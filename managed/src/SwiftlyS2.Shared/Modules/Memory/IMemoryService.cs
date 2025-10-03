@@ -21,6 +21,12 @@ public interface IMemoryService {
   /// <returns>The unmanaged function.</returns>
   IUnmanagedFunction<TDelegate> GetUnmanagedFunctionByVTable<TDelegate>(nint pVTable, int index) where TDelegate : Delegate;
 
+  /// <summary>
+  /// Get an unmanaged address wrapper for the specified memory address.
+  /// </summary>
+  /// <param name="address">The memory address to wrap, represented as a platform-specific integer.</param>
+  /// <returns>An object implementing <see cref="IUnmanagedAddress"/> that represents the specified unmanaged memory address.</returns>
+  IUnmanagedAddress GetUnmanagedAddress(nint address);
 
   /// <summary>
   /// Get the address of an valve or swiftly native interface by its name.

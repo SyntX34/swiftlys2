@@ -2,15 +2,21 @@ class Hooks
 
 ptr AllocateHook = void
 ptr AllocateVHook = void
+ptr AllocateMidHook = void
 void DeallocateHook = ptr hook
 void DeallocateVHook = ptr hook
+void DeallocateMidHook = ptr hook
 void SetHook = ptr hook, ptr func, ptr callback // the callback should receive the exact arguments as the function has, and to return the same amount of arguments
 void SetVHook = ptr hook, ptr entityOrVTable, int32 index, ptr callback, bool isVtable // the callback should receive the exact arguments as the function has, and to return the same amount of arguments, plus the first argument needs to be the pointer to the original function
+void SetMidHook = ptr hook, ptr instr, ptr callback
 void EnableHook = ptr hook
 void EnableVHook = ptr hook
+void EnableMidHook = ptr hook
 void DisableHook = ptr hook
 void DisableVHook = ptr hook
+void DisableMidHook = ptr hook
 bool IsHookEnabled = ptr hook
 bool IsVHookEnabled = ptr hook
+bool IsMidHookEnabled = ptr hook
 ptr GetHookOriginal = ptr hook
 ptr GetVHookOriginal = ptr hook

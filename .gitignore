@@ -9,6 +9,7 @@ bin/
 obj/
 .vs/
 api/
+!src/api/
 docs/
 
 # Dependencies

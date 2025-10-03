@@ -43,6 +43,16 @@ void HooksManager::DestroyVFunctionHook(IVFunctionHook* hook)
     delete (VFunctionHook*)hook;
 }
 
+IMFunctionHook* HooksManager::CreateMFunctionHook()
+{
+    return new MFunctionHook();
+}
+
+void HooksManager::DestroyMFunctionHook(IMFunctionHook* hook)
+{
+    delete (MFunctionHook*)hook;
+}
+
 IFunctionHook* g_pFireOutputHook = nullptr;
 std::map<uint64_t, std::map<uint64_t, void*>> outputHooksList;
 

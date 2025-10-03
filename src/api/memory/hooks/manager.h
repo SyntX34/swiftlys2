@@ -21,6 +21,7 @@
 
 #include "function.h"
 #include "vfunction.h"
+#include "mfunction.h"
 
 #define PTR_SIZE sizeof(void*)
 
@@ -32,9 +33,11 @@ public:
 
     virtual IFunctionHook* CreateFunctionHook() = 0;
     virtual IVFunctionHook* CreateVFunctionHook() = 0;
+    virtual IMFunctionHook* CreateMFunctionHook() = 0;
 
     virtual void DestroyFunctionHook(IFunctionHook* hook) = 0;
     virtual void DestroyVFunctionHook(IVFunctionHook* hook) = 0;
+    virtual void DestroyMFunctionHook(IMFunctionHook* hook) = 0;
 
     // ptr CEntityIOOutput, string outputName, ptr activator, ptr caller, float delay -> int (HookResult)
     virtual uint64_t CreateEntityHookOutput(const std::string& className, const std::string& outputName, void* callback) = 0;
