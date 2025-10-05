@@ -206,7 +206,7 @@ jobs:
           ${{ env.WINDOWS_FOLDER }}-with-runtimes.zip
   
   releasing:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/beta') }}
     needs: [versioning, packaging]
     runs-on: ubuntu-latest
     env:
