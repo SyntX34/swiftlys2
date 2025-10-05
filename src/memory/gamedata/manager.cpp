@@ -97,9 +97,6 @@ void* FindSignature(std::string library, std::string pattern)
 
         m_handles[library] = LoadBinaryModule(path.c_str());
     }
-    else {
-        return nullptr;
-    }
 
     uint64_t length = 0;
     auto patterns = HexToByte(("\\x" + replace(replace(pattern, "?", "2A"), " ", "\\x")).c_str(), length);
