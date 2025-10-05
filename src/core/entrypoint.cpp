@@ -37,6 +37,8 @@
 
 #include <fmt/format.h>
 
+#include <s2binlib/s2binlib.h>
+
 SwiftlyCore g_SwiftlyCore;
 InterfacesManager g_ifaceService;
 
@@ -44,6 +46,10 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
 {
     m_iKind = kind;
     SetupConsoleColors();
+
+    s2binlib_initialize(Plat_GetGameDirectory(), "csgo");
+    s2binlib_set_module_base_from_pointer("server", (uint64_t)g_ifaceService.FetchInterface<IServerGameDLL>(INTERFACEVERSION_SERVERGAMEDLL));
+    s2binlib_set_module_base_from_pointer("engine2", (uint64_t)g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER));
 
     auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
 

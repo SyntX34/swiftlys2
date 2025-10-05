@@ -27,6 +27,8 @@
 #include <steam/steam_gameserver.h>
 #include <public/engine/igameeventsystem.h>
 
+#include <s2binlib/s2binlib.h>
+
 SwiftlyMMBridge g_MMPluginBridge;
 CSteamGameServerAPIContext g_SteamAPI;
 
@@ -66,8 +68,8 @@ bool SwiftlyMMBridge::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxle
 
     META_CONVAR_REGISTER(FCVAR_RELEASE | FCVAR_SERVER_CAN_EXECUTE | FCVAR_CLIENT_CAN_EXECUTE | FCVAR_GAMEDLL);
 
-    DynLibUtils::CModule eng = DetermineModuleByLibrary("engine2");
-    void* serverSideClientVTable = eng.GetVirtualTableByName("CServerSideClient");
+    uint64_t serverSideClientVTable;
+    s2binlib_find_vtable("server", "CServerSideClient", &serverSideClientVTable);
     OnConVarQueryID = SH_ADD_DVPHOOK(CServerSideClientBase, ProcessRespondCvarValue, (CServerSideClientBase*)serverSideClientVTable, SH_MEMBER(this, &SwiftlyMMBridge::OnConvarQuery), false);
 
     auto server = g_ifaceService.FetchInterface<IServerGameDLL>(INTERFACEVERSION_SERVERGAMEDLL);

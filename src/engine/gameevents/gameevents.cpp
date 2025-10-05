@@ -38,6 +38,8 @@
 
 #include <fmt/format.h>
 
+#include <s2binlib/s2binlib.h>
+
 using json = nlohmann::json;
 
 SH_DECL_EXTERN2(IGameEventManager2, FireEvent, SH_NOATTRIB, 0, bool, IGameEvent*, bool);
@@ -66,7 +68,10 @@ IGameEventManager2* g_gameEventManager = nullptr;
 void CEventManager::Initialize(std::string game_name)
 {
     DynLibUtils::CModule servermodule = DetermineModuleByLibrary("server");
-    auto CGameEventManagerVTable = servermodule.GetVirtualTableByName("CGameEventManager");
+    uint64_t CGameEventManagerVTable;
+    s2binlib_find_vtable("server", "CGameEventManager", &CGameEventManagerVTable);
+
+    printf("CGameEventManagerVTable: %llx\n", CGameEventManagerVTable);
 
     auto networkserverservice = g_ifaceService.FetchInterface<INetworkServerService>(NETWORKSERVERSERVICE_INTERFACE_VERSION);
 

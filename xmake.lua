@@ -137,6 +137,7 @@ target("swiftlys2")
             sdk_path.."/lib/public/win64/mathlib.lib",
             sdk_path.."/lib/public/win64/2015/libprotobuf.lib",
             sdk_path.."/lib/public/win64/steam_api64.lib",
+            "vendor/s2binlib/s2binlib.lib"
         })
     else
         add_links({
@@ -146,6 +147,7 @@ target("swiftlys2")
             sdk_path.."/lib/linux64/mathlib.a",
             sdk_path.."/lib/linux64/release/libprotobuf.a",
             sdk_path.."/lib/linux64/libsteam_api.so",
+            "vendor/s2binlib/libs2binlib.a"
         })
     end
 
@@ -240,6 +242,8 @@ target("swiftlys2")
             "odbc32",
             "odbccp32",
             "dbghelp",
+            "ntdll",
+            "kernel32",
         })
     else
         add_links({
