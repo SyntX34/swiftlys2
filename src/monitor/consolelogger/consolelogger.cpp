@@ -85,6 +85,9 @@ void ConsoleLogger::Initialize()
     if (int* i = std::get_if<int>(&config->GetValue("core.ConsoleLogger.WriteIntervalMs")))
         m_writeIntervalMs = (*i > 0) ? *i : 2000;
 
+    if (bool* b = std::get_if<bool>(&config->GetValue("core.ConsoleLogger.ManagedEnable")))
+        m_managedEnabled = *b;
+
     if (bool* b = std::get_if<bool>(&config->GetValue("core.ConsoleLogger.Rotation.Enable")))
         m_rotationEnabled = *b;
 
@@ -97,19 +100,32 @@ void ConsoleLogger::Initialize()
     if (int* i = std::get_if<int>(&config->GetValue("core.ConsoleLogger.Rotation.DeleteOlderThanHours")))
         m_deleteOlderThanHours = *i;
 
-    std::string relativeLogDir = g_SwiftlyCore.GetCorePath() + "logs" + WIN_LINUX("\\", "/") + "console" + WIN_LINUX("\\", "/");
+    std::string logsBase = g_SwiftlyCore.GetCorePath() + "logs" + WIN_LINUX("\\", "/");
+    std::string relativeLogDir = logsBase + "console" + WIN_LINUX("\\", "/");
     m_logDir = Files::GeneratePath(relativeLogDir);
 
     std::error_code mkdirEc;
     std::filesystem::create_directories(m_logDir, mkdirEc);
 
+    if (m_managedEnabled)
+    {
+        m_managedLogDir = Files::GeneratePath(logsBase + "managed" + WIN_LINUX("\\", "/"));
+        std::filesystem::create_directories(m_managedLogDir, mkdirEc);
+    }
+
     m_currentLogFile = GetDailyLogPath();
     if (m_rotationEnabled)
     {
         if (m_rotationMode == "file_count")
-            ApplyFileCountRotation();
+        {
+            ApplyFileCountRotation(m_logDir);
+            if (m_managedEnabled) ApplyFileCountRotation(m_managedLogDir);
+        }
         else if (m_rotationMode == "time_interval")
-            ApplyTimeIntervalRotation();
+        {
+            ApplyTimeIntervalRotation(m_logDir);
+            if (m_managedEnabled) ApplyTimeIntervalRotation(m_managedLogDir);
+        }
     }
 
     m_running = true;
@@ -190,9 +206,15 @@ void ConsoleLogger::WorkerThread()
         if (m_rotationEnabled)
         {
             if (m_rotationMode == "file_count")
-                ApplyFileCountRotation();
+            {
+                ApplyFileCountRotation(m_logDir);
+                if (m_managedEnabled) ApplyFileCountRotation(m_managedLogDir);
+            }
             else if (m_rotationMode == "time_interval")
-                ApplyTimeIntervalRotation();
+            {
+                ApplyTimeIntervalRotation(m_logDir);
+                if (m_managedEnabled) ApplyTimeIntervalRotation(m_managedLogDir);
+            }
         }
     }
 }
@@ -227,15 +249,15 @@ std::string ConsoleLogger::GetDailyLogPath() const
     return m_logDir + GetDateString() + ".log";
 }
 
-void ConsoleLogger::ApplyFileCountRotation()
+void ConsoleLogger::ApplyFileCountRotation(const std::string& dir)
 {
-    if (m_logDir.empty() || m_maxFiles <= 0)
+    if (dir.empty() || m_maxFiles <= 0)
         return;
 
     std::error_code ec;
     std::vector<std::pair<fs::file_time_type, fs::path>> files;
 
-    for (const auto& entry : fs::directory_iterator(m_logDir, ec))
+    for (const auto& entry : fs::directory_iterator(dir, ec))
     {
         if (ec)
             break;
@@ -257,16 +279,16 @@ void ConsoleLogger::ApplyFileCountRotation()
         fs::remove(files[i].second, ec);
 }
 
-void ConsoleLogger::ApplyTimeIntervalRotation()
+void ConsoleLogger::ApplyTimeIntervalRotation(const std::string& dir)
 {
-    if (m_logDir.empty() || m_deleteOlderThanHours <= 0)
+    if (dir.empty() || m_deleteOlderThanHours <= 0)
         return;
 
     std::error_code ec;
     auto now = fs::file_time_type::clock::now();
     auto maxAge = std::chrono::hours(m_deleteOlderThanHours);
 
-    for (const auto& entry : fs::directory_iterator(m_logDir, ec))
+    for (const auto& entry : fs::directory_iterator(dir, ec))
     {
         if (ec)
             break;

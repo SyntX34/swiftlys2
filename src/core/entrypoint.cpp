@@ -52,6 +52,7 @@
 
 #include <public/tier1/convar.h>
 #include <thread>
+#include <cstdlib>
 
 #include <monitor/consolelogger/consolelogger.h>
 
@@ -291,6 +292,21 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
         crashreporter->ReportPreventionIncident("Managed", fmt::format("Couldn't initialize the .NET runtime. Make sure you installed `swiftlys2-{}-{}-with-runtimes.zip`.", WIN_LINUX("windows", "linux"), GetVersion()));
         return true;
     }
+
+    bool managedLogEnabled = true;
+    int managedLogInterval = 2000;
+    if (bool* b = std::get_if<bool>(&configuration->GetValue("core.ConsoleLogger.ManagedEnable")))
+        managedLogEnabled = *b;
+    if (int* i = std::get_if<int>(&configuration->GetValue("core.ConsoleLogger.WriteIntervalMs")))
+        managedLogInterval = (*i > 0) ? *i : 2000;
+#ifdef _WIN32
+    _putenv_s("SWIFTLY_MANAGED_LOG_ENABLE", managedLogEnabled ? "1" : "0");
+    _putenv_s("SWIFTLY_MANAGED_LOG_INTERVAL_MS", std::to_string(managedLogInterval).c_str());
+#else
+    setenv("SWIFTLY_MANAGED_LOG_ENABLE", managedLogEnabled ? "1" : "0", 1);
+    setenv("SWIFTLY_MANAGED_LOG_INTERVAL_MS", std::to_string(managedLogInterval).c_str(), 1);
+#endif
+
     if (!InitializeDotNetAPI(scripting->GetNativeFunctions(), scripting->GetNativeFunctionsCount(), std::string(Plat_GetGameDirectory()) + "/csgo/" + m_sLogPath))
     {
         auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);

@@ -147,6 +147,10 @@ public class TestPlugin : BasePlugin
 
     private delegate nint ReflectPawnStateType( nint a1, nint a2 );
 
+    private Thread? _simThread;
+    private volatile bool _simRunning;
+    private static readonly char[] _simChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ".ToCharArray();
+
     public TestPlugin( ISwiftlyCore core ) : base(core)
     {
         Console.WriteLine("[TestPlugin] TestPlugin constructed successfully!");
@@ -1646,9 +1650,78 @@ public class TestPlugin : BasePlugin
         ThrowLevel1();
     }
 
+    [Command("simlog")]
+    public void SimLogCommand( ICommandContext context )
+    {
+        if (_simRunning)
+        {
+            Core.Logger.LogInformation("[SimLog] Already running.");
+            return;
+        }
+
+        _simRunning = true;
+        _simThread = new Thread(() =>
+        {
+            var rng = new Random();
+
+            while (_simRunning)
+            {
+                // Cycle: 5s normal (~40/sec), 1s burst (~2000/sec), repeat
+                var phaseStart = Environment.TickCount64;
+                bool burst = (rng.Next(0, 6) == 0);
+                long phaseDuration = burst ? 1000 : 5000;
+                int delayMs = burst ? 0 : 25;
+
+                while (_simRunning && (Environment.TickCount64 - phaseStart) < phaseDuration)
+                {
+                    int len = rng.Next(16, 49);
+                    var buf = new char[len];
+                    for (int i = 0; i < len; i++)
+                        buf[i] = _simChars[rng.Next(_simChars.Length)];
+                    Core.Logger.LogInformation("[SimLog] {Msg}", new string(buf));
+
+                    if (burst)
+                    {
+                        // ~2000/sec — log 10 messages then yield
+                        for (var extra = 0; extra < 9 && _simRunning; extra++)
+                        {
+                            len = rng.Next(16, 49);
+                            buf = new char[len];
+                            for (var i = 0; i < len; i++)
+                                buf[i] = _simChars[rng.Next(_simChars.Length)];
+                            Core.Logger.LogInformation("[SimLog] {Msg}", new string(buf));
+                        }
+                        Thread.Sleep(5);
+                    }
+                    else
+                    {
+                        Thread.Sleep(delayMs);
+                    }
+                }
+            }
+        }) {
+            IsBackground = true,
+            Name = "SimLog"
+        };
+        _simThread.Start();
+        Core.Logger.LogInformation("[SimLog] Started.");
+    }
+
+    [Command("simlogstop")]
+    public void SimLogStopCommand( ICommandContext context )
+    {
+        if (!_simRunning)
+        {
+            Core.Logger.LogInformation("[SimLog] Not running.");
+            return;
+        }
+        _simRunning = false;
+        Core.Logger.LogInformation("[SimLog] Stopped.");
+    }
+
     public override void Unload()
     {
-
+        _simRunning = false;
         Console.WriteLine("TestPlugin unloaded");
     }
 }

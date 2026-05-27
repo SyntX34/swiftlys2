@@ -36,8 +36,8 @@ public:
 private:
     void        WorkerThread();
     std::string GetDailyLogPath() const;
-    void        ApplyFileCountRotation();
-    void        ApplyTimeIntervalRotation();
+    void        ApplyFileCountRotation(const std::string& dir);
+    void        ApplyTimeIntervalRotation(const std::string& dir);
     void        WriteEntries(std::queue<std::string>& entries, const std::string& targetFile);
 
     std::queue<std::string>  m_queue;
@@ -47,6 +47,7 @@ private:
 
     uint64_t    m_listenerId = UINT64_MAX;
     bool        m_enabled = false;
+    bool        m_managedEnabled = false;
     bool        m_rotationEnabled = false;
     std::string m_rotationMode;
     int         m_writeIntervalMs = 2000;
@@ -54,6 +55,7 @@ private:
     int         m_deleteOlderThanHours = 168;
 
     std::string m_logDir;
+    std::string m_managedLogDir;
     std::string m_currentLogFile;
 };
 
