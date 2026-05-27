@@ -82,6 +82,9 @@ void ConsoleLogger::Initialize()
     if (!m_enabled)
         return;
 
+    if (int* i = std::get_if<int>(&config->GetValue("core.ConsoleLogger.WriteIntervalMs")))
+        m_writeIntervalMs = (*i > 0) ? *i : 2000;
+
     if (bool* b = std::get_if<bool>(&config->GetValue("core.ConsoleLogger.Rotation.Enable")))
         m_rotationEnabled = *b;
 
@@ -110,13 +113,14 @@ void ConsoleLogger::Initialize()
     }
 
     m_running = true;
-    m_thread  = std::thread(&ConsoleLogger::WorkerThread, this);
+    m_thread = std::thread(&ConsoleLogger::WorkerThread, this);
+    m_thread.detach();
 
     auto consoleoutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    m_listenerId       = consoleoutput->AddConsoleListener([this](const std::string& message) {
+    m_listenerId = consoleoutput->AddConsoleListener([this](const std::string& message) {
         std::lock_guard<std::mutex> lock(m_mutex);
         m_queue.push(fmt::format("[{}] {}", GetTimestampString(), message));
-    });
+        });
 }
 
 void ConsoleLogger::Shutdown()
@@ -132,10 +136,6 @@ void ConsoleLogger::Shutdown()
     }
 
     m_running = false;
-    m_cv.notify_all();
-    if (m_thread.joinable())
-        m_thread.join();
-
     FlushQueue();
 }
 
@@ -167,12 +167,11 @@ void ConsoleLogger::WorkerThread()
 {
     while (m_running)
     {
+        std::this_thread::sleep_for(std::chrono::milliseconds(m_writeIntervalMs));
+
         std::queue<std::string> local;
         {
-            std::unique_lock<std::mutex> lock(m_mutex);
-            m_cv.wait_for(lock, std::chrono::milliseconds(500), [this] {
-                return !m_queue.empty() || !m_running;
-            });
+            std::lock_guard<std::mutex> lock(m_mutex);
             std::swap(local, m_queue);
         }
 
@@ -264,7 +263,7 @@ void ConsoleLogger::ApplyTimeIntervalRotation()
         return;
 
     std::error_code ec;
-    auto now    = fs::file_time_type::clock::now();
+    auto now = fs::file_time_type::clock::now();
     auto maxAge = std::chrono::hours(m_deleteOlderThanHours);
 
     for (const auto& entry : fs::directory_iterator(m_logDir, ec))

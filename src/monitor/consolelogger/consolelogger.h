@@ -20,7 +20,6 @@
 #define src_monitor_consolelogger_consolelogger_h
 
 #include <atomic>
-#include <condition_variable>
 #include <cstdint>
 #include <mutex>
 #include <queue>
@@ -43,15 +42,15 @@ private:
 
     std::queue<std::string>  m_queue;
     std::mutex               m_mutex;
-    std::condition_variable  m_cv;
     std::thread              m_thread;
     std::atomic<bool>        m_running{ false };
 
-    uint64_t    m_listenerId           = UINT64_MAX;
-    bool        m_enabled              = false;
-    bool        m_rotationEnabled      = false;
+    uint64_t    m_listenerId = UINT64_MAX;
+    bool        m_enabled = false;
+    bool        m_rotationEnabled = false;
     std::string m_rotationMode;
-    int         m_maxFiles             = 60;
+    int         m_writeIntervalMs = 2000;
+    int         m_maxFiles = 60;
     int         m_deleteOlderThanHours = 168;
 
     std::string m_logDir;

@@ -492,6 +492,7 @@ bool Configuration::Load()
         RegisterConfiguration(wasEdited, config_json, "core", "core", "Menu.Buttons.Exit", "tab");
 
         RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Enable", true);
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.WriteIntervalMs", 2000);
         RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.Enable", true);
         RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.Mode", "file_count");
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.AvailableModes", { "file_count", "time_interval" }, true, " ");
