@@ -4,25 +4,32 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public unsafe struct TakeDamageEntityParams
+public struct TakeDamageEntityParams
 {
     /// <summary>
     /// The entity that is taking damage.
     /// </summary>
     public required CBaseEntity Entity { get; init; }
 
-    internal CTakeDamageInfo* _infoPtr;
-    internal CTakeDamageResult* _resultPtr;
+    internal unsafe CTakeDamageInfo* _infoPtr;
+    internal unsafe CTakeDamageResult* _resultPtr;
 
     /// <summary>
     /// The damage information passed to the original function. Modifications are written to native memory.
     /// </summary>
-    public ref CTakeDamageInfo Info => ref *_infoPtr;
+    public ref CTakeDamageInfo Info {
+        get {
+            unsafe
+            {
+                return ref *_infoPtr;
+            }
+        }
+    }
 
     /// <summary>
     /// The optional native damage result. It may be null when the caller did not provide a result object.
     /// </summary>
-    public CTakeDamageResult* DamageResult => _resultPtr;
+    public unsafe CTakeDamageResult* DamageResult => _resultPtr;
 }
 
 public ref struct TakeDamageEntityPreContext
