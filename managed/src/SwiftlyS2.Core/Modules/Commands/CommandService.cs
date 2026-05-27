@@ -225,11 +225,12 @@ internal class CommandService : ICommandService, IDisposable
         var commandNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         lock (commandLock)
         {
-            foreach (var callback in commandCallbacks)
+            foreach (var callbacks in commandsByPlugin.Values)
             {
-                if (callback is CommandCallback commandCallback)
+                foreach (var callback in callbacks)
                 {
-                    _ = commandNames.Add(commandCallback.CommandName);
+                    if (callback is CommandCallback commandCallback)
+                        _ = commandNames.Add(commandCallback.CommandName);
                 }
             }
         }
@@ -251,7 +252,6 @@ internal class CommandService : ICommandService, IDisposable
                 callback.Dispose();
             }
             commandCallbacks.Clear();
-            commandsByPlugin.Clear();
         }
     }
 
