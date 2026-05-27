@@ -74,6 +74,12 @@ void CrashReporter::Init()
         }
     }
 
+    for (const auto& dir : Files::FetchDirectories(g_SwiftlyCore.GetCorePath() + "dumps/crashreport"))
+    {
+        if (Files::FetchFileNames(dir).empty() && Files::FetchDirectories(dir).empty())
+            Files::Delete(dir);
+    }
+
     g_relativeDumpPath = g_SwiftlyCore.GetCorePath() + "dumps/crashreport/" + get_uuid();
     g_dumpPath = Files::GeneratePath(g_relativeDumpPath);
 
