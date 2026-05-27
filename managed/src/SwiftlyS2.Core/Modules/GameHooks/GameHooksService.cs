@@ -11,6 +11,7 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
     internal readonly GameHookPawn PawnHook = new();
     internal readonly GameHookWeapon WeaponsHook = new();
     internal readonly GameHookController ControllerHook = new();
+    internal readonly GameHookEntities EntitiesHook = new();
     private bool _disposed = false;
     private readonly IContextedProfilerService profiler;
     private readonly ILogger<GameHooksService> logger;
@@ -20,6 +21,7 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
     public IGameHookPawn Pawn => PawnHook;
     public IGameHookWeapon Weapons => WeaponsHook;
     public IGameHookController Controller => ControllerHook;
+    public IGameHookEntities Entities => EntitiesHook;
 
     public GameHooksService( IContextedProfilerService profiler, ILogger<GameHooksService> logger )
     {
@@ -74,6 +76,8 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
 
         WeaponsHook.CanUseHook.UnregisterListeners();
         WeaponsHook.DropHook.UnregisterListeners();
+
+        EntitiesHook.TakeDamageHook.UnregisterListeners();
 
         _disposed = true;
         GameHooksPublisher.Unsubscribe(this);
@@ -1485,6 +1489,50 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
         finally
         {
             profiler.StopRecording("GameHooks::Movement::GroundAccelerate::Post");
+        }
+    }
+
+    internal void InvokeTakeDamagePre( ref TakeDamageEntityPreContext ctx )
+    {
+        if (!EntitiesHook.TakeDamageHook.HasPreListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::TakeDamage::Pre");
+            EntitiesHook.TakeDamageHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::TakeDamage::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::TakeDamage::Pre");
+        }
+    }
+
+    internal void InvokeTakeDamagePost( ref TakeDamageEntityPostContext ctx )
+    {
+        if (!EntitiesHook.TakeDamageHook.HasPostListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::TakeDamage::Post");
+            EntitiesHook.TakeDamageHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::TakeDamage::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::TakeDamage::Post");
         }
     }
 }

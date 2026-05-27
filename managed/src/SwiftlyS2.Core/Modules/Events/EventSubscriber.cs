@@ -47,6 +47,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     public event EventDelegates.OnConVarValueChanged? OnConVarValueChanged;
     public event EventDelegates.OnConCommandCreated? OnConCommandCreated;
     public event EventDelegates.OnConVarCreated? OnConVarCreated;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.TakeDamage instead.")]
     public event EventDelegates.OnEntityTakeDamage? OnEntityTakeDamage;
     public event EventDelegates.OnPrecacheResource? OnPrecacheResource;
     public event EventDelegates.OnEntityStartTouch? OnEntityStartTouch;
@@ -440,6 +441,8 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     }
 
     public bool ListensToProcessUsercmds => OnClientProcessUsercmds != null;
+
+    public bool ListensToTakeDamage => OnEntityTakeDamage != null;
 
     public void InvokeOnClientProcessUsercmds( ref OnClientProcessUsercmdsEvent @event )
     {

@@ -16,7 +16,6 @@ internal static class EventPublisher
 {
     private static readonly List<EventSubscriber> subscribers = [];
     private static readonly Lock subscribersLock = new();
-    private static CTakeDamageResult emptyTakeDamageResult = new();
 
     public static void Subscribe( EventSubscriber subscriber )
     {
@@ -52,7 +51,6 @@ internal static class EventPublisher
             NativeEvents.RegisterOnEntitySpawnedCallback((nint)(delegate* unmanaged< nint, void >)&OnEntitySpawned);
             NativeEvents.RegisterOnMapLoadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapLoad);
             NativeEvents.RegisterOnMapUnloadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapUnload);
-            NativeEvents.RegisterOnEntityTakeDamageCallback((nint)(delegate* unmanaged< nint, nint, nint, byte >)&OnEntityTakeDamage);
             NativeEvents.RegisterOnPrecacheResourceCallback((nint)(delegate* unmanaged< nint, void >)&OnPrecacheResource);
             NativeEvents.RegisterOnStartupServerCallback((nint)(delegate* unmanaged< void >)&OnStartupServer);
             NativeEvents.RegisterOnClientVoiceCallback((nint)(delegate* unmanaged< int, void >)&OnClientVoice);
@@ -619,73 +617,38 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
-    public static byte OnEntityTakeDamage( nint entityPtr, nint takeDamageInfoPtr, nint takeDamageResultPtr )
+    public static bool ListensToTakeDamage {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToTakeDamage) return true;
+            }
+            return false;
+        }
+    }
+
+    public static void InvokeOnEntityTakeDamage( ref OnEntityTakeDamageEvent @event )
     {
         if (subscribers.Count == 0)
         {
-            return 1;
+            return;
         }
 
         try
         {
-            unsafe
+            for (var i = 0; i < subscribers.Count; i++)
             {
-                if (takeDamageResultPtr == 0 && takeDamageInfoPtr != 0)
+                subscribers[i].InvokeOnEntityTakeDamage(ref @event);
+
+                if (@event.Result == HookResult.Handled || @event.Result == HookResult.Stop)
                 {
-                    var damageInfo = (CTakeDamageInfo*)takeDamageInfoPtr;
-
-                    emptyTakeDamageResult.OriginatingInfo = damageInfo;
-                    emptyTakeDamageResult.DestructibleHitGroupRequests = damageInfo->DestructiblePartDamageRequests;
-                    emptyTakeDamageResult.HealthLost = (int)damageInfo->Damage;
-                    emptyTakeDamageResult.DamageDealt = damageInfo->Damage;
-                    emptyTakeDamageResult.PreModifiedDamage = damageInfo->Damage;
-                    emptyTakeDamageResult.TotalledDamageDealt = damageInfo->Damage;
-                    emptyTakeDamageResult.TotalledHealthLost = (int)damageInfo->Damage;
-                    emptyTakeDamageResult.TotalledPreModifiedDamage = damageInfo->Damage;
-                    emptyTakeDamageResult.DamageFlags = damageInfo->DamageFlags;
-                    emptyTakeDamageResult.WasDamageSuppressed = (byte)(damageInfo->InTakeDamageFlow == 0 ? 1 : 0);
-                    emptyTakeDamageResult.OverrideFlinchHitGroup = damageInfo->ActualHitGroup;
-                    emptyTakeDamageResult.HealthBefore = 0;
-                    emptyTakeDamageResult.NewDamageAccumulatorValue = 0;
-                    emptyTakeDamageResult.SuppressFlinch = 0;
-
-                    fixed (CTakeDamageResult* resultPtr = &emptyTakeDamageResult)
-                    {
-                        takeDamageResultPtr = (nint)resultPtr;
-                    }
+                    return;
                 }
-
-                OnEntityTakeDamageEvent @event = new() {
-                    Entity = EntityManager.GetEntityByAddress(entityPtr) ?? new CEntityInstanceImpl(entityPtr),
-                    _infoPtr = takeDamageInfoPtr,
-                    _resultPtr = takeDamageResultPtr
-                };
-                for (var i = 0; i < subscribers.Count; i++)
-                {
-                    subscribers[i].InvokeOnEntityTakeDamage(ref @event);
-
-                    if (@event.Result == HookResult.Handled)
-                    {
-                        return 1;
-                    }
-
-                    if (@event.Result == HookResult.Stop)
-                    {
-                        return 0;
-                    }
-                }
-
-                if (@event.Result == HookResult.CancelOriginal) return 0;
-
-                return 1;
             }
         }
         catch (Exception e)
         {
             if (GlobalExceptionHandler.Handle(ref e)) AnsiConsole.WriteException(e);
-
-            return 1;
         }
     }
 

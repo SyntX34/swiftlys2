@@ -38,6 +38,7 @@ internal class CoreHookService : IDisposable
         HookSteamServerAPIActivated();
         HookCPlayerMovementServicesRunCommand();
         HookCCSPlayerPawnPostThink();
+        HookCBaseEntityTakeDamage();
         HookEntityIdentityAcceptInput();
         HookEntityIOOutputFireOutputInternal();
         HookDispatchDatamapFunction();
@@ -600,6 +601,29 @@ internal class CoreHookService : IDisposable
         core.GameHooks.Controller.ProcessUsercmds.Pre -= OnClientProcessUsercmds;
     }
 
+    internal unsafe void EntityTakeDamagePre( ref TakeDamageEntityPreContext @event )
+    {
+        if (!EventPublisher.ListensToTakeDamage) return;
+
+        var @ev = new OnEntityTakeDamageEvent {
+            Entity = @event.Params.Entity,
+            _infoPtr = (nint)@event.Params._infoPtr,
+            _resultPtr = (nint)@event.Params.DamageResult
+        };
+        EventPublisher.InvokeOnEntityTakeDamage(ref @ev);
+        @event.SetHookResult(@ev.Result);
+    }
+
+    internal void HookCBaseEntityTakeDamage()
+    {
+        core.GameHooks.Entities.TakeDamage.Pre += EntityTakeDamagePre;
+    }
+
+    internal void UnhookCBaseEntityTakeDamage()
+    {
+        core.GameHooks.Entities.TakeDamage.Pre -= EntityTakeDamagePre;
+    }
+
     public void Dispose()
     {
         UnhookExecuteCommand();
@@ -615,5 +639,6 @@ internal class CoreHookService : IDisposable
         UnhookCCSPlayerPawnPostThink();
         UnhookCPlayerMovementServicesRunCommand();
         UnhookOnClientProcessUsercmds();
+        UnhookCBaseEntityTakeDamage();
     }
 }

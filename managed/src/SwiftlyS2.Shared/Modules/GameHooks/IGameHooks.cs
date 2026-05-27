@@ -26,4 +26,9 @@ public interface IGameHooks
     /// Hooks related to weapons.
     /// </summary>
     public IGameHookWeapon Weapons { get; }
+
+    /// <summary>
+    /// Hooks related to entities.
+    /// </summary>
+    public IGameHookEntities Entities { get; }
 }

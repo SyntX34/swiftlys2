@@ -141,16 +141,6 @@ internal static class NativeEvents
         _RegisterOnMapUnloadCallback(callback);
     }
 
-    private unsafe static delegate* unmanaged<nint, void> _RegisterOnEntityTakeDamageCallback;
-
-    /// <summary>
-    /// CBaseEntity* entity, CTakeDamageInfo* info -> bool (true -> ignored, false -> supercede)
-    /// </summary>
-    public unsafe static void RegisterOnEntityTakeDamageCallback(nint callback)
-    {
-        _RegisterOnEntityTakeDamageCallback(callback);
-    }
-
     private unsafe static delegate* unmanaged<nint, void> _RegisterOnPrecacheResourceCallback;
 
     /// <summary>

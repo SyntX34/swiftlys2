@@ -107,6 +107,7 @@ public interface IEventSubscriber
     /// <summary>
     /// Called when an entity takes damage.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.TakeDamage instead.")]
     public event EventDelegates.OnEntityTakeDamage? OnEntityTakeDamage;
 
     /// <summary>
