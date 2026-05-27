@@ -429,22 +429,29 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
 
             void* controller = player->GetController();
             bool teamonly = (command == "say_team");
-            auto text = args[1];
-            if (strlen(text) == 0)
+            std::string rawCmd = args.GetCommandString();
+            int cmdEnd;
+            if (!rawCmd.empty() && rawCmd[0] == '"')
+            {
+                int closeQuote = rawCmd.find('"', 1);
+                cmdEnd = (closeQuote != std::string::npos) ? closeQuote + 1 : rawCmd.size();
+            }
+            else
+            {
+                cmdEnd = strlen(args.Arg(0));
+            }
+            while (cmdEnd < rawCmd.size() && rawCmd[cmdEnd] == ' ')
+                cmdEnd++;
+
+            std::string text = rawCmd.substr(cmdEnd);
+            if (!text.empty() && text.front() == '"')
+                text.erase(0, 1);
+            if (!text.empty() && text.back() == '"')
+                text.pop_back();
+
+            if (text.empty())
             {
                 return;
-            }
-
-            if (controller)
-            {
-                IGameEvent* pEvent = eventmanager->GetGameEventManager()->CreateEvent("player_chat");
-                if (pEvent)
-                {
-                    pEvent->SetBool("teamonly", teamonly);
-                    pEvent->SetInt("userid", slot.Get());
-                    pEvent->SetString("text", text);
-                    eventmanager->GetGameEventManager()->FireEvent(pEvent, true);
-                }
             }
 
             gameText = text;
