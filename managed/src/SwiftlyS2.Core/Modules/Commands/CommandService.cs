@@ -293,8 +293,9 @@ internal class CommandService : ICommandService, IDisposable
     {
         lock (commandLock)
         {
-            return commandCallbacks
-                .OfType<CommandCallback>()
+            return commandsByPlugin
+                .Values
+                .SelectMany(callbacks => callbacks.OfType<CommandCallback>())
                 .Select(c => new CommandInfo {
                     CommandName = c.CommandName,
                     RegisterRaw = c.RegisterRaw,
