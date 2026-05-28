@@ -45,10 +45,6 @@ using json = nlohmann::json;
 std::map<uint64_t, std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)>> g_mEventListeners;
 std::map<uint64_t, std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)>> g_mPostEventListeners;
 
-std::list<std::list<std::pair<int64_t, std::function<void()>>>::iterator> queueRemoveTimeouts;
-std::list<std::pair<int64_t, std::function<void()>>> timeoutsArray;
-bool processingTimeouts = false;
-
 std::set<std::string> g_sDumpedFiles;
 json dumpedEvents;
 
@@ -68,8 +64,6 @@ void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& confi
 
 IVFunctionHook* g_pFireEventHook = nullptr;
 bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast);
-
-void GameFrameEventManager(void* _this, bool simulate, bool first, bool last);
 
 void CEventManager::Initialize(std::string game_name)
 {
@@ -100,12 +94,6 @@ void CEventManager::Initialize(std::string game_name)
 
     void* servervtable = nullptr;
     s2binlib_find_vtable("server", "CSource2Server", &servervtable);
-
-    void* gameFrameAddr;
-    s2binlib_find_vfunc_by_vtbname("server", "CSource2Server", gamedata->GetOffsets()->Fetch("IServerGameDLL::GameFrame"), &gameFrameAddr);
-    g_GameFrameHookEventManager = hooksmanager->CreateFunctionHook();
-    g_GameFrameHookEventManager->SetHookFunction(gameFrameAddr, reinterpret_cast<void*>(GameFrameEventManager));
-    g_GameFrameHookEventManager->Enable();
 
     g_PreworldUpdateHook = hooksmanager->CreateVFunctionHook();
     g_PreworldUpdateHook->SetHookFunction(servervtable, gamedata->GetOffsets()->Fetch("IServerGameDLL::PreWorldUpdate"), reinterpret_cast<void*>(PreworldUpdateHook), true);
@@ -162,28 +150,6 @@ void PreworldUpdateHook(void* _this, bool simulate)
 
     if (g_pOnPreworldUpdateCallback)
         reinterpret_cast<void(*)(bool)>(g_pOnPreworldUpdateCallback)(simulate);
-}
-
-void GameFrameEventManager(void* _this, bool simulate, bool first, bool last)
-{
-    reinterpret_cast<decltype(&GameFrameEventManager)>(g_GameFrameHookEventManager->GetOriginal())(_this, simulate, first, last);
-
-    if (processingTimeouts)
-    {
-        int64_t t = GetTime();
-        for (auto it = timeoutsArray.begin(); it != timeoutsArray.end(); ++it) {
-            if (it->first <= t) {
-                queueRemoveTimeouts.push_back(it);
-                it->second();
-            }
-        }
-
-        for (auto it = queueRemoveTimeouts.rbegin(); it != queueRemoveTimeouts.rend(); ++it)
-            timeoutsArray.erase(*it);
-
-        queueRemoveTimeouts.clear();
-        processingTimeouts = (timeoutsArray.size() > 0);
-    }
 }
 
 bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast)
