@@ -755,6 +755,22 @@ public class TestPlugin : BasePlugin
         Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) => { Console.WriteLine($"pong: {buffer}"); });
     }
 
+    [ClientNetMessageHandler]
+    public HookResult ClientStatusCommandHandler( CCLCMsg_ServerStatus msg, int playerId )
+    {
+        Core.Logger.LogInformation("Received 'status' command from player with ID {PlayerId}.", playerId);
+        var player = Core.PlayerManager.GetPlayer(playerId);
+        if (player == null)
+        {
+            Core.Logger.LogInformation("Player with ID {PlayerId} not found.", playerId);
+        }
+        else
+        {
+            player.SendChat("test message");
+        }
+        return HookResult.Stop;
+    }
+
     [Command("tround")]
     public void TestRoundCommand( ICommandContext context )
     {
@@ -863,7 +879,8 @@ public class TestPlugin : BasePlugin
     public HookResult TestSignonMessage( CNETMsg_SignonState msg, int playerid )
     {
         Console.WriteLine("HELLO MA MEN\n");
-        Console.WriteLine(msg.SignonState.ToString(), playerid);
+        Console.WriteLine(msg.SignonState.ToString());
+        Console.WriteLine($"pid: {playerid}");
         return HookResult.Continue;
     }
 
