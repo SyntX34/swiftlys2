@@ -311,7 +311,7 @@ void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char*
 {
     reinterpret_cast<decltype(&ClientDisconnectHook)>(g_pClientDisconnectHook->GetOriginal())(_this, slot, reason, pszName, xuid, pszNetworkID);
 
-    static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
+    auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
     auto playerid = slot.Get();
 
     if (g_pOnClientDisconnectCallback)
