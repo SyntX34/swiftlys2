@@ -38,6 +38,11 @@ internal enum HookListener
     CanMove,
     GroundAccelerate,
     TakeDamage,
+    StartTouch,
+    Touch,
+    EndTouch,
+    AcceptInput,
+    FireOutput,
 }
 
 internal static partial class GameHooksPublisher
@@ -138,6 +143,11 @@ internal static partial class GameHooksPublisher
             HookListener.CanMove => HookCanMove(),
             HookListener.GroundAccelerate => HookGroundAccelerate(),
             HookListener.TakeDamage => HookTakeDamage(),
+            HookListener.StartTouch => HookStartTouch(),
+            HookListener.Touch => HookTouch(),
+            HookListener.EndTouch => HookEndTouch(),
+            HookListener.AcceptInput => HookAcceptInput(),
+            HookListener.FireOutput => HookFireOutput(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
     }
@@ -178,6 +188,11 @@ internal static partial class GameHooksPublisher
             HookListener.CanMove => UnhookCanMove(),
             HookListener.GroundAccelerate => UnhookGroundAccelerate(),
             HookListener.TakeDamage => UnhookTakeDamage(),
+            HookListener.StartTouch => UnhookStartTouch(),
+            HookListener.Touch => UnhookTouch(),
+            HookListener.EndTouch => UnhookEndTouch(),
+            HookListener.AcceptInput => UnhookAcceptInput(),
+            HookListener.FireOutput => UnhookFireOutput(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
     }

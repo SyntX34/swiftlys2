@@ -78,6 +78,11 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
         WeaponsHook.DropHook.UnregisterListeners();
 
         EntitiesHook.TakeDamageHook.UnregisterListeners();
+        EntitiesHook.StartTouchHook.UnregisterListeners();
+        EntitiesHook.TouchHook.UnregisterListeners();
+        EntitiesHook.EndTouchHook.UnregisterListeners();
+        EntitiesHook.AcceptInputHook.UnregisterListeners();
+        EntitiesHook.FireOutputHook.UnregisterListeners();
 
         _disposed = true;
         GameHooksPublisher.Unsubscribe(this);
@@ -1533,6 +1538,226 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
         finally
         {
             profiler.StopRecording("GameHooks::Entities::TakeDamage::Post");
+        }
+    }
+
+    internal void InvokeStartTouchPre( ref StartTouchEntityPreContext ctx )
+    {
+        if (!EntitiesHook.StartTouchHook.HasPreListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::StartTouch::Pre");
+            EntitiesHook.StartTouchHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::StartTouch::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::StartTouch::Pre");
+        }
+    }
+
+    internal void InvokeStartTouchPost( ref StartTouchEntityPostContext ctx )
+    {
+        if (!EntitiesHook.StartTouchHook.HasPostListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::StartTouch::Post");
+            EntitiesHook.StartTouchHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::StartTouch::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::StartTouch::Post");
+        }
+    }
+
+    internal void InvokeTouchPre( ref TouchEntityPreContext ctx )
+    {
+        if (!EntitiesHook.TouchHook.HasPreListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::Touch::Pre");
+            EntitiesHook.TouchHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::Touch::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::Touch::Pre");
+        }
+    }
+
+    internal void InvokeTouchPost( ref TouchEntityPostContext ctx )
+    {
+        if (!EntitiesHook.TouchHook.HasPostListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::Touch::Post");
+            EntitiesHook.TouchHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::Touch::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::Touch::Post");
+        }
+    }
+
+    internal void InvokeEndTouchPre( ref EndTouchEntityPreContext ctx )
+    {
+        if (!EntitiesHook.EndTouchHook.HasPreListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::EndTouch::Pre");
+            EntitiesHook.EndTouchHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::EndTouch::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::EndTouch::Pre");
+        }
+    }
+
+    internal void InvokeEndTouchPost( ref EndTouchEntityPostContext ctx )
+    {
+        if (!EntitiesHook.EndTouchHook.HasPostListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::EndTouch::Post");
+            EntitiesHook.EndTouchHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::EndTouch::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::EndTouch::Post");
+        }
+    }
+
+    internal void InvokeAcceptInputPre( ref AcceptInputEntityPreContext ctx )
+    {
+        if (!EntitiesHook.AcceptInputHook.HasPreListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::AcceptInput::Pre");
+            EntitiesHook.AcceptInputHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::AcceptInput::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::AcceptInput::Pre");
+        }
+    }
+
+    internal void InvokeAcceptInputPost( ref AcceptInputEntityPostContext ctx )
+    {
+        if (!EntitiesHook.AcceptInputHook.HasPostListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::AcceptInput::Post");
+            EntitiesHook.AcceptInputHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::AcceptInput::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::AcceptInput::Post");
+        }
+    }
+
+    internal void InvokeFireOutputPre( ref FireOutputEntityPreContext ctx )
+    {
+        if (!EntitiesHook.FireOutputHook.HasPreListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::FireOutput::Pre");
+            EntitiesHook.FireOutputHook.InvokePre(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::FireOutput::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::FireOutput::Pre");
+        }
+    }
+
+    internal void InvokeFireOutputPost( ref FireOutputEntityPostContext ctx )
+    {
+        if (!EntitiesHook.FireOutputHook.HasPostListeners) return;
+
+        try
+        {
+            profiler.StartRecording("GameHooks::Entities::FireOutput::Post");
+            EntitiesHook.FireOutputHook.InvokePost(ref ctx);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Entities::FireOutput::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Entities::FireOutput::Post");
         }
     }
 }

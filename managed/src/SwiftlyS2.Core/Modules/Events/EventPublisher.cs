@@ -703,6 +703,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToEntityStartTouch {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToEntityStartTouch) return true;
+            }
+            return false;
+        }
+    }
+
     public static void InvokeOnEntityStartTouch( OnEntityStartTouchEvent @event )
     {
         if (subscribers.Count == 0)
@@ -727,6 +737,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToEntityTouch {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToEntityTouch) return true;
+            }
+            return false;
+        }
+    }
+
     public static void InvokeOnEntityTouch( OnEntityTouchEvent @event )
     {
         if (subscribers.Count == 0)
@@ -748,6 +768,16 @@ internal static class EventPublisher
                 return;
             }
             AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static bool ListensToEntityEndTouch {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToEntityEndTouch) return true;
+            }
+            return false;
         }
     }
 
@@ -989,6 +1019,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToAcceptInput {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToAcceptInput) return true;
+            }
+            return false;
+        }
+    }
+
     public static void InvokeOnEntityIdentityAcceptInputHook( OnEntityIdentityAcceptInputHookEvent @event )
     {
         if (subscribers.Count == 0)
@@ -1044,6 +1084,16 @@ internal static class EventPublisher
                 return;
             }
             AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static bool ListensToFireOutput {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToFireOutput) return true;
+            }
+            return false;
         }
     }
 

@@ -1,0 +1,240 @@
+using SwiftlyS2.Core.EntitySystem;
+using SwiftlyS2.Shared.GameHooks;
+using SwiftlyS2.Shared.Memory;
+using SwiftlyS2.Shared.Misc;
+using SwiftlyS2.Shared.SchemaDefinitions;
+
+namespace SwiftlyS2.Core.GameHooks;
+
+internal static partial class GameHooksPublisher
+{
+    private delegate nint CBaseEntityTouchTemplate( nint pBaseEntity, nint pOtherEntity );
+
+    internal static Guid HookStartTouch()
+    {
+        if (_core == null) throw new InvalidOperationException("GameHooksCore is not initialized.");
+
+        var offset = _core.GameData.GetOffset("CBaseEntity::StartTouch");
+        if (offset < 0)
+            throw new InvalidOperationException("Failed to find offset for CBaseEntity::StartTouch.");
+
+        var fn = _core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(_core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, offset);
+        return fn.AddHook(next =>
+        {
+            return ( pBaseEntity, pOtherEntity ) =>
+            {
+                var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity);
+                var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity);
+
+                var preCtx = new StartTouchEntityPreContext {
+                    Params = new EntityTouchParams {
+                        Entity = entity,
+                        OtherEntity = otherEntity
+                    }
+                };
+
+                InvokeStartTouchPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return nint.Zero;
+
+                var result = next()(pBaseEntity, pOtherEntity);
+
+                var postCtx = new StartTouchEntityPostContext { Params = preCtx.Params };
+                InvokeStartTouchPost(ref postCtx);
+                return result;
+            };
+        });
+    }
+
+    internal static Guid UnhookStartTouch()
+    {
+        if (_core == null) throw new InvalidOperationException("GameHooksCore is not initialized.");
+
+        if (hookIds.TryGetValue(HookListener.StartTouch, out var hookId))
+        {
+            var offset = _core.GameData.GetOffset("CBaseEntity::StartTouch");
+            if (offset < 0)
+                throw new InvalidOperationException("Failed to find offset for CBaseEntity::StartTouch.");
+
+            var fn = _core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(_core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, offset);
+            fn.RemoveHook(hookId);
+            return hookId;
+        }
+        else return Guid.Empty;
+    }
+
+    internal static Guid HookTouch()
+    {
+        if (_core == null) throw new InvalidOperationException("GameHooksCore is not initialized.");
+
+        var offset = _core.GameData.GetOffset("CBaseEntity::Touch");
+        if (offset < 0)
+            throw new InvalidOperationException("Failed to find offset for CBaseEntity::Touch.");
+
+        var fn = _core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(_core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, offset);
+        return fn.AddHook(next =>
+        {
+            return ( pBaseEntity, pOtherEntity ) =>
+            {
+                var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity);
+                var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity);
+
+                var preCtx = new TouchEntityPreContext {
+                    Params = new EntityTouchParams {
+                        Entity = entity,
+                        OtherEntity = otherEntity
+                    }
+                };
+
+                InvokeTouchPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return nint.Zero;
+
+                var result = next()(pBaseEntity, pOtherEntity);
+
+                var postCtx = new TouchEntityPostContext { Params = preCtx.Params };
+                InvokeTouchPost(ref postCtx);
+                return result;
+            };
+        });
+    }
+
+    internal static Guid UnhookTouch()
+    {
+        if (_core == null) throw new InvalidOperationException("GameHooksCore is not initialized.");
+
+        if (hookIds.TryGetValue(HookListener.Touch, out var hookId))
+        {
+            var offset = _core.GameData.GetOffset("CBaseEntity::Touch");
+            if (offset < 0)
+                throw new InvalidOperationException("Failed to find offset for CBaseEntity::Touch.");
+
+            var fn = _core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(_core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, offset);
+            fn.RemoveHook(hookId);
+            return hookId;
+        }
+        else return Guid.Empty;
+    }
+
+    internal static Guid HookEndTouch()
+    {
+        if (_core == null) throw new InvalidOperationException("GameHooksCore is not initialized.");
+
+        var offset = _core.GameData.GetOffset("CBaseEntity::EndTouch");
+        if (offset < 0)
+            throw new InvalidOperationException("Failed to find offset for CBaseEntity::EndTouch.");
+
+        var fn = _core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(_core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, offset);
+        return fn.AddHook(next =>
+        {
+            return ( pBaseEntity, pOtherEntity ) =>
+            {
+                var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity);
+                var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity);
+
+                var preCtx = new EndTouchEntityPreContext {
+                    Params = new EntityTouchParams {
+                        Entity = entity,
+                        OtherEntity = otherEntity
+                    }
+                };
+
+                InvokeEndTouchPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return nint.Zero;
+
+                var result = next()(pBaseEntity, pOtherEntity);
+
+                var postCtx = new EndTouchEntityPostContext { Params = preCtx.Params };
+                InvokeEndTouchPost(ref postCtx);
+                return result;
+            };
+        });
+    }
+
+    internal static Guid UnhookEndTouch()
+    {
+        if (_core == null) throw new InvalidOperationException("GameHooksCore is not initialized.");
+
+        if (hookIds.TryGetValue(HookListener.EndTouch, out var hookId))
+        {
+            var offset = _core.GameData.GetOffset("CBaseEntity::EndTouch");
+            if (offset < 0)
+                throw new InvalidOperationException("Failed to find offset for CBaseEntity::EndTouch.");
+
+            var fn = _core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(_core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, offset);
+            fn.RemoveHook(hookId);
+            return hookId;
+        }
+        else return Guid.Empty;
+    }
+
+    internal static void InvokeStartTouchPre( ref StartTouchEntityPreContext ctx )
+    {
+        lock (subscribersLock)
+        {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                subscribers[i].InvokeStartTouchPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
+            }
+        }
+    }
+
+    internal static void InvokeStartTouchPost( ref StartTouchEntityPostContext ctx )
+    {
+        lock (subscribersLock)
+        {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                subscribers[i].InvokeStartTouchPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
+            }
+        }
+    }
+
+    internal static void InvokeTouchPre( ref TouchEntityPreContext ctx )
+    {
+        lock (subscribersLock)
+        {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                subscribers[i].InvokeTouchPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
+            }
+        }
+    }
+
+    internal static void InvokeTouchPost( ref TouchEntityPostContext ctx )
+    {
+        lock (subscribersLock)
+        {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                subscribers[i].InvokeTouchPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
+            }
+        }
+    }
+
+    internal static void InvokeEndTouchPre( ref EndTouchEntityPreContext ctx )
+    {
+        lock (subscribersLock)
+        {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                subscribers[i].InvokeEndTouchPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
+            }
+        }
+    }
+
+    internal static void InvokeEndTouchPost( ref EndTouchEntityPostContext ctx )
+    {
+        lock (subscribersLock)
+        {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                subscribers[i].InvokeEndTouchPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
+            }
+        }
+    }
+}

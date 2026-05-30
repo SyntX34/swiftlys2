@@ -43,6 +43,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     public event EventDelegates.OnEntitySpawned? OnEntitySpawned;
     public event EventDelegates.OnMapLoad? OnMapLoad;
     public event EventDelegates.OnMapUnload? OnMapUnload;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Controller.ProcessUsercmds instead.")]
     public event EventDelegates.OnClientProcessUsercmds? OnClientProcessUsercmds;
     public event EventDelegates.OnConVarValueChanged? OnConVarValueChanged;
     public event EventDelegates.OnConCommandCreated? OnConCommandCreated;
@@ -50,18 +51,28 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.TakeDamage instead.")]
     public event EventDelegates.OnEntityTakeDamage? OnEntityTakeDamage;
     public event EventDelegates.OnPrecacheResource? OnPrecacheResource;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.StartTouch instead.")]
     public event EventDelegates.OnEntityStartTouch? OnEntityStartTouch;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.Touch instead.")]
     public event EventDelegates.OnEntityTouch? OnEntityTouch;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.EndTouch instead.")]
     public event EventDelegates.OnEntityEndTouch? OnEntityEndTouch;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Items.CanAcquire instead.")]
     public event EventDelegates.OnItemServicesCanAcquireHook? OnItemServicesCanAcquireHook;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.CanUse instead.")]
     public event EventDelegates.OnWeaponServicesCanUseHook? OnWeaponServicesCanUseHook;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.Drop instead.")]
     public event EventDelegates.OnWeaponServicesDropWeaponHook? OnWeaponServicesDropWeaponHook;
     public event EventDelegates.OnConsoleOutput? OnConsoleOutput;
     public event EventDelegates.OnCommandExecuteHook? OnCommandExecuteHook;
     public event EventDelegates.OnSteamAPIActivated? OnSteamAPIActivated;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Movement.RunCommand instead.")]
     public event EventDelegates.OnMovementServicesRunCommandHook? OnMovementServicesRunCommandHook;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Pawn.PostThink instead.")]
     public event EventDelegates.OnPlayerPawnPostThink? OnPlayerPawnPostThink;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.AcceptInput instead.")]
     public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.FireOutput instead.")]
     public event EventDelegates.OnEntityFireOutputHookEvent? OnEntityFireOutputHook;
     public event EventDelegates.OnStartupServer? OnStartupServer;
     public event EventDelegates.OnClientVoice? OnClientVoice;
@@ -516,6 +527,8 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
+    public bool ListensToEntityStartTouch => OnEntityStartTouch != null;
+
     public void InvokeOnEntityStartTouch( ref OnEntityStartTouchEvent @event )
     {
         if (OnEntityStartTouch == null)
@@ -540,6 +553,8 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
+    public bool ListensToEntityTouch => OnEntityTouch != null;
+
     public void InvokeOnEntityTouch( ref OnEntityTouchEvent @event )
     {
         if (OnEntityTouch == null)
@@ -563,6 +578,8 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             profiler.StopRecording("Event::OnEntityTouch");
         }
     }
+
+    public bool ListensToEntityEndTouch => OnEntityEndTouch != null;
 
     public void InvokeOnEntityEndTouch( ref OnEntityEndTouchEvent @event )
     {
@@ -836,6 +853,8 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
+    public bool ListensToAcceptInput => OnEntityIdentityAcceptInputHook != null;
+
     public void InvokeOnEntityIdentityAcceptInputHook( ref OnEntityIdentityAcceptInputHookEvent @event )
     {
         if (OnEntityIdentityAcceptInputHook == null)
@@ -885,6 +904,8 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             profiler.StopRecording("Event::OnWeaponServicesDropWeaponHook");
         }
     }
+
+    public bool ListensToFireOutput => OnEntityFireOutputHook != null;
 
     public void InvokeOnEntityFireOutputHook( ref OnEntityFireOutputHookEvent @event )
     {

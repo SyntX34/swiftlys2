@@ -73,10 +73,7 @@ internal class CoreHookService : IDisposable
     private delegate nint ExecuteCommand( nint a1, int a2, uint a3, nint a4, nint a5 );
     private delegate nint ICvarFindConCommandWindows( nint pICvar, nint pRet, nint pConCommandName, int unk1 );
     private delegate nint ICvarFindConCommandLinux( nint pICvar, nint pConCommandName, int unk1 );
-    private delegate nint CBaseEntityTouchTemplate( nint pBaseEntity, nint pOtherEntity );
     private delegate void SteamServerAPIActivated( nint pServer );
-    private delegate void CEntityIdentityAcceptInput( nint pEntityIdentity, nint inputName, nint activator, nint caller, nint variant, int outputId, nint unk1, nint unk2 );
-    private delegate void CEntityIOOutputFireOutputInternal( nint pEntityIO, nint pActivator, nint pCaller, nint pVariant, float flDelay, nint unk1, nint unk2 );
     private delegate void DispatchDatamapFunction( nint a1, nint pDatamapFunc, nint a3, uint a4, nint a5, double a6 /* unknown */ );
 
     private IUnmanagedFunction<ExecuteCommand>? executeCommand;
@@ -84,122 +81,66 @@ internal class CoreHookService : IDisposable
     private IUnmanagedFunction<ICvarFindConCommandWindows>? findConCommandWindows;
     private IUnmanagedFunction<ICvarFindConCommandLinux>? findConCommandLinux;
     private Guid findConCommandGuid;
-    private IUnmanagedFunction<CBaseEntityTouchTemplate>? entityStartTouch;
-    private Guid entityStartTouchGuid;
-    private IUnmanagedFunction<CBaseEntityTouchTemplate>? entityTouch;
-    private Guid entityTouchGuid;
-    private IUnmanagedFunction<CBaseEntityTouchTemplate>? entityEndTouch;
-    private Guid entityEndTouchGuid;
     private IUnmanagedFunction<SteamServerAPIActivated>? steamServerAPIActivated;
     private Guid steamServerAPIActivatedGuid;
-    private IUnmanagedFunction<CEntityIdentityAcceptInput>? entityIdentityAcceptInput;
-    private Guid entityIdentityAcceptInputGuid;
-    private IUnmanagedFunction<CEntityIOOutputFireOutputInternal>? entityIOOutputFireOutputInternal;
-    private Guid entityIOOutputFireOutputInternalGuid;
     private IUnmanagedFunction<DispatchDatamapFunction>? dispatchDatamapFunction;
     private Guid dispatchDatamapFunctionGuid;
 
+    internal unsafe void EntityAcceptInputPre( ref AcceptInputEntityPreContext @event )
+    {
+        if (!EventPublisher.ListensToAcceptInput) return;
+
+        var @e = new OnEntityIdentityAcceptInputHookEvent {
+            Identity = @event.Params.Identity,
+            EntityInstance = @event.Params.EntityInstance,
+            DesignerName = @event.Params.DesignerName,
+            InputName = @event.Params.InputName,
+            Activator = @event.Params.Activator,
+            Caller = @event.Params.Caller,
+            _variant = @event.Params._variant,
+            OutputId = @event.Params.OutputId,
+            Result = HookResult.Continue
+        };
+        EventPublisher.InvokeOnEntityIdentityAcceptInputHook(@e);
+        @event.SetHookResult(@e.Result);
+    }
+
     internal void HookEntityIdentityAcceptInput()
     {
-        var address = core.GameData.GetSignature("CEntityIdentity::AcceptInput");
-
-        logger.LogInformation("Hooking CEntityIdentity::AcceptInput at {Address:X}", address);
-
-        entityIdentityAcceptInput = core.Memory.GetUnmanagedFunctionByAddress<CEntityIdentityAcceptInput>(address);
-        entityIdentityAcceptInputGuid = entityIdentityAcceptInput.AddHook(next =>
-        {
-            return ( pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2 ) =>
-            {
-                unsafe
-                {
-                    var entityIdentity = core.Memory.ToSchemaClass<CEntityIdentity>(pEntityIdentity);
-                    if (!entityIdentity.IsValid || !entityIdentity.EntityInstance.IsValid)
-                    {
-                        next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
-                        return;
-                    }
-                    var inputName = pInputName != nint.Zero ? pInputName.AsRef<CUtlSymbolLarge>().Value : "";
-                    var activator = pActivator != nint.Zero ? EntityManager.GetEntityByAddress(pActivator) : null;
-                    var caller = pCaller != nint.Zero ? EntityManager.GetEntityByAddress(pCaller) : null;
-
-                    var @event = new OnEntityIdentityAcceptInputHookEvent {
-                        Identity = entityIdentity,
-                        EntityInstance = EntityManager.GetEntityByIndex(entityIdentity.EntityInstance.Index)!,
-                        DesignerName = entityIdentity.DesignerName,
-                        InputName = inputName,
-                        Activator = activator,
-                        Caller = caller,
-                        _variant = (CVariant<CVariantDefaultAllocator>*)pVariant,
-                        OutputId = outputId,
-                        Result = HookResult.Continue
-                    };
-                    EventPublisher.InvokeOnEntityIdentityAcceptInputHook(@event);
-
-                    if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                    {
-                        return;
-                    }
-
-                    next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
-                }
-            };
-        });
+        core.GameHooks.Entities.AcceptInput.Pre += EntityAcceptInputPre;
     }
 
     internal void UnhookEntityIdentityAcceptInput()
     {
-        if (entityIdentityAcceptInput == null) return;
-        entityIdentityAcceptInput.RemoveHook(entityIdentityAcceptInputGuid);
-        entityIdentityAcceptInput = null;
+        core.GameHooks.Entities.AcceptInput.Pre -= EntityAcceptInputPre;
     }
 
-    internal unsafe void HookEntityIOOutputFireOutputInternal()
+    internal unsafe void EntityFireOutputPre( ref FireOutputEntityPreContext @event )
     {
-        var address = core.GameData.GetSignature("CEntityIOOutput::FireOutputInternal");
+        if (!EventPublisher.ListensToFireOutput) return;
 
-        logger.LogInformation("Hooking CEntityIOOutput_FireOutputInternal at {Address:X}", address);
+        var @e = new OnEntityFireOutputHookEvent {
+            _entityIO = @event.Params._entityIO,
+            _variant = @event.Params._variant,
+            DesignerName = @event.Params.DesignerName,
+            OutputName = @event.Params.OutputName,
+            Activator = @event.Params.Activator,
+            Caller = @event.Params.Caller,
+            Delay = @event.Params.Delay,
+            Result = HookResult.Continue
+        };
+        EventPublisher.InvokeEntityFireOutputHook(@e);
+        @event.SetHookResult(@e.Result);
+    }
 
-        entityIOOutputFireOutputInternal = core.Memory.GetUnmanagedFunctionByAddress<CEntityIOOutputFireOutputInternal>(address);
-        entityIOOutputFireOutputInternalGuid = entityIOOutputFireOutputInternal.AddHook(next =>
-        {
-            return ( pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2 ) =>
-            {
-                var entityIO = pEntityIO.AsRef<CEntityIOOutput>();
-
-                var outputName = entityIO.Desc.Name.Value;
-                var activator = pActivator != nint.Zero ? EntityManager.GetEntityByAddress(pActivator) : null;
-                var caller = pCaller != nint.Zero ? EntityManager.GetEntityByAddress(pCaller) : null;
-
-                var variant = pVariant.AsRef<CVariant<CVariantDefaultAllocator>>();
-
-                var @event = new OnEntityFireOutputHookEvent {
-                    _entityIO = (CEntityIOOutput*)pEntityIO,
-                    _variant = (CVariant<CVariantDefaultAllocator>*)pVariant,
-                    DesignerName = caller?.DesignerName ?? string.Empty,
-                    OutputName = outputName,
-                    Activator = activator,
-                    Caller = caller,
-                    VariantValue = variant,
-                    Delay = flDelay,
-                    Result = HookResult.Continue
-                };
-                EventPublisher.InvokeEntityFireOutputHook(@event);
-
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                {
-                    return;
-                }
-
-                next()(pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2);
-            };
-        });
+    internal void HookEntityIOOutputFireOutputInternal()
+    {
+        core.GameHooks.Entities.FireOutput.Pre += EntityFireOutputPre;
     }
 
     internal void UnhookEntityIOOutputFireOutputInternal()
     {
-        if (entityIOOutputFireOutputInternal == null) return;
-        entityIOOutputFireOutputInternal.RemoveHook(entityIOOutputFireOutputInternalGuid);
-        entityIOOutputFireOutputInternal = null;
+        core.GameHooks.Entities.FireOutput.Pre -= EntityFireOutputPre;
     }
 
     internal void HookExecuteCommand()
@@ -392,81 +333,51 @@ internal class CoreHookService : IDisposable
         core.GameHooks.Weapons.CanUse.Post -= CanUseEventPost;
     }
 
+    internal void EntityStartTouchPre( ref StartTouchEntityPreContext @event )
+    {
+        if (!EventPublisher.ListensToEntityStartTouch) return;
+
+        using var @e = new OnEntityStartTouchEvent {
+            Entity = @event.Params.Entity,
+            OtherEntity = @event.Params.OtherEntity
+        };
+        EventPublisher.InvokeOnEntityStartTouch(@e);
+    }
+
+    internal void EntityTouchPre( ref TouchEntityPreContext @event )
+    {
+        if (!EventPublisher.ListensToEntityTouch) return;
+
+        using var @e = new OnEntityTouchEvent {
+            Entity = @event.Params.Entity,
+            OtherEntity = @event.Params.OtherEntity
+        };
+        EventPublisher.InvokeOnEntityTouch(@e);
+    }
+
+    internal void EntityEndTouchPre( ref EndTouchEntityPreContext @event )
+    {
+        if (!EventPublisher.ListensToEntityEndTouch) return;
+
+        using var @e = new OnEntityEndTouchEvent {
+            Entity = @event.Params.Entity,
+            OtherEntity = @event.Params.OtherEntity
+        };
+        EventPublisher.InvokeOnEntityEndTouch(@e);
+    }
+
     internal void HookCBaseEntityTouchTemplate()
     {
-        var touchOffset = core.GameData.GetOffset("CBaseEntity::Touch");
-        var startTouchOffset = core.GameData.GetOffset("CBaseEntity::StartTouch");
-        var endTouchOffset = core.GameData.GetOffset("CBaseEntity::EndTouch");
-        entityStartTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, startTouchOffset);
-        entityTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, touchOffset);
-        entityEndTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, endTouchOffset);
-        logger.LogInformation("Hooking CBaseEntity::StartTouch at {Address:X}", entityStartTouch.Address);
-        logger.LogInformation("Hooking CBaseEntity::Touch at {Address:X}", entityTouch.Address);
-        logger.LogInformation("Hooking CBaseEntity::EndTouch at {Address:X}", entityEndTouch.Address);
-
-        entityStartTouchGuid = entityStartTouch.AddHook(next =>
-        {
-            return ( pBaseEntity, pOtherEntity ) =>
-            {
-                var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity;
-                var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity;
-                using var @event = new OnEntityStartTouchEvent {
-                    Entity = entity ?? core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity),
-                    OtherEntity = otherEntity ?? core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity)
-                };
-                EventPublisher.InvokeOnEntityStartTouch(@event);
-                return next()(pBaseEntity, pOtherEntity);
-            };
-        });
-
-        entityTouchGuid = entityTouch.AddHook(next =>
-        {
-            return ( pBaseEntity, pOtherEntity ) =>
-            {
-                var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity;
-                var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity;
-                using var @event = new OnEntityTouchEvent {
-                    Entity = entity ?? core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity),
-                    OtherEntity = otherEntity ?? core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity)
-                };
-                EventPublisher.InvokeOnEntityTouch(@event);
-                return next()(pBaseEntity, pOtherEntity);
-            };
-        });
-
-        entityEndTouchGuid = entityEndTouch.AddHook(next =>
-        {
-            return ( pBaseEntity, pOtherEntity ) =>
-            {
-                var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity;
-                var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity;
-                using var @event = new OnEntityEndTouchEvent {
-                    Entity = entity ?? core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity),
-                    OtherEntity = otherEntity ?? core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity)
-                };
-                EventPublisher.InvokeOnEntityEndTouch(@event);
-                return next()(pBaseEntity, pOtherEntity);
-            };
-        });
+        core.GameHooks.Entities.StartTouch.Pre += EntityStartTouchPre;
+        core.GameHooks.Entities.Touch.Pre += EntityTouchPre;
+        core.GameHooks.Entities.EndTouch.Pre += EntityEndTouchPre;
     }
 
     internal void UnhookCBaseEntityTouchTemplate()
     {
-        if (entityStartTouch != null)
-        {
-            entityStartTouch.RemoveHook(entityStartTouchGuid);
-            entityStartTouch = null;
-        }
-        if (entityTouch != null)
-        {
-            entityTouch.RemoveHook(entityTouchGuid);
-            entityTouch = null;
-        }
-        if (entityEndTouch != null)
-        {
-            entityEndTouch.RemoveHook(entityEndTouchGuid);
-            entityEndTouch = null;
-        }
+        core.GameHooks.Entities.StartTouch.Pre -= EntityStartTouchPre;
+        core.GameHooks.Entities.Touch.Pre -= EntityTouchPre;
+        core.GameHooks.Entities.EndTouch.Pre -= EntityEndTouchPre;
     }
 
     internal void HookSteamServerAPIActivated()
