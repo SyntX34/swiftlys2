@@ -18,7 +18,6 @@ internal class StartupService : IHostedService
         provider.UseGameHooksPublisher();
         provider.UseCoreHookService();
         provider.UsePermissionManager();
-        provider.UseCommandTrackerService();
         provider.UseMenuManagerAPIService();
         // UseCoreCommandService must be the second to last one
         provider.UseCoreCommandService();

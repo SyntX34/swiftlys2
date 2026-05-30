@@ -753,6 +753,9 @@ public class TestPlugin : BasePlugin
     public void TestCommand7( ICommandContext _ )
     {
         Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) => { Console.WriteLine($"pong: {buffer}"); });
+        Core.Engine.ExecuteCommandWithBuffer("@ping2", ( buffer ) => { Console.WriteLine($"pong2: {buffer}"); });
+        Core.Engine.ExecuteCommandWithBuffer("@ping3", ( buffer ) => { Console.WriteLine($"pong3: {buffer}"); });
+        Core.Engine.ExecuteCommandWithBuffer("@ping4", ( buffer ) => { Console.WriteLine($"pong4: {buffer}"); });
     }
 
     [ClientNetMessageHandler]

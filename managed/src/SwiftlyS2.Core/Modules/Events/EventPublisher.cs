@@ -9,6 +9,7 @@ using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Core.Players;
 using SwiftlyS2.Core.EntitySystem;
+using SwiftlyS2.Core.Services;
 
 namespace SwiftlyS2.Core.Events;
 
@@ -909,9 +910,18 @@ internal static class EventPublisher
             return;
         }
 
+        var message = string.Empty;
+        var setMessage = false;
+        if (CommandTrackerManager.IsTracking)
+        {
+            message = StringAlloc.CreateCSharpString(messagePtr);
+            setMessage = true;
+            CommandTrackerManager.ProcessOutput(message);
+        }
+
         try
         {
-            OnConsoleOutputEvent @event = new() { Message = StringAlloc.CreateCSharpString(messagePtr) };
+            OnConsoleOutputEvent @event = new() { Message = setMessage ? message : StringAlloc.CreateCSharpString(messagePtr) };
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnConsoleOutput(ref @event);
@@ -929,6 +939,8 @@ internal static class EventPublisher
 
     public static void InvokeOnCommandExecuteHook( OnCommandExecuteHookEvent @event )
     {
+        CommandTrackerManager.ProcessCommand(@event);
+
         if (subscribers.Count == 0)
         {
             return;

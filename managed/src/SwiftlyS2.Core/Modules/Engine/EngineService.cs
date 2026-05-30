@@ -11,12 +11,10 @@ namespace SwiftlyS2.Core.Services;
 internal class EngineService : IEngineService
 {
     private readonly ISwiftlyCore core;
-    private readonly CommandTrackerManager commandTrackedManager;
 
-    public EngineService( ISwiftlyCore core, CommandTrackerManager commandTrackedManager )
+    public EngineService( ISwiftlyCore core )
     {
         this.core = core;
-        this.commandTrackedManager = commandTrackedManager;
     }
 
     public string? ServerIP => NativeEngineHelpers.GetIP();
@@ -50,7 +48,7 @@ internal class EngineService : IEngineService
             bufferCallback(string.Empty);
             return;
         }
-        commandTrackedManager.EnqueueCommand(bufferCallback);
+        CommandTrackerManager.EnqueueCommand(bufferCallback);
         NativeEngineHelpers.ExecuteCommand($"ecwb{command.Trim()}");
     }
 

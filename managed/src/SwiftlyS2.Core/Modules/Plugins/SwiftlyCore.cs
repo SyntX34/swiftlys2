@@ -109,7 +109,6 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton(coreProvider.GetRequiredService<HookManager>())
             .AddSingleton(coreProvider.GetRequiredService<TraceManager>())
             .AddSingleton(coreProvider.GetRequiredService<PermissionManager>())
-            .AddSingleton(coreProvider.GetRequiredService<CommandTrackerManager>())
             .AddSingleton(coreProvider.GetRequiredService<MenuManagerAPI>())
             .AddSingleton(coreProvider.GetRequiredService<DatamapFunctionManager>())
 
