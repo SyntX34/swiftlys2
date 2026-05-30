@@ -1,7 +1,6 @@
 using System.Runtime.InteropServices;
 using Spectre.Console;
 using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Core.Scheduler;
@@ -62,6 +61,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToConVarCreated {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToConVarCreated) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnConVarCreated( nint convarNamePtr )
     {
@@ -69,6 +78,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToConVarCreated) return;
 
         try
         {
@@ -88,6 +99,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToConCommandCreated {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToConCommandCreated) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnConCommandCreated( nint commandNamePtr )
     {
@@ -95,6 +116,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToConCommandCreated) return;
 
         try
         {
@@ -114,6 +137,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToConVarValueChanged {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToConVarValueChanged) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnConVarValueChanged( nint convarNamePtr, int playerid, nint newValuePtr, nint oldValuePtr )
     {
@@ -121,6 +154,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToConVarValueChanged) return;
 
         try
         {
@@ -145,6 +180,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToTick {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToTick) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnTick( byte simulating, byte first, byte last )
     {
@@ -154,6 +199,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToTick) return;
 
         try
         {
@@ -172,6 +219,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToWorldUpdate {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToWorldUpdate) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnPreworldUpdate( byte simulating )
     {
@@ -181,6 +238,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToWorldUpdate) return;
 
         try
         {
@@ -199,6 +258,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToClientConnected {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToClientConnected) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static byte OnClientConnected( int playerId )
     {
@@ -207,6 +276,8 @@ internal static class EventPublisher
         {
             return 1;
         }
+
+        if (!ListensToClientConnected) return 1;
 
         try
         {
@@ -242,6 +313,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToClientDisconnected {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToClientDisconnected) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnClientDisconnected( int playerId, int reason )
     {
@@ -249,6 +330,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToClientDisconnected) return;
 
         try
         {
@@ -277,6 +360,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToClientKeyStateChanged {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToClientKeyStateChanged) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnClientKeyStateChanged( int playerId, GameButtons key, byte pressed )
     {
@@ -284,6 +377,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToClientKeyStateChanged) return;
 
         try
         {
@@ -307,6 +402,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToClientPutInServer {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToClientPutInServer) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnClientPutInServer( int playerId, int clientKind )
     {
@@ -316,6 +421,8 @@ internal static class EventPublisher
         }
 
         if (clientKind == (int)ClientKind.Bot) PlayerManagerService.RegisterPlayerObject(playerId);
+
+        if (!ListensToClientPutInServer) return;
 
         try
         {
@@ -338,6 +445,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToClientSteamAuthorize {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToClientSteamAuthorize) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnClientSteamAuthorize( int playerId )
     {
@@ -345,6 +462,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToClientSteamAuthorize) return;
 
         try
         {
@@ -364,6 +483,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToClientSteamAuthorizeFail {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToClientSteamAuthorizeFail) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnClientSteamAuthorizeFail( int playerId )
     {
@@ -371,6 +500,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToClientSteamAuthorizeFail) return;
 
         try
         {
@@ -390,6 +521,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToEntityCreated {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToEntityCreated) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnEntityCreated( nint entityPtr )
     {
@@ -398,6 +539,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToEntityCreated) return;
 
         try
         {
@@ -417,10 +560,26 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToEntityDeleted {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToEntityDeleted) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnEntityDeleted( nint entityPtr )
     {
         if (subscribers.Count == 0)
+        {
+            EntityManager.OnEntityDeleted(entityPtr);
+            return;
+        }
+
+        if (!ListensToEntityDeleted)
         {
             EntityManager.OnEntityDeleted(entityPtr);
             return;
@@ -450,6 +609,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToEntityParentChanged {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToEntityParentChanged) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnEntityParentChanged( nint entityPtr, nint newParentPtr )
     {
@@ -457,6 +626,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToEntityParentChanged) return;
 
         try
         {
@@ -479,6 +650,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToEntitySpawned {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToEntitySpawned) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnEntitySpawned( nint entityPtr )
     {
@@ -486,6 +667,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToEntitySpawned) return;
 
         try
         {
@@ -505,6 +688,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToMapLoad {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToMapLoad) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnMapLoad( nint mapNamePtr )
     {
@@ -512,6 +705,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToMapLoad) return;
 
         try
         {
@@ -531,6 +726,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToClientVoice {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToClientVoice) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnClientVoice( int playerId )
     {
@@ -538,6 +743,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToClientVoice) return;
 
         try
         {
@@ -557,6 +764,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToMapUnload {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToMapUnload) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnMapUnload( nint mapNamePtr )
     {
@@ -565,6 +782,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToMapUnload) return;
 
         try
         {
@@ -653,6 +872,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToPrecacheResource {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToPrecacheResource) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnPrecacheResource( nint pResourceManifest )
     {
@@ -660,6 +889,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToPrecacheResource) return;
 
         try
         {
@@ -679,6 +910,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToStartupServer {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToStartupServer) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnStartupServer()
     {
@@ -686,6 +927,8 @@ internal static class EventPublisher
         {
             return;
         }
+
+        if (!ListensToStartupServer) return;
 
         try
         {
@@ -902,6 +1145,16 @@ internal static class EventPublisher
         }
     }
 
+    public static bool ListensToConsoleOutput {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToConsoleOutput) return true;
+            }
+            return false;
+        }
+    }
+
     [UnmanagedCallersOnly]
     public static void OnConsoleOutput( nint messagePtr )
     {
@@ -918,6 +1171,8 @@ internal static class EventPublisher
             setMessage = true;
             CommandTrackerManager.ProcessOutput(message);
         }
+
+        if (!ListensToConsoleOutput) return;
 
         try
         {
