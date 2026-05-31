@@ -24,9 +24,6 @@ internal static partial class GameHooksPublisher
         {
             return ( pBaseEntity, pOtherEntity ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.StartTouch, out var count) && count == 1 && !EventPublisher.ListensToEntityStartTouch)
-                    return next()(pBaseEntity, pOtherEntity);
-
                 var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity);
                 var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity);
 
@@ -36,6 +33,15 @@ internal static partial class GameHooksPublisher
                         OtherEntity = otherEntity
                     }
                 };
+
+                if (EventPublisher.ListensToEntityStartTouch)
+                {
+                    using var ev = new OnEntityStartTouchEvent {
+                        Entity = preCtx.Params.Entity,
+                        OtherEntity = preCtx.Params.OtherEntity
+                    };
+                    EventPublisher.InvokeOnEntityStartTouch(ev);
+                }
 
                 InvokeStartTouchPre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return nint.Zero;
@@ -79,9 +85,6 @@ internal static partial class GameHooksPublisher
         {
             return ( pBaseEntity, pOtherEntity ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.Touch, out var count) && count == 1 && !EventPublisher.ListensToEntityTouch)
-                    return next()(pBaseEntity, pOtherEntity);
-
                 var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity);
                 var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity);
 
@@ -91,6 +94,15 @@ internal static partial class GameHooksPublisher
                         OtherEntity = otherEntity
                     }
                 };
+
+                if (EventPublisher.ListensToEntityTouch)
+                {
+                    using var ev = new OnEntityTouchEvent {
+                        Entity = preCtx.Params.Entity,
+                        OtherEntity = preCtx.Params.OtherEntity
+                    };
+                    EventPublisher.InvokeOnEntityTouch(ev);
+                }
 
                 InvokeTouchPre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return nint.Zero;
@@ -134,9 +146,6 @@ internal static partial class GameHooksPublisher
         {
             return ( pBaseEntity, pOtherEntity ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.EndTouch, out var count) && count == 1 && !EventPublisher.ListensToEntityEndTouch)
-                    return next()(pBaseEntity, pOtherEntity);
-
                 var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity);
                 var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity);
 
@@ -146,6 +155,15 @@ internal static partial class GameHooksPublisher
                         OtherEntity = otherEntity
                     }
                 };
+
+                if (EventPublisher.ListensToEntityEndTouch)
+                {
+                    using var ev = new OnEntityEndTouchEvent {
+                        Entity = preCtx.Params.Entity,
+                        OtherEntity = preCtx.Params.OtherEntity
+                    };
+                    EventPublisher.InvokeOnEntityEndTouch(ev);
+                }
 
                 InvokeEndTouchPre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return nint.Zero;

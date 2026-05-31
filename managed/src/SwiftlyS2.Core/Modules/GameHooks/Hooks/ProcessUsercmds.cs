@@ -2,6 +2,7 @@ using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
+using SwiftlyS2.Shared.ProtobufDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 
@@ -23,9 +24,6 @@ internal static partial class GameHooksPublisher
         {
             return ( controller, userCmds, numCmds, paused, margin ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.ProcessUsercmds, out var count) && count == 1 && !EventPublisher.ListensToProcessUsercmds)
-                    return next()(controller, userCmds, numCmds, paused, margin);
-
                 var dummy = _controllerPool.Rent();
                 dummy.DangerousSetHandle(controller);
                 var player = dummy.ToPlayer();
@@ -45,6 +43,21 @@ internal static partial class GameHooksPublisher
                         Margin = margin
                     }
                 };
+
+                if (EventPublisher.ListensToProcessUsercmds)
+                {
+                    var usercmdsPBList = new List<CSGOUserCmdPB>(preCtx.Params.Usercmds.Count);
+                    foreach (var usercmd in preCtx.Params.Usercmds)
+                        usercmdsPBList.Add(usercmd.CSGOUserCmd);
+
+                    var ev = new OnClientProcessUsercmdsEvent {
+                        PlayerId = preCtx.Params.Player.PlayerID,
+                        Paused = preCtx.Params.Paused,
+                        Margin = preCtx.Params.Margin,
+                        Usercmds = usercmdsPBList
+                    };
+                    EventPublisher.OnClientProcessUsercmds(ref ev);
+                }
 
                 InvokeProcessUsercmdsPre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return 0;

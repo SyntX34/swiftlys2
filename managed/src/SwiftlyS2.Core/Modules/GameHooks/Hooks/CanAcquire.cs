@@ -25,9 +25,6 @@ internal static partial class GameHooksPublisher
         {
             return ( pItemServices, pEconItemView, acquireMethod, unk1 ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.CanAcquire, out var count) && count == 1 && !EventPublisher.ListensToCanAcquire)
-                    return next()(pItemServices, pEconItemView, acquireMethod, unk1);
-
                 var dummy = _pawnComponentPool.Rent();
                 dummy.DangerousSetHandle(pItemServices);
                 var player = dummy.ToPlayer();
@@ -56,6 +53,19 @@ internal static partial class GameHooksPublisher
                 var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
 
                 var postCtx = new CanAcquireItemPostContext { Params = preCtx.Params, Return = (AcquireResult)result };
+
+                if (EventPublisher.ListensToCanAcquire)
+                {
+                    var ev = new OnItemServicesCanAcquireHookEvent {
+                        ItemServices = postCtx.Params.Player.PlayerPawn!.ItemServices!,
+                        EconItemView = postCtx.Params.EconItemView,
+                        WeaponVData = postCtx.Params.WeaponVData,
+                        AcquireMethod = postCtx.Params.AcquireMethod,
+                        OriginalResult = postCtx.Return
+                    };
+                    EventPublisher.InvokeOnCanAcquireHook(ev);
+                    postCtx.Return = ev.OriginalResult;
+                }
 
                 InvokeCanAcquirePost(ref postCtx);
 

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Profiler;
 
@@ -43,37 +44,194 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     public event EventDelegates.OnEntitySpawned? OnEntitySpawned;
     public event EventDelegates.OnMapLoad? OnMapLoad;
     public event EventDelegates.OnMapUnload? OnMapUnload;
+    private EventDelegates.OnClientProcessUsercmds? _OnClientProcessUsercmds;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Controller.ProcessUsercmds instead.")]
-    public event EventDelegates.OnClientProcessUsercmds? OnClientProcessUsercmds;
+    public event EventDelegates.OnClientProcessUsercmds? OnClientProcessUsercmds
+    {
+        add
+        {
+            if (_OnClientProcessUsercmds == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
+            _OnClientProcessUsercmds += value;
+        }
+        remove
+        {
+            _OnClientProcessUsercmds -= value;
+            if (_OnClientProcessUsercmds == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
+        }
+    }
     public event EventDelegates.OnConVarValueChanged? OnConVarValueChanged;
     public event EventDelegates.OnConCommandCreated? OnConCommandCreated;
     public event EventDelegates.OnConVarCreated? OnConVarCreated;
+    private EventDelegates.OnEntityTakeDamage? _OnEntityTakeDamage;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.TakeDamage instead.")]
-    public event EventDelegates.OnEntityTakeDamage? OnEntityTakeDamage;
+    public event EventDelegates.OnEntityTakeDamage? OnEntityTakeDamage
+    {
+        add
+        {
+            if (_OnEntityTakeDamage == null) GameHooksPublisher.AddHookListener(HookListener.TakeDamage);
+            _OnEntityTakeDamage += value;
+        }
+        remove
+        {
+            _OnEntityTakeDamage -= value;
+            if (_OnEntityTakeDamage == null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
+        }
+    }
     public event EventDelegates.OnPrecacheResource? OnPrecacheResource;
+    private EventDelegates.OnEntityStartTouch? _OnEntityStartTouch;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.StartTouch instead.")]
-    public event EventDelegates.OnEntityStartTouch? OnEntityStartTouch;
+    public event EventDelegates.OnEntityStartTouch? OnEntityStartTouch
+    {
+        add
+        {
+            if (_OnEntityStartTouch == null) GameHooksPublisher.AddHookListener(HookListener.StartTouch);
+            _OnEntityStartTouch += value;
+        }
+        remove
+        {
+            _OnEntityStartTouch -= value;
+            if (_OnEntityStartTouch == null) GameHooksPublisher.RemoveHookListener(HookListener.StartTouch);
+        }
+    }
+    private EventDelegates.OnEntityTouch? _OnEntityTouch;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.Touch instead.")]
-    public event EventDelegates.OnEntityTouch? OnEntityTouch;
+    public event EventDelegates.OnEntityTouch? OnEntityTouch
+    {
+        add
+        {
+            if (_OnEntityTouch == null) GameHooksPublisher.AddHookListener(HookListener.Touch);
+            _OnEntityTouch += value;
+        }
+        remove
+        {
+            _OnEntityTouch -= value;
+            if (_OnEntityTouch == null) GameHooksPublisher.RemoveHookListener(HookListener.Touch);
+        }
+    }
+    private EventDelegates.OnEntityEndTouch? _OnEntityEndTouch;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.EndTouch instead.")]
-    public event EventDelegates.OnEntityEndTouch? OnEntityEndTouch;
+    public event EventDelegates.OnEntityEndTouch? OnEntityEndTouch
+    {
+        add
+        {
+            if (_OnEntityEndTouch == null) GameHooksPublisher.AddHookListener(HookListener.EndTouch);
+            _OnEntityEndTouch += value;
+        }
+        remove
+        {
+            _OnEntityEndTouch -= value;
+            if (_OnEntityEndTouch == null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch);
+        }
+    }
+    private EventDelegates.OnItemServicesCanAcquireHook? _OnItemServicesCanAcquireHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Items.CanAcquire instead.")]
-    public event EventDelegates.OnItemServicesCanAcquireHook? OnItemServicesCanAcquireHook;
+    public event EventDelegates.OnItemServicesCanAcquireHook? OnItemServicesCanAcquireHook
+    {
+        add
+        {
+            if (_OnItemServicesCanAcquireHook == null) GameHooksPublisher.AddHookListener(HookListener.CanAcquire);
+            _OnItemServicesCanAcquireHook += value;
+        }
+        remove
+        {
+            _OnItemServicesCanAcquireHook -= value;
+            if (_OnItemServicesCanAcquireHook == null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire);
+        }
+    }
+    private EventDelegates.OnWeaponServicesCanUseHook? _OnWeaponServicesCanUseHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.CanUse instead.")]
-    public event EventDelegates.OnWeaponServicesCanUseHook? OnWeaponServicesCanUseHook;
+    public event EventDelegates.OnWeaponServicesCanUseHook? OnWeaponServicesCanUseHook
+    {
+        add
+        {
+            if (_OnWeaponServicesCanUseHook == null) GameHooksPublisher.AddHookListener(HookListener.CanUse);
+            _OnWeaponServicesCanUseHook += value;
+        }
+        remove
+        {
+            _OnWeaponServicesCanUseHook -= value;
+            if (_OnWeaponServicesCanUseHook == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
+        }
+    }
+    private EventDelegates.OnWeaponServicesDropWeaponHook? _OnWeaponServicesDropWeaponHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.Drop instead.")]
-    public event EventDelegates.OnWeaponServicesDropWeaponHook? OnWeaponServicesDropWeaponHook;
+    public event EventDelegates.OnWeaponServicesDropWeaponHook? OnWeaponServicesDropWeaponHook
+    {
+        add
+        {
+            if (_OnWeaponServicesDropWeaponHook == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop);
+            _OnWeaponServicesDropWeaponHook += value;
+        }
+        remove
+        {
+            _OnWeaponServicesDropWeaponHook -= value;
+            if (_OnWeaponServicesDropWeaponHook == null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
+        }
+    }
     public event EventDelegates.OnConsoleOutput? OnConsoleOutput;
     public event EventDelegates.OnCommandExecuteHook? OnCommandExecuteHook;
     public event EventDelegates.OnSteamAPIActivated? OnSteamAPIActivated;
+    private EventDelegates.OnMovementServicesRunCommandHook? _OnMovementServicesRunCommandHook;
+
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Movement.RunCommand instead.")]
-    public event EventDelegates.OnMovementServicesRunCommandHook? OnMovementServicesRunCommandHook;
+    public event EventDelegates.OnMovementServicesRunCommandHook? OnMovementServicesRunCommandHook
+    {
+        add
+        {
+            if (_OnMovementServicesRunCommandHook == null) GameHooksPublisher.AddHookListener(HookListener.RunCommand);
+            _OnMovementServicesRunCommandHook += value;
+        }
+        remove
+        {
+            _OnMovementServicesRunCommandHook -= value;
+            if (_OnMovementServicesRunCommandHook == null) GameHooksPublisher.RemoveHookListener(HookListener.RunCommand);
+        }
+    }
+    private EventDelegates.OnPlayerPawnPostThink? _OnPlayerPawnPostThink;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Pawn.PostThink instead.")]
-    public event EventDelegates.OnPlayerPawnPostThink? OnPlayerPawnPostThink;
+    public event EventDelegates.OnPlayerPawnPostThink? OnPlayerPawnPostThink
+    {
+        add
+        {
+            if (_OnPlayerPawnPostThink == null) GameHooksPublisher.AddHookListener(HookListener.PostThink);
+            _OnPlayerPawnPostThink += value;
+        }
+        remove
+        {
+            _OnPlayerPawnPostThink -= value;
+            if (_OnPlayerPawnPostThink == null) GameHooksPublisher.RemoveHookListener(HookListener.PostThink);
+        }
+    }
+    private EventDelegates.OnEntityIdentityAcceptInputHook? _OnEntityIdentityAcceptInputHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.AcceptInput instead.")]
-    public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook;
+    public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook
+    {
+        add
+        {
+            if (_OnEntityIdentityAcceptInputHook == null) GameHooksPublisher.AddHookListener(HookListener.AcceptInput);
+            _OnEntityIdentityAcceptInputHook += value;
+        }
+        remove
+        {
+            _OnEntityIdentityAcceptInputHook -= value;
+            if (_OnEntityIdentityAcceptInputHook == null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
+        }
+    }
+    private EventDelegates.OnEntityFireOutputHookEvent? _OnEntityFireOutputHook;
     [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.FireOutput instead.")]
-    public event EventDelegates.OnEntityFireOutputHookEvent? OnEntityFireOutputHook;
+    public event EventDelegates.OnEntityFireOutputHookEvent? OnEntityFireOutputHook
+    {
+        add
+        {
+            if (_OnEntityFireOutputHook == null) GameHooksPublisher.AddHookListener(HookListener.FireOutput);
+            _OnEntityFireOutputHook += value;
+        }
+        remove
+        {
+            _OnEntityFireOutputHook -= value;
+            if (_OnEntityFireOutputHook == null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
+        }
+    }
     public event EventDelegates.OnStartupServer? OnStartupServer;
     public event EventDelegates.OnClientVoice? OnClientVoice;
 
@@ -84,6 +242,19 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             return;
         }
         disposed = true;
+
+        if (_OnClientProcessUsercmds != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
+        if (_OnEntityTakeDamage != null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
+        if (_OnEntityStartTouch != null) GameHooksPublisher.RemoveHookListener(HookListener.StartTouch);
+        if (_OnEntityTouch != null) GameHooksPublisher.RemoveHookListener(HookListener.Touch);
+        if (_OnEntityEndTouch != null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch);
+        if (_OnItemServicesCanAcquireHook != null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire);
+        if (_OnWeaponServicesCanUseHook != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
+        if (_OnWeaponServicesDropWeaponHook != null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
+        if (_OnPlayerPawnPostThink != null) GameHooksPublisher.RemoveHookListener(HookListener.PostThink);
+        if (_OnEntityIdentityAcceptInputHook != null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
+        if (_OnEntityFireOutputHook != null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
+        if (_OnMovementServicesRunCommandHook != null) GameHooksPublisher.RemoveHookListener(HookListener.RunCommand);
 
         EventPublisher.Unsubscribe(this);
         GC.SuppressFinalize(this);
@@ -481,20 +652,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToProcessUsercmds => OnClientProcessUsercmds != null;
+    public bool ListensToProcessUsercmds => _OnClientProcessUsercmds != null;
 
-    public bool ListensToTakeDamage => OnEntityTakeDamage != null;
+    public bool ListensToTakeDamage => _OnEntityTakeDamage != null;
 
     public void InvokeOnClientProcessUsercmds( ref OnClientProcessUsercmdsEvent @event )
     {
-        if (OnClientProcessUsercmds == null)
+        if (_OnClientProcessUsercmds == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnClientProcessUsercmds");
-            OnClientProcessUsercmds.Invoke(@event);
+            _OnClientProcessUsercmds.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -511,14 +682,14 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntityTakeDamage( ref OnEntityTakeDamageEvent @event )
     {
-        if (OnEntityTakeDamage == null)
+        if (_OnEntityTakeDamage == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnEntityTakeDamage");
-            OnEntityTakeDamage.Invoke(@event);
+            _OnEntityTakeDamage.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -559,18 +730,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToEntityStartTouch => OnEntityStartTouch != null;
+    public bool ListensToEntityStartTouch => _OnEntityStartTouch != null;
 
     public void InvokeOnEntityStartTouch( ref OnEntityStartTouchEvent @event )
     {
-        if (OnEntityStartTouch == null)
+        if (_OnEntityStartTouch == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnEntityStartTouch");
-            OnEntityStartTouch.Invoke(@event);
+            _OnEntityStartTouch.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -585,18 +756,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToEntityTouch => OnEntityTouch != null;
+    public bool ListensToEntityTouch => _OnEntityTouch != null;
 
     public void InvokeOnEntityTouch( ref OnEntityTouchEvent @event )
     {
-        if (OnEntityTouch == null)
+        if (_OnEntityTouch == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnEntityTouch");
-            OnEntityTouch.Invoke(@event);
+            _OnEntityTouch.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -611,18 +782,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToEntityEndTouch => OnEntityEndTouch != null;
+    public bool ListensToEntityEndTouch => _OnEntityEndTouch != null;
 
     public void InvokeOnEntityEndTouch( ref OnEntityEndTouchEvent @event )
     {
-        if (OnEntityEndTouch == null)
+        if (_OnEntityEndTouch == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnEntityEndTouch");
-            OnEntityEndTouch.Invoke(@event);
+            _OnEntityEndTouch.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -661,18 +832,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToCanAcquire => OnItemServicesCanAcquireHook != null;
+    public bool ListensToCanAcquire => _OnItemServicesCanAcquireHook != null;
 
     public void InvokeOnItemServicesCanAcquireHook( ref OnItemServicesCanAcquireHookEvent @event )
     {
-        if (OnItemServicesCanAcquireHook == null)
+        if (_OnItemServicesCanAcquireHook == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnItemServicesCanAcquireHook");
-            OnItemServicesCanAcquireHook.Invoke(@event);
+            _OnItemServicesCanAcquireHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -687,18 +858,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToCanUseWeapon => OnWeaponServicesCanUseHook != null;
+    public bool ListensToCanUseWeapon => _OnWeaponServicesCanUseHook != null;
 
     public void InvokeOnWeaponServicesCanUseHook( ref OnWeaponServicesCanUseHookEvent @event )
     {
-        if (OnWeaponServicesCanUseHook == null)
+        if (_OnWeaponServicesCanUseHook == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnWeaponServicesCanUseHook");
-            OnWeaponServicesCanUseHook.Invoke(@event);
+            _OnWeaponServicesCanUseHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -841,18 +1012,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToRunCommand => OnMovementServicesRunCommandHook != null;
+    public bool ListensToRunCommand => _OnMovementServicesRunCommandHook != null;
 
     public void InvokeOnMovementServicesRunCommandHook( ref OnMovementServicesRunCommandHookEvent @event )
     {
-        if (OnMovementServicesRunCommandHook == null)
+        if (_OnMovementServicesRunCommandHook == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnMovementServicesRunCommandHook");
-            OnMovementServicesRunCommandHook.Invoke(@event);
+            _OnMovementServicesRunCommandHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -867,18 +1038,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToPostThink => OnPlayerPawnPostThink != null;
+    public bool ListensToPostThink => _OnPlayerPawnPostThink != null;
 
     public void InvokeOnPlayerPawnPostThinkHook( ref OnPlayerPawnPostThinkHookEvent @event )
     {
-        if (OnPlayerPawnPostThink == null)
+        if (_OnPlayerPawnPostThink == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnPlayerPawnPostThink");
-            OnPlayerPawnPostThink.Invoke(@event);
+            _OnPlayerPawnPostThink.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -893,18 +1064,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToAcceptInput => OnEntityIdentityAcceptInputHook != null;
+    public bool ListensToAcceptInput => _OnEntityIdentityAcceptInputHook != null;
 
     public void InvokeOnEntityIdentityAcceptInputHook( ref OnEntityIdentityAcceptInputHookEvent @event )
     {
-        if (OnEntityIdentityAcceptInputHook == null)
+        if (_OnEntityIdentityAcceptInputHook == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnEntityIdentityAcceptInput");
-            OnEntityIdentityAcceptInputHook.Invoke(@event);
+            _OnEntityIdentityAcceptInputHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -919,18 +1090,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToWeaponDrop => OnWeaponServicesDropWeaponHook != null;
+    public bool ListensToWeaponDrop => _OnWeaponServicesDropWeaponHook != null;
 
     public void InvokeOnWeaponServicesDropWeaponHook( ref OnWeaponServicesDropWeaponHook @event )
     {
-        if (OnWeaponServicesDropWeaponHook == null)
+        if (_OnWeaponServicesDropWeaponHook == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnWeaponServicesDropWeaponHook");
-            OnWeaponServicesDropWeaponHook.Invoke(@event);
+            _OnWeaponServicesDropWeaponHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -945,18 +1116,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public bool ListensToFireOutput => OnEntityFireOutputHook != null;
+    public bool ListensToFireOutput => _OnEntityFireOutputHook != null;
 
     public void InvokeOnEntityFireOutputHook( ref OnEntityFireOutputHookEvent @event )
     {
-        if (OnEntityFireOutputHook == null)
+        if (_OnEntityFireOutputHook == null)
         {
             return;
         }
         try
         {
             profiler.StartRecording("Event::OnEntityFireOutputHook");
-            OnEntityFireOutputHook.Invoke(@event);
+            _OnEntityFireOutputHook.Invoke(@event);
         }
         catch (Exception e)
         {

@@ -22,9 +22,6 @@ internal static partial class GameHooksPublisher
         {
             return ( pawn ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.PostThink, out var count) && count == 1 && !EventPublisher.ListensToPostThink)
-                    return next()(pawn);
-
                 var dummy = _pawnPool.Rent();
                 dummy.DangerousSetHandle(pawn);
                 var player = dummy.ToPlayer();
@@ -32,6 +29,14 @@ internal static partial class GameHooksPublisher
                 if (player == null) return next()(pawn);
 
                 var preCtx = new PostThinkPawnPreContext { Params = new PostThinkPawnParams { Player = player } };
+
+                if (EventPublisher.ListensToPostThink)
+                {
+                    using var ev = new OnPlayerPawnPostThinkHookEvent {
+                        PlayerPawn = preCtx.Params.Player.PlayerPawn!
+                    };
+                    EventPublisher.InvokeOnPlayerPawnPostThinkHook(ev);
+                }
 
                 InvokePostThinkPre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return 0;

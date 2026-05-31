@@ -25,12 +25,6 @@ internal static partial class GameHooksPublisher
         {
             return ( pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2 ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.AcceptInput, out var count) && count == 1 && !EventPublisher.ListensToAcceptInput)
-                {
-                    next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
-                    return;
-                }
-
                 var entityIdentity = _core.Memory.ToSchemaClass<CEntityIdentity>(pEntityIdentity);
                 if (!entityIdentity.IsValid || !entityIdentity.EntityInstance.IsValid)
                 {
@@ -54,6 +48,23 @@ internal static partial class GameHooksPublisher
                         OutputId = outputId
                     }
                 };
+
+                if (EventPublisher.ListensToAcceptInput)
+                {
+                    var ev = new OnEntityIdentityAcceptInputHookEvent {
+                        Identity = preCtx.Params.Identity,
+                        EntityInstance = preCtx.Params.EntityInstance,
+                        DesignerName = preCtx.Params.DesignerName,
+                        InputName = preCtx.Params.InputName,
+                        Activator = preCtx.Params.Activator,
+                        Caller = preCtx.Params.Caller,
+                        _variant = preCtx.Params._variant,
+                        OutputId = preCtx.Params.OutputId,
+                        Result = HookResult.Continue
+                    };
+                    EventPublisher.InvokeOnEntityIdentityAcceptInputHook(ev);
+                    if (ev.Result == HookResult.Stop || ev.Result == HookResult.CancelOriginal) return;
+                }
 
                 InvokeAcceptInputPre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;

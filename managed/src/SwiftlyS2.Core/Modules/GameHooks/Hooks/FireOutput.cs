@@ -24,12 +24,6 @@ internal static partial class GameHooksPublisher
         {
             return ( pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2 ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.FireOutput, out var count) && count == 1 && !EventPublisher.ListensToFireOutput)
-                {
-                    next()(pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2);
-                    return;
-                }
-
                 var entityIO = pEntityIO.AsRef<CEntityIOOutput>();
                 var outputName = entityIO.Desc.Name.Value;
                 var activator = pActivator != nint.Zero ? EntityManager.GetEntityByAddress(pActivator) : null;
@@ -46,6 +40,22 @@ internal static partial class GameHooksPublisher
                         Delay = flDelay
                     }
                 };
+
+                if (EventPublisher.ListensToFireOutput)
+                {
+                    var ev = new OnEntityFireOutputHookEvent {
+                        _entityIO = preCtx.Params._entityIO,
+                        _variant = preCtx.Params._variant,
+                        DesignerName = preCtx.Params.DesignerName,
+                        OutputName = preCtx.Params.OutputName,
+                        Activator = preCtx.Params.Activator,
+                        Caller = preCtx.Params.Caller,
+                        Delay = preCtx.Params.Delay,
+                        Result = HookResult.Continue
+                    };
+                    EventPublisher.InvokeEntityFireOutputHook(ev);
+                    if (ev.Result == HookResult.Stop || ev.Result == HookResult.CancelOriginal) return;
+                }
 
                 InvokeFireOutputPre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;

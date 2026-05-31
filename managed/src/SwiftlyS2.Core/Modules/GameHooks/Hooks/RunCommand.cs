@@ -22,8 +22,6 @@ internal static partial class GameHooksPublisher
         {
             return ( pMovementServices, pUserCmd ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.RunCommand, out var count) && count == 1 && !EventPublisher.ListensToRunCommand)
-                    return next()(pMovementServices, pUserCmd);
 
                 var dummy = _pawnComponentPool.Rent();
                 dummy.DangerousSetHandle(pMovementServices);
@@ -37,6 +35,16 @@ internal static partial class GameHooksPublisher
                         UserCmd = new CUserCmd { Address = pUserCmd }
                     }
                 };
+
+                if (EventPublisher.ListensToRunCommand)
+                {
+                    using var ev = new OnMovementServicesRunCommandHookEvent {
+                        MovementServices = preCtx.Params.Player.PlayerPawn!.MovementServices!,
+                        ButtonState = preCtx.Params.UserCmd.ButtonState,
+                        UserCmdPB = preCtx.Params.UserCmd.CSGOUserCmd
+                    };
+                    EventPublisher.InvokeOnMovementServicesRunCommandHook(ev);
+                }
 
                 InvokeRunCommandPre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return 0;

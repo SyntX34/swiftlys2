@@ -26,9 +26,6 @@ internal static partial class GameHooksPublisher
             {
                 return ( weaponServices, playerWeapon, swapping ) =>
                 {
-                    if (hookListeners.TryGetValue(HookListener.WeaponDrop, out var count) && count == 1 && !EventPublisher.ListensToWeaponDrop)
-                        return next()(weaponServices, playerWeapon, swapping);
-
                     var dummy = _pawnComponentPool.Rent();
                     dummy.DangerousSetHandle(weaponServices);
                     var player = dummy.ToPlayer();
@@ -44,6 +41,18 @@ internal static partial class GameHooksPublisher
                             SwappingWeapon = swapping == 1
                         }
                     };
+
+                    if (EventPublisher.ListensToWeaponDrop)
+                    {
+                        var ev = new OnWeaponServicesDropWeaponHook {
+                            WeaponServices = preCtx.Params.Player.PlayerPawn!.WeaponServices!,
+                            Weapon = preCtx.Params.Weapon,
+                            SwappingWeapon = preCtx.Params.SwappingWeapon,
+                            Result = preCtx.HookResult
+                        };
+                        EventPublisher.InvokeOnWeaponServicesDropWeaponHook(ev);
+                        if (ev.Result == HookResult.Stop || ev.Result == HookResult.CancelOriginal) return 0;
+                    }
 
                     InvokeDropWeaponPre(ref preCtx);
                     if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return 0;
@@ -65,9 +74,6 @@ internal static partial class GameHooksPublisher
             {
                 return ( weaponServices, playerWeapon, swapping ) =>
                 {
-                    if (hookListeners.TryGetValue(HookListener.WeaponDrop, out var count) && count == 1 && !EventPublisher.ListensToWeaponDrop)
-                        return next()(weaponServices, playerWeapon, swapping);
-
                     var dummy = _pawnComponentPool.Rent();
                     dummy.DangerousSetHandle(weaponServices);
                     var player = dummy.ToPlayer();
@@ -83,6 +89,18 @@ internal static partial class GameHooksPublisher
                             SwappingWeapon = swapping == 1
                         }
                     };
+
+                    if (EventPublisher.ListensToWeaponDrop)
+                    {
+                        var ev = new OnWeaponServicesDropWeaponHook {
+                            WeaponServices = preCtx.Params.Player.PlayerPawn!.WeaponServices!,
+                            Weapon = preCtx.Params.Weapon,
+                            SwappingWeapon = preCtx.Params.SwappingWeapon,
+                            Result = preCtx.HookResult
+                        };
+                        EventPublisher.InvokeOnWeaponServicesDropWeaponHook(ev);
+                        if (ev.Result == HookResult.Stop || ev.Result == HookResult.CancelOriginal) return 0;
+                    }
 
                     InvokeDropWeaponPre(ref preCtx);
                     if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return 0;

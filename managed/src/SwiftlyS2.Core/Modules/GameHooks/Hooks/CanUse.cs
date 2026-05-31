@@ -24,9 +24,6 @@ internal static partial class GameHooksPublisher
         {
             return ( pWeaponServices, pBasePlayerWeapon ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.CanUse, out var count) && count == 1 && !EventPublisher.ListensToCanUseWeapon)
-                    return next()(pWeaponServices, pBasePlayerWeapon);
-
                 var dummy = _pawnComponentPool.Rent();
                 dummy.DangerousSetHandle(pWeaponServices);
                 var player = dummy.ToPlayer();
@@ -50,6 +47,17 @@ internal static partial class GameHooksPublisher
                 var result = next()(pWeaponServices, pBasePlayerWeapon);
 
                 var postCtx = new CanUseWeaponPostContext { Params = preCtx.Params, Return = result != 0 };
+
+                if (EventPublisher.ListensToCanUseWeapon)
+                {
+                    var ev = new OnWeaponServicesCanUseHookEvent {
+                        WeaponServices = postCtx.Params.Player.PlayerPawn!.WeaponServices!,
+                        Weapon = postCtx.Params.Weapon,
+                        OriginalResult = postCtx.Return
+                    };
+                    EventPublisher.InvokeOnWeaponServicesCanUseHook(ev);
+                    postCtx.Return = ev.OriginalResult;
+                }
 
                 InvokeCanUsePost(ref postCtx);
 

@@ -24,12 +24,6 @@ internal static partial class GameHooksPublisher
         {
             return ( entity, info, damageResult ) =>
             {
-                if (hookListeners.TryGetValue(HookListener.TakeDamage, out var count) && count == 1 && !EventPublisher.ListensToTakeDamage)
-                {
-                    next()(entity, info, damageResult);
-                    return;
-                }
-
                 var baseEntity = EntityManager.GetEntityByAddress(entity) as CBaseEntity
                     ?? _core.Memory.ToSchemaClass<CBaseEntity>(entity);
 
@@ -40,6 +34,17 @@ internal static partial class GameHooksPublisher
                         _resultPtr = damageResult
                     }
                 };
+
+                if (EventPublisher.ListensToTakeDamage)
+                {
+                    var ev = new OnEntityTakeDamageEvent {
+                        Entity = preCtx.Params.Entity,
+                        _infoPtr = (nint)preCtx.Params._infoPtr,
+                        _resultPtr = (nint)preCtx.Params.DamageResult
+                    };
+                    EventPublisher.InvokeOnEntityTakeDamage(ref ev);
+                    if (ev.Result == HookResult.Stop || ev.Result == HookResult.CancelOriginal) return;
+                }
 
                 InvokeTakeDamagePre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;

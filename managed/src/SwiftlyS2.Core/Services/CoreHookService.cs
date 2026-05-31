@@ -1,20 +1,15 @@
-
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using Spectre.Console;
 using SwiftlyS2.Core.Datamaps;
-using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Shared;
-using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.ProtobufDefinitions;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.SteamAPI;
 
 namespace SwiftlyS2.Core.Services;
@@ -32,18 +27,8 @@ internal class CoreHookService : IDisposable
 
         HookExecuteCommand();
         HookICvarFindConCommandTemplate();
-        HookCCSPlayerItemServicesCanAcquire();
-        HookCCSPlayerWeaponServicesCanUse();
-        HookCBaseEntityTouchTemplate();
         HookSteamServerAPIActivated();
-        HookCPlayerMovementServicesRunCommand();
-        HookCCSPlayerPawnPostThink();
-        HookCBaseEntityTakeDamage();
-        HookEntityIdentityAcceptInput();
-        HookEntityIOOutputFireOutputInternal();
         HookDispatchDatamapFunction();
-        HookWeaponServicesDropWeapon();
-        HookOnClientProcessUsercmds();
     }
 
     /*
@@ -86,63 +71,6 @@ internal class CoreHookService : IDisposable
     private IUnmanagedFunction<DispatchDatamapFunction>? dispatchDatamapFunction;
     private Guid dispatchDatamapFunctionGuid;
 
-    internal unsafe void EntityAcceptInputPre( ref AcceptInputEntityPreContext @event )
-    {
-        if (!EventPublisher.ListensToAcceptInput) return;
-
-        var @e = new OnEntityIdentityAcceptInputHookEvent {
-            Identity = @event.Params.Identity,
-            EntityInstance = @event.Params.EntityInstance,
-            DesignerName = @event.Params.DesignerName,
-            InputName = @event.Params.InputName,
-            Activator = @event.Params.Activator,
-            Caller = @event.Params.Caller,
-            _variant = @event.Params._variant,
-            OutputId = @event.Params.OutputId,
-            Result = HookResult.Continue
-        };
-        EventPublisher.InvokeOnEntityIdentityAcceptInputHook(@e);
-        @event.SetHookResult(@e.Result);
-    }
-
-    internal void HookEntityIdentityAcceptInput()
-    {
-        core.GameHooks.Entities.AcceptInput.Pre += EntityAcceptInputPre;
-    }
-
-    internal void UnhookEntityIdentityAcceptInput()
-    {
-        core.GameHooks.Entities.AcceptInput.Pre -= EntityAcceptInputPre;
-    }
-
-    internal unsafe void EntityFireOutputPre( ref FireOutputEntityPreContext @event )
-    {
-        if (!EventPublisher.ListensToFireOutput) return;
-
-        var @e = new OnEntityFireOutputHookEvent {
-            _entityIO = @event.Params._entityIO,
-            _variant = @event.Params._variant,
-            DesignerName = @event.Params.DesignerName,
-            OutputName = @event.Params.OutputName,
-            Activator = @event.Params.Activator,
-            Caller = @event.Params.Caller,
-            Delay = @event.Params.Delay,
-            Result = HookResult.Continue
-        };
-        EventPublisher.InvokeEntityFireOutputHook(@e);
-        @event.SetHookResult(@e.Result);
-    }
-
-    internal void HookEntityIOOutputFireOutputInternal()
-    {
-        core.GameHooks.Entities.FireOutput.Pre += EntityFireOutputPre;
-    }
-
-    internal void UnhookEntityIOOutputFireOutputInternal()
-    {
-        core.GameHooks.Entities.FireOutput.Pre -= EntityFireOutputPre;
-    }
-
     internal void HookExecuteCommand()
     {
         var address = core.GameData.GetSignature("Cmd_ExecuteCommand");
@@ -184,30 +112,6 @@ internal class CoreHookService : IDisposable
         if (executeCommand == null) return;
         executeCommand.RemoveHook(executeCommandGuid);
         executeCommand = null;
-    }
-
-    internal void WeaponDropPre( ref WeaponDropPreContext @event )
-    {
-        if (!EventPublisher.ListensToWeaponDrop) return;
-
-        var @e = new OnWeaponServicesDropWeaponHook {
-            WeaponServices = @event.Params.Player.PlayerPawn!.WeaponServices!,
-            Weapon = @event.Params.Weapon,
-            SwappingWeapon = @event.Params.SwappingWeapon,
-            Result = @event.HookResult
-        };
-        EventPublisher.InvokeOnWeaponServicesDropWeaponHook(@e);
-        @event.SetHookResult(@e.Result);
-    }
-
-    internal void HookWeaponServicesDropWeapon()
-    {
-        core.GameHooks.Weapons.Drop.Pre += WeaponDropPre;
-    }
-
-    internal void UnhookWeaponServicesDropWeapon()
-    {
-        core.GameHooks.Weapons.Drop.Pre -= WeaponDropPre;
     }
 
     internal void HookICvarFindConCommandTemplate()
@@ -283,103 +187,6 @@ internal class CoreHookService : IDisposable
         }
     }
 
-    internal void CanAcquireEventPost( ref CanAcquireItemPostContext @event )
-    {
-        if (!EventPublisher.ListensToCanAcquire) return;
-
-        var @e = new OnItemServicesCanAcquireHookEvent {
-            ItemServices = @event.Params.Player.PlayerPawn!.ItemServices!,
-            EconItemView = @event.Params.EconItemView,
-            WeaponVData = @event.Params.WeaponVData,
-            AcquireMethod = @event.Params.AcquireMethod,
-            OriginalResult = @event.Return
-        };
-
-        EventPublisher.InvokeOnCanAcquireHook(@e);
-        @event.Return = @e.OriginalResult;
-    }
-
-    internal void HookCCSPlayerItemServicesCanAcquire()
-    {
-        core.GameHooks.Items.CanAcquire.Post += CanAcquireEventPost;
-    }
-
-    internal void UnhookCCSPlayerItemServicesCanAcquire()
-    {
-        core.GameHooks.Items.CanAcquire.Post -= CanAcquireEventPost;
-    }
-
-    internal void CanUseEventPost( ref CanUseWeaponPostContext @event )
-    {
-        if (!EventPublisher.ListensToCanUseWeapon) return;
-
-        var @e = new OnWeaponServicesCanUseHookEvent {
-            WeaponServices = @event.Params.Player.PlayerPawn!.WeaponServices!,
-            Weapon = @event.Params.Weapon,
-            OriginalResult = @event.Return
-        };
-
-        EventPublisher.InvokeOnWeaponServicesCanUseHook(@e);
-        @event.Return = @e.OriginalResult;
-    }
-
-    internal void HookCCSPlayerWeaponServicesCanUse()
-    {
-        core.GameHooks.Weapons.CanUse.Post += CanUseEventPost;
-    }
-
-    internal void UnhookCCSPlayerWeaponServicesCanUse()
-    {
-        core.GameHooks.Weapons.CanUse.Post -= CanUseEventPost;
-    }
-
-    internal void EntityStartTouchPre( ref StartTouchEntityPreContext @event )
-    {
-        if (!EventPublisher.ListensToEntityStartTouch) return;
-
-        using var @e = new OnEntityStartTouchEvent {
-            Entity = @event.Params.Entity,
-            OtherEntity = @event.Params.OtherEntity
-        };
-        EventPublisher.InvokeOnEntityStartTouch(@e);
-    }
-
-    internal void EntityTouchPre( ref TouchEntityPreContext @event )
-    {
-        if (!EventPublisher.ListensToEntityTouch) return;
-
-        using var @e = new OnEntityTouchEvent {
-            Entity = @event.Params.Entity,
-            OtherEntity = @event.Params.OtherEntity
-        };
-        EventPublisher.InvokeOnEntityTouch(@e);
-    }
-
-    internal void EntityEndTouchPre( ref EndTouchEntityPreContext @event )
-    {
-        if (!EventPublisher.ListensToEntityEndTouch) return;
-
-        using var @e = new OnEntityEndTouchEvent {
-            Entity = @event.Params.Entity,
-            OtherEntity = @event.Params.OtherEntity
-        };
-        EventPublisher.InvokeOnEntityEndTouch(@e);
-    }
-
-    internal void HookCBaseEntityTouchTemplate()
-    {
-        core.GameHooks.Entities.StartTouch.Pre += EntityStartTouchPre;
-        core.GameHooks.Entities.Touch.Pre += EntityTouchPre;
-        core.GameHooks.Entities.EndTouch.Pre += EntityEndTouchPre;
-    }
-
-    internal void UnhookCBaseEntityTouchTemplate()
-    {
-        core.GameHooks.Entities.StartTouch.Pre -= EntityStartTouchPre;
-        core.GameHooks.Entities.Touch.Pre -= EntityTouchPre;
-        core.GameHooks.Entities.EndTouch.Pre -= EntityEndTouchPre;
-    }
-
     internal void HookSteamServerAPIActivated()
     {
         var offset = core.GameData.GetOffset("IServerGameDLL::GameServerSteamAPIActivated");
@@ -406,48 +213,6 @@ internal class CoreHookService : IDisposable
         if (steamServerAPIActivated == null) return;
         steamServerAPIActivated.RemoveHook(steamServerAPIActivatedGuid);
         steamServerAPIActivated = null;
-    }
-
-    internal void MovementServicesRunCommandHookPre( ref RunCommandMovementPreContext @event )
-    {
-        if (!EventPublisher.ListensToRunCommand) return;
-
-        using var @ev = new OnMovementServicesRunCommandHookEvent {
-            MovementServices = @event.Params.Player.PlayerPawn!.MovementServices!,
-            ButtonState = @event.Params.UserCmd.ButtonState,
-            UserCmdPB = @event.Params.UserCmd.CSGOUserCmd
-        };
-        EventPublisher.InvokeOnMovementServicesRunCommandHook(@ev);
-    }
-
-    internal void HookCPlayerMovementServicesRunCommand()
-    {
-        core.GameHooks.Movement.RunCommand.Pre += MovementServicesRunCommandHookPre;
-    }
-
-    internal void UnhookCPlayerMovementServicesRunCommand()
-    {
-        core.GameHooks.Movement.RunCommand.Pre -= MovementServicesRunCommandHookPre;
-    }
-
-    internal void CCSPlayerPostPostThinkPre( ref PostThinkPawnPreContext @event )
-    {
-        if (!EventPublisher.ListensToPostThink) return;
-
-        using var @ev = new OnPlayerPawnPostThinkHookEvent {
-            PlayerPawn = @event.Params.Player.PlayerPawn!
-        };
-        EventPublisher.InvokeOnPlayerPawnPostThinkHook(@ev);
-    }
-
-    internal void HookCCSPlayerPawnPostThink()
-    {
-        core.GameHooks.Pawn.PostThink.Pre += CCSPlayerPostPostThinkPre;
-    }
-
-    internal void UnhookCCSPlayerPawnPostThink()
-    {
-        core.GameHooks.Pawn.PostThink.Pre -= CCSPlayerPostPostThinkPre;
     }
 
     internal void HookDispatchDatamapFunction()
@@ -483,73 +248,11 @@ internal class CoreHookService : IDisposable
         dispatchDatamapFunction = null;
     }
 
-    internal void OnClientProcessUsercmds( ref ProcessUsercmdsPreContext @event )
-    {
-        if (!EventPublisher.ListensToProcessUsercmds) return;
-
-        var v = new List<CSGOUserCmdPB>(@event.Params.Usercmds.Count);
-        foreach (var usercmd in @event.Params.Usercmds)
-        {
-            v.Add(usercmd.CSGOUserCmd);
-        }
-
-        var @ev = new OnClientProcessUsercmdsEvent {
-            PlayerId = @event.Params.Player.PlayerID,
-            Paused = @event.Params.Paused,
-            Margin = @event.Params.Margin,
-            Usercmds = v
-        };
-        EventPublisher.OnClientProcessUsercmds(ref @ev);
-    }
-
-    internal void HookOnClientProcessUsercmds()
-    {
-        core.GameHooks.Controller.ProcessUsercmds.Pre += OnClientProcessUsercmds;
-    }
-
-    internal void UnhookOnClientProcessUsercmds()
-    {
-        core.GameHooks.Controller.ProcessUsercmds.Pre -= OnClientProcessUsercmds;
-    }
-
-    internal unsafe void EntityTakeDamagePre( ref TakeDamageEntityPreContext @event )
-    {
-        if (!EventPublisher.ListensToTakeDamage) return;
-
-        var @ev = new OnEntityTakeDamageEvent {
-            Entity = @event.Params.Entity,
-            _infoPtr = (nint)@event.Params._infoPtr,
-            _resultPtr = (nint)@event.Params.DamageResult
-        };
-        EventPublisher.InvokeOnEntityTakeDamage(ref @ev);
-        @event.SetHookResult(@ev.Result);
-    }
-
-    internal void HookCBaseEntityTakeDamage()
-    {
-        core.GameHooks.Entities.TakeDamage.Pre += EntityTakeDamagePre;
-    }
-
-    internal void UnhookCBaseEntityTakeDamage()
-    {
-        core.GameHooks.Entities.TakeDamage.Pre -= EntityTakeDamagePre;
-    }
-
     public void Dispose()
     {
         UnhookExecuteCommand();
         UnhookICvarFindConCommandTemplate();
-        UnhookCCSPlayerItemServicesCanAcquire();
-        UnhookCCSPlayerWeaponServicesCanUse();
-        UnhookCBaseEntityTouchTemplate();
         UnhookSteamServerAPIActivated();
-        UnhookEntityIdentityAcceptInput();
-        UnhookEntityIOOutputFireOutputInternal();
-        UnhookWeaponServicesDropWeapon();
         UnhookDispatchDatamapFunction();
-        UnhookCCSPlayerPawnPostThink();
-        UnhookCPlayerMovementServicesRunCommand();
-        UnhookOnClientProcessUsercmds();
-        UnhookCBaseEntityTakeDamage();
     }
 }
