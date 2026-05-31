@@ -6,7 +6,7 @@ namespace SwiftlyS2.Core.AttributeParsers;
 
 internal static class GameHooksAttributeParser
 {
-    private record HookEntry( Func<IGameHooks, object> Accessor, EventInfo Pre, EventInfo Post );
+    private record HookEntry(Func<IGameHooks, object> Accessor, EventInfo Pre, EventInfo Post);
 
     private static readonly Dictionary<Type, HookEntry> _hookMap = BuildHookMap();
 
@@ -28,7 +28,7 @@ internal static class GameHooksAttributeParser
 
                 var catProp = categoryProp;
                 var evtProp = eventsProp;
-                object accessor( IGameHooks hooks ) =>
+                object accessor(IGameHooks hooks) =>
                     evtProp.GetValue(catProp.GetValue(hooks)!)!;
 
                 map[dataType] = new HookEntry(accessor, preEvent, postEvent);
@@ -38,9 +38,8 @@ internal static class GameHooksAttributeParser
         return map;
     }
 
-    public static void ParseFromObject( this IGameHooks self, object instance )
+    public static void ParseFromObject(this IGameHooks self, object instance)
     {
-        Console.WriteLine("Parsing the gamehooks");
         var methods = instance.GetType()
             .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 

@@ -98,7 +98,6 @@ void CrashReporterOnTickLinux()
 bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* context, bool succeeded)
 {
     static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-    ConsoleLogger_FlushForCrash();
 
     auto tracerLevel = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION)->GetDotnetCrashTracerLevel();
     if (tracerLevel > 0)
@@ -112,6 +111,7 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
 
     if (!succeeded) {
         logger->Error("Crash Reporter", fmt::format("Failed to write minidump to '{}'\n", mdmpPath));
+        ConsoleLogger_FlushForCrash();
         return succeeded;
     }
 
@@ -128,6 +128,7 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
     google_breakpad::Minidump mdmp(mdmpPath);
     if (!mdmp.Read()) {
         logger->Error("Crash Reporter", fmt::format("Failed to read minidump from '{}'\n", mdmpPath));
+        ConsoleLogger_FlushForCrash();
         return succeeded;
     }
     else {
@@ -143,6 +144,7 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
         }
     }
 
+    ConsoleLogger_FlushForCrash();
     return succeeded;
 }
 
