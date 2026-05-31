@@ -1,4 +1,5 @@
 using SwiftlyS2.Core.EntitySystem;
+using SwiftlyS2.Core.Events;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
@@ -23,6 +24,12 @@ internal static partial class GameHooksPublisher
         {
             return ( entity, info, damageResult ) =>
             {
+                if (hookListeners.TryGetValue(HookListener.TakeDamage, out var count) && count == 1 && !EventPublisher.ListensToTakeDamage)
+                {
+                    next()(entity, info, damageResult);
+                    return;
+                }
+
                 var baseEntity = EntityManager.GetEntityByAddress(entity) as CBaseEntity
                     ?? _core.Memory.ToSchemaClass<CBaseEntity>(entity);
 

@@ -1,4 +1,5 @@
 using SwiftlyS2.Core.EntitySystem;
+using SwiftlyS2.Core.Events;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.SchemaDefinitions;
@@ -25,6 +26,9 @@ internal static partial class GameHooksPublisher
             {
                 return ( weaponServices, playerWeapon, swapping ) =>
                 {
+                    if (hookListeners.TryGetValue(HookListener.WeaponDrop, out var count) && count == 1 && !EventPublisher.ListensToWeaponDrop)
+                        return next()(weaponServices, playerWeapon, swapping);
+
                     var dummy = _pawnComponentPool.Rent();
                     dummy.DangerousSetHandle(weaponServices);
                     var player = dummy.ToPlayer();
@@ -61,6 +65,9 @@ internal static partial class GameHooksPublisher
             {
                 return ( weaponServices, playerWeapon, swapping ) =>
                 {
+                    if (hookListeners.TryGetValue(HookListener.WeaponDrop, out var count) && count == 1 && !EventPublisher.ListensToWeaponDrop)
+                        return next()(weaponServices, playerWeapon, swapping);
+
                     var dummy = _pawnComponentPool.Rent();
                     dummy.DangerousSetHandle(weaponServices);
                     var player = dummy.ToPlayer();

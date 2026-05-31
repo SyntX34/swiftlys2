@@ -1,3 +1,4 @@
+using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
@@ -22,6 +23,9 @@ internal static partial class GameHooksPublisher
         {
             return ( controller, userCmds, numCmds, paused, margin ) =>
             {
+                if (hookListeners.TryGetValue(HookListener.ProcessUsercmds, out var count) && count == 1 && !EventPublisher.ListensToProcessUsercmds)
+                    return next()(controller, userCmds, numCmds, paused, margin);
+
                 var dummy = _controllerPool.Rent();
                 dummy.DangerousSetHandle(controller);
                 var player = dummy.ToPlayer();

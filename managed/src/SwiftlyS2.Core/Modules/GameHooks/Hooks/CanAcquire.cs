@@ -1,3 +1,4 @@
+using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Core.Schemas;
@@ -24,6 +25,9 @@ internal static partial class GameHooksPublisher
         {
             return ( pItemServices, pEconItemView, acquireMethod, unk1 ) =>
             {
+                if (hookListeners.TryGetValue(HookListener.CanAcquire, out var count) && count == 1 && !EventPublisher.ListensToCanAcquire)
+                    return next()(pItemServices, pEconItemView, acquireMethod, unk1);
+
                 var dummy = _pawnComponentPool.Rent();
                 dummy.DangerousSetHandle(pItemServices);
                 var player = dummy.ToPlayer();

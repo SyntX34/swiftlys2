@@ -1,4 +1,5 @@
 using SwiftlyS2.Core.EntitySystem;
+using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
@@ -23,6 +24,12 @@ internal static partial class GameHooksPublisher
         {
             return ( pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2 ) =>
             {
+                if (hookListeners.TryGetValue(HookListener.FireOutput, out var count) && count == 1 && !EventPublisher.ListensToFireOutput)
+                {
+                    next()(pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2);
+                    return;
+                }
+
                 var entityIO = pEntityIO.AsRef<CEntityIOOutput>();
                 var outputName = entityIO.Desc.Name.Value;
                 var activator = pActivator != nint.Zero ? EntityManager.GetEntityByAddress(pActivator) : null;

@@ -1,4 +1,5 @@
 using SwiftlyS2.Core.EntitySystem;
+using SwiftlyS2.Core.Events;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Misc;
@@ -23,6 +24,9 @@ internal static partial class GameHooksPublisher
         {
             return ( pBaseEntity, pOtherEntity ) =>
             {
+                if (hookListeners.TryGetValue(HookListener.StartTouch, out var count) && count == 1 && !EventPublisher.ListensToEntityStartTouch)
+                    return next()(pBaseEntity, pOtherEntity);
+
                 var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity);
                 var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity);
 
@@ -75,6 +79,9 @@ internal static partial class GameHooksPublisher
         {
             return ( pBaseEntity, pOtherEntity ) =>
             {
+                if (hookListeners.TryGetValue(HookListener.Touch, out var count) && count == 1 && !EventPublisher.ListensToEntityTouch)
+                    return next()(pBaseEntity, pOtherEntity);
+
                 var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity);
                 var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity);
 
@@ -127,6 +134,9 @@ internal static partial class GameHooksPublisher
         {
             return ( pBaseEntity, pOtherEntity ) =>
             {
+                if (hookListeners.TryGetValue(HookListener.EndTouch, out var count) && count == 1 && !EventPublisher.ListensToEntityEndTouch)
+                    return next()(pBaseEntity, pOtherEntity);
+
                 var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity);
                 var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity ?? _core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity);
 
