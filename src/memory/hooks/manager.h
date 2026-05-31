@@ -43,10 +43,6 @@ public:
     virtual void DestroyFunctionHook(IFunctionHook* hook) override;
     virtual void DestroyVFunctionHook(IVFunctionHook* hook) override;
     virtual void DestroyMFunctionHook(IMFunctionHook* hook) override;
-
-    // ptr CEntityIOOutput, string outputName, ptr activator, ptr caller, float delay -> int (HookResult)
-    virtual uint64_t CreateEntityHookOutput(const std::string& className, const std::string& outputName, void* callback) override;
-    virtual void DestroyEntityHookOutput(uint64_t id) override;
 };
 
 struct EntityIOConnectionDesc_t

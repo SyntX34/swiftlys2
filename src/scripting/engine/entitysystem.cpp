@@ -66,18 +66,6 @@ void* Bridge_EntitySystem_GetEntitySystem()
     return entsystem->GetEntitySystem();
 }
 
-uint64_t Bridge_EntitySystem_HookEntityOutput(const char* className, const char* outputName, void* callback)
-{
-    static auto hooksystem = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    return hooksystem->CreateEntityHookOutput(className, outputName, callback);
-}
-
-void Bridge_EntitySystem_UnhookEntityOutput(uint64_t hookid)
-{
-    static auto hooksystem = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-    hooksystem->DestroyEntityHookOutput(hookid);
-}
-
 bool Bridge_EntitySystem_IsValid()
 {
     static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
@@ -90,6 +78,4 @@ DEFINE_NATIVE("EntitySystem.CreateEntityByName", Bridge_EntitySystem_CreateEntit
 DEFINE_NATIVE("EntitySystem.AcceptInput", Bridge_EntitySystem_AcceptInput);
 DEFINE_NATIVE("EntitySystem.AddEntityIOEvent", Bridge_EntitySystem_AddEntityIOEvent);
 DEFINE_NATIVE("EntitySystem.GetEntitySystem", Bridge_EntitySystem_GetEntitySystem);
-DEFINE_NATIVE("EntitySystem.HookEntityOutput", Bridge_EntitySystem_HookEntityOutput);
-DEFINE_NATIVE("EntitySystem.UnhookEntityOutput", Bridge_EntitySystem_UnhookEntityOutput);
 DEFINE_NATIVE("EntitySystem.IsValid", Bridge_EntitySystem_IsValid);

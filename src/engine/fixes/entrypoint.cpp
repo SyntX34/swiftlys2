@@ -17,19 +17,15 @@
  ************************************************************************************************/
 
 #include "serverlist.h"
-#include "nullificator.h"
 
 ServerListFix g_ServerListFix;
-NullificatorFix g_NullificatorFix;
 
 void StartFixes()
 {
     g_ServerListFix.Start();
-    g_NullificatorFix.Start();
 }
 
 void StopFixes()
 {
     g_ServerListFix.Stop();
-    g_NullificatorFix.Stop();
 }

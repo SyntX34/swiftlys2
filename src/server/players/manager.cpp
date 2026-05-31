@@ -202,9 +202,12 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
         auto& activeMasks = blockedBits.activeMasks;
 
         // NUM_MASKS_ACTIVE ops = NUM_MASKS_ACTIVE*64 bits -> 64 players -> NUM_MASKS_ACTIVE*64 ops
-        for (auto& dword : activeMasks)
+        if (!activeMasks.empty())
         {
-            base[dword] &= ~blockedBits.blockedMask[dword];
+            for (auto& dword : activeMasks)
+            {
+                base[dword] &= ~blockedBits.blockedMask[dword];
+            }
         }
 
         // 512 ops = 16k bits -> 64 players -> 32k ops

@@ -53,90 +53,10 @@ void HooksManager::DestroyMFunctionHook(IMFunctionHook* hook)
     delete (MFunctionHook*)hook;
 }
 
-IFunctionHook* g_pFireOutputHook = nullptr;
-std::map<uint64_t, std::map<uint64_t, void*>> outputHooksList;
-
-void CEntityIOOutput_FireOutputInternal_Hook(CEntityIOOutput* pThis, CEntityInstance* pActivator, CEntityInstance* pCaller, void* variantValue, float delay, void* unk01, void* unk02);
-
 void HooksManager::Initialize()
 {
-    g_pFireOutputHook = CreateFunctionHook();
-    g_pFireOutputHook->SetHookFunction("CEntityIOOutput::FireOutputInternal", reinterpret_cast<void*>(CEntityIOOutput_FireOutputInternal_Hook));
-    g_pFireOutputHook->Enable();
 }
 
 void HooksManager::Shutdown()
 {
-    g_pFireOutputHook->Disable();
-    DestroyFunctionHook(g_pFireOutputHook);
-    g_pFireOutputHook = nullptr;
-}
-
-void CEntityIOOutput_FireOutputInternal_Hook(CEntityIOOutput* pThis, CEntityInstance* pActivator, CEntityInstance* pCaller, void* variantValue, float delay, void* unk01, void* unk02)
-{
-    const char* outputName = pThis->m_pDesc->m_pName;
-    const char* callerClassName = pCaller ? pCaller->GetClassname() : "(null)";
-    static auto hashStar = hash_32_fnv1a_const("*");
-    auto outputNameHash = hash_32_fnv1a_const(outputName);
-
-    std::vector searchOutputs{ ((uint64_t)hashStar << 32 | outputNameHash), ((uint64_t)hashStar << 32 | hashStar) };
-
-    if (pCaller)
-    {
-        uint64_t classHash = hash_32_fnv1a_const(callerClassName);
-        uint64_t combinedHash = (classHash << 32) | outputNameHash;
-        searchOutputs.push_back(combinedHash);
-        searchOutputs.push_back(((uint64_t)classHash << 32 | hashStar));
-    }
-
-    bool stopOriginal = false;
-    for (auto& output : searchOutputs)
-    {
-        bool shouldStop = false;
-        for (auto& hook : outputHooksList[output])
-        {
-            int result = reinterpret_cast<int (*)(CEntityIOOutput*, const char*, CEntityInstance*, CEntityInstance*, float)>(hook.second)(pThis, outputName, pActivator, pCaller, delay);
-            if (result == 1)
-            {
-                return;
-            }
-            else if (result == 2)
-            {
-                shouldStop = true;
-                break;
-            }
-            else if (result == 3)
-            {
-                stopOriginal = true;
-            }
-        }
-        if (shouldStop)
-        {
-            break;
-        }
-    }
-
-    if (stopOriginal) return;
-
-    reinterpret_cast<decltype(&CEntityIOOutput_FireOutputInternal_Hook)>(g_pFireOutputHook->GetOriginal())(pThis, pActivator, pCaller, variantValue, delay, unk01, unk02);
-}
-
-uint64_t HooksManager::CreateEntityHookOutput(const std::string& className, const std::string& outputName, void* callback)
-{
-    static uint64_t listenerID = 0;
-    uint64_t outputHash = ((uint64_t)hash_32_fnv1a_const(className.c_str()) << 32 | hash_32_fnv1a_const(outputName.c_str()));
-    outputHooksList[outputHash][++listenerID] = callback;
-    return listenerID;
-}
-
-void HooksManager::DestroyEntityHookOutput(uint64_t id)
-{
-    for (auto& output : outputHooksList)
-    {
-        auto it = output.second.find(id);
-        if (it != output.second.end())
-        {
-            output.second.erase(it);
-        }
-    }
 }

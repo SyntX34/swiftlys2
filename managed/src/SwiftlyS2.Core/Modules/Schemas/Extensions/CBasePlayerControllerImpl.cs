@@ -18,6 +18,6 @@ internal partial class CBasePlayerControllerImpl : CBasePlayerController
         if (!IsValid) return null;
         if (!PlayerManagerService.PlayerObjects.TryGetValue((int)(Index - 1), out var player)) return null;
 
-        return player is { IsValid: true } ? player : null;
+        return player;
     }
 }

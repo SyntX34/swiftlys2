@@ -38,10 +38,6 @@ public:
     virtual void DestroyFunctionHook(IFunctionHook* hook) = 0;
     virtual void DestroyVFunctionHook(IVFunctionHook* hook) = 0;
     virtual void DestroyMFunctionHook(IMFunctionHook* hook) = 0;
-
-    // ptr CEntityIOOutput, string outputName, ptr activator, ptr caller, float delay -> int (HookResult)
-    virtual uint64_t CreateEntityHookOutput(const std::string& className, const std::string& outputName, void* callback) = 0;
-    virtual void DestroyEntityHookOutput(uint64_t id) = 0;
 };
 
 template<typename T, typename RetType, typename... Args>
