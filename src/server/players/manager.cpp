@@ -167,12 +167,22 @@ extern void* g_pOnClientPutInServerCallback;
 
 void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid)
 {
+    static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
+    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
+
     reinterpret_cast<decltype(&OnClientPutInServerHook)>(g_pClientPutInServerHook->GetOriginal())(_this, slot, pszName, type, xuid);
 
     if (type == 0)
     {
         auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
         cvarmanager->QueryClientConvar(slot.Get(), "cl_language");
+    }
+
+    if (engine->IsClientFullyAuthenticated(slot))
+    {
+        auto player = playermanager->GetPlayer(slot.Get());
+        if (player)
+            player->ChangeAuthorizationState(true);
     }
 
     if (g_pOnClientPutInServerCallback)

@@ -322,6 +322,9 @@ extern void* g_pOnClientSteamAuthorizeFailCallback;
 
 void CPlayer::ChangeAuthorizationState(bool bAuthorized)
 {
+    if (m_bAuthorized == bAuthorized)
+        return;
+
     m_bAuthorized = bAuthorized;
 
     if (bAuthorized)
