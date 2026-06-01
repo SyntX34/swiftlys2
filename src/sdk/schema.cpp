@@ -279,11 +279,12 @@ void CSDKSchema::SetStateChanged(void* pEntity, const char* sClassName, const ch
 
 void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
 {
+    if (pEntity == nullptr) return;
+
     auto fieldData = offsets.find(uHash);
     if (fieldData == offsets.end()) return;
 
     auto& fieldInfo = fieldData->second;
-    auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
 
     auto uncheckedNetworkVar = reinterpret_cast<NetworkVar*>(pEntity);
     auto it = inlineNetworkVarVtbs.find(uncheckedNetworkVar->pVtable());
@@ -297,7 +298,7 @@ void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
         CNetworkVarChainer* pChainer = (CNetworkVarChainer*)((uintptr_t)pEntity + fieldInfo.m_nChainerOffset);
 
         CEntityInstance* pEntity = pChainer->m_pEntity;
-        if (pEntity)
+        if (pEntity != nullptr)
             pEntity->NetworkStateChanged(NetworkStateChangedData(fieldInfo.m_uOffset, -1, pChainer->m_PathIndex));
     }
     else if (fieldInfo.m_bIsStruct) {
