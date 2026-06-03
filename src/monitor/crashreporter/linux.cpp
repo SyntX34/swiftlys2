@@ -148,4 +148,33 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
     return succeeded;
 }
 
+void ParseAndWriteCrashInfo(const std::string& mdmpAbsPath, const std::string& crashInfoRelPath)
+{
+    static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
+
+    google_breakpad::SimpleSymbolSupplier symbolSupplier("");
+    google_breakpad::BasicSourceLineResolver resolver;
+    google_breakpad::MinidumpProcessor minidump_processor(&symbolSupplier, &resolver);
+
+    google_breakpad::MinidumpThreadList::set_max_threads(std::numeric_limits<uint32_t>::max());
+    google_breakpad::MinidumpMemoryList::set_max_regions(std::numeric_limits<uint32_t>::max());
+
+    google_breakpad::Minidump mdmp(mdmpAbsPath);
+    if (!mdmp.Read())
+    {
+        logger->Error("Crash Reporter", fmt::format("Failed to read minidump from '{}'\n", mdmpAbsPath));
+        return;
+    }
+
+    google_breakpad::ProcessState processState;
+    if (minidump_processor.Process(&mdmp, &processState) != google_breakpad::PROCESS_OK)
+    {
+        logger->Error("Crash Reporter", fmt::format("MinidumpProcessor::Process failed for '{}'\n", mdmpAbsPath));
+        return;
+    }
+
+    auto crashInfoJson = FormatProcessState(processState, &resolver);
+    Files::Write(crashInfoRelPath, crashInfoJson, false);
+}
+
 #endif

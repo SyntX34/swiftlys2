@@ -60,6 +60,7 @@ extern void ShutdownCrashReporterWindows();
 extern void CrashReporterOnTickLinux();
 
 std::string FormatProcessState(const google_breakpad::ProcessState& process_state, google_breakpad::SourceLineResolverInterface* resolver);
+void ParseAndWriteCrashInfo(const std::string& mdmpAbsPath, const std::string& crashInfoRelPath);
 
 extern void ConsoleLogger_FlushForCrash();
 

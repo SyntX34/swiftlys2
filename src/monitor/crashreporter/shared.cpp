@@ -80,6 +80,41 @@ void CrashReporter::Init()
             Files::Delete(dir);
     }
 
+    for (const auto& dir : Files::FetchDirectories(g_SwiftlyCore.GetCorePath() + "dumps/crashreport"))
+    {
+        auto fileNames = Files::FetchFileNames(dir);
+
+        bool hasCrashInfo = false;
+        std::string dmpRelPath;
+
+        for (const auto& f : fileNames)
+        {
+            if (f.size() >= 13 && f.substr(f.size() - 13) == "crashinfo.json")
+            {
+                hasCrashInfo = true;
+                break;
+            }
+        }
+
+        if (hasCrashInfo)
+            continue;
+
+        for (const auto& f : fileNames)
+        {
+            if (f.size() > 4 && f.substr(f.size() - 4) == ".dmp")
+            {
+                dmpRelPath = f;
+                break;
+            }
+        }
+
+        if (dmpRelPath.empty())
+            continue;
+
+        logger->Info("Crash Reporter", fmt::format("Recovering crashinfo.json for: {}\n", dir));
+        ParseAndWriteCrashInfo(Files::GeneratePath(dmpRelPath), dir + "/crashinfo.json");
+    }
+
     g_relativeDumpPath = g_SwiftlyCore.GetCorePath() + "dumps/crashreport/" + get_uuid();
     g_dumpPath = Files::GeneratePath(g_relativeDumpPath);
 
