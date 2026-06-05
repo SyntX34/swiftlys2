@@ -78,7 +78,7 @@ internal static class Schema
         {
             throw new InvalidOperationException($"Cannot get or set 0x{hash:X16} while \"FollowCS2ServerGuidelines\" is enabled.\n\tTo use this operation, disable the option in core.jsonc.");
         }
-        _ = SchedulerManager.QueueOrNow(() => NativeSchema.SetStateChanged(handle, hash));
+        _ = SchedulerManager.QueueOrNow(() => NativeSchema.SetStateChanged(handle, hash), true);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
