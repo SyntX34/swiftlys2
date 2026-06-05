@@ -7,9 +7,6 @@ set_languages("cxx23")
 
 add_rules("mode.debug", "mode.release")
 
-add_includedirs("include")
-add_includedirs("external/include")
-
 local GITHUB_SHA = os.getenv("GITHUB_SHA") or "Local"
 local SWIFTLY_VERSION = os.getenv("SWIFTLY_VERSION") or "Local"
 

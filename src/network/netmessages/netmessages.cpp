@@ -37,7 +37,7 @@ IVFunctionHook* g_pSendNetMessageHook = nullptr;
 
 bool bypassPostEventAbstractHook = false;
 
-bool FilterMessage(CServerSideClient* client, CNetMessage* cMsg, INetChannel* netchan);
+bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan);
 void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLocalOnly, int nClientCount, const uint64* clients,
     INetworkMessageInternal* pEvent, const CNetMessage* pData, unsigned long nSize, NetChannelBufType_t bufType);
 
@@ -98,12 +98,15 @@ bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBuf
     return reinterpret_cast<decltype(&SendNetMessage)>(g_pSendNetMessageHook->GetOriginal())(client, pData, bufType);
 }
 
-bool FilterMessage(CServerSideClient* client, CNetMessage* cMsg, INetChannel* netchan)
+bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
 {
     if (!client) return reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal())(client, cMsg, netchan);
     if (!cMsg) return reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal())(client, cMsg, netchan);
 
-    auto playerid = client->GetPlayerSlot(true).Get();
+    static auto gameDataManager = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
+    static auto playerIndex = gameDataManager->GetOffsets()->Fetch("CServerSideClientBase::m_nClientSlot") - WIN_LINUX(8, 48);
+
+    auto playerid = *(int*)((uintptr_t)client + playerIndex);
     int msgid = cMsg->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
 
     bool stopOriginal = false;
