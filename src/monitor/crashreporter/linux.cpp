@@ -51,15 +51,27 @@ void (*SignalHandler)(int, siginfo_t*, void*);
 const int kExceptionSignals[] = { SIGSEGV, SIGABRT, SIGFPE, SIGILL, SIGBUS };
 const int kNumHandledSignals = std::size(kExceptionSignals);
 
+static void CrashSignalHandler(int sig, siginfo_t* info, void* uctx)
+{
+    if (exceptionHandler) exceptionHandler->HandleSignal(sig, info, uctx);
+}
+
 void InitCrashReporterLinux()
 {
     google_breakpad::MinidumpDescriptor descriptor(g_dumpPath);
 
     exceptionHandler = new google_breakpad::ExceptionHandler(descriptor, NULL, linuxDumpCallback, NULL, true, -1);
 
-    struct sigaction oact;
-    sigaction(SIGSEGV, NULL, &oact);
-    SignalHandler = oact.sa_sigaction;
+    struct sigaction sa;
+    memset(&sa, 0, sizeof(sa));
+    sa.sa_sigaction = CrashSignalHandler;
+    sa.sa_flags = SA_SIGINFO | SA_ONSTACK;
+    sigemptyset(&sa.sa_mask);
+
+    for (int i = 0; i < kNumHandledSignals; ++i)
+    {
+        sigaction(kExceptionSignals[i], &sa, nullptr);
+    }
 }
 
 void CrashReporterOnTickLinux()
@@ -71,7 +83,7 @@ void CrashReporterOnTickLinux()
     {
         sigaction(kExceptionSignals[i], NULL, &oact);
 
-        if (oact.sa_sigaction != SignalHandler)
+        if (oact.sa_sigaction != CrashSignalHandler)
         {
             signalChanged = true;
             break;
@@ -88,7 +100,7 @@ void CrashReporterOnTickLinux()
     for (int i = 0; i < kNumHandledSignals; ++i)
         sigaddset(&act.sa_mask, kExceptionSignals[i]);
 
-    act.sa_sigaction = SignalHandler;
+    act.sa_sigaction = CrashSignalHandler;
     act.sa_flags = SA_ONSTACK | SA_SIGINFO;
 
     for (int i = 0; i < kNumHandledSignals; ++i)
