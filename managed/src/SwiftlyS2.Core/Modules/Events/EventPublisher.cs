@@ -2,6 +2,7 @@ using System.Runtime.InteropServices;
 using Spectre.Console;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Commands;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
@@ -58,7 +59,22 @@ internal static class EventPublisher
             _ = NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated);
             _ = NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
             _ = NativeConsoleOutput.AddConsoleListener((nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput);
+            NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
         }
+    }
+
+    [UnmanagedCallersOnly]
+    public static void OnCommandDispatch( nint commandNamePtr, int playerId, nint argsPtr, nint originalCommandNamePtr, nint prefixPtr, byte silent )
+    {
+        var commandName = StringAlloc.CreateCSharpString(commandNamePtr);
+        var argsString = StringAlloc.CreateCSharpString(argsPtr);
+        var originalCommandName = StringAlloc.CreateCSharpString(originalCommandNamePtr);
+        var prefix = StringAlloc.CreateCSharpString(prefixPtr);
+
+        var args = argsString.Split('\x01');
+        if (args.Length < 2) args = [.. args.Where(s => !string.IsNullOrWhiteSpace(s))];
+
+        CommandService.DispatchCommand(commandName, playerId, args, originalCommandName, prefix, silent == 1);
     }
 
     public static bool ListensToConVarCreated {

@@ -29,7 +29,7 @@
 std::map<std::string, ConCommand*> conCommandCreated;
 std::map<uint64_t, std::string> conCommandMapping;
 
-std::map<std::string, std::function<void(int, std::vector<std::string>, std::string, std::string, bool)>> commandHandlers;
+std::function<void(std::string, int, std::vector<std::string>, std::string, std::string, bool)> commandHandler;
 
 std::map<uint64_t, std::function<int(int, const std::string&)>> clientCommandListeners;
 std::map<uint64_t, std::function<int(int, const std::string&, bool)>> clientChatListeners;
@@ -52,11 +52,11 @@ void CommandsCallback(const CCommandContext& context, const CCommand& args)
 
     std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
     std::string originalCommandName = commandName;
-    if (!commandHandlers.contains(commandName))
+    if (!conCommandCreated.contains(commandName))
     {
         commandName = "sw_" + commandName;
     }
-    if (!commandHandlers.contains(commandName))
+    if (!conCommandCreated.contains(commandName))
     {
         return;
     }
@@ -64,8 +64,8 @@ void CommandsCallback(const CCommandContext& context, const CCommand& args)
     std::vector<std::string> argsplit = TokenizeCommand(args.GetCommandString());
     argsplit.erase(argsplit.begin());
 
-    auto& handler = commandHandlers[commandName];
-    handler(context.GetPlayerSlot().Get(), argsplit, originalCommandName, "sw_", true);
+    if (commandHandler)
+        commandHandler(commandName, context.GetPlayerSlot().Get(), argsplit, originalCommandName, "sw_", true);
 }
 
 void CServerCommands::Initialize()
@@ -196,17 +196,18 @@ int CServerCommands::HandleCommand(int playerid, const std::string& text, bool d
         std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
         std::string originalCommandName = commandName;
 
-        if (!commandHandlers.contains(commandName))
+        if (!conCommandCreated.contains(commandName))
         {
             commandName = "sw_" + commandName;
         }
 
-        if (!commandHandlers.contains(commandName))
+        if (!conCommandCreated.contains(commandName))
         {
             return 0;
         }
 
-        if (!dryrun) commandHandlers[commandName](playerid, cmdString, originalCommandName, selectedPrefix, isSilentCommand);
+        if (!dryrun && commandHandler)
+            commandHandler(commandName, playerid, cmdString, originalCommandName, selectedPrefix, isSilentCommand);
     }
 
     if (isCommand)
@@ -271,7 +272,7 @@ bool CServerCommands::HandleClientChat(int playerid, const std::string& text, bo
     return true;
 }
 
-uint64_t CServerCommands::RegisterCommand(std::string commandName, std::function<void(int, std::vector<std::string>, std::string, std::string, bool)> handler, bool registerRaw, std::string helpText)
+uint64_t CServerCommands::RegisterCommand(std::string commandName, bool registerRaw, std::string helpText)
 {
     std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
 
@@ -289,10 +290,14 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, std::function
     {
         conCommandCreated[commandName] = new ConCommand(commandName.c_str(), CommandsCallback, strdup(helpText.c_str()), FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND);
         conCommandMapping[++commandId] = commandName;
-        commandHandlers[commandName] = handler;
         conCommandCreated[commandName]->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
     }
     return commandId;
+}
+
+void CServerCommands::SetCommandHandler(std::function<void(std::string, int, std::vector<std::string>, std::string, std::string, bool)> handler)
+{
+    commandHandler = handler;
 }
 
 void CServerCommands::UnregisterCommand(uint64_t commandId)
@@ -310,7 +315,6 @@ void CServerCommands::UnregisterCommand(uint64_t commandId)
 
     const std::string& commandName = mappingIt->second;
     auto createdIt = conCommandCreated.find(commandName);
-    auto handlerIt = commandHandlers.find(commandName);
 
     ConCommand* conCommand = nullptr;
     if (createdIt != conCommandCreated.end())
@@ -319,10 +323,6 @@ void CServerCommands::UnregisterCommand(uint64_t commandId)
     }
 
     conCommandMapping.erase(mappingIt);
-    if (handlerIt != commandHandlers.end())
-    {
-        commandHandlers.erase(handlerIt);
-    }
     if (createdIt != conCommandCreated.end())
     {
         conCommandCreated.erase(createdIt);
@@ -334,13 +334,13 @@ void CServerCommands::UnregisterCommand(uint64_t commandId)
 bool CServerCommands::IsCommandRegistered(std::string commandName)
 {
     std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
-    if (commandHandlers.contains(commandName))
+    if (conCommandCreated.contains(commandName))
     {
         return true;
     }
 
     commandName = "sw_" + commandName;
-    if (commandHandlers.contains(commandName))
+    if (conCommandCreated.contains(commandName))
     {
         return true;
     }
@@ -351,15 +351,15 @@ bool CServerCommands::IsCommandRegistered(std::string commandName)
 uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string commandName, bool registerRaw)
 {
     std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
-    if (!commandHandlers.contains(commandName))
+    if (!conCommandCreated.contains(commandName))
     {
         commandName = "sw_" + commandName;
-        if (!commandHandlers.contains(commandName))
+        if (!conCommandCreated.contains(commandName))
         {
             return 0;
         }
     }
-    return RegisterCommand(aliasCommand, commandHandlers[commandName], registerRaw, conCommandCreated[commandName]->GetHelpText());
+    return RegisterCommand(aliasCommand, registerRaw, conCommandCreated[commandName]->GetHelpText());
 }
 
 void CServerCommands::UnregisterAlias(uint64_t aliasId)

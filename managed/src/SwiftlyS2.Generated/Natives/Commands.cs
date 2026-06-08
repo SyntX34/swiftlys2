@@ -29,21 +29,31 @@ internal static class NativeCommands
         });
     }
 
-    private unsafe static delegate* unmanaged<byte*, nint, byte, byte*, ulong> _RegisterCommand;
+    private unsafe static delegate* unmanaged<byte*, byte, byte*, ulong> _RegisterCommand;
 
     /// <summary>
-    /// callback should receive (int32 playerid, string arguments_list (separated by \x01), string commandName, string prefix, bool silent), if registerRaw is false, it will not put "sw_" before the command name
+    /// if registerRaw is false, it will not put "sw_" before the command name
     /// </summary>
-    public unsafe static ulong RegisterCommand(string commandName, nint callback, bool registerRaw, string helpText)
+    public unsafe static ulong RegisterCommand(string commandName, bool registerRaw, string helpText)
     {
         return StringAlloc.CreateCString(commandName, commandNameBufferPtr =>
         {
             return StringAlloc.CreateCString(helpText, helpTextBufferPtr =>
             {
-                var ret = _RegisterCommand((byte*)commandNameBufferPtr, callback, registerRaw ? (byte)1 : (byte)0, (byte*)helpTextBufferPtr);
+                var ret = _RegisterCommand((byte*)commandNameBufferPtr, registerRaw ? (byte)1 : (byte)0, (byte*)helpTextBufferPtr);
                 return ret;
             });
         });
+    }
+
+    private unsafe static delegate* unmanaged<nint, void> _SetCommandHandler;
+
+    /// <summary>
+    /// callback receives (string commandName, int32 playerid, string arguments_list (separated by \x01), string originalCommandName, string prefix, bool silent)
+    /// </summary>
+    public unsafe static void SetCommandHandler(nint callback)
+    {
+        _SetCommandHandler(callback);
     }
 
     private unsafe static delegate* unmanaged<ulong, void> _UnregisterCommand;

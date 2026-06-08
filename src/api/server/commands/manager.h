@@ -34,8 +34,9 @@ public:
     virtual bool HandleClientCommand(int playerid, const std::string& text) = 0;
     virtual bool HandleClientChat(int playerid, const std::string& text, bool teamonly) = 0;
 
-    // playerid, args, command_name, prefix, silent
-    virtual uint64_t RegisterCommand(std::string command_name, std::function<void(int, std::vector<std::string>, std::string, std::string, bool)> handler, bool registerRaw, std::string helpText) = 0;
+    virtual uint64_t RegisterCommand(std::string command_name, bool registerRaw, std::string helpText) = 0;
+    // command_name, playerid, args, original_command_name, prefix, silent
+    virtual void SetCommandHandler(std::function<void(std::string, int, std::vector<std::string>, std::string, std::string, bool)> handler) = 0;
     virtual void UnregisterCommand(uint64_t command_id) = 0;
     virtual bool IsCommandRegistered(std::string command_name) = 0;
 

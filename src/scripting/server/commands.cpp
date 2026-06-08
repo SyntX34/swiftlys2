@@ -32,7 +32,7 @@ int Bridge_Commands_HandleCommandForPlayer(int playerid, const char* command)
     return servercommands->HandleCommand(playerid, command, false);
 }
 
-uint64_t Bridge_Commands_RegisterCommand(const char* commandName, void* callback, bool registerRaw, const char* helpText)
+uint64_t Bridge_Commands_RegisterCommand(const char* commandName, bool registerRaw, const char* helpText)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
     if (!servercommands)
@@ -40,11 +40,23 @@ uint64_t Bridge_Commands_RegisterCommand(const char* commandName, void* callback
         return 0;
     }
 
-    // i hate cpp compilers, i stood here for an hour and a half because it was `-> bool` instead of `-> void`
-    return servercommands->RegisterCommand(
-        commandName,
-        [callback](int playerid, std::vector<std::string> args, std::string originalCommandName, std::string selectedPrefix, bool isSilentCommand) -> void
+    return servercommands->RegisterCommand(commandName, registerRaw, helpText);
+}
+
+void Bridge_Commands_SetCommandHandler(void* callback)
+{
+    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
+    if (!servercommands)
+    {
+        return;
+    }
+
+    servercommands->SetCommandHandler(
+        [callback](std::string commandName, int playerid, std::vector<std::string> args, std::string originalCommandName, std::string selectedPrefix, bool isSilentCommand) -> void
         {
+            static std::string cmd_name;
+            cmd_name = commandName;
+
             static std::string imploded_args;
             imploded_args = implode(args, "\x01");
 
@@ -54,10 +66,8 @@ uint64_t Bridge_Commands_RegisterCommand(const char* commandName, void* callback
             static std::string selected_prefix;
             selected_prefix = selectedPrefix;
 
-            reinterpret_cast<void (*)(int, const char*, const char*, const char*, uint8_t)>(callback)(playerid, imploded_args.c_str(), original_name.c_str(), selected_prefix.c_str(), isSilentCommand == true ? 1 : 0);
-        },
-        registerRaw,
-        helpText);
+            reinterpret_cast<void (*)(const char*, int, const char*, const char*, const char*, uint8_t)>(callback)(cmd_name.c_str(), playerid, imploded_args.c_str(), original_name.c_str(), selected_prefix.c_str(), isSilentCommand == true ? 1 : 0);
+        });
 }
 
 void Bridge_Commands_UnregisterCommand(uint64_t callbackID)
@@ -110,6 +120,7 @@ void Bridge_Commands_UnregisterClientChatListener(uint64_t callbackID)
 
 DEFINE_NATIVE("Commands.HandleCommandForPlayer", Bridge_Commands_HandleCommandForPlayer);
 DEFINE_NATIVE("Commands.RegisterCommand", Bridge_Commands_RegisterCommand);
+DEFINE_NATIVE("Commands.SetCommandHandler", Bridge_Commands_SetCommandHandler);
 DEFINE_NATIVE("Commands.UnregisterCommand", Bridge_Commands_UnregisterCommand);
 DEFINE_NATIVE("Commands.RegisterAlias", Bridge_Commands_RegisterAlias);
 DEFINE_NATIVE("Commands.UnregisterAlias", Bridge_Commands_UnregisterAlias);
