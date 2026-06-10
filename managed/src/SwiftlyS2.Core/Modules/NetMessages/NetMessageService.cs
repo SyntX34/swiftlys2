@@ -135,7 +135,7 @@ internal class NetMessageService : INetMessageService, IDisposable
         var handle = AllocateNetMessage(T.MessageId);
         var message = T.Wrap(handle, true);
         configureMessage(message);
-        NativeNetMessages.SendMessageToPlayers(handle, T.MessageId, message.Recipients.ToMask());
+        message.Send();
     }
 
     public void Dispose()

@@ -550,6 +550,15 @@ public class TestPlugin : BasePlugin
     {
         var player = ctx.Sender;
         ctx.Reply($"Ground distance: {player!.RequiredPawn.GroundDistance}");
+
+        var um = Core.NetMessage.Create<CUserMessageShake>();
+        um.Duration = 1.0f;
+        um.Amplitude = 10.0f;
+        um.Frequency = 1.0f;
+        um.Command = 0;
+        um.Recipients.AddAllPlayers();
+        um.Send();
+        um.Send();
     }
 
     [Command("hh")]
