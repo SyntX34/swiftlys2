@@ -193,6 +193,7 @@ target("swiftlys2")
             "JSON_HAS_CPP_14",
             "JSON_HAS_CPP_11",
             "LUA_USE_WINDOWS",
+            "_LIBCPP_STD_VER",
         })
 
         add_files({

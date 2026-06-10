@@ -1,7 +1,7 @@
 /************************************************************************************
  *  S2BinLib - A static library that helps resolving memory from binary file
  *  and map to absolute memory address, targeting source 2 game engine.
- *  Copyright (C) 2025  samyyc
+ *  Copyright (C) 2025-2026  samyyc
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -545,6 +545,18 @@ int s2binlib_find_networkvar_vtable_statechanged_rva(uint64_t vtable_rva, uint64
 /// @param result Pointer to store the resulting index
 /// @return 0 on success, negative error code on failure
 int s2binlib_find_networkvar_vtable_statechanged(uint64_t vtable_mem_address, uint64_t* result);
+
+// ============================================================================
+// Signature Functions
+// ============================================================================
+
+/// Make a signature from a RVA
+/// @param binary_name Name of the binary
+/// @param func_rva RVA of the function
+/// @param result_out Buffer to store the signature
+/// @param result_out_size Size of the result_out buffer
+/// @return 0 on success, negative error code on failure    
+int s2binlib_make_sig_rva(const char* binary_name, uint64_t func_rva, char* result_out, size_t result_out_size);
 
 #ifdef __cplusplus
 }
