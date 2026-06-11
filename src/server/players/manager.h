@@ -28,6 +28,9 @@
 #include <steam/isteamuser.h>
 #include <steam/steamclientpublic.h>
 
+#include <array>
+#include <optional>
+
 class CPlayerManager : public IPlayerManager
 {
 public:
@@ -39,8 +42,6 @@ public:
 
     virtual IPlayer* GetPlayer(int playerid) override;
 
-    virtual bool IsPlayerOnline(int playerid) override;
-
     virtual int GetPlayerCount() override;
     virtual int GetPlayerCap() override;
 
@@ -50,5 +51,5 @@ public:
 
     STEAM_GAMESERVER_CALLBACK_MANUAL(CPlayerManager, OnValidateAuthTicket, ValidateAuthTicketResponse_t, m_CallbackValidateAuthTicketResponse);
 private:
-    CPlayer** g_Players = nullptr;
+    std::array<std::optional<CPlayer>, MAX_PLAYERS> g_Players;
 };

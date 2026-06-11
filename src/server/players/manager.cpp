@@ -64,11 +64,7 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
 
 void CPlayerManager::Initialize()
 {
-    g_Players = new CPlayer * [g_SwiftlyCore.GetMaxGameClients()];
-    for (int i = 0; i < g_SwiftlyCore.GetMaxGameClients(); i++)
-    {
-        g_Players[i] = nullptr;
-    }
+    g_Players.fill(std::nullopt);
 
     auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
     auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
@@ -109,14 +105,8 @@ void CPlayerManager::Initialize()
 
 void CPlayerManager::Shutdown()
 {
-    for (int i = 0; i < g_SwiftlyCore.GetMaxGameClients(); i++)
-    {
-        if (g_Players[i] != nullptr)
-        {
-            delete g_Players[i];
-        }
-    }
-    delete[] g_Players;
+    for (auto& slot : g_Players)
+        slot.reset();
 
     auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
 
@@ -255,7 +245,8 @@ void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last)
         if (player) player->Think();
     }
 
-    g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION)->OnTick();
+    static auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
+    crashreporter->OnTick();
 }
 
 extern void* g_pOnClientConnectCallback;
@@ -338,46 +329,33 @@ IPlayer* CPlayerManager::RegisterPlayer(int playerid)
     if (playerid < 0 || playerid >= g_SwiftlyCore.GetMaxGameClients())
         return nullptr;
 
-    if (g_Players[playerid] != nullptr)
+    if (g_Players[playerid].has_value())
         UnregisterPlayer(playerid);
 
-    auto player = new CPlayer();
-    player->Initialize(playerid);
-    g_Players[playerid] = player;
+    g_Players[playerid].emplace();
+    g_Players[playerid]->Initialize(playerid);
 
-    return player;
+    return &g_Players[playerid].value();
 }
 
 void CPlayerManager::UnregisterPlayer(int playerid)
 {
     if (playerid < 0 || playerid >= g_SwiftlyCore.GetMaxGameClients())
         return;
-    if (g_Players[playerid] == nullptr)
+
+    if (!g_Players[playerid].has_value())
         return;
 
-    auto player = g_Players[playerid];
-    g_Players[playerid] = nullptr;
-
-    player->Shutdown();
-    delete player;
+    g_Players[playerid]->Shutdown();
+    g_Players[playerid].reset();
 }
 
 IPlayer* CPlayerManager::GetPlayer(int playerid)
 {
-    if (!IsPlayerOnline(playerid))
+    if (!g_Players[playerid].has_value())
         return nullptr;
 
-    auto player = g_Players[playerid];
-    return player && *(void***)player ? player : nullptr;
-}
-
-bool CPlayerManager::IsPlayerOnline(int playerid)
-{
-    if (playerid < 0 || playerid >= g_SwiftlyCore.GetMaxGameClients())
-        return false;
-
-    static auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    return (engine->GetClientSteamID(playerid) != nullptr);
+    return &g_Players[playerid].value();
 }
 
 int CPlayerManager::GetPlayerCount()
