@@ -499,11 +499,12 @@ public class TestPlugin : BasePlugin
         // };
         //
 
-        // Core.NetMessage.HookClientMessage<CCLCMsg_Move>((msg, id) => {
-        //   Console.WriteLine("TestPlugin OnClientMove ");
-        //   Console.WriteLine(BitConverter.ToString(msg.Data));
-        //   return HookResult.Continue;
-        // });
+        _ = Core.NetMessage.HookServerMessage<CMsgSource1LegacyGameEvent>(( msg ) =>
+        {
+            Console.WriteLine("TestPlugin CMsgSource1LegacyGameEvent ");
+            Console.WriteLine($"Event ID: {msg.Eventid}");
+            return HookResult.Continue;
+        });
 
         // Core.Event.OnEntityTakeDamage += ( @event ) =>
         // {

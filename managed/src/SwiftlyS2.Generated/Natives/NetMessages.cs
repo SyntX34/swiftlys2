@@ -855,57 +855,33 @@ internal static class NativeNetMessages
         _SendMessageToPlayers(netmsg, msgid, playermask);
     }
 
-    private unsafe static delegate* unmanaged<nint, ulong> _AddNetMessageServerHook;
+    private unsafe static delegate* unmanaged<nint, void> _SetNetMessageServerHook;
 
     /// <summary>
-    /// the callback should receive the following: uint64* playermask_ptr, int netmessage_id, void* netmsg, return bool (true -> ignored, false -> supercede)
+    /// the callback should receive the following: uint64* playermask_ptr, int netmessage_id, void* netmsg, return HookResult int
     /// </summary>
-    public unsafe static ulong AddNetMessageServerHook(nint callback)
+    public unsafe static void SetNetMessageServerHook(nint callback)
     {
-        var ret = _AddNetMessageServerHook(callback);
-        return ret;
+        _SetNetMessageServerHook(callback);
     }
 
-    private unsafe static delegate* unmanaged<ulong, void> _RemoveNetMessageServerHook;
-
-    public unsafe static void RemoveNetMessageServerHook(ulong callbackID)
-    {
-        _RemoveNetMessageServerHook(callbackID);
-    }
-
-    private unsafe static delegate* unmanaged<nint, ulong> _AddNetMessageClientHook;
+    private unsafe static delegate* unmanaged<nint, void> _SetNetMessageClientHook;
 
     /// <summary>
-    /// the callback should receive the following: int32 playerid, int netmessage_id, void* netmsg, return bool (true -> ignored, false -> supercede)
+    /// the callback should receive the following: int32 playerid, int netmessage_id, void* netmsg, return HookResult int
     /// </summary>
-    public unsafe static ulong AddNetMessageClientHook(nint callback)
+    public unsafe static void SetNetMessageClientHook(nint callback)
     {
-        var ret = _AddNetMessageClientHook(callback);
-        return ret;
+        _SetNetMessageClientHook(callback);
     }
 
-    private unsafe static delegate* unmanaged<ulong, void> _RemoveNetMessageClientHook;
-
-    public unsafe static void RemoveNetMessageClientHook(ulong callbackID)
-    {
-        _RemoveNetMessageClientHook(callbackID);
-    }
-
-    private unsafe static delegate* unmanaged<nint, ulong> _AddNetMessageServerHookInternal;
+    private unsafe static delegate* unmanaged<nint, void> _SetNetMessageServerHookInternal;
 
     /// <summary>
-    /// callback should receive the following: int32 playerid, int netmessage_id, void* netmsg, return bool (true -> ignored, false -> supercede)
+    /// callback should receive the following: int32 playerid, int netmessage_id, void* netmsg, return HookResult int
     /// </summary>
-    public unsafe static ulong AddNetMessageServerHookInternal(nint callback)
+    public unsafe static void SetNetMessageServerHookInternal(nint callback)
     {
-        var ret = _AddNetMessageServerHookInternal(callback);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<ulong, void> _RemoveNetMessageServerHookInternal;
-
-    public unsafe static void RemoveNetMessageServerHookInternal(ulong callbackID)
-    {
-        _RemoveNetMessageServerHookInternal(callbackID);
+        _SetNetMessageServerHookInternal(callback);
     }
 }

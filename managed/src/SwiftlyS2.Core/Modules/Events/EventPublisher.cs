@@ -3,6 +3,7 @@ using Spectre.Console;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Commands;
+using SwiftlyS2.Core.NetMessages;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
@@ -62,6 +63,9 @@ internal static class EventPublisher
             NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
             NativeCommands.SetClientCommandHandler((nint)(delegate* unmanaged< int, nint, int >)&OnClientCommandDispatch);
             NativeCommands.SetClientChatHandler((nint)(delegate* unmanaged< int, nint, byte, int >)&OnClientChatDispatch);
+            NativeNetMessages.SetNetMessageServerHook((nint)(delegate* unmanaged< nint, int, nint, int >)&OnNetMessageServerDispatch);
+            NativeNetMessages.SetNetMessageClientHook((nint)(delegate* unmanaged< int, int, nint, int >)&OnNetMessageClientDispatch);
+            NativeNetMessages.SetNetMessageServerHookInternal((nint)(delegate* unmanaged< int, int, nint, int >)&OnNetMessageServerInternalDispatch);
         }
     }
 
@@ -91,6 +95,24 @@ internal static class EventPublisher
     {
         var text = StringAlloc.CreateCSharpString(textPtr);
         return CommandService.DispatchClientChat(playerId, text, teamonly == 1);
+    }
+
+    [UnmanagedCallersOnly]
+    public static int OnNetMessageServerDispatch( nint pPlayerMask, int msgId, nint pMessage )
+    {
+        return NetMessageService.DispatchServerMessage(pPlayerMask, msgId, pMessage);
+    }
+
+    [UnmanagedCallersOnly]
+    public static int OnNetMessageClientDispatch( int playerId, int msgId, nint pMessage )
+    {
+        return NetMessageService.DispatchClientMessage(playerId, msgId, pMessage);
+    }
+
+    [UnmanagedCallersOnly]
+    public static int OnNetMessageServerInternalDispatch( int playerId, int msgId, nint pMessage )
+    {
+        return NetMessageService.DispatchServerInternalMessage(playerId, msgId, pMessage);
     }
 
     public static bool ListensToConVarCreated {

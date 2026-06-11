@@ -983,43 +983,37 @@ void Bridge_NetMessages_SendMessageToPlayers(void* pmsg, int msgid, uint64_t pla
     bypassPostEventAbstractHook = false;
 }
 
-uint64_t Bridge_NetMessages_AddNetMessageServerHook(void* callback_ptr)
+void Bridge_NetMessages_SetNetMessageServerHook(void* callback_ptr)
 {
-    auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
+    static auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
+    if (!netmessages)
+        return;
 
-    return netmessages->AddServerMessageSendCallback([callback_ptr](uint64_t* clients, int messageid, void* msg) { return ((int (*)(uint64_t*, int, void*))callback_ptr)(clients, messageid, msg); });
+    netmessages->SetServerMessageSendHandler([callback_ptr](uint64_t* clients, int messageid, void* msg) {
+        return ((int (*)(uint64_t*, int, void*))callback_ptr)(clients, messageid, msg);
+    });
 }
 
-void Bridge_NetMessages_RemoveNetMessageServerHook(uint64_t callbackID)
+void Bridge_NetMessages_SetNetMessageClientHook(void* callback_ptr)
 {
-    auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
-    netmessages->RemoveServerMessageSendCallback(callbackID);
+    static auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
+    if (!netmessages)
+        return;
+
+    netmessages->SetClientMessageSendHandler([callback_ptr](int playerid, int messageid, void* msg) {
+        return ((int (*)(int, int, void*))callback_ptr)(playerid, messageid, msg);
+    });
 }
 
-uint64_t Bridge_NetMessages_AddNetMessageClientHook(void* callback_ptr)
+void Bridge_NetMessages_SetNetMessageServerHookInternal(void* callback_ptr)
 {
-    auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
+    static auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
+    if (!netmessages)
+        return;
 
-    return netmessages->AddClientMessageSendCallback([callback_ptr](int playerid, int messageid, void* msg) { return ((int (*)(int, int, void*))callback_ptr)(playerid, messageid, msg); });
-}
-
-void Bridge_NetMessages_RemoveNetMessageClientHook(uint64_t callbackID)
-{
-    auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
-    netmessages->RemoveClientMessageSendCallback(callbackID);
-}
-
-uint64_t Bridge_NetMessages_AddNetMessageServerHookInternal(void* callback_ptr)
-{
-    auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
-
-    return netmessages->AddServerMessageInternalSendCallback([callback_ptr](int playerid, int messageid, void* msg) { return ((int (*)(int, int, void*))callback_ptr)(playerid, messageid, msg); });
-}
-
-void Bridge_NetMessages_RemoveNetMessageServerHookInternal(uint64_t callbackID)
-{
-    auto netmessages = g_ifaceService.FetchInterface<INetMessages>(NETMESSAGES_INTERFACE_VERSION);
-    netmessages->RemoveServerMessageInternalSendCallback(callbackID);
+    netmessages->SetServerMessageInternalSendHandler([callback_ptr](int playerid, int messageid, void* msg) {
+        return ((int (*)(int, int, void*))callback_ptr)(playerid, messageid, msg);
+    });
 }
 
 DEFINE_NATIVE("NetMessages.AllocateNetMessageByID", Bridge_NetMessages_AllocateNetMessageByID);
@@ -1099,9 +1093,6 @@ DEFINE_NATIVE("NetMessages.ClearRepeatedField", Bridge_NetMessages_ClearRepeated
 DEFINE_NATIVE("NetMessages.Clear", Bridge_NetMessages_Clear);
 DEFINE_NATIVE("NetMessages.SendMessage", Bridge_NetMessages_SendMessage);
 DEFINE_NATIVE("NetMessages.SendMessageToPlayers", Bridge_NetMessages_SendMessageToPlayers);
-DEFINE_NATIVE("NetMessages.AddNetMessageServerHook", Bridge_NetMessages_AddNetMessageServerHook);
-DEFINE_NATIVE("NetMessages.RemoveNetMessageServerHook", Bridge_NetMessages_RemoveNetMessageServerHook);
-DEFINE_NATIVE("NetMessages.AddNetMessageClientHook", Bridge_NetMessages_AddNetMessageClientHook);
-DEFINE_NATIVE("NetMessages.RemoveNetMessageClientHook", Bridge_NetMessages_RemoveNetMessageClientHook);
-DEFINE_NATIVE("NetMessages.AddNetMessageServerHookInternal", Bridge_NetMessages_AddNetMessageServerHookInternal);
-DEFINE_NATIVE("NetMessages.RemoveNetMessageServerHookInternal", Bridge_NetMessages_RemoveNetMessageServerHookInternal);
+DEFINE_NATIVE("NetMessages.SetNetMessageServerHook", Bridge_NetMessages_SetNetMessageServerHook);
+DEFINE_NATIVE("NetMessages.SetNetMessageClientHook", Bridge_NetMessages_SetNetMessageClientHook);
+DEFINE_NATIVE("NetMessages.SetNetMessageServerHookInternal", Bridge_NetMessages_SetNetMessageServerHookInternal);

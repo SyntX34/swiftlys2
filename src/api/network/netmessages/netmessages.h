@@ -28,17 +28,14 @@ public:
     virtual void Initialize() = 0;
     virtual void Shutdown() = 0;
 
-    // playermask_ptr, netmessageid, pmsg, return true -> ignore, false -> supercede
-    virtual uint64_t AddServerMessageSendCallback(std::function<int(uint64_t*, int, void*)> callback) = 0;
-    virtual void RemoveServerMessageSendCallback(uint64_t callbackID) = 0;
+    // playermask_ptr, netmessageid, pmsg, return HookResult int
+    virtual void SetServerMessageSendHandler(std::function<int(uint64_t*, int, void*)> handler) = 0;
 
-    // playerid, netmessageid, pmsg, return true -> ignore, false -> supercede
-    virtual uint64_t AddClientMessageSendCallback(std::function<int(int, int, void*)> callback) = 0;
-    virtual void RemoveClientMessageSendCallback(uint64_t callbackID) = 0;
+    // playerid, netmessageid, pmsg, return HookResult int
+    virtual void SetClientMessageSendHandler(std::function<int(int, int, void*)> handler) = 0;
 
-    // playerid, netmessageid, pmsg, return true -> ignore, false -> supercede
-    virtual uint64_t AddServerMessageInternalSendCallback(std::function<int(int, int, void*)> callback) = 0;
-    virtual void RemoveServerMessageInternalSendCallback(uint64_t callbackID) = 0;
+    // playerid, netmessageid, pmsg, return HookResult int
+    virtual void SetServerMessageInternalSendHandler(std::function<int(int, int, void*)> handler) = 0;
 };
 
 #endif
