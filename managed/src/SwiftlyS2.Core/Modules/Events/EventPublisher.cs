@@ -61,6 +61,7 @@ internal static class EventPublisher
             _ = NativeConsoleOutput.AddConsoleListener((nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput);
             NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
             NativeCommands.SetClientCommandHandler((nint)(delegate* unmanaged< int, nint, int >)&OnClientCommandDispatch);
+            NativeCommands.SetClientChatHandler((nint)(delegate* unmanaged< int, nint, byte, int >)&OnClientChatDispatch);
         }
     }
 
@@ -83,6 +84,13 @@ internal static class EventPublisher
     {
         var commandLine = StringAlloc.CreateCSharpString(commandLinePtr);
         return CommandService.DispatchClientCommand(playerId, commandLine);
+    }
+
+    [UnmanagedCallersOnly]
+    public static int OnClientChatDispatch( int playerId, nint textPtr, byte teamonly )
+    {
+        var text = StringAlloc.CreateCSharpString(textPtr);
+        return CommandService.DispatchClientChat(playerId, text, teamonly == 1);
     }
 
     public static bool ListensToConVarCreated {

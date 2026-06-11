@@ -47,8 +47,7 @@ public:
     virtual void SetClientCommandHandler(std::function<int(int, const std::string&)> handler) = 0;
 
     // playerid, text, teamonly
-    virtual uint64_t RegisterClientChatListener(std::function<int(int, const std::string&, bool)> listener) = 0;
-    virtual void UnregisterClientChatListener(uint64_t listener_id) = 0;
+    virtual void SetClientChatHandler(std::function<int(int, const std::string&, bool)> handler) = 0;
 };
 
 #endif

@@ -105,16 +105,15 @@ void Bridge_Commands_SetClientCommandHandler(void* callback)
         });
 }
 
-uint64_t Bridge_Commands_RegisterClientChatListener(void* callback)
+void Bridge_Commands_SetClientChatHandler(void* callback)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    return servercommands->RegisterClientChatListener([callback](int playerid, const std::string& text, bool teamonly) -> int { return reinterpret_cast<int (*)(int, const char*, uint8_t)>(callback)(playerid, text.c_str(), teamonly ? 1 : 0); });
-}
+    if (!servercommands)
+        return;
 
-void Bridge_Commands_UnregisterClientChatListener(uint64_t callbackID)
-{
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    servercommands->UnregisterClientChatListener(callbackID);
+    servercommands->SetClientChatHandler([callback](int playerid, const std::string& text, bool teamonly) -> int {
+        return reinterpret_cast<int (*)(int, const char*, uint8_t)>(callback)(playerid, text.c_str(), teamonly ? 1 : 0);
+    });
 }
 
 DEFINE_NATIVE("Commands.HandleCommandForPlayer", Bridge_Commands_HandleCommandForPlayer);
@@ -124,6 +123,5 @@ DEFINE_NATIVE("Commands.UnregisterCommand", Bridge_Commands_UnregisterCommand);
 DEFINE_NATIVE("Commands.RegisterAlias", Bridge_Commands_RegisterAlias);
 DEFINE_NATIVE("Commands.UnregisterAlias", Bridge_Commands_UnregisterAlias);
 DEFINE_NATIVE("Commands.SetClientCommandHandler", Bridge_Commands_SetClientCommandHandler);
-DEFINE_NATIVE("Commands.RegisterClientChatListener", Bridge_Commands_RegisterClientChatListener);
-DEFINE_NATIVE("Commands.UnregisterClientChatListener", Bridge_Commands_UnregisterClientChatListener);
+DEFINE_NATIVE("Commands.SetClientChatHandler", Bridge_Commands_SetClientChatHandler);
 DEFINE_NATIVE("Commands.IsCommandRegistered", Bridge_Commands_IsCommandRegistered);

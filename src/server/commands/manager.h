@@ -44,8 +44,7 @@ public:
     virtual void SetClientCommandHandler(std::function<int(int, const std::string&)> handler) override;
 
     // playerid, text, teamonly
-    virtual uint64_t RegisterClientChatListener(std::function<int(int, const std::string&, bool)> listener) override;
-    virtual void UnregisterClientChatListener(uint64_t listener_id) override;
+    virtual void SetClientChatHandler(std::function<int(int, const std::string&, bool)> handler) override;
 };
 
 #endif

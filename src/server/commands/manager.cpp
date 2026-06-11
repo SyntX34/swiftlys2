@@ -32,7 +32,7 @@ std::map<uint64_t, std::string> conCommandMapping;
 std::function<void(std::string, int, std::vector<std::string>, std::string, std::string, bool)> commandHandler;
 
 std::function<int(int, const std::string&)> clientCommandHandler;
-std::map<uint64_t, std::function<int(int, const std::string&, bool)>> clientChatListeners;
+std::function<int(int, const std::string&, bool)> clientChatHandler;
 
 std::set<std::string> commandPrefixes;
 std::set<std::string> silentCommandPrefixes;
@@ -247,16 +247,12 @@ bool CServerCommands::HandleClientCommand(int playerid, const std::string& text)
 bool CServerCommands::HandleClientChat(int playerid, const std::string& text, bool teamonly)
 {
     bool stopOriginal = false;
-    for (const auto& [id, listener] : clientChatListeners)
+    if (clientChatHandler)
     {
-        auto res = listener(playerid, text, teamonly);
+        auto res = clientChatHandler(playerid, text, teamonly);
         if (res == 1)
         {
             return false;
-        }
-        else if (res == 2)
-        {
-            break;
         }
         else if (res == 3)
         {
@@ -368,16 +364,9 @@ void CServerCommands::SetClientCommandHandler(std::function<int(int, const std::
     clientCommandHandler = handler;
 }
 
-uint64_t CServerCommands::RegisterClientChatListener(std::function<int(int, const std::string&, bool)> listener)
+void CServerCommands::SetClientChatHandler(std::function<int(int, const std::string&, bool)> handler)
 {
-    static uint64_t listenerId = 0;
-    clientChatListeners[++listenerId] = listener;
-    return listenerId;
-}
-
-void CServerCommands::UnregisterClientChatListener(uint64_t listenerId)
-{
-    clientChatListeners.erase(listenerId);
+    clientChatHandler = handler;
 }
 
 void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args)

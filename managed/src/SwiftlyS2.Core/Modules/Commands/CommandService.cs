@@ -240,6 +240,29 @@ internal class CommandService : ICommandService, IDisposable
         }
     }
 
+    public static int DispatchClientChat( int playerId, string text, bool teamonly )
+    {
+        lock (dispatchLock)
+        {
+            var stopOriginal = false;
+            foreach (var pluginCallbacks in commandsByPlugin.Values)
+            {
+                foreach (var cb in pluginCallbacks)
+                {
+                    if (cb is not ClientChatListenerCallback cc) continue;
+                    var result = cc.Invoke(playerId, text, teamonly);
+                    if (result == HookResult.Stop)
+                        return (int)HookResult.Stop;
+                    if (result == HookResult.Handled)
+                        return (int)HookResult.Handled;
+                    if (result == HookResult.CancelOriginal)
+                        stopOriginal = true;
+                }
+            }
+            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
+        }
+    }
+
     public Guid HookClientChat( ICommandService.ClientChatHandler handler )
     {
         var callback = new ClientChatListenerCallback(handler, loggerFactory, profiler, coreContext.Name);

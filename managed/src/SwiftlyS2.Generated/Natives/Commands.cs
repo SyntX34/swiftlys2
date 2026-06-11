@@ -108,21 +108,13 @@ internal static class NativeCommands
         _SetClientCommandHandler(callback);
     }
 
-    private unsafe static delegate* unmanaged<nint, ulong> _RegisterClientChatListener;
+    private unsafe static delegate* unmanaged<nint, void> _SetClientChatHandler;
 
     /// <summary>
-    /// callback should receive: int32 playerid, string text, bool teamonly, return true -> ignored, return false -> supercede, when superceded it's not gonna send the message
+    /// callback should receive: int32 playerid, string text, bool teamonly, return HookResult result
     /// </summary>
-    public unsafe static ulong RegisterClientChatListener(nint callback)
+    public unsafe static void SetClientChatHandler(nint callback)
     {
-        var ret = _RegisterClientChatListener(callback);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<ulong, void> _UnregisterClientChatListener;
-
-    public unsafe static void UnregisterClientChatListener(ulong callbackID)
-    {
-        _UnregisterClientChatListener(callbackID);
+        _SetClientChatHandler(callback);
     }
 }

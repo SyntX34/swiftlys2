@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Players;
@@ -141,42 +140,36 @@ internal class ClientCommandListenerCallback : CommandCallbackBase
 internal class ClientChatListenerCallback : CommandCallbackBase
 {
     private readonly ICommandService.ClientChatHandler commandHandle;
-    private readonly ClientChatListenerCallbackDelegate commandCallback;
-    private readonly nint commandCallbackPtr;
-    private readonly ulong nativeListenerId;
     private readonly ILogger<ClientChatListenerCallback> logger;
 
     public ClientChatListenerCallback( ICommandService.ClientChatHandler handler, ILoggerFactory loggerFactory, IContextedProfilerService profiler, string pluginName ) : base(loggerFactory, profiler, pluginName)
     {
         logger = LoggerFactory.CreateLogger<ClientChatListenerCallback>();
         Guid = Guid.NewGuid();
-
         commandHandle = handler;
-        commandCallback = ( playerId, textPtr, teamonly ) =>
-        {
-            try
-            {
-                var category = "ClientChatListenerCallback";
-                Profiler.StartRecording(category);
-                var textString = Marshal.PtrToStringUTF8(textPtr)!;
-                var result = commandHandle(playerId, textString, teamonly == 1);
-                Profiler.StopRecording(category);
-                return result;
-            }
-            catch (Exception e)
-            {
-                if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
-                logger.LogError(e, "Failed to handle client chat listener.");
-                return HookResult.Continue;
-            }
-        };
-
-        commandCallbackPtr = Marshal.GetFunctionPointerForDelegate(commandCallback);
-        nativeListenerId = NativeCommands.RegisterClientChatListener(commandCallbackPtr);
     }
 
-    public override void Dispose()
+    internal HookResult Invoke( int playerId, string text, bool teamonly )
     {
-        NativeCommands.UnregisterClientChatListener(nativeListenerId);
+        var category = "ClientChatListenerCallback";
+        try
+        {
+            Profiler.StartRecording(category);
+            var result = commandHandle(playerId, text, teamonly);
+            Profiler.StopRecording(category);
+            return result;
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
+            logger.LogError(e, "Failed to handle client chat listener.");
+            return HookResult.Continue;
+        }
+        finally
+        {
+            Profiler.StopRecording(category);
+        }
     }
+
+    public override void Dispose() { }
 }
