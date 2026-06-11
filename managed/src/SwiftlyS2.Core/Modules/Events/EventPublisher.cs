@@ -3,6 +3,7 @@ using Spectre.Console;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Commands;
+using SwiftlyS2.Core.GameEvents;
 using SwiftlyS2.Core.NetMessages;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Core.Scheduler;
@@ -66,6 +67,8 @@ internal static class EventPublisher
             NativeNetMessages.SetNetMessageServerHook((nint)(delegate* unmanaged< nint, int, nint, int >)&OnNetMessageServerDispatch);
             NativeNetMessages.SetNetMessageClientHook((nint)(delegate* unmanaged< int, int, nint, int >)&OnNetMessageClientDispatch);
             NativeNetMessages.SetNetMessageServerHookInternal((nint)(delegate* unmanaged< int, int, nint, int >)&OnNetMessageServerInternalDispatch);
+            NativeGameEvents.SetListenerPreHandler((nint)(delegate* unmanaged< uint, nint, nint, int >)&OnGameEventPreDispatch);
+            NativeGameEvents.SetListenerPostHandler((nint)(delegate* unmanaged< uint, nint, nint, int >)&OnGameEventPostDispatch);
         }
     }
 
@@ -114,6 +117,14 @@ internal static class EventPublisher
     {
         return NetMessageService.DispatchServerInternalMessage(playerId, msgId, pMessage);
     }
+
+    [UnmanagedCallersOnly]
+    public static int OnGameEventPreDispatch( uint hash, nint pEvent, nint pDontBroadcast )
+        => GameEventService.DispatchPreEvent(hash, pEvent, pDontBroadcast);
+
+    [UnmanagedCallersOnly]
+    public static int OnGameEventPostDispatch( uint hash, nint pEvent, nint pDontBroadcast )
+        => GameEventService.DispatchPostEvent(hash, pEvent, pDontBroadcast);
 
     public static bool ListensToConVarCreated {
         get {

@@ -35,11 +35,8 @@ public:
     virtual void RegisterGameEventsListeners(bool shouldRegister) override;
     virtual void RegisterGameEventListener(std::string event_name) override;
 
-    virtual uint64_t AddGameEventFireListener(std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)> callback) override;
-    virtual uint64_t AddPostGameEventFireListener(std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)> callback) override;
-
-    virtual void RemoveGameEventFireListener(uint64_t listener_id) override;
-    virtual void RemovePostGameEventFireListener(uint64_t listener_id) override;
+    virtual void SetGameEventFireHandler(std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)> handler) override;
+    virtual void SetPostGameEventFireHandler(std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)> handler) override;
 
     virtual IGameEventManager2* GetGameEventManager() override;
 

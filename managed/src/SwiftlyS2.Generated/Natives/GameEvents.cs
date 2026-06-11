@@ -304,40 +304,24 @@ internal static class NativeGameEvents
         });
     }
 
-    private unsafe static delegate* unmanaged<nint, ulong> _AddListenerPreCallback;
+    private unsafe static delegate* unmanaged<nint, void> _SetListenerPreHandler;
 
     /// <summary>
-    /// the callback should receive the following: uint32 eventNameHash, IntPtr gameEvent, bool* dontBroadcast, return bool (true -> ignored, false -> supercede)
+    /// the callback should receive the following: uint32 eventNameHash, IntPtr gameEvent, bool* dontBroadcast, return HookResult int
     /// </summary>
-    public unsafe static ulong AddListenerPreCallback(nint callback)
+    public unsafe static void SetListenerPreHandler(nint callback)
     {
-        var ret = _AddListenerPreCallback(callback);
-        return ret;
+        _SetListenerPreHandler(callback);
     }
 
-    private unsafe static delegate* unmanaged<nint, ulong> _AddListenerPostCallback;
+    private unsafe static delegate* unmanaged<nint, void> _SetListenerPostHandler;
 
     /// <summary>
-    /// the callback should receive the following: uint32 eventNameHash, IntPtr gameEvent, bool* dontBroadcast, return bool (true -> ignored, false -> supercede)
+    /// the callback should receive the following: uint32 eventNameHash, IntPtr gameEvent, bool* dontBroadcast, return HookResult int
     /// </summary>
-    public unsafe static ulong AddListenerPostCallback(nint callback)
+    public unsafe static void SetListenerPostHandler(nint callback)
     {
-        var ret = _AddListenerPostCallback(callback);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<ulong, void> _RemoveListenerPreCallback;
-
-    public unsafe static void RemoveListenerPreCallback(ulong listenerID)
-    {
-        _RemoveListenerPreCallback(listenerID);
-    }
-
-    private unsafe static delegate* unmanaged<ulong, void> _RemoveListenerPostCallback;
-
-    public unsafe static void RemoveListenerPostCallback(ulong listenerID)
-    {
-        _RemoveListenerPostCallback(listenerID);
+        _SetListenerPostHandler(callback);
     }
 
     private unsafe static delegate* unmanaged<byte*, nint> _CreateEvent;
