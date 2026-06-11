@@ -27,6 +27,7 @@ internal class CoreCommandService
         this.rootDirService = rootDirService;
         this.profileService = profileService;
         _ = core.Command.RegisterCommand("sw", OnCommand, true, helpText: "SwiftlyS2 Core Command");
+        _ = core.Command.RegisterCommand("buildinfo", ( ctx ) => ctx.Reply($"SwiftlyS2 v{NativeEngineHelpers.GetNativeVersion()}"), true, helpText: "SwiftlyS2 Build Information");
     }
 
     private void OnCommand( ICommandContext context )
