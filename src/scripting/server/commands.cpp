@@ -94,16 +94,15 @@ void Bridge_Commands_UnregisterAlias(uint64_t callbackID)
     servercommands->UnregisterAlias(callbackID);
 }
 
-uint64_t Bridge_Commands_RegisterClientCommandsListener(void* callback)
+void Bridge_Commands_SetClientCommandHandler(void* callback)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    return servercommands->RegisterClientCommandsListener([callback](int playerid, const std::string& command) -> int { return reinterpret_cast<int (*)(int, const char*)>(callback)(playerid, command.c_str()); });
-}
+    if (!servercommands)
+        return;
 
-void Bridge_Commands_UnregisterClientCommandsListener(uint64_t callbackID)
-{
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    servercommands->UnregisterClientCommandsListener(callbackID);
+    servercommands->SetClientCommandHandler([callback](int playerid, const std::string& command) -> int {
+        return reinterpret_cast<int (*)(int, const char*)>(callback)(playerid, command.c_str());
+        });
 }
 
 uint64_t Bridge_Commands_RegisterClientChatListener(void* callback)
@@ -124,8 +123,7 @@ DEFINE_NATIVE("Commands.SetCommandHandler", Bridge_Commands_SetCommandHandler);
 DEFINE_NATIVE("Commands.UnregisterCommand", Bridge_Commands_UnregisterCommand);
 DEFINE_NATIVE("Commands.RegisterAlias", Bridge_Commands_RegisterAlias);
 DEFINE_NATIVE("Commands.UnregisterAlias", Bridge_Commands_UnregisterAlias);
-DEFINE_NATIVE("Commands.RegisterClientCommandsListener", Bridge_Commands_RegisterClientCommandsListener);
-DEFINE_NATIVE("Commands.UnregisterClientCommandsListener", Bridge_Commands_UnregisterClientCommandsListener);
+DEFINE_NATIVE("Commands.SetClientCommandHandler", Bridge_Commands_SetClientCommandHandler);
 DEFINE_NATIVE("Commands.RegisterClientChatListener", Bridge_Commands_RegisterClientChatListener);
 DEFINE_NATIVE("Commands.UnregisterClientChatListener", Bridge_Commands_UnregisterClientChatListener);
 DEFINE_NATIVE("Commands.IsCommandRegistered", Bridge_Commands_IsCommandRegistered);

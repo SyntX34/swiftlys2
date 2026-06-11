@@ -6,6 +6,7 @@ using SwiftlyS2.Core.Models;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.Commands;
 using SwiftlyS2.Shared.Profiler;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Permissions;
 
 namespace SwiftlyS2.Core.Commands;
@@ -170,6 +171,29 @@ internal class CommandService : ICommandService, IDisposable
     public bool IsCommandRegistered( string commandName )
     {
         return NativeCommands.IsCommandRegistered(commandName);
+    }
+
+    public static int DispatchClientCommand( int playerId, string commandLine )
+    {
+        lock (dispatchLock)
+        {
+            var stopOriginal = false;
+            foreach (var pluginCallbacks in commandsByPlugin.Values)
+            {
+                foreach (var cb in pluginCallbacks)
+                {
+                    if (cb is not ClientCommandListenerCallback cc) continue;
+                    var result = cc.Invoke(playerId, commandLine);
+                    if (result == HookResult.Stop)
+                        return (int)HookResult.Stop;
+                    if (result == HookResult.Handled)
+                        return (int)HookResult.Handled;
+                    if (result == HookResult.CancelOriginal)
+                        stopOriginal = true;
+                }
+            }
+            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
+        }
     }
 
     public Guid HookClientCommand( ICommandService.ClientCommandHandler handler )

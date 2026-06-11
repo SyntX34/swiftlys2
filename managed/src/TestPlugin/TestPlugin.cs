@@ -164,6 +164,12 @@ public class TestPlugin : BasePlugin
         {
             @event.Params.Acceleration = 69f;
         };
+
+        _ = core.Command.HookClientCommand(( playerId, commandLine ) =>
+        {
+            Console.WriteLine($"[TestPlugin] HookClientCommand: Player {playerId} executed command: {commandLine}");
+            return HookResult.Continue;
+        });
     }
 
     [Command("selfmute")]

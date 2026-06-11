@@ -46,21 +46,21 @@ internal static class NativeCommands
         });
     }
 
-    private unsafe static delegate* unmanaged<nint, void> _SetCommandHandler;
-
-    /// <summary>
-    /// callback receives (string commandName, int32 playerid, string arguments_list (separated by \x01), string originalCommandName, string prefix, bool silent)
-    /// </summary>
-    public unsafe static void SetCommandHandler(nint callback)
-    {
-        _SetCommandHandler(callback);
-    }
-
     private unsafe static delegate* unmanaged<ulong, void> _UnregisterCommand;
 
     public unsafe static void UnregisterCommand(ulong callbackID)
     {
         _UnregisterCommand(callbackID);
+    }
+
+    private unsafe static delegate* unmanaged<nint, void> _SetCommandHandler;
+
+    /// <summary>
+    /// the callback should receive (nint commandName, int playerid, nint impodedArgs (\x01), nint originalCommandName, nint prefix, byte silent)
+    /// </summary>
+    public unsafe static void SetCommandHandler(nint callback)
+    {
+        _SetCommandHandler(callback);
     }
 
     private unsafe static delegate* unmanaged<byte*, byte> _IsCommandRegistered;
@@ -98,22 +98,14 @@ internal static class NativeCommands
         _UnregisterAlias(callbackID);
     }
 
-    private unsafe static delegate* unmanaged<nint, ulong> _RegisterClientCommandsListener;
+    private unsafe static delegate* unmanaged<nint, void> _SetClientCommandHandler;
 
     /// <summary>
-    /// callback should receive: int32 playerid, string commandline, return true -> ignored, return false -> supercede
+    /// callback should receive: int32 playerid, string commandline
     /// </summary>
-    public unsafe static ulong RegisterClientCommandsListener(nint callback)
+    public unsafe static void SetClientCommandHandler(nint callback)
     {
-        var ret = _RegisterClientCommandsListener(callback);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<ulong, void> _UnregisterClientCommandsListener;
-
-    public unsafe static void UnregisterClientCommandsListener(ulong callbackID)
-    {
-        _UnregisterClientCommandsListener(callbackID);
+        _SetClientCommandHandler(callback);
     }
 
     private unsafe static delegate* unmanaged<nint, ulong> _RegisterClientChatListener;

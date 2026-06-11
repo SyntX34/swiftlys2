@@ -31,7 +31,7 @@ std::map<uint64_t, std::string> conCommandMapping;
 
 std::function<void(std::string, int, std::vector<std::string>, std::string, std::string, bool)> commandHandler;
 
-std::map<uint64_t, std::function<int(int, const std::string&)>> clientCommandListeners;
+std::function<int(int, const std::string&)> clientCommandHandler;
 std::map<uint64_t, std::function<int(int, const std::string&, bool)>> clientChatListeners;
 
 std::set<std::string> commandPrefixes;
@@ -227,16 +227,12 @@ int CServerCommands::HandleCommand(int playerid, const std::string& text, bool d
 bool CServerCommands::HandleClientCommand(int playerid, const std::string& text)
 {
     bool stopOriginal = false;
-    for (const auto& [id, listener] : clientCommandListeners)
+    if (clientCommandHandler)
     {
-        auto res = listener(playerid, text);
+        auto res = clientCommandHandler(playerid, text);
         if (res == 1)
         {
             return false;
-        }
-        else if (res == 2)
-        {
-            break;
         }
         else if (res == 3)
         {
@@ -367,16 +363,9 @@ void CServerCommands::UnregisterAlias(uint64_t aliasId)
     return UnregisterCommand(aliasId);
 }
 
-uint64_t CServerCommands::RegisterClientCommandsListener(std::function<int(int, const std::string&)> listener)
+void CServerCommands::SetClientCommandHandler(std::function<int(int, const std::string&)> handler)
 {
-    static uint64_t listenerId = 0;
-    clientCommandListeners[++listenerId] = listener;
-    return listenerId;
-}
-
-void CServerCommands::UnregisterClientCommandsListener(uint64_t listenerId)
-{
-    clientCommandListeners.erase(listenerId);
+    clientCommandHandler = handler;
 }
 
 uint64_t CServerCommands::RegisterClientChatListener(std::function<int(int, const std::string&, bool)> listener)

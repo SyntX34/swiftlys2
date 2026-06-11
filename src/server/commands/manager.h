@@ -41,8 +41,7 @@ public:
     virtual void UnregisterAlias(uint64_t alias_id) override;
 
     // playerid, command
-    virtual uint64_t RegisterClientCommandsListener(std::function<int(int, const std::string&)> listener) override;
-    virtual void UnregisterClientCommandsListener(uint64_t listener_id) override;
+    virtual void SetClientCommandHandler(std::function<int(int, const std::string&)> handler) override;
 
     // playerid, text, teamonly
     virtual uint64_t RegisterClientChatListener(std::function<int(int, const std::string&, bool)> listener) override;

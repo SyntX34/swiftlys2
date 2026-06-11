@@ -60,6 +60,7 @@ internal static class EventPublisher
             _ = NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
             _ = NativeConsoleOutput.AddConsoleListener((nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput);
             NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
+            NativeCommands.SetClientCommandHandler((nint)(delegate* unmanaged< int, nint, int >)&OnClientCommandDispatch);
         }
     }
 
@@ -75,6 +76,13 @@ internal static class EventPublisher
         if (args.Length < 2) args = [.. args.Where(s => !string.IsNullOrWhiteSpace(s))];
 
         CommandService.DispatchCommand(commandName, playerId, args, originalCommandName, prefix, silent == 1);
+    }
+
+    [UnmanagedCallersOnly]
+    public static int OnClientCommandDispatch( int playerId, nint commandLinePtr )
+    {
+        var commandLine = StringAlloc.CreateCSharpString(commandLinePtr);
+        return CommandService.DispatchClientCommand(playerId, commandLine);
     }
 
     public static bool ListensToConVarCreated {

@@ -104,44 +104,38 @@ internal class CommandCallback : CommandCallbackBase
 internal class ClientCommandListenerCallback : CommandCallbackBase
 {
     private readonly ICommandService.ClientCommandHandler commandHandle;
-    private readonly ClientCommandListenerCallbackDelegate commandCallback;
-    private readonly nint commandCallbackPtr;
-    private readonly ulong nativeListenerId;
     private readonly ILogger<ClientCommandListenerCallback> logger;
 
     public ClientCommandListenerCallback( ICommandService.ClientCommandHandler handler, ILoggerFactory loggerFactory, IContextedProfilerService profiler, string pluginName ) : base(loggerFactory, profiler, pluginName)
     {
         logger = LoggerFactory.CreateLogger<ClientCommandListenerCallback>();
         Guid = Guid.NewGuid();
-
         commandHandle = handler;
-        commandCallback = ( playerId, commandLinePtr ) =>
-        {
-            try
-            {
-                var category = "ClientCommandListenerCallback";
-                Profiler.StartRecording(category);
-                var commandLineString = Marshal.PtrToStringUTF8(commandLinePtr)!;
-                var result = commandHandle(playerId, commandLineString);
-                Profiler.StopRecording(category);
-                return result;
-            }
-            catch (Exception e)
-            {
-                if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
-                logger.LogError(e, "Failed to handle client command listener.");
-                return HookResult.Continue;
-            }
-        };
-
-        commandCallbackPtr = Marshal.GetFunctionPointerForDelegate(commandCallback);
-        nativeListenerId = NativeCommands.RegisterClientCommandsListener(commandCallbackPtr);
     }
 
-    public override void Dispose()
+    internal HookResult Invoke( int playerId, string commandLine )
     {
-        NativeCommands.UnregisterClientCommandsListener(nativeListenerId);
+        var category = "ClientCommandListenerCallback";
+        try
+        {
+            Profiler.StartRecording(category);
+            var result = commandHandle(playerId, commandLine);
+            Profiler.StopRecording(category);
+            return result;
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
+            logger.LogError(e, "Failed to handle client command listener.");
+            return HookResult.Continue;
+        }
+        finally
+        {
+            Profiler.StopRecording(category);
+        }
     }
+
+    public override void Dispose() { }
 }
 
 internal class ClientChatListenerCallback : CommandCallbackBase
