@@ -10,25 +10,6 @@ namespace SwiftlyS2.Core.Natives;
 
 internal static class NativeCommands
 {
-
-    private unsafe static delegate* unmanaged<int, byte*, int> _HandleCommandForPlayer;
-
-    /// <summary>
-    /// 1 -> not silent, 2 -> silent, -1 -> invalid player, 0 -> no command
-    /// </summary>
-    public unsafe static int HandleCommandForPlayer(int playerid, string command)
-    {
-        if (!NativeBinding.IsMainThread)
-        {
-            throw new InvalidOperationException("This method can only be called from the main thread.");
-        }
-        return StringAlloc.CreateCString(command, commandBufferPtr =>
-        {
-            var ret = _HandleCommandForPlayer(playerid, (byte*)commandBufferPtr);
-            return ret;
-        });
-    }
-
     private unsafe static delegate* unmanaged<byte*, byte, byte*, ulong> _RegisterCommand;
 
     /// <summary>

@@ -21,17 +21,6 @@
 
 #include <api/shared/string.h>
 
-int Bridge_Commands_HandleCommandForPlayer(int playerid, const char* command)
-{
-    auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    if (!servercommands)
-    {
-        return -1;
-    }
-
-    return servercommands->HandleCommand(playerid, command, false);
-}
-
 uint64_t Bridge_Commands_RegisterCommand(const char* commandName, bool registerRaw, const char* helpText)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
@@ -113,10 +102,9 @@ void Bridge_Commands_SetClientChatHandler(void* callback)
 
     servercommands->SetClientChatHandler([callback](int playerid, const std::string& text, bool teamonly) -> int {
         return reinterpret_cast<int (*)(int, const char*, uint8_t)>(callback)(playerid, text.c_str(), teamonly ? 1 : 0);
-    });
+        });
 }
 
-DEFINE_NATIVE("Commands.HandleCommandForPlayer", Bridge_Commands_HandleCommandForPlayer);
 DEFINE_NATIVE("Commands.RegisterCommand", Bridge_Commands_RegisterCommand);
 DEFINE_NATIVE("Commands.SetCommandHandler", Bridge_Commands_SetCommandHandler);
 DEFINE_NATIVE("Commands.UnregisterCommand", Bridge_Commands_UnregisterCommand);
