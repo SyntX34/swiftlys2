@@ -77,7 +77,7 @@ internal class GameEventCallback<T> : GameEventCallback, IDisposable where T : I
     private HookResult Invoke( uint hash, nint pEvent, nint pDontBroadcast )
     {
         if (hash != s_hash) return HookResult.Continue;
-        Profiler.StartRecording(s_category);
+
         try
         {
             var eventObj = T.Create(pEvent);
@@ -91,10 +91,6 @@ internal class GameEventCallback<T> : GameEventCallback, IDisposable where T : I
             if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
             _Logger.LogError(e, "Error in event {EventName} callback from context {ContextName}", s_eventName, Context.Name);
             return HookResult.Continue;
-        }
-        finally
-        {
-            Profiler.StopRecording(s_category);
         }
     }
 

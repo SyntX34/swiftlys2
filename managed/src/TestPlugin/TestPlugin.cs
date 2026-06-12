@@ -20,17 +20,10 @@ using Dapper;
 using SwiftlyS2.Shared.Sounds;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Players;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Toolchains.InProcess.NoEmit;
-using BenchmarkDotNet.Jobs;
-using BenchmarkDotNet.Loggers;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
-using System.Diagnostics;
-using SwiftlyS2.Shared.Convars;
 using SwiftlyS2.Shared.Trace;
-using SwiftlyS2.Shared.GameHooks;
 
 namespace TestPlugin;
 
@@ -128,17 +121,6 @@ public sealed class CompatibilitySettings
 
     /// <summary>Random winner on draw instead of tie</summary>
     public bool PreventDrawRounds { get; set; } = true;
-}
-
-public class InProcessConfig : ManualConfig
-{
-    public InProcessConfig()
-    {
-        _ = AddLogger(ConsoleLogger.Default);
-        _ = AddJob(Job.Default
-            .WithToolchain(new InProcessNoEmitToolchain(true))
-            .WithId("InProcess"));
-    }
 }
 
 [PluginMetadata(Id = "sw2.testplugin", Version = "1.0.0", MinimumAPIVersion = "1.1.6")]
@@ -481,12 +463,10 @@ public class TestPlugin : BasePlugin
         //     var players = Core.PlayerManager.GetAllPlayers();
         //     foreach (var player in players)
         //     {
-        //         Core.Profiler.StartRecording("OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player");
         //         for (int i = 0; i < 1024; i++)
         //         {
         //             convar!.ReplicateToClient(player.PlayerID, (float)Random.Shared.NextDouble());
         //         }
-        //         Core.Profiler.StopRecording("OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player");
         //     }
         // };
 

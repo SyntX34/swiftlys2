@@ -52,7 +52,7 @@ internal class NetMessageClientHookCallback<T> : NetMessageHookCallback where T 
     internal override HookResult InvokeAsClient( int playerId, int msgId, nint pMessage )
     {
         if (msgId != T.MessageId) return HookResult.Continue;
-        Profiler.StartRecording(s_category);
+
         try
         {
             var msg = T.Wrap(pMessage, false);
@@ -63,10 +63,6 @@ internal class NetMessageClientHookCallback<T> : NetMessageHookCallback where T 
             if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
             _logger.LogError(e, "Error in net message client hook callback for {MessageType}", s_typeName);
             return HookResult.Continue;
-        }
-        finally
-        {
-            Profiler.StopRecording(s_category);
         }
     }
 
@@ -97,7 +93,7 @@ internal class NetMessageServerHookCallback<T> : NetMessageHookCallback where T 
     internal override HookResult InvokeAsServer( nint pPlayerMask, int msgId, nint pMessage )
     {
         if (msgId != T.MessageId) return HookResult.Continue;
-        Profiler.StartRecording(s_category);
+
         try
         {
             var msg = T.Wrap(pMessage, false);
@@ -112,10 +108,6 @@ internal class NetMessageServerHookCallback<T> : NetMessageHookCallback where T 
             if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
             _logger.LogError(e, "Error in net message server hook callback for {MessageType}", s_typeName);
             return HookResult.Continue;
-        }
-        finally
-        {
-            Profiler.StopRecording(s_category);
         }
     }
 
@@ -147,7 +139,7 @@ internal class NetMessageServerInternalHookCallback<T> : NetMessageHookCallback 
     internal override HookResult InvokeAsServerInternal( int playerId, int msgId, nint pMessage )
     {
         if (msgId != T.MessageId) return HookResult.Continue;
-        Profiler.StartRecording(s_category);
+
         try
         {
             var msg = T.Wrap(pMessage, false);
@@ -158,10 +150,6 @@ internal class NetMessageServerInternalHookCallback<T> : NetMessageHookCallback 
             if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
             _logger.LogError(e, "Error in net message server internal hook callback for {MessageType}", s_typeName);
             return HookResult.Continue;
-        }
-        finally
-        {
-            Profiler.StopRecording(s_category);
         }
     }
 

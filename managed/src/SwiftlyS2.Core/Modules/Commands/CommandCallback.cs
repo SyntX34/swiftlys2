@@ -66,9 +66,6 @@ internal class CommandCallback : CommandCallbackBase
 
     internal void Invoke( int playerId, string[] args, string originalCommandName, string prefix, bool silent )
     {
-        var category = "CommandCallback::" + CommandName;
-        Profiler.StartRecording(category);
-
         try
         {
             var context = new CommandContext(playerId, args, originalCommandName, prefix, silent);
@@ -87,10 +84,6 @@ internal class CommandCallback : CommandCallbackBase
         {
             if (!GlobalExceptionHandler.Handle(ref e)) return;
             logger.LogError(e, "Failed to handle command {CommandName}.", CommandName);
-        }
-        finally
-        {
-            Profiler.StopRecording(category);
         }
     }
 
@@ -114,23 +107,15 @@ internal class ClientCommandListenerCallback : CommandCallbackBase
 
     internal HookResult Invoke( int playerId, string commandLine )
     {
-        var category = "ClientCommandListenerCallback";
         try
         {
-            Profiler.StartRecording(category);
-            var result = commandHandle(playerId, commandLine);
-            Profiler.StopRecording(category);
-            return result;
+            return commandHandle(playerId, commandLine);
         }
         catch (Exception e)
         {
             if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
             logger.LogError(e, "Failed to handle client command listener.");
             return HookResult.Continue;
-        }
-        finally
-        {
-            Profiler.StopRecording(category);
         }
     }
 
@@ -151,23 +136,15 @@ internal class ClientChatListenerCallback : CommandCallbackBase
 
     internal HookResult Invoke( int playerId, string text, bool teamonly )
     {
-        var category = "ClientChatListenerCallback";
         try
         {
-            Profiler.StartRecording(category);
-            var result = commandHandle(playerId, text, teamonly);
-            Profiler.StopRecording(category);
-            return result;
+            return commandHandle(playerId, text, teamonly);
         }
         catch (Exception e)
         {
             if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
             logger.LogError(e, "Failed to handle client chat listener.");
             return HookResult.Continue;
-        }
-        finally
-        {
-            Profiler.StopRecording(category);
         }
     }
 

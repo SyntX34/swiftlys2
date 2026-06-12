@@ -335,19 +335,7 @@ internal class CoreCommandService
                 logger.LogInformation("Profiler is currently {Status}.", profileService.IsEnabled() ? "enabled" : "disabled");
                 break;
             case "save":
-                var pluginId = args.Length >= 3 ? args[2] : "core";
-                var profilerDir = Path.Combine(rootDirService.GetRoot(), "profilers");
-
-                if (!Directory.Exists(profilerDir))
-                {
-                    _ = Directory.CreateDirectory(profilerDir);
-                }
-
-                var fileName = $"{DateTime.Now:yyyyMMdd}.{Guid.NewGuid()}.{pluginId}.json";
-                var filePath = Path.Combine(profilerDir, fileName);
-
-                File.WriteAllText(filePath, profileService.GenerateJSONPerformance(args.Length >= 3 ? args[2] : string.Empty));
-                logger.LogInformation("Profile saved to {FilePath}.", filePath);
+                _ = profileService.SaveAsync(rootDirService.GetRoot(), logger);
                 break;
             default:
                 logger.LogWarning("Unknown command");

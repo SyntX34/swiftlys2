@@ -274,9 +274,6 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
         {
             try
             {
-                // const string category = "MenuAPI::UpdateDynamicText";
-                // core.Profiler.StartRecording(category);
-
                 foreach (var option in options)
                 {
                     if (option is MenuOptionBase optionBase)
@@ -285,10 +282,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                         optionBase.UpdateCustomAnimations(now);
                     }
                 }
-
-                // core.Profiler.StopRecording(category);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (GlobalExceptionHandler.Handle(ref ex))
                 {
@@ -574,7 +569,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                         {
                             break;
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             if (GlobalExceptionHandler.Handle(ref ex))
                             {
