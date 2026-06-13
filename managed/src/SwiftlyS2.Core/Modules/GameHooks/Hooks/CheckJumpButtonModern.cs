@@ -29,21 +29,32 @@ internal static partial class GameHooksPublisher
                 _pawnComponentPool.Return(dummy);
                 if (player == null) { next()(ccsPlayerModernJump, moveData); return; }
 
+                var moveDataImpl = _moveDataPool.Rent();
+                moveDataImpl.Address = moveData;
+
                 var preCtx = new CheckJumpButtonModernMovementPreContext {
                     Params = new CheckJumpButtonModernMovementParams {
                         Player = player,
-                        MoveData = new CMoveDataImpl { Address = moveData }
+                        MoveData = moveDataImpl
                     }
                 };
 
                 InvokeCheckJumpButtonModernPre(ref preCtx);
-                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                {
+                    moveDataImpl.Address = 0;
+                    _moveDataPool.Return(moveDataImpl);
+                    return;
+                }
 
                 next()(ccsPlayerModernJump, moveData);
 
                 var postCtx = new CheckJumpButtonModernMovementPostContext { Params = preCtx.Params };
 
                 InvokeCheckJumpButtonModernPost(ref postCtx);
+
+                moveDataImpl.Address = 0;
+                _moveDataPool.Return(moveDataImpl);
             };
         });
     }

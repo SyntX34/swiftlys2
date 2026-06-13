@@ -6,7 +6,7 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal class CMoveDataImpl : IMoveData, IDisposable
 {
-    public nint Address { get; init; } = 0;
+    public nint Address { get; set; } = 0;
 
     public unsafe CMoveData* TypedAddress { get { ThrowIfInvalid(); return (CMoveData*)Address; } }
 

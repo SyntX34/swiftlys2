@@ -28,10 +28,13 @@ internal static partial class GameHooksPublisher
                 _pawnComponentPool.Return(dummy);
                 if (player == null) { next()(movementServices, moveData, firstDest, firstTrace, isSurfing); return; }
 
+                var moveDataImpl = _moveDataPool.Rent();
+                moveDataImpl.Address = moveData;
+
                 var preCtx = new TryPlayerMoveMovementPreContext {
                     Params = new TryPlayerMoveMovementParams {
                         Player = player,
-                        MoveData = new CMoveDataImpl { Address = moveData },
+                        MoveData = moveDataImpl,
                         FirstDest = firstDest != null ? *firstDest : default,
                         FirstTrace = ConvertGameTrace(firstTrace),
                         IsSurfing = isSurfing != null && *isSurfing != 0
@@ -39,7 +42,12 @@ internal static partial class GameHooksPublisher
                 };
 
                 InvokeTryPlayerMovePre(ref preCtx);
-                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                {
+                    moveDataImpl.Address = 0;
+                    _moveDataPool.Return(moveDataImpl);
+                    return;
+                }
 
                 if (firstDest != null) *firstDest = preCtx.Params.FirstDest;
                 if (isSurfing != null) *isSurfing = preCtx.Params.IsSurfing ? (byte)1 : (byte)0;
@@ -48,6 +56,9 @@ internal static partial class GameHooksPublisher
                 var postCtx = new TryPlayerMoveMovementPostContext { Params = preCtx.Params };
 
                 InvokeTryPlayerMovePost(ref postCtx);
+
+                moveDataImpl.Address = 0;
+                _moveDataPool.Return(moveDataImpl);
             };
         });
     }

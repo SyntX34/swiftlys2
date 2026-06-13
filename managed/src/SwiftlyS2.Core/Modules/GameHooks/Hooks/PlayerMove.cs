@@ -26,16 +26,23 @@ internal static partial class GameHooksPublisher
                 _pawnComponentPool.Return(dummy);
                 if (player == null) return next()(movementServices, moveData);
 
+                var moveDataImpl = _moveDataPool.Rent();
+                moveDataImpl.Address = moveData;
+
                 var preCtx = new PlayerMoveMovementPreContext {
                     Params = new PlayerMoveMovementParams {
                         Player = player,
-                        MoveData = new CMoveDataImpl { Address = moveData }
+                        MoveData = moveDataImpl
                     }
                 };
 
                 InvokePlayerMovePre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                {
+                    moveDataImpl.Address = 0;
+                    _moveDataPool.Return(moveDataImpl);
                     return preCtx.IsReturnSet ? (preCtx.Return ? (byte)1 : (byte)0) : (byte)0;
+                }
 
                 var result = next()(movementServices, moveData);
 
@@ -43,6 +50,8 @@ internal static partial class GameHooksPublisher
 
                 InvokePlayerMovePost(ref postCtx);
 
+                moveDataImpl.Address = 0;
+                _moveDataPool.Return(moveDataImpl);
                 return postCtx.Return ? (byte)1 : (byte)0;
             };
         });

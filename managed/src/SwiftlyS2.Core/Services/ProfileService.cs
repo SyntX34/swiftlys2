@@ -113,9 +113,6 @@ internal class ProfileService
             File.Move(_tempTraceFile, savedPath);
         }
 
-        if (_enabled)
-            StartSession();
-
         if (savedPath is not null)
         {
             try
@@ -138,6 +135,9 @@ internal class ProfileService
         }
 
         logger.LogInformation("Profiler data saved to {FilePath}.", savedPath);
+
+        if (_enabled)
+            StartSession();
     }
 
     private void StartSession()

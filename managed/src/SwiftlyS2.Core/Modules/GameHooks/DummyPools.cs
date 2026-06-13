@@ -34,4 +34,7 @@ internal static partial class GameHooksPublisher
 
     private static readonly DummyEntityPool<CEntityIdentityImpl> _entityIdentityPool =
         new(DummyPoolSize, static () => new CEntityIdentityImpl(0));
+
+    private static readonly DummyEntityPool<CMoveDataImpl> _moveDataPool =
+        new(DummyPoolSize, static () => new CMoveDataImpl());
 }

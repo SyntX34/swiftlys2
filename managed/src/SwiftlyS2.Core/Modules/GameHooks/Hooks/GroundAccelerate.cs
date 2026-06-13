@@ -30,10 +30,13 @@ internal static partial class GameHooksPublisher
                     _pawnComponentPool.Return(dummy);
                     if (player == null) { next()(movementServices, moveData, frameTime, wishDirection, wishSpeed, acceleration); return; }
 
+                    var moveDataImpl = _moveDataPool.Rent();
+                    moveDataImpl.Address = moveData;
+
                     var preCtx = new GroundAccelerateMovementPreContext {
                         Params = new GroundAccelerateMovementParams {
                             Player = player,
-                            MoveData = new CMoveDataImpl { Address = moveData },
+                            MoveData = moveDataImpl,
                             FrameTime = frameTime,
                             WishDirection = wishDirection != null ? *wishDirection : default,
                             WishSpeed = wishSpeed,
@@ -42,7 +45,12 @@ internal static partial class GameHooksPublisher
                     };
 
                     InvokeGroundAcceleratePre(ref preCtx);
-                    if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
+                    if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                    {
+                        moveDataImpl.Address = 0;
+                        _moveDataPool.Return(moveDataImpl);
+                        return;
+                    }
 
                     if (wishDirection != null) *wishDirection = preCtx.Params.WishDirection;
                     next()(movementServices, moveData, preCtx.Params.FrameTime, wishDirection, preCtx.Params.WishSpeed, preCtx.Params.Acceleration);
@@ -50,6 +58,9 @@ internal static partial class GameHooksPublisher
                     var postCtx = new GroundAccelerateMovementPostContext { Params = preCtx.Params };
 
                     InvokeGroundAcceleratePost(ref postCtx);
+
+                    moveDataImpl.Address = 0;
+                    _moveDataPool.Return(moveDataImpl);
                 };
             });
         }
@@ -66,10 +77,13 @@ internal static partial class GameHooksPublisher
                     _pawnComponentPool.Return(dummy);
                     if (player == null) { next()(movementServices, moveData, wishDirection, frameTime, wishSpeed, acceleration); return; }
 
+                    var moveDataImpl = _moveDataPool.Rent();
+                    moveDataImpl.Address = moveData;
+
                     var preCtx = new GroundAccelerateMovementPreContext {
                         Params = new GroundAccelerateMovementParams {
                             Player = player,
-                            MoveData = new CMoveDataImpl { Address = moveData },
+                            MoveData = moveDataImpl,
                             FrameTime = frameTime,
                             WishDirection = wishDirection != null ? *wishDirection : default,
                             WishSpeed = wishSpeed,
@@ -78,7 +92,12 @@ internal static partial class GameHooksPublisher
                     };
 
                     InvokeGroundAcceleratePre(ref preCtx);
-                    if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
+                    if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                    {
+                        moveDataImpl.Address = 0;
+                        _moveDataPool.Return(moveDataImpl);
+                        return;
+                    }
 
                     if (wishDirection != null) *wishDirection = preCtx.Params.WishDirection;
                     next()(movementServices, moveData, wishDirection, preCtx.Params.FrameTime, preCtx.Params.WishSpeed, preCtx.Params.Acceleration);
@@ -86,6 +105,9 @@ internal static partial class GameHooksPublisher
                     var postCtx = new GroundAccelerateMovementPostContext { Params = preCtx.Params };
 
                     InvokeGroundAcceleratePost(ref postCtx);
+
+                    moveDataImpl.Address = 0;
+                    _moveDataPool.Return(moveDataImpl);
                 };
             });
         }
