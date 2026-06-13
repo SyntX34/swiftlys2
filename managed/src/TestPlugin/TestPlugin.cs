@@ -1062,11 +1062,13 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("ss")]
-    public void SwapScoresCommand( ICommandContext _ )
+    public void SwapScoresCommand( ICommandContext ctx )
     {
-        Core.PlayerManager.SendChat($"Before: {Core.Game.MatchData}");
-        Core.Game.SwapTeamScores();
-        Core.PlayerManager.SendChat($"After: {Core.Game.MatchData}");
+        _ = Task.Run(async () =>
+        {
+            await Task.Delay(1000);
+            Console.WriteLine("hell yeah");
+        });
     }
 
     [Command("sizecheck")]

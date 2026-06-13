@@ -245,7 +245,7 @@ internal static class ProfilerAnalyzer
             return;
         }
 
-        _ = sb.AppendLine($"  {"ms/t",7}  {"tot ms",6}  {"calls",6}  {"inc%",5}  {"exc%",5}  {"",2}  Method");
+        _ = sb.AppendLine($"  {"ms/t",7}  {"tot ms",6}  {"calls",6}  {"inc%",5}   {"exc%",5}       {"Async",5}  Method");
 
         var ordered = nodes.OrderByDescending(n => n.InclusiveMetric).ToList();
         for (var i = 0; i < ordered.Count; i++)
@@ -257,7 +257,8 @@ internal static class ProfilerAnalyzer
             var msPerTick = totalTicks > 0 ? msTotal / totalTicks : 0f;
             var calls = (int)n.InclusiveCount;
             var flag = msPerTick > BudgetMs ? "▲!" : "  ";
-            _ = sb.AppendLine($"  {msPerTick,7:F3}  {msTotal,6:F0}  {calls,6}  {inc,5:F2}%  {ex,5:F2}%  {flag}  {n.DisplayName}");
+            var asyncTag = IsAsync(n.Name) ? "Async" : "     ";
+            _ = sb.AppendLine($"  {msPerTick,7:F3}  {msTotal,6:F0}  {calls,6}  {inc,5:F2}%  {ex,5:F2}%  {flag}  {asyncTag}  {n.DisplayName}");
         }
         _ = sb.AppendLine();
     }
@@ -312,6 +313,9 @@ internal static class ProfilerAnalyzer
 
         DescendChain(sb, bestChild, activeTotal, totalTicks, depth + 1, depthBudget - 1, cutoff, visited);
     }
+
+    private static bool IsAsync( string? name )
+        => name != null && (name.Contains(">d__", StringComparison.Ordinal) || name.Contains(".MoveNext()", StringComparison.Ordinal));
 
     private static bool IsThreadShell( string name )
         => name.StartsWith("Thread (", StringComparison.Ordinal)
