@@ -539,6 +539,8 @@ public class TestPlugin : BasePlugin
         um.Recipients.AddAllPlayers();
         um.Send();
         um.Send();
+
+        throw new ObjectDisposedException(nameof(CUserMessageShake));
     }
 
     [Command("hh")]

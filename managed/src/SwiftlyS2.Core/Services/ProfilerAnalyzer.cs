@@ -91,6 +91,9 @@ internal static class ProfilerAnalyzer
         var memStats = ParseMemoryStats(traceLog);
         WriteMemorySection(sb, memStats, traceLog.SessionEndTimeRelativeMSec);
 
+        var exceptions = ParseExceptions(traceLog);
+        WriteExceptionsSection(sb, exceptions);
+
         var pluginGroups = ParseCustomRecordings(traceLog);
         WriteCustomSection(sb, pluginGroups);
 
@@ -240,7 +243,7 @@ internal static class ProfilerAnalyzer
 
         if (nodes.Count == 0)
         {
-            _ = sb.AppendLine("  (no actionable samples)");
+            _ = sb.AppendLine("  No samples available.");
             _ = sb.AppendLine();
             return;
         }
@@ -332,6 +335,14 @@ internal static class ProfilerAnalyzer
         || name.Contains("SocketAsyncEngine.EventLoop", StringComparison.Ordinal);
 
     private readonly record struct AllocEntry( string TypeName, double TotalMB, int TickCount );
+
+    private readonly record struct ExceptionEntry(
+        string TypeName,
+        string Message,
+        bool Unhandled,
+        int Count,
+        string[] Stack
+    );
 
     private readonly record struct MemoryStats(
         int[] GcCountPerGen,
@@ -468,6 +479,89 @@ internal static class ProfilerAnalyzer
         }
 
         _ = sb.AppendLine();
+    }
+
+    private static List<ExceptionEntry> ParseExceptions( TraceLog traceLog )
+    {
+        var raw = new List<(string TypeName, string Message, bool Unhandled, string[] Stack)>();
+
+        foreach (var evt in traceLog.Events)
+        {
+            if (evt.ProviderName != "Microsoft-Windows-DotNETRuntime") continue;
+            if ((int)evt.ID != 80) continue;
+
+            var typeName = evt.PayloadByName("ExceptionType") as string;
+            if (string.IsNullOrEmpty(typeName)) continue;
+
+            var message = evt.PayloadByName("ExceptionMessage") as string ?? string.Empty;
+            if (message.Length > 80) message = message[..80] + "…";
+
+            var flags = 0;
+            if (evt.PayloadByName("ExceptionFlags") is { } flagsObj)
+                flags = Convert.ToInt32(flagsObj);
+            var unhandled = (flags & 4) != 0;
+
+            var frames = new List<string>();
+            var stackIdx = evt.CallStackIndex();
+            if (stackIdx != CallStackIndex.Invalid)
+            {
+                var frame = traceLog.CallStacks[stackIdx];
+                while (frame != null)
+                {
+                    var method = frame.CodeAddress.FullMethodName;
+                    if (!string.IsNullOrEmpty(method) && IsRelevant(method))
+                        frames.Add(method);
+                    frame = frame.Caller;
+                }
+            }
+
+            raw.Add((typeName, message, unhandled, frames.ToArray()));
+        }
+
+        return raw
+            .GroupBy(e => (e.TypeName, StackKey: string.Join("|", e.Stack)))
+            .OrderByDescending(g => g.Count())
+            .Select(g => new ExceptionEntry(
+                g.Key.TypeName,
+                g.First().Message,
+                g.Any(e => e.Unhandled),
+                g.Count(),
+                g.First().Stack))
+            .ToList();
+    }
+
+    private static void WriteExceptionsSection( StringBuilder sb, List<ExceptionEntry> exceptions )
+    {
+        const int W = 70;
+        _ = sb.AppendLine("▸ Exceptions");
+        _ = sb.AppendLine(new string('-', W));
+        _ = sb.AppendLine();
+
+        if (exceptions.Count == 0)
+        {
+            _ = sb.AppendLine("  No exceptions captured in trace.");
+            _ = sb.AppendLine();
+            return;
+        }
+
+        foreach (var ex in exceptions)
+        {
+            var flag = ex.Unhandled ? "▲!" : "  ";
+            _ = sb.AppendLine($"  {ex.Count,6}x  {flag}  {ex.TypeName}");
+            if (ex.Message.Length > 0)
+                _ = sb.AppendLine($"          ↳ {ex.Message}");
+            if (ex.Stack.Length > 0)
+            {
+                _ = sb.AppendLine($"          Stack:");
+                foreach (var frame in ex.Stack)
+                    _ = sb.AppendLine($"            at {frame}");
+            }
+            else
+            {
+                _ = sb.AppendLine($"          No Stack");
+            }
+            _ = sb.AppendLine();
+        }
     }
 
     private static Dictionary<string, Dictionary<string, RecordingNode>> ParseCustomRecordings( TraceLog traceLog )
