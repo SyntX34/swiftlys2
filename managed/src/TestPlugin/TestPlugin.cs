@@ -479,13 +479,6 @@ public class TestPlugin : BasePlugin
         // };
         //
 
-        _ = Core.NetMessage.HookServerMessage<CMsgSource1LegacyGameEvent>(( msg ) =>
-        {
-            Console.WriteLine("TestPlugin CMsgSource1LegacyGameEvent ");
-            Console.WriteLine($"Event ID: {msg.Eventid}");
-            return HookResult.Continue;
-        });
-
         // Core.Event.OnEntityTakeDamage += ( @event ) =>
         // {
         //     Console.WriteLine(@event.Entity.DesignerName);

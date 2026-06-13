@@ -96,7 +96,7 @@ internal partial class CPlayer_WeaponServicesImpl
         NativeBinding.ThrowIfNonMainThread();
         MyWeapons.ToList().ForEach(weapon =>
         {
-            if (weapon.Value?.Entity?.DesignerName == designerName)
+            if (weapon.Value?.DesignerName == designerName)
             {
                 DropWeapon(weapon.Value);
             }
@@ -108,7 +108,7 @@ internal partial class CPlayer_WeaponServicesImpl
         NativeBinding.ThrowIfNonMainThread();
         MyWeapons.ToList().ForEach(weapon =>
         {
-            if (weapon.Value?.Entity?.DesignerName == designerName)
+            if (weapon.Value?.DesignerName == designerName)
             {
                 DropWeapon(weapon.Value, momentum);
             }
@@ -120,7 +120,7 @@ internal partial class CPlayer_WeaponServicesImpl
         NativeBinding.ThrowIfNonMainThread();
         MyWeapons.ToList().ForEach(weapon =>
         {
-            if (weapon.Value?.Entity?.DesignerName == designerName)
+            if (weapon.Value?.DesignerName == designerName)
             {
                 RemoveWeapon(weapon.Value);
             }
@@ -132,7 +132,7 @@ internal partial class CPlayer_WeaponServicesImpl
         NativeBinding.ThrowIfNonMainThread();
         MyWeapons.ToList().ForEach(weapon =>
         {
-            if (weapon.Value?.Entity?.DesignerName == designerName)
+            if (weapon.Value?.DesignerName == designerName)
             {
                 SelectWeapon(weapon.Value);
             }

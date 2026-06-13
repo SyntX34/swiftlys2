@@ -93,7 +93,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
     public IEnumerable<T> GetAllEntitiesByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>
     {
         return GetAllEntities()
-            .Where(entity => entity.Entity?.DesignerName == designerName)
+            .Where(entity => entity.DesignerName == designerName)
             .Select(entity => (entity as T)!);
     }
 
