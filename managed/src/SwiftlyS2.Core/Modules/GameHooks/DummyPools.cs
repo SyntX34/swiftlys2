@@ -31,4 +31,7 @@ internal static partial class GameHooksPublisher
 
     private static readonly DummyEntityPool<CCSPlayerPawnImpl> _pawnPool =
         new(DummyPoolSize, static () => new CCSPlayerPawnImpl(0));
+
+    private static readonly DummyEntityPool<CEntityIdentityImpl> _entityIdentityPool =
+        new(DummyPoolSize, static () => new CEntityIdentityImpl(0));
 }

@@ -25,9 +25,13 @@ internal static partial class GameHooksPublisher
         {
             return ( pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2 ) =>
             {
-                var entityIdentity = _core.Memory.ToSchemaClass<CEntityIdentity>(pEntityIdentity);
+                var dummy = _entityIdentityPool.Rent();
+                dummy.DangerousSetHandle(pEntityIdentity);
+
+                var entityIdentity = dummy;
                 if (!entityIdentity.IsValid || !entityIdentity.EntityInstance.IsValid)
                 {
+                    _entityIdentityPool.Return(entityIdentity);
                     next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
                     return;
                 }
@@ -63,16 +67,26 @@ internal static partial class GameHooksPublisher
                         Result = HookResult.Continue
                     };
                     EventPublisher.InvokeOnEntityIdentityAcceptInputHook(ev);
-                    if (ev.Result == HookResult.Stop || ev.Result == HookResult.CancelOriginal) return;
+                    if (ev.Result == HookResult.Stop || ev.Result == HookResult.CancelOriginal)
+                    {
+                        _entityIdentityPool.Return(entityIdentity);
+                        return;
+                    }
                 }
 
                 InvokeAcceptInputPre(ref preCtx);
-                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                {
+                    _entityIdentityPool.Return(entityIdentity);
+                    return;
+                }
 
                 next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
 
                 var postCtx = new AcceptInputEntityPostContext { Params = preCtx.Params };
                 InvokeAcceptInputPost(ref postCtx);
+
+                _entityIdentityPool.Return(entityIdentity);
             };
         });
     }
