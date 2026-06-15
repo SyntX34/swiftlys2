@@ -29,7 +29,6 @@
 
 #include <api/interfaces/manager.h>
 #include <s2binlib/s2binlib.h>
-#include <unordered_dense/include/ankerl/unordered_dense.h>
 
 typedef void (*CBaseEntity_DispatchSpawn)(void*, void*);
 typedef void (*UTIL_Remove)(void*);
@@ -39,11 +38,9 @@ typedef void (*CEntitySystem_AddEntityIOEvent)(void*, void*, const char*, void*,
 
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
-extern void* g_pOnEntityTakeDamageCallback;
 extern void* g_pTraceManager;
 extern void* g_pOnStartupServerCallback;
 
-IFunctionHook* g_pOnEntityTakeDamageHook = nullptr;
 IFunctionHook* g_pTraceShapeHook = nullptr;
 IVFunctionHook* g_pStartupServerHook = nullptr;
 
@@ -54,7 +51,6 @@ CGameEntitySystem* GameEntitySystem()
     return g_pGameEntitySystem;
 }
 
-int64_t TakeDamageHook(void* baseEntity, void* info, void* idk);
 void TraceShapeHook(void* _this, Ray_t& ray, Vector& start, Vector& end, CTraceFilter* filter, trace_t* trace);
 void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
 
@@ -62,10 +58,6 @@ void CEntSystem::Initialize()
 {
     auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
     auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
-    g_pOnEntityTakeDamageHook = hooksmanager->CreateFunctionHook();
-    g_pOnEntityTakeDamageHook->SetHookFunction(gamedata->GetSignatures()->Fetch("CBaseEntity::TakeDamage"), reinterpret_cast<void*>(TakeDamageHook));
-    g_pOnEntityTakeDamageHook->Enable();
 
     g_pTraceShapeHook = hooksmanager->CreateFunctionHook();
     g_pTraceShapeHook->SetHookFunction(gamedata->GetSignatures()->Fetch("TraceShape"), reinterpret_cast<void*>(TraceShapeHook));
@@ -82,10 +74,6 @@ void CEntSystem::Initialize()
 void CEntSystem::Shutdown()
 {
     auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
-
-    g_pOnEntityTakeDamageHook->Disable();
-    hooksmanager->DestroyFunctionHook(g_pOnEntityTakeDamageHook);
-    g_pOnEntityTakeDamageHook = nullptr;
 
     g_pTraceShapeHook->Disable();
     hooksmanager->DestroyFunctionHook(g_pTraceShapeHook);
@@ -106,15 +94,6 @@ void TraceShapeHook(void* _this, Ray_t& ray, Vector& start, Vector& end, CTraceF
     }
 
     reinterpret_cast<void(*)(void*, Ray_t&, Vector&, Vector&, CTraceFilter*, trace_t*)>(g_pTraceShapeHook->GetOriginal())(_this, ray, start, end, filter, trace);
-}
-
-int64_t TakeDamageHook(void* baseEntity, void* info, void* damageResult)
-{
-    if (g_pOnEntityTakeDamageCallback)
-        if (reinterpret_cast<bool(*)(void*, void*, void*)>(g_pOnEntityTakeDamageCallback)(baseEntity, info, damageResult) == false)
-            return 0;
-
-    return reinterpret_cast<int64_t(*)(void*, void*, void*)>(g_pOnEntityTakeDamageHook->GetOriginal())(baseEntity, info, damageResult);
 }
 
 void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)

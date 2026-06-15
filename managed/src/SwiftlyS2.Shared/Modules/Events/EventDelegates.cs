@@ -107,6 +107,7 @@ public class EventDelegates
     /// <summary>
     /// Called when an entity takes damage.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.TakeDamage instead.")]
     public delegate void OnEntityTakeDamage( IOnEntityTakeDamageEvent @event );
 
     /// <summary>

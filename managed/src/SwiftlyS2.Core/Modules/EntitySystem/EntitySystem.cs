@@ -1,28 +1,28 @@
 
 using System.Collections.Concurrent;
 using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Schemas;
 using SwiftlyS2.Shared.EntitySystem;
-using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Shared.GameHooks;
+using SwiftlyS2.Core.Events;
+using SwiftlyS2.Shared.Misc;
 
 namespace SwiftlyS2.Core.EntitySystem;
 
 internal class EntitySystemService : IEntitySystemService, IDisposable
 {
-    private CCSGameRulesProxy? cachedGameRulesProxy;
-    private CCSGameRules? cachedGameRules;
-    private readonly IEventSubscriber eventSubscriber;
+    public static CCSGameRulesProxy? cachedGameRulesProxy;
+    private readonly IGameHooks gameHooks;
 
-    private readonly ConcurrentDictionary<Guid, EventDelegates.OnEntityFireOutputHookEvent> outputHooks = new();
-    private readonly ConcurrentDictionary<Guid, EventDelegates.OnEntityIdentityAcceptInputHook> inputHooks = new();
+    private readonly ConcurrentDictionary<Guid, OnFireOutputEntityPreDelegate> outputHooks = new();
+    private readonly ConcurrentDictionary<Guid, OnAcceptInputEntityPreDelegate> inputHooks = new();
     private volatile bool disposed;
 
-    public EntitySystemService( IEventSubscriber eventSubscriber )
+    public EntitySystemService( IGameHooks gameHooks )
     {
-        this.eventSubscriber = eventSubscriber;
+        this.gameHooks = gameHooks;
         this.disposed = false;
     }
 
@@ -66,18 +66,16 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
     public CCSGameRules? GetGameRules()
     {
         ThrowIfEntitySystemInvalid();
-        if (cachedGameRules != null && cachedGameRulesProxy != null && cachedGameRulesProxy.IsValidEntity)
+        if (cachedGameRulesProxy != null && cachedGameRulesProxy.IsValidEntity)
         {
-            return cachedGameRules;
+            return cachedGameRulesProxy.GameRules;
         }
-        cachedGameRules = null;
         cachedGameRulesProxy = null;
 
         if (GetAllEntitiesByClass<CCSGameRulesProxy>().FirstOrDefault() is CCSGameRulesProxy proxy)
         {
             cachedGameRulesProxy = proxy;
-            cachedGameRules = cachedGameRulesProxy.GameRules;
-            return cachedGameRules;
+            return proxy.GameRules;
         }
         return null;
     }
@@ -95,7 +93,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
     public IEnumerable<T> GetAllEntitiesByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>
     {
         return GetAllEntities()
-            .Where(entity => entity.Entity?.DesignerName == designerName)
+            .Where(entity => entity.DesignerName == designerName)
             .Select(entity => (entity as T)!);
     }
 
@@ -128,20 +126,34 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
 
         var className = T.ClassName;
         outputName = outputName.Trim();
-        void handler( IOnEntityFireOutputHookEvent @event )
+        void handler( ref FireOutputEntityPreContext ctx )
         {
-            if (outputName == "*" || outputName.Equals(@event.OutputName, StringComparison.OrdinalIgnoreCase))
+            if (outputName == "*" || outputName.Equals(ctx.Params.OutputName, StringComparison.OrdinalIgnoreCase))
             {
-                if (@event.DesignerName.Equals(className, StringComparison.OrdinalIgnoreCase))
+                if (ctx.Params.DesignerName.Equals(className, StringComparison.OrdinalIgnoreCase))
                 {
-                    callback(@event);
+                    unsafe
+                    {
+                        var @e = new OnEntityFireOutputHookEvent {
+                            _entityIO = ctx.Params._entityIO,
+                            _variant = ctx.Params._variant,
+                            DesignerName = ctx.Params.DesignerName,
+                            OutputName = ctx.Params.OutputName,
+                            Activator = ctx.Params.Activator,
+                            Caller = ctx.Params.Caller,
+                            Delay = ctx.Params.Delay,
+                            Result = HookResult.Continue
+                        };
+                        callback(@e);
+                        ctx.SetHookResult(@e.Result);
+                    }
                 }
             }
         }
 
         var guid = Guid.NewGuid();
         _ = outputHooks.TryAdd(guid, handler);
-        eventSubscriber.OnEntityFireOutputHook += handler;
+        gameHooks.Entities.FireOutput.Pre += handler;
 
         return guid;
     }
@@ -159,20 +171,34 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
 
         designerName = designerName.Trim();
         outputName = outputName.Trim();
-        void handler( IOnEntityFireOutputHookEvent @event )
+        void handler( ref FireOutputEntityPreContext ctx )
         {
-            if (outputName == "*" || outputName.Equals(@event.OutputName, StringComparison.OrdinalIgnoreCase))
+            if (outputName == "*" || outputName.Equals(ctx.Params.OutputName, StringComparison.OrdinalIgnoreCase))
             {
-                if (designerName == "*" || @event.DesignerName.Equals(designerName, StringComparison.OrdinalIgnoreCase))
+                if (designerName == "*" || ctx.Params.DesignerName.Equals(designerName, StringComparison.OrdinalIgnoreCase))
                 {
-                    callback(@event);
+                    unsafe
+                    {
+                        var @e = new OnEntityFireOutputHookEvent {
+                            _entityIO = ctx.Params._entityIO,
+                            _variant = ctx.Params._variant,
+                            DesignerName = ctx.Params.DesignerName,
+                            OutputName = ctx.Params.OutputName,
+                            Activator = ctx.Params.Activator,
+                            Caller = ctx.Params.Caller,
+                            Delay = ctx.Params.Delay,
+                            Result = HookResult.Continue
+                        };
+                        callback(@e);
+                        ctx.SetHookResult(@e.Result);
+                    }
                 }
             }
         }
 
         var guid = Guid.NewGuid();
         _ = outputHooks.TryAdd(guid, handler);
-        eventSubscriber.OnEntityFireOutputHook += handler;
+        gameHooks.Entities.FireOutput.Pre += handler;
 
         return guid;
     }
@@ -190,20 +216,35 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
 
         var className = T.ClassName;
         inputName = inputName.Trim();
-        void handler( IOnEntityIdentityAcceptInputHookEvent @event )
+        void handler( ref AcceptInputEntityPreContext ctx )
         {
-            if (inputName == "*" || inputName.Equals(@event.InputName, StringComparison.OrdinalIgnoreCase))
+            if (inputName == "*" || inputName.Equals(ctx.Params.InputName, StringComparison.OrdinalIgnoreCase))
             {
-                if (@event.DesignerName.Equals(className, StringComparison.OrdinalIgnoreCase))
+                if (ctx.Params.DesignerName.Equals(className, StringComparison.OrdinalIgnoreCase))
                 {
-                    callback(@event);
+                    unsafe
+                    {
+                        var @e = new OnEntityIdentityAcceptInputHookEvent {
+                            Identity = ctx.Params.Identity,
+                            EntityInstance = ctx.Params.EntityInstance,
+                            DesignerName = ctx.Params.DesignerName,
+                            InputName = ctx.Params.InputName,
+                            Activator = ctx.Params.Activator,
+                            Caller = ctx.Params.Caller,
+                            _variant = ctx.Params._variant,
+                            OutputId = ctx.Params.OutputId,
+                            Result = HookResult.Continue
+                        };
+                        callback(@e);
+                        ctx.SetHookResult(@e.Result);
+                    }
                 }
             }
         }
 
         var guid = Guid.NewGuid();
         _ = inputHooks.TryAdd(guid, handler);
-        eventSubscriber.OnEntityIdentityAcceptInputHook += handler;
+        gameHooks.Entities.AcceptInput.Pre += handler;
 
         return guid;
     }
@@ -221,20 +262,35 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
 
         designerName = designerName.Trim();
         inputName = inputName.Trim();
-        void handler( IOnEntityIdentityAcceptInputHookEvent @event )
+        void handler( ref AcceptInputEntityPreContext ctx )
         {
-            if (inputName == "*" || inputName.Equals(@event.InputName, StringComparison.OrdinalIgnoreCase))
+            if (inputName == "*" || inputName.Equals(ctx.Params.InputName, StringComparison.OrdinalIgnoreCase))
             {
-                if (designerName == "*" || @event.DesignerName.Equals(designerName, StringComparison.OrdinalIgnoreCase))
+                if (designerName == "*" || ctx.Params.DesignerName.Equals(designerName, StringComparison.OrdinalIgnoreCase))
                 {
-                    callback(@event);
+                    unsafe
+                    {
+                        var @e = new OnEntityIdentityAcceptInputHookEvent {
+                            Identity = ctx.Params.Identity,
+                            EntityInstance = ctx.Params.EntityInstance,
+                            DesignerName = ctx.Params.DesignerName,
+                            InputName = ctx.Params.InputName,
+                            Activator = ctx.Params.Activator,
+                            Caller = ctx.Params.Caller,
+                            _variant = ctx.Params._variant,
+                            OutputId = ctx.Params.OutputId,
+                            Result = HookResult.Continue
+                        };
+                        callback(@e);
+                        ctx.SetHookResult(@e.Result);
+                    }
                 }
             }
         }
 
         var guid = Guid.NewGuid();
         _ = inputHooks.TryAdd(guid, handler);
-        eventSubscriber.OnEntityIdentityAcceptInputHook += handler;
+        gameHooks.Entities.AcceptInput.Pre += handler;
 
         return guid;
     }
@@ -243,7 +299,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
     {
         if (outputHooks.TryRemove(guid, out var handler))
         {
-            eventSubscriber.OnEntityFireOutputHook -= handler;
+            gameHooks.Entities.FireOutput.Pre -= handler;
             return true;
         }
         return false;
@@ -253,7 +309,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
     {
         if (inputHooks.TryRemove(guid, out var handler))
         {
-            eventSubscriber.OnEntityIdentityAcceptInputHook -= handler;
+            gameHooks.Entities.AcceptInput.Pre -= handler;
             return true;
         }
         return false;
@@ -269,13 +325,13 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
 
         foreach (var handler in outputHooks.Values)
         {
-            eventSubscriber.OnEntityFireOutputHook -= handler;
+            gameHooks.Entities.FireOutput.Pre -= handler;
         }
         outputHooks.Clear();
 
         foreach (var handler in inputHooks.Values)
         {
-            eventSubscriber.OnEntityIdentityAcceptInputHook -= handler;
+            gameHooks.Entities.AcceptInput.Pre -= handler;
         }
         inputHooks.Clear();
 

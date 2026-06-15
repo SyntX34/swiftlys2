@@ -8,6 +8,7 @@ namespace SwiftlyS2.Shared.Events;
 /// <summary>
 /// Called when an entity takes damage.
 /// </summary>
+[Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.TakeDamage instead.")]
 public interface IOnEntityTakeDamageEvent
 {
     /// <summary>
@@ -22,6 +23,8 @@ public interface IOnEntityTakeDamageEvent
 
     /// <summary>
     /// The damage result.
+    /// Throws <see cref="InvalidOperationException"/> when the native call did not provide a result.
+    /// Use <see cref="SwiftlyS2.Shared.GameHooks.IGameHooks.Entities"/> to access the nullable native result.
     /// </summary>
     public ref CTakeDamageResult DamageResult { get; }
 

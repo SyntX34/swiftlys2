@@ -206,38 +206,28 @@ void Bridge_GameEvents_RegisterListener(const char* eventName)
     eventmanager->RegisterGameEventListener(eventName);
 }
 
-uint64_t Bridge_GameEvents_AddListenerPreCallback(void* callback)
+void Bridge_GameEvents_SetListenerPreHandler(void* callback_ptr)
 {
     static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    return eventmanager->AddGameEventFireListener([callback](std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash) -> int
+    if (!eventmanager) return;
+
+    eventmanager->SetGameEventFireHandler([callback_ptr](std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash) -> int
         {
             typedef int (*CallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
-            auto cb = reinterpret_cast<CallbackType>(callback);
-            return cb(hash, event, &dont_broadcast);
+            return reinterpret_cast<CallbackType>(callback_ptr)(hash, event, &dont_broadcast);
         });
 }
 
-uint64_t Bridge_GameEvents_AddListenerPostCallback(void* callback)
+void Bridge_GameEvents_SetListenerPostHandler(void* callback_ptr)
 {
     static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    return eventmanager->AddPostGameEventFireListener([callback](std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash) -> int
+    if (!eventmanager) return;
+
+    eventmanager->SetPostGameEventFireHandler([callback_ptr](std::string& event_name, IGameEvent* event, bool& dont_broadcast, uint32_t& hash) -> int
         {
             typedef int (*CallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
-            auto cb = reinterpret_cast<CallbackType>(callback);
-            return cb(hash, event, &dont_broadcast);
+            return reinterpret_cast<CallbackType>(callback_ptr)(hash, event, &dont_broadcast);
         });
-}
-
-void Bridge_GameEvents_RemoveListenerPreCallback(uint64_t listener_id)
-{
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    eventmanager->RemoveGameEventFireListener(listener_id);
-}
-
-void Bridge_GameEvents_RemoveListenerPostCallback(uint64_t listener_id)
-{
-    static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
-    eventmanager->RemovePostGameEventFireListener(listener_id);
 }
 
 void* Bridge_GameEvents_CreateEvent(const char* eventName)
@@ -337,10 +327,8 @@ DEFINE_NATIVE("GameEvents.HasKey", Bridge_GameEvents_HasKey);
 DEFINE_NATIVE("GameEvents.IsReliable", Bridge_GameEvents_IsReliable);
 DEFINE_NATIVE("GameEvents.IsLocal", Bridge_GameEvents_IsLocal);
 DEFINE_NATIVE("GameEvents.RegisterListener", Bridge_GameEvents_RegisterListener);
-DEFINE_NATIVE("GameEvents.AddListenerPreCallback", Bridge_GameEvents_AddListenerPreCallback);
-DEFINE_NATIVE("GameEvents.AddListenerPostCallback", Bridge_GameEvents_AddListenerPostCallback);
-DEFINE_NATIVE("GameEvents.RemoveListenerPreCallback", Bridge_GameEvents_RemoveListenerPreCallback);
-DEFINE_NATIVE("GameEvents.RemoveListenerPostCallback", Bridge_GameEvents_RemoveListenerPostCallback);
+DEFINE_NATIVE("GameEvents.SetListenerPreHandler", Bridge_GameEvents_SetListenerPreHandler);
+DEFINE_NATIVE("GameEvents.SetListenerPostHandler", Bridge_GameEvents_SetListenerPostHandler);
 DEFINE_NATIVE("GameEvents.CreateEvent", Bridge_GameEvents_CreateEvent);
 DEFINE_NATIVE("GameEvents.FreeEvent", Bridge_GameEvents_FreeEvent);
 DEFINE_NATIVE("GameEvents.FireEvent", Bridge_GameEvents_FireEvent);

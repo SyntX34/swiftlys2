@@ -20,15 +20,9 @@ using Dapper;
 using SwiftlyS2.Shared.Sounds;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Players;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Toolchains.InProcess.NoEmit;
-using BenchmarkDotNet.Jobs;
-using BenchmarkDotNet.Loggers;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
-using System.Diagnostics;
-using SwiftlyS2.Shared.Convars;
 using SwiftlyS2.Shared.Trace;
 
 namespace TestPlugin;
@@ -129,58 +123,35 @@ public sealed class CompatibilitySettings
     public bool PreventDrawRounds { get; set; } = true;
 }
 
-public class InProcessConfig : ManualConfig
-{
-    public InProcessConfig()
-    {
-        _ = AddLogger(ConsoleLogger.Default);
-        _ = AddJob(Job.Default
-            .WithToolchain(new InProcessNoEmitToolchain(true))
-            .WithId("InProcess"));
-    }
-}
-
 [PluginMetadata(Id = "sw2.testplugin", Version = "1.0.0", MinimumAPIVersion = "1.1.6")]
 public class TestPlugin : BasePlugin
 {
-    private IConVar<bool>? _autobunnyhopping;
 
     private delegate nint ReflectPawnStateType( nint a1, nint a2 );
 
+    private Thread? _simThread;
+    private volatile bool _simRunning;
+    private static readonly char[] _simChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ".ToCharArray();
+
     public TestPlugin( ISwiftlyCore core ) : base(core)
     {
-        _autobunnyhopping = Core.ConVar.Find<bool>("sv_autobunnyhopping");
         Console.WriteLine("[TestPlugin] TestPlugin constructed successfully!");
-        // Console.WriteLine($"sizeof(bool): {sizeof(bool)}");
-        // Console.WriteLine($"Marshal.SizeOf<bool>: {Marshal.SizeOf<bool>()}");
-        Core.Event.OnWeaponServicesCanUseHook += ( @event ) =>
+
+        core.GameHooks.Movement.PlayerMove.Pre += ( ref @event ) =>
         {
-            // Console.WriteLine($"WeaponServicesCanUse: {@event.Weapon.WeaponBaseVData.AttackMovespeedFactor} {@event.OriginalResult}");
+            @event.Params.MoveData.MaxSpeed = 2000f;
         };
 
-        // throw new InvalidOperationException("TestPlugin constructor exception");
+        core.GameHooks.Movement.GroundAccelerate.Pre += ( ref @event ) =>
+        {
+            @event.Params.Acceleration = 69f;
+        };
 
-        // var addr = Core.Memory.GetAddressBySignature("server", "48 89 5C 24 ? 56 57 41 56 48 83 EC ? 48 8D 05 ? ? ? ? 48 C7 44 24");
-        // var func = Core.Memory.GetUnmanagedFunctionByAddress<ReflectPawnStateType>(addr!.Value);
-        // _ = func.AddHook(next =>
-        // {
-        //     return ( a1, a2 ) =>
-        //     {
-        //         var ret = next()(a1, a2);
-        //         var controller = Helper.AsSchema<CCS2PawnGraphController>(a1);
-
-        //         //    controller.FlinchIsOnFire.Value = true;
-        //         //    controller.Action.Value = "action_crouch";
-        //         //    controller.AirHeightAboveGround.Value = 1f;
-        //         //    controller.Char = "action_celebrate";
-        //         //    controller.MoveSpeedY.Value = 0.1f;
-        //         // controller.IsWalking.Value = false;
-        //         // controller.AimPitchAngle.Value = 90f;
-        //         controller.CrouchAmount.Value = 1 * MathF.Sin(Core.Engine.GlobalVars.TickCount);
-        //         // Console.WriteLine(ret+"\n");
-        //         return ret;
-        //     };
-        // });
+        _ = core.Command.HookClientCommand(( playerId, commandLine ) =>
+        {
+            Console.WriteLine($"[TestPlugin] HookClientCommand: Player {playerId} executed command: {commandLine}");
+            return HookResult.Continue;
+        });
     }
 
     [Command("selfmute")]
@@ -188,6 +159,7 @@ public class TestPlugin : BasePlugin
     {
         var player = context.Sender!;
         player.VoiceFlags = VoiceFlagValue.Muted;
+
     }
 
     [Command("be")]
@@ -491,28 +463,21 @@ public class TestPlugin : BasePlugin
         //     var players = Core.PlayerManager.GetAllPlayers();
         //     foreach (var player in players)
         //     {
-        //         Core.Profiler.StartRecording("OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player");
         //         for (int i = 0; i < 1024; i++)
         //         {
         //             convar!.ReplicateToClient(player.PlayerID, (float)Random.Shared.NextDouble());
         //         }
-        //         Core.Profiler.StopRecording("OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player");
         //     }
         // };
 
-        // Core.Event.OnClientProcessUsercmds += (@event) => {
-        //   foreach(var usercmd in @event.Usercmds) {
-        //     usercmd.Base.ButtonsPb.Buttonstate1 &= 1UL << (int)GameButtons.Ctrl;
-        //     usercmd.Base.ButtonsPb.Buttonstate2 &= 1UL << (int)GameButtons.Ctrl;
-        //     usercmd.Base.ButtonsPb.Buttonstate3 &= 1UL << (int)GameButtons.Ctrl;
-        //   }
+        // Core.GameHooks.Controller.ProcessUsercmds.Pre += ( ref @event ) =>
+        // {
+        //     foreach (var usercmd in @event.Usercmds)
+        //     {
+        //         Console.WriteLine($"Player: {@event.Player.Name}, Buttons: {usercmd.Base.ButtonsPb.Buttonstate1}");
+        //     }
         // };
-
-        // Core.NetMessage.HookClientMessage<CCLCMsg_Move>((msg, id) => {
-        //   Console.WriteLine("TestPlugin OnClientMove ");
-        //   Console.WriteLine(BitConverter.ToString(msg.Data));
-        //   return HookResult.Continue;
-        // });
+        //
 
         // Core.Event.OnEntityTakeDamage += ( @event ) =>
         // {
@@ -565,6 +530,17 @@ public class TestPlugin : BasePlugin
     {
         var player = ctx.Sender;
         ctx.Reply($"Ground distance: {player!.RequiredPawn.GroundDistance}");
+
+        var um = Core.NetMessage.Create<CUserMessageShake>();
+        um.Duration = 1.0f;
+        um.Amplitude = 10.0f;
+        um.Frequency = 1.0f;
+        um.Command = 0;
+        um.Recipients.AddAllPlayers();
+        um.Send();
+        um.Send();
+
+        throw new ObjectDisposedException(nameof(CUserMessageShake));
     }
 
     [Command("hh")]
@@ -768,6 +744,25 @@ public class TestPlugin : BasePlugin
     public void TestCommand7( ICommandContext _ )
     {
         Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) => { Console.WriteLine($"pong: {buffer}"); });
+        Core.Engine.ExecuteCommandWithBuffer("@ping2", ( buffer ) => { Console.WriteLine($"pong2: {buffer}"); });
+        Core.Engine.ExecuteCommandWithBuffer("@ping3", ( buffer ) => { Console.WriteLine($"pong3: {buffer}"); });
+        Core.Engine.ExecuteCommandWithBuffer("@ping4", ( buffer ) => { Console.WriteLine($"pong4: {buffer}"); });
+    }
+
+    [ClientNetMessageHandler]
+    public HookResult ClientStatusCommandHandler( CCLCMsg_ServerStatus msg, int playerId )
+    {
+        Core.Logger.LogInformation("Received 'status' command from player with ID {PlayerId}.", playerId);
+        var player = Core.PlayerManager.GetPlayer(playerId);
+        if (player == null)
+        {
+            Core.Logger.LogInformation("Player with ID {PlayerId} not found.", playerId);
+        }
+        else
+        {
+            player.SendChat("test message");
+        }
+        return HookResult.Stop;
     }
 
     [Command("tround")]
@@ -878,7 +873,8 @@ public class TestPlugin : BasePlugin
     public HookResult TestSignonMessage( CNETMsg_SignonState msg, int playerid )
     {
         Console.WriteLine("HELLO MA MEN\n");
-        Console.WriteLine(msg.SignonState.ToString(), playerid);
+        Console.WriteLine(msg.SignonState.ToString());
+        Console.WriteLine($"pid: {playerid}");
         return HookResult.Continue;
     }
 
@@ -1061,11 +1057,13 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("ss")]
-    public void SwapScoresCommand( ICommandContext _ )
+    public void SwapScoresCommand( ICommandContext ctx )
     {
-        Core.PlayerManager.SendChat($"Before: {Core.Game.MatchData}");
-        Core.Game.SwapTeamScores();
-        Core.PlayerManager.SendChat($"After: {Core.Game.MatchData}");
+        _ = Task.Run(async () =>
+        {
+            await Task.Delay(1000);
+            Console.WriteLine("hell yeah");
+        });
     }
 
     [Command("sizecheck")]
@@ -1552,30 +1550,6 @@ public class TestPlugin : BasePlugin
         }
     }
 
-    [EventListener<EventDelegates.OnMovementServicesRunCommandHook>]
-    public void OnMovementServicesRunCommandHook( IOnMovementServicesRunCommandHookEvent @event )
-    {
-        var movementServices = @event.MovementServices;
-        var pawn = movementServices?.Pawn;
-        var player = pawn?.ToPlayer();
-
-        if (player == null || !player.IsValid)
-        {
-            return;
-        }
-
-        if (!player.IsAlive)
-        {
-            return;
-        }
-
-        if (pawn!.MoveType == MoveType_t.MOVETYPE_NOCLIP || pawn.ActualMoveType == MoveType_t.MOVETYPE_NOCLIP)
-        {
-            return;
-        }
-
-        _autobunnyhopping!.Value = !_autobunnyhopping.Value;
-    }
 
     [Command("ecwb")]
     public void ECWBCommand( ICommandContext _ )
@@ -1689,9 +1663,78 @@ public class TestPlugin : BasePlugin
         ThrowLevel1();
     }
 
+    [Command("simlog")]
+    public void SimLogCommand( ICommandContext context )
+    {
+        if (_simRunning)
+        {
+            Core.Logger.LogInformation("[SimLog] Already running.");
+            return;
+        }
+
+        _simRunning = true;
+        _simThread = new Thread(() =>
+        {
+            var rng = new Random();
+
+            while (_simRunning)
+            {
+                // Cycle: 5s normal (~40/sec), 1s burst (~2000/sec), repeat
+                var phaseStart = Environment.TickCount64;
+                bool burst = (rng.Next(0, 6) == 0);
+                long phaseDuration = burst ? 1000 : 5000;
+                int delayMs = burst ? 0 : 25;
+
+                while (_simRunning && (Environment.TickCount64 - phaseStart) < phaseDuration)
+                {
+                    int len = rng.Next(16, 49);
+                    var buf = new char[len];
+                    for (int i = 0; i < len; i++)
+                        buf[i] = _simChars[rng.Next(_simChars.Length)];
+                    Core.Logger.LogInformation("[SimLog] {Msg}", new string(buf));
+
+                    if (burst)
+                    {
+                        // ~2000/sec — log 10 messages then yield
+                        for (var extra = 0; extra < 9 && _simRunning; extra++)
+                        {
+                            len = rng.Next(16, 49);
+                            buf = new char[len];
+                            for (var i = 0; i < len; i++)
+                                buf[i] = _simChars[rng.Next(_simChars.Length)];
+                            Core.Logger.LogInformation("[SimLog] {Msg}", new string(buf));
+                        }
+                        Thread.Sleep(5);
+                    }
+                    else
+                    {
+                        Thread.Sleep(delayMs);
+                    }
+                }
+            }
+        }) {
+            IsBackground = true,
+            Name = "SimLog"
+        };
+        _simThread.Start();
+        Core.Logger.LogInformation("[SimLog] Started.");
+    }
+
+    [Command("simlogstop")]
+    public void SimLogStopCommand( ICommandContext context )
+    {
+        if (!_simRunning)
+        {
+            Core.Logger.LogInformation("[SimLog] Not running.");
+            return;
+        }
+        _simRunning = false;
+        Core.Logger.LogInformation("[SimLog] Stopped.");
+    }
+
     public override void Unload()
     {
-
+        _simRunning = false;
         Console.WriteLine("TestPlugin unloaded");
     }
 }

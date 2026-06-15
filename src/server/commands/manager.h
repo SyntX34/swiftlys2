@@ -32,8 +32,8 @@ public:
     virtual bool HandleClientCommand(int playerid, const std::string& text) override;
     virtual bool HandleClientChat(int playerid, const std::string& text, bool teamonly) override;
 
-    // playerid, args, command_name, prefix, silent
-    virtual uint64_t RegisterCommand(std::string command_name, std::function<void(int, std::vector<std::string>, std::string, std::string, bool)> handler, bool registerRaw, std::string helpText) override;
+    virtual uint64_t RegisterCommand(std::string command_name, bool registerRaw, std::string helpText) override;
+    virtual void SetCommandHandler(std::function<void(std::string, int, std::vector<std::string>, std::string, std::string, bool)> handler) override;
     virtual void UnregisterCommand(uint64_t command_id) override;
     virtual bool IsCommandRegistered(std::string command_name) override;
 
@@ -41,12 +41,10 @@ public:
     virtual void UnregisterAlias(uint64_t alias_id) override;
 
     // playerid, command
-    virtual uint64_t RegisterClientCommandsListener(std::function<int(int, const std::string&)> listener) override;
-    virtual void UnregisterClientCommandsListener(uint64_t listener_id) override;
+    virtual void SetClientCommandHandler(std::function<int(int, const std::string&)> handler) override;
 
     // playerid, text, teamonly
-    virtual uint64_t RegisterClientChatListener(std::function<int(int, const std::string&, bool)> listener) override;
-    virtual void UnregisterClientChatListener(uint64_t listener_id) override;
+    virtual void SetClientChatHandler(std::function<int(int, const std::string&, bool)> handler) override;
 };
 
 #endif

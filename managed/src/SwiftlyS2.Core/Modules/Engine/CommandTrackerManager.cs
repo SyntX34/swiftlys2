@@ -6,64 +6,27 @@ using SwiftlyS2.Shared.Events;
 
 namespace SwiftlyS2.Core.Services;
 
-internal sealed class CommandTrackerManager : IDisposable
+internal sealed class ExecutingCommand
 {
-    private sealed record CommandIdContainer( Guid Value )
+    public required Action<string> Callback { get; init; }
+    public ConcurrentQueue<string> Output { get; } = new();
+    public DateTime Created { get; } = DateTime.UtcNow;
+    public bool IsExpired => DateTime.UtcNow - Created > TimeSpan.FromMilliseconds(5000);
+}
+
+internal static class CommandTrackerManager
+{
+    private static readonly Lock _lock = new();
+    private static readonly ConcurrentDictionary<Guid, ExecutingCommand> activeCommands = new();
+    private static readonly ConcurrentQueue<Action<string>> pendingCallbacks = new();
+    private static Guid currentCommandId = Guid.Empty;
+
+    public static void EnqueueCommand( Action<string> callback )
     {
-        public static readonly CommandIdContainer Empty = new(Guid.Empty);
-    }
-
-    private readonly record struct ExecutingCommand( Action<string> Callback )
-    {
-        public ConcurrentQueue<string> Output { get; } = new();
-        public DateTime Created { get; } = DateTime.UtcNow;
-        public bool IsExpired => DateTime.UtcNow - Created > TimeSpan.FromMilliseconds(5000);
-    }
-
-    private volatile CommandIdContainer currentCommandContainer = CommandIdContainer.Empty;
-    private readonly ConcurrentDictionary<Guid, ExecutingCommand> activeCommands = new();
-    private readonly CancellationTokenSource cancellationTokenSource = new();
-    private readonly ConcurrentQueue<Action<string>> pendingCallbacks = new();
-    private volatile bool disposed;
-
-    public CommandTrackerManager()
-    {
-        disposed = false;
-        StartCleanupTimer();
-    }
-
-    ~CommandTrackerManager()
-    {
-        Dispose();
-    }
-
-    public void Dispose()
-    {
-        if (disposed)
-        {
-            return;
-        }
-        disposed = true;
-
-        cancellationTokenSource.Cancel();
-
-        while (pendingCallbacks.TryDequeue(out _)) { }
-        activeCommands.Clear();
-
-        cancellationTokenSource.Dispose();
-    }
-
-    public void EnqueueCommand( Action<string> callback )
-    {
-        if (disposed)
-        {
-            return;
-        }
-
         pendingCallbacks.Enqueue(callback);
     }
 
-    public void ProcessCommand( IOnCommandExecuteHookEvent @event )
+    public static void ProcessCommand( IOnCommandExecuteHookEvent @event )
     {
         if (@event.HookMode == HookMode.Pre)
         {
@@ -78,14 +41,25 @@ internal sealed class CommandTrackerManager : IDisposable
         }
     }
 
-    public void ProcessOutput( IOnConsoleOutputEvent @event )
+    public static bool IsTracking
     {
-        if (disposed)
+        get
         {
-            return;
+            lock (_lock)
+            {
+                return currentCommandId != Guid.Empty;
+            }
+        }
+    }
+
+    public static void ProcessOutput( string message )
+    {
+        Guid commandId;
+        lock (_lock)
+        {
+            commandId = currentCommandId;
         }
 
-        var commandId = currentCommandContainer?.Value ?? Guid.Empty;
         if (commandId == Guid.Empty)
         {
             return;
@@ -93,31 +67,45 @@ internal sealed class CommandTrackerManager : IDisposable
 
         if (activeCommands.TryGetValue(commandId, out var command) && command.Output.Count < 100)
         {
-            command.Output.Enqueue(@event.Message);
+            command.Output.Enqueue(message);
         }
     }
 
-    private void ProcessCommandStart( IOnCommandExecuteHookEvent @event )
+    private static void ProcessCommandStart( IOnCommandExecuteHookEvent @event )
     {
+        PurgeExpired();
+
         if (pendingCallbacks.TryDequeue(out var callback))
         {
             var newCommandId = Guid.NewGuid();
-            if (activeCommands.TryAdd(newCommandId, new ExecutingCommand(callback)))
+            if (activeCommands.TryAdd(newCommandId, new ExecutingCommand { Callback = callback }))
             {
-                _ = Interlocked.Exchange(ref currentCommandContainer, new CommandIdContainer(newCommandId));
+                lock (_lock)
+                {
+                    currentCommandId = newCommandId;
+                }
                 var arg0 = @event.Command[0] ?? string.Empty;
                 _ = @event.Command.Tokenize($"{arg0.Trim().Replace("ecwb", string.Empty)} {@event.Command.ArgS?.Trim()}");
             }
         }
         else
         {
-            _ = Interlocked.Exchange(ref currentCommandContainer, CommandIdContainer.Empty);
+            lock (_lock)
+            {
+                currentCommandId = Guid.Empty;
+            }
         }
     }
 
-    private void ProcessCommandEnd()
+    private static void ProcessCommandEnd()
     {
-        var commandId = Interlocked.Exchange(ref currentCommandContainer, CommandIdContainer.Empty)?.Value ?? Guid.Empty;
+        Guid commandId;
+        lock (_lock)
+        {
+            commandId = currentCommandId;
+            currentCommandId = Guid.Empty;
+        }
+
         if (commandId != Guid.Empty && activeCommands.TryRemove(commandId, out var command))
         {
             var output = new StringBuilder();
@@ -135,44 +123,23 @@ internal sealed class CommandTrackerManager : IDisposable
                 try
                 {
                     command.Callback.Invoke(output.ToString());
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
-                    if (!GlobalExceptionHandler.Handle(ref ex))
-                    {
-                        return;
-                    }
-                    AnsiConsole.WriteException(ex);
+                    if (GlobalExceptionHandler.Handle(ref ex)) AnsiConsole.WriteException(ex);
                 }
             });
         }
     }
 
-    private void StartCleanupTimer()
+    private static void PurgeExpired()
     {
-        _ = Task.Run(async () =>
+        foreach (var kvp in activeCommands.ToArray())
         {
-            while (!cancellationTokenSource.Token.IsCancellationRequested)
+            if (kvp.Value.IsExpired)
             {
-                try
-                {
-                    await Task.Delay(TimeSpan.FromMilliseconds(200), cancellationTokenSource.Token);
-                    foreach (var kvp in activeCommands.ToArray())
-                    {
-                        if (kvp.Value.IsExpired)
-                        {
-                            _ = activeCommands.TryRemove(kvp.Key, out _);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    if (!GlobalExceptionHandler.Handle(ref ex))
-                    {
-                        return;
-                    }
-                    AnsiConsole.WriteException(ex);
-                }
+                _ = activeCommands.TryRemove(kvp.Key, out _);
             }
-        }, cancellationTokenSource.Token);
+        }
     }
 }

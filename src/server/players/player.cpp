@@ -148,9 +148,6 @@ extern bool bypassPostEventAbstractHook;
 
 void CPlayer::SendMsg(MessageType type, const std::string& message, int duration = 5000)
 {
-    if (IsFakeClient())
-        return;
-
     if (type == MessageType::CenterHTML)
     {
         if (message == "")
@@ -322,6 +319,9 @@ extern void* g_pOnClientSteamAuthorizeFailCallback;
 
 void CPlayer::ChangeAuthorizationState(bool bAuthorized)
 {
+    if (m_bAuthorized == bAuthorized)
+        return;
+
     m_bAuthorized = bAuthorized;
 
     if (bAuthorized)

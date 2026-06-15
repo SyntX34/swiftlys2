@@ -16,8 +16,13 @@ internal class SchedulerService : ISchedulerService, IDisposable
         {
             lock (_lock)
             {
-                _mapChangeCts.Cancel();
-                _mapChangeCts.Dispose();
+                try
+                {
+                    _mapChangeCts.Cancel();
+                    _mapChangeCts.Dispose();
+                }
+                catch (ObjectDisposedException) { }
+
                 _mapChangeCts = new CancellationTokenSource();
             }
 

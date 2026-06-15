@@ -21,6 +21,11 @@ public partial interface CEntityInstance : IEquatable<CEntityInstance>
   public string DesignerName { get; }
 
   /// <summary>
+  /// The identity of the entity.
+  /// </summary>
+  public CEntityIdentity? Identity { get; }
+
+  /// <summary>
   /// Whether the entity instance is valid and exists on server. This MUST be used just on entities, otherwise it will return false.
   /// </summary>
   public bool IsValidEntity { get; }

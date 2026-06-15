@@ -25,11 +25,9 @@
 #include <api/shared/plat.h>
 #include <s2binlib/s2binlib.h>
 
-#include <map>
-
-std::map<uint64_t, std::function<int(uint64_t*, int, void*)>> g_mServerMessageSendCallbacks;
-std::map<uint64_t, std::function<int(int, int, void*)>> g_mClientMessageSendCallbacks;
-std::map<uint64_t, std::function<int(int, int, void*)>> g_mServerMessageInternalSendCallbacks;
+std::function<int(uint64_t*, int, void*)> g_fnServerMessageSendHandler;
+std::function<int(int, int, void*)> g_fnClientMessageSendHandler;
+std::function<int(int, int, void*)> g_fnServerMessageInternalSendHandler;
 
 IFunctionHook* g_pFilterMessageHook = nullptr;
 IVFunctionHook* g_pPostEventAbstractHook = nullptr;
@@ -37,7 +35,7 @@ IVFunctionHook* g_pSendNetMessageHook = nullptr;
 
 bool bypassPostEventAbstractHook = false;
 
-bool FilterMessage(INetworkMessageProcessingPreFilterCustom* client, CNetMessage* cMsg, INetChannel* netchan);
+bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan);
 void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLocalOnly, int nClientCount, const uint64* clients,
     INetworkMessageInternal* pEvent, const CNetMessage* pData, unsigned long nSize, NetChannelBufType_t bufType);
 
@@ -87,10 +85,10 @@ bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBuf
     int msgid = pData->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
 
     bool stopOriginal = false;
-    for (const auto& [id, callback] : g_mServerMessageInternalSendCallbacks) {
-        auto res = callback(playerid, msgid, pData);
+    if (g_fnServerMessageInternalSendHandler)
+    {
+        auto res = g_fnServerMessageInternalSendHandler(playerid, msgid, pData);
         if (res == 1) return true;
-        else if (res == 2) break;
         else if (res == 3) stopOriginal = true;
     }
 
@@ -98,19 +96,22 @@ bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBuf
     return reinterpret_cast<decltype(&SendNetMessage)>(g_pSendNetMessageHook->GetOriginal())(client, pData, bufType);
 }
 
-bool FilterMessage(INetworkMessageProcessingPreFilterCustom* client, CNetMessage* cMsg, INetChannel* netchan)
+bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
 {
     if (!client) return reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal())(client, cMsg, netchan);
     if (!cMsg) return reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal())(client, cMsg, netchan);
 
-    auto playerid = client->GetPlayerSlot().Get();
+    static auto gameDataManager = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
+    static auto playerIndex = gameDataManager->GetOffsets()->Fetch("CServerSideClientBase::m_nClientSlot") - WIN_LINUX(8, 48);
+
+    auto playerid = *(int*)((uintptr_t)client + playerIndex);
     int msgid = cMsg->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
 
     bool stopOriginal = false;
-    for (const auto& [id, callback] : g_mClientMessageSendCallbacks) {
-        auto res = callback(playerid, msgid, cMsg);
+    if (g_fnClientMessageSendHandler)
+    {
+        auto res = g_fnClientMessageSendHandler(playerid, msgid, cMsg);
         if (res == 1) return true;
-        else if (res == 2) break;
         else if (res == 3) stopOriginal = true;
     }
 
@@ -127,10 +128,10 @@ void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLocalOnly,
     uint64_t* playermask = (uint64_t*)(clients);
 
     bool stopOriginal = false;
-    for (const auto& [id, callback] : g_mServerMessageSendCallbacks) {
-        auto res = callback(playermask, msgid, msg);
+    if (g_fnServerMessageSendHandler)
+    {
+        auto res = g_fnServerMessageSendHandler(playermask, msgid, msg);
         if (res == 1) return;
-        else if (res == 2) break;
         else if (res == 3) stopOriginal = true;
     }
 
@@ -139,38 +140,17 @@ void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLocalOnly,
     reinterpret_cast<decltype(&PostEventAbstractHook)>(g_pPostEventAbstractHook->GetOriginal())(_this, nSlot, bLocalOnly, nClientCount, clients, pEvent, pData, nSize, bufType);
 }
 
-uint64_t CNetMessages::AddServerMessageSendCallback(std::function<int(uint64_t*, int, void*)> callback)
+void CNetMessages::SetServerMessageSendHandler(std::function<int(uint64_t*, int, void*)> handler)
 {
-    static uint64_t s_CallbackID = 0;
-    g_mServerMessageSendCallbacks[s_CallbackID++] = callback;
-    return s_CallbackID - 1;
+    g_fnServerMessageSendHandler = handler;
 }
 
-void CNetMessages::RemoveServerMessageSendCallback(uint64_t callbackID)
+void CNetMessages::SetClientMessageSendHandler(std::function<int(int, int, void*)> handler)
 {
-    g_mServerMessageSendCallbacks.erase(callbackID);
+    g_fnClientMessageSendHandler = handler;
 }
 
-uint64_t CNetMessages::AddClientMessageSendCallback(std::function<int(int, int, void*)> callback)
+void CNetMessages::SetServerMessageInternalSendHandler(std::function<int(int, int, void*)> handler)
 {
-    static uint64_t s_CallbackID = 0;
-    g_mClientMessageSendCallbacks[s_CallbackID++] = callback;
-    return s_CallbackID - 1;
-}
-
-void CNetMessages::RemoveClientMessageSendCallback(uint64_t callbackID)
-{
-    g_mClientMessageSendCallbacks.erase(callbackID);
-}
-
-uint64_t CNetMessages::AddServerMessageInternalSendCallback(std::function<int(int, int, void*)> callback)
-{
-    static uint64_t s_CallbackID = 0;
-    g_mServerMessageInternalSendCallbacks[s_CallbackID++] = callback;
-    return s_CallbackID - 1;
-}
-
-void CNetMessages::RemoveServerMessageInternalSendCallback(uint64_t callbackID)
-{
-    g_mServerMessageInternalSendCallbacks.erase(callbackID);
+    g_fnServerMessageInternalSendHandler = handler;
 }

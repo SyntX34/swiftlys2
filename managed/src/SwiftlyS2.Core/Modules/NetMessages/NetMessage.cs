@@ -1,5 +1,4 @@
 using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.Natives.NativeObjects;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.NetMessages;
@@ -53,17 +52,11 @@ internal class NetMessage<T> : TypedProtobuf<T>, INativeHandle, IDisposable
     public void Send()
     {
         CheckIsManuallyAllocated();
-        var success = false;
-        this._allocatedHandle!.DangerousAddRef(ref success);
-        if (!success)
-        {
-            throw new Exception("Failed to add reference to net message. Might already been disposed.");
-        }
 
         _ = SchedulerManager.QueueOrNow(() =>
         {
+            CheckIsManuallyAllocated();
             NativeNetMessages.SendMessageToPlayers(_allocatedHandle!.Address, T.MessageId, _filter.ToMask());
-            this._allocatedHandle!.DangerousRelease();
         });
     }
 

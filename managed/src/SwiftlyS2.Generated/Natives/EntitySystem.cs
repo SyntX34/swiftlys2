@@ -80,30 +80,6 @@ internal static class NativeEntitySystem
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<byte*, byte*, nint, ulong> _HookEntityOutput;
-
-    /// <summary>
-    /// CEntityIOOutput*, string outputName, CEntityInstance* activator, CEntityInstance* caller, float delay -> int (HookResult)
-    /// </summary>
-    public unsafe static ulong HookEntityOutput(string className, string outputName, nint callback)
-    {
-        return StringAlloc.CreateCString(className, classNameBufferPtr =>
-        {
-            return StringAlloc.CreateCString(outputName, outputNameBufferPtr =>
-            {
-                var ret = _HookEntityOutput((byte*)classNameBufferPtr, (byte*)outputNameBufferPtr, callback);
-                return ret;
-            });
-        });
-    }
-
-    private unsafe static delegate* unmanaged<ulong, void> _UnhookEntityOutput;
-
-    public unsafe static void UnhookEntityOutput(ulong hookid)
-    {
-        _UnhookEntityOutput(hookid);
-    }
-
     private unsafe static delegate* unmanaged<byte> _IsValid;
 
     public unsafe static bool IsValid()

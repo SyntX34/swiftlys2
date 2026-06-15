@@ -1,254 +1,207 @@
-using SwiftlyS2.Core.Natives;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Diagnostics.Tracing;
+using System.Reflection;
+using Microsoft.Diagnostics.NETCore.Client;
+using Microsoft.Extensions.Logging;
+using SwiftlyS2.Core.Natives;
 
 namespace SwiftlyS2.Core.Services;
 
+[EventSource(Name = "SwiftlyS2-Profiler")]
+internal sealed class ProfilerEventSource : EventSource
+{
+    public static readonly ProfilerEventSource Log = new();
+
+    [Event(1, Level = EventLevel.Informational)]
+    public void RecordingStart( string name ) => WriteEvent(1, name);
+
+    [Event(2, Level = EventLevel.Informational)]
+    public void RecordingStop( string name, double durationMs ) => WriteEvent(2, name, durationMs);
+
+    [Event(3, Level = EventLevel.Informational)]
+    public void RecordTime( string name, double durationMs ) => WriteEvent(3, name, durationMs);
+}
+
 internal class ProfileService
 {
+    private static readonly List<EventPipeProvider> s_providers = [
+        // GC | Fusion | Loader | Jit | NGen | StopEnumeration | Security | AppDomainResourceManagement | Contention | Exception | Threading
+        // JittedMethodILToNativeMap | OverrideAndSuppressNGen | Type | GCHeapSurvivalAndMovement | GCHeapAndTypeNames | Stack | ThreadTransfer | CodeSymbols
+        new EventPipeProvider("Microsoft-Windows-DotNETRuntime", EventLevel.Verbose, 0x4c14fccbd),
+        new EventPipeProvider("SwiftlyS2-Profiler", EventLevel.Informational),
+        new EventPipeProvider("Microsoft-DotNETCore-SampleProfiler", EventLevel.Informational, 0)
+    ];
 
-  private readonly Lock _lock = new();
-  private bool _enabled = false;
+    private readonly DiagnosticsClient _diagnosticsClient;
+    private volatile bool _enabled;
 
-  private readonly Dictionary<string, Dictionary<string, Stat>> _statsTable = [];
-  private readonly Dictionary<string, Dictionary<string, ulong>> _activeStartsUs = [];
+    private readonly record struct RecordedEntry( string Name, double DurationMs, long TimestampUtcMs );
 
-  // High-precision timestamping via Stopwatch, mapped to epoch micros
-  private readonly long _swBaseTicks;
-  private readonly ulong _epochBaseMicros;
-  private readonly double _ticksToMicro;
+    private readonly ConcurrentDictionary<string, long> _activeRecordings = new();
 
-  private sealed class Stat
-  {
-    public ulong Count;
-    public ulong TotalUs;
-    public ulong MinUs = ulong.MaxValue;
-    public ulong MaxUs = 0UL;
-  }
+    private EventPipeSession? _session;
+    private CancellationTokenSource? _sessionCts;
+    private Task? _drainTask;
+    private string? _tempTraceFile;
 
-  public ProfileService()
-  {
-    _swBaseTicks = Stopwatch.GetTimestamp();
-    // Capture epoch micros at approximately the same moment as base ticks
-    var epochTicks = DateTimeOffset.UtcNow.Ticks - DateTimeOffset.UnixEpoch.Ticks; // 100ns ticks
-    _epochBaseMicros = (ulong)(epochTicks / 10);
-    _ticksToMicro = 1_000_000.0 / Stopwatch.Frequency;
-
-    _enabled = NativeCore.EnableProfilerByDefault();
-  }
-
-  private ulong NowMicrosecondsSinceUnixEpoch()
-  {
-    var deltaTicks = Stopwatch.GetTimestamp() - _swBaseTicks;
-    var micros = (ulong)(deltaTicks * _ticksToMicro);
-    return _epochBaseMicros + micros;
-  }
-
-  public void Enable()
-  {
-    lock (_lock)
+    public ProfileService()
     {
-      _statsTable.Clear();
-      _activeStartsUs.Clear();
-      _enabled = true;
-    }
-  }
-
-  public void Disable()
-  {
-    lock (_lock)
-    {
-      _enabled = false;
-      _statsTable.Clear();
-      _activeStartsUs.Clear();
-    }
-  }
-
-  public bool IsEnabled()
-  {
-    lock (_lock)
-    {
-      return _enabled;
-    }
-  }
-
-  public void StartRecordingWithIdentifier( string identifier, string name )
-  {
-    if (!_enabled) return;
-    lock (_lock)
-    {
-      if (!_activeStartsUs.TryGetValue(identifier, out var startMap))
-      {
-        startMap = new Dictionary<string, ulong>(StringComparer.Ordinal);
-        _activeStartsUs[identifier] = startMap;
-      }
-      startMap[name] = NowMicrosecondsSinceUnixEpoch();
-    }
-  }
-  public void StopRecordingWithIdentifier( string identifier, string name )
-  {
-    if (!_enabled) return;
-    lock (_lock)
-    {
-      if (!_activeStartsUs.TryGetValue(identifier, out var startMap)) return;
-      if (!startMap.TryGetValue(name, out var startUs)) return;
-      var endUs = NowMicrosecondsSinceUnixEpoch();
-      var durUs = endUs > startUs ? endUs - startUs : 0UL;
-      _ = startMap.Remove(name);
-
-      if (!_statsTable.TryGetValue(identifier, out var nameToStat))
-      {
-        nameToStat = new Dictionary<string, Stat>(StringComparer.Ordinal);
-        _statsTable[identifier] = nameToStat;
-      }
-      if (!nameToStat.TryGetValue(name, out var stat))
-      {
-        stat = new Stat();
-        nameToStat[name] = stat;
-      }
-
-      ++stat.Count;
-      stat.TotalUs += durUs;
-      if (durUs < stat.MinUs) stat.MinUs = durUs;
-      if (durUs > stat.MaxUs) stat.MaxUs = durUs;
-    }
-  }
-  public void RecordTimeWithIdentifier( string identifier, string name, double duration )
-  {
-    lock (_lock)
-    {
-      if (!_enabled) return;
-
-      var durUs = duration <= 0 ? 0UL : (ulong)duration;
-
-      if (!_statsTable.TryGetValue(identifier, out var nameToStat))
-      {
-        nameToStat = new Dictionary<string, Stat>(StringComparer.Ordinal);
-        _statsTable[identifier] = nameToStat;
-      }
-      if (!nameToStat.TryGetValue(name, out var stat))
-      {
-        stat = new Stat();
-        nameToStat[name] = stat;
-      }
-
-      ++stat.Count;
-      stat.TotalUs += durUs;
-      if (durUs < stat.MinUs) stat.MinUs = durUs;
-      if (durUs > stat.MaxUs) stat.MaxUs = durUs;
-    }
-  }
-
-  public void StartRecording( string name )
-  {
-    StartRecordingWithIdentifier("SwiftlyS2", name);
-  }
-
-  public void StopRecording( string name )
-  {
-    StopRecordingWithIdentifier("SwiftlyS2", name);
-  }
-
-  public void RecordTime( string name, double duration )
-  {
-    RecordTimeWithIdentifier("SwiftlyS2", name, duration);
-  }
-
-  public string GenerateJSONPerformance( string pluginId )
-  {
-    // snapshot stats
-    Dictionary<string, Dictionary<string, Stat>> stats;
-    lock (_lock)
-    {
-      stats = _statsTable.ToDictionary(
-        kv => kv.Key,
-        kv => kv.Value.ToDictionary(inner => inner.Key, inner => new Stat {
-          Count = inner.Value.Count,
-          TotalUs = inner.Value.TotalUs,
-          MinUs = inner.Value.Count == 0 ? 0UL : inner.Value.MinUs,
-          MaxUs = inner.Value.MaxUs,
-        }, StringComparer.Ordinal), StringComparer.Ordinal);
+        _diagnosticsClient = new DiagnosticsClient(Environment.ProcessId);
+        if (NativeCore.EnableProfilerByDefault())
+            Enable();
     }
 
-    var traceEvents = new List<Dictionary<string, object?>>();
-
-    // Metadata events
-    traceEvents.Add(new Dictionary<string, object?> {
-      { "args", new Dictionary<string, object?> { { "name", "Swiftly" } } },
-      { "cat", "__metadata" },
-      { "name", "process_name" },
-      { "ph", "M" },
-      { "pid", 1 },
-      { "tid", 1 },
-      { "ts", 0UL },
-    });
-    traceEvents.Add(new Dictionary<string, object?> {
-      { "args", new Dictionary<string, object?> { { "name", "Swiftly Main" } } },
-      { "cat", "__metadata" },
-      { "name", "thread_name" },
-      { "ph", "M" },
-      { "pid", 1 },
-      { "tid", 1 },
-      { "ts", 0UL },
-    });
-    traceEvents.Add(new Dictionary<string, object?> {
-      { "args", new Dictionary<string, object?> { { "name", "Swiftly Profiler" } } },
-      { "cat", "__metadata" },
-      { "name", "thread_name" },
-      { "ph", "M" },
-      { "pid", 1 },
-      { "tid", 2 },
-      { "ts", 0UL },
-    });
-
-    string FormatUs( float us )
+    public void Enable()
     {
-      // switch to ms when duration reaches 0.01 ms (10 microseconds)
-      if (us >= 10f)
-      {
-        var ms = us / 1000f;
-        return $"{ms:F2}ms";
-      }
-      var ius = (ulong)System.MathF.Max(0f, us);
-      return $"{ius:d}.00μs";
+        if (_enabled) return;
+        _enabled = true;
+        StartSession();
     }
 
-    foreach (var (plugin, nameMap) in stats)
+    public void Disable()
     {
-      if (!string.IsNullOrEmpty(pluginId) && !string.Equals(pluginId, plugin, StringComparison.Ordinal))
-      {
-        continue;
-      }
-      foreach (var (name, stat) in nameMap)
-      {
-        var count = stat.Count;
-        var minUs = count == 0 ? 0f : stat.MinUs;
-        var maxUs = stat.MaxUs;
-        var avgUs = count == 0 ? 0f : (float)(stat.TotalUs / (double)count);
-        var eventName = $"{name} [{plugin}] (min={FormatUs(minUs)},avg={FormatUs(avgUs)},max={FormatUs(maxUs)},count={(ulong)count})";
-
-        traceEvents.Add(new Dictionary<string, object?> {
-          { "name", eventName },
-          { "ph", "X" },
-          { "tid", 2 },
-          { "pid", 1 },
-          { "ts", 0UL },
-          { "dur", stat.TotalUs },
-        });
-      }
+        if (!_enabled) return;
+        _enabled = false;
+        StopSession();
     }
 
-    var root = new Dictionary<string, object?> {
-      { "traceEvents", traceEvents }
-    };
+    public bool IsEnabled() => _enabled;
 
-    var options = new JsonSerializerOptions {
-      PropertyNamingPolicy = null,
-      WriteIndented = false,
-      DefaultIgnoreCondition = JsonIgnoreCondition.Never,
-    };
+    public void StartRecordingWithIdentifier( string identifier, string name )
+    {
+        if (!_enabled) return;
+        var key = $"[{identifier}] {name}";
+        _activeRecordings[key] = Stopwatch.GetTimestamp();
+        ProfilerEventSource.Log.RecordingStart(key);
+    }
 
-    return JsonSerializer.Serialize(root, options);
-  }
+    public void StopRecordingWithIdentifier( string identifier, string name )
+    {
+        if (!_enabled) return;
+        var key = $"[{identifier}] {name}";
+        if (!_activeRecordings.TryRemove(key, out var startTs)) return;
+
+        var durationMs = Stopwatch.GetElapsedTime(startTs).TotalMilliseconds;
+        ProfilerEventSource.Log.RecordingStop(key, durationMs);
+    }
+
+    public void RecordTimeWithIdentifier( string identifier, string name, double duration )
+    {
+        if (!_enabled) return;
+        var key = $"[{identifier}] {name}";
+        ProfilerEventSource.Log.RecordTime(key, duration);
+    }
+
+    public async Task SaveAsync( string rootDir, ILogger logger )
+    {
+        if (_session is null || _tempTraceFile is null)
+        {
+            logger.LogWarning("No active trace to save.");
+            return;
+        }
+
+        logger.LogInformation("Saving profiler data...");
+        await StopSessionAsync();
+
+        string? savedPath = null;
+        if (File.Exists(_tempTraceFile))
+        {
+            var dir = Path.Combine(rootDir, "profilers", Guid.NewGuid().ToString());
+            _ = Directory.CreateDirectory(dir);
+            savedPath = Path.Combine(dir, $"{DateTime.UtcNow:yyyyMMdd_HHmmss}.nettrace");
+            File.Move(_tempTraceFile, savedPath);
+        }
+
+        if (savedPath is not null)
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    var hostDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
+                    var profilerDll = Path.Combine(hostDir, "SwiftlyS2.Profiler.dll");
+                    if (!File.Exists(profilerDll)) return;
+                    var asm = Assembly.LoadFrom(profilerDll);
+                    _ = asm.GetType("SwiftlyS2.Core.Services.ProfilerAnalyzer")!
+                       .GetMethod("Analyze")!
+                       .Invoke(null, [savedPath, logger]);
+                });
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, "Trace conversion failed, raw nettrace preserved.");
+            }
+        }
+
+        logger.LogInformation("Profiler data saved to {FilePath}.", savedPath);
+
+        if (_enabled)
+            StartSession();
+    }
+
+    private void StartSession()
+    {
+        try
+        {
+            _sessionCts = new CancellationTokenSource();
+            _tempTraceFile = Path.GetTempFileName();
+            _session = _diagnosticsClient.StartEventPipeSession(s_providers, circularBufferMB: 256);
+            var stream = _session.EventStream;
+            var destFile = _tempTraceFile;
+            var ct = _sessionCts.Token;
+            _drainTask = Task.Run(() => CopyToFileAsync(stream, destFile, ct), CancellationToken.None);
+        }
+        catch
+        {
+            _session = null;
+            _tempTraceFile = null;
+        }
+    }
+
+    private async Task StopSessionAsync()
+    {
+        var session = _session;
+        if (session is null) return;
+
+        var stopTask = Task.Run(() => { try { session.Stop(); } catch { } });
+
+        if (_drainTask is not null)
+            await Task.WhenAll(stopTask, _drainTask).ConfigureAwait(false);
+        else
+            await stopTask.ConfigureAwait(false);
+
+        _sessionCts?.Cancel();
+        session.Dispose();
+        _session = null;
+        _sessionCts = null;
+        _drainTask = null;
+    }
+
+    private void StopSession()
+    {
+        var session = _session;
+        if (session is null) return;
+
+        var stopTask = Task.Run(() => { try { session.Stop(); } catch { } });
+        Task.WhenAll(stopTask, _drainTask ?? Task.CompletedTask).Wait();
+
+        _sessionCts?.Cancel();
+        session.Dispose();
+        _session = null;
+        _sessionCts = null;
+        _drainTask = null;
+    }
+
+    private static async Task CopyToFileAsync( Stream source, string destPath, CancellationToken ct )
+    {
+        try
+        {
+            await using var file = new FileStream(destPath, FileMode.Create, FileAccess.Write, FileShare.None, 65536, useAsync: true);
+            await source.CopyToAsync(file, ct).ConfigureAwait(false);
+        }
+        catch (OperationCanceledException) { }
+        catch { }
+    }
 }
+

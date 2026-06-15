@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Profiler;
 
@@ -43,25 +44,158 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     public event EventDelegates.OnEntitySpawned? OnEntitySpawned;
     public event EventDelegates.OnMapLoad? OnMapLoad;
     public event EventDelegates.OnMapUnload? OnMapUnload;
-    public event EventDelegates.OnClientProcessUsercmds? OnClientProcessUsercmds;
+    private EventDelegates.OnClientProcessUsercmds? _OnClientProcessUsercmds;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Controller.ProcessUsercmds instead.")]
+    public event EventDelegates.OnClientProcessUsercmds? OnClientProcessUsercmds {
+        add {
+            if (_OnClientProcessUsercmds == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
+            _OnClientProcessUsercmds += value;
+        }
+        remove {
+            _OnClientProcessUsercmds -= value;
+            if (_OnClientProcessUsercmds == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
+        }
+    }
     public event EventDelegates.OnConVarValueChanged? OnConVarValueChanged;
     public event EventDelegates.OnConCommandCreated? OnConCommandCreated;
     public event EventDelegates.OnConVarCreated? OnConVarCreated;
-    public event EventDelegates.OnEntityTakeDamage? OnEntityTakeDamage;
+    private EventDelegates.OnEntityTakeDamage? _OnEntityTakeDamage;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.TakeDamage instead.")]
+    public event EventDelegates.OnEntityTakeDamage? OnEntityTakeDamage {
+        add {
+            if (_OnEntityTakeDamage == null) GameHooksPublisher.AddHookListener(HookListener.TakeDamage);
+            _OnEntityTakeDamage += value;
+        }
+        remove {
+            _OnEntityTakeDamage -= value;
+            if (_OnEntityTakeDamage == null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
+        }
+    }
     public event EventDelegates.OnPrecacheResource? OnPrecacheResource;
-    public event EventDelegates.OnEntityStartTouch? OnEntityStartTouch;
-    public event EventDelegates.OnEntityTouch? OnEntityTouch;
-    public event EventDelegates.OnEntityEndTouch? OnEntityEndTouch;
-    public event EventDelegates.OnItemServicesCanAcquireHook? OnItemServicesCanAcquireHook;
-    public event EventDelegates.OnWeaponServicesCanUseHook? OnWeaponServicesCanUseHook;
-    public event EventDelegates.OnWeaponServicesDropWeaponHook? OnWeaponServicesDropWeaponHook;
+    private EventDelegates.OnEntityStartTouch? _OnEntityStartTouch;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.StartTouch instead.")]
+    public event EventDelegates.OnEntityStartTouch? OnEntityStartTouch {
+        add {
+            if (_OnEntityStartTouch == null) GameHooksPublisher.AddHookListener(HookListener.StartTouch);
+            _OnEntityStartTouch += value;
+        }
+        remove {
+            _OnEntityStartTouch -= value;
+            if (_OnEntityStartTouch == null) GameHooksPublisher.RemoveHookListener(HookListener.StartTouch);
+        }
+    }
+    private EventDelegates.OnEntityTouch? _OnEntityTouch;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.Touch instead.")]
+    public event EventDelegates.OnEntityTouch? OnEntityTouch {
+        add {
+            if (_OnEntityTouch == null) GameHooksPublisher.AddHookListener(HookListener.Touch);
+            _OnEntityTouch += value;
+        }
+        remove {
+            _OnEntityTouch -= value;
+            if (_OnEntityTouch == null) GameHooksPublisher.RemoveHookListener(HookListener.Touch);
+        }
+    }
+    private EventDelegates.OnEntityEndTouch? _OnEntityEndTouch;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.EndTouch instead.")]
+    public event EventDelegates.OnEntityEndTouch? OnEntityEndTouch {
+        add {
+            if (_OnEntityEndTouch == null) GameHooksPublisher.AddHookListener(HookListener.EndTouch);
+            _OnEntityEndTouch += value;
+        }
+        remove {
+            _OnEntityEndTouch -= value;
+            if (_OnEntityEndTouch == null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch);
+        }
+    }
+    private EventDelegates.OnItemServicesCanAcquireHook? _OnItemServicesCanAcquireHook;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Items.CanAcquire instead.")]
+    public event EventDelegates.OnItemServicesCanAcquireHook? OnItemServicesCanAcquireHook {
+        add {
+            if (_OnItemServicesCanAcquireHook == null) GameHooksPublisher.AddHookListener(HookListener.CanAcquire);
+            _OnItemServicesCanAcquireHook += value;
+        }
+        remove {
+            _OnItemServicesCanAcquireHook -= value;
+            if (_OnItemServicesCanAcquireHook == null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire);
+        }
+    }
+    private EventDelegates.OnWeaponServicesCanUseHook? _OnWeaponServicesCanUseHook;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.CanUse instead.")]
+    public event EventDelegates.OnWeaponServicesCanUseHook? OnWeaponServicesCanUseHook {
+        add {
+            if (_OnWeaponServicesCanUseHook == null) GameHooksPublisher.AddHookListener(HookListener.CanUse);
+            _OnWeaponServicesCanUseHook += value;
+        }
+        remove {
+            _OnWeaponServicesCanUseHook -= value;
+            if (_OnWeaponServicesCanUseHook == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
+        }
+    }
+    private EventDelegates.OnWeaponServicesDropWeaponHook? _OnWeaponServicesDropWeaponHook;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.Drop instead.")]
+    public event EventDelegates.OnWeaponServicesDropWeaponHook? OnWeaponServicesDropWeaponHook {
+        add {
+            if (_OnWeaponServicesDropWeaponHook == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop);
+            _OnWeaponServicesDropWeaponHook += value;
+        }
+        remove {
+            _OnWeaponServicesDropWeaponHook -= value;
+            if (_OnWeaponServicesDropWeaponHook == null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
+        }
+    }
     public event EventDelegates.OnConsoleOutput? OnConsoleOutput;
     public event EventDelegates.OnCommandExecuteHook? OnCommandExecuteHook;
     public event EventDelegates.OnSteamAPIActivated? OnSteamAPIActivated;
-    public event EventDelegates.OnMovementServicesRunCommandHook? OnMovementServicesRunCommandHook;
-    public event EventDelegates.OnPlayerPawnPostThink? OnPlayerPawnPostThink;
-    public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook;
-    public event EventDelegates.OnEntityFireOutputHookEvent? OnEntityFireOutputHook;
+    private EventDelegates.OnMovementServicesRunCommandHook? _OnMovementServicesRunCommandHook;
+
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Movement.RunCommand instead.")]
+    public event EventDelegates.OnMovementServicesRunCommandHook? OnMovementServicesRunCommandHook {
+        add {
+            if (_OnMovementServicesRunCommandHook == null) GameHooksPublisher.AddHookListener(HookListener.RunCommand);
+            _OnMovementServicesRunCommandHook += value;
+        }
+        remove {
+            _OnMovementServicesRunCommandHook -= value;
+            if (_OnMovementServicesRunCommandHook == null) GameHooksPublisher.RemoveHookListener(HookListener.RunCommand);
+        }
+    }
+    private EventDelegates.OnPlayerPawnPostThink? _OnPlayerPawnPostThink;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Pawn.PostThink instead.")]
+    public event EventDelegates.OnPlayerPawnPostThink? OnPlayerPawnPostThink {
+        add {
+            if (_OnPlayerPawnPostThink == null) GameHooksPublisher.AddHookListener(HookListener.PostThink);
+            _OnPlayerPawnPostThink += value;
+        }
+        remove {
+            _OnPlayerPawnPostThink -= value;
+            if (_OnPlayerPawnPostThink == null) GameHooksPublisher.RemoveHookListener(HookListener.PostThink);
+        }
+    }
+    private EventDelegates.OnEntityIdentityAcceptInputHook? _OnEntityIdentityAcceptInputHook;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.AcceptInput instead.")]
+    public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook {
+        add {
+            if (_OnEntityIdentityAcceptInputHook == null) GameHooksPublisher.AddHookListener(HookListener.AcceptInput);
+            _OnEntityIdentityAcceptInputHook += value;
+        }
+        remove {
+            _OnEntityIdentityAcceptInputHook -= value;
+            if (_OnEntityIdentityAcceptInputHook == null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
+        }
+    }
+    private EventDelegates.OnEntityFireOutputHookEvent? _OnEntityFireOutputHook;
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.FireOutput instead.")]
+    public event EventDelegates.OnEntityFireOutputHookEvent? OnEntityFireOutputHook {
+        add {
+            if (_OnEntityFireOutputHook == null) GameHooksPublisher.AddHookListener(HookListener.FireOutput);
+            _OnEntityFireOutputHook += value;
+        }
+        remove {
+            _OnEntityFireOutputHook -= value;
+            if (_OnEntityFireOutputHook == null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
+        }
+    }
     public event EventDelegates.OnStartupServer? OnStartupServer;
     public event EventDelegates.OnClientVoice? OnClientVoice;
 
@@ -73,19 +207,35 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
         disposed = true;
 
+        if (_OnClientProcessUsercmds != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
+        if (_OnEntityTakeDamage != null) GameHooksPublisher.RemoveHookListener(HookListener.TakeDamage);
+        if (_OnEntityStartTouch != null) GameHooksPublisher.RemoveHookListener(HookListener.StartTouch);
+        if (_OnEntityTouch != null) GameHooksPublisher.RemoveHookListener(HookListener.Touch);
+        if (_OnEntityEndTouch != null) GameHooksPublisher.RemoveHookListener(HookListener.EndTouch);
+        if (_OnItemServicesCanAcquireHook != null) GameHooksPublisher.RemoveHookListener(HookListener.CanAcquire);
+        if (_OnWeaponServicesCanUseHook != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
+        if (_OnWeaponServicesDropWeaponHook != null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
+        if (_OnPlayerPawnPostThink != null) GameHooksPublisher.RemoveHookListener(HookListener.PostThink);
+        if (_OnEntityIdentityAcceptInputHook != null) GameHooksPublisher.RemoveHookListener(HookListener.AcceptInput);
+        if (_OnEntityFireOutputHook != null) GameHooksPublisher.RemoveHookListener(HookListener.FireOutput);
+        if (_OnMovementServicesRunCommandHook != null) GameHooksPublisher.RemoveHookListener(HookListener.RunCommand);
+
         EventPublisher.Unsubscribe(this);
         GC.SuppressFinalize(this);
     }
 
+    public bool ListensToTick => OnTick != null;
+
     public void InvokeOnTick()
     {
+        if (OnTick == null)
+        {
+            return;
+        }
+
         try
         {
-            if (OnTick == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnTick");
+
             OnTick.Invoke();
         }
         catch (Exception e)
@@ -95,21 +245,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnTick.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnTick");
-        }
+
     }
+
+    public bool ListensToWorldUpdate => OnWorldUpdate != null;
 
     public void InvokeOnWorldUpdate()
     {
+        if (OnWorldUpdate == null)
+        {
+            return;
+        }
         try
         {
-            if (OnWorldUpdate == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnWorldUpdate");
+
             OnWorldUpdate.Invoke();
         }
         catch (Exception e)
@@ -119,21 +268,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnWorldUpdate.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnWorldUpdate");
-        }
+
     }
+
+    public bool ListensToClientConnected => OnClientConnected != null;
 
     public void InvokeOnClientConnected( ref OnClientConnectedEvent @event )
     {
+        if (OnClientConnected == null)
+        {
+            return;
+        }
+
         try
         {
-            if (OnClientConnected == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnClientConnected");
+
             OnClientConnected.Invoke(@event);
         }
         catch (Exception e)
@@ -143,21 +292,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnClientConnected.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnClientConnected");
-        }
+
     }
+
+    public bool ListensToClientDisconnected => OnClientDisconnected != null;
 
     public void InvokeOnClientDisconnected( ref OnClientDisconnectedEvent @event )
     {
+        if (OnClientDisconnected == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientDisconnected == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnClientDisconnected");
+
             OnClientDisconnected.Invoke(@event);
         }
         catch (Exception e)
@@ -167,21 +315,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnClientDisconnected.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnClientDisconnected");
-        }
+
     }
+
+    public bool ListensToClientKeyStateChanged => OnClientKeyStateChanged != null;
 
     public void InvokeOnClientKeyStateChanged( ref OnClientKeyStateChangedEvent @event )
     {
+        if (OnClientKeyStateChanged == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientKeyStateChanged == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnClientKeyStateChanged");
+
             OnClientKeyStateChanged.Invoke(@event);
         }
         catch (Exception e)
@@ -191,21 +338,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnClientKeyStateChanged.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnClientKeyStateChanged");
-        }
+
     }
+
+    public bool ListensToClientPutInServer => OnClientPutInServer != null;
 
     public void InvokeOnClientPutInServer( ref OnClientPutInServerEvent @event )
     {
+        if (OnClientPutInServer == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientPutInServer == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnClientPutInServer");
+
             OnClientPutInServer.Invoke(@event);
         }
         catch (Exception e)
@@ -215,21 +361,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnClientPutInServer.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnClientPutInServer");
-        }
+
     }
+
+    public bool ListensToClientSteamAuthorize => OnClientSteamAuthorize != null;
 
     public void InvokeOnClientSteamAuthorize( ref OnClientSteamAuthorizeEvent @event )
     {
+        if (OnClientSteamAuthorize == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientSteamAuthorize == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnClientSteamAuthorize");
+
             OnClientSteamAuthorize.Invoke(@event);
         }
         catch (Exception e)
@@ -239,21 +384,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnClientSteamAuthorize.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnClientSteamAuthorize");
-        }
+
     }
+
+    public bool ListensToClientSteamAuthorizeFail => OnClientSteamAuthorizeFail != null;
 
     public void InvokeOnClientSteamAuthorizeFail( ref OnClientSteamAuthorizeFailEvent @event )
     {
+        if (OnClientSteamAuthorizeFail == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientSteamAuthorizeFail == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnClientSteamAuthorizeFail");
+
             OnClientSteamAuthorizeFail.Invoke(@event);
         }
         catch (Exception e)
@@ -263,21 +407,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnClientSteamAuthorizeFail.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnClientSteamAuthorizeFail");
-        }
+
     }
+
+    public bool ListensToEntityCreated => OnEntityCreated != null;
 
     public void InvokeOnEntityCreated( ref OnEntityCreatedEvent @event )
     {
+        if (OnEntityCreated == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityCreated == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnEntityCreated");
+
             OnEntityCreated.Invoke(@event);
         }
         catch (Exception e)
@@ -287,21 +430,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnEntityCreated.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnEntityCreated");
-        }
+
     }
+
+    public bool ListensToClientVoice => OnClientVoice != null;
 
     public void InvokeOnClientVoice( ref OnClientVoiceEvent @event )
     {
+        if (OnClientVoice == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientVoice == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnClientVoice");
+
             OnClientVoice.Invoke(@event);
         }
         catch (Exception e)
@@ -311,21 +453,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnClientVoice.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnClientVoice");
-        }
+
     }
+
+    public bool ListensToEntityDeleted => OnEntityDeleted != null;
 
     public void InvokeOnEntityDeleted( ref OnEntityDeletedEvent @event )
     {
+        if (OnEntityDeleted == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityDeleted == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnEntityDeleted");
+
             OnEntityDeleted.Invoke(@event);
         }
         catch (Exception e)
@@ -335,21 +476,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnEntityDeleted.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnEntityDeleted");
-        }
+
     }
+
+    public bool ListensToEntityParentChanged => OnEntityParentChanged != null;
 
     public void InvokeOnEntityParentChanged( ref OnEntityParentChangedEvent @event )
     {
+        if (OnEntityParentChanged == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityParentChanged == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnEntityParentChanged");
+
             OnEntityParentChanged.Invoke(@event);
         }
         catch (Exception e)
@@ -359,21 +499,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnEntityParentChanged.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnEntityParentChanged");
-        }
+
     }
+
+    public bool ListensToEntitySpawned => OnEntitySpawned != null;
 
     public void InvokeOnEntitySpawned( ref OnEntitySpawnedEvent @event )
     {
+        if (OnEntitySpawned == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntitySpawned == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnEntitySpawned");
+
             OnEntitySpawned.Invoke(@event);
         }
         catch (Exception e)
@@ -383,21 +522,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnEntitySpawned.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnEntitySpawned");
-        }
+
     }
+
+    public bool ListensToMapLoad => OnMapLoad != null;
 
     public void InvokeOnMapLoad( ref OnMapLoadEvent @event )
     {
+        if (OnMapLoad == null)
+        {
+            return;
+        }
         try
         {
-            if (OnMapLoad == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnMapLoad");
+
             OnMapLoad.Invoke(@event);
         }
         catch (Exception e)
@@ -407,21 +545,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnMapLoad.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnMapLoad");
-        }
+
     }
+
+    public bool ListensToMapUnload => OnMapUnload != null;
 
     public void InvokeOnMapUnload( ref OnMapUnloadEvent @event )
     {
+        if (OnMapUnload == null)
+        {
+            return;
+        }
         try
         {
-            if (OnMapUnload == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnMapUnload");
+
             OnMapUnload.Invoke(@event);
         }
         catch (Exception e)
@@ -431,22 +568,23 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnMapUnload.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnMapUnload");
-        }
+
     }
+
+    public bool ListensToProcessUsercmds => _OnClientProcessUsercmds != null;
+
+    public bool ListensToTakeDamage => _OnEntityTakeDamage != null;
 
     public void InvokeOnClientProcessUsercmds( ref OnClientProcessUsercmdsEvent @event )
     {
+        if (_OnClientProcessUsercmds == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientProcessUsercmds == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnClientProcessUsercmds");
-            OnClientProcessUsercmds.Invoke(@event);
+
+            _OnClientProcessUsercmds.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -455,22 +593,19 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnClientProcessUsercmds.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnClientProcessUsercmds");
-        }
+
     }
 
     public void InvokeOnEntityTakeDamage( ref OnEntityTakeDamageEvent @event )
     {
+        if (_OnEntityTakeDamage == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityTakeDamage == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnEntityTakeDamage");
-            OnEntityTakeDamage.Invoke(@event);
+
+            _OnEntityTakeDamage.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -479,21 +614,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnEntityTakeDamage.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnEntityTakeDamage");
-        }
+
     }
+
+    public bool ListensToPrecacheResource => OnPrecacheResource != null;
 
     public void InvokeOnPrecacheResource( ref OnPrecacheResourceEvent @event )
     {
+        if (OnPrecacheResource == null)
+        {
+            return;
+        }
         try
         {
-            if (OnPrecacheResource == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnPrecacheResource");
+
             OnPrecacheResource.Invoke(@event);
         }
         catch (Exception e)
@@ -503,22 +637,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnPrecacheResource.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnPrecacheResource");
-        }
+
     }
+
+    public bool ListensToEntityStartTouch => _OnEntityStartTouch != null;
 
     public void InvokeOnEntityStartTouch( ref OnEntityStartTouchEvent @event )
     {
+        if (_OnEntityStartTouch == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityStartTouch == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnEntityStartTouch");
-            OnEntityStartTouch.Invoke(@event);
+
+            _OnEntityStartTouch.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -527,22 +660,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnEntityStartTouch.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnEntityStartTouch");
-        }
+
     }
+
+    public bool ListensToEntityTouch => _OnEntityTouch != null;
 
     public void InvokeOnEntityTouch( ref OnEntityTouchEvent @event )
     {
+        if (_OnEntityTouch == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityTouch == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnEntityTouch");
-            OnEntityTouch.Invoke(@event);
+
+            _OnEntityTouch.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -551,22 +683,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnEntityTouch.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnEntityTouch");
-        }
+
     }
+
+    public bool ListensToEntityEndTouch => _OnEntityEndTouch != null;
 
     public void InvokeOnEntityEndTouch( ref OnEntityEndTouchEvent @event )
     {
+        if (_OnEntityEndTouch == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityEndTouch == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnEntityEndTouch");
-            OnEntityEndTouch.Invoke(@event);
+
+            _OnEntityEndTouch.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -575,21 +706,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnEntityEndTouch.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnEntityEndTouch");
-        }
+
     }
 
     public void InvokeOnSteamAPIActivatedHook()
     {
+        if (OnSteamAPIActivated == null)
+        {
+            return;
+        }
         try
         {
-            if (OnSteamAPIActivated == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnSteamAPIActivatedHook");
+
             OnSteamAPIActivated.Invoke();
         }
         catch (Exception e)
@@ -599,22 +727,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnSteamAPIActivatedHook.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnSteamAPIActivatedHook");
-        }
+
     }
+
+    public bool ListensToCanAcquire => _OnItemServicesCanAcquireHook != null;
 
     public void InvokeOnItemServicesCanAcquireHook( ref OnItemServicesCanAcquireHookEvent @event )
     {
+        if (_OnItemServicesCanAcquireHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnItemServicesCanAcquireHook == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnItemServicesCanAcquireHook");
-            OnItemServicesCanAcquireHook.Invoke(@event);
+
+            _OnItemServicesCanAcquireHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -623,22 +750,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnItemServicesCanAcquireHook.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnItemServicesCanAcquireHook");
-        }
+
     }
+
+    public bool ListensToCanUseWeapon => _OnWeaponServicesCanUseHook != null;
 
     public void InvokeOnWeaponServicesCanUseHook( ref OnWeaponServicesCanUseHookEvent @event )
     {
+        if (_OnWeaponServicesCanUseHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnWeaponServicesCanUseHook == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnWeaponServicesCanUseHook");
-            OnWeaponServicesCanUseHook.Invoke(@event);
+
+            _OnWeaponServicesCanUseHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -647,21 +773,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnWeaponServicesCanUseHook.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnWeaponServicesCanUseHook");
-        }
+
     }
+
+    public bool ListensToConsoleOutput => OnConsoleOutput != null;
 
     public void InvokeOnConsoleOutput( ref OnConsoleOutputEvent @event )
     {
+        if (OnConsoleOutput == null)
+        {
+            return;
+        }
         try
         {
-            if (OnConsoleOutput == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnConsoleOutput");
+
             OnConsoleOutput.Invoke(@event);
         }
         catch (Exception e)
@@ -671,21 +796,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnConsoleOutput.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnConsoleOutput");
-        }
+
     }
+
+    public bool ListensToConVarValueChanged => OnConVarValueChanged != null;
 
     public void InvokeOnConVarValueChanged( ref OnConVarValueChanged @event )
     {
+        if (OnConVarValueChanged == null)
+        {
+            return;
+        }
         try
         {
-            if (OnConVarValueChanged == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnConVarValueChanged");
+
             OnConVarValueChanged.Invoke(@event);
         }
         catch (Exception e)
@@ -695,21 +819,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnConVarValueChanged.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnConVarValueChanged");
-        }
+
     }
+
+    public bool ListensToConCommandCreated => OnConCommandCreated != null;
 
     public void InvokeOnConCommandCreated( ref OnConCommandCreated @event )
     {
+        if (OnConCommandCreated == null)
+        {
+            return;
+        }
         try
         {
-            if (OnConCommandCreated == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnConCommandCreated");
+
             OnConCommandCreated.Invoke(@event);
         }
         catch (Exception e)
@@ -719,21 +842,20 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnConCommandCreated.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnConCommandCreated");
-        }
+
     }
+
+    public bool ListensToConVarCreated => OnConVarCreated != null;
 
     public void InvokeOnConVarCreated( ref OnConVarCreated @event )
     {
+        if (OnConVarCreated == null)
+        {
+            return;
+        }
         try
         {
-            if (OnConVarCreated == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnConVarCreated");
+
             OnConVarCreated.Invoke(@event);
         }
         catch (Exception e)
@@ -743,21 +865,18 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnConVarCreated.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnConVarCreated");
-        }
+
     }
 
     public void InvokeOnCommandExecuteHook( ref OnCommandExecuteHookEvent @event )
     {
+        if (OnCommandExecuteHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnCommandExecuteHook == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnCommandExecuteHook");
+
             OnCommandExecuteHook.Invoke(@event);
         }
         catch (Exception e)
@@ -767,22 +886,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnCommandExecuteHook.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnCommandExecuteHook");
-        }
+
     }
+
+    public bool ListensToRunCommand => _OnMovementServicesRunCommandHook != null;
 
     public void InvokeOnMovementServicesRunCommandHook( ref OnMovementServicesRunCommandHookEvent @event )
     {
+        if (_OnMovementServicesRunCommandHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnMovementServicesRunCommandHook == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnMovementServicesRunCommandHook");
-            OnMovementServicesRunCommandHook.Invoke(@event);
+
+            _OnMovementServicesRunCommandHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -791,22 +909,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnMovementServicesRunCommandHook.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnMovementServicesRunCommandHook");
-        }
+
     }
+
+    public bool ListensToPostThink => _OnPlayerPawnPostThink != null;
 
     public void InvokeOnPlayerPawnPostThinkHook( ref OnPlayerPawnPostThinkHookEvent @event )
     {
+        if (_OnPlayerPawnPostThink == null)
+        {
+            return;
+        }
         try
         {
-            if (OnPlayerPawnPostThink == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnPlayerPawnPostThink");
-            OnPlayerPawnPostThink.Invoke(@event);
+
+            _OnPlayerPawnPostThink.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -815,22 +932,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnPlayerPawnPostThink.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnPlayerPawnPostThink");
-        }
+
     }
+
+    public bool ListensToAcceptInput => _OnEntityIdentityAcceptInputHook != null;
 
     public void InvokeOnEntityIdentityAcceptInputHook( ref OnEntityIdentityAcceptInputHookEvent @event )
     {
+        if (_OnEntityIdentityAcceptInputHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityIdentityAcceptInputHook == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnEntityIdentityAcceptInput");
-            OnEntityIdentityAcceptInputHook.Invoke(@event);
+
+            _OnEntityIdentityAcceptInputHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -839,22 +955,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnEntityIdentityAcceptInput.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnEntityIdentityAcceptInput");
-        }
+
     }
+
+    public bool ListensToWeaponDrop => _OnWeaponServicesDropWeaponHook != null;
 
     public void InvokeOnWeaponServicesDropWeaponHook( ref OnWeaponServicesDropWeaponHook @event )
     {
+        if (_OnWeaponServicesDropWeaponHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnWeaponServicesDropWeaponHook == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnWeaponServicesDropWeaponHook");
-            OnWeaponServicesDropWeaponHook.Invoke(@event);
+
+            _OnWeaponServicesDropWeaponHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -863,22 +978,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnWeaponServicesDropWeaponHook.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnWeaponServicesDropWeaponHook");
-        }
+
     }
+
+    public bool ListensToFireOutput => _OnEntityFireOutputHook != null;
 
     public void InvokeOnEntityFireOutputHook( ref OnEntityFireOutputHookEvent @event )
     {
+        if (_OnEntityFireOutputHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityFireOutputHook == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnEntityFireOutputHook");
-            OnEntityFireOutputHook.Invoke(@event);
+
+            _OnEntityFireOutputHook.Invoke(@event);
         }
         catch (Exception e)
         {
@@ -887,21 +1001,21 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnEntityFireOutputHook.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnEntityFireOutputHook");
-        }
+
     }
+
+    public bool ListensToStartupServer => OnStartupServer != null;
 
     public void InvokeOnStartupServer()
     {
+        if (OnStartupServer == null)
+        {
+            return;
+        }
+
         try
         {
-            if (OnStartupServer == null)
-            {
-                return;
-            }
-            profiler.StartRecording("Event::OnStartupServer");
+
             OnStartupServer.Invoke();
         }
         catch (Exception e)
@@ -911,9 +1025,6 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
                 logger.LogError(e, "Error invoking OnStartupServer.");
             }
         }
-        finally
-        {
-            profiler.StopRecording("Event::OnStartupServer");
-        }
+
     }
 }

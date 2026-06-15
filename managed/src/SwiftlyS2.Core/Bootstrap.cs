@@ -40,9 +40,9 @@ internal static class Bootstrap
         return IntPtr.Zero;
     }
 
-    public static void Start( IntPtr nativeTable, int nativeTableSize, string basePath, string logPath)
+    public static void Start( IntPtr nativeTable, int nativeTableSize, string basePath, string logPath )
     {
-        
+
         AppDomain.CurrentDomain.UnhandledException += ( sender, e ) =>
         {
             Console.WriteLine("CRITICAL: Unhandled exception. Aborting.");
@@ -110,8 +110,6 @@ internal static class Bootstrap
                     .AddPermissionManager()
                     .AddCoreHookService()
                     .AddCoreCommandService()
-                    .AddCommandTrackerManager()
-                    .AddCommandTrackerService()
                     .AddMenuManagerAPI()
                     .AddMenuManagerAPIService()
                     .AddDatamapFunctionManager()

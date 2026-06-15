@@ -14,23 +14,29 @@ internal partial class CBaseEntityImpl : CBaseEntity
 
     public Vector? AbsOrigin {
         get {
-            if (CBodyComponent == null) return null;
-            if (!CBodyComponent.IsValid) return null;
-            if (CBodyComponent.SceneNode == null) return null;
-            if (!CBodyComponent.SceneNode.IsValid) return null;
+            var bodyComponent = CBodyComponent;
+            if (bodyComponent == null) return null;
+            if (!bodyComponent.IsValid) return null;
 
-            return CBodyComponent?.SceneNode?.AbsOrigin;
+            var sceneNode = bodyComponent.SceneNode;
+            if (sceneNode == null) return null;
+            if (!sceneNode.IsValid) return null;
+
+            return sceneNode.AbsOrigin;
         }
     }
 
     public QAngle? AbsRotation {
         get {
-            if (CBodyComponent == null) return null;
-            if (!CBodyComponent.IsValid) return null;
-            if (CBodyComponent.SceneNode == null) return null;
-            if (!CBodyComponent.SceneNode.IsValid) return null;
+            var bodyComponent = CBodyComponent;
+            if (bodyComponent == null) return null;
+            if (!bodyComponent.IsValid) return null;
 
-            return CBodyComponent?.SceneNode?.AbsRotation;
+            var sceneNode = bodyComponent.SceneNode;
+            if (sceneNode == null) return null;
+            if (!sceneNode.IsValid) return null;
+
+            return sceneNode.AbsRotation;
         }
     }
 

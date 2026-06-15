@@ -142,50 +142,6 @@ internal static class NativePlayer
         _ClearTransmitEntityBlocked(playerid);
     }
 
-    private unsafe static delegate* unmanaged<int, int, void> _ChangeTeam;
-
-    public unsafe static void ChangeTeam(int playerid, int newteam)
-    {
-        if (!NativeBinding.IsMainThread)
-        {
-            throw new InvalidOperationException("This method can only be called from the main thread.");
-        }
-        _ChangeTeam(playerid, newteam);
-    }
-
-    private unsafe static delegate* unmanaged<int, int, void> _SwitchTeam;
-
-    public unsafe static void SwitchTeam(int playerid, int newteam)
-    {
-        if (!NativeBinding.IsMainThread)
-        {
-            throw new InvalidOperationException("This method can only be called from the main thread.");
-        }
-        _SwitchTeam(playerid, newteam);
-    }
-
-    private unsafe static delegate* unmanaged<int, nint, void> _TakeDamage;
-
-    public unsafe static void TakeDamage(int playerid, nint dmginfo)
-    {
-        if (!NativeBinding.IsMainThread)
-        {
-            throw new InvalidOperationException("This method can only be called from the main thread.");
-        }
-        _TakeDamage(playerid, dmginfo);
-    }
-
-    private unsafe static delegate* unmanaged<int, Vector, QAngle, Vector, void> _Teleport;
-
-    public unsafe static void Teleport(int playerid, Vector pos, QAngle angle, Vector velocity)
-    {
-        if (!NativeBinding.IsMainThread)
-        {
-            throw new InvalidOperationException("This method can only be called from the main thread.");
-        }
-        _Teleport(playerid, pos, angle, velocity);
-    }
-
     private unsafe static delegate* unmanaged<int*, int, byte*> _GetLanguage;
 
     public unsafe static string GetLanguage(int playerid)

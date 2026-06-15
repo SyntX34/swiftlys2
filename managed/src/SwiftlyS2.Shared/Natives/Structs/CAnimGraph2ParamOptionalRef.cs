@@ -16,7 +16,7 @@ public struct CAnimGraph2ParamOptionalRefFloat
     public bool IsBound => _bound;
     public bool IsValid => _bound && _index >= 0 && _pManager != 0;
 
-    private float Param(float? value = null)
+    private float Param( float? value = null )
     {
         unsafe
         {
@@ -50,7 +50,7 @@ public unsafe struct CAnimGraph2ParamOptionalRefBool
     public bool IsBound => _bound;
     public bool IsValid => _bound && _index >= 0 && _pManager != 0;
 
-    private byte Param(byte? value = null)
+    private byte Param( byte? value = null )
     {
         unsafe
         {
@@ -84,7 +84,7 @@ public unsafe struct CAnimGraph2ParamOptionalRefCGlobalSymbol
     public bool IsBound => _bound;
     public bool IsValid => _bound && _index >= 0 && _pManager != 0;
 
-    private string Param(string? value = null)
+    private string Param( string? value = null )
     {
         unsafe
         {
@@ -100,7 +100,7 @@ public unsafe struct CAnimGraph2ParamOptionalRefCGlobalSymbol
     }
 
     public string Value {
-        get => IsValid ? Param() : default;
+        get => IsValid ? Param() : string.Empty;
         set { if (IsValid) _ = Param(value); }
     }
 }

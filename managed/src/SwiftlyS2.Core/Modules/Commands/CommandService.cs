@@ -6,6 +6,7 @@ using SwiftlyS2.Core.Models;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.Commands;
 using SwiftlyS2.Shared.Profiler;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Permissions;
 
 namespace SwiftlyS2.Core.Commands;
@@ -21,8 +22,12 @@ internal class CommandService : ICommandService, IDisposable
 
     private readonly List<CommandCallbackBase> commandCallbacks = [];
     private readonly List<ulong> commandAliases = [];
+    private readonly List<string> commandAliasNames = [];
     private static readonly Dictionary<string, List<CommandCallbackBase>> commandsByPlugin = [];
+    private static readonly Dictionary<string, string> aliasToOriginal = [];
     private readonly Lock commandLock = new();
+
+    private static readonly Lock dispatchLock = new();
 
     public CommandService( ILoggerFactory loggerFactory, IContextedProfilerService profiler, IPlayerManagerService playerManagerService, IPermissionManager permissionManager, IOptionsMonitor<CommandOverrideConfig> commandOverrideOptions, CoreContext coreContext )
     {
@@ -37,6 +42,27 @@ internal class CommandService : ICommandService, IDisposable
         {
             commandCallbacks.Clear();
             commandAliases.Clear();
+        }
+
+    }
+
+    public static void DispatchCommand( string commandName, int playerId, string[] args, string originalCommandName, string prefix, bool silent )
+    {
+        lock (dispatchLock)
+        {
+            var resolvedName = aliasToOriginal.TryGetValue(commandName, out var original) ? original : commandName;
+            foreach (var pluginCallbacks in commandsByPlugin.Values)
+            {
+                foreach (var cb in pluginCallbacks)
+                {
+                    if (cb is not CommandCallback cc) continue;
+                    var normalizedName = cc.RegisterRaw ? cc.CommandName : "sw_" + cc.CommandName;
+                    if (string.Equals(normalizedName, resolvedName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cc.Invoke(playerId, args, originalCommandName, prefix, silent);
+                    }
+                }
+            }
         }
     }
 
@@ -71,6 +97,21 @@ internal class CommandService : ICommandService, IDisposable
             if (commandId != 0)
             {
                 commandAliases.Add(commandId);
+
+                var normalizedAlias = registerRaw ? alias.ToLower() : "sw_" + alias.ToLower();
+                var originalCallback = commandsByPlugin.Values
+                    .SelectMany(x => x)
+                    .OfType<CommandCallback>()
+                    .FirstOrDefault(cc =>
+                        cc.CommandName.Equals(commandName, StringComparison.OrdinalIgnoreCase) ||
+                        ("sw_" + cc.CommandName).Equals(commandName, StringComparison.OrdinalIgnoreCase));
+
+                if (originalCallback != null)
+                {
+                    var normalizedOriginal = originalCallback.RegisterRaw ? originalCallback.CommandName : "sw_" + originalCallback.CommandName;
+                    aliasToOriginal[normalizedAlias] = normalizedOriginal;
+                    commandAliasNames.Add(normalizedAlias);
+                }
             }
         }
     }
@@ -132,6 +173,29 @@ internal class CommandService : ICommandService, IDisposable
         return NativeCommands.IsCommandRegistered(commandName);
     }
 
+    public static int DispatchClientCommand( int playerId, string commandLine )
+    {
+        lock (dispatchLock)
+        {
+            var stopOriginal = false;
+            foreach (var pluginCallbacks in commandsByPlugin.Values)
+            {
+                foreach (var cb in pluginCallbacks)
+                {
+                    if (cb is not ClientCommandListenerCallback cc) continue;
+                    var result = cc.Invoke(playerId, commandLine);
+                    if (result == HookResult.Stop)
+                        return (int)HookResult.Stop;
+                    if (result == HookResult.Handled)
+                        return (int)HookResult.Handled;
+                    if (result == HookResult.CancelOriginal)
+                        stopOriginal = true;
+                }
+            }
+            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
+        }
+    }
+
     public Guid HookClientCommand( ICommandService.ClientCommandHandler handler )
     {
         var callback = new ClientCommandListenerCallback(handler, loggerFactory, profiler, coreContext.Name);
@@ -173,6 +237,29 @@ internal class CommandService : ICommandService, IDisposable
                 }
                 return false;
             });
+        }
+    }
+
+    public static int DispatchClientChat( int playerId, string text, bool teamonly )
+    {
+        lock (dispatchLock)
+        {
+            var stopOriginal = false;
+            foreach (var pluginCallbacks in commandsByPlugin.Values)
+            {
+                foreach (var cb in pluginCallbacks)
+                {
+                    if (cb is not ClientChatListenerCallback cc) continue;
+                    var result = cc.Invoke(playerId, text, teamonly);
+                    if (result == HookResult.Stop)
+                        return (int)HookResult.Stop;
+                    if (result == HookResult.Handled)
+                        return (int)HookResult.Handled;
+                    if (result == HookResult.CancelOriginal)
+                        stopOriginal = true;
+                }
+            }
+            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
         }
     }
 
@@ -225,11 +312,12 @@ internal class CommandService : ICommandService, IDisposable
         var commandNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         lock (commandLock)
         {
-            foreach (var callback in commandCallbacks)
+            foreach (var callbacks in commandsByPlugin.Values)
             {
-                if (callback is CommandCallback commandCallback)
+                foreach (var callback in callbacks)
                 {
-                    _ = commandNames.Add(commandCallback.CommandName);
+                    if (callback is CommandCallback commandCallback)
+                        _ = commandNames.Add(commandCallback.CommandName);
                 }
             }
         }
@@ -241,17 +329,16 @@ internal class CommandService : ICommandService, IDisposable
         lock (commandLock)
         {
             foreach (var alias in commandAliases)
-            {
                 NativeCommands.UnregisterAlias(alias);
-            }
             commandAliases.Clear();
 
+            foreach (var aliasName in commandAliasNames)
+                aliasToOriginal.Remove(aliasName);
+            commandAliasNames.Clear();
+
             foreach (var callback in commandCallbacks)
-            {
                 callback.Dispose();
-            }
             commandCallbacks.Clear();
-            commandsByPlugin.Clear();
         }
     }
 
@@ -293,8 +380,9 @@ internal class CommandService : ICommandService, IDisposable
     {
         lock (commandLock)
         {
-            return commandCallbacks
-                .OfType<CommandCallback>()
+            return commandsByPlugin
+                .Values
+                .SelectMany(callbacks => callbacks.OfType<CommandCallback>())
                 .Select(c => new CommandInfo {
                     CommandName = c.CommandName,
                     RegisterRaw = c.RegisterRaw,

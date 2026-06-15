@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.NetMessages;
 using SwiftlyS2.Shared.Profiler;
 
@@ -8,6 +9,73 @@ namespace SwiftlyS2.Core.NetMessages;
 
 internal class NetMessageService : INetMessageService, IDisposable
 {
+
+    private static readonly List<NetMessageHookCallback> s_globalCallbacks = [];
+    private static readonly Lock s_globalLock = new();
+
+    internal static void RegisterCallback( NetMessageHookCallback callback )
+    {
+        lock (s_globalLock)
+        {
+            s_globalCallbacks.Add(callback);
+        }
+    }
+
+    internal static void UnregisterCallback( NetMessageHookCallback callback )
+    {
+        lock (s_globalLock)
+        {
+            _ = s_globalCallbacks.Remove(callback);
+        }
+    }
+
+    public static int DispatchClientMessage( int playerId, int msgId, nint pMessage )
+    {
+        lock (s_globalLock)
+        {
+            var stopOriginal = false;
+            foreach (var cb in s_globalCallbacks)
+            {
+                var result = cb.InvokeAsClient(playerId, msgId, pMessage);
+                if (result == HookResult.Stop) return (int)HookResult.Stop;
+                if (result == HookResult.Handled) return (int)HookResult.Handled;
+                if (result == HookResult.CancelOriginal) stopOriginal = true;
+            }
+            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
+        }
+    }
+
+    public static int DispatchServerMessage( nint pPlayerMask, int msgId, nint pMessage )
+    {
+        lock (s_globalLock)
+        {
+            var stopOriginal = false;
+            foreach (var cb in s_globalCallbacks)
+            {
+                var result = cb.InvokeAsServer(pPlayerMask, msgId, pMessage);
+                if (result == HookResult.Stop) return (int)HookResult.Stop;
+                if (result == HookResult.Handled) return (int)HookResult.Handled;
+                if (result == HookResult.CancelOriginal) stopOriginal = true;
+            }
+            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
+        }
+    }
+
+    public static int DispatchServerInternalMessage( int playerId, int msgId, nint pMessage )
+    {
+        lock (s_globalLock)
+        {
+            var stopOriginal = false;
+            foreach (var cb in s_globalCallbacks)
+            {
+                var result = cb.InvokeAsServerInternal(playerId, msgId, pMessage);
+                if (result == HookResult.Stop) return (int)HookResult.Stop;
+                if (result == HookResult.Handled) return (int)HookResult.Handled;
+                if (result == HookResult.CancelOriginal) stopOriginal = true;
+            }
+            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
+        }
+    }
 
     private List<NetMessageHookCallback> _callbacks = [];
     private ILoggerFactory _loggerFactory;
@@ -135,7 +203,7 @@ internal class NetMessageService : INetMessageService, IDisposable
         var handle = AllocateNetMessage(T.MessageId);
         var message = T.Wrap(handle, true);
         configureMessage(message);
-        NativeNetMessages.SendMessageToPlayers(handle, T.MessageId, message.Recipients.ToMask());
+        message.Send();
     }
 
     public void Dispose()

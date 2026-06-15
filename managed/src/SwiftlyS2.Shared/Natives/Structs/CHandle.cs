@@ -20,8 +20,8 @@ public struct CHandle<T>( uint raw ) : ICHandle where T : class, ISchemaClass<T>
         get {
             if (Raw == 0xFFFFFFFF) return false;
             var ent = EntityManager.GetEntityByIndex(EntityIndex);
-            if (ent == null || ent.Entity == null) return false;
-            return ent.Entity.EntityHandle.Raw == Raw;
+            if (ent == null || ent.Identity == null) return false;
+            return ent.Identity.EntityHandle.Raw == Raw;
         }
     }
 

@@ -25,7 +25,7 @@
 class VFunctionHook : public IVFunctionHook
 {
 public:
-    virtual void SetHookFunction(const std::string& interface, int index, void* callback) override;
+    virtual void SetHookFunction(const std::string& iface_name, int index, void* callback) override;
     virtual void SetHookFunction(void* instance, int index, void* callback, bool is_vtable) override;
 
     virtual void Enable() override;

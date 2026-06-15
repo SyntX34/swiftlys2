@@ -87,6 +87,7 @@ public interface IEventSubscriber
     /// Called when the game process user's input.
     /// This callback is a hot path, be careful with it and don't do anything expensive.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Controller.ProcessUsercmds instead.")]
     public event EventDelegates.OnClientProcessUsercmds? OnClientProcessUsercmds;
 
     /// <summary>
@@ -107,6 +108,7 @@ public interface IEventSubscriber
     /// <summary>
     /// Called when an entity takes damage.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.TakeDamage instead.")]
     public event EventDelegates.OnEntityTakeDamage? OnEntityTakeDamage;
 
     /// <summary>
@@ -117,16 +119,19 @@ public interface IEventSubscriber
     /// <summary>
     /// Called when an item services can acquire hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Items.CanAcquire instead.")]
     public event EventDelegates.OnItemServicesCanAcquireHook? OnItemServicesCanAcquireHook;
 
     /// <summary>
     /// Called when a weapon services can use hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.CanUse instead.")]
     public event EventDelegates.OnWeaponServicesCanUseHook? OnWeaponServicesCanUseHook;
 
     /// <summary>
     /// Called when a weapon services drop weapon hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.Drop instead.")]
     public event EventDelegates.OnWeaponServicesDropWeaponHook? OnWeaponServicesDropWeaponHook;
 
     /// <summary>
@@ -142,36 +147,43 @@ public interface IEventSubscriber
     /// <summary>
     /// Called when an entity starts touching another entity.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.StartTouch instead.")]
     public event EventDelegates.OnEntityStartTouch? OnEntityStartTouch;
 
     /// <summary>
     /// Called when an entity is touching another entity.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.Touch instead.")]
     public event EventDelegates.OnEntityTouch? OnEntityTouch;
 
     /// <summary>
     /// Called when an entity ends touching another entity.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.EndTouch instead.")]
     public event EventDelegates.OnEntityEndTouch? OnEntityEndTouch;
 
     /// <summary>
     /// Called when the movement services run command hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Movement.RunCommand instead.")]
     public event EventDelegates.OnMovementServicesRunCommandHook? OnMovementServicesRunCommandHook;
 
     /// <summary>
     /// Called when the player pawn post think hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Pawn.PostThink instead.")]
     public event EventDelegates.OnPlayerPawnPostThink? OnPlayerPawnPostThink;
 
     /// <summary>
     /// Called when an entity identity accept input hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.AcceptInput instead.")]
     public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook;
 
     /// <summary>
     /// Called when an entity fires output.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.FireOutput instead.")]
     public event EventDelegates.OnEntityFireOutputHookEvent? OnEntityFireOutputHook;
 
     /// <summary>

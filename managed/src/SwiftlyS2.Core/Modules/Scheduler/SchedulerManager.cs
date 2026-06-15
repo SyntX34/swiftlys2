@@ -385,7 +385,7 @@ internal static class SchedulerManager
         return tcs.Task;
     }
 
-    public static Task QueueOrNow( Action action )
+    public static Task QueueOrNow( Action action, bool onWorldUpdate = false )
     {
         if (NativeBinding.IsMainThread)
         {
@@ -393,11 +393,11 @@ internal static class SchedulerManager
             return Task.CompletedTask;
         }
 
-        return NextTickAsync(action);
+        return onWorldUpdate ? NextWorldUpdateAsync(action) : NextTickAsync(action);
     }
 
-    public static Task<T> QueueOrNow<T>( Func<T> task )
+    public static Task<T> QueueOrNow<T>( Func<T> task, bool onWorldUpdate = false )
     {
-        return NativeBinding.IsMainThread ? Task.FromResult(task()) : NextTickAsync(task);
+        return NativeBinding.IsMainThread ? Task.FromResult(task()) : (onWorldUpdate ? NextWorldUpdateAsync(task) : NextTickAsync(task));
     }
 }

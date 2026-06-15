@@ -42,6 +42,7 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="McMaster.NETCore.Plugins" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Diagnostics.NETCore.Client" Version="0.2.661903" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0" />
@@ -62,7 +63,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="src\SwiftlyS2.Profiler\SwiftlyS2.Profiler.csproj"
+                      ReferenceOutputAssembly="false"
+                      PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="src\TestPlugin\**\*.cs" />
+    <Compile Remove="src\SwiftlyS2.Core\Services\ProfilerAnalyzer.cs" />
     <Compile Remove="SwiftlyS2.Benchmarks\**\*.cs" />
     <Compile Remove="SwiftlyS2.PluginTemplate\**\*.cs" />
     <Compile Remove="src\SwiftlyS2.Runner\**\*.cs" />

@@ -21,6 +21,8 @@
 
 #include "player.h"
 
+#define MAX_PLAYERS 64
+
 class IPlayerManager
 {
 public:
@@ -31,8 +33,6 @@ public:
     virtual void UnregisterPlayer(int playerid) = 0;
 
     virtual IPlayer* GetPlayer(int playerid) = 0;
-
-    virtual bool IsPlayerOnline(int playerid) = 0;
 
     virtual int GetPlayerCount() = 0;
     virtual int GetPlayerCap() = 0;

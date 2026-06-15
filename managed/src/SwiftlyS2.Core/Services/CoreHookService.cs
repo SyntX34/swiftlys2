@@ -1,22 +1,15 @@
-
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using Spectre.Console;
 using SwiftlyS2.Core.Datamaps;
-using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Extensions;
-using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.ProtobufDefinitions;
-using SwiftlyS2.Core.SchemaDefinitions;
-using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.SteamAPI;
 
 namespace SwiftlyS2.Core.Services;
@@ -34,16 +27,8 @@ internal class CoreHookService : IDisposable
 
         HookExecuteCommand();
         HookICvarFindConCommandTemplate();
-        HookCCSPlayerItemServicesCanAcquire();
-        HookCCSPlayerWeaponServicesCanUse();
-        HookCBaseEntityTouchTemplate();
         HookSteamServerAPIActivated();
-        HookCPlayerMovementServicesRunCommand();
-        HookCCSPlayerPawnPostThink();
-        HookEntityIdentityAcceptInput();
-        HookEntityIOOutputFireOutputInternal();
         HookDispatchDatamapFunction();
-        HookWeaponServicesDropWeapon();
     }
 
     /*
@@ -73,139 +58,20 @@ internal class CoreHookService : IDisposable
     private delegate nint ExecuteCommand( nint a1, int a2, uint a3, nint a4, nint a5 );
     private delegate nint ICvarFindConCommandWindows( nint pICvar, nint pRet, nint pConCommandName, int unk1 );
     private delegate nint ICvarFindConCommandLinux( nint pICvar, nint pConCommandName, int unk1 );
-    private delegate nint CCSPlayerItemServicesCanAcquire( nint pItemServices, nint pEconItemView, int acquireMethod, nint unk1 );
-    private delegate byte CCSPlayerWeaponServicesCanUse( nint pWeaponServices, nint pBasePlayerWeapon );
-    private delegate nint CBaseEntityTouchTemplate( nint pBaseEntity, nint pOtherEntity );
     private delegate void SteamServerAPIActivated( nint pServer );
-    private delegate nint CPlayerMovementServicesRunCommand( nint pMovementServices, nint pUserCmd );
-    private delegate nint CCSPlayerPawnPostThink( nint pPlayerPawn );
-    private delegate void CEntityIdentityAcceptInput( nint pEntityIdentity, nint inputName, nint activator, nint caller, nint variant, int outputId, nint unk1, nint unk2 );
-    private delegate void CEntityIOOutputFireOutputInternal( nint pEntityIO, nint pActivator, nint pCaller, nint pVariant, float flDelay, nint unk1, nint unk2 );
     private delegate void DispatchDatamapFunction( nint a1, nint pDatamapFunc, nint a3, uint a4, nint a5, double a6 /* unknown */ );
-    private delegate byte DropWeaponWindows( nint weaponServices, nint playerWeapon, byte swapping );
-    private delegate nint DropWeaponLinux( nint weaponServices, nint playerWeapon, byte swapping );
 
     private IUnmanagedFunction<ExecuteCommand>? executeCommand;
     private Guid executeCommandGuid;
     private IUnmanagedFunction<ICvarFindConCommandWindows>? findConCommandWindows;
     private IUnmanagedFunction<ICvarFindConCommandLinux>? findConCommandLinux;
     private Guid findConCommandGuid;
-    private IUnmanagedFunction<CCSPlayerItemServicesCanAcquire>? itemServicesCanAcquire;
-    private Guid itemServicesCanAcquireGuid;
-    private IUnmanagedFunction<CCSPlayerWeaponServicesCanUse>? weaponServicesCanUse;
-    private Guid weaponServicesCanUseGuid;
-    private IUnmanagedFunction<CBaseEntityTouchTemplate>? entityStartTouch;
-    private Guid entityStartTouchGuid;
-    private IUnmanagedFunction<CBaseEntityTouchTemplate>? entityTouch;
-    private Guid entityTouchGuid;
-    private IUnmanagedFunction<CBaseEntityTouchTemplate>? entityEndTouch;
-    private Guid entityEndTouchGuid;
     private IUnmanagedFunction<SteamServerAPIActivated>? steamServerAPIActivated;
     private Guid steamServerAPIActivatedGuid;
-    private IUnmanagedFunction<CPlayerMovementServicesRunCommand>? movementServiceRunCommand;
-    private Guid movementServiceRunCommandGuid;
-    private IUnmanagedFunction<CCSPlayerPawnPostThink>? playerPawnPostThink;
-    private Guid playerPawnPostThinkGuid;
-    private IUnmanagedFunction<CEntityIdentityAcceptInput>? entityIdentityAcceptInput;
-    private Guid entityIdentityAcceptInputGuid;
-    private IUnmanagedFunction<CEntityIOOutputFireOutputInternal>? entityIOOutputFireOutputInternal;
-    private Guid entityIOOutputFireOutputInternalGuid;
     private IUnmanagedFunction<DispatchDatamapFunction>? dispatchDatamapFunction;
     private Guid dispatchDatamapFunctionGuid;
-    private IUnmanagedFunction<DropWeaponWindows>? dropWeaponWindows;
-    private IUnmanagedFunction<DropWeaponLinux>? dropWeaponLinux;
-    private Guid dropWeaponGuid;
 
-    private void HookEntityIdentityAcceptInput()
-    {
-        var address = core.GameData.GetSignature("CEntityIdentity::AcceptInput");
-
-        logger.LogInformation("Hooking CEntityIdentity::AcceptInput at {Address:X}", address);
-
-        entityIdentityAcceptInput = core.Memory.GetUnmanagedFunctionByAddress<CEntityIdentityAcceptInput>(address);
-        entityIdentityAcceptInputGuid = entityIdentityAcceptInput.AddHook(next =>
-        {
-            return ( pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2 ) =>
-            {
-                unsafe
-                {
-                    var entityIdentity = core.Memory.ToSchemaClass<CEntityIdentity>(pEntityIdentity);
-                    if (!entityIdentity.IsValid || !entityIdentity.EntityInstance.IsValid)
-                    {
-                        next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
-                        return;
-                    }
-                    var inputName = pInputName != nint.Zero ? pInputName.AsRef<CUtlSymbolLarge>().Value : "";
-                    var activator = pActivator != nint.Zero ? EntityManager.GetEntityByAddress(pActivator) : null;
-                    var caller = pCaller != nint.Zero ? EntityManager.GetEntityByAddress(pCaller) : null;
-
-                    var @event = new OnEntityIdentityAcceptInputHookEvent {
-                        Identity = entityIdentity,
-                        EntityInstance = EntityManager.GetEntityByIndex(entityIdentity.EntityInstance.Index)!,
-                        DesignerName = entityIdentity.DesignerName,
-                        InputName = inputName,
-                        Activator = activator,
-                        Caller = caller,
-                        _variant = (CVariant<CVariantDefaultAllocator>*)pVariant,
-                        OutputId = outputId,
-                        Result = HookResult.Continue
-                    };
-                    EventPublisher.InvokeOnEntityIdentityAcceptInputHook(@event);
-
-                    if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                    {
-                        return;
-                    }
-
-                    next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
-                }
-            };
-        });
-    }
-
-    private unsafe void HookEntityIOOutputFireOutputInternal()
-    {
-        var address = core.GameData.GetSignature("CEntityIOOutput::FireOutputInternal");
-
-        logger.LogInformation("Hooking CEntityIOOutput_FireOutputInternal at {Address:X}", address);
-
-        entityIOOutputFireOutputInternal = core.Memory.GetUnmanagedFunctionByAddress<CEntityIOOutputFireOutputInternal>(address);
-        entityIOOutputFireOutputInternalGuid = entityIOOutputFireOutputInternal.AddHook(next =>
-        {
-            return ( pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2 ) =>
-            {
-                var entityIO = pEntityIO.AsRef<CEntityIOOutput>();
-
-                var outputName = entityIO.Desc.Name.Value;
-                var activator = pActivator != nint.Zero ? EntityManager.GetEntityByAddress(pActivator) : null;
-                var caller = pCaller != nint.Zero ? EntityManager.GetEntityByAddress(pCaller) : null;
-
-                var variant = pVariant.AsRef<CVariant<CVariantDefaultAllocator>>();
-
-                var @event = new OnEntityFireOutputHookEvent {
-                    _entityIO = (CEntityIOOutput*)pEntityIO,
-                    _variant = (CVariant<CVariantDefaultAllocator>*)pVariant,
-                    DesignerName = caller?.DesignerName ?? string.Empty,
-                    OutputName = outputName,
-                    Activator = activator,
-                    Caller = caller,
-                    VariantValue = variant,
-                    Delay = flDelay,
-                    Result = HookResult.Continue
-                };
-                EventPublisher.InvokeEntityFireOutputHook(@event);
-
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                {
-                    return;
-                }
-
-                next()(pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2);
-            };
-        });
-    }
-
-    private void HookExecuteCommand()
+    internal void HookExecuteCommand()
     {
         var address = core.GameData.GetSignature("Cmd_ExecuteCommand");
 
@@ -241,58 +107,14 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookWeaponServicesDropWeapon()
+    internal void UnhookExecuteCommand()
     {
-        var sig = core.GameData.GetSignature("CCSPlayer_WeaponServices::DropWeapon");
-        if (IsWindows)
-        {
-            dropWeaponWindows = core.Memory.GetUnmanagedFunctionByAddress<DropWeaponWindows>(sig);
-            logger.LogInformation("Hooking CCSPlayer_WeaponServices::DropWeapon at {Address:X}", dropWeaponWindows.Address);
-            dropWeaponGuid = dropWeaponWindows.AddHook(next =>
-            {
-                return ( pWeaponServices, pPlayerWeapon, swapping ) =>
-                {
-                    var weaponServices = core.Memory.ToSchemaClass<CCSPlayer_WeaponServices>(pWeaponServices);
-                    var playerWeapon = pPlayerWeapon != nint.Zero ? EntityManager.GetEntityByAddress(pPlayerWeapon) as CBasePlayerWeapon ?? core.Memory.ToSchemaClass<CBasePlayerWeapon>(pPlayerWeapon) : null;
-
-                    var @event = new OnWeaponServicesDropWeaponHook {
-                        WeaponServices = weaponServices,
-                        Weapon = playerWeapon,
-                        SwappingWeapon = swapping != 0,
-                        Result = HookResult.Continue
-                    };
-                    EventPublisher.InvokeOnWeaponServicesDropWeaponHook(@event);
-
-                    return (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) ? (byte)0 : next()(pWeaponServices, pPlayerWeapon, swapping);
-                };
-            });
-        }
-        else
-        {
-            dropWeaponLinux = core.Memory.GetUnmanagedFunctionByAddress<DropWeaponLinux>(sig);
-            logger.LogInformation("Hooking CCSPlayer_WeaponServices::DropWeapon at {Address:X}", dropWeaponLinux.Address);
-            dropWeaponGuid = dropWeaponLinux.AddHook(next =>
-            {
-                return ( pWeaponServices, pPlayerWeapon, swapping ) =>
-                {
-                    var weaponServices = core.Memory.ToSchemaClass<CCSPlayer_WeaponServices>(pWeaponServices);
-                    var playerWeapon = pPlayerWeapon != nint.Zero ? EntityManager.GetEntityByAddress(pPlayerWeapon) as CBasePlayerWeapon ?? core.Memory.ToSchemaClass<CBasePlayerWeapon>(pPlayerWeapon) : null;
-
-                    var @event = new OnWeaponServicesDropWeaponHook {
-                        WeaponServices = weaponServices,
-                        Weapon = playerWeapon,
-                        SwappingWeapon = swapping != 0,
-                        Result = HookResult.Continue
-                    };
-                    EventPublisher.InvokeOnWeaponServicesDropWeaponHook(@event);
-
-                    return (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) ? 0 : next()(pWeaponServices, pPlayerWeapon, swapping);
-                };
-            });
-        }
+        if (executeCommand == null) return;
+        executeCommand.RemoveHook(executeCommandGuid);
+        executeCommand = null;
     }
 
-    private void HookICvarFindConCommandTemplate()
+    internal void HookICvarFindConCommandTemplate()
     {
         var offset = core.GameData.GetOffset("ICvar::FindConCommand");
         if (IsWindows)
@@ -349,133 +171,23 @@ internal class CoreHookService : IDisposable
         }
     }
 
-    private void HookCCSPlayerItemServicesCanAcquire()
+    internal void UnhookICvarFindConCommandTemplate()
     {
-        var address = core.GameData.GetSignature("CCSPlayer_ItemServices::CanAcquire");
-
-        logger.LogInformation("Hooking CCSPlayer_ItemServices::CanAcquire at {Address:X}", address);
-
-        itemServicesCanAcquire = core.Memory.GetUnmanagedFunctionByAddress<CCSPlayerItemServicesCanAcquire>(address);
-        itemServicesCanAcquireGuid = itemServicesCanAcquire.AddHook(next =>
+        if (IsWindows)
         {
-            return ( pItemServices, pEconItemView, acquireMethod, unk1 ) =>
-            {
-                var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
-
-                var itemServices = core.Memory.ToSchemaClass<CCSPlayer_ItemServices>(pItemServices);
-
-                Schema.isFollowingServerGuidelines = false;
-
-                var econItemView = core.Memory.ToSchemaClass<CEconItemView>(pEconItemView);
-
-                var @event = new OnItemServicesCanAcquireHookEvent {
-                    ItemServices = itemServices,
-                    EconItemView = econItemView,
-                    WeaponVData = core.Helpers.GetWeaponCSDataFromKey(econItemView.ItemDefinitionIndex),
-                    AcquireMethod = (AcquireMethod)acquireMethod,
-                    OriginalResult = (AcquireResult)result
-                };
-
-                Schema.isFollowingServerGuidelines = NativeServerHelpers.IsFollowingServerGuidelines();
-
-                EventPublisher.InvokeOnCanAcquireHook(@event);
-
-                if (@event.Intercepted)
-                {
-                    // original result is modified here.
-                    return (int)@event.OriginalResult;
-                }
-
-                return result;
-            };
-        });
+            if (findConCommandWindows == null) return;
+            findConCommandWindows.RemoveHook(findConCommandGuid);
+            findConCommandWindows = null;
+        }
+        else
+        {
+            if (findConCommandLinux == null) return;
+            findConCommandLinux.RemoveHook(findConCommandGuid);
+            findConCommandLinux = null;
+        }
     }
 
-    private void HookCCSPlayerWeaponServicesCanUse()
-    {
-        var offset = core.GameData.GetOffset("CCSPlayer_WeaponServices::CanUse");
-        weaponServicesCanUse = core.Memory.GetUnmanagedFunctionByVTable<CCSPlayerWeaponServicesCanUse>(core.Memory.GetVTableAddress(Library.Server, "CCSPlayer_WeaponServices")!.Value, offset);
-        logger.LogInformation("Hooking CCSPlayer_WeaponServices::CanUse at {Address:X}", weaponServicesCanUse.Address);
-        weaponServicesCanUseGuid = weaponServicesCanUse.AddHook(next =>
-        {
-            return ( pWeaponServices, pBasePlayerWeapon ) =>
-            {
-                var result = next()(pWeaponServices, pBasePlayerWeapon);
-
-                var weaponServices = core.Memory.ToSchemaClass<CCSPlayer_WeaponServices>(pWeaponServices);
-                var basePlayerWeapon = EntityManager.GetEntityByAddress(pBasePlayerWeapon) as CCSWeaponBase ?? core.Memory.ToSchemaClass<CCSWeaponBase>(pBasePlayerWeapon);
-
-                var @event = new OnWeaponServicesCanUseHookEvent {
-                    WeaponServices = weaponServices,
-                    Weapon = basePlayerWeapon,
-                    OriginalResult = result != 0
-                };
-                EventPublisher.InvokeOnWeaponServicesCanUseHook(@event);
-
-                return @event.Intercepted ? @event.OriginalResult ? (byte)1 : (byte)0 : result;
-            };
-        });
-    }
-
-    private void HookCBaseEntityTouchTemplate()
-    {
-        var touchOffset = core.GameData.GetOffset("CBaseEntity::Touch");
-        var startTouchOffset = core.GameData.GetOffset("CBaseEntity::StartTouch");
-        var endTouchOffset = core.GameData.GetOffset("CBaseEntity::EndTouch");
-        entityStartTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, startTouchOffset);
-        entityTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, touchOffset);
-        entityEndTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, endTouchOffset);
-        logger.LogInformation("Hooking CBaseEntity::StartTouch at {Address:X}", entityStartTouch.Address);
-        logger.LogInformation("Hooking CBaseEntity::Touch at {Address:X}", entityTouch.Address);
-        logger.LogInformation("Hooking CBaseEntity::EndTouch at {Address:X}", entityEndTouch.Address);
-
-        entityStartTouchGuid = entityStartTouch.AddHook(next =>
-        {
-            return ( pBaseEntity, pOtherEntity ) =>
-            {
-                var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity;
-                var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity;
-                using var @event = new OnEntityStartTouchEvent {
-                    Entity = entity ?? core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity),
-                    OtherEntity = otherEntity ?? core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity)
-                };
-                EventPublisher.InvokeOnEntityStartTouch(@event);
-                return next()(pBaseEntity, pOtherEntity);
-            };
-        });
-
-        entityTouchGuid = entityTouch.AddHook(next =>
-        {
-            return ( pBaseEntity, pOtherEntity ) =>
-            {
-                var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity;
-                var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity;
-                using var @event = new OnEntityTouchEvent {
-                    Entity = entity ?? core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity),
-                    OtherEntity = otherEntity ?? core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity)
-                };
-                EventPublisher.InvokeOnEntityTouch(@event);
-                return next()(pBaseEntity, pOtherEntity);
-            };
-        });
-
-        entityEndTouchGuid = entityEndTouch.AddHook(next =>
-        {
-            return ( pBaseEntity, pOtherEntity ) =>
-            {
-                var entity = EntityManager.GetEntityByAddress(pBaseEntity) as CBaseEntity;
-                var otherEntity = EntityManager.GetEntityByAddress(pOtherEntity) as CBaseEntity;
-                using var @event = new OnEntityEndTouchEvent {
-                    Entity = entity ?? core.Memory.ToSchemaClass<CBaseEntity>(pBaseEntity),
-                    OtherEntity = otherEntity ?? core.Memory.ToSchemaClass<CBaseEntity>(pOtherEntity)
-                };
-                EventPublisher.InvokeOnEntityEndTouch(@event);
-                return next()(pBaseEntity, pOtherEntity);
-            };
-        });
-    }
-
-    private void HookSteamServerAPIActivated()
+    internal void HookSteamServerAPIActivated()
     {
         var offset = core.GameData.GetOffset("IServerGameDLL::GameServerSteamAPIActivated");
         steamServerAPIActivated = core.Memory.GetUnmanagedFunctionByVTable<SteamServerAPIActivated>(core.Memory.GetVTableAddress(Library.Server, "CSource2Server")!.Value, offset);
@@ -496,56 +208,14 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookCPlayerMovementServicesRunCommand()
+    internal void UnhookSteamServerAPIActivated()
     {
-        var offset = core.GameData.GetOffset("CPlayer_MovementServices::RunCommand");
-        movementServiceRunCommand = core.Memory.GetUnmanagedFunctionByVTable<CPlayerMovementServicesRunCommand>(core.Memory.GetVTableAddress(Library.Server, "CPlayer_MovementServices")!.Value, offset);
-        logger.LogInformation("Hooking CPlayer_MovementServices::RunCommand at {Address:X}", movementServiceRunCommand.Address);
-        movementServiceRunCommandGuid = movementServiceRunCommand.AddHook(( next ) =>
-        {
-            return ( pMovementServices, pUserCmd ) =>
-            {
-                var movementService = core.Memory.ToSchemaClass<CCSPlayer_MovementServices>(pMovementServices);
-                var userCmdPb = new CSGOUserCmdPBImpl(pUserCmd + 0x10, false);
-                var buttonState = new CInButtonStateImpl(pUserCmd + 0x58);
-
-                using var @event = new OnMovementServicesRunCommandHookEvent {
-                    MovementServices = movementService,
-                    ButtonState = buttonState,
-                    UserCmdPB = userCmdPb
-                };
-                EventPublisher.InvokeOnMovementServicesRunCommandHook(@event);
-
-                var result = next()(pMovementServices, pUserCmd);
-                return result;
-            };
-        });
+        if (steamServerAPIActivated == null) return;
+        steamServerAPIActivated.RemoveHook(steamServerAPIActivatedGuid);
+        steamServerAPIActivated = null;
     }
 
-    private void HookCCSPlayerPawnPostThink()
-    {
-        var address = core.GameData.GetSignature("CCSPlayerPawn::PostThink");
-
-        logger.LogInformation("Hooking CCSPlayerPawn::PostThink at {Address:X}", address);
-
-        playerPawnPostThink = core.Memory.GetUnmanagedFunctionByAddress<CCSPlayerPawnPostThink>(address);
-        playerPawnPostThinkGuid = playerPawnPostThink.AddHook(( next ) =>
-        {
-            return ( pPlayerPawn ) =>
-            {
-                var playerPawn = EntityManager.GetEntityByAddress(pPlayerPawn) as CCSPlayerPawn;
-
-                using var @event = new OnPlayerPawnPostThinkHookEvent {
-                    PlayerPawn = playerPawn ?? core.Memory.ToSchemaClass<CCSPlayerPawn>(pPlayerPawn)
-                };
-                EventPublisher.InvokeOnPlayerPawnPostThinkHook(@event);
-
-                return next()(pPlayerPawn);
-            };
-        });
-    }
-
-    private void HookDispatchDatamapFunction()
+    internal void HookDispatchDatamapFunction()
     {
         var address = core.GameData.GetSignature("DispatchDatamapFunction");
         dispatchDatamapFunction = core.Memory.GetUnmanagedFunctionByAddress<DispatchDatamapFunction>(address);
@@ -571,23 +241,18 @@ internal class CoreHookService : IDisposable
         });
     }
 
+    internal void UnhookDispatchDatamapFunction()
+    {
+        if (dispatchDatamapFunction == null) return;
+        dispatchDatamapFunction.RemoveHook(dispatchDatamapFunctionGuid);
+        dispatchDatamapFunction = null;
+    }
+
     public void Dispose()
     {
-        executeCommand?.RemoveHook(executeCommandGuid);
-        findConCommandWindows?.RemoveHook(findConCommandGuid);
-        findConCommandLinux?.RemoveHook(findConCommandGuid);
-        itemServicesCanAcquire?.RemoveHook(itemServicesCanAcquireGuid);
-        weaponServicesCanUse?.RemoveHook(weaponServicesCanUseGuid);
-        entityStartTouch?.RemoveHook(entityStartTouchGuid);
-        entityTouch?.RemoveHook(entityTouchGuid);
-        entityEndTouch?.RemoveHook(entityEndTouchGuid);
-        steamServerAPIActivated?.RemoveHook(steamServerAPIActivatedGuid);
-        movementServiceRunCommand?.RemoveHook(movementServiceRunCommandGuid);
-        playerPawnPostThink?.RemoveHook(playerPawnPostThinkGuid);
-        entityIdentityAcceptInput?.RemoveHook(entityIdentityAcceptInputGuid);
-        entityIOOutputFireOutputInternal?.RemoveHook(entityIOOutputFireOutputInternalGuid);
-        dispatchDatamapFunction?.RemoveHook(dispatchDatamapFunctionGuid);
-        dropWeaponWindows?.RemoveHook(dropWeaponGuid);
-        dropWeaponLinux?.RemoveHook(dropWeaponGuid);
+        UnhookExecuteCommand();
+        UnhookICvarFindConCommandTemplate();
+        UnhookSteamServerAPIActivated();
+        UnhookDispatchDatamapFunction();
     }
 }

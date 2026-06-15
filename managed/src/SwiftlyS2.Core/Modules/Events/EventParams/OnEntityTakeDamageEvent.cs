@@ -12,7 +12,14 @@ internal class OnEntityTakeDamageEvent : IOnEntityTakeDamageEvent
     public nint _infoPtr;
     public nint _resultPtr;
     public ref CTakeDamageInfo Info => ref _infoPtr.AsRef<CTakeDamageInfo>();
-    public ref CTakeDamageResult DamageResult => ref _resultPtr.AsRef<CTakeDamageResult>();
+    public ref CTakeDamageResult DamageResult {
+        get {
+            if (_resultPtr == nint.Zero)
+                throw new InvalidOperationException("The native TakeDamage call did not provide a DamageResult. Use GameHooks.Entities.TakeDamage and check its nullable DamageResult pointer.");
+
+            return ref _resultPtr.AsRef<CTakeDamageResult>();
+        }
+    }
 
     public HookResult Result { get; set; } = HookResult.Continue;
 }

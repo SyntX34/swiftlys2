@@ -45,7 +45,6 @@ public:
 #endif
 };
 
-IFunctionHook* g_pProcessUserCmdsHook = nullptr;
 IVFunctionHook* g_pOnGameFramePlayerHook = nullptr;
 
 IVFunctionHook* g_pClientConnectHook = nullptr;
@@ -55,7 +54,6 @@ IVFunctionHook* g_pClientPutInServerHook = nullptr;
 
 IVFunctionHook* g_pCheckTransmitHook = nullptr;
 
-void* ProcessUsercmdsHook(void* pController, CUserCmd* cmds, int numcmds, bool paused, float margin);
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last);
 
 void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid);
@@ -66,11 +64,7 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
 
 void CPlayerManager::Initialize()
 {
-    g_Players = new CPlayer * [g_SwiftlyCore.GetMaxGameClients()];
-    for (int i = 0; i < g_SwiftlyCore.GetMaxGameClients(); i++)
-    {
-        g_Players[i] = nullptr;
-    }
+    g_Players.fill(std::nullopt);
 
     auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
     auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
@@ -101,30 +95,18 @@ void CPlayerManager::Initialize()
     g_pCheckTransmitHook->SetHookFunction(gameentitiesvtable, gamedata->GetOffsets()->Fetch("ISource2GameEntities::CheckTransmit"), reinterpret_cast<void*>(CheckTransmitHook), true);
     g_pCheckTransmitHook->Enable();
 
-    auto processusercmds = gamedata->GetSignatures()->Fetch("CCSPlayerController::ProcessUserCmd");
-
     void* serverGameDLLVTable;
     s2binlib_find_vtable("server", "CSource2Server", &serverGameDLLVTable);
 
     g_pOnGameFramePlayerHook = hooksmanager->CreateVFunctionHook();
     g_pOnGameFramePlayerHook->SetHookFunction(serverGameDLLVTable, gamedata->GetOffsets()->Fetch("IServerGameDLL::GameFrame"), reinterpret_cast<void*>(OnGameFramePlayerHook), true);
     g_pOnGameFramePlayerHook->Enable();
-
-    g_pProcessUserCmdsHook = hooksmanager->CreateFunctionHook();
-    g_pProcessUserCmdsHook->SetHookFunction(processusercmds, reinterpret_cast<void*>(ProcessUsercmdsHook));
-    g_pProcessUserCmdsHook->Enable();
 }
 
 void CPlayerManager::Shutdown()
 {
-    for (int i = 0; i < g_SwiftlyCore.GetMaxGameClients(); i++)
-    {
-        if (g_Players[i] != nullptr)
-        {
-            delete g_Players[i];
-        }
-    }
-    delete[] g_Players;
+    for (auto& slot : g_Players)
+        slot.reset();
 
     auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
 
@@ -133,13 +115,6 @@ void CPlayerManager::Shutdown()
         g_pOnGameFramePlayerHook->Disable();
         hooksmanager->DestroyVFunctionHook(g_pOnGameFramePlayerHook);
         g_pOnGameFramePlayerHook = nullptr;
-    }
-
-    if (g_pProcessUserCmdsHook)
-    {
-        g_pProcessUserCmdsHook->Disable();
-        hooksmanager->DestroyFunctionHook(g_pProcessUserCmdsHook);
-        g_pProcessUserCmdsHook = nullptr;
     }
 
     if (g_pClientConnectHook)
@@ -182,6 +157,9 @@ extern void* g_pOnClientPutInServerCallback;
 
 void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid)
 {
+    static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
+    auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
+
     reinterpret_cast<decltype(&OnClientPutInServerHook)>(g_pClientPutInServerHook->GetOriginal())(_this, slot, pszName, type, xuid);
 
     if (type == 0)
@@ -190,26 +168,15 @@ void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName,
         cvarmanager->QueryClientConvar(slot.Get(), "cl_language");
     }
 
+    if (engine->IsClientFullyAuthenticated(slot))
+    {
+        auto player = playermanager->GetPlayer(slot.Get());
+        if (player)
+            player->ChangeAuthorizationState(true);
+    }
+
     if (g_pOnClientPutInServerCallback)
         reinterpret_cast<void (*)(int, int)>(g_pOnClientPutInServerCallback)(slot.Get(), type);
-}
-
-extern void* g_pOnClientProcessUsercmdsCallback;
-
-void* ProcessUsercmdsHook(void* pController, CUserCmd* cmds, int numcmds, bool paused, float margin)
-{
-    auto playerid = ((CEntityInstance*)pController)->m_pEntity->m_EHandle.GetEntryIndex() - 1;
-
-    google::protobuf::Message** pMsg = new google::protobuf::Message * [numcmds];
-    for (int i = 0; i < numcmds; i++)
-        pMsg[i] = (google::protobuf::Message*)&cmds[i].cmd;
-
-    if (g_pOnClientProcessUsercmdsCallback)
-        reinterpret_cast<void (*)(int, void*, int, bool, float)>(g_pOnClientProcessUsercmdsCallback)(playerid, pMsg, numcmds, paused, margin);
-
-    delete[] pMsg;
-
-    return reinterpret_cast<void* (*)(void*, CUserCmd*, int, bool, float)>(g_pProcessUserCmdsHook->GetOriginal())(pController, cmds, numcmds, paused, margin);
 }
 
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities)
@@ -235,9 +202,12 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
         auto& activeMasks = blockedBits.activeMasks;
 
         // NUM_MASKS_ACTIVE ops = NUM_MASKS_ACTIVE*64 bits -> 64 players -> NUM_MASKS_ACTIVE*64 ops
-        for (auto& dword : activeMasks)
+        if (!activeMasks.empty())
         {
-            base[dword] &= ~blockedBits.blockedMask[dword];
+            for (auto& dword : activeMasks)
+            {
+                base[dword] &= ~blockedBits.blockedMask[dword];
+            }
         }
 
         // 512 ops = 16k bits -> 64 players -> 32k ops
@@ -274,6 +244,9 @@ void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last)
         auto player = playermanager->GetPlayer(i);
         if (player) player->Think();
     }
+
+    static auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
+    crashreporter->OnTick();
 }
 
 extern void* g_pOnClientConnectCallback;
@@ -342,7 +315,7 @@ void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char*
 {
     reinterpret_cast<decltype(&ClientDisconnectHook)>(g_pClientDisconnectHook->GetOriginal())(_this, slot, reason, pszName, xuid, pszNetworkID);
 
-    static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
+    auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
     auto playerid = slot.Get();
 
     if (g_pOnClientDisconnectCallback)
@@ -356,46 +329,33 @@ IPlayer* CPlayerManager::RegisterPlayer(int playerid)
     if (playerid < 0 || playerid >= g_SwiftlyCore.GetMaxGameClients())
         return nullptr;
 
-    if (g_Players[playerid] != nullptr)
+    if (g_Players[playerid].has_value())
         UnregisterPlayer(playerid);
 
-    auto player = new CPlayer();
-    player->Initialize(playerid);
-    g_Players[playerid] = player;
+    g_Players[playerid].emplace();
+    g_Players[playerid]->Initialize(playerid);
 
-    return player;
+    return &g_Players[playerid].value();
 }
 
 void CPlayerManager::UnregisterPlayer(int playerid)
 {
     if (playerid < 0 || playerid >= g_SwiftlyCore.GetMaxGameClients())
         return;
-    if (g_Players[playerid] == nullptr)
+
+    if (!g_Players[playerid].has_value())
         return;
 
-    auto player = g_Players[playerid];
-    g_Players[playerid] = nullptr;
-
-    player->Shutdown();
-    delete player;
+    g_Players[playerid]->Shutdown();
+    g_Players[playerid].reset();
 }
 
 IPlayer* CPlayerManager::GetPlayer(int playerid)
 {
-    if (!IsPlayerOnline(playerid))
+    if (!g_Players[playerid].has_value())
         return nullptr;
 
-    auto player = g_Players[playerid];
-    return player && *(void***)player ? player : nullptr;
-}
-
-bool CPlayerManager::IsPlayerOnline(int playerid)
-{
-    if (playerid < 0 || playerid >= g_SwiftlyCore.GetMaxGameClients())
-        return false;
-
-    static auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-    return (engine->GetClientSteamID(playerid) != nullptr);
+    return &g_Players[playerid].value();
 }
 
 int CPlayerManager::GetPlayerCount()
