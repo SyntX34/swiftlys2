@@ -62,12 +62,12 @@ internal class PlayerManagerService : IPlayerManagerService
 
     public IPlayer? GetPlayerFromController( CBasePlayerController controller )
     {
-        return GetPlayer((int)(controller.Index - 1));
+        return controller.ToPlayer();
     }
 
     public IPlayer? GetPlayerFromPawn( CBasePlayerPawn pawn )
     {
-        return pawn.Controller.Value is not { IsValid: true } controller ? null : GetPlayerFromController(controller);
+        return pawn.ToPlayer();
     }
 
     public bool IsPlayerOnline( int playerid )
@@ -112,13 +112,17 @@ internal class PlayerManagerService : IPlayerManagerService
             var aimedPlayer = pickerEntity.ToPlayer();
             return aimedPlayer is { IsValid: true } && MatchesSearchMode(player, aimedPlayer, searchMode) ? [aimedPlayer] : [];
         }
+        else if(target == "@me")
+        {
+            return player != null && player.IsValid && MatchesSearchMode(player, player, searchMode) ? [player] : [];
+        }
 
-        IEnumerable<IPlayer> allPlayers = [];
+        List<IPlayer> allPlayers = [];
 
         var players = GetAllValidPlayers();
         foreach (var targetPlayer in players)
         {
-            if (searchMode.HasFlag(TargetSearchMode.NoMultipleTargets) && allPlayers.Any())
+            if (searchMode.HasFlag(TargetSearchMode.NoMultipleTargets) && allPlayers.Count != 0)
                 break;
 
             if (!MatchesSearchMode(player, targetPlayer, searchMode))
@@ -126,59 +130,51 @@ internal class PlayerManagerService : IPlayerManagerService
 
             if (target == "@all")
             {
-                allPlayers = allPlayers.Append(targetPlayer);
-            }
-            else if (target == "@me" && targetPlayer.PlayerID == player.PlayerID)
-            {
-                allPlayers = allPlayers.Append(targetPlayer);
-            }
-            else if (target == "@!me" && targetPlayer.PlayerID != player.PlayerID)
-            {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if ((target == "@bots" || target == "@!human") && targetPlayer.IsFakeClient)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if ((target == "@!bots" || target == "@human") && !targetPlayer.IsFakeClient)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@alive" && targetPlayer.Pawn?.LifeState == (byte)LifeState_t.LIFE_ALIVE)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@dead" && targetPlayer.Pawn?.LifeState == (byte)LifeState_t.LIFE_DEAD)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@ct" && targetPlayer.Pawn?.TeamNum == (int)Team.CT)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@t" && targetPlayer.Pawn?.TeamNum == (int)Team.T)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@spec" && targetPlayer.Pawn?.TeamNum == (int)Team.Spectator)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target.StartsWith('#'))
             {
                 if (int.TryParse(target[1..], out var id) && (targetPlayer.PlayerID == id || targetPlayer.UserID == id))
                 {
-                    allPlayers = allPlayers.Append(targetPlayer);
+                    allPlayers.Add(targetPlayer);
                 }
             }
             else if (targetPlayer.Controller.PlayerName.Contains(target, nameComparison))
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (new CSteamID(target) is var steamId && steamId.IsValid() &&
                      steamId.GetSteamID64() == targetPlayer.SteamID)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
         }
 
@@ -193,21 +189,32 @@ internal class PlayerManagerService : IPlayerManagerService
         if (!searchMode.HasFlag(TargetSearchMode.IncludeSelf) && targetPlayer.PlayerID == player.PlayerID)
             return false;
 
-        var targetLifeState = targetPlayer.Pawn?.LifeState;
-        var targetTeam = targetPlayer.Pawn?.TeamNum;
-        var playerTeam = player.Pawn?.TeamNum;
+        var targetPawn = targetPlayer.Pawn;
+        if(targetPawn == null || !targetPawn.IsValid) return false;
 
+        var targetLifeState = targetPawn.LifeState;
         if (searchMode.HasFlag(TargetSearchMode.Alive) && targetLifeState != (byte)LifeState_t.LIFE_ALIVE)
             return false;
 
         if (searchMode.HasFlag(TargetSearchMode.Dead) && targetLifeState != (byte)LifeState_t.LIFE_DEAD)
             return false;
 
-        if (searchMode.HasFlag(TargetSearchMode.TeamOnly) && targetTeam != playerTeam)
-            return false;
+        if(player != null)
+        {
+            var playerPawn = player.Pawn;
 
-        if (searchMode.HasFlag(TargetSearchMode.OppositeTeamOnly) && targetTeam == playerTeam)
-            return false;
+            if(playerPawn == null || !playerPawn.IsValid)
+                return false;
+
+            var targetTeam = targetPawn.TeamNum;
+            var playerTeam = playerPawn.TeamNum;
+
+            if (searchMode.HasFlag(TargetSearchMode.TeamOnly) && targetTeam != playerTeam)
+                return false;
+
+            if (searchMode.HasFlag(TargetSearchMode.OppositeTeamOnly) && targetTeam == playerTeam)
+                return false;   
+        }
 
         return true;
     }

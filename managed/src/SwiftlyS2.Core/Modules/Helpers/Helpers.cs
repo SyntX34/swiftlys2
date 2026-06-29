@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.Helpers;
@@ -90,15 +91,31 @@ internal class HelpersService : IHelpers
         { "ammo_50ae", 0 }
     };
 
+    public static ConcurrentDictionary<int, CCSWeaponBaseVData?> WeaponCSDataCache { get; } = new();
+
+    public static void RenewVDataCache()
+    {
+        WeaponCSDataCache.Clear();
+    }
+
     public CCSWeaponBaseVData? GetWeaponCSDataFromKey( int unknown, string key )
     {
+        if(WeaponCSDataCache.TryGetValue(int.TryParse(key, out var itemDefIndex) ? itemDefIndex : -1, out var cachedData))
+        {
+            return cachedData;
+        }
+
         var weaponDataPtr = GameFunctions.GetWeaponCSDataFromKey(unknown, key);
-        return weaponDataPtr == 0 ? null : (CCSWeaponBaseVData)new CCSWeaponBaseVDataImpl(weaponDataPtr);
+        var result = weaponDataPtr == 0 ? null : new CCSWeaponBaseVDataImpl(weaponDataPtr);
+        _ = WeaponCSDataCache.TryAdd(itemDefIndex, result);
+        return result;
     }
 
     public CCSWeaponBaseVData? GetWeaponCSDataFromKey( int itemDefinitionIndex )
     {
-        return GetWeaponCSDataFromKey(-1, itemDefinitionIndex.ToString());
+        return WeaponCSDataCache.TryGetValue(itemDefinitionIndex, out var cachedData)
+            ? cachedData
+            : GetWeaponCSDataFromKey(-1, itemDefinitionIndex.ToString());
     }
 
     public CCSWeaponBaseVData? GetWeaponCSDataFromKey( ItemDefinitionIndex itemDefinitionIndex )
