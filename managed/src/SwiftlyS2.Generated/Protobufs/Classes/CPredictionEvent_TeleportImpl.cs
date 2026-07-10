@@ -18,4 +18,6 @@ internal class CPredictionEvent_TeleportImpl : TypedProtobuf<CPredictionEvent_Te
     { get => Accessor.GetQAngle("angles"); set => Accessor.SetQAngle("angles", value); }
     public float DropToGroundRange
     { get => Accessor.GetFloat("drop_to_ground_range"); set => Accessor.SetFloat("drop_to_ground_range", value); }
+    public Vector Velocity
+    { get => Accessor.GetVector("velocity"); set => Accessor.SetVector("velocity", value); }
 }

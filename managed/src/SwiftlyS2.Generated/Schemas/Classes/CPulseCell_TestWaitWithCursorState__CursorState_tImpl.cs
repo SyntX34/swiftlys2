@@ -26,14 +26,44 @@ internal partial class CPulseCell_TestWaitWithCursorState__CursorState_tImpl : S
             return ref _Handle.AsRef<float>(_WaitValueOffset!.Value);
         }
     }
-    private static nint? _FailOnCancelOffset;
+    private static nint? _FailOffset;
 
-    public ref bool FailOnCancel
+    public ref bool Fail
     {
         get
         {
-            _FailOnCancelOffset = _FailOnCancelOffset ?? Schema.GetOffset(0x9C2318A4BEE5ED52);
-            return ref _Handle.AsRef<bool>(_FailOnCancelOffset!.Value);
+            _FailOffset = _FailOffset ?? Schema.GetOffset(0x9C2318A497AC176D);
+            return ref _Handle.AsRef<bool>(_FailOffset!.Value);
+        }
+    }
+    private static nint? _SelfCursorOffset;
+
+    public SchemaUntypedField SelfCursor
+    {
+        get
+        {
+            _SelfCursorOffset = _SelfCursorOffset ?? Schema.GetOffset(0x9C2318A405F3C953);
+            return new SchemaUntypedField(_Handle + _SelfCursorOffset!.Value);
+        }
+    }
+    private static nint? _SelfCellInstanceUntypedOffset;
+
+    public SchemaUntypedField SelfCellInstanceUntyped
+    {
+        get
+        {
+            _SelfCellInstanceUntypedOffset = _SelfCellInstanceUntypedOffset ?? Schema.GetOffset(0x9C2318A42AA23A43);
+            return new SchemaUntypedField(_Handle + _SelfCellInstanceUntypedOffset!.Value);
+        }
+    }
+    private static nint? _SelfCellInstanceOffset;
+
+    public SchemaUntypedField SelfCellInstance
+    {
+        get
+        {
+            _SelfCellInstanceOffset = _SelfCellInstanceOffset ?? Schema.GetOffset(0x9C2318A4F6CABDEE);
+            return new SchemaUntypedField(_Handle + _SelfCellInstanceOffset!.Value);
         }
     }
 

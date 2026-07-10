@@ -28,13 +28,12 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
     }
     private static nint? _MainGraphControllerOffset;
 
-    public CAnimGraphControllerBase? MainGraphController
+    public CAnimGraphControllerPtr MainGraphController
     {
         get
         {
             _MainGraphControllerOffset = _MainGraphControllerOffset ?? Schema.GetOffset(0xE501DB1E655CC5F6);
-            var ptr = _Handle.Read<nint>(_MainGraphControllerOffset!.Value);
-            return ptr.IsValidPtr() ? new CAnimGraphControllerBaseImpl(ptr) : null;
+            return new CAnimGraphControllerPtrImpl(_Handle + _MainGraphControllerOffset!.Value);
         }
     }
     private static nint? _InitiallyPopulateInterpHistoryOffset;
@@ -45,6 +44,26 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
         {
             _InitiallyPopulateInterpHistoryOffset = _InitiallyPopulateInterpHistoryOffset ?? Schema.GetOffset(0xE501DB1E3087361C);
             return ref _Handle.AsRef<bool>(_InitiallyPopulateInterpHistoryOffset!.Value);
+        }
+    }
+    private static nint? _OnLayerCycleUpdatedOffset;
+
+    public SchemaUntypedField OnLayerCycleUpdated
+    {
+        get
+        {
+            _OnLayerCycleUpdatedOffset = _OnLayerCycleUpdatedOffset ?? Schema.GetOffset(0xE501DB1EDEFC292C);
+            return new SchemaUntypedField(_Handle + _OnLayerCycleUpdatedOffset!.Value);
+        }
+    }
+    private static nint? _OnExternalChoreoGraphChangedOffset;
+
+    public ref CEntityIOOutput OnExternalChoreoGraphChanged
+    {
+        get
+        {
+            _OnExternalChoreoGraphChangedOffset = _OnExternalChoreoGraphChangedOffset ?? Schema.GetOffset(0xE501DB1EA00A1521);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnExternalChoreoGraphChangedOffset!.Value);
         }
     }
     private static nint? _ChoreoServicesOffset;

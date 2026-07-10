@@ -38,12 +38,12 @@ internal partial class RsDepthStencilStateDesc_tImpl : SchemaClass, RsDepthStenc
     }
     private static nint? _DepthFuncOffset;
 
-    public ref RsComparison_t DepthFunc
+    public SchemaUntypedField DepthFunc
     {
         get
         {
             _DepthFuncOffset = _DepthFuncOffset ?? Schema.GetOffset(0x9026AFA8B47FC61C);
-            return ref _Handle.AsRef<RsComparison_t>(_DepthFuncOffset!.Value);
+            return new SchemaUntypedField(_Handle + _DepthFuncOffset!.Value);
         }
     }
     private static nint? _StencilStateOffset;

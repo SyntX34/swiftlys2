@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulse_InstructionDebug : ISchemaClass<CPulse_InstructionDebug>
 {
     static CPulse_InstructionDebug ISchemaClass<CPulse_InstructionDebug>.From(nint handle) => new CPulse_InstructionDebugImpl(handle);
-    static int ISchemaClass<CPulse_InstructionDebug>.Size => 16;
+    static int ISchemaClass<CPulse_InstructionDebug>.Size => 24;
     static string? ISchemaClass<CPulse_InstructionDebug>.ClassName => null;
 
 
@@ -19,7 +19,8 @@ public partial interface CPulse_InstructionDebug : ISchemaClass<CPulse_Instructi
 
     public PulseDocNodeID_t ValueNodeID { get; }
 
-    public ref CGlobalSymbol SequencePointName { get; }
+    // PulseSymbol_t
+    public SchemaUntypedField SequencePointName { get; }
 
 
 }

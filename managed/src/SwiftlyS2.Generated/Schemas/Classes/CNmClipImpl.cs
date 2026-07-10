@@ -76,46 +76,6 @@ internal partial class CNmClipImpl : SchemaClass, CNmClip
             return ref _Handle.AsRef<CUtlVector<uint>>(_CompressedPoseOffsetsOffset!.Value);
         }
     }
-    private static nint? _FloatCurveIDsOffset;
-
-    public ref CUtlVector<CGlobalSymbol> FloatCurveIDs
-    {
-        get
-        {
-            _FloatCurveIDsOffset = _FloatCurveIDsOffset ?? Schema.GetOffset(0x3FC883BD11EF489E);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_FloatCurveIDsOffset!.Value);
-        }
-    }
-    private static nint? _FloatCurveDefsOffset;
-
-    public ref CUtlVector<NmFloatCurveCompressionSettings_t> FloatCurveDefs
-    {
-        get
-        {
-            _FloatCurveDefsOffset = _FloatCurveDefsOffset ?? Schema.GetOffset(0x3FC883BDE3CCFA68);
-            return ref _Handle.AsRef<CUtlVector<NmFloatCurveCompressionSettings_t>>(_FloatCurveDefsOffset!.Value);
-        }
-    }
-    private static nint? _CompressedFloatCurveDataOffset;
-
-    public ref CUtlVector<ushort> CompressedFloatCurveData
-    {
-        get
-        {
-            _CompressedFloatCurveDataOffset = _CompressedFloatCurveDataOffset ?? Schema.GetOffset(0x3FC883BD42C154B9);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_CompressedFloatCurveDataOffset!.Value);
-        }
-    }
-    private static nint? _CompressedFloatCurveOffsetsOffset;
-
-    public ref CUtlVector<uint> CompressedFloatCurveOffsets
-    {
-        get
-        {
-            _CompressedFloatCurveOffsetsOffset = _CompressedFloatCurveOffsetsOffset ?? Schema.GetOffset(0x3FC883BD24AF623F);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_CompressedFloatCurveOffsetsOffset!.Value);
-        }
-    }
     private static nint? _SecondaryAnimationsOffset;
 
     public SchemaUntypedField SecondaryAnimations
@@ -124,6 +84,16 @@ internal partial class CNmClipImpl : SchemaClass, CNmClip
         {
             _SecondaryAnimationsOffset = _SecondaryAnimationsOffset ?? Schema.GetOffset(0x3FC883BD9A6B439E);
             return new SchemaUntypedField(_Handle + _SecondaryAnimationsOffset!.Value);
+        }
+    }
+    private static nint? _FloatChannelDataOffset;
+
+    public SchemaUntypedField FloatChannelData
+    {
+        get
+        {
+            _FloatChannelDataOffset = _FloatChannelDataOffset ?? Schema.GetOffset(0x3FC883BD03D8C18C);
+            return new SchemaUntypedField(_Handle + _FloatChannelDataOffset!.Value);
         }
     }
     private static nint? _SyncTrackOffset;

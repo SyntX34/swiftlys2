@@ -66,14 +66,14 @@ internal partial class CBaseCombatCharacterImpl : CBaseAnimGraphImpl, CBaseComba
             return ref _Handle.AsRef<bool>(_DeathEventsDispatchedOffset!.Value);
         }
     }
-    private static nint? _VecRelationshipsOffset;
+    private static nint? _RelationshipsOffset;
 
-    public ref CUtlVector<RelationshipOverride_t> VecRelationships
+    public ref CUtlVector<RelationshipOverride_t> Relationships
     {
         get
         {
-            _VecRelationshipsOffset = _VecRelationshipsOffset ?? Schema.GetOffset(0xB47DE3DE2B978F5E);
-            return ref _Handle.Deref<CUtlVector<RelationshipOverride_t>>(_VecRelationshipsOffset!.Value);
+            _RelationshipsOffset = _RelationshipsOffset ?? Schema.GetOffset(0xB47DE3DEF4339A38);
+            return ref _Handle.AsRef<CUtlVector<RelationshipOverride_t>>(_RelationshipsOffset!.Value);
         }
     }
     private static nint? _StrRelationshipsOffset;

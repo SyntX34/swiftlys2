@@ -467,16 +467,6 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
             return ref _Handle.AsRef<int>(_SentToClientsOffset!.Value);
         }
     }
-    private static nint? _SpeedOffset;
-
-    public ref float Speed
-    {
-        get
-        {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x9DC483B8C631B7EA);
-            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
-        }
-    }
     private static nint? _UniqueHammerIDOffset;
 
     public string UniqueHammerID
@@ -921,7 +911,6 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
     public void ClientSideRagdollUpdated() => Schema.Update(_Handle, 0x9DC483B8F1B9C3D0);
     public void InterpolationFrameUpdated() => Schema.Update(_Handle, 0x9DC483B8937E9619);
     public void TeamNumUpdated() => Schema.Update(_Handle, 0x9DC483B8A5BFEFB3);
-    public void SpeedUpdated() => Schema.Update(_Handle, 0x9DC483B8C631B7EA);
     public void SpawnflagsUpdated() => Schema.Update(_Handle, 0x9DC483B83A4BBF6B);
     public void NextThinkTickUpdated() => Schema.Update(_Handle, 0x9DC483B8B7CEF021);
     public void FlagsUpdated() => Schema.Update(_Handle, 0x9DC483B8A4A37590);

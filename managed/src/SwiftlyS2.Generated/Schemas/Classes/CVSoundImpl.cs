@@ -16,6 +16,16 @@ internal partial class CVSoundImpl : SchemaClass, CVSound
 {
     public CVSoundImpl(nint handle) : base(handle) { }
 
+    private static nint? _SentencesOffset;
+
+    public ref CUtlLeanVector<CAudioSentence, int> Sentences
+    {
+        get
+        {
+            _SentencesOffset = _SentencesOffset ?? Schema.GetOffset(0x478C98730FF1D785);
+            return ref _Handle.AsRef<CUtlLeanVector<CAudioSentence, int>>(_SentencesOffset!.Value);
+        }
+    }
     private static nint? _RateOffset;
 
     public ref int Rate
@@ -76,16 +86,6 @@ internal partial class CVSoundImpl : SchemaClass, CVSound
             return ref _Handle.AsRef<float>(_DurationOffset!.Value);
         }
     }
-    private static nint? _SentencesOffset;
-
-    public ref CUtlVector<CAudioSentence> Sentences
-    {
-        get
-        {
-            _SentencesOffset = _SentencesOffset ?? Schema.GetOffset(0x478C98730FF1D785);
-            return ref _Handle.AsRef<CUtlVector<CAudioSentence>>(_SentencesOffset!.Value);
-        }
-    }
     private static nint? _StreamingSizeOffset;
 
     public ref uint StreamingSize
@@ -96,16 +96,6 @@ internal partial class CVSoundImpl : SchemaClass, CVSound
             return ref _Handle.AsRef<uint>(_StreamingSizeOffset!.Value);
         }
     }
-    private static nint? _SeekTableOffset;
-
-    public ref CUtlVector<int> SeekTable
-    {
-        get
-        {
-            _SeekTableOffset = _SeekTableOffset ?? Schema.GetOffset(0x478C987388E17207);
-            return ref _Handle.AsRef<CUtlVector<int>>(_SeekTableOffset!.Value);
-        }
-    }
     private static nint? _LoopEndOffset;
 
     public ref int LoopEnd
@@ -114,16 +104,6 @@ internal partial class CVSoundImpl : SchemaClass, CVSound
         {
             _LoopEndOffset = _LoopEndOffset ?? Schema.GetOffset(0x478C9873900B36CC);
             return ref _Handle.AsRef<int>(_LoopEndOffset!.Value);
-        }
-    }
-    private static nint? _EncodedHeaderOffset;
-
-    public ref CUtlBinaryBlock EncodedHeader
-    {
-        get
-        {
-            _EncodedHeaderOffset = _EncodedHeaderOffset ?? Schema.GetOffset(0x478C9873BDA3C36C);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_EncodedHeaderOffset!.Value);
         }
     }
 

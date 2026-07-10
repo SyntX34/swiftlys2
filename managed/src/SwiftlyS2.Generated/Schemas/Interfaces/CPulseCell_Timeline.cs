@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_Timeline : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Timeline>
 {
     static CPulseCell_Timeline ISchemaClass<CPulseCell_Timeline>.From(nint handle) => new CPulseCell_TimelineImpl(handle);
-    static int ISchemaClass<CPulseCell_Timeline>.Size => 248;
+    static int ISchemaClass<CPulseCell_Timeline>.Size => 320;
     static string? ISchemaClass<CPulseCell_Timeline>.ClassName => null;
 
 
@@ -20,8 +20,6 @@ public partial interface CPulseCell_Timeline : CPulseCell_BaseYieldingInflow, IS
     public ref bool WaitForChildOutflows { get; }
 
     public CPulse_ResumePoint OnFinished { get; }
-
-    public CPulse_ResumePoint OnCanceled { get; }
 
 
 }

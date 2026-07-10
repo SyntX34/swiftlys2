@@ -46,6 +46,31 @@ internal partial class C_OP_RenderLightBeamImpl : CParticleFunctionRendererImpl,
             return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
         }
     }
+    private static nint? _StrLightStyleOffset;
+
+    public string StrLightStyle
+    {
+        get
+        {
+            _StrLightStyleOffset = _StrLightStyleOffset ?? Schema.GetOffset(0xD8A7845079803489);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrLightStyleOffset!.Value));
+        }
+        set
+        {
+            _StrLightStyleOffset = _StrLightStyleOffset ?? Schema.GetOffset(0xD8A7845079803489);
+            Schema.SetCUtlString(_Handle, _StrLightStyleOffset!.Value, value);
+        }
+    }
+    private static nint? _LightStyleTimeOffset;
+
+    public CPerParticleFloatInput LightStyleTime
+    {
+        get
+        {
+            _LightStyleTimeOffset = _LightStyleTimeOffset ?? Schema.GetOffset(0xD8A78450260C525B);
+            return new CPerParticleFloatInputImpl(_Handle + _LightStyleTimeOffset!.Value);
+        }
+    }
     private static nint? _BrightnessLumensPerMeterOffset;
 
     public CParticleCollectionFloatInput BrightnessLumensPerMeter
@@ -54,6 +79,16 @@ internal partial class C_OP_RenderLightBeamImpl : CParticleFunctionRendererImpl,
         {
             _BrightnessLumensPerMeterOffset = _BrightnessLumensPerMeterOffset ?? Schema.GetOffset(0xD8A78450889235AE);
             return new CParticleCollectionFloatInputImpl(_Handle + _BrightnessLumensPerMeterOffset!.Value);
+        }
+    }
+    private static nint? _NumberOfLightsToCreateOffset;
+
+    public CParticleCollectionFloatInput NumberOfLightsToCreate
+    {
+        get
+        {
+            _NumberOfLightsToCreateOffset = _NumberOfLightsToCreateOffset ?? Schema.GetOffset(0xD8A784506970F4A3);
+            return new CParticleCollectionFloatInputImpl(_Handle + _NumberOfLightsToCreateOffset!.Value);
         }
     }
     private static nint? _CastShadowsOffset;
@@ -114,6 +149,76 @@ internal partial class C_OP_RenderLightBeamImpl : CParticleFunctionRendererImpl,
         {
             _ThicknessOffset = _ThicknessOffset ?? Schema.GetOffset(0xD8A78450DC7C1987);
             return new CParticleCollectionFloatInputImpl(_Handle + _ThicknessOffset!.Value);
+        }
+    }
+    private static nint? _InnerConeAngleOffset;
+
+    public CParticleCollectionFloatInput InnerConeAngle
+    {
+        get
+        {
+            _InnerConeAngleOffset = _InnerConeAngleOffset ?? Schema.GetOffset(0xD8A7845016875B1D);
+            return new CParticleCollectionFloatInputImpl(_Handle + _InnerConeAngleOffset!.Value);
+        }
+    }
+    private static nint? _OuterConeAngleOffset;
+
+    public CParticleCollectionFloatInput OuterConeAngle
+    {
+        get
+        {
+            _OuterConeAngleOffset = _OuterConeAngleOffset ?? Schema.GetOffset(0xD8A7845090EF9464);
+            return new CParticleCollectionFloatInputImpl(_Handle + _OuterConeAngleOffset!.Value);
+        }
+    }
+    private static nint? _ConeRotationOffsetOffset;
+
+    public CParticleCollectionVecInput ConeRotationOffset
+    {
+        get
+        {
+            _ConeRotationOffsetOffset = _ConeRotationOffsetOffset ?? Schema.GetOffset(0xD8A784500365FC6B);
+            return new CParticleCollectionVecInputImpl(_Handle + _ConeRotationOffsetOffset!.Value);
+        }
+    }
+    private static nint? _FogLightingModeOffset;
+
+    public ref ParticleLightFogLightingMode_t FogLightingMode
+    {
+        get
+        {
+            _FogLightingModeOffset = _FogLightingModeOffset ?? Schema.GetOffset(0xD8A7845068C76B34);
+            return ref _Handle.AsRef<ParticleLightFogLightingMode_t>(_FogLightingModeOffset!.Value);
+        }
+    }
+    private static nint? _FogContributionOffset;
+
+    public CParticleCollectionRendererFloatInput FogContribution
+    {
+        get
+        {
+            _FogContributionOffset = _FogContributionOffset ?? Schema.GetOffset(0xD8A784501B30F043);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FogContributionOffset!.Value);
+        }
+    }
+    private static nint? _RenderFilterOffset;
+
+    public CPerParticleFloatInput RenderFilter
+    {
+        get
+        {
+            _RenderFilterOffset = _RenderFilterOffset ?? Schema.GetOffset(0xD8A78450EDE7010D);
+            return new CPerParticleFloatInputImpl(_Handle + _RenderFilterOffset!.Value);
+        }
+    }
+    private static nint? _DebugOrientationOffset;
+
+    public ref bool DebugOrientation
+    {
+        get
+        {
+            _DebugOrientationOffset = _DebugOrientationOffset ?? Schema.GetOffset(0xD8A78450EA5FFA12);
+            return ref _Handle.AsRef<bool>(_DebugOrientationOffset!.Value);
         }
     }
 

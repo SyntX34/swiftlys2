@@ -36,6 +36,16 @@ internal partial class RTProxyInstanceInfo_tImpl : SchemaClass, RTProxyInstanceI
             return ref _Handle.AsRef<VertexAlbedoFormat_t>(_AlbedoFormatOffset!.Value);
         }
     }
+    private static nint? _EmissiveFormatOffset;
+
+    public ref VertexAlbedoFormat_t EmissiveFormat
+    {
+        get
+        {
+            _EmissiveFormatOffset = _EmissiveFormatOffset ?? Schema.GetOffset(0x41A18F799F6D2A7D);
+            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_EmissiveFormatOffset!.Value);
+        }
+    }
     private static nint? _BLASCountOffset;
 
     public ref ushort BLASCount
@@ -64,6 +74,26 @@ internal partial class RTProxyInstanceInfo_tImpl : SchemaClass, RTProxyInstanceI
         {
             _VertexAlbedoByteOffsetOffset = _VertexAlbedoByteOffsetOffset ?? Schema.GetOffset(0x41A18F79F818F1FF);
             return ref _Handle.AsRef<uint>(_VertexAlbedoByteOffsetOffset!.Value);
+        }
+    }
+    private static nint? _VertexEmissiveByteOffsetOffset;
+
+    public ref uint VertexEmissiveByteOffset
+    {
+        get
+        {
+            _VertexEmissiveByteOffsetOffset = _VertexEmissiveByteOffsetOffset ?? Schema.GetOffset(0x41A18F79C34241F5);
+            return ref _Handle.AsRef<uint>(_VertexEmissiveByteOffsetOffset!.Value);
+        }
+    }
+    private static nint? _EmissiveFactorOffset;
+
+    public ref float EmissiveFactor
+    {
+        get
+        {
+            _EmissiveFactorOffset = _EmissiveFactorOffset ?? Schema.GetOffset(0x41A18F7939C67965);
+            return ref _Handle.AsRef<float>(_EmissiveFactorOffset!.Value);
         }
     }
     private static nint? _MWorldFromLocalOffset;

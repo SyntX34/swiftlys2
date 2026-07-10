@@ -86,6 +86,16 @@ internal partial class CBaseTriggerImpl : CBaseToggleImpl, CBaseTrigger
             return ref _Handle.AsRef<CEntityIOOutput>(_OnNotTouchingOffset!.Value);
         }
     }
+    private static nint? _OnTouchingChangedOffset;
+
+    public ref CEntityIOOutput OnTouchingChanged
+    {
+        get
+        {
+            _OnTouchingChangedOffset = _OnTouchingChangedOffset ?? Schema.GetOffset(0x96DE10B1AF544F1F);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTouchingChangedOffset!.Value);
+        }
+    }
     private static nint? _TouchingEntitiesOffset;
 
     public ref CUtlVector<CHandle<CBaseEntity>> TouchingEntities

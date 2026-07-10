@@ -26,16 +26,6 @@ internal partial class CSndSeqInstBaseSchemaImpl : SchemaClass, CSndSeqInstBaseS
             return ref _Handle.AsRef<SndSeqInstrumentType_t>(_TypeOffset!.Value);
         }
     }
-    private static nint? _PlayerTypeOffset;
-
-    public ref SndSeqPlayerType_t PlayerType
-    {
-        get
-        {
-            _PlayerTypeOffset = _PlayerTypeOffset ?? Schema.GetOffset(0xEEA54D3641495B74);
-            return ref _Handle.AsRef<SndSeqPlayerType_t>(_PlayerTypeOffset!.Value);
-        }
-    }
     private static nint? _StopCurrentEventsOffset;
 
     public ref bool StopCurrentEvents

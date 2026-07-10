@@ -86,5 +86,15 @@ internal partial class CLogicCollisionPairImpl : CLogicalEntityImpl, CLogicColli
             return ref _Handle.AsRef<bool>(_SucceededOffset!.Value);
         }
     }
+    private static nint? _AllowMissingOffset;
+
+    public ref bool AllowMissing
+    {
+        get
+        {
+            _AllowMissingOffset = _AllowMissingOffset ?? Schema.GetOffset(0x9E0FC6ACC16B74A6);
+            return ref _Handle.AsRef<bool>(_AllowMissingOffset!.Value);
+        }
+    }
 
 }

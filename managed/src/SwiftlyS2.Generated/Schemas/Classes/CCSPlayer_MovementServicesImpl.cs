@@ -36,16 +36,6 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
             return ref _Handle.AsRef<bool>(_UsingGroundTopologyOffsetOffset!.Value);
         }
     }
-    private static nint? _AltitudeAtLastUsingGroundTopologyOffsetTransitionOffset;
-
-    public ref float AltitudeAtLastUsingGroundTopologyOffsetTransition
-    {
-        get
-        {
-            _AltitudeAtLastUsingGroundTopologyOffsetTransitionOffset = _AltitudeAtLastUsingGroundTopologyOffsetTransitionOffset ?? Schema.GetOffset(0xD20D9A03A10FA1EA);
-            return ref _Handle.AsRef<float>(_AltitudeAtLastUsingGroundTopologyOffsetTransitionOffset!.Value);
-        }
-    }
     private static nint? _UsingGroundTopologyOffsetTransitionSmoothingOffset;
 
     public ref float UsingGroundTopologyOffsetTransitionSmoothing
@@ -336,16 +326,6 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
             return new GameTime_tImpl(_Handle + _StashGrenadeParameterWhenOffset!.Value);
         }
     }
-    private static nint? _ButtonDownMaskPrevOffset;
-
-    public ref ulong ButtonDownMaskPrev
-    {
-        get
-        {
-            _ButtonDownMaskPrevOffset = _ButtonDownMaskPrevOffset ?? Schema.GetOffset(0xD20D9A03FA4E9DC4);
-            return ref _Handle.AsRef<ulong>(_ButtonDownMaskPrevOffset!.Value);
-        }
-    }
     private static nint? _UseFrictionStashedSpeedOffset;
 
     public ref bool UseFrictionStashedSpeed
@@ -516,16 +496,6 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
             return ref _Handle.AsRef<float>(_TicksSinceLastSurfingDetectedOffset!.Value);
         }
     }
-    private static nint? _WasSurfingOffset;
-
-    public ref bool WasSurfing
-    {
-        get
-        {
-            _WasSurfingOffset = _WasSurfingOffset ?? Schema.GetOffset(0xD20D9A03C30201EE);
-            return ref _Handle.AsRef<bool>(_WasSurfingOffset!.Value);
-        }
-    }
     private static nint? _WalkWishVelOffset;
 
     public ref Vector2D WalkWishVel
@@ -548,7 +518,6 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
     }
 
     public void UsingGroundTopologyOffsetUpdated() => Schema.Update(_Handle, 0xD20D9A03F0083882);
-    public void AltitudeAtLastUsingGroundTopologyOffsetTransitionUpdated() => Schema.Update(_Handle, 0xD20D9A03A10FA1EA);
     public void UsingGroundTopologyOffsetTransitionSmoothingUpdated() => Schema.Update(_Handle, 0xD20D9A03F5D9BC1B);
     public void LadderSurfacePropIndexUpdated() => Schema.Update(_Handle, 0xD20D9A03149CA20B);
     public void DuckedUpdated() => Schema.Update(_Handle, 0xD20D9A0314A05A59);
@@ -563,7 +532,6 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
     public void BombPlantViewOffsetUpdated() => Schema.Update(_Handle, 0xD20D9A037FD144AA);
     public void GameCodeHasMovedPlayerAfterCommandUpdated() => Schema.Update(_Handle, 0xD20D9A032045380F);
     public void StashGrenadeParameterWhenUpdated() => Schema.Update(_Handle, 0xD20D9A03FCB5208F);
-    public void ButtonDownMaskPrevUpdated() => Schema.Update(_Handle, 0xD20D9A03FA4E9DC4);
     public void UseFrictionStashedSpeedUpdated() => Schema.Update(_Handle, 0xD20D9A033C4BD165);
     public void UseFrictionStashedSpeedUntilFracUpdated() => Schema.Update(_Handle, 0xD20D9A03A77B65FD);
     public void FrictionStashedSpeedUpdated() => Schema.Update(_Handle, 0xD20D9A039A6C0ADA);
@@ -574,6 +542,5 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
     public void LastJumpFracUpdated() => Schema.Update(_Handle, 0xD20D9A035A88108B);
     public void LastJumpVelocityZUpdated() => Schema.Update(_Handle, 0xD20D9A031736B002);
     public void JumpApexPendingUpdated() => Schema.Update(_Handle, 0xD20D9A03B2669F50);
-    public void WasSurfingUpdated() => Schema.Update(_Handle, 0xD20D9A03C30201EE);
     public void HasEverProcessedCommandUpdated() => Schema.Update(_Handle, 0xD20D9A037B4A289E);
 }

@@ -66,6 +66,16 @@ internal partial class AggregateSceneObject_tImpl : SchemaClass, AggregateSceneO
             return ref _Handle.AsRef<short>(_VertexAlbedoStreamOffset!.Value);
         }
     }
+    private static nint? _VertexEmissiveStreamOffset;
+
+    public ref short VertexEmissiveStream
+    {
+        get
+        {
+            _VertexEmissiveStreamOffset = _VertexEmissiveStreamOffset ?? Schema.GetOffset(0xEF81F2D403495594);
+            return ref _Handle.AsRef<short>(_VertexEmissiveStreamOffset!.Value);
+        }
+    }
     private static nint? _AggregateMeshesOffset;
 
     public ref CUtlVector<AggregateMeshInfo_t> AggregateMeshes

@@ -26,16 +26,6 @@ internal partial class CCS2ChickenGraphControllerImpl : CAnimGraphControllerBase
             return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefCGlobalSymbol>(_ActionOffset!.Value);
         }
     }
-    private static nint? _ActionSubtypeOffset;
-
-    public ref CAnimGraph2ParamOptionalRefCGlobalSymbol ActionSubtype
-    {
-        get
-        {
-            _ActionSubtypeOffset = _ActionSubtypeOffset ?? Schema.GetOffset(0xC887F157FC94FE0B);
-            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefCGlobalSymbol>(_ActionSubtypeOffset!.Value);
-        }
-    }
     private static nint? _ActionResetOffset;
 
     public SchemaUntypedField ActionReset

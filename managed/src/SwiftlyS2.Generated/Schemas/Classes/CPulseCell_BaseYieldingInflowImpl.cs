@@ -16,4 +16,25 @@ internal partial class CPulseCell_BaseYieldingInflowImpl : CPulseCell_BaseFlowIm
 {
     public CPulseCell_BaseYieldingInflowImpl(nint handle) : base(handle) { }
 
+    private static nint? _BaseFlow_OnAfterCancelOffset;
+
+    public CPulse_ResumePoint BaseFlow_OnAfterCancel
+    {
+        get
+        {
+            _BaseFlow_OnAfterCancelOffset = _BaseFlow_OnAfterCancelOffset ?? Schema.GetOffset(0x9A860DAD56A57A30);
+            return new CPulse_ResumePointImpl(_Handle + _BaseFlow_OnAfterCancelOffset!.Value);
+        }
+    }
+    private static nint? _BaseFlow_WhileActiveOffset;
+
+    public CPulse_ResumePoint BaseFlow_WhileActive
+    {
+        get
+        {
+            _BaseFlow_WhileActiveOffset = _BaseFlow_WhileActiveOffset ?? Schema.GetOffset(0x9A860DAD51C198E0);
+            return new CPulse_ResumePointImpl(_Handle + _BaseFlow_WhileActiveOffset!.Value);
+        }
+    }
+
 }

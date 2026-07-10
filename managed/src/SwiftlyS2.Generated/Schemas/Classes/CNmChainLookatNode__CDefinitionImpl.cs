@@ -16,14 +16,34 @@ internal partial class CNmChainLookatNode__CDefinitionImpl : CNmPassthroughNode_
 {
     public CNmChainLookatNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChainEndBoneIDOffset;
+    private static nint? _EndEffectorBoneIDOffset;
 
-    public ref CGlobalSymbol ChainEndBoneID
+    public ref CGlobalSymbol EndEffectorBoneID
     {
         get
         {
-            _ChainEndBoneIDOffset = _ChainEndBoneIDOffset ?? Schema.GetOffset(0x3D36690222B26274);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ChainEndBoneIDOffset!.Value);
+            _EndEffectorBoneIDOffset = _EndEffectorBoneIDOffset ?? Schema.GetOffset(0x3D3669027429BFC5);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EndEffectorBoneIDOffset!.Value);
+        }
+    }
+    private static nint? _EndEffectorForwardAxisOffset;
+
+    public ref Vector EndEffectorForwardAxis
+    {
+        get
+        {
+            _EndEffectorForwardAxisOffset = _EndEffectorForwardAxisOffset ?? Schema.GetOffset(0x3D366902FB45FDBE);
+            return ref _Handle.AsRef<Vector>(_EndEffectorForwardAxisOffset!.Value);
+        }
+    }
+    private static nint? _EndEffectorOffsetOffset;
+
+    public ref Vector EndEffectorOffset
+    {
+        get
+        {
+            _EndEffectorOffsetOffset = _EndEffectorOffsetOffset ?? Schema.GetOffset(0x3D3669029CBCDDD9);
+            return ref _Handle.AsRef<Vector>(_EndEffectorOffsetOffset!.Value);
         }
     }
     private static nint? _LookatTargetNodeIdxOffset;
@@ -56,6 +76,16 @@ internal partial class CNmChainLookatNode__CDefinitionImpl : CNmPassthroughNode_
             return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
         }
     }
+    private static nint? _ChainWeightsOffset;
+
+    public SchemaUntypedField ChainWeights
+    {
+        get
+        {
+            _ChainWeightsOffset = _ChainWeightsOffset ?? Schema.GetOffset(0x3D36690261882157);
+            return new SchemaUntypedField(_Handle + _ChainWeightsOffset!.Value);
+        }
+    }
     private static nint? _ChainLengthOffset;
 
     public ref byte ChainLength
@@ -74,16 +104,6 @@ internal partial class CNmChainLookatNode__CDefinitionImpl : CNmPassthroughNode_
         {
             _IsTargetInWorldSpaceOffset = _IsTargetInWorldSpaceOffset ?? Schema.GetOffset(0x3D3669025F56E0C5);
             return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
-        }
-    }
-    private static nint? _ChainForwardDirOffset;
-
-    public ref Vector ChainForwardDir
-    {
-        get
-        {
-            _ChainForwardDirOffset = _ChainForwardDirOffset ?? Schema.GetOffset(0x3D36690298A5355A);
-            return ref _Handle.AsRef<Vector>(_ChainForwardDirOffset!.Value);
         }
     }
 

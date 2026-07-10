@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmTwoBoneIKTask : CNmPoseTask, ISchemaClass<CNmTwoBoneIKTask>
 {
     static CNmTwoBoneIKTask ISchemaClass<CNmTwoBoneIKTask>.From(nint handle) => new CNmTwoBoneIKTaskImpl(handle);
-    static int ISchemaClass<CNmTwoBoneIKTask>.Size => 192;
+    static int ISchemaClass<CNmTwoBoneIKTask>.Size => 240;
     static string? ISchemaClass<CNmTwoBoneIKTask>.ClassName => null;
 
 

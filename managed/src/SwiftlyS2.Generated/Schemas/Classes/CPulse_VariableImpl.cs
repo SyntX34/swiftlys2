@@ -101,5 +101,15 @@ internal partial class CPulse_VariableImpl : SchemaClass, CPulse_Variable
             return new PulseDocNodeID_tImpl(_Handle + _EditorNodeIDOffset!.Value);
         }
     }
+    private static nint? _MetadataOffset;
+
+    public SchemaUntypedField Metadata
+    {
+        get
+        {
+            _MetadataOffset = _MetadataOffset ?? Schema.GetOffset(0x598DEA5CCEFAFFC0);
+            return new SchemaUntypedField(_Handle + _MetadataOffset!.Value);
+        }
+    }
 
 }

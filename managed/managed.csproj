@@ -51,7 +51,6 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.0" />
-    <PackageReference Include="Mono.Cecil" Version="0.11.6" />
     <PackageReference Include="MySqlConnector" Version="2.4.0" />
     <PackageReference Include="Npgsql" Version="9.0.3" />
     <PackageReference Include="Semver" Version="3.0.0" />
@@ -63,9 +62,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="src\SwiftlyS2.Profiler\SwiftlyS2.Profiler.csproj"
-                      ReferenceOutputAssembly="false"
-                      PrivateAssets="all" />
+    <ProjectReference Include="src\SwiftlyS2.Profiler\SwiftlyS2.Profiler.csproj" ReferenceOutputAssembly="false" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>

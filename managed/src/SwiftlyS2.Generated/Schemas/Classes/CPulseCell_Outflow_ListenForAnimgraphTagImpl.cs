@@ -36,16 +36,6 @@ internal partial class CPulseCell_Outflow_ListenForAnimgraphTagImpl : CPulseCell
             return new CPulse_ResumePointImpl(_Handle + _OnEndOffset!.Value);
         }
     }
-    private static nint? _OnCanceledOffset;
-
-    public CPulse_ResumePoint OnCanceled
-    {
-        get
-        {
-            _OnCanceledOffset = _OnCanceledOffset ?? Schema.GetOffset(0xAD79BF78F02162DB);
-            return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
-        }
-    }
     private static nint? _TagNameOffset;
 
     public ref CGlobalSymbol TagName

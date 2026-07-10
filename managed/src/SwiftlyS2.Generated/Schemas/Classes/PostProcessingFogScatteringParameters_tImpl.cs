@@ -66,5 +66,35 @@ internal partial class PostProcessingFogScatteringParameters_tImpl : SchemaClass
             return ref _Handle.AsRef<float>(_GradientScaleOffset!.Value);
         }
     }
+    private static nint? _WaterScaleOffset;
+
+    public ref float WaterScale
+    {
+        get
+        {
+            _WaterScaleOffset = _WaterScaleOffset ?? Schema.GetOffset(0xAE3B2EF5A973E52E);
+            return ref _Handle.AsRef<float>(_WaterScaleOffset!.Value);
+        }
+    }
+    private static nint? _WaterDensityOffset;
+
+    public ref float WaterDensity
+    {
+        get
+        {
+            _WaterDensityOffset = _WaterDensityOffset ?? Schema.GetOffset(0xAE3B2EF52C55B87C);
+            return ref _Handle.AsRef<float>(_WaterDensityOffset!.Value);
+        }
+    }
+    private static nint? _WaterDepthBlurRadiusOffset;
+
+    public ref float WaterDepthBlurRadius
+    {
+        get
+        {
+            _WaterDepthBlurRadiusOffset = _WaterDepthBlurRadiusOffset ?? Schema.GetOffset(0xAE3B2EF52C22ADB2);
+            return ref _Handle.AsRef<float>(_WaterDepthBlurRadiusOffset!.Value);
+        }
+    }
 
 }

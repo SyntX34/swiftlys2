@@ -126,6 +126,16 @@ internal partial class AggregateMeshInfo_tImpl : SchemaClass, AggregateMeshInfo_
             return ref _Handle.AsRef<uint>(_VertexAlbedoStreamOffsetOffset!.Value);
         }
     }
+    private static nint? _VertexEmissiveStreamOffsetOffset;
+
+    public ref uint VertexEmissiveStreamOffset
+    {
+        get
+        {
+            _VertexEmissiveStreamOffsetOffset = _VertexEmissiveStreamOffsetOffset ?? Schema.GetOffset(0x609E946033DA9CB);
+            return ref _Handle.AsRef<uint>(_VertexEmissiveStreamOffsetOffset!.Value);
+        }
+    }
     private static nint? _InstanceStreamsOffset;
 
     public ref AggregateInstanceStream_t InstanceStreams
@@ -134,6 +144,16 @@ internal partial class AggregateMeshInfo_tImpl : SchemaClass, AggregateMeshInfo_
         {
             _InstanceStreamsOffset = _InstanceStreamsOffset ?? Schema.GetOffset(0x609E94630D081BB);
             return ref _Handle.AsRef<AggregateInstanceStream_t>(_InstanceStreamsOffset!.Value);
+        }
+    }
+    private static nint? _EmissiveFactorOffset;
+
+    public ref float EmissiveFactor
+    {
+        get
+        {
+            _EmissiveFactorOffset = _EmissiveFactorOffset ?? Schema.GetOffset(0x609E94639C67965);
+            return ref _Handle.AsRef<float>(_EmissiveFactorOffset!.Value);
         }
     }
 

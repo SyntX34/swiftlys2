@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_PlaySequence : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_PlaySequence>
 {
     static CPulseCell_PlaySequence ISchemaClass<CPulseCell_PlaySequence>.From(nint handle) => new CPulseCell_PlaySequenceImpl(handle);
-    static int ISchemaClass<CPulseCell_PlaySequence>.Size => 248;
+    static int ISchemaClass<CPulseCell_PlaySequence>.Size => 320;
     static string? ISchemaClass<CPulseCell_PlaySequence>.ClassName => null;
 
 
@@ -20,8 +20,6 @@ public partial interface CPulseCell_PlaySequence : CPulseCell_BaseYieldingInflow
     public PulseNodeDynamicOutflows_t PulseAnimEvents { get; }
 
     public CPulse_ResumePoint OnFinished { get; }
-
-    public CPulse_ResumePoint OnCanceled { get; }
 
 
 }

@@ -63,17 +63,12 @@ internal partial class CMessageImpl : CPointEntityImpl, CMessage
     }
     private static nint? _NoiseOffset;
 
-    public string Noise
+    public SchemaUntypedField Noise
     {
         get
         {
             _NoiseOffset = _NoiseOffset ?? Schema.GetOffset(0xCCCF4991F22B8CC);
-            return Schema.GetString(_Handle.Read<nint>(_NoiseOffset!.Value));
-        }
-        set
-        {
-            _NoiseOffset = _NoiseOffset ?? Schema.GetOffset(0xCCCF4991F22B8CC);
-            Schema.SetString(_Handle, _NoiseOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _NoiseOffset!.Value);
         }
     }
     private static nint? _OnShowMessageOffset;

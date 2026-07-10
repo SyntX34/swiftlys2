@@ -55,6 +55,8 @@ public partial interface C_OP_RenderCables : CParticleFunctionRenderer, ISchemaC
 
     public ref bool ForceRoundnessFixed { get; }
 
+    public ref bool OnlyRenderInEffectsBloomPass { get; }
+
     public CParticleTransformInput LightingTransform { get; }
 
     public ref CUtlLeanVector<FloatInputMaterialVariable_t, int> MaterialFloatVars { get; }

@@ -12,7 +12,7 @@ public partial interface CCSGO_TeamPreviewCharacterPosition : CBaseEntity, ISche
 {
     static CCSGO_TeamPreviewCharacterPosition ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.From(nint handle) => new CCSGO_TeamPreviewCharacterPositionImpl(handle);
     static int ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.Size => 3264;
-    static string? ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.ClassName => null;
+    static string? ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.ClassName => "team_preview_character_position";
 
 
     public ref int Variant { get; }

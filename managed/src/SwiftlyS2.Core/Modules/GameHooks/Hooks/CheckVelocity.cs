@@ -24,7 +24,11 @@ internal static partial class GameHooksPublisher
                 dummy.DangerousSetHandle(movementServices);
                 var player = dummy.ToPlayer();
                 _pawnComponentPool.Return(dummy);
-                if (player == null) { next()(movementServices, moveData, unknown); return; }
+                if (player == null)
+                {
+                    next()(movementServices, moveData, unknown);
+                    return;
+                }
 
                 var moveDataImpl = _moveDataPool.Rent();
                 moveDataImpl.Address = moveData;
@@ -52,6 +56,7 @@ internal static partial class GameHooksPublisher
 
                 moveDataImpl.Address = 0;
                 _moveDataPool.Return(moveDataImpl);
+                return;
             };
         });
     }

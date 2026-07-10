@@ -16,10 +16,7 @@ public partial struct CUtlStringToken
         if (str != null)
         {
             HashCode = MurmurHash2.HashString(str, 0x31415926);
-            if (ExternDLL.GetExportedVariable<bool>("tier0", "g_bUpdateStringTokenDatabase"))
-            {
-                RegisterStringToken(HashCode, str);
-            }
+            RegisterStringToken(HashCode, str);
         }
     }
 

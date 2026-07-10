@@ -46,5 +46,15 @@ internal partial class AI_Navigator_DebugSnapshotData_t__Waypoint_tImpl : Schema
             return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
         }
     }
+    private static nint? _Is_pathcornerOffset;
+
+    public ref bool Is_pathcorner
+    {
+        get
+        {
+            _Is_pathcornerOffset = _Is_pathcornerOffset ?? Schema.GetOffset(0x891DD4E661B3A520);
+            return ref _Handle.AsRef<bool>(_Is_pathcornerOffset!.Value);
+        }
+    }
 
 }

@@ -15,6 +15,12 @@ public partial interface CAI_Expresser : ISchemaClass<CAI_Expresser>
     static string? ISchemaClass<CAI_Expresser>.ClassName => null;
 
 
+    // CUtlDict< GameTime_t >
+    public SchemaUntypedField ConceptCooldowns { get; }
+
+    // CUtlDict< GameTime_t >
+    public SchemaUntypedField RuleCooldowns { get; }
+
     public GameTime_t StopTalkTime { get; }
 
     public GameTime_t StopTalkTimeWithoutDelay { get; }

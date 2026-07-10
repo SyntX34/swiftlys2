@@ -46,16 +46,6 @@ internal partial class CChickenImpl : CDynamicPropImpl, CChicken
             return ref _Handle.AsRef<Vector>(_StuckAnchorOffset!.Value);
         }
     }
-    private static nint? _StuckTimerOffset;
-
-    public CountdownTimer StuckTimer
-    {
-        get
-        {
-            _StuckTimerOffset = _StuckTimerOffset ?? Schema.GetOffset(0x66D7920D22E8E3F0);
-            return new CountdownTimerImpl(_Handle + _StuckTimerOffset!.Value);
-        }
-    }
     private static nint? _CollisionStuckTimerOffset;
 
     public CountdownTimer CollisionStuckTimer
@@ -88,22 +78,22 @@ internal partial class CChickenImpl : CDynamicPropImpl, CChicken
     }
     private static nint? _DesiredActivityOffset;
 
-    public ref ChickenActivity DesiredActivity
+    public ref EChickenActivity DesiredActivity
     {
         get
         {
             _DesiredActivityOffset = _DesiredActivityOffset ?? Schema.GetOffset(0x66D7920D0BDF74DC);
-            return ref _Handle.AsRef<ChickenActivity>(_DesiredActivityOffset!.Value);
+            return ref _Handle.AsRef<EChickenActivity>(_DesiredActivityOffset!.Value);
         }
     }
     private static nint? _CurrentActivityOffset;
 
-    public ref ChickenActivity CurrentActivity
+    public ref EChickenActivity CurrentActivity
     {
         get
         {
             _CurrentActivityOffset = _CurrentActivityOffset ?? Schema.GetOffset(0x66D7920DBF339767);
-            return ref _Handle.AsRef<ChickenActivity>(_CurrentActivityOffset!.Value);
+            return ref _Handle.AsRef<EChickenActivity>(_CurrentActivityOffset!.Value);
         }
     }
     private static nint? _ActivityTimerOffset;
@@ -166,26 +156,6 @@ internal partial class CChickenImpl : CDynamicPropImpl, CChicken
             return new CountdownTimerImpl(_Handle + _VocalizeTimerOffset!.Value);
         }
     }
-    private static nint? _WhenZombifiedOffset;
-
-    public GameTime_t WhenZombified
-    {
-        get
-        {
-            _WhenZombifiedOffset = _WhenZombifiedOffset ?? Schema.GetOffset(0x66D7920DEC63D622);
-            return new GameTime_tImpl(_Handle + _WhenZombifiedOffset!.Value);
-        }
-    }
-    private static nint? _JumpedThisFrameOffset;
-
-    public ref bool JumpedThisFrame
-    {
-        get
-        {
-            _JumpedThisFrameOffset = _JumpedThisFrameOffset ?? Schema.GetOffset(0x66D7920D6BF897BD);
-            return ref _Handle.AsRef<bool>(_JumpedThisFrameOffset!.Value);
-        }
-    }
     private static nint? _LeaderOffset;
 
     public ref CHandle<CCSPlayerPawn> Leader
@@ -206,16 +176,6 @@ internal partial class CChickenImpl : CDynamicPropImpl, CChicken
             return new CountdownTimerImpl(_Handle + _ReuseTimerOffset!.Value);
         }
     }
-    private static nint? _HasBeenUsedOffset;
-
-    public ref bool HasBeenUsed
-    {
-        get
-        {
-            _HasBeenUsedOffset = _HasBeenUsedOffset ?? Schema.GetOffset(0x66D7920D4B85A934);
-            return ref _Handle.AsRef<bool>(_HasBeenUsedOffset!.Value);
-        }
-    }
     private static nint? _JumpTimerOffset;
 
     public CountdownTimer JumpTimer
@@ -234,16 +194,6 @@ internal partial class CChickenImpl : CDynamicPropImpl, CChicken
         {
             _LastJumpTimeOffset = _LastJumpTimeOffset ?? Schema.GetOffset(0x66D7920DAB061352);
             return ref _Handle.AsRef<float>(_LastJumpTimeOffset!.Value);
-        }
-    }
-    private static nint? _InJumpOffset;
-
-    public ref bool InJump
-    {
-        get
-        {
-            _InJumpOffset = _InJumpOffset ?? Schema.GetOffset(0x66D7920DD74EE446);
-            return ref _Handle.AsRef<bool>(_InJumpOffset!.Value);
         }
     }
     private static nint? _RepathTimerOffset;
@@ -298,6 +248,5 @@ internal partial class CChickenImpl : CDynamicPropImpl, CChicken
     }
 
     public void AttributeManagerUpdated() => Schema.Update(_Handle, 0x66D7920D537B0586);
-    public void JumpedThisFrameUpdated() => Schema.Update(_Handle, 0x66D7920D6BF897BD);
     public void LeaderUpdated() => Schema.Update(_Handle, 0x66D7920D658B4E84);
 }

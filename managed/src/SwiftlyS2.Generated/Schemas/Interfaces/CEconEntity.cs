@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEconEntity : CBaseAnimGraph, ISchemaClass<CEconEntity>
 {
     static CEconEntity ISchemaClass<CEconEntity>.From(nint handle) => new CEconEntityImpl(handle);
-    static int ISchemaClass<CEconEntity>.Size => 3184;
+    static int ISchemaClass<CEconEntity>.Size => 3216;
     static string? ISchemaClass<CEconEntity>.ClassName => null;
 
 

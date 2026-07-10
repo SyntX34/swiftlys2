@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSkeletonInstance : CGameSceneNode, ISchemaClass<CSkeletonInstance>
 {
     static CSkeletonInstance ISchemaClass<CSkeletonInstance>.From(nint handle) => new CSkeletonInstanceImpl(handle);
-    static int ISchemaClass<CSkeletonInstance>.Size => 1056;
+    static int ISchemaClass<CSkeletonInstance>.Size => 1120;
     static string? ISchemaClass<CSkeletonInstance>.ClassName => null;
 
 
@@ -21,11 +21,9 @@ public partial interface CSkeletonInstance : CGameSceneNode, ISchemaClass<CSkele
 
     public ref bool DisableSolidCollisionsForHierarchy { get; }
 
-    // bitfield
-    public SchemaUntypedField DirtyMotionType { get; }
+    public ref bool DirtyMotionType { get; }
 
-    // bitfield
-    public SchemaUntypedField IsGeneratingLatchedParentSpaceState { get; }
+    public ref bool IsGeneratingLatchedParentSpaceState { get; }
 
     public ref CUtlStringToken MaterialGroup { get; }
 

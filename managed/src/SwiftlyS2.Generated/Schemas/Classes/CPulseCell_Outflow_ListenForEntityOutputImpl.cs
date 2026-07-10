@@ -26,16 +26,6 @@ internal partial class CPulseCell_Outflow_ListenForEntityOutputImpl : CPulseCell
             return new SignatureOutflow_ResumeImpl(_Handle + _OnFiredOffset!.Value);
         }
     }
-    private static nint? _OnCanceledOffset;
-
-    public CPulse_ResumePoint OnCanceled
-    {
-        get
-        {
-            _OnCanceledOffset = _OnCanceledOffset ?? Schema.GetOffset(0xCB351637F02162DB);
-            return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
-        }
-    }
     private static nint? _StrEntityOutputOffset;
 
     public ref CGlobalSymbol StrEntityOutput

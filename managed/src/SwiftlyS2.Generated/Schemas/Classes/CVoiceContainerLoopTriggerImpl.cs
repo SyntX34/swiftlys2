@@ -16,16 +16,6 @@ internal partial class CVoiceContainerLoopTriggerImpl : CVoiceContainerBaseImpl,
 {
     public CVoiceContainerLoopTriggerImpl(nint handle) : base(handle) { }
 
-    private static nint? _SoundOffset;
-
-    public CSoundContainerReference Sound
-    {
-        get
-        {
-            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x1A1BEAF4E1C4FB4);
-            return new CSoundContainerReferenceImpl(_Handle + _SoundOffset!.Value);
-        }
-    }
     private static nint? _RetriggerTimeMinOffset;
 
     public ref float RetriggerTimeMin
@@ -64,6 +54,16 @@ internal partial class CVoiceContainerLoopTriggerImpl : CVoiceContainerBaseImpl,
         {
             _CrossFadeOffset = _CrossFadeOffset ?? Schema.GetOffset(0x1A1BEAF64BEC665);
             return ref _Handle.AsRef<bool>(_CrossFadeOffset!.Value);
+        }
+    }
+    private static nint? _SoundOffset;
+
+    public CSoundContainerReference Sound
+    {
+        get
+        {
+            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x1A1BEAF4E1C4FB4);
+            return new CSoundContainerReferenceImpl(_Handle + _SoundOffset!.Value);
         }
     }
 

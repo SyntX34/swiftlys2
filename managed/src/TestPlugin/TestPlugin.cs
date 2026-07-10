@@ -488,10 +488,26 @@ public class TestPlugin : BasePlugin
         //     @event.Result = HookResult.Stop;
         // };
 
-        // Core.Event.OnTick += () => {
+        _ = Core.Command.RegisterCommand("takedmg", ( ctx ) =>
+        {
+            ctx.Sender!.TakeDamage(69f, DamageTypes_t.DMG_BULLET, ctx.Sender!.Pawn, ctx.Sender!.Pawn);
+            ctx.Sender!.SendCenterHTML("hello there");
+        });
 
-        //   Console.WriteLine("TestPlugin OnTick");
-        // };
+        // CMsgSos
+
+
+        Core.NetMessage.HookServerMessage<CMsgSosStartSoundEvent>((msg) =>
+        {
+            Console.WriteLine(msg.SoundeventHash);
+            return HookResult.Continue;
+        });
+
+        Core.GameHooks.Entities.TakeDamage.Post += ( ref ctx ) =>
+        {
+            var player = (ctx.Params.Info.Attacker.Value as CCSPlayerPawn)!.ToPlayer()!;
+            Console.WriteLine($"TakeDamage Post - {player.Name} - {player.PressedButtons}");
+        };
 
         // Core.Event.OnEntityCreated += (ev) => {
         //   var entity = ev.Entity;
@@ -616,20 +632,20 @@ public class TestPlugin : BasePlugin
         if (targetAddress.HasValue)
         {
             _dispatchspawn = Core.Memory.GetUnmanagedFunctionByAddress<DispatchSpawnDelegate>(targetAddress.Value);
-            _ = _dispatchspawn.AddHook((next) =>
+            _ = _dispatchspawn.AddHook(( next ) =>
             {
-                return (pEntity, pKV) =>
+                return ( pEntity, pKV ) =>
                 {
-                    if(order == 0)
+                    if (order == 0)
                     {
                         sw = Stopwatch.StartNew();
                     }
                     order++;
-                    
+
                     var result = next()(pEntity, pKV);
 
                     order--;
-                    if(order == 0)
+                    if (order == 0)
                     {
                         sw.Stop();
                         Console.WriteLine($"DispatchSpawn took {sw.ElapsedTicks * 1_000_000 / Stopwatch.Frequency} us");
@@ -639,14 +655,14 @@ public class TestPlugin : BasePlugin
                 };
             });
 
-            for(var i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
             {
-                _ = _dispatchspawn.AddHook((next) =>
+                _ = _dispatchspawn.AddHook(( next ) =>
                 {
-                    return (pEntity, pKV) =>
+                    return ( pEntity, pKV ) =>
                     {
                         return next()(pEntity, pKV);
-                    }; 
+                    };
                 });
             }
         }
@@ -917,7 +933,10 @@ public class TestPlugin : BasePlugin
     [Command("dw")]
     public void DropWeaponTest( ICommandContext context )
     {
-        Console.WriteLine(Core.Localizer["test"]);
+        using var se = new SoundEvent();
+        se.Name = "Weapon_AK47.Single";
+        se.Recipients.AddAllPlayers();
+        se.Emit();
     }
 
     [Command("stats")]
@@ -1248,7 +1267,7 @@ public class TestPlugin : BasePlugin
         var pawnHealth = @event.UserIdPlayer.PlayerPawn!.Health;
         var eventHealth = @event.Health;
         Core.PlayerManager.SendChat($"OnPlayerHurt>> pawnHealth[{pawnHealth}], eventHealth[{eventHealth}], ActualHealth[{@event.ActualHealth}], ActualHitGroup[{@event.ActualHitGroup}]");
-        @event.ActualHitGroup = HitGroup_t.HITGROUP_HEAD;
+
         Core.PlayerManager.SendChat($"OnPlayerHurt>> newActualHitGroup[{@event.ActualHitGroup}]");
         return HookResult.Continue;
     }
@@ -1837,18 +1856,18 @@ public class TestPlugin : BasePlugin
     [Command("iue9rg")]
     public void SomethingCommand( ICommandContext context )
     {
-        foreach(var itemidx in a.Values)
+        foreach (var itemidx in a.Values)
         {
-            if(!CSVData.ContainsKey(itemidx))
+            if (!CSVData.ContainsKey(itemidx))
             {
                 _ = CSVData.TryAdd(itemidx, Core.Helpers.GetWeaponCSDataFromKey(itemidx)?.Address ?? 0);
-            } 
+            }
             else
             {
                 var addr = Core.Helpers.GetWeaponCSDataFromKey(itemidx)?.Address;
                 var storedAddr = CSVData[itemidx];
 
-                if(addr != storedAddr)
+                if (addr != storedAddr)
                 {
                     Console.WriteLine($"Data mismatch for item index {itemidx}: CSV address = {storedAddr}, current address = {addr}");
                 }

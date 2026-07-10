@@ -27,7 +27,8 @@ public partial interface CAmbientGeneric : CPointEntity, ISchemaClass<CAmbientGe
 
     public ref bool Looping { get; }
 
-    public string Sound { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField Sound { get; }
 
     public string SourceEntName { get; set; }
 

@@ -36,5 +36,15 @@ internal partial class C_OP_PointVectorAtNextParticleImpl : CParticleFunctionOpe
             return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
         }
     }
+    private static nint? _PreviousOffset;
+
+    public ref bool Previous
+    {
+        get
+        {
+            _PreviousOffset = _PreviousOffset ?? Schema.GetOffset(0xC209094C14318488);
+            return ref _Handle.AsRef<bool>(_PreviousOffset!.Value);
+        }
+    }
 
 }

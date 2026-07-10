@@ -61,34 +61,49 @@ internal partial class AI_BaseNPC_DebugSnapshotData_tImpl : DebugSnapshotBaseStr
             return ref _Handle.AsRef<CGlobalSymbol>(_S_current_taskOffset!.Value);
         }
     }
-    private static nint? _S_schedule_interrupt_reasonOffset;
+    private static nint? _S_prev_scheduleOffset;
 
-    public string S_schedule_interrupt_reason
+    public string S_prev_schedule
     {
         get
         {
-            _S_schedule_interrupt_reasonOffset = _S_schedule_interrupt_reasonOffset ?? Schema.GetOffset(0x92164B577BAA861F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_S_schedule_interrupt_reasonOffset!.Value));
+            _S_prev_scheduleOffset = _S_prev_scheduleOffset ?? Schema.GetOffset(0x92164B574799DD26);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_S_prev_scheduleOffset!.Value));
         }
         set
         {
-            _S_schedule_interrupt_reasonOffset = _S_schedule_interrupt_reasonOffset ?? Schema.GetOffset(0x92164B577BAA861F);
-            Schema.SetCUtlString(_Handle, _S_schedule_interrupt_reasonOffset!.Value, value);
+            _S_prev_scheduleOffset = _S_prev_scheduleOffset ?? Schema.GetOffset(0x92164B574799DD26);
+            Schema.SetCUtlString(_Handle, _S_prev_scheduleOffset!.Value, value);
         }
     }
-    private static nint? _S_schedule_fail_reasonOffset;
+    private static nint? _S_npc_current_movementOffset;
 
-    public string S_schedule_fail_reason
+    public string S_npc_current_movement
     {
         get
         {
-            _S_schedule_fail_reasonOffset = _S_schedule_fail_reasonOffset ?? Schema.GetOffset(0x92164B575216E5D4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_S_schedule_fail_reasonOffset!.Value));
+            _S_npc_current_movementOffset = _S_npc_current_movementOffset ?? Schema.GetOffset(0x92164B5740D0BBF4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_S_npc_current_movementOffset!.Value));
         }
         set
         {
-            _S_schedule_fail_reasonOffset = _S_schedule_fail_reasonOffset ?? Schema.GetOffset(0x92164B575216E5D4);
-            Schema.SetCUtlString(_Handle, _S_schedule_fail_reasonOffset!.Value, value);
+            _S_npc_current_movementOffset = _S_npc_current_movementOffset ?? Schema.GetOffset(0x92164B5740D0BBF4);
+            Schema.SetCUtlString(_Handle, _S_npc_current_movementOffset!.Value, value);
+        }
+    }
+    private static nint? _S_last_task_end_locationOffset;
+
+    public string S_last_task_end_location
+    {
+        get
+        {
+            _S_last_task_end_locationOffset = _S_last_task_end_locationOffset ?? Schema.GetOffset(0x92164B57CD46DB23);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_S_last_task_end_locationOffset!.Value));
+        }
+        set
+        {
+            _S_last_task_end_locationOffset = _S_last_task_end_locationOffset ?? Schema.GetOffset(0x92164B57CD46DB23);
+            Schema.SetCUtlString(_Handle, _S_last_task_end_locationOffset!.Value, value);
         }
     }
     private static nint? _ConditionsOffset;
@@ -111,24 +126,44 @@ internal partial class AI_BaseNPC_DebugSnapshotData_tImpl : DebugSnapshotBaseStr
             return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_Anim_eventsOffset!.Value);
         }
     }
-    private static nint? _E_action_body_sectionOffset;
+    private static nint? _AnimgraphOffset;
 
-    public ref CGlobalSymbol E_action_body_section
+    public AI_BaseNPCAnimGraph_DebugSnapshotData_t Animgraph
     {
         get
         {
-            _E_action_body_sectionOffset = _E_action_body_sectionOffset ?? Schema.GetOffset(0x92164B577B8FC620);
-            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_body_sectionOffset!.Value);
+            _AnimgraphOffset = _AnimgraphOffset ?? Schema.GetOffset(0x92164B57BA9B5054);
+            return new AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl(_Handle + _AnimgraphOffset!.Value);
         }
     }
-    private static nint? _E_movement_body_sectionOffset;
+    private static nint? _NavigatorOffset;
 
-    public ref CGlobalSymbol E_movement_body_section
+    public AI_Navigator_DebugSnapshotData_t Navigator
     {
         get
         {
-            _E_movement_body_sectionOffset = _E_movement_body_sectionOffset ?? Schema.GetOffset(0x92164B5725F85AA9);
-            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_body_sectionOffset!.Value);
+            _NavigatorOffset = _NavigatorOffset ?? Schema.GetOffset(0x92164B5702BB9C3E);
+            return new AI_Navigator_DebugSnapshotData_tImpl(_Handle + _NavigatorOffset!.Value);
+        }
+    }
+    private static nint? _MotorServicesOffset;
+
+    public AI_MotorServices_DebugSnapshotData_t MotorServices
+    {
+        get
+        {
+            _MotorServicesOffset = _MotorServicesOffset ?? Schema.GetOffset(0x92164B573FC09BDE);
+            return new AI_MotorServices_DebugSnapshotData_tImpl(_Handle + _MotorServicesOffset!.Value);
+        }
+    }
+    private static nint? _FacingServicesOffset;
+
+    public AI_FacingServices_DebugSnapshotData_t FacingServices
+    {
+        get
+        {
+            _FacingServicesOffset = _FacingServicesOffset ?? Schema.GetOffset(0x92164B57F3306973);
+            return new AI_FacingServices_DebugSnapshotData_tImpl(_Handle + _FacingServicesOffset!.Value);
         }
     }
 

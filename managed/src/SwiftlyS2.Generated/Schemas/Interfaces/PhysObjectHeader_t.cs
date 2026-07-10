@@ -21,7 +21,7 @@ public partial interface PhysObjectHeader_t : ISchemaClass<PhysObjectHeader_t>
 
     public string FieldName { get; set; }
 
-    public ref int Objects { get; }
+    public ref bool SaveObject { get; }
 
     public string ModelName { get; set; }
 

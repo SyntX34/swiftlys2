@@ -46,5 +46,15 @@ internal partial class CTriggerSaveImpl : CBaseTriggerImpl, CTriggerSave
             return ref _Handle.AsRef<int>(_MinHitPointsOffset!.Value);
         }
     }
+    private static nint? _RetriggerDelayOffset;
+
+    public ref float RetriggerDelay
+    {
+        get
+        {
+            _RetriggerDelayOffset = _RetriggerDelayOffset ?? Schema.GetOffset(0xFA0C03F32E33F01);
+            return ref _Handle.AsRef<float>(_RetriggerDelayOffset!.Value);
+        }
+    }
 
 }

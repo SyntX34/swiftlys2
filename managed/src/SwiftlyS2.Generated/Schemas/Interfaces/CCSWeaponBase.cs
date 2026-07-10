@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeaponBase>
 {
     static CCSWeaponBase ISchemaClass<CCSWeaponBase>.From(nint handle) => new CCSWeaponBaseImpl(handle);
-    static int ISchemaClass<CCSWeaponBase>.Size => 4144;
+    static int ISchemaClass<CCSWeaponBase>.Size => 4176;
     static string? ISchemaClass<CCSWeaponBase>.ClassName => "weapon_cs_base";
 
 
@@ -141,6 +141,7 @@ public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeap
     public void OriginalTeamNumberUpdated();
     public void MostRecentTeamNumberUpdated();
     public void DroppedNearBuyZoneUpdated();
+    public void CanBePickedUpUpdated();
     public void NextPrevOwnerUseTimeUpdated();
     public void PrevOwnerUpdated();
     public void DropTickUpdated();

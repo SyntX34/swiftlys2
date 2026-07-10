@@ -17,8 +17,6 @@ public partial interface CSndSeqInstBaseSchema : ISchemaClass<CSndSeqInstBaseSch
 
     public ref SndSeqInstrumentType_t Type { get; }
 
-    public ref SndSeqPlayerType_t PlayerType { get; }
-
     public ref bool StopCurrentEvents { get; }
 
     public ref float BPM { get; }

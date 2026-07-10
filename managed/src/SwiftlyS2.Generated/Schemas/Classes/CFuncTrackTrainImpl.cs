@@ -56,6 +56,16 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
             return ref _Handle.AsRef<QAngle>(_PrevOffset!.Value);
         }
     }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x416637FBC631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+        }
+    }
     private static nint? _ControlMinsOffset;
 
     public ref Vector ControlMins
@@ -168,77 +178,52 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
     }
     private static nint? _SoundMoveOffset;
 
-    public string SoundMove
+    public SchemaUntypedField SoundMove
     {
         get
         {
             _SoundMoveOffset = _SoundMoveOffset ?? Schema.GetOffset(0x416637FB73E14089);
-            return Schema.GetString(_Handle.Read<nint>(_SoundMoveOffset!.Value));
-        }
-        set
-        {
-            _SoundMoveOffset = _SoundMoveOffset ?? Schema.GetOffset(0x416637FB73E14089);
-            Schema.SetString(_Handle, _SoundMoveOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _SoundMoveOffset!.Value);
         }
     }
     private static nint? _SoundMovePingOffset;
 
-    public string SoundMovePing
+    public SchemaUntypedField SoundMovePing
     {
         get
         {
             _SoundMovePingOffset = _SoundMovePingOffset ?? Schema.GetOffset(0x416637FB68B489FD);
-            return Schema.GetString(_Handle.Read<nint>(_SoundMovePingOffset!.Value));
-        }
-        set
-        {
-            _SoundMovePingOffset = _SoundMovePingOffset ?? Schema.GetOffset(0x416637FB68B489FD);
-            Schema.SetString(_Handle, _SoundMovePingOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _SoundMovePingOffset!.Value);
         }
     }
     private static nint? _SoundStartOffset;
 
-    public string SoundStart
+    public SchemaUntypedField SoundStart
     {
         get
         {
             _SoundStartOffset = _SoundStartOffset ?? Schema.GetOffset(0x416637FB7CA15A30);
-            return Schema.GetString(_Handle.Read<nint>(_SoundStartOffset!.Value));
-        }
-        set
-        {
-            _SoundStartOffset = _SoundStartOffset ?? Schema.GetOffset(0x416637FB7CA15A30);
-            Schema.SetString(_Handle, _SoundStartOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _SoundStartOffset!.Value);
         }
     }
     private static nint? _SoundStopOffset;
 
-    public string SoundStop
+    public SchemaUntypedField SoundStop
     {
         get
         {
             _SoundStopOffset = _SoundStopOffset ?? Schema.GetOffset(0x416637FB34D8E0B4);
-            return Schema.GetString(_Handle.Read<nint>(_SoundStopOffset!.Value));
-        }
-        set
-        {
-            _SoundStopOffset = _SoundStopOffset ?? Schema.GetOffset(0x416637FB34D8E0B4);
-            Schema.SetString(_Handle, _SoundStopOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _SoundStopOffset!.Value);
         }
     }
     private static nint? _StrPathTargetOffset;
 
-    public string StrPathTarget
+    public SchemaUntypedField StrPathTarget
     {
         get
         {
             _StrPathTargetOffset = _StrPathTargetOffset ?? Schema.GetOffset(0x416637FB7AF8129A);
-            return Schema.GetString(_Handle.Read<nint>(_StrPathTargetOffset!.Value));
-        }
-        set
-        {
-            _StrPathTargetOffset = _StrPathTargetOffset ?? Schema.GetOffset(0x416637FB7AF8129A);
-            Schema.SetString(_Handle, _StrPathTargetOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _StrPathTargetOffset!.Value);
         }
     }
     private static nint? _MoveSoundMinDurationOffset;

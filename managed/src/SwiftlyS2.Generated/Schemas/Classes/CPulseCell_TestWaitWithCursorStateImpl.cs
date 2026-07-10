@@ -26,16 +26,6 @@ internal partial class CPulseCell_TestWaitWithCursorStateImpl : CPulseCell_BaseY
             return new CPulse_ResumePointImpl(_Handle + _WakeResumeOffset!.Value);
         }
     }
-    private static nint? _WakeCancelOffset;
-
-    public CPulse_ResumePoint WakeCancel
-    {
-        get
-        {
-            _WakeCancelOffset = _WakeCancelOffset ?? Schema.GetOffset(0xB1305BB47C373223);
-            return new CPulse_ResumePointImpl(_Handle + _WakeCancelOffset!.Value);
-        }
-    }
     private static nint? _WakeFailOffset;
 
     public CPulse_ResumePoint WakeFail

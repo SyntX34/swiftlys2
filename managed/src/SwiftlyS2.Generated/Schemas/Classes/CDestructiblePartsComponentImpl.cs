@@ -48,13 +48,12 @@ internal partial class CDestructiblePartsComponentImpl : SchemaClass, CDestructi
     }
     private static nint? _AnimGraphDestructibleGraphControllerOffset;
 
-    public CBaseAnimGraphDestructibleParts_GraphController? AnimGraphDestructibleGraphController
+    public CAnimGraphControllerPtr AnimGraphDestructibleGraphController
     {
         get
         {
             _AnimGraphDestructibleGraphControllerOffset = _AnimGraphDestructibleGraphControllerOffset ?? Schema.GetOffset(0xE69A9E5185A33CD0);
-            var ptr = _Handle.Read<nint>(_AnimGraphDestructibleGraphControllerOffset!.Value);
-            return ptr.IsValidPtr() ? new CBaseAnimGraphDestructibleParts_GraphControllerImpl(ptr) : null;
+            return new CAnimGraphControllerPtrImpl(_Handle + _AnimGraphDestructibleGraphControllerOffset!.Value);
         }
     }
 

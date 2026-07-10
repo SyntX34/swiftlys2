@@ -16,6 +16,26 @@ internal partial class RsStencilStateDesc_tImpl : SchemaClass, RsStencilStateDes
 {
     public RsStencilStateDesc_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _FrontStencilFuncOffset;
+
+    public SchemaUntypedField FrontStencilFunc
+    {
+        get
+        {
+            _FrontStencilFuncOffset = _FrontStencilFuncOffset ?? Schema.GetOffset(0xA65B7AC581FBEC02);
+            return new SchemaUntypedField(_Handle + _FrontStencilFuncOffset!.Value);
+        }
+    }
+    private static nint? _BackStencilFuncOffset;
+
+    public SchemaUntypedField BackStencilFunc
+    {
+        get
+        {
+            _BackStencilFuncOffset = _BackStencilFuncOffset ?? Schema.GetOffset(0xA65B7AC520B49048);
+            return new SchemaUntypedField(_Handle + _BackStencilFuncOffset!.Value);
+        }
+    }
     private static nint? _StencilEnableOffset;
 
     public SchemaUntypedField StencilEnable
@@ -56,16 +76,6 @@ internal partial class RsStencilStateDesc_tImpl : SchemaClass, RsStencilStateDes
             return new SchemaUntypedField(_Handle + _FrontStencilPassOpOffset!.Value);
         }
     }
-    private static nint? _FrontStencilFuncOffset;
-
-    public SchemaUntypedField FrontStencilFunc
-    {
-        get
-        {
-            _FrontStencilFuncOffset = _FrontStencilFuncOffset ?? Schema.GetOffset(0xA65B7AC581FBEC02);
-            return new SchemaUntypedField(_Handle + _FrontStencilFuncOffset!.Value);
-        }
-    }
     private static nint? _BackStencilFailOpOffset;
 
     public SchemaUntypedField BackStencilFailOp
@@ -94,16 +104,6 @@ internal partial class RsStencilStateDesc_tImpl : SchemaClass, RsStencilStateDes
         {
             _BackStencilPassOpOffset = _BackStencilPassOpOffset ?? Schema.GetOffset(0xA65B7AC51276F800);
             return new SchemaUntypedField(_Handle + _BackStencilPassOpOffset!.Value);
-        }
-    }
-    private static nint? _BackStencilFuncOffset;
-
-    public SchemaUntypedField BackStencilFunc
-    {
-        get
-        {
-            _BackStencilFuncOffset = _BackStencilFuncOffset ?? Schema.GetOffset(0xA65B7AC520B49048);
-            return new SchemaUntypedField(_Handle + _BackStencilFuncOffset!.Value);
         }
     }
     private static nint? _StencilReadMaskOffset;

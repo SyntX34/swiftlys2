@@ -18,32 +18,22 @@ internal partial class locksound_tImpl : SchemaClass, locksound_t
 
     private static nint? _LockedSoundOffset;
 
-    public string LockedSound
+    public SchemaUntypedField LockedSound
     {
         get
         {
             _LockedSoundOffset = _LockedSoundOffset ?? Schema.GetOffset(0xDAD0AE229881D7AB);
-            return Schema.GetString(_Handle.Read<nint>(_LockedSoundOffset!.Value));
-        }
-        set
-        {
-            _LockedSoundOffset = _LockedSoundOffset ?? Schema.GetOffset(0xDAD0AE229881D7AB);
-            Schema.SetString(_Handle, _LockedSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _LockedSoundOffset!.Value);
         }
     }
     private static nint? _UnlockedSoundOffset;
 
-    public string UnlockedSound
+    public SchemaUntypedField UnlockedSound
     {
         get
         {
             _UnlockedSoundOffset = _UnlockedSoundOffset ?? Schema.GetOffset(0xDAD0AE227EE88276);
-            return Schema.GetString(_Handle.Read<nint>(_UnlockedSoundOffset!.Value));
-        }
-        set
-        {
-            _UnlockedSoundOffset = _UnlockedSoundOffset ?? Schema.GetOffset(0xDAD0AE227EE88276);
-            Schema.SetString(_Handle, _UnlockedSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _UnlockedSoundOffset!.Value);
         }
     }
     private static nint? _FlwaitSoundOffset;

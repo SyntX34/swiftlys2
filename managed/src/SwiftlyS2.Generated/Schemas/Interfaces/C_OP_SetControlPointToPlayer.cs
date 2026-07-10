@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointToPlayer : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToPlayer>
 {
     static C_OP_SetControlPointToPlayer ISchemaClass<C_OP_SetControlPointToPlayer>.From(nint handle) => new C_OP_SetControlPointToPlayerImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointToPlayer>.Size => 504;
+    static int ISchemaClass<C_OP_SetControlPointToPlayer>.Size => 512;
     static string? ISchemaClass<C_OP_SetControlPointToPlayer>.ClassName => null;
 
 
@@ -22,6 +22,10 @@ public partial interface C_OP_SetControlPointToPlayer : CParticleFunctionPreEmis
     public ref bool OrientToEyes { get; }
 
     public ref ParticleEntityPos_t Position { get; }
+
+    public ref int RadiusCP { get; }
+
+    public ref int RadiusCPField { get; }
 
 
 }

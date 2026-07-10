@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerPush : CBaseTrigger, ISchemaClass<CTriggerPush>
 {
     static CTriggerPush ISchemaClass<CTriggerPush>.From(nint handle) => new CTriggerPushImpl(handle);
-    static int ISchemaClass<CTriggerPush>.Size => 2296;
+    static int ISchemaClass<CTriggerPush>.Size => 2336;
     static string? ISchemaClass<CTriggerPush>.ClassName => "trigger_push";
 
 
@@ -28,6 +28,8 @@ public partial interface CTriggerPush : CBaseTrigger, ISchemaClass<CTriggerPush>
     public ref CHandle<CPathSimple> PathSimple { get; }
 
     public ref uint SplinePushType { get; }
+
+    public ref float Speed { get; }
 
 
 }

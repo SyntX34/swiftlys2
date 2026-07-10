@@ -118,62 +118,42 @@ internal partial class CBaseDoorImpl : CBaseToggleImpl, CBaseDoor
     }
     private static nint? _NoiseMovingOffset;
 
-    public string NoiseMoving
+    public SchemaUntypedField NoiseMoving
     {
         get
         {
             _NoiseMovingOffset = _NoiseMovingOffset ?? Schema.GetOffset(0x798B70E7415AB84B);
-            return Schema.GetString(_Handle.Read<nint>(_NoiseMovingOffset!.Value));
-        }
-        set
-        {
-            _NoiseMovingOffset = _NoiseMovingOffset ?? Schema.GetOffset(0x798B70E7415AB84B);
-            Schema.SetString(_Handle, _NoiseMovingOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _NoiseMovingOffset!.Value);
         }
     }
     private static nint? _NoiseArrivedOffset;
 
-    public string NoiseArrived
+    public SchemaUntypedField NoiseArrived
     {
         get
         {
             _NoiseArrivedOffset = _NoiseArrivedOffset ?? Schema.GetOffset(0x798B70E7D2CDE47A);
-            return Schema.GetString(_Handle.Read<nint>(_NoiseArrivedOffset!.Value));
-        }
-        set
-        {
-            _NoiseArrivedOffset = _NoiseArrivedOffset ?? Schema.GetOffset(0x798B70E7D2CDE47A);
-            Schema.SetString(_Handle, _NoiseArrivedOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _NoiseArrivedOffset!.Value);
         }
     }
     private static nint? _NoiseMovingClosedOffset;
 
-    public string NoiseMovingClosed
+    public SchemaUntypedField NoiseMovingClosed
     {
         get
         {
             _NoiseMovingClosedOffset = _NoiseMovingClosedOffset ?? Schema.GetOffset(0x798B70E7ED56FC0F);
-            return Schema.GetString(_Handle.Read<nint>(_NoiseMovingClosedOffset!.Value));
-        }
-        set
-        {
-            _NoiseMovingClosedOffset = _NoiseMovingClosedOffset ?? Schema.GetOffset(0x798B70E7ED56FC0F);
-            Schema.SetString(_Handle, _NoiseMovingClosedOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _NoiseMovingClosedOffset!.Value);
         }
     }
     private static nint? _NoiseArrivedClosedOffset;
 
-    public string NoiseArrivedClosed
+    public SchemaUntypedField NoiseArrivedClosed
     {
         get
         {
             _NoiseArrivedClosedOffset = _NoiseArrivedClosedOffset ?? Schema.GetOffset(0x798B70E78637F9A6);
-            return Schema.GetString(_Handle.Read<nint>(_NoiseArrivedClosedOffset!.Value));
-        }
-        set
-        {
-            _NoiseArrivedClosedOffset = _NoiseArrivedClosedOffset ?? Schema.GetOffset(0x798B70E78637F9A6);
-            Schema.SetString(_Handle, _NoiseArrivedClosedOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _NoiseArrivedClosedOffset!.Value);
         }
     }
     private static nint? _ChainTargetOffset;
@@ -299,6 +279,16 @@ internal partial class CBaseDoorImpl : CBaseToggleImpl, CBaseDoor
         {
             _CreateNavObstacleOffset = _CreateNavObstacleOffset ?? Schema.GetOffset(0x798B70E71849970B);
             return ref _Handle.AsRef<bool>(_CreateNavObstacleOffset!.Value);
+        }
+    }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x798B70E7C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
         }
     }
     private static nint? _IsChainingOffset;

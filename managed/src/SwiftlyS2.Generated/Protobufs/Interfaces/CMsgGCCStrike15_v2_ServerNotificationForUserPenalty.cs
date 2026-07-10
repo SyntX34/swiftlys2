@@ -12,4 +12,5 @@ public interface CMsgGCCStrike15_v2_ServerNotificationForUserPenalty : ITypedPro
     public uint Reason { get; set; }
     public uint Seconds { get; set; }
     public bool CommunicationCooldown { get; set; }
+    public uint CheatingPenaltyLevel { get; set; }
 }

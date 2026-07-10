@@ -308,23 +308,22 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
     }
     private static nint? _GraphInstanceAG2Offset;
 
-    public CNmGraphInstance? GraphInstanceAG2
+    public CAnimGraph2InstancePtr GraphInstanceAG2
     {
         get
         {
             _GraphInstanceAG2Offset = _GraphInstanceAG2Offset ?? Schema.GetOffset(0xFA1FB81E1D1203E0);
-            var ptr = _Handle.Read<nint>(_GraphInstanceAG2Offset!.Value);
-            return ptr.IsValidPtr() ? new CNmGraphInstanceImpl(ptr) : null;
+            return new CAnimGraph2InstancePtrImpl(_Handle + _GraphInstanceAG2Offset!.Value);
         }
     }
     private static nint? _ExternalGraphsOffset;
 
-    public ref CUtlVector<ExternalAnimGraph_t> ExternalGraphs
+    public CExternalAnimGraphList ExternalGraphs
     {
         get
         {
             _ExternalGraphsOffset = _ExternalGraphsOffset ?? Schema.GetOffset(0xFA1FB81E932F0BC3);
-            return ref _Handle.AsRef<CUtlVector<ExternalAnimGraph_t>>(_ExternalGraphsOffset!.Value);
+            return new CExternalAnimGraphListImpl(_Handle + _ExternalGraphsOffset!.Value);
         }
     }
 

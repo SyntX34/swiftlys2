@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_Inflow_Yield : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Inflow_Yield>
 {
     static CPulseCell_Inflow_Yield ISchemaClass<CPulseCell_Inflow_Yield>.From(nint handle) => new CPulseCell_Inflow_YieldImpl(handle);
-    static int ISchemaClass<CPulseCell_Inflow_Yield>.Size => 144;
+    static int ISchemaClass<CPulseCell_Inflow_Yield>.Size => 288;
     static string? ISchemaClass<CPulseCell_Inflow_Yield>.ClassName => null;
 
 

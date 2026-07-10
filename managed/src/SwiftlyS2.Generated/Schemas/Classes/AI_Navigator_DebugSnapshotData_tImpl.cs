@@ -12,28 +12,28 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AI_Navigator_DebugSnapshotData_tImpl : DebugSnapshotBaseStructuredData_tImpl, AI_Navigator_DebugSnapshotData_t
+internal partial class AI_Navigator_DebugSnapshotData_tImpl : SchemaClass, AI_Navigator_DebugSnapshotData_t
 {
     public AI_Navigator_DebugSnapshotData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _S_npc_nav_authorityOffset;
+    private static nint? _S_movement_idOffset;
 
-    public ref CGlobalSymbol S_npc_nav_authority
+    public ref CGlobalSymbol S_movement_id
     {
         get
         {
-            _S_npc_nav_authorityOffset = _S_npc_nav_authorityOffset ?? Schema.GetOffset(0x48159FC64E3BA80A);
-            return ref _Handle.AsRef<CGlobalSymbol>(_S_npc_nav_authorityOffset!.Value);
+            _S_movement_idOffset = _S_movement_idOffset ?? Schema.GetOffset(0x48159FC62DEAD6BE);
+            return ref _Handle.AsRef<CGlobalSymbol>(_S_movement_idOffset!.Value);
         }
     }
-    private static nint? _S_goal_nav_search_idOffset;
+    private static nint? _S_movement_serial_numberOffset;
 
-    public ref CGlobalSymbol S_goal_nav_search_id
+    public ref uint S_movement_serial_number
     {
         get
         {
-            _S_goal_nav_search_idOffset = _S_goal_nav_search_idOffset ?? Schema.GetOffset(0x48159FC61EBF3C55);
-            return ref _Handle.AsRef<CGlobalSymbol>(_S_goal_nav_search_idOffset!.Value);
+            _S_movement_serial_numberOffset = _S_movement_serial_numberOffset ?? Schema.GetOffset(0x48159FC6B552A149);
+            return ref _Handle.AsRef<uint>(_S_movement_serial_numberOffset!.Value);
         }
     }
     private static nint? _S_goal_source_locationOffset;
@@ -51,24 +51,24 @@ internal partial class AI_Navigator_DebugSnapshotData_tImpl : DebugSnapshotBaseS
             Schema.SetCUtlString(_Handle, _S_goal_source_locationOffset!.Value, value);
         }
     }
-    private static nint? _Goal_actual_posOffset;
+    private static nint? _Last_waypoint_posOffset;
 
-    public ref Vector Goal_actual_pos
+    public ref Vector Last_waypoint_pos
     {
         get
         {
-            _Goal_actual_posOffset = _Goal_actual_posOffset ?? Schema.GetOffset(0x48159FC68DB5A388);
-            return ref _Handle.AsRef<Vector>(_Goal_actual_posOffset!.Value);
+            _Last_waypoint_posOffset = _Last_waypoint_posOffset ?? Schema.GetOffset(0x48159FC621F16944);
+            return ref _Handle.AsRef<Vector>(_Last_waypoint_posOffset!.Value);
         }
     }
-    private static nint? _Goal_base_posOffset;
+    private static nint? _Goal_locationOffset;
 
-    public ref Vector Goal_base_pos
+    public ref Vector Goal_location
     {
         get
         {
-            _Goal_base_posOffset = _Goal_base_posOffset ?? Schema.GetOffset(0x48159FC6FA337B3B);
-            return ref _Handle.AsRef<Vector>(_Goal_base_posOffset!.Value);
+            _Goal_locationOffset = _Goal_locationOffset ?? Schema.GetOffset(0x48159FC69DA1E84C);
+            return ref _Handle.AsRef<Vector>(_Goal_locationOffset!.Value);
         }
     }
     private static nint? _WaypointsOffset;
@@ -79,6 +79,16 @@ internal partial class AI_Navigator_DebugSnapshotData_tImpl : DebugSnapshotBaseS
         {
             _WaypointsOffset = _WaypointsOffset ?? Schema.GetOffset(0x48159FC67A0ABB2B);
             return ref _Handle.AsRef<CUtlVector<AI_Navigator_DebugSnapshotData_t__Waypoint_t>>(_WaypointsOffset!.Value);
+        }
+    }
+    private static nint? _S_arrival_movement_gait_setOffset;
+
+    public ref CGlobalSymbol S_arrival_movement_gait_set
+    {
+        get
+        {
+            _S_arrival_movement_gait_setOffset = _S_arrival_movement_gait_setOffset ?? Schema.GetOffset(0x48159FC6F533C81F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_S_arrival_movement_gait_setOffset!.Value);
         }
     }
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBeam : CBaseModelEntity, ISchemaClass<CBeam>
 {
     static CBeam ISchemaClass<CBeam>.From(nint handle) => new CBeamImpl(handle);
-    static int ISchemaClass<CBeam>.Size => 2056;
+    static int ISchemaClass<CBeam>.Size => 2064;
     static string? ISchemaClass<CBeam>.ClassName => "beam";
 
 
@@ -53,8 +53,6 @@ public partial interface CBeam : CBaseModelEntity, ISchemaClass<CBeam>
 
     public ref float Frame { get; }
 
-    public ref BeamClipStyle_t ClipStyle { get; }
-
     public ref bool TurnedOff { get; }
 
     public ref Vector EndPos { get; }
@@ -80,7 +78,6 @@ public partial interface CBeam : CBaseModelEntity, ISchemaClass<CBeam>
     public void StartFrameUpdated();
     public void SpeedUpdated();
     public void FrameUpdated();
-    public void ClipStyleUpdated();
     public void TurnedOffUpdated();
     public void EndPosUpdated();
 }

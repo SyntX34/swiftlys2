@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseTrigger : CBaseToggle, ISchemaClass<CBaseTrigger>
 {
     static CBaseTrigger ISchemaClass<CBaseTrigger>.From(nint handle) => new CBaseTriggerImpl(handle);
-    static int ISchemaClass<CBaseTrigger>.Size => 2248;
+    static int ISchemaClass<CBaseTrigger>.Size => 2280;
     static string? ISchemaClass<CBaseTrigger>.ClassName => "trigger";
 
 
@@ -28,6 +28,8 @@ public partial interface CBaseTrigger : CBaseToggle, ISchemaClass<CBaseTrigger>
     public ref CEntityIOOutput OnTouchingEachEntity { get; }
 
     public ref CEntityIOOutput OnNotTouching { get; }
+
+    public ref CEntityIOOutput OnTouchingChanged { get; }
 
     public ref CUtlVector<CHandle<CBaseEntity>> TouchingEntities { get; }
 

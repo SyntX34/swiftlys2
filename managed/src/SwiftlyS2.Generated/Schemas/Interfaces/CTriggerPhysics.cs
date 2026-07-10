@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerPhysics : CBaseTrigger, ISchemaClass<CTriggerPhysics>
 {
     static CTriggerPhysics ISchemaClass<CTriggerPhysics>.From(nint handle) => new CTriggerPhysicsImpl(handle);
-    static int ISchemaClass<CTriggerPhysics>.Size => 2344;
+    static int ISchemaClass<CTriggerPhysics>.Size => 2376;
     static string? ISchemaClass<CTriggerPhysics>.ClassName => "trigger_physics";
 
 

@@ -14,4 +14,5 @@ public interface CUserMessage_UserSentBugBug : ITypedProtobuf<CUserMessage_UserS
     public uint BuildId { get; set; }
     public int Osversion { get; set; }
     public string CommandLogs { get; set; }
+    public int BugbugNo { get; set; }
 }

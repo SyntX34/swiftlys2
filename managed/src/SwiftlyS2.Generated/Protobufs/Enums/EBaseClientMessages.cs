@@ -8,6 +8,5 @@ public enum EBaseClientMessages
     CM_DevPaletteVisibilityChanged = 283,
     CM_WorldUIControllerHasPanelChanged = 284,
     CM_RotateAnchor = 285,
-    CM_ListenForResponseFound = 286,
     CM_MAX_BASE = 300,
 }

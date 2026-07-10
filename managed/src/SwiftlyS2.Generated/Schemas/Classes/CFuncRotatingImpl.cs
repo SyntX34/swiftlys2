@@ -56,6 +56,16 @@ internal partial class CFuncRotatingImpl : CBaseModelEntityImpl, CFuncRotating
             return new SchemaUntypedField(_Handle + _LocalRotationVectorOffset!.Value);
         }
     }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x1A29EA94C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+        }
+    }
     private static nint? _FanFrictionOffset;
 
     public ref float FanFriction
@@ -118,17 +128,12 @@ internal partial class CFuncRotatingImpl : CBaseModelEntityImpl, CFuncRotating
     }
     private static nint? _NoiseRunningOffset;
 
-    public string NoiseRunning
+    public SchemaUntypedField NoiseRunning
     {
         get
         {
             _NoiseRunningOffset = _NoiseRunningOffset ?? Schema.GetOffset(0x1A29EA943C33F758);
-            return Schema.GetString(_Handle.Read<nint>(_NoiseRunningOffset!.Value));
-        }
-        set
-        {
-            _NoiseRunningOffset = _NoiseRunningOffset ?? Schema.GetOffset(0x1A29EA943C33F758);
-            Schema.SetString(_Handle, _NoiseRunningOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _NoiseRunningOffset!.Value);
         }
     }
     private static nint? _ReversedOffset;

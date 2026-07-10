@@ -48,32 +48,22 @@ internal partial class CFuncMoveLinearImpl : CBaseToggleImpl, CFuncMoveLinear
     }
     private static nint? _SoundStartOffset;
 
-    public string SoundStart
+    public SchemaUntypedField SoundStart
     {
         get
         {
             _SoundStartOffset = _SoundStartOffset ?? Schema.GetOffset(0xDC0EE894E2756078);
-            return Schema.GetString(_Handle.Read<nint>(_SoundStartOffset!.Value));
-        }
-        set
-        {
-            _SoundStartOffset = _SoundStartOffset ?? Schema.GetOffset(0xDC0EE894E2756078);
-            Schema.SetString(_Handle, _SoundStartOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _SoundStartOffset!.Value);
         }
     }
     private static nint? _SoundStopOffset;
 
-    public string SoundStop
+    public SchemaUntypedField SoundStop
     {
         get
         {
             _SoundStopOffset = _SoundStopOffset ?? Schema.GetOffset(0xDC0EE894E9EADD9C);
-            return Schema.GetString(_Handle.Read<nint>(_SoundStopOffset!.Value));
-        }
-        set
-        {
-            _SoundStopOffset = _SoundStopOffset ?? Schema.GetOffset(0xDC0EE894E9EADD9C);
-            Schema.SetString(_Handle, _SoundStopOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _SoundStopOffset!.Value);
         }
     }
     private static nint? _CurrentSoundOffset;
@@ -129,6 +119,16 @@ internal partial class CFuncMoveLinearImpl : CBaseToggleImpl, CFuncMoveLinear
         {
             _OnFullyClosedOffset = _OnFullyClosedOffset ?? Schema.GetOffset(0xDC0EE89475470294);
             return ref _Handle.AsRef<CEntityIOOutput>(_OnFullyClosedOffset!.Value);
+        }
+    }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xDC0EE894C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
         }
     }
     private static nint? _CreateMovableNavMeshOffset;

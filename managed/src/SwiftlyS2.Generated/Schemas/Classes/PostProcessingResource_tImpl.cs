@@ -146,5 +146,25 @@ internal partial class PostProcessingResource_tImpl : SchemaClass, PostProcessin
             return new PostProcessingFogScatteringParameters_tImpl(_Handle + _FogScatteringParamsOffset!.Value);
         }
     }
+    private static nint? _HasLocalExposureParamsOffset;
+
+    public ref bool HasLocalExposureParams
+    {
+        get
+        {
+            _HasLocalExposureParamsOffset = _HasLocalExposureParamsOffset ?? Schema.GetOffset(0x81127543713ED0F1);
+            return ref _Handle.AsRef<bool>(_HasLocalExposureParamsOffset!.Value);
+        }
+    }
+    private static nint? _LocalExposureParamsOffset;
+
+    public PostProcessingLocalExposureParameters_t LocalExposureParams
+    {
+        get
+        {
+            _LocalExposureParamsOffset = _LocalExposureParamsOffset ?? Schema.GetOffset(0x81127543A03A73BB);
+            return new PostProcessingLocalExposureParameters_tImpl(_Handle + _LocalExposureParamsOffset!.Value);
+        }
+    }
 
 }

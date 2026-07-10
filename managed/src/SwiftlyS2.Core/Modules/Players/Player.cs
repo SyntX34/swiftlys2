@@ -58,7 +58,20 @@ internal class Player : IPlayer, IDisposable
 
     public CCSPlayerPawn RequiredPlayerPawn => PlayerPawn is { IsValid: true } pawn ? pawn : throw new InvalidOperationException("PlayerPawn is not valid");
 
-    public GameButtonFlags PressedButtons { get { ThrowIfDisposed(); return (GameButtonFlags)NativePlayer.GetPressedButtons(Slot); } }
+    public GameButtonFlags PressedButtons {
+        get {
+            ThrowIfDisposed();
+
+            var pawn = PlayerPawn;
+            if (pawn == null || !pawn.IsValid) return GameButtonFlags.None;
+
+            var movementServices = pawn.MovementServices;
+            if (movementServices == null || !movementServices.IsValid) return GameButtonFlags.None;
+
+            var buttons = movementServices.Buttons;
+            return (GameButtonFlags)buttons.ButtonStates[0];
+        }
+    }
 
     public string IPAddress { get { ThrowIfDisposed(); return NativePlayer.GetIPAddress(Slot); } }
 

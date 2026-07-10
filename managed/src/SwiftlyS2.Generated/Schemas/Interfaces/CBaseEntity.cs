@@ -107,8 +107,6 @@ public partial interface CBaseEntity : CEntityInstance, ISchemaClass<CBaseEntity
 
     public ref int SentToClients { get; }
 
-    public ref float Speed { get; }
-
     public string UniqueHammerID { get; set; }
 
     public ref uint Spawnflags { get; }
@@ -209,7 +207,6 @@ public partial interface CBaseEntity : CEntityInstance, ISchemaClass<CBaseEntity
     public void ClientSideRagdollUpdated();
     public void InterpolationFrameUpdated();
     public void TeamNumUpdated();
-    public void SpeedUpdated();
     public void SpawnflagsUpdated();
     public void NextThinkTickUpdated();
     public void FlagsUpdated();

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPointClientUIWorldPanel : CBaseClientUIEntity, ISchemaClass<CPointClientUIWorldPanel>
 {
     static CPointClientUIWorldPanel ISchemaClass<CPointClientUIWorldPanel>.From(nint handle) => new CPointClientUIWorldPanelImpl(handle);
-    static int ISchemaClass<CPointClientUIWorldPanel>.Size => 2336;
+    static int ISchemaClass<CPointClientUIWorldPanel>.Size => 2352;
     static string? ISchemaClass<CPointClientUIWorldPanel>.ClassName => "point_clientui_world_panel";
 
 
@@ -63,6 +63,8 @@ public partial interface CPointClientUIWorldPanel : CBaseClientUIEntity, ISchema
 
     public ref int ExplicitImageLayout { get; }
 
+    public ref bool IgnoreParentOrientation { get; }
+
     public void IgnoreInputUpdated();
     public void LitUpdated();
     public void FollowPlayerAcrossTeleportUpdated();
@@ -87,4 +89,5 @@ public partial interface CPointClientUIWorldPanel : CBaseClientUIEntity, ISchema
     public void OnlyRenderToTextureUpdated();
     public void DisableMipGenUpdated();
     public void ExplicitImageLayoutUpdated();
+    public void IgnoreParentOrientationUpdated();
 }

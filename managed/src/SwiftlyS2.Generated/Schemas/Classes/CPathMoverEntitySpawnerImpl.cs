@@ -150,5 +150,30 @@ internal partial class CPathMoverEntitySpawnerImpl : CLogicalEntityImpl, CPathMo
             return ref _Handle.AsRef<CEntityIOOutput>(_OnTemplateGroupSpawnedOffset!.Value);
         }
     }
+    private static nint? _PathMoverNameOffset;
+
+    public string PathMoverName
+    {
+        get
+        {
+            _PathMoverNameOffset = _PathMoverNameOffset ?? Schema.GetOffset(0x384C46FF6D7B04A0);
+            return Schema.GetString(_Handle.Read<nint>(_PathMoverNameOffset!.Value));
+        }
+        set
+        {
+            _PathMoverNameOffset = _PathMoverNameOffset ?? Schema.GetOffset(0x384C46FF6D7B04A0);
+            Schema.SetString(_Handle, _PathMoverNameOffset!.Value, value);
+        }
+    }
+    private static nint? _PrepopulateOnSpawnOffset;
+
+    public ref bool PrepopulateOnSpawn
+    {
+        get
+        {
+            _PrepopulateOnSpawnOffset = _PrepopulateOnSpawnOffset ?? Schema.GetOffset(0x384C46FF09787B48);
+            return ref _Handle.AsRef<bool>(_PrepopulateOnSpawnOffset!.Value);
+        }
+    }
 
 }

@@ -11,13 +11,22 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_TestWaitWithCursorState__CursorState_t : ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>
 {
     static CPulseCell_TestWaitWithCursorState__CursorState_t ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>.From(nint handle) => new CPulseCell_TestWaitWithCursorState__CursorState_tImpl(handle);
-    static int ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>.Size => 8;
+    static int ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>.Size => 36;
     static string? ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>.ClassName => null;
 
 
     public ref float WaitValue { get; }
 
-    public ref bool FailOnCancel { get; }
+    public ref bool Fail { get; }
+
+    // HYieldedCursor
+    public SchemaUntypedField SelfCursor { get; }
+
+    // HPulseCellBase
+    public SchemaUntypedField SelfCellInstanceUntyped { get; }
+
+    // HPulseCell< CPulseCell_TestWaitWithCursorState >
+    public SchemaUntypedField SelfCellInstance { get; }
 
 
 }

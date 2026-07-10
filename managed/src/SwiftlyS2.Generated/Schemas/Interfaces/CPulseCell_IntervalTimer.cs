@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_IntervalTimer : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_IntervalTimer>
 {
     static CPulseCell_IntervalTimer ISchemaClass<CPulseCell_IntervalTimer>.From(nint handle) => new CPulseCell_IntervalTimerImpl(handle);
-    static int ISchemaClass<CPulseCell_IntervalTimer>.Size => 216;
+    static int ISchemaClass<CPulseCell_IntervalTimer>.Size => 360;
     static string? ISchemaClass<CPulseCell_IntervalTimer>.ClassName => null;
 
 

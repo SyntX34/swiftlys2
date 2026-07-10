@@ -81,5 +81,15 @@ internal partial class CFuncTrainImpl : CBasePlatTrainImpl, CFuncTrain
             Schema.SetString(_Handle, _LastTargetOffset!.Value, value);
         }
     }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xAAD8EE8EC631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+        }
+    }
 
 }

@@ -56,39 +56,14 @@ internal partial class AI_DefaultNPC_DebugSnapshotData_tImpl : DebugSnapshotBase
             return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_Tactic_interrupt_conditionsOffset!.Value);
         }
     }
-    private static nint? _S_npc_current_movementOffset;
+    private static nint? _Path_queryOffset;
 
-    public string S_npc_current_movement
+    public AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t Path_query
     {
         get
         {
-            _S_npc_current_movementOffset = _S_npc_current_movementOffset ?? Schema.GetOffset(0xADB6DBDF40D0BBF4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_S_npc_current_movementOffset!.Value));
-        }
-        set
-        {
-            _S_npc_current_movementOffset = _S_npc_current_movementOffset ?? Schema.GetOffset(0xADB6DBDF40D0BBF4);
-            Schema.SetCUtlString(_Handle, _S_npc_current_movementOffset!.Value, value);
-        }
-    }
-    private static nint? _Path_query_scheduleOffset;
-
-    public AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t Path_query_schedule
-    {
-        get
-        {
-            _Path_query_scheduleOffset = _Path_query_scheduleOffset ?? Schema.GetOffset(0xADB6DBDFF5614F37);
-            return new AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl(_Handle + _Path_query_scheduleOffset!.Value);
-        }
-    }
-    private static nint? _Path_query_tacticOffset;
-
-    public AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t Path_query_tactic
-    {
-        get
-        {
-            _Path_query_tacticOffset = _Path_query_tacticOffset ?? Schema.GetOffset(0xADB6DBDF929182E2);
-            return new AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl(_Handle + _Path_query_tacticOffset!.Value);
+            _Path_queryOffset = _Path_queryOffset ?? Schema.GetOffset(0xADB6DBDF39D1C6D9);
+            return new AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl(_Handle + _Path_queryOffset!.Value);
         }
     }
     private static nint? _Path_queries_speculativeOffset;

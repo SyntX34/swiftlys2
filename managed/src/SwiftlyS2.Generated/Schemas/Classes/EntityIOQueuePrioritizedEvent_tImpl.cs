@@ -86,16 +86,6 @@ internal partial class EntityIOQueuePrioritizedEvent_tImpl : SchemaClass, Entity
             return ref _Handle.AsRef<CHandle<CEntityInstance>>(_CallerOffset!.Value);
         }
     }
-    private static nint? _OutputIDOffset;
-
-    public ref int OutputID
-    {
-        get
-        {
-            _OutputIDOffset = _OutputIDOffset ?? Schema.GetOffset(0xE77B3E3348C5B285);
-            return ref _Handle.AsRef<int>(_OutputIDOffset!.Value);
-        }
-    }
     private static nint? _EntTargetOffset;
 
     public ref CHandle<CEntityInstance> EntTarget

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNPCPhysicsHull : ISchemaClass<CNPCPhysicsHull>
 {
     static CNPCPhysicsHull ISchemaClass<CNPCPhysicsHull>.From(nint handle) => new CNPCPhysicsHullImpl(handle);
-    static int ISchemaClass<CNPCPhysicsHull>.Size => 56;
+    static int ISchemaClass<CNPCPhysicsHull>.Size => 64;
     static string? ISchemaClass<CNPCPhysicsHull>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmSkeleton : ISchemaClass<CNmSkeleton>
 {
     static CNmSkeleton ISchemaClass<CNmSkeleton>.From(nint handle) => new CNmSkeletonImpl(handle);
-    static int ISchemaClass<CNmSkeleton>.Size => 192;
+    static int ISchemaClass<CNmSkeleton>.Size => 208;
     static string? ISchemaClass<CNmSkeleton>.ClassName => null;
 
 
@@ -30,6 +30,8 @@ public partial interface CNmSkeleton : ISchemaClass<CNmSkeleton>
     public ref CUtlLeanVector<NmBoneMaskSetDefinition_t, int> MaskDefinitions { get; }
 
     public ref CUtlLeanVector<CNmSkeleton__SecondarySkeleton_t, int> SecondarySkeletons { get; }
+
+    public ref CUtlLeanVector<CNmFloatChannelSet_t, int> FloatChannelSets { get; }
 
     public ref bool IsPropSkeleton { get; }
 

@@ -36,6 +36,26 @@ internal partial class CChoreoComponentImpl : SchemaClass, CChoreoComponent
             return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset!.Value);
         }
     }
+    private static nint? _ExernalChoreoGraphCountOffset;
+
+    public ref int ExernalChoreoGraphCount
+    {
+        get
+        {
+            _ExernalChoreoGraphCountOffset = _ExernalChoreoGraphCountOffset ?? Schema.GetOffset(0x1CE3A87345F5FE3);
+            return ref _Handle.AsRef<int>(_ExernalChoreoGraphCountOffset!.Value);
+        }
+    }
+    private static nint? _ActiveExternalChoreoGraphSlotIDOffset;
+
+    public ref CGlobalSymbol ActiveExternalChoreoGraphSlotID
+    {
+        get
+        {
+            _ActiveExternalChoreoGraphSlotIDOffset = _ActiveExternalChoreoGraphSlotIDOffset ?? Schema.GetOffset(0x1CE3A879B40121E);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ActiveExternalChoreoGraphSlotIDOffset!.Value);
+        }
+    }
     private static nint? _NextSceneEventIdOffset;
 
     public SceneEventId_t NextSceneEventId
@@ -44,16 +64,6 @@ internal partial class CChoreoComponentImpl : SchemaClass, CChoreoComponent
         {
             _NextSceneEventIdOffset = _NextSceneEventIdOffset ?? Schema.GetOffset(0x1CE3A873756F461);
             return new SceneEventId_tImpl(_Handle + _NextSceneEventIdOffset!.Value);
-        }
-    }
-    private static nint? _UpdateLayerPrioritiesOffset;
-
-    public ref bool UpdateLayerPriorities
-    {
-        get
-        {
-            _UpdateLayerPrioritiesOffset = _UpdateLayerPrioritiesOffset ?? Schema.GetOffset(0x1CE3A87446AC3B9);
-            return ref _Handle.AsRef<bool>(_UpdateLayerPrioritiesOffset!.Value);
         }
     }
     private static nint? _AllowResponsesEndTimeOffset;

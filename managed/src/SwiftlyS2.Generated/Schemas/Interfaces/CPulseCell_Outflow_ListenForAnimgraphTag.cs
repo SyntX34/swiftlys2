@@ -11,15 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_Outflow_ListenForAnimgraphTag : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Outflow_ListenForAnimgraphTag>
 {
     static CPulseCell_Outflow_ListenForAnimgraphTag ISchemaClass<CPulseCell_Outflow_ListenForAnimgraphTag>.From(nint handle) => new CPulseCell_Outflow_ListenForAnimgraphTagImpl(handle);
-    static int ISchemaClass<CPulseCell_Outflow_ListenForAnimgraphTag>.Size => 296;
+    static int ISchemaClass<CPulseCell_Outflow_ListenForAnimgraphTag>.Size => 368;
     static string? ISchemaClass<CPulseCell_Outflow_ListenForAnimgraphTag>.ClassName => null;
 
 
     public CPulse_ResumePoint OnStart { get; }
 
     public CPulse_ResumePoint OnEnd { get; }
-
-    public CPulse_ResumePoint OnCanceled { get; }
 
     public ref CGlobalSymbol TagName { get; }
 

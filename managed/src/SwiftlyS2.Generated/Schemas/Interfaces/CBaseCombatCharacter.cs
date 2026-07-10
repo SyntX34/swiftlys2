@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseCombatCharacter : CBaseAnimGraph, ISchemaClass<CBaseCombatCharacter>
 {
     static CBaseCombatCharacter ISchemaClass<CBaseCombatCharacter>.From(nint handle) => new CBaseCombatCharacterImpl(handle);
-    static int ISchemaClass<CBaseCombatCharacter>.Size => 2560;
+    static int ISchemaClass<CBaseCombatCharacter>.Size => 2608;
     static string? ISchemaClass<CBaseCombatCharacter>.ClassName => null;
 
 
@@ -25,7 +25,7 @@ public partial interface CBaseCombatCharacter : CBaseAnimGraph, ISchemaClass<CBa
 
     public ref bool DeathEventsDispatched { get; }
 
-    public ref CUtlVector<RelationshipOverride_t> VecRelationships { get; }
+    public ref CUtlVector<RelationshipOverride_t> Relationships { get; }
 
     public string StrRelationships { get; set; }
 

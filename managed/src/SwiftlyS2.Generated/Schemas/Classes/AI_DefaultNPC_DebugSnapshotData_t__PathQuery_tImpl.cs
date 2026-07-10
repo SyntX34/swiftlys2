@@ -16,24 +16,24 @@ internal partial class AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl : Sche
 {
     public AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _InitialQueryNameOffset;
+    private static nint? _InitialMovementIdOffset;
 
-    public ref CGlobalSymbol InitialQueryName
+    public ref CGlobalSymbol InitialMovementId
     {
         get
         {
-            _InitialQueryNameOffset = _InitialQueryNameOffset ?? Schema.GetOffset(0x694C69B77F206BB9);
-            return ref _Handle.AsRef<CGlobalSymbol>(_InitialQueryNameOffset!.Value);
+            _InitialMovementIdOffset = _InitialMovementIdOffset ?? Schema.GetOffset(0x694C69B73FDEDBCB);
+            return ref _Handle.AsRef<CGlobalSymbol>(_InitialMovementIdOffset!.Value);
         }
     }
-    private static nint? _CurrentQueryNameOffset;
+    private static nint? _CurrentMovementIdOffset;
 
-    public ref CGlobalSymbol CurrentQueryName
+    public ref CGlobalSymbol CurrentMovementId
     {
         get
         {
-            _CurrentQueryNameOffset = _CurrentQueryNameOffset ?? Schema.GetOffset(0x694C69B78AF41ACA);
-            return ref _Handle.AsRef<CGlobalSymbol>(_CurrentQueryNameOffset!.Value);
+            _CurrentMovementIdOffset = _CurrentMovementIdOffset ?? Schema.GetOffset(0x694C69B7009EA592);
+            return ref _Handle.AsRef<CGlobalSymbol>(_CurrentMovementIdOffset!.Value);
         }
     }
     private static nint? _ModeOffset;

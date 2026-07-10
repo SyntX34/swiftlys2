@@ -16,6 +16,26 @@ internal partial class CSceneObjectData__RTProxyDrawDescriptor_tImpl : SchemaCla
 {
     public CSceneObjectData__RTProxyDrawDescriptor_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _MaterialGroupTokenOffset;
+
+    public ref uint MaterialGroupToken
+    {
+        get
+        {
+            _MaterialGroupTokenOffset = _MaterialGroupTokenOffset ?? Schema.GetOffset(0x2393DBED97DE61E0);
+            return ref _Handle.AsRef<uint>(_MaterialGroupTokenOffset!.Value);
+        }
+    }
+    private static nint? _SrcDrawIndexOffset;
+
+    public ref int SrcDrawIndex
+    {
+        get
+        {
+            _SrcDrawIndexOffset = _SrcDrawIndexOffset ?? Schema.GetOffset(0x2393DBEDD5B73BD1);
+            return ref _Handle.AsRef<int>(_SrcDrawIndexOffset!.Value);
+        }
+    }
     private static nint? _DrawDescOffset;
 
     public CMaterialDrawDescriptor DrawDesc
@@ -74,6 +94,56 @@ internal partial class CSceneObjectData__RTProxyDrawDescriptor_tImpl : SchemaCla
         {
             _VertexAlbedoStrideOffset = _VertexAlbedoStrideOffset ?? Schema.GetOffset(0x2393DBED9FEA6463);
             return ref _Handle.AsRef<ushort>(_VertexAlbedoStrideOffset!.Value);
+        }
+    }
+    private static nint? _VertexEmissiveFormatOffset;
+
+    public ref VertexAlbedoFormat_t VertexEmissiveFormat
+    {
+        get
+        {
+            _VertexEmissiveFormatOffset = _VertexEmissiveFormatOffset ?? Schema.GetOffset(0x2393DBEDC37583AB);
+            return ref _Handle.AsRef<VertexAlbedoFormat_t>(_VertexEmissiveFormatOffset!.Value);
+        }
+    }
+    private static nint? _VertexEmissiveVBOffset;
+
+    public ref byte VertexEmissiveVB
+    {
+        get
+        {
+            _VertexEmissiveVBOffset = _VertexEmissiveVBOffset ?? Schema.GetOffset(0x2393DBED8F978608);
+            return ref _Handle.AsRef<byte>(_VertexEmissiveVBOffset!.Value);
+        }
+    }
+    private static nint? _VertexEmissiveOffsetOffset;
+
+    public ref ushort VertexEmissiveOffset
+    {
+        get
+        {
+            _VertexEmissiveOffsetOffset = _VertexEmissiveOffsetOffset ?? Schema.GetOffset(0x2393DBED5C499A1B);
+            return ref _Handle.AsRef<ushort>(_VertexEmissiveOffsetOffset!.Value);
+        }
+    }
+    private static nint? _VertexEmissiveStrideOffset;
+
+    public ref ushort VertexEmissiveStride
+    {
+        get
+        {
+            _VertexEmissiveStrideOffset = _VertexEmissiveStrideOffset ?? Schema.GetOffset(0x2393DBED5BD57FBD);
+            return ref _Handle.AsRef<ushort>(_VertexEmissiveStrideOffset!.Value);
+        }
+    }
+    private static nint? _EmissiveFactorOffset;
+
+    public ref float EmissiveFactor
+    {
+        get
+        {
+            _EmissiveFactorOffset = _EmissiveFactorOffset ?? Schema.GetOffset(0x2393DBED39C67965);
+            return ref _Handle.AsRef<float>(_EmissiveFactorOffset!.Value);
         }
     }
 

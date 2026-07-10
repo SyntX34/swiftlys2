@@ -11,35 +11,25 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRotator>
 {
     static CFuncRotator ISchemaClass<CFuncRotator>.From(nint handle) => new CFuncRotatorImpl(handle);
-    static int ISchemaClass<CFuncRotator>.Size => 2384;
+    static int ISchemaClass<CFuncRotator>.Size => 2288;
     static string? ISchemaClass<CFuncRotator>.ClassName => "func_rotator";
 
 
-    public ref CHandle<CBaseEntity> RotatorTarget { get; }
+    public ref CFuncRotator__Rotate_t RotateType { get; }
 
     public ref bool IsRotating { get; }
 
-    public ref bool IsReversing { get; }
+    public ref SolidType_t SolidType { get; }
 
-    public ref float TimeToReachMaxSpeed { get; }
+    public ref float Speed { get; }
 
-    public ref float TimeToReachZeroSpeed { get; }
+    public ref float TimeToCompleteRotation { get; }
 
-    public ref float DistanceAlongArcTraveled { get; }
+    public ref CHandle<CBaseEntity> RotatorTarget { get; }
 
-    public ref float TimeToWaitOscillate { get; }
+    public string StrRotatorTarget { get; set; }
 
-    public GameTime_t TimeRotationStart { get; }
-
-    public ref Quaternion LSPrevChange { get; }
-
-    public ref Quaternion WSPrev { get; }
-
-    public ref Quaternion WSInit { get; }
-
-    public ref Quaternion LSInit { get; }
-
-    public ref Quaternion LSOrientation { get; }
+    public ref CUtlVector<Quaternion> LocalRotationHistory { get; }
 
     public ref CEntityIOOutput OnRotationStarted { get; }
 
@@ -55,47 +45,54 @@ public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRota
 
     public ref CEntityIOOutput OnOscillateEndDepart { get; }
 
-    public ref bool OscillateDepart { get; }
+    public GameTick_t TickRotateRan { get; }
 
-    public ref int OscillateCount { get; }
+    public ref bool StartedRotating { get; }
 
-    public ref CFuncRotator__Rotate_t RotateType { get; }
+    public FuncRotatorRotationSummary_t RotationSummary { get; }
 
-    public ref CFuncRotator__Rotate_t PrevRotateType { get; }
+    public ref float TimeToReachMaxSpeed { get; }
 
-    public ref bool HasTargetOverride { get; }
+    public ref float TimeToReachZeroSpeed { get; }
 
-    public ref Quaternion OrientationOverride { get; }
+    public GameTime_t TimeRotationStart { get; }
 
-    public ref RotatorTargetSpace_t SpaceOverride { get; }
+    public GameTime_t TimeRotationStop { get; }
 
-    public ref QAngle AngularVelocity { get; }
+    public ref float StartSpeed { get; }
 
-    public ref Vector LookAtForcedUp { get; }
-
-    public string StrRotatorTarget { get; set; }
+    public ref Quaternion SpawnOrientation { get; }
 
     public ref bool RecordHistory { get; }
 
-    public ref CUtlVector<RotatorHistoryEntry_t> RotatorHistory { get; }
+    public ref bool ReturningToPreviousRotation { get; }
 
-    public ref bool ReturningToPreviousOrientation { get; }
-
-    public ref CUtlVector<RotatorQueueEntry_t> RotatorQueue { get; }
-
-    public ref CUtlVector<RotatorHistoryEntry_t> RotatorQueueHistory { get; }
-
-    public ref SolidType_t SolidType { get; }
-
-    public ref CHandle<CFuncMover> SpeedFromMover { get; }
-
-    public string SpeedFromMover1 { get; set; }
-
-    public ref float SpeedScale { get; }
+    public ref bool ReturningToInitialRotation { get; }
 
     public ref float MinYawRotation { get; }
 
     public ref float MaxYawRotation { get; }
+
+    public ref int OscillationCount { get; }
+
+    public ref bool OscillationFromStart { get; }
+
+    // CGameSoundEventName
+    public SchemaUntypedField StartSound { get; }
+
+    // CGameSoundEventName
+    public SchemaUntypedField LoopSound { get; }
+
+    // CGameSoundEventName
+    public SchemaUntypedField StopSound { get; }
+
+    public ref float TargetAngle { get; }
+
+    public ref float CurrentAngle { get; }
+
+    public ref CFuncRotator__RotationAxis_t RotationAxis { get; }
+
+    public ref float SpeedDriftFromOverRotate { get; }
 
 
 }

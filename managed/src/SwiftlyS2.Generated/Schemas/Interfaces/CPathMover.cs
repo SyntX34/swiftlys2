@@ -11,15 +11,21 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPathMover : CPathWithDynamicNodes, ISchemaClass<CPathMover>
 {
     static CPathMover ISchemaClass<CPathMover>.From(nint handle) => new CPathMoverImpl(handle);
-    static int ISchemaClass<CPathMover>.Size => 1568;
+    static int ISchemaClass<CPathMover>.Size => 1600;
     static string? ISchemaClass<CPathMover>.ClassName => "path_mover";
 
 
     public ref CUtlVector<CHandle<CFuncMover>> Movers { get; }
 
-    public ref CHandle<CPathMoverEntitySpawner> MoverSpawner { get; }
+    public ref CUtlVector<CHandle<CPathMoverEntitySpawner>> Spawners { get; }
 
     public string MoverSpawnerName { get; set; }
+
+    public ref CHandle<CFuncMoverRouter> MoverRouter { get; }
+
+    public string MoverRouterName { get; set; }
+
+    public ref float SampleSpacing { get; }
 
 
 }

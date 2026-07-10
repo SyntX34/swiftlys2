@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface PhysFeModelDesc_t : ISchemaClass<PhysFeModelDesc_t>
 {
     static PhysFeModelDesc_t ISchemaClass<PhysFeModelDesc_t>.From(nint handle) => new PhysFeModelDesc_tImpl(handle);
-    static int ISchemaClass<PhysFeModelDesc_t>.Size => 1760;
+    static int ISchemaClass<PhysFeModelDesc_t>.Size => 1784;
     static string? ISchemaClass<PhysFeModelDesc_t>.ClassName => null;
 
 
@@ -80,6 +80,8 @@ public partial interface PhysFeModelDesc_t : ISchemaClass<PhysFeModelDesc_t>
     public ref CUtlVector<uint> AntiTunnelBytecode { get; }
 
     public ref CUtlVector<FeDynKinLink_t> DynKinLinks { get; }
+
+    public ref CUtlVector<FeBoneMergeLink_t> BoneMergeLinks { get; }
 
     public ref CUtlVector<FeAntiTunnelProbe_t> AntiTunnelProbes { get; }
 

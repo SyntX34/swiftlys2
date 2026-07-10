@@ -11,9 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVSound : ISchemaClass<CVSound>
 {
     static CVSound ISchemaClass<CVSound>.From(nint handle) => new CVSoundImpl(handle);
-    static int ISchemaClass<CVSound>.Size => 120;
+    static int ISchemaClass<CVSound>.Size => 64;
     static string? ISchemaClass<CVSound>.ClassName => null;
 
+
+    public ref CUtlLeanVector<CAudioSentence, int> Sentences { get; }
 
     public ref int Rate { get; }
 
@@ -27,15 +29,9 @@ public partial interface CVSound : ISchemaClass<CVSound>
 
     public ref float Duration { get; }
 
-    public ref CUtlVector<CAudioSentence> Sentences { get; }
-
     public ref uint StreamingSize { get; }
 
-    public ref CUtlVector<int> SeekTable { get; }
-
     public ref int LoopEnd { get; }
-
-    public ref CUtlBinaryBlock EncodedHeader { get; }
 
 
 }

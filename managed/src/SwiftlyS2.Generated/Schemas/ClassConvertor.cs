@@ -6,10 +6,8 @@ internal static class ClassConvertor
 {
     public static CEntityInstance ConvertEntityByDesignerName( nint address, string designerName )
     {
-        return designerName switch
-        {
+        return designerName switch {
             "func_nav_avoidance_obstacle" => new CFuncNavObstructionImpl(address),
-            "script_nav_blocker" => new CScriptNavBlockerImpl(address),
             "wearable_item" => new CEconWearableImpl(address),
             "trigger_detect_explosion" => new CTriggerDetectExplosionImpl(address),
             "trigger_detect_bullet_fire" => new CTriggerDetectBulletFireImpl(address),
@@ -22,7 +20,6 @@ internal static class ClassConvertor
             "ai_changehintgroup" => new CAI_ChangeHintGroupImpl(address),
             "trigger_gravity" => new CTriggerGravityImpl(address),
             "trigger_autosave" => new CTriggerSaveImpl(address),
-            "trigger_togglesave" => new CTriggerToggleSaveImpl(address),
             "info_teleport_destination" => new CInfoTeleportDestinationImpl(address),
             "script_trigger_push" => new CScriptTriggerPushImpl(address),
             "trigger_push" => new CTriggerPushImpl(address),
@@ -58,6 +55,7 @@ internal static class ClassConvertor
             "func_proprrespawnzone" => new CFuncPropRespawnZoneImpl(address),
             "prop_dynamic_ornament" => new COrnamentPropImpl(address),
             "point_enable_motion_fixup" => new CEnableMotionFixupImpl(address),
+            "prop_door_rotating" => new CPropDoorRotatingBreakableImpl(address),
             "point_teleport" => new CPointTeleportImpl(address),
             "point_hurt" => new CPointHurtImpl(address),
             "point_velocitysensor" => new CPointVelocitySensorImpl(address),
@@ -124,6 +122,8 @@ internal static class ClassConvertor
             "logic_measure_movement" => new CLogicMeasureMovementImpl(address),
             "trigger_game_event" => new CTriggerGameEventImpl(address),
             "logic_gameevent_listener" => new CLogicGameEventListenerImpl(address),
+            "logic_gamestate_report" => new CLogicGameStateReportImpl(address),
+            "logic_activityevent" => new CLogicActivityEventImpl(address),
             "logic_achievement" => new CLogicAchievementImpl(address),
             "scripted_item_drop" => new CScriptItemImpl(address),
             "info_spawngroup_load_unload" => new CInfoSpawnGroupLoadUnloadImpl(address),
@@ -180,7 +180,6 @@ internal static class ClassConvertor
             "hl_vr_texture_based_animatable" => new CTextureBasedAnimatableImpl(address),
             "info_particle_system" => new CParticleSystemImpl(address),
             "env_particle_glow" => new CEnvParticleGlowImpl(address),
-            "info_interaction" => new CInfoInteractionImpl(address),
             "point_gamestats_counter" => new CPointGamestatsCounterImpl(address),
             "filter_activator_class" => new CFilterClassImpl(address),
             "filter_los" => new CFilterLOSImpl(address),
@@ -269,6 +268,7 @@ internal static class ClassConvertor
             "team_intro_terrorist" => new CCSGO_TeamIntroTerroristPositionImpl(address),
             "team_select_counterterrorist" => new CCSGO_TeamSelectCounterTerroristPositionImpl(address),
             "team_select_terrorist" => new CCSGO_TeamSelectTerroristPositionImpl(address),
+            "team_preview_character_position" => new CCSGO_TeamPreviewCharacterPositionImpl(address),
             "cs_pet_placement" => new CCSPetPlacementImpl(address),
             "cs_minimap_boundary" => new CCSMinimapBoundaryImpl(address),
             "func_retakebarrier" => new CFuncRetakeBarrierImpl(address),
@@ -283,6 +283,7 @@ internal static class ClassConvertor
             "pulse_game_blackboard" => new CPulseGameBlackboardImpl(address),
             "fog_volume" => new CFogVolumeImpl(address),
             "info_nav_space" => new CNavSpaceInfoImpl(address),
+            "script_nav_blocker" => new CScriptNavBlockerImpl(address),
             "func_nav_blocker" => new CFuncNavBlockerImpl(address),
             "point_nav_walkable" => new CNavWalkableImpl(address),
             "waterbullet" => new CWaterBulletImpl(address),
@@ -333,6 +334,7 @@ internal static class ClassConvertor
             "func_rotating" => new CFuncRotatingImpl(address),
             "func_mover" => new CFuncMoverImpl(address),
             "path_mover" => new CPathMoverImpl(address),
+            "func_mover_router" => new CFuncMoverRouterImpl(address),
             "path_mover_entity_spawner" => new CPathMoverEntitySpawnerImpl(address),
             "path_node_mover" => new CMoverPathNodeImpl(address),
             "func_movelinear" => new CFuncMoveLinearImpl(address),
@@ -366,6 +368,7 @@ internal static class ClassConvertor
             "snd_opvar_set_path_corner" => new CSoundOpvarSetPathCornerEntityImpl(address),
             "snd_opvar_set_obb" => new CSoundOpvarSetOBBEntityImpl(address),
             "snd_opvar_set_aabb" => new CSoundOpvarSetAABBEntityImpl(address),
+            "snd_opvar_set_box_base" => new CSoundOpvarSetBoxEntityImpl(address),
             "snd_opvar_set_point" => new CSoundOpvarSetPointEntityImpl(address),
             "snd_opvar_set_point_base" => new CSoundOpvarSetPointBaseImpl(address),
             "func_shatterglass" => new CFuncShatterglassImpl(address),
@@ -447,6 +450,7 @@ internal static class ClassConvertor
             "trigger_bomb_reset" => new CTriggerBombResetImpl(address),
             "cs_team_manager" => new CCSTeamImpl(address),
             "point_script" => new CCSPointScriptEntityImpl(address),
+            "player_pawn_base" => new CCSPlayerPawnBaseImpl(address),
             "player" => new CCSPlayerPawnImpl(address),
             "env_cs_place" => new CCSPlaceImpl(address),
             "observer" => new CCSObserverPawnImpl(address),
@@ -467,6 +471,7 @@ internal static class ClassConvertor
             "phys_hinge_local" => new CPhysHingeImpl(address),
             "momentary_door" => new CFuncMoveLinearImpl(address),
             "func_useableladder" => new CFuncLadderImpl(address),
+            "baseanimating" => new CBaseAnimGraphImpl(address),
             "path_particle_rope_clientside" => new CPathParticleRopeImpl(address),
             "cable_dynamic" => new CDynamicPropImpl(address),
             "prop_dynamic_override" => new CDynamicPropImpl(address),
@@ -476,9 +481,9 @@ internal static class ClassConvertor
             "snd_soundscape_proxy" => new CEnvSoundscapeProxyImpl(address),
             "snd_event_point" => new CSoundEventEntityImpl(address),
             "env_tonemap_controller2" => new CTonemapController2Impl(address),
+            "func_combined_light_probe_volume" => new CEnvCombinedLightProbeVolumeImpl(address),
             "info_hostage_spawn" => new CHostageImpl(address),
             "item_defuser" => new CItemDefuserImpl(address),
-            "prop_door_rotating" => new CPropDoorRotatingImpl(address),
             _ => new CEntityInstanceImpl(address),
         };
     }

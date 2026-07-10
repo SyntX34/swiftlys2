@@ -601,5 +601,30 @@ internal partial class C_OP_RenderModelsImpl : CParticleFunctionRendererImpl, C_
             return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
         }
     }
+    private static nint? _StrLightStyleOffset;
+
+    public string StrLightStyle
+    {
+        get
+        {
+            _StrLightStyleOffset = _StrLightStyleOffset ?? Schema.GetOffset(0xC58C7B1379803489);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrLightStyleOffset!.Value));
+        }
+        set
+        {
+            _StrLightStyleOffset = _StrLightStyleOffset ?? Schema.GetOffset(0xC58C7B1379803489);
+            Schema.SetCUtlString(_Handle, _StrLightStyleOffset!.Value, value);
+        }
+    }
+    private static nint? _LightStyleTimeOffset;
+
+    public CPerParticleFloatInput LightStyleTime
+    {
+        get
+        {
+            _LightStyleTimeOffset = _LightStyleTimeOffset ?? Schema.GetOffset(0xC58C7B13260C525B);
+            return new CPerParticleFloatInputImpl(_Handle + _LightStyleTimeOffset!.Value);
+        }
+    }
 
 }

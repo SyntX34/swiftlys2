@@ -11,12 +11,18 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPrecipitationVData : CEntitySubclassVDataBase, ISchemaClass<CPrecipitationVData>
 {
     static CPrecipitationVData ISchemaClass<CPrecipitationVData>.From(nint handle) => new CPrecipitationVDataImpl(handle);
-    static int ISchemaClass<CPrecipitationVData>.Size => 304;
+    static int ISchemaClass<CPrecipitationVData>.Size => 752;
     static string? ISchemaClass<CPrecipitationVData>.ClassName => null;
 
 
     // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
     public SchemaUntypedField ParticlePrecipitationEffect { get; }
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
+    public SchemaUntypedField ParticlePrecipitationPuddleEffect { get; }
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
+    public SchemaUntypedField ParticlePrecipitationPostEffect { get; }
 
     public ref float InnerDistance { get; }
 

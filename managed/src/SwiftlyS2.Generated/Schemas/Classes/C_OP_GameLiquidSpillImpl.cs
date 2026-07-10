@@ -36,6 +36,26 @@ internal partial class C_OP_GameLiquidSpillImpl : CParticleFunctionRendererImpl,
             return new CParticleCollectionFloatInputImpl(_Handle + _ExpirationTimeOffset!.Value);
         }
     }
+    private static nint? _RadiusOffset;
+
+    public CParticleCollectionFloatInput Radius
+    {
+        get
+        {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xB07185275ACFC08D);
+            return new CParticleCollectionFloatInputImpl(_Handle + _RadiusOffset!.Value);
+        }
+    }
+    private static nint? _CheckExposedToSkyOffset;
+
+    public ref bool CheckExposedToSky
+    {
+        get
+        {
+            _CheckExposedToSkyOffset = _CheckExposedToSkyOffset ?? Schema.GetOffset(0xB07185270385F99D);
+            return ref _Handle.AsRef<bool>(_CheckExposedToSkyOffset!.Value);
+        }
+    }
     private static nint? _AmountAttributeOffset;
 
     public ParticleAttributeIndex_t AmountAttribute

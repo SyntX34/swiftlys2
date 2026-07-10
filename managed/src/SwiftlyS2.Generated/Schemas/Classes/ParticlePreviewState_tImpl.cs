@@ -206,5 +206,15 @@ internal partial class ParticlePreviewState_tImpl : SchemaClass, ParticlePreview
             return ref _Handle.AsRef<Vector>(_PreviewGravityOffset!.Value);
         }
     }
+    private static nint? _PreviewWindOffset;
+
+    public ref Vector PreviewWind
+    {
+        get
+        {
+            _PreviewWindOffset = _PreviewWindOffset ?? Schema.GetOffset(0x31FB1901B95A8AE1);
+            return ref _Handle.AsRef<Vector>(_PreviewWindOffset!.Value);
+        }
+    }
 
 }

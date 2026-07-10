@@ -51,14 +51,14 @@ internal partial class PhysObjectHeader_tImpl : SchemaClass, PhysObjectHeader_t
             Schema.SetString(_Handle, _FieldNameOffset!.Value, value);
         }
     }
-    private static nint? _ObjectsOffset;
+    private static nint? _SaveObjectOffset;
 
-    public ref int Objects
+    public ref bool SaveObject
     {
         get
         {
-            _ObjectsOffset = _ObjectsOffset ?? Schema.GetOffset(0xBB54A900594B2767);
-            return ref _Handle.AsRef<int>(_ObjectsOffset!.Value);
+            _SaveObjectOffset = _SaveObjectOffset ?? Schema.GetOffset(0xBB54A9008FCC8DFF);
+            return ref _Handle.AsRef<bool>(_SaveObjectOffset!.Value);
         }
     }
     private static nint? _ModelNameOffset;

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmClip : ISchemaClass<CNmClip>
 {
     static CNmClip ISchemaClass<CNmClip>.From(nint handle) => new CNmClipImpl(handle);
-    static int ISchemaClass<CNmClip>.Size => 576;
+    static int ISchemaClass<CNmClip>.Size => 512;
     static string? ISchemaClass<CNmClip>.ClassName => null;
 
 
@@ -27,16 +27,11 @@ public partial interface CNmClip : ISchemaClass<CNmClip>
 
     public ref CUtlVector<uint> CompressedPoseOffsets { get; }
 
-    public ref CUtlVector<CGlobalSymbol> FloatCurveIDs { get; }
-
-    public ref CUtlVector<NmFloatCurveCompressionSettings_t> FloatCurveDefs { get; }
-
-    public ref CUtlVector<ushort> CompressedFloatCurveData { get; }
-
-    public ref CUtlVector<uint> CompressedFloatCurveOffsets { get; }
-
     // CUtlVectorFixedGrowable< CNmClip*, 1 >
     public SchemaUntypedField SecondaryAnimations { get; }
+
+    // CUtlVectorFixedGrowable< CNmFloatChannelData*, 2 >
+    public SchemaUntypedField FloatChannelData { get; }
 
     public CNmSyncTrack SyncTrack { get; }
 

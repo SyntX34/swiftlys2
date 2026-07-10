@@ -33,6 +33,8 @@ public partial interface CDecalInstance : ISchemaClass<CDecalInstance>
 
     public ref Vector NormalLS { get; }
 
+    public ref Vector NormalOS { get; }
+
     public ref Vector SAxisLS { get; }
 
     public ref DecalFlags_t Flags { get; }

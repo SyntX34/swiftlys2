@@ -76,5 +76,15 @@ internal partial class AggregateRTProxySceneObject_tImpl : SchemaClass, Aggregat
             return ref _Handle.AsRef<CUtlBinaryBlock>(_InstanceAlbedoDataOffset!.Value);
         }
     }
+    private static nint? _InstanceEmissiveDataOffset;
+
+    public ref CUtlBinaryBlock InstanceEmissiveData
+    {
+        get
+        {
+            _InstanceEmissiveDataOffset = _InstanceEmissiveDataOffset ?? Schema.GetOffset(0x5CA2907AEF293B85);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_InstanceEmissiveDataOffset!.Value);
+        }
+    }
 
 }

@@ -16,6 +16,16 @@ internal partial class C_OP_OrientTo2dDirectionImpl : CParticleFunctionOperatorI
 {
     public C_OP_OrientTo2dDirectionImpl(nint handle) : base(handle) { }
 
+    private static nint? _InputOffset;
+
+    public CPerParticleVecInput Input
+    {
+        get
+        {
+            _InputOffset = _InputOffset ?? Schema.GetOffset(0x2AC61F041EA0ED5B);
+            return new CPerParticleVecInputImpl(_Handle + _InputOffset!.Value);
+        }
+    }
     private static nint? _RotOffsetOffset;
 
     public ref float RotOffset

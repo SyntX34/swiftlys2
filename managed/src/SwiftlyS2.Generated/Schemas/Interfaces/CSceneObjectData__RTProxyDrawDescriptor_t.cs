@@ -11,9 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSceneObjectData__RTProxyDrawDescriptor_t : ISchemaClass<CSceneObjectData__RTProxyDrawDescriptor_t>
 {
     static CSceneObjectData__RTProxyDrawDescriptor_t ISchemaClass<CSceneObjectData__RTProxyDrawDescriptor_t>.From(nint handle) => new CSceneObjectData__RTProxyDrawDescriptor_tImpl(handle);
-    static int ISchemaClass<CSceneObjectData__RTProxyDrawDescriptor_t>.Size => 320;
+    static int ISchemaClass<CSceneObjectData__RTProxyDrawDescriptor_t>.Size => 352;
     static string? ISchemaClass<CSceneObjectData__RTProxyDrawDescriptor_t>.ClassName => null;
 
+
+    public ref uint MaterialGroupToken { get; }
+
+    public ref int SrcDrawIndex { get; }
 
     public CMaterialDrawDescriptor DrawDesc { get; }
 
@@ -26,6 +30,16 @@ public partial interface CSceneObjectData__RTProxyDrawDescriptor_t : ISchemaClas
     public ref ushort VertexAlbedoOffset { get; }
 
     public ref ushort VertexAlbedoStride { get; }
+
+    public ref VertexAlbedoFormat_t VertexEmissiveFormat { get; }
+
+    public ref byte VertexEmissiveVB { get; }
+
+    public ref ushort VertexEmissiveOffset { get; }
+
+    public ref ushort VertexEmissiveStride { get; }
+
+    public ref float EmissiveFactor { get; }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncTrackTrain : CBaseModelEntity, ISchemaClass<CFuncTrackTrain>
 {
     static CFuncTrackTrain ISchemaClass<CFuncTrackTrain>.From(nint handle) => new CFuncTrackTrainImpl(handle);
-    static int ISchemaClass<CFuncTrackTrain>.Size => 2192;
+    static int ISchemaClass<CFuncTrackTrain>.Size => 2200;
     static string? ISchemaClass<CFuncTrackTrain>.ClassName => "func_tracktrain";
 
 
@@ -22,6 +22,8 @@ public partial interface CFuncTrackTrain : CBaseModelEntity, ISchemaClass<CFuncT
     public ref Vector PosPrev { get; }
 
     public ref QAngle Prev { get; }
+
+    public ref float Speed { get; }
 
     public ref Vector ControlMins { get; }
 
@@ -45,15 +47,20 @@ public partial interface CFuncTrackTrain : CBaseModelEntity, ISchemaClass<CFuncT
 
     public ref float Dir { get; }
 
-    public string SoundMove { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundMove { get; }
 
-    public string SoundMovePing { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundMovePing { get; }
 
-    public string SoundStart { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundStart { get; }
 
-    public string SoundStop { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundStop { get; }
 
-    public string StrPathTarget { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField StrPathTarget { get; }
 
     public ref float MoveSoundMinDuration { get; }
 

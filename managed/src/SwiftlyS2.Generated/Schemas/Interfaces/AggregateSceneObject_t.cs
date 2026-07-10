@@ -25,6 +25,8 @@ public partial interface AggregateSceneObject_t : ISchemaClass<AggregateSceneObj
 
     public ref short VertexAlbedoStream { get; }
 
+    public ref short VertexEmissiveStream { get; }
+
     public ref CUtlVector<AggregateMeshInfo_t> AggregateMeshes { get; }
 
     public ref CUtlVector<AggregateLODSetup_t> LodSetups { get; }

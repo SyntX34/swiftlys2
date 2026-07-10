@@ -86,6 +86,16 @@ internal partial class DestructiblePartDamageRequest_tImpl : SchemaClass, Destru
             return ref _Handle.AsRef<float>(_BreakDamageRadiusOffset!.Value);
         }
     }
+    private static nint? _AttackerOffset;
+
+    public ref CHandle<CBaseEntity> Attacker
+    {
+        get
+        {
+            _AttackerOffset = _AttackerOffset ?? Schema.GetOffset(0x5336DA0768573D54);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttackerOffset!.Value);
+        }
+    }
     private static nint? _WsBreakDamageOriginOffset;
 
     public ref Vector WsBreakDamageOrigin

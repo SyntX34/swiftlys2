@@ -15,4 +15,6 @@ public enum EBaseGameEvents
     GE_SosSetSoundEventParams = 210,
     GE_SosSetLibraryStackFields = 211,
     GE_SosStopSoundEventHash = 212,
+    GE_ClothStiffenAnimEvent = 213,
+    GE_ClothEffectAnimEvent = 214,
 }

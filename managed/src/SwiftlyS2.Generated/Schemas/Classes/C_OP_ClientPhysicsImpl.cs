@@ -151,5 +151,25 @@ internal partial class C_OP_ClientPhysicsImpl : CParticleFunctionRendererImpl, C
             return ref _Handle.AsRef<ParticleAttrBoxFlags_t>(_ForcedStatusEffectsOffset!.Value);
         }
     }
+    private static nint? _NoCollisionAttributeOffset;
+
+    public ParticleAttributeIndex_t NoCollisionAttribute
+    {
+        get
+        {
+            _NoCollisionAttributeOffset = _NoCollisionAttributeOffset ?? Schema.GetOffset(0xD58F5C47EB328EB2);
+            return new ParticleAttributeIndex_tImpl(_Handle + _NoCollisionAttributeOffset!.Value);
+        }
+    }
+    private static nint? _ZeroGravityAttributeOffset;
+
+    public ParticleAttributeIndex_t ZeroGravityAttribute
+    {
+        get
+        {
+            _ZeroGravityAttributeOffset = _ZeroGravityAttributeOffset ?? Schema.GetOffset(0xD58F5C478415ACED);
+            return new ParticleAttributeIndex_tImpl(_Handle + _ZeroGravityAttributeOffset!.Value);
+        }
+    }
 
 }

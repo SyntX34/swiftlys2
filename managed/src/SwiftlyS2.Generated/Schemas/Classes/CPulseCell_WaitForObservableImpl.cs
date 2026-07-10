@@ -18,12 +18,12 @@ internal partial class CPulseCell_WaitForObservableImpl : CPulseCell_BaseYieldin
 
     private static nint? _ConditionOffset;
 
-    public PulseObservableBoolExpression_t Condition
+    public SchemaUntypedField Condition
     {
         get
         {
             _ConditionOffset = _ConditionOffset ?? Schema.GetOffset(0xE6EB02CD5F2A883E);
-            return new PulseObservableBoolExpression_tImpl(_Handle + _ConditionOffset!.Value);
+            return new SchemaUntypedField(_Handle + _ConditionOffset!.Value);
         }
     }
     private static nint? _OnTrueOffset;

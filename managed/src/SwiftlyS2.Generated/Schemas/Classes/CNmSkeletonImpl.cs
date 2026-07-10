@@ -96,6 +96,16 @@ internal partial class CNmSkeletonImpl : SchemaClass, CNmSkeleton
             return ref _Handle.AsRef<CUtlLeanVector<CNmSkeleton__SecondarySkeleton_t, int>>(_SecondarySkeletonsOffset!.Value);
         }
     }
+    private static nint? _FloatChannelSetsOffset;
+
+    public ref CUtlLeanVector<CNmFloatChannelSet_t, int> FloatChannelSets
+    {
+        get
+        {
+            _FloatChannelSetsOffset = _FloatChannelSetsOffset ?? Schema.GetOffset(0xC9232514FE339B8D);
+            return ref _Handle.AsRef<CUtlLeanVector<CNmFloatChannelSet_t, int>>(_FloatChannelSetsOffset!.Value);
+        }
+    }
     private static nint? _IsPropSkeletonOffset;
 
     public ref bool IsPropSkeleton

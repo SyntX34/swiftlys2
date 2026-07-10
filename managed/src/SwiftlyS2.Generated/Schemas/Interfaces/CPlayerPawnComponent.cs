@@ -17,5 +17,7 @@ public partial interface CPlayerPawnComponent : ISchemaClass<CPlayerPawnComponen
 
     public ref CNetworkVarChainer __m_pChainEntity { get; }
 
+    public CAnimGraphControllerPtr ComponentGraphController { get; }
+
 
 }

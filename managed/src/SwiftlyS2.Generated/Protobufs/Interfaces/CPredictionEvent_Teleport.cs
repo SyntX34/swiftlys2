@@ -11,4 +11,5 @@ public interface CPredictionEvent_Teleport : ITypedProtobuf<CPredictionEvent_Tel
     public Vector Origin { get; set; }
     public QAngle Angles { get; set; }
     public float DropToGroundRange { get; set; }
+    public Vector Velocity { get; set; }
 }

@@ -24,6 +24,7 @@ internal enum EConVarType : int
     EConVarType_Vector3,
     EConVarType_Vector4,
     EConVarType_Qangle,
+    EConVarType_VectorWS,
     EConVarType_MAX
 };
 

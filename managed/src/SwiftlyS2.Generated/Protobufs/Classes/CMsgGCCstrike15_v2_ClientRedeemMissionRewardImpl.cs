@@ -22,4 +22,8 @@ internal class CMsgGCCstrike15_v2_ClientRedeemMissionRewardImpl : TypedProtobuf<
     { get => Accessor.GetUInt32("expected_cost"); set => Accessor.SetUInt32("expected_cost", value); }
     public int BidControl
     { get => Accessor.GetInt32("bid_control"); set => Accessor.SetInt32("bid_control", value); }
+    public IProtobufRepeatedFieldValueType<ulong> VolatileShop
+    { get => new ProtobufRepeatedFieldValueType<ulong>(Accessor, "volatile_shop"); }
+    public ulong SouvenirMatchid
+    { get => Accessor.GetUInt64("souvenir_matchid"); set => Accessor.SetUInt64("souvenir_matchid", value); }
 }

@@ -40,4 +40,6 @@ internal class CMsgPlaceDecalEventImpl : NetMessage<CMsgPlaceDecalEvent>, CMsgPl
     { get => Accessor.GetUInt32("sequence_name"); set => Accessor.SetUInt32("sequence_name", value); }
     public Vector PositionObjectspace
     { get => Accessor.GetVector("position_objectspace"); set => Accessor.SetVector("position_objectspace", value); }
+    public Vector NormalObjectspace
+    { get => Accessor.GetVector("normal_objectspace"); set => Accessor.SetVector("normal_objectspace", value); }
 }

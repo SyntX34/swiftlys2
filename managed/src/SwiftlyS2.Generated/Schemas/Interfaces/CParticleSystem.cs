@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CParticleSystem : CBaseModelEntity, ISchemaClass<CParticleSystem>
 {
     static CParticleSystem ISchemaClass<CParticleSystem>.From(nint handle) => new CParticleSystemImpl(handle);
-    static int ISchemaClass<CParticleSystem>.Size => 3296;
+    static int ISchemaClass<CParticleSystem>.Size => 3320;
     static string? ISchemaClass<CParticleSystem>.ClassName => "info_particle_system";
 
 
@@ -38,6 +38,10 @@ public partial interface CParticleSystem : CBaseModelEntity, ISchemaClass<CParti
     public ISchemaFixedArray<byte> ServerControlPointAssignments { get; }
 
     public ISchemaFixedArray<CHandle<CBaseEntity>> ControlPointEnts { get; }
+
+    public ref bool DataStringLocalized { get; }
+
+    public string StrDataString { get; set; }
 
     public ref bool NoSave { get; }
 
@@ -71,6 +75,8 @@ public partial interface CParticleSystem : CBaseModelEntity, ISchemaClass<CParti
     public void ServerControlPointsUpdated();
     public void ServerControlPointAssignmentsUpdated();
     public void ControlPointEntsUpdated();
+    public void DataStringLocalizedUpdated();
+    public void StrDataStringUpdated();
     public void NoSaveUpdated();
     public void NoFreezeUpdated();
     public void NoRampUpdated();

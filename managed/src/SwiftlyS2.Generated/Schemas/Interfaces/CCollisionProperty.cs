@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCollisionProperty : ISchemaClass<CCollisionProperty>
 {
     static CCollisionProperty ISchemaClass<CCollisionProperty>.From(nint handle) => new CCollisionPropertyImpl(handle);
-    static int ISchemaClass<CCollisionProperty>.Size => 176;
+    static int ISchemaClass<CCollisionProperty>.Size => 184;
     static string? ISchemaClass<CCollisionProperty>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncMoveLinear : CBaseToggle, ISchemaClass<CFuncMoveLinear>
 {
     static CFuncMoveLinear ISchemaClass<CFuncMoveLinear>.From(nint handle) => new CFuncMoveLinearImpl(handle);
-    static int ISchemaClass<CFuncMoveLinear>.Size => 2160;
+    static int ISchemaClass<CFuncMoveLinear>.Size => 2168;
     static string? ISchemaClass<CFuncMoveLinear>.ClassName => "func_movelinear";
 
 
@@ -21,9 +21,11 @@ public partial interface CFuncMoveLinear : CBaseToggle, ISchemaClass<CFuncMoveLi
 
     public ref Vector MoveDirParentSpace { get; }
 
-    public string SoundStart { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundStart { get; }
 
-    public string SoundStop { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundStop { get; }
 
     public string CurrentSound { get; set; }
 
@@ -34,6 +36,8 @@ public partial interface CFuncMoveLinear : CBaseToggle, ISchemaClass<CFuncMoveLi
     public ref CEntityIOOutput OnFullyOpen { get; }
 
     public ref CEntityIOOutput OnFullyClosed { get; }
+
+    public ref float Speed { get; }
 
     public ref bool CreateMovableNavMesh { get; }
 

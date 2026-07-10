@@ -13,4 +13,5 @@ public interface CSOPersonaDataPublic : ITypedProtobuf<CSOPersonaDataPublic>
     public bool ElevatedState { get; set; }
     public uint XpTrailTimestampRefresh { get; set; }
     public uint XpTrailLevel { get; set; }
+    public uint ClanId { get; set; }
 }

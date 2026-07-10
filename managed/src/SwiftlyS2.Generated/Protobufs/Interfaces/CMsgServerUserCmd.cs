@@ -13,4 +13,5 @@ public interface CMsgServerUserCmd : ITypedProtobuf<CMsgServerUserCmd>
     public int PlayerSlot { get; set; }
     public int ServerTickExecuted { get; set; }
     public int ClientTick { get; set; }
+    public byte[] DeltaData { get; set; }
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSceneObjectData : ISchemaClass<CSceneObjectData>
 {
     static CSceneObjectData ISchemaClass<CSceneObjectData>.From(nint handle) => new CSceneObjectDataImpl(handle);
-    static int ISchemaClass<CSceneObjectData>.Size => 160;
+    static int ISchemaClass<CSceneObjectData>.Size => 184;
     static string? ISchemaClass<CSceneObjectData>.ClassName => null;
 
 

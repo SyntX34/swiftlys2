@@ -24,4 +24,6 @@ internal class CUserMessage_UserSentBugBugImpl : TypedProtobuf<CUserMessage_User
     { get => Accessor.GetInt32("osversion"); set => Accessor.SetInt32("osversion", value); }
     public string CommandLogs
     { get => Accessor.GetString("command_logs"); set => Accessor.SetString("command_logs", value); }
+    public int BugbugNo
+    { get => Accessor.GetInt32("bugbug_no"); set => Accessor.SetInt32("bugbug_no", value); }
 }

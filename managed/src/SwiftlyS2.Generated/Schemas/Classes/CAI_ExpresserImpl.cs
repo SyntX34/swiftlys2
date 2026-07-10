@@ -16,6 +16,26 @@ internal partial class CAI_ExpresserImpl : SchemaClass, CAI_Expresser
 {
     public CAI_ExpresserImpl(nint handle) : base(handle) { }
 
+    private static nint? _ConceptCooldownsOffset;
+
+    public SchemaUntypedField ConceptCooldowns
+    {
+        get
+        {
+            _ConceptCooldownsOffset = _ConceptCooldownsOffset ?? Schema.GetOffset(0xFB9DA1AC3E92F68F);
+            return new SchemaUntypedField(_Handle + _ConceptCooldownsOffset!.Value);
+        }
+    }
+    private static nint? _RuleCooldownsOffset;
+
+    public SchemaUntypedField RuleCooldowns
+    {
+        get
+        {
+            _RuleCooldownsOffset = _RuleCooldownsOffset ?? Schema.GetOffset(0xFB9DA1AC67C524CF);
+            return new SchemaUntypedField(_Handle + _RuleCooldownsOffset!.Value);
+        }
+    }
     private static nint? _StopTalkTimeOffset;
 
     public GameTime_t StopTalkTime

@@ -16,6 +16,16 @@ internal partial class CBaseGrenadeImpl : CBaseAnimGraphImpl, CBaseGrenade
 {
     public CBaseGrenadeImpl(nint handle) : base(handle) { }
 
+    private static nint? _DamageDetonatingOffset;
+
+    public ref bool DamageDetonating
+    {
+        get
+        {
+            _DamageDetonatingOffset = _DamageDetonatingOffset ?? Schema.GetOffset(0xB6ACD98F1302D323);
+            return ref _Handle.AsRef<bool>(_DamageDetonatingOffset!.Value);
+        }
+    }
     private static nint? _OnPlayerPickupOffset;
 
     public ref CEntityIOOutput OnPlayerPickup

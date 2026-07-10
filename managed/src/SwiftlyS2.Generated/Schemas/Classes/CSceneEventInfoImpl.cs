@@ -56,6 +56,46 @@ internal partial class CSceneEventInfoImpl : SchemaClass, CSceneEventInfo
             return ref _Handle.AsRef<float>(_WeightOffset!.Value);
         }
     }
+    private static nint? _LastAccumulatedTimeOffset;
+
+    public ref float LastAccumulatedTime
+    {
+        get
+        {
+            _LastAccumulatedTimeOffset = _LastAccumulatedTimeOffset ?? Schema.GetOffset(0x38A9D25E8499A7EA);
+            return ref _Handle.AsRef<float>(_LastAccumulatedTimeOffset!.Value);
+        }
+    }
+    private static nint? _LastJumpFromTimeOffset;
+
+    public ref float LastJumpFromTime
+    {
+        get
+        {
+            _LastJumpFromTimeOffset = _LastJumpFromTimeOffset ?? Schema.GetOffset(0x38A9D25EF7D98FE6);
+            return ref _Handle.AsRef<float>(_LastJumpFromTimeOffset!.Value);
+        }
+    }
+    private static nint? _LastJumpToTimeOffset;
+
+    public ref float LastJumpToTime
+    {
+        get
+        {
+            _LastJumpToTimeOffset = _LastJumpToTimeOffset ?? Schema.GetOffset(0x38A9D25EEDA83CAF);
+            return ref _Handle.AsRef<float>(_LastJumpToTimeOffset!.Value);
+        }
+    }
+    private static nint? _LastCycleOffset;
+
+    public ref float LastCycle
+    {
+        get
+        {
+            _LastCycleOffset = _LastCycleOffset ?? Schema.GetOffset(0x38A9D25E414C389F);
+            return ref _Handle.AsRef<float>(_LastCycleOffset!.Value);
+        }
+    }
     private static nint? _AnimClipOffset;
 
     public ref CStrongHandle<InfoForResourceTypeCNmClip> AnimClip

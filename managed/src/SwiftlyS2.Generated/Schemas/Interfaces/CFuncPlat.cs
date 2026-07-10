@@ -11,9 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncPlat : CBasePlatTrain, ISchemaClass<CFuncPlat>
 {
     static CFuncPlat ISchemaClass<CFuncPlat>.From(nint handle) => new CFuncPlatImpl(handle);
-    static int ISchemaClass<CFuncPlat>.Size => 2072;
+    static int ISchemaClass<CFuncPlat>.Size => 2088;
     static string? ISchemaClass<CFuncPlat>.ClassName => "func_plat";
 
+
+    public ref float Speed { get; }
 
     public string Noise { get; set; }
 

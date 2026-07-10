@@ -11,13 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_TestWaitWithCursorState : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_TestWaitWithCursorState>
 {
     static CPulseCell_TestWaitWithCursorState ISchemaClass<CPulseCell_TestWaitWithCursorState>.From(nint handle) => new CPulseCell_TestWaitWithCursorStateImpl(handle);
-    static int ISchemaClass<CPulseCell_TestWaitWithCursorState>.Size => 288;
+    static int ISchemaClass<CPulseCell_TestWaitWithCursorState>.Size => 360;
     static string? ISchemaClass<CPulseCell_TestWaitWithCursorState>.ClassName => null;
 
 
     public CPulse_ResumePoint WakeResume { get; }
-
-    public CPulse_ResumePoint WakeCancel { get; }
 
     public CPulse_ResumePoint WakeFail { get; }
 

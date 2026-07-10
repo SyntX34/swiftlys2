@@ -3,8 +3,6 @@ namespace SwiftlyS2.Shared.ProtobufDefinitions;
 public enum EBaseUserMessages
 {
     UM_AchievementEvent = 101,
-    UM_CloseCaption = 102,
-    UM_CloseCaptionDirect = 103,
     UM_CurrentTimescale = 104,
     UM_DesiredTimescale = 105,
     UM_Fade = 106,
@@ -53,5 +51,6 @@ public enum EBaseUserMessages
     UM_NotifyResponseFound = 165,
     UM_PlayResponseConditional = 166,
     UM_UserSentBugBug = 167,
+    UM_UsageReport = 168,
     UM_MAX_BASE = 200,
 }

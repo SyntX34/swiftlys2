@@ -86,14 +86,14 @@ internal partial class C_OP_RenderSpritesImpl : CBaseRendererSource2Impl, C_OP_R
             return new CParticleCollectionRendererFloatInputImpl(_Handle + _MaxSizeOffset!.Value);
         }
     }
-    private static nint? _AlphaAdjustWithSizeAdjustOffset;
+    private static nint? _SubPixelAAScaleOffset;
 
-    public CParticleCollectionRendererFloatInput AlphaAdjustWithSizeAdjust
+    public CParticleCollectionRendererFloatInput SubPixelAAScale
     {
         get
         {
-            _AlphaAdjustWithSizeAdjustOffset = _AlphaAdjustWithSizeAdjustOffset ?? Schema.GetOffset(0x35C791355B30C850);
-            return new CParticleCollectionRendererFloatInputImpl(_Handle + _AlphaAdjustWithSizeAdjustOffset!.Value);
+            _SubPixelAAScaleOffset = _SubPixelAAScaleOffset ?? Schema.GetOffset(0x35C791353801ACCB);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _SubPixelAAScaleOffset!.Value);
         }
     }
     private static nint? _StartFadeSizeOffset;

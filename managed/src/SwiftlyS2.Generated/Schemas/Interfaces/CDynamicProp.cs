@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CDynamicProp : CBreakableProp, ISchemaClass<CDynamicProp>
 {
     static CDynamicProp ISchemaClass<CDynamicProp>.From(nint handle) => new CDynamicPropImpl(handle);
-    static int ISchemaClass<CDynamicProp>.Size => 2944;
+    static int ISchemaClass<CDynamicProp>.Size => 2976;
     static string? ISchemaClass<CDynamicProp>.ClassName => "prop_dynamic";
 
 
@@ -44,6 +44,8 @@ public partial interface CDynamicProp : CBreakableProp, ISchemaClass<CDynamicPro
     public ref bool FiredStartEndOutput { get; }
 
     public ref bool ForceNpcExclude { get; }
+
+    public ref bool CreateMovableSurfaceGraph { get; }
 
     public ref bool CreateNonSolid { get; }
 

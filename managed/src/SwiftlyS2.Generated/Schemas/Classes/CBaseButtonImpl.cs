@@ -58,47 +58,32 @@ internal partial class CBaseButtonImpl : CBaseToggleImpl, CBaseButton
     }
     private static nint? _UseSoundOffset;
 
-    public string UseSound
+    public SchemaUntypedField UseSound
     {
         get
         {
             _UseSoundOffset = _UseSoundOffset ?? Schema.GetOffset(0x1911FA7FCCC8AC24);
-            return Schema.GetString(_Handle.Read<nint>(_UseSoundOffset!.Value));
-        }
-        set
-        {
-            _UseSoundOffset = _UseSoundOffset ?? Schema.GetOffset(0x1911FA7FCCC8AC24);
-            Schema.SetString(_Handle, _UseSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _UseSoundOffset!.Value);
         }
     }
     private static nint? _LockedSoundOffset;
 
-    public string LockedSound
+    public SchemaUntypedField LockedSound
     {
         get
         {
             _LockedSoundOffset = _LockedSoundOffset ?? Schema.GetOffset(0x1911FA7FB3FCB84B);
-            return Schema.GetString(_Handle.Read<nint>(_LockedSoundOffset!.Value));
-        }
-        set
-        {
-            _LockedSoundOffset = _LockedSoundOffset ?? Schema.GetOffset(0x1911FA7FB3FCB84B);
-            Schema.SetString(_Handle, _LockedSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _LockedSoundOffset!.Value);
         }
     }
     private static nint? _UnlockedSoundOffset;
 
-    public string UnlockedSound
+    public SchemaUntypedField UnlockedSound
     {
         get
         {
             _UnlockedSoundOffset = _UnlockedSoundOffset ?? Schema.GetOffset(0x1911FA7FDC697A96);
-            return Schema.GetString(_Handle.Read<nint>(_UnlockedSoundOffset!.Value));
-        }
-        set
-        {
-            _UnlockedSoundOffset = _UnlockedSoundOffset ?? Schema.GetOffset(0x1911FA7FDC697A96);
-            Schema.SetString(_Handle, _UnlockedSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _UnlockedSoundOffset!.Value);
         }
     }
     private static nint? _OverrideAnticipationNameOffset;
@@ -134,6 +119,16 @@ internal partial class CBaseButtonImpl : CBaseToggleImpl, CBaseButton
         {
             _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x1911FA7F3A7C5965);
             return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
+    }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x1911FA7FC631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
         }
     }
     private static nint? _UseLockedTimeOffset;

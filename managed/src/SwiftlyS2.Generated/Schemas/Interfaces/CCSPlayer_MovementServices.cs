@@ -11,15 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_Humanoid, ISchemaClass<CCSPlayer_MovementServices>
 {
     static CCSPlayer_MovementServices ISchemaClass<CCSPlayer_MovementServices>.From(nint handle) => new CCSPlayer_MovementServicesImpl(handle);
-    static int ISchemaClass<CCSPlayer_MovementServices>.Size => 4080;
+    static int ISchemaClass<CCSPlayer_MovementServices>.Size => 4064;
     static string? ISchemaClass<CCSPlayer_MovementServices>.ClassName => null;
 
 
     public CCSPlayerAnimationState AnimationState { get; }
 
     public ref bool UsingGroundTopologyOffset { get; }
-
-    public ref float AltitudeAtLastUsingGroundTopologyOffsetTransition { get; }
 
     public ref float UsingGroundTopologyOffsetTransitionSmoothing { get; }
 
@@ -79,8 +77,6 @@ public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_H
 
     public GameTime_t StashGrenadeParameterWhen { get; }
 
-    public ref ulong ButtonDownMaskPrev { get; }
-
     public ref bool UseFrictionStashedSpeed { get; }
 
     public ref float UseFrictionStashedSpeedUntilFrac { get; }
@@ -115,14 +111,11 @@ public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_H
 
     public ref float TicksSinceLastSurfingDetected { get; }
 
-    public ref bool WasSurfing { get; }
-
     public ref Vector2D WalkWishVel { get; }
 
     public ref bool HasEverProcessedCommand { get; }
 
     public void UsingGroundTopologyOffsetUpdated();
-    public void AltitudeAtLastUsingGroundTopologyOffsetTransitionUpdated();
     public void UsingGroundTopologyOffsetTransitionSmoothingUpdated();
     public void LadderSurfacePropIndexUpdated();
     public void DuckedUpdated();
@@ -137,7 +130,6 @@ public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_H
     public void BombPlantViewOffsetUpdated();
     public void GameCodeHasMovedPlayerAfterCommandUpdated();
     public void StashGrenadeParameterWhenUpdated();
-    public void ButtonDownMaskPrevUpdated();
     public void UseFrictionStashedSpeedUpdated();
     public void UseFrictionStashedSpeedUntilFracUpdated();
     public void FrictionStashedSpeedUpdated();
@@ -148,6 +140,5 @@ public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_H
     public void LastJumpFracUpdated();
     public void LastJumpVelocityZUpdated();
     public void JumpApexPendingUpdated();
-    public void WasSurfingUpdated();
     public void HasEverProcessedCommandUpdated();
 }

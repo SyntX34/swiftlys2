@@ -46,6 +46,16 @@ internal partial class CPathTrackImpl : CPointEntityImpl, CPathTrack
             return ref _Handle.AsRef<CHandle<CPathTrack>>(_PaltpathOffset!.Value);
         }
     }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xF86750E8C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+        }
+    }
     private static nint? _RadiusOffset;
 
     public ref float Radius

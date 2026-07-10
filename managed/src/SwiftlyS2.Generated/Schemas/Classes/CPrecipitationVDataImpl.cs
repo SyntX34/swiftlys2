@@ -26,6 +26,26 @@ internal partial class CPrecipitationVDataImpl : CEntitySubclassVDataBaseImpl, C
             return new SchemaUntypedField(_Handle + _ParticlePrecipitationEffectOffset!.Value);
         }
     }
+    private static nint? _ParticlePrecipitationPuddleEffectOffset;
+
+    public SchemaUntypedField ParticlePrecipitationPuddleEffect
+    {
+        get
+        {
+            _ParticlePrecipitationPuddleEffectOffset = _ParticlePrecipitationPuddleEffectOffset ?? Schema.GetOffset(0x4F75C25D63135904);
+            return new SchemaUntypedField(_Handle + _ParticlePrecipitationPuddleEffectOffset!.Value);
+        }
+    }
+    private static nint? _ParticlePrecipitationPostEffectOffset;
+
+    public SchemaUntypedField ParticlePrecipitationPostEffect
+    {
+        get
+        {
+            _ParticlePrecipitationPostEffectOffset = _ParticlePrecipitationPostEffectOffset ?? Schema.GetOffset(0x4F75C25DAA7F13AE);
+            return new SchemaUntypedField(_Handle + _ParticlePrecipitationPostEffectOffset!.Value);
+        }
+    }
     private static nint? _InnerDistanceOffset;
 
     public ref float InnerDistance

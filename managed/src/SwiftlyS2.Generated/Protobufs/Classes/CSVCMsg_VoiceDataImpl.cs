@@ -14,8 +14,8 @@ internal class CSVCMsg_VoiceDataImpl : NetMessage<CSVCMsg_VoiceData>, CSVCMsg_Vo
 
     public CMsgVoiceAudio Audio
     { get => new CMsgVoiceAudioImpl(NativeNetMessages.GetNestedMessage(Address, "audio"), false); }
-    public int Client
-    { get => Accessor.GetInt32("client"); set => Accessor.SetInt32("client", value); }
+    public int ClientDeprecated
+    { get => Accessor.GetInt32("client_deprecated"); set => Accessor.SetInt32("client_deprecated", value); }
     public bool Proximity
     { get => Accessor.GetBool("proximity"); set => Accessor.SetBool("proximity", value); }
     public ulong Xuid
@@ -26,4 +26,6 @@ internal class CSVCMsg_VoiceDataImpl : NetMessage<CSVCMsg_VoiceData>, CSVCMsg_Vo
     { get => Accessor.GetUInt32("tick"); set => Accessor.SetUInt32("tick", value); }
     public int Passthrough
     { get => Accessor.GetInt32("passthrough"); set => Accessor.SetInt32("passthrough", value); }
+    public int Entity
+    { get => Accessor.GetInt32("entity"); set => Accessor.SetInt32("entity", value); }
 }

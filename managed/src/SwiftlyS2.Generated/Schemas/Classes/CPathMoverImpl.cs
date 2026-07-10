@@ -26,14 +26,14 @@ internal partial class CPathMoverImpl : CPathWithDynamicNodesImpl, CPathMover
             return ref _Handle.AsRef<CUtlVector<CHandle<CFuncMover>>>(_MoversOffset!.Value);
         }
     }
-    private static nint? _MoverSpawnerOffset;
+    private static nint? _SpawnersOffset;
 
-    public ref CHandle<CPathMoverEntitySpawner> MoverSpawner
+    public ref CUtlVector<CHandle<CPathMoverEntitySpawner>> Spawners
     {
         get
         {
-            _MoverSpawnerOffset = _MoverSpawnerOffset ?? Schema.GetOffset(0x459CE4C689A8C6A8);
-            return ref _Handle.AsRef<CHandle<CPathMoverEntitySpawner>>(_MoverSpawnerOffset!.Value);
+            _SpawnersOffset = _SpawnersOffset ?? Schema.GetOffset(0x459CE4C66B28B874);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CPathMoverEntitySpawner>>>(_SpawnersOffset!.Value);
         }
     }
     private static nint? _MoverSpawnerNameOffset;
@@ -49,6 +49,41 @@ internal partial class CPathMoverImpl : CPathWithDynamicNodesImpl, CPathMover
         {
             _MoverSpawnerNameOffset = _MoverSpawnerNameOffset ?? Schema.GetOffset(0x459CE4C65C6B2861);
             Schema.SetString(_Handle, _MoverSpawnerNameOffset!.Value, value);
+        }
+    }
+    private static nint? _MoverRouterOffset;
+
+    public ref CHandle<CFuncMoverRouter> MoverRouter
+    {
+        get
+        {
+            _MoverRouterOffset = _MoverRouterOffset ?? Schema.GetOffset(0x459CE4C6BC5064D1);
+            return ref _Handle.AsRef<CHandle<CFuncMoverRouter>>(_MoverRouterOffset!.Value);
+        }
+    }
+    private static nint? _MoverRouterNameOffset;
+
+    public string MoverRouterName
+    {
+        get
+        {
+            _MoverRouterNameOffset = _MoverRouterNameOffset ?? Schema.GetOffset(0x459CE4C68D3E59D0);
+            return Schema.GetString(_Handle.Read<nint>(_MoverRouterNameOffset!.Value));
+        }
+        set
+        {
+            _MoverRouterNameOffset = _MoverRouterNameOffset ?? Schema.GetOffset(0x459CE4C68D3E59D0);
+            Schema.SetString(_Handle, _MoverRouterNameOffset!.Value, value);
+        }
+    }
+    private static nint? _SampleSpacingOffset;
+
+    public ref float SampleSpacing
+    {
+        get
+        {
+            _SampleSpacingOffset = _SampleSpacingOffset ?? Schema.GetOffset(0x459CE4C6F46CEE26);
+            return ref _Handle.AsRef<float>(_SampleSpacingOffset!.Value);
         }
     }
 

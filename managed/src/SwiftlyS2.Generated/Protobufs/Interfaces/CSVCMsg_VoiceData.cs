@@ -13,10 +13,11 @@ public interface CSVCMsg_VoiceData : ITypedProtobuf<CSVCMsg_VoiceData>, INetMess
     static CSVCMsg_VoiceData ITypedProtobuf<CSVCMsg_VoiceData>.Wrap(nint handle, bool isManuallyAllocated) => new CSVCMsg_VoiceDataImpl(handle, isManuallyAllocated);
 
     public CMsgVoiceAudio Audio { get; }
-    public int Client { get; set; }
+    public int ClientDeprecated { get; set; }
     public bool Proximity { get; set; }
     public ulong Xuid { get; set; }
     public int AudibleMask { get; set; }
     public uint Tick { get; set; }
     public int Passthrough { get; set; }
+    public int Entity { get; set; }
 }

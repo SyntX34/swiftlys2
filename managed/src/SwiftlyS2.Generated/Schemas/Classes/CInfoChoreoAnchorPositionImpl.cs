@@ -16,24 +16,24 @@ internal partial class CInfoChoreoAnchorPositionImpl : SchemaClass, CInfoChoreoA
 {
     public CInfoChoreoAnchorPositionImpl(nint handle) : base(handle) { }
 
-    private static nint? _OriginOffset;
+    private static nint? _OriginLSOffset;
 
-    public ref Vector Origin
+    public ref Vector OriginLS
     {
         get
         {
-            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0xFA471256F26E589B);
-            return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
+            _OriginLSOffset = _OriginLSOffset ?? Schema.GetOffset(0xFA471256524669D2);
+            return ref _Handle.AsRef<Vector>(_OriginLSOffset!.Value);
         }
     }
-    private static nint? _AnglesOffset;
+    private static nint? _AnglesLSOffset;
 
-    public ref QAngle Angles
+    public ref Quaternion AnglesLS
     {
         get
         {
-            _AnglesOffset = _AnglesOffset ?? Schema.GetOffset(0xFA471256EF3F183C);
-            return ref _Handle.AsRef<QAngle>(_AnglesOffset!.Value);
+            _AnglesLSOffset = _AnglesLSOffset ?? Schema.GetOffset(0xFA471256B665ECB9);
+            return ref _Handle.AsRef<Quaternion>(_AnglesLSOffset!.Value);
         }
     }
     private static nint? _ExtentsMinOffset;
@@ -64,6 +64,26 @@ internal partial class CInfoChoreoAnchorPositionImpl : SchemaClass, CInfoChoreoA
         {
             _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xFA4712565ACFC08D);
             return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
+    }
+    private static nint? _OnlyWarpPositionOffset;
+
+    public ref bool OnlyWarpPosition
+    {
+        get
+        {
+            _OnlyWarpPositionOffset = _OnlyWarpPositionOffset ?? Schema.GetOffset(0xFA471256277706AE);
+            return ref _Handle.AsRef<bool>(_OnlyWarpPositionOffset!.Value);
+        }
+    }
+    private static nint? _ParentOffset;
+
+    public ref CHandle<CBaseEntity> Parent
+    {
+        get
+        {
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0xFA4712569FD3A1B7);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ParentOffset!.Value);
         }
     }
     private static nint? _ShapeTypeOffset;

@@ -38,5 +38,7 @@ public enum PulseValueType_t : uint
     PVAL_ARRAY = 28,
     PVAL_TYPESAFE_INT64 = 29,
     PVAL_PARTICLE_EHANDLE = 30,
-    PVAL_COUNT = 31,
+    PVAL_ANIM_SEQUENCE = 31,
+    PVAL_VDATA_CHOICE = 32,
+    PVAL_COUNT = 33,
 }

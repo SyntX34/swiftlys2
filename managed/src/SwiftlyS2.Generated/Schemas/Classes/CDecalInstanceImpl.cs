@@ -106,6 +106,16 @@ internal partial class CDecalInstanceImpl : SchemaClass, CDecalInstance
             return ref _Handle.AsRef<Vector>(_NormalLSOffset!.Value);
         }
     }
+    private static nint? _NormalOSOffset;
+
+    public ref Vector NormalOS
+    {
+        get
+        {
+            _NormalOSOffset = _NormalOSOffset ?? Schema.GetOffset(0x88CA447CD41E27D8);
+            return ref _Handle.AsRef<Vector>(_NormalOSOffset!.Value);
+        }
+    }
     private static nint? _SAxisLSOffset;
 
     public ref Vector SAxisLS

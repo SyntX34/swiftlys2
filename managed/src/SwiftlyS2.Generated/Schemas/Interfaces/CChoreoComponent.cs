@@ -19,9 +19,11 @@ public partial interface CChoreoComponent : ISchemaClass<CChoreoComponent>
 
     public ref CHandle<CBaseModelEntity> Owner { get; }
 
-    public SceneEventId_t NextSceneEventId { get; }
+    public ref int ExernalChoreoGraphCount { get; }
 
-    public ref bool UpdateLayerPriorities { get; }
+    public ref CGlobalSymbol ActiveExternalChoreoGraphSlotID { get; }
+
+    public SceneEventId_t NextSceneEventId { get; }
 
     public GameTime_t AllowResponsesEndTime { get; }
 

@@ -48,6 +48,8 @@ public unsafe struct CGameTrace
 
     public int Triangle;
     public short HitboxBoneIndex;
+    private short Unknown182;
+    private short Unknown184;
 
     public RayType_t RayType;
 

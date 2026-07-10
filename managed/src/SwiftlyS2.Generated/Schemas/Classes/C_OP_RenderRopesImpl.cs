@@ -86,6 +86,16 @@ internal partial class C_OP_RenderRopesImpl : CBaseRendererSource2Impl, C_OP_Ren
             return ref _Handle.AsRef<float>(_EndFadeDotOffset!.Value);
         }
     }
+    private static nint? _SubPixelAAScaleOffset;
+
+    public CParticleCollectionRendererFloatInput SubPixelAAScale
+    {
+        get
+        {
+            _SubPixelAAScaleOffset = _SubPixelAAScaleOffset ?? Schema.GetOffset(0x9BCDD8B23801ACCB);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _SubPixelAAScaleOffset!.Value);
+        }
+    }
     private static nint? _RadiusTaperOffset;
 
     public ref float RadiusTaper

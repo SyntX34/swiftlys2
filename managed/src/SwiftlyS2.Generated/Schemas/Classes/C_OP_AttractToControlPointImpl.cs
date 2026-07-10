@@ -36,6 +36,16 @@ internal partial class C_OP_AttractToControlPointImpl : CParticleFunctionForceIm
             return new CPerParticleFloatInputImpl(_Handle + _ForceAmountOffset!.Value);
         }
     }
+    private static nint? _MinimumDistanceOffset;
+
+    public CPerParticleFloatInput MinimumDistance
+    {
+        get
+        {
+            _MinimumDistanceOffset = _MinimumDistanceOffset ?? Schema.GetOffset(0xBD30C24A9AC4C964);
+            return new CPerParticleFloatInputImpl(_Handle + _MinimumDistanceOffset!.Value);
+        }
+    }
     private static nint? _FalloffPowerOffset;
 
     public ref float FalloffPower

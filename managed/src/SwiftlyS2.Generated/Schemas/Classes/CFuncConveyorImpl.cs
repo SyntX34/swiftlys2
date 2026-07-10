@@ -41,6 +41,16 @@ internal partial class CFuncConveyorImpl : CBaseModelEntityImpl, CFuncConveyor
             return ref _Handle.AsRef<float>(_TransitionDurationSecondsOffset!.Value);
         }
     }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x6E29EBA9C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+        }
+    }
     private static nint? _MoveEntitySpaceOffset;
 
     public ref QAngle MoveEntitySpace

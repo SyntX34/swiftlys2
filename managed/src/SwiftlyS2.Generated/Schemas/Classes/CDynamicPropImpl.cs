@@ -171,6 +171,16 @@ internal partial class CDynamicPropImpl : CBreakablePropImpl, CDynamicProp
             return ref _Handle.AsRef<bool>(_ForceNpcExcludeOffset!.Value);
         }
     }
+    private static nint? _CreateMovableSurfaceGraphOffset;
+
+    public ref bool CreateMovableSurfaceGraph
+    {
+        get
+        {
+            _CreateMovableSurfaceGraphOffset = _CreateMovableSurfaceGraphOffset ?? Schema.GetOffset(0x6A5171A20BC6AA1C);
+            return ref _Handle.AsRef<bool>(_CreateMovableSurfaceGraphOffset!.Value);
+        }
+    }
     private static nint? _CreateNonSolidOffset;
 
     public ref bool CreateNonSolid

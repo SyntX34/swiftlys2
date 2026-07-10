@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface AI_DefaultNPC_DebugSnapshotData_t : DebugSnapshotBaseStructuredData_t, ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t>
 {
     static AI_DefaultNPC_DebugSnapshotData_t ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t>.From(nint handle) => new AI_DefaultNPC_DebugSnapshotData_tImpl(handle);
-    static int ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t>.Size => 168;
+    static int ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t>.Size => 120;
     static string? ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t>.ClassName => null;
 
 
@@ -23,11 +23,7 @@ public partial interface AI_DefaultNPC_DebugSnapshotData_t : DebugSnapshotBaseSt
 
     public ref CUtlVector<CGlobalSymbol> Tactic_interrupt_conditions { get; }
 
-    public string S_npc_current_movement { get; set; }
-
-    public AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t Path_query_schedule { get; }
-
-    public AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t Path_query_tactic { get; }
+    public AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t Path_query { get; }
 
     public ref CUtlVector<AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t> Path_queries_speculative { get; }
 

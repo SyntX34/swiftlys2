@@ -88,12 +88,12 @@ internal partial class CEntityDissolveImpl : CBaseModelEntityImpl, CEntityDissol
     }
     private static nint? _DissolveTypeOffset;
 
-    public ref EntityDisolveType_t DissolveType
+    public ref EntityDissolveType_t DissolveType
     {
         get
         {
             _DissolveTypeOffset = _DissolveTypeOffset ?? Schema.GetOffset(0x443F205E79AB525E);
-            return ref _Handle.AsRef<EntityDisolveType_t>(_DissolveTypeOffset!.Value);
+            return ref _Handle.AsRef<EntityDissolveType_t>(_DissolveTypeOffset!.Value);
         }
     }
     private static nint? _DissolverOriginOffset;

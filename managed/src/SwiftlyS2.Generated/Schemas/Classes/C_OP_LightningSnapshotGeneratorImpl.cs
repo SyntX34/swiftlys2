@@ -116,6 +116,56 @@ internal partial class C_OP_LightningSnapshotGeneratorImpl : CParticleFunctionPr
             return new CParticleCollectionFloatInputImpl(_Handle + _SplitRateOffset!.Value);
         }
     }
+    private static nint? _RecursionSplitScaleOffset;
+
+    public CParticleCollectionFloatInput RecursionSplitScale
+    {
+        get
+        {
+            _RecursionSplitScaleOffset = _RecursionSplitScaleOffset ?? Schema.GetOffset(0xA39272CA97F6E863);
+            return new CParticleCollectionFloatInputImpl(_Handle + _RecursionSplitScaleOffset!.Value);
+        }
+    }
+    private static nint? _ScaleBranchDistanceOffset;
+
+    public ref bool ScaleBranchDistance
+    {
+        get
+        {
+            _ScaleBranchDistanceOffset = _ScaleBranchDistanceOffset ?? Schema.GetOffset(0xA39272CA9C8535D6);
+            return ref _Handle.AsRef<bool>(_ScaleBranchDistanceOffset!.Value);
+        }
+    }
+    private static nint? _BranchDistanceScaleOffset;
+
+    public CParticleCollectionFloatInput BranchDistanceScale
+    {
+        get
+        {
+            _BranchDistanceScaleOffset = _BranchDistanceScaleOffset ?? Schema.GetOffset(0xA39272CAAF861DBA);
+            return new CParticleCollectionFloatInputImpl(_Handle + _BranchDistanceScaleOffset!.Value);
+        }
+    }
+    private static nint? _ScaleBranchOffsetOffset;
+
+    public ref bool ScaleBranchOffset
+    {
+        get
+        {
+            _ScaleBranchOffsetOffset = _ScaleBranchOffsetOffset ?? Schema.GetOffset(0xA39272CAA5D78F66);
+            return ref _Handle.AsRef<bool>(_ScaleBranchOffsetOffset!.Value);
+        }
+    }
+    private static nint? _BranchOffsetScaleOffset;
+
+    public CParticleCollectionFloatInput BranchOffsetScale
+    {
+        get
+        {
+            _BranchOffsetScaleOffset = _BranchOffsetScaleOffset ?? Schema.GetOffset(0xA39272CA4151B19E);
+            return new CParticleCollectionFloatInputImpl(_Handle + _BranchOffsetScaleOffset!.Value);
+        }
+    }
     private static nint? _BranchTwistOffset;
 
     public CParticleCollectionFloatInput BranchTwist

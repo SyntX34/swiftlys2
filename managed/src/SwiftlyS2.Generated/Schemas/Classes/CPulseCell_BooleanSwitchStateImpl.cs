@@ -18,22 +18,12 @@ internal partial class CPulseCell_BooleanSwitchStateImpl : CPulseCell_BaseStateI
 
     private static nint? _ConditionOffset;
 
-    public PulseObservableBoolExpression_t Condition
+    public SchemaUntypedField Condition
     {
         get
         {
             _ConditionOffset = _ConditionOffset ?? Schema.GetOffset(0xB0380EFD5F2A883E);
-            return new PulseObservableBoolExpression_tImpl(_Handle + _ConditionOffset!.Value);
-        }
-    }
-    private static nint? _AlwaysOffset;
-
-    public CPulse_OutflowConnection Always
-    {
-        get
-        {
-            _AlwaysOffset = _AlwaysOffset ?? Schema.GetOffset(0xB0380EFDD5D76864);
-            return new CPulse_OutflowConnectionImpl(_Handle + _AlwaysOffset!.Value);
+            return new SchemaUntypedField(_Handle + _ConditionOffset!.Value);
         }
     }
     private static nint? _WhenTrueOffset;

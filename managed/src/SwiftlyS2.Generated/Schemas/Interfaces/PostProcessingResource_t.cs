@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface PostProcessingResource_t : ISchemaClass<PostProcessingResource_t>
 {
     static PostProcessingResource_t ISchemaClass<PostProcessingResource_t>.From(nint handle) => new PostProcessingResource_tImpl(handle);
-    static int ISchemaClass<PostProcessingResource_t>.Size => 312;
+    static int ISchemaClass<PostProcessingResource_t>.Size => 344;
     static string? ISchemaClass<PostProcessingResource_t>.ClassName => null;
 
 
@@ -40,6 +40,10 @@ public partial interface PostProcessingResource_t : ISchemaClass<PostProcessingR
     public ref bool HasFogScatteringParams { get; }
 
     public PostProcessingFogScatteringParameters_t FogScatteringParams { get; }
+
+    public ref bool HasLocalExposureParams { get; }
+
+    public PostProcessingLocalExposureParameters_t LocalExposureParams { get; }
 
 
 }

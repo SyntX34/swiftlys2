@@ -20,4 +20,6 @@ internal class CMsgGCCStrike15_v2_ServerNotificationForUserPenaltyImpl : TypedPr
     { get => Accessor.GetUInt32("seconds"); set => Accessor.SetUInt32("seconds", value); }
     public bool CommunicationCooldown
     { get => Accessor.GetBool("communication_cooldown"); set => Accessor.SetBool("communication_cooldown", value); }
+    public uint CheatingPenaltyLevel
+    { get => Accessor.GetUInt32("cheating_penalty_level"); set => Accessor.SetUInt32("cheating_penalty_level", value); }
 }

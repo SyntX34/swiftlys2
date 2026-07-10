@@ -21,6 +21,8 @@ public partial interface CPathTrack : CPointEntity, ISchemaClass<CPathTrack>
 
     public ref CHandle<CPathTrack> Paltpath { get; }
 
+    public ref float Speed { get; }
+
     public ref float Radius { get; }
 
     public ref float Length { get; }

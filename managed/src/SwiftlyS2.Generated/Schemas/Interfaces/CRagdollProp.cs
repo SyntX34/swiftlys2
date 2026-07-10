@@ -11,13 +11,19 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRagdollProp : CBaseAnimGraph, ISchemaClass<CRagdollProp>
 {
     static CRagdollProp ISchemaClass<CRagdollProp>.From(nint handle) => new CRagdollPropImpl(handle);
-    static int ISchemaClass<CRagdollProp>.Size => 2736;
+    static int ISchemaClass<CRagdollProp>.Size => 2848;
     static string? ISchemaClass<CRagdollProp>.ClassName => "prop_ragdoll";
 
+
+    public CPropDataComponent CPropDataComponent { get; }
 
     public ragdoll_t Ragdoll { get; }
 
     public ref bool StartDisabled { get; }
+
+    public ref float MassScale { get; }
+
+    public ref float BuoyancyScale { get; }
 
     public ref CUtlVector<bool> RagEnabled { get; }
 
@@ -77,6 +83,7 @@ public partial interface CRagdollProp : CBaseAnimGraph, ISchemaClass<CRagdollPro
 
     public ref CUtlVector<PointerTo<INavObstacle>> NavObstacles { get; }
 
+    public void CPropDataComponentUpdated();
     public void RagEnabledUpdated();
     public void RagPosUpdated();
     public void RagAnglesUpdated();

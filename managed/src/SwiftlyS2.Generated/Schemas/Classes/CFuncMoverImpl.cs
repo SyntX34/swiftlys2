@@ -323,107 +323,72 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
     }
     private static nint? _StartForwardSoundOffset;
 
-    public string StartForwardSound
+    public SchemaUntypedField StartForwardSound
     {
         get
         {
             _StartForwardSoundOffset = _StartForwardSoundOffset ?? Schema.GetOffset(0x320E8B69CBDFD56B);
-            return Schema.GetString(_Handle.Read<nint>(_StartForwardSoundOffset!.Value));
-        }
-        set
-        {
-            _StartForwardSoundOffset = _StartForwardSoundOffset ?? Schema.GetOffset(0x320E8B69CBDFD56B);
-            Schema.SetString(_Handle, _StartForwardSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _StartForwardSoundOffset!.Value);
         }
     }
     private static nint? _LoopForwardSoundOffset;
 
-    public string LoopForwardSound
+    public SchemaUntypedField LoopForwardSound
     {
         get
         {
             _LoopForwardSoundOffset = _LoopForwardSoundOffset ?? Schema.GetOffset(0x320E8B69C875F2F7);
-            return Schema.GetString(_Handle.Read<nint>(_LoopForwardSoundOffset!.Value));
-        }
-        set
-        {
-            _LoopForwardSoundOffset = _LoopForwardSoundOffset ?? Schema.GetOffset(0x320E8B69C875F2F7);
-            Schema.SetString(_Handle, _LoopForwardSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _LoopForwardSoundOffset!.Value);
         }
     }
     private static nint? _StopForwardSoundOffset;
 
-    public string StopForwardSound
+    public SchemaUntypedField StopForwardSound
     {
         get
         {
             _StopForwardSoundOffset = _StopForwardSoundOffset ?? Schema.GetOffset(0x320E8B69B72A6EC9);
-            return Schema.GetString(_Handle.Read<nint>(_StopForwardSoundOffset!.Value));
-        }
-        set
-        {
-            _StopForwardSoundOffset = _StopForwardSoundOffset ?? Schema.GetOffset(0x320E8B69B72A6EC9);
-            Schema.SetString(_Handle, _StopForwardSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _StopForwardSoundOffset!.Value);
         }
     }
     private static nint? _StartReverseSoundOffset;
 
-    public string StartReverseSound
+    public SchemaUntypedField StartReverseSound
     {
         get
         {
             _StartReverseSoundOffset = _StartReverseSoundOffset ?? Schema.GetOffset(0x320E8B6927D9C282);
-            return Schema.GetString(_Handle.Read<nint>(_StartReverseSoundOffset!.Value));
-        }
-        set
-        {
-            _StartReverseSoundOffset = _StartReverseSoundOffset ?? Schema.GetOffset(0x320E8B6927D9C282);
-            Schema.SetString(_Handle, _StartReverseSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _StartReverseSoundOffset!.Value);
         }
     }
     private static nint? _LoopReverseSoundOffset;
 
-    public string LoopReverseSound
+    public SchemaUntypedField LoopReverseSound
     {
         get
         {
             _LoopReverseSoundOffset = _LoopReverseSoundOffset ?? Schema.GetOffset(0x320E8B69FC2C15CE);
-            return Schema.GetString(_Handle.Read<nint>(_LoopReverseSoundOffset!.Value));
-        }
-        set
-        {
-            _LoopReverseSoundOffset = _LoopReverseSoundOffset ?? Schema.GetOffset(0x320E8B69FC2C15CE);
-            Schema.SetString(_Handle, _LoopReverseSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _LoopReverseSoundOffset!.Value);
         }
     }
     private static nint? _StopReverseSoundOffset;
 
-    public string StopReverseSound
+    public SchemaUntypedField StopReverseSound
     {
         get
         {
             _StopReverseSoundOffset = _StopReverseSoundOffset ?? Schema.GetOffset(0x320E8B69B0EFF4BC);
-            return Schema.GetString(_Handle.Read<nint>(_StopReverseSoundOffset!.Value));
-        }
-        set
-        {
-            _StopReverseSoundOffset = _StopReverseSoundOffset ?? Schema.GetOffset(0x320E8B69B0EFF4BC);
-            Schema.SetString(_Handle, _StopReverseSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _StopReverseSoundOffset!.Value);
         }
     }
     private static nint? _ArriveAtDestinationSoundOffset;
 
-    public string ArriveAtDestinationSound
+    public SchemaUntypedField ArriveAtDestinationSound
     {
         get
         {
             _ArriveAtDestinationSoundOffset = _ArriveAtDestinationSoundOffset ?? Schema.GetOffset(0x320E8B696350F6A0);
-            return Schema.GetString(_Handle.Read<nint>(_ArriveAtDestinationSoundOffset!.Value));
-        }
-        set
-        {
-            _ArriveAtDestinationSoundOffset = _ArriveAtDestinationSoundOffset ?? Schema.GetOffset(0x320E8B696350F6A0);
-            Schema.SetString(_Handle, _ArriveAtDestinationSoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _ArriveAtDestinationSoundOffset!.Value);
         }
     }
     private static nint? _OnMovementEndOffset;
@@ -514,6 +479,16 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         {
             _CreateMovableNavMeshOffset = _CreateMovableNavMeshOffset ?? Schema.GetOffset(0x320E8B6985442AAF);
             return ref _Handle.AsRef<bool>(_CreateMovableNavMeshOffset!.Value);
+        }
+    }
+    private static nint? _CreateMovableSurfaceGraphOffset;
+
+    public ref bool CreateMovableSurfaceGraph
+    {
+        get
+        {
+            _CreateMovableSurfaceGraphOffset = _CreateMovableSurfaceGraphOffset ?? Schema.GetOffset(0x320E8B690BC6AA1C);
+            return ref _Handle.AsRef<bool>(_CreateMovableSurfaceGraphOffset!.Value);
         }
     }
     private static nint? _AllowMovableNavMeshDockingOnEntireEntityOffset;
@@ -669,6 +644,26 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         {
             _IsImGuiLoggingOffset = _IsImGuiLoggingOffset ?? Schema.GetOffset(0x320E8B690BF8C787);
             return ref _Handle.AsRef<bool>(_IsImGuiLoggingOffset!.Value);
+        }
+    }
+    private static nint? _IsImGuiEntTextLoggingOffset;
+
+    public ref bool IsImGuiEntTextLogging
+    {
+        get
+        {
+            _IsImGuiEntTextLoggingOffset = _IsImGuiEntTextLoggingOffset ?? Schema.GetOffset(0x320E8B6922F2184D);
+            return ref _Handle.AsRef<bool>(_IsImGuiEntTextLoggingOffset!.Value);
+        }
+    }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x320E8B69C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
         }
     }
     private static nint? _FollowEntityOffset;
@@ -836,6 +831,21 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
             return ref _Handle.AsRef<CHandle<CFuncMover>>(_FollowMoverOffset!.Value);
         }
     }
+    private static nint? _FollowEntityNameOffset;
+
+    public string FollowEntityName
+    {
+        get
+        {
+            _FollowEntityNameOffset = _FollowEntityNameOffset ?? Schema.GetOffset(0x320E8B69D56EA0F8);
+            return Schema.GetString(_Handle.Read<nint>(_FollowEntityNameOffset!.Value));
+        }
+        set
+        {
+            _FollowEntityNameOffset = _FollowEntityNameOffset ?? Schema.GetOffset(0x320E8B69D56EA0F8);
+            Schema.SetString(_Handle, _FollowEntityNameOffset!.Value, value);
+        }
+    }
     private static nint? _FollowMoverEntityNameOffset;
 
     public string FollowMoverEntityName
@@ -899,6 +909,16 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         {
             _FollowMoverConstraintPriorityOffset = _FollowMoverConstraintPriorityOffset ?? Schema.GetOffset(0x320E8B69E4EFD3C2);
             return ref _Handle.AsRef<int>(_FollowMoverConstraintPriorityOffset!.Value);
+        }
+    }
+    private static nint? _FollowMoverCouplerRangeOffset;
+
+    public ref Vector2D FollowMoverCouplerRange
+    {
+        get
+        {
+            _FollowMoverCouplerRangeOffset = _FollowMoverCouplerRangeOffset ?? Schema.GetOffset(0x320E8B69D982E782);
+            return ref _Handle.AsRef<Vector2D>(_FollowMoverCouplerRangeOffset!.Value);
         }
     }
     private static nint? _FollowConstraintsInitializedOffset;
@@ -989,6 +1009,26 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         {
             _QueueStopMovingOffset = _QueueStopMovingOffset ?? Schema.GetOffset(0x320E8B690D240066);
             return ref _Handle.AsRef<bool>(_QueueStopMovingOffset!.Value);
+        }
+    }
+    private static nint? _QueueSetupPathMoverOffset;
+
+    public ref bool QueueSetupPathMover
+    {
+        get
+        {
+            _QueueSetupPathMoverOffset = _QueueSetupPathMoverOffset ?? Schema.GetOffset(0x320E8B69E851D603);
+            return ref _Handle.AsRef<bool>(_QueueSetupPathMoverOffset!.Value);
+        }
+    }
+    private static nint? _PathRebuildStrategyOffset;
+
+    public ref CFuncMover__PathRebuildStrategy_t PathRebuildStrategy
+    {
+        get
+        {
+            _PathRebuildStrategyOffset = _PathRebuildStrategyOffset ?? Schema.GetOffset(0x320E8B6989C0A69F);
+            return ref _Handle.AsRef<CFuncMover__PathRebuildStrategy_t>(_PathRebuildStrategyOffset!.Value);
         }
     }
 

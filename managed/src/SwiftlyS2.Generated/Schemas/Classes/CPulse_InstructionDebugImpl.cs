@@ -38,12 +38,12 @@ internal partial class CPulse_InstructionDebugImpl : SchemaClass, CPulse_Instruc
     }
     private static nint? _SequencePointNameOffset;
 
-    public ref CGlobalSymbol SequencePointName
+    public SchemaUntypedField SequencePointName
     {
         get
         {
             _SequencePointNameOffset = _SequencePointNameOffset ?? Schema.GetOffset(0xD615D74BF45FA85D);
-            return ref _Handle.AsRef<CGlobalSymbol>(_SequencePointNameOffset!.Value);
+            return new SchemaUntypedField(_Handle + _SequencePointNameOffset!.Value);
         }
     }
 

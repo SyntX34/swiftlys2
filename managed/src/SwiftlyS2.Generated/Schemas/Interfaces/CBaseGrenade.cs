@@ -11,9 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseGrenade : CBaseAnimGraph, ISchemaClass<CBaseGrenade>
 {
     static CBaseGrenade ISchemaClass<CBaseGrenade>.From(nint handle) => new CBaseGrenadeImpl(handle);
-    static int ISchemaClass<CBaseGrenade>.Size => 2496;
+    static int ISchemaClass<CBaseGrenade>.Size => 2544;
     static string? ISchemaClass<CBaseGrenade>.ClassName => "grenade";
 
+
+    public ref bool DamageDetonating { get; }
 
     public ref CEntityIOOutput OnPlayerPickup { get; }
 

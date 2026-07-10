@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncTrain : CBasePlatTrain, ISchemaClass<CFuncTrain>
 {
     static CFuncTrain ISchemaClass<CFuncTrain>.From(nint handle) => new CFuncTrainImpl(handle);
-    static int ISchemaClass<CFuncTrain>.Size => 2096;
+    static int ISchemaClass<CFuncTrain>.Size => 2112;
     static string? ISchemaClass<CFuncTrain>.ClassName => "func_train";
 
 
@@ -26,6 +26,8 @@ public partial interface CFuncTrain : CBasePlatTrain, ISchemaClass<CFuncTrain>
     public GameTime_t NextBlockTime { get; }
 
     public string LastTarget { get; set; }
+
+    public ref float Speed { get; }
 
 
 }

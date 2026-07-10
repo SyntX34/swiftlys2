@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSprite : CBaseModelEntity, ISchemaClass<CSprite>
 {
     static CSprite ISchemaClass<CSprite>.From(nint handle) => new CSpriteImpl(handle);
-    static int ISchemaClass<CSprite>.Size => 2008;
+    static int ISchemaClass<CSprite>.Size => 2016;
     static string? ISchemaClass<CSprite>.ClassName => "env_sprite";
 
 
@@ -60,6 +60,8 @@ public partial interface CSprite : CBaseModelEntity, ISchemaClass<CSprite>
     public ref int SpriteWidth { get; }
 
     public ref int SpriteHeight { get; }
+
+    public ref float Speed { get; }
 
     public void SpriteMaterialUpdated();
     public void AttachedToEntityUpdated();

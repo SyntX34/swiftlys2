@@ -81,6 +81,26 @@ internal partial class C_OP_RenderVolumetricEmitterImpl : CParticleFunctionRende
             return new CPerParticleVecInputImpl(_Handle + _VelocityOffset!.Value);
         }
     }
+    private static nint? _PrevPositionOffset;
+
+    public CPerParticleVecInput PrevPosition
+    {
+        get
+        {
+            _PrevPositionOffset = _PrevPositionOffset ?? Schema.GetOffset(0x93EEEB29299B2C27);
+            return new CPerParticleVecInputImpl(_Handle + _PrevPositionOffset!.Value);
+        }
+    }
+    private static nint? _SpeedOffset;
+
+    public CPerParticleFloatInput Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x93EEEB29C631B7EA);
+            return new CPerParticleFloatInputImpl(_Handle + _SpeedOffset!.Value);
+        }
+    }
     private static nint? _RadiusOffset;
 
     public CPerParticleFloatInput Radius
@@ -129,6 +149,16 @@ internal partial class C_OP_RenderVolumetricEmitterImpl : CParticleFunctionRende
         {
             _KillRadiusOffset = _KillRadiusOffset ?? Schema.GetOffset(0x93EEEB29A0D462BD);
             return new CPerParticleFloatInputImpl(_Handle + _KillRadiusOffset!.Value);
+        }
+    }
+    private static nint? _KillDensityScaleOffset;
+
+    public CPerParticleFloatInput KillDensityScale
+    {
+        get
+        {
+            _KillDensityScaleOffset = _KillDensityScaleOffset ?? Schema.GetOffset(0x93EEEB29852F9405);
+            return new CPerParticleFloatInputImpl(_Handle + _KillDensityScaleOffset!.Value);
         }
     }
     private static nint? _FalloffOffset;

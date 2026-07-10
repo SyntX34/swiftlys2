@@ -194,16 +194,6 @@ internal partial class CBeamImpl : CBaseModelEntityImpl, CBeam
             return ref _Handle.AsRef<float>(_FrameOffset!.Value);
         }
     }
-    private static nint? _ClipStyleOffset;
-
-    public ref BeamClipStyle_t ClipStyle
-    {
-        get
-        {
-            _ClipStyleOffset = _ClipStyleOffset ?? Schema.GetOffset(0x4BCF3CE51A311350);
-            return ref _Handle.AsRef<BeamClipStyle_t>(_ClipStyleOffset!.Value);
-        }
-    }
     private static nint? _TurnedOffOffset;
 
     public ref bool TurnedOff
@@ -262,7 +252,6 @@ internal partial class CBeamImpl : CBaseModelEntityImpl, CBeam
     public void StartFrameUpdated() => Schema.Update(_Handle, 0x4BCF3CE5EE6DF5C0);
     public void SpeedUpdated() => Schema.Update(_Handle, 0x4BCF3CE5288671E4);
     public void FrameUpdated() => Schema.Update(_Handle, 0x4BCF3CE5F836C9F4);
-    public void ClipStyleUpdated() => Schema.Update(_Handle, 0x4BCF3CE51A311350);
     public void TurnedOffUpdated() => Schema.Update(_Handle, 0x4BCF3CE5EC469948);
     public void EndPosUpdated() => Schema.Update(_Handle, 0x4BCF3CE58DD24760);
 }

@@ -383,16 +383,6 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
             return ref _Handle.AsRef<Vector>(_RagdollDamageForceOffset!.Value);
         }
     }
-    private static nint? _RagdollDamagePositionOffset;
-
-    public ref Vector RagdollDamagePosition
-    {
-        get
-        {
-            _RagdollDamagePositionOffset = _RagdollDamagePositionOffset ?? Schema.GetOffset(0xC7614AAB29671362);
-            return ref _Handle.AsRef<Vector>(_RagdollDamagePositionOffset!.Value);
-        }
-    }
     private static nint? _RagdollDamageWeaponNameOffset;
 
     public string RagdollDamageWeaponName
@@ -1023,18 +1013,6 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
             return ref _Handle.AsRef<Vector>(_StashedVelocityOffset!.Value);
         }
     }
-    public ISchemaFixedArray<QAngle> ShootAngleHistory
-    {
-        get => new SchemaFixedArray<QAngle>(_Handle, 0xC7614AABE9EFCFCF, 2, 12, 4);
-    }
-    public ISchemaFixedArray<Vector> ThrowPositionHistory
-    {
-        get => new SchemaFixedArray<Vector>(_Handle, 0xC7614AAB35A0837C, 2, 12, 4);
-    }
-    public ISchemaFixedArray<Vector> VelocityHistory
-    {
-        get => new SchemaFixedArray<Vector>(_Handle, 0xC7614AAB24AFD9B2, 2, 12, 4);
-    }
     private static nint? _CommittingSuicideOnTeamChangeOffset;
 
     public ref bool CommittingSuicideOnTeamChange
@@ -1118,7 +1096,6 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
     public void NextSprayDecalTimeUpdated() => Schema.Update(_Handle, 0xC7614AAB53790011);
     public void RagdollDamageBoneUpdated() => Schema.Update(_Handle, 0xC7614AAB31F4732F);
     public void RagdollDamageForceUpdated() => Schema.Update(_Handle, 0xC7614AAB7FBF68CC);
-    public void RagdollDamagePositionUpdated() => Schema.Update(_Handle, 0xC7614AAB29671362);
     public void RagdollDamageWeaponNameUpdated() => Schema.Update(_Handle, 0xC7614AABDAAFA519);
     public void RagdollDamageHeadshotUpdated() => Schema.Update(_Handle, 0xC7614AAB324979E7);
     public void RagdollServerOriginUpdated() => Schema.Update(_Handle, 0xC7614AAB24991D61);

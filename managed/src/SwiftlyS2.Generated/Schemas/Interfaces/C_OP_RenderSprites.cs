@@ -29,7 +29,7 @@ public partial interface C_OP_RenderSprites : CBaseRendererSource2, ISchemaClass
 
     public CParticleCollectionRendererFloatInput MaxSize { get; }
 
-    public CParticleCollectionRendererFloatInput AlphaAdjustWithSizeAdjust { get; }
+    public CParticleCollectionRendererFloatInput SubPixelAAScale { get; }
 
     public CParticleCollectionRendererFloatInput StartFadeSize { get; }
 

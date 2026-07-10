@@ -15,9 +15,9 @@ public partial interface AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t : ISchem
     static string? ISchemaClass<AI_DefaultNPC_DebugSnapshotData_t__PathQuery_t>.ClassName => null;
 
 
-    public ref CGlobalSymbol InitialQueryName { get; }
+    public ref CGlobalSymbol InitialMovementId { get; }
 
-    public ref CGlobalSymbol CurrentQueryName { get; }
+    public ref CGlobalSymbol CurrentMovementId { get; }
 
     public ref CGlobalSymbol Mode { get; }
 

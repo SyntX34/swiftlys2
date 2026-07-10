@@ -65,7 +65,34 @@ internal class PermissionManager : IPermissionManager
 
         permissions.AddRange(_defaultPermissions);
 
-        return permissions;
+        var subPermissions = GetSubPermissions();
+        var visited = new HashSet<string>();
+        var result = new List<string>();
+
+        void Expand( string permission )
+        {
+            if (!visited.Add(permission))
+            {
+                return;
+            }
+
+            result.Add(permission);
+
+            if (subPermissions.TryGetValue(permission, out var subs))
+            {
+                foreach (var sub in subs)
+                {
+                    Expand(sub);
+                }
+            }
+        }
+
+        foreach (var permission in permissions)
+        {
+            Expand(permission);
+        }
+
+        return result;
     }
 
     private Dictionary<string, List<string>> GetSubPermissions()

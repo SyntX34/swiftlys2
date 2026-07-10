@@ -246,6 +246,16 @@ internal partial class CSpriteImpl : CBaseModelEntityImpl, CSprite
             return ref _Handle.AsRef<int>(_SpriteHeightOffset!.Value);
         }
     }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xAAF88CE3C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+        }
+    }
 
     public void SpriteMaterialUpdated() => Schema.Update(_Handle, 0xAAF88CE378793443);
     public void AttachedToEntityUpdated() => Schema.Update(_Handle, 0xAAF88CE3FDEAA64D);

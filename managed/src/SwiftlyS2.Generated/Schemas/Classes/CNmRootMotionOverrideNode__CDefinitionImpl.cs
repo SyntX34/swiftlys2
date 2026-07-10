@@ -56,6 +56,16 @@ internal partial class CNmRootMotionOverrideNode__CDefinitionImpl : CNmPassthrou
             return ref _Handle.AsRef<short>(_AngularVelocityLimitNodeIdxOffset!.Value);
         }
     }
+    private static nint? _EnabledNodeIdxOffset;
+
+    public ref short EnabledNodeIdx
+    {
+        get
+        {
+            _EnabledNodeIdxOffset = _EnabledNodeIdxOffset ?? Schema.GetOffset(0x63AAD28B4437410D);
+            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+        }
+    }
     private static nint? _MaxLinearVelocityOffset;
 
     public ref float MaxLinearVelocity

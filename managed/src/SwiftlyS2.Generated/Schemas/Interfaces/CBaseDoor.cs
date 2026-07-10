@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseDoor : CBaseToggle, ISchemaClass<CBaseDoor>
 {
     static CBaseDoor ISchemaClass<CBaseDoor>.From(nint handle) => new CBaseDoorImpl(handle);
-    static int ISchemaClass<CBaseDoor>.Size => 2408;
+    static int ISchemaClass<CBaseDoor>.Size => 2424;
     static string? ISchemaClass<CBaseDoor>.ClassName => "func_door";
 
 
@@ -35,13 +35,17 @@ public partial interface CBaseDoor : CBaseToggle, ISchemaClass<CBaseDoor>
 
     public ref float BlockDamage { get; }
 
-    public string NoiseMoving { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField NoiseMoving { get; }
 
-    public string NoiseArrived { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField NoiseArrived { get; }
 
-    public string NoiseMovingClosed { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField NoiseMovingClosed { get; }
 
-    public string NoiseArrivedClosed { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField NoiseArrivedClosed { get; }
 
     public string ChainTarget { get; set; }
 
@@ -66,6 +70,8 @@ public partial interface CBaseDoor : CBaseToggle, ISchemaClass<CBaseDoor>
     public ref bool LoopMoveSound { get; }
 
     public ref bool CreateNavObstacle { get; }
+
+    public ref float Speed { get; }
 
     public ref bool IsChaining { get; }
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSceneEventInfo : ISchemaClass<CSceneEventInfo>
 {
     static CSceneEventInfo ISchemaClass<CSceneEventInfo>.From(nint handle) => new CSceneEventInfoImpl(handle);
-    static int ISchemaClass<CSceneEventInfo>.Size => 104;
+    static int ISchemaClass<CSceneEventInfo>.Size => 120;
     static string? ISchemaClass<CSceneEventInfo>.ClassName => null;
 
 
@@ -22,6 +22,14 @@ public partial interface CSceneEventInfo : ISchemaClass<CSceneEventInfo>
     public HSequence Sequence { get; }
 
     public ref float Weight { get; }
+
+    public ref float LastAccumulatedTime { get; }
+
+    public ref float LastJumpFromTime { get; }
+
+    public ref float LastJumpToTime { get; }
+
+    public ref float LastCycle { get; }
 
     public ref CStrongHandle<InfoForResourceTypeCNmClip> AnimClip { get; }
 

@@ -19,4 +19,5 @@ public interface CCSUsrMsg_WeaponSound : ITypedProtobuf<CCSUsrMsg_WeaponSound>, 
     public string Sound { get; set; }
     public float GameTimestamp { get; set; }
     public uint SourceSoundscapeid { get; set; }
+    public bool Stealth { get; set; }
 }

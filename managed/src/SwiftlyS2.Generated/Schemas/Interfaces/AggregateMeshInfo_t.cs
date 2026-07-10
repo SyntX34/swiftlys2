@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface AggregateMeshInfo_t : ISchemaClass<AggregateMeshInfo_t>
 {
     static AggregateMeshInfo_t ISchemaClass<AggregateMeshInfo_t>.From(nint handle) => new AggregateMeshInfo_tImpl(handle);
-    static int ISchemaClass<AggregateMeshInfo_t>.Size => 36;
+    static int ISchemaClass<AggregateMeshInfo_t>.Size => 44;
     static string? ISchemaClass<AggregateMeshInfo_t>.ClassName => null;
 
 
@@ -37,7 +37,11 @@ public partial interface AggregateMeshInfo_t : ISchemaClass<AggregateMeshInfo_t>
 
     public ref uint VertexAlbedoStreamOffset { get; }
 
+    public ref uint VertexEmissiveStreamOffset { get; }
+
     public ref AggregateInstanceStream_t InstanceStreams { get; }
+
+    public ref float EmissiveFactor { get; }
 
 
 }

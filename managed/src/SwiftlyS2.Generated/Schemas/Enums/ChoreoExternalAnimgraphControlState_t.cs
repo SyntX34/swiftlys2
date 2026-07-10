@@ -7,9 +7,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public enum ChoreoExternalAnimgraphControlState_t : uint
 {
     eNone = 0,
-    eBegin = 1,
-    eLooping = 2,
-    eExit = 3,
-    eAbort = 4,
-    eCount = 5,
+    eExit = 1,
+    eState01 = 2,
+    eState02 = 3,
+    eState03 = 4,
+    eState04 = 5,
+    eState05 = 6,
+    eCount = 7,
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmFootIKTask : CNmPoseTask, ISchemaClass<CNmFootIKTask>
 {
     static CNmFootIKTask ISchemaClass<CNmFootIKTask>.From(nint handle) => new CNmFootIKTaskImpl(handle);
-    static int ISchemaClass<CNmFootIKTask>.Size => 272;
+    static int ISchemaClass<CNmFootIKTask>.Size => 320;
     static string? ISchemaClass<CNmFootIKTask>.ClassName => null;
 
 

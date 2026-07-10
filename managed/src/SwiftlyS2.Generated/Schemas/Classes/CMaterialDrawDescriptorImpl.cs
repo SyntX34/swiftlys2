@@ -106,6 +106,16 @@ internal partial class CMaterialDrawDescriptorImpl : SchemaClass, CMaterialDrawD
             return ref _Handle.AsRef<CUtlLeanVector<CMaterialDrawDescriptor__RigidMeshPart_t, int>>(_RigidMeshPartsOffset!.Value);
         }
     }
+    private static nint? _RootBvhNodesOffset;
+
+    public ref CUtlLeanVector<ushort, int> RootBvhNodes
+    {
+        get
+        {
+            _RootBvhNodesOffset = _RootBvhNodesOffset ?? Schema.GetOffset(0xE7C21000147870D0);
+            return ref _Handle.AsRef<CUtlLeanVector<ushort, int>>(_RootBvhNodesOffset!.Value);
+        }
+    }
     private static nint? _PrimitiveTypeOffset;
 
     public ref RenderPrimitiveType_t PrimitiveType

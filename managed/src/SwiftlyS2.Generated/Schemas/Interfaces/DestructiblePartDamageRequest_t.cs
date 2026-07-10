@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface DestructiblePartDamageRequest_t : ISchemaClass<DestructiblePartDamageRequest_t>
 {
     static DestructiblePartDamageRequest_t ISchemaClass<DestructiblePartDamageRequest_t>.From(nint handle) => new DestructiblePartDamageRequest_tImpl(handle);
-    static int ISchemaClass<DestructiblePartDamageRequest_t>.Size => 56;
+    static int ISchemaClass<DestructiblePartDamageRequest_t>.Size => 60;
     static string? ISchemaClass<DestructiblePartDamageRequest_t>.ClassName => null;
 
 
@@ -28,6 +28,8 @@ public partial interface DestructiblePartDamageRequest_t : ISchemaClass<Destruct
     public ref float BreakDamage { get; }
 
     public ref float BreakDamageRadius { get; }
+
+    public ref CHandle<CBaseEntity> Attacker { get; }
 
     public ref Vector WsBreakDamageOrigin { get; }
 

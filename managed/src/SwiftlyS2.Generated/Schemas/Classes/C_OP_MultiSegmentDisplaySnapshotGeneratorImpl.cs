@@ -71,6 +71,16 @@ internal partial class C_OP_MultiSegmentDisplaySnapshotGeneratorImpl : CParticle
             return new CParticleCollectionFloatInputImpl(_Handle + _ValueOffset!.Value);
         }
     }
+    private static nint? _ScollOffsetOffset;
+
+    public CParticleCollectionFloatInput ScollOffset
+    {
+        get
+        {
+            _ScollOffsetOffset = _ScollOffsetOffset ?? Schema.GetOffset(0xAF1E9A287C73B6E9);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ScollOffsetOffset!.Value);
+        }
+    }
     private static nint? _SpecialCharListOffset;
 
     public ref CUtlVector<ParticleMultiSegmentSpecialCharacter_t> SpecialCharList

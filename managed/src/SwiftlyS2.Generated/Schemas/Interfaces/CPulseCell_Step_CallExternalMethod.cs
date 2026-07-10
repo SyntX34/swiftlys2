@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_Step_CallExternalMethod : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Step_CallExternalMethod>
 {
     static CPulseCell_Step_CallExternalMethod ISchemaClass<CPulseCell_Step_CallExternalMethod>.From(nint handle) => new CPulseCell_Step_CallExternalMethodImpl(handle);
-    static int ISchemaClass<CPulseCell_Step_CallExternalMethod>.Size => 192;
+    static int ISchemaClass<CPulseCell_Step_CallExternalMethod>.Size => 336;
     static string? ISchemaClass<CPulseCell_Step_CallExternalMethod>.ClassName => null;
 
 

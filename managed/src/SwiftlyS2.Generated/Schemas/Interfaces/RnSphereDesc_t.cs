@@ -15,7 +15,7 @@ public partial interface RnSphereDesc_t : RnShapeDesc_t, ISchemaClass<RnSphereDe
     static string? ISchemaClass<RnSphereDesc_t>.ClassName => null;
 
 
-    // SphereBase_t< float32 >
+    // RnSphere_t
     public SchemaUntypedField Sphere { get; }
 
 

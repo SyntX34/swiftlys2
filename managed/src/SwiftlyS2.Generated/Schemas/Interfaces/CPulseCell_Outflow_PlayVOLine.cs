@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_Outflow_PlayVOLine : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Outflow_PlayVOLine>
 {
     static CPulseCell_Outflow_PlayVOLine ISchemaClass<CPulseCell_Outflow_PlayVOLine>.From(nint handle) => new CPulseCell_Outflow_PlayVOLineImpl(handle);
-    static int ISchemaClass<CPulseCell_Outflow_PlayVOLine>.Size => 144;
+    static int ISchemaClass<CPulseCell_Outflow_PlayVOLine>.Size => 288;
     static string? ISchemaClass<CPulseCell_Outflow_PlayVOLine>.ClassName => null;
 
 

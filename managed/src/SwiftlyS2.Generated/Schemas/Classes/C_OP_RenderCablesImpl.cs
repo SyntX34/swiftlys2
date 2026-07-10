@@ -216,6 +216,16 @@ internal partial class C_OP_RenderCablesImpl : CParticleFunctionRendererImpl, C_
             return ref _Handle.AsRef<bool>(_ForceRoundnessFixedOffset!.Value);
         }
     }
+    private static nint? _OnlyRenderInEffectsBloomPassOffset;
+
+    public ref bool OnlyRenderInEffectsBloomPass
+    {
+        get
+        {
+            _OnlyRenderInEffectsBloomPassOffset = _OnlyRenderInEffectsBloomPassOffset ?? Schema.GetOffset(0x16498877D6FA0FBC);
+            return ref _Handle.AsRef<bool>(_OnlyRenderInEffectsBloomPassOffset!.Value);
+        }
+    }
     private static nint? _LightingTransformOffset;
 
     public CParticleTransformInput LightingTransform

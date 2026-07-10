@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface AI_BaseNPC_DebugSnapshotData_t : DebugSnapshotBaseStructuredData_t, ISchemaClass<AI_BaseNPC_DebugSnapshotData_t>
 {
     static AI_BaseNPC_DebugSnapshotData_t ISchemaClass<AI_BaseNPC_DebugSnapshotData_t>.From(nint handle) => new AI_BaseNPC_DebugSnapshotData_tImpl(handle);
-    static int ISchemaClass<AI_BaseNPC_DebugSnapshotData_t>.Size => 120;
+    static int ISchemaClass<AI_BaseNPC_DebugSnapshotData_t>.Size => 376;
     static string? ISchemaClass<AI_BaseNPC_DebugSnapshotData_t>.ClassName => null;
 
 
@@ -23,17 +23,23 @@ public partial interface AI_BaseNPC_DebugSnapshotData_t : DebugSnapshotBaseStruc
 
     public ref CGlobalSymbol S_current_task { get; }
 
-    public string S_schedule_interrupt_reason { get; set; }
+    public string S_prev_schedule { get; set; }
 
-    public string S_schedule_fail_reason { get; set; }
+    public string S_npc_current_movement { get; set; }
+
+    public string S_last_task_end_location { get; set; }
 
     public ref CUtlVector<CGlobalSymbol> Conditions { get; }
 
     public ref CUtlVector<CGlobalSymbol> Anim_events { get; }
 
-    public ref CGlobalSymbol E_action_body_section { get; }
+    public AI_BaseNPCAnimGraph_DebugSnapshotData_t Animgraph { get; }
 
-    public ref CGlobalSymbol E_movement_body_section { get; }
+    public AI_Navigator_DebugSnapshotData_t Navigator { get; }
+
+    public AI_MotorServices_DebugSnapshotData_t MotorServices { get; }
+
+    public AI_FacingServices_DebugSnapshotData_t FacingServices { get; }
 
 
 }

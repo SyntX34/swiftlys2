@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderModels : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderModels>
 {
     static C_OP_RenderModels ISchemaClass<C_OP_RenderModels>.From(nint handle) => new C_OP_RenderModelsImpl(handle);
-    static int ISchemaClass<C_OP_RenderModels>.Size => 11432;
+    static int ISchemaClass<C_OP_RenderModels>.Size => 11808;
     static string? ISchemaClass<C_OP_RenderModels>.ClassName => null;
 
 
@@ -126,6 +126,10 @@ public partial interface C_OP_RenderModels : CParticleFunctionRenderer, ISchemaC
     public CParticleCollectionVecInput ColorScale { get; }
 
     public ref ParticleColorBlendType_t ColorBlendType { get; }
+
+    public string StrLightStyle { get; set; }
+
+    public CPerParticleFloatInput LightStyleTime { get; }
 
 
 }

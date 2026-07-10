@@ -15,10 +15,10 @@ public partial interface CEntityAttributeTable : ISchemaClass<CEntityAttributeTa
     static string? ISchemaClass<CEntityAttributeTable>.ClassName => null;
 
 
-    // CUtlOrderedMap< CUtlStringToken, Attribute_t >
+    // CUtlOrderedMap< CUtlStringTokenNoRegistration, Attribute_t >
     public SchemaUntypedField Attributes { get; }
 
-    // CUtlOrderedMap< CUtlStringToken, CUtlString >
+    // CUtlOrderedMap< CUtlStringTokenNoRegistration, CUtlString >
     public SchemaUntypedField Names { get; }
 
 

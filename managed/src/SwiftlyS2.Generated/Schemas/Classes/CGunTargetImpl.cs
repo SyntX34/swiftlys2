@@ -16,6 +16,16 @@ internal partial class CGunTargetImpl : CBaseToggleImpl, CGunTarget
 {
     public CGunTargetImpl(nint handle) : base(handle) { }
 
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x4CB42969C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+        }
+    }
     private static nint? _OnOffset;
 
     public ref bool On

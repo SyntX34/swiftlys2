@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface AggregateRTProxySceneObject_t : ISchemaClass<AggregateRTProxySceneObject_t>
 {
     static AggregateRTProxySceneObject_t ISchemaClass<AggregateRTProxySceneObject_t>.From(nint handle) => new AggregateRTProxySceneObject_tImpl(handle);
-    static int ISchemaClass<AggregateRTProxySceneObject_t>.Size => 104;
+    static int ISchemaClass<AggregateRTProxySceneObject_t>.Size => 120;
     static string? ISchemaClass<AggregateRTProxySceneObject_t>.ClassName => null;
 
 
@@ -26,6 +26,8 @@ public partial interface AggregateRTProxySceneObject_t : ISchemaClass<AggregateR
     public ref CUtlBinaryBlock IBData { get; }
 
     public ref CUtlBinaryBlock InstanceAlbedoData { get; }
+
+    public ref CUtlBinaryBlock InstanceEmissiveData { get; }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderVolumetricEmitter : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderVolumetricEmitter>
 {
     static C_OP_RenderVolumetricEmitter ISchemaClass<C_OP_RenderVolumetricEmitter>.From(nint handle) => new C_OP_RenderVolumetricEmitterImpl(handle);
-    static int ISchemaClass<C_OP_RenderVolumetricEmitter>.Size => 6224;
+    static int ISchemaClass<C_OP_RenderVolumetricEmitter>.Size => 8680;
     static string? ISchemaClass<C_OP_RenderVolumetricEmitter>.ClassName => null;
 
 
@@ -27,6 +27,10 @@ public partial interface C_OP_RenderVolumetricEmitter : CParticleFunctionRendere
 
     public CPerParticleVecInput Velocity { get; }
 
+    public CPerParticleVecInput PrevPosition { get; }
+
+    public CPerParticleFloatInput Speed { get; }
+
     public CPerParticleFloatInput Radius { get; }
 
     public CPerParticleFloatInput Density { get; }
@@ -36,6 +40,8 @@ public partial interface C_OP_RenderVolumetricEmitter : CParticleFunctionRendere
     public CPerParticleFloatInput Magnitude { get; }
 
     public CPerParticleFloatInput KillRadius { get; }
+
+    public CPerParticleFloatInput KillDensityScale { get; }
 
     public CPerParticleFloatInput Falloff { get; }
 

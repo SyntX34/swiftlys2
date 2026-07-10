@@ -11,11 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmChainLookatNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmChainLookatNode__CDefinition>
 {
     static CNmChainLookatNode__CDefinition ISchemaClass<CNmChainLookatNode__CDefinition>.From(nint handle) => new CNmChainLookatNode__CDefinitionImpl(handle);
-    static int ISchemaClass<CNmChainLookatNode__CDefinition>.Size => 56;
+    static int ISchemaClass<CNmChainLookatNode__CDefinition>.Size => 120;
     static string? ISchemaClass<CNmChainLookatNode__CDefinition>.ClassName => null;
 
 
-    public ref CGlobalSymbol ChainEndBoneID { get; }
+    public ref CGlobalSymbol EndEffectorBoneID { get; }
+
+    public ref Vector EndEffectorForwardAxis { get; }
+
+    public ref Vector EndEffectorOffset { get; }
 
     public ref short LookatTargetNodeIdx { get; }
 
@@ -23,11 +27,12 @@ public partial interface CNmChainLookatNode__CDefinition : CNmPassthroughNode__C
 
     public ref float BlendTimeSeconds { get; }
 
+    // CUtlVectorFixedGrowable< float32, 5 >
+    public SchemaUntypedField ChainWeights { get; }
+
     public ref byte ChainLength { get; }
 
     public ref bool IsTargetInWorldSpace { get; }
-
-    public ref Vector ChainForwardDir { get; }
 
 
 }

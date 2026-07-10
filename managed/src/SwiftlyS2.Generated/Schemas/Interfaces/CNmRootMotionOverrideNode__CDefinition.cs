@@ -23,6 +23,8 @@ public partial interface CNmRootMotionOverrideNode__CDefinition : CNmPassthrough
 
     public ref short AngularVelocityLimitNodeIdx { get; }
 
+    public ref short EnabledNodeIdx { get; }
+
     public ref float MaxLinearVelocity { get; }
 
     public ref float MaxAngularVelocityRadians { get; }

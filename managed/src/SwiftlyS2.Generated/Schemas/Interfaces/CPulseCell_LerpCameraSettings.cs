@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_LerpCameraSettings : CPulseCell_BaseLerp, ISchemaClass<CPulseCell_LerpCameraSettings>
 {
     static CPulseCell_LerpCameraSettings ISchemaClass<CPulseCell_LerpCameraSettings>.From(nint handle) => new CPulseCell_LerpCameraSettingsImpl(handle);
-    static int ISchemaClass<CPulseCell_LerpCameraSettings>.Size => 184;
+    static int ISchemaClass<CPulseCell_LerpCameraSettings>.Size => 328;
     static string? ISchemaClass<CPulseCell_LerpCameraSettings>.ClassName => null;
 
 

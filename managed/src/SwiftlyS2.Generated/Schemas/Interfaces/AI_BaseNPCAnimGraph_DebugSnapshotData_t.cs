@@ -8,20 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AI_BaseNPCAnimGraph_DebugSnapshotData_t : DebugSnapshotBaseStructuredData_t, ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>
+public partial interface AI_BaseNPCAnimGraph_DebugSnapshotData_t : ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>
 {
     static AI_BaseNPCAnimGraph_DebugSnapshotData_t ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>.From(nint handle) => new AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl(handle);
-    static int ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>.Size => 40;
+    static int ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>.Size => 64;
     static string? ISchemaClass<AI_BaseNPCAnimGraph_DebugSnapshotData_t>.ClassName => null;
 
 
     public ref CGlobalSymbol E_action_desired { get; }
 
-    public ref bool B_action_restart { get; }
+    public ref CGlobalSymbol E_action_handshake_restart { get; }
+
+    public ref CGlobalSymbol E_action_handshake_body_authority_current { get; }
+
+    public ref CGlobalSymbol E_action_handshake_body_authority_desired { get; }
 
     public ref CGlobalSymbol E_movement_type_desired { get; }
 
-    public ref bool B_movement_type_restart { get; }
+    public ref CGlobalSymbol E_movement_handshake_restart { get; }
+
+    public ref CGlobalSymbol E_movement_handshake_body_authority_current { get; }
+
+    public ref CGlobalSymbol E_movement_handshake_body_authority_desired { get; }
 
 
 }

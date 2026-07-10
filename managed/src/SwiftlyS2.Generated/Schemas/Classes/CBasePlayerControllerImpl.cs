@@ -106,6 +106,16 @@ internal partial class CBasePlayerControllerImpl : CBaseEntityImpl, CBasePlayerC
             return ref _Handle.AsRef<PlayerConnectedState>(_ConnectedOffset!.Value);
         }
     }
+    private static nint? _MostConnectedOffset;
+
+    public ref PlayerConnectedState MostConnected
+    {
+        get
+        {
+            _MostConnectedOffset = _MostConnectedOffset ?? Schema.GetOffset(0x3979FF6E3AED17EE);
+            return ref _Handle.AsRef<PlayerConnectedState>(_MostConnectedOffset!.Value);
+        }
+    }
     private static nint? _PlayerNameOffset;
 
     public string PlayerName
@@ -271,6 +281,7 @@ internal partial class CBasePlayerControllerImpl : CBaseEntityImpl, CBasePlayerC
     public void PawnUpdated() => Schema.Update(_Handle, 0x3979FF6E7C628C1D);
     public void KnownTeamMismatchUpdated() => Schema.Update(_Handle, 0x3979FF6EDDCE3C49);
     public void ConnectedUpdated() => Schema.Update(_Handle, 0x3979FF6E97963D8B);
+    public void MostConnectedUpdated() => Schema.Update(_Handle, 0x3979FF6E3AED17EE);
     public void PlayerNameUpdated() => Schema.Update(_Handle, 0x3979FF6EDE61DD3B);
     public void SteamIDUpdated() => Schema.Update(_Handle, 0x3979FF6EB22F805E);
     public void NoClipEnabledUpdated() => Schema.Update(_Handle, 0x3979FF6E520E7FBD);

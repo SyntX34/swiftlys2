@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface RTProxyInstanceInfo_t : ISchemaClass<RTProxyInstanceInfo_t>
 {
     static RTProxyInstanceInfo_t ISchemaClass<RTProxyInstanceInfo_t>.From(nint handle) => new RTProxyInstanceInfo_tImpl(handle);
-    static int ISchemaClass<RTProxyInstanceInfo_t>.Size => 60;
+    static int ISchemaClass<RTProxyInstanceInfo_t>.Size => 72;
     static string? ISchemaClass<RTProxyInstanceInfo_t>.ClassName => null;
 
 
@@ -19,11 +19,17 @@ public partial interface RTProxyInstanceInfo_t : ISchemaClass<RTProxyInstanceInf
 
     public ref VertexAlbedoFormat_t AlbedoFormat { get; }
 
+    public ref VertexAlbedoFormat_t EmissiveFormat { get; }
+
     public ref ushort BLASCount { get; }
 
     public ref uint BLASIndex { get; }
 
     public ref uint VertexAlbedoByteOffset { get; }
+
+    public ref uint VertexEmissiveByteOffset { get; }
+
+    public ref float EmissiveFactor { get; }
 
     public ref matrix3x4_t MWorldFromLocal { get; }
 

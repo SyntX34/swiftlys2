@@ -27,5 +27,7 @@ public partial interface CLogicCollisionPair : CLogicalEntity, ISchemaClass<CLog
 
     public ref bool Succeeded { get; }
 
+    public ref bool AllowMissing { get; }
+
 
 }

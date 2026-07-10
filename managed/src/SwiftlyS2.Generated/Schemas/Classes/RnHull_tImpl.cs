@@ -86,16 +86,6 @@ internal partial class RnHull_tImpl : SchemaClass, RnHull_t
             return ref _Handle.AsRef<float>(_SurfaceAreaOffset!.Value);
         }
     }
-    private static nint? _VerticesOffset;
-
-    public ref CUtlVector<RnVertex_t> Vertices
-    {
-        get
-        {
-            _VerticesOffset = _VerticesOffset ?? Schema.GetOffset(0x856EB4A1E4F9760E);
-            return ref _Handle.AsRef<CUtlVector<RnVertex_t>>(_VerticesOffset!.Value);
-        }
-    }
     private static nint? _VertexPositionsOffset;
 
     public ref CUtlVector<Vector> VertexPositions
@@ -104,26 +94,6 @@ internal partial class RnHull_tImpl : SchemaClass, RnHull_t
         {
             _VertexPositionsOffset = _VertexPositionsOffset ?? Schema.GetOffset(0x856EB4A1E553E225);
             return ref _Handle.AsRef<CUtlVector<Vector>>(_VertexPositionsOffset!.Value);
-        }
-    }
-    private static nint? _EdgesOffset;
-
-    public ref CUtlVector<RnHalfEdge_t> Edges
-    {
-        get
-        {
-            _EdgesOffset = _EdgesOffset ?? Schema.GetOffset(0x856EB4A1CFE839DD);
-            return ref _Handle.AsRef<CUtlVector<RnHalfEdge_t>>(_EdgesOffset!.Value);
-        }
-    }
-    private static nint? _FacesOffset;
-
-    public ref CUtlVector<RnFace_t> Faces
-    {
-        get
-        {
-            _FacesOffset = _FacesOffset ?? Schema.GetOffset(0x856EB4A1B57F1DFD);
-            return ref _Handle.AsRef<CUtlVector<RnFace_t>>(_FacesOffset!.Value);
         }
     }
     private static nint? _FacePlanesOffset;
@@ -155,6 +125,36 @@ internal partial class RnHull_tImpl : SchemaClass, RnHull_t
             _RegionSVMOffset = _RegionSVMOffset ?? Schema.GetOffset(0x856EB4A18AD82DC9);
             var ptr = _Handle.Read<nint>(_RegionSVMOffset!.Value);
             return ptr.IsValidPtr() ? new CRegionSVMImpl(ptr) : null;
+        }
+    }
+    private static nint? _VerticesOffset;
+
+    public ref CUtlVector<RnVertex_t> Vertices
+    {
+        get
+        {
+            _VerticesOffset = _VerticesOffset ?? Schema.GetOffset(0x856EB4A1E4F9760E);
+            return ref _Handle.AsRef<CUtlVector<RnVertex_t>>(_VerticesOffset!.Value);
+        }
+    }
+    private static nint? _EdgesOffset;
+
+    public ref CUtlVector<RnHalfEdge_t> Edges
+    {
+        get
+        {
+            _EdgesOffset = _EdgesOffset ?? Schema.GetOffset(0x856EB4A1CFE839DD);
+            return ref _Handle.AsRef<CUtlVector<RnHalfEdge_t>>(_EdgesOffset!.Value);
+        }
+    }
+    private static nint? _FacesOffset;
+
+    public ref CUtlVector<RnFace_t> Faces
+    {
+        get
+        {
+            _FacesOffset = _FacesOffset ?? Schema.GetOffset(0x856EB4A1B57F1DFD);
+            return ref _Handle.AsRef<CUtlVector<RnFace_t>>(_FacesOffset!.Value);
         }
     }
 

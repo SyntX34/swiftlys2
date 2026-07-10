@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmOverlayBlendTask : CNmBlendTaskBase, ISchemaClass<CNmOverlayBlendTask>
 {
     static CNmOverlayBlendTask ISchemaClass<CNmOverlayBlendTask>.From(nint handle) => new CNmOverlayBlendTaskImpl(handle);
-    static int ISchemaClass<CNmOverlayBlendTask>.Size => 208;
+    static int ISchemaClass<CNmOverlayBlendTask>.Size => 256;
     static string? ISchemaClass<CNmOverlayBlendTask>.ClassName => null;
 
 }

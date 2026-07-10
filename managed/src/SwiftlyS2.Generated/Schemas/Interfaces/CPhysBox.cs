@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPhysBox : CBreakable, ISchemaClass<CPhysBox>
 {
     static CPhysBox ISchemaClass<CPhysBox>.From(nint handle) => new CPhysBoxImpl(handle);
-    static int ISchemaClass<CPhysBox>.Size => 2312;
+    static int ISchemaClass<CPhysBox>.Size => 2344;
     static string? ISchemaClass<CPhysBox>.ClassName => "func_physbox";
 
 
@@ -33,6 +33,14 @@ public partial interface CPhysBox : CBreakable, ISchemaClass<CPhysBox>
 
     public ref float TouchOutputPerEntityDelay { get; }
 
+    public string CollisionGroup { get; set; }
+
+    public string InteractsAs { get; set; }
+
+    public string InteractsWith { get; set; }
+
+    public string InteractsExclude { get; set; }
+
     public ref CEntityIOOutput OnDamaged { get; }
 
     public ref CEntityIOOutput OnAwakened { get; }
@@ -42,8 +50,6 @@ public partial interface CPhysBox : CBreakable, ISchemaClass<CPhysBox>
     public ref CEntityIOOutput OnPlayerUse { get; }
 
     public ref CEntityIOOutput OnStartTouch { get; }
-
-    public ref CHandle<CBasePlayerPawn> CarryingPlayer { get; }
 
 
 }

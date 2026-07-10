@@ -56,5 +56,25 @@ internal partial class C_OP_SetControlPointToPlayerImpl : CParticleFunctionPreEm
             return ref _Handle.AsRef<ParticleEntityPos_t>(_PositionOffset!.Value);
         }
     }
+    private static nint? _RadiusCPOffset;
+
+    public ref int RadiusCP
+    {
+        get
+        {
+            _RadiusCPOffset = _RadiusCPOffset ?? Schema.GetOffset(0xD877DC8E675C27FC);
+            return ref _Handle.AsRef<int>(_RadiusCPOffset!.Value);
+        }
+    }
+    private static nint? _RadiusCPFieldOffset;
+
+    public ref int RadiusCPField
+    {
+        get
+        {
+            _RadiusCPFieldOffset = _RadiusCPFieldOffset ?? Schema.GetOffset(0xD877DC8E6DD6B5A0);
+            return ref _Handle.AsRef<int>(_RadiusCPFieldOffset!.Value);
+        }
+    }
 
 }

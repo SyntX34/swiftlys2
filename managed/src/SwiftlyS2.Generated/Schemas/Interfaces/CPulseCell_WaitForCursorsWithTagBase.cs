@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_WaitForCursorsWithTagBase : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_WaitForCursorsWithTagBase>
 {
     static CPulseCell_WaitForCursorsWithTagBase ISchemaClass<CPulseCell_WaitForCursorsWithTagBase>.From(nint handle) => new CPulseCell_WaitForCursorsWithTagBaseImpl(handle);
-    static int ISchemaClass<CPulseCell_WaitForCursorsWithTagBase>.Size => 152;
+    static int ISchemaClass<CPulseCell_WaitForCursorsWithTagBase>.Size => 296;
     static string? ISchemaClass<CPulseCell_WaitForCursorsWithTagBase>.ClassName => null;
 
 

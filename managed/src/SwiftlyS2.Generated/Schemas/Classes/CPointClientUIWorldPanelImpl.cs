@@ -256,6 +256,16 @@ internal partial class CPointClientUIWorldPanelImpl : CBaseClientUIEntityImpl, C
             return ref _Handle.AsRef<int>(_ExplicitImageLayoutOffset!.Value);
         }
     }
+    private static nint? _IgnoreParentOrientationOffset;
+
+    public ref bool IgnoreParentOrientation
+    {
+        get
+        {
+            _IgnoreParentOrientationOffset = _IgnoreParentOrientationOffset ?? Schema.GetOffset(0xA4834E6F4B9CFB0F);
+            return ref _Handle.AsRef<bool>(_IgnoreParentOrientationOffset!.Value);
+        }
+    }
 
     public void IgnoreInputUpdated() => Schema.Update(_Handle, 0xA4834E6F946EC6E1);
     public void LitUpdated() => Schema.Update(_Handle, 0xA4834E6F68D14396);
@@ -281,4 +291,5 @@ internal partial class CPointClientUIWorldPanelImpl : CBaseClientUIEntityImpl, C
     public void OnlyRenderToTextureUpdated() => Schema.Update(_Handle, 0xA4834E6F52B95FF9);
     public void DisableMipGenUpdated() => Schema.Update(_Handle, 0xA4834E6F0CB84487);
     public void ExplicitImageLayoutUpdated() => Schema.Update(_Handle, 0xA4834E6FAFAD513C);
+    public void IgnoreParentOrientationUpdated() => Schema.Update(_Handle, 0xA4834E6F4B9CFB0F);
 }

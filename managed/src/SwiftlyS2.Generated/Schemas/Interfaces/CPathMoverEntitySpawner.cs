@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPathMoverEntitySpawner : CLogicalEntity, ISchemaClass<CPathMoverEntitySpawner>
 {
     static CPathMoverEntitySpawner ISchemaClass<CPathMoverEntitySpawner>.From(nint handle) => new CPathMoverEntitySpawnerImpl(handle);
-    static int ISchemaClass<CPathMoverEntitySpawner>.Size => 1376;
+    static int ISchemaClass<CPathMoverEntitySpawner>.Size => 1384;
     static string? ISchemaClass<CPathMoverEntitySpawner>.ClassName => "path_mover_entity_spawner";
 
 
@@ -43,6 +43,10 @@ public partial interface CPathMoverEntitySpawner : CLogicalEntity, ISchemaClass<
     public ref CEntityIOOutput OnTemplateSpawned { get; }
 
     public ref CEntityIOOutput OnTemplateGroupSpawned { get; }
+
+    public string PathMoverName { get; set; }
+
+    public ref bool PrepopulateOnSpawn { get; }
 
 
 }

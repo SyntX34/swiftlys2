@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBasePlayerController : CBaseEntity, ISchemaClass<CBasePlayerController>
 {
     static CBasePlayerController ISchemaClass<CBasePlayerController>.From(nint handle) => new CBasePlayerControllerImpl(handle);
-    static int ISchemaClass<CBasePlayerController>.Size => 1992;
+    static int ISchemaClass<CBasePlayerController>.Size => 2000;
     static string? ISchemaClass<CBasePlayerController>.ClassName => "player_controller";
 
 
@@ -32,6 +32,8 @@ public partial interface CBasePlayerController : CBaseEntity, ISchemaClass<CBase
     public ref bool IsHLTV { get; }
 
     public ref PlayerConnectedState Connected { get; }
+
+    public ref PlayerConnectedState MostConnected { get; }
 
     public string PlayerName { get; set; }
 
@@ -67,6 +69,7 @@ public partial interface CBasePlayerController : CBaseEntity, ISchemaClass<CBase
     public void PawnUpdated();
     public void KnownTeamMismatchUpdated();
     public void ConnectedUpdated();
+    public void MostConnectedUpdated();
     public void PlayerNameUpdated();
     public void SteamIDUpdated();
     public void NoClipEnabledUpdated();

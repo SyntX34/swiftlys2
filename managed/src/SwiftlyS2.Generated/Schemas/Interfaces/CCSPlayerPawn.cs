@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlayerPawn>
 {
     static CCSPlayerPawn ISchemaClass<CCSPlayerPawn>.From(nint handle) => new CCSPlayerPawnImpl(handle);
-    static int ISchemaClass<CCSPlayerPawn>.Size => 5024;
+    static int ISchemaClass<CCSPlayerPawn>.Size => 4992;
     static string? ISchemaClass<CCSPlayerPawn>.ClassName => "player";
 
 
@@ -84,8 +84,6 @@ public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlay
     public ref int RagdollDamageBone { get; }
 
     public ref Vector RagdollDamageForce { get; }
-
-    public ref Vector RagdollDamagePosition { get; }
 
     public string RagdollDamageWeaponName { get; set; }
 
@@ -213,12 +211,6 @@ public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlay
 
     public ref Vector StashedVelocity { get; }
 
-    public ISchemaFixedArray<QAngle> ShootAngleHistory { get; }
-
-    public ISchemaFixedArray<Vector> ThrowPositionHistory { get; }
-
-    public ISchemaFixedArray<Vector> VelocityHistory { get; }
-
     public ref bool CommittingSuicideOnTeamChange { get; }
 
     public ref bool WasNotKilledNaturally { get; }
@@ -253,7 +245,6 @@ public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlay
     public void NextSprayDecalTimeUpdated();
     public void RagdollDamageBoneUpdated();
     public void RagdollDamageForceUpdated();
-    public void RagdollDamagePositionUpdated();
     public void RagdollDamageWeaponNameUpdated();
     public void RagdollDamageHeadshotUpdated();
     public void RagdollServerOriginUpdated();

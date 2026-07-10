@@ -13,4 +13,6 @@ public interface CMsgGCCstrike15_v2_ClientRedeemMissionReward : ITypedProtobuf<C
     public uint RedeemableBalance { get; set; }
     public uint ExpectedCost { get; set; }
     public int BidControl { get; set; }
+    public IProtobufRepeatedFieldValueType<ulong> VolatileShop { get; }
+    public ulong SouvenirMatchid { get; set; }
 }

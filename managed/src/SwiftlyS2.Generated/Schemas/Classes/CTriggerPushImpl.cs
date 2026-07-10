@@ -91,5 +91,15 @@ internal partial class CTriggerPushImpl : CBaseTriggerImpl, CTriggerPush
             return ref _Handle.AsRef<uint>(_SplinePushTypeOffset!.Value);
         }
     }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed
+    {
+        get
+        {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x92E0F2F2C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+        }
+    }
 
 }

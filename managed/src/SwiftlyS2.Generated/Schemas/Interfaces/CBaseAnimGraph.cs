@@ -11,15 +11,20 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseAnimGraph : CBaseModelEntity, ISchemaClass<CBaseAnimGraph>
 {
     static CBaseAnimGraph ISchemaClass<CBaseAnimGraph>.From(nint handle) => new CBaseAnimGraphImpl(handle);
-    static int ISchemaClass<CBaseAnimGraph>.Size => 2368;
+    static int ISchemaClass<CBaseAnimGraph>.Size => 2400;
     static string? ISchemaClass<CBaseAnimGraph>.ClassName => "baseanimgraph";
 
 
     public CAnimGraphControllerManager GraphControllerManager { get; }
 
-    public CAnimGraphControllerBase? MainGraphController { get; }
+    public CAnimGraphControllerPtr MainGraphController { get; }
 
     public ref bool InitiallyPopulateInterpHistory { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnLayerCycleUpdated { get; }
+
+    public ref CEntityIOOutput OnExternalChoreoGraphChanged { get; }
 
     public IChoreoServices? ChoreoServices { get; }
 

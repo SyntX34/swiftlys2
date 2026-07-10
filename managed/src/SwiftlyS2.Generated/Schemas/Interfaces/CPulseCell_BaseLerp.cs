@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_BaseLerp : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_BaseLerp>
 {
     static CPulseCell_BaseLerp ISchemaClass<CPulseCell_BaseLerp>.From(nint handle) => new CPulseCell_BaseLerpImpl(handle);
-    static int ISchemaClass<CPulseCell_BaseLerp>.Size => 144;
+    static int ISchemaClass<CPulseCell_BaseLerp>.Size => 288;
     static string? ISchemaClass<CPulseCell_BaseLerp>.ClassName => null;
 
 

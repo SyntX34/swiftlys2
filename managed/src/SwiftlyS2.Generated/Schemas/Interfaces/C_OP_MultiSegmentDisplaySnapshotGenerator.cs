@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_MultiSegmentDisplaySnapshotGenerator : CParticleFunctionPreEmission, ISchemaClass<C_OP_MultiSegmentDisplaySnapshotGenerator>
 {
     static C_OP_MultiSegmentDisplaySnapshotGenerator ISchemaClass<C_OP_MultiSegmentDisplaySnapshotGenerator>.From(nint handle) => new C_OP_MultiSegmentDisplaySnapshotGeneratorImpl(handle);
-    static int ISchemaClass<C_OP_MultiSegmentDisplaySnapshotGenerator>.Size => 6184;
+    static int ISchemaClass<C_OP_MultiSegmentDisplaySnapshotGenerator>.Size => 6552;
     static string? ISchemaClass<C_OP_MultiSegmentDisplaySnapshotGenerator>.ClassName => null;
 
 
@@ -24,6 +24,8 @@ public partial interface C_OP_MultiSegmentDisplaySnapshotGenerator : CParticleFu
     public string StrDefaultString { get; set; }
 
     public CParticleCollectionFloatInput Value { get; }
+
+    public CParticleCollectionFloatInput ScollOffset { get; }
 
     public ref CUtlVector<ParticleMultiSegmentSpecialCharacter_t> SpecialCharList { get; }
 

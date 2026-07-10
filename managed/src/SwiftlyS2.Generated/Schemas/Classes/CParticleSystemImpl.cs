@@ -123,6 +123,31 @@ internal partial class CParticleSystemImpl : CBaseModelEntityImpl, CParticleSyst
     {
         get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x8F6D2B25ECA36598, 64, 4, 4);
     }
+    private static nint? _DataStringLocalizedOffset;
+
+    public ref bool DataStringLocalized
+    {
+        get
+        {
+            _DataStringLocalizedOffset = _DataStringLocalizedOffset ?? Schema.GetOffset(0x8F6D2B25C35393AD);
+            return ref _Handle.AsRef<bool>(_DataStringLocalizedOffset!.Value);
+        }
+    }
+    private static nint? _StrDataStringOffset;
+
+    public string StrDataString
+    {
+        get
+        {
+            _StrDataStringOffset = _StrDataStringOffset ?? Schema.GetOffset(0x8F6D2B25F9AB1DE1);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrDataStringOffset!.Value));
+        }
+        set
+        {
+            _StrDataStringOffset = _StrDataStringOffset ?? Schema.GetOffset(0x8F6D2B25F9AB1DE1);
+            Schema.SetCUtlString(_Handle, _StrDataStringOffset!.Value, value);
+        }
+    }
     private static nint? _NoSaveOffset;
 
     public ref bool NoSave
@@ -235,6 +260,8 @@ internal partial class CParticleSystemImpl : CBaseModelEntityImpl, CParticleSyst
     public void ServerControlPointsUpdated() => Schema.Update(_Handle, 0x8F6D2B2561386048);
     public void ServerControlPointAssignmentsUpdated() => Schema.Update(_Handle, 0x8F6D2B25E9DEDAC8);
     public void ControlPointEntsUpdated() => Schema.Update(_Handle, 0x8F6D2B25ECA36598);
+    public void DataStringLocalizedUpdated() => Schema.Update(_Handle, 0x8F6D2B25C35393AD);
+    public void StrDataStringUpdated() => Schema.Update(_Handle, 0x8F6D2B25F9AB1DE1);
     public void NoSaveUpdated() => Schema.Update(_Handle, 0x8F6D2B257507B947);
     public void NoFreezeUpdated() => Schema.Update(_Handle, 0x8F6D2B256015A661);
     public void NoRampUpdated() => Schema.Update(_Handle, 0x8F6D2B25AD7F8116);

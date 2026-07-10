@@ -256,7 +256,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
             (typeof(T) == typeof(double) && Type != EConVarType.EConVarType_Float64) ||
             (typeof(T) == typeof(Color) && Type != EConVarType.EConVarType_Color) ||
             (typeof(T) == typeof(QAngle) && Type != EConVarType.EConVarType_Qangle) ||
-            (typeof(T) == typeof(Vector) && Type != EConVarType.EConVarType_Vector3) ||
+            (typeof(T) == typeof(Vector) && Type != EConVarType.EConVarType_Vector3 && Type != EConVarType.EConVarType_VectorWS) ||
             (typeof(T) == typeof(Vector2D) && Type != EConVarType.EConVarType_Vector2) ||
             (typeof(T) == typeof(Vector4D) && Type != EConVarType.EConVarType_Vector4) ||
             (typeof(T) == typeof(string) && Type != EConVarType.EConVarType_String)

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBasePropDoor : CDynamicProp, ISchemaClass<CBasePropDoor>
 {
     static CBasePropDoor ISchemaClass<CBasePropDoor>.From(nint handle) => new CBasePropDoorImpl(handle);
-    static int ISchemaClass<CBasePropDoor>.Size => 3456;
+    static int ISchemaClass<CBasePropDoor>.Size => 3488;
     static string? ISchemaClass<CBasePropDoor>.ClassName => null;
 
 
@@ -45,23 +45,34 @@ public partial interface CBasePropDoor : CDynamicProp, ISchemaClass<CBasePropDoo
 
     public ref CHandle<CBaseEntity> Activator { get; }
 
-    public string SoundMoving { get; set; }
+    public ref float Speed { get; }
 
-    public string SoundOpen { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundMoving { get; }
 
-    public string SoundClose { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundOpen { get; }
 
-    public string SoundLock { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundClose { get; }
 
-    public string SoundUnlock { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundLock { get; }
 
-    public string SoundLatch { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundUnlock { get; }
 
-    public string SoundPound { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundLatch { get; }
 
-    public string SoundJiggle { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundPound { get; }
 
-    public string SoundLockedAnim { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField SoundJiggle { get; }
+
+    // CGameSoundEventName
+    public SchemaUntypedField SoundLockedAnim { get; }
 
     public ref int NumCloseAttempts { get; }
 

@@ -16,6 +16,16 @@ internal partial class CRagdollPropImpl : CBaseAnimGraphImpl, CRagdollProp
 {
     public CRagdollPropImpl(nint handle) : base(handle) { }
 
+    private static nint? _CPropDataComponentOffset;
+
+    public CPropDataComponent CPropDataComponent
+    {
+        get
+        {
+            _CPropDataComponentOffset = _CPropDataComponentOffset ?? Schema.GetOffset(0x9505BA78ACBC1DDE);
+            return new CPropDataComponentImpl(_Handle + _CPropDataComponentOffset!.Value);
+        }
+    }
     private static nint? _RagdollOffset;
 
     public ragdoll_t Ragdoll
@@ -34,6 +44,26 @@ internal partial class CRagdollPropImpl : CBaseAnimGraphImpl, CRagdollProp
         {
             _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0x9505BA7861ED0C4F);
             return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+        }
+    }
+    private static nint? _MassScaleOffset;
+
+    public ref float MassScale
+    {
+        get
+        {
+            _MassScaleOffset = _MassScaleOffset ?? Schema.GetOffset(0x9505BA7801B9E905);
+            return ref _Handle.AsRef<float>(_MassScaleOffset!.Value);
+        }
+    }
+    private static nint? _BuoyancyScaleOffset;
+
+    public ref float BuoyancyScale
+    {
+        get
+        {
+            _BuoyancyScaleOffset = _BuoyancyScaleOffset ?? Schema.GetOffset(0x9505BA78296C36AB);
+            return ref _Handle.AsRef<float>(_BuoyancyScaleOffset!.Value);
         }
     }
     private static nint? _RagEnabledOffset;
@@ -337,6 +367,7 @@ internal partial class CRagdollPropImpl : CBaseAnimGraphImpl, CRagdollProp
         }
     }
 
+    public void CPropDataComponentUpdated() => Schema.Update(_Handle, 0x9505BA78ACBC1DDE);
     public void RagEnabledUpdated() => Schema.Update(_Handle, 0x9505BA78CD1FB84A);
     public void RagPosUpdated() => Schema.Update(_Handle, 0x9505BA7897C85315);
     public void RagAnglesUpdated() => Schema.Update(_Handle, 0x9505BA78FD4E530D);

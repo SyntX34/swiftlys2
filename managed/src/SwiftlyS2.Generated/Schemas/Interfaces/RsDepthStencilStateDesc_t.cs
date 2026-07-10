@@ -21,7 +21,8 @@ public partial interface RsDepthStencilStateDesc_t : ISchemaClass<RsDepthStencil
     // bitfield
     public SchemaUntypedField DepthWriteEnable { get; }
 
-    public ref RsComparison_t DepthFunc { get; }
+    // bitfield
+    public SchemaUntypedField DepthFunc { get; }
 
     public RsStencilStateDesc_t StencilState { get; }
 

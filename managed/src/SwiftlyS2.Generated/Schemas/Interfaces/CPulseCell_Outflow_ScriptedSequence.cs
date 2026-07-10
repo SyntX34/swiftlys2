@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_Outflow_ScriptedSequence : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Outflow_ScriptedSequence>
 {
     static CPulseCell_Outflow_ScriptedSequence ISchemaClass<CPulseCell_Outflow_ScriptedSequence>.From(nint handle) => new CPulseCell_Outflow_ScriptedSequenceImpl(handle);
-    static int ISchemaClass<CPulseCell_Outflow_ScriptedSequence>.Size => 336;
+    static int ISchemaClass<CPulseCell_Outflow_ScriptedSequence>.Size => 408;
     static string? ISchemaClass<CPulseCell_Outflow_ScriptedSequence>.ClassName => null;
 
 
@@ -30,8 +30,6 @@ public partial interface CPulseCell_Outflow_ScriptedSequence : CPulseCell_BaseYi
     public ref CUtlVector<PulseScriptedSequenceData_t> AdditionalActors { get; }
 
     public CPulse_ResumePoint OnFinished { get; }
-
-    public CPulse_ResumePoint OnCanceled { get; }
 
     public ref CUtlVector<CPulse_OutflowConnection> Triggers { get; }
 

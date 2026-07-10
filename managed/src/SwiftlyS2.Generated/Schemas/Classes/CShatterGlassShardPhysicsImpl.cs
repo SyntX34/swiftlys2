@@ -12,20 +12,10 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CShatterGlassShardPhysicsImpl : CPhysicsPropImpl, CShatterGlassShardPhysics
+internal partial class CShatterGlassShardPhysicsImpl : CBaseModelEntityImpl, CShatterGlassShardPhysics
 {
     public CShatterGlassShardPhysicsImpl(nint handle) : base(handle) { }
 
-    private static nint? _DebrisOffset;
-
-    public ref bool Debris
-    {
-        get
-        {
-            _DebrisOffset = _DebrisOffset ?? Schema.GetOffset(0xC24E779865054BBA);
-            return ref _Handle.AsRef<bool>(_DebrisOffset!.Value);
-        }
-    }
     private static nint? _ParentShardOffset;
 
     public ref uint ParentShard
@@ -44,6 +34,26 @@ internal partial class CShatterGlassShardPhysicsImpl : CPhysicsPropImpl, CShatte
         {
             _ShardDescOffset = _ShardDescOffset ?? Schema.GetOffset(0xC24E77982CBF17C6);
             return new shard_model_desc_tImpl(_Handle + _ShardDescOffset!.Value);
+        }
+    }
+    private static nint? _PoolStateOffset;
+
+    public ref ShatterGlassEntityPoolState_t PoolState
+    {
+        get
+        {
+            _PoolStateOffset = _PoolStateOffset ?? Schema.GetOffset(0xC24E7798786B16F8);
+            return ref _Handle.AsRef<ShatterGlassEntityPoolState_t>(_PoolStateOffset!.Value);
+        }
+    }
+    private static nint? _TouchedByPlayerOffset;
+
+    public ref bool TouchedByPlayer
+    {
+        get
+        {
+            _TouchedByPlayerOffset = _TouchedByPlayerOffset ?? Schema.GetOffset(0xC24E77983D91E55D);
+            return ref _Handle.AsRef<bool>(_TouchedByPlayerOffset!.Value);
         }
     }
 

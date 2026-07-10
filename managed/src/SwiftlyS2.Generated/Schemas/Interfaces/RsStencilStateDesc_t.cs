@@ -16,6 +16,12 @@ public partial interface RsStencilStateDesc_t : ISchemaClass<RsStencilStateDesc_
 
 
     // bitfield
+    public SchemaUntypedField FrontStencilFunc { get; }
+
+    // bitfield
+    public SchemaUntypedField BackStencilFunc { get; }
+
+    // bitfield
     public SchemaUntypedField StencilEnable { get; }
 
     // bitfield
@@ -28,9 +34,6 @@ public partial interface RsStencilStateDesc_t : ISchemaClass<RsStencilStateDesc_
     public SchemaUntypedField FrontStencilPassOp { get; }
 
     // bitfield
-    public SchemaUntypedField FrontStencilFunc { get; }
-
-    // bitfield
     public SchemaUntypedField BackStencilFailOp { get; }
 
     // bitfield
@@ -38,9 +41,6 @@ public partial interface RsStencilStateDesc_t : ISchemaClass<RsStencilStateDesc_
 
     // bitfield
     public SchemaUntypedField BackStencilPassOp { get; }
-
-    // bitfield
-    public SchemaUntypedField BackStencilFunc { get; }
 
     public ref byte StencilReadMask { get; }
 

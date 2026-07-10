@@ -12,7 +12,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Outflow_PlayVCDImpl : CPulseCell_Outflow_PlaySceneBaseImpl, CPulseCell_Outflow_PlayVCD
+internal partial class CPulseCell_Outflow_PlayVCDImpl : CPulseCell_Outflow_PlayVCDBaseImpl, CPulseCell_Outflow_PlayVCD
 {
     public CPulseCell_Outflow_PlayVCDImpl(nint handle) : base(handle) { }
 

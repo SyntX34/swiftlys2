@@ -48,22 +48,22 @@ internal partial class CSkeletonInstanceImpl : CGameSceneNodeImpl, CSkeletonInst
     }
     private static nint? _DirtyMotionTypeOffset;
 
-    public SchemaUntypedField DirtyMotionType
+    public ref bool DirtyMotionType
     {
         get
         {
             _DirtyMotionTypeOffset = _DirtyMotionTypeOffset ?? Schema.GetOffset(0xD6C6252E6EB99391);
-            return new SchemaUntypedField(_Handle + _DirtyMotionTypeOffset!.Value);
+            return ref _Handle.AsRef<bool>(_DirtyMotionTypeOffset!.Value);
         }
     }
     private static nint? _IsGeneratingLatchedParentSpaceStateOffset;
 
-    public SchemaUntypedField IsGeneratingLatchedParentSpaceState
+    public ref bool IsGeneratingLatchedParentSpaceState
     {
         get
         {
             _IsGeneratingLatchedParentSpaceStateOffset = _IsGeneratingLatchedParentSpaceStateOffset ?? Schema.GetOffset(0xD6C6252ED0EFEAB7);
-            return new SchemaUntypedField(_Handle + _IsGeneratingLatchedParentSpaceStateOffset!.Value);
+            return ref _Handle.AsRef<bool>(_IsGeneratingLatchedParentSpaceStateOffset!.Value);
         }
     }
     private static nint? _MaterialGroupOffset;

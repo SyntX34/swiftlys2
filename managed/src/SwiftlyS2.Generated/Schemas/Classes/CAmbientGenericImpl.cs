@@ -78,17 +78,12 @@ internal partial class CAmbientGenericImpl : CPointEntityImpl, CAmbientGeneric
     }
     private static nint? _SoundOffset;
 
-    public string Sound
+    public SchemaUntypedField Sound
     {
         get
         {
             _SoundOffset = _SoundOffset ?? Schema.GetOffset(0xD45BE96F5FF1867C);
-            return Schema.GetString(_Handle.Read<nint>(_SoundOffset!.Value));
-        }
-        set
-        {
-            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0xD45BE96F5FF1867C);
-            Schema.SetString(_Handle, _SoundOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _SoundOffset!.Value);
         }
     }
     private static nint? _SourceEntNameOffset;

@@ -27,8 +27,6 @@ public partial interface EntityIOQueuePrioritizedEvent_t : ISchemaClass<EntityIO
 
     public ref CHandle<CEntityInstance> Caller { get; }
 
-    public ref int OutputID { get; }
-
     public ref CHandle<CEntityInstance> EntTarget { get; }
 
     public ref CVariant<CVariantDefaultAllocator> VariantValue { get; }

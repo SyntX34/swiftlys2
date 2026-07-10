@@ -18,32 +18,22 @@ internal partial class CBasePlatTrainImpl : CBaseToggleImpl, CBasePlatTrain
 
     private static nint? _NoiseMovingOffset;
 
-    public string NoiseMoving
+    public SchemaUntypedField NoiseMoving
     {
         get
         {
             _NoiseMovingOffset = _NoiseMovingOffset ?? Schema.GetOffset(0x78773ABC415AB84B);
-            return Schema.GetString(_Handle.Read<nint>(_NoiseMovingOffset!.Value));
-        }
-        set
-        {
-            _NoiseMovingOffset = _NoiseMovingOffset ?? Schema.GetOffset(0x78773ABC415AB84B);
-            Schema.SetString(_Handle, _NoiseMovingOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _NoiseMovingOffset!.Value);
         }
     }
     private static nint? _NoiseArrivedOffset;
 
-    public string NoiseArrived
+    public SchemaUntypedField NoiseArrived
     {
         get
         {
             _NoiseArrivedOffset = _NoiseArrivedOffset ?? Schema.GetOffset(0x78773ABCD2CDE47A);
-            return Schema.GetString(_Handle.Read<nint>(_NoiseArrivedOffset!.Value));
-        }
-        set
-        {
-            _NoiseArrivedOffset = _NoiseArrivedOffset ?? Schema.GetOffset(0x78773ABCD2CDE47A);
-            Schema.SetString(_Handle, _NoiseArrivedOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _NoiseArrivedOffset!.Value);
         }
     }
     private static nint? _VolumeOffset;

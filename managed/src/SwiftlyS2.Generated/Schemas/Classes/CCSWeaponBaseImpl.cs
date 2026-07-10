@@ -559,6 +559,7 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
     public void OriginalTeamNumberUpdated() => Schema.Update(_Handle, 0x8102BA515DB51597);
     public void MostRecentTeamNumberUpdated() => Schema.Update(_Handle, 0x8102BA51D818821C);
     public void DroppedNearBuyZoneUpdated() => Schema.Update(_Handle, 0x8102BA511DC5989F);
+    public void CanBePickedUpUpdated() => Schema.Update(_Handle, 0x8102BA51BC5DCE9D);
     public void NextPrevOwnerUseTimeUpdated() => Schema.Update(_Handle, 0x8102BA51C84F06AE);
     public void PrevOwnerUpdated() => Schema.Update(_Handle, 0x8102BA5133F3C84D);
     public void DropTickUpdated() => Schema.Update(_Handle, 0x8102BA51B2FC22F5);

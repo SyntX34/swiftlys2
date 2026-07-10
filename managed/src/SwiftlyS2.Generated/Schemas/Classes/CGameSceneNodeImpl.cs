@@ -330,16 +330,6 @@ internal partial class CGameSceneNodeImpl : SchemaClass, CGameSceneNode
             return ref _Handle.AsRef<float>(_ClientLocalScaleOffset!.Value);
         }
     }
-    private static nint? _RenderOriginOffset;
-
-    public ref Vector RenderOrigin
-    {
-        get
-        {
-            _RenderOriginOffset = _RenderOriginOffset ?? Schema.GetOffset(0xD9451D94A46385A3);
-            return ref _Handle.AsRef<Vector>(_RenderOriginOffset!.Value);
-        }
-    }
 
     public void Parent1Updated() => Schema.Update(_Handle, 0xD9451D949FD3A1B7);
     public void OriginUpdated() => Schema.Update(_Handle, 0xD9451D94559D81AF);

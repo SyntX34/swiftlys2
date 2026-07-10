@@ -14,5 +14,6 @@ public enum SolidType_t : byte
     SOLID_POINT = 5,
     SOLID_VPHYSICS = 6,
     SOLID_CAPSULE = 7,
-    SOLID_LAST = 8,
+    SOLID_CYLINDER = 8,
+    SOLID_LAST = 9,
 }

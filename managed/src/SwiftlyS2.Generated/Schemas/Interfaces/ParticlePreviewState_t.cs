@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface ParticlePreviewState_t : ISchemaClass<ParticlePreviewState_t>
 {
     static ParticlePreviewState_t ISchemaClass<ParticlePreviewState_t>.From(nint handle) => new ParticlePreviewState_tImpl(handle);
-    static int ISchemaClass<ParticlePreviewState_t>.Size => 104;
+    static int ISchemaClass<ParticlePreviewState_t>.Size => 112;
     static string? ISchemaClass<ParticlePreviewState_t>.ClassName => null;
 
 
@@ -48,6 +48,8 @@ public partial interface ParticlePreviewState_t : ISchemaClass<ParticlePreviewSt
     public ref bool SequenceNameIsAnimClipPath { get; }
 
     public ref Vector PreviewGravity { get; }
+
+    public ref Vector PreviewWind { get; }
 
 
 }

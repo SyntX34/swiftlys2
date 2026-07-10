@@ -11,19 +11,23 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInfoChoreoAnchorPosition : ISchemaClass<CInfoChoreoAnchorPosition>
 {
     static CInfoChoreoAnchorPosition ISchemaClass<CInfoChoreoAnchorPosition>.From(nint handle) => new CInfoChoreoAnchorPositionImpl(handle);
-    static int ISchemaClass<CInfoChoreoAnchorPosition>.Size => 56;
+    static int ISchemaClass<CInfoChoreoAnchorPosition>.Size => 80;
     static string? ISchemaClass<CInfoChoreoAnchorPosition>.ClassName => null;
 
 
-    public ref Vector Origin { get; }
+    public ref Vector OriginLS { get; }
 
-    public ref QAngle Angles { get; }
+    public ref Quaternion AnglesLS { get; }
 
     public ref Vector ExtentsMin { get; }
 
     public ref Vector ExtentsMax { get; }
 
     public ref float Radius { get; }
+
+    public ref bool OnlyWarpPosition { get; }
+
+    public ref CHandle<CBaseEntity> Parent { get; }
 
     public ref CInfoChoreoLocatorShapeType_t ShapeType { get; }
 

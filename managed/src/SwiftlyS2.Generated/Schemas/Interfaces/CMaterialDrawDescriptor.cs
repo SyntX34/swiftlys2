@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMaterialDrawDescriptor : ISchemaClass<CMaterialDrawDescriptor>
 {
     static CMaterialDrawDescriptor ISchemaClass<CMaterialDrawDescriptor>.From(nint handle) => new CMaterialDrawDescriptorImpl(handle);
-    static int ISchemaClass<CMaterialDrawDescriptor>.Size => 264;
+    static int ISchemaClass<CMaterialDrawDescriptor>.Size => 280;
     static string? ISchemaClass<CMaterialDrawDescriptor>.ClassName => null;
 
 
@@ -32,6 +32,8 @@ public partial interface CMaterialDrawDescriptor : ISchemaClass<CMaterialDrawDes
     public ref byte MeshletPackedIVBIndex { get; }
 
     public ref CUtlLeanVector<CMaterialDrawDescriptor__RigidMeshPart_t, int> RigidMeshParts { get; }
+
+    public ref CUtlLeanVector<ushort, int> RootBvhNodes { get; }
 
     public ref RenderPrimitiveType_t PrimitiveType { get; }
 

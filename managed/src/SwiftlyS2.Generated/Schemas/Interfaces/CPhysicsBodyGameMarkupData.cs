@@ -15,7 +15,7 @@ public partial interface CPhysicsBodyGameMarkupData : ISchemaClass<CPhysicsBodyG
     static string? ISchemaClass<CPhysicsBodyGameMarkupData>.ClassName => null;
 
 
-    // CUtlOrderedMap< CUtlString, CPhysicsBodyGameMarkup >
+    // CUtlDict< CPhysicsBodyGameMarkup >
     public SchemaUntypedField PhysicsBodyMarkupByBoneName { get; }
 
 

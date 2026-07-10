@@ -346,6 +346,16 @@ internal partial class PhysFeModelDesc_tImpl : SchemaClass, PhysFeModelDesc_t
             return ref _Handle.AsRef<CUtlVector<FeDynKinLink_t>>(_DynKinLinksOffset!.Value);
         }
     }
+    private static nint? _BoneMergeLinksOffset;
+
+    public ref CUtlVector<FeBoneMergeLink_t> BoneMergeLinks
+    {
+        get
+        {
+            _BoneMergeLinksOffset = _BoneMergeLinksOffset ?? Schema.GetOffset(0x1BA43927D23781EE);
+            return ref _Handle.AsRef<CUtlVector<FeBoneMergeLink_t>>(_BoneMergeLinksOffset!.Value);
+        }
+    }
     private static nint? _AntiTunnelProbesOffset;
 
     public ref CUtlVector<FeAntiTunnelProbe_t> AntiTunnelProbes

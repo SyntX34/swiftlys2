@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseCell_FireCursors : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_FireCursors>
 {
     static CPulseCell_FireCursors ISchemaClass<CPulseCell_FireCursors>.From(nint handle) => new CPulseCell_FireCursorsImpl(handle);
-    static int ISchemaClass<CPulseCell_FireCursors>.Size => 248;
+    static int ISchemaClass<CPulseCell_FireCursors>.Size => 320;
     static string? ISchemaClass<CPulseCell_FireCursors>.ClassName => null;
 
 
@@ -20,8 +20,6 @@ public partial interface CPulseCell_FireCursors : CPulseCell_BaseYieldingInflow,
     public ref bool WaitForChildOutflows { get; }
 
     public CPulse_ResumePoint OnFinished { get; }
-
-    public CPulse_ResumePoint OnCanceled { get; }
 
 
 }

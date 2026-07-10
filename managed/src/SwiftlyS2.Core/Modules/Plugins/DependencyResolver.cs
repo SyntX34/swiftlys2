@@ -1,5 +1,5 @@
-using Mono.Cecil;
 using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace SwiftlyS2.Core.Modules.Plugins;
 
@@ -24,8 +24,7 @@ internal class DependencyResolver
             {
                 try
                 {
-                    using var assembly = AssemblyDefinition.ReadAssembly(exportFile);
-                    var assemblyName = assembly.Name.Name;
+                    var assemblyName = AssemblyName.GetAssemblyName(exportFile).Name ?? Path.GetFileNameWithoutExtension(exportFile);
                     exportAssemblies[assemblyName] = exportFile;
                     _pluginPaths[assemblyName] = exportFile;
 
@@ -69,12 +68,12 @@ internal class DependencyResolver
         {
             try
             {
-                using var assembly = AssemblyDefinition.ReadAssembly(assemblyPath);
+                var assembly = Assembly.LoadFrom(assemblyPath);
                 var dependencies = new List<string>();
 
-                foreach (var reference in assembly.MainModule.AssemblyReferences)
+                foreach (var reference in assembly.GetReferencedAssemblies())
                 {
-                    var refName = reference.Name;
+                    var refName = reference.Name!;
 
                     if (exportAssemblies.ContainsKey(refName))
                     {

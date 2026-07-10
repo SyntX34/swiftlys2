@@ -76,6 +76,16 @@ internal partial class CBaseTrailRendererImpl : CBaseRendererSource2Impl, CBaseT
             return new CParticleCollectionRendererFloatInputImpl(_Handle + _EndFadeSizeOffset!.Value);
         }
     }
+    private static nint? _SubPixelAAScaleOffset;
+
+    public CParticleCollectionRendererFloatInput SubPixelAAScale
+    {
+        get
+        {
+            _SubPixelAAScaleOffset = _SubPixelAAScaleOffset ?? Schema.GetOffset(0x2FCF7FA63801ACCB);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _SubPixelAAScaleOffset!.Value);
+        }
+    }
     private static nint? _ClampVOffset;
 
     public ref bool ClampV

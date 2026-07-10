@@ -8,24 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AI_Navigator_DebugSnapshotData_t : DebugSnapshotBaseStructuredData_t, ISchemaClass<AI_Navigator_DebugSnapshotData_t>
+public partial interface AI_Navigator_DebugSnapshotData_t : ISchemaClass<AI_Navigator_DebugSnapshotData_t>
 {
     static AI_Navigator_DebugSnapshotData_t ISchemaClass<AI_Navigator_DebugSnapshotData_t>.From(nint handle) => new AI_Navigator_DebugSnapshotData_tImpl(handle);
     static int ISchemaClass<AI_Navigator_DebugSnapshotData_t>.Size => 80;
     static string? ISchemaClass<AI_Navigator_DebugSnapshotData_t>.ClassName => null;
 
 
-    public ref CGlobalSymbol S_npc_nav_authority { get; }
+    public ref CGlobalSymbol S_movement_id { get; }
 
-    public ref CGlobalSymbol S_goal_nav_search_id { get; }
+    public ref uint S_movement_serial_number { get; }
 
     public string S_goal_source_location { get; set; }
 
-    public ref Vector Goal_actual_pos { get; }
+    public ref Vector Last_waypoint_pos { get; }
 
-    public ref Vector Goal_base_pos { get; }
+    public ref Vector Goal_location { get; }
 
     public ref CUtlVector<AI_Navigator_DebugSnapshotData_t__Waypoint_t> Waypoints { get; }
+
+    public ref CGlobalSymbol S_arrival_movement_gait_set { get; }
 
 
 }

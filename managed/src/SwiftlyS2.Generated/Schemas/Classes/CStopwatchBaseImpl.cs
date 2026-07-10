@@ -22,7 +22,7 @@ internal partial class CStopwatchBaseImpl : CSimpleSimTimerImpl, CStopwatchBase
     {
         get
         {
-            _IsRunningOffset = _IsRunningOffset ?? Schema.GetOffset(0x80DA66DCF34F2570);
+            _IsRunningOffset = _IsRunningOffset ?? Schema.GetOffset(0x80DA66DC45EC173C);
             return ref _Handle.AsRef<bool>(_IsRunningOffset!.Value);
         }
     }

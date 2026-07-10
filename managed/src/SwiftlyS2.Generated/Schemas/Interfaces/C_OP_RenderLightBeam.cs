@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_RenderLightBeam : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderLightBeam>
 {
     static C_OP_RenderLightBeam ISchemaClass<C_OP_RenderLightBeam>.From(nint handle) => new C_OP_RenderLightBeamImpl(handle);
-    static int ISchemaClass<C_OP_RenderLightBeam>.Size => 4136;
+    static int ISchemaClass<C_OP_RenderLightBeam>.Size => 8088;
     static string? ISchemaClass<C_OP_RenderLightBeam>.ClassName => null;
 
 
@@ -21,7 +21,13 @@ public partial interface C_OP_RenderLightBeam : CParticleFunctionRenderer, ISche
 
     public ref ParticleColorBlendType_t ColorBlendType { get; }
 
+    public string StrLightStyle { get; set; }
+
+    public CPerParticleFloatInput LightStyleTime { get; }
+
     public CParticleCollectionFloatInput BrightnessLumensPerMeter { get; }
+
+    public CParticleCollectionFloatInput NumberOfLightsToCreate { get; }
 
     public ref bool CastShadows { get; }
 
@@ -34,6 +40,20 @@ public partial interface C_OP_RenderLightBeam : CParticleFunctionRenderer, ISche
     public CParticleCollectionFloatInput Range { get; }
 
     public CParticleCollectionFloatInput Thickness { get; }
+
+    public CParticleCollectionFloatInput InnerConeAngle { get; }
+
+    public CParticleCollectionFloatInput OuterConeAngle { get; }
+
+    public CParticleCollectionVecInput ConeRotationOffset { get; }
+
+    public ref ParticleLightFogLightingMode_t FogLightingMode { get; }
+
+    public CParticleCollectionRendererFloatInput FogContribution { get; }
+
+    public CPerParticleFloatInput RenderFilter { get; }
+
+    public ref bool DebugOrientation { get; }
 
 
 }

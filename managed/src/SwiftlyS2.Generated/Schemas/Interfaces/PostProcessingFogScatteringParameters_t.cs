@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface PostProcessingFogScatteringParameters_t : ISchemaClass<PostProcessingFogScatteringParameters_t>
 {
     static PostProcessingFogScatteringParameters_t ISchemaClass<PostProcessingFogScatteringParameters_t>.From(nint handle) => new PostProcessingFogScatteringParameters_tImpl(handle);
-    static int ISchemaClass<PostProcessingFogScatteringParameters_t>.Size => 20;
+    static int ISchemaClass<PostProcessingFogScatteringParameters_t>.Size => 32;
     static string? ISchemaClass<PostProcessingFogScatteringParameters_t>.ClassName => null;
 
 
@@ -24,6 +24,12 @@ public partial interface PostProcessingFogScatteringParameters_t : ISchemaClass<
     public ref float VolumetricScale { get; }
 
     public ref float GradientScale { get; }
+
+    public ref float WaterScale { get; }
+
+    public ref float WaterDensity { get; }
+
+    public ref float WaterDepthBlurRadius { get; }
 
 
 }

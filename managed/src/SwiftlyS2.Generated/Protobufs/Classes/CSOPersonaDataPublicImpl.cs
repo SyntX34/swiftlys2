@@ -22,4 +22,6 @@ internal class CSOPersonaDataPublicImpl : TypedProtobuf<CSOPersonaDataPublic>, C
     { get => Accessor.GetUInt32("xp_trail_timestamp_refresh"); set => Accessor.SetUInt32("xp_trail_timestamp_refresh", value); }
     public uint XpTrailLevel
     { get => Accessor.GetUInt32("xp_trail_level"); set => Accessor.SetUInt32("xp_trail_level", value); }
+    public uint ClanId
+    { get => Accessor.GetUInt32("clan_id"); set => Accessor.SetUInt32("clan_id", value); }
 }

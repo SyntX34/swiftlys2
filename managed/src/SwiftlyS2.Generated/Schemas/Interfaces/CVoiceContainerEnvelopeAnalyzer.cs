@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerEnvelopeAnalyzer : CVoiceContainerAnalysisBase, ISchemaClass<CVoiceContainerEnvelopeAnalyzer>
 {
     static CVoiceContainerEnvelopeAnalyzer ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.From(nint handle) => new CVoiceContainerEnvelopeAnalyzerImpl(handle);
-    static int ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.Size => 96;
+    static int ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.Size => 88;
     static string? ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.ClassName => null;
 
 

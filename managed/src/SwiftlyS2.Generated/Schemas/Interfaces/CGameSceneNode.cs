@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CGameSceneNode : ISchemaClass<CGameSceneNode>
 {
     static CGameSceneNode ISchemaClass<CGameSceneNode>.From(nint handle) => new CGameSceneNodeImpl(handle);
-    static int ISchemaClass<CGameSceneNode>.Size => 288;
+    static int ISchemaClass<CGameSceneNode>.Size => 272;
     static string? ISchemaClass<CGameSceneNode>.ClassName => null;
 
 
@@ -85,8 +85,6 @@ public partial interface CGameSceneNode : ISchemaClass<CGameSceneNode>
     public ref CUtlStringToken HierarchyAttachName { get; }
 
     public ref float ClientLocalScale { get; }
-
-    public ref Vector RenderOrigin { get; }
 
     public void Parent1Updated();
     public void OriginUpdated();

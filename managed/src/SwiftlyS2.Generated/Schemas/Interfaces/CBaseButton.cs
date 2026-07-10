@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseButton : CBaseToggle, ISchemaClass<CBaseButton>
 {
     static CBaseButton ISchemaClass<CBaseButton>.From(nint handle) => new CBaseButtonImpl(handle);
-    static int ISchemaClass<CBaseButton>.Size => 2280;
+    static int ISchemaClass<CBaseButton>.Size => 2288;
     static string? ISchemaClass<CBaseButton>.ClassName => "func_button";
 
 
@@ -23,17 +23,22 @@ public partial interface CBaseButton : CBaseToggle, ISchemaClass<CBaseButton>
 
     public locksound_t Ls { get; }
 
-    public string UseSound { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField UseSound { get; }
 
-    public string LockedSound { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField LockedSound { get; }
 
-    public string UnlockedSound { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField UnlockedSound { get; }
 
     public string OverrideAnticipationName { get; set; }
 
     public ref bool Locked { get; }
 
     public ref bool Disabled { get; }
+
+    public ref float Speed { get; }
 
     public GameTime_t UseLockedTime { get; }
 

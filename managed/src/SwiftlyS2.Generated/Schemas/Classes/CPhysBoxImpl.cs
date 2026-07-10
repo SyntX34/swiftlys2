@@ -106,6 +106,66 @@ internal partial class CPhysBoxImpl : CBreakableImpl, CPhysBox
             return ref _Handle.AsRef<float>(_TouchOutputPerEntityDelayOffset!.Value);
         }
     }
+    private static nint? _CollisionGroupOffset;
+
+    public string CollisionGroup
+    {
+        get
+        {
+            _CollisionGroupOffset = _CollisionGroupOffset ?? Schema.GetOffset(0x914B502B6426430E);
+            return Schema.GetString(_Handle.Read<nint>(_CollisionGroupOffset!.Value));
+        }
+        set
+        {
+            _CollisionGroupOffset = _CollisionGroupOffset ?? Schema.GetOffset(0x914B502B6426430E);
+            Schema.SetString(_Handle, _CollisionGroupOffset!.Value, value);
+        }
+    }
+    private static nint? _InteractsAsOffset;
+
+    public string InteractsAs
+    {
+        get
+        {
+            _InteractsAsOffset = _InteractsAsOffset ?? Schema.GetOffset(0x914B502B488FC5DC);
+            return Schema.GetString(_Handle.Read<nint>(_InteractsAsOffset!.Value));
+        }
+        set
+        {
+            _InteractsAsOffset = _InteractsAsOffset ?? Schema.GetOffset(0x914B502B488FC5DC);
+            Schema.SetString(_Handle, _InteractsAsOffset!.Value, value);
+        }
+    }
+    private static nint? _InteractsWithOffset;
+
+    public string InteractsWith
+    {
+        get
+        {
+            _InteractsWithOffset = _InteractsWithOffset ?? Schema.GetOffset(0x914B502B84AB4214);
+            return Schema.GetString(_Handle.Read<nint>(_InteractsWithOffset!.Value));
+        }
+        set
+        {
+            _InteractsWithOffset = _InteractsWithOffset ?? Schema.GetOffset(0x914B502B84AB4214);
+            Schema.SetString(_Handle, _InteractsWithOffset!.Value, value);
+        }
+    }
+    private static nint? _InteractsExcludeOffset;
+
+    public string InteractsExclude
+    {
+        get
+        {
+            _InteractsExcludeOffset = _InteractsExcludeOffset ?? Schema.GetOffset(0x914B502BECFBE0D6);
+            return Schema.GetString(_Handle.Read<nint>(_InteractsExcludeOffset!.Value));
+        }
+        set
+        {
+            _InteractsExcludeOffset = _InteractsExcludeOffset ?? Schema.GetOffset(0x914B502BECFBE0D6);
+            Schema.SetString(_Handle, _InteractsExcludeOffset!.Value, value);
+        }
+    }
     private static nint? _OnDamagedOffset;
 
     public ref CEntityIOOutput OnDamaged
@@ -154,16 +214,6 @@ internal partial class CPhysBoxImpl : CBreakableImpl, CPhysBox
         {
             _OnStartTouchOffset = _OnStartTouchOffset ?? Schema.GetOffset(0x914B502BB4E38193);
             return ref _Handle.AsRef<CEntityIOOutput>(_OnStartTouchOffset!.Value);
-        }
-    }
-    private static nint? _CarryingPlayerOffset;
-
-    public ref CHandle<CBasePlayerPawn> CarryingPlayer
-    {
-        get
-        {
-            _CarryingPlayerOffset = _CarryingPlayerOffset ?? Schema.GetOffset(0x914B502B0491B86F);
-            return ref _Handle.AsRef<CHandle<CBasePlayerPawn>>(_CarryingPlayerOffset!.Value);
         }
     }
 

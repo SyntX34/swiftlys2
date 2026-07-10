@@ -11,5 +11,6 @@ public enum PulseVariableKeysSource_t : uint
     VMAP = 2,
     VMDL = 3,
     XML = 4,
-    COUNT = 5,
+    VDATA = 5,
+    COUNT = 6,
 }

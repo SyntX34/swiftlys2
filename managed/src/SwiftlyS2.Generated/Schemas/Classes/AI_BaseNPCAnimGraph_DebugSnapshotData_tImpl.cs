@@ -12,7 +12,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl : DebugSnapshotBaseStructuredData_tImpl, AI_BaseNPCAnimGraph_DebugSnapshotData_t
+internal partial class AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl : SchemaClass, AI_BaseNPCAnimGraph_DebugSnapshotData_t
 {
     public AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl(nint handle) : base(handle) { }
 
@@ -26,14 +26,34 @@ internal partial class AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl : DebugSnapsh
             return ref _Handle.AsRef<CGlobalSymbol>(_E_action_desiredOffset!.Value);
         }
     }
-    private static nint? _B_action_restartOffset;
+    private static nint? _E_action_handshake_restartOffset;
 
-    public ref bool B_action_restart
+    public ref CGlobalSymbol E_action_handshake_restart
     {
         get
         {
-            _B_action_restartOffset = _B_action_restartOffset ?? Schema.GetOffset(0xC191B83C8FAD0708);
-            return ref _Handle.AsRef<bool>(_B_action_restartOffset!.Value);
+            _E_action_handshake_restartOffset = _E_action_handshake_restartOffset ?? Schema.GetOffset(0xC191B83C1708CA55);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_handshake_restartOffset!.Value);
+        }
+    }
+    private static nint? _E_action_handshake_body_authority_currentOffset;
+
+    public ref CGlobalSymbol E_action_handshake_body_authority_current
+    {
+        get
+        {
+            _E_action_handshake_body_authority_currentOffset = _E_action_handshake_body_authority_currentOffset ?? Schema.GetOffset(0xC191B83CECA167D2);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_handshake_body_authority_currentOffset!.Value);
+        }
+    }
+    private static nint? _E_action_handshake_body_authority_desiredOffset;
+
+    public ref CGlobalSymbol E_action_handshake_body_authority_desired
+    {
+        get
+        {
+            _E_action_handshake_body_authority_desiredOffset = _E_action_handshake_body_authority_desiredOffset ?? Schema.GetOffset(0xC191B83C26FDC22D);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_handshake_body_authority_desiredOffset!.Value);
         }
     }
     private static nint? _E_movement_type_desiredOffset;
@@ -46,14 +66,34 @@ internal partial class AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl : DebugSnapsh
             return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_type_desiredOffset!.Value);
         }
     }
-    private static nint? _B_movement_type_restartOffset;
+    private static nint? _E_movement_handshake_restartOffset;
 
-    public ref bool B_movement_type_restart
+    public ref CGlobalSymbol E_movement_handshake_restart
     {
         get
         {
-            _B_movement_type_restartOffset = _B_movement_type_restartOffset ?? Schema.GetOffset(0xC191B83C5C9C443C);
-            return ref _Handle.AsRef<bool>(_B_movement_type_restartOffset!.Value);
+            _E_movement_handshake_restartOffset = _E_movement_handshake_restartOffset ?? Schema.GetOffset(0xC191B83C628A4C1A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_handshake_restartOffset!.Value);
+        }
+    }
+    private static nint? _E_movement_handshake_body_authority_currentOffset;
+
+    public ref CGlobalSymbol E_movement_handshake_body_authority_current
+    {
+        get
+        {
+            _E_movement_handshake_body_authority_currentOffset = _E_movement_handshake_body_authority_currentOffset ?? Schema.GetOffset(0xC191B83C2FC6C293);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_handshake_body_authority_currentOffset!.Value);
+        }
+    }
+    private static nint? _E_movement_handshake_body_authority_desiredOffset;
+
+    public ref CGlobalSymbol E_movement_handshake_body_authority_desired
+    {
+        get
+        {
+            _E_movement_handshake_body_authority_desiredOffset = _E_movement_handshake_body_authority_desiredOffset ?? Schema.GetOffset(0xC191B83C981EDC70);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_handshake_body_authority_desiredOffset!.Value);
         }
     }
 

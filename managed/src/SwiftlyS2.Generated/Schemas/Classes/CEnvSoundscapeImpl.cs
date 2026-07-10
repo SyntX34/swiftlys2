@@ -38,17 +38,12 @@ internal partial class CEnvSoundscapeImpl : CBaseEntityImpl, CEnvSoundscape
     }
     private static nint? _SoundEventNameOffset;
 
-    public string SoundEventName
+    public SchemaUntypedField SoundEventName
     {
         get
         {
             _SoundEventNameOffset = _SoundEventNameOffset ?? Schema.GetOffset(0x4C8F896AABB0F687);
-            return Schema.GetString(_Handle.Read<nint>(_SoundEventNameOffset!.Value));
-        }
-        set
-        {
-            _SoundEventNameOffset = _SoundEventNameOffset ?? Schema.GetOffset(0x4C8F896AABB0F687);
-            Schema.SetString(_Handle, _SoundEventNameOffset!.Value, value);
+            return new SchemaUntypedField(_Handle + _SoundEventNameOffset!.Value);
         }
     }
     private static nint? _OverrideWithEventOffset;

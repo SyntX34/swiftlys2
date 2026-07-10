@@ -29,19 +29,19 @@ public partial interface RnHull_t : ISchemaClass<RnHull_t>
 
     public ref float SurfaceArea { get; }
 
-    public ref CUtlVector<RnVertex_t> Vertices { get; }
-
     public ref CUtlVector<Vector> VertexPositions { get; }
-
-    public ref CUtlVector<RnHalfEdge_t> Edges { get; }
-
-    public ref CUtlVector<RnFace_t> Faces { get; }
 
     public ref CUtlVector<RnPlane_t> FacePlanes { get; }
 
     public ref uint Flags { get; }
 
     public CRegionSVM? RegionSVM { get; }
+
+    public ref CUtlVector<RnVertex_t> Vertices { get; }
+
+    public ref CUtlVector<RnHalfEdge_t> Edges { get; }
+
+    public ref CUtlVector<RnFace_t> Faces { get; }
 
 
 }

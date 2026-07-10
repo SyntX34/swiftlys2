@@ -11,11 +11,9 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerLoopTrigger : CVoiceContainerBase, ISchemaClass<CVoiceContainerLoopTrigger>
 {
     static CVoiceContainerLoopTrigger ISchemaClass<CVoiceContainerLoopTrigger>.From(nint handle) => new CVoiceContainerLoopTriggerImpl(handle);
-    static int ISchemaClass<CVoiceContainerLoopTrigger>.Size => 216;
+    static int ISchemaClass<CVoiceContainerLoopTrigger>.Size => 160;
     static string? ISchemaClass<CVoiceContainerLoopTrigger>.ClassName => null;
 
-
-    public CSoundContainerReference Sound { get; }
 
     public ref float RetriggerTimeMin { get; }
 
@@ -24,6 +22,8 @@ public partial interface CVoiceContainerLoopTrigger : CVoiceContainerBase, ISche
     public ref float FadeTime { get; }
 
     public ref bool CrossFade { get; }
+
+    public CSoundContainerReference Sound { get; }
 
 
 }

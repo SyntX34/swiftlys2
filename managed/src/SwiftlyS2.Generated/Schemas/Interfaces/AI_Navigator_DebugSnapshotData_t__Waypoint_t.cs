@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface AI_Navigator_DebugSnapshotData_t__Waypoint_t : ISchemaClass<AI_Navigator_DebugSnapshotData_t__Waypoint_t>
 {
     static AI_Navigator_DebugSnapshotData_t__Waypoint_t ISchemaClass<AI_Navigator_DebugSnapshotData_t__Waypoint_t>.From(nint handle) => new AI_Navigator_DebugSnapshotData_t__Waypoint_tImpl(handle);
-    static int ISchemaClass<AI_Navigator_DebugSnapshotData_t__Waypoint_t>.Size => 20;
+    static int ISchemaClass<AI_Navigator_DebugSnapshotData_t__Waypoint_t>.Size => 24;
     static string? ISchemaClass<AI_Navigator_DebugSnapshotData_t__Waypoint_t>.ClassName => null;
 
 
@@ -20,6 +20,8 @@ public partial interface AI_Navigator_DebugSnapshotData_t__Waypoint_t : ISchemaC
     public ref uint Nav_type { get; }
 
     public ref uint Flags { get; }
+
+    public ref bool Is_pathcorner { get; }
 
 
 }

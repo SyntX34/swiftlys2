@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncRotating : CBaseModelEntity, ISchemaClass<CFuncRotating>
 {
     static CFuncRotating ISchemaClass<CFuncRotating>.From(nint handle) => new CFuncRotatingImpl(handle);
-    static int ISchemaClass<CFuncRotating>.Size => 2096;
+    static int ISchemaClass<CFuncRotating>.Size => 2104;
     static string? ISchemaClass<CFuncRotating>.ClassName => "func_rotating";
 
 
@@ -23,6 +23,8 @@ public partial interface CFuncRotating : CBaseModelEntity, ISchemaClass<CFuncRot
 
     // RotationVector
     public SchemaUntypedField LocalRotationVector { get; }
+
+    public ref float Speed { get; }
 
     public ref float FanFriction { get; }
 
@@ -36,7 +38,8 @@ public partial interface CFuncRotating : CBaseModelEntity, ISchemaClass<CFuncRot
 
     public ref float BlockDamage { get; }
 
-    public string NoiseRunning { get; set; }
+    // CGameSoundEventName
+    public SchemaUntypedField NoiseRunning { get; }
 
     public ref bool Reversed { get; }
 

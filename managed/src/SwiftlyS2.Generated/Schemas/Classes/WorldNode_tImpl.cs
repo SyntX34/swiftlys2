@@ -116,6 +116,16 @@ internal partial class WorldNode_tImpl : SchemaClass, WorldNode_t
             return ref _Handle.AsRef<CUtlVector<AggregateVertexAlbedoStreamOnDiskData_t>>(_VertexAlbedoStreamsOffset!.Value);
         }
     }
+    private static nint? _VertexEmissiveStreamsOffset;
+
+    public ref CUtlVector<AggregateVertexEmissiveStreamOnDiskData_t> VertexEmissiveStreams
+    {
+        get
+        {
+            _VertexEmissiveStreamsOffset = _VertexEmissiveStreamsOffset ?? Schema.GetOffset(0xFC31048013723AA5);
+            return ref _Handle.AsRef<CUtlVector<AggregateVertexEmissiveStreamOnDiskData_t>>(_VertexEmissiveStreamsOffset!.Value);
+        }
+    }
     private static nint? _LayerNamesOffset;
 
     public ref CUtlVector<CUtlString> LayerNames
