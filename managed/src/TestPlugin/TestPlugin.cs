@@ -494,27 +494,6 @@ public class TestPlugin : BasePlugin
             ctx.Sender!.SendCenterHTML("hello there");
         });
 
-        // CMsgSos
-
-
-        Core.NetMessage.HookServerMessage<CMsgSosStartSoundEvent>(( msg ) =>
-        {
-            Console.WriteLine(msg.SoundeventHash);
-            return HookResult.Continue;
-        });
-
-        Core.GameHooks.Entities.TakeDamage.Post += ( ref ctx ) =>
-        {
-            var player = (ctx.Params.Info.Attacker.Value as CCSPlayerPawn)!.ToPlayer()!;
-            Console.WriteLine($"TakeDamage Post - {player.Name} - {player.PressedButtons}");
-        };
-
-        // Core.Event.OnEntityCreated += (ev) => {
-        //   var entity = ev.Entity;
-        //   entity.Entity.DesignerName = "a";
-        //   Console.WriteLine("TestPlugin OnEntityCreated " + ev.Entity.Entity?.DesignerName);
-        // };
-
         using CEntityKeyValues kv = new();
         kv.SetBool("test", true);
         Console.WriteLine(kv.Get<bool>("test2"));
@@ -695,12 +674,23 @@ public class TestPlugin : BasePlugin
         }
     }
 
-    // [EventListener<EventDelegates.OnEntityCreated>]
-    // public void OnEntityCreated( IOnEntityCreatedEvent @event )
-    // {
-    //     // @event.Entity.Entity.DesignerName = "abc";
-    //     Console.WriteLine("TestPlugin OnEntityCreated222 " + @event.Entity.Entity?.DesignerName);
-    // }
+    private bool hide = false;
+
+    [EventListener<EventDelegates.OnEntityCreated>]
+    public void OnEntityCreated( IOnEntityCreatedEvent @event )
+    {
+        Console.WriteLine(@event.Entity.DesignerName);
+        if(@event.Entity is CCSPlayerPawn pawn && hide)
+        {
+            pawn.SetTransmitState(false);
+        }
+    }
+
+    [Command("b89u3e4h89wfg")]
+    public void TestCommandBad2( ICommandContext _ )
+    {
+        hide = !hide;
+    }
 
     // private Guid _hookId = Guid.Empty;
 

@@ -18,12 +18,12 @@ internal partial class RnCompound_tImpl : SchemaClass, RnCompound_t
 
     private static nint? _SpheresOffset;
 
-    public ref CUtlVector<SchemaUntypedField> Spheres
+    public ref CUtlVector<RnSphere_t> Spheres
     {
         get
         {
             _SpheresOffset = _SpheresOffset ?? Schema.GetOffset(0xAFF8C613E56F78F1);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_SpheresOffset!.Value);
+            return ref _Handle.AsRef<CUtlVector<RnSphere_t>>(_SpheresOffset!.Value);
         }
     }
     private static nint? _CapsulesOffset;
@@ -57,13 +57,16 @@ internal partial class RnCompound_tImpl : SchemaClass, RnCompound_t
         }
     }
     private static nint? _BoundsOffset;
+    private AABB_tImpl? _BoundsInstance;
 
     public AABB_t Bounds
     {
         get
         {
             _BoundsOffset = _BoundsOffset ?? Schema.GetOffset(0xAFF8C613ABF76288);
-            return new AABB_tImpl(_Handle + _BoundsOffset!.Value);
+            var instance = _BoundsInstance ??= new AABB_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _BoundsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _OrthographicAreasOffset;

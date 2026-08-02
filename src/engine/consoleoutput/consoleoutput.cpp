@@ -38,6 +38,7 @@ uint64_t g_filterIds = 1;
 
 std::map<uint64_t, std::string> g_FilterNames;
 std::map<uint64_t, uint64_t> g_FilteredMessages;
+bool skipNextNewlineOnlyLog = false;
 
 IFunctionHook* g_CLoggingSystem_LogDirect_Hook = nullptr;
 
@@ -45,6 +46,11 @@ int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity,
 {
     if (!str)
         return reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook->GetOriginal())(loggingSystem, channel, severity, leafCode, str, args);
+
+    if(skipNextNewlineOnlyLog && strcmp(str, "\n") == 0) {
+        skipNextNewlineOnlyLog = false;
+        return 0;
+    }
 
     char buf[MAX_LOGGING_MESSAGE_LENGTH];
     if (args) {
@@ -160,6 +166,9 @@ bool CConsoleOutput::NeedsFiltering(char* text)
         {
             uint64_t key = it->first;
             g_FilteredMessages[key]++;
+
+            skipNextNewlineOnlyLog = (g_FilterNames[key] == "Framerate_Values" || g_FilterNames[key] == "Framerate_Total");
+
             return true;
         }
     }

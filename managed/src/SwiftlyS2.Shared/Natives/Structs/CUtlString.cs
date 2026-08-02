@@ -45,7 +45,7 @@ public struct CUtlString
             var neededSize = byteCount + 1;
             var ptr = NativeAllocator.Alloc((ulong)neededSize);
             var span = new Span<byte>(ptr.ToPointer(), neededSize);
-            Encoding.UTF8.GetBytes(str, span);
+            _ = Encoding.UTF8.GetBytes(str, span);
             span[byteCount] = 0;
             _ptr = ptr;
         }

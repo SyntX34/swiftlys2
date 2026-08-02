@@ -47,43 +47,46 @@ internal partial class CBaseButtonImpl : CBaseToggleImpl, CBaseButton
         }
     }
     private static nint? _LsOffset;
+    private locksound_tImpl? _LsInstance;
 
     public locksound_t Ls
     {
         get
         {
             _LsOffset = _LsOffset ?? Schema.GetOffset(0x1911FA7FD3B05E88);
-            return new locksound_tImpl(_Handle + _LsOffset!.Value);
+            var instance = _LsInstance ??= new locksound_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _LsOffset!.Value);
+            return instance;
         }
     }
     private static nint? _UseSoundOffset;
 
-    public SchemaUntypedField UseSound
+    public ref CGameSoundEventName UseSound
     {
         get
         {
             _UseSoundOffset = _UseSoundOffset ?? Schema.GetOffset(0x1911FA7FCCC8AC24);
-            return new SchemaUntypedField(_Handle + _UseSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_UseSoundOffset!.Value);
         }
     }
     private static nint? _LockedSoundOffset;
 
-    public SchemaUntypedField LockedSound
+    public ref CGameSoundEventName LockedSound
     {
         get
         {
             _LockedSoundOffset = _LockedSoundOffset ?? Schema.GetOffset(0x1911FA7FB3FCB84B);
-            return new SchemaUntypedField(_Handle + _LockedSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_LockedSoundOffset!.Value);
         }
     }
     private static nint? _UnlockedSoundOffset;
 
-    public SchemaUntypedField UnlockedSound
+    public ref CGameSoundEventName UnlockedSound
     {
         get
         {
             _UnlockedSoundOffset = _UnlockedSoundOffset ?? Schema.GetOffset(0x1911FA7FDC697A96);
-            return new SchemaUntypedField(_Handle + _UnlockedSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_UnlockedSoundOffset!.Value);
         }
     }
     private static nint? _OverrideAnticipationNameOffset;
@@ -132,13 +135,16 @@ internal partial class CBaseButtonImpl : CBaseToggleImpl, CBaseButton
         }
     }
     private static nint? _UseLockedTimeOffset;
+    private GameTime_tImpl? _UseLockedTimeInstance;
 
     public GameTime_t UseLockedTime
     {
         get
         {
             _UseLockedTimeOffset = _UseLockedTimeOffset ?? Schema.GetOffset(0x1911FA7FE94A05A1);
-            return new GameTime_tImpl(_Handle + _UseLockedTimeOffset!.Value);
+            var instance = _UseLockedTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _UseLockedTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _SolidBspOffset;

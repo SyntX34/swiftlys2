@@ -178,52 +178,52 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
     }
     private static nint? _SoundMoveOffset;
 
-    public SchemaUntypedField SoundMove
+    public ref CGameSoundEventName SoundMove
     {
         get
         {
             _SoundMoveOffset = _SoundMoveOffset ?? Schema.GetOffset(0x416637FB73E14089);
-            return new SchemaUntypedField(_Handle + _SoundMoveOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundMoveOffset!.Value);
         }
     }
     private static nint? _SoundMovePingOffset;
 
-    public SchemaUntypedField SoundMovePing
+    public ref CGameSoundEventName SoundMovePing
     {
         get
         {
             _SoundMovePingOffset = _SoundMovePingOffset ?? Schema.GetOffset(0x416637FB68B489FD);
-            return new SchemaUntypedField(_Handle + _SoundMovePingOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundMovePingOffset!.Value);
         }
     }
     private static nint? _SoundStartOffset;
 
-    public SchemaUntypedField SoundStart
+    public ref CGameSoundEventName SoundStart
     {
         get
         {
             _SoundStartOffset = _SoundStartOffset ?? Schema.GetOffset(0x416637FB7CA15A30);
-            return new SchemaUntypedField(_Handle + _SoundStartOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundStartOffset!.Value);
         }
     }
     private static nint? _SoundStopOffset;
 
-    public SchemaUntypedField SoundStop
+    public ref CGameSoundEventName SoundStop
     {
         get
         {
             _SoundStopOffset = _SoundStopOffset ?? Schema.GetOffset(0x416637FB34D8E0B4);
-            return new SchemaUntypedField(_Handle + _SoundStopOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundStopOffset!.Value);
         }
     }
     private static nint? _StrPathTargetOffset;
 
-    public SchemaUntypedField StrPathTarget
+    public ref CGameSoundEventName StrPathTarget
     {
         get
         {
             _StrPathTargetOffset = _StrPathTargetOffset ?? Schema.GetOffset(0x416637FB7AF8129A);
-            return new SchemaUntypedField(_Handle + _StrPathTargetOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_StrPathTargetOffset!.Value);
         }
     }
     private static nint? _MoveSoundMinDurationOffset;
@@ -247,13 +247,16 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
         }
     }
     private static nint? _NextMoveSoundTimeOffset;
+    private GameTime_tImpl? _NextMoveSoundTimeInstance;
 
     public GameTime_t NextMoveSoundTime
     {
         get
         {
             _NextMoveSoundTimeOffset = _NextMoveSoundTimeOffset ?? Schema.GetOffset(0x416637FB05BD176B);
-            return new GameTime_tImpl(_Handle + _NextMoveSoundTimeOffset!.Value);
+            var instance = _NextMoveSoundTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextMoveSoundTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _MoveSoundMinPitchOffset;
@@ -347,13 +350,16 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
         }
     }
     private static nint? _SpeedChangeTimeOffset;
+    private GameTime_tImpl? _SpeedChangeTimeInstance;
 
     public GameTime_t SpeedChangeTime
     {
         get
         {
             _SpeedChangeTimeOffset = _SpeedChangeTimeOffset ?? Schema.GetOffset(0x416637FBCC334417);
-            return new GameTime_tImpl(_Handle + _SpeedChangeTimeOffset!.Value);
+            var instance = _SpeedChangeTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _SpeedChangeTimeOffset!.Value);
+            return instance;
         }
     }
     private static nint? _AccelSpeedOffset;
@@ -387,13 +393,16 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
         }
     }
     private static nint? _NextMPSoundTimeOffset;
+    private GameTime_tImpl? _NextMPSoundTimeInstance;
 
     public GameTime_t NextMPSoundTime
     {
         get
         {
             _NextMPSoundTimeOffset = _NextMPSoundTimeOffset ?? Schema.GetOffset(0x416637FB251847DB);
-            return new GameTime_tImpl(_Handle + _NextMPSoundTimeOffset!.Value);
+            var instance = _NextMPSoundTimeInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _NextMPSoundTimeOffset!.Value);
+            return instance;
         }
     }
 

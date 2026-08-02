@@ -47,13 +47,16 @@ internal partial class CAmbientGenericImpl : CPointEntityImpl, CAmbientGeneric
         }
     }
     private static nint? _DpvOffset;
+    private dynpitchvol_tImpl? _DpvInstance;
 
     public dynpitchvol_t Dpv
     {
         get
         {
             _DpvOffset = _DpvOffset ?? Schema.GetOffset(0xD45BE96FD7C5AFFD);
-            return new dynpitchvol_tImpl(_Handle + _DpvOffset!.Value);
+            var instance = _DpvInstance ??= new dynpitchvol_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _DpvOffset!.Value);
+            return instance;
         }
     }
     private static nint? _ActiveOffset;
@@ -78,12 +81,12 @@ internal partial class CAmbientGenericImpl : CPointEntityImpl, CAmbientGeneric
     }
     private static nint? _SoundOffset;
 
-    public SchemaUntypedField Sound
+    public ref CGameSoundEventName Sound
     {
         get
         {
             _SoundOffset = _SoundOffset ?? Schema.GetOffset(0xD45BE96F5FF1867C);
-            return new SchemaUntypedField(_Handle + _SoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundOffset!.Value);
         }
     }
     private static nint? _SourceEntNameOffset;

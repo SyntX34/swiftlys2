@@ -20,8 +20,8 @@ public struct CHandle<T>( uint raw ) : ICHandle where T : class, ISchemaClass<T>
         get {
             if (Raw == 0xFFFFFFFF) return false;
             var ent = EntityManager.GetEntityByIndex(EntityIndex);
-            if (ent == null || ent.Identity == null) return false;
-            return ent.Identity.EntityHandle.Raw == Raw;
+            if (ent == null || ent.Entity == null) return false;
+            return ent.Entity.EntityHandle.Raw == Raw;
         }
     }
 
@@ -29,10 +29,9 @@ public struct CHandle<T>( uint raw ) : ICHandle where T : class, ISchemaClass<T>
         readonly get {
             unsafe
             {
-                if (!IsValid) return null;
-
                 var ent = EntityManager.GetEntityByIndex(EntityIndex);
-                if (ent == null) return null;
+                if (ent == null || ent.Entity == null) return null;
+                if (ent.Entity.EntityHandle.Raw != Raw) return null;
 
                 return ent is T entity ? entity : T.From(ent.Address);
             }

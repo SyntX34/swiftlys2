@@ -172,13 +172,16 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
         }
     }
     private static nint? _TickRotateRanOffset;
+    private GameTick_tImpl? _TickRotateRanInstance;
 
     public GameTick_t TickRotateRan
     {
         get
         {
             _TickRotateRanOffset = _TickRotateRanOffset ?? Schema.GetOffset(0x73DA1BB9B490BCBC);
-            return new GameTick_tImpl(_Handle + _TickRotateRanOffset!.Value);
+            var instance = _TickRotateRanInstance ??= new GameTick_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TickRotateRanOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartedRotatingOffset;
@@ -192,13 +195,16 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
         }
     }
     private static nint? _RotationSummaryOffset;
+    private FuncRotatorRotationSummary_tImpl? _RotationSummaryInstance;
 
     public FuncRotatorRotationSummary_t RotationSummary
     {
         get
         {
             _RotationSummaryOffset = _RotationSummaryOffset ?? Schema.GetOffset(0x73DA1BB949F8A259);
-            return new FuncRotatorRotationSummary_tImpl(_Handle + _RotationSummaryOffset!.Value);
+            var instance = _RotationSummaryInstance ??= new FuncRotatorRotationSummary_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _RotationSummaryOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeToReachMaxSpeedOffset;
@@ -222,23 +228,29 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
         }
     }
     private static nint? _TimeRotationStartOffset;
+    private GameTime_tImpl? _TimeRotationStartInstance;
 
     public GameTime_t TimeRotationStart
     {
         get
         {
             _TimeRotationStartOffset = _TimeRotationStartOffset ?? Schema.GetOffset(0x73DA1BB952C0B2E8);
-            return new GameTime_tImpl(_Handle + _TimeRotationStartOffset!.Value);
+            var instance = _TimeRotationStartInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeRotationStartOffset!.Value);
+            return instance;
         }
     }
     private static nint? _TimeRotationStopOffset;
+    private GameTime_tImpl? _TimeRotationStopInstance;
 
     public GameTime_t TimeRotationStop
     {
         get
         {
             _TimeRotationStopOffset = _TimeRotationStopOffset ?? Schema.GetOffset(0x73DA1BB955A9F3CC);
-            return new GameTime_tImpl(_Handle + _TimeRotationStopOffset!.Value);
+            var instance = _TimeRotationStopInstance ??= new GameTime_tImpl(0);
+            instance.DangerousSetHandle(_Handle + _TimeRotationStopOffset!.Value);
+            return instance;
         }
     }
     private static nint? _StartSpeedOffset;
@@ -333,32 +345,32 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
     }
     private static nint? _StartSoundOffset;
 
-    public SchemaUntypedField StartSound
+    public ref CGameSoundEventName StartSound
     {
         get
         {
             _StartSoundOffset = _StartSoundOffset ?? Schema.GetOffset(0x73DA1BB9F9B2297E);
-            return new SchemaUntypedField(_Handle + _StartSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_StartSoundOffset!.Value);
         }
     }
     private static nint? _LoopSoundOffset;
 
-    public SchemaUntypedField LoopSound
+    public ref CGameSoundEventName LoopSound
     {
         get
         {
             _LoopSoundOffset = _LoopSoundOffset ?? Schema.GetOffset(0x73DA1BB99B98C092);
-            return new SchemaUntypedField(_Handle + _LoopSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_LoopSoundOffset!.Value);
         }
     }
     private static nint? _StopSoundOffset;
 
-    public SchemaUntypedField StopSound
+    public ref CGameSoundEventName StopSound
     {
         get
         {
             _StopSoundOffset = _StopSoundOffset ?? Schema.GetOffset(0x73DA1BB9136BDCCC);
-            return new SchemaUntypedField(_Handle + _StopSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_StopSoundOffset!.Value);
         }
     }
     private static nint? _TargetAngleOffset;
