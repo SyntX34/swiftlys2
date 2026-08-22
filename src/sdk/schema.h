@@ -31,59 +31,33 @@
 
 using json = nlohmann::json;
 
-void ReadClasses(CSchemaType_DeclaredClass* declClass, json& outJson);
-void ReadEnums(CSchemaType_DeclaredEnum* declClass, json& outJson);
-void ReadClassDatamap(CSchemaType_DeclaredClass* declClass, json& outJson);
+void ReadClasses(CSchemaType_DeclaredClass* declClass);
 
 class CSDKSchema : public ISDKSchema
 {
 public:
-    virtual void SetStateChanged(void* pEntity, const char* sClassName, const char* sMemberName) override;
     virtual void SetStateChanged(void* pEntity, uint64_t uHash) override;
-
-    virtual int32_t FindChainOffset(const char* sClassName) override;
 
     virtual int32_t GetOffset(const char* sClassName, const char* sMemberName) override;
     virtual int32_t GetOffset(uint64_t uHash) override;
 
-    virtual bool IsStruct(const char* sClassName) override;
-    virtual bool IsClassLoaded(const char* sClassName) override;
-
     virtual void* GetPropPtr(void* pEntity, const char* sClassName, const char* sMemberName) override;
     virtual void* GetPropPtr(void* pEntity, uint64_t uHash) override;
 
-    virtual void WritePropPtr(void* pEntity, const char* sClassName, const char* sMemberName, void* pValue, uint32_t size) override;
-    virtual void WritePropPtr(void* pEntity, uint64_t uHash, void* pValue, uint32_t size) override;
-
     virtual void* GetVData(void* pEntity) override;
 
-    virtual inputfunc_t* GetDatamapFunction(uint32_t uHash) override;
+    virtual void* GetDatamapFunction(const char* className, const char* functionName) override;
 
     virtual void Load() override;
-    virtual void DumpEntitySystem() override;
 };
 
 struct SchemaField
 {
     bool m_bChainer;
     bool m_bIsStruct;
-    uint32_t m_uOffset;
     int32_t m_nChainerOffset;
-};
-
-struct SchemaClass
-{
-    bool m_bIsStruct;
-    uint32_t m_uSize;
-    uint32_t m_uAlignment;
-    uint32_t m_uHash;
-};
-
-
-struct FNV1aHasher32 {
-    std::size_t operator()(const uint32_t key) const {
-        return key;
-    }
+    int32_t m_nStateChangedOffset;
+    uint32_t m_uOffset;
 };
 
 struct FNV1aHasher64 {
@@ -93,12 +67,9 @@ struct FNV1aHasher64 {
 };
 
 extern std::unordered_map<uint64_t, SchemaField, FNV1aHasher64> offsets;
-extern std::unordered_map<uint32_t, SchemaClass, FNV1aHasher32> classes;
-extern std::unordered_map<uint32_t, inputfunc_t*, FNV1aHasher32> datamapFunctions;
 
 class NetworkVar {
 public:
-    uint64_t pVtable() const { return *(uint64_t*)this; };
     void StateChanged(uint64_t index, const NetworkStateChangedData& data) {
         CALL_VIRTUAL(void, (int)index, this, &data);
     }

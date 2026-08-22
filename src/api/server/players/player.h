@@ -23,7 +23,9 @@
 #include <string>
 
 #include <api/engine/voicemanager/voicemanager.h>
+#include <api/utils/mutex.h>
 
+#include <api/utils/bitvec.h>
 #include <public/bitvec.h>
 #include <public/const.h>
 
@@ -42,8 +44,8 @@ enum MessageType : uint8_t
 
 struct BlockedTransmitInfo
 {
-    uint64_t blockedMask[MAX_EDICTS >> 6] = { 0 };
-    std::vector<uint8_t> activeMasks;
+    CBitVector<MAX_EDICTS> blockedTransmitBits;
+    QueueMutex mutex;
 };
 
 class IPlayer

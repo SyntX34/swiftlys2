@@ -20,9 +20,9 @@
 
 #include <api/dll/extern.h>
 
-SW_API bool StartCore()
+SW_API bool StartCore(CreateIFaceFn serverFactory, CreateIFaceFn engineFactory)
 {
-    return g_SwiftlyCore.Load(BridgeKind_t::SwiftlyLoader);
+    return g_SwiftlyCore.Load(BridgeKind_t::SwiftlyLoader, serverFactory, engineFactory);
 }
 
 SW_API bool StopCore()
