@@ -27,16 +27,8 @@
 #include <api/shared/string.h>
 #include <api/shared/plat.h>
 #include <api/shared/files.h>
-#include "rva.h"
 #include <fmt/format.h>
 #include <s2binlib/s2binlib.h>
-#include <emmintrin.h>
-#ifdef _WIN32
-#include <intrin.h>
-#define ctz(x) _tzcnt_u32(x)
-#else
-#define ctz(x) __builtin_ctz(x)
-#endif
 
 IGameDataOffsets* GameDataManager::GetOffsets()
 {
@@ -55,12 +47,6 @@ IGameDataPatches* GameDataManager::GetPatches()
     if (m_pPatches == nullptr) m_pPatches = new GameDataPatches();
     return m_pPatches;
 }
-
-extern std::vector<uint8_t> HexToByte(const char* src, uint64_t& length);
-
-std::map<std::string, uint8_t*> m_binaries;
-std::map<std::string, void*> m_handles;
-std::map<std::string, int> m_binariesSize;
 
 void* FindSignature(std::string library, std::string pattern)
 {

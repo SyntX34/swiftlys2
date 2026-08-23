@@ -89,7 +89,7 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass)
 
     if (!classInfo) return;
 
-    uint32_t class_hash = hash_32_fnv1a_const(classInfo->m_pszName);
+    uint64_t class_hash = (uint64_t)(hash_32_fnv1a_const(classInfo->m_pszName)) << 32;
     bool isStruct = IsStandardLayoutClass(classInfo);
     auto field_size = classInfo->m_nFieldCount;
     auto fields = classInfo->m_pFields;
@@ -118,7 +118,7 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass)
 
         void* vtable = nullptr;
         int stateChangedIndex = -1;
-        uint64_t fieldHash = ((uint64_t)(class_hash) << 32 | hash_32_fnv1a_const(field.m_pszName));
+        uint64_t fieldHash = (class_hash | hash_32_fnv1a_const(field.m_pszName));
 
         std::string networkVarName = std::string("NetworkVar_") + field.m_pszName;
         int result = s2binlib_find_vtable_nested_2("server", classInfo->m_pszName, networkVarName.c_str(), &vtable);
