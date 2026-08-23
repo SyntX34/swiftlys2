@@ -48,7 +48,6 @@
 #include <fmt/format.h>
 
 #include <public/engine/igameeventsystem.h>
-#include <s2binlib/s2binlib.h>
 
 #include <public/steam/steam_gameserver.h>
 
@@ -112,13 +111,11 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     g_pGameClientsService = (ISource2GameClients*)GetInterface(INTERFACEVERSION_SERVERGAMECLIENTS);
     g_pGameResources = GetInterface(GAMERESOURCESERVICESERVER_INTERFACE_VERSION);
 
-    s2binlib_initialize(Plat_GetGameDirectory(), "csgo");
-
 #ifdef _WIN32
-    void* libServer = load_library(StringWide(Plat_GetGameDirectory() + std::string("\\csgo\\bin\\win64\\server.dll")).c_str());
+    void* libServer = load_library(StringWide(Plat_GetGameDirectory() + std::string("\\" + g_sGameFolder + "\\bin\\win64\\server.dll")).c_str());
     void* libEngine = load_library(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\engine2.dll")).c_str());
-    s2binlib_set_module_base_from_pointer("server", libServer);
-    s2binlib_set_module_base_from_pointer("engine2", libEngine);
+    g_pS2BinLib->SetModuleBaseFromPointer("server", libServer);
+    g_pS2BinLib->SetModuleBaseFromPointer("engine2", libEngine);
 #endif
 
     g_pCVar = g_pGameCvar;
@@ -228,14 +225,14 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     g_pHooksManager->Initialize();
 
     void* loopmodeLevelLoad = nullptr;
-    s2binlib_find_vtable("engine2", "CLoopModeLevelLoad", &loopmodeLevelLoad);
+    g_pS2BinLib->FindVtable("engine2", "CLoopModeLevelLoad", &loopmodeLevelLoad);
 
     g_pLoopInitHook = g_pHooksManager->CreateVFunctionHook();
     g_pLoopInitHook->SetHookFunction(loopmodeLevelLoad, g_pGameDataManager->GetOffsets()->Fetch("ILoopMode::LoopInit"), (void*)LoopInitHook, true);
     g_pLoopInitHook->Enable();
 
     void* servervtable = nullptr;
-    s2binlib_find_vtable("server", "CSource2Server", &servervtable);
+    g_pS2BinLib->FindVtable("server", "CSource2Server", &servervtable);
 
     g_pGameServerSteamAPIActivated = g_pHooksManager->CreateVFunctionHook();
     g_pGameServerSteamAPIActivated->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::GameServerSteamAPIActivated"), (void*)GameServerSteamAPIActivatedHook, true);
@@ -247,7 +244,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
     StartFixes();
 
-    if (!InitializeHostFXR(std::string(Plat_GetGameDirectory()) + "/csgo/" + m_sCorePath))
+    if (!InitializeHostFXR(std::string(Plat_GetGameDirectory()) + "/" + g_sGameFolder + "/" + m_sCorePath))
     {
         g_pCrashReporter->ReportPreventionIncident("Managed", fmt::format("Couldn't initialize the .NET runtime. Make sure you installed `swiftlys2-{}-{}-with-runtimes.zip`.", WIN_LINUX("windows", "linux"), GetVersion()));
         return true;
@@ -263,7 +260,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     putenv("SWIFTLY_MANAGED_LOG_ENABLE", managedLogEnabled ? "1" : "0", 1);
     putenv("SWIFTLY_MANAGED_LOG_INTERVAL_MS", std::to_string(managedLogInterval).c_str(), 1);
 
-    if (!InitializeDotNetAPI(g_pScriptingAPI->GetNativeFunctions(), g_pScriptingAPI->GetNativeFunctionsCount(), std::string(Plat_GetGameDirectory()) + "/csgo/" + m_sLogPath))
+    if (!InitializeDotNetAPI(g_pScriptingAPI->GetNativeFunctions(), g_pScriptingAPI->GetNativeFunctionsCount(), std::string(Plat_GetGameDirectory()) + "/" + g_sGameFolder + "/" + m_sLogPath))
     {
         g_pCrashReporter->ReportPreventionIncident("Managed", "Couldn't initialize the .NET scripting API.");
         return true;
@@ -393,31 +390,19 @@ void SwiftlyCore::SendConsoleMessage(const std::string& message)
 
 std::string SwiftlyCore::GetCurrentGame()
 {
-    if (!g_pGameEngine)
+    if (g_sGameFolder == "")
     {
         return "unknown";
     }
 
-    switch (g_pGameEngine->GetAppID())
-    {
-    case 730:
-        return "cs2";
-    default:
-        return "unknown";
-    }
+    if (g_sGameFolder == "csgo") return "cs2";
+    else return "unknown";
 }
 
 int SwiftlyCore::GetMaxGameClients()
 {
-    if (!g_pGameEngine) return 0;
-
-    switch (g_pGameEngine->GetAppID())
-    {
-    case 730:
-        return 64;
-    default:
-        return 0;
-    }
+    if (g_sGameFolder == "csgo") return 64;
+    else return 0;
 }
 
 std::string& SwiftlyCore::GetCorePath()

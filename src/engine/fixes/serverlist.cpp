@@ -23,8 +23,6 @@
 #include <public/steam/isteamclient.h>
 #include <public/steam/isteamgameserver.h>
 
-#include <s2binlib/s2binlib.h>
-
 #include "serverlist.h"
 
 IVFunctionHook* g_GameFrameHook = nullptr;
@@ -34,7 +32,7 @@ void GameFrame(void* _this, bool simulate, bool first, bool last);
 void ServerListFix::Start()
 {
     void* servervtable = nullptr;
-    s2binlib_find_vtable("server", "CSource2Server", &servervtable);
+    g_pS2BinLib->FindVtable("server", "CSource2Server", &servervtable);
 
     g_GameFrameHook = g_pHooksManager->CreateVFunctionHook();
     g_GameFrameHook->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::GameFrame"), reinterpret_cast<void*>(GameFrame), true);

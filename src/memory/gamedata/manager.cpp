@@ -28,7 +28,6 @@
 #include <api/shared/plat.h>
 #include <api/shared/files.h>
 #include <fmt/format.h>
-#include <s2binlib/s2binlib.h>
 
 IGameDataOffsets* GameDataManager::GetOffsets()
 {
@@ -51,6 +50,6 @@ IGameDataPatches* GameDataManager::GetPatches()
 void* FindSignature(std::string library, std::string pattern)
 {
     void* result = 0;
-    s2binlib_pattern_scan(library.c_str(), pattern.c_str(), &result);
+    g_pS2BinLib->PatternScan(library.c_str(), pattern.c_str(), &result);
     return result;
 }

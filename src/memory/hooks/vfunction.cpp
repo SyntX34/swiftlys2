@@ -20,7 +20,6 @@
 
 #include <api/interfaces/interfaces.h>
 #include <core/entrypoint.h>
-#include <s2binlib/s2binlib.h>
 
 void VFunctionHook::SetHookFunction(const std::string& iface_name, int index, void* callback)
 {
@@ -28,7 +27,7 @@ void VFunctionHook::SetHookFunction(const std::string& iface_name, int index, vo
     if (!iface) return;
 
     void* trampoline_addr = nullptr;
-    s2binlib_install_trampoline(((void*)((uintptr_t)(*(void**)iface) + 8 * index)), &trampoline_addr);
+    g_pS2BinLib->InstallTrampoline(((void*)((uintptr_t)(*(void**)iface) + 8 * index)), &trampoline_addr);
 
     m_oHook = safetyhook::create_inline(trampoline_addr, callback, safetyhook::InlineHook::Flags::StartDisabled);
 }
@@ -38,7 +37,7 @@ void VFunctionHook::SetHookFunction(void* instance, int index, void* callback, b
     if (!instance) return;
 
     void* trampoline_addr = nullptr;
-    s2binlib_install_trampoline(is_vtable ? (void*)((uintptr_t)instance + 8 * index) : ((void*)((uintptr_t)(*(void**)instance) + 8 * index)), &trampoline_addr);
+    g_pS2BinLib->InstallTrampoline(is_vtable ? (void*)((uintptr_t)instance + 8 * index) : ((void*)((uintptr_t)(*(void**)instance) + 8 * index)), &trampoline_addr);
 
     m_oHook = safetyhook::create_inline(trampoline_addr, callback, safetyhook::InlineHook::Flags::StartDisabled);
 }

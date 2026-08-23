@@ -11,7 +11,7 @@ namespace SwiftlyS2.Core.Natives;
 internal static class NativeEngineHelpers
 {
 
-    private unsafe static delegate* unmanaged<int*, byte*> _GetIP;
+    private unsafe static delegate* unmanaged< int*, byte* > _GetIP;
 
     public unsafe static string GetIP()
     {
@@ -22,12 +22,12 @@ internal static class NativeEngineHelpers
         return outString;
     }
 
-    private unsafe static delegate* unmanaged<byte*, byte> _IsMapValid;
+    private unsafe static delegate* unmanaged< byte*, byte > _IsMapValid;
 
     /// <summary>
     /// it can be map name, or workshop id
     /// </summary>
-    public unsafe static bool IsMapValid(string map_name)
+    public unsafe static bool IsMapValid( string map_name )
     {
         return StringAlloc.CreateCString(map_name, map_nameBufferPtr =>
         {
@@ -36,9 +36,9 @@ internal static class NativeEngineHelpers
         });
     }
 
-    private unsafe static delegate* unmanaged<byte*, void> _ExecuteCommand;
+    private unsafe static delegate* unmanaged< byte*, void > _ExecuteCommand;
 
-    public unsafe static void ExecuteCommand(string command)
+    public unsafe static void ExecuteCommand( string command )
     {
         if (!NativeBinding.IsMainThread)
         {
@@ -50,9 +50,9 @@ internal static class NativeEngineHelpers
         });
     }
 
-    private unsafe static delegate* unmanaged<byte*, nint> _FindGameSystemByName;
+    private unsafe static delegate* unmanaged< byte*, nint > _FindGameSystemByName;
 
-    public unsafe static nint FindGameSystemByName(string name)
+    public unsafe static nint FindGameSystemByName( string name )
     {
         return StringAlloc.CreateCString(name, nameBufferPtr =>
         {
@@ -61,9 +61,9 @@ internal static class NativeEngineHelpers
         });
     }
 
-    private unsafe static delegate* unmanaged<byte*, void> _SendMessageToConsole;
+    private unsafe static delegate* unmanaged< byte*, void > _SendMessageToConsole;
 
-    public unsafe static void SendMessageToConsole(string msg)
+    public unsafe static void SendMessageToConsole( string msg )
     {
         StringAlloc.CreateCString(msg, msgBufferPtr =>
         {
@@ -71,7 +71,7 @@ internal static class NativeEngineHelpers
         });
     }
 
-    private unsafe static delegate* unmanaged<nint> _GetTraceManager;
+    private unsafe static delegate* unmanaged< nint > _GetTraceManager;
 
     public unsafe static nint GetTraceManager()
     {
@@ -79,7 +79,7 @@ internal static class NativeEngineHelpers
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<int*, byte*> _GetCurrentGame;
+    private unsafe static delegate* unmanaged< int*, byte* > _GetCurrentGame;
 
     public unsafe static string GetCurrentGame()
     {
@@ -90,7 +90,7 @@ internal static class NativeEngineHelpers
         return outString;
     }
 
-    private unsafe static delegate* unmanaged<int*, byte*> _GetNativeVersion;
+    private unsafe static delegate* unmanaged< int*, byte* > _GetNativeVersion;
 
     public unsafe static string GetNativeVersion()
     {
@@ -101,7 +101,7 @@ internal static class NativeEngineHelpers
         return outString;
     }
 
-    private unsafe static delegate* unmanaged<int*, byte*> _GetMenuSettings;
+    private unsafe static delegate* unmanaged< int*, byte* > _GetMenuSettings;
 
     public unsafe static string GetMenuSettings()
     {
@@ -112,7 +112,7 @@ internal static class NativeEngineHelpers
         return outString;
     }
 
-    private unsafe static delegate* unmanaged<nint> _GetGlobalVars;
+    private unsafe static delegate* unmanaged< nint > _GetGlobalVars;
 
     public unsafe static nint GetGlobalVars()
     {
@@ -120,7 +120,7 @@ internal static class NativeEngineHelpers
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<nint> _GetNetworkGameServer;
+    private unsafe static delegate* unmanaged< nint > _GetNetworkGameServer;
 
     public unsafe static nint GetNetworkGameServer()
     {
@@ -128,18 +128,7 @@ internal static class NativeEngineHelpers
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<int*, byte*> _GetCSGODirectoryPath;
-
-    public unsafe static string GetCSGODirectoryPath()
-    {
-        var length = 0;
-        var returnedPtr = _GetCSGODirectoryPath(&length);
-        var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
-        NativeAllocator.Free((nint)returnedPtr);
-        return outString;
-    }
-
-    private unsafe static delegate* unmanaged<int*, byte*> _GetGameDirectoryPath;
+    private unsafe static delegate* unmanaged< int*, byte* > _GetGameDirectoryPath;
 
     public unsafe static string GetGameDirectoryPath()
     {
@@ -150,7 +139,7 @@ internal static class NativeEngineHelpers
         return outString;
     }
 
-    private unsafe static delegate* unmanaged<int*, byte*> _GetWorkshopId;
+    private unsafe static delegate* unmanaged< int*, byte* > _GetWorkshopId;
 
     public unsafe static string GetWorkshopId()
     {
@@ -161,9 +150,9 @@ internal static class NativeEngineHelpers
         return outString;
     }
 
-    private unsafe static delegate* unmanaged<byte*, uint, nint, byte, nint, byte, int, ulong, void> _DispatchParticleEffect;
+    private unsafe static delegate* unmanaged< byte*, uint, nint, byte, nint, byte, int, ulong, void > _DispatchParticleEffect;
 
-    public unsafe static void DispatchParticleEffect(string particleName, uint attachmentType, nint entity, byte attachmentPoint, nint attachmentName, bool resetAllParticlesOnEntity, int splitScreenSlot, ulong filtermask)
+    public unsafe static void DispatchParticleEffect( string particleName, uint attachmentType, nint entity, byte attachmentPoint, nint attachmentName, bool resetAllParticlesOnEntity, int splitScreenSlot, ulong filtermask )
     {
         StringAlloc.CreateCString(particleName, particleNameBufferPtr =>
         {

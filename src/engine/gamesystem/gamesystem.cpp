@@ -18,7 +18,6 @@
 
 #include "gamesystem.h"
 
-#include <s2binlib/s2binlib.h>
 #include <api/interfaces/interfaces.h>
 
 CBaseGameSystemFactory** CBaseGameSystemFactory::sm_pFirst = nullptr;
@@ -37,7 +36,7 @@ void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* 
 bool InitGameSystem()
 {
     void* gameRulesGameSystemVTable = nullptr;
-    s2binlib_find_vtable("server", "CGameRulesGameSystem", &gameRulesGameSystemVTable);
+    g_pS2BinLib->FindVtable("server", "CGameRulesGameSystem", &gameRulesGameSystemVTable);
 
     pOnPrecacheResourceCallbackHook = g_pHooksManager->CreateVFunctionHook();
     pOnPrecacheResourceCallbackHook->SetHookFunction(gameRulesGameSystemVTable, g_pGameDataManager->GetOffsets()->Fetch("IGameSystem::BuildGameSessionManifest"), (void*)BuildGameSessionManifestHook, true);

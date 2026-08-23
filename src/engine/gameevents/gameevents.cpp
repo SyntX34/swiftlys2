@@ -38,8 +38,6 @@
 
 #include <fmt/format.h>
 
-#include <s2binlib/s2binlib.h>
-
 using json = nlohmann::json;
 
 std::function<int(std::string&, IGameEvent*, bool&, uint32_t&)> g_fnEventFireHandler;
@@ -68,10 +66,10 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
 void CEventManager::Initialize()
 {
     void* CGameEventManagerVTable;
-    s2binlib_find_vtable("server", "CGameEventManager", &CGameEventManagerVTable);
+    g_pS2BinLib->FindVtable("server", "CGameEventManager", &CGameEventManagerVTable);
 
     void* netserverservice = nullptr;
-    s2binlib_find_vtable("engine2", "CNetworkServerService", &netserverservice);
+    g_pS2BinLib->FindVtable("engine2", "CNetworkServerService", &netserverservice);
 
     g_pStartupServerEventHook = g_pHooksManager->CreateVFunctionHook();
     g_pStartupServerEventHook->SetHookFunction(netserverservice, g_pGameDataManager->GetOffsets()->Fetch("INetworkServerService::StartupServer"), reinterpret_cast<void*>(StartupServerEventHook), true);
@@ -89,7 +87,7 @@ void CEventManager::Initialize()
     g_pFireEventHook->Enable();
 
     void* servervtable = nullptr;
-    s2binlib_find_vtable("server", "CSource2Server", &servervtable);
+    g_pS2BinLib->FindVtable("server", "CSource2Server", &servervtable);
 
     g_PreworldUpdateHook = g_pHooksManager->CreateVFunctionHook();
     g_PreworldUpdateHook->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::PreWorldUpdate"), reinterpret_cast<void*>(PreworldUpdateHook), true);

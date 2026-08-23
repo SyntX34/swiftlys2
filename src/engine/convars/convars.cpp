@@ -30,7 +30,6 @@
 #include <public/engine/igameeventsystem.h>
 
 #include <fmt/format.h>
-#include <s2binlib/s2binlib.h>
 
 #include "networkbasetypes.pb.h"
 
@@ -116,7 +115,7 @@ bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_Re
 void CConvarManager::Initialize()
 {
     void* serverSideClientVTable;
-    s2binlib_find_vtable("engine2", "CServerSideClient", &serverSideClientVTable);
+    g_pS2BinLib->FindVtable("engine2", "CServerSideClient", &serverSideClientVTable);
 
     g_pProcessRespondCvarValueHook = g_pHooksManager->CreateVFunctionHook();
     g_pProcessRespondCvarValueHook->SetHookFunction(serverSideClientVTable, g_pGameDataManager->GetOffsets()->Fetch("CServerSideClient::ProcessRespondCvarValue"), reinterpret_cast<void*>(OnConvarQuery), true);

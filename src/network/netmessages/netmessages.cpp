@@ -23,7 +23,6 @@
 #include <memory/gamedata/manager.h>
 
 #include <api/shared/plat.h>
-#include <s2binlib/s2binlib.h>
 
 std::function<int(uint64_t*, int, void*)> g_fnServerMessageSendHandler;
 std::function<int(int, int, void*)> g_fnClientMessageSendHandler;
@@ -48,14 +47,14 @@ void CNetMessages::Initialize()
     g_pFilterMessageHook->Enable();
 
     void* gameEventSystem = nullptr;
-    s2binlib_find_vtable("engine2", "CGameEventSystem", &gameEventSystem);
+    g_pS2BinLib->FindVtable("engine2", "CGameEventSystem", &gameEventSystem);
 
     g_pPostEventAbstractHook = g_pHooksManager->CreateVFunctionHook();
     g_pPostEventAbstractHook->SetHookFunction(gameEventSystem, g_pGameDataManager->GetOffsets()->Fetch("IGameEventSystem::PostEventAbstract"), (void*)PostEventAbstractHook, true);
     g_pPostEventAbstractHook->Enable();
 
     void* serverSideClientVTable = nullptr;
-    s2binlib_find_vtable("engine2", "CServerSideClient", &serverSideClientVTable);
+    g_pS2BinLib->FindVtable("engine2", "CServerSideClient", &serverSideClientVTable);
 
     g_pSendNetMessageHook = g_pHooksManager->CreateVFunctionHook();
     g_pSendNetMessageHook->SetHookFunction(serverSideClientVTable, g_pGameDataManager->GetOffsets()->Fetch("CServerSideClient::SendNetMessage"), (void*)SendNetMessage, true);
