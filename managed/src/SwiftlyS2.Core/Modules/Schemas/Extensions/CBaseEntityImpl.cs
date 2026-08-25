@@ -12,7 +12,6 @@ internal partial class CBaseEntityImpl : CBaseEntity
 
     public CEntitySubclassVDataBase VData {
         get {
-            if (!IsValidEntity) throw new InvalidOperationException("Entity is invalid.");
             var vDataPtr = NativeSchema.GetVData(_Handle);
             _vData.DangerousSetHandle(vDataPtr);
             return _vData;
