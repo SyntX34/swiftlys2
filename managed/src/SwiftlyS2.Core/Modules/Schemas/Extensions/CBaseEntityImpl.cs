@@ -8,10 +8,11 @@ namespace SwiftlyS2.Core.SchemaDefinitions;
 
 internal partial class CBaseEntityImpl : CBaseEntity
 {
-    private CEntitySubclassVDataBaseImpl _vData;
+    private CEntitySubclassVDataBaseImpl _vData = new(0);
 
     public CEntitySubclassVDataBase VData {
         get {
+            if (!IsValidEntity) throw new InvalidOperationException("Entity is invalid.");
             var vDataPtr = NativeSchema.GetVData(_Handle);
             _vData.DangerousSetHandle(vDataPtr);
             return _vData;
