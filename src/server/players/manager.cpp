@@ -33,17 +33,6 @@
 #include <public/networksystem/netmessage.h>
 #include "usermessages.pb.h"
 
-class CUserCmd
-{
-public:
-    [[maybe_unused]] char pad0[0x10];
-    CSGOUserCmdPB cmd;
-    [[maybe_unused]] char pad1[0x38];
-#ifdef _WIN32
-    [[maybe_unused]] char pad2[0x8];
-#endif
-};
-
 IVFunctionHook* g_pOnGameFramePlayerHook = nullptr;
 
 IVFunctionHook* g_pClientConnectHook = nullptr;

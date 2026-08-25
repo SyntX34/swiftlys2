@@ -47,7 +47,7 @@ internal class Player : IPlayer, IDisposable
 
     public ulong UnauthorizedSteamID { get { ThrowIfDisposed(); return NativePlayer.GetUnauthorizedSteamID(Slot); } }
 
-    public CCSPlayerController Controller { get { ThrowIfDisposed(); var controllerPtr = NativePlayer.GetController(Slot); return EntityManager.GetEntityByAddress(controllerPtr) as CCSPlayerControllerImpl ?? new CCSPlayerControllerImpl(controllerPtr); } }
+    public CCSPlayerController Controller { get { ThrowIfDisposed(); return EntityManager.GetEntityByIndex((uint)(Slot + 1)) as CCSPlayerControllerImpl ?? new CCSPlayerControllerImpl(0); } }
     public CCSPlayerController RequiredController => Controller is { IsValid: true } controller ? controller : throw new InvalidOperationException("Controller is not valid");
 
     public CBasePlayerPawn? Pawn => Controller is { IsValid: true } ? Controller.Pawn.Value : null;

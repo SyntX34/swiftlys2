@@ -32,7 +32,6 @@
 #include <public/iserver.h>
 
 #define CBaseEntity_m_iTeamNum 0x9DC483B8A5BFEFB3
-#define CBaseEntity_m_fFlags 0x9DC483B8A4A37590
 
 #define CBasePlayerController_m_hPawn 0x3979FF6E7C628C1D
 #define CCSPlayerController_m_hPlayerPawn 0x28ECD7A1D6C93E7C
@@ -40,73 +39,6 @@
 #define CBasePlayerPawn_m_pMovementServices 0xCA2EED04CF73E28A
 #define CPlayer_MovementServices_m_nButtons 0xD5BDF28998CCEF82
 #define CInButtonState_m_pButtonStates 0x6C8AF06A00121DF9
-
-static const std::vector<std::string> g_vButtons = {
-    "mouse1",
-    "space",
-    "ctrl",
-    "w",
-    "s",
-    "e",
-    "esc",
-    "a",
-    "d",
-    "a",
-    "d",
-    "mouse2",
-    "unknown_key_run",
-    "r",
-    "alt",
-    "alt",
-    "shift",
-    "unknown_key_speed",
-    "shift",
-    "unknown_key_hudzoom",
-    "unknown_key_weapon1",
-    "unknown_key_weapon2",
-    "unknown_key_bullrush",
-    "unknown_key_grenade1",
-    "unknown_key_grenade2",
-    "unknown_key_lookspin",
-    "unknown_key_26",
-    "unknown_key_27",
-    "unknown_key_28",
-    "unknown_key_29",
-    "unknown_key_30",
-    "unknown_key_31",
-    "unknown_key_32",
-    "tab",
-    "unknown_key_34",
-    "f",
-    "unknown_key_36",
-    "unknown_key_37",
-    "unknown_key_38",
-    "unknown_key_39",
-    "unknown_key_40",
-    "unknown_key_41",
-    "unknown_key_42",
-    "unknown_key_43",
-    "unknown_key_44",
-    "unknown_key_45",
-    "unknown_key_46",
-    "unknown_key_47",
-    "unknown_key_48",
-    "unknown_key_49",
-    "unknown_key_50",
-    "unknown_key_51",
-    "unknown_key_52",
-    "unknown_key_53",
-    "unknown_key_54",
-    "unknown_key_55",
-    "unknown_key_56",
-    "unknown_key_57",
-    "unknown_key_58",
-    "unknown_key_59",
-    "unknown_key_60",
-    "unknown_key_61",
-    "unknown_key_62",
-    "unknown_key_63",
-};
 
 uint64_t sessionId = 1000;
 
@@ -377,16 +309,6 @@ VoiceFlagValue& CPlayer::GetVoiceFlags()
 CPlayerBitVec& CPlayer::GetSelfMutes()
 {
     return m_bvSelfMutes;
-}
-
-uint64_t& CPlayer::GetPressedButtons()
-{
-    return m_uPressedButtons;
-}
-
-void CPlayer::PerformCommand(const std::string& command)
-{
-    g_pGameEngine->ClientCommand(CPlayerSlot(m_iPlayerId), command.c_str());
 }
 
 std::string CPlayer::GetIPAddress()

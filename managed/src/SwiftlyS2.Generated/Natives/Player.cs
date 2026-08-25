@@ -65,36 +65,6 @@ internal static class NativePlayer
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<int, nint> _GetController;
-
-    public unsafe static nint GetController(int playerid)
-    {
-        var ret = _GetController(playerid);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<int, ulong> _GetPressedButtons;
-
-    public unsafe static ulong GetPressedButtons(int playerid)
-    {
-        var ret = _GetPressedButtons(playerid);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<int, byte*, void> _PerformCommand;
-
-    public unsafe static void PerformCommand(int playerid, string command)
-    {
-        if (!NativeBinding.IsMainThread)
-        {
-            throw new InvalidOperationException("This method can only be called from the main thread.");
-        }
-        StringAlloc.CreateCString(command, commandBufferPtr =>
-        {
-            _PerformCommand(playerid, (byte*)commandBufferPtr);
-        });
-    }
-
     private unsafe static delegate* unmanaged<int*, int, byte*> _GetIPAddress;
 
     public unsafe static string GetIPAddress(int playerid)
