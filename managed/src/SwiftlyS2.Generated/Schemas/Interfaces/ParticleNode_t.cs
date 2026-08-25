@@ -15,7 +15,7 @@ public partial interface ParticleNode_t : ISchemaClass<ParticleNode_t>
     static string? ISchemaClass<ParticleNode_t>.ClassName => null;
 
 
-    public ref CHandle<CBaseEntity> Entity { get; }
+    public ref CHandle<C_BaseEntity> Entity { get; }
 
     public ParticleIndex_t Index { get; }
 

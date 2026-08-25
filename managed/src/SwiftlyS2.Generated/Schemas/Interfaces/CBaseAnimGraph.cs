@@ -12,7 +12,7 @@ public partial interface CBaseAnimGraph : CBaseModelEntity, ISchemaClass<CBaseAn
 {
     static CBaseAnimGraph ISchemaClass<CBaseAnimGraph>.From(nint handle) => new CBaseAnimGraphImpl(handle);
     static int ISchemaClass<CBaseAnimGraph>.Size => 2400;
-    static string? ISchemaClass<CBaseAnimGraph>.ClassName => "baseanimgraph";
+    static string? ISchemaClass<CBaseAnimGraph>.ClassName => "baseanimating";
 
 
     public CAnimGraphControllerManager GraphControllerManager { get; }

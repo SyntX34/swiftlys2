@@ -12,7 +12,7 @@ public partial interface CSceneEntity : CPointEntity, ISchemaClass<CSceneEntity>
 {
     static CSceneEntity ISchemaClass<CSceneEntity>.From(nint handle) => new CSceneEntityImpl(handle);
     static int ISchemaClass<CSceneEntity>.Size => 2032;
-    static string? ISchemaClass<CSceneEntity>.ClassName => "scripted_scene";
+    static string? ISchemaClass<CSceneEntity>.ClassName => "logic_choreographed_scene";
 
 
     public string SceneFile { get; set; }

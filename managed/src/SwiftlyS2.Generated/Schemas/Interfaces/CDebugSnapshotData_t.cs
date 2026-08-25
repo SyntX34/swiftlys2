@@ -35,7 +35,7 @@ public partial interface CDebugSnapshotData_t : ISchemaClass<CDebugSnapshotData_
 
     public DebugSnapshotBaseStructuredData_t? StructuredData { get; }
 
-    public ref CHandle<CBaseEntity> Entity { get; }
+    public ref CHandle<C_BaseEntity> Entity { get; }
 
     public string EntityName { get; set; }
 

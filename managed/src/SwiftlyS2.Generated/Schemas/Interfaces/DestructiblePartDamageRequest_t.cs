@@ -29,7 +29,7 @@ public partial interface DestructiblePartDamageRequest_t : ISchemaClass<Destruct
 
     public ref float BreakDamageRadius { get; }
 
-    public ref CHandle<CBaseEntity> Attacker { get; }
+    public ref CHandle<C_BaseEntity> Attacker { get; }
 
     public ref Vector WsBreakDamageOrigin { get; }
 

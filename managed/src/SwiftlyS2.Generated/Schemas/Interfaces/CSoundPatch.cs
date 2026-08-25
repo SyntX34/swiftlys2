@@ -25,7 +25,7 @@ public partial interface CSoundPatch : ISchemaClass<CSoundPatch>
 
     public string SoundScriptName { get; set; }
 
-    public ref CHandle<CBaseEntity> Ent { get; }
+    public ref CHandle<C_BaseEntity> Ent { get; }
 
     public ref uint SoundEntityIndex { get; }
 

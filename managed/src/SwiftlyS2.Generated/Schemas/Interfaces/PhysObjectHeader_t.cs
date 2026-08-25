@@ -17,7 +17,7 @@ public partial interface PhysObjectHeader_t : ISchemaClass<PhysObjectHeader_t>
 
     public ref PhysInterfaceId_t Type { get; }
 
-    public ref CHandle<CBaseEntity> Entity { get; }
+    public ref CHandle<C_BaseEntity> Entity { get; }
 
     public string FieldName { get; set; }
 

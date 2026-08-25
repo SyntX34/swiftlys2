@@ -21,7 +21,7 @@ public partial interface CDecalInstance : ISchemaClass<CDecalInstance>
 
     public ref CUtlStringToken SequenceName { get; }
 
-    public ref CHandle<CBaseEntity> Entity { get; }
+    public ref CHandle<C_BaseEntity> Entity { get; }
 
     public ref int BoneIndex { get; }
 

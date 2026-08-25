@@ -15,7 +15,7 @@ public partial interface CDebugDrawHistoryData : ISchemaClass<CDebugDrawHistoryD
     static string? ISchemaClass<CDebugDrawHistoryData>.ClassName => null;
 
 
-    public ref CHandle<CBaseEntity> Entity { get; }
+    public ref CHandle<C_BaseEntity> Entity { get; }
 
     public ref ESceneViewDebugOverlaysListenerDataType_t Etype { get; }
 

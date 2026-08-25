@@ -28,12 +28,12 @@ internal partial class AI_BaseNPC_DebugSnapshotData_tImpl : DebugSnapshotBaseStr
     }
     private static nint? _Current_enemyOffset;
 
-    public ref CHandle<CBaseEntity> Current_enemy
+    public ref CHandle<C_BaseEntity> Current_enemy
     {
         get
         {
             _Current_enemyOffset = _Current_enemyOffset ?? Schema.GetOffset(0x92164B573B77EA5D);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_Current_enemyOffset!.Value);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_Current_enemyOffset!.Value);
         }
     }
     private static nint? _S_current_scheduleOffset;

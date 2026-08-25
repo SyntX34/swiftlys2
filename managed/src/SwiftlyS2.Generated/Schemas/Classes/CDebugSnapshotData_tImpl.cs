@@ -131,12 +131,12 @@ internal partial class CDebugSnapshotData_tImpl : SchemaClass, CDebugSnapshotDat
     }
     private static nint? _EntityOffset;
 
-    public ref CHandle<CBaseEntity> Entity
+    public ref CHandle<C_BaseEntity> Entity
     {
         get
         {
             _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x9C6DA566EBADCB0);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset!.Value);
         }
     }
     private static nint? _EntityNameOffset;

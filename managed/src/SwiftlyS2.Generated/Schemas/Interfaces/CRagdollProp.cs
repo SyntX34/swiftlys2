@@ -12,7 +12,7 @@ public partial interface CRagdollProp : CBaseAnimGraph, ISchemaClass<CRagdollPro
 {
     static CRagdollProp ISchemaClass<CRagdollProp>.From(nint handle) => new CRagdollPropImpl(handle);
     static int ISchemaClass<CRagdollProp>.Size => 2848;
-    static string? ISchemaClass<CRagdollProp>.ClassName => "prop_ragdoll";
+    static string? ISchemaClass<CRagdollProp>.ClassName => "physics_prop_ragdoll";
 
 
     public CPropDataComponent CPropDataComponent { get; }

@@ -1074,6 +1074,16 @@ internal partial class CCSPlayerPawnImpl : CCSPlayerPawnBaseImpl, CCSPlayerPawn
             return ref _Handle.AsRef<Vector>(_StashedGrenadeThrowPositionOffset!.Value);
         }
     }
+    private static nint? _StashedGrenadeThrowPawnCenterOffset;
+
+    public ref Vector StashedGrenadeThrowPawnCenter
+    {
+        get
+        {
+            _StashedGrenadeThrowPawnCenterOffset = _StashedGrenadeThrowPawnCenterOffset ?? Schema.GetOffset(0xC7614AAB09BE1A8E);
+            return ref _Handle.AsRef<Vector>(_StashedGrenadeThrowPawnCenterOffset!.Value);
+        }
+    }
     private static nint? _StashedVelocityOffset;
 
     public ref Vector StashedVelocity
