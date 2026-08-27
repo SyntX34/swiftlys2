@@ -42,10 +42,11 @@ internal static class NativeSounds
 
     public unsafe static void SetName(nint soundEvent, string name)
     {
-        StringAlloc.CreateCString(name, nameBufferPtr =>
+        using var nameStr = new ScopedCString(name);
+        fixed (byte* nameBufferPtr = nameStr)
         {
-            _SetName(soundEvent, (byte*)nameBufferPtr);
-        });
+            _SetName(soundEvent, nameBufferPtr);
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, nint, byte*> _GetName;
@@ -106,137 +107,150 @@ internal static class NativeSounds
 
     public unsafe static bool HasField(nint soundEvent, string fieldName)
     {
-        return StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            var ret = _HasField(soundEvent, (byte*)fieldNameBufferPtr);
+            var ret = _HasField(soundEvent, fieldNameBufferPtr);
             return ret == 1;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, byte, void> _SetBool;
 
     public unsafe static void SetBool(nint soundEvent, string fieldName, bool value)
     {
-        StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            _SetBool(soundEvent, (byte*)fieldNameBufferPtr, value ? (byte)1 : (byte)0);
-        });
+            _SetBool(soundEvent, fieldNameBufferPtr, value ? (byte)1 : (byte)0);
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, byte> _GetBool;
 
     public unsafe static bool GetBool(nint soundEvent, string fieldName)
     {
-        return StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            var ret = _GetBool(soundEvent, (byte*)fieldNameBufferPtr);
+            var ret = _GetBool(soundEvent, fieldNameBufferPtr);
             return ret == 1;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, int, void> _SetInt32;
 
     public unsafe static void SetInt32(nint soundEvent, string fieldName, int value)
     {
-        StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            _SetInt32(soundEvent, (byte*)fieldNameBufferPtr, value);
-        });
+            _SetInt32(soundEvent, fieldNameBufferPtr, value);
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, int> _GetInt32;
 
     public unsafe static int GetInt32(nint soundEvent, string fieldName)
     {
-        return StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            var ret = _GetInt32(soundEvent, (byte*)fieldNameBufferPtr);
+            var ret = _GetInt32(soundEvent, fieldNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, uint, void> _SetUInt32;
 
     public unsafe static void SetUInt32(nint soundEvent, string fieldName, uint value)
     {
-        StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            _SetUInt32(soundEvent, (byte*)fieldNameBufferPtr, value);
-        });
+            _SetUInt32(soundEvent, fieldNameBufferPtr, value);
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, uint> _GetUInt32;
 
     public unsafe static uint GetUInt32(nint soundEvent, string fieldName)
     {
-        return StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            var ret = _GetUInt32(soundEvent, (byte*)fieldNameBufferPtr);
+            var ret = _GetUInt32(soundEvent, fieldNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, ulong, void> _SetUInt64;
 
     public unsafe static void SetUInt64(nint soundEvent, string fieldName, ulong value)
     {
-        StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            _SetUInt64(soundEvent, (byte*)fieldNameBufferPtr, value);
-        });
+            _SetUInt64(soundEvent, fieldNameBufferPtr, value);
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, ulong> _GetUInt64;
 
     public unsafe static ulong GetUInt64(nint soundEvent, string fieldName)
     {
-        return StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            var ret = _GetUInt64(soundEvent, (byte*)fieldNameBufferPtr);
+            var ret = _GetUInt64(soundEvent, fieldNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, float, void> _SetFloat;
 
     public unsafe static void SetFloat(nint soundEvent, string fieldName, float value)
     {
-        StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            _SetFloat(soundEvent, (byte*)fieldNameBufferPtr, value);
-        });
+            _SetFloat(soundEvent, fieldNameBufferPtr, value);
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, float> _GetFloat;
 
     public unsafe static float GetFloat(nint soundEvent, string fieldName)
     {
-        return StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            var ret = _GetFloat(soundEvent, (byte*)fieldNameBufferPtr);
+            var ret = _GetFloat(soundEvent, fieldNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, Vector, void> _SetFloat3;
 
     public unsafe static void SetFloat3(nint soundEvent, string fieldName, Vector value)
     {
-        StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            _SetFloat3(soundEvent, (byte*)fieldNameBufferPtr, value);
-        });
+            _SetFloat3(soundEvent, fieldNameBufferPtr, value);
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, byte*, Vector> _GetFloat3;
 
     public unsafe static Vector GetFloat3(nint soundEvent, string fieldName)
     {
-        return StringAlloc.CreateCString(fieldName, fieldNameBufferPtr =>
+        using var fieldNameStr = new ScopedCString(fieldName);
+        fixed (byte* fieldNameBufferPtr = fieldNameStr)
         {
-            var ret = _GetFloat3(soundEvent, (byte*)fieldNameBufferPtr);
+            var ret = _GetFloat3(soundEvent, fieldNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<nint, ulong> _GetClients;
