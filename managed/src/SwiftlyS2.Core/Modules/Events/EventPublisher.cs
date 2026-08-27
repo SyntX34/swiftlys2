@@ -1530,7 +1530,7 @@ internal static class EventPublisher
         }
     }
 
-    public static void InvokeOnCustomHudClicked( nint pMessage )
+    public static void InvokeOnCustomHudClicked( int playerId, nint pMessage )
     {
         if (subscribers.Count == 0)
         {
@@ -1540,7 +1540,7 @@ internal static class EventPublisher
         try
         {
             var msg = new CCSUsrMsg_CustomHudClickedImpl(pMessage, false);
-            OnCustomHudClickedEvent @event = new() { Message = msg };
+            OnCustomHudClickedEvent @event = new() { Message = msg, PlayerId = playerId };
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnCustomHudClicked(ref @event);

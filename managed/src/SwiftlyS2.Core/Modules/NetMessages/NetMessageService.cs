@@ -45,7 +45,7 @@ internal class NetMessageService : INetMessageService, IDisposable
             }
             if (!stopOriginal && msgId == (int)ECstrike15UserMessages.CS_UM_CustomHudClicked)
             {
-                EventPublisher.InvokeOnCustomHudClicked(pMessage);
+                EventPublisher.InvokeOnCustomHudClicked(playerId, pMessage);
             }
             return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
         }

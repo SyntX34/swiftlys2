@@ -7,6 +7,11 @@ namespace SwiftlyS2.Shared.Events;
 /// </summary>
 public interface IOnCustomHudClickedEvent
 {
+    ///
+    /// The player that clicked the custom hud element.
+    /// 
+    public int PlayerId { get; }
+
     /// <summary>
     /// The entity index of the custom hud layout entity.
     /// </summary>

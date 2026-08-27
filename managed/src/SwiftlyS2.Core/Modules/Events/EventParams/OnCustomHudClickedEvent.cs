@@ -9,6 +9,7 @@ namespace SwiftlyS2.Core.Events;
 internal class OnCustomHudClickedEvent : IOnCustomHudClickedEvent
 {
     public required CCSUsrMsg_CustomHudClicked Message { get; set; }
+    public required int PlayerId { get; set; }
 
     public uint CustomHudLayoutEntityIndex => Message.CustomHudLayout;
 
@@ -20,4 +21,5 @@ internal class OnCustomHudClickedEvent : IOnCustomHudClickedEvent
     }
 
     public string ButtonId => Message.ButtonId;
+
 }
