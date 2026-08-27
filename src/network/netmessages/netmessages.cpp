@@ -107,6 +107,32 @@ bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
         auto res = g_fnClientMessageSendHandler(playerid, msgid, cMsg);
         if (res == 1) return true;
         else if (res == 3) stopOriginal = true;
+
+        if (msgid == svc_UserMessage)
+        {
+            auto userMessage = static_cast<CSVCMsg_UserMessage*>(cMsg->AsProto());
+            if (userMessage && userMessage->has_msg_type())
+            {
+                auto innerNetMessage = g_pGameNetworkMessages->FindNetworkMessageById(userMessage->msg_type());
+                if (innerNetMessage)
+                {
+                    auto innerMessage = innerNetMessage->AllocateMessage();
+                    auto innerResult = 0;
+
+                    if (innerMessage)
+                    {
+                        auto innerProto = static_cast<google::protobuf::Message*>(innerMessage->AsProto());
+                        if (innerProto && innerProto->ParseFromString(userMessage->msg_data()))
+                            innerResult = g_fnClientMessageSendHandler(playerid, userMessage->msg_type(), innerMessage);
+
+                        g_pGameNetworkMessages->DeallocateNetMessageAbstract(innerNetMessage, innerMessage);
+                    }
+
+                    if (innerResult == 1) return true;
+                    else if (innerResult == 3) stopOriginal = true;
+                }
+            }
+        }
     }
 
     if (stopOriginal) return true;
