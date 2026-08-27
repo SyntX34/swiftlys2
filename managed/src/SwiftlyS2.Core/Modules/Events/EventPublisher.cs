@@ -12,6 +12,7 @@ using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Core.Players;
 using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Services;
+using SwiftlyS2.Core.ProtobufDefinitions;
 
 namespace SwiftlyS2.Core.Events;
 
@@ -1507,6 +1508,42 @@ internal static class EventPublisher
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnEntityFireOutputHook(ref @event);
+            }
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e))
+            {
+                return;
+            }
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static bool ListensToCustomHudClicked {
+        get {
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                if (subscribers[i].ListensToCustomHudClicked) return true;
+            }
+            return false;
+        }
+    }
+
+    public static void InvokeOnCustomHudClicked( nint pMessage )
+    {
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
+        try
+        {
+            var msg = new CCSUsrMsg_CustomHudClickedImpl(pMessage, false);
+            OnCustomHudClickedEvent @event = new() { Message = msg };
+            for (var i = 0; i < subscribers.Count; i++)
+            {
+                subscribers[i].InvokeOnCustomHudClicked(ref @event);
             }
         }
         catch (Exception e)
