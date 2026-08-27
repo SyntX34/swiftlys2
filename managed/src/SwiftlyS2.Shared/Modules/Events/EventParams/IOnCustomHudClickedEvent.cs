@@ -13,14 +13,9 @@ public interface IOnCustomHudClickedEvent
     public int PlayerId { get; }
 
     /// <summary>
-    /// The entity index of the custom hud layout entity.
-    /// </summary>
-    public uint CustomHudLayoutEntityIndex { get; }
-
-    /// <summary>
     /// The custom hud layout entity.
     /// </summary>
-    public CCSCustomHudLayout? CustomHudLayout { get; }
+    public CCSCustomHudLayout CustomHudLayout { get; }
 
     /// <summary>
     /// The custom hud element button id.

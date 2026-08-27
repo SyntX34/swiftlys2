@@ -1,6 +1,7 @@
 using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.Events;
+using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
@@ -11,12 +12,12 @@ internal class OnCustomHudClickedEvent : IOnCustomHudClickedEvent
     public required CCSUsrMsg_CustomHudClicked Message { get; set; }
     public required int PlayerId { get; set; }
 
-    public uint CustomHudLayoutEntityIndex => Message.CustomHudLayout;
+    public bool IsValid => CHandle<CCSCustomHudLayout>.FromPackedInt((int)Message.CustomHudLayout).IsValid;
 
-    public CCSCustomHudLayout? CustomHudLayout {
+    public CCSCustomHudLayout CustomHudLayout {
         get {
-            var entity = EntityManager.GetEntityByIndex(Message.CustomHudLayout);
-            return entity is CCSCustomHudLayoutImpl layout ? layout : null;
+            var handle = CHandle<CCSCustomHudLayout>.FromPackedInt((int)Message.CustomHudLayout);
+            return handle.Value!;
         }
     }
 

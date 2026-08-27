@@ -1541,6 +1541,10 @@ internal static class EventPublisher
         {
             var msg = new CCSUsrMsg_CustomHudClickedImpl(pMessage, false);
             OnCustomHudClickedEvent @event = new() { Message = msg, PlayerId = playerId };
+            if (!@event.IsValid)
+            {
+                return;
+            }
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnCustomHudClicked(ref @event);
