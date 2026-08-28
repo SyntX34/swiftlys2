@@ -19,6 +19,7 @@ namespace SwiftlyS2.Core.Events;
 internal static class EventPublisher
 {
     private static readonly List<EventSubscriber> subscribers = [];
+    private static EventSubscriber[] subscriberSnapshot = [];
     private static readonly Lock subscribersLock = new();
     private static readonly Lock consoleOutputListenerLock = new();
     private static int consoleOutputSubscriberCount;
@@ -29,6 +30,7 @@ internal static class EventPublisher
         lock (subscribersLock)
         {
             subscribers.Add(subscriber);
+            System.Threading.Volatile.Write(ref subscriberSnapshot, [.. subscribers]);
         }
     }
 
@@ -37,6 +39,7 @@ internal static class EventPublisher
         lock (subscribersLock)
         {
             _ = subscribers.Remove(subscriber);
+            System.Threading.Volatile.Write(ref subscriberSnapshot, [.. subscribers]);
         }
     }
 
@@ -1311,9 +1314,10 @@ internal static class EventPublisher
 
     public static bool ListensToConsoleOutput {
         get {
-            for (var i = 0; i < subscribers.Count; i++)
+            var currentSubscribers = System.Threading.Volatile.Read(ref subscriberSnapshot);
+            for (var i = 0; i < currentSubscribers.Length; i++)
             {
-                if (subscribers[i].ListensToConsoleOutput) return true;
+                if (currentSubscribers[i].ListensToConsoleOutput) return true;
             }
             return false;
         }
@@ -1324,8 +1328,9 @@ internal static class EventPublisher
     {
         try
         {
+            var currentSubscribers = System.Threading.Volatile.Read(ref subscriberSnapshot);
             var isTracking = CommandTrackerManager.IsTracking;
-            if (!isTracking && subscribers.Count == 0)
+            if (!isTracking && currentSubscribers.Length == 0)
             {
                 return;
             }
@@ -1339,12 +1344,19 @@ internal static class EventPublisher
                 CommandTrackerManager.ProcessOutput(message);
             }
 
-            if (!ListensToConsoleOutput) return;
+            var hasConsoleOutputListener = false;
+            for (var i = 0; i < currentSubscribers.Length; i++)
+            {
+                if (!currentSubscribers[i].ListensToConsoleOutput) continue;
+                hasConsoleOutputListener = true;
+                break;
+            }
+            if (!hasConsoleOutputListener) return;
 
             OnConsoleOutputEvent @event = new() { Message = setMessage ? message : StringAlloc.CreateCSharpString(messagePtr) };
-            for (var i = 0; i < subscribers.Count; i++)
+            for (var i = 0; i < currentSubscribers.Length; i++)
             {
-                subscribers[i].InvokeOnConsoleOutput(ref @event);
+                currentSubscribers[i].InvokeOnConsoleOutput(ref @event);
             }
         }
         catch (Exception e)

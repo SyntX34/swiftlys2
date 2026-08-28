@@ -157,7 +157,7 @@ public class EventDelegates
     public delegate void OnClientVoice( IOnClientVoiceEvent @event );
 
     /// <summary>
-    /// Called when a console output is received.
+    /// Called when a console output is received on the dedicated console dispatch thread.
     /// </summary>
     public delegate void OnConsoleOutput( IOnConsoleOutputEvent @event );
 

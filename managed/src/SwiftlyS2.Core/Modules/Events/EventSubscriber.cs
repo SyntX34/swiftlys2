@@ -812,11 +812,11 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     }
 
-    public bool ListensToConsoleOutput => _OnConsoleOutput != null;
+    public bool ListensToConsoleOutput => System.Threading.Volatile.Read(ref _OnConsoleOutput) != null;
 
     public void InvokeOnConsoleOutput( ref OnConsoleOutputEvent @event )
     {
-        var handler = _OnConsoleOutput;
+        var handler = System.Threading.Volatile.Read(ref _OnConsoleOutput);
         if (handler == null)
         {
             return;

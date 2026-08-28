@@ -29,6 +29,7 @@
 
 #include <atomic>
 #include <mutex>
+#include <thread>
 #include <utility>
 #include <vector>
 
@@ -46,6 +47,8 @@ std::vector<std::string> g_DispatchedConsoleMessages;
 std::mutex g_QueuedConsoleMessagesMutex;
 std::mutex g_DispatchConsoleMessagesMutex;
 std::atomic<bool> g_HasQueuedConsoleMessages{ false };
+std::thread g_ConsoleDispatchThread;
+std::atomic<bool> g_ConsoleDispatchRunning{ false };
 
 std::map<uint64_t, pcre2_code*> g_Filters;
 std::map<uint64_t, pcre2_match_data*> g_FiltersMatchData;
@@ -83,6 +86,7 @@ static SWIFTLY_CONSOLE_NOINLINE bool FilterOrQueueConsoleMessage(
 
     if (filterEnabled && g_pConsoleOutput->NeedsFiltering(const_cast<char*>(message))) return true;
 
+    bool wakeDispatcher = false;
     if (hasListeners)
     {
         std::lock_guard<std::mutex> lock(g_QueuedConsoleMessagesMutex);
@@ -90,12 +94,32 @@ static SWIFTLY_CONSOLE_NOINLINE bool FilterOrQueueConsoleMessage(
         // A listener may have been removed after the fast-path load.
         if (g_ConsoleWorkState.load(std::memory_order_relaxed) >= CONSOLE_LISTENER_INCREMENT)
         {
+            wakeDispatcher = g_QueuedConsoleMessages.empty();
             g_QueuedConsoleMessages.emplace_back(message);
-            g_HasQueuedConsoleMessages.store(true, std::memory_order_release);
+            if (wakeDispatcher)
+                g_HasQueuedConsoleMessages.store(true, std::memory_order_release);
         }
     }
 
+    // One wake-up is enough for a complete batch. Avoid notifying the worker for
+    // every message while producers are already filling a non-empty queue.
+    if (wakeDispatcher)
+        g_HasQueuedConsoleMessages.notify_one();
+
     return false;
+}
+
+static void ConsoleDispatchWorker()
+{
+    while (g_ConsoleDispatchRunning.load(std::memory_order_acquire))
+    {
+        g_HasQueuedConsoleMessages.wait(false, std::memory_order_acquire);
+
+        if (!g_ConsoleDispatchRunning.load(std::memory_order_acquire))
+            break;
+
+        g_pConsoleOutput->DispatchQueuedListeners();
+    }
 }
 
 #undef SWIFTLY_CONSOLE_NOINLINE
@@ -135,6 +159,9 @@ void CConsoleOutput::Initialize()
     g_CLoggingSystem_LogDirect_Hook->Enable();
 
     ReloadFilterConfiguration();
+
+    g_ConsoleDispatchRunning.store(true, std::memory_order_release);
+    g_ConsoleDispatchThread = std::thread(ConsoleDispatchWorker);
 }
 
 void CConsoleOutput::Shutdown()
@@ -145,8 +172,14 @@ void CConsoleOutput::Shutdown()
         g_CLoggingSystem_LogDirect_Hook = nullptr;
     }
 
+    g_ConsoleDispatchRunning.store(false, std::memory_order_release);
+    g_HasQueuedConsoleMessages.store(true, std::memory_order_release);
+    g_HasQueuedConsoleMessages.notify_one();
+    if (g_ConsoleDispatchThread.joinable())
+        g_ConsoleDispatchThread.join();
+
     {
-        std::lock_guard<std::mutex> lock(g_QueuedConsoleMessagesMutex);
+        std::scoped_lock lock(g_DispatchConsoleMessagesMutex, g_QueuedConsoleMessagesMutex);
         g_QueuedConsoleMessages.clear();
         g_DispatchedConsoleMessages.clear();
         g_HasQueuedConsoleMessages.store(false, std::memory_order_release);
@@ -276,15 +309,14 @@ void CConsoleOutput::RemoveConsoleListener(uint64_t id)
 
 void CConsoleOutput::DispatchQueuedListeners()
 {
-    // The idle GameFrame path is a single atomic load with no mutex acquisition.
+    // The idle dispatcher path is a single atomic load with no mutex acquisition.
     if (!g_HasQueuedConsoleMessages.load(std::memory_order_acquire)) return;
 
-    // There is one normal consumer (GameFrame), but an explicit command-output flush
-    // can race it. Leave the pending flag intact for whichever consumer owns dispatch.
-    std::unique_lock<std::mutex> dispatchLock(g_DispatchConsoleMessagesMutex, std::try_to_lock);
-    if (!dispatchLock.owns_lock()) return;
+    // The worker is the normal consumer. An explicit command-output flush may race it;
+    // wait for the active batch so the capture window cannot close too early.
+    std::unique_lock<std::mutex> dispatchLock(g_DispatchConsoleMessagesMutex);
 
-    // Avoid taking either mutex on frames where no console messages were produced.
+    // Avoid taking the queue mutex when no console messages were produced.
     if (!g_HasQueuedConsoleMessages.exchange(false, std::memory_order_acq_rel)) return;
 
     {
