@@ -202,6 +202,8 @@ target("swiftlys2")
             breakpad_path.."/common/windows/guid_string.cc",
         }, { cxxflags = {"-g0", "/DUNICODE", "/D_UNICODE"} })
     else
+        add_shflags("-Wl,-z,noexecstack", {force = true})
+
         add_defines({
             "_LINUX",
             "LINUX",
@@ -265,6 +267,9 @@ target("swiftlys2")
             breakpad_path.."/common/linux/linux_libc_support.cc",
             breakpad_path.."/common/linux/memory_mapped_file.cc",
             breakpad_path.."/common/linux/safe_readlink.cc",
+            breakpad_path.."/common/linux/scoped_pipe.cc",
+            breakpad_path.."/common/linux/scoped_tmpfile.cc",
+            breakpad_path.."/processor/disassembler_objdump.cc",
             breakpad_path.."/common/linux/breakpad_getcontext.S",
             breakpad_path.."/client/minidump_file_writer.cc",
         }, { cxxflags = "-g0" })

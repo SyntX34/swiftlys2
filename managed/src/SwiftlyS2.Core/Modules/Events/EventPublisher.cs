@@ -19,13 +19,18 @@ namespace SwiftlyS2.Core.Events;
 internal static class EventPublisher
 {
     private static readonly List<EventSubscriber> subscribers = [];
+    private static EventSubscriber[] subscriberSnapshot = [];
     private static readonly Lock subscribersLock = new();
+    private static readonly Lock consoleOutputListenerLock = new();
+    private static int consoleOutputSubscriberCount;
+    private static ulong? consoleOutputListenerId;
 
     public static void Subscribe( EventSubscriber subscriber )
     {
         lock (subscribersLock)
         {
             subscribers.Add(subscriber);
+            System.Threading.Volatile.Write(ref subscriberSnapshot, [.. subscribers]);
         }
     }
 
@@ -34,6 +39,7 @@ internal static class EventPublisher
         lock (subscribersLock)
         {
             _ = subscribers.Remove(subscriber);
+            System.Threading.Volatile.Write(ref subscriberSnapshot, [.. subscribers]);
         }
     }
 
@@ -61,7 +67,6 @@ internal static class EventPublisher
             _ = NativeConvars.AddConvarCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConVarCreated);
             _ = NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated);
             _ = NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
-            _ = NativeConsoleOutput.AddConsoleListener((nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput);
             NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
             NativeCommands.SetClientCommandHandler((nint)(delegate* unmanaged< int, nint, int >)&OnClientCommandDispatch);
             NativeCommands.SetClientChatHandler((nint)(delegate* unmanaged< int, nint, byte, int >)&OnClientChatDispatch);
@@ -70,6 +75,36 @@ internal static class EventPublisher
             NativeNetMessages.SetNetMessageServerHookInternal((nint)(delegate* unmanaged< int, int, nint, int >)&OnNetMessageServerInternalDispatch);
             NativeGameEvents.SetListenerPreHandler((nint)(delegate* unmanaged< uint, nint, nint, int >)&OnGameEventPreDispatch);
             NativeGameEvents.SetListenerPostHandler((nint)(delegate* unmanaged< uint, nint, nint, int >)&OnGameEventPostDispatch);
+        }
+    }
+
+    public static void AddConsoleOutputListener()
+    {
+        lock (consoleOutputListenerLock)
+        {
+            consoleOutputSubscriberCount++;
+            if (consoleOutputSubscriberCount != 1) return;
+
+            unsafe
+            {
+                consoleOutputListenerId = NativeConsoleOutput.AddConsoleListener(
+                    (nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput
+                );
+            }
+        }
+    }
+
+    public static void RemoveConsoleOutputListener()
+    {
+        lock (consoleOutputListenerLock)
+        {
+            if (consoleOutputSubscriberCount == 0) return;
+
+            consoleOutputSubscriberCount--;
+            if (consoleOutputSubscriberCount != 0 || consoleOutputListenerId == null) return;
+
+            NativeConsoleOutput.RemoveConsoleListener(consoleOutputListenerId.Value);
+            consoleOutputListenerId = null;
         }
     }
 
@@ -1279,9 +1314,10 @@ internal static class EventPublisher
 
     public static bool ListensToConsoleOutput {
         get {
-            for (var i = 0; i < subscribers.Count; i++)
+            var currentSubscribers = System.Threading.Volatile.Read(ref subscriberSnapshot);
+            for (var i = 0; i < currentSubscribers.Length; i++)
             {
-                if (subscribers[i].ListensToConsoleOutput) return true;
+                if (currentSubscribers[i].ListensToConsoleOutput) return true;
             }
             return false;
         }
@@ -1292,26 +1328,35 @@ internal static class EventPublisher
     {
         try
         {
-            if (subscribers.Count == 0)
+            var currentSubscribers = System.Threading.Volatile.Read(ref subscriberSnapshot);
+            var isTracking = CommandTrackerManager.IsTracking;
+            if (!isTracking && currentSubscribers.Length == 0)
             {
                 return;
             }
 
             var message = string.Empty;
             var setMessage = false;
-            if (CommandTrackerManager.IsTracking)
+            if (isTracking)
             {
                 message = StringAlloc.CreateCSharpString(messagePtr);
                 setMessage = true;
                 CommandTrackerManager.ProcessOutput(message);
             }
 
-            if (!ListensToConsoleOutput) return;
+            var hasConsoleOutputListener = false;
+            for (var i = 0; i < currentSubscribers.Length; i++)
+            {
+                if (!currentSubscribers[i].ListensToConsoleOutput) continue;
+                hasConsoleOutputListener = true;
+                break;
+            }
+            if (!hasConsoleOutputListener) return;
 
             OnConsoleOutputEvent @event = new() { Message = setMessage ? message : StringAlloc.CreateCSharpString(messagePtr) };
-            for (var i = 0; i < subscribers.Count; i++)
+            for (var i = 0; i < currentSubscribers.Length; i++)
             {
-                subscribers[i].InvokeOnConsoleOutput(ref @event);
+                currentSubscribers[i].InvokeOnConsoleOutput(ref @event);
             }
         }
         catch (Exception e)

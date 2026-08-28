@@ -181,6 +181,7 @@ public class TestPlugin : BasePlugin
     [CommandAlias("cat", true)]
     public void CommandAliasTest( ICommandContext context )
     {
+        
         foreach (var player in Core.PlayerManager.GetAllPlayers())
         {
             var controller = player.Controller;
