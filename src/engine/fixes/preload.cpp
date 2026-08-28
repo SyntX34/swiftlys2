@@ -18,8 +18,6 @@
 
 #include <regex>
 
-#include <s2binlib/s2binlib.h>
-
 #include "preload.h"
 #include <api/interfaces/interfaces.h>
 #include <fmt/format.h>
@@ -59,7 +57,7 @@ void PreloadDLLFix::Start()
 {
 #ifdef _WIN32
     void* preloadDLLFunction = nullptr;
-    s2binlib_find_func_with_string("engine2", "Could not PreloadLibrary %s - error %d: %s", &preloadDLLFunction);
+    g_pS2BinLib->FindFuncWithString("engine2", "Could not PreloadLibrary %s - error %d: %s", &preloadDLLFunction);
     if (!preloadDLLFunction) return;
 
     g_pPreloadDLLHook = g_pHooksManager->CreateFunctionHook();

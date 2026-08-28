@@ -28,15 +28,17 @@
 #include <filesystem>
 #include <fmt/format.h>
 
+extern std::string g_sGameFolder;
+
 std::string GetRelativePath(std::string path)
 {
-    std::string str = fmt::format("{}{}csgo{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), WIN_LINUX("\\", "/"));
+    std::string str = fmt::format("{}{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder, WIN_LINUX("\\", "/"));
     return replace(path, str, "");
 }
 
 std::string Files::GeneratePath(std::string path)
 {
-    return fmt::format("{}{}csgo{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), WIN_LINUX("\\", "/"), path);
+    return fmt::format("{}{}{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder, WIN_LINUX("\\", "/"), path);
 }
 
 std::string Files::Read(std::string path)

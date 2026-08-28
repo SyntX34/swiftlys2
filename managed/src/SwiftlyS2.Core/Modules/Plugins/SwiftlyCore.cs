@@ -214,6 +214,13 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         serviceProvider.Dispose();
     }
 
+    private string DetermineGameFolder()
+    {
+        var game = NativeEngineHelpers.GetCurrentGame();
+        if (game == "cs2") return "csgo";
+        else return "unknown";
+    }
+
     IEventSubscriber ISwiftlyCore.Event => EventSubscriber;
     IPluginConfigurationService ISwiftlyCore.Configuration => Configuration;
     ILoggerFactory ISwiftlyCore.LoggerFactory => LoggerFactory;
@@ -246,7 +253,8 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     IGameHooks ISwiftlyCore.GameHooks => GameHooksService;
     string ISwiftlyCore.PluginPath => ContextBasePath;
     string ISwiftlyCore.PluginDataDirectory => PluginDataDirectory;
-    string ISwiftlyCore.CSGODirectory => NativeEngineHelpers.GetCSGODirectoryPath();
+    string ISwiftlyCore.CSGODirectory => $"{NativeEngineHelpers.GetGameDirectoryPath()}{(OperatingSystem.IsWindows() ? "\\" : "/")}{DetermineGameFolder()}";
+    string ISwiftlyCore.GameFilesDirectory => $"{NativeEngineHelpers.GetGameDirectoryPath()}{(OperatingSystem.IsWindows() ? "\\" : "/")}{DetermineGameFolder()}";
     string ISwiftlyCore.GameDirectory => NativeEngineHelpers.GetGameDirectoryPath();
     bool ISwiftlyCore.IsGameThread => NativeCore.IsMainThread();
 }

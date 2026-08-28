@@ -26,25 +26,12 @@
 #include "cs_usercmd.pb.h"
 #include "usercmd.pb.h"
 
-#include <s2binlib/s2binlib.h>
-
 #include <api/shared/string.h>
 #include <api/sdk/recipientfilter.h>
 #include <public/engine/igameeventsystem.h>
 #include <public/networksystem/inetworkmessages.h>
 #include <public/networksystem/netmessage.h>
 #include "usermessages.pb.h"
-
-class CUserCmd
-{
-public:
-    [[maybe_unused]] char pad0[0x10];
-    CSGOUserCmdPB cmd;
-    [[maybe_unused]] char pad1[0x38];
-#ifdef _WIN32
-    [[maybe_unused]] char pad2[0x8];
-#endif
-};
 
 IVFunctionHook* g_pOnGameFramePlayerHook = nullptr;
 
@@ -69,10 +56,10 @@ void CPlayerManager::Initialize()
         player.reset();
 
     void* gameclientsvtable = nullptr;
-    s2binlib_find_vtable("server", "CSource2GameClients", &gameclientsvtable);
+    g_pS2BinLib->FindVtable("server", "CSource2GameClients", &gameclientsvtable);
 
     void* gameentitiesvtable = nullptr;
-    s2binlib_find_vtable("server", "CSource2GameEntities", &gameentitiesvtable);
+    g_pS2BinLib->FindVtable("server", "CSource2GameEntities", &gameentitiesvtable);
 
     g_pClientConnectHook = g_pHooksManager->CreateVFunctionHook();
     g_pClientConnectHook->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientConnect"), reinterpret_cast<void*>(ClientConnectHook), true);
@@ -95,7 +82,7 @@ void CPlayerManager::Initialize()
     g_pCheckTransmitHook->Enable();
 
     void* serverGameDLLVTable;
-    s2binlib_find_vtable("server", "CSource2Server", &serverGameDLLVTable);
+    g_pS2BinLib->FindVtable("server", "CSource2Server", &serverGameDLLVTable);
 
     g_pOnGameFramePlayerHook = g_pHooksManager->CreateVFunctionHook();
     g_pOnGameFramePlayerHook->SetHookFunction(serverGameDLLVTable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::GameFrame"), reinterpret_cast<void*>(OnGameFramePlayerHook), true);

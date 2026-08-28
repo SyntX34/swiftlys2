@@ -19,7 +19,6 @@
 #include "schema.h"
 
 #include <fmt/format.h>
-#include <s2binlib/s2binlib.h>
 
 bool IsStandardLayoutClass(SchemaClassInfoData_t* classData) {
     {
@@ -89,7 +88,7 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass)
 
     if (!classInfo) return;
 
-    uint32_t class_hash = hash_32_fnv1a_const(classInfo->m_pszName);
+    uint64_t class_hash = (uint64_t)(hash_32_fnv1a_const(classInfo->m_pszName)) << 32;
     bool isStruct = IsStandardLayoutClass(classInfo);
     auto field_size = classInfo->m_nFieldCount;
     auto fields = classInfo->m_pFields;
@@ -118,13 +117,13 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass)
 
         void* vtable = nullptr;
         int stateChangedIndex = -1;
-        uint64_t fieldHash = ((uint64_t)(class_hash) << 32 | hash_32_fnv1a_const(field.m_pszName));
+        uint64_t fieldHash = (class_hash | hash_32_fnv1a_const(field.m_pszName));
 
         std::string networkVarName = std::string("NetworkVar_") + field.m_pszName;
-        int result = s2binlib_find_vtable_nested_2("server", classInfo->m_pszName, networkVarName.c_str(), &vtable);
+        int result = g_pS2BinLib->FindVtableNested2("server", classInfo->m_pszName, networkVarName.c_str(), &vtable);
         if (result == 0) {
             uint64_t index;
-            result = s2binlib_find_networkvar_vtable_statechanged((uint64_t)vtable, &index);
+            result = g_pS2BinLib->FindNetworkvarVtableStatechanged((uint64_t)vtable, &index);
             if (result == 0) {
                 stateChangedIndex = (int)index;
             }

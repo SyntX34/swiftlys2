@@ -209,6 +209,8 @@ public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlay
 
     public ref Vector StashedGrenadeThrowPosition { get; }
 
+    public ref Vector StashedGrenadeThrowPawnCenter { get; }
+
     public ref Vector StashedVelocity { get; }
 
     public ref bool CommittingSuicideOnTeamChange { get; }

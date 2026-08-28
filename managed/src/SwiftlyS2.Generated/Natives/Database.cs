@@ -37,116 +37,125 @@ internal static class NativeDatabase
 
     public unsafe static string GetConnectionDriver(string connectionName)
     {
-        return StringAlloc.CreateCString(connectionName, connectionNameBufferPtr =>
+        using var connectionNameStr = new ScopedCString(connectionName);
+        fixed (byte* connectionNameBufferPtr = connectionNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetConnectionDriver(&length, (byte*)connectionNameBufferPtr);
+            var returnedPtr = _GetConnectionDriver(&length, connectionNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*, byte*> _GetConnectionHost;
 
     public unsafe static string GetConnectionHost(string connectionName)
     {
-        return StringAlloc.CreateCString(connectionName, connectionNameBufferPtr =>
+        using var connectionNameStr = new ScopedCString(connectionName);
+        fixed (byte* connectionNameBufferPtr = connectionNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetConnectionHost(&length, (byte*)connectionNameBufferPtr);
+            var returnedPtr = _GetConnectionHost(&length, connectionNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*, byte*> _GetConnectionDatabase;
 
     public unsafe static string GetConnectionDatabase(string connectionName)
     {
-        return StringAlloc.CreateCString(connectionName, connectionNameBufferPtr =>
+        using var connectionNameStr = new ScopedCString(connectionName);
+        fixed (byte* connectionNameBufferPtr = connectionNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetConnectionDatabase(&length, (byte*)connectionNameBufferPtr);
+            var returnedPtr = _GetConnectionDatabase(&length, connectionNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*, byte*> _GetConnectionUser;
 
     public unsafe static string GetConnectionUser(string connectionName)
     {
-        return StringAlloc.CreateCString(connectionName, connectionNameBufferPtr =>
+        using var connectionNameStr = new ScopedCString(connectionName);
+        fixed (byte* connectionNameBufferPtr = connectionNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetConnectionUser(&length, (byte*)connectionNameBufferPtr);
+            var returnedPtr = _GetConnectionUser(&length, connectionNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*, byte*> _GetConnectionPass;
 
     public unsafe static string GetConnectionPass(string connectionName)
     {
-        return StringAlloc.CreateCString(connectionName, connectionNameBufferPtr =>
+        using var connectionNameStr = new ScopedCString(connectionName);
+        fixed (byte* connectionNameBufferPtr = connectionNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetConnectionPass(&length, (byte*)connectionNameBufferPtr);
+            var returnedPtr = _GetConnectionPass(&length, connectionNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, uint> _GetConnectionTimeout;
 
     public unsafe static uint GetConnectionTimeout(string connectionName)
     {
-        return StringAlloc.CreateCString(connectionName, connectionNameBufferPtr =>
+        using var connectionNameStr = new ScopedCString(connectionName);
+        fixed (byte* connectionNameBufferPtr = connectionNameStr)
         {
-            var ret = _GetConnectionTimeout((byte*)connectionNameBufferPtr);
+            var ret = _GetConnectionTimeout(connectionNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, ushort> _GetConnectionPort;
 
     public unsafe static ushort GetConnectionPort(string connectionName)
     {
-        return StringAlloc.CreateCString(connectionName, connectionNameBufferPtr =>
+        using var connectionNameStr = new ScopedCString(connectionName);
+        fixed (byte* connectionNameBufferPtr = connectionNameStr)
         {
-            var ret = _GetConnectionPort((byte*)connectionNameBufferPtr);
+            var ret = _GetConnectionPort(connectionNameBufferPtr);
             return ret;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*, byte*> _GetConnectionRawUri;
 
     public unsafe static string GetConnectionRawUri(string connectionName)
     {
-        return StringAlloc.CreateCString(connectionName, connectionNameBufferPtr =>
+        using var connectionNameStr = new ScopedCString(connectionName);
+        fixed (byte* connectionNameBufferPtr = connectionNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetConnectionRawUri(&length, (byte*)connectionNameBufferPtr);
+            var returnedPtr = _GetConnectionRawUri(&length, connectionNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<byte*, byte> _ConnectionExists;
 
     public unsafe static bool ConnectionExists(string connectionName)
     {
-        return StringAlloc.CreateCString(connectionName, connectionNameBufferPtr =>
+        using var connectionNameStr = new ScopedCString(connectionName);
+        fixed (byte* connectionNameBufferPtr = connectionNameStr)
         {
-            var ret = _ConnectionExists((byte*)connectionNameBufferPtr);
+            var ret = _ConnectionExists(connectionNameBufferPtr);
             return ret == 1;
-        });
+        }
     }
 }

@@ -18,12 +18,12 @@ internal partial class CDebugDrawHistoryDataImpl : SchemaClass, CDebugDrawHistor
 
     private static nint? _EntityOffset;
 
-    public ref CHandle<CBaseEntity> Entity
+    public ref CHandle<C_BaseEntity> Entity
     {
         get
         {
             _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xC0AC823D6EBADCB0);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset!.Value);
         }
     }
     private static nint? _EtypeOffset;

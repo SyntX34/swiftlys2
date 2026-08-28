@@ -28,7 +28,6 @@
 #include "listener.h"
 
 #include <api/interfaces/interfaces.h>
-#include <s2binlib/s2binlib.h>
 
 typedef void (*CBaseEntity_DispatchSpawn)(void*, void*);
 typedef void (*UTIL_Remove)(void*);
@@ -58,7 +57,7 @@ void CEntSystem::Initialize()
     g_pTraceShapeHook->Enable();
 
     void* netserverservice = nullptr;
-    s2binlib_find_vtable("engine2", "CNetworkServerService", &netserverservice);
+    g_pS2BinLib->FindVtable("engine2", "CNetworkServerService", &netserverservice);
 
     g_pStartupServerHook = g_pHooksManager->CreateVFunctionHook();
     g_pStartupServerHook->SetHookFunction(netserverservice, g_pGameDataManager->GetOffsets()->Fetch("INetworkServerService::StartupServer"), reinterpret_cast<void*>(StartupServerHook), true);

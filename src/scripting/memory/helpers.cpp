@@ -22,8 +22,6 @@
 
 #include <memory/gamedata/manager.h>
 
-#include <s2binlib/s2binlib.h>
-
 static char* Bridge_MemoryHelpers_CopyString(const std::string& value, int* size)
 {
     int outSize = static_cast<int>(value.size());
@@ -44,7 +42,7 @@ void* Bridge_MemoryHelpers_GetVirtualTableAddress(const char* binary, const char
 {
     void* result = nullptr;
 
-    s2binlib_find_vtable(binary, vtable_name, &result);
+    g_pS2BinLib->FindVtable(binary, vtable_name, &result);
     return result;
 }
 
@@ -52,7 +50,7 @@ void* Bridge_MemoryHelpers_GetVirtualTableAddressNested2(const char* binary, con
 {
     void* result = nullptr;
 
-    s2binlib_find_vtable_nested_2(binary, class1, class2, &result);
+    g_pS2BinLib->FindVtableNested2(binary, class1, class2, &result);
     return result;
 }
 
@@ -86,7 +84,7 @@ void* Bridge_MemoryHelpers_GetAddressBySignature(const char* binary, const char*
 char* Bridge_MemoryHelpers_GetObjectPtrVtableName(int* size, void* objptr)
 {
     char buffer[1024] = { 0 };
-    int ret = s2binlib_get_object_ptr_vtable_name(objptr, buffer, sizeof(buffer));
+    int ret = g_pS2BinLib->GetObjectPtrVtableName(objptr, buffer, sizeof(buffer));
     if (ret != 0)
     {
         return Bridge_MemoryHelpers_CopyString("", size);
@@ -97,12 +95,12 @@ char* Bridge_MemoryHelpers_GetObjectPtrVtableName(int* size, void* objptr)
 
 bool Bridge_MemoryHelpers_ObjectPtrHasVtable(void* objptr)
 {
-    return s2binlib_object_ptr_has_vtable(objptr) == 1;
+    return g_pS2BinLib->ObjectPtrHasVtable(objptr) == 1;
 }
 
 bool Bridge_MemoryHelpers_ObjectPtrHasBaseClass(void* objptr, const char* base_class_name)
 {
-    return s2binlib_object_ptr_has_base_class(objptr, base_class_name) == 1;
+    return g_pS2BinLib->ObjectPtrHasBaseClass(objptr, base_class_name) == 1;
 }
 
 DEFINE_NATIVE("MemoryHelpers.FetchInterfaceByName", Bridge_MemoryHelpers_FetchInterfaceByName);

@@ -105,12 +105,6 @@ void* Bridge_EngineHelpers_GetTraceManager()
     return g_pTraceManager;
 }
 
-char* Bridge_EngineHelpers_GetCSGODirectoryPath(int* size)
-{
-    std::string s = fmt::format("{}{}csgo", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"));
-    return Bridge_EngineHelpers_CopyString(s, size);
-}
-
 char* Bridge_EngineHelpers_GetGameDirectoryPath(int* size)
 {
     std::string s = Plat_GetGameDirectory();
@@ -206,7 +200,6 @@ DEFINE_NATIVE("EngineHelpers.GetCurrentGame", Bridge_EngineHelpers_GetCurrentGam
 DEFINE_NATIVE("EngineHelpers.GetNativeVersion", Bridge_EngineHelpers_GetNativeVersion);
 DEFINE_NATIVE("EngineHelpers.GetMenuSettings", Bridge_EngineHelpers_GetMenuSettings);
 DEFINE_NATIVE("EngineHelpers.GetGlobalVars", Bridge_EngineHelpers_GetGlobalVars);
-DEFINE_NATIVE("EngineHelpers.GetCSGODirectoryPath", Bridge_EngineHelpers_GetCSGODirectoryPath);
 DEFINE_NATIVE("EngineHelpers.GetGameDirectoryPath", Bridge_EngineHelpers_GetGameDirectoryPath);
 DEFINE_NATIVE("EngineHelpers.GetWorkshopId", Bridge_EngineHelpers_GetWorkshopId);
 DEFINE_NATIVE("EngineHelpers.GetNetworkGameServer", Bridge_EngineHelpers_GetNetworkGameServer);

@@ -24,7 +24,6 @@
 
 #include <cstdio>
 #include <public/icvar.h>
-#include <s2binlib/s2binlib.h>
 
 std::map<std::string, ConCommand*> conCommandCreated;
 std::map<uint64_t, std::string> conCommandMapping;
@@ -71,14 +70,14 @@ void CommandsCallback(const CCommandContext& context, const CCommand& args)
 void CServerCommands::Initialize()
 {
     void* ccvarVTable;
-    s2binlib_find_vtable("tier0", "CCvar", &ccvarVTable);
+    g_pS2BinLib->FindVtable("tier0", "CCvar", &ccvarVTable);
 
     dispatchConCommandHook = g_pHooksManager->CreateVFunctionHook();
     dispatchConCommandHook->SetHookFunction(ccvarVTable, g_pGameDataManager->GetOffsets()->Fetch("ICvar::DispatchConCommand"), (void*)DispatchConCommand, true);
     dispatchConCommandHook->Enable();
 
     void* gameclientsvtable = nullptr;
-    s2binlib_find_vtable("server", "CSource2GameClients", &gameclientsvtable);
+    g_pS2BinLib->FindVtable("server", "CSource2GameClients", &gameclientsvtable);
 
     clientCommandHook2 = g_pHooksManager->CreateVFunctionHook();
     clientCommandHook2->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientCommand"), (void*)ClientCommandHook2, true);

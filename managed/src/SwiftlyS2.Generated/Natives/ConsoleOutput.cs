@@ -67,11 +67,12 @@ internal static class NativeConsoleOutput
     /// </summary>
     public unsafe static bool NeedsFiltering(string text)
     {
-        return StringAlloc.CreateCString(text, textBufferPtr =>
+        using var textStr = new ScopedCString(text);
+        fixed (byte* textBufferPtr = textStr)
         {
-            var ret = _NeedsFiltering((byte*)textBufferPtr);
+            var ret = _NeedsFiltering(textBufferPtr);
             return ret == 1;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int*, byte*> _GetCounterText;

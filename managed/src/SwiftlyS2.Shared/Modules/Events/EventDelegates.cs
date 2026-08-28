@@ -194,4 +194,9 @@ public class EventDelegates
     /// Called when the server is started.
     /// </summary>
     public delegate void OnStartupServer();
+
+    /// <summary>
+    /// Called when a custom hud element is clicked.
+    /// </summary>
+    public delegate void OnCustomHudClicked( IOnCustomHudClickedEvent @event );
 }

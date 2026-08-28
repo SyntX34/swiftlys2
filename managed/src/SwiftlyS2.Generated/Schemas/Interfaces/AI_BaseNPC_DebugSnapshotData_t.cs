@@ -17,7 +17,7 @@ public partial interface AI_BaseNPC_DebugSnapshotData_t : DebugSnapshotBaseStruc
 
     public ref CGlobalSymbol Npc_state { get; }
 
-    public ref CHandle<CBaseEntity> Current_enemy { get; }
+    public ref CHandle<C_BaseEntity> Current_enemy { get; }
 
     public string S_current_schedule { get; set; }
 

@@ -28,12 +28,12 @@ internal partial class PhysObjectHeader_tImpl : SchemaClass, PhysObjectHeader_t
     }
     private static nint? _EntityOffset;
 
-    public ref CHandle<CBaseEntity> Entity
+    public ref CHandle<C_BaseEntity> Entity
     {
         get
         {
             _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xBB54A90025B27FD0);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset!.Value);
         }
     }
     private static nint? _FieldNameOffset;

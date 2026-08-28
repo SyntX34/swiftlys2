@@ -198,6 +198,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     }
     public event EventDelegates.OnStartupServer? OnStartupServer;
     public event EventDelegates.OnClientVoice? OnClientVoice;
+    public event EventDelegates.OnCustomHudClicked? OnCustomHudClicked;
 
     public void Dispose()
     {
@@ -1023,6 +1024,29 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
             if (GlobalExceptionHandler.Handle(ref e))
             {
                 logger.LogError(e, "Error invoking OnStartupServer.");
+            }
+        }
+
+    }
+
+    public bool ListensToCustomHudClicked => OnCustomHudClicked != null;
+
+    public void InvokeOnCustomHudClicked( ref OnCustomHudClickedEvent @event )
+    {
+        if (OnCustomHudClicked == null)
+        {
+            return;
+        }
+
+        try
+        {
+            OnCustomHudClicked.Invoke(@event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking OnCustomHudClicked.");
             }
         }
 

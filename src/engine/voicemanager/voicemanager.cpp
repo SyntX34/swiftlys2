@@ -19,7 +19,6 @@
 #include "voicemanager.h"
 
 #include <api/interfaces/interfaces.h>
-#include <s2binlib/s2binlib.h>
 
 IVFunctionHook* g_pSetClientListeningHook = nullptr;
 IVFunctionHook* g_pClientCommandHook = nullptr;
@@ -38,7 +37,7 @@ void CVoiceManager::Initialize()
     g_pSetClientListeningHook->Enable();
 
     void* gameclientsvtable = nullptr;
-    s2binlib_find_vtable("server", "CSource2GameClients", &gameclientsvtable);
+    g_pS2BinLib->FindVtable("server", "CSource2GameClients", &gameclientsvtable);
 
     g_pClientCommandHook = g_pHooksManager->CreateVFunctionHook();
     g_pClientCommandHook->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientCommand"), (void*)ClientCommandHook, true);

@@ -48,12 +48,12 @@ internal partial class SummaryTakeDamageInfo_tImpl : SchemaClass, SummaryTakeDam
     }
     private static nint? _TargetOffset;
 
-    public ref CHandle<CBaseEntity> Target
+    public ref CHandle<C_BaseEntity> Target
     {
         get
         {
             _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x8A8061E295A3933A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_TargetOffset!.Value);
         }
     }
 

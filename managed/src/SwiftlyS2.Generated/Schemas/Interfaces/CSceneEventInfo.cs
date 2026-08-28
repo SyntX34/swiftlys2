@@ -47,7 +47,7 @@ public partial interface CSceneEventInfo : ISchemaClass<CSceneEventInfo>
 
     public ref bool ShouldRemove { get; }
 
-    public ref CHandle<CBaseEntity> Target { get; }
+    public ref CHandle<C_BaseEntity> Target { get; }
 
     public SceneEventId_t SceneEventId { get; }
 

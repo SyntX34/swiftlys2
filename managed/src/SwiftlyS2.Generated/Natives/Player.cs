@@ -19,10 +19,11 @@ internal static class NativePlayer
         {
             throw new InvalidOperationException("This method can only be called from the main thread.");
         }
-        StringAlloc.CreateCString(message, messageBufferPtr =>
+        using var messageStr = new ScopedCString(message);
+        fixed (byte* messageBufferPtr = messageStr)
         {
-            _SendMessage(playerid, kind, (byte*)messageBufferPtr, htmlDuration);
-        });
+            _SendMessage(playerid, kind, messageBufferPtr, htmlDuration);
+        }
     }
 
     private unsafe static delegate* unmanaged<int, byte> _IsFakeClient;
@@ -65,36 +66,6 @@ internal static class NativePlayer
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<int, nint> _GetController;
-
-    public unsafe static nint GetController(int playerid)
-    {
-        var ret = _GetController(playerid);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<int, ulong> _GetPressedButtons;
-
-    public unsafe static ulong GetPressedButtons(int playerid)
-    {
-        var ret = _GetPressedButtons(playerid);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<int, byte*, void> _PerformCommand;
-
-    public unsafe static void PerformCommand(int playerid, string command)
-    {
-        if (!NativeBinding.IsMainThread)
-        {
-            throw new InvalidOperationException("This method can only be called from the main thread.");
-        }
-        StringAlloc.CreateCString(command, commandBufferPtr =>
-        {
-            _PerformCommand(playerid, (byte*)commandBufferPtr);
-        });
-    }
-
     private unsafe static delegate* unmanaged<int*, int, byte*> _GetIPAddress;
 
     public unsafe static string GetIPAddress(int playerid)
@@ -114,10 +85,11 @@ internal static class NativePlayer
         {
             throw new InvalidOperationException("This method can only be called from the main thread.");
         }
-        StringAlloc.CreateCString(reason, reasonBufferPtr =>
+        using var reasonStr = new ScopedCString(reason);
+        fixed (byte* reasonBufferPtr = reasonStr)
         {
-            _Kick(playerid, (byte*)reasonBufferPtr, gamereason);
-        });
+            _Kick(playerid, reasonBufferPtr, gamereason);
+        }
     }
 
     private unsafe static delegate* unmanaged<int, int, byte, void> _ShouldBlockTransmitEntity;
@@ -157,10 +129,11 @@ internal static class NativePlayer
 
     public unsafe static void SetCenterMenuRender(int playerid, string text)
     {
-        StringAlloc.CreateCString(text, textBufferPtr =>
+        using var textStr = new ScopedCString(text);
+        fixed (byte* textBufferPtr = textStr)
         {
-            _SetCenterMenuRender(playerid, (byte*)textBufferPtr);
-        });
+            _SetCenterMenuRender(playerid, textBufferPtr);
+        }
     }
 
     private unsafe static delegate* unmanaged<int, void> _ClearCenterMenuRender;
@@ -186,10 +159,11 @@ internal static class NativePlayer
         {
             throw new InvalidOperationException("This method can only be called from the main thread.");
         }
-        StringAlloc.CreateCString(command, commandBufferPtr =>
+        using var commandStr = new ScopedCString(command);
+        fixed (byte* commandBufferPtr = commandStr)
         {
-            _ExecuteCommand(playerid, (byte*)commandBufferPtr);
-        });
+            _ExecuteCommand(playerid, commandBufferPtr);
+        }
     }
 
     private unsafe static delegate* unmanaged<int, byte> _IsFirstSpawn;
@@ -220,14 +194,15 @@ internal static class NativePlayer
 
     public unsafe static string GetClientConvarValue(int playerid, string convarName)
     {
-        return StringAlloc.CreateCString(convarName, convarNameBufferPtr =>
+        using var convarNameStr = new ScopedCString(convarName);
+        fixed (byte* convarNameBufferPtr = convarNameStr)
         {
             var length = 0;
-            var returnedPtr = _GetClientConvarValue(&length, playerid, (byte*)convarNameBufferPtr);
+            var returnedPtr = _GetClientConvarValue(&length, playerid, convarNameBufferPtr);
             var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
             NativeAllocator.Free((nint)returnedPtr);
             return outString;
-        });
+        }
     }
 
     private unsafe static delegate* unmanaged<int, nint> _GetServerSideClient;

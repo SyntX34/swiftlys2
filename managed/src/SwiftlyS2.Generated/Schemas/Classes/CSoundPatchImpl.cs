@@ -79,12 +79,12 @@ internal partial class CSoundPatchImpl : SchemaClass, CSoundPatch
     }
     private static nint? _EntOffset;
 
-    public ref CHandle<CBaseEntity> Ent
+    public ref CHandle<C_BaseEntity> Ent
     {
         get
         {
             _EntOffset = _EntOffset ?? Schema.GetOffset(0xBE66ED3D8BBDB334);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOffset!.Value);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntOffset!.Value);
         }
     }
     private static nint? _SoundEntityIndexOffset;

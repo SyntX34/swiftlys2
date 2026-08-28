@@ -58,6 +58,8 @@
 #include <public/schemasystem/schemasystem.h>
 #include <public/networkstringtabledefs.h>
 
+#include <s2binlib/s2binlib.h>
+
  /**
   * Project Interfaces
   */
@@ -81,6 +83,8 @@ extern ITranslations* g_pTranslations;
 extern IServerCommands* g_pServerCommands;
 extern INetMessages* g_pNetMessages;
 extern IConsoleOutput* g_pConsoleOutput;
+extern S2BinLib004* g_pS2BinLib;
+extern std::string g_sGameFolder;
 
 /**
  * Game Interfaces

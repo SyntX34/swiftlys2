@@ -184,12 +184,12 @@ internal partial class CSceneEventInfoImpl : SchemaClass, CSceneEventInfo
     }
     private static nint? _TargetOffset;
 
-    public ref CHandle<CBaseEntity> Target
+    public ref CHandle<C_BaseEntity> Target
     {
         get
         {
             _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x38A9D25ECE35901A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_TargetOffset!.Value);
         }
     }
     private static nint? _SceneEventIdOffset;
