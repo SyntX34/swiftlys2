@@ -20,6 +20,9 @@ internal static class EventPublisher
 {
     private static readonly List<EventSubscriber> subscribers = [];
     private static readonly Lock subscribersLock = new();
+    private static readonly Lock consoleOutputListenerLock = new();
+    private static int consoleOutputSubscriberCount;
+    private static ulong? consoleOutputListenerId;
 
     public static void Subscribe( EventSubscriber subscriber )
     {
@@ -61,7 +64,6 @@ internal static class EventPublisher
             _ = NativeConvars.AddConvarCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConVarCreated);
             _ = NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated);
             _ = NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
-            _ = NativeConsoleOutput.AddConsoleListener((nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput);
             NativeCommands.SetCommandHandler((nint)(delegate* unmanaged< nint, int, nint, nint, nint, byte, void >)&OnCommandDispatch);
             NativeCommands.SetClientCommandHandler((nint)(delegate* unmanaged< int, nint, int >)&OnClientCommandDispatch);
             NativeCommands.SetClientChatHandler((nint)(delegate* unmanaged< int, nint, byte, int >)&OnClientChatDispatch);
@@ -70,6 +72,36 @@ internal static class EventPublisher
             NativeNetMessages.SetNetMessageServerHookInternal((nint)(delegate* unmanaged< int, int, nint, int >)&OnNetMessageServerInternalDispatch);
             NativeGameEvents.SetListenerPreHandler((nint)(delegate* unmanaged< uint, nint, nint, int >)&OnGameEventPreDispatch);
             NativeGameEvents.SetListenerPostHandler((nint)(delegate* unmanaged< uint, nint, nint, int >)&OnGameEventPostDispatch);
+        }
+    }
+
+    public static void AddConsoleOutputListener()
+    {
+        lock (consoleOutputListenerLock)
+        {
+            consoleOutputSubscriberCount++;
+            if (consoleOutputSubscriberCount != 1) return;
+
+            unsafe
+            {
+                consoleOutputListenerId = NativeConsoleOutput.AddConsoleListener(
+                    (nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput
+                );
+            }
+        }
+    }
+
+    public static void RemoveConsoleOutputListener()
+    {
+        lock (consoleOutputListenerLock)
+        {
+            if (consoleOutputSubscriberCount == 0) return;
+
+            consoleOutputSubscriberCount--;
+            if (consoleOutputSubscriberCount != 0 || consoleOutputListenerId == null) return;
+
+            NativeConsoleOutput.RemoveConsoleListener(consoleOutputListenerId.Value);
+            consoleOutputListenerId = null;
         }
     }
 
@@ -1292,14 +1324,15 @@ internal static class EventPublisher
     {
         try
         {
-            if (subscribers.Count == 0)
+            var isTracking = CommandTrackerManager.IsTracking;
+            if (!isTracking && subscribers.Count == 0)
             {
                 return;
             }
 
             var message = string.Empty;
             var setMessage = false;
-            if (CommandTrackerManager.IsTracking)
+            if (isTracking)
             {
                 message = StringAlloc.CreateCSharpString(messagePtr);
                 setMessage = true;

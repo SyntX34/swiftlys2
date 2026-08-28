@@ -189,6 +189,10 @@ void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last)
 {
     reinterpret_cast<decltype(&OnGameFramePlayerHook)>(g_pOnGameFramePlayerHook->GetOriginal())(_this, simulate, first, last);
 
+    // Dispatch console callbacks from a known native engine frame. Messages produced by
+    // a callback remain queued until the next frame, preventing synchronous re-entry.
+    g_pConsoleOutput->DispatchQueuedListeners();
+
     if (g_pOnGameTickCallback)
         reinterpret_cast<void (*)(bool, bool, bool)>(g_pOnGameTickCallback)(simulate, first, last);
 
