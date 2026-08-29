@@ -89,15 +89,17 @@ jobs:
         id: metadata
         shell: bash
         run: |
-          timestamp="$(date -u +'%Y%m%d-%H%M%S|%Y-%m-%d %H:%M:%S UTC')"
+          timestamp="$(date -u +'%Y%m%d-%H%M%S|%Y-%m-%d %H:%M:%S UTC|%Y-%m-%d')"
+          timestamp_details="${timestamp#*|}"
           echo "branch_timestamp=${timestamp%%|*}" >> "$GITHUB_OUTPUT"
-          echo "commit_timestamp=${timestamp#*|}" >> "$GITHUB_OUTPUT"
+          echo "commit_timestamp=${timestamp_details%%|*}" >> "$GITHUB_OUTPUT"
+          title_date="${timestamp##*|}"
 
           if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
-            echo "title=[CS2][Manual] Game Sync Update" >> "$GITHUB_OUTPUT"
+            echo "title=[CS2][Manual] Game Sync Update ($title_date)" >> "$GITHUB_OUTPUT"
             echo "trigger=Manual workflow dispatch" >> "$GITHUB_OUTPUT"
           else
-            echo "title=[CS2] Game Sync Update" >> "$GITHUB_OUTPUT"
+            echo "title=[CS2] Game Sync Update ($title_date)" >> "$GITHUB_OUTPUT"
             echo "trigger=CS2-Dumps update workflow" >> "$GITHUB_OUTPUT"
           fi
 
