@@ -130,7 +130,7 @@ class VersionTests(unittest.TestCase):
 
         self.assertEqual("1.5.0-beta.8", self.calculate("beta").semVer)
 
-    def test_merged_untagged_master_still_starts_new_beta_series(self) -> None:
+    def test_master_advances_beta_only_after_stable_tag_exists(self) -> None:
         self.repo.run("switch", "--quiet", "-c", "beta")
         self.repo.commit("beta.txt", "beta\n", "feat: beta work")
         self.repo.tag("v1.4.6-beta.9")
@@ -141,6 +141,12 @@ class VersionTests(unittest.TestCase):
 
         self.repo.run("switch", "--quiet", "beta")
         self.repo.run("merge", "--quiet", "--no-ff", "master", "-m", "Merge master")
+
+        self.assertEqual("1.4.6-beta.10", self.calculate("beta").semVer)
+
+        self.repo.run("switch", "--quiet", "master")
+        self.repo.tag("v1.4.6")
+        self.repo.run("switch", "--quiet", "beta")
 
         self.assertEqual("1.4.7-beta.1", self.calculate("beta").semVer)
 
