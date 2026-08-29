@@ -96,15 +96,15 @@ public partial interface CCSCustomHudLayout
     ///         <description>Behavior</description>
     ///     </listheader>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_Undefined"/></term>
+    ///         <term>k_eHudPanelClassStatus_Undefined</term>
     ///         <description>Does not override the existing class status.</description>
     ///     </item>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_DoesNotHaveClass"/></term>
+    ///         <term>k_eHudPanelClassStatus_DoesNotHaveClass</term>
     ///         <description>Explicitly specifies that the panel does not have the class.</description>
     ///     </item>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_HasClass"/></term>
+    ///         <term>k_eHudPanelClassStatus_HasClass</term>
     ///         <description>Explicitly specifies that the panel has the class.</description>
     ///     </item>
     /// </list>
@@ -125,15 +125,15 @@ public partial interface CCSCustomHudLayout
     ///         <description>Behavior</description>
     ///     </listheader>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_Undefined"/></term>
+    ///         <term>k_eHudPanelClassStatus_Undefined</term>
     ///         <description>Does not override the existing class status.</description>
     ///     </item>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_DoesNotHaveClass"/></term>
+    ///         <term>k_eHudPanelClassStatus_DoesNotHaveClass</term>
     ///         <description>Explicitly specifies that the panel does not have the class.</description>
     ///     </item>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_HasClass"/></term>
+    ///         <term>k_eHudPanelClassStatus_HasClass</term>
     ///         <description>Explicitly specifies that the panel has the class.</description>
     ///     </item>
     /// </list>
@@ -146,7 +146,7 @@ public partial interface CCSCustomHudLayout
     /// <param name="playerId">Player id.</param>
     /// <param name="panelId">The id attribute of the target hud element.</param>
     /// <param name="className">The class name.</param>
-    /// <returns>The class status. Return <see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_Undefined"/> if the class status is not set.</returns>
+    /// <returns>The class status. Return k_eHudPanelClassStatus_Undefined if the class status is not set.</returns>
     public EHudPanelClassStatus_t GetHasClassForPlayer( int playerId, string panelId, string className );
 
     /// <summary>
@@ -163,15 +163,15 @@ public partial interface CCSCustomHudLayout
     ///         <description>Behavior</description>
     ///     </listheader>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_Undefined"/></term>
+    ///         <term>k_eHudPanelClassStatus_Undefined</term>
     ///         <description>Does not override the existing class status.</description>
     ///     </item>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_DoesNotHaveClass"/></term>
+    ///         <term>k_eHudPanelClassStatus_DoesNotHaveClass</term>
     ///         <description>Explicitly specifies that the panel does not have the class.</description>
     ///     </item>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_HasClass"/></term>
+    ///         <term>k_eHudPanelClassStatus_HasClass</term>
     ///         <description>Explicitly specifies that the panel has the class.</description>
     ///     </item>
     /// </list>
@@ -191,15 +191,15 @@ public partial interface CCSCustomHudLayout
     ///         <description>Behavior</description>
     ///     </listheader>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_Undefined"/></term>
+    ///         <term>k_eHudPanelClassStatus_Undefined</term>
     ///         <description>Does not override the existing class status.</description>
     ///     </item>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_DoesNotHaveClass"/></term>
+    ///         <term>k_eHudPanelClassStatus_DoesNotHaveClass</term>
     ///         <description>Explicitly specifies that the panel does not have the class.</description>
     ///     </item>
     ///     <item>
-    ///         <term><see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_HasClass"/></term>
+    ///         <term>k_eHudPanelClassStatus_HasClass</term>
     ///         <description>Explicitly specifies that the panel has the class.</description>
     ///     </item>
     /// </list>
@@ -211,7 +211,7 @@ public partial interface CCSCustomHudLayout
     /// </summary>
     /// <param name="panelId">The id attribute of the target hud element.</param>
     /// <param name="className">The class name.</param>
-    /// <returns>The class status. Return <see cref="EHudPanelClassStatus_t.k_eHudPanelClassStatus_Undefined"/> if the class status is not set.</returns>
+    /// <returns>The class status. Return k_eHudPanelClassStatus_Undefined if the class status is not set.</returns>
     public EHudPanelClassStatus_t GetHasClass( string panelId, string className );
 
     /// <summary>

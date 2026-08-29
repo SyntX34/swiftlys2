@@ -5,7 +5,7 @@ This is intentionally repository-specific.  It replaces the subset of
 GitVersion used by the build workflow while making beta numbering tag-based:
 
 * master: the next stable version after the newest reachable stable tag;
-* beta:   the next beta tag for the next stable core version;
+* beta:   the next beta tag after the newest reachable stable tag;
 * other:  GitVersion-compatible branch-labelled preview versions.
 
 Stable tags use ``vMAJOR.MINOR.PATCH`` and beta tags use
@@ -245,16 +245,19 @@ def merged_stable_base(
     repo: Path,
     main_refs: Iterable[str],
     ref: str = "HEAD",
+    *,
+    include_untagged_main: bool = True,
 ) -> StableBase:
     candidates: list[StableBase] = []
     source = newest_stable_tag(repo, ref)
     if source is not None:
         candidates.append(StableBase(source.version, source.commit))
 
-    for main_ref in main_refs:
-        if not ref_exists(repo, main_ref) or not is_ancestor(repo, main_ref, ref):
-            continue
-        candidates.append(effective_stable_version(repo, main_ref))
+    if include_untagged_main:
+        for main_ref in main_refs:
+            if not ref_exists(repo, main_ref) or not is_ancestor(repo, main_ref, ref):
+                continue
+            candidates.append(effective_stable_version(repo, main_ref))
 
     if not candidates:
         root = repository_root_commit(repo, ref)
@@ -390,7 +393,15 @@ def calculate_version(
         stable = effective_stable_version(repo, "HEAD")
         return make_result(stable.version, "", None, branch_name, sha)
 
-    base = merged_stable_base(repo, main_refs)
+    # A stable release is only real to beta once its tag exists.  Master must
+    # infer its pending version so the release workflow knows which tag to
+    # create, but using that inferred version here would advance beta twice
+    # when a master build is intentionally skipped.
+    base = merged_stable_base(
+        repo,
+        main_refs,
+        include_untagged_main=branch_name != "beta",
+    )
     history_messages = commit_messages(repo, base.commit, "HEAD")
     next_from_stable = base.version.bump(requested_increment(history_messages))
     historical_betas = beta_tags(repo)
