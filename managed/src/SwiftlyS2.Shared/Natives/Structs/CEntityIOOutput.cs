@@ -19,7 +19,7 @@ public struct EntityIOConnectionDesc_t
 public unsafe struct EntityIOConnection_t
 {
     public EntityIOConnectionDesc_t Desc;
-    public bool MarkedForRemoval;
+    [MarshalAs(UnmanagedType.I1)] public bool MarkedForRemoval;
     public EntityIOConnection_t* Next;
 }
 
