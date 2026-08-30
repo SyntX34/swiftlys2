@@ -35,6 +35,9 @@ internal class PluginManager : IPluginManager
     private readonly ConcurrentDictionary<string, Assembly> _exportAssemblies;
     private readonly FileSystemWatcher? _fileWatcher;
 
+    internal event Action<PluginContext>? PluginLoaded;
+    internal event Action<PluginContext>? PluginUnloading;
+
     public PluginManager(
         IServiceProvider provider,
         ILogger<PluginManager> logger,
@@ -390,6 +393,8 @@ internal class PluginManager : IPluginManager
             var pluginName = Path.GetFileName(directory);
             _ = _pluginLoadErrors.TryRemove(pluginName, out _);
 
+            PluginLoaded?.Invoke(context);
+
             return context;
         }
         catch (Exception e)
@@ -414,6 +419,7 @@ internal class PluginManager : IPluginManager
 
         try
         {
+            PluginUnloading?.Invoke(context);
             context.Dispose();
             _ = _plugins.Remove(context);
             return true;
