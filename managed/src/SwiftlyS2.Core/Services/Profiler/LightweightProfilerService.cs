@@ -95,37 +95,20 @@ internal sealed class LightweightProfilerService
         foreach (var context in _pluginManager.GetPlugins())
             PatchPlugin(context);
 
-        _logger.LogWarning("Lightweight profiler enabled: patching the core SwiftlyS2 assembly, SwiftlyS2.Profiler, and every loaded plugin with Harmony. This will add per-call overhead while active.");
-        LogNamespaceBreakdown();
+        _logger.LogWarning("Lightweight profiler enabled. This will add per-call overhead while active.");
     }
-
-    private void LogNamespaceBreakdown()
-    {
-        var counts = new Dictionary<string, int>();
-        foreach (var candidates in _discoveredMethods.Values)
-        {
-            foreach (var method in candidates)
-            {
-                var ns = method.DeclaringType?.Namespace ?? "(none)";
-                counts[ns] = counts.GetValueOrDefault(ns) + 1;
-            }
-        }
-
-        if (counts.Count == 0) return;
-
-        var sb = new StringBuilder();
-        _ = sb.AppendLine($"Lightweight profiler: {counts.Values.Sum():N0} patched methods across {counts.Count} namespaces —");
-        foreach (var (ns, count) in counts.OrderByDescending(kv => kv.Value))
-            _ = sb.AppendLine($"  {count,6}  {ns}");
-
-        _logger.LogInformation("{Breakdown}", sb.ToString());
-    }
-
     public void Disable()
     {
         if (!_enabled) return;
         _enabled = false;
         Current = null;
+
+        _globalHarmony?.UnpatchAll(GlobalHarmonyId);
+        _globalHarmony = null;
+
+        foreach (var harmony in _pluginHarmonyInstances.Values)
+            harmony.UnpatchAll(harmony.Id);
+        _pluginHarmonyInstances.Clear();
     }
 
     public LightweightSnapshot Snapshot() => new(
@@ -339,7 +322,7 @@ internal sealed class LightweightProfilerService
             var task = ExtractTask(result);
             if (task is not null)
             {
-                task.ContinueWith(_ => RecordNow(originalMethod, startTicks), TaskScheduler.Default);
+                _ = task.ContinueWith(_ => RecordNow(originalMethod, startTicks), TaskScheduler.Default);
                 return;
             }
             RecordNow(originalMethod, startTicks);

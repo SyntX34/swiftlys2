@@ -22,9 +22,9 @@ internal static class LightweightSummaryWriter
         var avgMsPerTick = totalTicks > 0 ? activeTotal / totalTicks : 0.0;
 
         _ = sb.AppendLine(Bar);
-        _ = sb.AppendLine(" SwiftlyS2 Profiler - Summary (Light)");
+        _ = sb.AppendLine(" SwiftlyS2 Profiler - Summary");
         _ = sb.AppendLine(Bar);
-        _ = sb.AppendLine("  mode      Harmony method-level instrumentation (core + SwiftlyS2.Profiler + plugins)");
+        _ = sb.AppendLine("  mode      Harmony");
         _ = sb.AppendLine($"  captured  {durationSec:F2} s  ·  {DateTime.UtcNow:yyyy-MM-dd HH:mm:ss} UTC");
         _ = sb.AppendLine(Bar);
         _ = sb.AppendLine();
