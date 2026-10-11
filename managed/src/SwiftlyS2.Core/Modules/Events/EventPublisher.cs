@@ -1342,21 +1342,8 @@ internal static class EventPublisher
     {
         try
         {
-            var currentSubscribers = System.Threading.Volatile.Read(ref subscriberSnapshot);
-            var isTracking = CommandTrackerManager.IsTracking;
-            if (!isTracking && currentSubscribers.Length == 0)
-            {
-                return;
-            }
-
-            var message = string.Empty;
-            var setMessage = false;
-            if (isTracking)
-            {
-                message = StringAlloc.CreateCSharpString(messagePtr);
-                setMessage = true;
-                CommandTrackerManager.ProcessOutput(message);
-            }
+            var currentSubscribers = Volatile.Read(ref subscriberSnapshot);
+            if (currentSubscribers.Length == 0) return;
 
             var hasConsoleOutputListener = false;
             for (var i = 0; i < currentSubscribers.Length; i++)
@@ -1367,7 +1354,7 @@ internal static class EventPublisher
             }
             if (!hasConsoleOutputListener) return;
 
-            OnConsoleOutputEvent @event = new() { Message = setMessage ? message : StringAlloc.CreateCSharpString(messagePtr) };
+            OnConsoleOutputEvent @event = new() { Message = StringAlloc.CreateCSharpString(messagePtr) };
             for (var i = 0; i < currentSubscribers.Length; i++)
             {
                 currentSubscribers[i].InvokeOnConsoleOutput(ref @event);
@@ -1385,8 +1372,6 @@ internal static class EventPublisher
 
     public static void InvokeOnCommandExecuteHook( OnCommandExecuteHookEvent @event )
     {
-        CommandTrackerManager.ProcessCommand(@event);
-
         if (subscribers.Count == 0)
         {
             return;
