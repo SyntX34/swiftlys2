@@ -76,6 +76,7 @@ internal static class Bootstrap
                 _ = config.AddJsonFile("permissions.jsonc", optional: false, reloadOnChange: true);
                 _ = config.AddJsonFile("command_overrides.jsonc", optional: false, reloadOnChange: true);
                 _ = config.AddJsonFile("database.jsonc", optional: false, reloadOnChange: true);
+                _ = config.AddJsonFile(Menu.Config.MenuConfigFile.RelativePath, optional: true, reloadOnChange: true);
             })
             .ConfigureServices(( context, services ) =>
             {
@@ -94,6 +95,8 @@ internal static class Bootstrap
                     .AddCoreCommandService()
                     .AddMenuManagerAPI()
                     .AddMenuManagerAPIService()
+                    .AddMenu()
+                    .AddMenuRuntimeService()
                     .AddSwiftlyCore(basePath);
             })
             .Build();
