@@ -178,7 +178,7 @@ internal class GameService : IGameService
     public unsafe int GetWinningTeam()
     {
         var match = GetCCSMatchPtr();
-        var teams = entitySystemService.GetAllEntitiesByDesignerName<CCSTeam>("cs_team_manager");
+        var teams = entitySystemService.GetAllEntitiesByClass<CCSTeam>();
 
         foreach (var team in teams)
         {
@@ -201,7 +201,7 @@ internal class GameService : IGameService
     private unsafe void UpdateTeamScores()
     {
         var match = GetCCSMatchPtr();
-        var teams = entitySystemService.GetAllEntitiesByDesignerName<CCSTeam>("cs_team_manager");
+        var teams = entitySystemService.GetAllEntitiesByClass<CCSTeam>();
 
         foreach (var team in teams)
         {

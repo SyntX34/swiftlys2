@@ -59,6 +59,8 @@ namespace SwiftlyS2.Core.Services;
 internal class SwiftlyCore : ISwiftlyCore, IDisposable
 {
     private readonly ServiceProvider serviceProvider;
+    private readonly string gameDirectory;
+    private readonly string gameFilesDirectory;
 
     public EventSubscriber EventSubscriber { get; init; }
     public GameEventService GameEventService { get; init; }
@@ -100,6 +102,8 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         CoreContext id = new(contextId, contextBaseDirectory, pluginManifest);
         ContextBasePath = contextBaseDirectory;
         PluginDataDirectory = pluginDataDirectory;
+        gameDirectory = NativeEngineHelpers.GetGameDirectoryPath();
+        gameFilesDirectory = $"{gameDirectory}{(OperatingSystem.IsWindows() ? "\\" : "/")}{DetermineGameFolder()}";
 
         serviceProvider = new ServiceCollection()
             .AddSingleton(id)
@@ -233,7 +237,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         serviceProvider.Dispose();
     }
 
-    private string DetermineGameFolder()
+    private static string DetermineGameFolder()
     {
         var game = NativeEngineHelpers.GetCurrentGame();
         if (game == "cs2") return "csgo";
@@ -274,8 +278,8 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     IGameHooks ISwiftlyCore.GameHooks => GameHooksService;
     string ISwiftlyCore.PluginPath => ContextBasePath;
     string ISwiftlyCore.PluginDataDirectory => PluginDataDirectory;
-    string ISwiftlyCore.CSGODirectory => $"{NativeEngineHelpers.GetGameDirectoryPath()}{(OperatingSystem.IsWindows() ? "\\" : "/")}{DetermineGameFolder()}";
-    string ISwiftlyCore.GameFilesDirectory => $"{NativeEngineHelpers.GetGameDirectoryPath()}{(OperatingSystem.IsWindows() ? "\\" : "/")}{DetermineGameFolder()}";
-    string ISwiftlyCore.GameDirectory => NativeEngineHelpers.GetGameDirectoryPath();
+    string ISwiftlyCore.CSGODirectory => gameFilesDirectory;
+    string ISwiftlyCore.GameFilesDirectory => gameFilesDirectory;
+    string ISwiftlyCore.GameDirectory => gameDirectory;
     bool ISwiftlyCore.IsGameThread => NativeCore.IsMainThread();
 }

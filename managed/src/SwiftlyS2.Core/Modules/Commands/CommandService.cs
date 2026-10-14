@@ -99,32 +99,55 @@ internal class CommandService : ICommandService, IDisposable
 
     public List<string> GetAllCommands()
     {
-        return CommandDispatcher.GetCommands()
-            .Select(command => command.CommandName)
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .ToList();
+        var count = CommandDispatcher.Count;
+        var result = new List<string>(count);
+        var seen = new HashSet<string>(count, StringComparer.OrdinalIgnoreCase);
+        foreach (var command in CommandDispatcher.GetCommands())
+        {
+            if (seen.Add(command.CommandName))
+            {
+                result.Add(command.CommandName);
+            }
+        }
+        return result;
     }
 
     public List<CommandInfo> GetCommandsByPlugin( string pluginName )
     {
-        return CommandDispatcher.GetCommands()
-            .Where(command => command.PluginName == pluginName)
-            .Select(ToCommandInfo)
-            .ToList();
+        var result = new List<CommandInfo>();
+        foreach (var command in CommandDispatcher.GetCommands())
+        {
+            if (command.PluginName == pluginName)
+            {
+                result.Add(ToCommandInfo(command));
+            }
+        }
+        return result;
     }
 
     public Dictionary<string, List<CommandInfo>> GetAllCommandsByPlugin()
     {
-        return CommandDispatcher.GetCommands()
-            .GroupBy(command => command.PluginName)
-            .ToDictionary(group => group.Key, group => group.Select(ToCommandInfo).ToList());
+        var result = new Dictionary<string, List<CommandInfo>>();
+        foreach (var command in CommandDispatcher.GetCommands())
+        {
+            if (!result.TryGetValue(command.PluginName, out var list))
+            {
+                list = [];
+                result[command.PluginName] = list;
+            }
+            list.Add(ToCommandInfo(command));
+        }
+        return result;
     }
 
     public List<CommandInfo> GetAllCommandsInfo()
     {
-        return CommandDispatcher.GetCommands()
-            .Select(ToCommandInfo)
-            .ToList();
+        var result = new List<CommandInfo>(CommandDispatcher.Count);
+        foreach (var command in CommandDispatcher.GetCommands())
+        {
+            result.Add(ToCommandInfo(command));
+        }
+        return result;
     }
 
     public void Dispose()
