@@ -460,7 +460,7 @@ void CPlayer::SendGameEvent(IGameEvent* event)
 {
     if(!event) return;
 
-    auto msg = g_pNetworkMessages->FindNetworkMessageById(GE_Source1LegacyGameEvent);
+    auto msg = g_pGameNetworkMessages->FindNetworkMessageById(GE_Source1LegacyGameEvent);
     if(!msg) return;
 
     auto data = msg->AllocateMessage()->ToPB<CMsgSource1LegacyGameEvent>();
