@@ -16,44 +16,44 @@ internal partial class CNmGraphDocFootstepEventPercentageThroughNodeImpl : CNmGr
 {
     public CNmGraphDocFootstepEventPercentageThroughNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _PhaseConditionOffset;
+    private static nint _PhaseConditionOffset = -1;
 
     public ref NmFootPhaseCondition_t PhaseCondition
     {
         get
         {
-            _PhaseConditionOffset = _PhaseConditionOffset ?? Schema.GetOffset(0x33C31EDE79D4BD7D);
-            return ref _Handle.AsRef<NmFootPhaseCondition_t>(_PhaseConditionOffset!.Value);
+            if (_PhaseConditionOffset == -1) _PhaseConditionOffset = Schema.GetOffset(0x33C31EDE79D4BD7D);
+            return ref _Handle.AsRef<NmFootPhaseCondition_t>(_PhaseConditionOffset);
         }
     }
-    private static nint? _PriorityRuleOffset;
+    private static nint _PriorityRuleOffset = -1;
 
     public ref NmEventPriorityRule_t PriorityRule
     {
         get
         {
-            _PriorityRuleOffset = _PriorityRuleOffset ?? Schema.GetOffset(0x33C31EDE16C8898F);
-            return ref _Handle.AsRef<NmEventPriorityRule_t>(_PriorityRuleOffset!.Value);
+            if (_PriorityRuleOffset == -1) _PriorityRuleOffset = Schema.GetOffset(0x33C31EDE16C8898F);
+            return ref _Handle.AsRef<NmEventPriorityRule_t>(_PriorityRuleOffset);
         }
     }
-    private static nint? _LimitSearchToSourceStateOffset;
+    private static nint _LimitSearchToSourceStateOffset = -1;
 
     public ref bool LimitSearchToSourceState
     {
         get
         {
-            _LimitSearchToSourceStateOffset = _LimitSearchToSourceStateOffset ?? Schema.GetOffset(0x33C31EDE15D4BD01);
-            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset!.Value);
+            if (_LimitSearchToSourceStateOffset == -1) _LimitSearchToSourceStateOffset = Schema.GetOffset(0x33C31EDE15D4BD01);
+            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset);
         }
     }
-    private static nint? _IgnoreInactiveBranchEventsOffset;
+    private static nint _IgnoreInactiveBranchEventsOffset = -1;
 
     public ref bool IgnoreInactiveBranchEvents
     {
         get
         {
-            _IgnoreInactiveBranchEventsOffset = _IgnoreInactiveBranchEventsOffset ?? Schema.GetOffset(0x33C31EDE40B77877);
-            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset!.Value);
+            if (_IgnoreInactiveBranchEventsOffset == -1) _IgnoreInactiveBranchEventsOffset = Schema.GetOffset(0x33C31EDE40B77877);
+            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset);
         }
     }
 

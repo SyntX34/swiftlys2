@@ -16,19 +16,19 @@ internal partial class CNmGraphDocTimeControlledClipNode__CDataImpl : CNmGraphDo
 {
     public CNmGraphDocTimeControlledClipNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _ClipOffset;
+    private static nint _ClipOffset = -1;
 
     public string Clip
     {
         get
         {
-            _ClipOffset = _ClipOffset ?? Schema.GetOffset(0xB32EB3D10ECBF9B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ClipOffset!.Value));
+            if (_ClipOffset == -1) _ClipOffset = Schema.GetOffset(0xB32EB3D10ECBF9B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ClipOffset));
         }
         set
         {
-            _ClipOffset = _ClipOffset ?? Schema.GetOffset(0xB32EB3D10ECBF9B);
-            Schema.SetCUtlString(_Handle, _ClipOffset!.Value, value);
+            if (_ClipOffset == -1) _ClipOffset = Schema.GetOffset(0xB32EB3D10ECBF9B);
+            Schema.SetCUtlString(_Handle, _ClipOffset, value);
         }
     }
 

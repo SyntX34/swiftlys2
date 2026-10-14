@@ -16,16 +16,16 @@ internal partial class CVMixDynamics3BandProcessorDescImpl : CVMixBaseProcessorD
 {
     public CVMixDynamics3BandProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixDynamics3BandDesc_tImpl? _DescInstance;
 
     public VMixDynamics3BandDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0xA8D5869B27917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0xA8D5869B27917BC0);
             var instance = _DescInstance ??= new VMixDynamics3BandDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }

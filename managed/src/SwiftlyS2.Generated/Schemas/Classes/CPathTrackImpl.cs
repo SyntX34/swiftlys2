@@ -16,109 +16,109 @@ internal partial class CPathTrackImpl : CPointEntityImpl, CPathTrack
 {
     public CPathTrackImpl(nint handle) : base(handle) { }
 
-    private static nint? _PnextOffset;
+    private static nint _PnextOffset = -1;
 
     public ref CHandle<CPathTrack> Pnext
     {
         get
         {
-            _PnextOffset = _PnextOffset ?? Schema.GetOffset(0xF86750E8B008D5EE);
-            return ref _Handle.AsRef<CHandle<CPathTrack>>(_PnextOffset!.Value);
+            if (_PnextOffset == -1) _PnextOffset = Schema.GetOffset(0xF86750E8B008D5EE);
+            return ref _Handle.AsRef<CHandle<CPathTrack>>(_PnextOffset);
         }
     }
-    private static nint? _PpreviousOffset;
+    private static nint _PpreviousOffset = -1;
 
     public ref CHandle<CPathTrack> Pprevious
     {
         get
         {
-            _PpreviousOffset = _PpreviousOffset ?? Schema.GetOffset(0xF86750E8BD38AFD2);
-            return ref _Handle.AsRef<CHandle<CPathTrack>>(_PpreviousOffset!.Value);
+            if (_PpreviousOffset == -1) _PpreviousOffset = Schema.GetOffset(0xF86750E8BD38AFD2);
+            return ref _Handle.AsRef<CHandle<CPathTrack>>(_PpreviousOffset);
         }
     }
-    private static nint? _PaltpathOffset;
+    private static nint _PaltpathOffset = -1;
 
     public ref CHandle<CPathTrack> Paltpath
     {
         get
         {
-            _PaltpathOffset = _PaltpathOffset ?? Schema.GetOffset(0xF86750E868D10551);
-            return ref _Handle.AsRef<CHandle<CPathTrack>>(_PaltpathOffset!.Value);
+            if (_PaltpathOffset == -1) _PaltpathOffset = Schema.GetOffset(0xF86750E868D10551);
+            return ref _Handle.AsRef<CHandle<CPathTrack>>(_PaltpathOffset);
         }
     }
-    private static nint? _SpeedOffset;
+    private static nint _SpeedOffset = -1;
 
     public ref float Speed
     {
         get
         {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xF86750E8C631B7EA);
-            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0xF86750E8C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xF86750E85ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0xF86750E85ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _LengthOffset;
+    private static nint _LengthOffset = -1;
 
     public ref float Length
     {
         get
         {
-            _LengthOffset = _LengthOffset ?? Schema.GetOffset(0xF86750E83AFED1B5);
-            return ref _Handle.AsRef<float>(_LengthOffset!.Value);
+            if (_LengthOffset == -1) _LengthOffset = Schema.GetOffset(0xF86750E83AFED1B5);
+            return ref _Handle.AsRef<float>(_LengthOffset);
         }
     }
-    private static nint? _AltNameOffset;
+    private static nint _AltNameOffset = -1;
 
     public string AltName
     {
         get
         {
-            _AltNameOffset = _AltNameOffset ?? Schema.GetOffset(0xF86750E8501CA457);
-            return Schema.GetString(_Handle.Read<nint>(_AltNameOffset!.Value));
+            if (_AltNameOffset == -1) _AltNameOffset = Schema.GetOffset(0xF86750E8501CA457);
+            return Schema.GetString(_Handle.Read<nint>(_AltNameOffset));
         }
         set
         {
-            _AltNameOffset = _AltNameOffset ?? Schema.GetOffset(0xF86750E8501CA457);
-            Schema.SetString(_Handle, _AltNameOffset!.Value, value);
+            if (_AltNameOffset == -1) _AltNameOffset = Schema.GetOffset(0xF86750E8501CA457);
+            Schema.SetString(_Handle, _AltNameOffset, value);
         }
     }
-    private static nint? _IterValOffset;
+    private static nint _IterValOffset = -1;
 
     public ref int IterVal
     {
         get
         {
-            _IterValOffset = _IterValOffset ?? Schema.GetOffset(0xF86750E808061552);
-            return ref _Handle.AsRef<int>(_IterValOffset!.Value);
+            if (_IterValOffset == -1) _IterValOffset = Schema.GetOffset(0xF86750E808061552);
+            return ref _Handle.AsRef<int>(_IterValOffset);
         }
     }
-    private static nint? _OrientationTypeOffset;
+    private static nint _OrientationTypeOffset = -1;
 
     public ref TrackOrientationType_t OrientationType
     {
         get
         {
-            _OrientationTypeOffset = _OrientationTypeOffset ?? Schema.GetOffset(0xF86750E8468ECE0A);
-            return ref _Handle.AsRef<TrackOrientationType_t>(_OrientationTypeOffset!.Value);
+            if (_OrientationTypeOffset == -1) _OrientationTypeOffset = Schema.GetOffset(0xF86750E8468ECE0A);
+            return ref _Handle.AsRef<TrackOrientationType_t>(_OrientationTypeOffset);
         }
     }
-    private static nint? _OnPassOffset;
+    private static nint _OnPassOffset = -1;
 
     public ref CEntityIOOutput OnPass
     {
         get
         {
-            _OnPassOffset = _OnPassOffset ?? Schema.GetOffset(0xF86750E89B527249);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassOffset!.Value);
+            if (_OnPassOffset == -1) _OnPassOffset = Schema.GetOffset(0xF86750E89B527249);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassOffset);
         }
     }
 

@@ -16,70 +16,70 @@ internal partial class CAnimGraphDoc_ParameterConditionImpl : CAnimGraphDoc_Cond
 {
     public CAnimGraphDoc_ParameterConditionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParamNameOffset;
+    private static nint _ParamNameOffset = -1;
 
     public string ParamName
     {
         get
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xF57A2AF6E87A9639);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset!.Value));
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0xF57A2AF6E87A9639);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset));
         }
         set
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xF57A2AF6E87A9639);
-            Schema.SetCUtlString(_Handle, _ParamNameOffset!.Value, value);
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0xF57A2AF6E87A9639);
+            Schema.SetCUtlString(_Handle, _ParamNameOffset, value);
         }
     }
-    private static nint? _ParamIDOffset;
+    private static nint _ParamIDOffset = -1;
     private AnimParamIDImpl? _ParamIDInstance;
 
     public AnimParamID ParamID
     {
         get
         {
-            _ParamIDOffset = _ParamIDOffset ?? Schema.GetOffset(0xF57A2AF6D605831F);
+            if (_ParamIDOffset == -1) _ParamIDOffset = Schema.GetOffset(0xF57A2AF6D605831F);
             var instance = _ParamIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamIDOffset);
             return instance;
         }
     }
-    private static nint? _ComparisonOpOffset;
+    private static nint _ComparisonOpOffset = -1;
 
     public ref Comparison_t ComparisonOp
     {
         get
         {
-            _ComparisonOpOffset = _ComparisonOpOffset ?? Schema.GetOffset(0xF57A2AF6BC2AB253);
-            return ref _Handle.AsRef<Comparison_t>(_ComparisonOpOffset!.Value);
+            if (_ComparisonOpOffset == -1) _ComparisonOpOffset = Schema.GetOffset(0xF57A2AF6BC2AB253);
+            return ref _Handle.AsRef<Comparison_t>(_ComparisonOpOffset);
         }
     }
-    private static nint? _ComparisonValueOffset;
+    private static nint _ComparisonValueOffset = -1;
     private SchemaUntypedField? _ComparisonValueInstance;
 
     public SchemaUntypedField ComparisonValue
     {
         get
         {
-            _ComparisonValueOffset = _ComparisonValueOffset ?? Schema.GetOffset(0xF57A2AF6E8EEEB1D);
+            if (_ComparisonValueOffset == -1) _ComparisonValueOffset = Schema.GetOffset(0xF57A2AF6E8EEEB1D);
             var instance = _ComparisonValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ComparisonValueOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ComparisonValueOffset);
             return instance;
         }
     }
-    private static nint? _ComparisonStringOffset;
+    private static nint _ComparisonStringOffset = -1;
 
     public string ComparisonString
     {
         get
         {
-            _ComparisonStringOffset = _ComparisonStringOffset ?? Schema.GetOffset(0xF57A2AF60AAA1B85);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ComparisonStringOffset!.Value));
+            if (_ComparisonStringOffset == -1) _ComparisonStringOffset = Schema.GetOffset(0xF57A2AF60AAA1B85);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ComparisonStringOffset));
         }
         set
         {
-            _ComparisonStringOffset = _ComparisonStringOffset ?? Schema.GetOffset(0xF57A2AF60AAA1B85);
-            Schema.SetCUtlString(_Handle, _ComparisonStringOffset!.Value, value);
+            if (_ComparisonStringOffset == -1) _ComparisonStringOffset = Schema.GetOffset(0xF57A2AF60AAA1B85);
+            Schema.SetCUtlString(_Handle, _ComparisonStringOffset, value);
         }
     }
 

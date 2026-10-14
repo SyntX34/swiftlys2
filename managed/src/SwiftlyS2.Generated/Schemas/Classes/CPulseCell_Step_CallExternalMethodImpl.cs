@@ -16,62 +16,62 @@ internal partial class CPulseCell_Step_CallExternalMethodImpl : CPulseCell_BaseY
 {
     public CPulseCell_Step_CallExternalMethodImpl(nint handle) : base(handle) { }
 
-    private static nint? _MethodNameOffset;
+    private static nint _MethodNameOffset = -1;
     private SchemaUntypedField? _MethodNameInstance;
 
     public SchemaUntypedField MethodName
     {
         get
         {
-            _MethodNameOffset = _MethodNameOffset ?? Schema.GetOffset(0x6A5B3EF57D863B13);
+            if (_MethodNameOffset == -1) _MethodNameOffset = Schema.GetOffset(0x6A5B3EF57D863B13);
             var instance = _MethodNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MethodNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MethodNameOffset);
             return instance;
         }
     }
-    private static nint? _BlackboardIndexOffset;
+    private static nint _BlackboardIndexOffset = -1;
     private PulseRuntimeBlackboardReferenceIndex_tImpl? _BlackboardIndexInstance;
 
     public PulseRuntimeBlackboardReferenceIndex_t BlackboardIndex
     {
         get
         {
-            _BlackboardIndexOffset = _BlackboardIndexOffset ?? Schema.GetOffset(0x6A5B3EF5C76B0A2C);
+            if (_BlackboardIndexOffset == -1) _BlackboardIndexOffset = Schema.GetOffset(0x6A5B3EF5C76B0A2C);
             var instance = _BlackboardIndexInstance ??= new PulseRuntimeBlackboardReferenceIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BlackboardIndexOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BlackboardIndexOffset);
             return instance;
         }
     }
-    private static nint? _ExpectedArgsOffset;
+    private static nint _ExpectedArgsOffset = -1;
 
     public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> ExpectedArgs
     {
         get
         {
-            _ExpectedArgsOffset = _ExpectedArgsOffset ?? Schema.GetOffset(0x6A5B3EF594EB10E8);
-            return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ExpectedArgsOffset!.Value);
+            if (_ExpectedArgsOffset == -1) _ExpectedArgsOffset = Schema.GetOffset(0x6A5B3EF594EB10E8);
+            return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ExpectedArgsOffset);
         }
     }
-    private static nint? _AsyncCallModeOffset;
+    private static nint _AsyncCallModeOffset = -1;
 
     public ref PulseMethodCallMode_t AsyncCallMode
     {
         get
         {
-            _AsyncCallModeOffset = _AsyncCallModeOffset ?? Schema.GetOffset(0x6A5B3EF535F27204);
-            return ref _Handle.AsRef<PulseMethodCallMode_t>(_AsyncCallModeOffset!.Value);
+            if (_AsyncCallModeOffset == -1) _AsyncCallModeOffset = Schema.GetOffset(0x6A5B3EF535F27204);
+            return ref _Handle.AsRef<PulseMethodCallMode_t>(_AsyncCallModeOffset);
         }
     }
-    private static nint? _OnFinishedOffset;
+    private static nint _OnFinishedOffset = -1;
     private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
-            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0x6A5B3EF58D903E5E);
+            if (_OnFinishedOffset == -1) _OnFinishedOffset = Schema.GetOffset(0x6A5B3EF58D903E5E);
             var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset);
             return instance;
         }
     }

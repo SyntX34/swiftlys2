@@ -16,77 +16,77 @@ internal partial class CCSPlayerBase_CameraServicesImpl : CPlayer_CameraServices
 {
     public CCSPlayerBase_CameraServicesImpl(nint handle) : base(handle) { }
 
-    private static nint? _FOVOffset;
+    private static nint _FOVOffset = -1;
 
     public ref uint FOV
     {
         get
         {
-            _FOVOffset = _FOVOffset ?? Schema.GetOffset(0x5B25D9023C965687);
-            return ref _Handle.AsRef<uint>(_FOVOffset!.Value);
+            if (_FOVOffset == -1) _FOVOffset = Schema.GetOffset(0x5B25D9023C965687);
+            return ref _Handle.AsRef<uint>(_FOVOffset);
         }
     }
-    private static nint? _FOVStartOffset;
+    private static nint _FOVStartOffset = -1;
 
     public ref uint FOVStart
     {
         get
         {
-            _FOVStartOffset = _FOVStartOffset ?? Schema.GetOffset(0x5B25D902612A684D);
-            return ref _Handle.AsRef<uint>(_FOVStartOffset!.Value);
+            if (_FOVStartOffset == -1) _FOVStartOffset = Schema.GetOffset(0x5B25D902612A684D);
+            return ref _Handle.AsRef<uint>(_FOVStartOffset);
         }
     }
-    private static nint? _FOVTimeOffset;
+    private static nint _FOVTimeOffset = -1;
     private GameTime_tImpl? _FOVTimeInstance;
 
     public GameTime_t FOVTime
     {
         get
         {
-            _FOVTimeOffset = _FOVTimeOffset ?? Schema.GetOffset(0x5B25D9024B291C67);
+            if (_FOVTimeOffset == -1) _FOVTimeOffset = Schema.GetOffset(0x5B25D9024B291C67);
             var instance = _FOVTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FOVTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FOVTimeOffset);
             return instance;
         }
     }
-    private static nint? _FOVRateOffset;
+    private static nint _FOVRateOffset = -1;
 
     public ref float FOVRate
     {
         get
         {
-            _FOVRateOffset = _FOVRateOffset ?? Schema.GetOffset(0x5B25D902A334F8AC);
-            return ref _Handle.AsRef<float>(_FOVRateOffset!.Value);
+            if (_FOVRateOffset == -1) _FOVRateOffset = Schema.GetOffset(0x5B25D902A334F8AC);
+            return ref _Handle.AsRef<float>(_FOVRateOffset);
         }
     }
-    private static nint? _ZoomOwnerOffset;
+    private static nint _ZoomOwnerOffset = -1;
 
     public ref CHandle<CBaseEntity> ZoomOwner
     {
         get
         {
-            _ZoomOwnerOffset = _ZoomOwnerOffset ?? Schema.GetOffset(0x5B25D902CA6018CF);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ZoomOwnerOffset!.Value);
+            if (_ZoomOwnerOffset == -1) _ZoomOwnerOffset = Schema.GetOffset(0x5B25D902CA6018CF);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ZoomOwnerOffset);
         }
     }
-    private static nint? _TriggerFogListOffset;
+    private static nint _TriggerFogListOffset = -1;
 
     public ref CUtlVector<CHandle<CBaseEntity>> TriggerFogList
     {
         get
         {
-            _TriggerFogListOffset = _TriggerFogListOffset ?? Schema.GetOffset(0x5B25D902AAF6ED5B);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_TriggerFogListOffset!.Value);
+            if (_TriggerFogListOffset == -1) _TriggerFogListOffset = Schema.GetOffset(0x5B25D902AAF6ED5B);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_TriggerFogListOffset);
         }
     }
-    private static nint? _LastFogTriggerOffset;
+    private static nint _LastFogTriggerOffset = -1;
 
     public ref CHandle<CBaseEntity> LastFogTrigger
     {
         get
         {
-            _LastFogTriggerOffset = _LastFogTriggerOffset ?? Schema.GetOffset(0x5B25D90218A86E0F);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LastFogTriggerOffset!.Value);
+            if (_LastFogTriggerOffset == -1) _LastFogTriggerOffset = Schema.GetOffset(0x5B25D90218A86E0F);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LastFogTriggerOffset);
         }
     }
 

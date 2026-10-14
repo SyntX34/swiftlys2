@@ -16,24 +16,24 @@ internal partial class WaterWheelDrag_tImpl : SchemaClass, WaterWheelDrag_t
 {
     public WaterWheelDrag_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _FractionOfWheelSubmergedOffset;
+    private static nint _FractionOfWheelSubmergedOffset = -1;
 
     public ref float FractionOfWheelSubmerged
     {
         get
         {
-            _FractionOfWheelSubmergedOffset = _FractionOfWheelSubmergedOffset ?? Schema.GetOffset(0x51DDFA66F2D4C09B);
-            return ref _Handle.AsRef<float>(_FractionOfWheelSubmergedOffset!.Value);
+            if (_FractionOfWheelSubmergedOffset == -1) _FractionOfWheelSubmergedOffset = Schema.GetOffset(0x51DDFA66F2D4C09B);
+            return ref _Handle.AsRef<float>(_FractionOfWheelSubmergedOffset);
         }
     }
-    private static nint? _WheelDragOffset;
+    private static nint _WheelDragOffset = -1;
 
     public ref float WheelDrag
     {
         get
         {
-            _WheelDragOffset = _WheelDragOffset ?? Schema.GetOffset(0x51DDFA66B996F340);
-            return ref _Handle.AsRef<float>(_WheelDragOffset!.Value);
+            if (_WheelDragOffset == -1) _WheelDragOffset = Schema.GetOffset(0x51DDFA66B996F340);
+            return ref _Handle.AsRef<float>(_WheelDragOffset);
         }
     }
 

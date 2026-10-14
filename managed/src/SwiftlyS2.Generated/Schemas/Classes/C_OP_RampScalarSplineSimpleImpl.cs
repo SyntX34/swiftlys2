@@ -16,57 +16,57 @@ internal partial class C_OP_RampScalarSplineSimpleImpl : CParticleFunctionOperat
 {
     public C_OP_RampScalarSplineSimpleImpl(nint handle) : base(handle) { }
 
-    private static nint? _RateOffset;
+    private static nint _RateOffset = -1;
 
     public ref float Rate
     {
         get
         {
-            _RateOffset = _RateOffset ?? Schema.GetOffset(0xA8BA5EF2EC3280E7);
-            return ref _Handle.AsRef<float>(_RateOffset!.Value);
+            if (_RateOffset == -1) _RateOffset = Schema.GetOffset(0xA8BA5EF2EC3280E7);
+            return ref _Handle.AsRef<float>(_RateOffset);
         }
     }
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
 
     public ref float StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xA8BA5EF267FE9DC4);
-            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0xA8BA5EF267FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset);
         }
     }
-    private static nint? _EndTimeOffset;
+    private static nint _EndTimeOffset = -1;
 
     public ref float EndTime
     {
         get
         {
-            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0xA8BA5EF22041DF9D);
-            return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
+            if (_EndTimeOffset == -1) _EndTimeOffset = Schema.GetOffset(0xA8BA5EF22041DF9D);
+            return ref _Handle.AsRef<float>(_EndTimeOffset);
         }
     }
-    private static nint? _FieldOffset;
+    private static nint _FieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldInstance;
 
     public ParticleAttributeIndex_t Field
     {
         get
         {
-            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0xA8BA5EF2C257B93B);
+            if (_FieldOffset == -1) _FieldOffset = Schema.GetOffset(0xA8BA5EF2C257B93B);
             var instance = _FieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOffset);
             return instance;
         }
     }
-    private static nint? _EaseOutOffset;
+    private static nint _EaseOutOffset = -1;
 
     public ref bool EaseOut
     {
         get
         {
-            _EaseOutOffset = _EaseOutOffset ?? Schema.GetOffset(0xA8BA5EF28E58B9D1);
-            return ref _Handle.AsRef<bool>(_EaseOutOffset!.Value);
+            if (_EaseOutOffset == -1) _EaseOutOffset = Schema.GetOffset(0xA8BA5EF28E58B9D1);
+            return ref _Handle.AsRef<bool>(_EaseOutOffset);
         }
     }
 

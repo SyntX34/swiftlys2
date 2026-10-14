@@ -16,87 +16,87 @@ internal partial class C_OP_RampScalarLinearImpl : CParticleFunctionOperatorImpl
 {
     public C_OP_RampScalarLinearImpl(nint handle) : base(handle) { }
 
-    private static nint? _RateMinOffset;
+    private static nint _RateMinOffset = -1;
 
     public ref float RateMin
     {
         get
         {
-            _RateMinOffset = _RateMinOffset ?? Schema.GetOffset(0xEE7E510C645AF561);
-            return ref _Handle.AsRef<float>(_RateMinOffset!.Value);
+            if (_RateMinOffset == -1) _RateMinOffset = Schema.GetOffset(0xEE7E510C645AF561);
+            return ref _Handle.AsRef<float>(_RateMinOffset);
         }
     }
-    private static nint? _RateMaxOffset;
+    private static nint _RateMaxOffset = -1;
 
     public ref float RateMax
     {
         get
         {
-            _RateMaxOffset = _RateMaxOffset ?? Schema.GetOffset(0xEE7E510C566E670F);
-            return ref _Handle.AsRef<float>(_RateMaxOffset!.Value);
+            if (_RateMaxOffset == -1) _RateMaxOffset = Schema.GetOffset(0xEE7E510C566E670F);
+            return ref _Handle.AsRef<float>(_RateMaxOffset);
         }
     }
-    private static nint? _StartTime_minOffset;
+    private static nint _StartTime_minOffset = -1;
 
     public ref float StartTime_min
     {
         get
         {
-            _StartTime_minOffset = _StartTime_minOffset ?? Schema.GetOffset(0xEE7E510C5AC75BFB);
-            return ref _Handle.AsRef<float>(_StartTime_minOffset!.Value);
+            if (_StartTime_minOffset == -1) _StartTime_minOffset = Schema.GetOffset(0xEE7E510C5AC75BFB);
+            return ref _Handle.AsRef<float>(_StartTime_minOffset);
         }
     }
-    private static nint? _StartTime_maxOffset;
+    private static nint _StartTime_maxOffset = -1;
 
     public ref float StartTime_max
     {
         get
         {
-            _StartTime_maxOffset = _StartTime_maxOffset ?? Schema.GetOffset(0xEE7E510C50B23185);
-            return ref _Handle.AsRef<float>(_StartTime_maxOffset!.Value);
+            if (_StartTime_maxOffset == -1) _StartTime_maxOffset = Schema.GetOffset(0xEE7E510C50B23185);
+            return ref _Handle.AsRef<float>(_StartTime_maxOffset);
         }
     }
-    private static nint? _EndTime_minOffset;
+    private static nint _EndTime_minOffset = -1;
 
     public ref float EndTime_min
     {
         get
         {
-            _EndTime_minOffset = _EndTime_minOffset ?? Schema.GetOffset(0xEE7E510C7B891932);
-            return ref _Handle.AsRef<float>(_EndTime_minOffset!.Value);
+            if (_EndTime_minOffset == -1) _EndTime_minOffset = Schema.GetOffset(0xEE7E510C7B891932);
+            return ref _Handle.AsRef<float>(_EndTime_minOffset);
         }
     }
-    private static nint? _EndTime_maxOffset;
+    private static nint _EndTime_maxOffset = -1;
 
     public ref float EndTime_max
     {
         get
         {
-            _EndTime_maxOffset = _EndTime_maxOffset ?? Schema.GetOffset(0xEE7E510C8575A138);
-            return ref _Handle.AsRef<float>(_EndTime_maxOffset!.Value);
+            if (_EndTime_maxOffset == -1) _EndTime_maxOffset = Schema.GetOffset(0xEE7E510C8575A138);
+            return ref _Handle.AsRef<float>(_EndTime_maxOffset);
         }
     }
-    private static nint? _FieldOffset;
+    private static nint _FieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldInstance;
 
     public ParticleAttributeIndex_t Field
     {
         get
         {
-            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0xEE7E510CC257B93B);
+            if (_FieldOffset == -1) _FieldOffset = Schema.GetOffset(0xEE7E510CC257B93B);
             var instance = _FieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOffset);
             return instance;
         }
     }
-    private static nint? _ProportionalOpOffset;
+    private static nint _ProportionalOpOffset = -1;
 
     public ref bool ProportionalOp
     {
         get
         {
-            _ProportionalOpOffset = _ProportionalOpOffset ?? Schema.GetOffset(0xEE7E510C0F8832BD);
-            return ref _Handle.AsRef<bool>(_ProportionalOpOffset!.Value);
+            if (_ProportionalOpOffset == -1) _ProportionalOpOffset = Schema.GetOffset(0xEE7E510C0F8832BD);
+            return ref _Handle.AsRef<bool>(_ProportionalOpOffset);
         }
     }
 

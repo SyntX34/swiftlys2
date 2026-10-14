@@ -16,146 +16,146 @@ internal partial class CAssetTagInfoImpl : SchemaClass, CAssetTagInfo
 {
     public CAssetTagInfoImpl(nint handle) : base(handle) { }
 
-    private static nint? _TagNameOffset;
+    private static nint _TagNameOffset = -1;
 
     public string TagName
     {
         get
         {
-            _TagNameOffset = _TagNameOffset ?? Schema.GetOffset(0x3BADF2B6647DC278);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TagNameOffset!.Value));
+            if (_TagNameOffset == -1) _TagNameOffset = Schema.GetOffset(0x3BADF2B6647DC278);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TagNameOffset));
         }
         set
         {
-            _TagNameOffset = _TagNameOffset ?? Schema.GetOffset(0x3BADF2B6647DC278);
-            Schema.SetCUtlString(_Handle, _TagNameOffset!.Value, value);
+            if (_TagNameOffset == -1) _TagNameOffset = Schema.GetOffset(0x3BADF2B6647DC278);
+            Schema.SetCUtlString(_Handle, _TagNameOffset, value);
         }
     }
-    private static nint? _TagDescriptionOffset;
+    private static nint _TagDescriptionOffset = -1;
 
     public string TagDescription
     {
         get
         {
-            _TagDescriptionOffset = _TagDescriptionOffset ?? Schema.GetOffset(0x3BADF2B66B9EE807);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TagDescriptionOffset!.Value));
+            if (_TagDescriptionOffset == -1) _TagDescriptionOffset = Schema.GetOffset(0x3BADF2B66B9EE807);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TagDescriptionOffset));
         }
         set
         {
-            _TagDescriptionOffset = _TagDescriptionOffset ?? Schema.GetOffset(0x3BADF2B66B9EE807);
-            Schema.SetCUtlString(_Handle, _TagDescriptionOffset!.Value, value);
+            if (_TagDescriptionOffset == -1) _TagDescriptionOffset = Schema.GetOffset(0x3BADF2B66B9EE807);
+            Schema.SetCUtlString(_Handle, _TagDescriptionOffset, value);
         }
     }
-    private static nint? _TagIconOffset;
+    private static nint _TagIconOffset = -1;
 
     public string TagIcon
     {
         get
         {
-            _TagIconOffset = _TagIconOffset ?? Schema.GetOffset(0x3BADF2B6A372F092);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TagIconOffset!.Value));
+            if (_TagIconOffset == -1) _TagIconOffset = Schema.GetOffset(0x3BADF2B6A372F092);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TagIconOffset));
         }
         set
         {
-            _TagIconOffset = _TagIconOffset ?? Schema.GetOffset(0x3BADF2B6A372F092);
-            Schema.SetCUtlString(_Handle, _TagIconOffset!.Value, value);
+            if (_TagIconOffset == -1) _TagIconOffset = Schema.GetOffset(0x3BADF2B6A372F092);
+            Schema.SetCUtlString(_Handle, _TagIconOffset, value);
         }
     }
-    private static nint? _TagColorOffset;
+    private static nint _TagColorOffset = -1;
 
     public ref Color TagColor
     {
         get
         {
-            _TagColorOffset = _TagColorOffset ?? Schema.GetOffset(0x3BADF2B690E85812);
-            return ref _Handle.AsRef<Color>(_TagColorOffset!.Value);
+            if (_TagColorOffset == -1) _TagColorOffset = Schema.GetOffset(0x3BADF2B690E85812);
+            return ref _Handle.AsRef<Color>(_TagColorOffset);
         }
     }
-    private static nint? _TagAliasesOffset;
+    private static nint _TagAliasesOffset = -1;
 
     public ref CUtlVector<CUtlString> TagAliases
     {
         get
         {
-            _TagAliasesOffset = _TagAliasesOffset ?? Schema.GetOffset(0x3BADF2B66FEC6E71);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_TagAliasesOffset!.Value);
+            if (_TagAliasesOffset == -1) _TagAliasesOffset = Schema.GetOffset(0x3BADF2B66FEC6E71);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_TagAliasesOffset);
         }
     }
-    private static nint? _ThumbnailOverlayImageOffset;
+    private static nint _ThumbnailOverlayImageOffset = -1;
 
     public string ThumbnailOverlayImage
     {
         get
         {
-            _ThumbnailOverlayImageOffset = _ThumbnailOverlayImageOffset ?? Schema.GetOffset(0x3BADF2B6F8E94C92);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ThumbnailOverlayImageOffset!.Value));
+            if (_ThumbnailOverlayImageOffset == -1) _ThumbnailOverlayImageOffset = Schema.GetOffset(0x3BADF2B6F8E94C92);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ThumbnailOverlayImageOffset));
         }
         set
         {
-            _ThumbnailOverlayImageOffset = _ThumbnailOverlayImageOffset ?? Schema.GetOffset(0x3BADF2B6F8E94C92);
-            Schema.SetCUtlString(_Handle, _ThumbnailOverlayImageOffset!.Value, value);
+            if (_ThumbnailOverlayImageOffset == -1) _ThumbnailOverlayImageOffset = Schema.GetOffset(0x3BADF2B6F8E94C92);
+            Schema.SetCUtlString(_Handle, _ThumbnailOverlayImageOffset, value);
         }
     }
-    private static nint? _TagIndicatesRejectedAssetOffset;
+    private static nint _TagIndicatesRejectedAssetOffset = -1;
 
     public ref bool TagIndicatesRejectedAsset
     {
         get
         {
-            _TagIndicatesRejectedAssetOffset = _TagIndicatesRejectedAssetOffset ?? Schema.GetOffset(0x3BADF2B633A19099);
-            return ref _Handle.AsRef<bool>(_TagIndicatesRejectedAssetOffset!.Value);
+            if (_TagIndicatesRejectedAssetOffset == -1) _TagIndicatesRejectedAssetOffset = Schema.GetOffset(0x3BADF2B633A19099);
+            return ref _Handle.AsRef<bool>(_TagIndicatesRejectedAssetOffset);
         }
     }
-    private static nint? _TagHidesAssetByDefaultOffset;
+    private static nint _TagHidesAssetByDefaultOffset = -1;
 
     public ref bool TagHidesAssetByDefault
     {
         get
         {
-            _TagHidesAssetByDefaultOffset = _TagHidesAssetByDefaultOffset ?? Schema.GetOffset(0x3BADF2B66CA22606);
-            return ref _Handle.AsRef<bool>(_TagHidesAssetByDefaultOffset!.Value);
+            if (_TagHidesAssetByDefaultOffset == -1) _TagHidesAssetByDefaultOffset = Schema.GetOffset(0x3BADF2B66CA22606);
+            return ref _Handle.AsRef<bool>(_TagHidesAssetByDefaultOffset);
         }
     }
-    private static nint? _RestrictAutoTagToAssetTypeOffset;
+    private static nint _RestrictAutoTagToAssetTypeOffset = -1;
 
     public string RestrictAutoTagToAssetType
     {
         get
         {
-            _RestrictAutoTagToAssetTypeOffset = _RestrictAutoTagToAssetTypeOffset ?? Schema.GetOffset(0x3BADF2B6E769CC55);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_RestrictAutoTagToAssetTypeOffset!.Value));
+            if (_RestrictAutoTagToAssetTypeOffset == -1) _RestrictAutoTagToAssetTypeOffset = Schema.GetOffset(0x3BADF2B6E769CC55);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_RestrictAutoTagToAssetTypeOffset));
         }
         set
         {
-            _RestrictAutoTagToAssetTypeOffset = _RestrictAutoTagToAssetTypeOffset ?? Schema.GetOffset(0x3BADF2B6E769CC55);
-            Schema.SetCUtlString(_Handle, _RestrictAutoTagToAssetTypeOffset!.Value, value);
+            if (_RestrictAutoTagToAssetTypeOffset == -1) _RestrictAutoTagToAssetTypeOffset = Schema.GetOffset(0x3BADF2B6E769CC55);
+            Schema.SetCUtlString(_Handle, _RestrictAutoTagToAssetTypeOffset, value);
         }
     }
-    private static nint? _AutoFilterTagOffset;
+    private static nint _AutoFilterTagOffset = -1;
 
     public string AutoFilterTag
     {
         get
         {
-            _AutoFilterTagOffset = _AutoFilterTagOffset ?? Schema.GetOffset(0x3BADF2B6FD3792B0);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AutoFilterTagOffset!.Value));
+            if (_AutoFilterTagOffset == -1) _AutoFilterTagOffset = Schema.GetOffset(0x3BADF2B6FD3792B0);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AutoFilterTagOffset));
         }
         set
         {
-            _AutoFilterTagOffset = _AutoFilterTagOffset ?? Schema.GetOffset(0x3BADF2B6FD3792B0);
-            Schema.SetCUtlString(_Handle, _AutoFilterTagOffset!.Value, value);
+            if (_AutoFilterTagOffset == -1) _AutoFilterTagOffset = Schema.GetOffset(0x3BADF2B6FD3792B0);
+            Schema.SetCUtlString(_Handle, _AutoFilterTagOffset, value);
         }
     }
-    private static nint? _AutoDataTagOffset;
+    private static nint _AutoDataTagOffset = -1;
     private AutoTagVDataCondition_tImpl? _AutoDataTagInstance;
 
     public AutoTagVDataCondition_t AutoDataTag
     {
         get
         {
-            _AutoDataTagOffset = _AutoDataTagOffset ?? Schema.GetOffset(0x3BADF2B6848A5886);
+            if (_AutoDataTagOffset == -1) _AutoDataTagOffset = Schema.GetOffset(0x3BADF2B6848A5886);
             var instance = _AutoDataTagInstance ??= new AutoTagVDataCondition_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AutoDataTagOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AutoDataTagOffset);
             return instance;
         }
     }

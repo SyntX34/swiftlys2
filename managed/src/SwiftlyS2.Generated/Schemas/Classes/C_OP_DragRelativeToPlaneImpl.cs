@@ -16,63 +16,63 @@ internal partial class C_OP_DragRelativeToPlaneImpl : CParticleFunctionOperatorI
 {
     public C_OP_DragRelativeToPlaneImpl(nint handle) : base(handle) { }
 
-    private static nint? _DragAtPlaneOffset;
+    private static nint _DragAtPlaneOffset = -1;
     private CParticleCollectionFloatInputImpl? _DragAtPlaneInstance;
 
     public CParticleCollectionFloatInput DragAtPlane
     {
         get
         {
-            _DragAtPlaneOffset = _DragAtPlaneOffset ?? Schema.GetOffset(0x9D049848176259A2);
+            if (_DragAtPlaneOffset == -1) _DragAtPlaneOffset = Schema.GetOffset(0x9D049848176259A2);
             var instance = _DragAtPlaneInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DragAtPlaneOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DragAtPlaneOffset);
             return instance;
         }
     }
-    private static nint? _FalloffOffset;
+    private static nint _FalloffOffset = -1;
     private CParticleCollectionFloatInputImpl? _FalloffInstance;
 
     public CParticleCollectionFloatInput Falloff
     {
         get
         {
-            _FalloffOffset = _FalloffOffset ?? Schema.GetOffset(0x9D049848FA143DCB);
+            if (_FalloffOffset == -1) _FalloffOffset = Schema.GetOffset(0x9D049848FA143DCB);
             var instance = _FalloffInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _FalloffOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FalloffOffset);
             return instance;
         }
     }
-    private static nint? _DirectionalOffset;
+    private static nint _DirectionalOffset = -1;
 
     public ref bool Directional
     {
         get
         {
-            _DirectionalOffset = _DirectionalOffset ?? Schema.GetOffset(0x9D0498484C2A43E7);
-            return ref _Handle.AsRef<bool>(_DirectionalOffset!.Value);
+            if (_DirectionalOffset == -1) _DirectionalOffset = Schema.GetOffset(0x9D0498484C2A43E7);
+            return ref _Handle.AsRef<bool>(_DirectionalOffset);
         }
     }
-    private static nint? _PlaneNormalOffset;
+    private static nint _PlaneNormalOffset = -1;
     private CParticleCollectionVecInputImpl? _PlaneNormalInstance;
 
     public CParticleCollectionVecInput PlaneNormal
     {
         get
         {
-            _PlaneNormalOffset = _PlaneNormalOffset ?? Schema.GetOffset(0x9D04984821103682);
+            if (_PlaneNormalOffset == -1) _PlaneNormalOffset = Schema.GetOffset(0x9D04984821103682);
             var instance = _PlaneNormalInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _PlaneNormalOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PlaneNormalOffset);
             return instance;
         }
     }
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x9D0498483F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x9D0498483F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
 

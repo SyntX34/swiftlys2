@@ -16,50 +16,50 @@ internal partial class SelectorInstanceData_tImpl : SchemaClass, SelectorInstanc
 {
     public SelectorInstanceData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _WeightsOffset;
+    private static nint _WeightsOffset = -1;
     private SchemaUntypedField? _WeightsInstance;
 
     public SchemaUntypedField Weights
     {
         get
         {
-            _WeightsOffset = _WeightsOffset ?? Schema.GetOffset(0x9F2CBD2C77B2F91E);
+            if (_WeightsOffset == -1) _WeightsOffset = Schema.GetOffset(0x9F2CBD2C77B2F91E);
             var instance = _WeightsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _WeightsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WeightsOffset);
             return instance;
         }
     }
-    private static nint? _CurrentIndexStartTimeOffset;
+    private static nint _CurrentIndexStartTimeOffset = -1;
     private SchemaUntypedField? _CurrentIndexStartTimeInstance;
 
     public SchemaUntypedField CurrentIndexStartTime
     {
         get
         {
-            _CurrentIndexStartTimeOffset = _CurrentIndexStartTimeOffset ?? Schema.GetOffset(0x9F2CBD2C31724957);
+            if (_CurrentIndexStartTimeOffset == -1) _CurrentIndexStartTimeOffset = Schema.GetOffset(0x9F2CBD2C31724957);
             var instance = _CurrentIndexStartTimeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurrentIndexStartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CurrentIndexStartTimeOffset);
             return instance;
         }
     }
-    private static nint? _CurrentIndexOffset;
+    private static nint _CurrentIndexOffset = -1;
 
     public ref int CurrentIndex
     {
         get
         {
-            _CurrentIndexOffset = _CurrentIndexOffset ?? Schema.GetOffset(0x9F2CBD2C883AA9CE);
-            return ref _Handle.AsRef<int>(_CurrentIndexOffset!.Value);
+            if (_CurrentIndexOffset == -1) _CurrentIndexOffset = Schema.GetOffset(0x9F2CBD2C883AA9CE);
+            return ref _Handle.AsRef<int>(_CurrentIndexOffset);
         }
     }
-    private static nint? _PreviousIndexOffset;
+    private static nint _PreviousIndexOffset = -1;
 
     public ref int PreviousIndex
     {
         get
         {
-            _PreviousIndexOffset = _PreviousIndexOffset ?? Schema.GetOffset(0x9F2CBD2CBF6FC124);
-            return ref _Handle.AsRef<int>(_PreviousIndexOffset!.Value);
+            if (_PreviousIndexOffset == -1) _PreviousIndexOffset = Schema.GetOffset(0x9F2CBD2CBF6FC124);
+            return ref _Handle.AsRef<int>(_PreviousIndexOffset);
         }
     }
 

@@ -16,37 +16,37 @@ internal partial class CNmIDEventNode__CDefinitionImpl : CNmIDValueNode__CDefini
 {
     public CNmIDEventNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceStateNodeIdxOffset;
+    private static nint _SourceStateNodeIdxOffset = -1;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x6308800E63F0228C);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0x6308800E63F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
         }
     }
-    private static nint? _EventConditionRulesOffset;
+    private static nint _EventConditionRulesOffset = -1;
     private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
-            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x6308800EA904315F);
+            if (_EventConditionRulesOffset == -1) _EventConditionRulesOffset = Schema.GetOffset(0x6308800EA904315F);
             var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
-            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset);
             return instance;
         }
     }
-    private static nint? _DefaultValueOffset;
+    private static nint _DefaultValueOffset = -1;
 
     public ref CGlobalSymbol DefaultValue
     {
         get
         {
-            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x6308800EBBE0341F);
-            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset!.Value);
+            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x6308800EBBE0341F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset);
         }
     }
 

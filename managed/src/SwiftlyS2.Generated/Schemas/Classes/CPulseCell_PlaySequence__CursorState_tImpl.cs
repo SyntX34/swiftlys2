@@ -16,14 +16,14 @@ internal partial class CPulseCell_PlaySequence__CursorState_tImpl : SchemaClass,
 {
     public CPulseCell_PlaySequence__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _TargetOffset;
+    private static nint _TargetOffset = -1;
 
     public ref CHandle<CBaseAnimGraph> Target
     {
         get
         {
-            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x2C22B771CE35901A);
-            return ref _Handle.AsRef<CHandle<CBaseAnimGraph>>(_TargetOffset!.Value);
+            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0x2C22B771CE35901A);
+            return ref _Handle.AsRef<CHandle<CBaseAnimGraph>>(_TargetOffset);
         }
     }
 

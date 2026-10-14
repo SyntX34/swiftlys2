@@ -16,44 +16,44 @@ internal partial class CNmFollowBoneNode__CDefinitionImpl : CNmPassthroughNode__
 {
     public CNmFollowBoneNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoneOffset;
+    private static nint _BoneOffset = -1;
 
     public ref CGlobalSymbol Bone
     {
         get
         {
-            _BoneOffset = _BoneOffset ?? Schema.GetOffset(0x51BD725C8020F02F);
-            return ref _Handle.AsRef<CGlobalSymbol>(_BoneOffset!.Value);
+            if (_BoneOffset == -1) _BoneOffset = Schema.GetOffset(0x51BD725C8020F02F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_BoneOffset);
         }
     }
-    private static nint? _FollowTargetBoneOffset;
+    private static nint _FollowTargetBoneOffset = -1;
 
     public ref CGlobalSymbol FollowTargetBone
     {
         get
         {
-            _FollowTargetBoneOffset = _FollowTargetBoneOffset ?? Schema.GetOffset(0x51BD725C38216D8B);
-            return ref _Handle.AsRef<CGlobalSymbol>(_FollowTargetBoneOffset!.Value);
+            if (_FollowTargetBoneOffset == -1) _FollowTargetBoneOffset = Schema.GetOffset(0x51BD725C38216D8B);
+            return ref _Handle.AsRef<CGlobalSymbol>(_FollowTargetBoneOffset);
         }
     }
-    private static nint? _EnabledNodeIdxOffset;
+    private static nint _EnabledNodeIdxOffset = -1;
 
     public ref short EnabledNodeIdx
     {
         get
         {
-            _EnabledNodeIdxOffset = _EnabledNodeIdxOffset ?? Schema.GetOffset(0x51BD725CF7CDF5E9);
-            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+            if (_EnabledNodeIdxOffset == -1) _EnabledNodeIdxOffset = Schema.GetOffset(0x51BD725CF7CDF5E9);
+            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset);
         }
     }
-    private static nint? _ModeOffset;
+    private static nint _ModeOffset = -1;
 
     public ref NmFollowBoneMode_t Mode
     {
         get
         {
-            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0x51BD725C90FD5BB2);
-            return ref _Handle.AsRef<NmFollowBoneMode_t>(_ModeOffset!.Value);
+            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0x51BD725C90FD5BB2);
+            return ref _Handle.AsRef<NmFollowBoneMode_t>(_ModeOffset);
         }
     }
 

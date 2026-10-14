@@ -16,65 +16,65 @@ internal partial class C_OP_LerpToInitialPositionImpl : CParticleFunctionOperato
 {
     public C_OP_LerpToInitialPositionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x56175BC3F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x56175BC3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _InterpolationOffset;
+    private static nint _InterpolationOffset = -1;
     private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
-            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x56175BCCF55B987);
+            if (_InterpolationOffset == -1) _InterpolationOffset = Schema.GetOffset(0x56175BCCF55B987);
             var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset);
             return instance;
         }
     }
-    private static nint? _CacheFieldOffset;
+    private static nint _CacheFieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _CacheFieldInstance;
 
     public ParticleAttributeIndex_t CacheField
     {
         get
         {
-            _CacheFieldOffset = _CacheFieldOffset ?? Schema.GetOffset(0x56175BCB3696EEB);
+            if (_CacheFieldOffset == -1) _CacheFieldOffset = Schema.GetOffset(0x56175BCB3696EEB);
             var instance = _CacheFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _CacheFieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CacheFieldOffset);
             return instance;
         }
     }
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
     private CParticleCollectionFloatInputImpl? _ScaleInstance;
 
     public CParticleCollectionFloatInput Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x56175BCB731A42F);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x56175BCB731A42F);
             var instance = _ScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset);
             return instance;
         }
     }
-    private static nint? _Scale1Offset;
+    private static nint _Scale1Offset = -1;
     private CParticleCollectionVecInputImpl? _Scale1Instance;
 
     public CParticleCollectionVecInput Scale1
     {
         get
         {
-            _Scale1Offset = _Scale1Offset ?? Schema.GetOffset(0x56175BC5F596B51);
+            if (_Scale1Offset == -1) _Scale1Offset = Schema.GetOffset(0x56175BC5F596B51);
             var instance = _Scale1Instance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Scale1Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Scale1Offset);
             return instance;
         }
     }

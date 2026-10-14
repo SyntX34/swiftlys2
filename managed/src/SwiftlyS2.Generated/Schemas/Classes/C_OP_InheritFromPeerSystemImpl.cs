@@ -16,50 +16,50 @@ internal partial class C_OP_InheritFromPeerSystemImpl : CParticleFunctionOperato
 {
     public C_OP_InheritFromPeerSystemImpl(nint handle) : base(handle) { }
 
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x8105C85DE5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x8105C85DE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _FieldInputOffset;
+    private static nint _FieldInputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldInputInstance;
 
     public ParticleAttributeIndex_t FieldInput
     {
         get
         {
-            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0x8105C85DAE775669);
+            if (_FieldInputOffset == -1) _FieldInputOffset = Schema.GetOffset(0x8105C85DAE775669);
             var instance = _FieldInputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldInputOffset);
             return instance;
         }
     }
-    private static nint? _IncrementOffset;
+    private static nint _IncrementOffset = -1;
 
     public ref int Increment
     {
         get
         {
-            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0x8105C85D2359F182);
-            return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+            if (_IncrementOffset == -1) _IncrementOffset = Schema.GetOffset(0x8105C85D2359F182);
+            return ref _Handle.AsRef<int>(_IncrementOffset);
         }
     }
-    private static nint? _GroupIDOffset;
+    private static nint _GroupIDOffset = -1;
 
     public ref int GroupID
     {
         get
         {
-            _GroupIDOffset = _GroupIDOffset ?? Schema.GetOffset(0x8105C85D3BB05135);
-            return ref _Handle.AsRef<int>(_GroupIDOffset!.Value);
+            if (_GroupIDOffset == -1) _GroupIDOffset = Schema.GetOffset(0x8105C85D3BB05135);
+            return ref _Handle.AsRef<int>(_GroupIDOffset);
         }
     }
 

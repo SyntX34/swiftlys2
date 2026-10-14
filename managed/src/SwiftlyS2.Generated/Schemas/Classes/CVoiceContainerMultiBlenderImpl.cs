@@ -16,37 +16,37 @@ internal partial class CVoiceContainerMultiBlenderImpl : CVoiceContainerBaseImpl
 {
     public CVoiceContainerMultiBlenderImpl(nint handle) : base(handle) { }
 
-    private static nint? _SoundsToPlayOffset;
+    private static nint _SoundsToPlayOffset = -1;
     private CSoundContainerReferenceArrayImpl? _SoundsToPlayInstance;
 
     public CSoundContainerReferenceArray SoundsToPlay
     {
         get
         {
-            _SoundsToPlayOffset = _SoundsToPlayOffset ?? Schema.GetOffset(0x98BE4B54DCB5F70E);
+            if (_SoundsToPlayOffset == -1) _SoundsToPlayOffset = Schema.GetOffset(0x98BE4B54DCB5F70E);
             var instance = _SoundsToPlayInstance ??= new CSoundContainerReferenceArrayImpl(0);
-            instance.DangerousSetHandle(_Handle + _SoundsToPlayOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SoundsToPlayOffset);
             return instance;
         }
     }
-    private static nint? _BlendFactorOffset;
+    private static nint _BlendFactorOffset = -1;
 
     public ref float BlendFactor
     {
         get
         {
-            _BlendFactorOffset = _BlendFactorOffset ?? Schema.GetOffset(0x98BE4B54FF4DA451);
-            return ref _Handle.AsRef<float>(_BlendFactorOffset!.Value);
+            if (_BlendFactorOffset == -1) _BlendFactorOffset = Schema.GetOffset(0x98BE4B54FF4DA451);
+            return ref _Handle.AsRef<float>(_BlendFactorOffset);
         }
     }
-    private static nint? _CrossoverOffset;
+    private static nint _CrossoverOffset = -1;
 
     public ref float Crossover
     {
         get
         {
-            _CrossoverOffset = _CrossoverOffset ?? Schema.GetOffset(0x98BE4B54F50498C7);
-            return ref _Handle.AsRef<float>(_CrossoverOffset!.Value);
+            if (_CrossoverOffset == -1) _CrossoverOffset = Schema.GetOffset(0x98BE4B54F50498C7);
+            return ref _Handle.AsRef<float>(_CrossoverOffset);
         }
     }
 

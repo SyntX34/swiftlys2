@@ -16,54 +16,54 @@ internal partial class CSeqBoneMaskListImpl : SchemaClass, CSeqBoneMaskList
 {
     public CSeqBoneMaskListImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public ref CBufferString Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xCD7B4EF763D22D49);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xCD7B4EF763D22D49);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset);
         }
     }
-    private static nint? _LocalBoneArrayOffset;
+    private static nint _LocalBoneArrayOffset = -1;
 
     public ref CUtlVector<short> LocalBoneArray
     {
         get
         {
-            _LocalBoneArrayOffset = _LocalBoneArrayOffset ?? Schema.GetOffset(0xCD7B4EF70B8EFD6B);
-            return ref _Handle.AsRef<CUtlVector<short>>(_LocalBoneArrayOffset!.Value);
+            if (_LocalBoneArrayOffset == -1) _LocalBoneArrayOffset = Schema.GetOffset(0xCD7B4EF70B8EFD6B);
+            return ref _Handle.AsRef<CUtlVector<short>>(_LocalBoneArrayOffset);
         }
     }
-    private static nint? _BoneWeightArrayOffset;
+    private static nint _BoneWeightArrayOffset = -1;
 
     public ref CUtlVector<float> BoneWeightArray
     {
         get
         {
-            _BoneWeightArrayOffset = _BoneWeightArrayOffset ?? Schema.GetOffset(0xCD7B4EF747E1E612);
-            return ref _Handle.AsRef<CUtlVector<float>>(_BoneWeightArrayOffset!.Value);
+            if (_BoneWeightArrayOffset == -1) _BoneWeightArrayOffset = Schema.GetOffset(0xCD7B4EF747E1E612);
+            return ref _Handle.AsRef<CUtlVector<float>>(_BoneWeightArrayOffset);
         }
     }
-    private static nint? _DefaultMorphCtrlWeightOffset;
+    private static nint _DefaultMorphCtrlWeightOffset = -1;
 
     public ref float DefaultMorphCtrlWeight
     {
         get
         {
-            _DefaultMorphCtrlWeightOffset = _DefaultMorphCtrlWeightOffset ?? Schema.GetOffset(0xCD7B4EF7AA0F3843);
-            return ref _Handle.AsRef<float>(_DefaultMorphCtrlWeightOffset!.Value);
+            if (_DefaultMorphCtrlWeightOffset == -1) _DefaultMorphCtrlWeightOffset = Schema.GetOffset(0xCD7B4EF7AA0F3843);
+            return ref _Handle.AsRef<float>(_DefaultMorphCtrlWeightOffset);
         }
     }
-    private static nint? _MorphCtrlWeightArrayOffset;
+    private static nint _MorphCtrlWeightArrayOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> MorphCtrlWeightArray
     {
         get
         {
-            _MorphCtrlWeightArrayOffset = _MorphCtrlWeightArrayOffset ?? Schema.GetOffset(0xCD7B4EF72C45A089);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MorphCtrlWeightArrayOffset!.Value);
+            if (_MorphCtrlWeightArrayOffset == -1) _MorphCtrlWeightArrayOffset = Schema.GetOffset(0xCD7B4EF72C45A089);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MorphCtrlWeightArrayOffset);
         }
     }
 

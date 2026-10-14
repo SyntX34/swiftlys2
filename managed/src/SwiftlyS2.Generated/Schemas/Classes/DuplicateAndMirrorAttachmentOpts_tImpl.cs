@@ -16,69 +16,69 @@ internal partial class DuplicateAndMirrorAttachmentOpts_tImpl : SchemaClass, Dup
 {
     public DuplicateAndMirrorAttachmentOpts_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF54F81ACCAE8A266);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xF54F81ACCAE8A266);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF54F81ACCAE8A266);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xF54F81ACCAE8A266);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _MirrorSpaceOffset;
+    private static nint _MirrorSpaceOffset = -1;
 
     public ref MirrorSpace_t MirrorSpace
     {
         get
         {
-            _MirrorSpaceOffset = _MirrorSpaceOffset ?? Schema.GetOffset(0xF54F81ACDD01D08F);
-            return ref _Handle.AsRef<MirrorSpace_t>(_MirrorSpaceOffset!.Value);
+            if (_MirrorSpaceOffset == -1) _MirrorSpaceOffset = Schema.GetOffset(0xF54F81ACDD01D08F);
+            return ref _Handle.AsRef<MirrorSpace_t>(_MirrorSpaceOffset);
         }
     }
-    private static nint? _SwapLeftRightParentBonesOffset;
+    private static nint _SwapLeftRightParentBonesOffset = -1;
 
     public ref bool SwapLeftRightParentBones
     {
         get
         {
-            _SwapLeftRightParentBonesOffset = _SwapLeftRightParentBonesOffset ?? Schema.GetOffset(0xF54F81ACEA36EE42);
-            return ref _Handle.AsRef<bool>(_SwapLeftRightParentBonesOffset!.Value);
+            if (_SwapLeftRightParentBonesOffset == -1) _SwapLeftRightParentBonesOffset = Schema.GetOffset(0xF54F81ACEA36EE42);
+            return ref _Handle.AsRef<bool>(_SwapLeftRightParentBonesOffset);
         }
     }
-    private static nint? _MirrorXOffset;
+    private static nint _MirrorXOffset = -1;
 
     public ref bool MirrorX
     {
         get
         {
-            _MirrorXOffset = _MirrorXOffset ?? Schema.GetOffset(0xF54F81AC304DF10E);
-            return ref _Handle.AsRef<bool>(_MirrorXOffset!.Value);
+            if (_MirrorXOffset == -1) _MirrorXOffset = Schema.GetOffset(0xF54F81AC304DF10E);
+            return ref _Handle.AsRef<bool>(_MirrorXOffset);
         }
     }
-    private static nint? _MirrorYOffset;
+    private static nint _MirrorYOffset = -1;
 
     public ref bool MirrorY
     {
         get
         {
-            _MirrorYOffset = _MirrorYOffset ?? Schema.GetOffset(0xF54F81AC314DF2A1);
-            return ref _Handle.AsRef<bool>(_MirrorYOffset!.Value);
+            if (_MirrorYOffset == -1) _MirrorYOffset = Schema.GetOffset(0xF54F81AC314DF2A1);
+            return ref _Handle.AsRef<bool>(_MirrorYOffset);
         }
     }
-    private static nint? _MirrorZOffset;
+    private static nint _MirrorZOffset = -1;
 
     public ref bool MirrorZ
     {
         get
         {
-            _MirrorZOffset = _MirrorZOffset ?? Schema.GetOffset(0xF54F81AC2E4DEDE8);
-            return ref _Handle.AsRef<bool>(_MirrorZOffset!.Value);
+            if (_MirrorZOffset == -1) _MirrorZOffset = Schema.GetOffset(0xF54F81AC2E4DEDE8);
+            return ref _Handle.AsRef<bool>(_MirrorZOffset);
         }
     }
 

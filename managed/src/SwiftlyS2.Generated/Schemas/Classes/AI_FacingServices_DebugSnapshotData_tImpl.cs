@@ -16,74 +16,74 @@ internal partial class AI_FacingServices_DebugSnapshotData_tImpl : SchemaClass, 
 {
     public AI_FacingServices_DebugSnapshotData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _Npc_positionOffset;
+    private static nint _Npc_positionOffset = -1;
 
     public ref Vector Npc_position
     {
         get
         {
-            _Npc_positionOffset = _Npc_positionOffset ?? Schema.GetOffset(0x397C35ADFD95A752);
-            return ref _Handle.AsRef<Vector>(_Npc_positionOffset!.Value);
+            if (_Npc_positionOffset == -1) _Npc_positionOffset = Schema.GetOffset(0x397C35ADFD95A752);
+            return ref _Handle.AsRef<Vector>(_Npc_positionOffset);
         }
     }
-    private static nint? _Facing_target_sourceOffset;
+    private static nint _Facing_target_sourceOffset = -1;
 
     public ref CGlobalSymbol Facing_target_source
     {
         get
         {
-            _Facing_target_sourceOffset = _Facing_target_sourceOffset ?? Schema.GetOffset(0x397C35AD97C4210F);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Facing_target_sourceOffset!.Value);
+            if (_Facing_target_sourceOffset == -1) _Facing_target_sourceOffset = Schema.GetOffset(0x397C35AD97C4210F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Facing_target_sourceOffset);
         }
     }
-    private static nint? _Facing_targetOffset;
+    private static nint _Facing_targetOffset = -1;
 
     public ref Vector Facing_target
     {
         get
         {
-            _Facing_targetOffset = _Facing_targetOffset ?? Schema.GetOffset(0x397C35ADC53AE599);
-            return ref _Handle.AsRef<Vector>(_Facing_targetOffset!.Value);
+            if (_Facing_targetOffset == -1) _Facing_targetOffset = Schema.GetOffset(0x397C35ADC53AE599);
+            return ref _Handle.AsRef<Vector>(_Facing_targetOffset);
         }
     }
-    private static nint? _Schedule_facing_priorityOffset;
+    private static nint _Schedule_facing_priorityOffset = -1;
 
     public ref CGlobalSymbol Schedule_facing_priority
     {
         get
         {
-            _Schedule_facing_priorityOffset = _Schedule_facing_priorityOffset ?? Schema.GetOffset(0x397C35ADF0034084);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Schedule_facing_priorityOffset!.Value);
+            if (_Schedule_facing_priorityOffset == -1) _Schedule_facing_priorityOffset = Schema.GetOffset(0x397C35ADF0034084);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Schedule_facing_priorityOffset);
         }
     }
-    private static nint? _Strafing_sourceOffset;
+    private static nint _Strafing_sourceOffset = -1;
 
     public ref CGlobalSymbol Strafing_source
     {
         get
         {
-            _Strafing_sourceOffset = _Strafing_sourceOffset ?? Schema.GetOffset(0x397C35AD37EC77CF);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Strafing_sourceOffset!.Value);
+            if (_Strafing_sourceOffset == -1) _Strafing_sourceOffset = Schema.GetOffset(0x397C35AD37EC77CF);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Strafing_sourceOffset);
         }
     }
-    private static nint? _Strafing_enabledOffset;
+    private static nint _Strafing_enabledOffset = -1;
 
     public ref bool Strafing_enabled
     {
         get
         {
-            _Strafing_enabledOffset = _Strafing_enabledOffset ?? Schema.GetOffset(0x397C35AD31C5187F);
-            return ref _Handle.AsRef<bool>(_Strafing_enabledOffset!.Value);
+            if (_Strafing_enabledOffset == -1) _Strafing_enabledOffset = Schema.GetOffset(0x397C35AD31C5187F);
+            return ref _Handle.AsRef<bool>(_Strafing_enabledOffset);
         }
     }
-    private static nint? _Movement_idOffset;
+    private static nint _Movement_idOffset = -1;
 
     public ref CGlobalSymbol Movement_id
     {
         get
         {
-            _Movement_idOffset = _Movement_idOffset ?? Schema.GetOffset(0x397C35AD85B83220);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Movement_idOffset!.Value);
+            if (_Movement_idOffset == -1) _Movement_idOffset = Schema.GetOffset(0x397C35AD85B83220);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Movement_idOffset);
         }
     }
 

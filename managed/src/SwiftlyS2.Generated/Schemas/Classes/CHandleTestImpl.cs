@@ -16,24 +16,24 @@ internal partial class CHandleTestImpl : CBaseEntityImpl, CHandleTest
 {
     public CHandleTestImpl(nint handle) : base(handle) { }
 
-    private static nint? _HandleOffset;
+    private static nint _HandleOffset = -1;
 
     public ref CHandle<CBaseEntity> Handle
     {
         get
         {
-            _HandleOffset = _HandleOffset ?? Schema.GetOffset(0xCC5023E89D208453);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_HandleOffset!.Value);
+            if (_HandleOffset == -1) _HandleOffset = Schema.GetOffset(0xCC5023E89D208453);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_HandleOffset);
         }
     }
-    private static nint? _SendHandleOffset;
+    private static nint _SendHandleOffset = -1;
 
     public ref bool SendHandle
     {
         get
         {
-            _SendHandleOffset = _SendHandleOffset ?? Schema.GetOffset(0xCC5023E8EACC8501);
-            return ref _Handle.AsRef<bool>(_SendHandleOffset!.Value);
+            if (_SendHandleOffset == -1) _SendHandleOffset = Schema.GetOffset(0xCC5023E8EACC8501);
+            return ref _Handle.AsRef<bool>(_SendHandleOffset);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CPlatTriggerImpl : CBaseModelEntityImpl, CPlatTrigger
 {
     public CPlatTriggerImpl(nint handle) : base(handle) { }
 
-    private static nint? _PlatformOffset;
+    private static nint _PlatformOffset = -1;
 
     public ref CHandle<CFuncPlat> Platform
     {
         get
         {
-            _PlatformOffset = _PlatformOffset ?? Schema.GetOffset(0xE5D76A656D16AFF0);
-            return ref _Handle.AsRef<CHandle<CFuncPlat>>(_PlatformOffset!.Value);
+            if (_PlatformOffset == -1) _PlatformOffset = Schema.GetOffset(0xE5D76A656D16AFF0);
+            return ref _Handle.AsRef<CHandle<CFuncPlat>>(_PlatformOffset);
         }
     }
 

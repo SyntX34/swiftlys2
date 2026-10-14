@@ -16,44 +16,44 @@ internal partial class CPlayer_ObserverServicesImpl : CPlayerPawnComponentImpl, 
 {
     public CPlayer_ObserverServicesImpl(nint handle) : base(handle) { }
 
-    private static nint? _ObserverModeOffset;
+    private static nint _ObserverModeOffset = -1;
 
     public ref byte ObserverMode
     {
         get
         {
-            _ObserverModeOffset = _ObserverModeOffset ?? Schema.GetOffset(0x1611315ADAB57B35);
-            return ref _Handle.AsRef<byte>(_ObserverModeOffset!.Value);
+            if (_ObserverModeOffset == -1) _ObserverModeOffset = Schema.GetOffset(0x1611315ADAB57B35);
+            return ref _Handle.AsRef<byte>(_ObserverModeOffset);
         }
     }
-    private static nint? _ObserverTargetOffset;
+    private static nint _ObserverTargetOffset = -1;
 
     public ref CHandle<CBaseEntity> ObserverTarget
     {
         get
         {
-            _ObserverTargetOffset = _ObserverTargetOffset ?? Schema.GetOffset(0x1611315A24779C4C);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ObserverTargetOffset!.Value);
+            if (_ObserverTargetOffset == -1) _ObserverTargetOffset = Schema.GetOffset(0x1611315A24779C4C);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ObserverTargetOffset);
         }
     }
-    private static nint? _ObserverLastModeOffset;
+    private static nint _ObserverLastModeOffset = -1;
 
     public ref ObserverMode_t ObserverLastMode
     {
         get
         {
-            _ObserverLastModeOffset = _ObserverLastModeOffset ?? Schema.GetOffset(0x1611315A555EDA49);
-            return ref _Handle.AsRef<ObserverMode_t>(_ObserverLastModeOffset!.Value);
+            if (_ObserverLastModeOffset == -1) _ObserverLastModeOffset = Schema.GetOffset(0x1611315A555EDA49);
+            return ref _Handle.AsRef<ObserverMode_t>(_ObserverLastModeOffset);
         }
     }
-    private static nint? _ForcedObserverModeOffset;
+    private static nint _ForcedObserverModeOffset = -1;
 
     public ref bool ForcedObserverMode
     {
         get
         {
-            _ForcedObserverModeOffset = _ForcedObserverModeOffset ?? Schema.GetOffset(0x1611315A276632E1);
-            return ref _Handle.AsRef<bool>(_ForcedObserverModeOffset!.Value);
+            if (_ForcedObserverModeOffset == -1) _ForcedObserverModeOffset = Schema.GetOffset(0x1611315A276632E1);
+            return ref _Handle.AsRef<bool>(_ForcedObserverModeOffset);
         }
     }
 

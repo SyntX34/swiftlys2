@@ -16,16 +16,16 @@ internal partial class CModelConfigElement_RandomColorImpl : CModelConfigElement
 {
     public CModelConfigElement_RandomColorImpl(nint handle) : base(handle) { }
 
-    private static nint? _GradientOffset;
+    private static nint _GradientOffset = -1;
     private SchemaUntypedField? _GradientInstance;
 
     public SchemaUntypedField Gradient
     {
         get
         {
-            _GradientOffset = _GradientOffset ?? Schema.GetOffset(0x375CC66605C95F25);
+            if (_GradientOffset == -1) _GradientOffset = Schema.GetOffset(0x375CC66605C95F25);
             var instance = _GradientInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _GradientOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GradientOffset);
             return instance;
         }
     }

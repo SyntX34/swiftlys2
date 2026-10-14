@@ -16,74 +16,74 @@ internal partial class CMixPropertyBaseImpl : SchemaClass, CMixPropertyBase
 {
     public CMixPropertyBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF774B5804D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xF774B5804D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF774B5804D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xF774B5804D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _CommentOffset;
+    private static nint _CommentOffset = -1;
 
     public string Comment
     {
         get
         {
-            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0xF774B5800EA935DE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset!.Value));
+            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0xF774B5800EA935DE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset));
         }
         set
         {
-            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0xF774B5800EA935DE);
-            Schema.SetCUtlString(_Handle, _CommentOffset!.Value, value);
+            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0xF774B5800EA935DE);
+            Schema.SetCUtlString(_Handle, _CommentOffset, value);
         }
     }
-    private static nint? _ActiveOffset;
+    private static nint _ActiveOffset = -1;
 
     public ref bool Active
     {
         get
         {
-            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0xF774B5808334208F);
-            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+            if (_ActiveOffset == -1) _ActiveOffset = Schema.GetOffset(0xF774B5808334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset);
         }
     }
-    private static nint? _SoloOffset;
+    private static nint _SoloOffset = -1;
 
     public ref bool Solo
     {
         get
         {
-            _SoloOffset = _SoloOffset ?? Schema.GetOffset(0xF774B580CF623EAA);
-            return ref _Handle.AsRef<bool>(_SoloOffset!.Value);
+            if (_SoloOffset == -1) _SoloOffset = Schema.GetOffset(0xF774B580CF623EAA);
+            return ref _Handle.AsRef<bool>(_SoloOffset);
         }
     }
-    private static nint? _EditPropertiesOffset;
+    private static nint _EditPropertiesOffset = -1;
 
     public ref bool EditProperties
     {
         get
         {
-            _EditPropertiesOffset = _EditPropertiesOffset ?? Schema.GetOffset(0xF774B580D1E0B058);
-            return ref _Handle.AsRef<bool>(_EditPropertiesOffset!.Value);
+            if (_EditPropertiesOffset == -1) _EditPropertiesOffset = Schema.GetOffset(0xF774B580D1E0B058);
+            return ref _Handle.AsRef<bool>(_EditPropertiesOffset);
         }
     }
-    private static nint? _GenerationIdOffset;
+    private static nint _GenerationIdOffset = -1;
 
     public ref int GenerationId
     {
         get
         {
-            _GenerationIdOffset = _GenerationIdOffset ?? Schema.GetOffset(0xF774B580C91578D6);
-            return ref _Handle.AsRef<int>(_GenerationIdOffset!.Value);
+            if (_GenerationIdOffset == -1) _GenerationIdOffset = Schema.GetOffset(0xF774B580C91578D6);
+            return ref _Handle.AsRef<int>(_GenerationIdOffset);
         }
     }
 

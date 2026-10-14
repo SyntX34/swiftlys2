@@ -16,143 +16,143 @@ internal partial class C_INIT_CreateWithinCapsuleTransformImpl : CParticleFuncti
 {
     public C_INIT_CreateWithinCapsuleTransformImpl(nint handle) : base(handle) { }
 
-    private static nint? _RadiusMinOffset;
+    private static nint _RadiusMinOffset = -1;
     private CPerParticleFloatInputImpl? _RadiusMinInstance;
 
     public CPerParticleFloatInput RadiusMin
     {
         get
         {
-            _RadiusMinOffset = _RadiusMinOffset ?? Schema.GetOffset(0xC088DBA85AD00941);
+            if (_RadiusMinOffset == -1) _RadiusMinOffset = Schema.GetOffset(0xC088DBA85AD00941);
             var instance = _RadiusMinInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RadiusMinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RadiusMinOffset);
             return instance;
         }
     }
-    private static nint? _RadiusMaxOffset;
+    private static nint _RadiusMaxOffset = -1;
     private CPerParticleFloatInputImpl? _RadiusMaxInstance;
 
     public CPerParticleFloatInput RadiusMax
     {
         get
         {
-            _RadiusMaxOffset = _RadiusMaxOffset ?? Schema.GetOffset(0xC088DBA84CE37AEF);
+            if (_RadiusMaxOffset == -1) _RadiusMaxOffset = Schema.GetOffset(0xC088DBA84CE37AEF);
             var instance = _RadiusMaxInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RadiusMaxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RadiusMaxOffset);
             return instance;
         }
     }
-    private static nint? _HeightOffset;
+    private static nint _HeightOffset = -1;
     private CPerParticleFloatInputImpl? _HeightInstance;
 
     public CPerParticleFloatInput Height
     {
         get
         {
-            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0xC088DBA86631D40E);
+            if (_HeightOffset == -1) _HeightOffset = Schema.GetOffset(0xC088DBA86631D40E);
             var instance = _HeightInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _HeightOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HeightOffset);
             return instance;
         }
     }
-    private static nint? _TransformInputOffset;
+    private static nint _TransformInputOffset = -1;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xC088DBA8B3FDC289);
+            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0xC088DBA8B3FDC289);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
             return instance;
         }
     }
-    private static nint? _SpeedMinOffset;
+    private static nint _SpeedMinOffset = -1;
     private CPerParticleFloatInputImpl? _SpeedMinInstance;
 
     public CPerParticleFloatInput SpeedMin
     {
         get
         {
-            _SpeedMinOffset = _SpeedMinOffset ?? Schema.GetOffset(0xC088DBA8B989E1F8);
+            if (_SpeedMinOffset == -1) _SpeedMinOffset = Schema.GetOffset(0xC088DBA8B989E1F8);
             var instance = _SpeedMinInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpeedMinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SpeedMinOffset);
             return instance;
         }
     }
-    private static nint? _SpeedMaxOffset;
+    private static nint _SpeedMaxOffset = -1;
     private CPerParticleFloatInputImpl? _SpeedMaxInstance;
 
     public CPerParticleFloatInput SpeedMax
     {
         get
         {
-            _SpeedMaxOffset = _SpeedMaxOffset ?? Schema.GetOffset(0xC088DBA8CF9D8C52);
+            if (_SpeedMaxOffset == -1) _SpeedMaxOffset = Schema.GetOffset(0xC088DBA8CF9D8C52);
             var instance = _SpeedMaxInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset);
             return instance;
         }
     }
-    private static nint? _SpeedRandExpOffset;
+    private static nint _SpeedRandExpOffset = -1;
 
     public ref float SpeedRandExp
     {
         get
         {
-            _SpeedRandExpOffset = _SpeedRandExpOffset ?? Schema.GetOffset(0xC088DBA83303A1AA);
-            return ref _Handle.AsRef<float>(_SpeedRandExpOffset!.Value);
+            if (_SpeedRandExpOffset == -1) _SpeedRandExpOffset = Schema.GetOffset(0xC088DBA83303A1AA);
+            return ref _Handle.AsRef<float>(_SpeedRandExpOffset);
         }
     }
-    private static nint? _LocalCoordinateSystemSpeedMinOffset;
+    private static nint _LocalCoordinateSystemSpeedMinOffset = -1;
     private CPerParticleVecInputImpl? _LocalCoordinateSystemSpeedMinInstance;
 
     public CPerParticleVecInput LocalCoordinateSystemSpeedMin
     {
         get
         {
-            _LocalCoordinateSystemSpeedMinOffset = _LocalCoordinateSystemSpeedMinOffset ?? Schema.GetOffset(0xC088DBA8A4A0F1AE);
+            if (_LocalCoordinateSystemSpeedMinOffset == -1) _LocalCoordinateSystemSpeedMinOffset = Schema.GetOffset(0xC088DBA8A4A0F1AE);
             var instance = _LocalCoordinateSystemSpeedMinInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LocalCoordinateSystemSpeedMinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LocalCoordinateSystemSpeedMinOffset);
             return instance;
         }
     }
-    private static nint? _LocalCoordinateSystemSpeedMaxOffset;
+    private static nint _LocalCoordinateSystemSpeedMaxOffset = -1;
     private CPerParticleVecInputImpl? _LocalCoordinateSystemSpeedMaxInstance;
 
     public CPerParticleVecInput LocalCoordinateSystemSpeedMax
     {
         get
         {
-            _LocalCoordinateSystemSpeedMaxOffset = _LocalCoordinateSystemSpeedMaxOffset ?? Schema.GetOffset(0xC088DBA8968D53EC);
+            if (_LocalCoordinateSystemSpeedMaxOffset == -1) _LocalCoordinateSystemSpeedMaxOffset = Schema.GetOffset(0xC088DBA8968D53EC);
             var instance = _LocalCoordinateSystemSpeedMaxInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LocalCoordinateSystemSpeedMaxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LocalCoordinateSystemSpeedMaxOffset);
             return instance;
         }
     }
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xC088DBA8E5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xC088DBA8E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _FieldVelocityOffset;
+    private static nint _FieldVelocityOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldVelocityInstance;
 
     public ParticleAttributeIndex_t FieldVelocity
     {
         get
         {
-            _FieldVelocityOffset = _FieldVelocityOffset ?? Schema.GetOffset(0xC088DBA8852EBFAC);
+            if (_FieldVelocityOffset == -1) _FieldVelocityOffset = Schema.GetOffset(0xC088DBA8852EBFAC);
             var instance = _FieldVelocityInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldVelocityOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldVelocityOffset);
             return instance;
         }
     }

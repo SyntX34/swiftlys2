@@ -16,14 +16,14 @@ internal partial class CFilterProximityImpl : CBaseFilterImpl, CFilterProximity
 {
     public CFilterProximityImpl(nint handle) : base(handle) { }
 
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xE1C36A555ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0xE1C36A555ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
 

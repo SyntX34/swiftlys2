@@ -16,44 +16,44 @@ internal partial class CMixControlInputImpl : CMixPropertyBaseImpl, CMixControlI
 {
     public CMixControlInputImpl(nint handle) : base(handle) { }
 
-    private static nint? _DefaultValueOffset;
+    private static nint _DefaultValueOffset = -1;
 
     public ref float DefaultValue
     {
         get
         {
-            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x3FB297F7700AB429);
-            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x3FB297F7700AB429);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset);
         }
     }
-    private static nint? _MinRangeOffset;
+    private static nint _MinRangeOffset = -1;
 
     public ref float MinRange
     {
         get
         {
-            _MinRangeOffset = _MinRangeOffset ?? Schema.GetOffset(0x3FB297F77B259A36);
-            return ref _Handle.AsRef<float>(_MinRangeOffset!.Value);
+            if (_MinRangeOffset == -1) _MinRangeOffset = Schema.GetOffset(0x3FB297F77B259A36);
+            return ref _Handle.AsRef<float>(_MinRangeOffset);
         }
     }
-    private static nint? _MaxRangeOffset;
+    private static nint _MaxRangeOffset = -1;
 
     public ref float MaxRange
     {
         get
         {
-            _MaxRangeOffset = _MaxRangeOffset ?? Schema.GetOffset(0x3FB297F7D163BBBC);
-            return ref _Handle.AsRef<float>(_MaxRangeOffset!.Value);
+            if (_MaxRangeOffset == -1) _MaxRangeOffset = Schema.GetOffset(0x3FB297F7D163BBBC);
+            return ref _Handle.AsRef<float>(_MaxRangeOffset);
         }
     }
-    private static nint? _UseDecibelsOffset;
+    private static nint _UseDecibelsOffset = -1;
 
     public ref bool UseDecibels
     {
         get
         {
-            _UseDecibelsOffset = _UseDecibelsOffset ?? Schema.GetOffset(0x3FB297F7C00AFAFF);
-            return ref _Handle.AsRef<bool>(_UseDecibelsOffset!.Value);
+            if (_UseDecibelsOffset == -1) _UseDecibelsOffset = Schema.GetOffset(0x3FB297F7C00AFAFF);
+            return ref _Handle.AsRef<bool>(_UseDecibelsOffset);
         }
     }
 

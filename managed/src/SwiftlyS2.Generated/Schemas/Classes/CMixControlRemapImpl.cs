@@ -16,54 +16,54 @@ internal partial class CMixControlRemapImpl : CMixPropertyBaseImpl, CMixControlR
 {
     public CMixControlRemapImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputMinOffset;
+    private static nint _InputMinOffset = -1;
 
     public ref float InputMin
     {
         get
         {
-            _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0xF326AA0AE88A0D0F);
-            return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+            if (_InputMinOffset == -1) _InputMinOffset = Schema.GetOffset(0xF326AA0AE88A0D0F);
+            return ref _Handle.AsRef<float>(_InputMinOffset);
         }
     }
-    private static nint? _InputMaxOffset;
+    private static nint _InputMaxOffset = -1;
 
     public ref float InputMax
     {
         get
         {
-            _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0xF326AA0AD6766901);
-            return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+            if (_InputMaxOffset == -1) _InputMaxOffset = Schema.GetOffset(0xF326AA0AD6766901);
+            return ref _Handle.AsRef<float>(_InputMaxOffset);
         }
     }
-    private static nint? _OutputStartOffset;
+    private static nint _OutputStartOffset = -1;
 
     public ref float OutputStart
     {
         get
         {
-            _OutputStartOffset = _OutputStartOffset ?? Schema.GetOffset(0xF326AA0A306D561A);
-            return ref _Handle.AsRef<float>(_OutputStartOffset!.Value);
+            if (_OutputStartOffset == -1) _OutputStartOffset = Schema.GetOffset(0xF326AA0A306D561A);
+            return ref _Handle.AsRef<float>(_OutputStartOffset);
         }
     }
-    private static nint? _OutputEndOffset;
+    private static nint _OutputEndOffset = -1;
 
     public ref float OutputEnd
     {
         get
         {
-            _OutputEndOffset = _OutputEndOffset ?? Schema.GetOffset(0xF326AA0AF07D83AF);
-            return ref _Handle.AsRef<float>(_OutputEndOffset!.Value);
+            if (_OutputEndOffset == -1) _OutputEndOffset = Schema.GetOffset(0xF326AA0AF07D83AF);
+            return ref _Handle.AsRef<float>(_OutputEndOffset);
         }
     }
-    private static nint? _PowerOffset;
+    private static nint _PowerOffset = -1;
 
     public ref float Power
     {
         get
         {
-            _PowerOffset = _PowerOffset ?? Schema.GetOffset(0xF326AA0A5B4BCC80);
-            return ref _Handle.AsRef<float>(_PowerOffset!.Value);
+            if (_PowerOffset == -1) _PowerOffset = Schema.GetOffset(0xF326AA0A5B4BCC80);
+            return ref _Handle.AsRef<float>(_PowerOffset);
         }
     }
 

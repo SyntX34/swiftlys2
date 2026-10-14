@@ -16,114 +16,114 @@ internal partial class CLightRigLightImpl : SchemaClass, CLightRigLight
 {
     public CLightRigLightImpl(nint handle) : base(handle) { }
 
-    private static nint? _PositionOffset;
+    private static nint _PositionOffset = -1;
 
     public ref Vector Position
     {
         get
         {
-            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x56B6297CBD6A6C9E);
-            return ref _Handle.AsRef<Vector>(_PositionOffset!.Value);
+            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0x56B6297CBD6A6C9E);
+            return ref _Handle.AsRef<Vector>(_PositionOffset);
         }
     }
-    private static nint? _DirectionOffset;
+    private static nint _DirectionOffset = -1;
 
     public ref Vector Direction
     {
         get
         {
-            _DirectionOffset = _DirectionOffset ?? Schema.GetOffset(0x56B6297CDAE41DEE);
-            return ref _Handle.AsRef<Vector>(_DirectionOffset!.Value);
+            if (_DirectionOffset == -1) _DirectionOffset = Schema.GetOffset(0x56B6297CDAE41DEE);
+            return ref _Handle.AsRef<Vector>(_DirectionOffset);
         }
     }
-    private static nint? _LookAtOffset;
+    private static nint _LookAtOffset = -1;
 
     public ref Vector LookAt
     {
         get
         {
-            _LookAtOffset = _LookAtOffset ?? Schema.GetOffset(0x56B6297CC504CE27);
-            return ref _Handle.AsRef<Vector>(_LookAtOffset!.Value);
+            if (_LookAtOffset == -1) _LookAtOffset = Schema.GetOffset(0x56B6297CC504CE27);
+            return ref _Handle.AsRef<Vector>(_LookAtOffset);
         }
     }
-    private static nint? _ColorOffset;
+    private static nint _ColorOffset = -1;
 
     public ref Color Color
     {
         get
         {
-            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x56B6297CD7D017D8);
-            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x56B6297CD7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset);
         }
     }
-    private static nint? _AxisScaleOffset;
+    private static nint _AxisScaleOffset = -1;
 
     public ref float AxisScale
     {
         get
         {
-            _AxisScaleOffset = _AxisScaleOffset ?? Schema.GetOffset(0x56B6297C057C02F0);
-            return ref _Handle.AsRef<float>(_AxisScaleOffset!.Value);
+            if (_AxisScaleOffset == -1) _AxisScaleOffset = Schema.GetOffset(0x56B6297C057C02F0);
+            return ref _Handle.AsRef<float>(_AxisScaleOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x56B6297C5ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x56B6297C5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _BrightnessOffset;
+    private static nint _BrightnessOffset = -1;
 
     public ref float Brightness
     {
         get
         {
-            _BrightnessOffset = _BrightnessOffset ?? Schema.GetOffset(0x56B6297C9132D314);
-            return ref _Handle.AsRef<float>(_BrightnessOffset!.Value);
+            if (_BrightnessOffset == -1) _BrightnessOffset = Schema.GetOffset(0x56B6297C9132D314);
+            return ref _Handle.AsRef<float>(_BrightnessOffset);
         }
     }
-    private static nint? _LightSourceRadiusOffset;
+    private static nint _LightSourceRadiusOffset = -1;
 
     public ref float LightSourceRadius
     {
         get
         {
-            _LightSourceRadiusOffset = _LightSourceRadiusOffset ?? Schema.GetOffset(0x56B6297CBFFD5D4A);
-            return ref _Handle.AsRef<float>(_LightSourceRadiusOffset!.Value);
+            if (_LightSourceRadiusOffset == -1) _LightSourceRadiusOffset = Schema.GetOffset(0x56B6297CBFFD5D4A);
+            return ref _Handle.AsRef<float>(_LightSourceRadiusOffset);
         }
     }
-    private static nint? _DistanceOffset;
+    private static nint _DistanceOffset = -1;
 
     public ref float Distance
     {
         get
         {
-            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x56B6297C00DC4A68);
-            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0x56B6297C00DC4A68);
+            return ref _Handle.AsRef<float>(_DistanceOffset);
         }
     }
-    private static nint? _RelativePositioningOffset;
+    private static nint _RelativePositioningOffset = -1;
 
     public ref bool RelativePositioning
     {
         get
         {
-            _RelativePositioningOffset = _RelativePositioningOffset ?? Schema.GetOffset(0x56B6297CEF7E968E);
-            return ref _Handle.AsRef<bool>(_RelativePositioningOffset!.Value);
+            if (_RelativePositioningOffset == -1) _RelativePositioningOffset = Schema.GetOffset(0x56B6297CEF7E968E);
+            return ref _Handle.AsRef<bool>(_RelativePositioningOffset);
         }
     }
-    private static nint? _ParentToCameraOffset;
+    private static nint _ParentToCameraOffset = -1;
 
     public ref bool ParentToCamera
     {
         get
         {
-            _ParentToCameraOffset = _ParentToCameraOffset ?? Schema.GetOffset(0x56B6297C25F2491B);
-            return ref _Handle.AsRef<bool>(_ParentToCameraOffset!.Value);
+            if (_ParentToCameraOffset == -1) _ParentToCameraOffset = Schema.GetOffset(0x56B6297C25F2491B);
+            return ref _Handle.AsRef<bool>(_ParentToCameraOffset);
         }
     }
 

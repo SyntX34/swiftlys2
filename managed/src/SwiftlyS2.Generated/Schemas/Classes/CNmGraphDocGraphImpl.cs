@@ -16,57 +16,57 @@ internal partial class CNmGraphDocGraphImpl : SchemaClass, CNmGraphDocGraph
 {
     public CNmGraphDocGraphImpl(nint handle) : base(handle) { }
 
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
     private SchemaUntypedField? _IDInstance;
 
     public SchemaUntypedField ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0xDCDC103395066900);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xDCDC103395066900);
             var instance = _IDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IDOffset);
             return instance;
         }
     }
-    private static nint? _NodesOffset;
+    private static nint _NodesOffset = -1;
 
     public ref CUtlVector<PointerTo<CNmGraphDocNode>> Nodes
     {
         get
         {
-            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0xDCDC1033780F027A);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CNmGraphDocNode>>>(_NodesOffset!.Value);
+            if (_NodesOffset == -1) _NodesOffset = Schema.GetOffset(0xDCDC1033780F027A);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CNmGraphDocNode>>>(_NodesOffset);
         }
     }
-    private static nint? _GraphTypeOffset;
+    private static nint _GraphTypeOffset = -1;
 
     public ref NmGraphDocGraphType_t GraphType
     {
         get
         {
-            _GraphTypeOffset = _GraphTypeOffset ?? Schema.GetOffset(0xDCDC1033EDFA861F);
-            return ref _Handle.AsRef<NmGraphDocGraphType_t>(_GraphTypeOffset!.Value);
+            if (_GraphTypeOffset == -1) _GraphTypeOffset = Schema.GetOffset(0xDCDC1033EDFA861F);
+            return ref _Handle.AsRef<NmGraphDocGraphType_t>(_GraphTypeOffset);
         }
     }
-    private static nint? _ViewOffsetOffset;
+    private static nint _ViewOffsetOffset = -1;
 
     public ref Vector2D ViewOffset
     {
         get
         {
-            _ViewOffsetOffset = _ViewOffsetOffset ?? Schema.GetOffset(0xDCDC10337DABD58B);
-            return ref _Handle.AsRef<Vector2D>(_ViewOffsetOffset!.Value);
+            if (_ViewOffsetOffset == -1) _ViewOffsetOffset = Schema.GetOffset(0xDCDC10337DABD58B);
+            return ref _Handle.AsRef<Vector2D>(_ViewOffsetOffset);
         }
     }
-    private static nint? _ViewZoomOffset;
+    private static nint _ViewZoomOffset = -1;
 
     public ref float ViewZoom
     {
         get
         {
-            _ViewZoomOffset = _ViewZoomOffset ?? Schema.GetOffset(0xDCDC1033FCC38C81);
-            return ref _Handle.AsRef<float>(_ViewZoomOffset!.Value);
+            if (_ViewZoomOffset == -1) _ViewZoomOffset = Schema.GetOffset(0xDCDC1033FCC38C81);
+            return ref _Handle.AsRef<float>(_ViewZoomOffset);
         }
     }
 

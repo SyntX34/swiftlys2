@@ -16,52 +16,52 @@ internal partial class FeSimdQuad_tImpl : SchemaClass, FeSimdQuad_t
 {
     public FeSimdQuad_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
     private SchemaUntypedField? _NodeInstance;
 
     public SchemaUntypedField Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xB82B061DCD6694B9);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0xB82B061DCD6694B9);
             var instance = _NodeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeOffset);
             return instance;
         }
     }
-    private static nint? _F4SlackOffset;
+    private static nint _F4SlackOffset = -1;
 
     public ref fltx4 F4Slack
     {
         get
         {
-            _F4SlackOffset = _F4SlackOffset ?? Schema.GetOffset(0xB82B061DBBFE3561);
-            return ref _Handle.AsRef<fltx4>(_F4SlackOffset!.Value);
+            if (_F4SlackOffset == -1) _F4SlackOffset = Schema.GetOffset(0xB82B061DBBFE3561);
+            return ref _Handle.AsRef<fltx4>(_F4SlackOffset);
         }
     }
-    private static nint? _ShapeOffset;
+    private static nint _ShapeOffset = -1;
     private SchemaFixedArray<FourVectors>? _ShapeInstance;
 
     public ISchemaFixedArray<FourVectors> Shape
     {
         get
         {
-            _ShapeOffset = _ShapeOffset ?? Schema.GetOffset(0xB82B061DE159551A);
+            if (_ShapeOffset == -1) _ShapeOffset = Schema.GetOffset(0xB82B061DE159551A);
             var instance = _ShapeInstance ??= new SchemaFixedArray<FourVectors>(0, 0xB82B061DE159551A, 4, 48, 16);
-            instance.DangerousSetHandle(_Handle + _ShapeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ShapeOffset);
             return instance;
         }
     }
-    private static nint? _F4WeightsOffset;
+    private static nint _F4WeightsOffset = -1;
     private SchemaFixedArray<fltx4>? _F4WeightsInstance;
 
     public ISchemaFixedArray<fltx4> F4Weights
     {
         get
         {
-            _F4WeightsOffset = _F4WeightsOffset ?? Schema.GetOffset(0xB82B061DDCFBCC00);
+            if (_F4WeightsOffset == -1) _F4WeightsOffset = Schema.GetOffset(0xB82B061DDCFBCC00);
             var instance = _F4WeightsInstance ??= new SchemaFixedArray<fltx4>(0, 0xB82B061DDCFBCC00, 4, 16, 16);
-            instance.DangerousSetHandle(_Handle + _F4WeightsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _F4WeightsOffset);
             return instance;
         }
     }

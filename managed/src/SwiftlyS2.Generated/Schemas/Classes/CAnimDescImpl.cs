@@ -16,162 +16,162 @@ internal partial class CAnimDescImpl : SchemaClass, CAnimDesc
 {
     public CAnimDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public ref CBufferString Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF48A66664D8F5786);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xF48A66664D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset);
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
     private CAnimDesc_FlagImpl? _FlagsInstance;
 
     public CAnimDesc_Flag Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xF48A6666DC74A14C);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xF48A6666DC74A14C);
             var instance = _FlagsInstance ??= new CAnimDesc_FlagImpl(0);
-            instance.DangerousSetHandle(_Handle + _FlagsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FlagsOffset);
             return instance;
         }
     }
-    private static nint? _FpsOffset;
+    private static nint _FpsOffset = -1;
 
     public ref float Fps
     {
         get
         {
-            _FpsOffset = _FpsOffset ?? Schema.GetOffset(0xF48A6666BDD34AA8);
-            return ref _Handle.AsRef<float>(_FpsOffset!.Value);
+            if (_FpsOffset == -1) _FpsOffset = Schema.GetOffset(0xF48A6666BDD34AA8);
+            return ref _Handle.AsRef<float>(_FpsOffset);
         }
     }
-    private static nint? _DataOffset;
+    private static nint _DataOffset = -1;
     private CAnimEncodedFramesImpl? _DataInstance;
 
     public CAnimEncodedFrames Data
     {
         get
         {
-            _DataOffset = _DataOffset ?? Schema.GetOffset(0xF48A66661621C725);
+            if (_DataOffset == -1) _DataOffset = Schema.GetOffset(0xF48A66661621C725);
             var instance = _DataInstance ??= new CAnimEncodedFramesImpl(0);
-            instance.DangerousSetHandle(_Handle + _DataOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DataOffset);
             return instance;
         }
     }
-    private static nint? _MovementArrayOffset;
+    private static nint _MovementArrayOffset = -1;
 
     public ref CUtlVector<CAnimMovement> MovementArray
     {
         get
         {
-            _MovementArrayOffset = _MovementArrayOffset ?? Schema.GetOffset(0xF48A6666A7A8E615);
-            return ref _Handle.AsRef<CUtlVector<CAnimMovement>>(_MovementArrayOffset!.Value);
+            if (_MovementArrayOffset == -1) _MovementArrayOffset = Schema.GetOffset(0xF48A6666A7A8E615);
+            return ref _Handle.AsRef<CUtlVector<CAnimMovement>>(_MovementArrayOffset);
         }
     }
-    private static nint? _XInitialOffsetOffset;
+    private static nint _XInitialOffsetOffset = -1;
 
     public ref CTransform XInitialOffset
     {
         get
         {
-            _XInitialOffsetOffset = _XInitialOffsetOffset ?? Schema.GetOffset(0xF48A6666BAB8D6AA);
-            return ref _Handle.AsRef<CTransform>(_XInitialOffsetOffset!.Value);
+            if (_XInitialOffsetOffset == -1) _XInitialOffsetOffset = Schema.GetOffset(0xF48A6666BAB8D6AA);
+            return ref _Handle.AsRef<CTransform>(_XInitialOffsetOffset);
         }
     }
-    private static nint? _EventArrayOffset;
+    private static nint _EventArrayOffset = -1;
 
     public ref CUtlVector<CAnimEventDefinition> EventArray
     {
         get
         {
-            _EventArrayOffset = _EventArrayOffset ?? Schema.GetOffset(0xF48A6666B9FB599C);
-            return ref _Handle.AsRef<CUtlVector<CAnimEventDefinition>>(_EventArrayOffset!.Value);
+            if (_EventArrayOffset == -1) _EventArrayOffset = Schema.GetOffset(0xF48A6666B9FB599C);
+            return ref _Handle.AsRef<CUtlVector<CAnimEventDefinition>>(_EventArrayOffset);
         }
     }
-    private static nint? _ActivityArrayOffset;
+    private static nint _ActivityArrayOffset = -1;
 
     public ref CUtlVector<CAnimActivity> ActivityArray
     {
         get
         {
-            _ActivityArrayOffset = _ActivityArrayOffset ?? Schema.GetOffset(0xF48A666638F0ACE1);
-            return ref _Handle.AsRef<CUtlVector<CAnimActivity>>(_ActivityArrayOffset!.Value);
+            if (_ActivityArrayOffset == -1) _ActivityArrayOffset = Schema.GetOffset(0xF48A666638F0ACE1);
+            return ref _Handle.AsRef<CUtlVector<CAnimActivity>>(_ActivityArrayOffset);
         }
     }
-    private static nint? _HierarchyArrayOffset;
+    private static nint _HierarchyArrayOffset = -1;
 
     public ref CUtlVector<CAnimLocalHierarchy> HierarchyArray
     {
         get
         {
-            _HierarchyArrayOffset = _HierarchyArrayOffset ?? Schema.GetOffset(0xF48A6666A806B925);
-            return ref _Handle.AsRef<CUtlVector<CAnimLocalHierarchy>>(_HierarchyArrayOffset!.Value);
+            if (_HierarchyArrayOffset == -1) _HierarchyArrayOffset = Schema.GetOffset(0xF48A6666A806B925);
+            return ref _Handle.AsRef<CUtlVector<CAnimLocalHierarchy>>(_HierarchyArrayOffset);
         }
     }
-    private static nint? _FramestalltimeOffset;
+    private static nint _FramestalltimeOffset = -1;
 
     public ref float Framestalltime
     {
         get
         {
-            _FramestalltimeOffset = _FramestalltimeOffset ?? Schema.GetOffset(0xF48A666641995711);
-            return ref _Handle.AsRef<float>(_FramestalltimeOffset!.Value);
+            if (_FramestalltimeOffset == -1) _FramestalltimeOffset = Schema.GetOffset(0xF48A666641995711);
+            return ref _Handle.AsRef<float>(_FramestalltimeOffset);
         }
     }
-    private static nint? _RootMinOffset;
+    private static nint _RootMinOffset = -1;
 
     public ref Vector RootMin
     {
         get
         {
-            _RootMinOffset = _RootMinOffset ?? Schema.GetOffset(0xF48A66666EC1D517);
-            return ref _Handle.AsRef<Vector>(_RootMinOffset!.Value);
+            if (_RootMinOffset == -1) _RootMinOffset = Schema.GetOffset(0xF48A66666EC1D517);
+            return ref _Handle.AsRef<Vector>(_RootMinOffset);
         }
     }
-    private static nint? _RootMaxOffset;
+    private static nint _RootMaxOffset = -1;
 
     public ref Vector RootMax
     {
         get
         {
-            _RootMaxOffset = _RootMaxOffset ?? Schema.GetOffset(0xF48A66667CD572D9);
-            return ref _Handle.AsRef<Vector>(_RootMaxOffset!.Value);
+            if (_RootMaxOffset == -1) _RootMaxOffset = Schema.GetOffset(0xF48A66667CD572D9);
+            return ref _Handle.AsRef<Vector>(_RootMaxOffset);
         }
     }
-    private static nint? _BoneWorldMinOffset;
+    private static nint _BoneWorldMinOffset = -1;
 
     public ref CUtlVector<Vector> BoneWorldMin
     {
         get
         {
-            _BoneWorldMinOffset = _BoneWorldMinOffset ?? Schema.GetOffset(0xF48A66663E4E9D3F);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_BoneWorldMinOffset!.Value);
+            if (_BoneWorldMinOffset == -1) _BoneWorldMinOffset = Schema.GetOffset(0xF48A66663E4E9D3F);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_BoneWorldMinOffset);
         }
     }
-    private static nint? _BoneWorldMaxOffset;
+    private static nint _BoneWorldMaxOffset = -1;
 
     public ref CUtlVector<Vector> BoneWorldMax
     {
         get
         {
-            _BoneWorldMaxOffset = _BoneWorldMaxOffset ?? Schema.GetOffset(0xF48A66664C3B2B91);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_BoneWorldMaxOffset!.Value);
+            if (_BoneWorldMaxOffset == -1) _BoneWorldMaxOffset = Schema.GetOffset(0xF48A66664C3B2B91);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_BoneWorldMaxOffset);
         }
     }
-    private static nint? _SequenceParamsOffset;
+    private static nint _SequenceParamsOffset = -1;
     private CAnimSequenceParamsImpl? _SequenceParamsInstance;
 
     public CAnimSequenceParams SequenceParams
     {
         get
         {
-            _SequenceParamsOffset = _SequenceParamsOffset ?? Schema.GetOffset(0xF48A666645F20F3E);
+            if (_SequenceParamsOffset == -1) _SequenceParamsOffset = Schema.GetOffset(0xF48A666645F20F3E);
             var instance = _SequenceParamsInstance ??= new CAnimSequenceParamsImpl(0);
-            instance.DangerousSetHandle(_Handle + _SequenceParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SequenceParamsOffset);
             return instance;
         }
     }

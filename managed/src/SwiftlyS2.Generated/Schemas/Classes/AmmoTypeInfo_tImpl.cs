@@ -16,59 +16,59 @@ internal partial class AmmoTypeInfo_tImpl : SchemaClass, AmmoTypeInfo_t
 {
     public AmmoTypeInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _MaxCarryOffset;
+    private static nint _MaxCarryOffset = -1;
 
     public ref int MaxCarry
     {
         get
         {
-            _MaxCarryOffset = _MaxCarryOffset ?? Schema.GetOffset(0xFC774B09B708280);
-            return ref _Handle.AsRef<int>(_MaxCarryOffset!.Value);
+            if (_MaxCarryOffset == -1) _MaxCarryOffset = Schema.GetOffset(0xFC774B09B708280);
+            return ref _Handle.AsRef<int>(_MaxCarryOffset);
         }
     }
-    private static nint? _SplashSizeOffset;
+    private static nint _SplashSizeOffset = -1;
     private CRangeIntImpl? _SplashSizeInstance;
 
     public CRangeInt SplashSize
     {
         get
         {
-            _SplashSizeOffset = _SplashSizeOffset ?? Schema.GetOffset(0xFC774B045E320D3);
+            if (_SplashSizeOffset == -1) _SplashSizeOffset = Schema.GetOffset(0xFC774B045E320D3);
             var instance = _SplashSizeInstance ??= new CRangeIntImpl(0);
-            instance.DangerousSetHandle(_Handle + _SplashSizeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SplashSizeOffset);
             return instance;
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref AmmoFlags_t Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xFC774B0CE6E9C28);
-            return ref _Handle.AsRef<AmmoFlags_t>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xFC774B0CE6E9C28);
+            return ref _Handle.AsRef<AmmoFlags_t>(_FlagsOffset);
         }
     }
-    private static nint? _MassOffset;
+    private static nint _MassOffset = -1;
 
     public ref float Mass
     {
         get
         {
-            _MassOffset = _MassOffset ?? Schema.GetOffset(0xFC774B0CD83D263);
-            return ref _Handle.AsRef<float>(_MassOffset!.Value);
+            if (_MassOffset == -1) _MassOffset = Schema.GetOffset(0xFC774B0CD83D263);
+            return ref _Handle.AsRef<float>(_MassOffset);
         }
     }
-    private static nint? _SpeedOffset;
+    private static nint _SpeedOffset = -1;
     private CRangeFloatImpl? _SpeedInstance;
 
     public CRangeFloat Speed
     {
         get
         {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xFC774B0C631B7EA);
+            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0xFC774B0C631B7EA);
             var instance = _SpeedInstance ??= new CRangeFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpeedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SpeedOffset);
             return instance;
         }
     }

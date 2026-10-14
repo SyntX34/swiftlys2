@@ -16,14 +16,14 @@ internal partial class physics_save_sphere_tImpl : SchemaClass, physics_save_sph
 {
     public physics_save_sphere_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x836490590DBA4CB3);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x836490590DBA4CB3);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
 

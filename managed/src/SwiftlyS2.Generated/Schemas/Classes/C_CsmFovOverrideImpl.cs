@@ -16,29 +16,29 @@ internal partial class C_CsmFovOverrideImpl : C_BaseEntityImpl, C_CsmFovOverride
 {
     public C_CsmFovOverrideImpl(nint handle) : base(handle) { }
 
-    private static nint? _CameraNameOffset;
+    private static nint _CameraNameOffset = -1;
 
     public string CameraName
     {
         get
         {
-            _CameraNameOffset = _CameraNameOffset ?? Schema.GetOffset(0x3E65115B6461442D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CameraNameOffset!.Value));
+            if (_CameraNameOffset == -1) _CameraNameOffset = Schema.GetOffset(0x3E65115B6461442D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CameraNameOffset));
         }
         set
         {
-            _CameraNameOffset = _CameraNameOffset ?? Schema.GetOffset(0x3E65115B6461442D);
-            Schema.SetCUtlString(_Handle, _CameraNameOffset!.Value, value);
+            if (_CameraNameOffset == -1) _CameraNameOffset = Schema.GetOffset(0x3E65115B6461442D);
+            Schema.SetCUtlString(_Handle, _CameraNameOffset, value);
         }
     }
-    private static nint? _CsmFovOverrideValueOffset;
+    private static nint _CsmFovOverrideValueOffset = -1;
 
     public ref float CsmFovOverrideValue
     {
         get
         {
-            _CsmFovOverrideValueOffset = _CsmFovOverrideValueOffset ?? Schema.GetOffset(0x3E65115BE5932D70);
-            return ref _Handle.AsRef<float>(_CsmFovOverrideValueOffset!.Value);
+            if (_CsmFovOverrideValueOffset == -1) _CsmFovOverrideValueOffset = Schema.GetOffset(0x3E65115BE5932D70);
+            return ref _Handle.AsRef<float>(_CsmFovOverrideValueOffset);
         }
     }
 

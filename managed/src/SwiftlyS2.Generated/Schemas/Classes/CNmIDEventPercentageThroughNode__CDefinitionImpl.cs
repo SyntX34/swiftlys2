@@ -16,37 +16,37 @@ internal partial class CNmIDEventPercentageThroughNode__CDefinitionImpl : CNmBoo
 {
     public CNmIDEventPercentageThroughNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceStateNodeIdxOffset;
+    private static nint _SourceStateNodeIdxOffset = -1;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x3912E5963F0228C);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0x3912E5963F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
         }
     }
-    private static nint? _EventConditionRulesOffset;
+    private static nint _EventConditionRulesOffset = -1;
     private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
-            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x3912E59A904315F);
+            if (_EventConditionRulesOffset == -1) _EventConditionRulesOffset = Schema.GetOffset(0x3912E59A904315F);
             var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
-            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset);
             return instance;
         }
     }
-    private static nint? _EventIDOffset;
+    private static nint _EventIDOffset = -1;
 
     public ref CGlobalSymbol EventID
     {
         get
         {
-            _EventIDOffset = _EventIDOffset ?? Schema.GetOffset(0x3912E599D798A72);
-            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+            if (_EventIDOffset == -1) _EventIDOffset = Schema.GetOffset(0x3912E599D798A72);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset);
         }
     }
 

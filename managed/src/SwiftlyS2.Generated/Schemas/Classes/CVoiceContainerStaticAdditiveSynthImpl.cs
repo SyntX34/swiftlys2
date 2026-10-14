@@ -16,14 +16,14 @@ internal partial class CVoiceContainerStaticAdditiveSynthImpl : CVoiceContainerA
 {
     public CVoiceContainerStaticAdditiveSynthImpl(nint handle) : base(handle) { }
 
-    private static nint? _TonesOffset;
+    private static nint _TonesOffset = -1;
 
     public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CTone> Tones
     {
         get
         {
-            _TonesOffset = _TonesOffset ?? Schema.GetOffset(0xE9663E55BAE6D716);
-            return ref _Handle.AsRef<CUtlVector<CVoiceContainerStaticAdditiveSynth__CTone>>(_TonesOffset!.Value);
+            if (_TonesOffset == -1) _TonesOffset = Schema.GetOffset(0xE9663E55BAE6D716);
+            return ref _Handle.AsRef<CUtlVector<CVoiceContainerStaticAdditiveSynth__CTone>>(_TonesOffset);
         }
     }
 

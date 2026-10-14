@@ -16,84 +16,84 @@ internal partial class VMixConvolutionDesc_tImpl : SchemaClass, VMixConvolutionD
 {
     public VMixConvolutionDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _FldbGainOffset;
+    private static nint _FldbGainOffset = -1;
 
     public ref float FldbGain
     {
         get
         {
-            _FldbGainOffset = _FldbGainOffset ?? Schema.GetOffset(0x451C060B31BF2DF2);
-            return ref _Handle.AsRef<float>(_FldbGainOffset!.Value);
+            if (_FldbGainOffset == -1) _FldbGainOffset = Schema.GetOffset(0x451C060B31BF2DF2);
+            return ref _Handle.AsRef<float>(_FldbGainOffset);
         }
     }
-    private static nint? _PreDelayMSOffset;
+    private static nint _PreDelayMSOffset = -1;
 
     public ref float PreDelayMS
     {
         get
         {
-            _PreDelayMSOffset = _PreDelayMSOffset ?? Schema.GetOffset(0x451C060B4EFEC8E7);
-            return ref _Handle.AsRef<float>(_PreDelayMSOffset!.Value);
+            if (_PreDelayMSOffset == -1) _PreDelayMSOffset = Schema.GetOffset(0x451C060B4EFEC8E7);
+            return ref _Handle.AsRef<float>(_PreDelayMSOffset);
         }
     }
-    private static nint? _WetMixOffset;
+    private static nint _WetMixOffset = -1;
 
     public ref float WetMix
     {
         get
         {
-            _WetMixOffset = _WetMixOffset ?? Schema.GetOffset(0x451C060BD5453C15);
-            return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
+            if (_WetMixOffset == -1) _WetMixOffset = Schema.GetOffset(0x451C060BD5453C15);
+            return ref _Handle.AsRef<float>(_WetMixOffset);
         }
     }
-    private static nint? _FldbLowOffset;
+    private static nint _FldbLowOffset = -1;
 
     public ref float FldbLow
     {
         get
         {
-            _FldbLowOffset = _FldbLowOffset ?? Schema.GetOffset(0x451C060B18EB7345);
-            return ref _Handle.AsRef<float>(_FldbLowOffset!.Value);
+            if (_FldbLowOffset == -1) _FldbLowOffset = Schema.GetOffset(0x451C060B18EB7345);
+            return ref _Handle.AsRef<float>(_FldbLowOffset);
         }
     }
-    private static nint? _FldbMidOffset;
+    private static nint _FldbMidOffset = -1;
 
     public ref float FldbMid
     {
         get
         {
-            _FldbMidOffset = _FldbMidOffset ?? Schema.GetOffset(0x451C060BCF183661);
-            return ref _Handle.AsRef<float>(_FldbMidOffset!.Value);
+            if (_FldbMidOffset == -1) _FldbMidOffset = Schema.GetOffset(0x451C060BCF183661);
+            return ref _Handle.AsRef<float>(_FldbMidOffset);
         }
     }
-    private static nint? _FldbHighOffset;
+    private static nint _FldbHighOffset = -1;
 
     public ref float FldbHigh
     {
         get
         {
-            _FldbHighOffset = _FldbHighOffset ?? Schema.GetOffset(0x451C060B4A2BCD39);
-            return ref _Handle.AsRef<float>(_FldbHighOffset!.Value);
+            if (_FldbHighOffset == -1) _FldbHighOffset = Schema.GetOffset(0x451C060B4A2BCD39);
+            return ref _Handle.AsRef<float>(_FldbHighOffset);
         }
     }
-    private static nint? _LowCutoffFreqOffset;
+    private static nint _LowCutoffFreqOffset = -1;
 
     public ref float LowCutoffFreq
     {
         get
         {
-            _LowCutoffFreqOffset = _LowCutoffFreqOffset ?? Schema.GetOffset(0x451C060B1E9A1CCC);
-            return ref _Handle.AsRef<float>(_LowCutoffFreqOffset!.Value);
+            if (_LowCutoffFreqOffset == -1) _LowCutoffFreqOffset = Schema.GetOffset(0x451C060B1E9A1CCC);
+            return ref _Handle.AsRef<float>(_LowCutoffFreqOffset);
         }
     }
-    private static nint? _HighCutoffFreqOffset;
+    private static nint _HighCutoffFreqOffset = -1;
 
     public ref float HighCutoffFreq
     {
         get
         {
-            _HighCutoffFreqOffset = _HighCutoffFreqOffset ?? Schema.GetOffset(0x451C060B3FE556C8);
-            return ref _Handle.AsRef<float>(_HighCutoffFreqOffset!.Value);
+            if (_HighCutoffFreqOffset == -1) _HighCutoffFreqOffset = Schema.GetOffset(0x451C060B3FE556C8);
+            return ref _Handle.AsRef<float>(_HighCutoffFreqOffset);
         }
     }
 

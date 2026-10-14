@@ -16,29 +16,29 @@ internal partial class inv_image_map_tImpl : SchemaClass, inv_image_map_t
 {
     public inv_image_map_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _Map_nameOffset;
+    private static nint _Map_nameOffset = -1;
 
     public string Map_name
     {
         get
         {
-            _Map_nameOffset = _Map_nameOffset ?? Schema.GetOffset(0x3733F21C2BC80471);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Map_nameOffset!.Value));
+            if (_Map_nameOffset == -1) _Map_nameOffset = Schema.GetOffset(0x3733F21C2BC80471);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_Map_nameOffset));
         }
         set
         {
-            _Map_nameOffset = _Map_nameOffset ?? Schema.GetOffset(0x3733F21C2BC80471);
-            Schema.SetCUtlString(_Handle, _Map_nameOffset!.Value, value);
+            if (_Map_nameOffset == -1) _Map_nameOffset = Schema.GetOffset(0x3733F21C2BC80471);
+            Schema.SetCUtlString(_Handle, _Map_nameOffset, value);
         }
     }
-    private static nint? _Map_rotationOffset;
+    private static nint _Map_rotationOffset = -1;
 
     public ref float Map_rotation
     {
         get
         {
-            _Map_rotationOffset = _Map_rotationOffset ?? Schema.GetOffset(0x3733F21CBEE35778);
-            return ref _Handle.AsRef<float>(_Map_rotationOffset!.Value);
+            if (_Map_rotationOffset == -1) _Map_rotationOffset = Schema.GetOffset(0x3733F21CBEE35778);
+            return ref _Handle.AsRef<float>(_Map_rotationOffset);
         }
     }
 

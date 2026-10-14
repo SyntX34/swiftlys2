@@ -16,96 +16,96 @@ internal partial class C_INIT_VelocityRadialRandomImpl : CParticleFunctionInitia
 {
     public C_INIT_VelocityRadialRandomImpl(nint handle) : base(handle) { }
 
-    private static nint? _PerParticleCenterOffset;
+    private static nint _PerParticleCenterOffset = -1;
 
     public ref bool PerParticleCenter
     {
         get
         {
-            _PerParticleCenterOffset = _PerParticleCenterOffset ?? Schema.GetOffset(0x61A3C8D50314399B);
-            return ref _Handle.AsRef<bool>(_PerParticleCenterOffset!.Value);
+            if (_PerParticleCenterOffset == -1) _PerParticleCenterOffset = Schema.GetOffset(0x61A3C8D50314399B);
+            return ref _Handle.AsRef<bool>(_PerParticleCenterOffset);
         }
     }
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x61A3C8D53F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x61A3C8D53F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _PositionOffset;
+    private static nint _PositionOffset = -1;
     private CPerParticleVecInputImpl? _PositionInstance;
 
     public CPerParticleVecInput Position
     {
         get
         {
-            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x61A3C8D5E092EE6A);
+            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0x61A3C8D5E092EE6A);
             var instance = _PositionInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _PositionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PositionOffset);
             return instance;
         }
     }
-    private static nint? _FwdOffset;
+    private static nint _FwdOffset = -1;
     private CPerParticleVecInputImpl? _FwdInstance;
 
     public CPerParticleVecInput Fwd
     {
         get
         {
-            _FwdOffset = _FwdOffset ?? Schema.GetOffset(0x61A3C8D5974CB62A);
+            if (_FwdOffset == -1) _FwdOffset = Schema.GetOffset(0x61A3C8D5974CB62A);
             var instance = _FwdInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _FwdOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FwdOffset);
             return instance;
         }
     }
-    private static nint? _SpeedMinOffset;
+    private static nint _SpeedMinOffset = -1;
     private CPerParticleFloatInputImpl? _SpeedMinInstance;
 
     public CPerParticleFloatInput SpeedMin
     {
         get
         {
-            _SpeedMinOffset = _SpeedMinOffset ?? Schema.GetOffset(0x61A3C8D5B989E1F8);
+            if (_SpeedMinOffset == -1) _SpeedMinOffset = Schema.GetOffset(0x61A3C8D5B989E1F8);
             var instance = _SpeedMinInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpeedMinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SpeedMinOffset);
             return instance;
         }
     }
-    private static nint? _SpeedMaxOffset;
+    private static nint _SpeedMaxOffset = -1;
     private CPerParticleFloatInputImpl? _SpeedMaxInstance;
 
     public CPerParticleFloatInput SpeedMax
     {
         get
         {
-            _SpeedMaxOffset = _SpeedMaxOffset ?? Schema.GetOffset(0x61A3C8D5CF9D8C52);
+            if (_SpeedMaxOffset == -1) _SpeedMaxOffset = Schema.GetOffset(0x61A3C8D5CF9D8C52);
             var instance = _SpeedMaxInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset);
             return instance;
         }
     }
-    private static nint? _LocalCoordinateSystemSpeedScaleOffset;
+    private static nint _LocalCoordinateSystemSpeedScaleOffset = -1;
 
     public ref Vector LocalCoordinateSystemSpeedScale
     {
         get
         {
-            _LocalCoordinateSystemSpeedScaleOffset = _LocalCoordinateSystemSpeedScaleOffset ?? Schema.GetOffset(0x61A3C8D5CEF062F0);
-            return ref _Handle.AsRef<Vector>(_LocalCoordinateSystemSpeedScaleOffset!.Value);
+            if (_LocalCoordinateSystemSpeedScaleOffset == -1) _LocalCoordinateSystemSpeedScaleOffset = Schema.GetOffset(0x61A3C8D5CEF062F0);
+            return ref _Handle.AsRef<Vector>(_LocalCoordinateSystemSpeedScaleOffset);
         }
     }
-    private static nint? _IgnoreDeltaOffset;
+    private static nint _IgnoreDeltaOffset = -1;
 
     public ref bool IgnoreDelta
     {
         get
         {
-            _IgnoreDeltaOffset = _IgnoreDeltaOffset ?? Schema.GetOffset(0x61A3C8D5A944B263);
-            return ref _Handle.AsRef<bool>(_IgnoreDeltaOffset!.Value);
+            if (_IgnoreDeltaOffset == -1) _IgnoreDeltaOffset = Schema.GetOffset(0x61A3C8D5A944B263);
+            return ref _Handle.AsRef<bool>(_IgnoreDeltaOffset);
         }
     }
 

@@ -16,42 +16,42 @@ internal partial class CStateNodeStateDataImpl : SchemaClass, CStateNodeStateDat
 {
     public CStateNodeStateDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChildOffset;
+    private static nint _ChildOffset = -1;
     private CAnimUpdateNodeRefImpl? _ChildInstance;
 
     public CAnimUpdateNodeRef Child
     {
         get
         {
-            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0x6AB991A04A0B773F);
+            if (_ChildOffset == -1) _ChildOffset = Schema.GetOffset(0x6AB991A04A0B773F);
             var instance = _ChildInstance ??= new CAnimUpdateNodeRefImpl(0);
-            instance.DangerousSetHandle(_Handle + _ChildOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ChildOffset);
             return instance;
         }
     }
-    private static nint? _ExclusiveRootMotionOffset;
+    private static nint _ExclusiveRootMotionOffset = -1;
     private SchemaUntypedField? _ExclusiveRootMotionInstance;
 
     public SchemaUntypedField ExclusiveRootMotion
     {
         get
         {
-            _ExclusiveRootMotionOffset = _ExclusiveRootMotionOffset ?? Schema.GetOffset(0x6AB991A019C8014D);
+            if (_ExclusiveRootMotionOffset == -1) _ExclusiveRootMotionOffset = Schema.GetOffset(0x6AB991A019C8014D);
             var instance = _ExclusiveRootMotionInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ExclusiveRootMotionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ExclusiveRootMotionOffset);
             return instance;
         }
     }
-    private static nint? _ExclusiveRootMotionFirstFrameOffset;
+    private static nint _ExclusiveRootMotionFirstFrameOffset = -1;
     private SchemaUntypedField? _ExclusiveRootMotionFirstFrameInstance;
 
     public SchemaUntypedField ExclusiveRootMotionFirstFrame
     {
         get
         {
-            _ExclusiveRootMotionFirstFrameOffset = _ExclusiveRootMotionFirstFrameOffset ?? Schema.GetOffset(0x6AB991A0220BA45A);
+            if (_ExclusiveRootMotionFirstFrameOffset == -1) _ExclusiveRootMotionFirstFrameOffset = Schema.GetOffset(0x6AB991A0220BA45A);
             var instance = _ExclusiveRootMotionFirstFrameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ExclusiveRootMotionFirstFrameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ExclusiveRootMotionFirstFrameOffset);
             return instance;
         }
     }

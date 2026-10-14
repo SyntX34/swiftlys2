@@ -16,122 +16,122 @@ internal partial class C_INIT_CreateOnGridImpl : CParticleFunctionInitializerImp
 {
     public C_INIT_CreateOnGridImpl(nint handle) : base(handle) { }
 
-    private static nint? _XCountOffset;
+    private static nint _XCountOffset = -1;
     private CParticleCollectionFloatInputImpl? _XCountInstance;
 
     public CParticleCollectionFloatInput XCount
     {
         get
         {
-            _XCountOffset = _XCountOffset ?? Schema.GetOffset(0x2C82A08B6E80D4FA);
+            if (_XCountOffset == -1) _XCountOffset = Schema.GetOffset(0x2C82A08B6E80D4FA);
             var instance = _XCountInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _XCountOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _XCountOffset);
             return instance;
         }
     }
-    private static nint? _YCountOffset;
+    private static nint _YCountOffset = -1;
     private CParticleCollectionFloatInputImpl? _YCountInstance;
 
     public CParticleCollectionFloatInput YCount
     {
         get
         {
-            _YCountOffset = _YCountOffset ?? Schema.GetOffset(0x2C82A08B51D32897);
+            if (_YCountOffset == -1) _YCountOffset = Schema.GetOffset(0x2C82A08B51D32897);
             var instance = _YCountInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _YCountOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _YCountOffset);
             return instance;
         }
     }
-    private static nint? _ZCountOffset;
+    private static nint _ZCountOffset = -1;
     private CParticleCollectionFloatInputImpl? _ZCountInstance;
 
     public CParticleCollectionFloatInput ZCount
     {
         get
         {
-            _ZCountOffset = _ZCountOffset ?? Schema.GetOffset(0x2C82A08BCCE7A908);
+            if (_ZCountOffset == -1) _ZCountOffset = Schema.GetOffset(0x2C82A08BCCE7A908);
             var instance = _ZCountInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ZCountOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ZCountOffset);
             return instance;
         }
     }
-    private static nint? _XSpacingOffset;
+    private static nint _XSpacingOffset = -1;
     private CParticleCollectionFloatInputImpl? _XSpacingInstance;
 
     public CParticleCollectionFloatInput XSpacing
     {
         get
         {
-            _XSpacingOffset = _XSpacingOffset ?? Schema.GetOffset(0x2C82A08B374E0750);
+            if (_XSpacingOffset == -1) _XSpacingOffset = Schema.GetOffset(0x2C82A08B374E0750);
             var instance = _XSpacingInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _XSpacingOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _XSpacingOffset);
             return instance;
         }
     }
-    private static nint? _YSpacingOffset;
+    private static nint _YSpacingOffset = -1;
     private CParticleCollectionFloatInputImpl? _YSpacingInstance;
 
     public CParticleCollectionFloatInput YSpacing
     {
         get
         {
-            _YSpacingOffset = _YSpacingOffset ?? Schema.GetOffset(0x2C82A08B836B50C9);
+            if (_YSpacingOffset == -1) _YSpacingOffset = Schema.GetOffset(0x2C82A08B836B50C9);
             var instance = _YSpacingInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _YSpacingOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _YSpacingOffset);
             return instance;
         }
     }
-    private static nint? _ZSpacingOffset;
+    private static nint _ZSpacingOffset = -1;
     private CParticleCollectionFloatInputImpl? _ZSpacingInstance;
 
     public CParticleCollectionFloatInput ZSpacing
     {
         get
         {
-            _ZSpacingOffset = _ZSpacingOffset ?? Schema.GetOffset(0x2C82A08BF78FF062);
+            if (_ZSpacingOffset == -1) _ZSpacingOffset = Schema.GetOffset(0x2C82A08BF78FF062);
             var instance = _ZSpacingInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ZSpacingOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ZSpacingOffset);
             return instance;
         }
     }
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x2C82A08B3F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x2C82A08B3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _LocalSpaceOffset;
+    private static nint _LocalSpaceOffset = -1;
 
     public ref bool LocalSpace
     {
         get
         {
-            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0x2C82A08B62418E6E);
-            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+            if (_LocalSpaceOffset == -1) _LocalSpaceOffset = Schema.GetOffset(0x2C82A08B62418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset);
         }
     }
-    private static nint? _CenterOffset;
+    private static nint _CenterOffset = -1;
 
     public ref bool Center
     {
         get
         {
-            _CenterOffset = _CenterOffset ?? Schema.GetOffset(0x2C82A08B69BF05E4);
-            return ref _Handle.AsRef<bool>(_CenterOffset!.Value);
+            if (_CenterOffset == -1) _CenterOffset = Schema.GetOffset(0x2C82A08B69BF05E4);
+            return ref _Handle.AsRef<bool>(_CenterOffset);
         }
     }
-    private static nint? _HollowOffset;
+    private static nint _HollowOffset = -1;
 
     public ref bool Hollow
     {
         get
         {
-            _HollowOffset = _HollowOffset ?? Schema.GetOffset(0x2C82A08B22E4957E);
-            return ref _Handle.AsRef<bool>(_HollowOffset!.Value);
+            if (_HollowOffset == -1) _HollowOffset = Schema.GetOffset(0x2C82A08B22E4957E);
+            return ref _Handle.AsRef<bool>(_HollowOffset);
         }
     }
 

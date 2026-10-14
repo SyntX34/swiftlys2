@@ -16,34 +16,34 @@ internal partial class PathCostImpl : CNavPathCostImpl, PathCost
 {
     public PathCostImpl(nint handle) : base(handle) { }
 
-    private static nint? _DangerFactorOffset;
+    private static nint _DangerFactorOffset = -1;
 
     public ref float DangerFactor
     {
         get
         {
-            _DangerFactorOffset = _DangerFactorOffset ?? Schema.GetOffset(0x650FBFE7D27E8989);
-            return ref _Handle.AsRef<float>(_DangerFactorOffset!.Value);
+            if (_DangerFactorOffset == -1) _DangerFactorOffset = Schema.GetOffset(0x650FBFE7D27E8989);
+            return ref _Handle.AsRef<float>(_DangerFactorOffset);
         }
     }
-    private static nint? _DamagingAreasPenaltyCostOffset;
+    private static nint _DamagingAreasPenaltyCostOffset = -1;
 
     public ref float DamagingAreasPenaltyCost
     {
         get
         {
-            _DamagingAreasPenaltyCostOffset = _DamagingAreasPenaltyCostOffset ?? Schema.GetOffset(0x650FBFE70A1F5F4D);
-            return ref _Handle.AsRef<float>(_DamagingAreasPenaltyCostOffset!.Value);
+            if (_DamagingAreasPenaltyCostOffset == -1) _DamagingAreasPenaltyCostOffset = Schema.GetOffset(0x650FBFE70A1F5F4D);
+            return ref _Handle.AsRef<float>(_DamagingAreasPenaltyCostOffset);
         }
     }
-    private static nint? _AgentMaxClimbOffset;
+    private static nint _AgentMaxClimbOffset = -1;
 
     public ref float AgentMaxClimb
     {
         get
         {
-            _AgentMaxClimbOffset = _AgentMaxClimbOffset ?? Schema.GetOffset(0x650FBFE7F9ADF8A3);
-            return ref _Handle.AsRef<float>(_AgentMaxClimbOffset!.Value);
+            if (_AgentMaxClimbOffset == -1) _AgentMaxClimbOffset = Schema.GetOffset(0x650FBFE7F9ADF8A3);
+            return ref _Handle.AsRef<float>(_AgentMaxClimbOffset);
         }
     }
 

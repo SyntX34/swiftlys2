@@ -16,84 +16,84 @@ internal partial class CNmGraphDocTransitionNodeImpl : CNmGraphDocResultNodeImpl
 {
     public CNmGraphDocTransitionNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _DurationSecondsOffset;
+    private static nint _DurationSecondsOffset = -1;
 
     public ref float DurationSeconds
     {
         get
         {
-            _DurationSecondsOffset = _DurationSecondsOffset ?? Schema.GetOffset(0x4A9B4C52917797C0);
-            return ref _Handle.AsRef<float>(_DurationSecondsOffset!.Value);
+            if (_DurationSecondsOffset == -1) _DurationSecondsOffset = Schema.GetOffset(0x4A9B4C52917797C0);
+            return ref _Handle.AsRef<float>(_DurationSecondsOffset);
         }
     }
-    private static nint? _ClampDurationToSourceOffset;
+    private static nint _ClampDurationToSourceOffset = -1;
 
     public ref bool ClampDurationToSource
     {
         get
         {
-            _ClampDurationToSourceOffset = _ClampDurationToSourceOffset ?? Schema.GetOffset(0x4A9B4C52BF5EDDA0);
-            return ref _Handle.AsRef<bool>(_ClampDurationToSourceOffset!.Value);
+            if (_ClampDurationToSourceOffset == -1) _ClampDurationToSourceOffset = Schema.GetOffset(0x4A9B4C52BF5EDDA0);
+            return ref _Handle.AsRef<bool>(_ClampDurationToSourceOffset);
         }
     }
-    private static nint? _RootMotionBlendOffset;
+    private static nint _RootMotionBlendOffset = -1;
 
     public ref NmRootMotionBlendMode_t RootMotionBlend
     {
         get
         {
-            _RootMotionBlendOffset = _RootMotionBlendOffset ?? Schema.GetOffset(0x4A9B4C528DADB2AE);
-            return ref _Handle.AsRef<NmRootMotionBlendMode_t>(_RootMotionBlendOffset!.Value);
+            if (_RootMotionBlendOffset == -1) _RootMotionBlendOffset = Schema.GetOffset(0x4A9B4C528DADB2AE);
+            return ref _Handle.AsRef<NmRootMotionBlendMode_t>(_RootMotionBlendOffset);
         }
     }
-    private static nint? _BlendWeightEasingOffset;
+    private static nint _BlendWeightEasingOffset = -1;
 
     public ref NmEasingOperation_t BlendWeightEasing
     {
         get
         {
-            _BlendWeightEasingOffset = _BlendWeightEasingOffset ?? Schema.GetOffset(0x4A9B4C52E7454DC5);
-            return ref _Handle.AsRef<NmEasingOperation_t>(_BlendWeightEasingOffset!.Value);
+            if (_BlendWeightEasingOffset == -1) _BlendWeightEasingOffset = Schema.GetOffset(0x4A9B4C52E7454DC5);
+            return ref _Handle.AsRef<NmEasingOperation_t>(_BlendWeightEasingOffset);
         }
     }
-    private static nint? _BoneMaskBlendInTimePercentageOffset;
+    private static nint _BoneMaskBlendInTimePercentageOffset = -1;
 
     public ref float BoneMaskBlendInTimePercentage
     {
         get
         {
-            _BoneMaskBlendInTimePercentageOffset = _BoneMaskBlendInTimePercentageOffset ?? Schema.GetOffset(0x4A9B4C521F75ED42);
-            return ref _Handle.AsRef<float>(_BoneMaskBlendInTimePercentageOffset!.Value);
+            if (_BoneMaskBlendInTimePercentageOffset == -1) _BoneMaskBlendInTimePercentageOffset = Schema.GetOffset(0x4A9B4C521F75ED42);
+            return ref _Handle.AsRef<float>(_BoneMaskBlendInTimePercentageOffset);
         }
     }
-    private static nint? _TimeMatchModeOffset;
+    private static nint _TimeMatchModeOffset = -1;
 
     public ref CNmGraphDocTransitionNode__TimeMatchMode_t TimeMatchMode
     {
         get
         {
-            _TimeMatchModeOffset = _TimeMatchModeOffset ?? Schema.GetOffset(0x4A9B4C52C601AAEA);
-            return ref _Handle.AsRef<CNmGraphDocTransitionNode__TimeMatchMode_t>(_TimeMatchModeOffset!.Value);
+            if (_TimeMatchModeOffset == -1) _TimeMatchModeOffset = Schema.GetOffset(0x4A9B4C52C601AAEA);
+            return ref _Handle.AsRef<CNmGraphDocTransitionNode__TimeMatchMode_t>(_TimeMatchModeOffset);
         }
     }
-    private static nint? _TimeOffsetOffset;
+    private static nint _TimeOffsetOffset = -1;
 
     public ref float TimeOffset
     {
         get
         {
-            _TimeOffsetOffset = _TimeOffsetOffset ?? Schema.GetOffset(0x4A9B4C526F4EE629);
-            return ref _Handle.AsRef<float>(_TimeOffsetOffset!.Value);
+            if (_TimeOffsetOffset == -1) _TimeOffsetOffset = Schema.GetOffset(0x4A9B4C526F4EE629);
+            return ref _Handle.AsRef<float>(_TimeOffsetOffset);
         }
     }
-    private static nint? _CanBeForcedOffset;
+    private static nint _CanBeForcedOffset = -1;
 
     public ref bool CanBeForced
     {
         get
         {
-            _CanBeForcedOffset = _CanBeForcedOffset ?? Schema.GetOffset(0x4A9B4C52B6EB0555);
-            return ref _Handle.AsRef<bool>(_CanBeForcedOffset!.Value);
+            if (_CanBeForcedOffset == -1) _CanBeForcedOffset = Schema.GetOffset(0x4A9B4C52B6EB0555);
+            return ref _Handle.AsRef<bool>(_CanBeForcedOffset);
         }
     }
 

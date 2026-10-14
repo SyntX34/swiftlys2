@@ -16,16 +16,16 @@ internal partial class CPulseCell_Value_GradientImpl : CPulseCell_BaseValueImpl,
 {
     public CPulseCell_Value_GradientImpl(nint handle) : base(handle) { }
 
-    private static nint? _GradientOffset;
+    private static nint _GradientOffset = -1;
     private SchemaUntypedField? _GradientInstance;
 
     public SchemaUntypedField Gradient
     {
         get
         {
-            _GradientOffset = _GradientOffset ?? Schema.GetOffset(0x67D602E05C95F25);
+            if (_GradientOffset == -1) _GradientOffset = Schema.GetOffset(0x67D602E05C95F25);
             var instance = _GradientInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _GradientOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GradientOffset);
             return instance;
         }
     }

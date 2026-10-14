@@ -16,67 +16,67 @@ internal partial class RenderSkeletonBone_tImpl : SchemaClass, RenderSkeletonBon
 {
     public RenderSkeletonBone_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoneNameOffset;
+    private static nint _BoneNameOffset = -1;
 
     public string BoneName
     {
         get
         {
-            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x6A3BCC9BFDEE0E0C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
+            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x6A3BCC9BFDEE0E0C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
         }
         set
         {
-            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x6A3BCC9BFDEE0E0C);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
+            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x6A3BCC9BFDEE0E0C);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
         }
     }
-    private static nint? _ParentNameOffset;
+    private static nint _ParentNameOffset = -1;
 
     public string ParentName
     {
         get
         {
-            _ParentNameOffset = _ParentNameOffset ?? Schema.GetOffset(0x6A3BCC9BC45C5BBE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParentNameOffset!.Value));
+            if (_ParentNameOffset == -1) _ParentNameOffset = Schema.GetOffset(0x6A3BCC9BC45C5BBE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParentNameOffset));
         }
         set
         {
-            _ParentNameOffset = _ParentNameOffset ?? Schema.GetOffset(0x6A3BCC9BC45C5BBE);
-            Schema.SetCUtlString(_Handle, _ParentNameOffset!.Value, value);
+            if (_ParentNameOffset == -1) _ParentNameOffset = Schema.GetOffset(0x6A3BCC9BC45C5BBE);
+            Schema.SetCUtlString(_Handle, _ParentNameOffset, value);
         }
     }
-    private static nint? _InvBindPoseOffset;
+    private static nint _InvBindPoseOffset = -1;
 
     public ref matrix3x4_t InvBindPose
     {
         get
         {
-            _InvBindPoseOffset = _InvBindPoseOffset ?? Schema.GetOffset(0x6A3BCC9B265CACBE);
-            return ref _Handle.AsRef<matrix3x4_t>(_InvBindPoseOffset!.Value);
+            if (_InvBindPoseOffset == -1) _InvBindPoseOffset = Schema.GetOffset(0x6A3BCC9B265CACBE);
+            return ref _Handle.AsRef<matrix3x4_t>(_InvBindPoseOffset);
         }
     }
-    private static nint? _BboxOffset;
+    private static nint _BboxOffset = -1;
     private SkeletonBoneBounds_tImpl? _BboxInstance;
 
     public SkeletonBoneBounds_t Bbox
     {
         get
         {
-            _BboxOffset = _BboxOffset ?? Schema.GetOffset(0x6A3BCC9B39392A72);
+            if (_BboxOffset == -1) _BboxOffset = Schema.GetOffset(0x6A3BCC9B39392A72);
             var instance = _BboxInstance ??= new SkeletonBoneBounds_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BboxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BboxOffset);
             return instance;
         }
     }
-    private static nint? _SphereRadiusOffset;
+    private static nint _SphereRadiusOffset = -1;
 
     public ref float SphereRadius
     {
         get
         {
-            _SphereRadiusOffset = _SphereRadiusOffset ?? Schema.GetOffset(0x6A3BCC9B7AF55658);
-            return ref _Handle.AsRef<float>(_SphereRadiusOffset!.Value);
+            if (_SphereRadiusOffset == -1) _SphereRadiusOffset = Schema.GetOffset(0x6A3BCC9B7AF55658);
+            return ref _Handle.AsRef<float>(_SphereRadiusOffset);
         }
     }
 

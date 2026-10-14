@@ -16,14 +16,14 @@ internal partial class CAnimGraphDoc_MotionMetricImpl : SchemaClass, CAnimGraphD
 {
     public CAnimGraphDoc_MotionMetricImpl(nint handle) : base(handle) { }
 
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
 
     public ref float Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xD658F1347B81E7AB);
-            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0xD658F1347B81E7AB);
+            return ref _Handle.AsRef<float>(_WeightOffset);
         }
     }
 

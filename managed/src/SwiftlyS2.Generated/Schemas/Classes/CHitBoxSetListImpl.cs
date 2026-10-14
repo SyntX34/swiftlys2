@@ -16,14 +16,14 @@ internal partial class CHitBoxSetListImpl : SchemaClass, CHitBoxSetList
 {
     public CHitBoxSetListImpl(nint handle) : base(handle) { }
 
-    private static nint? _HitBoxSetsOffset;
+    private static nint _HitBoxSetsOffset = -1;
 
     public ref CUtlVector<CHitBoxSet> HitBoxSets
     {
         get
         {
-            _HitBoxSetsOffset = _HitBoxSetsOffset ?? Schema.GetOffset(0x2FE1303444ABBA1A);
-            return ref _Handle.AsRef<CUtlVector<CHitBoxSet>>(_HitBoxSetsOffset!.Value);
+            if (_HitBoxSetsOffset == -1) _HitBoxSetsOffset = Schema.GetOffset(0x2FE1303444ABBA1A);
+            return ref _Handle.AsRef<CUtlVector<CHitBoxSet>>(_HitBoxSetsOffset);
         }
     }
 

@@ -16,80 +16,80 @@ internal partial class CMeshletDescriptorImpl : SchemaClass, CMeshletDescriptor
 {
     public CMeshletDescriptorImpl(nint handle) : base(handle) { }
 
-    private static nint? _PackedAABBOffset;
+    private static nint _PackedAABBOffset = -1;
     private PackedAABB_tImpl? _PackedAABBInstance;
 
     public PackedAABB_t PackedAABB
     {
         get
         {
-            _PackedAABBOffset = _PackedAABBOffset ?? Schema.GetOffset(0xAF93495D8D638233);
+            if (_PackedAABBOffset == -1) _PackedAABBOffset = Schema.GetOffset(0xAF93495D8D638233);
             var instance = _PackedAABBInstance ??= new PackedAABB_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PackedAABBOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PackedAABBOffset);
             return instance;
         }
     }
-    private static nint? _CullingDataOffset;
+    private static nint _CullingDataOffset = -1;
     private CDrawCullingDataImpl? _CullingDataInstance;
 
     public CDrawCullingData CullingData
     {
         get
         {
-            _CullingDataOffset = _CullingDataOffset ?? Schema.GetOffset(0xAF93495DA6D54DC3);
+            if (_CullingDataOffset == -1) _CullingDataOffset = Schema.GetOffset(0xAF93495DA6D54DC3);
             var instance = _CullingDataInstance ??= new CDrawCullingDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _CullingDataOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CullingDataOffset);
             return instance;
         }
     }
-    private static nint? _VertexOffsetOffset;
+    private static nint _VertexOffsetOffset = -1;
 
     public ref uint VertexOffset
     {
         get
         {
-            _VertexOffsetOffset = _VertexOffsetOffset ?? Schema.GetOffset(0xAF93495DF1F6FC40);
-            return ref _Handle.AsRef<uint>(_VertexOffsetOffset!.Value);
+            if (_VertexOffsetOffset == -1) _VertexOffsetOffset = Schema.GetOffset(0xAF93495DF1F6FC40);
+            return ref _Handle.AsRef<uint>(_VertexOffsetOffset);
         }
     }
-    private static nint? _TriangleOffsetOffset;
+    private static nint _TriangleOffsetOffset = -1;
 
     public ref uint TriangleOffset
     {
         get
         {
-            _TriangleOffsetOffset = _TriangleOffsetOffset ?? Schema.GetOffset(0xAF93495DAFE22CE6);
-            return ref _Handle.AsRef<uint>(_TriangleOffsetOffset!.Value);
+            if (_TriangleOffsetOffset == -1) _TriangleOffsetOffset = Schema.GetOffset(0xAF93495DAFE22CE6);
+            return ref _Handle.AsRef<uint>(_TriangleOffsetOffset);
         }
     }
-    private static nint? _VertexCountOffset;
+    private static nint _VertexCountOffset = -1;
 
     public ref byte VertexCount
     {
         get
         {
-            _VertexCountOffset = _VertexCountOffset ?? Schema.GetOffset(0xAF93495D12923E12);
-            return ref _Handle.AsRef<byte>(_VertexCountOffset!.Value);
+            if (_VertexCountOffset == -1) _VertexCountOffset = Schema.GetOffset(0xAF93495D12923E12);
+            return ref _Handle.AsRef<byte>(_VertexCountOffset);
         }
     }
-    private static nint? _TriangleCountOffset;
+    private static nint _TriangleCountOffset = -1;
 
     public ref byte TriangleCount
     {
         get
         {
-            _TriangleCountOffset = _TriangleCountOffset ?? Schema.GetOffset(0xAF93495D5E82E240);
-            return ref _Handle.AsRef<byte>(_TriangleCountOffset!.Value);
+            if (_TriangleCountOffset == -1) _TriangleCountOffset = Schema.GetOffset(0xAF93495D5E82E240);
+            return ref _Handle.AsRef<byte>(_TriangleCountOffset);
         }
     }
-    private static nint? _BoneIndexOffset;
+    private static nint _BoneIndexOffset = -1;
 
     public ref ushort BoneIndex
     {
         get
         {
-            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xAF93495D9F407B79);
-            return ref _Handle.AsRef<ushort>(_BoneIndexOffset!.Value);
+            if (_BoneIndexOffset == -1) _BoneIndexOffset = Schema.GetOffset(0xAF93495D9F407B79);
+            return ref _Handle.AsRef<ushort>(_BoneIndexOffset);
         }
     }
 

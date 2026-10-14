@@ -16,49 +16,49 @@ internal partial class HUDPanelDialogVariableString_tImpl : SchemaClass, HUDPane
 {
     public HUDPanelDialogVariableString_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _PanelIdIndexOffset;
+    private static nint _PanelIdIndexOffset = -1;
 
     public ref ushort PanelIdIndex
     {
         get
         {
-            _PanelIdIndexOffset = _PanelIdIndexOffset ?? Schema.GetOffset(0x163C31960205D770);
-            return ref _Handle.AsRef<ushort>(_PanelIdIndexOffset!.Value);
+            if (_PanelIdIndexOffset == -1) _PanelIdIndexOffset = Schema.GetOffset(0x163C31960205D770);
+            return ref _Handle.AsRef<ushort>(_PanelIdIndexOffset);
         }
     }
-    private static nint? _DialogVariableIndexOffset;
+    private static nint _DialogVariableIndexOffset = -1;
 
     public ref ushort DialogVariableIndex
     {
         get
         {
-            _DialogVariableIndexOffset = _DialogVariableIndexOffset ?? Schema.GetOffset(0x163C3196E2BF745B);
-            return ref _Handle.AsRef<ushort>(_DialogVariableIndexOffset!.Value);
+            if (_DialogVariableIndexOffset == -1) _DialogVariableIndexOffset = Schema.GetOffset(0x163C3196E2BF745B);
+            return ref _Handle.AsRef<ushort>(_DialogVariableIndexOffset);
         }
     }
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public string Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x163C3196EA9CA74B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ValueOffset!.Value));
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x163C3196EA9CA74B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ValueOffset));
         }
         set
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x163C3196EA9CA74B);
-            Schema.SetCUtlString(_Handle, _ValueOffset!.Value, value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x163C3196EA9CA74B);
+            Schema.SetCUtlString(_Handle, _ValueOffset, value);
         }
     }
-    private static nint? _IsSetOffset;
+    private static nint _IsSetOffset = -1;
 
     public ref bool IsSet
     {
         get
         {
-            _IsSetOffset = _IsSetOffset ?? Schema.GetOffset(0x163C31964307E3B3);
-            return ref _Handle.AsRef<bool>(_IsSetOffset!.Value);
+            if (_IsSetOffset == -1) _IsSetOffset = Schema.GetOffset(0x163C31964307E3B3);
+            return ref _Handle.AsRef<bool>(_IsSetOffset);
         }
     }
 

@@ -16,124 +16,124 @@ internal partial class C_OP_SetControlPointPositionsImpl : CParticleFunctionPreE
 {
     public C_OP_SetControlPointPositionsImpl(nint handle) : base(handle) { }
 
-    private static nint? _UseWorldLocationOffset;
+    private static nint _UseWorldLocationOffset = -1;
 
     public ref bool UseWorldLocation
     {
         get
         {
-            _UseWorldLocationOffset = _UseWorldLocationOffset ?? Schema.GetOffset(0x12B1A872F371AED7);
-            return ref _Handle.AsRef<bool>(_UseWorldLocationOffset!.Value);
+            if (_UseWorldLocationOffset == -1) _UseWorldLocationOffset = Schema.GetOffset(0x12B1A872F371AED7);
+            return ref _Handle.AsRef<bool>(_UseWorldLocationOffset);
         }
     }
-    private static nint? _OrientOffset;
+    private static nint _OrientOffset = -1;
 
     public ref bool Orient
     {
         get
         {
-            _OrientOffset = _OrientOffset ?? Schema.GetOffset(0x12B1A8727CD61854);
-            return ref _Handle.AsRef<bool>(_OrientOffset!.Value);
+            if (_OrientOffset == -1) _OrientOffset = Schema.GetOffset(0x12B1A8727CD61854);
+            return ref _Handle.AsRef<bool>(_OrientOffset);
         }
     }
-    private static nint? _SetOnceOffset;
+    private static nint _SetOnceOffset = -1;
 
     public ref bool SetOnce
     {
         get
         {
-            _SetOnceOffset = _SetOnceOffset ?? Schema.GetOffset(0x12B1A8726B261086);
-            return ref _Handle.AsRef<bool>(_SetOnceOffset!.Value);
+            if (_SetOnceOffset == -1) _SetOnceOffset = Schema.GetOffset(0x12B1A8726B261086);
+            return ref _Handle.AsRef<bool>(_SetOnceOffset);
         }
     }
-    private static nint? _CP1Offset;
+    private static nint _CP1Offset = -1;
 
     public ref int CP1
     {
         get
         {
-            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0x12B1A872D4B1E579);
-            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+            if (_CP1Offset == -1) _CP1Offset = Schema.GetOffset(0x12B1A872D4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset);
         }
     }
-    private static nint? _CP2Offset;
+    private static nint _CP2Offset = -1;
 
     public ref int CP2
     {
         get
         {
-            _CP2Offset = _CP2Offset ?? Schema.GetOffset(0x12B1A872D1B1E0C0);
-            return ref _Handle.AsRef<int>(_CP2Offset!.Value);
+            if (_CP2Offset == -1) _CP2Offset = Schema.GetOffset(0x12B1A872D1B1E0C0);
+            return ref _Handle.AsRef<int>(_CP2Offset);
         }
     }
-    private static nint? _CP3Offset;
+    private static nint _CP3Offset = -1;
 
     public ref int CP3
     {
         get
         {
-            _CP3Offset = _CP3Offset ?? Schema.GetOffset(0x12B1A872D2B1E253);
-            return ref _Handle.AsRef<int>(_CP3Offset!.Value);
+            if (_CP3Offset == -1) _CP3Offset = Schema.GetOffset(0x12B1A872D2B1E253);
+            return ref _Handle.AsRef<int>(_CP3Offset);
         }
     }
-    private static nint? _CP4Offset;
+    private static nint _CP4Offset = -1;
 
     public ref int CP4
     {
         get
         {
-            _CP4Offset = _CP4Offset ?? Schema.GetOffset(0x12B1A872D7B1EA32);
-            return ref _Handle.AsRef<int>(_CP4Offset!.Value);
+            if (_CP4Offset == -1) _CP4Offset = Schema.GetOffset(0x12B1A872D7B1EA32);
+            return ref _Handle.AsRef<int>(_CP4Offset);
         }
     }
-    private static nint? _CP1PosOffset;
+    private static nint _CP1PosOffset = -1;
 
     public ref Vector CP1Pos
     {
         get
         {
-            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0x12B1A872408288D9);
-            return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+            if (_CP1PosOffset == -1) _CP1PosOffset = Schema.GetOffset(0x12B1A872408288D9);
+            return ref _Handle.AsRef<Vector>(_CP1PosOffset);
         }
     }
-    private static nint? _CP2PosOffset;
+    private static nint _CP2PosOffset = -1;
 
     public ref Vector CP2Pos
     {
         get
         {
-            _CP2PosOffset = _CP2PosOffset ?? Schema.GetOffset(0x12B1A872862C8D46);
-            return ref _Handle.AsRef<Vector>(_CP2PosOffset!.Value);
+            if (_CP2PosOffset == -1) _CP2PosOffset = Schema.GetOffset(0x12B1A872862C8D46);
+            return ref _Handle.AsRef<Vector>(_CP2PosOffset);
         }
     }
-    private static nint? _CP3PosOffset;
+    private static nint _CP3PosOffset = -1;
 
     public ref Vector CP3Pos
     {
         get
         {
-            _CP3PosOffset = _CP3PosOffset ?? Schema.GetOffset(0x12B1A872E3C5304F);
-            return ref _Handle.AsRef<Vector>(_CP3PosOffset!.Value);
+            if (_CP3PosOffset == -1) _CP3PosOffset = Schema.GetOffset(0x12B1A872E3C5304F);
+            return ref _Handle.AsRef<Vector>(_CP3PosOffset);
         }
     }
-    private static nint? _CP4PosOffset;
+    private static nint _CP4PosOffset = -1;
 
     public ref Vector CP4Pos
     {
         get
         {
-            _CP4PosOffset = _CP4PosOffset ?? Schema.GetOffset(0x12B1A872A5E5E51C);
-            return ref _Handle.AsRef<Vector>(_CP4PosOffset!.Value);
+            if (_CP4PosOffset == -1) _CP4PosOffset = Schema.GetOffset(0x12B1A872A5E5E51C);
+            return ref _Handle.AsRef<Vector>(_CP4PosOffset);
         }
     }
-    private static nint? _HeadLocationOffset;
+    private static nint _HeadLocationOffset = -1;
 
     public ref int HeadLocation
     {
         get
         {
-            _HeadLocationOffset = _HeadLocationOffset ?? Schema.GetOffset(0x12B1A872A8ECDA78);
-            return ref _Handle.AsRef<int>(_HeadLocationOffset!.Value);
+            if (_HeadLocationOffset == -1) _HeadLocationOffset = Schema.GetOffset(0x12B1A872A8ECDA78);
+            return ref _Handle.AsRef<int>(_HeadLocationOffset);
         }
     }
 

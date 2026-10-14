@@ -16,86 +16,86 @@ internal partial class RenderHairStrandInfo_tImpl : SchemaClass, RenderHairStran
 {
     public RenderHairStrandInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _GuideHairIndices_nSurfaceTriIndexOffset;
+    private static nint _GuideHairIndices_nSurfaceTriIndexOffset = -1;
     private SchemaFixedArray<uint>? _GuideHairIndices_nSurfaceTriIndexInstance;
 
     public ISchemaFixedArray<uint> GuideHairIndices_nSurfaceTriIndex
     {
         get
         {
-            _GuideHairIndices_nSurfaceTriIndexOffset = _GuideHairIndices_nSurfaceTriIndexOffset ?? Schema.GetOffset(0x9037AEC699AC7193);
+            if (_GuideHairIndices_nSurfaceTriIndexOffset == -1) _GuideHairIndices_nSurfaceTriIndexOffset = Schema.GetOffset(0x9037AEC699AC7193);
             var instance = _GuideHairIndices_nSurfaceTriIndexInstance ??= new SchemaFixedArray<uint>(0, 0x9037AEC699AC7193, 2, 4, 4);
-            instance.DangerousSetHandle(_Handle + _GuideHairIndices_nSurfaceTriIndexOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GuideHairIndices_nSurfaceTriIndexOffset);
             return instance;
         }
     }
-    private static nint? _GuideBary_vBaseBaryOffset;
+    private static nint _GuideBary_vBaseBaryOffset = -1;
     private SchemaFixedArray<ushort>? _GuideBary_vBaseBaryInstance;
 
     public ISchemaFixedArray<ushort> GuideBary_vBaseBary
     {
         get
         {
-            _GuideBary_vBaseBaryOffset = _GuideBary_vBaseBaryOffset ?? Schema.GetOffset(0x9037AEC6B3848BF7);
+            if (_GuideBary_vBaseBaryOffset == -1) _GuideBary_vBaseBaryOffset = Schema.GetOffset(0x9037AEC6B3848BF7);
             var instance = _GuideBary_vBaseBaryInstance ??= new SchemaFixedArray<ushort>(0, 0x9037AEC6B3848BF7, 4, 2, 2);
-            instance.DangerousSetHandle(_Handle + _GuideBary_vBaseBaryOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GuideBary_vBaseBaryOffset);
             return instance;
         }
     }
-    private static nint? _RootOffset_flLengthScaleOffset;
+    private static nint _RootOffset_flLengthScaleOffset = -1;
     private SchemaFixedArray<ushort>? _RootOffset_flLengthScaleInstance;
 
     public ISchemaFixedArray<ushort> RootOffset_flLengthScale
     {
         get
         {
-            _RootOffset_flLengthScaleOffset = _RootOffset_flLengthScaleOffset ?? Schema.GetOffset(0x9037AEC67324D845);
+            if (_RootOffset_flLengthScaleOffset == -1) _RootOffset_flLengthScaleOffset = Schema.GetOffset(0x9037AEC67324D845);
             var instance = _RootOffset_flLengthScaleInstance ??= new SchemaFixedArray<ushort>(0, 0x9037AEC67324D845, 4, 2, 2);
-            instance.DangerousSetHandle(_Handle + _RootOffset_flLengthScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RootOffset_flLengthScaleOffset);
             return instance;
         }
     }
-    private static nint? _PackedBaseUvOffset;
+    private static nint _PackedBaseUvOffset = -1;
     private SchemaFixedArray<ushort>? _PackedBaseUvInstance;
 
     public ISchemaFixedArray<ushort> PackedBaseUv
     {
         get
         {
-            _PackedBaseUvOffset = _PackedBaseUvOffset ?? Schema.GetOffset(0x9037AEC6D5457D8B);
+            if (_PackedBaseUvOffset == -1) _PackedBaseUvOffset = Schema.GetOffset(0x9037AEC6D5457D8B);
             var instance = _PackedBaseUvInstance ??= new SchemaFixedArray<ushort>(0, 0x9037AEC6D5457D8B, 2, 2, 2);
-            instance.DangerousSetHandle(_Handle + _PackedBaseUvOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PackedBaseUvOffset);
             return instance;
         }
     }
-    private static nint? _PackedSurfaceNormalOsOffset;
+    private static nint _PackedSurfaceNormalOsOffset = -1;
 
     public ref uint PackedSurfaceNormalOs
     {
         get
         {
-            _PackedSurfaceNormalOsOffset = _PackedSurfaceNormalOsOffset ?? Schema.GetOffset(0x9037AEC605444631);
-            return ref _Handle.AsRef<uint>(_PackedSurfaceNormalOsOffset!.Value);
+            if (_PackedSurfaceNormalOsOffset == -1) _PackedSurfaceNormalOsOffset = Schema.GetOffset(0x9037AEC605444631);
+            return ref _Handle.AsRef<uint>(_PackedSurfaceNormalOsOffset);
         }
     }
-    private static nint? _PackedSurfaceTangentOsOffset;
+    private static nint _PackedSurfaceTangentOsOffset = -1;
 
     public ref uint PackedSurfaceTangentOs
     {
         get
         {
-            _PackedSurfaceTangentOsOffset = _PackedSurfaceTangentOsOffset ?? Schema.GetOffset(0x9037AEC6FD9896F7);
-            return ref _Handle.AsRef<uint>(_PackedSurfaceTangentOsOffset!.Value);
+            if (_PackedSurfaceTangentOsOffset == -1) _PackedSurfaceTangentOsOffset = Schema.GetOffset(0x9037AEC6FD9896F7);
+            return ref _Handle.AsRef<uint>(_PackedSurfaceTangentOsOffset);
         }
     }
-    private static nint? _DataOffset_SegmentsOffset;
+    private static nint _DataOffset_SegmentsOffset = -1;
 
     public ref uint DataOffset_Segments
     {
         get
         {
-            _DataOffset_SegmentsOffset = _DataOffset_SegmentsOffset ?? Schema.GetOffset(0x9037AEC6BB31BC1D);
-            return ref _Handle.AsRef<uint>(_DataOffset_SegmentsOffset!.Value);
+            if (_DataOffset_SegmentsOffset == -1) _DataOffset_SegmentsOffset = Schema.GetOffset(0x9037AEC6BB31BC1D);
+            return ref _Handle.AsRef<uint>(_DataOffset_SegmentsOffset);
         }
     }
 

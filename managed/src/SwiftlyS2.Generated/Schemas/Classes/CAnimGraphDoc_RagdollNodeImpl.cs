@@ -16,41 +16,41 @@ internal partial class CAnimGraphDoc_RagdollNodeImpl : CAnimGraphDoc_NodeImpl, C
 {
     public CAnimGraphDoc_RagdollNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _WeightListNameOffset;
+    private static nint _WeightListNameOffset = -1;
 
     public string WeightListName
     {
         get
         {
-            _WeightListNameOffset = _WeightListNameOffset ?? Schema.GetOffset(0x4E15E855C4E07306);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_WeightListNameOffset!.Value));
+            if (_WeightListNameOffset == -1) _WeightListNameOffset = Schema.GetOffset(0x4E15E855C4E07306);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_WeightListNameOffset));
         }
         set
         {
-            _WeightListNameOffset = _WeightListNameOffset ?? Schema.GetOffset(0x4E15E855C4E07306);
-            Schema.SetCUtlString(_Handle, _WeightListNameOffset!.Value, value);
+            if (_WeightListNameOffset == -1) _WeightListNameOffset = Schema.GetOffset(0x4E15E855C4E07306);
+            Schema.SetCUtlString(_Handle, _WeightListNameOffset, value);
         }
     }
-    private static nint? _PoseControlMethodOffset;
+    private static nint _PoseControlMethodOffset = -1;
 
     public ref RagdollPoseControl PoseControlMethod
     {
         get
         {
-            _PoseControlMethodOffset = _PoseControlMethodOffset ?? Schema.GetOffset(0x4E15E85588DA12AC);
-            return ref _Handle.AsRef<RagdollPoseControl>(_PoseControlMethodOffset!.Value);
+            if (_PoseControlMethodOffset == -1) _PoseControlMethodOffset = Schema.GetOffset(0x4E15E85588DA12AC);
+            return ref _Handle.AsRef<RagdollPoseControl>(_PoseControlMethodOffset);
         }
     }
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x4E15E8551F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x4E15E8551F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }

@@ -16,54 +16,54 @@ internal partial class SteamAudioReverbSettings_tImpl : SchemaClass, SteamAudioR
 {
     public SteamAudioReverbSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NumRaysOffset;
+    private static nint _NumRaysOffset = -1;
 
     public ref int NumRays
     {
         get
         {
-            _NumRaysOffset = _NumRaysOffset ?? Schema.GetOffset(0xD2E73E09DE17FAF6);
-            return ref _Handle.AsRef<int>(_NumRaysOffset!.Value);
+            if (_NumRaysOffset == -1) _NumRaysOffset = Schema.GetOffset(0xD2E73E09DE17FAF6);
+            return ref _Handle.AsRef<int>(_NumRaysOffset);
         }
     }
-    private static nint? _NumBouncesOffset;
+    private static nint _NumBouncesOffset = -1;
 
     public ref int NumBounces
     {
         get
         {
-            _NumBouncesOffset = _NumBouncesOffset ?? Schema.GetOffset(0xD2E73E09C867C4AC);
-            return ref _Handle.AsRef<int>(_NumBouncesOffset!.Value);
+            if (_NumBouncesOffset == -1) _NumBouncesOffset = Schema.GetOffset(0xD2E73E09C867C4AC);
+            return ref _Handle.AsRef<int>(_NumBouncesOffset);
         }
     }
-    private static nint? _IRDurationOffset;
+    private static nint _IRDurationOffset = -1;
 
     public ref float IRDuration
     {
         get
         {
-            _IRDurationOffset = _IRDurationOffset ?? Schema.GetOffset(0xD2E73E0939FE45A0);
-            return ref _Handle.AsRef<float>(_IRDurationOffset!.Value);
+            if (_IRDurationOffset == -1) _IRDurationOffset = Schema.GetOffset(0xD2E73E0939FE45A0);
+            return ref _Handle.AsRef<float>(_IRDurationOffset);
         }
     }
-    private static nint? _AmbisonicsOrderOffset;
+    private static nint _AmbisonicsOrderOffset = -1;
 
     public ref int AmbisonicsOrder
     {
         get
         {
-            _AmbisonicsOrderOffset = _AmbisonicsOrderOffset ?? Schema.GetOffset(0xD2E73E09F24DBAC5);
-            return ref _Handle.AsRef<int>(_AmbisonicsOrderOffset!.Value);
+            if (_AmbisonicsOrderOffset == -1) _AmbisonicsOrderOffset = Schema.GetOffset(0xD2E73E09F24DBAC5);
+            return ref _Handle.AsRef<int>(_AmbisonicsOrderOffset);
         }
     }
-    private static nint? _ExportSceneOffset;
+    private static nint _ExportSceneOffset = -1;
 
     public ref bool ExportScene
     {
         get
         {
-            _ExportSceneOffset = _ExportSceneOffset ?? Schema.GetOffset(0xD2E73E092D125811);
-            return ref _Handle.AsRef<bool>(_ExportSceneOffset!.Value);
+            if (_ExportSceneOffset == -1) _ExportSceneOffset = Schema.GetOffset(0xD2E73E092D125811);
+            return ref _Handle.AsRef<bool>(_ExportSceneOffset);
         }
     }
 

@@ -16,64 +16,64 @@ internal partial class C_INIT_GlobalScaleImpl : CParticleFunctionInitializerImpl
 {
     public C_INIT_GlobalScaleImpl(nint handle) : base(handle) { }
 
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
 
     public ref float Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xE0588671B731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xE0588671B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset);
         }
     }
-    private static nint? _ScaleControlPointNumberOffset;
+    private static nint _ScaleControlPointNumberOffset = -1;
 
     public ref int ScaleControlPointNumber
     {
         get
         {
-            _ScaleControlPointNumberOffset = _ScaleControlPointNumberOffset ?? Schema.GetOffset(0xE05886719A649261);
-            return ref _Handle.AsRef<int>(_ScaleControlPointNumberOffset!.Value);
+            if (_ScaleControlPointNumberOffset == -1) _ScaleControlPointNumberOffset = Schema.GetOffset(0xE05886719A649261);
+            return ref _Handle.AsRef<int>(_ScaleControlPointNumberOffset);
         }
     }
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xE05886713F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0xE05886713F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _ScaleRadiusOffset;
+    private static nint _ScaleRadiusOffset = -1;
 
     public ref bool ScaleRadius
     {
         get
         {
-            _ScaleRadiusOffset = _ScaleRadiusOffset ?? Schema.GetOffset(0xE0588671714DF6EF);
-            return ref _Handle.AsRef<bool>(_ScaleRadiusOffset!.Value);
+            if (_ScaleRadiusOffset == -1) _ScaleRadiusOffset = Schema.GetOffset(0xE0588671714DF6EF);
+            return ref _Handle.AsRef<bool>(_ScaleRadiusOffset);
         }
     }
-    private static nint? _ScalePositionOffset;
+    private static nint _ScalePositionOffset = -1;
 
     public ref bool ScalePosition
     {
         get
         {
-            _ScalePositionOffset = _ScalePositionOffset ?? Schema.GetOffset(0xE05886713AD08CD6);
-            return ref _Handle.AsRef<bool>(_ScalePositionOffset!.Value);
+            if (_ScalePositionOffset == -1) _ScalePositionOffset = Schema.GetOffset(0xE05886713AD08CD6);
+            return ref _Handle.AsRef<bool>(_ScalePositionOffset);
         }
     }
-    private static nint? _ScaleVelocityOffset;
+    private static nint _ScaleVelocityOffset = -1;
 
     public ref bool ScaleVelocity
     {
         get
         {
-            _ScaleVelocityOffset = _ScaleVelocityOffset ?? Schema.GetOffset(0xE058867117A59666);
-            return ref _Handle.AsRef<bool>(_ScaleVelocityOffset!.Value);
+            if (_ScaleVelocityOffset == -1) _ScaleVelocityOffset = Schema.GetOffset(0xE058867117A59666);
+            return ref _Handle.AsRef<bool>(_ScaleVelocityOffset);
         }
     }
 

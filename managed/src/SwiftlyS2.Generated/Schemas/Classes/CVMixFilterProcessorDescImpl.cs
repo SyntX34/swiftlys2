@@ -16,42 +16,42 @@ internal partial class CVMixFilterProcessorDescImpl : CVMixBaseProcessorDescImpl
 {
     public CVMixFilterProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixFilterDesc_tImpl? _DescInstance;
 
     public VMixFilterDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0xCDEFD84927917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0xCDEFD84927917BC0);
             var instance = _DescInstance ??= new VMixFilterDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }
-    private static nint? _ParamCutoffFreqOffset;
+    private static nint _ParamCutoffFreqOffset = -1;
     private CVMixParameterFloatImpl? _ParamCutoffFreqInstance;
 
     public CVMixParameterFloat ParamCutoffFreq
     {
         get
         {
-            _ParamCutoffFreqOffset = _ParamCutoffFreqOffset ?? Schema.GetOffset(0xCDEFD8494066AD81);
+            if (_ParamCutoffFreqOffset == -1) _ParamCutoffFreqOffset = Schema.GetOffset(0xCDEFD8494066AD81);
             var instance = _ParamCutoffFreqInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamCutoffFreqOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamCutoffFreqOffset);
             return instance;
         }
     }
-    private static nint? _ParamQOffset;
+    private static nint _ParamQOffset = -1;
     private CVMixParameterFloatImpl? _ParamQInstance;
 
     public CVMixParameterFloat ParamQ
     {
         get
         {
-            _ParamQOffset = _ParamQOffset ?? Schema.GetOffset(0xCDEFD849460E79B9);
+            if (_ParamQOffset == -1) _ParamQOffset = Schema.GetOffset(0xCDEFD849460E79B9);
             var instance = _ParamQInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamQOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamQOffset);
             return instance;
         }
     }

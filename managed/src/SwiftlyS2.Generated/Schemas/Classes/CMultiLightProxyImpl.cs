@@ -16,94 +16,94 @@ internal partial class CMultiLightProxyImpl : CLogicalEntityImpl, CMultiLightPro
 {
     public CMultiLightProxyImpl(nint handle) : base(handle) { }
 
-    private static nint? _LightNameFilterOffset;
+    private static nint _LightNameFilterOffset = -1;
 
     public string LightNameFilter
     {
         get
         {
-            _LightNameFilterOffset = _LightNameFilterOffset ?? Schema.GetOffset(0xF2B647B3071F3A26);
-            return Schema.GetString(_Handle.Read<nint>(_LightNameFilterOffset!.Value));
+            if (_LightNameFilterOffset == -1) _LightNameFilterOffset = Schema.GetOffset(0xF2B647B3071F3A26);
+            return Schema.GetString(_Handle.Read<nint>(_LightNameFilterOffset));
         }
         set
         {
-            _LightNameFilterOffset = _LightNameFilterOffset ?? Schema.GetOffset(0xF2B647B3071F3A26);
-            Schema.SetString(_Handle, _LightNameFilterOffset!.Value, value);
+            if (_LightNameFilterOffset == -1) _LightNameFilterOffset = Schema.GetOffset(0xF2B647B3071F3A26);
+            Schema.SetString(_Handle, _LightNameFilterOffset, value);
         }
     }
-    private static nint? _LightClassFilterOffset;
+    private static nint _LightClassFilterOffset = -1;
 
     public string LightClassFilter
     {
         get
         {
-            _LightClassFilterOffset = _LightClassFilterOffset ?? Schema.GetOffset(0xF2B647B32B566D5B);
-            return Schema.GetString(_Handle.Read<nint>(_LightClassFilterOffset!.Value));
+            if (_LightClassFilterOffset == -1) _LightClassFilterOffset = Schema.GetOffset(0xF2B647B32B566D5B);
+            return Schema.GetString(_Handle.Read<nint>(_LightClassFilterOffset));
         }
         set
         {
-            _LightClassFilterOffset = _LightClassFilterOffset ?? Schema.GetOffset(0xF2B647B32B566D5B);
-            Schema.SetString(_Handle, _LightClassFilterOffset!.Value, value);
+            if (_LightClassFilterOffset == -1) _LightClassFilterOffset = Schema.GetOffset(0xF2B647B32B566D5B);
+            Schema.SetString(_Handle, _LightClassFilterOffset, value);
         }
     }
-    private static nint? _LightRadiusFilterOffset;
+    private static nint _LightRadiusFilterOffset = -1;
 
     public ref float LightRadiusFilter
     {
         get
         {
-            _LightRadiusFilterOffset = _LightRadiusFilterOffset ?? Schema.GetOffset(0xF2B647B3DBC59891);
-            return ref _Handle.AsRef<float>(_LightRadiusFilterOffset!.Value);
+            if (_LightRadiusFilterOffset == -1) _LightRadiusFilterOffset = Schema.GetOffset(0xF2B647B3DBC59891);
+            return ref _Handle.AsRef<float>(_LightRadiusFilterOffset);
         }
     }
-    private static nint? _BrightnessDeltaOffset;
+    private static nint _BrightnessDeltaOffset = -1;
 
     public ref float BrightnessDelta
     {
         get
         {
-            _BrightnessDeltaOffset = _BrightnessDeltaOffset ?? Schema.GetOffset(0xF2B647B3E60D5182);
-            return ref _Handle.AsRef<float>(_BrightnessDeltaOffset!.Value);
+            if (_BrightnessDeltaOffset == -1) _BrightnessDeltaOffset = Schema.GetOffset(0xF2B647B3E60D5182);
+            return ref _Handle.AsRef<float>(_BrightnessDeltaOffset);
         }
     }
-    private static nint? _PerformScreenFadeOffset;
+    private static nint _PerformScreenFadeOffset = -1;
 
     public ref bool PerformScreenFade
     {
         get
         {
-            _PerformScreenFadeOffset = _PerformScreenFadeOffset ?? Schema.GetOffset(0xF2B647B3F3DAE928);
-            return ref _Handle.AsRef<bool>(_PerformScreenFadeOffset!.Value);
+            if (_PerformScreenFadeOffset == -1) _PerformScreenFadeOffset = Schema.GetOffset(0xF2B647B3F3DAE928);
+            return ref _Handle.AsRef<bool>(_PerformScreenFadeOffset);
         }
     }
-    private static nint? _TargetBrightnessMultiplierOffset;
+    private static nint _TargetBrightnessMultiplierOffset = -1;
 
     public ref float TargetBrightnessMultiplier
     {
         get
         {
-            _TargetBrightnessMultiplierOffset = _TargetBrightnessMultiplierOffset ?? Schema.GetOffset(0xF2B647B3B84CF4BA);
-            return ref _Handle.AsRef<float>(_TargetBrightnessMultiplierOffset!.Value);
+            if (_TargetBrightnessMultiplierOffset == -1) _TargetBrightnessMultiplierOffset = Schema.GetOffset(0xF2B647B3B84CF4BA);
+            return ref _Handle.AsRef<float>(_TargetBrightnessMultiplierOffset);
         }
     }
-    private static nint? _CurrentBrightnessMultiplierOffset;
+    private static nint _CurrentBrightnessMultiplierOffset = -1;
 
     public ref float CurrentBrightnessMultiplier
     {
         get
         {
-            _CurrentBrightnessMultiplierOffset = _CurrentBrightnessMultiplierOffset ?? Schema.GetOffset(0xF2B647B3C03C5EEC);
-            return ref _Handle.AsRef<float>(_CurrentBrightnessMultiplierOffset!.Value);
+            if (_CurrentBrightnessMultiplierOffset == -1) _CurrentBrightnessMultiplierOffset = Schema.GetOffset(0xF2B647B3C03C5EEC);
+            return ref _Handle.AsRef<float>(_CurrentBrightnessMultiplierOffset);
         }
     }
-    private static nint? _LightsOffset;
+    private static nint _LightsOffset = -1;
 
     public ref CUtlVector<CHandle<CLightEntity>> Lights
     {
         get
         {
-            _LightsOffset = _LightsOffset ?? Schema.GetOffset(0xF2B647B3A5ECA534);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CLightEntity>>>(_LightsOffset!.Value);
+            if (_LightsOffset == -1) _LightsOffset = Schema.GetOffset(0xF2B647B3A5ECA534);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CLightEntity>>>(_LightsOffset);
         }
     }
 

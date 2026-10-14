@@ -16,34 +16,34 @@ internal partial class CNmStateNode__TimedEvent_tImpl : SchemaClass, CNmStateNod
 {
     public CNmStateNode__TimedEvent_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0x256373A95066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0x256373A95066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
         }
     }
-    private static nint? _TimeValueSecondsOffset;
+    private static nint _TimeValueSecondsOffset = -1;
 
     public ref float TimeValueSeconds
     {
         get
         {
-            _TimeValueSecondsOffset = _TimeValueSecondsOffset ?? Schema.GetOffset(0x256373A3B175F1C);
-            return ref _Handle.AsRef<float>(_TimeValueSecondsOffset!.Value);
+            if (_TimeValueSecondsOffset == -1) _TimeValueSecondsOffset = Schema.GetOffset(0x256373A3B175F1C);
+            return ref _Handle.AsRef<float>(_TimeValueSecondsOffset);
         }
     }
-    private static nint? _ComparisionOperatorOffset;
+    private static nint _ComparisionOperatorOffset = -1;
 
     public ref CNmStateNode__TimedEvent_t__Comparison_t ComparisionOperator
     {
         get
         {
-            _ComparisionOperatorOffset = _ComparisionOperatorOffset ?? Schema.GetOffset(0x256373A5C6D84A1);
-            return ref _Handle.AsRef<CNmStateNode__TimedEvent_t__Comparison_t>(_ComparisionOperatorOffset!.Value);
+            if (_ComparisionOperatorOffset == -1) _ComparisionOperatorOffset = Schema.GetOffset(0x256373A5C6D84A1);
+            return ref _Handle.AsRef<CNmStateNode__TimedEvent_t__Comparison_t>(_ComparisionOperatorOffset);
         }
     }
 

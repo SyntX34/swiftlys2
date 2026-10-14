@@ -16,54 +16,54 @@ internal partial class ParticleChildrenInfo_tImpl : SchemaClass, ParticleChildre
 {
     public ParticleChildrenInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChildRefOffset;
+    private static nint _ChildRefOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ChildRef
     {
         get
         {
-            _ChildRefOffset = _ChildRefOffset ?? Schema.GetOffset(0x1EF548F3D87838A);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_ChildRefOffset!.Value);
+            if (_ChildRefOffset == -1) _ChildRefOffset = Schema.GetOffset(0x1EF548F3D87838A);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_ChildRefOffset);
         }
     }
-    private static nint? _DelayOffset;
+    private static nint _DelayOffset = -1;
 
     public ref float Delay
     {
         get
         {
-            _DelayOffset = _DelayOffset ?? Schema.GetOffset(0x1EF548F7D68FD6E);
-            return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+            if (_DelayOffset == -1) _DelayOffset = Schema.GetOffset(0x1EF548F7D68FD6E);
+            return ref _Handle.AsRef<float>(_DelayOffset);
         }
     }
-    private static nint? _EndCapOffset;
+    private static nint _EndCapOffset = -1;
 
     public ref bool EndCap
     {
         get
         {
-            _EndCapOffset = _EndCapOffset ?? Schema.GetOffset(0x1EF548FC47CB04A);
-            return ref _Handle.AsRef<bool>(_EndCapOffset!.Value);
+            if (_EndCapOffset == -1) _EndCapOffset = Schema.GetOffset(0x1EF548FC47CB04A);
+            return ref _Handle.AsRef<bool>(_EndCapOffset);
         }
     }
-    private static nint? _DisableChildOffset;
+    private static nint _DisableChildOffset = -1;
 
     public ref bool DisableChild
     {
         get
         {
-            _DisableChildOffset = _DisableChildOffset ?? Schema.GetOffset(0x1EF548F81AECD9B);
-            return ref _Handle.AsRef<bool>(_DisableChildOffset!.Value);
+            if (_DisableChildOffset == -1) _DisableChildOffset = Schema.GetOffset(0x1EF548F81AECD9B);
+            return ref _Handle.AsRef<bool>(_DisableChildOffset);
         }
     }
-    private static nint? _DetailLevelOffset;
+    private static nint _DetailLevelOffset = -1;
 
     public ref ParticleDetailLevel_t DetailLevel
     {
         get
         {
-            _DetailLevelOffset = _DetailLevelOffset ?? Schema.GetOffset(0x1EF548F11D9E786);
-            return ref _Handle.AsRef<ParticleDetailLevel_t>(_DetailLevelOffset!.Value);
+            if (_DetailLevelOffset == -1) _DetailLevelOffset = Schema.GetOffset(0x1EF548F11D9E786);
+            return ref _Handle.AsRef<ParticleDetailLevel_t>(_DetailLevelOffset);
         }
     }
 

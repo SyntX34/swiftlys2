@@ -281,19 +281,6 @@ void CConvarManager::DeleteConvar(const std::string& cvar_name)
     created.free(created.convar);
 }
 
-bool CConvarManager::ExistsConvar(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    return cvar.IsValidRef() && cvar.IsConVarDataValid();
-}
-
-EConVarType CConvarManager::GetConvarType(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    if (!cvar.IsConVarDataValid()) return EConVarType::EConVarType_Invalid;
-    return cvar.GetType();
-}
-
 ConVarRefAbstract& CConvarManager::GetConvarRef(const char* cvar_name)
 {
     QueueLockGuard lock(m_mtxConvars);
@@ -308,94 +295,6 @@ ConVarRefAbstract& CConvarManager::GetConvarRef(const char* cvar_name)
     return it->second;
 }
 
-void* CConvarManager::GetConvarDataAddress(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    CSplitScreenSlot server(0);
-    if (!cvar.IsValidRef()) return nullptr;
-    if (!cvar.IsConVarDataValid()) return nullptr;
-
-    return cvar.GetConVarData()->ValueOrDefault(server);
-}
-
-ConvarValue CConvarManager::GetConvarValue(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    CSplitScreenSlot server(0);
-    if (!cvar.IsConVarDataValid()) return 0;
-
-    switch (cvar.GetType())
-    {
-        case EConVarType_Int16: return cvar.GetAs<int16_t>(server);
-        case EConVarType_UInt16: return cvar.GetAs<uint16_t>(server);
-        case EConVarType_Int32: return cvar.GetAs<int32_t>(server);
-        case EConVarType_UInt32: return cvar.GetAs<uint32_t>(server);
-        /*
-
-        unsigned long long long long long long long long long long long long long long long long long long
-        fuck you linux fuck you gcc
-
-        * fuck sourcehook too, almost forget about you
-
-
-        */
-        case EConVarType_UInt64: return (uint64_t)cvar.GetAs<uint64>(server);
-        case EConVarType_Int64: return (int64_t)cvar.GetAs<int64>(server);
-        case EConVarType_Bool: return cvar.GetAs<bool>(server);
-        case EConVarType_Float32: return cvar.GetAs<float>(server);
-        case EConVarType_Float64: return cvar.GetAs<double>(server);
-        case EConVarType_String: return std::string(cvar.GetString(server).String());
-        case EConVarType_Color: return cvar.GetAs<Color>(server);
-        case EConVarType_Vector2: return cvar.GetAs<Vector2D>(server);
-        case EConVarType_Vector3: return cvar.GetAs<Vector>(server);
-        case EConVarType_Vector4: return cvar.GetAs<Vector4D>(server);
-        case EConVarType_Qangle: return cvar.GetAs<QAngle>(server);
-        default:
-            g_pLogger->Error("Convars", fmt::format("Unsupported ConVar type: {}", (int)cvar.GetType()));
-            return 0;
-    }
-}
-
-void CConvarManager::SetConvarValue(const std::string& cvar_name, const ConvarValue& value)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    CSplitScreenSlot server(0);
-    if (!cvar.IsConVarDataValid()) return;
-
-    auto v_str = ConvertConvarValueToString(value);
-    cvar.SetString(CUtlString(v_str.c_str()), server);
-}
-
-void CConvarManager::SetClientConvar(int playerid, const std::string& cvar_name, const std::string& value)
-{
-    const auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(6);
-    auto msg = netmsg->AllocateMessage()->ToPB<CNETMsg_SetConVar>();
-
-    CMsg_CVars_CVar* cvar = msg->mutable_convars()->add_cvars();
-    cvar->set_name(cvar_name);
-    cvar->set_value(value);
-
-    bypassPostEventAbstractHook = true;
-
-    CSingleRecipientFilter filter(playerid);
-    g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
-
-    bypassPostEventAbstractHook = false;
-
-    /*
-    Finally it's been fixed, i've had this problem since a year ago, glad that it's fixed and i didn't need to use deamberd with it's "const const const" feature
-
-    thanks memoverride, glad to have you here m8
-
-    now i can finally delete it, even on windows!!!
-
-    and 100% (i'm not sure of this number) i'll not need to stay again 4 hours to debug it
-
-    fuck you windows
-    */
-    delete msg;
-}
-
 /*
 
 it feels so good to not make "#define private public" stuff
@@ -403,38 +302,6 @@ it feels so good to not make "#define private public" stuff
 some people don't even want to look through all the fields and just go to the shortest way
 
 */
-
-void CConvarManager::AddFlags(const std::string& cvar_name, uint64_t flags)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    if (!cvar.IsConVarDataValid()) return;
-
-    cvar.AddFlags(flags);
-}
-
-void CConvarManager::RemoveFlags(const std::string& cvar_name, uint64_t flags)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    if (!cvar.IsConVarDataValid()) return;
-
-    cvar.RemoveFlags(flags);
-}
-
-void CConvarManager::ClearFlags(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    if (!cvar.IsConVarDataValid()) return;
-
-    cvar.RemoveFlags(cvar.GetFlags());
-}
-
-uint64_t CConvarManager::GetFlags(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    if (!cvar.IsConVarDataValid()) return 0;
-
-    return cvar.GetFlags();
-}
 
 uint64_t CConvarManager::AddGlobalChangeListener(std::function<void(const char*, int, const char*, const char*)> callback)
 {

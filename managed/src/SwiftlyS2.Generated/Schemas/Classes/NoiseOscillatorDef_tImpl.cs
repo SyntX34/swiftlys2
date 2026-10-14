@@ -16,34 +16,34 @@ internal partial class NoiseOscillatorDef_tImpl : SchemaClass, NoiseOscillatorDe
 {
     public NoiseOscillatorDef_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _PhaseOffset;
+    private static nint _PhaseOffset = -1;
 
     public ref float Phase
     {
         get
         {
-            _PhaseOffset = _PhaseOffset ?? Schema.GetOffset(0xB33CBEA13C22A9CA);
-            return ref _Handle.AsRef<float>(_PhaseOffset!.Value);
+            if (_PhaseOffset == -1) _PhaseOffset = Schema.GetOffset(0xB33CBEA13C22A9CA);
+            return ref _Handle.AsRef<float>(_PhaseOffset);
         }
     }
-    private static nint? _FrequencyOffset;
+    private static nint _FrequencyOffset = -1;
 
     public ref float Frequency
     {
         get
         {
-            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0xB33CBEA1D2C16DD7);
-            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+            if (_FrequencyOffset == -1) _FrequencyOffset = Schema.GetOffset(0xB33CBEA1D2C16DD7);
+            return ref _Handle.AsRef<float>(_FrequencyOffset);
         }
     }
-    private static nint? _AmplitudeOffset;
+    private static nint _AmplitudeOffset = -1;
 
     public ref float Amplitude
     {
         get
         {
-            _AmplitudeOffset = _AmplitudeOffset ?? Schema.GetOffset(0xB33CBEA1B44B0E18);
-            return ref _Handle.AsRef<float>(_AmplitudeOffset!.Value);
+            if (_AmplitudeOffset == -1) _AmplitudeOffset = Schema.GetOffset(0xB33CBEA1B44B0E18);
+            return ref _Handle.AsRef<float>(_AmplitudeOffset);
         }
     }
 

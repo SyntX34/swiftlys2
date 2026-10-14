@@ -16,29 +16,29 @@ internal partial class ActorMapping_tImpl : SchemaClass, ActorMapping_t
 {
     public ActorMapping_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ActorNameOffset;
+    private static nint _ActorNameOffset = -1;
 
     public string ActorName
     {
         get
         {
-            _ActorNameOffset = _ActorNameOffset ?? Schema.GetOffset(0x8CCE1717B76E7478);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ActorNameOffset!.Value));
+            if (_ActorNameOffset == -1) _ActorNameOffset = Schema.GetOffset(0x8CCE1717B76E7478);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ActorNameOffset));
         }
         set
         {
-            _ActorNameOffset = _ActorNameOffset ?? Schema.GetOffset(0x8CCE1717B76E7478);
-            Schema.SetCUtlString(_Handle, _ActorNameOffset!.Value, value);
+            if (_ActorNameOffset == -1) _ActorNameOffset = Schema.GetOffset(0x8CCE1717B76E7478);
+            Schema.SetCUtlString(_Handle, _ActorNameOffset, value);
         }
     }
-    private static nint? _EntityOffset;
+    private static nint _EntityOffset = -1;
 
     public ref CHandle<CBaseEntity> Entity
     {
         get
         {
-            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x8CCE17176EBADCB0);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0x8CCE17176EBADCB0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset);
         }
     }
 

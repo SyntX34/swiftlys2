@@ -16,29 +16,29 @@ internal partial class ModelAnimGraph2Ref_tImpl : SchemaClass, ModelAnimGraph2Re
 {
     public ModelAnimGraph2Ref_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _IdentifierOffset;
+    private static nint _IdentifierOffset = -1;
 
     public string Identifier
     {
         get
         {
-            _IdentifierOffset = _IdentifierOffset ?? Schema.GetOffset(0xB068395EF7D0521);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IdentifierOffset!.Value));
+            if (_IdentifierOffset == -1) _IdentifierOffset = Schema.GetOffset(0xB068395EF7D0521);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IdentifierOffset));
         }
         set
         {
-            _IdentifierOffset = _IdentifierOffset ?? Schema.GetOffset(0xB068395EF7D0521);
-            Schema.SetCUtlString(_Handle, _IdentifierOffset!.Value, value);
+            if (_IdentifierOffset == -1) _IdentifierOffset = Schema.GetOffset(0xB068395EF7D0521);
+            Schema.SetCUtlString(_Handle, _IdentifierOffset, value);
         }
     }
-    private static nint? _GraphOffset;
+    private static nint _GraphOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeCNmGraphDefinition> Graph
     {
         get
         {
-            _GraphOffset = _GraphOffset ?? Schema.GetOffset(0xB068395AA5BE1A5);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmGraphDefinition>>(_GraphOffset!.Value);
+            if (_GraphOffset == -1) _GraphOffset = Schema.GetOffset(0xB068395AA5BE1A5);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmGraphDefinition>>(_GraphOffset);
         }
     }
 

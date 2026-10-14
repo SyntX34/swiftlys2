@@ -16,84 +16,84 @@ internal partial class CAnimDesc_FlagImpl : SchemaClass, CAnimDesc_Flag
 {
     public CAnimDesc_FlagImpl(nint handle) : base(handle) { }
 
-    private static nint? _LoopingOffset;
+    private static nint _LoopingOffset = -1;
 
     public ref bool Looping
     {
         get
         {
-            _LoopingOffset = _LoopingOffset ?? Schema.GetOffset(0xF86D993525449B0D);
-            return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
+            if (_LoopingOffset == -1) _LoopingOffset = Schema.GetOffset(0xF86D993525449B0D);
+            return ref _Handle.AsRef<bool>(_LoopingOffset);
         }
     }
-    private static nint? _AllZerosOffset;
+    private static nint _AllZerosOffset = -1;
 
     public ref bool AllZeros
     {
         get
         {
-            _AllZerosOffset = _AllZerosOffset ?? Schema.GetOffset(0xF86D99350524016F);
-            return ref _Handle.AsRef<bool>(_AllZerosOffset!.Value);
+            if (_AllZerosOffset == -1) _AllZerosOffset = Schema.GetOffset(0xF86D99350524016F);
+            return ref _Handle.AsRef<bool>(_AllZerosOffset);
         }
     }
-    private static nint? _HiddenOffset;
+    private static nint _HiddenOffset = -1;
 
     public ref bool Hidden
     {
         get
         {
-            _HiddenOffset = _HiddenOffset ?? Schema.GetOffset(0xF86D993557D2DC99);
-            return ref _Handle.AsRef<bool>(_HiddenOffset!.Value);
+            if (_HiddenOffset == -1) _HiddenOffset = Schema.GetOffset(0xF86D993557D2DC99);
+            return ref _Handle.AsRef<bool>(_HiddenOffset);
         }
     }
-    private static nint? _DeltaOffset;
+    private static nint _DeltaOffset = -1;
 
     public ref bool Delta
     {
         get
         {
-            _DeltaOffset = _DeltaOffset ?? Schema.GetOffset(0xF86D99352E4BCA01);
-            return ref _Handle.AsRef<bool>(_DeltaOffset!.Value);
+            if (_DeltaOffset == -1) _DeltaOffset = Schema.GetOffset(0xF86D99352E4BCA01);
+            return ref _Handle.AsRef<bool>(_DeltaOffset);
         }
     }
-    private static nint? _LegacyWorldspaceOffset;
+    private static nint _LegacyWorldspaceOffset = -1;
 
     public ref bool LegacyWorldspace
     {
         get
         {
-            _LegacyWorldspaceOffset = _LegacyWorldspaceOffset ?? Schema.GetOffset(0xF86D9935E598BF5C);
-            return ref _Handle.AsRef<bool>(_LegacyWorldspaceOffset!.Value);
+            if (_LegacyWorldspaceOffset == -1) _LegacyWorldspaceOffset = Schema.GetOffset(0xF86D9935E598BF5C);
+            return ref _Handle.AsRef<bool>(_LegacyWorldspaceOffset);
         }
     }
-    private static nint? _ModelDocOffset;
+    private static nint _ModelDocOffset = -1;
 
     public ref bool ModelDoc
     {
         get
         {
-            _ModelDocOffset = _ModelDocOffset ?? Schema.GetOffset(0xF86D9935815FEAE4);
-            return ref _Handle.AsRef<bool>(_ModelDocOffset!.Value);
+            if (_ModelDocOffset == -1) _ModelDocOffset = Schema.GetOffset(0xF86D9935815FEAE4);
+            return ref _Handle.AsRef<bool>(_ModelDocOffset);
         }
     }
-    private static nint? _ImplicitSeqIgnoreDeltaOffset;
+    private static nint _ImplicitSeqIgnoreDeltaOffset = -1;
 
     public ref bool ImplicitSeqIgnoreDelta
     {
         get
         {
-            _ImplicitSeqIgnoreDeltaOffset = _ImplicitSeqIgnoreDeltaOffset ?? Schema.GetOffset(0xF86D9935C902252B);
-            return ref _Handle.AsRef<bool>(_ImplicitSeqIgnoreDeltaOffset!.Value);
+            if (_ImplicitSeqIgnoreDeltaOffset == -1) _ImplicitSeqIgnoreDeltaOffset = Schema.GetOffset(0xF86D9935C902252B);
+            return ref _Handle.AsRef<bool>(_ImplicitSeqIgnoreDeltaOffset);
         }
     }
-    private static nint? _AnimGraphAdditiveOffset;
+    private static nint _AnimGraphAdditiveOffset = -1;
 
     public ref bool AnimGraphAdditive
     {
         get
         {
-            _AnimGraphAdditiveOffset = _AnimGraphAdditiveOffset ?? Schema.GetOffset(0xF86D9935704DBB70);
-            return ref _Handle.AsRef<bool>(_AnimGraphAdditiveOffset!.Value);
+            if (_AnimGraphAdditiveOffset == -1) _AnimGraphAdditiveOffset = Schema.GetOffset(0xF86D9935704DBB70);
+            return ref _Handle.AsRef<bool>(_AnimGraphAdditiveOffset);
         }
     }
 

@@ -16,76 +16,76 @@ internal partial class CAnimGraphDoc_CycleConditionImpl : CAnimGraphDoc_Conditio
 {
     public CAnimGraphDoc_CycleConditionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ComparisonOpOffset;
+    private static nint _ComparisonOpOffset = -1;
 
     public ref Comparison_t ComparisonOp
     {
         get
         {
-            _ComparisonOpOffset = _ComparisonOpOffset ?? Schema.GetOffset(0x87696121BC2AB253);
-            return ref _Handle.AsRef<Comparison_t>(_ComparisonOpOffset!.Value);
+            if (_ComparisonOpOffset == -1) _ComparisonOpOffset = Schema.GetOffset(0x87696121BC2AB253);
+            return ref _Handle.AsRef<Comparison_t>(_ComparisonOpOffset);
         }
     }
-    private static nint? _ComparisonStringOffset;
+    private static nint _ComparisonStringOffset = -1;
 
     public string ComparisonString
     {
         get
         {
-            _ComparisonStringOffset = _ComparisonStringOffset ?? Schema.GetOffset(0x876961210AAA1B85);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ComparisonStringOffset!.Value));
+            if (_ComparisonStringOffset == -1) _ComparisonStringOffset = Schema.GetOffset(0x876961210AAA1B85);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ComparisonStringOffset));
         }
         set
         {
-            _ComparisonStringOffset = _ComparisonStringOffset ?? Schema.GetOffset(0x876961210AAA1B85);
-            Schema.SetCUtlString(_Handle, _ComparisonStringOffset!.Value, value);
+            if (_ComparisonStringOffset == -1) _ComparisonStringOffset = Schema.GetOffset(0x876961210AAA1B85);
+            Schema.SetCUtlString(_Handle, _ComparisonStringOffset, value);
         }
     }
-    private static nint? _ComparisonValueOffset;
+    private static nint _ComparisonValueOffset = -1;
 
     public ref float ComparisonValue
     {
         get
         {
-            _ComparisonValueOffset = _ComparisonValueOffset ?? Schema.GetOffset(0x87696121E8EEEB1D);
-            return ref _Handle.AsRef<float>(_ComparisonValueOffset!.Value);
+            if (_ComparisonValueOffset == -1) _ComparisonValueOffset = Schema.GetOffset(0x87696121E8EEEB1D);
+            return ref _Handle.AsRef<float>(_ComparisonValueOffset);
         }
     }
-    private static nint? _ComparisonValueTypeOffset;
+    private static nint _ComparisonValueTypeOffset = -1;
 
     public ref ComparisonValueType ComparisonValueType
     {
         get
         {
-            _ComparisonValueTypeOffset = _ComparisonValueTypeOffset ?? Schema.GetOffset(0x876961216AA52395);
-            return ref _Handle.AsRef<ComparisonValueType>(_ComparisonValueTypeOffset!.Value);
+            if (_ComparisonValueTypeOffset == -1) _ComparisonValueTypeOffset = Schema.GetOffset(0x876961216AA52395);
+            return ref _Handle.AsRef<ComparisonValueType>(_ComparisonValueTypeOffset);
         }
     }
-    private static nint? _ComparisonParamNameOffset;
+    private static nint _ComparisonParamNameOffset = -1;
 
     public string ComparisonParamName
     {
         get
         {
-            _ComparisonParamNameOffset = _ComparisonParamNameOffset ?? Schema.GetOffset(0x876961218C840EE6);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ComparisonParamNameOffset!.Value));
+            if (_ComparisonParamNameOffset == -1) _ComparisonParamNameOffset = Schema.GetOffset(0x876961218C840EE6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ComparisonParamNameOffset));
         }
         set
         {
-            _ComparisonParamNameOffset = _ComparisonParamNameOffset ?? Schema.GetOffset(0x876961218C840EE6);
-            Schema.SetCUtlString(_Handle, _ComparisonParamNameOffset!.Value, value);
+            if (_ComparisonParamNameOffset == -1) _ComparisonParamNameOffset = Schema.GetOffset(0x876961218C840EE6);
+            Schema.SetCUtlString(_Handle, _ComparisonParamNameOffset, value);
         }
     }
-    private static nint? _ComparisonParamIDOffset;
+    private static nint _ComparisonParamIDOffset = -1;
     private AnimParamIDImpl? _ComparisonParamIDInstance;
 
     public AnimParamID ComparisonParamID
     {
         get
         {
-            _ComparisonParamIDOffset = _ComparisonParamIDOffset ?? Schema.GetOffset(0x87696121727BE180);
+            if (_ComparisonParamIDOffset == -1) _ComparisonParamIDOffset = Schema.GetOffset(0x87696121727BE180);
             var instance = _ComparisonParamIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ComparisonParamIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ComparisonParamIDOffset);
             return instance;
         }
     }

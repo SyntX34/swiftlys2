@@ -16,14 +16,14 @@ internal partial class SelectedEditItemInfo_tImpl : SchemaClass, SelectedEditIte
 {
     public SelectedEditItemInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EditItemsOffset;
+    private static nint _EditItemsOffset = -1;
 
     public ref CUtlVector<SosEditItemInfo_t> EditItems
     {
         get
         {
-            _EditItemsOffset = _EditItemsOffset ?? Schema.GetOffset(0xDF4D8E78F11EB01B);
-            return ref _Handle.AsRef<CUtlVector<SosEditItemInfo_t>>(_EditItemsOffset!.Value);
+            if (_EditItemsOffset == -1) _EditItemsOffset = Schema.GetOffset(0xDF4D8E78F11EB01B);
+            return ref _Handle.AsRef<CUtlVector<SosEditItemInfo_t>>(_EditItemsOffset);
         }
     }
 

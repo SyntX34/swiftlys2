@@ -16,119 +16,119 @@ internal partial class CEnvInstructorVRHintImpl : CPointEntityImpl, CEnvInstruct
 {
     public CEnvInstructorVRHintImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x75F3B61F74FF65FE);
-            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x75F3B61F74FF65FE);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x75F3B61F74FF65FE);
-            Schema.SetString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x75F3B61F74FF65FE);
+            Schema.SetString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _HintTargetEntityOffset;
+    private static nint _HintTargetEntityOffset = -1;
 
     public string HintTargetEntity
     {
         get
         {
-            _HintTargetEntityOffset = _HintTargetEntityOffset ?? Schema.GetOffset(0x75F3B61F0024C1BE);
-            return Schema.GetString(_Handle.Read<nint>(_HintTargetEntityOffset!.Value));
+            if (_HintTargetEntityOffset == -1) _HintTargetEntityOffset = Schema.GetOffset(0x75F3B61F0024C1BE);
+            return Schema.GetString(_Handle.Read<nint>(_HintTargetEntityOffset));
         }
         set
         {
-            _HintTargetEntityOffset = _HintTargetEntityOffset ?? Schema.GetOffset(0x75F3B61F0024C1BE);
-            Schema.SetString(_Handle, _HintTargetEntityOffset!.Value, value);
+            if (_HintTargetEntityOffset == -1) _HintTargetEntityOffset = Schema.GetOffset(0x75F3B61F0024C1BE);
+            Schema.SetString(_Handle, _HintTargetEntityOffset, value);
         }
     }
-    private static nint? _TimeoutOffset;
+    private static nint _TimeoutOffset = -1;
 
     public ref int Timeout
     {
         get
         {
-            _TimeoutOffset = _TimeoutOffset ?? Schema.GetOffset(0x75F3B61F2EC6CDDF);
-            return ref _Handle.AsRef<int>(_TimeoutOffset!.Value);
+            if (_TimeoutOffset == -1) _TimeoutOffset = Schema.GetOffset(0x75F3B61F2EC6CDDF);
+            return ref _Handle.AsRef<int>(_TimeoutOffset);
         }
     }
-    private static nint? _CaptionOffset;
+    private static nint _CaptionOffset = -1;
 
     public string Caption
     {
         get
         {
-            _CaptionOffset = _CaptionOffset ?? Schema.GetOffset(0x75F3B61FBE8E34DD);
-            return Schema.GetString(_Handle.Read<nint>(_CaptionOffset!.Value));
+            if (_CaptionOffset == -1) _CaptionOffset = Schema.GetOffset(0x75F3B61FBE8E34DD);
+            return Schema.GetString(_Handle.Read<nint>(_CaptionOffset));
         }
         set
         {
-            _CaptionOffset = _CaptionOffset ?? Schema.GetOffset(0x75F3B61FBE8E34DD);
-            Schema.SetString(_Handle, _CaptionOffset!.Value, value);
+            if (_CaptionOffset == -1) _CaptionOffset = Schema.GetOffset(0x75F3B61FBE8E34DD);
+            Schema.SetString(_Handle, _CaptionOffset, value);
         }
     }
-    private static nint? _StartSoundOffset;
+    private static nint _StartSoundOffset = -1;
 
     public string StartSound
     {
         get
         {
-            _StartSoundOffset = _StartSoundOffset ?? Schema.GetOffset(0x75F3B61FF9B2297E);
-            return Schema.GetString(_Handle.Read<nint>(_StartSoundOffset!.Value));
+            if (_StartSoundOffset == -1) _StartSoundOffset = Schema.GetOffset(0x75F3B61FF9B2297E);
+            return Schema.GetString(_Handle.Read<nint>(_StartSoundOffset));
         }
         set
         {
-            _StartSoundOffset = _StartSoundOffset ?? Schema.GetOffset(0x75F3B61FF9B2297E);
-            Schema.SetString(_Handle, _StartSoundOffset!.Value, value);
+            if (_StartSoundOffset == -1) _StartSoundOffset = Schema.GetOffset(0x75F3B61FF9B2297E);
+            Schema.SetString(_Handle, _StartSoundOffset, value);
         }
     }
-    private static nint? _LayoutFileTypeOffset;
+    private static nint _LayoutFileTypeOffset = -1;
 
     public ref int LayoutFileType
     {
         get
         {
-            _LayoutFileTypeOffset = _LayoutFileTypeOffset ?? Schema.GetOffset(0x75F3B61FAB45B364);
-            return ref _Handle.AsRef<int>(_LayoutFileTypeOffset!.Value);
+            if (_LayoutFileTypeOffset == -1) _LayoutFileTypeOffset = Schema.GetOffset(0x75F3B61FAB45B364);
+            return ref _Handle.AsRef<int>(_LayoutFileTypeOffset);
         }
     }
-    private static nint? _CustomLayoutFileOffset;
+    private static nint _CustomLayoutFileOffset = -1;
 
     public string CustomLayoutFile
     {
         get
         {
-            _CustomLayoutFileOffset = _CustomLayoutFileOffset ?? Schema.GetOffset(0x75F3B61F60A92CB6);
-            return Schema.GetString(_Handle.Read<nint>(_CustomLayoutFileOffset!.Value));
+            if (_CustomLayoutFileOffset == -1) _CustomLayoutFileOffset = Schema.GetOffset(0x75F3B61F60A92CB6);
+            return Schema.GetString(_Handle.Read<nint>(_CustomLayoutFileOffset));
         }
         set
         {
-            _CustomLayoutFileOffset = _CustomLayoutFileOffset ?? Schema.GetOffset(0x75F3B61F60A92CB6);
-            Schema.SetString(_Handle, _CustomLayoutFileOffset!.Value, value);
+            if (_CustomLayoutFileOffset == -1) _CustomLayoutFileOffset = Schema.GetOffset(0x75F3B61F60A92CB6);
+            Schema.SetString(_Handle, _CustomLayoutFileOffset, value);
         }
     }
-    private static nint? _AttachTypeOffset;
+    private static nint _AttachTypeOffset = -1;
 
     public ref int AttachType
     {
         get
         {
-            _AttachTypeOffset = _AttachTypeOffset ?? Schema.GetOffset(0x75F3B61F432E8381);
-            return ref _Handle.AsRef<int>(_AttachTypeOffset!.Value);
+            if (_AttachTypeOffset == -1) _AttachTypeOffset = Schema.GetOffset(0x75F3B61F432E8381);
+            return ref _Handle.AsRef<int>(_AttachTypeOffset);
         }
     }
-    private static nint? _HeightOffsetOffset;
+    private static nint _HeightOffsetOffset = -1;
 
     public ref float HeightOffset
     {
         get
         {
-            _HeightOffsetOffset = _HeightOffsetOffset ?? Schema.GetOffset(0x75F3B61F2D0C5BF3);
-            return ref _Handle.AsRef<float>(_HeightOffsetOffset!.Value);
+            if (_HeightOffsetOffset == -1) _HeightOffsetOffset = Schema.GetOffset(0x75F3B61F2D0C5BF3);
+            return ref _Handle.AsRef<float>(_HeightOffsetOffset);
         }
     }
 

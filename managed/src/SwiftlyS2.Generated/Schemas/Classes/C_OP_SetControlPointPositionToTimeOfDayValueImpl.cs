@@ -16,39 +16,39 @@ internal partial class C_OP_SetControlPointPositionToTimeOfDayValueImpl : CParti
 {
     public C_OP_SetControlPointPositionToTimeOfDayValueImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x976831CB3F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x976831CB3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _TimeOfDayParameterOffset;
+    private static nint _TimeOfDayParameterOffset = -1;
 
     public string TimeOfDayParameter
     {
         get
         {
-            _TimeOfDayParameterOffset = _TimeOfDayParameterOffset ?? Schema.GetOffset(0x976831CB5B5E9DD3);
-            return Schema.GetString(_Handle + _TimeOfDayParameterOffset!.Value);
+            if (_TimeOfDayParameterOffset == -1) _TimeOfDayParameterOffset = Schema.GetOffset(0x976831CB5B5E9DD3);
+            return Schema.GetString(_Handle + _TimeOfDayParameterOffset);
         }
         set
         {
-            _TimeOfDayParameterOffset = _TimeOfDayParameterOffset ?? Schema.GetOffset(0x976831CB5B5E9DD3);
-            Schema.SetFixedString(_Handle, _TimeOfDayParameterOffset!.Value, value, 128);
+            if (_TimeOfDayParameterOffset == -1) _TimeOfDayParameterOffset = Schema.GetOffset(0x976831CB5B5E9DD3);
+            Schema.SetFixedString(_Handle, _TimeOfDayParameterOffset, value, 128);
         }
     }
-    private static nint? _DefaultValueOffset;
+    private static nint _DefaultValueOffset = -1;
 
     public ref Vector DefaultValue
     {
         get
         {
-            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x976831CB0A18BFDF);
-            return ref _Handle.AsRef<Vector>(_DefaultValueOffset!.Value);
+            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x976831CB0A18BFDF);
+            return ref _Handle.AsRef<Vector>(_DefaultValueOffset);
         }
     }
 

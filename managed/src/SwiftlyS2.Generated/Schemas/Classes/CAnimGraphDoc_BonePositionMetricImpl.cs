@@ -16,19 +16,19 @@ internal partial class CAnimGraphDoc_BonePositionMetricImpl : CAnimGraphDoc_Moti
 {
     public CAnimGraphDoc_BonePositionMetricImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoneNameOffset;
+    private static nint _BoneNameOffset = -1;
 
     public string BoneName
     {
         get
         {
-            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x66C94D03FDEE0E0C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
+            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x66C94D03FDEE0E0C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
         }
         set
         {
-            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x66C94D03FDEE0E0C);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
+            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x66C94D03FDEE0E0C);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
         }
     }
 

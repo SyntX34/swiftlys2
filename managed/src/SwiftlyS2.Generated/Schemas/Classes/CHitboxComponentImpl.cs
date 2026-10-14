@@ -16,14 +16,14 @@ internal partial class CHitboxComponentImpl : CEntityComponentImpl, CHitboxCompo
 {
     public CHitboxComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoundsExpandRadiusOffset;
+    private static nint _BoundsExpandRadiusOffset = -1;
 
     public ref float BoundsExpandRadius
     {
         get
         {
-            _BoundsExpandRadiusOffset = _BoundsExpandRadiusOffset ?? Schema.GetOffset(0x8148DEC366FA148C);
-            return ref _Handle.AsRef<float>(_BoundsExpandRadiusOffset!.Value);
+            if (_BoundsExpandRadiusOffset == -1) _BoundsExpandRadiusOffset = Schema.GetOffset(0x8148DEC366FA148C);
+            return ref _Handle.AsRef<float>(_BoundsExpandRadiusOffset);
         }
     }
 

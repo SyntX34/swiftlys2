@@ -16,57 +16,57 @@ internal partial class CAnimGraphDoc_MotionItemImpl : SchemaClass, CAnimGraphDoc
 {
     public CAnimGraphDoc_MotionItemImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParamManagerOffset;
+    private static nint _ParamManagerOffset = -1;
     private CAnimGraphDoc_MotionParameterManagerImpl? _ParamManagerInstance;
 
     public CAnimGraphDoc_MotionParameterManager ParamManager
     {
         get
         {
-            _ParamManagerOffset = _ParamManagerOffset ?? Schema.GetOffset(0x8D5A8D3FF50B25C9);
+            if (_ParamManagerOffset == -1) _ParamManagerOffset = Schema.GetOffset(0x8D5A8D3FF50B25C9);
             var instance = _ParamManagerInstance ??= new CAnimGraphDoc_MotionParameterManagerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamManagerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamManagerOffset);
             return instance;
         }
     }
-    private static nint? _BlockSpansOffset;
+    private static nint _BlockSpansOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> BlockSpans
     {
         get
         {
-            _BlockSpansOffset = _BlockSpansOffset ?? Schema.GetOffset(0x8D5A8D3F44892E43);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_BlockSpansOffset!.Value);
+            if (_BlockSpansOffset == -1) _BlockSpansOffset = Schema.GetOffset(0x8D5A8D3F44892E43);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_BlockSpansOffset);
         }
     }
-    private static nint? _TagSpansOffset;
+    private static nint _TagSpansOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> TagSpans
     {
         get
         {
-            _TagSpansOffset = _TagSpansOffset ?? Schema.GetOffset(0x8D5A8D3FA56106AC);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TagSpansOffset!.Value);
+            if (_TagSpansOffset == -1) _TagSpansOffset = Schema.GetOffset(0x8D5A8D3FA56106AC);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TagSpansOffset);
         }
     }
-    private static nint? _ParamSpansOffset;
+    private static nint _ParamSpansOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> ParamSpans
     {
         get
         {
-            _ParamSpansOffset = _ParamSpansOffset ?? Schema.GetOffset(0x8D5A8D3FDAC91553);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParamSpansOffset!.Value);
+            if (_ParamSpansOffset == -1) _ParamSpansOffset = Schema.GetOffset(0x8D5A8D3FDAC91553);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParamSpansOffset);
         }
     }
-    private static nint? _LoopOffset;
+    private static nint _LoopOffset = -1;
 
     public ref bool Loop
     {
         get
         {
-            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0x8D5A8D3FC668A4CB);
-            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+            if (_LoopOffset == -1) _LoopOffset = Schema.GetOffset(0x8D5A8D3FC668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset);
         }
     }
 

@@ -16,113 +16,113 @@ internal partial class CVsndRadioButtonSlotImpl : SchemaClass, CVsndRadioButtonS
 {
     public CVsndRadioButtonSlotImpl(nint handle) : base(handle) { }
 
-    private static nint? _EnableVsndOffset;
+    private static nint _EnableVsndOffset = -1;
 
     public ref bool EnableVsnd
     {
         get
         {
-            _EnableVsndOffset = _EnableVsndOffset ?? Schema.GetOffset(0xB3DE3CEEE95E449B);
-            return ref _Handle.AsRef<bool>(_EnableVsndOffset!.Value);
+            if (_EnableVsndOffset == -1) _EnableVsndOffset = Schema.GetOffset(0xB3DE3CEEE95E449B);
+            return ref _Handle.AsRef<bool>(_EnableVsndOffset);
         }
     }
-    private static nint? _VsndOffset;
+    private static nint _VsndOffset = -1;
     private CSoundContainerReferenceImpl? _VsndInstance;
 
     public CSoundContainerReference Vsnd
     {
         get
         {
-            _VsndOffset = _VsndOffset ?? Schema.GetOffset(0xB3DE3CEE865F386C);
+            if (_VsndOffset == -1) _VsndOffset = Schema.GetOffset(0xB3DE3CEE865F386C);
             var instance = _VsndInstance ??= new CSoundContainerReferenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _VsndOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VsndOffset);
             return instance;
         }
     }
-    private static nint? _EnableEndcapOffset;
+    private static nint _EnableEndcapOffset = -1;
 
     public ref bool EnableEndcap
     {
         get
         {
-            _EnableEndcapOffset = _EnableEndcapOffset ?? Schema.GetOffset(0xB3DE3CEE7399D6F1);
-            return ref _Handle.AsRef<bool>(_EnableEndcapOffset!.Value);
+            if (_EnableEndcapOffset == -1) _EnableEndcapOffset = Schema.GetOffset(0xB3DE3CEE7399D6F1);
+            return ref _Handle.AsRef<bool>(_EnableEndcapOffset);
         }
     }
-    private static nint? _EndcapVsndOffset;
+    private static nint _EndcapVsndOffset = -1;
     private CSoundContainerReferenceImpl? _EndcapVsndInstance;
 
     public CSoundContainerReference EndcapVsnd
     {
         get
         {
-            _EndcapVsndOffset = _EndcapVsndOffset ?? Schema.GetOffset(0xB3DE3CEEAD14708F);
+            if (_EndcapVsndOffset == -1) _EndcapVsndOffset = Schema.GetOffset(0xB3DE3CEEAD14708F);
             var instance = _EndcapVsndInstance ??= new CSoundContainerReferenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndcapVsndOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndcapVsndOffset);
             return instance;
         }
     }
-    private static nint? _EnableLoopcapOffset;
+    private static nint _EnableLoopcapOffset = -1;
 
     public ref bool EnableLoopcap
     {
         get
         {
-            _EnableLoopcapOffset = _EnableLoopcapOffset ?? Schema.GetOffset(0xB3DE3CEEE522C044);
-            return ref _Handle.AsRef<bool>(_EnableLoopcapOffset!.Value);
+            if (_EnableLoopcapOffset == -1) _EnableLoopcapOffset = Schema.GetOffset(0xB3DE3CEEE522C044);
+            return ref _Handle.AsRef<bool>(_EnableLoopcapOffset);
         }
     }
-    private static nint? _LoopcapVsndOffset;
+    private static nint _LoopcapVsndOffset = -1;
     private CSoundContainerReferenceImpl? _LoopcapVsndInstance;
 
     public CSoundContainerReference LoopcapVsnd
     {
         get
         {
-            _LoopcapVsndOffset = _LoopcapVsndOffset ?? Schema.GetOffset(0xB3DE3CEE99377240);
+            if (_LoopcapVsndOffset == -1) _LoopcapVsndOffset = Schema.GetOffset(0xB3DE3CEE99377240);
             var instance = _LoopcapVsndInstance ??= new CSoundContainerReferenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _LoopcapVsndOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LoopcapVsndOffset);
             return instance;
         }
     }
-    private static nint? _GroupOffset;
+    private static nint _GroupOffset = -1;
 
     public ref int Group
     {
         get
         {
-            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0xB3DE3CEE9FC645AC);
-            return ref _Handle.AsRef<int>(_GroupOffset!.Value);
+            if (_GroupOffset == -1) _GroupOffset = Schema.GetOffset(0xB3DE3CEE9FC645AC);
+            return ref _Handle.AsRef<int>(_GroupOffset);
         }
     }
-    private static nint? _VolumeOffset;
+    private static nint _VolumeOffset = -1;
 
     public ref float Volume
     {
         get
         {
-            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0xB3DE3CEEE3962F2F);
-            return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
+            if (_VolumeOffset == -1) _VolumeOffset = Schema.GetOffset(0xB3DE3CEEE3962F2F);
+            return ref _Handle.AsRef<float>(_VolumeOffset);
         }
     }
-    private static nint? _FadeOutOffset;
+    private static nint _FadeOutOffset = -1;
 
     public ref float FadeOut
     {
         get
         {
-            _FadeOutOffset = _FadeOutOffset ?? Schema.GetOffset(0xB3DE3CEE68E7FFE5);
-            return ref _Handle.AsRef<float>(_FadeOutOffset!.Value);
+            if (_FadeOutOffset == -1) _FadeOutOffset = Schema.GetOffset(0xB3DE3CEE68E7FFE5);
+            return ref _Handle.AsRef<float>(_FadeOutOffset);
         }
     }
-    private static nint? _ModeOffset;
+    private static nint _ModeOffset = -1;
 
     public ref EVsndPlaybackMode Mode
     {
         get
         {
-            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xB3DE3CEE90FD5BB2);
-            return ref _Handle.AsRef<EVsndPlaybackMode>(_ModeOffset!.Value);
+            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0xB3DE3CEE90FD5BB2);
+            return ref _Handle.AsRef<EVsndPlaybackMode>(_ModeOffset);
         }
     }
 

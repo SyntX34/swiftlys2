@@ -16,69 +16,69 @@ internal partial class SosEditItemInfo_tImpl : SchemaClass, SosEditItemInfo_t
 {
     public SosEditItemInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ItemTypeOffset;
+    private static nint _ItemTypeOffset = -1;
 
     public ref SosEditItemType_t ItemType
     {
         get
         {
-            _ItemTypeOffset = _ItemTypeOffset ?? Schema.GetOffset(0x8E29E1C0C91C9136);
-            return ref _Handle.AsRef<SosEditItemType_t>(_ItemTypeOffset!.Value);
+            if (_ItemTypeOffset == -1) _ItemTypeOffset = Schema.GetOffset(0x8E29E1C0C91C9136);
+            return ref _Handle.AsRef<SosEditItemType_t>(_ItemTypeOffset);
         }
     }
-    private static nint? _ItemNameOffset;
+    private static nint _ItemNameOffset = -1;
 
     public string ItemName
     {
         get
         {
-            _ItemNameOffset = _ItemNameOffset ?? Schema.GetOffset(0x8E29E1C0575A2B25);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ItemNameOffset!.Value));
+            if (_ItemNameOffset == -1) _ItemNameOffset = Schema.GetOffset(0x8E29E1C0575A2B25);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ItemNameOffset));
         }
         set
         {
-            _ItemNameOffset = _ItemNameOffset ?? Schema.GetOffset(0x8E29E1C0575A2B25);
-            Schema.SetCUtlString(_Handle, _ItemNameOffset!.Value, value);
+            if (_ItemNameOffset == -1) _ItemNameOffset = Schema.GetOffset(0x8E29E1C0575A2B25);
+            Schema.SetCUtlString(_Handle, _ItemNameOffset, value);
         }
     }
-    private static nint? _ItemTypeNameOffset;
+    private static nint _ItemTypeNameOffset = -1;
 
     public string ItemTypeName
     {
         get
         {
-            _ItemTypeNameOffset = _ItemTypeNameOffset ?? Schema.GetOffset(0x8E29E1C0B2F8CB75);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ItemTypeNameOffset!.Value));
+            if (_ItemTypeNameOffset == -1) _ItemTypeNameOffset = Schema.GetOffset(0x8E29E1C0B2F8CB75);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ItemTypeNameOffset));
         }
         set
         {
-            _ItemTypeNameOffset = _ItemTypeNameOffset ?? Schema.GetOffset(0x8E29E1C0B2F8CB75);
-            Schema.SetCUtlString(_Handle, _ItemTypeNameOffset!.Value, value);
+            if (_ItemTypeNameOffset == -1) _ItemTypeNameOffset = Schema.GetOffset(0x8E29E1C0B2F8CB75);
+            Schema.SetCUtlString(_Handle, _ItemTypeNameOffset, value);
         }
     }
-    private static nint? _ItemKVStringOffset;
+    private static nint _ItemKVStringOffset = -1;
 
     public string ItemKVString
     {
         get
         {
-            _ItemKVStringOffset = _ItemKVStringOffset ?? Schema.GetOffset(0x8E29E1C0A0151DD6);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ItemKVStringOffset!.Value));
+            if (_ItemKVStringOffset == -1) _ItemKVStringOffset = Schema.GetOffset(0x8E29E1C0A0151DD6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ItemKVStringOffset));
         }
         set
         {
-            _ItemKVStringOffset = _ItemKVStringOffset ?? Schema.GetOffset(0x8E29E1C0A0151DD6);
-            Schema.SetCUtlString(_Handle, _ItemKVStringOffset!.Value, value);
+            if (_ItemKVStringOffset == -1) _ItemKVStringOffset = Schema.GetOffset(0x8E29E1C0A0151DD6);
+            Schema.SetCUtlString(_Handle, _ItemKVStringOffset, value);
         }
     }
-    private static nint? _ItemPosOffset;
+    private static nint _ItemPosOffset = -1;
 
     public ref Vector2D ItemPos
     {
         get
         {
-            _ItemPosOffset = _ItemPosOffset ?? Schema.GetOffset(0x8E29E1C0AB2D0B6C);
-            return ref _Handle.AsRef<Vector2D>(_ItemPosOffset!.Value);
+            if (_ItemPosOffset == -1) _ItemPosOffset = Schema.GetOffset(0x8E29E1C0AB2D0B6C);
+            return ref _Handle.AsRef<Vector2D>(_ItemPosOffset);
         }
     }
 

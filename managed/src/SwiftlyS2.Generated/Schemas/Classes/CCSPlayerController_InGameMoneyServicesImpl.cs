@@ -16,64 +16,64 @@ internal partial class CCSPlayerController_InGameMoneyServicesImpl : CPlayerCont
 {
     public CCSPlayerController_InGameMoneyServicesImpl(nint handle) : base(handle) { }
 
-    private static nint? _ReceivesMoneyNextRoundOffset;
+    private static nint _ReceivesMoneyNextRoundOffset = -1;
 
     public ref bool ReceivesMoneyNextRound
     {
         get
         {
-            _ReceivesMoneyNextRoundOffset = _ReceivesMoneyNextRoundOffset ?? Schema.GetOffset(0x6C87CBFDB54DB07C);
-            return ref _Handle.AsRef<bool>(_ReceivesMoneyNextRoundOffset!.Value);
+            if (_ReceivesMoneyNextRoundOffset == -1) _ReceivesMoneyNextRoundOffset = Schema.GetOffset(0x6C87CBFDB54DB07C);
+            return ref _Handle.AsRef<bool>(_ReceivesMoneyNextRoundOffset);
         }
     }
-    private static nint? _MoneyEarnedForNextRoundOffset;
+    private static nint _MoneyEarnedForNextRoundOffset = -1;
 
     public ref int MoneyEarnedForNextRound
     {
         get
         {
-            _MoneyEarnedForNextRoundOffset = _MoneyEarnedForNextRoundOffset ?? Schema.GetOffset(0x6C87CBFDAB17AAC1);
-            return ref _Handle.AsRef<int>(_MoneyEarnedForNextRoundOffset!.Value);
+            if (_MoneyEarnedForNextRoundOffset == -1) _MoneyEarnedForNextRoundOffset = Schema.GetOffset(0x6C87CBFDAB17AAC1);
+            return ref _Handle.AsRef<int>(_MoneyEarnedForNextRoundOffset);
         }
     }
-    private static nint? _AccountOffset;
+    private static nint _AccountOffset = -1;
 
     public ref int Account
     {
         get
         {
-            _AccountOffset = _AccountOffset ?? Schema.GetOffset(0x6C87CBFDF7F4E98B);
-            return ref _Handle.AsRef<int>(_AccountOffset!.Value);
+            if (_AccountOffset == -1) _AccountOffset = Schema.GetOffset(0x6C87CBFDF7F4E98B);
+            return ref _Handle.AsRef<int>(_AccountOffset);
         }
     }
-    private static nint? _StartAccountOffset;
+    private static nint _StartAccountOffset = -1;
 
     public ref int StartAccount
     {
         get
         {
-            _StartAccountOffset = _StartAccountOffset ?? Schema.GetOffset(0x6C87CBFD6433FAB7);
-            return ref _Handle.AsRef<int>(_StartAccountOffset!.Value);
+            if (_StartAccountOffset == -1) _StartAccountOffset = Schema.GetOffset(0x6C87CBFD6433FAB7);
+            return ref _Handle.AsRef<int>(_StartAccountOffset);
         }
     }
-    private static nint? _TotalCashSpentOffset;
+    private static nint _TotalCashSpentOffset = -1;
 
     public ref int TotalCashSpent
     {
         get
         {
-            _TotalCashSpentOffset = _TotalCashSpentOffset ?? Schema.GetOffset(0x6C87CBFDD4977327);
-            return ref _Handle.AsRef<int>(_TotalCashSpentOffset!.Value);
+            if (_TotalCashSpentOffset == -1) _TotalCashSpentOffset = Schema.GetOffset(0x6C87CBFDD4977327);
+            return ref _Handle.AsRef<int>(_TotalCashSpentOffset);
         }
     }
-    private static nint? _CashSpentThisRoundOffset;
+    private static nint _CashSpentThisRoundOffset = -1;
 
     public ref int CashSpentThisRound
     {
         get
         {
-            _CashSpentThisRoundOffset = _CashSpentThisRoundOffset ?? Schema.GetOffset(0x6C87CBFDFB4284AB);
-            return ref _Handle.AsRef<int>(_CashSpentThisRoundOffset!.Value);
+            if (_CashSpentThisRoundOffset == -1) _CashSpentThisRoundOffset = Schema.GetOffset(0x6C87CBFDFB4284AB);
+            return ref _Handle.AsRef<int>(_CashSpentThisRoundOffset);
         }
     }
 

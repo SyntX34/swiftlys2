@@ -16,37 +16,37 @@ internal partial class C_OP_StopAfterCPDurationImpl : CParticleFunctionPreEmissi
 {
     public C_OP_StopAfterCPDurationImpl(nint handle) : base(handle) { }
 
-    private static nint? _DurationOffset;
+    private static nint _DurationOffset = -1;
     private CParticleCollectionFloatInputImpl? _DurationInstance;
 
     public CParticleCollectionFloatInput Duration
     {
         get
         {
-            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xFC2AFAC6BC5E3BAB);
+            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0xFC2AFAC6BC5E3BAB);
             var instance = _DurationInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DurationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DurationOffset);
             return instance;
         }
     }
-    private static nint? _DestroyImmediatelyOffset;
+    private static nint _DestroyImmediatelyOffset = -1;
 
     public ref bool DestroyImmediately
     {
         get
         {
-            _DestroyImmediatelyOffset = _DestroyImmediatelyOffset ?? Schema.GetOffset(0xFC2AFAC675F43101);
-            return ref _Handle.AsRef<bool>(_DestroyImmediatelyOffset!.Value);
+            if (_DestroyImmediatelyOffset == -1) _DestroyImmediatelyOffset = Schema.GetOffset(0xFC2AFAC675F43101);
+            return ref _Handle.AsRef<bool>(_DestroyImmediatelyOffset);
         }
     }
-    private static nint? _PlayEndCapOffset;
+    private static nint _PlayEndCapOffset = -1;
 
     public ref bool PlayEndCap
     {
         get
         {
-            _PlayEndCapOffset = _PlayEndCapOffset ?? Schema.GetOffset(0xFC2AFAC6A7AB4A38);
-            return ref _Handle.AsRef<bool>(_PlayEndCapOffset!.Value);
+            if (_PlayEndCapOffset == -1) _PlayEndCapOffset = Schema.GetOffset(0xFC2AFAC6A7AB4A38);
+            return ref _Handle.AsRef<bool>(_PlayEndCapOffset);
         }
     }
 

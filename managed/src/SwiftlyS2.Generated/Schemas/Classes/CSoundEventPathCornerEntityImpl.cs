@@ -16,29 +16,29 @@ internal partial class CSoundEventPathCornerEntityImpl : CSoundEventMultiPointEn
 {
     public CSoundEventPathCornerEntityImpl(nint handle) : base(handle) { }
 
-    private static nint? _PathCornerOffset;
+    private static nint _PathCornerOffset = -1;
 
     public string PathCorner
     {
         get
         {
-            _PathCornerOffset = _PathCornerOffset ?? Schema.GetOffset(0x9EED262E0243CF47);
-            return Schema.GetString(_Handle.Read<nint>(_PathCornerOffset!.Value));
+            if (_PathCornerOffset == -1) _PathCornerOffset = Schema.GetOffset(0x9EED262E0243CF47);
+            return Schema.GetString(_Handle.Read<nint>(_PathCornerOffset));
         }
         set
         {
-            _PathCornerOffset = _PathCornerOffset ?? Schema.GetOffset(0x9EED262E0243CF47);
-            Schema.SetString(_Handle, _PathCornerOffset!.Value, value);
+            if (_PathCornerOffset == -1) _PathCornerOffset = Schema.GetOffset(0x9EED262E0243CF47);
+            Schema.SetString(_Handle, _PathCornerOffset, value);
         }
     }
-    private static nint? _CornerPairsNetworkedOffset;
+    private static nint _CornerPairsNetworkedOffset = -1;
 
     public ref CUtlVector<SoundeventPathCornerPairNetworked_t> CornerPairsNetworked
     {
         get
         {
-            _CornerPairsNetworkedOffset = _CornerPairsNetworkedOffset ?? Schema.GetOffset(0x9EED262E4C7A9B2C);
-            return ref _Handle.AsRef<CUtlVector<SoundeventPathCornerPairNetworked_t>>(_CornerPairsNetworkedOffset!.Value);
+            if (_CornerPairsNetworkedOffset == -1) _CornerPairsNetworkedOffset = Schema.GetOffset(0x9EED262E4C7A9B2C);
+            return ref _Handle.AsRef<CUtlVector<SoundeventPathCornerPairNetworked_t>>(_CornerPairsNetworkedOffset);
         }
     }
 

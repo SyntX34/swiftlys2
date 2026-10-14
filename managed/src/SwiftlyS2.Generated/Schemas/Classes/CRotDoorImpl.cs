@@ -16,14 +16,14 @@ internal partial class CRotDoorImpl : CBaseDoorImpl, CRotDoor
 {
     public CRotDoorImpl(nint handle) : base(handle) { }
 
-    private static nint? _SolidBspOffset;
+    private static nint _SolidBspOffset = -1;
 
     public ref bool SolidBsp
     {
         get
         {
-            _SolidBspOffset = _SolidBspOffset ?? Schema.GetOffset(0x175D110BA50CEC89);
-            return ref _Handle.AsRef<bool>(_SolidBspOffset!.Value);
+            if (_SolidBspOffset == -1) _SolidBspOffset = Schema.GetOffset(0x175D110BA50CEC89);
+            return ref _Handle.AsRef<bool>(_SolidBspOffset);
         }
     }
 

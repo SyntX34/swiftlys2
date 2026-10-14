@@ -16,44 +16,44 @@ internal partial class CAnimFrameSegmentImpl : SchemaClass, CAnimFrameSegment
 {
     public CAnimFrameSegmentImpl(nint handle) : base(handle) { }
 
-    private static nint? _UniqueFrameIndexOffset;
+    private static nint _UniqueFrameIndexOffset = -1;
 
     public ref int UniqueFrameIndex
     {
         get
         {
-            _UniqueFrameIndexOffset = _UniqueFrameIndexOffset ?? Schema.GetOffset(0x1D6E27D17D02E339);
-            return ref _Handle.AsRef<int>(_UniqueFrameIndexOffset!.Value);
+            if (_UniqueFrameIndexOffset == -1) _UniqueFrameIndexOffset = Schema.GetOffset(0x1D6E27D17D02E339);
+            return ref _Handle.AsRef<int>(_UniqueFrameIndexOffset);
         }
     }
-    private static nint? _LocalElementMasksOffset;
+    private static nint _LocalElementMasksOffset = -1;
 
     public ref uint LocalElementMasks
     {
         get
         {
-            _LocalElementMasksOffset = _LocalElementMasksOffset ?? Schema.GetOffset(0x1D6E27D16981357D);
-            return ref _Handle.AsRef<uint>(_LocalElementMasksOffset!.Value);
+            if (_LocalElementMasksOffset == -1) _LocalElementMasksOffset = Schema.GetOffset(0x1D6E27D16981357D);
+            return ref _Handle.AsRef<uint>(_LocalElementMasksOffset);
         }
     }
-    private static nint? _LocalChannelOffset;
+    private static nint _LocalChannelOffset = -1;
 
     public ref int LocalChannel
     {
         get
         {
-            _LocalChannelOffset = _LocalChannelOffset ?? Schema.GetOffset(0x1D6E27D10BCF9E77);
-            return ref _Handle.AsRef<int>(_LocalChannelOffset!.Value);
+            if (_LocalChannelOffset == -1) _LocalChannelOffset = Schema.GetOffset(0x1D6E27D10BCF9E77);
+            return ref _Handle.AsRef<int>(_LocalChannelOffset);
         }
     }
-    private static nint? _ContainerOffset;
+    private static nint _ContainerOffset = -1;
 
     public ref CUtlBinaryBlock Container
     {
         get
         {
-            _ContainerOffset = _ContainerOffset ?? Schema.GetOffset(0x1D6E27D13F54D498);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_ContainerOffset!.Value);
+            if (_ContainerOffset == -1) _ContainerOffset = Schema.GetOffset(0x1D6E27D13F54D498);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_ContainerOffset);
         }
     }
 

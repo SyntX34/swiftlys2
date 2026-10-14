@@ -16,44 +16,44 @@ internal partial class CMotionMetricEvaluatorImpl : SchemaClass, CMotionMetricEv
 {
     public CMotionMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-    private static nint? _MeansOffset;
+    private static nint _MeansOffset = -1;
 
     public ref CUtlVector<float> Means
     {
         get
         {
-            _MeansOffset = _MeansOffset ?? Schema.GetOffset(0x1C07D08DAB070085);
-            return ref _Handle.AsRef<CUtlVector<float>>(_MeansOffset!.Value);
+            if (_MeansOffset == -1) _MeansOffset = Schema.GetOffset(0x1C07D08DAB070085);
+            return ref _Handle.AsRef<CUtlVector<float>>(_MeansOffset);
         }
     }
-    private static nint? _StandardDeviationsOffset;
+    private static nint _StandardDeviationsOffset = -1;
 
     public ref CUtlVector<float> StandardDeviations
     {
         get
         {
-            _StandardDeviationsOffset = _StandardDeviationsOffset ?? Schema.GetOffset(0x1C07D08D9114EB60);
-            return ref _Handle.AsRef<CUtlVector<float>>(_StandardDeviationsOffset!.Value);
+            if (_StandardDeviationsOffset == -1) _StandardDeviationsOffset = Schema.GetOffset(0x1C07D08D9114EB60);
+            return ref _Handle.AsRef<CUtlVector<float>>(_StandardDeviationsOffset);
         }
     }
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
 
     public ref float Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x1C07D08D7B81E7AB);
-            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0x1C07D08D7B81E7AB);
+            return ref _Handle.AsRef<float>(_WeightOffset);
         }
     }
-    private static nint? _DimensionStartIndexOffset;
+    private static nint _DimensionStartIndexOffset = -1;
 
     public ref int DimensionStartIndex
     {
         get
         {
-            _DimensionStartIndexOffset = _DimensionStartIndexOffset ?? Schema.GetOffset(0x1C07D08D3448F2E3);
-            return ref _Handle.AsRef<int>(_DimensionStartIndexOffset!.Value);
+            if (_DimensionStartIndexOffset == -1) _DimensionStartIndexOffset = Schema.GetOffset(0x1C07D08D3448F2E3);
+            return ref _Handle.AsRef<int>(_DimensionStartIndexOffset);
         }
     }
 

@@ -16,64 +16,64 @@ internal partial class CAttributeManagerImpl : SchemaClass, CAttributeManager
 {
     public CAttributeManagerImpl(nint handle) : base(handle) { }
 
-    private static nint? _ProvidersOffset;
+    private static nint _ProvidersOffset = -1;
 
     public ref CUtlVector<CHandle<CBaseEntity>> Providers
     {
         get
         {
-            _ProvidersOffset = _ProvidersOffset ?? Schema.GetOffset(0x7FCB380DA07F345D);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ProvidersOffset!.Value);
+            if (_ProvidersOffset == -1) _ProvidersOffset = Schema.GetOffset(0x7FCB380DA07F345D);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ProvidersOffset);
         }
     }
-    private static nint? _ReapplyProvisionParityOffset;
+    private static nint _ReapplyProvisionParityOffset = -1;
 
     public ref int ReapplyProvisionParity
     {
         get
         {
-            _ReapplyProvisionParityOffset = _ReapplyProvisionParityOffset ?? Schema.GetOffset(0x7FCB380D2F68110B);
-            return ref _Handle.AsRef<int>(_ReapplyProvisionParityOffset!.Value);
+            if (_ReapplyProvisionParityOffset == -1) _ReapplyProvisionParityOffset = Schema.GetOffset(0x7FCB380D2F68110B);
+            return ref _Handle.AsRef<int>(_ReapplyProvisionParityOffset);
         }
     }
-    private static nint? _OuterOffset;
+    private static nint _OuterOffset = -1;
 
     public ref CHandle<CBaseEntity> Outer
     {
         get
         {
-            _OuterOffset = _OuterOffset ?? Schema.GetOffset(0x7FCB380D30AE9FA2);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OuterOffset!.Value);
+            if (_OuterOffset == -1) _OuterOffset = Schema.GetOffset(0x7FCB380D30AE9FA2);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OuterOffset);
         }
     }
-    private static nint? _PreventLoopbackOffset;
+    private static nint _PreventLoopbackOffset = -1;
 
     public ref bool PreventLoopback
     {
         get
         {
-            _PreventLoopbackOffset = _PreventLoopbackOffset ?? Schema.GetOffset(0x7FCB380D2CE71CA4);
-            return ref _Handle.AsRef<bool>(_PreventLoopbackOffset!.Value);
+            if (_PreventLoopbackOffset == -1) _PreventLoopbackOffset = Schema.GetOffset(0x7FCB380D2CE71CA4);
+            return ref _Handle.AsRef<bool>(_PreventLoopbackOffset);
         }
     }
-    private static nint? _ProviderTypeOffset;
+    private static nint _ProviderTypeOffset = -1;
 
     public ref attributeprovidertypes_t ProviderType
     {
         get
         {
-            _ProviderTypeOffset = _ProviderTypeOffset ?? Schema.GetOffset(0x7FCB380DD5677CB4);
-            return ref _Handle.AsRef<attributeprovidertypes_t>(_ProviderTypeOffset!.Value);
+            if (_ProviderTypeOffset == -1) _ProviderTypeOffset = Schema.GetOffset(0x7FCB380DD5677CB4);
+            return ref _Handle.AsRef<attributeprovidertypes_t>(_ProviderTypeOffset);
         }
     }
-    private static nint? _CachedResultsOffset;
+    private static nint _CachedResultsOffset = -1;
 
     public ref CUtlVector<CAttributeManager__cached_attribute_float_t> CachedResults
     {
         get
         {
-            _CachedResultsOffset = _CachedResultsOffset ?? Schema.GetOffset(0x7FCB380D3CD4B7CB);
-            return ref _Handle.AsRef<CUtlVector<CAttributeManager__cached_attribute_float_t>>(_CachedResultsOffset!.Value);
+            if (_CachedResultsOffset == -1) _CachedResultsOffset = Schema.GetOffset(0x7FCB380D3CD4B7CB);
+            return ref _Handle.AsRef<CUtlVector<CAttributeManager__cached_attribute_float_t>>(_CachedResultsOffset);
         }
     }
 

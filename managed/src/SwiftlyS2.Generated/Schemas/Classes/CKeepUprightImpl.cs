@@ -16,94 +16,94 @@ internal partial class CKeepUprightImpl : CPointEntityImpl, CKeepUpright
 {
     public CKeepUprightImpl(nint handle) : base(handle) { }
 
-    private static nint? _WorldGoalAxisOffset;
+    private static nint _WorldGoalAxisOffset = -1;
 
     public ref Vector WorldGoalAxis
     {
         get
         {
-            _WorldGoalAxisOffset = _WorldGoalAxisOffset ?? Schema.GetOffset(0xB65A0D30836922ED);
-            return ref _Handle.AsRef<Vector>(_WorldGoalAxisOffset!.Value);
+            if (_WorldGoalAxisOffset == -1) _WorldGoalAxisOffset = Schema.GetOffset(0xB65A0D30836922ED);
+            return ref _Handle.AsRef<Vector>(_WorldGoalAxisOffset);
         }
     }
-    private static nint? _LocalTestAxisOffset;
+    private static nint _LocalTestAxisOffset = -1;
 
     public ref Vector LocalTestAxis
     {
         get
         {
-            _LocalTestAxisOffset = _LocalTestAxisOffset ?? Schema.GetOffset(0xB65A0D30B678975D);
-            return ref _Handle.AsRef<Vector>(_LocalTestAxisOffset!.Value);
+            if (_LocalTestAxisOffset == -1) _LocalTestAxisOffset = Schema.GetOffset(0xB65A0D30B678975D);
+            return ref _Handle.AsRef<Vector>(_LocalTestAxisOffset);
         }
     }
-    private static nint? _ControllerOffset;
+    private static nint _ControllerOffset = -1;
     private IPhysicsMotionControllerImpl? _ControllerInstance;
 
     public IPhysicsMotionController? Controller
     {
         get
         {
-            _ControllerOffset = _ControllerOffset ?? Schema.GetOffset(0xB65A0D308F2DD553);
-            var ptr = _Handle.Read<nint>(_ControllerOffset!.Value);
+            if (_ControllerOffset == -1) _ControllerOffset = Schema.GetOffset(0xB65A0D308F2DD553);
+            var ptr = _Handle.Read<nint>(_ControllerOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ControllerInstance ??= new IPhysicsMotionControllerImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _NameAttachOffset;
+    private static nint _NameAttachOffset = -1;
 
     public string NameAttach
     {
         get
         {
-            _NameAttachOffset = _NameAttachOffset ?? Schema.GetOffset(0xB65A0D30BECAEF3F);
-            return Schema.GetString(_Handle.Read<nint>(_NameAttachOffset!.Value));
+            if (_NameAttachOffset == -1) _NameAttachOffset = Schema.GetOffset(0xB65A0D30BECAEF3F);
+            return Schema.GetString(_Handle.Read<nint>(_NameAttachOffset));
         }
         set
         {
-            _NameAttachOffset = _NameAttachOffset ?? Schema.GetOffset(0xB65A0D30BECAEF3F);
-            Schema.SetString(_Handle, _NameAttachOffset!.Value, value);
+            if (_NameAttachOffset == -1) _NameAttachOffset = Schema.GetOffset(0xB65A0D30BECAEF3F);
+            Schema.SetString(_Handle, _NameAttachOffset, value);
         }
     }
-    private static nint? _AttachedObjectOffset;
+    private static nint _AttachedObjectOffset = -1;
 
     public ref CHandle<CBaseEntity> AttachedObject
     {
         get
         {
-            _AttachedObjectOffset = _AttachedObjectOffset ?? Schema.GetOffset(0xB65A0D301AE8F30A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedObjectOffset!.Value);
+            if (_AttachedObjectOffset == -1) _AttachedObjectOffset = Schema.GetOffset(0xB65A0D301AE8F30A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedObjectOffset);
         }
     }
-    private static nint? _AngularLimitOffset;
+    private static nint _AngularLimitOffset = -1;
 
     public ref float AngularLimit
     {
         get
         {
-            _AngularLimitOffset = _AngularLimitOffset ?? Schema.GetOffset(0xB65A0D30497B8D18);
-            return ref _Handle.AsRef<float>(_AngularLimitOffset!.Value);
+            if (_AngularLimitOffset == -1) _AngularLimitOffset = Schema.GetOffset(0xB65A0D30497B8D18);
+            return ref _Handle.AsRef<float>(_AngularLimitOffset);
         }
     }
-    private static nint? _ActiveOffset;
+    private static nint _ActiveOffset = -1;
 
     public ref bool Active
     {
         get
         {
-            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0xB65A0D308334208F);
-            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+            if (_ActiveOffset == -1) _ActiveOffset = Schema.GetOffset(0xB65A0D308334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset);
         }
     }
-    private static nint? _DampAllRotationOffset;
+    private static nint _DampAllRotationOffset = -1;
 
     public ref bool DampAllRotation
     {
         get
         {
-            _DampAllRotationOffset = _DampAllRotationOffset ?? Schema.GetOffset(0xB65A0D30AAA70B9C);
-            return ref _Handle.AsRef<bool>(_DampAllRotationOffset!.Value);
+            if (_DampAllRotationOffset == -1) _DampAllRotationOffset = Schema.GetOffset(0xB65A0D30AAA70B9C);
+            return ref _Handle.AsRef<bool>(_DampAllRotationOffset);
         }
     }
 

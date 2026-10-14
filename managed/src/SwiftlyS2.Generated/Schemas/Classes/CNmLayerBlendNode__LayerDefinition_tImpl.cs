@@ -16,84 +16,84 @@ internal partial class CNmLayerBlendNode__LayerDefinition_tImpl : SchemaClass, C
 {
     public CNmLayerBlendNode__LayerDefinition_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputNodeIdxOffset;
+    private static nint _InputNodeIdxOffset = -1;
 
     public ref short InputNodeIdx
     {
         get
         {
-            _InputNodeIdxOffset = _InputNodeIdxOffset ?? Schema.GetOffset(0xB5F2C492B0A177F6);
-            return ref _Handle.AsRef<short>(_InputNodeIdxOffset!.Value);
+            if (_InputNodeIdxOffset == -1) _InputNodeIdxOffset = Schema.GetOffset(0xB5F2C492B0A177F6);
+            return ref _Handle.AsRef<short>(_InputNodeIdxOffset);
         }
     }
-    private static nint? _WeightValueNodeIdxOffset;
+    private static nint _WeightValueNodeIdxOffset = -1;
 
     public ref short WeightValueNodeIdx
     {
         get
         {
-            _WeightValueNodeIdxOffset = _WeightValueNodeIdxOffset ?? Schema.GetOffset(0xB5F2C4924E4CD159);
-            return ref _Handle.AsRef<short>(_WeightValueNodeIdxOffset!.Value);
+            if (_WeightValueNodeIdxOffset == -1) _WeightValueNodeIdxOffset = Schema.GetOffset(0xB5F2C4924E4CD159);
+            return ref _Handle.AsRef<short>(_WeightValueNodeIdxOffset);
         }
     }
-    private static nint? _BoneMaskValueNodeIdxOffset;
+    private static nint _BoneMaskValueNodeIdxOffset = -1;
 
     public ref short BoneMaskValueNodeIdx
     {
         get
         {
-            _BoneMaskValueNodeIdxOffset = _BoneMaskValueNodeIdxOffset ?? Schema.GetOffset(0xB5F2C49284E70B17);
-            return ref _Handle.AsRef<short>(_BoneMaskValueNodeIdxOffset!.Value);
+            if (_BoneMaskValueNodeIdxOffset == -1) _BoneMaskValueNodeIdxOffset = Schema.GetOffset(0xB5F2C49284E70B17);
+            return ref _Handle.AsRef<short>(_BoneMaskValueNodeIdxOffset);
         }
     }
-    private static nint? _RootMotionWeightValueNodeIdxOffset;
+    private static nint _RootMotionWeightValueNodeIdxOffset = -1;
 
     public ref short RootMotionWeightValueNodeIdx
     {
         get
         {
-            _RootMotionWeightValueNodeIdxOffset = _RootMotionWeightValueNodeIdxOffset ?? Schema.GetOffset(0xB5F2C492C355D4CF);
-            return ref _Handle.AsRef<short>(_RootMotionWeightValueNodeIdxOffset!.Value);
+            if (_RootMotionWeightValueNodeIdxOffset == -1) _RootMotionWeightValueNodeIdxOffset = Schema.GetOffset(0xB5F2C492C355D4CF);
+            return ref _Handle.AsRef<short>(_RootMotionWeightValueNodeIdxOffset);
         }
     }
-    private static nint? _IsSynchronizedOffset;
+    private static nint _IsSynchronizedOffset = -1;
 
     public ref bool IsSynchronized
     {
         get
         {
-            _IsSynchronizedOffset = _IsSynchronizedOffset ?? Schema.GetOffset(0xB5F2C492DCF1E06B);
-            return ref _Handle.AsRef<bool>(_IsSynchronizedOffset!.Value);
+            if (_IsSynchronizedOffset == -1) _IsSynchronizedOffset = Schema.GetOffset(0xB5F2C492DCF1E06B);
+            return ref _Handle.AsRef<bool>(_IsSynchronizedOffset);
         }
     }
-    private static nint? _IgnoreEventsOffset;
+    private static nint _IgnoreEventsOffset = -1;
 
     public ref bool IgnoreEvents
     {
         get
         {
-            _IgnoreEventsOffset = _IgnoreEventsOffset ?? Schema.GetOffset(0xB5F2C4920E574CA6);
-            return ref _Handle.AsRef<bool>(_IgnoreEventsOffset!.Value);
+            if (_IgnoreEventsOffset == -1) _IgnoreEventsOffset = Schema.GetOffset(0xB5F2C4920E574CA6);
+            return ref _Handle.AsRef<bool>(_IgnoreEventsOffset);
         }
     }
-    private static nint? _IsStateMachineLayerOffset;
+    private static nint _IsStateMachineLayerOffset = -1;
 
     public ref bool IsStateMachineLayer
     {
         get
         {
-            _IsStateMachineLayerOffset = _IsStateMachineLayerOffset ?? Schema.GetOffset(0xB5F2C492EE48C9D0);
-            return ref _Handle.AsRef<bool>(_IsStateMachineLayerOffset!.Value);
+            if (_IsStateMachineLayerOffset == -1) _IsStateMachineLayerOffset = Schema.GetOffset(0xB5F2C492EE48C9D0);
+            return ref _Handle.AsRef<bool>(_IsStateMachineLayerOffset);
         }
     }
-    private static nint? _BlendModeOffset;
+    private static nint _BlendModeOffset = -1;
 
     public ref NmPoseBlendMode_t BlendMode
     {
         get
         {
-            _BlendModeOffset = _BlendModeOffset ?? Schema.GetOffset(0xB5F2C4928D5006AB);
-            return ref _Handle.AsRef<NmPoseBlendMode_t>(_BlendModeOffset!.Value);
+            if (_BlendModeOffset == -1) _BlendModeOffset = Schema.GetOffset(0xB5F2C4928D5006AB);
+            return ref _Handle.AsRef<NmPoseBlendMode_t>(_BlendModeOffset);
         }
     }
 

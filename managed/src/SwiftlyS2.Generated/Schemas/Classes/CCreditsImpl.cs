@@ -16,34 +16,34 @@ internal partial class CCreditsImpl : CPointEntityImpl, CCredits
 {
     public CCreditsImpl(nint handle) : base(handle) { }
 
-    private static nint? _OnCreditsDoneOffset;
+    private static nint _OnCreditsDoneOffset = -1;
 
     public ref CEntityIOOutput OnCreditsDone
     {
         get
         {
-            _OnCreditsDoneOffset = _OnCreditsDoneOffset ?? Schema.GetOffset(0xF1224C0488A2DA7A);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnCreditsDoneOffset!.Value);
+            if (_OnCreditsDoneOffset == -1) _OnCreditsDoneOffset = Schema.GetOffset(0xF1224C0488A2DA7A);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCreditsDoneOffset);
         }
     }
-    private static nint? _RolledOutroCreditsOffset;
+    private static nint _RolledOutroCreditsOffset = -1;
 
     public ref bool RolledOutroCredits
     {
         get
         {
-            _RolledOutroCreditsOffset = _RolledOutroCreditsOffset ?? Schema.GetOffset(0xF1224C048E1511D4);
-            return ref _Handle.AsRef<bool>(_RolledOutroCreditsOffset!.Value);
+            if (_RolledOutroCreditsOffset == -1) _RolledOutroCreditsOffset = Schema.GetOffset(0xF1224C048E1511D4);
+            return ref _Handle.AsRef<bool>(_RolledOutroCreditsOffset);
         }
     }
-    private static nint? _LogoLengthOffset;
+    private static nint _LogoLengthOffset = -1;
 
     public ref float LogoLength
     {
         get
         {
-            _LogoLengthOffset = _LogoLengthOffset ?? Schema.GetOffset(0xF1224C04D283492C);
-            return ref _Handle.AsRef<float>(_LogoLengthOffset!.Value);
+            if (_LogoLengthOffset == -1) _LogoLengthOffset = Schema.GetOffset(0xF1224C04D283492C);
+            return ref _Handle.AsRef<float>(_LogoLengthOffset);
         }
     }
 

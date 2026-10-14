@@ -16,54 +16,54 @@ internal partial class CEnvSparkImpl : CPointEntityImpl, CEnvSpark
 {
     public CEnvSparkImpl(nint handle) : base(handle) { }
 
-    private static nint? _DelayOffset;
+    private static nint _DelayOffset = -1;
 
     public ref float Delay
     {
         get
         {
-            _DelayOffset = _DelayOffset ?? Schema.GetOffset(0x3BACCABA7D68FD6E);
-            return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+            if (_DelayOffset == -1) _DelayOffset = Schema.GetOffset(0x3BACCABA7D68FD6E);
+            return ref _Handle.AsRef<float>(_DelayOffset);
         }
     }
-    private static nint? _MagnitudeOffset;
+    private static nint _MagnitudeOffset = -1;
 
     public ref int Magnitude
     {
         get
         {
-            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x3BACCABA0C71BDF1);
-            return ref _Handle.AsRef<int>(_MagnitudeOffset!.Value);
+            if (_MagnitudeOffset == -1) _MagnitudeOffset = Schema.GetOffset(0x3BACCABA0C71BDF1);
+            return ref _Handle.AsRef<int>(_MagnitudeOffset);
         }
     }
-    private static nint? _TrailLengthOffset;
+    private static nint _TrailLengthOffset = -1;
 
     public ref int TrailLength
     {
         get
         {
-            _TrailLengthOffset = _TrailLengthOffset ?? Schema.GetOffset(0x3BACCABA65AAB1A7);
-            return ref _Handle.AsRef<int>(_TrailLengthOffset!.Value);
+            if (_TrailLengthOffset == -1) _TrailLengthOffset = Schema.GetOffset(0x3BACCABA65AAB1A7);
+            return ref _Handle.AsRef<int>(_TrailLengthOffset);
         }
     }
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref int Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x3BACCABA18853D59);
-            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x3BACCABA18853D59);
+            return ref _Handle.AsRef<int>(_TypeOffset);
         }
     }
-    private static nint? _OnSparkOffset;
+    private static nint _OnSparkOffset = -1;
 
     public ref CEntityIOOutput OnSpark
     {
         get
         {
-            _OnSparkOffset = _OnSparkOffset ?? Schema.GetOffset(0x3BACCABA67E1EE5D);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnSparkOffset!.Value);
+            if (_OnSparkOffset == -1) _OnSparkOffset = Schema.GetOffset(0x3BACCABA67E1EE5D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSparkOffset);
         }
     }
 

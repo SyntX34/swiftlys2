@@ -16,14 +16,14 @@ internal partial class CCSGameModeRulesImpl : SchemaClass, CCSGameModeRules
 {
     public CCSGameModeRulesImpl(nint handle) : base(handle) { }
 
-    private static nint? ___m_pChainEntityOffset;
+    private static nint ___m_pChainEntityOffset = -1;
 
     public ref CNetworkVarChainer __m_pChainEntity
     {
         get
         {
-            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0x5093D6A4F63F0E7D);
-            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+            if (___m_pChainEntityOffset == -1) ___m_pChainEntityOffset = Schema.GetOffset(0x5093D6A4F63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset);
         }
     }
 

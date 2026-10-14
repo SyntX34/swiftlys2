@@ -16,42 +16,42 @@ internal partial class CPathSimpleImpl : CBaseEntityImpl, CPathSimple
 {
     public CPathSimpleImpl(nint handle) : base(handle) { }
 
-    private static nint? _CPathQueryComponentOffset;
+    private static nint _CPathQueryComponentOffset = -1;
     private CPathQueryComponentImpl? _CPathQueryComponentInstance;
 
     public CPathQueryComponent CPathQueryComponent
     {
         get
         {
-            _CPathQueryComponentOffset = _CPathQueryComponentOffset ?? Schema.GetOffset(0x10936CB34513F542);
+            if (_CPathQueryComponentOffset == -1) _CPathQueryComponentOffset = Schema.GetOffset(0x10936CB34513F542);
             var instance = _CPathQueryComponentInstance ??= new CPathQueryComponentImpl(0);
-            instance.DangerousSetHandle(_Handle + _CPathQueryComponentOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CPathQueryComponentOffset);
             return instance;
         }
     }
-    private static nint? _PathStringOffset;
+    private static nint _PathStringOffset = -1;
 
     public string PathString
     {
         get
         {
-            _PathStringOffset = _PathStringOffset ?? Schema.GetOffset(0x10936CB36EC51AA7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PathStringOffset!.Value));
+            if (_PathStringOffset == -1) _PathStringOffset = Schema.GetOffset(0x10936CB36EC51AA7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PathStringOffset));
         }
         set
         {
-            _PathStringOffset = _PathStringOffset ?? Schema.GetOffset(0x10936CB36EC51AA7);
-            Schema.SetCUtlString(_Handle, _PathStringOffset!.Value, value);
+            if (_PathStringOffset == -1) _PathStringOffset = Schema.GetOffset(0x10936CB36EC51AA7);
+            Schema.SetCUtlString(_Handle, _PathStringOffset, value);
         }
     }
-    private static nint? _ClosedLoopOffset;
+    private static nint _ClosedLoopOffset = -1;
 
     public ref bool ClosedLoop
     {
         get
         {
-            _ClosedLoopOffset = _ClosedLoopOffset ?? Schema.GetOffset(0x10936CB37C20D1AB);
-            return ref _Handle.AsRef<bool>(_ClosedLoopOffset!.Value);
+            if (_ClosedLoopOffset == -1) _ClosedLoopOffset = Schema.GetOffset(0x10936CB37C20D1AB);
+            return ref _Handle.AsRef<bool>(_ClosedLoopOffset);
         }
     }
 

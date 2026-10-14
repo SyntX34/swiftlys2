@@ -16,37 +16,37 @@ internal partial class CAnimGraphDoc_FootStepTriggerNodeImpl : CAnimGraphDoc_Nod
 {
     public CAnimGraphDoc_FootStepTriggerNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x1B16D3D01F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x1B16D3D01F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _ToleranceOffset;
+    private static nint _ToleranceOffset = -1;
 
     public ref float Tolerance
     {
         get
         {
-            _ToleranceOffset = _ToleranceOffset ?? Schema.GetOffset(0x1B16D3D08C29728E);
-            return ref _Handle.AsRef<float>(_ToleranceOffset!.Value);
+            if (_ToleranceOffset == -1) _ToleranceOffset = Schema.GetOffset(0x1B16D3D08C29728E);
+            return ref _Handle.AsRef<float>(_ToleranceOffset);
         }
     }
-    private static nint? _ItemsOffset;
+    private static nint _ItemsOffset = -1;
 
     public ref CUtlVector<CFootStepTriggerItem> Items
     {
         get
         {
-            _ItemsOffset = _ItemsOffset ?? Schema.GetOffset(0x1B16D3D07A87EDAF);
-            return ref _Handle.AsRef<CUtlVector<CFootStepTriggerItem>>(_ItemsOffset!.Value);
+            if (_ItemsOffset == -1) _ItemsOffset = Schema.GetOffset(0x1B16D3D07A87EDAF);
+            return ref _Handle.AsRef<CUtlVector<CFootStepTriggerItem>>(_ItemsOffset);
         }
     }
 

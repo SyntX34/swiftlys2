@@ -16,109 +16,109 @@ internal partial class CFootDefinitionImpl : SchemaClass, CFootDefinition
 {
     public CFootDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xAA3BA2A34D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xAA3BA2A34D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xAA3BA2A34D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xAA3BA2A34D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _AnkleBoneNameOffset;
+    private static nint _AnkleBoneNameOffset = -1;
 
     public string AnkleBoneName
     {
         get
         {
-            _AnkleBoneNameOffset = _AnkleBoneNameOffset ?? Schema.GetOffset(0xAA3BA2A3A8A2DEF9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AnkleBoneNameOffset!.Value));
+            if (_AnkleBoneNameOffset == -1) _AnkleBoneNameOffset = Schema.GetOffset(0xAA3BA2A3A8A2DEF9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AnkleBoneNameOffset));
         }
         set
         {
-            _AnkleBoneNameOffset = _AnkleBoneNameOffset ?? Schema.GetOffset(0xAA3BA2A3A8A2DEF9);
-            Schema.SetCUtlString(_Handle, _AnkleBoneNameOffset!.Value, value);
+            if (_AnkleBoneNameOffset == -1) _AnkleBoneNameOffset = Schema.GetOffset(0xAA3BA2A3A8A2DEF9);
+            Schema.SetCUtlString(_Handle, _AnkleBoneNameOffset, value);
         }
     }
-    private static nint? _ToeBoneNameOffset;
+    private static nint _ToeBoneNameOffset = -1;
 
     public string ToeBoneName
     {
         get
         {
-            _ToeBoneNameOffset = _ToeBoneNameOffset ?? Schema.GetOffset(0xAA3BA2A39C96209A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ToeBoneNameOffset!.Value));
+            if (_ToeBoneNameOffset == -1) _ToeBoneNameOffset = Schema.GetOffset(0xAA3BA2A39C96209A);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ToeBoneNameOffset));
         }
         set
         {
-            _ToeBoneNameOffset = _ToeBoneNameOffset ?? Schema.GetOffset(0xAA3BA2A39C96209A);
-            Schema.SetCUtlString(_Handle, _ToeBoneNameOffset!.Value, value);
+            if (_ToeBoneNameOffset == -1) _ToeBoneNameOffset = Schema.GetOffset(0xAA3BA2A39C96209A);
+            Schema.SetCUtlString(_Handle, _ToeBoneNameOffset, value);
         }
     }
-    private static nint? _BallOffsetOffset;
+    private static nint _BallOffsetOffset = -1;
 
     public ref Vector BallOffset
     {
         get
         {
-            _BallOffsetOffset = _BallOffsetOffset ?? Schema.GetOffset(0xAA3BA2A3E3376F1B);
-            return ref _Handle.AsRef<Vector>(_BallOffsetOffset!.Value);
+            if (_BallOffsetOffset == -1) _BallOffsetOffset = Schema.GetOffset(0xAA3BA2A3E3376F1B);
+            return ref _Handle.AsRef<Vector>(_BallOffsetOffset);
         }
     }
-    private static nint? _HeelOffsetOffset;
+    private static nint _HeelOffsetOffset = -1;
 
     public ref Vector HeelOffset
     {
         get
         {
-            _HeelOffsetOffset = _HeelOffsetOffset ?? Schema.GetOffset(0xAA3BA2A3306AE608);
-            return ref _Handle.AsRef<Vector>(_HeelOffsetOffset!.Value);
+            if (_HeelOffsetOffset == -1) _HeelOffsetOffset = Schema.GetOffset(0xAA3BA2A3306AE608);
+            return ref _Handle.AsRef<Vector>(_HeelOffsetOffset);
         }
     }
-    private static nint? _FootLengthOffset;
+    private static nint _FootLengthOffset = -1;
 
     public ref float FootLength
     {
         get
         {
-            _FootLengthOffset = _FootLengthOffset ?? Schema.GetOffset(0xAA3BA2A308C0C9F7);
-            return ref _Handle.AsRef<float>(_FootLengthOffset!.Value);
+            if (_FootLengthOffset == -1) _FootLengthOffset = Schema.GetOffset(0xAA3BA2A308C0C9F7);
+            return ref _Handle.AsRef<float>(_FootLengthOffset);
         }
     }
-    private static nint? _BindPoseDirectionMSOffset;
+    private static nint _BindPoseDirectionMSOffset = -1;
 
     public ref float BindPoseDirectionMS
     {
         get
         {
-            _BindPoseDirectionMSOffset = _BindPoseDirectionMSOffset ?? Schema.GetOffset(0xAA3BA2A34413B862);
-            return ref _Handle.AsRef<float>(_BindPoseDirectionMSOffset!.Value);
+            if (_BindPoseDirectionMSOffset == -1) _BindPoseDirectionMSOffset = Schema.GetOffset(0xAA3BA2A34413B862);
+            return ref _Handle.AsRef<float>(_BindPoseDirectionMSOffset);
         }
     }
-    private static nint? _TraceHeightOffset;
+    private static nint _TraceHeightOffset = -1;
 
     public ref float TraceHeight
     {
         get
         {
-            _TraceHeightOffset = _TraceHeightOffset ?? Schema.GetOffset(0xAA3BA2A3EFB858CF);
-            return ref _Handle.AsRef<float>(_TraceHeightOffset!.Value);
+            if (_TraceHeightOffset == -1) _TraceHeightOffset = Schema.GetOffset(0xAA3BA2A3EFB858CF);
+            return ref _Handle.AsRef<float>(_TraceHeightOffset);
         }
     }
-    private static nint? _TraceRadiusOffset;
+    private static nint _TraceRadiusOffset = -1;
 
     public ref float TraceRadius
     {
         get
         {
-            _TraceRadiusOffset = _TraceRadiusOffset ?? Schema.GetOffset(0xAA3BA2A39A33E452);
-            return ref _Handle.AsRef<float>(_TraceRadiusOffset!.Value);
+            if (_TraceRadiusOffset == -1) _TraceRadiusOffset = Schema.GetOffset(0xAA3BA2A39A33E452);
+            return ref _Handle.AsRef<float>(_TraceRadiusOffset);
         }
     }
 

@@ -16,54 +16,54 @@ internal partial class SellbackPurchaseEntry_tImpl : SchemaClass, SellbackPurcha
 {
     public SellbackPurchaseEntry_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _DefIdxOffset;
+    private static nint _DefIdxOffset = -1;
 
     public ref ushort DefIdx
     {
         get
         {
-            _DefIdxOffset = _DefIdxOffset ?? Schema.GetOffset(0xAC9E0914F02DD274);
-            return ref _Handle.AsRef<ushort>(_DefIdxOffset!.Value);
+            if (_DefIdxOffset == -1) _DefIdxOffset = Schema.GetOffset(0xAC9E0914F02DD274);
+            return ref _Handle.AsRef<ushort>(_DefIdxOffset);
         }
     }
-    private static nint? _CostOffset;
+    private static nint _CostOffset = -1;
 
     public ref int Cost
     {
         get
         {
-            _CostOffset = _CostOffset ?? Schema.GetOffset(0xAC9E0914919660C4);
-            return ref _Handle.AsRef<int>(_CostOffset!.Value);
+            if (_CostOffset == -1) _CostOffset = Schema.GetOffset(0xAC9E0914919660C4);
+            return ref _Handle.AsRef<int>(_CostOffset);
         }
     }
-    private static nint? _PrevArmorOffset;
+    private static nint _PrevArmorOffset = -1;
 
     public ref int PrevArmor
     {
         get
         {
-            _PrevArmorOffset = _PrevArmorOffset ?? Schema.GetOffset(0xAC9E09143A18A19B);
-            return ref _Handle.AsRef<int>(_PrevArmorOffset!.Value);
+            if (_PrevArmorOffset == -1) _PrevArmorOffset = Schema.GetOffset(0xAC9E09143A18A19B);
+            return ref _Handle.AsRef<int>(_PrevArmorOffset);
         }
     }
-    private static nint? _PrevHelmetOffset;
+    private static nint _PrevHelmetOffset = -1;
 
     public ref bool PrevHelmet
     {
         get
         {
-            _PrevHelmetOffset = _PrevHelmetOffset ?? Schema.GetOffset(0xAC9E0914DA638D65);
-            return ref _Handle.AsRef<bool>(_PrevHelmetOffset!.Value);
+            if (_PrevHelmetOffset == -1) _PrevHelmetOffset = Schema.GetOffset(0xAC9E0914DA638D65);
+            return ref _Handle.AsRef<bool>(_PrevHelmetOffset);
         }
     }
-    private static nint? _ItemOffset;
+    private static nint _ItemOffset = -1;
 
     public ref CHandle<CEntityInstance> Item
     {
         get
         {
-            _ItemOffset = _ItemOffset ?? Schema.GetOffset(0xAC9E091452FF0710);
-            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_ItemOffset!.Value);
+            if (_ItemOffset == -1) _ItemOffset = Schema.GetOffset(0xAC9E091452FF0710);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_ItemOffset);
         }
     }
 

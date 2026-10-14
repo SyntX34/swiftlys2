@@ -16,103 +16,103 @@ internal partial class CCSPlayerModernJumpImpl : SchemaClass, CCSPlayerModernJum
 {
     public CCSPlayerModernJumpImpl(nint handle) : base(handle) { }
 
-    private static nint? _LastActualJumpPressTickOffset;
+    private static nint _LastActualJumpPressTickOffset = -1;
     private GameTick_tImpl? _LastActualJumpPressTickInstance;
 
     public GameTick_t LastActualJumpPressTick
     {
         get
         {
-            _LastActualJumpPressTickOffset = _LastActualJumpPressTickOffset ?? Schema.GetOffset(0x8CD8CF82BF93929F);
+            if (_LastActualJumpPressTickOffset == -1) _LastActualJumpPressTickOffset = Schema.GetOffset(0x8CD8CF82BF93929F);
             var instance = _LastActualJumpPressTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastActualJumpPressTickOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LastActualJumpPressTickOffset);
             return instance;
         }
     }
-    private static nint? _LastActualJumpPressFracOffset;
+    private static nint _LastActualJumpPressFracOffset = -1;
 
     public ref float LastActualJumpPressFrac
     {
         get
         {
-            _LastActualJumpPressFracOffset = _LastActualJumpPressFracOffset ?? Schema.GetOffset(0x8CD8CF82EFA846D4);
-            return ref _Handle.AsRef<float>(_LastActualJumpPressFracOffset!.Value);
+            if (_LastActualJumpPressFracOffset == -1) _LastActualJumpPressFracOffset = Schema.GetOffset(0x8CD8CF82EFA846D4);
+            return ref _Handle.AsRef<float>(_LastActualJumpPressFracOffset);
         }
     }
-    private static nint? _LastUsableJumpPressTickOffset;
+    private static nint _LastUsableJumpPressTickOffset = -1;
     private GameTick_tImpl? _LastUsableJumpPressTickInstance;
 
     public GameTick_t LastUsableJumpPressTick
     {
         get
         {
-            _LastUsableJumpPressTickOffset = _LastUsableJumpPressTickOffset ?? Schema.GetOffset(0x8CD8CF8276B8735D);
+            if (_LastUsableJumpPressTickOffset == -1) _LastUsableJumpPressTickOffset = Schema.GetOffset(0x8CD8CF8276B8735D);
             var instance = _LastUsableJumpPressTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastUsableJumpPressTickOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LastUsableJumpPressTickOffset);
             return instance;
         }
     }
-    private static nint? _LastUsableJumpPressFracOffset;
+    private static nint _LastUsableJumpPressFracOffset = -1;
 
     public ref float LastUsableJumpPressFrac
     {
         get
         {
-            _LastUsableJumpPressFracOffset = _LastUsableJumpPressFracOffset ?? Schema.GetOffset(0x8CD8CF8285D28572);
-            return ref _Handle.AsRef<float>(_LastUsableJumpPressFracOffset!.Value);
+            if (_LastUsableJumpPressFracOffset == -1) _LastUsableJumpPressFracOffset = Schema.GetOffset(0x8CD8CF8285D28572);
+            return ref _Handle.AsRef<float>(_LastUsableJumpPressFracOffset);
         }
     }
-    private static nint? _LastLandedTickOffset;
+    private static nint _LastLandedTickOffset = -1;
     private GameTick_tImpl? _LastLandedTickInstance;
 
     public GameTick_t LastLandedTick
     {
         get
         {
-            _LastLandedTickOffset = _LastLandedTickOffset ?? Schema.GetOffset(0x8CD8CF82680C80AC);
+            if (_LastLandedTickOffset == -1) _LastLandedTickOffset = Schema.GetOffset(0x8CD8CF82680C80AC);
             var instance = _LastLandedTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastLandedTickOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LastLandedTickOffset);
             return instance;
         }
     }
-    private static nint? _LastLandedFracOffset;
+    private static nint _LastLandedFracOffset = -1;
 
     public ref float LastLandedFrac
     {
         get
         {
-            _LastLandedFracOffset = _LastLandedFracOffset ?? Schema.GetOffset(0x8CD8CF8276080263);
-            return ref _Handle.AsRef<float>(_LastLandedFracOffset!.Value);
+            if (_LastLandedFracOffset == -1) _LastLandedFracOffset = Schema.GetOffset(0x8CD8CF8276080263);
+            return ref _Handle.AsRef<float>(_LastLandedFracOffset);
         }
     }
-    private static nint? _LastLandedVelocityXOffset;
+    private static nint _LastLandedVelocityXOffset = -1;
 
     public ref float LastLandedVelocityX
     {
         get
         {
-            _LastLandedVelocityXOffset = _LastLandedVelocityXOffset ?? Schema.GetOffset(0x8CD8CF82B72D3B94);
-            return ref _Handle.AsRef<float>(_LastLandedVelocityXOffset!.Value);
+            if (_LastLandedVelocityXOffset == -1) _LastLandedVelocityXOffset = Schema.GetOffset(0x8CD8CF82B72D3B94);
+            return ref _Handle.AsRef<float>(_LastLandedVelocityXOffset);
         }
     }
-    private static nint? _LastLandedVelocityYOffset;
+    private static nint _LastLandedVelocityYOffset = -1;
 
     public ref float LastLandedVelocityY
     {
         get
         {
-            _LastLandedVelocityYOffset = _LastLandedVelocityYOffset ?? Schema.GetOffset(0x8CD8CF82B82D3D27);
-            return ref _Handle.AsRef<float>(_LastLandedVelocityYOffset!.Value);
+            if (_LastLandedVelocityYOffset == -1) _LastLandedVelocityYOffset = Schema.GetOffset(0x8CD8CF82B82D3D27);
+            return ref _Handle.AsRef<float>(_LastLandedVelocityYOffset);
         }
     }
-    private static nint? _LastLandedVelocityZOffset;
+    private static nint _LastLandedVelocityZOffset = -1;
 
     public ref float LastLandedVelocityZ
     {
         get
         {
-            _LastLandedVelocityZOffset = _LastLandedVelocityZOffset ?? Schema.GetOffset(0x8CD8CF82B92D3EBA);
-            return ref _Handle.AsRef<float>(_LastLandedVelocityZOffset!.Value);
+            if (_LastLandedVelocityZOffset == -1) _LastLandedVelocityZOffset = Schema.GetOffset(0x8CD8CF82B92D3EBA);
+            return ref _Handle.AsRef<float>(_LastLandedVelocityZOffset);
         }
     }
 

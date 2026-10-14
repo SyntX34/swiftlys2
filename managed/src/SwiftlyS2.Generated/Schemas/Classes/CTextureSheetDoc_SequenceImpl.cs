@@ -16,57 +16,57 @@ internal partial class CTextureSheetDoc_SequenceImpl : SchemaClass, CTextureShee
 {
     public CTextureSheetDoc_SequenceImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChannelModeOffset;
+    private static nint _ChannelModeOffset = -1;
 
     public ref SequenceChannelMode_t ChannelMode
     {
         get
         {
-            _ChannelModeOffset = _ChannelModeOffset ?? Schema.GetOffset(0xBC4C6EACB92CA87);
-            return ref _Handle.AsRef<SequenceChannelMode_t>(_ChannelModeOffset!.Value);
+            if (_ChannelModeOffset == -1) _ChannelModeOffset = Schema.GetOffset(0xBC4C6EACB92CA87);
+            return ref _Handle.AsRef<SequenceChannelMode_t>(_ChannelModeOffset);
         }
     }
-    private static nint? _LoopModeOffset;
+    private static nint _LoopModeOffset = -1;
 
     public ref SequenceLoopMode_t LoopMode
     {
         get
         {
-            _LoopModeOffset = _LoopModeOffset ?? Schema.GetOffset(0xBC4C6EAB1FCEBF4);
-            return ref _Handle.AsRef<SequenceLoopMode_t>(_LoopModeOffset!.Value);
+            if (_LoopModeOffset == -1) _LoopModeOffset = Schema.GetOffset(0xBC4C6EAB1FCEBF4);
+            return ref _Handle.AsRef<SequenceLoopMode_t>(_LoopModeOffset);
         }
     }
-    private static nint? _AlphaCropModeOffset;
+    private static nint _AlphaCropModeOffset = -1;
 
     public ref SequenceAlphaCropMode_t AlphaCropMode
     {
         get
         {
-            _AlphaCropModeOffset = _AlphaCropModeOffset ?? Schema.GetOffset(0xBC4C6EA0E168106);
-            return ref _Handle.AsRef<SequenceAlphaCropMode_t>(_AlphaCropModeOffset!.Value);
+            if (_AlphaCropModeOffset == -1) _AlphaCropModeOffset = Schema.GetOffset(0xBC4C6EA0E168106);
+            return ref _Handle.AsRef<SequenceAlphaCropMode_t>(_AlphaCropModeOffset);
         }
     }
-    private static nint? _DecalParamsOffset;
+    private static nint _DecalParamsOffset = -1;
     private CTextureSheetDoc_SequenceDecalParamsImpl? _DecalParamsInstance;
 
     public CTextureSheetDoc_SequenceDecalParams DecalParams
     {
         get
         {
-            _DecalParamsOffset = _DecalParamsOffset ?? Schema.GetOffset(0xBC4C6EA9CDA4054);
+            if (_DecalParamsOffset == -1) _DecalParamsOffset = Schema.GetOffset(0xBC4C6EA9CDA4054);
             var instance = _DecalParamsInstance ??= new CTextureSheetDoc_SequenceDecalParamsImpl(0);
-            instance.DangerousSetHandle(_Handle + _DecalParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DecalParamsOffset);
             return instance;
         }
     }
-    private static nint? _FramesOffset;
+    private static nint _FramesOffset = -1;
 
     public ref CUtlVector<CTextureSheetDoc_Frame> Frames
     {
         get
         {
-            _FramesOffset = _FramesOffset ?? Schema.GetOffset(0xBC4C6EAEA11EACF);
-            return ref _Handle.AsRef<CUtlVector<CTextureSheetDoc_Frame>>(_FramesOffset!.Value);
+            if (_FramesOffset == -1) _FramesOffset = Schema.GetOffset(0xBC4C6EAEA11EACF);
+            return ref _Handle.AsRef<CUtlVector<CTextureSheetDoc_Frame>>(_FramesOffset);
         }
     }
 

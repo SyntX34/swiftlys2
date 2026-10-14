@@ -20,6 +20,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
     private readonly ConcurrentDictionary<Guid, OnFireOutputEntityPreDelegate> outputHooks = new();
     private readonly ConcurrentDictionary<Guid, OnAcceptInputEntityPreDelegate> inputHooks = new();
     private volatile bool disposed;
+    private static bool entitySystemReady;
 
     public EntitySystemService( IGameHooks gameHooks )
     {
@@ -29,10 +30,14 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
 
     private static void ThrowIfEntitySystemInvalid()
     {
+        if (entitySystemReady) return;
+
         if (!NativeEntitySystem.IsValid())
         {
             throw new InvalidOperationException("Entity system is not valid at this moment.");
         }
+
+        entitySystemReady = true;
     }
 
     public T CreateEntity<T>() where T : class, ISchemaClass<T>

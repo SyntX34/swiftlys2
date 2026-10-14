@@ -16,70 +16,70 @@ internal partial class CCSPlayer_WaterServicesImpl : CPlayer_WaterServicesImpl, 
 {
     public CCSPlayer_WaterServicesImpl(nint handle) : base(handle) { }
 
-    private static nint? _NextDrownDamageTimeOffset;
+    private static nint _NextDrownDamageTimeOffset = -1;
     private GameTime_tImpl? _NextDrownDamageTimeInstance;
 
     public GameTime_t NextDrownDamageTime
     {
         get
         {
-            _NextDrownDamageTimeOffset = _NextDrownDamageTimeOffset ?? Schema.GetOffset(0x81EE3221161B7836);
+            if (_NextDrownDamageTimeOffset == -1) _NextDrownDamageTimeOffset = Schema.GetOffset(0x81EE3221161B7836);
             var instance = _NextDrownDamageTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextDrownDamageTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NextDrownDamageTimeOffset);
             return instance;
         }
     }
-    private static nint? _DrownDmgRateOffset;
+    private static nint _DrownDmgRateOffset = -1;
 
     public ref int DrownDmgRate
     {
         get
         {
-            _DrownDmgRateOffset = _DrownDmgRateOffset ?? Schema.GetOffset(0x81EE3221DB1DC111);
-            return ref _Handle.AsRef<int>(_DrownDmgRateOffset!.Value);
+            if (_DrownDmgRateOffset == -1) _DrownDmgRateOffset = Schema.GetOffset(0x81EE3221DB1DC111);
+            return ref _Handle.AsRef<int>(_DrownDmgRateOffset);
         }
     }
-    private static nint? _AirFinishedTimeOffset;
+    private static nint _AirFinishedTimeOffset = -1;
     private GameTime_tImpl? _AirFinishedTimeInstance;
 
     public GameTime_t AirFinishedTime
     {
         get
         {
-            _AirFinishedTimeOffset = _AirFinishedTimeOffset ?? Schema.GetOffset(0x81EE3221F32CD208);
+            if (_AirFinishedTimeOffset == -1) _AirFinishedTimeOffset = Schema.GetOffset(0x81EE3221F32CD208);
             var instance = _AirFinishedTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AirFinishedTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AirFinishedTimeOffset);
             return instance;
         }
     }
-    private static nint? _WaterJumpTimeOffset;
+    private static nint _WaterJumpTimeOffset = -1;
 
     public ref float WaterJumpTime
     {
         get
         {
-            _WaterJumpTimeOffset = _WaterJumpTimeOffset ?? Schema.GetOffset(0x81EE3221E7A7489F);
-            return ref _Handle.AsRef<float>(_WaterJumpTimeOffset!.Value);
+            if (_WaterJumpTimeOffset == -1) _WaterJumpTimeOffset = Schema.GetOffset(0x81EE3221E7A7489F);
+            return ref _Handle.AsRef<float>(_WaterJumpTimeOffset);
         }
     }
-    private static nint? _WaterJumpVelOffset;
+    private static nint _WaterJumpVelOffset = -1;
 
     public ref Vector WaterJumpVel
     {
         get
         {
-            _WaterJumpVelOffset = _WaterJumpVelOffset ?? Schema.GetOffset(0x81EE3221B3333137);
-            return ref _Handle.AsRef<Vector>(_WaterJumpVelOffset!.Value);
+            if (_WaterJumpVelOffset == -1) _WaterJumpVelOffset = Schema.GetOffset(0x81EE3221B3333137);
+            return ref _Handle.AsRef<Vector>(_WaterJumpVelOffset);
         }
     }
-    private static nint? _SwimSoundTimeOffset;
+    private static nint _SwimSoundTimeOffset = -1;
 
     public ref float SwimSoundTime
     {
         get
         {
-            _SwimSoundTimeOffset = _SwimSoundTimeOffset ?? Schema.GetOffset(0x81EE32218B6E62D7);
-            return ref _Handle.AsRef<float>(_SwimSoundTimeOffset!.Value);
+            if (_SwimSoundTimeOffset == -1) _SwimSoundTimeOffset = Schema.GetOffset(0x81EE32218B6E62D7);
+            return ref _Handle.AsRef<float>(_SwimSoundTimeOffset);
         }
     }
 

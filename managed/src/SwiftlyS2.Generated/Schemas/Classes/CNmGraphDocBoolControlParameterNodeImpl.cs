@@ -16,14 +16,14 @@ internal partial class CNmGraphDocBoolControlParameterNodeImpl : CNmGraphDocCont
 {
     public CNmGraphDocBoolControlParameterNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _PreviewStartValueOffset;
+    private static nint _PreviewStartValueOffset = -1;
 
     public ref bool PreviewStartValue
     {
         get
         {
-            _PreviewStartValueOffset = _PreviewStartValueOffset ?? Schema.GetOffset(0xC9079153A841402);
-            return ref _Handle.AsRef<bool>(_PreviewStartValueOffset!.Value);
+            if (_PreviewStartValueOffset == -1) _PreviewStartValueOffset = Schema.GetOffset(0xC9079153A841402);
+            return ref _Handle.AsRef<bool>(_PreviewStartValueOffset);
         }
     }
 

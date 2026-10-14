@@ -16,80 +16,80 @@ internal partial class CTimelineImpl : IntervalTimerImpl, CTimeline
 {
     public CTimelineImpl(nint handle) : base(handle) { }
 
-    private static nint? _ValuesOffset;
+    private static nint _ValuesOffset = -1;
     private SchemaFixedArray<float>? _ValuesInstance;
 
     public ISchemaFixedArray<float> Values
     {
         get
         {
-            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x36D1E6597BD8BFD5);
+            if (_ValuesOffset == -1) _ValuesOffset = Schema.GetOffset(0x36D1E6597BD8BFD5);
             var instance = _ValuesInstance ??= new SchemaFixedArray<float>(0, 0x36D1E6597BD8BFD5, 64, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ValuesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ValuesOffset);
             return instance;
         }
     }
-    private static nint? _ValueCountsOffset;
+    private static nint _ValueCountsOffset = -1;
     private SchemaFixedArray<int>? _ValueCountsInstance;
 
     public ISchemaFixedArray<int> ValueCounts
     {
         get
         {
-            _ValueCountsOffset = _ValueCountsOffset ?? Schema.GetOffset(0x36D1E65961EF23CA);
+            if (_ValueCountsOffset == -1) _ValueCountsOffset = Schema.GetOffset(0x36D1E65961EF23CA);
             var instance = _ValueCountsInstance ??= new SchemaFixedArray<int>(0, 0x36D1E65961EF23CA, 64, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ValueCountsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ValueCountsOffset);
             return instance;
         }
     }
-    private static nint? _BucketCountOffset;
+    private static nint _BucketCountOffset = -1;
 
     public ref int BucketCount
     {
         get
         {
-            _BucketCountOffset = _BucketCountOffset ?? Schema.GetOffset(0x36D1E6596ACA5C8A);
-            return ref _Handle.AsRef<int>(_BucketCountOffset!.Value);
+            if (_BucketCountOffset == -1) _BucketCountOffset = Schema.GetOffset(0x36D1E6596ACA5C8A);
+            return ref _Handle.AsRef<int>(_BucketCountOffset);
         }
     }
-    private static nint? _IntervalOffset;
+    private static nint _IntervalOffset = -1;
 
     public ref float Interval
     {
         get
         {
-            _IntervalOffset = _IntervalOffset ?? Schema.GetOffset(0x36D1E659320F7B8E);
-            return ref _Handle.AsRef<float>(_IntervalOffset!.Value);
+            if (_IntervalOffset == -1) _IntervalOffset = Schema.GetOffset(0x36D1E659320F7B8E);
+            return ref _Handle.AsRef<float>(_IntervalOffset);
         }
     }
-    private static nint? _FinalValueOffset;
+    private static nint _FinalValueOffset = -1;
 
     public ref float FinalValue
     {
         get
         {
-            _FinalValueOffset = _FinalValueOffset ?? Schema.GetOffset(0x36D1E659534A71BA);
-            return ref _Handle.AsRef<float>(_FinalValueOffset!.Value);
+            if (_FinalValueOffset == -1) _FinalValueOffset = Schema.GetOffset(0x36D1E659534A71BA);
+            return ref _Handle.AsRef<float>(_FinalValueOffset);
         }
     }
-    private static nint? _CompressionTypeOffset;
+    private static nint _CompressionTypeOffset = -1;
 
     public ref TimelineCompression_t CompressionType
     {
         get
         {
-            _CompressionTypeOffset = _CompressionTypeOffset ?? Schema.GetOffset(0x36D1E6593FD9B909);
-            return ref _Handle.AsRef<TimelineCompression_t>(_CompressionTypeOffset!.Value);
+            if (_CompressionTypeOffset == -1) _CompressionTypeOffset = Schema.GetOffset(0x36D1E6593FD9B909);
+            return ref _Handle.AsRef<TimelineCompression_t>(_CompressionTypeOffset);
         }
     }
-    private static nint? _StoppedOffset;
+    private static nint _StoppedOffset = -1;
 
     public ref bool Stopped
     {
         get
         {
-            _StoppedOffset = _StoppedOffset ?? Schema.GetOffset(0x36D1E6591C198C2E);
-            return ref _Handle.AsRef<bool>(_StoppedOffset!.Value);
+            if (_StoppedOffset == -1) _StoppedOffset = Schema.GetOffset(0x36D1E6591C198C2E);
+            return ref _Handle.AsRef<bool>(_StoppedOffset);
         }
     }
 

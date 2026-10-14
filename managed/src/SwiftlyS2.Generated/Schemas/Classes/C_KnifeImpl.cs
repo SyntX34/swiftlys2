@@ -16,14 +16,14 @@ internal partial class C_KnifeImpl : C_CSWeaponBaseImpl, C_Knife
 {
     public C_KnifeImpl(nint handle) : base(handle) { }
 
-    private static nint? _FirstAttackOffset;
+    private static nint _FirstAttackOffset = -1;
 
     public ref bool FirstAttack
     {
         get
         {
-            _FirstAttackOffset = _FirstAttackOffset ?? Schema.GetOffset(0x8E7614441D83D9);
-            return ref _Handle.AsRef<bool>(_FirstAttackOffset!.Value);
+            if (_FirstAttackOffset == -1) _FirstAttackOffset = Schema.GetOffset(0x8E7614441D83D9);
+            return ref _Handle.AsRef<bool>(_FirstAttackOffset);
         }
     }
 

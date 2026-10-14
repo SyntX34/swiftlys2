@@ -16,14 +16,14 @@ internal partial class CMixControlInputArrayImpl : CMixPropertyBaseImpl, CMixCon
 {
     public CMixControlInputArrayImpl(nint handle) : base(handle) { }
 
-    private static nint? _VflDataOffset;
+    private static nint _VflDataOffset = -1;
 
     public ref CUtlVector<float> VflData
     {
         get
         {
-            _VflDataOffset = _VflDataOffset ?? Schema.GetOffset(0x8C56A3D4B6310F6B);
-            return ref _Handle.AsRef<CUtlVector<float>>(_VflDataOffset!.Value);
+            if (_VflDataOffset == -1) _VflDataOffset = Schema.GetOffset(0x8C56A3D4B6310F6B);
+            return ref _Handle.AsRef<CUtlVector<float>>(_VflDataOffset);
         }
     }
 

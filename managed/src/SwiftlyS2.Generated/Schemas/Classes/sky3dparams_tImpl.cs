@@ -16,67 +16,67 @@ internal partial class sky3dparams_tImpl : SchemaClass, sky3dparams_t
 {
     public sky3dparams_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
 
     public ref short Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x49687CC482971C71);
-            return ref _Handle.AsRef<short>(_ScaleOffset!.Value);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x49687CC482971C71);
+            return ref _Handle.AsRef<short>(_ScaleOffset);
         }
     }
-    private static nint? _OriginOffset;
+    private static nint _OriginOffset = -1;
 
     public ref Vector Origin
     {
         get
         {
-            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0x49687CC4D97F9A4F);
-            return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
+            if (_OriginOffset == -1) _OriginOffset = Schema.GetOffset(0x49687CC4D97F9A4F);
+            return ref _Handle.AsRef<Vector>(_OriginOffset);
         }
     }
-    private static nint? _Clip3DSkyBoxNearToWorldFarOffset;
+    private static nint _Clip3DSkyBoxNearToWorldFarOffset = -1;
 
     public ref bool Clip3DSkyBoxNearToWorldFar
     {
         get
         {
-            _Clip3DSkyBoxNearToWorldFarOffset = _Clip3DSkyBoxNearToWorldFarOffset ?? Schema.GetOffset(0x49687CC482943804);
-            return ref _Handle.AsRef<bool>(_Clip3DSkyBoxNearToWorldFarOffset!.Value);
+            if (_Clip3DSkyBoxNearToWorldFarOffset == -1) _Clip3DSkyBoxNearToWorldFarOffset = Schema.GetOffset(0x49687CC482943804);
+            return ref _Handle.AsRef<bool>(_Clip3DSkyBoxNearToWorldFarOffset);
         }
     }
-    private static nint? _Clip3DSkyBoxNearToWorldFarOffsetOffset;
+    private static nint _Clip3DSkyBoxNearToWorldFarOffsetOffset = -1;
 
     public ref float Clip3DSkyBoxNearToWorldFarOffset
     {
         get
         {
-            _Clip3DSkyBoxNearToWorldFarOffsetOffset = _Clip3DSkyBoxNearToWorldFarOffsetOffset ?? Schema.GetOffset(0x49687CC49D6E9441);
-            return ref _Handle.AsRef<float>(_Clip3DSkyBoxNearToWorldFarOffsetOffset!.Value);
+            if (_Clip3DSkyBoxNearToWorldFarOffsetOffset == -1) _Clip3DSkyBoxNearToWorldFarOffsetOffset = Schema.GetOffset(0x49687CC49D6E9441);
+            return ref _Handle.AsRef<float>(_Clip3DSkyBoxNearToWorldFarOffsetOffset);
         }
     }
-    private static nint? _FogOffset;
+    private static nint _FogOffset = -1;
     private fogparams_tImpl? _FogInstance;
 
     public fogparams_t Fog
     {
         get
         {
-            _FogOffset = _FogOffset ?? Schema.GetOffset(0x49687CC4A1F3723F);
+            if (_FogOffset == -1) _FogOffset = Schema.GetOffset(0x49687CC4A1F3723F);
             var instance = _FogInstance ??= new fogparams_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FogOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FogOffset);
             return instance;
         }
     }
-    private static nint? _WorldGroupIDOffset;
+    private static nint _WorldGroupIDOffset = -1;
 
     public ref uint WorldGroupID
     {
         get
         {
-            _WorldGroupIDOffset = _WorldGroupIDOffset ?? Schema.GetOffset(0x49687CC49414E3F3);
-            return ref _Handle.AsRef<uint>(_WorldGroupIDOffset!.Value);
+            if (_WorldGroupIDOffset == -1) _WorldGroupIDOffset = Schema.GetOffset(0x49687CC49414E3F3);
+            return ref _Handle.AsRef<uint>(_WorldGroupIDOffset);
         }
     }
 

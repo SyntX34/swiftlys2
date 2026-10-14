@@ -16,34 +16,34 @@ internal partial class CWorldCompositionChunkReferenceElement_tImpl : SchemaClas
 {
     public CWorldCompositionChunkReferenceElement_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrMapToLoadOffset;
+    private static nint _StrMapToLoadOffset = -1;
 
     public string StrMapToLoad
     {
         get
         {
-            _StrMapToLoadOffset = _StrMapToLoadOffset ?? Schema.GetOffset(0x9B80004DE87F0C1B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMapToLoadOffset!.Value));
+            if (_StrMapToLoadOffset == -1) _StrMapToLoadOffset = Schema.GetOffset(0x9B80004DE87F0C1B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMapToLoadOffset));
         }
         set
         {
-            _StrMapToLoadOffset = _StrMapToLoadOffset ?? Schema.GetOffset(0x9B80004DE87F0C1B);
-            Schema.SetCUtlString(_Handle, _StrMapToLoadOffset!.Value, value);
+            if (_StrMapToLoadOffset == -1) _StrMapToLoadOffset = Schema.GetOffset(0x9B80004DE87F0C1B);
+            Schema.SetCUtlString(_Handle, _StrMapToLoadOffset, value);
         }
     }
-    private static nint? _StrLandmarkNameOffset;
+    private static nint _StrLandmarkNameOffset = -1;
 
     public string StrLandmarkName
     {
         get
         {
-            _StrLandmarkNameOffset = _StrLandmarkNameOffset ?? Schema.GetOffset(0x9B80004DE0BB30D3);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrLandmarkNameOffset!.Value));
+            if (_StrLandmarkNameOffset == -1) _StrLandmarkNameOffset = Schema.GetOffset(0x9B80004DE0BB30D3);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrLandmarkNameOffset));
         }
         set
         {
-            _StrLandmarkNameOffset = _StrLandmarkNameOffset ?? Schema.GetOffset(0x9B80004DE0BB30D3);
-            Schema.SetCUtlString(_Handle, _StrLandmarkNameOffset!.Value, value);
+            if (_StrLandmarkNameOffset == -1) _StrLandmarkNameOffset = Schema.GetOffset(0x9B80004DE0BB30D3);
+            Schema.SetCUtlString(_Handle, _StrLandmarkNameOffset, value);
         }
     }
 

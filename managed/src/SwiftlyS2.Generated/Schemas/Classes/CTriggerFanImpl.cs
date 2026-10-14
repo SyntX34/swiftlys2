@@ -16,262 +16,262 @@ internal partial class CTriggerFanImpl : CBaseTriggerImpl, CTriggerFan
 {
     public CTriggerFanImpl(nint handle) : base(handle) { }
 
-    private static nint? _FanOriginOffsetOffset;
+    private static nint _FanOriginOffsetOffset = -1;
 
     public ref Vector FanOriginOffset
     {
         get
         {
-            _FanOriginOffsetOffset = _FanOriginOffsetOffset ?? Schema.GetOffset(0x6A8B5C2BAFB9770B);
-            return ref _Handle.AsRef<Vector>(_FanOriginOffsetOffset!.Value);
+            if (_FanOriginOffsetOffset == -1) _FanOriginOffsetOffset = Schema.GetOffset(0x6A8B5C2BAFB9770B);
+            return ref _Handle.AsRef<Vector>(_FanOriginOffsetOffset);
         }
     }
-    private static nint? _DirectionOffset;
+    private static nint _DirectionOffset = -1;
 
     public ref Vector Direction
     {
         get
         {
-            _DirectionOffset = _DirectionOffset ?? Schema.GetOffset(0x6A8B5C2BDAE41DEE);
-            return ref _Handle.AsRef<Vector>(_DirectionOffset!.Value);
+            if (_DirectionOffset == -1) _DirectionOffset = Schema.GetOffset(0x6A8B5C2BDAE41DEE);
+            return ref _Handle.AsRef<Vector>(_DirectionOffset);
         }
     }
-    private static nint? _PushTowardsInfoTargetOffset;
+    private static nint _PushTowardsInfoTargetOffset = -1;
 
     public ref bool PushTowardsInfoTarget
     {
         get
         {
-            _PushTowardsInfoTargetOffset = _PushTowardsInfoTargetOffset ?? Schema.GetOffset(0x6A8B5C2BB6D3B4CE);
-            return ref _Handle.AsRef<bool>(_PushTowardsInfoTargetOffset!.Value);
+            if (_PushTowardsInfoTargetOffset == -1) _PushTowardsInfoTargetOffset = Schema.GetOffset(0x6A8B5C2BB6D3B4CE);
+            return ref _Handle.AsRef<bool>(_PushTowardsInfoTargetOffset);
         }
     }
-    private static nint? _PushAwayFromInfoTargetOffset;
+    private static nint _PushAwayFromInfoTargetOffset = -1;
 
     public ref bool PushAwayFromInfoTarget
     {
         get
         {
-            _PushAwayFromInfoTargetOffset = _PushAwayFromInfoTargetOffset ?? Schema.GetOffset(0x6A8B5C2BF3F3D5EE);
-            return ref _Handle.AsRef<bool>(_PushAwayFromInfoTargetOffset!.Value);
+            if (_PushAwayFromInfoTargetOffset == -1) _PushAwayFromInfoTargetOffset = Schema.GetOffset(0x6A8B5C2BF3F3D5EE);
+            return ref _Handle.AsRef<bool>(_PushAwayFromInfoTargetOffset);
         }
     }
-    private static nint? _NoiseDeltaOffset;
+    private static nint _NoiseDeltaOffset = -1;
 
     public ref Quaternion NoiseDelta
     {
         get
         {
-            _NoiseDeltaOffset = _NoiseDeltaOffset ?? Schema.GetOffset(0x6A8B5C2BDC0D2AE8);
-            return ref _Handle.AsRef<Quaternion>(_NoiseDeltaOffset!.Value);
+            if (_NoiseDeltaOffset == -1) _NoiseDeltaOffset = Schema.GetOffset(0x6A8B5C2BDC0D2AE8);
+            return ref _Handle.AsRef<Quaternion>(_NoiseDeltaOffset);
         }
     }
-    private static nint? _InfoFanOffset;
+    private static nint _InfoFanOffset = -1;
 
     public ref CHandle<CInfoFan> InfoFan
     {
         get
         {
-            _InfoFanOffset = _InfoFanOffset ?? Schema.GetOffset(0x6A8B5C2B423064AC);
-            return ref _Handle.AsRef<CHandle<CInfoFan>>(_InfoFanOffset!.Value);
+            if (_InfoFanOffset == -1) _InfoFanOffset = Schema.GetOffset(0x6A8B5C2B423064AC);
+            return ref _Handle.AsRef<CHandle<CInfoFan>>(_InfoFanOffset);
         }
     }
-    private static nint? _ForceOffset;
+    private static nint _ForceOffset = -1;
 
     public ref float Force
     {
         get
         {
-            _ForceOffset = _ForceOffset ?? Schema.GetOffset(0x6A8B5C2BCA90E47A);
-            return ref _Handle.AsRef<float>(_ForceOffset!.Value);
+            if (_ForceOffset == -1) _ForceOffset = Schema.GetOffset(0x6A8B5C2BCA90E47A);
+            return ref _Handle.AsRef<float>(_ForceOffset);
         }
     }
-    private static nint? _FalloffOffset;
+    private static nint _FalloffOffset = -1;
 
     public ref bool Falloff
     {
         get
         {
-            _FalloffOffset = _FalloffOffset ?? Schema.GetOffset(0x6A8B5C2B76E955A5);
-            return ref _Handle.AsRef<bool>(_FalloffOffset!.Value);
+            if (_FalloffOffset == -1) _FalloffOffset = Schema.GetOffset(0x6A8B5C2B76E955A5);
+            return ref _Handle.AsRef<bool>(_FalloffOffset);
         }
     }
-    private static nint? _RampTimerOffset;
+    private static nint _RampTimerOffset = -1;
     private CountdownTimerImpl? _RampTimerInstance;
 
     public CountdownTimer RampTimer
     {
         get
         {
-            _RampTimerOffset = _RampTimerOffset ?? Schema.GetOffset(0x6A8B5C2B21725ED6);
+            if (_RampTimerOffset == -1) _RampTimerOffset = Schema.GetOffset(0x6A8B5C2B21725ED6);
             var instance = _RampTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _RampTimerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RampTimerOffset);
             return instance;
         }
     }
-    private static nint? _FanOriginWSOffset;
+    private static nint _FanOriginWSOffset = -1;
 
     public ref Vector FanOriginWS
     {
         get
         {
-            _FanOriginWSOffset = _FanOriginWSOffset ?? Schema.GetOffset(0x6A8B5C2BB1BF460A);
-            return ref _Handle.AsRef<Vector>(_FanOriginWSOffset!.Value);
+            if (_FanOriginWSOffset == -1) _FanOriginWSOffset = Schema.GetOffset(0x6A8B5C2BB1BF460A);
+            return ref _Handle.AsRef<Vector>(_FanOriginWSOffset);
         }
     }
-    private static nint? _FanOriginLSOffset;
+    private static nint _FanOriginLSOffset = -1;
 
     public ref Vector FanOriginLS
     {
         get
         {
-            _FanOriginLSOffset = _FanOriginLSOffset ?? Schema.GetOffset(0x6A8B5C2BF1CC76BD);
-            return ref _Handle.AsRef<Vector>(_FanOriginLSOffset!.Value);
+            if (_FanOriginLSOffset == -1) _FanOriginLSOffset = Schema.GetOffset(0x6A8B5C2BF1CC76BD);
+            return ref _Handle.AsRef<Vector>(_FanOriginLSOffset);
         }
     }
-    private static nint? _FanEndLSOffset;
+    private static nint _FanEndLSOffset = -1;
 
     public ref Vector FanEndLS
     {
         get
         {
-            _FanEndLSOffset = _FanEndLSOffset ?? Schema.GetOffset(0x6A8B5C2B53F6BE42);
-            return ref _Handle.AsRef<Vector>(_FanEndLSOffset!.Value);
+            if (_FanEndLSOffset == -1) _FanEndLSOffset = Schema.GetOffset(0x6A8B5C2B53F6BE42);
+            return ref _Handle.AsRef<Vector>(_FanEndLSOffset);
         }
     }
-    private static nint? _NoiseDirectionTargetOffset;
+    private static nint _NoiseDirectionTargetOffset = -1;
 
     public ref Vector NoiseDirectionTarget
     {
         get
         {
-            _NoiseDirectionTargetOffset = _NoiseDirectionTargetOffset ?? Schema.GetOffset(0x6A8B5C2B59781ABB);
-            return ref _Handle.AsRef<Vector>(_NoiseDirectionTargetOffset!.Value);
+            if (_NoiseDirectionTargetOffset == -1) _NoiseDirectionTargetOffset = Schema.GetOffset(0x6A8B5C2B59781ABB);
+            return ref _Handle.AsRef<Vector>(_NoiseDirectionTargetOffset);
         }
     }
-    private static nint? _InfoFan1Offset;
+    private static nint _InfoFan1Offset = -1;
 
     public string InfoFan1
     {
         get
         {
-            _InfoFan1Offset = _InfoFan1Offset ?? Schema.GetOffset(0x6A8B5C2B8E6431BA);
-            return Schema.GetString(_Handle.Read<nint>(_InfoFan1Offset!.Value));
+            if (_InfoFan1Offset == -1) _InfoFan1Offset = Schema.GetOffset(0x6A8B5C2B8E6431BA);
+            return Schema.GetString(_Handle.Read<nint>(_InfoFan1Offset));
         }
         set
         {
-            _InfoFan1Offset = _InfoFan1Offset ?? Schema.GetOffset(0x6A8B5C2B8E6431BA);
-            Schema.SetString(_Handle, _InfoFan1Offset!.Value, value);
+            if (_InfoFan1Offset == -1) _InfoFan1Offset = Schema.GetOffset(0x6A8B5C2B8E6431BA);
+            Schema.SetString(_Handle, _InfoFan1Offset, value);
         }
     }
-    private static nint? _RopeForceScaleOffset;
+    private static nint _RopeForceScaleOffset = -1;
 
     public ref float RopeForceScale
     {
         get
         {
-            _RopeForceScaleOffset = _RopeForceScaleOffset ?? Schema.GetOffset(0x6A8B5C2B08EB54C8);
-            return ref _Handle.AsRef<float>(_RopeForceScaleOffset!.Value);
+            if (_RopeForceScaleOffset == -1) _RopeForceScaleOffset = Schema.GetOffset(0x6A8B5C2B08EB54C8);
+            return ref _Handle.AsRef<float>(_RopeForceScaleOffset);
         }
     }
-    private static nint? _ParticleForceScaleOffset;
+    private static nint _ParticleForceScaleOffset = -1;
 
     public ref float ParticleForceScale
     {
         get
         {
-            _ParticleForceScaleOffset = _ParticleForceScaleOffset ?? Schema.GetOffset(0x6A8B5C2B8DB0C4D2);
-            return ref _Handle.AsRef<float>(_ParticleForceScaleOffset!.Value);
+            if (_ParticleForceScaleOffset == -1) _ParticleForceScaleOffset = Schema.GetOffset(0x6A8B5C2B8DB0C4D2);
+            return ref _Handle.AsRef<float>(_ParticleForceScaleOffset);
         }
     }
-    private static nint? _PlayerForceOffset;
+    private static nint _PlayerForceOffset = -1;
 
     public ref float PlayerForce
     {
         get
         {
-            _PlayerForceOffset = _PlayerForceOffset ?? Schema.GetOffset(0x6A8B5C2B3081B6B5);
-            return ref _Handle.AsRef<float>(_PlayerForceOffset!.Value);
+            if (_PlayerForceOffset == -1) _PlayerForceOffset = Schema.GetOffset(0x6A8B5C2B3081B6B5);
+            return ref _Handle.AsRef<float>(_PlayerForceOffset);
         }
     }
-    private static nint? _PlayerWindblockOffset;
+    private static nint _PlayerWindblockOffset = -1;
 
     public ref bool PlayerWindblock
     {
         get
         {
-            _PlayerWindblockOffset = _PlayerWindblockOffset ?? Schema.GetOffset(0x6A8B5C2B59B4AC7B);
-            return ref _Handle.AsRef<bool>(_PlayerWindblockOffset!.Value);
+            if (_PlayerWindblockOffset == -1) _PlayerWindblockOffset = Schema.GetOffset(0x6A8B5C2B59B4AC7B);
+            return ref _Handle.AsRef<bool>(_PlayerWindblockOffset);
         }
     }
-    private static nint? _NPCForceOffset;
+    private static nint _NPCForceOffset = -1;
 
     public ref float NPCForce
     {
         get
         {
-            _NPCForceOffset = _NPCForceOffset ?? Schema.GetOffset(0x6A8B5C2B9BD16135);
-            return ref _Handle.AsRef<float>(_NPCForceOffset!.Value);
+            if (_NPCForceOffset == -1) _NPCForceOffset = Schema.GetOffset(0x6A8B5C2B9BD16135);
+            return ref _Handle.AsRef<float>(_NPCForceOffset);
         }
     }
-    private static nint? _RampTimeOffset;
+    private static nint _RampTimeOffset = -1;
 
     public ref float RampTime
     {
         get
         {
-            _RampTimeOffset = _RampTimeOffset ?? Schema.GetOffset(0x6A8B5C2B7F655EF6);
-            return ref _Handle.AsRef<float>(_RampTimeOffset!.Value);
+            if (_RampTimeOffset == -1) _RampTimeOffset = Schema.GetOffset(0x6A8B5C2B7F655EF6);
+            return ref _Handle.AsRef<float>(_RampTimeOffset);
         }
     }
-    private static nint? _NoiseDegreesOffset;
+    private static nint _NoiseDegreesOffset = -1;
 
     public ref float NoiseDegrees
     {
         get
         {
-            _NoiseDegreesOffset = _NoiseDegreesOffset ?? Schema.GetOffset(0x6A8B5C2BB9B3398E);
-            return ref _Handle.AsRef<float>(_NoiseDegreesOffset!.Value);
+            if (_NoiseDegreesOffset == -1) _NoiseDegreesOffset = Schema.GetOffset(0x6A8B5C2BB9B3398E);
+            return ref _Handle.AsRef<float>(_NoiseDegreesOffset);
         }
     }
-    private static nint? _NoiseSpeedOffset;
+    private static nint _NoiseSpeedOffset = -1;
 
     public ref float NoiseSpeed
     {
         get
         {
-            _NoiseSpeedOffset = _NoiseSpeedOffset ?? Schema.GetOffset(0x6A8B5C2B5C5BB620);
-            return ref _Handle.AsRef<float>(_NoiseSpeedOffset!.Value);
+            if (_NoiseSpeedOffset == -1) _NoiseSpeedOffset = Schema.GetOffset(0x6A8B5C2B5C5BB620);
+            return ref _Handle.AsRef<float>(_NoiseSpeedOffset);
         }
     }
-    private static nint? _PushPlayerOffset;
+    private static nint _PushPlayerOffset = -1;
 
     public ref bool PushPlayer
     {
         get
         {
-            _PushPlayerOffset = _PushPlayerOffset ?? Schema.GetOffset(0x6A8B5C2B9DD4D118);
-            return ref _Handle.AsRef<bool>(_PushPlayerOffset!.Value);
+            if (_PushPlayerOffset == -1) _PushPlayerOffset = Schema.GetOffset(0x6A8B5C2B9DD4D118);
+            return ref _Handle.AsRef<bool>(_PushPlayerOffset);
         }
     }
-    private static nint? _RampDownOffset;
+    private static nint _RampDownOffset = -1;
 
     public ref bool RampDown
     {
         get
         {
-            _RampDownOffset = _RampDownOffset ?? Schema.GetOffset(0x6A8B5C2B16C1F4F9);
-            return ref _Handle.AsRef<bool>(_RampDownOffset!.Value);
+            if (_RampDownOffset == -1) _RampDownOffset = Schema.GetOffset(0x6A8B5C2B16C1F4F9);
+            return ref _Handle.AsRef<bool>(_RampDownOffset);
         }
     }
-    private static nint? _ManagerFanIdxOffset;
+    private static nint _ManagerFanIdxOffset = -1;
 
     public ref int ManagerFanIdx
     {
         get
         {
-            _ManagerFanIdxOffset = _ManagerFanIdxOffset ?? Schema.GetOffset(0x6A8B5C2B2401CC88);
-            return ref _Handle.AsRef<int>(_ManagerFanIdxOffset!.Value);
+            if (_ManagerFanIdxOffset == -1) _ManagerFanIdxOffset = Schema.GetOffset(0x6A8B5C2B2401CC88);
+            return ref _Handle.AsRef<int>(_ManagerFanIdxOffset);
         }
     }
 

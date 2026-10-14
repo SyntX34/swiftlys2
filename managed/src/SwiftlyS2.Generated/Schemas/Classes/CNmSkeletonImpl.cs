@@ -16,134 +16,134 @@ internal partial class CNmSkeletonImpl : SchemaClass, CNmSkeleton
 {
     public CNmSkeletonImpl(nint handle) : base(handle) { }
 
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0xC923251495066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xC923251495066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
         }
     }
-    private static nint? _BoneIDsOffset;
+    private static nint _BoneIDsOffset = -1;
 
     public ref CUtlLeanVector<CGlobalSymbol, int> BoneIDs
     {
         get
         {
-            _BoneIDsOffset = _BoneIDsOffset ?? Schema.GetOffset(0xC92325140909C443);
-            return ref _Handle.AsRef<CUtlLeanVector<CGlobalSymbol, int>>(_BoneIDsOffset!.Value);
+            if (_BoneIDsOffset == -1) _BoneIDsOffset = Schema.GetOffset(0xC92325140909C443);
+            return ref _Handle.AsRef<CUtlLeanVector<CGlobalSymbol, int>>(_BoneIDsOffset);
         }
     }
-    private static nint? _ParentIndicesOffset;
+    private static nint _ParentIndicesOffset = -1;
 
     public ref CUtlVector<int> ParentIndices
     {
         get
         {
-            _ParentIndicesOffset = _ParentIndicesOffset ?? Schema.GetOffset(0xC923251480CFB2AA);
-            return ref _Handle.AsRef<CUtlVector<int>>(_ParentIndicesOffset!.Value);
+            if (_ParentIndicesOffset == -1) _ParentIndicesOffset = Schema.GetOffset(0xC923251480CFB2AA);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ParentIndicesOffset);
         }
     }
-    private static nint? _ParentSpaceReferencePoseOffset;
+    private static nint _ParentSpaceReferencePoseOffset = -1;
 
     public ref CUtlVector<CTransform> ParentSpaceReferencePose
     {
         get
         {
-            _ParentSpaceReferencePoseOffset = _ParentSpaceReferencePoseOffset ?? Schema.GetOffset(0xC92325145BF1EDE7);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_ParentSpaceReferencePoseOffset!.Value);
+            if (_ParentSpaceReferencePoseOffset == -1) _ParentSpaceReferencePoseOffset = Schema.GetOffset(0xC92325145BF1EDE7);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_ParentSpaceReferencePoseOffset);
         }
     }
-    private static nint? _ModelSpaceReferencePoseOffset;
+    private static nint _ModelSpaceReferencePoseOffset = -1;
 
     public ref CUtlVector<CTransform> ModelSpaceReferencePose
     {
         get
         {
-            _ModelSpaceReferencePoseOffset = _ModelSpaceReferencePoseOffset ?? Schema.GetOffset(0xC92325147B025328);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_ModelSpaceReferencePoseOffset!.Value);
+            if (_ModelSpaceReferencePoseOffset == -1) _ModelSpaceReferencePoseOffset = Schema.GetOffset(0xC92325147B025328);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_ModelSpaceReferencePoseOffset);
         }
     }
-    private static nint? _NumBonesToSampleAtLowLODOffset;
+    private static nint _NumBonesToSampleAtLowLODOffset = -1;
 
     public ref int NumBonesToSampleAtLowLOD
     {
         get
         {
-            _NumBonesToSampleAtLowLODOffset = _NumBonesToSampleAtLowLODOffset ?? Schema.GetOffset(0xC9232514813C419D);
-            return ref _Handle.AsRef<int>(_NumBonesToSampleAtLowLODOffset!.Value);
+            if (_NumBonesToSampleAtLowLODOffset == -1) _NumBonesToSampleAtLowLODOffset = Schema.GetOffset(0xC9232514813C419D);
+            return ref _Handle.AsRef<int>(_NumBonesToSampleAtLowLODOffset);
         }
     }
-    private static nint? _IsPropSkeletonOffset;
+    private static nint _IsPropSkeletonOffset = -1;
 
     public ref bool IsPropSkeleton
     {
         get
         {
-            _IsPropSkeletonOffset = _IsPropSkeletonOffset ?? Schema.GetOffset(0xC9232514FD7D351F);
-            return ref _Handle.AsRef<bool>(_IsPropSkeletonOffset!.Value);
+            if (_IsPropSkeletonOffset == -1) _IsPropSkeletonOffset = Schema.GetOffset(0xC9232514FD7D351F);
+            return ref _Handle.AsRef<bool>(_IsPropSkeletonOffset);
         }
     }
-    private static nint? _MaskDefinitionsOffset;
+    private static nint _MaskDefinitionsOffset = -1;
 
     public ref CUtlLeanVector<NmBoneMaskSetDefinition_t, int> MaskDefinitions
     {
         get
         {
-            _MaskDefinitionsOffset = _MaskDefinitionsOffset ?? Schema.GetOffset(0xC92325147196574D);
-            return ref _Handle.AsRef<CUtlLeanVector<NmBoneMaskSetDefinition_t, int>>(_MaskDefinitionsOffset!.Value);
+            if (_MaskDefinitionsOffset == -1) _MaskDefinitionsOffset = Schema.GetOffset(0xC92325147196574D);
+            return ref _Handle.AsRef<CUtlLeanVector<NmBoneMaskSetDefinition_t, int>>(_MaskDefinitionsOffset);
         }
     }
-    private static nint? _SecondarySkeletonsOffset;
+    private static nint _SecondarySkeletonsOffset = -1;
 
     public ref CUtlLeanVector<CNmSkeleton__SecondarySkeleton_t, int> SecondarySkeletons
     {
         get
         {
-            _SecondarySkeletonsOffset = _SecondarySkeletonsOffset ?? Schema.GetOffset(0xC9232514782F396B);
-            return ref _Handle.AsRef<CUtlLeanVector<CNmSkeleton__SecondarySkeleton_t, int>>(_SecondarySkeletonsOffset!.Value);
+            if (_SecondarySkeletonsOffset == -1) _SecondarySkeletonsOffset = Schema.GetOffset(0xC9232514782F396B);
+            return ref _Handle.AsRef<CUtlLeanVector<CNmSkeleton__SecondarySkeleton_t, int>>(_SecondarySkeletonsOffset);
         }
     }
-    private static nint? _FloatChannelSetsOffset;
+    private static nint _FloatChannelSetsOffset = -1;
 
     public ref CUtlLeanVector<CNmFloatChannelSet_t, int> FloatChannelSets
     {
         get
         {
-            _FloatChannelSetsOffset = _FloatChannelSetsOffset ?? Schema.GetOffset(0xC9232514FE339B8D);
-            return ref _Handle.AsRef<CUtlLeanVector<CNmFloatChannelSet_t, int>>(_FloatChannelSetsOffset!.Value);
+            if (_FloatChannelSetsOffset == -1) _FloatChannelSetsOffset = Schema.GetOffset(0xC9232514FE339B8D);
+            return ref _Handle.AsRef<CUtlLeanVector<CNmFloatChannelSet_t, int>>(_FloatChannelSetsOffset);
         }
     }
-    private static nint? _ContactConfigsOffset;
+    private static nint _ContactConfigsOffset = -1;
 
     public ref CUtlVector<CNmSkeleton__ContactConfig_t> ContactConfigs
     {
         get
         {
-            _ContactConfigsOffset = _ContactConfigsOffset ?? Schema.GetOffset(0xC923251427B5F356);
-            return ref _Handle.AsRef<CUtlVector<CNmSkeleton__ContactConfig_t>>(_ContactConfigsOffset!.Value);
+            if (_ContactConfigsOffset == -1) _ContactConfigsOffset = Schema.GetOffset(0xC923251427B5F356);
+            return ref _Handle.AsRef<CUtlVector<CNmSkeleton__ContactConfig_t>>(_ContactConfigsOffset);
         }
     }
-    private static nint? _GameplayRelevantBoneIndicesOffset;
+    private static nint _GameplayRelevantBoneIndicesOffset = -1;
 
     public ref CUtlVector<int> GameplayRelevantBoneIndices
     {
         get
         {
-            _GameplayRelevantBoneIndicesOffset = _GameplayRelevantBoneIndicesOffset ?? Schema.GetOffset(0xC9232514930C946B);
-            return ref _Handle.AsRef<CUtlVector<int>>(_GameplayRelevantBoneIndicesOffset!.Value);
+            if (_GameplayRelevantBoneIndicesOffset == -1) _GameplayRelevantBoneIndicesOffset = Schema.GetOffset(0xC9232514930C946B);
+            return ref _Handle.AsRef<CUtlVector<int>>(_GameplayRelevantBoneIndicesOffset);
         }
     }
-    private static nint? _SpecialDependencyHashOffset;
+    private static nint _SpecialDependencyHashOffset = -1;
 
     public ref long SpecialDependencyHash
     {
         get
         {
-            _SpecialDependencyHashOffset = _SpecialDependencyHashOffset ?? Schema.GetOffset(0xC923251449DA09A9);
-            return ref _Handle.AsRef<long>(_SpecialDependencyHashOffset!.Value);
+            if (_SpecialDependencyHashOffset == -1) _SpecialDependencyHashOffset = Schema.GetOffset(0xC923251449DA09A9);
+            return ref _Handle.AsRef<long>(_SpecialDependencyHashOffset);
         }
     }
 

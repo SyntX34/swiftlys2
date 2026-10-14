@@ -16,14 +16,14 @@ internal partial class CPointCameraVFOVImpl : CPointCameraImpl, CPointCameraVFOV
 {
     public CPointCameraVFOVImpl(nint handle) : base(handle) { }
 
-    private static nint? _VerticalFOVOffset;
+    private static nint _VerticalFOVOffset = -1;
 
     public ref float VerticalFOV
     {
         get
         {
-            _VerticalFOVOffset = _VerticalFOVOffset ?? Schema.GetOffset(0xBDB1254E910A1908);
-            return ref _Handle.AsRef<float>(_VerticalFOVOffset!.Value);
+            if (_VerticalFOVOffset == -1) _VerticalFOVOffset = Schema.GetOffset(0xBDB1254E910A1908);
+            return ref _Handle.AsRef<float>(_VerticalFOVOffset);
         }
     }
 

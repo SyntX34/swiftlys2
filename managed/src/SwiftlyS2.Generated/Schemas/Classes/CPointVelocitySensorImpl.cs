@@ -16,66 +16,66 @@ internal partial class CPointVelocitySensorImpl : CPointEntityImpl, CPointVeloci
 {
     public CPointVelocitySensorImpl(nint handle) : base(handle) { }
 
-    private static nint? _TargetEntityOffset;
+    private static nint _TargetEntityOffset = -1;
 
     public ref CHandle<CBaseEntity> TargetEntity
     {
         get
         {
-            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x96CA232125D042A9);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset!.Value);
+            if (_TargetEntityOffset == -1) _TargetEntityOffset = Schema.GetOffset(0x96CA232125D042A9);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset);
         }
     }
-    private static nint? _AxisOffset;
+    private static nint _AxisOffset = -1;
 
     public ref Vector Axis
     {
         get
         {
-            _AxisOffset = _AxisOffset ?? Schema.GetOffset(0x96CA23210AF9CE54);
-            return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+            if (_AxisOffset == -1) _AxisOffset = Schema.GetOffset(0x96CA23210AF9CE54);
+            return ref _Handle.AsRef<Vector>(_AxisOffset);
         }
     }
-    private static nint? _EnabledOffset;
+    private static nint _EnabledOffset = -1;
 
     public ref bool Enabled
     {
         get
         {
-            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x96CA23216154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x96CA23216154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset);
         }
     }
-    private static nint? _PrevVelocityOffset;
+    private static nint _PrevVelocityOffset = -1;
 
     public ref float PrevVelocity
     {
         get
         {
-            _PrevVelocityOffset = _PrevVelocityOffset ?? Schema.GetOffset(0x96CA23211F9ACE5F);
-            return ref _Handle.AsRef<float>(_PrevVelocityOffset!.Value);
+            if (_PrevVelocityOffset == -1) _PrevVelocityOffset = Schema.GetOffset(0x96CA23211F9ACE5F);
+            return ref _Handle.AsRef<float>(_PrevVelocityOffset);
         }
     }
-    private static nint? _AvgIntervalOffset;
+    private static nint _AvgIntervalOffset = -1;
 
     public ref float AvgInterval
     {
         get
         {
-            _AvgIntervalOffset = _AvgIntervalOffset ?? Schema.GetOffset(0x96CA2321D6693004);
-            return ref _Handle.AsRef<float>(_AvgIntervalOffset!.Value);
+            if (_AvgIntervalOffset == -1) _AvgIntervalOffset = Schema.GetOffset(0x96CA2321D6693004);
+            return ref _Handle.AsRef<float>(_AvgIntervalOffset);
         }
     }
-    private static nint? _VelocityOffset;
+    private static nint _VelocityOffset = -1;
     private SchemaUntypedField? _VelocityInstance;
 
     public SchemaUntypedField Velocity
     {
         get
         {
-            _VelocityOffset = _VelocityOffset ?? Schema.GetOffset(0x96CA23219B4CC8B2);
+            if (_VelocityOffset == -1) _VelocityOffset = Schema.GetOffset(0x96CA23219B4CC8B2);
             var instance = _VelocityInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _VelocityOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VelocityOffset);
             return instance;
         }
     }

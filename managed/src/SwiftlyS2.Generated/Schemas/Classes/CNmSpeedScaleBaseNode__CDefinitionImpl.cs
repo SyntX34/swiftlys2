@@ -16,24 +16,24 @@ internal partial class CNmSpeedScaleBaseNode__CDefinitionImpl : CNmPassthroughNo
 {
     public CNmSpeedScaleBaseNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputValueNodeIdxOffset;
+    private static nint _InputValueNodeIdxOffset = -1;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x69CF028795E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x69CF028795E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
         }
     }
-    private static nint? _DefaultInputValueOffset;
+    private static nint _DefaultInputValueOffset = -1;
 
     public ref float DefaultInputValue
     {
         get
         {
-            _DefaultInputValueOffset = _DefaultInputValueOffset ?? Schema.GetOffset(0x69CF02875DFEC365);
-            return ref _Handle.AsRef<float>(_DefaultInputValueOffset!.Value);
+            if (_DefaultInputValueOffset == -1) _DefaultInputValueOffset = Schema.GetOffset(0x69CF02875DFEC365);
+            return ref _Handle.AsRef<float>(_DefaultInputValueOffset);
         }
     }
 

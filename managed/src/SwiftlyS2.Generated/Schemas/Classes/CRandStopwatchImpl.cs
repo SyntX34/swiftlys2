@@ -16,24 +16,24 @@ internal partial class CRandStopwatchImpl : CStopwatchBaseImpl, CRandStopwatch
 {
     public CRandStopwatchImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinIntervalOffset;
+    private static nint _MinIntervalOffset = -1;
 
     public ref float MinInterval
     {
         get
         {
-            _MinIntervalOffset = _MinIntervalOffset ?? Schema.GetOffset(0x538C26044BB35EE4);
-            return ref _Handle.AsRef<float>(_MinIntervalOffset!.Value);
+            if (_MinIntervalOffset == -1) _MinIntervalOffset = Schema.GetOffset(0x538C26044BB35EE4);
+            return ref _Handle.AsRef<float>(_MinIntervalOffset);
         }
     }
-    private static nint? _MaxIntervalOffset;
+    private static nint _MaxIntervalOffset = -1;
 
     public ref float MaxInterval
     {
         get
         {
-            _MaxIntervalOffset = _MaxIntervalOffset ?? Schema.GetOffset(0x538C2604400B2156);
-            return ref _Handle.AsRef<float>(_MaxIntervalOffset!.Value);
+            if (_MaxIntervalOffset == -1) _MaxIntervalOffset = Schema.GetOffset(0x538C2604400B2156);
+            return ref _Handle.AsRef<float>(_MaxIntervalOffset);
         }
     }
 

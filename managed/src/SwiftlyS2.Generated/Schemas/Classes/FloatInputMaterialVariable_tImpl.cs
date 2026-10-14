@@ -16,31 +16,31 @@ internal partial class FloatInputMaterialVariable_tImpl : SchemaClass, FloatInpu
 {
     public FloatInputMaterialVariable_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrVariableOffset;
+    private static nint _StrVariableOffset = -1;
 
     public string StrVariable
     {
         get
         {
-            _StrVariableOffset = _StrVariableOffset ?? Schema.GetOffset(0xEFEA50FDA52C3390);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrVariableOffset!.Value));
+            if (_StrVariableOffset == -1) _StrVariableOffset = Schema.GetOffset(0xEFEA50FDA52C3390);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrVariableOffset));
         }
         set
         {
-            _StrVariableOffset = _StrVariableOffset ?? Schema.GetOffset(0xEFEA50FDA52C3390);
-            Schema.SetCUtlString(_Handle, _StrVariableOffset!.Value, value);
+            if (_StrVariableOffset == -1) _StrVariableOffset = Schema.GetOffset(0xEFEA50FDA52C3390);
+            Schema.SetCUtlString(_Handle, _StrVariableOffset, value);
         }
     }
-    private static nint? _InputOffset;
+    private static nint _InputOffset = -1;
     private CParticleCollectionFloatInputImpl? _InputInstance;
 
     public CParticleCollectionFloatInput Input
     {
         get
         {
-            _InputOffset = _InputOffset ?? Schema.GetOffset(0xEFEA50FD1D4B7FFD);
+            if (_InputOffset == -1) _InputOffset = Schema.GetOffset(0xEFEA50FD1D4B7FFD);
             var instance = _InputInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputOffset);
             return instance;
         }
     }

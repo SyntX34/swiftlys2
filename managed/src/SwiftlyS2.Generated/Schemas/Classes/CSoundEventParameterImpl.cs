@@ -16,29 +16,29 @@ internal partial class CSoundEventParameterImpl : CBaseEntityImpl, CSoundEventPa
 {
     public CSoundEventParameterImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParamNameOffset;
+    private static nint _ParamNameOffset = -1;
 
     public string ParamName
     {
         get
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xEFEED49AFF6F4311);
-            return Schema.GetString(_Handle.Read<nint>(_ParamNameOffset!.Value));
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0xEFEED49AFF6F4311);
+            return Schema.GetString(_Handle.Read<nint>(_ParamNameOffset));
         }
         set
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xEFEED49AFF6F4311);
-            Schema.SetString(_Handle, _ParamNameOffset!.Value, value);
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0xEFEED49AFF6F4311);
+            Schema.SetString(_Handle, _ParamNameOffset, value);
         }
     }
-    private static nint? _FloatValueOffset;
+    private static nint _FloatValueOffset = -1;
 
     public ref float FloatValue
     {
         get
         {
-            _FloatValueOffset = _FloatValueOffset ?? Schema.GetOffset(0xEFEED49A80BDA558);
-            return ref _Handle.AsRef<float>(_FloatValueOffset!.Value);
+            if (_FloatValueOffset == -1) _FloatValueOffset = Schema.GetOffset(0xEFEED49A80BDA558);
+            return ref _Handle.AsRef<float>(_FloatValueOffset);
         }
     }
 

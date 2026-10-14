@@ -16,29 +16,29 @@ internal partial class CNmGraphDocTransitionConduitNodeImpl : CNmGraphDocStateMa
 {
     public CNmGraphDocTransitionConduitNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartStateIDOffset;
+    private static nint _StartStateIDOffset = -1;
     private SchemaUntypedField? _StartStateIDInstance;
 
     public SchemaUntypedField StartStateID
     {
         get
         {
-            _StartStateIDOffset = _StartStateIDOffset ?? Schema.GetOffset(0x583F0684FC94E26D);
+            if (_StartStateIDOffset == -1) _StartStateIDOffset = Schema.GetOffset(0x583F0684FC94E26D);
             var instance = _StartStateIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StartStateIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartStateIDOffset);
             return instance;
         }
     }
-    private static nint? _EndStateIDOffset;
+    private static nint _EndStateIDOffset = -1;
     private SchemaUntypedField? _EndStateIDInstance;
 
     public SchemaUntypedField EndStateID
     {
         get
         {
-            _EndStateIDOffset = _EndStateIDOffset ?? Schema.GetOffset(0x583F068419404852);
+            if (_EndStateIDOffset == -1) _EndStateIDOffset = Schema.GetOffset(0x583F068419404852);
             var instance = _EndStateIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _EndStateIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndStateIDOffset);
             return instance;
         }
     }

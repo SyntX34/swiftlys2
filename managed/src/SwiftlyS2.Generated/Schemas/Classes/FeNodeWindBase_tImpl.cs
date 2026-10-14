@@ -16,44 +16,44 @@ internal partial class FeNodeWindBase_tImpl : SchemaClass, FeNodeWindBase_t
 {
     public FeNodeWindBase_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeX0Offset;
+    private static nint _NodeX0Offset = -1;
 
     public ref ushort NodeX0
     {
         get
         {
-            _NodeX0Offset = _NodeX0Offset ?? Schema.GetOffset(0x3892EC5081C7FEB9);
-            return ref _Handle.AsRef<ushort>(_NodeX0Offset!.Value);
+            if (_NodeX0Offset == -1) _NodeX0Offset = Schema.GetOffset(0x3892EC5081C7FEB9);
+            return ref _Handle.AsRef<ushort>(_NodeX0Offset);
         }
     }
-    private static nint? _NodeX1Offset;
+    private static nint _NodeX1Offset = -1;
 
     public ref ushort NodeX1
     {
         get
         {
-            _NodeX1Offset = _NodeX1Offset ?? Schema.GetOffset(0x3892EC5080C7FD26);
-            return ref _Handle.AsRef<ushort>(_NodeX1Offset!.Value);
+            if (_NodeX1Offset == -1) _NodeX1Offset = Schema.GetOffset(0x3892EC5080C7FD26);
+            return ref _Handle.AsRef<ushort>(_NodeX1Offset);
         }
     }
-    private static nint? _NodeY0Offset;
+    private static nint _NodeY0Offset = -1;
 
     public ref ushort NodeY0
     {
         get
         {
-            _NodeY0Offset = _NodeY0Offset ?? Schema.GetOffset(0x3892EC507BC5B6B0);
-            return ref _Handle.AsRef<ushort>(_NodeY0Offset!.Value);
+            if (_NodeY0Offset == -1) _NodeY0Offset = Schema.GetOffset(0x3892EC507BC5B6B0);
+            return ref _Handle.AsRef<ushort>(_NodeY0Offset);
         }
     }
-    private static nint? _NodeY1Offset;
+    private static nint _NodeY1Offset = -1;
 
     public ref ushort NodeY1
     {
         get
         {
-            _NodeY1Offset = _NodeY1Offset ?? Schema.GetOffset(0x3892EC507CC5B843);
-            return ref _Handle.AsRef<ushort>(_NodeY1Offset!.Value);
+            if (_NodeY1Offset == -1) _NodeY1Offset = Schema.GetOffset(0x3892EC507CC5B843);
+            return ref _Handle.AsRef<ushort>(_NodeY1Offset);
         }
     }
 

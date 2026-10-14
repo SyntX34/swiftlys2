@@ -16,64 +16,64 @@ internal partial class C_EnvShakeVolumeImpl : C_BaseEntityImpl, C_EnvShakeVolume
 {
     public C_EnvShakeVolumeImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoxMinsOffset;
+    private static nint _BoxMinsOffset = -1;
 
     public ref Vector BoxMins
     {
         get
         {
-            _BoxMinsOffset = _BoxMinsOffset ?? Schema.GetOffset(0xD1DAED06D8201373);
-            return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
+            if (_BoxMinsOffset == -1) _BoxMinsOffset = Schema.GetOffset(0xD1DAED06D8201373);
+            return ref _Handle.AsRef<Vector>(_BoxMinsOffset);
         }
     }
-    private static nint? _BoxMaxsOffset;
+    private static nint _BoxMaxsOffset = -1;
 
     public ref Vector BoxMaxs
     {
         get
         {
-            _BoxMaxsOffset = _BoxMaxsOffset ?? Schema.GetOffset(0xD1DAED06817A3B31);
-            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
+            if (_BoxMaxsOffset == -1) _BoxMaxsOffset = Schema.GetOffset(0xD1DAED06817A3B31);
+            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset);
         }
     }
-    private static nint? _AmplitudeOffset;
+    private static nint _AmplitudeOffset = -1;
 
     public ref float Amplitude
     {
         get
         {
-            _AmplitudeOffset = _AmplitudeOffset ?? Schema.GetOffset(0xD1DAED06B44B0E18);
-            return ref _Handle.AsRef<float>(_AmplitudeOffset!.Value);
+            if (_AmplitudeOffset == -1) _AmplitudeOffset = Schema.GetOffset(0xD1DAED06B44B0E18);
+            return ref _Handle.AsRef<float>(_AmplitudeOffset);
         }
     }
-    private static nint? _FrequencyOffset;
+    private static nint _FrequencyOffset = -1;
 
     public ref float Frequency
     {
         get
         {
-            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0xD1DAED06D2C16DD7);
-            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+            if (_FrequencyOffset == -1) _FrequencyOffset = Schema.GetOffset(0xD1DAED06D2C16DD7);
+            return ref _Handle.AsRef<float>(_FrequencyOffset);
         }
     }
-    private static nint? _FalloffDistanceOffset;
+    private static nint _FalloffDistanceOffset = -1;
 
     public ref float FalloffDistance
     {
         get
         {
-            _FalloffDistanceOffset = _FalloffDistanceOffset ?? Schema.GetOffset(0xD1DAED06CDEA07E4);
-            return ref _Handle.AsRef<float>(_FalloffDistanceOffset!.Value);
+            if (_FalloffDistanceOffset == -1) _FalloffDistanceOffset = Schema.GetOffset(0xD1DAED06CDEA07E4);
+            return ref _Handle.AsRef<float>(_FalloffDistanceOffset);
         }
     }
-    private static nint? _RollScaleOffset;
+    private static nint _RollScaleOffset = -1;
 
     public ref float RollScale
     {
         get
         {
-            _RollScaleOffset = _RollScaleOffset ?? Schema.GetOffset(0xD1DAED06F2113F72);
-            return ref _Handle.AsRef<float>(_RollScaleOffset!.Value);
+            if (_RollScaleOffset == -1) _RollScaleOffset = Schema.GetOffset(0xD1DAED06F2113F72);
+            return ref _Handle.AsRef<float>(_RollScaleOffset);
         }
     }
 

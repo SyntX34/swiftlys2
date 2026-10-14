@@ -16,16 +16,16 @@ internal partial class CNmGraphDocFloatClampNodeImpl : CNmGraphDocFlowNodeImpl, 
 {
     public CNmGraphDocFloatClampNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _ClampRangeOffset;
+    private static nint _ClampRangeOffset = -1;
     private SchemaUntypedField? _ClampRangeInstance;
 
     public SchemaUntypedField ClampRange
     {
         get
         {
-            _ClampRangeOffset = _ClampRangeOffset ?? Schema.GetOffset(0x88954A14FED5C4A1);
+            if (_ClampRangeOffset == -1) _ClampRangeOffset = Schema.GetOffset(0x88954A14FED5C4A1);
             var instance = _ClampRangeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ClampRangeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ClampRangeOffset);
             return instance;
         }
     }

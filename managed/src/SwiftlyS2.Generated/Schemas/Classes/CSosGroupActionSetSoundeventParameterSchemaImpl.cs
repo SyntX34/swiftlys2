@@ -16,59 +16,59 @@ internal partial class CSosGroupActionSetSoundeventParameterSchemaImpl : CSosGro
 {
     public CSosGroupActionSetSoundeventParameterSchemaImpl(nint handle) : base(handle) { }
 
-    private static nint? _MaxCountOffset;
+    private static nint _MaxCountOffset = -1;
 
     public ref int MaxCount
     {
         get
         {
-            _MaxCountOffset = _MaxCountOffset ?? Schema.GetOffset(0x40D29D8964BED864);
-            return ref _Handle.AsRef<int>(_MaxCountOffset!.Value);
+            if (_MaxCountOffset == -1) _MaxCountOffset = Schema.GetOffset(0x40D29D8964BED864);
+            return ref _Handle.AsRef<int>(_MaxCountOffset);
         }
     }
-    private static nint? _MinValueOffset;
+    private static nint _MinValueOffset = -1;
 
     public ref float MinValue
     {
         get
         {
-            _MinValueOffset = _MinValueOffset ?? Schema.GetOffset(0x40D29D897C31AC56);
-            return ref _Handle.AsRef<float>(_MinValueOffset!.Value);
+            if (_MinValueOffset == -1) _MinValueOffset = Schema.GetOffset(0x40D29D897C31AC56);
+            return ref _Handle.AsRef<float>(_MinValueOffset);
         }
     }
-    private static nint? _MaxValueOffset;
+    private static nint _MaxValueOffset = -1;
 
     public ref float MaxValue
     {
         get
         {
-            _MaxValueOffset = _MaxValueOffset ?? Schema.GetOffset(0x40D29D89D0A5C87C);
-            return ref _Handle.AsRef<float>(_MaxValueOffset!.Value);
+            if (_MaxValueOffset == -1) _MaxValueOffset = Schema.GetOffset(0x40D29D89D0A5C87C);
+            return ref _Handle.AsRef<float>(_MaxValueOffset);
         }
     }
-    private static nint? _OpvarNameOffset;
+    private static nint _OpvarNameOffset = -1;
 
     public string OpvarName
     {
         get
         {
-            _OpvarNameOffset = _OpvarNameOffset ?? Schema.GetOffset(0x40D29D894ECBF7E4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_OpvarNameOffset!.Value));
+            if (_OpvarNameOffset == -1) _OpvarNameOffset = Schema.GetOffset(0x40D29D894ECBF7E4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_OpvarNameOffset));
         }
         set
         {
-            _OpvarNameOffset = _OpvarNameOffset ?? Schema.GetOffset(0x40D29D894ECBF7E4);
-            Schema.SetCUtlString(_Handle, _OpvarNameOffset!.Value, value);
+            if (_OpvarNameOffset == -1) _OpvarNameOffset = Schema.GetOffset(0x40D29D894ECBF7E4);
+            Schema.SetCUtlString(_Handle, _OpvarNameOffset, value);
         }
     }
-    private static nint? _SortTypeOffset;
+    private static nint _SortTypeOffset = -1;
 
     public ref SosActionSetParamSortType_t SortType
     {
         get
         {
-            _SortTypeOffset = _SortTypeOffset ?? Schema.GetOffset(0x40D29D892E0E44B5);
-            return ref _Handle.AsRef<SosActionSetParamSortType_t>(_SortTypeOffset!.Value);
+            if (_SortTypeOffset == -1) _SortTypeOffset = Schema.GetOffset(0x40D29D892E0E44B5);
+            return ref _Handle.AsRef<SosActionSetParamSortType_t>(_SortTypeOffset);
         }
     }
 

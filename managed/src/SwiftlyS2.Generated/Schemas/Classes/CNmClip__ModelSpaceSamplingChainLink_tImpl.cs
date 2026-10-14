@@ -16,34 +16,34 @@ internal partial class CNmClip__ModelSpaceSamplingChainLink_tImpl : SchemaClass,
 {
     public CNmClip__ModelSpaceSamplingChainLink_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoneIdxOffset;
+    private static nint _BoneIdxOffset = -1;
 
     public ref int BoneIdx
     {
         get
         {
-            _BoneIdxOffset = _BoneIdxOffset ?? Schema.GetOffset(0xAFAB55410E26A9C2);
-            return ref _Handle.AsRef<int>(_BoneIdxOffset!.Value);
+            if (_BoneIdxOffset == -1) _BoneIdxOffset = Schema.GetOffset(0xAFAB55410E26A9C2);
+            return ref _Handle.AsRef<int>(_BoneIdxOffset);
         }
     }
-    private static nint? _ParentBoneIdxOffset;
+    private static nint _ParentBoneIdxOffset = -1;
 
     public ref int ParentBoneIdx
     {
         get
         {
-            _ParentBoneIdxOffset = _ParentBoneIdxOffset ?? Schema.GetOffset(0xAFAB554185076542);
-            return ref _Handle.AsRef<int>(_ParentBoneIdxOffset!.Value);
+            if (_ParentBoneIdxOffset == -1) _ParentBoneIdxOffset = Schema.GetOffset(0xAFAB554185076542);
+            return ref _Handle.AsRef<int>(_ParentBoneIdxOffset);
         }
     }
-    private static nint? _ParentChainLinkIdxOffset;
+    private static nint _ParentChainLinkIdxOffset = -1;
 
     public ref int ParentChainLinkIdx
     {
         get
         {
-            _ParentChainLinkIdxOffset = _ParentChainLinkIdxOffset ?? Schema.GetOffset(0xAFAB5541DB4E7C5D);
-            return ref _Handle.AsRef<int>(_ParentChainLinkIdxOffset!.Value);
+            if (_ParentChainLinkIdxOffset == -1) _ParentChainLinkIdxOffset = Schema.GetOffset(0xAFAB5541DB4E7C5D);
+            return ref _Handle.AsRef<int>(_ParentChainLinkIdxOffset);
         }
     }
 

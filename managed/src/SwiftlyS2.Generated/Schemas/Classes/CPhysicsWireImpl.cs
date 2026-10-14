@@ -16,14 +16,14 @@ internal partial class CPhysicsWireImpl : CBaseEntityImpl, CPhysicsWire
 {
     public CPhysicsWireImpl(nint handle) : base(handle) { }
 
-    private static nint? _DensityOffset;
+    private static nint _DensityOffset = -1;
 
     public ref int Density
     {
         get
         {
-            _DensityOffset = _DensityOffset ?? Schema.GetOffset(0x455AFD76A65E630F);
-            return ref _Handle.AsRef<int>(_DensityOffset!.Value);
+            if (_DensityOffset == -1) _DensityOffset = Schema.GetOffset(0x455AFD76A65E630F);
+            return ref _Handle.AsRef<int>(_DensityOffset);
         }
     }
 

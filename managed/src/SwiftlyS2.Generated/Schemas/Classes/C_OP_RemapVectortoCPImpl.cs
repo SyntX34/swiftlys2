@@ -16,37 +16,37 @@ internal partial class C_OP_RemapVectortoCPImpl : CParticleFunctionOperatorImpl,
 {
     public C_OP_RemapVectortoCPImpl(nint handle) : base(handle) { }
 
-    private static nint? _OutControlPointNumberOffset;
+    private static nint _OutControlPointNumberOffset = -1;
 
     public ref int OutControlPointNumber
     {
         get
         {
-            _OutControlPointNumberOffset = _OutControlPointNumberOffset ?? Schema.GetOffset(0xADC661D7D021D73F);
-            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
+            if (_OutControlPointNumberOffset == -1) _OutControlPointNumberOffset = Schema.GetOffset(0xADC661D7D021D73F);
+            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset);
         }
     }
-    private static nint? _FieldInputOffset;
+    private static nint _FieldInputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldInputInstance;
 
     public ParticleAttributeIndex_t FieldInput
     {
         get
         {
-            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0xADC661D7AE775669);
+            if (_FieldInputOffset == -1) _FieldInputOffset = Schema.GetOffset(0xADC661D7AE775669);
             var instance = _FieldInputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldInputOffset);
             return instance;
         }
     }
-    private static nint? _ParticleNumberOffset;
+    private static nint _ParticleNumberOffset = -1;
 
     public ref int ParticleNumber
     {
         get
         {
-            _ParticleNumberOffset = _ParticleNumberOffset ?? Schema.GetOffset(0xADC661D712F26402);
-            return ref _Handle.AsRef<int>(_ParticleNumberOffset!.Value);
+            if (_ParticleNumberOffset == -1) _ParticleNumberOffset = Schema.GetOffset(0xADC661D712F26402);
+            return ref _Handle.AsRef<int>(_ParticleNumberOffset);
         }
     }
 

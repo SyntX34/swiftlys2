@@ -51,21 +51,8 @@ public:
 
     virtual void CreateConvar(const std::string& cvar_name, EConVarType type, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue = std::nullopt, const std::optional<ConvarValue>& maxValue = std::nullopt) override;
     virtual void DeleteConvar(const std::string& cvar_name) override;
-    virtual bool ExistsConvar(const std::string& cvar_name) override;
-    virtual EConVarType GetConvarType(const std::string& cvar_name) override;
 
     virtual ConVarRefAbstract& GetConvarRef(const char* cvar_name) override;
-
-    virtual void* GetConvarDataAddress(const std::string& cvar_name) override;
-    virtual ConvarValue GetConvarValue(const std::string& cvar_name) override;
-
-    virtual void SetConvarValue(const std::string& cvar_name, const ConvarValue& value) override;
-    virtual void SetClientConvar(int playerid, const std::string& cvar_name, const std::string& value) override;
-
-    virtual void AddFlags(const std::string& cvar_name, uint64_t flags) override;
-    virtual void RemoveFlags(const std::string& cvar_name, uint64_t flags) override;
-    virtual void ClearFlags(const std::string& cvar_name) override;
-    virtual uint64_t GetFlags(const std::string& cvar_name) override;
 
     virtual uint64_t AddGlobalChangeListener(std::function<void(const char*, int, const char*, const char*)> callback) override;
     virtual void RemoveGlobalChangeListener(uint64_t callback_id) override;

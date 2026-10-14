@@ -16,24 +16,24 @@ internal partial class CTiltTwistConstraintImpl : CBaseConstraintImpl, CTiltTwis
 {
     public CTiltTwistConstraintImpl(nint handle) : base(handle) { }
 
-    private static nint? _TargetAxisOffset;
+    private static nint _TargetAxisOffset = -1;
 
     public ref int TargetAxis
     {
         get
         {
-            _TargetAxisOffset = _TargetAxisOffset ?? Schema.GetOffset(0x4A56E4D341CC84D5);
-            return ref _Handle.AsRef<int>(_TargetAxisOffset!.Value);
+            if (_TargetAxisOffset == -1) _TargetAxisOffset = Schema.GetOffset(0x4A56E4D341CC84D5);
+            return ref _Handle.AsRef<int>(_TargetAxisOffset);
         }
     }
-    private static nint? _SlaveAxisOffset;
+    private static nint _SlaveAxisOffset = -1;
 
     public ref int SlaveAxis
     {
         get
         {
-            _SlaveAxisOffset = _SlaveAxisOffset ?? Schema.GetOffset(0x4A56E4D3CA99CDBD);
-            return ref _Handle.AsRef<int>(_SlaveAxisOffset!.Value);
+            if (_SlaveAxisOffset == -1) _SlaveAxisOffset = Schema.GetOffset(0x4A56E4D3CA99CDBD);
+            return ref _Handle.AsRef<int>(_SlaveAxisOffset);
         }
     }
 

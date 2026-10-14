@@ -16,34 +16,34 @@ internal partial class C_OP_SetControlPointToHMDImpl : CParticleFunctionPreEmiss
 {
     public C_OP_SetControlPointToHMDImpl(nint handle) : base(handle) { }
 
-    private static nint? _CP1Offset;
+    private static nint _CP1Offset = -1;
 
     public ref int CP1
     {
         get
         {
-            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0x58898D54D4B1E579);
-            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+            if (_CP1Offset == -1) _CP1Offset = Schema.GetOffset(0x58898D54D4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset);
         }
     }
-    private static nint? _CP1PosOffset;
+    private static nint _CP1PosOffset = -1;
 
     public ref Vector CP1Pos
     {
         get
         {
-            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0x58898D54408288D9);
-            return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+            if (_CP1PosOffset == -1) _CP1PosOffset = Schema.GetOffset(0x58898D54408288D9);
+            return ref _Handle.AsRef<Vector>(_CP1PosOffset);
         }
     }
-    private static nint? _OrientToHMDOffset;
+    private static nint _OrientToHMDOffset = -1;
 
     public ref bool OrientToHMD
     {
         get
         {
-            _OrientToHMDOffset = _OrientToHMDOffset ?? Schema.GetOffset(0x58898D54F3E0D0A6);
-            return ref _Handle.AsRef<bool>(_OrientToHMDOffset!.Value);
+            if (_OrientToHMDOffset == -1) _OrientToHMDOffset = Schema.GetOffset(0x58898D54F3E0D0A6);
+            return ref _Handle.AsRef<bool>(_OrientToHMDOffset);
         }
     }
 

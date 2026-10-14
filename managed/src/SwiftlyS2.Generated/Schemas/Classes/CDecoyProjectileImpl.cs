@@ -16,47 +16,47 @@ internal partial class CDecoyProjectileImpl : CBaseCSGrenadeProjectileImpl, CDec
 {
     public CDecoyProjectileImpl(nint handle) : base(handle) { }
 
-    private static nint? _DecoyShotTickOffset;
+    private static nint _DecoyShotTickOffset = -1;
 
     public ref int DecoyShotTick
     {
         get
         {
-            _DecoyShotTickOffset = _DecoyShotTickOffset ?? Schema.GetOffset(0x69629121C4EFED0A);
-            return ref _Handle.AsRef<int>(_DecoyShotTickOffset!.Value);
+            if (_DecoyShotTickOffset == -1) _DecoyShotTickOffset = Schema.GetOffset(0x69629121C4EFED0A);
+            return ref _Handle.AsRef<int>(_DecoyShotTickOffset);
         }
     }
-    private static nint? _ShotsRemainingOffset;
+    private static nint _ShotsRemainingOffset = -1;
 
     public ref int ShotsRemaining
     {
         get
         {
-            _ShotsRemainingOffset = _ShotsRemainingOffset ?? Schema.GetOffset(0x6962912188CAE2A2);
-            return ref _Handle.AsRef<int>(_ShotsRemainingOffset!.Value);
+            if (_ShotsRemainingOffset == -1) _ShotsRemainingOffset = Schema.GetOffset(0x6962912188CAE2A2);
+            return ref _Handle.AsRef<int>(_ShotsRemainingOffset);
         }
     }
-    private static nint? _ExpireTimeOffset;
+    private static nint _ExpireTimeOffset = -1;
     private GameTime_tImpl? _ExpireTimeInstance;
 
     public GameTime_t ExpireTime
     {
         get
         {
-            _ExpireTimeOffset = _ExpireTimeOffset ?? Schema.GetOffset(0x696291216D61853F);
+            if (_ExpireTimeOffset == -1) _ExpireTimeOffset = Schema.GetOffset(0x696291216D61853F);
             var instance = _ExpireTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ExpireTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ExpireTimeOffset);
             return instance;
         }
     }
-    private static nint? _DecoyWeaponDefIndexOffset;
+    private static nint _DecoyWeaponDefIndexOffset = -1;
 
     public ref ushort DecoyWeaponDefIndex
     {
         get
         {
-            _DecoyWeaponDefIndexOffset = _DecoyWeaponDefIndexOffset ?? Schema.GetOffset(0x69629121A9377E6A);
-            return ref _Handle.AsRef<ushort>(_DecoyWeaponDefIndexOffset!.Value);
+            if (_DecoyWeaponDefIndexOffset == -1) _DecoyWeaponDefIndexOffset = Schema.GetOffset(0x69629121A9377E6A);
+            return ref _Handle.AsRef<ushort>(_DecoyWeaponDefIndexOffset);
         }
     }
 

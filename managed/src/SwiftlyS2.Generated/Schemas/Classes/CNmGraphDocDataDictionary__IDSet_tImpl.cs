@@ -16,42 +16,42 @@ internal partial class CNmGraphDocDataDictionary__IDSet_tImpl : SchemaClass, CNm
 {
     public CNmGraphDocDataDictionary__IDSet_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
     private SchemaUntypedField? _IDInstance;
 
     public SchemaUntypedField ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0x7842FBB795066900);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0x7842FBB795066900);
             var instance = _IDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IDOffset);
             return instance;
         }
     }
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x7842FBB74D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x7842FBB74D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x7842FBB74D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x7842FBB74D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _GraphIDsOffset;
+    private static nint _GraphIDsOffset = -1;
 
     public ref CUtlVector<CGlobalSymbol> GraphIDs
     {
         get
         {
-            _GraphIDsOffset = _GraphIDsOffset ?? Schema.GetOffset(0x7842FBB7BA5A365B);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_GraphIDsOffset!.Value);
+            if (_GraphIDsOffset == -1) _GraphIDsOffset = Schema.GetOffset(0x7842FBB7BA5A365B);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_GraphIDsOffset);
         }
     }
 

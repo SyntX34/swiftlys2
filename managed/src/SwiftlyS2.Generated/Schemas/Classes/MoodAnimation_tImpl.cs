@@ -16,27 +16,27 @@ internal partial class MoodAnimation_tImpl : SchemaClass, MoodAnimation_t
 {
     public MoodAnimation_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
     private SchemaUntypedField? _NameInstance;
 
     public SchemaUntypedField Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8982458763D22D49);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x8982458763D22D49);
             var instance = _NameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NameOffset);
             return instance;
         }
     }
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
 
     public ref float Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x898245877B81E7AB);
-            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0x898245877B81E7AB);
+            return ref _Handle.AsRef<float>(_WeightOffset);
         }
     }
 

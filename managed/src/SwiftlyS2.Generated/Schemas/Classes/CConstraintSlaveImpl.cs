@@ -16,59 +16,59 @@ internal partial class CConstraintSlaveImpl : SchemaClass, CConstraintSlave
 {
     public CConstraintSlaveImpl(nint handle) : base(handle) { }
 
-    private static nint? _BaseOrientationOffset;
+    private static nint _BaseOrientationOffset = -1;
 
     public ref Quaternion BaseOrientation
     {
         get
         {
-            _BaseOrientationOffset = _BaseOrientationOffset ?? Schema.GetOffset(0xE0E093BC46E6EA75);
-            return ref _Handle.AsRef<Quaternion>(_BaseOrientationOffset!.Value);
+            if (_BaseOrientationOffset == -1) _BaseOrientationOffset = Schema.GetOffset(0xE0E093BC46E6EA75);
+            return ref _Handle.AsRef<Quaternion>(_BaseOrientationOffset);
         }
     }
-    private static nint? _BasePositionOffset;
+    private static nint _BasePositionOffset = -1;
 
     public ref Vector BasePosition
     {
         get
         {
-            _BasePositionOffset = _BasePositionOffset ?? Schema.GetOffset(0xE0E093BCC510D587);
-            return ref _Handle.AsRef<Vector>(_BasePositionOffset!.Value);
+            if (_BasePositionOffset == -1) _BasePositionOffset = Schema.GetOffset(0xE0E093BCC510D587);
+            return ref _Handle.AsRef<Vector>(_BasePositionOffset);
         }
     }
-    private static nint? _BoneHashOffset;
+    private static nint _BoneHashOffset = -1;
 
     public ref uint BoneHash
     {
         get
         {
-            _BoneHashOffset = _BoneHashOffset ?? Schema.GetOffset(0xE0E093BCD4010F03);
-            return ref _Handle.AsRef<uint>(_BoneHashOffset!.Value);
+            if (_BoneHashOffset == -1) _BoneHashOffset = Schema.GetOffset(0xE0E093BCD4010F03);
+            return ref _Handle.AsRef<uint>(_BoneHashOffset);
         }
     }
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
 
     public ref float Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xE0E093BC7B81E7AB);
-            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0xE0E093BC7B81E7AB);
+            return ref _Handle.AsRef<float>(_WeightOffset);
         }
     }
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE0E093BC63D22D49);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE0E093BC63D22D49);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE0E093BC63D22D49);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE0E093BC63D22D49);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
 

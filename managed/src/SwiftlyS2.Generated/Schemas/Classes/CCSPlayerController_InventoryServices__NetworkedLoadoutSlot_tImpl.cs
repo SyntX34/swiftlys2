@@ -16,39 +16,39 @@ internal partial class CCSPlayerController_InventoryServices__NetworkedLoadoutSl
 {
     public CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ItemOffset;
+    private static nint _ItemOffset = -1;
     private CEconItemViewImpl? _ItemInstance;
 
     public CEconItemView? Item
     {
         get
         {
-            _ItemOffset = _ItemOffset ?? Schema.GetOffset(0x16C4EAAC5C1539E8);
-            var ptr = _Handle.Read<nint>(_ItemOffset!.Value);
+            if (_ItemOffset == -1) _ItemOffset = Schema.GetOffset(0x16C4EAAC5C1539E8);
+            var ptr = _Handle.Read<nint>(_ItemOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ItemInstance ??= new CEconItemViewImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _TeamOffset;
+    private static nint _TeamOffset = -1;
 
     public ref ushort Team
     {
         get
         {
-            _TeamOffset = _TeamOffset ?? Schema.GetOffset(0x16C4EAACA2FD7D0C);
-            return ref _Handle.AsRef<ushort>(_TeamOffset!.Value);
+            if (_TeamOffset == -1) _TeamOffset = Schema.GetOffset(0x16C4EAACA2FD7D0C);
+            return ref _Handle.AsRef<ushort>(_TeamOffset);
         }
     }
-    private static nint? _SlotOffset;
+    private static nint _SlotOffset = -1;
 
     public ref ushort Slot
     {
         get
         {
-            _SlotOffset = _SlotOffset ?? Schema.GetOffset(0x16C4EAAC70954771);
-            return ref _Handle.AsRef<ushort>(_SlotOffset!.Value);
+            if (_SlotOffset == -1) _SlotOffset = Schema.GetOffset(0x16C4EAAC70954771);
+            return ref _Handle.AsRef<ushort>(_SlotOffset);
         }
     }
 

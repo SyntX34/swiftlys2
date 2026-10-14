@@ -16,53 +16,53 @@ internal partial class C_OP_RemapCrossProductOfTwoVectorsToVectorImpl : CParticl
 {
     public C_OP_RemapCrossProductOfTwoVectorsToVectorImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputVec1Offset;
+    private static nint _InputVec1Offset = -1;
     private CPerParticleVecInputImpl? _InputVec1Instance;
 
     public CPerParticleVecInput InputVec1
     {
         get
         {
-            _InputVec1Offset = _InputVec1Offset ?? Schema.GetOffset(0x4B4531D84584355A);
+            if (_InputVec1Offset == -1) _InputVec1Offset = Schema.GetOffset(0x4B4531D84584355A);
             var instance = _InputVec1Instance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputVec1Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputVec1Offset);
             return instance;
         }
     }
-    private static nint? _InputVec2Offset;
+    private static nint _InputVec2Offset = -1;
     private CPerParticleVecInputImpl? _InputVec2Instance;
 
     public CPerParticleVecInput InputVec2
     {
         get
         {
-            _InputVec2Offset = _InputVec2Offset ?? Schema.GetOffset(0x4B4531D8448433C7);
+            if (_InputVec2Offset == -1) _InputVec2Offset = Schema.GetOffset(0x4B4531D8448433C7);
             var instance = _InputVec2Instance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputVec2Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputVec2Offset);
             return instance;
         }
     }
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4B4531D8E5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x4B4531D8E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _NormalizeOffset;
+    private static nint _NormalizeOffset = -1;
 
     public ref bool Normalize
     {
         get
         {
-            _NormalizeOffset = _NormalizeOffset ?? Schema.GetOffset(0x4B4531D848BC424C);
-            return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+            if (_NormalizeOffset == -1) _NormalizeOffset = Schema.GetOffset(0x4B4531D848BC424C);
+            return ref _Handle.AsRef<bool>(_NormalizeOffset);
         }
     }
 

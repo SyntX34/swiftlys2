@@ -97,7 +97,7 @@ internal class PlayerManagerService : IPlayerManagerService
 
     public IEnumerable<IPlayer> GetAllValidPlayers()
     {
-        return GetAllPlayers().Where(p => p.IsValid);
+        return Collect(false, -1, false);
     }
 
     public IEnumerable<IPlayer> FindTargettedPlayers( IPlayer player, string target, TargetSearchMode searchMode,
@@ -219,47 +219,42 @@ internal class PlayerManagerService : IPlayerManagerService
         return true;
     }
 
-    public IEnumerable<IPlayer> GetBots()
+    private List<IPlayer> Collect( bool botsOnly, int team, bool aliveOnly )
     {
-        return GetAllPlayers().Where(p => p.IsValid && p.IsFakeClient);
+        var result = new List<IPlayer>(PlayerObjects.Count);
+        foreach (var p in PlayerObjects.Values)
+        {
+            if (!p.IsValid) continue;
+            if (botsOnly && !p.IsFakeClient) continue;
+
+            if (team != -1 || aliveOnly)
+            {
+                var pawn = p.Pawn;
+                if (pawn == null) continue;
+                if (team != -1 && pawn.TeamNum != team) continue;
+                if (aliveOnly && pawn.LifeState != (byte)LifeState_t.LIFE_ALIVE) continue;
+            }
+
+            result.Add(p);
+        }
+        return result;
     }
 
-    public IEnumerable<IPlayer> GetAlive()
-    {
-        return GetAllPlayers().Where(p => p.IsValid && p.Pawn?.LifeState == (byte)LifeState_t.LIFE_ALIVE);
-    }
+    public IEnumerable<IPlayer> GetBots() => Collect(true, -1, false);
 
-    public IEnumerable<IPlayer> GetCT()
-    {
-        return GetAllPlayers().Where(p => p.IsValid && p.Pawn?.TeamNum == (int)Team.CT);
-    }
+    public IEnumerable<IPlayer> GetAlive() => Collect(false, -1, true);
 
-    public IEnumerable<IPlayer> GetT()
-    {
-        return GetAllPlayers().Where(p => p.IsValid && p.Pawn?.TeamNum == (int)Team.T);
-    }
+    public IEnumerable<IPlayer> GetCT() => Collect(false, (int)Team.CT, false);
 
-    public IEnumerable<IPlayer> GetSpectators()
-    {
-        return GetAllPlayers().Where(p => p.IsValid && p.Pawn?.TeamNum == (int)Team.Spectator);
-    }
+    public IEnumerable<IPlayer> GetT() => Collect(false, (int)Team.T, false);
 
-    public IEnumerable<IPlayer> GetInTeam( Team team )
-    {
-        return GetAllPlayers().Where(p => p.IsValid && p.Pawn?.TeamNum == (int)team);
-    }
+    public IEnumerable<IPlayer> GetSpectators() => Collect(false, (int)Team.Spectator, false);
 
-    public IEnumerable<IPlayer> GetTAlive()
-    {
-        return GetAllPlayers().Where(p =>
-            p.IsValid && p.Pawn?.TeamNum == (int)Team.T && p.Pawn?.LifeState == (byte)LifeState_t.LIFE_ALIVE);
-    }
+    public IEnumerable<IPlayer> GetInTeam( Team team ) => Collect(false, (int)team, false);
 
-    public IEnumerable<IPlayer> GetCTAlive()
-    {
-        return GetAllPlayers().Where(p =>
-            p.IsValid && p.Pawn?.TeamNum == (int)Team.CT && p.Pawn?.LifeState == (byte)LifeState_t.LIFE_ALIVE);
-    }
+    public IEnumerable<IPlayer> GetTAlive() => Collect(false, (int)Team.T, true);
+
+    public IEnumerable<IPlayer> GetCTAlive() => Collect(false, (int)Team.CT, true);
 
     public void SendMessage( MessageType kind, string message, int htmlDuration = 5000 )
     {

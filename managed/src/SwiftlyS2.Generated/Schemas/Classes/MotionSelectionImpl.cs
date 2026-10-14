@@ -16,66 +16,66 @@ internal partial class MotionSelectionImpl : SchemaClass, MotionSelection
 {
     public MotionSelectionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ConfigIndexOffset;
+    private static nint _ConfigIndexOffset = -1;
     private NetVarConfigIndexImpl? _ConfigIndexInstance;
 
     public NetVarConfigIndex ConfigIndex
     {
         get
         {
-            _ConfigIndexOffset = _ConfigIndexOffset ?? Schema.GetOffset(0x6004D4E3636A4289);
+            if (_ConfigIndexOffset == -1) _ConfigIndexOffset = Schema.GetOffset(0x6004D4E3636A4289);
             var instance = _ConfigIndexInstance ??= new NetVarConfigIndexImpl(0);
-            instance.DangerousSetHandle(_Handle + _ConfigIndexOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ConfigIndexOffset);
             return instance;
         }
     }
-    private static nint? _CycleZeroTimeOffset;
+    private static nint _CycleZeroTimeOffset = -1;
     private SchemaUntypedField? _CycleZeroTimeInstance;
 
     public SchemaUntypedField CycleZeroTime
     {
         get
         {
-            _CycleZeroTimeOffset = _CycleZeroTimeOffset ?? Schema.GetOffset(0x6004D4E340321698);
+            if (_CycleZeroTimeOffset == -1) _CycleZeroTimeOffset = Schema.GetOffset(0x6004D4E340321698);
             var instance = _CycleZeroTimeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CycleZeroTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CycleZeroTimeOffset);
             return instance;
         }
     }
-    private static nint? _PlaybackSpeedOffset;
+    private static nint _PlaybackSpeedOffset = -1;
     private SchemaUntypedField? _PlaybackSpeedInstance;
 
     public SchemaUntypedField PlaybackSpeed
     {
         get
         {
-            _PlaybackSpeedOffset = _PlaybackSpeedOffset ?? Schema.GetOffset(0x6004D4E3FA2B402D);
+            if (_PlaybackSpeedOffset == -1) _PlaybackSpeedOffset = Schema.GetOffset(0x6004D4E3FA2B402D);
             var instance = _PlaybackSpeedInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PlaybackSpeedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PlaybackSpeedOffset);
             return instance;
         }
     }
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
     private SchemaUntypedField? _StartTimeInstance;
 
     public SchemaUntypedField StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x6004D4E367FE9DC4);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x6004D4E367FE9DC4);
             var instance = _StartTimeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
             return instance;
         }
     }
-    private static nint? _SampleOffset;
+    private static nint _SampleOffset = -1;
 
     public ref int Sample
     {
         get
         {
-            _SampleOffset = _SampleOffset ?? Schema.GetOffset(0x6004D4E3BAD1917B);
-            return ref _Handle.AsRef<int>(_SampleOffset!.Value);
+            if (_SampleOffset == -1) _SampleOffset = Schema.GetOffset(0x6004D4E3BAD1917B);
+            return ref _Handle.AsRef<int>(_SampleOffset);
         }
     }
 

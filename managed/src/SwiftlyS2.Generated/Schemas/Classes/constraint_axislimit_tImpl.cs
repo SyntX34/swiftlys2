@@ -16,44 +16,44 @@ internal partial class constraint_axislimit_tImpl : SchemaClass, constraint_axis
 {
     public constraint_axislimit_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinRotationOffset;
+    private static nint _MinRotationOffset = -1;
 
     public ref float MinRotation
     {
         get
         {
-            _MinRotationOffset = _MinRotationOffset ?? Schema.GetOffset(0x610A06522A8C970B);
-            return ref _Handle.AsRef<float>(_MinRotationOffset!.Value);
+            if (_MinRotationOffset == -1) _MinRotationOffset = Schema.GetOffset(0x610A06522A8C970B);
+            return ref _Handle.AsRef<float>(_MinRotationOffset);
         }
     }
-    private static nint? _MaxRotationOffset;
+    private static nint _MaxRotationOffset = -1;
 
     public ref float MaxRotation
     {
         get
         {
-            _MaxRotationOffset = _MaxRotationOffset ?? Schema.GetOffset(0x610A0652FEB73D49);
-            return ref _Handle.AsRef<float>(_MaxRotationOffset!.Value);
+            if (_MaxRotationOffset == -1) _MaxRotationOffset = Schema.GetOffset(0x610A0652FEB73D49);
+            return ref _Handle.AsRef<float>(_MaxRotationOffset);
         }
     }
-    private static nint? _MotorTargetAngSpeedOffset;
+    private static nint _MotorTargetAngSpeedOffset = -1;
 
     public ref float MotorTargetAngSpeed
     {
         get
         {
-            _MotorTargetAngSpeedOffset = _MotorTargetAngSpeedOffset ?? Schema.GetOffset(0x610A0652C783A98E);
-            return ref _Handle.AsRef<float>(_MotorTargetAngSpeedOffset!.Value);
+            if (_MotorTargetAngSpeedOffset == -1) _MotorTargetAngSpeedOffset = Schema.GetOffset(0x610A0652C783A98E);
+            return ref _Handle.AsRef<float>(_MotorTargetAngSpeedOffset);
         }
     }
-    private static nint? _MotorMaxTorqueOffset;
+    private static nint _MotorMaxTorqueOffset = -1;
 
     public ref float MotorMaxTorque
     {
         get
         {
-            _MotorMaxTorqueOffset = _MotorMaxTorqueOffset ?? Schema.GetOffset(0x610A0652808C4A00);
-            return ref _Handle.AsRef<float>(_MotorMaxTorqueOffset!.Value);
+            if (_MotorMaxTorqueOffset == -1) _MotorMaxTorqueOffset = Schema.GetOffset(0x610A0652808C4A00);
+            return ref _Handle.AsRef<float>(_MotorMaxTorqueOffset);
         }
     }
 

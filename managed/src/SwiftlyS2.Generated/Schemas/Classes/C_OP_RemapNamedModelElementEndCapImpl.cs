@@ -16,79 +16,79 @@ internal partial class C_OP_RemapNamedModelElementEndCapImpl : CParticleFunction
 {
     public C_OP_RemapNamedModelElementEndCapImpl(nint handle) : base(handle) { }
 
-    private static nint? _ModelOffset;
+    private static nint _ModelOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> Model
     {
         get
         {
-            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0xC434ECD3E100C814);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+            if (_ModelOffset == -1) _ModelOffset = Schema.GetOffset(0xC434ECD3E100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset);
         }
     }
-    private static nint? _InNamesOffset;
+    private static nint _InNamesOffset = -1;
 
     public ref CUtlVector<CUtlString> InNames
     {
         get
         {
-            _InNamesOffset = _InNamesOffset ?? Schema.GetOffset(0xC434ECD3C6BEF30A);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InNamesOffset!.Value);
+            if (_InNamesOffset == -1) _InNamesOffset = Schema.GetOffset(0xC434ECD3C6BEF30A);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InNamesOffset);
         }
     }
-    private static nint? _OutNamesOffset;
+    private static nint _OutNamesOffset = -1;
 
     public ref CUtlVector<CUtlString> OutNames
     {
         get
         {
-            _OutNamesOffset = _OutNamesOffset ?? Schema.GetOffset(0xC434ECD34AEE2CFD);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OutNamesOffset!.Value);
+            if (_OutNamesOffset == -1) _OutNamesOffset = Schema.GetOffset(0xC434ECD34AEE2CFD);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OutNamesOffset);
         }
     }
-    private static nint? _FallbackNamesOffset;
+    private static nint _FallbackNamesOffset = -1;
 
     public ref CUtlVector<CUtlString> FallbackNames
     {
         get
         {
-            _FallbackNamesOffset = _FallbackNamesOffset ?? Schema.GetOffset(0xC434ECD35C686169);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_FallbackNamesOffset!.Value);
+            if (_FallbackNamesOffset == -1) _FallbackNamesOffset = Schema.GetOffset(0xC434ECD35C686169);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_FallbackNamesOffset);
         }
     }
-    private static nint? _ModelFromRendererOffset;
+    private static nint _ModelFromRendererOffset = -1;
 
     public ref bool ModelFromRenderer
     {
         get
         {
-            _ModelFromRendererOffset = _ModelFromRendererOffset ?? Schema.GetOffset(0xC434ECD3AEBA1F25);
-            return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
+            if (_ModelFromRendererOffset == -1) _ModelFromRendererOffset = Schema.GetOffset(0xC434ECD3AEBA1F25);
+            return ref _Handle.AsRef<bool>(_ModelFromRendererOffset);
         }
     }
-    private static nint? _FieldInputOffset;
+    private static nint _FieldInputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldInputInstance;
 
     public ParticleAttributeIndex_t FieldInput
     {
         get
         {
-            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0xC434ECD3AE775669);
+            if (_FieldInputOffset == -1) _FieldInputOffset = Schema.GetOffset(0xC434ECD3AE775669);
             var instance = _FieldInputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldInputOffset);
             return instance;
         }
     }
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xC434ECD3E5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xC434ECD3E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }

@@ -16,92 +16,92 @@ internal partial class C_OP_ConstrainDistanceToPathImpl : CParticleFunctionConst
 {
     public C_OP_ConstrainDistanceToPathImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinDistanceOffset;
+    private static nint _MinDistanceOffset = -1;
 
     public ref float MinDistance
     {
         get
         {
-            _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0x8146F787F016B7AC);
-            return ref _Handle.AsRef<float>(_MinDistanceOffset!.Value);
+            if (_MinDistanceOffset == -1) _MinDistanceOffset = Schema.GetOffset(0x8146F787F016B7AC);
+            return ref _Handle.AsRef<float>(_MinDistanceOffset);
         }
     }
-    private static nint? _MaxDistance0Offset;
+    private static nint _MaxDistance0Offset = -1;
 
     public ref float MaxDistance0
     {
         get
         {
-            _MaxDistance0Offset = _MaxDistance0Offset ?? Schema.GetOffset(0x8146F7876FFBC6F0);
-            return ref _Handle.AsRef<float>(_MaxDistance0Offset!.Value);
+            if (_MaxDistance0Offset == -1) _MaxDistance0Offset = Schema.GetOffset(0x8146F7876FFBC6F0);
+            return ref _Handle.AsRef<float>(_MaxDistance0Offset);
         }
     }
-    private static nint? _MaxDistanceMidOffset;
+    private static nint _MaxDistanceMidOffset = -1;
 
     public ref float MaxDistanceMid
     {
         get
         {
-            _MaxDistanceMidOffset = _MaxDistanceMidOffset ?? Schema.GetOffset(0x8146F7872D2B1E5A);
-            return ref _Handle.AsRef<float>(_MaxDistanceMidOffset!.Value);
+            if (_MaxDistanceMidOffset == -1) _MaxDistanceMidOffset = Schema.GetOffset(0x8146F7872D2B1E5A);
+            return ref _Handle.AsRef<float>(_MaxDistanceMidOffset);
         }
     }
-    private static nint? _MaxDistance1Offset;
+    private static nint _MaxDistance1Offset = -1;
 
     public ref float MaxDistance1
     {
         get
         {
-            _MaxDistance1Offset = _MaxDistance1Offset ?? Schema.GetOffset(0x8146F78770FBC883);
-            return ref _Handle.AsRef<float>(_MaxDistance1Offset!.Value);
+            if (_MaxDistance1Offset == -1) _MaxDistance1Offset = Schema.GetOffset(0x8146F78770FBC883);
+            return ref _Handle.AsRef<float>(_MaxDistance1Offset);
         }
     }
-    private static nint? _PathParametersOffset;
+    private static nint _PathParametersOffset = -1;
     private CPathParametersImpl? _PathParametersInstance;
 
     public CPathParameters PathParameters
     {
         get
         {
-            _PathParametersOffset = _PathParametersOffset ?? Schema.GetOffset(0x8146F7878C111646);
+            if (_PathParametersOffset == -1) _PathParametersOffset = Schema.GetOffset(0x8146F7878C111646);
             var instance = _PathParametersInstance ??= new CPathParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _PathParametersOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PathParametersOffset);
             return instance;
         }
     }
-    private static nint? _TravelTimeOffset;
+    private static nint _TravelTimeOffset = -1;
 
     public ref float TravelTime
     {
         get
         {
-            _TravelTimeOffset = _TravelTimeOffset ?? Schema.GetOffset(0x8146F7870228B67A);
-            return ref _Handle.AsRef<float>(_TravelTimeOffset!.Value);
+            if (_TravelTimeOffset == -1) _TravelTimeOffset = Schema.GetOffset(0x8146F7870228B67A);
+            return ref _Handle.AsRef<float>(_TravelTimeOffset);
         }
     }
-    private static nint? _FieldScaleOffset;
+    private static nint _FieldScaleOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldScaleInstance;
 
     public ParticleAttributeIndex_t FieldScale
     {
         get
         {
-            _FieldScaleOffset = _FieldScaleOffset ?? Schema.GetOffset(0x8146F787BE94CE93);
+            if (_FieldScaleOffset == -1) _FieldScaleOffset = Schema.GetOffset(0x8146F787BE94CE93);
             var instance = _FieldScaleInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldScaleOffset);
             return instance;
         }
     }
-    private static nint? _ManualTFieldOffset;
+    private static nint _ManualTFieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _ManualTFieldInstance;
 
     public ParticleAttributeIndex_t ManualTField
     {
         get
         {
-            _ManualTFieldOffset = _ManualTFieldOffset ?? Schema.GetOffset(0x8146F7871190C51B);
+            if (_ManualTFieldOffset == -1) _ManualTFieldOffset = Schema.GetOffset(0x8146F7871190C51B);
             var instance = _ManualTFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ManualTFieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ManualTFieldOffset);
             return instance;
         }
     }

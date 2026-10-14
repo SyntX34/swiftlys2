@@ -16,186 +16,186 @@ internal partial class C_PathParticleRopeImpl : C_BaseEntityImpl, C_PathParticle
 {
     public C_PathParticleRopeImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartActiveOffset;
+    private static nint _StartActiveOffset = -1;
 
     public ref bool StartActive
     {
         get
         {
-            _StartActiveOffset = _StartActiveOffset ?? Schema.GetOffset(0xA27E5B6E953CBC21);
-            return ref _Handle.AsRef<bool>(_StartActiveOffset!.Value);
+            if (_StartActiveOffset == -1) _StartActiveOffset = Schema.GetOffset(0xA27E5B6E953CBC21);
+            return ref _Handle.AsRef<bool>(_StartActiveOffset);
         }
     }
-    private static nint? _MaxSimulationTimeOffset;
+    private static nint _MaxSimulationTimeOffset = -1;
 
     public ref float MaxSimulationTime
     {
         get
         {
-            _MaxSimulationTimeOffset = _MaxSimulationTimeOffset ?? Schema.GetOffset(0xA27E5B6E80F036E5);
-            return ref _Handle.AsRef<float>(_MaxSimulationTimeOffset!.Value);
+            if (_MaxSimulationTimeOffset == -1) _MaxSimulationTimeOffset = Schema.GetOffset(0xA27E5B6E80F036E5);
+            return ref _Handle.AsRef<float>(_MaxSimulationTimeOffset);
         }
     }
-    private static nint? _EffectNameOffset;
+    private static nint _EffectNameOffset = -1;
 
     public string EffectName
     {
         get
         {
-            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0xA27E5B6E82D2BFC7);
-            return Schema.GetString(_Handle.Read<nint>(_EffectNameOffset!.Value));
+            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0xA27E5B6E82D2BFC7);
+            return Schema.GetString(_Handle.Read<nint>(_EffectNameOffset));
         }
         set
         {
-            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0xA27E5B6E82D2BFC7);
-            Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
+            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0xA27E5B6E82D2BFC7);
+            Schema.SetString(_Handle, _EffectNameOffset, value);
         }
     }
-    private static nint? _PathNodes_NameOffset;
+    private static nint _PathNodes_NameOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> PathNodes_Name
     {
         get
         {
-            _PathNodes_NameOffset = _PathNodes_NameOffset ?? Schema.GetOffset(0xA27E5B6EFFAFA92F);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_PathNodes_NameOffset!.Value);
+            if (_PathNodes_NameOffset == -1) _PathNodes_NameOffset = Schema.GetOffset(0xA27E5B6EFFAFA92F);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_PathNodes_NameOffset);
         }
     }
-    private static nint? _ParticleSpacingOffset;
+    private static nint _ParticleSpacingOffset = -1;
 
     public ref float ParticleSpacing
     {
         get
         {
-            _ParticleSpacingOffset = _ParticleSpacingOffset ?? Schema.GetOffset(0xA27E5B6E66CCF542);
-            return ref _Handle.AsRef<float>(_ParticleSpacingOffset!.Value);
+            if (_ParticleSpacingOffset == -1) _ParticleSpacingOffset = Schema.GetOffset(0xA27E5B6E66CCF542);
+            return ref _Handle.AsRef<float>(_ParticleSpacingOffset);
         }
     }
-    private static nint? _SlackOffset;
+    private static nint _SlackOffset = -1;
 
     public ref float Slack
     {
         get
         {
-            _SlackOffset = _SlackOffset ?? Schema.GetOffset(0xA27E5B6E183285C9);
-            return ref _Handle.AsRef<float>(_SlackOffset!.Value);
+            if (_SlackOffset == -1) _SlackOffset = Schema.GetOffset(0xA27E5B6E183285C9);
+            return ref _Handle.AsRef<float>(_SlackOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xA27E5B6E5ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0xA27E5B6E5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _ColorTintOffset;
+    private static nint _ColorTintOffset = -1;
 
     public ref Color ColorTint
     {
         get
         {
-            _ColorTintOffset = _ColorTintOffset ?? Schema.GetOffset(0xA27E5B6ED55CDDFD);
-            return ref _Handle.AsRef<Color>(_ColorTintOffset!.Value);
+            if (_ColorTintOffset == -1) _ColorTintOffset = Schema.GetOffset(0xA27E5B6ED55CDDFD);
+            return ref _Handle.AsRef<Color>(_ColorTintOffset);
         }
     }
-    private static nint? _EffectStateOffset;
+    private static nint _EffectStateOffset = -1;
 
     public ref int EffectState
     {
         get
         {
-            _EffectStateOffset = _EffectStateOffset ?? Schema.GetOffset(0xA27E5B6E4188A2AD);
-            return ref _Handle.AsRef<int>(_EffectStateOffset!.Value);
+            if (_EffectStateOffset == -1) _EffectStateOffset = Schema.GetOffset(0xA27E5B6E4188A2AD);
+            return ref _Handle.AsRef<int>(_EffectStateOffset);
         }
     }
-    private static nint? _EffectIndexOffset;
+    private static nint _EffectIndexOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> EffectIndex
     {
         get
         {
-            _EffectIndexOffset = _EffectIndexOffset ?? Schema.GetOffset(0xA27E5B6E3C93DC73);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectIndexOffset!.Value);
+            if (_EffectIndexOffset == -1) _EffectIndexOffset = Schema.GetOffset(0xA27E5B6E3C93DC73);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectIndexOffset);
         }
     }
-    private static nint? _PathNodes_PositionOffset;
+    private static nint _PathNodes_PositionOffset = -1;
     private SchemaUntypedField? _PathNodes_PositionInstance;
 
     public SchemaUntypedField PathNodes_Position
     {
         get
         {
-            _PathNodes_PositionOffset = _PathNodes_PositionOffset ?? Schema.GetOffset(0xA27E5B6EC84253C7);
+            if (_PathNodes_PositionOffset == -1) _PathNodes_PositionOffset = Schema.GetOffset(0xA27E5B6EC84253C7);
             var instance = _PathNodes_PositionInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PathNodes_PositionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PathNodes_PositionOffset);
             return instance;
         }
     }
-    private static nint? _PathNodes_TangentInOffset;
+    private static nint _PathNodes_TangentInOffset = -1;
     private SchemaUntypedField? _PathNodes_TangentInInstance;
 
     public SchemaUntypedField PathNodes_TangentIn
     {
         get
         {
-            _PathNodes_TangentInOffset = _PathNodes_TangentInOffset ?? Schema.GetOffset(0xA27E5B6E4CEA7F8E);
+            if (_PathNodes_TangentInOffset == -1) _PathNodes_TangentInOffset = Schema.GetOffset(0xA27E5B6E4CEA7F8E);
             var instance = _PathNodes_TangentInInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PathNodes_TangentInOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PathNodes_TangentInOffset);
             return instance;
         }
     }
-    private static nint? _PathNodes_TangentOutOffset;
+    private static nint _PathNodes_TangentOutOffset = -1;
     private SchemaUntypedField? _PathNodes_TangentOutInstance;
 
     public SchemaUntypedField PathNodes_TangentOut
     {
         get
         {
-            _PathNodes_TangentOutOffset = _PathNodes_TangentOutOffset ?? Schema.GetOffset(0xA27E5B6E218FA6AF);
+            if (_PathNodes_TangentOutOffset == -1) _PathNodes_TangentOutOffset = Schema.GetOffset(0xA27E5B6E218FA6AF);
             var instance = _PathNodes_TangentOutInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PathNodes_TangentOutOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PathNodes_TangentOutOffset);
             return instance;
         }
     }
-    private static nint? _PathNodes_ColorOffset;
+    private static nint _PathNodes_ColorOffset = -1;
     private SchemaUntypedField? _PathNodes_ColorInstance;
 
     public SchemaUntypedField PathNodes_Color
     {
         get
         {
-            _PathNodes_ColorOffset = _PathNodes_ColorOffset ?? Schema.GetOffset(0xA27E5B6E6DB8C1DB);
+            if (_PathNodes_ColorOffset == -1) _PathNodes_ColorOffset = Schema.GetOffset(0xA27E5B6E6DB8C1DB);
             var instance = _PathNodes_ColorInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PathNodes_ColorOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PathNodes_ColorOffset);
             return instance;
         }
     }
-    private static nint? _PathNodes_PinEnabledOffset;
+    private static nint _PathNodes_PinEnabledOffset = -1;
     private SchemaUntypedField? _PathNodes_PinEnabledInstance;
 
     public SchemaUntypedField PathNodes_PinEnabled
     {
         get
         {
-            _PathNodes_PinEnabledOffset = _PathNodes_PinEnabledOffset ?? Schema.GetOffset(0xA27E5B6E830E8AD8);
+            if (_PathNodes_PinEnabledOffset == -1) _PathNodes_PinEnabledOffset = Schema.GetOffset(0xA27E5B6E830E8AD8);
             var instance = _PathNodes_PinEnabledInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PathNodes_PinEnabledOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PathNodes_PinEnabledOffset);
             return instance;
         }
     }
-    private static nint? _PathNodes_RadiusScaleOffset;
+    private static nint _PathNodes_RadiusScaleOffset = -1;
     private SchemaUntypedField? _PathNodes_RadiusScaleInstance;
 
     public SchemaUntypedField PathNodes_RadiusScale
     {
         get
         {
-            _PathNodes_RadiusScaleOffset = _PathNodes_RadiusScaleOffset ?? Schema.GetOffset(0xA27E5B6E593CB340);
+            if (_PathNodes_RadiusScaleOffset == -1) _PathNodes_RadiusScaleOffset = Schema.GetOffset(0xA27E5B6E593CB340);
             var instance = _PathNodes_RadiusScaleInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PathNodes_RadiusScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PathNodes_RadiusScaleOffset);
             return instance;
         }
     }

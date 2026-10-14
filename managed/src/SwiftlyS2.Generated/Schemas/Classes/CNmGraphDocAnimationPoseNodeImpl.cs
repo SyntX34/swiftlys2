@@ -16,37 +16,37 @@ internal partial class CNmGraphDocAnimationPoseNodeImpl : CNmGraphDocVariationDa
 {
     public CNmGraphDocAnimationPoseNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputTimeRemapRangeOffset;
+    private static nint _InputTimeRemapRangeOffset = -1;
     private SchemaUntypedField? _InputTimeRemapRangeInstance;
 
     public SchemaUntypedField InputTimeRemapRange
     {
         get
         {
-            _InputTimeRemapRangeOffset = _InputTimeRemapRangeOffset ?? Schema.GetOffset(0xEEA67144E53BDBD4);
+            if (_InputTimeRemapRangeOffset == -1) _InputTimeRemapRangeOffset = Schema.GetOffset(0xEEA67144E53BDBD4);
             var instance = _InputTimeRemapRangeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _InputTimeRemapRangeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputTimeRemapRangeOffset);
             return instance;
         }
     }
-    private static nint? _FixedTimeValueOffset;
+    private static nint _FixedTimeValueOffset = -1;
 
     public ref float FixedTimeValue
     {
         get
         {
-            _FixedTimeValueOffset = _FixedTimeValueOffset ?? Schema.GetOffset(0xEEA67144EB4CCC01);
-            return ref _Handle.AsRef<float>(_FixedTimeValueOffset!.Value);
+            if (_FixedTimeValueOffset == -1) _FixedTimeValueOffset = Schema.GetOffset(0xEEA67144EB4CCC01);
+            return ref _Handle.AsRef<float>(_FixedTimeValueOffset);
         }
     }
-    private static nint? _UseFramesAsInputOffset;
+    private static nint _UseFramesAsInputOffset = -1;
 
     public ref bool UseFramesAsInput
     {
         get
         {
-            _UseFramesAsInputOffset = _UseFramesAsInputOffset ?? Schema.GetOffset(0xEEA67144C9210EC6);
-            return ref _Handle.AsRef<bool>(_UseFramesAsInputOffset!.Value);
+            if (_UseFramesAsInputOffset == -1) _UseFramesAsInputOffset = Schema.GetOffset(0xEEA67144C9210EC6);
+            return ref _Handle.AsRef<bool>(_UseFramesAsInputOffset);
         }
     }
 

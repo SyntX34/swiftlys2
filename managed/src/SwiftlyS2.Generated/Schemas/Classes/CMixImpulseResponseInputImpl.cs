@@ -16,19 +16,19 @@ internal partial class CMixImpulseResponseInputImpl : CMixPropertyBaseImpl, CMix
 {
     public CMixImpulseResponseInputImpl(nint handle) : base(handle) { }
 
-    private static nint? _DefaultValueOffset;
+    private static nint _DefaultValueOffset = -1;
 
     public string DefaultValue
     {
         get
         {
-            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x6B7AAAB8BBE0341F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DefaultValueOffset!.Value));
+            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x6B7AAAB8BBE0341F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DefaultValueOffset));
         }
         set
         {
-            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x6B7AAAB8BBE0341F);
-            Schema.SetCUtlString(_Handle, _DefaultValueOffset!.Value, value);
+            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x6B7AAAB8BBE0341F);
+            Schema.SetCUtlString(_Handle, _DefaultValueOffset, value);
         }
     }
 

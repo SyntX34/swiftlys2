@@ -16,69 +16,69 @@ internal partial class CompMatMutatorCondition_tImpl : SchemaClass, CompMatMutat
 {
     public CompMatMutatorCondition_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _MutatorConditionOffset;
+    private static nint _MutatorConditionOffset = -1;
 
     public ref CompMatPropertyMutatorConditionType_t MutatorCondition
     {
         get
         {
-            _MutatorConditionOffset = _MutatorConditionOffset ?? Schema.GetOffset(0xF34FC6BC15498DCE);
-            return ref _Handle.AsRef<CompMatPropertyMutatorConditionType_t>(_MutatorConditionOffset!.Value);
+            if (_MutatorConditionOffset == -1) _MutatorConditionOffset = Schema.GetOffset(0xF34FC6BC15498DCE);
+            return ref _Handle.AsRef<CompMatPropertyMutatorConditionType_t>(_MutatorConditionOffset);
         }
     }
-    private static nint? _StrMutatorConditionContainerNameOffset;
+    private static nint _StrMutatorConditionContainerNameOffset = -1;
 
     public string StrMutatorConditionContainerName
     {
         get
         {
-            _StrMutatorConditionContainerNameOffset = _StrMutatorConditionContainerNameOffset ?? Schema.GetOffset(0xF34FC6BC0DEE1B79);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMutatorConditionContainerNameOffset!.Value));
+            if (_StrMutatorConditionContainerNameOffset == -1) _StrMutatorConditionContainerNameOffset = Schema.GetOffset(0xF34FC6BC0DEE1B79);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMutatorConditionContainerNameOffset));
         }
         set
         {
-            _StrMutatorConditionContainerNameOffset = _StrMutatorConditionContainerNameOffset ?? Schema.GetOffset(0xF34FC6BC0DEE1B79);
-            Schema.SetCUtlString(_Handle, _StrMutatorConditionContainerNameOffset!.Value, value);
+            if (_StrMutatorConditionContainerNameOffset == -1) _StrMutatorConditionContainerNameOffset = Schema.GetOffset(0xF34FC6BC0DEE1B79);
+            Schema.SetCUtlString(_Handle, _StrMutatorConditionContainerNameOffset, value);
         }
     }
-    private static nint? _StrMutatorConditionContainerVarNameOffset;
+    private static nint _StrMutatorConditionContainerVarNameOffset = -1;
 
     public string StrMutatorConditionContainerVarName
     {
         get
         {
-            _StrMutatorConditionContainerVarNameOffset = _StrMutatorConditionContainerVarNameOffset ?? Schema.GetOffset(0xF34FC6BCE96A00DC);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMutatorConditionContainerVarNameOffset!.Value));
+            if (_StrMutatorConditionContainerVarNameOffset == -1) _StrMutatorConditionContainerVarNameOffset = Schema.GetOffset(0xF34FC6BCE96A00DC);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMutatorConditionContainerVarNameOffset));
         }
         set
         {
-            _StrMutatorConditionContainerVarNameOffset = _StrMutatorConditionContainerVarNameOffset ?? Schema.GetOffset(0xF34FC6BCE96A00DC);
-            Schema.SetCUtlString(_Handle, _StrMutatorConditionContainerVarNameOffset!.Value, value);
+            if (_StrMutatorConditionContainerVarNameOffset == -1) _StrMutatorConditionContainerVarNameOffset = Schema.GetOffset(0xF34FC6BCE96A00DC);
+            Schema.SetCUtlString(_Handle, _StrMutatorConditionContainerVarNameOffset, value);
         }
     }
-    private static nint? _StrMutatorConditionContainerVarValueOffset;
+    private static nint _StrMutatorConditionContainerVarValueOffset = -1;
 
     public string StrMutatorConditionContainerVarValue
     {
         get
         {
-            _StrMutatorConditionContainerVarValueOffset = _StrMutatorConditionContainerVarValueOffset ?? Schema.GetOffset(0xF34FC6BC8F774E14);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMutatorConditionContainerVarValueOffset!.Value));
+            if (_StrMutatorConditionContainerVarValueOffset == -1) _StrMutatorConditionContainerVarValueOffset = Schema.GetOffset(0xF34FC6BC8F774E14);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMutatorConditionContainerVarValueOffset));
         }
         set
         {
-            _StrMutatorConditionContainerVarValueOffset = _StrMutatorConditionContainerVarValueOffset ?? Schema.GetOffset(0xF34FC6BC8F774E14);
-            Schema.SetCUtlString(_Handle, _StrMutatorConditionContainerVarValueOffset!.Value, value);
+            if (_StrMutatorConditionContainerVarValueOffset == -1) _StrMutatorConditionContainerVarValueOffset = Schema.GetOffset(0xF34FC6BC8F774E14);
+            Schema.SetCUtlString(_Handle, _StrMutatorConditionContainerVarValueOffset, value);
         }
     }
-    private static nint? _PassWhenTrueOffset;
+    private static nint _PassWhenTrueOffset = -1;
 
     public ref bool PassWhenTrue
     {
         get
         {
-            _PassWhenTrueOffset = _PassWhenTrueOffset ?? Schema.GetOffset(0xF34FC6BC5B723AC8);
-            return ref _Handle.AsRef<bool>(_PassWhenTrueOffset!.Value);
+            if (_PassWhenTrueOffset == -1) _PassWhenTrueOffset = Schema.GetOffset(0xF34FC6BC5B723AC8);
+            return ref _Handle.AsRef<bool>(_PassWhenTrueOffset);
         }
     }
 

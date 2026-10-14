@@ -16,65 +16,65 @@ internal partial class C_OP_ReadFromNeighboringParticleImpl : CParticleFunctionO
 {
     public C_OP_ReadFromNeighboringParticleImpl(nint handle) : base(handle) { }
 
-    private static nint? _FieldInputOffset;
+    private static nint _FieldInputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldInputInstance;
 
     public ParticleAttributeIndex_t FieldInput
     {
         get
         {
-            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0xDC4AE427AE775669);
+            if (_FieldInputOffset == -1) _FieldInputOffset = Schema.GetOffset(0xDC4AE427AE775669);
             var instance = _FieldInputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldInputOffset);
             return instance;
         }
     }
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xDC4AE427E5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xDC4AE427E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _IncrementOffset;
+    private static nint _IncrementOffset = -1;
 
     public ref int Increment
     {
         get
         {
-            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0xDC4AE4272359F182);
-            return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+            if (_IncrementOffset == -1) _IncrementOffset = Schema.GetOffset(0xDC4AE4272359F182);
+            return ref _Handle.AsRef<int>(_IncrementOffset);
         }
     }
-    private static nint? _DistanceCheckOffset;
+    private static nint _DistanceCheckOffset = -1;
     private CPerParticleFloatInputImpl? _DistanceCheckInstance;
 
     public CPerParticleFloatInput DistanceCheck
     {
         get
         {
-            _DistanceCheckOffset = _DistanceCheckOffset ?? Schema.GetOffset(0xDC4AE4272F031DC2);
+            if (_DistanceCheckOffset == -1) _DistanceCheckOffset = Schema.GetOffset(0xDC4AE4272F031DC2);
             var instance = _DistanceCheckInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DistanceCheckOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DistanceCheckOffset);
             return instance;
         }
     }
-    private static nint? _InterpolationOffset;
+    private static nint _InterpolationOffset = -1;
     private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
-            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0xDC4AE427CF55B987);
+            if (_InterpolationOffset == -1) _InterpolationOffset = Schema.GetOffset(0xDC4AE427CF55B987);
             var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset);
             return instance;
         }
     }

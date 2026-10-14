@@ -16,19 +16,19 @@ internal partial class CModelConfigElement_SetMaterialGroupOnAttachedModelsImpl 
 {
     public CModelConfigElement_SetMaterialGroupOnAttachedModelsImpl(nint handle) : base(handle) { }
 
-    private static nint? _MaterialGroupNameOffset;
+    private static nint _MaterialGroupNameOffset = -1;
 
     public string MaterialGroupName
     {
         get
         {
-            _MaterialGroupNameOffset = _MaterialGroupNameOffset ?? Schema.GetOffset(0xAD67B617C2DD3048);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_MaterialGroupNameOffset!.Value));
+            if (_MaterialGroupNameOffset == -1) _MaterialGroupNameOffset = Schema.GetOffset(0xAD67B617C2DD3048);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_MaterialGroupNameOffset));
         }
         set
         {
-            _MaterialGroupNameOffset = _MaterialGroupNameOffset ?? Schema.GetOffset(0xAD67B617C2DD3048);
-            Schema.SetCUtlString(_Handle, _MaterialGroupNameOffset!.Value, value);
+            if (_MaterialGroupNameOffset == -1) _MaterialGroupNameOffset = Schema.GetOffset(0xAD67B617C2DD3048);
+            Schema.SetCUtlString(_Handle, _MaterialGroupNameOffset, value);
         }
     }
 

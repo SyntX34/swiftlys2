@@ -16,54 +16,54 @@ internal partial class ParticleNamedValueSource_tImpl : SchemaClass, ParticleNam
 {
     public ParticleNamedValueSource_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x740B6BEFCAE8A266);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x740B6BEFCAE8A266);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x740B6BEFCAE8A266);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x740B6BEFCAE8A266);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _IsPublicOffset;
+    private static nint _IsPublicOffset = -1;
 
     public ref bool IsPublic
     {
         get
         {
-            _IsPublicOffset = _IsPublicOffset ?? Schema.GetOffset(0x740B6BEFD2D88EB0);
-            return ref _Handle.AsRef<bool>(_IsPublicOffset!.Value);
+            if (_IsPublicOffset == -1) _IsPublicOffset = Schema.GetOffset(0x740B6BEFD2D88EB0);
+            return ref _Handle.AsRef<bool>(_IsPublicOffset);
         }
     }
-    private static nint? _ValueTypeOffset;
+    private static nint _ValueTypeOffset = -1;
     private SchemaUntypedField? _ValueTypeInstance;
 
     public SchemaUntypedField ValueType
     {
         get
         {
-            _ValueTypeOffset = _ValueTypeOffset ?? Schema.GetOffset(0x740B6BEFC2A673CA);
+            if (_ValueTypeOffset == -1) _ValueTypeOffset = Schema.GetOffset(0x740B6BEFC2A673CA);
             var instance = _ValueTypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ValueTypeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ValueTypeOffset);
             return instance;
         }
     }
-    private static nint? _DefaultConfigOffset;
+    private static nint _DefaultConfigOffset = -1;
     private ParticleNamedValueConfiguration_tImpl? _DefaultConfigInstance;
 
     public ParticleNamedValueConfiguration_t DefaultConfig
     {
         get
         {
-            _DefaultConfigOffset = _DefaultConfigOffset ?? Schema.GetOffset(0x740B6BEF05A58128);
+            if (_DefaultConfigOffset == -1) _DefaultConfigOffset = Schema.GetOffset(0x740B6BEF05A58128);
             var instance = _DefaultConfigInstance ??= new ParticleNamedValueConfiguration_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DefaultConfigOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DefaultConfigOffset);
             return instance;
         }
     }

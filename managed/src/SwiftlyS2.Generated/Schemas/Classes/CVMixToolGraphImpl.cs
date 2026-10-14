@@ -16,69 +16,69 @@ internal partial class CVMixToolGraphImpl : SchemaClass, CVMixToolGraph
 {
     public CVMixToolGraphImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x7728F8604D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x7728F8604D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x7728F8604D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x7728F8604D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _GraphOutputChannelsOffset;
+    private static nint _GraphOutputChannelsOffset = -1;
 
     public ref int GraphOutputChannels
     {
         get
         {
-            _GraphOutputChannelsOffset = _GraphOutputChannelsOffset ?? Schema.GetOffset(0x7728F8606476037E);
-            return ref _Handle.AsRef<int>(_GraphOutputChannelsOffset!.Value);
+            if (_GraphOutputChannelsOffset == -1) _GraphOutputChannelsOffset = Schema.GetOffset(0x7728F8606476037E);
+            return ref _Handle.AsRef<int>(_GraphOutputChannelsOffset);
         }
     }
-    private static nint? _IsMainGraphOffset;
+    private static nint _IsMainGraphOffset = -1;
 
     public ref bool IsMainGraph
     {
         get
         {
-            _IsMainGraphOffset = _IsMainGraphOffset ?? Schema.GetOffset(0x7728F86013899EBC);
-            return ref _Handle.AsRef<bool>(_IsMainGraphOffset!.Value);
+            if (_IsMainGraphOffset == -1) _IsMainGraphOffset = Schema.GetOffset(0x7728F86013899EBC);
+            return ref _Handle.AsRef<bool>(_IsMainGraphOffset);
         }
     }
-    private static nint? _PreviewNodeOffset;
+    private static nint _PreviewNodeOffset = -1;
 
     public ref int PreviewNode
     {
         get
         {
-            _PreviewNodeOffset = _PreviewNodeOffset ?? Schema.GetOffset(0x7728F860A7EE24BB);
-            return ref _Handle.AsRef<int>(_PreviewNodeOffset!.Value);
+            if (_PreviewNodeOffset == -1) _PreviewNodeOffset = Schema.GetOffset(0x7728F860A7EE24BB);
+            return ref _Handle.AsRef<int>(_PreviewNodeOffset);
         }
     }
-    private static nint? _EditorNodesOffset;
+    private static nint _EditorNodesOffset = -1;
 
     public ref CUtlVector<CVMixEditorNode> EditorNodes
     {
         get
         {
-            _EditorNodesOffset = _EditorNodesOffset ?? Schema.GetOffset(0x7728F86086FA9835);
-            return ref _Handle.AsRef<CUtlVector<CVMixEditorNode>>(_EditorNodesOffset!.Value);
+            if (_EditorNodesOffset == -1) _EditorNodesOffset = Schema.GetOffset(0x7728F86086FA9835);
+            return ref _Handle.AsRef<CUtlVector<CVMixEditorNode>>(_EditorNodesOffset);
         }
     }
-    private static nint? _EditorEdgesOffset;
+    private static nint _EditorEdgesOffset = -1;
 
     public ref CUtlVector<CVMixEditorEdge> EditorEdges
     {
         get
         {
-            _EditorEdgesOffset = _EditorEdgesOffset ?? Schema.GetOffset(0x7728F860F671261A);
-            return ref _Handle.AsRef<CUtlVector<CVMixEditorEdge>>(_EditorEdgesOffset!.Value);
+            if (_EditorEdgesOffset == -1) _EditorEdgesOffset = Schema.GetOffset(0x7728F860F671261A);
+            return ref _Handle.AsRef<CUtlVector<CVMixEditorEdge>>(_EditorEdgesOffset);
         }
     }
 

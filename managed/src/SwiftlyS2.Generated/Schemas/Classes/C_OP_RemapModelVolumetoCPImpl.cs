@@ -16,114 +16,114 @@ internal partial class C_OP_RemapModelVolumetoCPImpl : CParticleFunctionPreEmiss
 {
     public C_OP_RemapModelVolumetoCPImpl(nint handle) : base(handle) { }
 
-    private static nint? _BBoxTypeOffset;
+    private static nint _BBoxTypeOffset = -1;
 
     public ref BBoxVolumeType_t BBoxType
     {
         get
         {
-            _BBoxTypeOffset = _BBoxTypeOffset ?? Schema.GetOffset(0x5F3AA677780A22F6);
-            return ref _Handle.AsRef<BBoxVolumeType_t>(_BBoxTypeOffset!.Value);
+            if (_BBoxTypeOffset == -1) _BBoxTypeOffset = Schema.GetOffset(0x5F3AA677780A22F6);
+            return ref _Handle.AsRef<BBoxVolumeType_t>(_BBoxTypeOffset);
         }
     }
-    private static nint? _InControlPointNumberOffset;
+    private static nint _InControlPointNumberOffset = -1;
 
     public ref int InControlPointNumber
     {
         get
         {
-            _InControlPointNumberOffset = _InControlPointNumberOffset ?? Schema.GetOffset(0x5F3AA677E7CB99DE);
-            return ref _Handle.AsRef<int>(_InControlPointNumberOffset!.Value);
+            if (_InControlPointNumberOffset == -1) _InControlPointNumberOffset = Schema.GetOffset(0x5F3AA677E7CB99DE);
+            return ref _Handle.AsRef<int>(_InControlPointNumberOffset);
         }
     }
-    private static nint? _OutControlPointNumberOffset;
+    private static nint _OutControlPointNumberOffset = -1;
 
     public ref int OutControlPointNumber
     {
         get
         {
-            _OutControlPointNumberOffset = _OutControlPointNumberOffset ?? Schema.GetOffset(0x5F3AA677D021D73F);
-            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
+            if (_OutControlPointNumberOffset == -1) _OutControlPointNumberOffset = Schema.GetOffset(0x5F3AA677D021D73F);
+            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset);
         }
     }
-    private static nint? _OutControlPointMaxNumberOffset;
+    private static nint _OutControlPointMaxNumberOffset = -1;
 
     public ref int OutControlPointMaxNumber
     {
         get
         {
-            _OutControlPointMaxNumberOffset = _OutControlPointMaxNumberOffset ?? Schema.GetOffset(0x5F3AA677420C1A45);
-            return ref _Handle.AsRef<int>(_OutControlPointMaxNumberOffset!.Value);
+            if (_OutControlPointMaxNumberOffset == -1) _OutControlPointMaxNumberOffset = Schema.GetOffset(0x5F3AA677420C1A45);
+            return ref _Handle.AsRef<int>(_OutControlPointMaxNumberOffset);
         }
     }
-    private static nint? _FieldOffset;
+    private static nint _FieldOffset = -1;
 
     public ref int Field
     {
         get
         {
-            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0x5F3AA677C257B93B);
-            return ref _Handle.AsRef<int>(_FieldOffset!.Value);
+            if (_FieldOffset == -1) _FieldOffset = Schema.GetOffset(0x5F3AA677C257B93B);
+            return ref _Handle.AsRef<int>(_FieldOffset);
         }
     }
-    private static nint? _InputMinOffset;
+    private static nint _InputMinOffset = -1;
 
     public ref float InputMin
     {
         get
         {
-            _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0x5F3AA677E88A0D0F);
-            return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+            if (_InputMinOffset == -1) _InputMinOffset = Schema.GetOffset(0x5F3AA677E88A0D0F);
+            return ref _Handle.AsRef<float>(_InputMinOffset);
         }
     }
-    private static nint? _InputMaxOffset;
+    private static nint _InputMaxOffset = -1;
 
     public ref float InputMax
     {
         get
         {
-            _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0x5F3AA677D6766901);
-            return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+            if (_InputMaxOffset == -1) _InputMaxOffset = Schema.GetOffset(0x5F3AA677D6766901);
+            return ref _Handle.AsRef<float>(_InputMaxOffset);
         }
     }
-    private static nint? _OutputMinOffset;
+    private static nint _OutputMinOffset = -1;
 
     public ref float OutputMin
     {
         get
         {
-            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x5F3AA6775F8D7716);
-            return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+            if (_OutputMinOffset == -1) _OutputMinOffset = Schema.GetOffset(0x5F3AA6775F8D7716);
+            return ref _Handle.AsRef<float>(_OutputMinOffset);
         }
     }
-    private static nint? _OutputMaxOffset;
+    private static nint _OutputMaxOffset = -1;
 
     public ref float OutputMax
     {
         get
         {
-            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x5F3AA67751A0E8C4);
-            return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+            if (_OutputMaxOffset == -1) _OutputMaxOffset = Schema.GetOffset(0x5F3AA67751A0E8C4);
+            return ref _Handle.AsRef<float>(_OutputMaxOffset);
         }
     }
-    private static nint? _BBoxOnlyOffset;
+    private static nint _BBoxOnlyOffset = -1;
 
     public ref bool BBoxOnly
     {
         get
         {
-            _BBoxOnlyOffset = _BBoxOnlyOffset ?? Schema.GetOffset(0x5F3AA67725A324B4);
-            return ref _Handle.AsRef<bool>(_BBoxOnlyOffset!.Value);
+            if (_BBoxOnlyOffset == -1) _BBoxOnlyOffset = Schema.GetOffset(0x5F3AA67725A324B4);
+            return ref _Handle.AsRef<bool>(_BBoxOnlyOffset);
         }
     }
-    private static nint? _CubeRootOffset;
+    private static nint _CubeRootOffset = -1;
 
     public ref bool CubeRoot
     {
         get
         {
-            _CubeRootOffset = _CubeRootOffset ?? Schema.GetOffset(0x5F3AA67717695018);
-            return ref _Handle.AsRef<bool>(_CubeRootOffset!.Value);
+            if (_CubeRootOffset == -1) _CubeRootOffset = Schema.GetOffset(0x5F3AA67717695018);
+            return ref _Handle.AsRef<bool>(_CubeRootOffset);
         }
     }
 

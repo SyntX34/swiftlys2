@@ -16,24 +16,24 @@ internal partial class CnmGraphDocFootIKNodeImpl : CNmGraphDocVariationDataNodeI
 {
     public CnmGraphDocFootIKNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _IsTargetInWorldSpaceOffset;
+    private static nint _IsTargetInWorldSpaceOffset = -1;
 
     public ref bool IsTargetInWorldSpace
     {
         get
         {
-            _IsTargetInWorldSpaceOffset = _IsTargetInWorldSpaceOffset ?? Schema.GetOffset(0x129E9E55F56E0C5);
-            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
+            if (_IsTargetInWorldSpaceOffset == -1) _IsTargetInWorldSpaceOffset = Schema.GetOffset(0x129E9E55F56E0C5);
+            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset);
         }
     }
-    private static nint? _BlendModeOffset;
+    private static nint _BlendModeOffset = -1;
 
     public ref NmIKBlendMode_t BlendMode
     {
         get
         {
-            _BlendModeOffset = _BlendModeOffset ?? Schema.GetOffset(0x129E9E58D5006AB);
-            return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset!.Value);
+            if (_BlendModeOffset == -1) _BlendModeOffset = Schema.GetOffset(0x129E9E58D5006AB);
+            return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset);
         }
     }
 

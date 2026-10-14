@@ -16,144 +16,144 @@ internal partial class C_INIT_CreatePhyllotaxisImpl : CParticleFunctionInitializ
 {
     public C_INIT_CreatePhyllotaxisImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x81F1ABBB3F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x81F1ABBB3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _ScaleCPOffset;
+    private static nint _ScaleCPOffset = -1;
 
     public ref int ScaleCP
     {
         get
         {
-            _ScaleCPOffset = _ScaleCPOffset ?? Schema.GetOffset(0x81F1ABBBDE3CC5E6);
-            return ref _Handle.AsRef<int>(_ScaleCPOffset!.Value);
+            if (_ScaleCPOffset == -1) _ScaleCPOffset = Schema.GetOffset(0x81F1ABBBDE3CC5E6);
+            return ref _Handle.AsRef<int>(_ScaleCPOffset);
         }
     }
-    private static nint? _ComponentOffset;
+    private static nint _ComponentOffset = -1;
 
     public ref int Component
     {
         get
         {
-            _ComponentOffset = _ComponentOffset ?? Schema.GetOffset(0x81F1ABBBBFD0952C);
-            return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
+            if (_ComponentOffset == -1) _ComponentOffset = Schema.GetOffset(0x81F1ABBBBFD0952C);
+            return ref _Handle.AsRef<int>(_ComponentOffset);
         }
     }
-    private static nint? _RadCentCoreOffset;
+    private static nint _RadCentCoreOffset = -1;
 
     public ref float RadCentCore
     {
         get
         {
-            _RadCentCoreOffset = _RadCentCoreOffset ?? Schema.GetOffset(0x81F1ABBBFED9B635);
-            return ref _Handle.AsRef<float>(_RadCentCoreOffset!.Value);
+            if (_RadCentCoreOffset == -1) _RadCentCoreOffset = Schema.GetOffset(0x81F1ABBBFED9B635);
+            return ref _Handle.AsRef<float>(_RadCentCoreOffset);
         }
     }
-    private static nint? _RadPerPointOffset;
+    private static nint _RadPerPointOffset = -1;
 
     public ref float RadPerPoint
     {
         get
         {
-            _RadPerPointOffset = _RadPerPointOffset ?? Schema.GetOffset(0x81F1ABBBEA5B2E9B);
-            return ref _Handle.AsRef<float>(_RadPerPointOffset!.Value);
+            if (_RadPerPointOffset == -1) _RadPerPointOffset = Schema.GetOffset(0x81F1ABBBEA5B2E9B);
+            return ref _Handle.AsRef<float>(_RadPerPointOffset);
         }
     }
-    private static nint? _RadPerPointToOffset;
+    private static nint _RadPerPointToOffset = -1;
 
     public ref float RadPerPointTo
     {
         get
         {
-            _RadPerPointToOffset = _RadPerPointToOffset ?? Schema.GetOffset(0x81F1ABBB80529536);
-            return ref _Handle.AsRef<float>(_RadPerPointToOffset!.Value);
+            if (_RadPerPointToOffset == -1) _RadPerPointToOffset = Schema.GetOffset(0x81F1ABBB80529536);
+            return ref _Handle.AsRef<float>(_RadPerPointToOffset);
         }
     }
-    private static nint? _FpointAngleOffset;
+    private static nint _FpointAngleOffset = -1;
 
     public ref float FpointAngle
     {
         get
         {
-            _FpointAngleOffset = _FpointAngleOffset ?? Schema.GetOffset(0x81F1ABBB762CD2A8);
-            return ref _Handle.AsRef<float>(_FpointAngleOffset!.Value);
+            if (_FpointAngleOffset == -1) _FpointAngleOffset = Schema.GetOffset(0x81F1ABBB762CD2A8);
+            return ref _Handle.AsRef<float>(_FpointAngleOffset);
         }
     }
-    private static nint? _FsizeOverallOffset;
+    private static nint _FsizeOverallOffset = -1;
 
     public ref float FsizeOverall
     {
         get
         {
-            _FsizeOverallOffset = _FsizeOverallOffset ?? Schema.GetOffset(0x81F1ABBB0AF1CD99);
-            return ref _Handle.AsRef<float>(_FsizeOverallOffset!.Value);
+            if (_FsizeOverallOffset == -1) _FsizeOverallOffset = Schema.GetOffset(0x81F1ABBB0AF1CD99);
+            return ref _Handle.AsRef<float>(_FsizeOverallOffset);
         }
     }
-    private static nint? _RadBiasOffset;
+    private static nint _RadBiasOffset = -1;
 
     public ref float RadBias
     {
         get
         {
-            _RadBiasOffset = _RadBiasOffset ?? Schema.GetOffset(0x81F1ABBB402F6151);
-            return ref _Handle.AsRef<float>(_RadBiasOffset!.Value);
+            if (_RadBiasOffset == -1) _RadBiasOffset = Schema.GetOffset(0x81F1ABBB402F6151);
+            return ref _Handle.AsRef<float>(_RadBiasOffset);
         }
     }
-    private static nint? _MinRadOffset;
+    private static nint _MinRadOffset = -1;
 
     public ref float MinRad
     {
         get
         {
-            _MinRadOffset = _MinRadOffset ?? Schema.GetOffset(0x81F1ABBB5B44DED6);
-            return ref _Handle.AsRef<float>(_MinRadOffset!.Value);
+            if (_MinRadOffset == -1) _MinRadOffset = Schema.GetOffset(0x81F1ABBB5B44DED6);
+            return ref _Handle.AsRef<float>(_MinRadOffset);
         }
     }
-    private static nint? _DistBiasOffset;
+    private static nint _DistBiasOffset = -1;
 
     public ref float DistBias
     {
         get
         {
-            _DistBiasOffset = _DistBiasOffset ?? Schema.GetOffset(0x81F1ABBB66C2666C);
-            return ref _Handle.AsRef<float>(_DistBiasOffset!.Value);
+            if (_DistBiasOffset == -1) _DistBiasOffset = Schema.GetOffset(0x81F1ABBB66C2666C);
+            return ref _Handle.AsRef<float>(_DistBiasOffset);
         }
     }
-    private static nint? _UseLocalCoordsOffset;
+    private static nint _UseLocalCoordsOffset = -1;
 
     public ref bool UseLocalCoords
     {
         get
         {
-            _UseLocalCoordsOffset = _UseLocalCoordsOffset ?? Schema.GetOffset(0x81F1ABBB8AB11575);
-            return ref _Handle.AsRef<bool>(_UseLocalCoordsOffset!.Value);
+            if (_UseLocalCoordsOffset == -1) _UseLocalCoordsOffset = Schema.GetOffset(0x81F1ABBB8AB11575);
+            return ref _Handle.AsRef<bool>(_UseLocalCoordsOffset);
         }
     }
-    private static nint? _UseWithContEmitOffset;
+    private static nint _UseWithContEmitOffset = -1;
 
     public ref bool UseWithContEmit
     {
         get
         {
-            _UseWithContEmitOffset = _UseWithContEmitOffset ?? Schema.GetOffset(0x81F1ABBB0A3190F7);
-            return ref _Handle.AsRef<bool>(_UseWithContEmitOffset!.Value);
+            if (_UseWithContEmitOffset == -1) _UseWithContEmitOffset = Schema.GetOffset(0x81F1ABBB0A3190F7);
+            return ref _Handle.AsRef<bool>(_UseWithContEmitOffset);
         }
     }
-    private static nint? _UseOrigRadiusOffset;
+    private static nint _UseOrigRadiusOffset = -1;
 
     public ref bool UseOrigRadius
     {
         get
         {
-            _UseOrigRadiusOffset = _UseOrigRadiusOffset ?? Schema.GetOffset(0x81F1ABBB3FB513D3);
-            return ref _Handle.AsRef<bool>(_UseOrigRadiusOffset!.Value);
+            if (_UseOrigRadiusOffset == -1) _UseOrigRadiusOffset = Schema.GetOffset(0x81F1ABBB3FB513D3);
+            return ref _Handle.AsRef<bool>(_UseOrigRadiusOffset);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class C_KeychainModuleImpl : C_CS2WeaponModuleBaseImpl, C_Keych
 {
     public C_KeychainModuleImpl(nint handle) : base(handle) { }
 
-    private static nint? _KeychainDefIDOffset;
+    private static nint _KeychainDefIDOffset = -1;
 
     public ref uint KeychainDefID
     {
         get
         {
-            _KeychainDefIDOffset = _KeychainDefIDOffset ?? Schema.GetOffset(0xF3D135D74987A005);
-            return ref _Handle.AsRef<uint>(_KeychainDefIDOffset!.Value);
+            if (_KeychainDefIDOffset == -1) _KeychainDefIDOffset = Schema.GetOffset(0xF3D135D74987A005);
+            return ref _Handle.AsRef<uint>(_KeychainDefIDOffset);
         }
     }
-    private static nint? _KeychainSeedOffset;
+    private static nint _KeychainSeedOffset = -1;
 
     public ref uint KeychainSeed
     {
         get
         {
-            _KeychainSeedOffset = _KeychainSeedOffset ?? Schema.GetOffset(0xF3D135D760CEBB40);
-            return ref _Handle.AsRef<uint>(_KeychainSeedOffset!.Value);
+            if (_KeychainSeedOffset == -1) _KeychainSeedOffset = Schema.GetOffset(0xF3D135D760CEBB40);
+            return ref _Handle.AsRef<uint>(_KeychainSeedOffset);
         }
     }
 

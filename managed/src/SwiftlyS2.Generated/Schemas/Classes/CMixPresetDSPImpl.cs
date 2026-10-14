@@ -16,39 +16,39 @@ internal partial class CMixPresetDSPImpl : CMixPropertyBaseImpl, CMixPresetDSP
 {
     public CMixPresetDSPImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChannelsOffset;
+    private static nint _ChannelsOffset = -1;
 
     public ref int Channels
     {
         get
         {
-            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0x70DDCC365A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
+            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0x70DDCC365A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset);
         }
     }
-    private static nint? _EffectNameOffset;
+    private static nint _EffectNameOffset = -1;
 
     public string EffectName
     {
         get
         {
-            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x70DDCC364DF4F5CF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectNameOffset!.Value));
+            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0x70DDCC364DF4F5CF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectNameOffset));
         }
         set
         {
-            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x70DDCC364DF4F5CF);
-            Schema.SetCUtlString(_Handle, _EffectNameOffset!.Value, value);
+            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0x70DDCC364DF4F5CF);
+            Schema.SetCUtlString(_Handle, _EffectNameOffset, value);
         }
     }
-    private static nint? _XFadeOffset;
+    private static nint _XFadeOffset = -1;
 
     public ref float XFade
     {
         get
         {
-            _XFadeOffset = _XFadeOffset ?? Schema.GetOffset(0x70DDCC368BA73023);
-            return ref _Handle.AsRef<float>(_XFadeOffset!.Value);
+            if (_XFadeOffset == -1) _XFadeOffset = Schema.GetOffset(0x70DDCC368BA73023);
+            return ref _Handle.AsRef<float>(_XFadeOffset);
         }
     }
 

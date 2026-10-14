@@ -16,44 +16,44 @@ internal partial class CPointTeleportImpl : CServerOnlyPointEntityImpl, CPointTe
 {
     public CPointTeleportImpl(nint handle) : base(handle) { }
 
-    private static nint? _SaveOriginOffset;
+    private static nint _SaveOriginOffset = -1;
 
     public ref Vector SaveOrigin
     {
         get
         {
-            _SaveOriginOffset = _SaveOriginOffset ?? Schema.GetOffset(0x9AE1393FD9277FA6);
-            return ref _Handle.AsRef<Vector>(_SaveOriginOffset!.Value);
+            if (_SaveOriginOffset == -1) _SaveOriginOffset = Schema.GetOffset(0x9AE1393FD9277FA6);
+            return ref _Handle.AsRef<Vector>(_SaveOriginOffset);
         }
     }
-    private static nint? _SaveAnglesOffset;
+    private static nint _SaveAnglesOffset = -1;
 
     public ref QAngle SaveAngles
     {
         get
         {
-            _SaveAnglesOffset = _SaveAnglesOffset ?? Schema.GetOffset(0x9AE1393FD68F48DC);
-            return ref _Handle.AsRef<QAngle>(_SaveAnglesOffset!.Value);
+            if (_SaveAnglesOffset == -1) _SaveAnglesOffset = Schema.GetOffset(0x9AE1393FD68F48DC);
+            return ref _Handle.AsRef<QAngle>(_SaveAnglesOffset);
         }
     }
-    private static nint? _TeleportParentedEntitiesOffset;
+    private static nint _TeleportParentedEntitiesOffset = -1;
 
     public ref bool TeleportParentedEntities
     {
         get
         {
-            _TeleportParentedEntitiesOffset = _TeleportParentedEntitiesOffset ?? Schema.GetOffset(0x9AE1393F20FFB18C);
-            return ref _Handle.AsRef<bool>(_TeleportParentedEntitiesOffset!.Value);
+            if (_TeleportParentedEntitiesOffset == -1) _TeleportParentedEntitiesOffset = Schema.GetOffset(0x9AE1393F20FFB18C);
+            return ref _Handle.AsRef<bool>(_TeleportParentedEntitiesOffset);
         }
     }
-    private static nint? _TeleportUseCurrentAngleOffset;
+    private static nint _TeleportUseCurrentAngleOffset = -1;
 
     public ref bool TeleportUseCurrentAngle
     {
         get
         {
-            _TeleportUseCurrentAngleOffset = _TeleportUseCurrentAngleOffset ?? Schema.GetOffset(0x9AE1393F528952CD);
-            return ref _Handle.AsRef<bool>(_TeleportUseCurrentAngleOffset!.Value);
+            if (_TeleportUseCurrentAngleOffset == -1) _TeleportUseCurrentAngleOffset = Schema.GetOffset(0x9AE1393F528952CD);
+            return ref _Handle.AsRef<bool>(_TeleportUseCurrentAngleOffset);
         }
     }
 

@@ -16,37 +16,37 @@ internal partial class CPulseCell_Outflow_ListenForEntityOutputImpl : CPulseCell
 {
     public CPulseCell_Outflow_ListenForEntityOutputImpl(nint handle) : base(handle) { }
 
-    private static nint? _OnFiredOffset;
+    private static nint _OnFiredOffset = -1;
     private SignatureOutflow_ResumeImpl? _OnFiredInstance;
 
     public SignatureOutflow_Resume OnFired
     {
         get
         {
-            _OnFiredOffset = _OnFiredOffset ?? Schema.GetOffset(0xCB35163784825730);
+            if (_OnFiredOffset == -1) _OnFiredOffset = Schema.GetOffset(0xCB35163784825730);
             var instance = _OnFiredInstance ??= new SignatureOutflow_ResumeImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnFiredOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnFiredOffset);
             return instance;
         }
     }
-    private static nint? _StrEntityOutputOffset;
+    private static nint _StrEntityOutputOffset = -1;
 
     public ref CGlobalSymbol StrEntityOutput
     {
         get
         {
-            _StrEntityOutputOffset = _StrEntityOutputOffset ?? Schema.GetOffset(0xCB351637C8E70456);
-            return ref _Handle.AsRef<CGlobalSymbol>(_StrEntityOutputOffset!.Value);
+            if (_StrEntityOutputOffset == -1) _StrEntityOutputOffset = Schema.GetOffset(0xCB351637C8E70456);
+            return ref _Handle.AsRef<CGlobalSymbol>(_StrEntityOutputOffset);
         }
     }
-    private static nint? _ListenUntilCanceledOffset;
+    private static nint _ListenUntilCanceledOffset = -1;
 
     public ref bool ListenUntilCanceled
     {
         get
         {
-            _ListenUntilCanceledOffset = _ListenUntilCanceledOffset ?? Schema.GetOffset(0xCB351637C798285D);
-            return ref _Handle.AsRef<bool>(_ListenUntilCanceledOffset!.Value);
+            if (_ListenUntilCanceledOffset == -1) _ListenUntilCanceledOffset = Schema.GetOffset(0xCB351637C798285D);
+            return ref _Handle.AsRef<bool>(_ListenUntilCanceledOffset);
         }
     }
 

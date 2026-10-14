@@ -16,14 +16,14 @@ internal partial class CNmGraphDocTargetWarpNode__CDataImpl : CNmGraphDocVariati
 {
     public CNmGraphDocTargetWarpNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrAlignmentBoneNameOffset;
+    private static nint _StrAlignmentBoneNameOffset = -1;
 
     public ref CGlobalSymbol StrAlignmentBoneName
     {
         get
         {
-            _StrAlignmentBoneNameOffset = _StrAlignmentBoneNameOffset ?? Schema.GetOffset(0x740A9913788CAA2C);
-            return ref _Handle.AsRef<CGlobalSymbol>(_StrAlignmentBoneNameOffset!.Value);
+            if (_StrAlignmentBoneNameOffset == -1) _StrAlignmentBoneNameOffset = Schema.GetOffset(0x740A9913788CAA2C);
+            return ref _Handle.AsRef<CGlobalSymbol>(_StrAlignmentBoneNameOffset);
         }
     }
 

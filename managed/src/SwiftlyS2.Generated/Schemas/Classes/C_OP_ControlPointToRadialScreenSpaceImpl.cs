@@ -16,54 +16,54 @@ internal partial class C_OP_ControlPointToRadialScreenSpaceImpl : CParticleFunct
 {
     public C_OP_ControlPointToRadialScreenSpaceImpl(nint handle) : base(handle) { }
 
-    private static nint? _CPInOffset;
+    private static nint _CPInOffset = -1;
 
     public ref int CPIn
     {
         get
         {
-            _CPInOffset = _CPInOffset ?? Schema.GetOffset(0xF5E82FE8CAF7E91D);
-            return ref _Handle.AsRef<int>(_CPInOffset!.Value);
+            if (_CPInOffset == -1) _CPInOffset = Schema.GetOffset(0xF5E82FE8CAF7E91D);
+            return ref _Handle.AsRef<int>(_CPInOffset);
         }
     }
-    private static nint? _CP1PosOffset;
+    private static nint _CP1PosOffset = -1;
 
     public ref Vector CP1Pos
     {
         get
         {
-            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0xF5E82FE8408288D9);
-            return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+            if (_CP1PosOffset == -1) _CP1PosOffset = Schema.GetOffset(0xF5E82FE8408288D9);
+            return ref _Handle.AsRef<Vector>(_CP1PosOffset);
         }
     }
-    private static nint? _CPOutOffset;
+    private static nint _CPOutOffset = -1;
 
     public ref int CPOut
     {
         get
         {
-            _CPOutOffset = _CPOutOffset ?? Schema.GetOffset(0xF5E82FE8BAE50826);
-            return ref _Handle.AsRef<int>(_CPOutOffset!.Value);
+            if (_CPOutOffset == -1) _CPOutOffset = Schema.GetOffset(0xF5E82FE8BAE50826);
+            return ref _Handle.AsRef<int>(_CPOutOffset);
         }
     }
-    private static nint? _CPOutFieldOffset;
+    private static nint _CPOutFieldOffset = -1;
 
     public ref int CPOutField
     {
         get
         {
-            _CPOutFieldOffset = _CPOutFieldOffset ?? Schema.GetOffset(0xF5E82FE8A29393C2);
-            return ref _Handle.AsRef<int>(_CPOutFieldOffset!.Value);
+            if (_CPOutFieldOffset == -1) _CPOutFieldOffset = Schema.GetOffset(0xF5E82FE8A29393C2);
+            return ref _Handle.AsRef<int>(_CPOutFieldOffset);
         }
     }
-    private static nint? _CPSSPosOutOffset;
+    private static nint _CPSSPosOutOffset = -1;
 
     public ref int CPSSPosOut
     {
         get
         {
-            _CPSSPosOutOffset = _CPSSPosOutOffset ?? Schema.GetOffset(0xF5E82FE881CD01AE);
-            return ref _Handle.AsRef<int>(_CPSSPosOutOffset!.Value);
+            if (_CPSSPosOutOffset == -1) _CPSSPosOutOffset = Schema.GetOffset(0xF5E82FE881CD01AE);
+            return ref _Handle.AsRef<int>(_CPSSPosOutOffset);
         }
     }
 

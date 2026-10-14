@@ -16,439 +16,439 @@ internal partial class C_RopeKeyframeImpl : C_BaseModelEntityImpl, C_RopeKeyfram
 {
     public C_RopeKeyframeImpl(nint handle) : base(handle) { }
 
-    private static nint? _LinksTouchingSomethingOffset;
+    private static nint _LinksTouchingSomethingOffset = -1;
     private SchemaUntypedField? _LinksTouchingSomethingInstance;
 
     public SchemaUntypedField LinksTouchingSomething
     {
         get
         {
-            _LinksTouchingSomethingOffset = _LinksTouchingSomethingOffset ?? Schema.GetOffset(0x831E8EF7E627DDE1);
+            if (_LinksTouchingSomethingOffset == -1) _LinksTouchingSomethingOffset = Schema.GetOffset(0x831E8EF7E627DDE1);
             var instance = _LinksTouchingSomethingInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _LinksTouchingSomethingOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LinksTouchingSomethingOffset);
             return instance;
         }
     }
-    private static nint? _LinksTouchingSomething1Offset;
+    private static nint _LinksTouchingSomething1Offset = -1;
 
     public ref int LinksTouchingSomething1
     {
         get
         {
-            _LinksTouchingSomething1Offset = _LinksTouchingSomething1Offset ?? Schema.GetOffset(0x831E8EF7EFC776C5);
-            return ref _Handle.AsRef<int>(_LinksTouchingSomething1Offset!.Value);
+            if (_LinksTouchingSomething1Offset == -1) _LinksTouchingSomething1Offset = Schema.GetOffset(0x831E8EF7EFC776C5);
+            return ref _Handle.AsRef<int>(_LinksTouchingSomething1Offset);
         }
     }
-    private static nint? _ApplyWindOffset;
+    private static nint _ApplyWindOffset = -1;
 
     public ref bool ApplyWind
     {
         get
         {
-            _ApplyWindOffset = _ApplyWindOffset ?? Schema.GetOffset(0x831E8EF71F8A2A6D);
-            return ref _Handle.AsRef<bool>(_ApplyWindOffset!.Value);
+            if (_ApplyWindOffset == -1) _ApplyWindOffset = Schema.GetOffset(0x831E8EF71F8A2A6D);
+            return ref _Handle.AsRef<bool>(_ApplyWindOffset);
         }
     }
-    private static nint? _PrevLockedPointsOffset;
+    private static nint _PrevLockedPointsOffset = -1;
 
     public ref int PrevLockedPoints
     {
         get
         {
-            _PrevLockedPointsOffset = _PrevLockedPointsOffset ?? Schema.GetOffset(0x831E8EF7D834BA3D);
-            return ref _Handle.AsRef<int>(_PrevLockedPointsOffset!.Value);
+            if (_PrevLockedPointsOffset == -1) _PrevLockedPointsOffset = Schema.GetOffset(0x831E8EF7D834BA3D);
+            return ref _Handle.AsRef<int>(_PrevLockedPointsOffset);
         }
     }
-    private static nint? _ForcePointMoveCounterOffset;
+    private static nint _ForcePointMoveCounterOffset = -1;
 
     public ref int ForcePointMoveCounter
     {
         get
         {
-            _ForcePointMoveCounterOffset = _ForcePointMoveCounterOffset ?? Schema.GetOffset(0x831E8EF729920626);
-            return ref _Handle.AsRef<int>(_ForcePointMoveCounterOffset!.Value);
+            if (_ForcePointMoveCounterOffset == -1) _ForcePointMoveCounterOffset = Schema.GetOffset(0x831E8EF729920626);
+            return ref _Handle.AsRef<int>(_ForcePointMoveCounterOffset);
         }
     }
-    private static nint? _PrevEndPointPosOffset;
+    private static nint _PrevEndPointPosOffset = -1;
     private SchemaFixedArray<bool>? _PrevEndPointPosInstance;
 
     public ISchemaFixedArray<bool> PrevEndPointPos
     {
         get
         {
-            _PrevEndPointPosOffset = _PrevEndPointPosOffset ?? Schema.GetOffset(0x831E8EF7A90B7A95);
+            if (_PrevEndPointPosOffset == -1) _PrevEndPointPosOffset = Schema.GetOffset(0x831E8EF7A90B7A95);
             var instance = _PrevEndPointPosInstance ??= new SchemaFixedArray<bool>(0, 0x831E8EF7A90B7A95, 2, 1, 1);
-            instance.DangerousSetHandle(_Handle + _PrevEndPointPosOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PrevEndPointPosOffset);
             return instance;
         }
     }
-    private static nint? _PrevEndPointPos2Offset;
+    private static nint _PrevEndPointPos2Offset = -1;
     private SchemaFixedArray<Vector>? _PrevEndPointPos2Instance;
 
     public ISchemaFixedArray<Vector> PrevEndPointPos2
     {
         get
         {
-            _PrevEndPointPos2Offset = _PrevEndPointPos2Offset ?? Schema.GetOffset(0x831E8EF717686869);
+            if (_PrevEndPointPos2Offset == -1) _PrevEndPointPos2Offset = Schema.GetOffset(0x831E8EF717686869);
             var instance = _PrevEndPointPos2Instance ??= new SchemaFixedArray<Vector>(0, 0x831E8EF717686869, 2, 12, 4);
-            instance.DangerousSetHandle(_Handle + _PrevEndPointPos2Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _PrevEndPointPos2Offset);
             return instance;
         }
     }
-    private static nint? _CurScrollOffset;
+    private static nint _CurScrollOffset = -1;
 
     public ref float CurScroll
     {
         get
         {
-            _CurScrollOffset = _CurScrollOffset ?? Schema.GetOffset(0x831E8EF7945F115A);
-            return ref _Handle.AsRef<float>(_CurScrollOffset!.Value);
+            if (_CurScrollOffset == -1) _CurScrollOffset = Schema.GetOffset(0x831E8EF7945F115A);
+            return ref _Handle.AsRef<float>(_CurScrollOffset);
         }
     }
-    private static nint? _ScrollSpeedOffset;
+    private static nint _ScrollSpeedOffset = -1;
 
     public ref float ScrollSpeed
     {
         get
         {
-            _ScrollSpeedOffset = _ScrollSpeedOffset ?? Schema.GetOffset(0x831E8EF7448C9F71);
-            return ref _Handle.AsRef<float>(_ScrollSpeedOffset!.Value);
+            if (_ScrollSpeedOffset == -1) _ScrollSpeedOffset = Schema.GetOffset(0x831E8EF7448C9F71);
+            return ref _Handle.AsRef<float>(_ScrollSpeedOffset);
         }
     }
-    private static nint? _RopeFlagsOffset;
+    private static nint _RopeFlagsOffset = -1;
 
     public ref ushort RopeFlags
     {
         get
         {
-            _RopeFlagsOffset = _RopeFlagsOffset ?? Schema.GetOffset(0x831E8EF72EF994F4);
-            return ref _Handle.AsRef<ushort>(_RopeFlagsOffset!.Value);
+            if (_RopeFlagsOffset == -1) _RopeFlagsOffset = Schema.GetOffset(0x831E8EF72EF994F4);
+            return ref _Handle.AsRef<ushort>(_RopeFlagsOffset);
         }
     }
-    private static nint? _RopeMaterialModelIndexOffset;
+    private static nint _RopeMaterialModelIndexOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> RopeMaterialModelIndex
     {
         get
         {
-            _RopeMaterialModelIndexOffset = _RopeMaterialModelIndexOffset ?? Schema.GetOffset(0x831E8EF7831DE452);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_RopeMaterialModelIndexOffset!.Value);
+            if (_RopeMaterialModelIndexOffset == -1) _RopeMaterialModelIndexOffset = Schema.GetOffset(0x831E8EF7831DE452);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_RopeMaterialModelIndexOffset);
         }
     }
-    private static nint? _SegmentsOffset;
+    private static nint _SegmentsOffset = -1;
 
     public ref byte Segments
     {
         get
         {
-            _SegmentsOffset = _SegmentsOffset ?? Schema.GetOffset(0x831E8EF74878E17B);
-            return ref _Handle.AsRef<byte>(_SegmentsOffset!.Value);
+            if (_SegmentsOffset == -1) _SegmentsOffset = Schema.GetOffset(0x831E8EF74878E17B);
+            return ref _Handle.AsRef<byte>(_SegmentsOffset);
         }
     }
-    private static nint? _StartPointOffset;
+    private static nint _StartPointOffset = -1;
 
     public ref CHandle<C_BaseEntity> StartPoint
     {
         get
         {
-            _StartPointOffset = _StartPointOffset ?? Schema.GetOffset(0x831E8EF7CCE549A9);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_StartPointOffset!.Value);
+            if (_StartPointOffset == -1) _StartPointOffset = Schema.GetOffset(0x831E8EF7CCE549A9);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_StartPointOffset);
         }
     }
-    private static nint? _EndPointOffset;
+    private static nint _EndPointOffset = -1;
 
     public ref CHandle<C_BaseEntity> EndPoint
     {
         get
         {
-            _EndPointOffset = _EndPointOffset ?? Schema.GetOffset(0x831E8EF75E8C8D3A);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EndPointOffset!.Value);
+            if (_EndPointOffset == -1) _EndPointOffset = Schema.GetOffset(0x831E8EF75E8C8D3A);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EndPointOffset);
         }
     }
-    private static nint? _StartAttachmentOffset;
+    private static nint _StartAttachmentOffset = -1;
     private AttachmentHandle_tImpl? _StartAttachmentInstance;
 
     public AttachmentHandle_t StartAttachment
     {
         get
         {
-            _StartAttachmentOffset = _StartAttachmentOffset ?? Schema.GetOffset(0x831E8EF71022E6F5);
+            if (_StartAttachmentOffset == -1) _StartAttachmentOffset = Schema.GetOffset(0x831E8EF71022E6F5);
             var instance = _StartAttachmentInstance ??= new AttachmentHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartAttachmentOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartAttachmentOffset);
             return instance;
         }
     }
-    private static nint? _EndAttachmentOffset;
+    private static nint _EndAttachmentOffset = -1;
     private AttachmentHandle_tImpl? _EndAttachmentInstance;
 
     public AttachmentHandle_t EndAttachment
     {
         get
         {
-            _EndAttachmentOffset = _EndAttachmentOffset ?? Schema.GetOffset(0x831E8EF7D537713C);
+            if (_EndAttachmentOffset == -1) _EndAttachmentOffset = Schema.GetOffset(0x831E8EF7D537713C);
             var instance = _EndAttachmentInstance ??= new AttachmentHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndAttachmentOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndAttachmentOffset);
             return instance;
         }
     }
-    private static nint? _SubdivOffset;
+    private static nint _SubdivOffset = -1;
 
     public ref byte Subdiv
     {
         get
         {
-            _SubdivOffset = _SubdivOffset ?? Schema.GetOffset(0x831E8EF7785F10D8);
-            return ref _Handle.AsRef<byte>(_SubdivOffset!.Value);
+            if (_SubdivOffset == -1) _SubdivOffset = Schema.GetOffset(0x831E8EF7785F10D8);
+            return ref _Handle.AsRef<byte>(_SubdivOffset);
         }
     }
-    private static nint? _RopeLengthOffset;
+    private static nint _RopeLengthOffset = -1;
 
     public ref short RopeLength
     {
         get
         {
-            _RopeLengthOffset = _RopeLengthOffset ?? Schema.GetOffset(0x831E8EF7C27FC78D);
-            return ref _Handle.AsRef<short>(_RopeLengthOffset!.Value);
+            if (_RopeLengthOffset == -1) _RopeLengthOffset = Schema.GetOffset(0x831E8EF7C27FC78D);
+            return ref _Handle.AsRef<short>(_RopeLengthOffset);
         }
     }
-    private static nint? _SlackOffset;
+    private static nint _SlackOffset = -1;
 
     public ref short Slack
     {
         get
         {
-            _SlackOffset = _SlackOffset ?? Schema.GetOffset(0x831E8EF784ECDEA7);
-            return ref _Handle.AsRef<short>(_SlackOffset!.Value);
+            if (_SlackOffset == -1) _SlackOffset = Schema.GetOffset(0x831E8EF784ECDEA7);
+            return ref _Handle.AsRef<short>(_SlackOffset);
         }
     }
-    private static nint? _TextureScaleOffset;
+    private static nint _TextureScaleOffset = -1;
 
     public ref float TextureScale
     {
         get
         {
-            _TextureScaleOffset = _TextureScaleOffset ?? Schema.GetOffset(0x831E8EF7A14A014E);
-            return ref _Handle.AsRef<float>(_TextureScaleOffset!.Value);
+            if (_TextureScaleOffset == -1) _TextureScaleOffset = Schema.GetOffset(0x831E8EF7A14A014E);
+            return ref _Handle.AsRef<float>(_TextureScaleOffset);
         }
     }
-    private static nint? _LockedPointsOffset;
+    private static nint _LockedPointsOffset = -1;
 
     public ref byte LockedPoints
     {
         get
         {
-            _LockedPointsOffset = _LockedPointsOffset ?? Schema.GetOffset(0x831E8EF7CE6446D4);
-            return ref _Handle.AsRef<byte>(_LockedPointsOffset!.Value);
+            if (_LockedPointsOffset == -1) _LockedPointsOffset = Schema.GetOffset(0x831E8EF7CE6446D4);
+            return ref _Handle.AsRef<byte>(_LockedPointsOffset);
         }
     }
-    private static nint? _ChangeCountOffset;
+    private static nint _ChangeCountOffset = -1;
 
     public ref byte ChangeCount
     {
         get
         {
-            _ChangeCountOffset = _ChangeCountOffset ?? Schema.GetOffset(0x831E8EF7167C12A8);
-            return ref _Handle.AsRef<byte>(_ChangeCountOffset!.Value);
+            if (_ChangeCountOffset == -1) _ChangeCountOffset = Schema.GetOffset(0x831E8EF7167C12A8);
+            return ref _Handle.AsRef<byte>(_ChangeCountOffset);
         }
     }
-    private static nint? _WidthOffset;
+    private static nint _WidthOffset = -1;
 
     public ref float Width
     {
         get
         {
-            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0x831E8EF72FD9239F);
-            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+            if (_WidthOffset == -1) _WidthOffset = Schema.GetOffset(0x831E8EF72FD9239F);
+            return ref _Handle.AsRef<float>(_WidthOffset);
         }
     }
-    private static nint? _PhysicsDelegateOffset;
+    private static nint _PhysicsDelegateOffset = -1;
     private C_RopeKeyframe__CPhysicsDelegateImpl? _PhysicsDelegateInstance;
 
     public C_RopeKeyframe__CPhysicsDelegate PhysicsDelegate
     {
         get
         {
-            _PhysicsDelegateOffset = _PhysicsDelegateOffset ?? Schema.GetOffset(0x831E8EF735892BF5);
+            if (_PhysicsDelegateOffset == -1) _PhysicsDelegateOffset = Schema.GetOffset(0x831E8EF735892BF5);
             var instance = _PhysicsDelegateInstance ??= new C_RopeKeyframe__CPhysicsDelegateImpl(0);
-            instance.DangerousSetHandle(_Handle + _PhysicsDelegateOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PhysicsDelegateOffset);
             return instance;
         }
     }
-    private static nint? _MaterialOffset;
+    private static nint _MaterialOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material
     {
         get
         {
-            _MaterialOffset = _MaterialOffset ?? Schema.GetOffset(0x831E8EF7888CE42E);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+            if (_MaterialOffset == -1) _MaterialOffset = Schema.GetOffset(0x831E8EF7888CE42E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset);
         }
     }
-    private static nint? _TextureHeightOffset;
+    private static nint _TextureHeightOffset = -1;
 
     public ref int TextureHeight
     {
         get
         {
-            _TextureHeightOffset = _TextureHeightOffset ?? Schema.GetOffset(0x831E8EF76982C8A7);
-            return ref _Handle.AsRef<int>(_TextureHeightOffset!.Value);
+            if (_TextureHeightOffset == -1) _TextureHeightOffset = Schema.GetOffset(0x831E8EF76982C8A7);
+            return ref _Handle.AsRef<int>(_TextureHeightOffset);
         }
     }
-    private static nint? _ImpulseOffset;
+    private static nint _ImpulseOffset = -1;
 
     public ref Vector Impulse
     {
         get
         {
-            _ImpulseOffset = _ImpulseOffset ?? Schema.GetOffset(0x831E8EF7D205FB34);
-            return ref _Handle.AsRef<Vector>(_ImpulseOffset!.Value);
+            if (_ImpulseOffset == -1) _ImpulseOffset = Schema.GetOffset(0x831E8EF7D205FB34);
+            return ref _Handle.AsRef<Vector>(_ImpulseOffset);
         }
     }
-    private static nint? _PreviousImpulseOffset;
+    private static nint _PreviousImpulseOffset = -1;
 
     public ref Vector PreviousImpulse
     {
         get
         {
-            _PreviousImpulseOffset = _PreviousImpulseOffset ?? Schema.GetOffset(0x831E8EF79B5D625B);
-            return ref _Handle.AsRef<Vector>(_PreviousImpulseOffset!.Value);
+            if (_PreviousImpulseOffset == -1) _PreviousImpulseOffset = Schema.GetOffset(0x831E8EF79B5D625B);
+            return ref _Handle.AsRef<Vector>(_PreviousImpulseOffset);
         }
     }
-    private static nint? _CurrentGustTimerOffset;
+    private static nint _CurrentGustTimerOffset = -1;
 
     public ref float CurrentGustTimer
     {
         get
         {
-            _CurrentGustTimerOffset = _CurrentGustTimerOffset ?? Schema.GetOffset(0x831E8EF72306BB3C);
-            return ref _Handle.AsRef<float>(_CurrentGustTimerOffset!.Value);
+            if (_CurrentGustTimerOffset == -1) _CurrentGustTimerOffset = Schema.GetOffset(0x831E8EF72306BB3C);
+            return ref _Handle.AsRef<float>(_CurrentGustTimerOffset);
         }
     }
-    private static nint? _CurrentGustLifetimeOffset;
+    private static nint _CurrentGustLifetimeOffset = -1;
 
     public ref float CurrentGustLifetime
     {
         get
         {
-            _CurrentGustLifetimeOffset = _CurrentGustLifetimeOffset ?? Schema.GetOffset(0x831E8EF71744F3CC);
-            return ref _Handle.AsRef<float>(_CurrentGustLifetimeOffset!.Value);
+            if (_CurrentGustLifetimeOffset == -1) _CurrentGustLifetimeOffset = Schema.GetOffset(0x831E8EF71744F3CC);
+            return ref _Handle.AsRef<float>(_CurrentGustLifetimeOffset);
         }
     }
-    private static nint? _TimeToNextGustOffset;
+    private static nint _TimeToNextGustOffset = -1;
 
     public ref float TimeToNextGust
     {
         get
         {
-            _TimeToNextGustOffset = _TimeToNextGustOffset ?? Schema.GetOffset(0x831E8EF7A17D05F1);
-            return ref _Handle.AsRef<float>(_TimeToNextGustOffset!.Value);
+            if (_TimeToNextGustOffset == -1) _TimeToNextGustOffset = Schema.GetOffset(0x831E8EF7A17D05F1);
+            return ref _Handle.AsRef<float>(_TimeToNextGustOffset);
         }
     }
-    private static nint? _WindDirOffset;
+    private static nint _WindDirOffset = -1;
 
     public ref Vector WindDir
     {
         get
         {
-            _WindDirOffset = _WindDirOffset ?? Schema.GetOffset(0x831E8EF74BD3B852);
-            return ref _Handle.AsRef<Vector>(_WindDirOffset!.Value);
+            if (_WindDirOffset == -1) _WindDirOffset = Schema.GetOffset(0x831E8EF74BD3B852);
+            return ref _Handle.AsRef<Vector>(_WindDirOffset);
         }
     }
-    private static nint? _ColorModOffset;
+    private static nint _ColorModOffset = -1;
 
     public ref Vector ColorMod
     {
         get
         {
-            _ColorModOffset = _ColorModOffset ?? Schema.GetOffset(0x831E8EF70D8D56F0);
-            return ref _Handle.AsRef<Vector>(_ColorModOffset!.Value);
+            if (_ColorModOffset == -1) _ColorModOffset = Schema.GetOffset(0x831E8EF70D8D56F0);
+            return ref _Handle.AsRef<Vector>(_ColorModOffset);
         }
     }
-    private static nint? _CachedEndPointAttachmentPosOffset;
+    private static nint _CachedEndPointAttachmentPosOffset = -1;
     private SchemaFixedArray<Vector>? _CachedEndPointAttachmentPosInstance;
 
     public ISchemaFixedArray<Vector> CachedEndPointAttachmentPos
     {
         get
         {
-            _CachedEndPointAttachmentPosOffset = _CachedEndPointAttachmentPosOffset ?? Schema.GetOffset(0x831E8EF7D96E3197);
+            if (_CachedEndPointAttachmentPosOffset == -1) _CachedEndPointAttachmentPosOffset = Schema.GetOffset(0x831E8EF7D96E3197);
             var instance = _CachedEndPointAttachmentPosInstance ??= new SchemaFixedArray<Vector>(0, 0x831E8EF7D96E3197, 2, 12, 4);
-            instance.DangerousSetHandle(_Handle + _CachedEndPointAttachmentPosOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CachedEndPointAttachmentPosOffset);
             return instance;
         }
     }
-    private static nint? _CachedEndPointAttachmentAngleOffset;
+    private static nint _CachedEndPointAttachmentAngleOffset = -1;
     private SchemaFixedArray<QAngle>? _CachedEndPointAttachmentAngleInstance;
 
     public ISchemaFixedArray<QAngle> CachedEndPointAttachmentAngle
     {
         get
         {
-            _CachedEndPointAttachmentAngleOffset = _CachedEndPointAttachmentAngleOffset ?? Schema.GetOffset(0x831E8EF7ED46DE1E);
+            if (_CachedEndPointAttachmentAngleOffset == -1) _CachedEndPointAttachmentAngleOffset = Schema.GetOffset(0x831E8EF7ED46DE1E);
             var instance = _CachedEndPointAttachmentAngleInstance ??= new SchemaFixedArray<QAngle>(0, 0x831E8EF7ED46DE1E, 2, 12, 4);
-            instance.DangerousSetHandle(_Handle + _CachedEndPointAttachmentAngleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CachedEndPointAttachmentAngleOffset);
             return instance;
         }
     }
-    private static nint? _ConstrainBetweenEndpointsOffset;
+    private static nint _ConstrainBetweenEndpointsOffset = -1;
 
     public ref bool ConstrainBetweenEndpoints
     {
         get
         {
-            _ConstrainBetweenEndpointsOffset = _ConstrainBetweenEndpointsOffset ?? Schema.GetOffset(0x831E8EF705033E3C);
-            return ref _Handle.AsRef<bool>(_ConstrainBetweenEndpointsOffset!.Value);
+            if (_ConstrainBetweenEndpointsOffset == -1) _ConstrainBetweenEndpointsOffset = Schema.GetOffset(0x831E8EF705033E3C);
+            return ref _Handle.AsRef<bool>(_ConstrainBetweenEndpointsOffset);
         }
     }
-    private static nint? _EndPointAttachmentPositionsDirtyOffset;
+    private static nint _EndPointAttachmentPositionsDirtyOffset = -1;
     private SchemaUntypedField? _EndPointAttachmentPositionsDirtyInstance;
 
     public SchemaUntypedField EndPointAttachmentPositionsDirty
     {
         get
         {
-            _EndPointAttachmentPositionsDirtyOffset = _EndPointAttachmentPositionsDirtyOffset ?? Schema.GetOffset(0x831E8EF73755EBDD);
+            if (_EndPointAttachmentPositionsDirtyOffset == -1) _EndPointAttachmentPositionsDirtyOffset = Schema.GetOffset(0x831E8EF73755EBDD);
             var instance = _EndPointAttachmentPositionsDirtyInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _EndPointAttachmentPositionsDirtyOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndPointAttachmentPositionsDirtyOffset);
             return instance;
         }
     }
-    private static nint? _EndPointAttachmentAnglesDirtyOffset;
+    private static nint _EndPointAttachmentAnglesDirtyOffset = -1;
     private SchemaUntypedField? _EndPointAttachmentAnglesDirtyInstance;
 
     public SchemaUntypedField EndPointAttachmentAnglesDirty
     {
         get
         {
-            _EndPointAttachmentAnglesDirtyOffset = _EndPointAttachmentAnglesDirtyOffset ?? Schema.GetOffset(0x831E8EF76022CA9B);
+            if (_EndPointAttachmentAnglesDirtyOffset == -1) _EndPointAttachmentAnglesDirtyOffset = Schema.GetOffset(0x831E8EF76022CA9B);
             var instance = _EndPointAttachmentAnglesDirtyInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _EndPointAttachmentAnglesDirtyOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndPointAttachmentAnglesDirtyOffset);
             return instance;
         }
     }
-    private static nint? _NewDataThisFrameOffset;
+    private static nint _NewDataThisFrameOffset = -1;
     private SchemaUntypedField? _NewDataThisFrameInstance;
 
     public SchemaUntypedField NewDataThisFrame
     {
         get
         {
-            _NewDataThisFrameOffset = _NewDataThisFrameOffset ?? Schema.GetOffset(0x831E8EF72E844916);
+            if (_NewDataThisFrameOffset == -1) _NewDataThisFrameOffset = Schema.GetOffset(0x831E8EF72E844916);
             var instance = _NewDataThisFrameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NewDataThisFrameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NewDataThisFrameOffset);
             return instance;
         }
     }
-    private static nint? _PhysicsInittedOffset;
+    private static nint _PhysicsInittedOffset = -1;
     private SchemaUntypedField? _PhysicsInittedInstance;
 
     public SchemaUntypedField PhysicsInitted
     {
         get
         {
-            _PhysicsInittedOffset = _PhysicsInittedOffset ?? Schema.GetOffset(0x831E8EF7E2042F45);
+            if (_PhysicsInittedOffset == -1) _PhysicsInittedOffset = Schema.GetOffset(0x831E8EF7E2042F45);
             var instance = _PhysicsInittedInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PhysicsInittedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PhysicsInittedOffset);
             return instance;
         }
     }

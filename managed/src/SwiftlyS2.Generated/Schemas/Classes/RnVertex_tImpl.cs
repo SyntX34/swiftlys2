@@ -16,14 +16,14 @@ internal partial class RnVertex_tImpl : SchemaClass, RnVertex_t
 {
     public RnVertex_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EdgeOffset;
+    private static nint _EdgeOffset = -1;
 
     public ref byte Edge
     {
         get
         {
-            _EdgeOffset = _EdgeOffset ?? Schema.GetOffset(0xA2F56A80E2949FC8);
-            return ref _Handle.AsRef<byte>(_EdgeOffset!.Value);
+            if (_EdgeOffset == -1) _EdgeOffset = Schema.GetOffset(0xA2F56A80E2949FC8);
+            return ref _Handle.AsRef<byte>(_EdgeOffset);
         }
     }
 

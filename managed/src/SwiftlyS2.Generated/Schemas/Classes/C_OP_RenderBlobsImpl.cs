@@ -16,93 +16,93 @@ internal partial class C_OP_RenderBlobsImpl : CParticleFunctionRendererImpl, C_O
 {
     public C_OP_RenderBlobsImpl(nint handle) : base(handle) { }
 
-    private static nint? _CubeWidthOffset;
+    private static nint _CubeWidthOffset = -1;
     private CParticleCollectionRendererFloatInputImpl? _CubeWidthInstance;
 
     public CParticleCollectionRendererFloatInput CubeWidth
     {
         get
         {
-            _CubeWidthOffset = _CubeWidthOffset ?? Schema.GetOffset(0xB25239A3E172FDCC);
+            if (_CubeWidthOffset == -1) _CubeWidthOffset = Schema.GetOffset(0xB25239A3E172FDCC);
             var instance = _CubeWidthInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _CubeWidthOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CubeWidthOffset);
             return instance;
         }
     }
-    private static nint? _CutoffRadiusOffset;
+    private static nint _CutoffRadiusOffset = -1;
     private CParticleCollectionRendererFloatInputImpl? _CutoffRadiusInstance;
 
     public CParticleCollectionRendererFloatInput CutoffRadius
     {
         get
         {
-            _CutoffRadiusOffset = _CutoffRadiusOffset ?? Schema.GetOffset(0xB25239A33B9D5B46);
+            if (_CutoffRadiusOffset == -1) _CutoffRadiusOffset = Schema.GetOffset(0xB25239A33B9D5B46);
             var instance = _CutoffRadiusInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _CutoffRadiusOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CutoffRadiusOffset);
             return instance;
         }
     }
-    private static nint? _RenderRadiusOffset;
+    private static nint _RenderRadiusOffset = -1;
     private CParticleCollectionRendererFloatInputImpl? _RenderRadiusInstance;
 
     public CParticleCollectionRendererFloatInput RenderRadius
     {
         get
         {
-            _RenderRadiusOffset = _RenderRadiusOffset ?? Schema.GetOffset(0xB25239A35157484B);
+            if (_RenderRadiusOffset == -1) _RenderRadiusOffset = Schema.GetOffset(0xB25239A35157484B);
             var instance = _RenderRadiusInstance ??= new CParticleCollectionRendererFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RenderRadiusOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RenderRadiusOffset);
             return instance;
         }
     }
-    private static nint? _VertexCountKbOffset;
+    private static nint _VertexCountKbOffset = -1;
 
     public ref uint VertexCountKb
     {
         get
         {
-            _VertexCountKbOffset = _VertexCountKbOffset ?? Schema.GetOffset(0xB25239A36064907B);
-            return ref _Handle.AsRef<uint>(_VertexCountKbOffset!.Value);
+            if (_VertexCountKbOffset == -1) _VertexCountKbOffset = Schema.GetOffset(0xB25239A36064907B);
+            return ref _Handle.AsRef<uint>(_VertexCountKbOffset);
         }
     }
-    private static nint? _IndexCountKbOffset;
+    private static nint _IndexCountKbOffset = -1;
 
     public ref uint IndexCountKb
     {
         get
         {
-            _IndexCountKbOffset = _IndexCountKbOffset ?? Schema.GetOffset(0xB25239A36CDECFF7);
-            return ref _Handle.AsRef<uint>(_IndexCountKbOffset!.Value);
+            if (_IndexCountKbOffset == -1) _IndexCountKbOffset = Schema.GetOffset(0xB25239A36CDECFF7);
+            return ref _Handle.AsRef<uint>(_IndexCountKbOffset);
         }
     }
-    private static nint? _ScaleCPOffset;
+    private static nint _ScaleCPOffset = -1;
 
     public ref int ScaleCP
     {
         get
         {
-            _ScaleCPOffset = _ScaleCPOffset ?? Schema.GetOffset(0xB25239A3DE3CC5E6);
-            return ref _Handle.AsRef<int>(_ScaleCPOffset!.Value);
+            if (_ScaleCPOffset == -1) _ScaleCPOffset = Schema.GetOffset(0xB25239A3DE3CC5E6);
+            return ref _Handle.AsRef<int>(_ScaleCPOffset);
         }
     }
-    private static nint? _MaterialVarsOffset;
+    private static nint _MaterialVarsOffset = -1;
 
     public ref CUtlVector<MaterialVariable_t> MaterialVars
     {
         get
         {
-            _MaterialVarsOffset = _MaterialVarsOffset ?? Schema.GetOffset(0xB25239A3FA861D66);
-            return ref _Handle.AsRef<CUtlVector<MaterialVariable_t>>(_MaterialVarsOffset!.Value);
+            if (_MaterialVarsOffset == -1) _MaterialVarsOffset = Schema.GetOffset(0xB25239A3FA861D66);
+            return ref _Handle.AsRef<CUtlVector<MaterialVariable_t>>(_MaterialVarsOffset);
         }
     }
-    private static nint? _MaterialOffset;
+    private static nint _MaterialOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material
     {
         get
         {
-            _MaterialOffset = _MaterialOffset ?? Schema.GetOffset(0xB25239A3888CE42E);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+            if (_MaterialOffset == -1) _MaterialOffset = Schema.GetOffset(0xB25239A3888CE42E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset);
         }
     }
 

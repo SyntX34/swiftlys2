@@ -16,14 +16,14 @@ internal partial class CPulseCell_Test_MultiOutflow_WithParams_Yielding__CursorS
 {
     public CPulseCell_Test_MultiOutflow_WithParams_Yielding__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _TestStepOffset;
+    private static nint _TestStepOffset = -1;
 
     public ref int TestStep
     {
         get
         {
-            _TestStepOffset = _TestStepOffset ?? Schema.GetOffset(0xE579E02F4D61CC93);
-            return ref _Handle.AsRef<int>(_TestStepOffset!.Value);
+            if (_TestStepOffset == -1) _TestStepOffset = Schema.GetOffset(0xE579E02F4D61CC93);
+            return ref _Handle.AsRef<int>(_TestStepOffset);
         }
     }
 

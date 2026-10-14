@@ -16,34 +16,34 @@ internal partial class CTwistConstraintImpl : CBaseConstraintImpl, CTwistConstra
 {
     public CTwistConstraintImpl(nint handle) : base(handle) { }
 
-    private static nint? _InverseOffset;
+    private static nint _InverseOffset = -1;
 
     public ref bool Inverse
     {
         get
         {
-            _InverseOffset = _InverseOffset ?? Schema.GetOffset(0xA3EC320A0DE8C163);
-            return ref _Handle.AsRef<bool>(_InverseOffset!.Value);
+            if (_InverseOffset == -1) _InverseOffset = Schema.GetOffset(0xA3EC320A0DE8C163);
+            return ref _Handle.AsRef<bool>(_InverseOffset);
         }
     }
-    private static nint? _ParentBindRotationOffset;
+    private static nint _ParentBindRotationOffset = -1;
 
     public ref Quaternion ParentBindRotation
     {
         get
         {
-            _ParentBindRotationOffset = _ParentBindRotationOffset ?? Schema.GetOffset(0xA3EC320AE46C74E5);
-            return ref _Handle.AsRef<Quaternion>(_ParentBindRotationOffset!.Value);
+            if (_ParentBindRotationOffset == -1) _ParentBindRotationOffset = Schema.GetOffset(0xA3EC320AE46C74E5);
+            return ref _Handle.AsRef<Quaternion>(_ParentBindRotationOffset);
         }
     }
-    private static nint? _ChildBindRotationOffset;
+    private static nint _ChildBindRotationOffset = -1;
 
     public ref Quaternion ChildBindRotation
     {
         get
         {
-            _ChildBindRotationOffset = _ChildBindRotationOffset ?? Schema.GetOffset(0xA3EC320A0FCDDACB);
-            return ref _Handle.AsRef<Quaternion>(_ChildBindRotationOffset!.Value);
+            if (_ChildBindRotationOffset == -1) _ChildBindRotationOffset = Schema.GetOffset(0xA3EC320A0FCDDACB);
+            return ref _Handle.AsRef<Quaternion>(_ChildBindRotationOffset);
         }
     }
 

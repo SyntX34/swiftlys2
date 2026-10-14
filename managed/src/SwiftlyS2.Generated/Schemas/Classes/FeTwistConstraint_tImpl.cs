@@ -16,44 +16,44 @@ internal partial class FeTwistConstraint_tImpl : SchemaClass, FeTwistConstraint_
 {
     public FeTwistConstraint_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeOrientOffset;
+    private static nint _NodeOrientOffset = -1;
 
     public ref ushort NodeOrient
     {
         get
         {
-            _NodeOrientOffset = _NodeOrientOffset ?? Schema.GetOffset(0x4BD7707B59026ED8);
-            return ref _Handle.AsRef<ushort>(_NodeOrientOffset!.Value);
+            if (_NodeOrientOffset == -1) _NodeOrientOffset = Schema.GetOffset(0x4BD7707B59026ED8);
+            return ref _Handle.AsRef<ushort>(_NodeOrientOffset);
         }
     }
-    private static nint? _NodeEndOffset;
+    private static nint _NodeEndOffset = -1;
 
     public ref ushort NodeEnd
     {
         get
         {
-            _NodeEndOffset = _NodeEndOffset ?? Schema.GetOffset(0x4BD7707B8A00317E);
-            return ref _Handle.AsRef<ushort>(_NodeEndOffset!.Value);
+            if (_NodeEndOffset == -1) _NodeEndOffset = Schema.GetOffset(0x4BD7707B8A00317E);
+            return ref _Handle.AsRef<ushort>(_NodeEndOffset);
         }
     }
-    private static nint? _TwistRelaxOffset;
+    private static nint _TwistRelaxOffset = -1;
 
     public ref float TwistRelax
     {
         get
         {
-            _TwistRelaxOffset = _TwistRelaxOffset ?? Schema.GetOffset(0x4BD7707B9E4510FC);
-            return ref _Handle.AsRef<float>(_TwistRelaxOffset!.Value);
+            if (_TwistRelaxOffset == -1) _TwistRelaxOffset = Schema.GetOffset(0x4BD7707B9E4510FC);
+            return ref _Handle.AsRef<float>(_TwistRelaxOffset);
         }
     }
-    private static nint? _SwingRelaxOffset;
+    private static nint _SwingRelaxOffset = -1;
 
     public ref float SwingRelax
     {
         get
         {
-            _SwingRelaxOffset = _SwingRelaxOffset ?? Schema.GetOffset(0x4BD7707BE4722697);
-            return ref _Handle.AsRef<float>(_SwingRelaxOffset!.Value);
+            if (_SwingRelaxOffset == -1) _SwingRelaxOffset = Schema.GetOffset(0x4BD7707BE4722697);
+            return ref _Handle.AsRef<float>(_SwingRelaxOffset);
         }
     }
 

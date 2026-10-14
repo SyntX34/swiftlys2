@@ -16,49 +16,49 @@ internal partial class CConstantForceControllerImpl : SchemaClass, CConstantForc
 {
     public CConstantForceControllerImpl(nint handle) : base(handle) { }
 
-    private static nint? _LinearOffset;
+    private static nint _LinearOffset = -1;
 
     public ref Vector Linear
     {
         get
         {
-            _LinearOffset = _LinearOffset ?? Schema.GetOffset(0x37030A8D6B6D1260);
-            return ref _Handle.AsRef<Vector>(_LinearOffset!.Value);
+            if (_LinearOffset == -1) _LinearOffset = Schema.GetOffset(0x37030A8D6B6D1260);
+            return ref _Handle.AsRef<Vector>(_LinearOffset);
         }
     }
-    private static nint? _AngularOffset;
+    private static nint _AngularOffset = -1;
     private SchemaUntypedField? _AngularInstance;
 
     public SchemaUntypedField Angular
     {
         get
         {
-            _AngularOffset = _AngularOffset ?? Schema.GetOffset(0x37030A8D74E0EB09);
+            if (_AngularOffset == -1) _AngularOffset = Schema.GetOffset(0x37030A8D74E0EB09);
             var instance = _AngularInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AngularOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AngularOffset);
             return instance;
         }
     }
-    private static nint? _LinearSaveOffset;
+    private static nint _LinearSaveOffset = -1;
 
     public ref Vector LinearSave
     {
         get
         {
-            _LinearSaveOffset = _LinearSaveOffset ?? Schema.GetOffset(0x37030A8D96B9953D);
-            return ref _Handle.AsRef<Vector>(_LinearSaveOffset!.Value);
+            if (_LinearSaveOffset == -1) _LinearSaveOffset = Schema.GetOffset(0x37030A8D96B9953D);
+            return ref _Handle.AsRef<Vector>(_LinearSaveOffset);
         }
     }
-    private static nint? _AngularSaveOffset;
+    private static nint _AngularSaveOffset = -1;
     private SchemaUntypedField? _AngularSaveInstance;
 
     public SchemaUntypedField AngularSave
     {
         get
         {
-            _AngularSaveOffset = _AngularSaveOffset ?? Schema.GetOffset(0x37030A8D8294323C);
+            if (_AngularSaveOffset == -1) _AngularSaveOffset = Schema.GetOffset(0x37030A8D8294323C);
             var instance = _AngularSaveInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AngularSaveOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AngularSaveOffset);
             return instance;
         }
     }

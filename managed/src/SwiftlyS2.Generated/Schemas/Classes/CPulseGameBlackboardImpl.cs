@@ -16,34 +16,34 @@ internal partial class CPulseGameBlackboardImpl : CBaseEntityImpl, CPulseGameBla
 {
     public CPulseGameBlackboardImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrGraphNameOffset;
+    private static nint _StrGraphNameOffset = -1;
 
     public string StrGraphName
     {
         get
         {
-            _StrGraphNameOffset = _StrGraphNameOffset ?? Schema.GetOffset(0xF9A17A20C99E48AF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrGraphNameOffset!.Value));
+            if (_StrGraphNameOffset == -1) _StrGraphNameOffset = Schema.GetOffset(0xF9A17A20C99E48AF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrGraphNameOffset));
         }
         set
         {
-            _StrGraphNameOffset = _StrGraphNameOffset ?? Schema.GetOffset(0xF9A17A20C99E48AF);
-            Schema.SetCUtlString(_Handle, _StrGraphNameOffset!.Value, value);
+            if (_StrGraphNameOffset == -1) _StrGraphNameOffset = Schema.GetOffset(0xF9A17A20C99E48AF);
+            Schema.SetCUtlString(_Handle, _StrGraphNameOffset, value);
         }
     }
-    private static nint? _StrStateBlobOffset;
+    private static nint _StrStateBlobOffset = -1;
 
     public string StrStateBlob
     {
         get
         {
-            _StrStateBlobOffset = _StrStateBlobOffset ?? Schema.GetOffset(0xF9A17A2046708C2A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrStateBlobOffset!.Value));
+            if (_StrStateBlobOffset == -1) _StrStateBlobOffset = Schema.GetOffset(0xF9A17A2046708C2A);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrStateBlobOffset));
         }
         set
         {
-            _StrStateBlobOffset = _StrStateBlobOffset ?? Schema.GetOffset(0xF9A17A2046708C2A);
-            Schema.SetCUtlString(_Handle, _StrStateBlobOffset!.Value, value);
+            if (_StrStateBlobOffset == -1) _StrStateBlobOffset = Schema.GetOffset(0xF9A17A2046708C2A);
+            Schema.SetCUtlString(_Handle, _StrStateBlobOffset, value);
         }
     }
 

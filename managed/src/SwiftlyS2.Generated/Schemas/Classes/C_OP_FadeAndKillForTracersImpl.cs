@@ -16,64 +16,64 @@ internal partial class C_OP_FadeAndKillForTracersImpl : CParticleFunctionOperato
 {
     public C_OP_FadeAndKillForTracersImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartFadeInTimeOffset;
+    private static nint _StartFadeInTimeOffset = -1;
 
     public ref float StartFadeInTime
     {
         get
         {
-            _StartFadeInTimeOffset = _StartFadeInTimeOffset ?? Schema.GetOffset(0x776267EF39639779);
-            return ref _Handle.AsRef<float>(_StartFadeInTimeOffset!.Value);
+            if (_StartFadeInTimeOffset == -1) _StartFadeInTimeOffset = Schema.GetOffset(0x776267EF39639779);
+            return ref _Handle.AsRef<float>(_StartFadeInTimeOffset);
         }
     }
-    private static nint? _EndFadeInTimeOffset;
+    private static nint _EndFadeInTimeOffset = -1;
 
     public ref float EndFadeInTime
     {
         get
         {
-            _EndFadeInTimeOffset = _EndFadeInTimeOffset ?? Schema.GetOffset(0x776267EF36A35C84);
-            return ref _Handle.AsRef<float>(_EndFadeInTimeOffset!.Value);
+            if (_EndFadeInTimeOffset == -1) _EndFadeInTimeOffset = Schema.GetOffset(0x776267EF36A35C84);
+            return ref _Handle.AsRef<float>(_EndFadeInTimeOffset);
         }
     }
-    private static nint? _StartFadeOutTimeOffset;
+    private static nint _StartFadeOutTimeOffset = -1;
 
     public ref float StartFadeOutTime
     {
         get
         {
-            _StartFadeOutTimeOffset = _StartFadeOutTimeOffset ?? Schema.GetOffset(0x776267EF6ABCF324);
-            return ref _Handle.AsRef<float>(_StartFadeOutTimeOffset!.Value);
+            if (_StartFadeOutTimeOffset == -1) _StartFadeOutTimeOffset = Schema.GetOffset(0x776267EF6ABCF324);
+            return ref _Handle.AsRef<float>(_StartFadeOutTimeOffset);
         }
     }
-    private static nint? _EndFadeOutTimeOffset;
+    private static nint _EndFadeOutTimeOffset = -1;
 
     public ref float EndFadeOutTime
     {
         get
         {
-            _EndFadeOutTimeOffset = _EndFadeOutTimeOffset ?? Schema.GetOffset(0x776267EFFE87D7E7);
-            return ref _Handle.AsRef<float>(_EndFadeOutTimeOffset!.Value);
+            if (_EndFadeOutTimeOffset == -1) _EndFadeOutTimeOffset = Schema.GetOffset(0x776267EFFE87D7E7);
+            return ref _Handle.AsRef<float>(_EndFadeOutTimeOffset);
         }
     }
-    private static nint? _StartAlphaOffset;
+    private static nint _StartAlphaOffset = -1;
 
     public ref float StartAlpha
     {
         get
         {
-            _StartAlphaOffset = _StartAlphaOffset ?? Schema.GetOffset(0x776267EF6A7A5D0B);
-            return ref _Handle.AsRef<float>(_StartAlphaOffset!.Value);
+            if (_StartAlphaOffset == -1) _StartAlphaOffset = Schema.GetOffset(0x776267EF6A7A5D0B);
+            return ref _Handle.AsRef<float>(_StartAlphaOffset);
         }
     }
-    private static nint? _EndAlphaOffset;
+    private static nint _EndAlphaOffset = -1;
 
     public ref float EndAlpha
     {
         get
         {
-            _EndAlphaOffset = _EndAlphaOffset ?? Schema.GetOffset(0x776267EF7A639CC0);
-            return ref _Handle.AsRef<float>(_EndAlphaOffset!.Value);
+            if (_EndAlphaOffset == -1) _EndAlphaOffset = Schema.GetOffset(0x776267EF7A639CC0);
+            return ref _Handle.AsRef<float>(_EndAlphaOffset);
         }
     }
 

@@ -16,34 +16,34 @@ internal partial class C_OP_DampenToCPImpl : CParticleFunctionOperatorImpl, C_OP
 {
     public C_OP_DampenToCPImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xB04699CE3F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0xB04699CE3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _RangeOffset;
+    private static nint _RangeOffset = -1;
 
     public ref float Range
     {
         get
         {
-            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0xB04699CE3FC92844);
-            return ref _Handle.AsRef<float>(_RangeOffset!.Value);
+            if (_RangeOffset == -1) _RangeOffset = Schema.GetOffset(0xB04699CE3FC92844);
+            return ref _Handle.AsRef<float>(_RangeOffset);
         }
     }
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
 
     public ref float Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xB04699CEB731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xB04699CEB731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset);
         }
     }
 

@@ -16,44 +16,44 @@ internal partial class CSoundEnvelopeImpl : SchemaClass, CSoundEnvelope
 {
     public CSoundEnvelopeImpl(nint handle) : base(handle) { }
 
-    private static nint? _CurrentOffset;
+    private static nint _CurrentOffset = -1;
 
     public ref float Current
     {
         get
         {
-            _CurrentOffset = _CurrentOffset ?? Schema.GetOffset(0xDF974C315AD334FA);
-            return ref _Handle.AsRef<float>(_CurrentOffset!.Value);
+            if (_CurrentOffset == -1) _CurrentOffset = Schema.GetOffset(0xDF974C315AD334FA);
+            return ref _Handle.AsRef<float>(_CurrentOffset);
         }
     }
-    private static nint? _TargetOffset;
+    private static nint _TargetOffset = -1;
 
     public ref float Target
     {
         get
         {
-            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xDF974C31FA08A9E8);
-            return ref _Handle.AsRef<float>(_TargetOffset!.Value);
+            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0xDF974C31FA08A9E8);
+            return ref _Handle.AsRef<float>(_TargetOffset);
         }
     }
-    private static nint? _RateOffset;
+    private static nint _RateOffset = -1;
 
     public ref float Rate
     {
         get
         {
-            _RateOffset = _RateOffset ?? Schema.GetOffset(0xDF974C316C5ECD07);
-            return ref _Handle.AsRef<float>(_RateOffset!.Value);
+            if (_RateOffset == -1) _RateOffset = Schema.GetOffset(0xDF974C316C5ECD07);
+            return ref _Handle.AsRef<float>(_RateOffset);
         }
     }
-    private static nint? _ForceupdateOffset;
+    private static nint _ForceupdateOffset = -1;
 
     public ref bool Forceupdate
     {
         get
         {
-            _ForceupdateOffset = _ForceupdateOffset ?? Schema.GetOffset(0xDF974C3131B01C25);
-            return ref _Handle.AsRef<bool>(_ForceupdateOffset!.Value);
+            if (_ForceupdateOffset == -1) _ForceupdateOffset = Schema.GetOffset(0xDF974C3131B01C25);
+            return ref _Handle.AsRef<bool>(_ForceupdateOffset);
         }
     }
 

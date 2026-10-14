@@ -60,7 +60,7 @@ void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
         auto& transmittingBits = player->GetBlockedTransmittingBits();
         QueueLockGuard lock(transmittingBits.mutex);
 
-        transmittingBits.blockedTransmitBits.Clear(entindex);
+        transmittingBits.Unblock(entindex);
     }
 
     if (g_pOnEntityDeletedCallback)

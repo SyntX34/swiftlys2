@@ -16,34 +16,34 @@ internal partial class C_EntityFlameImpl : C_BaseEntityImpl, C_EntityFlame
 {
     public C_EntityFlameImpl(nint handle) : base(handle) { }
 
-    private static nint? _EntAttachedOffset;
+    private static nint _EntAttachedOffset = -1;
 
     public ref CHandle<C_BaseEntity> EntAttached
     {
         get
         {
-            _EntAttachedOffset = _EntAttachedOffset ?? Schema.GetOffset(0x1A59DEA309F89DF0);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntAttachedOffset!.Value);
+            if (_EntAttachedOffset == -1) _EntAttachedOffset = Schema.GetOffset(0x1A59DEA309F89DF0);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntAttachedOffset);
         }
     }
-    private static nint? _OldAttachedOffset;
+    private static nint _OldAttachedOffset = -1;
 
     public ref CHandle<C_BaseEntity> OldAttached
     {
         get
         {
-            _OldAttachedOffset = _OldAttachedOffset ?? Schema.GetOffset(0x1A59DEA39948EDC4);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_OldAttachedOffset!.Value);
+            if (_OldAttachedOffset == -1) _OldAttachedOffset = Schema.GetOffset(0x1A59DEA39948EDC4);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_OldAttachedOffset);
         }
     }
-    private static nint? _CheapEffectOffset;
+    private static nint _CheapEffectOffset = -1;
 
     public ref bool CheapEffect
     {
         get
         {
-            _CheapEffectOffset = _CheapEffectOffset ?? Schema.GetOffset(0x1A59DEA3DF421B51);
-            return ref _Handle.AsRef<bool>(_CheapEffectOffset!.Value);
+            if (_CheapEffectOffset == -1) _CheapEffectOffset = Schema.GetOffset(0x1A59DEA3DF421B51);
+            return ref _Handle.AsRef<bool>(_CheapEffectOffset);
         }
     }
 

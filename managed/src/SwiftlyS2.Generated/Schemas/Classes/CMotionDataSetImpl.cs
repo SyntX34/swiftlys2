@@ -16,24 +16,24 @@ internal partial class CMotionDataSetImpl : SchemaClass, CMotionDataSet
 {
     public CMotionDataSetImpl(nint handle) : base(handle) { }
 
-    private static nint? _GroupsOffset;
+    private static nint _GroupsOffset = -1;
 
     public ref CUtlVector<CMotionGraphGroup> Groups
     {
         get
         {
-            _GroupsOffset = _GroupsOffset ?? Schema.GetOffset(0x8AC1A050641FFE0D);
-            return ref _Handle.AsRef<CUtlVector<CMotionGraphGroup>>(_GroupsOffset!.Value);
+            if (_GroupsOffset == -1) _GroupsOffset = Schema.GetOffset(0x8AC1A050641FFE0D);
+            return ref _Handle.AsRef<CUtlVector<CMotionGraphGroup>>(_GroupsOffset);
         }
     }
-    private static nint? _DimensionCountOffset;
+    private static nint _DimensionCountOffset = -1;
 
     public ref int DimensionCount
     {
         get
         {
-            _DimensionCountOffset = _DimensionCountOffset ?? Schema.GetOffset(0x8AC1A05036656C8E);
-            return ref _Handle.AsRef<int>(_DimensionCountOffset!.Value);
+            if (_DimensionCountOffset == -1) _DimensionCountOffset = Schema.GetOffset(0x8AC1A05036656C8E);
+            return ref _Handle.AsRef<int>(_DimensionCountOffset);
         }
     }
 

@@ -16,34 +16,34 @@ internal partial class CVoiceContainerEnvelopeAnalyzerImpl : CVoiceContainerAnal
 {
     public CVoiceContainerEnvelopeAnalyzerImpl(nint handle) : base(handle) { }
 
-    private static nint? _ModeOffset;
+    private static nint _ModeOffset = -1;
 
     public ref EMode_t Mode
     {
         get
         {
-            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xC5D0FF1990FD5BB2);
-            return ref _Handle.AsRef<EMode_t>(_ModeOffset!.Value);
+            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0xC5D0FF1990FD5BB2);
+            return ref _Handle.AsRef<EMode_t>(_ModeOffset);
         }
     }
-    private static nint? _AnalysisWindowMsOffset;
+    private static nint _AnalysisWindowMsOffset = -1;
 
     public ref float AnalysisWindowMs
     {
         get
         {
-            _AnalysisWindowMsOffset = _AnalysisWindowMsOffset ?? Schema.GetOffset(0xC5D0FF198349BF07);
-            return ref _Handle.AsRef<float>(_AnalysisWindowMsOffset!.Value);
+            if (_AnalysisWindowMsOffset == -1) _AnalysisWindowMsOffset = Schema.GetOffset(0xC5D0FF198349BF07);
+            return ref _Handle.AsRef<float>(_AnalysisWindowMsOffset);
         }
     }
-    private static nint? _ThresholdOffset;
+    private static nint _ThresholdOffset = -1;
 
     public ref float Threshold
     {
         get
         {
-            _ThresholdOffset = _ThresholdOffset ?? Schema.GetOffset(0xC5D0FF197872FFEA);
-            return ref _Handle.AsRef<float>(_ThresholdOffset!.Value);
+            if (_ThresholdOffset == -1) _ThresholdOffset = Schema.GetOffset(0xC5D0FF197872FFEA);
+            return ref _Handle.AsRef<float>(_ThresholdOffset);
         }
     }
 

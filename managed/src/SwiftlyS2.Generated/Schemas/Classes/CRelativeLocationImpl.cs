@@ -16,44 +16,44 @@ internal partial class CRelativeLocationImpl : SchemaClass, CRelativeLocation
 {
     public CRelativeLocationImpl(nint handle) : base(handle) { }
 
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref RelativeLocationType_t Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xA25CE2418ED6D5CD);
-            return ref _Handle.AsRef<RelativeLocationType_t>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0xA25CE2418ED6D5CD);
+            return ref _Handle.AsRef<RelativeLocationType_t>(_TypeOffset);
         }
     }
-    private static nint? _RelativeOffsetOffset;
+    private static nint _RelativeOffsetOffset = -1;
 
     public ref Vector RelativeOffset
     {
         get
         {
-            _RelativeOffsetOffset = _RelativeOffsetOffset ?? Schema.GetOffset(0xA25CE241B6F2D296);
-            return ref _Handle.AsRef<Vector>(_RelativeOffsetOffset!.Value);
+            if (_RelativeOffsetOffset == -1) _RelativeOffsetOffset = Schema.GetOffset(0xA25CE241B6F2D296);
+            return ref _Handle.AsRef<Vector>(_RelativeOffsetOffset);
         }
     }
-    private static nint? _WorldSpacePosOffset;
+    private static nint _WorldSpacePosOffset = -1;
 
     public ref Vector WorldSpacePos
     {
         get
         {
-            _WorldSpacePosOffset = _WorldSpacePosOffset ?? Schema.GetOffset(0xA25CE2410A43E96B);
-            return ref _Handle.AsRef<Vector>(_WorldSpacePosOffset!.Value);
+            if (_WorldSpacePosOffset == -1) _WorldSpacePosOffset = Schema.GetOffset(0xA25CE2410A43E96B);
+            return ref _Handle.AsRef<Vector>(_WorldSpacePosOffset);
         }
     }
-    private static nint? _EntityOffset;
+    private static nint _EntityOffset = -1;
 
     public ref CHandle<CBaseEntity> Entity
     {
         get
         {
-            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xA25CE2416EBADCB0);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0xA25CE2416EBADCB0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset);
         }
     }
 

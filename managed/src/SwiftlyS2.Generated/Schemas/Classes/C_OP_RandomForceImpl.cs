@@ -16,24 +16,24 @@ internal partial class C_OP_RandomForceImpl : CParticleFunctionForceImpl, C_OP_R
 {
     public C_OP_RandomForceImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinForceOffset;
+    private static nint _MinForceOffset = -1;
 
     public ref Vector MinForce
     {
         get
         {
-            _MinForceOffset = _MinForceOffset ?? Schema.GetOffset(0x4BB81519FA8D2AE2);
-            return ref _Handle.AsRef<Vector>(_MinForceOffset!.Value);
+            if (_MinForceOffset == -1) _MinForceOffset = Schema.GetOffset(0x4BB81519FA8D2AE2);
+            return ref _Handle.AsRef<Vector>(_MinForceOffset);
         }
     }
-    private static nint? _MaxForceOffset;
+    private static nint _MaxForceOffset = -1;
 
     public ref Vector MaxForce
     {
         get
         {
-            _MaxForceOffset = _MaxForceOffset ?? Schema.GetOffset(0x4BB815192324D8D8);
-            return ref _Handle.AsRef<Vector>(_MaxForceOffset!.Value);
+            if (_MaxForceOffset == -1) _MaxForceOffset = Schema.GetOffset(0x4BB815192324D8D8);
+            return ref _Handle.AsRef<Vector>(_MaxForceOffset);
         }
     }
 

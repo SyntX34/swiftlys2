@@ -209,16 +209,14 @@ void Bridge_GameEvents_FireEventToClient(void* event, int playerid)
     if (!listener) return;
 
     if (!g_pGameEventManager->GetGameEventManager()->FindListener(listener, ((IGameEvent*)event)->GetName()))
-    {
-        return g_pCrashReporter->ReportPreventionIncident("GameEvents", fmt::format("Tried to fire event '{}' but the client isn't listening to this event.", ((IGameEvent*)event)->GetName()));
-    }
+        return;
 
     listener->FireGameEvent((IGameEvent*)event);
 }
 
 bool Bridge_GameEvents_IsPlayerListeningToEventName(int playerid, const char* eventName)
 {
-    auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
+    static auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
     if (!pListenerSig) return false;
 
     auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(playerid);
@@ -229,7 +227,7 @@ bool Bridge_GameEvents_IsPlayerListeningToEventName(int playerid, const char* ev
 
 bool Bridge_GameEvents_IsPlayerListeningToEvent(int playerid, void* event)
 {
-    auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
+    static auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
     if (!pListenerSig) return false;
 
     auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(playerid);

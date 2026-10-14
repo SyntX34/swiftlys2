@@ -16,126 +16,126 @@ internal partial class CAnimationLayerImpl : SchemaClass, CAnimationLayer
 {
     public CAnimationLayerImpl(nint handle) : base(handle) { }
 
-    private static nint? _SequenceOffset;
+    private static nint _SequenceOffset = -1;
     private SchemaUntypedField? _SequenceInstance;
 
     public SchemaUntypedField Sequence
     {
         get
         {
-            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x5FD3D565E0A0598E);
+            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0x5FD3D565E0A0598E);
             var instance = _SequenceInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset);
             return instance;
         }
     }
-    private static nint? _PrevCycleOffset;
+    private static nint _PrevCycleOffset = -1;
 
     public ref float PrevCycle
     {
         get
         {
-            _PrevCycleOffset = _PrevCycleOffset ?? Schema.GetOffset(0x5FD3D565AA0F5CF4);
-            return ref _Handle.AsRef<float>(_PrevCycleOffset!.Value);
+            if (_PrevCycleOffset == -1) _PrevCycleOffset = Schema.GetOffset(0x5FD3D565AA0F5CF4);
+            return ref _Handle.AsRef<float>(_PrevCycleOffset);
         }
     }
-    private static nint? _CycleOffset;
+    private static nint _CycleOffset = -1;
     private SchemaUntypedField? _CycleInstance;
 
     public SchemaUntypedField Cycle
     {
         get
         {
-            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x5FD3D5650C77829F);
+            if (_CycleOffset == -1) _CycleOffset = Schema.GetOffset(0x5FD3D5650C77829F);
             var instance = _CycleInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CycleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CycleOffset);
             return instance;
         }
     }
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
     private SchemaUntypedField? _WeightInstance;
 
     public SchemaUntypedField Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x5FD3D5657B81E7AB);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0x5FD3D5657B81E7AB);
             var instance = _WeightInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _WeightOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WeightOffset);
             return instance;
         }
     }
-    private static nint? _OrderOffset;
+    private static nint _OrderOffset = -1;
     private SchemaUntypedField? _OrderInstance;
 
     public SchemaUntypedField Order
     {
         get
         {
-            _OrderOffset = _OrderOffset ?? Schema.GetOffset(0x5FD3D5656B8529A3);
+            if (_OrderOffset == -1) _OrderOffset = Schema.GetOffset(0x5FD3D5656B8529A3);
             var instance = _OrderInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OrderOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OrderOffset);
             return instance;
         }
     }
-    private static nint? _LoopingOffset;
+    private static nint _LoopingOffset = -1;
 
     public ref bool Looping
     {
         get
         {
-            _LoopingOffset = _LoopingOffset ?? Schema.GetOffset(0x5FD3D56525449B0D);
-            return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
+            if (_LoopingOffset == -1) _LoopingOffset = Schema.GetOffset(0x5FD3D56525449B0D);
+            return ref _Handle.AsRef<bool>(_LoopingOffset);
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref int Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x5FD3D565CE6E9C28);
-            return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x5FD3D565CE6E9C28);
+            return ref _Handle.AsRef<int>(_FlagsOffset);
         }
     }
-    private static nint? _SequenceFinishedOffset;
+    private static nint _SequenceFinishedOffset = -1;
 
     public ref bool SequenceFinished
     {
         get
         {
-            _SequenceFinishedOffset = _SequenceFinishedOffset ?? Schema.GetOffset(0x5FD3D5655DB8EB16);
-            return ref _Handle.AsRef<bool>(_SequenceFinishedOffset!.Value);
+            if (_SequenceFinishedOffset == -1) _SequenceFinishedOffset = Schema.GetOffset(0x5FD3D5655DB8EB16);
+            return ref _Handle.AsRef<bool>(_SequenceFinishedOffset);
         }
     }
-    private static nint? _KillRateOffset;
+    private static nint _KillRateOffset = -1;
 
     public ref float KillRate
     {
         get
         {
-            _KillRateOffset = _KillRateOffset ?? Schema.GetOffset(0x5FD3D565ABF77E45);
-            return ref _Handle.AsRef<float>(_KillRateOffset!.Value);
+            if (_KillRateOffset == -1) _KillRateOffset = Schema.GetOffset(0x5FD3D565ABF77E45);
+            return ref _Handle.AsRef<float>(_KillRateOffset);
         }
     }
-    private static nint? _KillDelayOffset;
+    private static nint _KillDelayOffset = -1;
 
     public ref float KillDelay
     {
         get
         {
-            _KillDelayOffset = _KillDelayOffset ?? Schema.GetOffset(0x5FD3D565233CFE3E);
-            return ref _Handle.AsRef<float>(_KillDelayOffset!.Value);
+            if (_KillDelayOffset == -1) _KillDelayOffset = Schema.GetOffset(0x5FD3D565233CFE3E);
+            return ref _Handle.AsRef<float>(_KillDelayOffset);
         }
     }
-    private static nint? _PriorityOffset;
+    private static nint _PriorityOffset = -1;
 
     public ref int Priority
     {
         get
         {
-            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0x5FD3D565E7EFB335);
-            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+            if (_PriorityOffset == -1) _PriorityOffset = Schema.GetOffset(0x5FD3D565E7EFB335);
+            return ref _Handle.AsRef<int>(_PriorityOffset);
         }
     }
 

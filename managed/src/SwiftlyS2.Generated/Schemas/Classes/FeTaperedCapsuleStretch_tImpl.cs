@@ -16,49 +16,49 @@ internal partial class FeTaperedCapsuleStretch_tImpl : SchemaClass, FeTaperedCap
 {
     public FeTaperedCapsuleStretch_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x627474D0CD6694B9);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x627474D0CD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x627474D0CD6694B9, 2, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeOffset);
             return instance;
         }
     }
-    private static nint? _CollisionMaskOffset;
+    private static nint _CollisionMaskOffset = -1;
 
     public ref ushort CollisionMask
     {
         get
         {
-            _CollisionMaskOffset = _CollisionMaskOffset ?? Schema.GetOffset(0x627474D00ED3454F);
-            return ref _Handle.AsRef<ushort>(_CollisionMaskOffset!.Value);
+            if (_CollisionMaskOffset == -1) _CollisionMaskOffset = Schema.GetOffset(0x627474D00ED3454F);
+            return ref _Handle.AsRef<ushort>(_CollisionMaskOffset);
         }
     }
-    private static nint? _DummyOffset;
+    private static nint _DummyOffset = -1;
 
     public ref ushort Dummy
     {
         get
         {
-            _DummyOffset = _DummyOffset ?? Schema.GetOffset(0x627474D0CD8BAE5F);
-            return ref _Handle.AsRef<ushort>(_DummyOffset!.Value);
+            if (_DummyOffset == -1) _DummyOffset = Schema.GetOffset(0x627474D0CD8BAE5F);
+            return ref _Handle.AsRef<ushort>(_DummyOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
     private SchemaFixedArray<float>? _RadiusInstance;
 
     public ISchemaFixedArray<float> Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x627474D095FBF7AD);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x627474D095FBF7AD);
             var instance = _RadiusInstance ??= new SchemaFixedArray<float>(0, 0x627474D095FBF7AD, 2, 4, 4);
-            instance.DangerousSetHandle(_Handle + _RadiusOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RadiusOffset);
             return instance;
         }
     }

@@ -16,430 +16,430 @@ internal partial class CompositeMaterialInputLooseVariable_tImpl : SchemaClass, 
 {
     public CompositeMaterialInputLooseVariable_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrNameOffset;
+    private static nint _StrNameOffset = -1;
 
     public string StrName
     {
         get
         {
-            _StrNameOffset = _StrNameOffset ?? Schema.GetOffset(0xAB8A0BE8BF1A7E13);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrNameOffset!.Value));
+            if (_StrNameOffset == -1) _StrNameOffset = Schema.GetOffset(0xAB8A0BE8BF1A7E13);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrNameOffset));
         }
         set
         {
-            _StrNameOffset = _StrNameOffset ?? Schema.GetOffset(0xAB8A0BE8BF1A7E13);
-            Schema.SetCUtlString(_Handle, _StrNameOffset!.Value, value);
+            if (_StrNameOffset == -1) _StrNameOffset = Schema.GetOffset(0xAB8A0BE8BF1A7E13);
+            Schema.SetCUtlString(_Handle, _StrNameOffset, value);
         }
     }
-    private static nint? _ExposeExternallyOffset;
+    private static nint _ExposeExternallyOffset = -1;
 
     public ref bool ExposeExternally
     {
         get
         {
-            _ExposeExternallyOffset = _ExposeExternallyOffset ?? Schema.GetOffset(0xAB8A0BE852CA5AD1);
-            return ref _Handle.AsRef<bool>(_ExposeExternallyOffset!.Value);
+            if (_ExposeExternallyOffset == -1) _ExposeExternallyOffset = Schema.GetOffset(0xAB8A0BE852CA5AD1);
+            return ref _Handle.AsRef<bool>(_ExposeExternallyOffset);
         }
     }
-    private static nint? _StrExposedFriendlyNameOffset;
+    private static nint _StrExposedFriendlyNameOffset = -1;
 
     public string StrExposedFriendlyName
     {
         get
         {
-            _StrExposedFriendlyNameOffset = _StrExposedFriendlyNameOffset ?? Schema.GetOffset(0xAB8A0BE89897332C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrExposedFriendlyNameOffset!.Value));
+            if (_StrExposedFriendlyNameOffset == -1) _StrExposedFriendlyNameOffset = Schema.GetOffset(0xAB8A0BE89897332C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrExposedFriendlyNameOffset));
         }
         set
         {
-            _StrExposedFriendlyNameOffset = _StrExposedFriendlyNameOffset ?? Schema.GetOffset(0xAB8A0BE89897332C);
-            Schema.SetCUtlString(_Handle, _StrExposedFriendlyNameOffset!.Value, value);
+            if (_StrExposedFriendlyNameOffset == -1) _StrExposedFriendlyNameOffset = Schema.GetOffset(0xAB8A0BE89897332C);
+            Schema.SetCUtlString(_Handle, _StrExposedFriendlyNameOffset, value);
         }
     }
-    private static nint? _StrExposedFriendlyGroupNameOffset;
+    private static nint _StrExposedFriendlyGroupNameOffset = -1;
 
     public string StrExposedFriendlyGroupName
     {
         get
         {
-            _StrExposedFriendlyGroupNameOffset = _StrExposedFriendlyGroupNameOffset ?? Schema.GetOffset(0xAB8A0BE8FD28A195);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrExposedFriendlyGroupNameOffset!.Value));
+            if (_StrExposedFriendlyGroupNameOffset == -1) _StrExposedFriendlyGroupNameOffset = Schema.GetOffset(0xAB8A0BE8FD28A195);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrExposedFriendlyGroupNameOffset));
         }
         set
         {
-            _StrExposedFriendlyGroupNameOffset = _StrExposedFriendlyGroupNameOffset ?? Schema.GetOffset(0xAB8A0BE8FD28A195);
-            Schema.SetCUtlString(_Handle, _StrExposedFriendlyGroupNameOffset!.Value, value);
+            if (_StrExposedFriendlyGroupNameOffset == -1) _StrExposedFriendlyGroupNameOffset = Schema.GetOffset(0xAB8A0BE8FD28A195);
+            Schema.SetCUtlString(_Handle, _StrExposedFriendlyGroupNameOffset, value);
         }
     }
-    private static nint? _ExposedVariableIsFixedRangeOffset;
+    private static nint _ExposedVariableIsFixedRangeOffset = -1;
 
     public ref bool ExposedVariableIsFixedRange
     {
         get
         {
-            _ExposedVariableIsFixedRangeOffset = _ExposedVariableIsFixedRangeOffset ?? Schema.GetOffset(0xAB8A0BE8BD2C8944);
-            return ref _Handle.AsRef<bool>(_ExposedVariableIsFixedRangeOffset!.Value);
+            if (_ExposedVariableIsFixedRangeOffset == -1) _ExposedVariableIsFixedRangeOffset = Schema.GetOffset(0xAB8A0BE8BD2C8944);
+            return ref _Handle.AsRef<bool>(_ExposedVariableIsFixedRangeOffset);
         }
     }
-    private static nint? _StrExposedVisibleWhenTrueOffset;
+    private static nint _StrExposedVisibleWhenTrueOffset = -1;
 
     public string StrExposedVisibleWhenTrue
     {
         get
         {
-            _StrExposedVisibleWhenTrueOffset = _StrExposedVisibleWhenTrueOffset ?? Schema.GetOffset(0xAB8A0BE8088F76C6);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrExposedVisibleWhenTrueOffset!.Value));
+            if (_StrExposedVisibleWhenTrueOffset == -1) _StrExposedVisibleWhenTrueOffset = Schema.GetOffset(0xAB8A0BE8088F76C6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrExposedVisibleWhenTrueOffset));
         }
         set
         {
-            _StrExposedVisibleWhenTrueOffset = _StrExposedVisibleWhenTrueOffset ?? Schema.GetOffset(0xAB8A0BE8088F76C6);
-            Schema.SetCUtlString(_Handle, _StrExposedVisibleWhenTrueOffset!.Value, value);
+            if (_StrExposedVisibleWhenTrueOffset == -1) _StrExposedVisibleWhenTrueOffset = Schema.GetOffset(0xAB8A0BE8088F76C6);
+            Schema.SetCUtlString(_Handle, _StrExposedVisibleWhenTrueOffset, value);
         }
     }
-    private static nint? _StrExposedHiddenWhenTrueOffset;
+    private static nint _StrExposedHiddenWhenTrueOffset = -1;
 
     public string StrExposedHiddenWhenTrue
     {
         get
         {
-            _StrExposedHiddenWhenTrueOffset = _StrExposedHiddenWhenTrueOffset ?? Schema.GetOffset(0xAB8A0BE84FD98974);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrExposedHiddenWhenTrueOffset!.Value));
+            if (_StrExposedHiddenWhenTrueOffset == -1) _StrExposedHiddenWhenTrueOffset = Schema.GetOffset(0xAB8A0BE84FD98974);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrExposedHiddenWhenTrueOffset));
         }
         set
         {
-            _StrExposedHiddenWhenTrueOffset = _StrExposedHiddenWhenTrueOffset ?? Schema.GetOffset(0xAB8A0BE84FD98974);
-            Schema.SetCUtlString(_Handle, _StrExposedHiddenWhenTrueOffset!.Value, value);
+            if (_StrExposedHiddenWhenTrueOffset == -1) _StrExposedHiddenWhenTrueOffset = Schema.GetOffset(0xAB8A0BE84FD98974);
+            Schema.SetCUtlString(_Handle, _StrExposedHiddenWhenTrueOffset, value);
         }
     }
-    private static nint? _StrExposedValueListOffset;
+    private static nint _StrExposedValueListOffset = -1;
 
     public string StrExposedValueList
     {
         get
         {
-            _StrExposedValueListOffset = _StrExposedValueListOffset ?? Schema.GetOffset(0xAB8A0BE85AFE334D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrExposedValueListOffset!.Value));
+            if (_StrExposedValueListOffset == -1) _StrExposedValueListOffset = Schema.GetOffset(0xAB8A0BE85AFE334D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrExposedValueListOffset));
         }
         set
         {
-            _StrExposedValueListOffset = _StrExposedValueListOffset ?? Schema.GetOffset(0xAB8A0BE85AFE334D);
-            Schema.SetCUtlString(_Handle, _StrExposedValueListOffset!.Value, value);
+            if (_StrExposedValueListOffset == -1) _StrExposedValueListOffset = Schema.GetOffset(0xAB8A0BE85AFE334D);
+            Schema.SetCUtlString(_Handle, _StrExposedValueListOffset, value);
         }
     }
-    private static nint? _VariableTypeOffset;
+    private static nint _VariableTypeOffset = -1;
 
     public ref CompositeMaterialInputLooseVariableType_t VariableType
     {
         get
         {
-            _VariableTypeOffset = _VariableTypeOffset ?? Schema.GetOffset(0xAB8A0BE874B2A8F1);
-            return ref _Handle.AsRef<CompositeMaterialInputLooseVariableType_t>(_VariableTypeOffset!.Value);
+            if (_VariableTypeOffset == -1) _VariableTypeOffset = Schema.GetOffset(0xAB8A0BE874B2A8F1);
+            return ref _Handle.AsRef<CompositeMaterialInputLooseVariableType_t>(_VariableTypeOffset);
         }
     }
-    private static nint? _ValueBooleanOffset;
+    private static nint _ValueBooleanOffset = -1;
 
     public ref bool ValueBoolean
     {
         get
         {
-            _ValueBooleanOffset = _ValueBooleanOffset ?? Schema.GetOffset(0xAB8A0BE84DE46152);
-            return ref _Handle.AsRef<bool>(_ValueBooleanOffset!.Value);
+            if (_ValueBooleanOffset == -1) _ValueBooleanOffset = Schema.GetOffset(0xAB8A0BE84DE46152);
+            return ref _Handle.AsRef<bool>(_ValueBooleanOffset);
         }
     }
-    private static nint? _ValueIntXOffset;
+    private static nint _ValueIntXOffset = -1;
 
     public ref int ValueIntX
     {
         get
         {
-            _ValueIntXOffset = _ValueIntXOffset ?? Schema.GetOffset(0xAB8A0BE8DCCAE4B5);
-            return ref _Handle.AsRef<int>(_ValueIntXOffset!.Value);
+            if (_ValueIntXOffset == -1) _ValueIntXOffset = Schema.GetOffset(0xAB8A0BE8DCCAE4B5);
+            return ref _Handle.AsRef<int>(_ValueIntXOffset);
         }
     }
-    private static nint? _ValueIntYOffset;
+    private static nint _ValueIntYOffset = -1;
 
     public ref int ValueIntY
     {
         get
         {
-            _ValueIntYOffset = _ValueIntYOffset ?? Schema.GetOffset(0xAB8A0BE8DBCAE322);
-            return ref _Handle.AsRef<int>(_ValueIntYOffset!.Value);
+            if (_ValueIntYOffset == -1) _ValueIntYOffset = Schema.GetOffset(0xAB8A0BE8DBCAE322);
+            return ref _Handle.AsRef<int>(_ValueIntYOffset);
         }
     }
-    private static nint? _ValueIntZOffset;
+    private static nint _ValueIntZOffset = -1;
 
     public ref int ValueIntZ
     {
         get
         {
-            _ValueIntZOffset = _ValueIntZOffset ?? Schema.GetOffset(0xAB8A0BE8DACAE18F);
-            return ref _Handle.AsRef<int>(_ValueIntZOffset!.Value);
+            if (_ValueIntZOffset == -1) _ValueIntZOffset = Schema.GetOffset(0xAB8A0BE8DACAE18F);
+            return ref _Handle.AsRef<int>(_ValueIntZOffset);
         }
     }
-    private static nint? _ValueIntWOffset;
+    private static nint _ValueIntWOffset = -1;
 
     public ref int ValueIntW
     {
         get
         {
-            _ValueIntWOffset = _ValueIntWOffset ?? Schema.GetOffset(0xAB8A0BE8DDCAE648);
-            return ref _Handle.AsRef<int>(_ValueIntWOffset!.Value);
+            if (_ValueIntWOffset == -1) _ValueIntWOffset = Schema.GetOffset(0xAB8A0BE8DDCAE648);
+            return ref _Handle.AsRef<int>(_ValueIntWOffset);
         }
     }
-    private static nint? _HasFloatBoundsOffset;
+    private static nint _HasFloatBoundsOffset = -1;
 
     public ref bool HasFloatBounds
     {
         get
         {
-            _HasFloatBoundsOffset = _HasFloatBoundsOffset ?? Schema.GetOffset(0xAB8A0BE8A94BE1E2);
-            return ref _Handle.AsRef<bool>(_HasFloatBoundsOffset!.Value);
+            if (_HasFloatBoundsOffset == -1) _HasFloatBoundsOffset = Schema.GetOffset(0xAB8A0BE8A94BE1E2);
+            return ref _Handle.AsRef<bool>(_HasFloatBoundsOffset);
         }
     }
-    private static nint? _ValueFloatXOffset;
+    private static nint _ValueFloatXOffset = -1;
 
     public ref float ValueFloatX
     {
         get
         {
-            _ValueFloatXOffset = _ValueFloatXOffset ?? Schema.GetOffset(0xAB8A0BE8BE0B10AA);
-            return ref _Handle.AsRef<float>(_ValueFloatXOffset!.Value);
+            if (_ValueFloatXOffset == -1) _ValueFloatXOffset = Schema.GetOffset(0xAB8A0BE8BE0B10AA);
+            return ref _Handle.AsRef<float>(_ValueFloatXOffset);
         }
     }
-    private static nint? _ValueFloatX_MinOffset;
+    private static nint _ValueFloatX_MinOffset = -1;
 
     public ref float ValueFloatX_Min
     {
         get
         {
-            _ValueFloatX_MinOffset = _ValueFloatX_MinOffset ?? Schema.GetOffset(0xAB8A0BE885C07CE9);
-            return ref _Handle.AsRef<float>(_ValueFloatX_MinOffset!.Value);
+            if (_ValueFloatX_MinOffset == -1) _ValueFloatX_MinOffset = Schema.GetOffset(0xAB8A0BE885C07CE9);
+            return ref _Handle.AsRef<float>(_ValueFloatX_MinOffset);
         }
     }
-    private static nint? _ValueFloatX_MaxOffset;
+    private static nint _ValueFloatX_MaxOffset = -1;
 
     public ref float ValueFloatX_Max
     {
         get
         {
-            _ValueFloatX_MaxOffset = _ValueFloatX_MaxOffset ?? Schema.GetOffset(0xAB8A0BE877ACDF27);
-            return ref _Handle.AsRef<float>(_ValueFloatX_MaxOffset!.Value);
+            if (_ValueFloatX_MaxOffset == -1) _ValueFloatX_MaxOffset = Schema.GetOffset(0xAB8A0BE877ACDF27);
+            return ref _Handle.AsRef<float>(_ValueFloatX_MaxOffset);
         }
     }
-    private static nint? _ValueFloatYOffset;
+    private static nint _ValueFloatYOffset = -1;
 
     public ref float ValueFloatY
     {
         get
         {
-            _ValueFloatYOffset = _ValueFloatYOffset ?? Schema.GetOffset(0xAB8A0BE8BF0B123D);
-            return ref _Handle.AsRef<float>(_ValueFloatYOffset!.Value);
+            if (_ValueFloatYOffset == -1) _ValueFloatYOffset = Schema.GetOffset(0xAB8A0BE8BF0B123D);
+            return ref _Handle.AsRef<float>(_ValueFloatYOffset);
         }
     }
-    private static nint? _ValueFloatY_MinOffset;
+    private static nint _ValueFloatY_MinOffset = -1;
 
     public ref float ValueFloatY_Min
     {
         get
         {
-            _ValueFloatY_MinOffset = _ValueFloatY_MinOffset ?? Schema.GetOffset(0xAB8A0BE81AB13F32);
-            return ref _Handle.AsRef<float>(_ValueFloatY_MinOffset!.Value);
+            if (_ValueFloatY_MinOffset == -1) _ValueFloatY_MinOffset = Schema.GetOffset(0xAB8A0BE81AB13F32);
+            return ref _Handle.AsRef<float>(_ValueFloatY_MinOffset);
         }
     }
-    private static nint? _ValueFloatY_MaxOffset;
+    private static nint _ValueFloatY_MaxOffset = -1;
 
     public ref float ValueFloatY_Max
     {
         get
         {
-            _ValueFloatY_MaxOffset = _ValueFloatY_MaxOffset ?? Schema.GetOffset(0xAB8A0BE8249DC738);
-            return ref _Handle.AsRef<float>(_ValueFloatY_MaxOffset!.Value);
+            if (_ValueFloatY_MaxOffset == -1) _ValueFloatY_MaxOffset = Schema.GetOffset(0xAB8A0BE8249DC738);
+            return ref _Handle.AsRef<float>(_ValueFloatY_MaxOffset);
         }
     }
-    private static nint? _ValueFloatZOffset;
+    private static nint _ValueFloatZOffset = -1;
 
     public ref float ValueFloatZ
     {
         get
         {
-            _ValueFloatZOffset = _ValueFloatZOffset ?? Schema.GetOffset(0xAB8A0BE8BC0B0D84);
-            return ref _Handle.AsRef<float>(_ValueFloatZOffset!.Value);
+            if (_ValueFloatZOffset == -1) _ValueFloatZOffset = Schema.GetOffset(0xAB8A0BE8BC0B0D84);
+            return ref _Handle.AsRef<float>(_ValueFloatZOffset);
         }
     }
-    private static nint? _ValueFloatZ_MinOffset;
+    private static nint _ValueFloatZ_MinOffset = -1;
 
     public ref float ValueFloatZ_Min
     {
         get
         {
-            _ValueFloatZ_MinOffset = _ValueFloatZ_MinOffset ?? Schema.GetOffset(0xAB8A0BE8B82D845B);
-            return ref _Handle.AsRef<float>(_ValueFloatZ_MinOffset!.Value);
+            if (_ValueFloatZ_MinOffset == -1) _ValueFloatZ_MinOffset = Schema.GetOffset(0xAB8A0BE8B82D845B);
+            return ref _Handle.AsRef<float>(_ValueFloatZ_MinOffset);
         }
     }
-    private static nint? _ValueFloatZ_MaxOffset;
+    private static nint _ValueFloatZ_MaxOffset = -1;
 
     public ref float ValueFloatZ_Max
     {
         get
         {
-            _ValueFloatZ_MaxOffset = _ValueFloatZ_MaxOffset ?? Schema.GetOffset(0xAB8A0BE8AE19ECE5);
-            return ref _Handle.AsRef<float>(_ValueFloatZ_MaxOffset!.Value);
+            if (_ValueFloatZ_MaxOffset == -1) _ValueFloatZ_MaxOffset = Schema.GetOffset(0xAB8A0BE8AE19ECE5);
+            return ref _Handle.AsRef<float>(_ValueFloatZ_MaxOffset);
         }
     }
-    private static nint? _ValueFloatWOffset;
+    private static nint _ValueFloatWOffset = -1;
 
     public ref float ValueFloatW
     {
         get
         {
-            _ValueFloatWOffset = _ValueFloatWOffset ?? Schema.GetOffset(0xAB8A0BE8B10AFC33);
-            return ref _Handle.AsRef<float>(_ValueFloatWOffset!.Value);
+            if (_ValueFloatWOffset == -1) _ValueFloatWOffset = Schema.GetOffset(0xAB8A0BE8B10AFC33);
+            return ref _Handle.AsRef<float>(_ValueFloatWOffset);
         }
     }
-    private static nint? _ValueFloatW_MinOffset;
+    private static nint _ValueFloatW_MinOffset = -1;
 
     public ref float ValueFloatW_Min
     {
         get
         {
-            _ValueFloatW_MinOffset = _ValueFloatW_MinOffset ?? Schema.GetOffset(0xAB8A0BE81793AAD8);
-            return ref _Handle.AsRef<float>(_ValueFloatW_MinOffset!.Value);
+            if (_ValueFloatW_MinOffset == -1) _ValueFloatW_MinOffset = Schema.GetOffset(0xAB8A0BE81793AAD8);
+            return ref _Handle.AsRef<float>(_ValueFloatW_MinOffset);
         }
     }
-    private static nint? _ValueFloatW_MaxOffset;
+    private static nint _ValueFloatW_MaxOffset = -1;
 
     public ref float ValueFloatW_Max
     {
         get
         {
-            _ValueFloatW_MaxOffset = _ValueFloatW_MaxOffset ?? Schema.GetOffset(0xAB8A0BE82DA75532);
-            return ref _Handle.AsRef<float>(_ValueFloatW_MaxOffset!.Value);
+            if (_ValueFloatW_MaxOffset == -1) _ValueFloatW_MaxOffset = Schema.GetOffset(0xAB8A0BE82DA75532);
+            return ref _Handle.AsRef<float>(_ValueFloatW_MaxOffset);
         }
     }
-    private static nint? _CValueColor4Offset;
+    private static nint _CValueColor4Offset = -1;
 
     public ref Color CValueColor4
     {
         get
         {
-            _CValueColor4Offset = _CValueColor4Offset ?? Schema.GetOffset(0xAB8A0BE801701ACA);
-            return ref _Handle.AsRef<Color>(_CValueColor4Offset!.Value);
+            if (_CValueColor4Offset == -1) _CValueColor4Offset = Schema.GetOffset(0xAB8A0BE801701ACA);
+            return ref _Handle.AsRef<Color>(_CValueColor4Offset);
         }
     }
-    private static nint? _ValueSystemVarOffset;
+    private static nint _ValueSystemVarOffset = -1;
 
     public ref CompositeMaterialVarSystemVar_t ValueSystemVar
     {
         get
         {
-            _ValueSystemVarOffset = _ValueSystemVarOffset ?? Schema.GetOffset(0xAB8A0BE834FC3B84);
-            return ref _Handle.AsRef<CompositeMaterialVarSystemVar_t>(_ValueSystemVarOffset!.Value);
+            if (_ValueSystemVarOffset == -1) _ValueSystemVarOffset = Schema.GetOffset(0xAB8A0BE834FC3B84);
+            return ref _Handle.AsRef<CompositeMaterialVarSystemVar_t>(_ValueSystemVarOffset);
         }
     }
-    private static nint? _StrResourceMaterialOffset;
+    private static nint _StrResourceMaterialOffset = -1;
     private SchemaUntypedField? _StrResourceMaterialInstance;
 
     public SchemaUntypedField StrResourceMaterial
     {
         get
         {
-            _StrResourceMaterialOffset = _StrResourceMaterialOffset ?? Schema.GetOffset(0xAB8A0BE898D8918D);
+            if (_StrResourceMaterialOffset == -1) _StrResourceMaterialOffset = Schema.GetOffset(0xAB8A0BE898D8918D);
             var instance = _StrResourceMaterialInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StrResourceMaterialOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StrResourceMaterialOffset);
             return instance;
         }
     }
-    private static nint? _StrTextureContentAssetPathOffset;
+    private static nint _StrTextureContentAssetPathOffset = -1;
 
     public string StrTextureContentAssetPath
     {
         get
         {
-            _StrTextureContentAssetPathOffset = _StrTextureContentAssetPathOffset ?? Schema.GetOffset(0xAB8A0BE8683601D3);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrTextureContentAssetPathOffset!.Value));
+            if (_StrTextureContentAssetPathOffset == -1) _StrTextureContentAssetPathOffset = Schema.GetOffset(0xAB8A0BE8683601D3);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrTextureContentAssetPathOffset));
         }
         set
         {
-            _StrTextureContentAssetPathOffset = _StrTextureContentAssetPathOffset ?? Schema.GetOffset(0xAB8A0BE8683601D3);
-            Schema.SetCUtlString(_Handle, _StrTextureContentAssetPathOffset!.Value, value);
+            if (_StrTextureContentAssetPathOffset == -1) _StrTextureContentAssetPathOffset = Schema.GetOffset(0xAB8A0BE8683601D3);
+            Schema.SetCUtlString(_Handle, _StrTextureContentAssetPathOffset, value);
         }
     }
-    private static nint? _StrTextureRuntimeResourcePathOffset;
+    private static nint _StrTextureRuntimeResourcePathOffset = -1;
     private SchemaUntypedField? _StrTextureRuntimeResourcePathInstance;
 
     public SchemaUntypedField StrTextureRuntimeResourcePath
     {
         get
         {
-            _StrTextureRuntimeResourcePathOffset = _StrTextureRuntimeResourcePathOffset ?? Schema.GetOffset(0xAB8A0BE8FAF89B8E);
+            if (_StrTextureRuntimeResourcePathOffset == -1) _StrTextureRuntimeResourcePathOffset = Schema.GetOffset(0xAB8A0BE8FAF89B8E);
             var instance = _StrTextureRuntimeResourcePathInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StrTextureRuntimeResourcePathOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StrTextureRuntimeResourcePathOffset);
             return instance;
         }
     }
-    private static nint? _StrTextureCompilationVtexTemplateOffset;
+    private static nint _StrTextureCompilationVtexTemplateOffset = -1;
 
     public string StrTextureCompilationVtexTemplate
     {
         get
         {
-            _StrTextureCompilationVtexTemplateOffset = _StrTextureCompilationVtexTemplateOffset ?? Schema.GetOffset(0xAB8A0BE83103EA5F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrTextureCompilationVtexTemplateOffset!.Value));
+            if (_StrTextureCompilationVtexTemplateOffset == -1) _StrTextureCompilationVtexTemplateOffset = Schema.GetOffset(0xAB8A0BE83103EA5F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrTextureCompilationVtexTemplateOffset));
         }
         set
         {
-            _StrTextureCompilationVtexTemplateOffset = _StrTextureCompilationVtexTemplateOffset ?? Schema.GetOffset(0xAB8A0BE83103EA5F);
-            Schema.SetCUtlString(_Handle, _StrTextureCompilationVtexTemplateOffset!.Value, value);
+            if (_StrTextureCompilationVtexTemplateOffset == -1) _StrTextureCompilationVtexTemplateOffset = Schema.GetOffset(0xAB8A0BE83103EA5F);
+            Schema.SetCUtlString(_Handle, _StrTextureCompilationVtexTemplateOffset, value);
         }
     }
-    private static nint? _TextureTypeOffset;
+    private static nint _TextureTypeOffset = -1;
 
     public ref CompositeMaterialInputTextureType_t TextureType
     {
         get
         {
-            _TextureTypeOffset = _TextureTypeOffset ?? Schema.GetOffset(0xAB8A0BE8499BE6C8);
-            return ref _Handle.AsRef<CompositeMaterialInputTextureType_t>(_TextureTypeOffset!.Value);
+            if (_TextureTypeOffset == -1) _TextureTypeOffset = Schema.GetOffset(0xAB8A0BE8499BE6C8);
+            return ref _Handle.AsRef<CompositeMaterialInputTextureType_t>(_TextureTypeOffset);
         }
     }
-    private static nint? _StrStringOffset;
+    private static nint _StrStringOffset = -1;
 
     public string StrString
     {
         get
         {
-            _StrStringOffset = _StrStringOffset ?? Schema.GetOffset(0xAB8A0BE866B150B9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrStringOffset!.Value));
+            if (_StrStringOffset == -1) _StrStringOffset = Schema.GetOffset(0xAB8A0BE866B150B9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrStringOffset));
         }
         set
         {
-            _StrStringOffset = _StrStringOffset ?? Schema.GetOffset(0xAB8A0BE866B150B9);
-            Schema.SetCUtlString(_Handle, _StrStringOffset!.Value, value);
+            if (_StrStringOffset == -1) _StrStringOffset = Schema.GetOffset(0xAB8A0BE866B150B9);
+            Schema.SetCUtlString(_Handle, _StrStringOffset, value);
         }
     }
-    private static nint? _StrPanoramaPanelPathOffset;
+    private static nint _StrPanoramaPanelPathOffset = -1;
 
     public string StrPanoramaPanelPath
     {
         get
         {
-            _StrPanoramaPanelPathOffset = _StrPanoramaPanelPathOffset ?? Schema.GetOffset(0xAB8A0BE8E142442C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrPanoramaPanelPathOffset!.Value));
+            if (_StrPanoramaPanelPathOffset == -1) _StrPanoramaPanelPathOffset = Schema.GetOffset(0xAB8A0BE8E142442C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrPanoramaPanelPathOffset));
         }
         set
         {
-            _StrPanoramaPanelPathOffset = _StrPanoramaPanelPathOffset ?? Schema.GetOffset(0xAB8A0BE8E142442C);
-            Schema.SetCUtlString(_Handle, _StrPanoramaPanelPathOffset!.Value, value);
+            if (_StrPanoramaPanelPathOffset == -1) _StrPanoramaPanelPathOffset = Schema.GetOffset(0xAB8A0BE8E142442C);
+            Schema.SetCUtlString(_Handle, _StrPanoramaPanelPathOffset, value);
         }
     }
-    private static nint? _PanoramaRenderResOffset;
+    private static nint _PanoramaRenderResOffset = -1;
 
     public ref int PanoramaRenderRes
     {
         get
         {
-            _PanoramaRenderResOffset = _PanoramaRenderResOffset ?? Schema.GetOffset(0xAB8A0BE8C6C9330C);
-            return ref _Handle.AsRef<int>(_PanoramaRenderResOffset!.Value);
+            if (_PanoramaRenderResOffset == -1) _PanoramaRenderResOffset = Schema.GetOffset(0xAB8A0BE8C6C9330C);
+            return ref _Handle.AsRef<int>(_PanoramaRenderResOffset);
         }
     }
 

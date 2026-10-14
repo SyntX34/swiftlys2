@@ -16,14 +16,14 @@ internal partial class CScriptItemImpl : CItemImpl, CScriptItem
 {
     public CScriptItemImpl(nint handle) : base(handle) { }
 
-    private static nint? _MoveTypeOverrideOffset;
+    private static nint _MoveTypeOverrideOffset = -1;
 
     public ref MoveType_t MoveTypeOverride
     {
         get
         {
-            _MoveTypeOverrideOffset = _MoveTypeOverrideOffset ?? Schema.GetOffset(0x501D9DD2B4DC8A64);
-            return ref _Handle.AsRef<MoveType_t>(_MoveTypeOverrideOffset!.Value);
+            if (_MoveTypeOverrideOffset == -1) _MoveTypeOverrideOffset = Schema.GetOffset(0x501D9DD2B4DC8A64);
+            return ref _Handle.AsRef<MoveType_t>(_MoveTypeOverrideOffset);
         }
     }
 

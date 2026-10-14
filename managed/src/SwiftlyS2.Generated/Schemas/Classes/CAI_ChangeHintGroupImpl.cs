@@ -16,54 +16,54 @@ internal partial class CAI_ChangeHintGroupImpl : CBaseEntityImpl, CAI_ChangeHint
 {
     public CAI_ChangeHintGroupImpl(nint handle) : base(handle) { }
 
-    private static nint? _SearchTypeOffset;
+    private static nint _SearchTypeOffset = -1;
 
     public ref int SearchType
     {
         get
         {
-            _SearchTypeOffset = _SearchTypeOffset ?? Schema.GetOffset(0xE2F9617B09088830);
-            return ref _Handle.AsRef<int>(_SearchTypeOffset!.Value);
+            if (_SearchTypeOffset == -1) _SearchTypeOffset = Schema.GetOffset(0xE2F9617B09088830);
+            return ref _Handle.AsRef<int>(_SearchTypeOffset);
         }
     }
-    private static nint? _StrSearchNameOffset;
+    private static nint _StrSearchNameOffset = -1;
 
     public string StrSearchName
     {
         get
         {
-            _StrSearchNameOffset = _StrSearchNameOffset ?? Schema.GetOffset(0xE2F9617B8A77B967);
-            return Schema.GetString(_Handle.Read<nint>(_StrSearchNameOffset!.Value));
+            if (_StrSearchNameOffset == -1) _StrSearchNameOffset = Schema.GetOffset(0xE2F9617B8A77B967);
+            return Schema.GetString(_Handle.Read<nint>(_StrSearchNameOffset));
         }
         set
         {
-            _StrSearchNameOffset = _StrSearchNameOffset ?? Schema.GetOffset(0xE2F9617B8A77B967);
-            Schema.SetString(_Handle, _StrSearchNameOffset!.Value, value);
+            if (_StrSearchNameOffset == -1) _StrSearchNameOffset = Schema.GetOffset(0xE2F9617B8A77B967);
+            Schema.SetString(_Handle, _StrSearchNameOffset, value);
         }
     }
-    private static nint? _StrNewHintGroupOffset;
+    private static nint _StrNewHintGroupOffset = -1;
 
     public string StrNewHintGroup
     {
         get
         {
-            _StrNewHintGroupOffset = _StrNewHintGroupOffset ?? Schema.GetOffset(0xE2F9617BD4585F62);
-            return Schema.GetString(_Handle.Read<nint>(_StrNewHintGroupOffset!.Value));
+            if (_StrNewHintGroupOffset == -1) _StrNewHintGroupOffset = Schema.GetOffset(0xE2F9617BD4585F62);
+            return Schema.GetString(_Handle.Read<nint>(_StrNewHintGroupOffset));
         }
         set
         {
-            _StrNewHintGroupOffset = _StrNewHintGroupOffset ?? Schema.GetOffset(0xE2F9617BD4585F62);
-            Schema.SetString(_Handle, _StrNewHintGroupOffset!.Value, value);
+            if (_StrNewHintGroupOffset == -1) _StrNewHintGroupOffset = Schema.GetOffset(0xE2F9617BD4585F62);
+            Schema.SetString(_Handle, _StrNewHintGroupOffset, value);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xE2F9617B5ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0xE2F9617B5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CNMEventPulseState_tImpl : SchemaClass, CNMEventPulseStat
 {
     public CNMEventPulseState_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EventIDOffset;
+    private static nint _EventIDOffset = -1;
 
     public ref CGlobalSymbol EventID
     {
         get
         {
-            _EventIDOffset = _EventIDOffset ?? Schema.GetOffset(0x9FAE77F49D798A72);
-            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+            if (_EventIDOffset == -1) _EventIDOffset = Schema.GetOffset(0x9FAE77F49D798A72);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset);
         }
     }
 

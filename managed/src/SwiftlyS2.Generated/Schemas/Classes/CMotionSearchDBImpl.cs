@@ -16,40 +16,40 @@ internal partial class CMotionSearchDBImpl : SchemaClass, CMotionSearchDB
 {
     public CMotionSearchDBImpl(nint handle) : base(handle) { }
 
-    private static nint? _RootNodeOffset;
+    private static nint _RootNodeOffset = -1;
     private CMotionSearchNodeImpl? _RootNodeInstance;
 
     public CMotionSearchNode RootNode
     {
         get
         {
-            _RootNodeOffset = _RootNodeOffset ?? Schema.GetOffset(0x5F49286C3D5FF0D);
+            if (_RootNodeOffset == -1) _RootNodeOffset = Schema.GetOffset(0x5F49286C3D5FF0D);
             var instance = _RootNodeInstance ??= new CMotionSearchNodeImpl(0);
-            instance.DangerousSetHandle(_Handle + _RootNodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RootNodeOffset);
             return instance;
         }
     }
-    private static nint? _ResidualQuantizerOffset;
+    private static nint _ResidualQuantizerOffset = -1;
     private CProductQuantizerImpl? _ResidualQuantizerInstance;
 
     public CProductQuantizer ResidualQuantizer
     {
         get
         {
-            _ResidualQuantizerOffset = _ResidualQuantizerOffset ?? Schema.GetOffset(0x5F49286A3EDA009);
+            if (_ResidualQuantizerOffset == -1) _ResidualQuantizerOffset = Schema.GetOffset(0x5F49286A3EDA009);
             var instance = _ResidualQuantizerInstance ??= new CProductQuantizerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ResidualQuantizerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ResidualQuantizerOffset);
             return instance;
         }
     }
-    private static nint? _CodeIndicesOffset;
+    private static nint _CodeIndicesOffset = -1;
 
     public ref CUtlVector<MotionDBIndex> CodeIndices
     {
         get
         {
-            _CodeIndicesOffset = _CodeIndicesOffset ?? Schema.GetOffset(0x5F49286767A76B1);
-            return ref _Handle.AsRef<CUtlVector<MotionDBIndex>>(_CodeIndicesOffset!.Value);
+            if (_CodeIndicesOffset == -1) _CodeIndicesOffset = Schema.GetOffset(0x5F49286767A76B1);
+            return ref _Handle.AsRef<CUtlVector<MotionDBIndex>>(_CodeIndicesOffset);
         }
     }
 

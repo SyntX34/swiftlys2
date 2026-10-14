@@ -16,123 +16,123 @@ internal partial class RsBlendStateDesc_tImpl : SchemaClass, RsBlendStateDesc_t
 {
     public RsBlendStateDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SrcBlendBitsOffset;
+    private static nint _SrcBlendBitsOffset = -1;
 
     public ref uint SrcBlendBits
     {
         get
         {
-            _SrcBlendBitsOffset = _SrcBlendBitsOffset ?? Schema.GetOffset(0x5A78EC788B3147C4);
-            return ref _Handle.AsRef<uint>(_SrcBlendBitsOffset!.Value);
+            if (_SrcBlendBitsOffset == -1) _SrcBlendBitsOffset = Schema.GetOffset(0x5A78EC788B3147C4);
+            return ref _Handle.AsRef<uint>(_SrcBlendBitsOffset);
         }
     }
-    private static nint? _DestBlendBitsOffset;
+    private static nint _DestBlendBitsOffset = -1;
 
     public ref uint DestBlendBits
     {
         get
         {
-            _DestBlendBitsOffset = _DestBlendBitsOffset ?? Schema.GetOffset(0x5A78EC78E23CD0E0);
-            return ref _Handle.AsRef<uint>(_DestBlendBitsOffset!.Value);
+            if (_DestBlendBitsOffset == -1) _DestBlendBitsOffset = Schema.GetOffset(0x5A78EC78E23CD0E0);
+            return ref _Handle.AsRef<uint>(_DestBlendBitsOffset);
         }
     }
-    private static nint? _SrcBlendAlphaBitsOffset;
+    private static nint _SrcBlendAlphaBitsOffset = -1;
 
     public ref uint SrcBlendAlphaBits
     {
         get
         {
-            _SrcBlendAlphaBitsOffset = _SrcBlendAlphaBitsOffset ?? Schema.GetOffset(0x5A78EC78E2820E60);
-            return ref _Handle.AsRef<uint>(_SrcBlendAlphaBitsOffset!.Value);
+            if (_SrcBlendAlphaBitsOffset == -1) _SrcBlendAlphaBitsOffset = Schema.GetOffset(0x5A78EC78E2820E60);
+            return ref _Handle.AsRef<uint>(_SrcBlendAlphaBitsOffset);
         }
     }
-    private static nint? _DestBlendAlphaBitsOffset;
+    private static nint _DestBlendAlphaBitsOffset = -1;
 
     public ref uint DestBlendAlphaBits
     {
         get
         {
-            _DestBlendAlphaBitsOffset = _DestBlendAlphaBitsOffset ?? Schema.GetOffset(0x5A78EC784217BA4C);
-            return ref _Handle.AsRef<uint>(_DestBlendAlphaBitsOffset!.Value);
+            if (_DestBlendAlphaBitsOffset == -1) _DestBlendAlphaBitsOffset = Schema.GetOffset(0x5A78EC784217BA4C);
+            return ref _Handle.AsRef<uint>(_DestBlendAlphaBitsOffset);
         }
     }
-    private static nint? _RenderTargetWriteMaskBitsOffset;
+    private static nint _RenderTargetWriteMaskBitsOffset = -1;
 
     public ref uint RenderTargetWriteMaskBits
     {
         get
         {
-            _RenderTargetWriteMaskBitsOffset = _RenderTargetWriteMaskBitsOffset ?? Schema.GetOffset(0x5A78EC78CB45C38F);
-            return ref _Handle.AsRef<uint>(_RenderTargetWriteMaskBitsOffset!.Value);
+            if (_RenderTargetWriteMaskBitsOffset == -1) _RenderTargetWriteMaskBitsOffset = Schema.GetOffset(0x5A78EC78CB45C38F);
+            return ref _Handle.AsRef<uint>(_RenderTargetWriteMaskBitsOffset);
         }
     }
-    private static nint? _BlendOpBitsOffset;
+    private static nint _BlendOpBitsOffset = -1;
     private SchemaUntypedField? _BlendOpBitsInstance;
 
     public SchemaUntypedField BlendOpBits
     {
         get
         {
-            _BlendOpBitsOffset = _BlendOpBitsOffset ?? Schema.GetOffset(0x5A78EC7824A9742B);
+            if (_BlendOpBitsOffset == -1) _BlendOpBitsOffset = Schema.GetOffset(0x5A78EC7824A9742B);
             var instance = _BlendOpBitsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _BlendOpBitsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BlendOpBitsOffset);
             return instance;
         }
     }
-    private static nint? _AlphaToCoverageEnableOffset;
+    private static nint _AlphaToCoverageEnableOffset = -1;
     private SchemaUntypedField? _AlphaToCoverageEnableInstance;
 
     public SchemaUntypedField AlphaToCoverageEnable
     {
         get
         {
-            _AlphaToCoverageEnableOffset = _AlphaToCoverageEnableOffset ?? Schema.GetOffset(0x5A78EC7860C58F3B);
+            if (_AlphaToCoverageEnableOffset == -1) _AlphaToCoverageEnableOffset = Schema.GetOffset(0x5A78EC7860C58F3B);
             var instance = _AlphaToCoverageEnableInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AlphaToCoverageEnableOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AlphaToCoverageEnableOffset);
             return instance;
         }
     }
-    private static nint? _IndependentBlendEnableOffset;
+    private static nint _IndependentBlendEnableOffset = -1;
     private SchemaUntypedField? _IndependentBlendEnableInstance;
 
     public SchemaUntypedField IndependentBlendEnable
     {
         get
         {
-            _IndependentBlendEnableOffset = _IndependentBlendEnableOffset ?? Schema.GetOffset(0x5A78EC78E42575C7);
+            if (_IndependentBlendEnableOffset == -1) _IndependentBlendEnableOffset = Schema.GetOffset(0x5A78EC78E42575C7);
             var instance = _IndependentBlendEnableInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IndependentBlendEnableOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IndependentBlendEnableOffset);
             return instance;
         }
     }
-    private static nint? _BlendOpAlphaBitsOffset;
+    private static nint _BlendOpAlphaBitsOffset = -1;
 
     public ref uint BlendOpAlphaBits
     {
         get
         {
-            _BlendOpAlphaBitsOffset = _BlendOpAlphaBitsOffset ?? Schema.GetOffset(0x5A78EC788F0DF1ED);
-            return ref _Handle.AsRef<uint>(_BlendOpAlphaBitsOffset!.Value);
+            if (_BlendOpAlphaBitsOffset == -1) _BlendOpAlphaBitsOffset = Schema.GetOffset(0x5A78EC788F0DF1ED);
+            return ref _Handle.AsRef<uint>(_BlendOpAlphaBitsOffset);
         }
     }
-    private static nint? _BlendEnableBitsOffset;
+    private static nint _BlendEnableBitsOffset = -1;
 
     public ref byte BlendEnableBits
     {
         get
         {
-            _BlendEnableBitsOffset = _BlendEnableBitsOffset ?? Schema.GetOffset(0x5A78EC780FE207F3);
-            return ref _Handle.AsRef<byte>(_BlendEnableBitsOffset!.Value);
+            if (_BlendEnableBitsOffset == -1) _BlendEnableBitsOffset = Schema.GetOffset(0x5A78EC780FE207F3);
+            return ref _Handle.AsRef<byte>(_BlendEnableBitsOffset);
         }
     }
-    private static nint? _SrgbWriteEnableBitsOffset;
+    private static nint _SrgbWriteEnableBitsOffset = -1;
 
     public ref byte SrgbWriteEnableBits
     {
         get
         {
-            _SrgbWriteEnableBitsOffset = _SrgbWriteEnableBitsOffset ?? Schema.GetOffset(0x5A78EC783E54A99F);
-            return ref _Handle.AsRef<byte>(_SrgbWriteEnableBitsOffset!.Value);
+            if (_SrgbWriteEnableBitsOffset == -1) _SrgbWriteEnableBitsOffset = Schema.GetOffset(0x5A78EC783E54A99F);
+            return ref _Handle.AsRef<byte>(_SrgbWriteEnableBitsOffset);
         }
     }
 

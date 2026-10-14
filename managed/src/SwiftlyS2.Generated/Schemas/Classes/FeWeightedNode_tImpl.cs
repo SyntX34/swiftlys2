@@ -16,24 +16,24 @@ internal partial class FeWeightedNode_tImpl : SchemaClass, FeWeightedNode_t
 {
     public FeWeightedNode_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
 
     public ref ushort Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x7CA6E056CD6694B9);
-            return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x7CA6E056CD6694B9);
+            return ref _Handle.AsRef<ushort>(_NodeOffset);
         }
     }
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
 
     public ref ushort Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x7CA6E0564C8D62A5);
-            return ref _Handle.AsRef<ushort>(_WeightOffset!.Value);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0x7CA6E0564C8D62A5);
+            return ref _Handle.AsRef<ushort>(_WeightOffset);
         }
     }
 

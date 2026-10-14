@@ -16,37 +16,37 @@ internal partial class EventClientProcessGameInput_tImpl : SchemaClass, EventCli
 {
     public EventClientProcessGameInput_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _LoopStateOffset;
+    private static nint _LoopStateOffset = -1;
     private EngineLoopState_tImpl? _LoopStateInstance;
 
     public EngineLoopState_t LoopState
     {
         get
         {
-            _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0x705D7E06F928A2EC);
+            if (_LoopStateOffset == -1) _LoopStateOffset = Schema.GetOffset(0x705D7E06F928A2EC);
             var instance = _LoopStateInstance ??= new EngineLoopState_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LoopStateOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LoopStateOffset);
             return instance;
         }
     }
-    private static nint? _RealTimeOffset;
+    private static nint _RealTimeOffset = -1;
 
     public ref float RealTime
     {
         get
         {
-            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0x705D7E061168EC02);
-            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+            if (_RealTimeOffset == -1) _RealTimeOffset = Schema.GetOffset(0x705D7E061168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset);
         }
     }
-    private static nint? _FrameTimeOffset;
+    private static nint _FrameTimeOffset = -1;
 
     public ref float FrameTime
     {
         get
         {
-            _FrameTimeOffset = _FrameTimeOffset ?? Schema.GetOffset(0x705D7E06659DF875);
-            return ref _Handle.AsRef<float>(_FrameTimeOffset!.Value);
+            if (_FrameTimeOffset == -1) _FrameTimeOffset = Schema.GetOffset(0x705D7E06659DF875);
+            return ref _Handle.AsRef<float>(_FrameTimeOffset);
         }
     }
 

@@ -16,46 +16,46 @@ internal partial class C_OP_RenderVRHapticEventImpl : CParticleFunctionRendererI
 {
     public C_OP_RenderVRHapticEventImpl(nint handle) : base(handle) { }
 
-    private static nint? _HandOffset;
+    private static nint _HandOffset = -1;
 
     public ref ParticleVRHandChoiceList_t Hand
     {
         get
         {
-            _HandOffset = _HandOffset ?? Schema.GetOffset(0xB83C5242D49ECB4C);
-            return ref _Handle.AsRef<ParticleVRHandChoiceList_t>(_HandOffset!.Value);
+            if (_HandOffset == -1) _HandOffset = Schema.GetOffset(0xB83C5242D49ECB4C);
+            return ref _Handle.AsRef<ParticleVRHandChoiceList_t>(_HandOffset);
         }
     }
-    private static nint? _OutputHandCPOffset;
+    private static nint _OutputHandCPOffset = -1;
 
     public ref int OutputHandCP
     {
         get
         {
-            _OutputHandCPOffset = _OutputHandCPOffset ?? Schema.GetOffset(0xB83C52428D35D26A);
-            return ref _Handle.AsRef<int>(_OutputHandCPOffset!.Value);
+            if (_OutputHandCPOffset == -1) _OutputHandCPOffset = Schema.GetOffset(0xB83C52428D35D26A);
+            return ref _Handle.AsRef<int>(_OutputHandCPOffset);
         }
     }
-    private static nint? _OutputFieldOffset;
+    private static nint _OutputFieldOffset = -1;
 
     public ref int OutputField
     {
         get
         {
-            _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0xB83C5242324F6F74);
-            return ref _Handle.AsRef<int>(_OutputFieldOffset!.Value);
+            if (_OutputFieldOffset == -1) _OutputFieldOffset = Schema.GetOffset(0xB83C5242324F6F74);
+            return ref _Handle.AsRef<int>(_OutputFieldOffset);
         }
     }
-    private static nint? _AmplitudeOffset;
+    private static nint _AmplitudeOffset = -1;
     private CPerParticleFloatInputImpl? _AmplitudeInstance;
 
     public CPerParticleFloatInput Amplitude
     {
         get
         {
-            _AmplitudeOffset = _AmplitudeOffset ?? Schema.GetOffset(0xB83C5242B44B0E18);
+            if (_AmplitudeOffset == -1) _AmplitudeOffset = Schema.GetOffset(0xB83C5242B44B0E18);
             var instance = _AmplitudeInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _AmplitudeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AmplitudeOffset);
             return instance;
         }
     }

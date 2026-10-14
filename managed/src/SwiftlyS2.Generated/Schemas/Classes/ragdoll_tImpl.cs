@@ -16,54 +16,54 @@ internal partial class ragdoll_tImpl : SchemaClass, ragdoll_t
 {
     public ragdoll_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ListOffset;
+    private static nint _ListOffset = -1;
 
     public ref CUtlVector<ragdollelement_t> List
     {
         get
         {
-            _ListOffset = _ListOffset ?? Schema.GetOffset(0xC7E89F530CFB5881);
-            return ref _Handle.AsRef<CUtlVector<ragdollelement_t>>(_ListOffset!.Value);
+            if (_ListOffset == -1) _ListOffset = Schema.GetOffset(0xC7E89F530CFB5881);
+            return ref _Handle.AsRef<CUtlVector<ragdollelement_t>>(_ListOffset);
         }
     }
-    private static nint? _HierarchyJointsOffset;
+    private static nint _HierarchyJointsOffset = -1;
 
     public ref CUtlVector<ragdollhierarchyjoint_t> HierarchyJoints
     {
         get
         {
-            _HierarchyJointsOffset = _HierarchyJointsOffset ?? Schema.GetOffset(0xC7E89F534421F4B5);
-            return ref _Handle.AsRef<CUtlVector<ragdollhierarchyjoint_t>>(_HierarchyJointsOffset!.Value);
+            if (_HierarchyJointsOffset == -1) _HierarchyJointsOffset = Schema.GetOffset(0xC7E89F534421F4B5);
+            return ref _Handle.AsRef<CUtlVector<ragdollhierarchyjoint_t>>(_HierarchyJointsOffset);
         }
     }
-    private static nint? _BoneIndexOffset;
+    private static nint _BoneIndexOffset = -1;
 
     public ref CUtlVector<int> BoneIndex
     {
         get
         {
-            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xC7E89F534FEF9075);
-            return ref _Handle.AsRef<CUtlVector<int>>(_BoneIndexOffset!.Value);
+            if (_BoneIndexOffset == -1) _BoneIndexOffset = Schema.GetOffset(0xC7E89F534FEF9075);
+            return ref _Handle.AsRef<CUtlVector<int>>(_BoneIndexOffset);
         }
     }
-    private static nint? _AllowStretchOffset;
+    private static nint _AllowStretchOffset = -1;
 
     public ref bool AllowStretch
     {
         get
         {
-            _AllowStretchOffset = _AllowStretchOffset ?? Schema.GetOffset(0xC7E89F5350E37D6F);
-            return ref _Handle.AsRef<bool>(_AllowStretchOffset!.Value);
+            if (_AllowStretchOffset == -1) _AllowStretchOffset = Schema.GetOffset(0xC7E89F5350E37D6F);
+            return ref _Handle.AsRef<bool>(_AllowStretchOffset);
         }
     }
-    private static nint? _UnusedOffset;
+    private static nint _UnusedOffset = -1;
 
     public ref bool Unused
     {
         get
         {
-            _UnusedOffset = _UnusedOffset ?? Schema.GetOffset(0xC7E89F5385CF281B);
-            return ref _Handle.AsRef<bool>(_UnusedOffset!.Value);
+            if (_UnusedOffset == -1) _UnusedOffset = Schema.GetOffset(0xC7E89F5385CF281B);
+            return ref _Handle.AsRef<bool>(_UnusedOffset);
         }
     }
 

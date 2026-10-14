@@ -16,36 +16,36 @@ internal partial class CPulseCell_TimelineImpl : CPulseCell_BaseYieldingInflowIm
 {
     public CPulseCell_TimelineImpl(nint handle) : base(handle) { }
 
-    private static nint? _TimelineEventsOffset;
+    private static nint _TimelineEventsOffset = -1;
 
     public ref CUtlVector<CPulseCell_Timeline__TimelineEvent_t> TimelineEvents
     {
         get
         {
-            _TimelineEventsOffset = _TimelineEventsOffset ?? Schema.GetOffset(0xF1185F93C91CDDC3);
-            return ref _Handle.AsRef<CUtlVector<CPulseCell_Timeline__TimelineEvent_t>>(_TimelineEventsOffset!.Value);
+            if (_TimelineEventsOffset == -1) _TimelineEventsOffset = Schema.GetOffset(0xF1185F93C91CDDC3);
+            return ref _Handle.AsRef<CUtlVector<CPulseCell_Timeline__TimelineEvent_t>>(_TimelineEventsOffset);
         }
     }
-    private static nint? _WaitForChildOutflowsOffset;
+    private static nint _WaitForChildOutflowsOffset = -1;
 
     public ref bool WaitForChildOutflows
     {
         get
         {
-            _WaitForChildOutflowsOffset = _WaitForChildOutflowsOffset ?? Schema.GetOffset(0xF1185F933F8E29C6);
-            return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset!.Value);
+            if (_WaitForChildOutflowsOffset == -1) _WaitForChildOutflowsOffset = Schema.GetOffset(0xF1185F933F8E29C6);
+            return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset);
         }
     }
-    private static nint? _OnFinishedOffset;
+    private static nint _OnFinishedOffset = -1;
     private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
-            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0xF1185F938D903E5E);
+            if (_OnFinishedOffset == -1) _OnFinishedOffset = Schema.GetOffset(0xF1185F938D903E5E);
             var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset);
             return instance;
         }
     }

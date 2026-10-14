@@ -16,34 +16,34 @@ internal partial class C_OP_GlobalLightImpl : CParticleFunctionOperatorImpl, C_O
 {
     public C_OP_GlobalLightImpl(nint handle) : base(handle) { }
 
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
 
     public ref float Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xC02700C2B731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xC02700C2B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset);
         }
     }
-    private static nint? _ClampLowerRangeOffset;
+    private static nint _ClampLowerRangeOffset = -1;
 
     public ref bool ClampLowerRange
     {
         get
         {
-            _ClampLowerRangeOffset = _ClampLowerRangeOffset ?? Schema.GetOffset(0xC02700C20F690326);
-            return ref _Handle.AsRef<bool>(_ClampLowerRangeOffset!.Value);
+            if (_ClampLowerRangeOffset == -1) _ClampLowerRangeOffset = Schema.GetOffset(0xC02700C20F690326);
+            return ref _Handle.AsRef<bool>(_ClampLowerRangeOffset);
         }
     }
-    private static nint? _ClampUpperRangeOffset;
+    private static nint _ClampUpperRangeOffset = -1;
 
     public ref bool ClampUpperRange
     {
         get
         {
-            _ClampUpperRangeOffset = _ClampUpperRangeOffset ?? Schema.GetOffset(0xC02700C2815873B5);
-            return ref _Handle.AsRef<bool>(_ClampUpperRangeOffset!.Value);
+            if (_ClampUpperRangeOffset == -1) _ClampUpperRangeOffset = Schema.GetOffset(0xC02700C2815873B5);
+            return ref _Handle.AsRef<bool>(_ClampUpperRangeOffset);
         }
     }
 

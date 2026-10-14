@@ -16,37 +16,37 @@ internal partial class CVoiceContainerStaticAdditiveSynth__CToneImpl : SchemaCla
 {
     public CVoiceContainerStaticAdditiveSynth__CToneImpl(nint handle) : base(handle) { }
 
-    private static nint? _HarmonicsOffset;
+    private static nint _HarmonicsOffset = -1;
 
     public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic> Harmonics
     {
         get
         {
-            _HarmonicsOffset = _HarmonicsOffset ?? Schema.GetOffset(0x1501082A3A08CDBF);
-            return ref _Handle.AsRef<CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic>>(_HarmonicsOffset!.Value);
+            if (_HarmonicsOffset == -1) _HarmonicsOffset = Schema.GetOffset(0x1501082A3A08CDBF);
+            return ref _Handle.AsRef<CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic>>(_HarmonicsOffset);
         }
     }
-    private static nint? _CurveOffset;
+    private static nint _CurveOffset = -1;
     private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
-            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0x1501082ABFFA0B34);
+            if (_CurveOffset == -1) _CurveOffset = Schema.GetOffset(0x1501082ABFFA0B34);
             var instance = _CurveInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CurveOffset);
             return instance;
         }
     }
-    private static nint? _SyncInstancesOffset;
+    private static nint _SyncInstancesOffset = -1;
 
     public ref bool SyncInstances
     {
         get
         {
-            _SyncInstancesOffset = _SyncInstancesOffset ?? Schema.GetOffset(0x1501082A21EE9902);
-            return ref _Handle.AsRef<bool>(_SyncInstancesOffset!.Value);
+            if (_SyncInstancesOffset == -1) _SyncInstancesOffset = Schema.GetOffset(0x1501082A21EE9902);
+            return ref _Handle.AsRef<bool>(_SyncInstancesOffset);
         }
     }
 

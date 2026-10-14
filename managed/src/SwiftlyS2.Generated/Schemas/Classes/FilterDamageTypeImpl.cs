@@ -16,14 +16,14 @@ internal partial class FilterDamageTypeImpl : CBaseFilterImpl, FilterDamageType
 {
     public FilterDamageTypeImpl(nint handle) : base(handle) { }
 
-    private static nint? _DamageTypeOffset;
+    private static nint _DamageTypeOffset = -1;
 
     public ref int DamageType
     {
         get
         {
-            _DamageTypeOffset = _DamageTypeOffset ?? Schema.GetOffset(0xEBD649E6AF4EB7BD);
-            return ref _Handle.AsRef<int>(_DamageTypeOffset!.Value);
+            if (_DamageTypeOffset == -1) _DamageTypeOffset = Schema.GetOffset(0xEBD649E6AF4EB7BD);
+            return ref _Handle.AsRef<int>(_DamageTypeOffset);
         }
     }
 

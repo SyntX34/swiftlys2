@@ -16,16 +16,16 @@ internal partial class CMixAudioSourceImpl : CMixPropertyBaseImpl, CMixAudioSour
 {
     public CMixAudioSourceImpl(nint handle) : base(handle) { }
 
-    private static nint? _KvContainerOffset;
+    private static nint _KvContainerOffset = -1;
     private SchemaUntypedField? _KvContainerInstance;
 
     public SchemaUntypedField KvContainer
     {
         get
         {
-            _KvContainerOffset = _KvContainerOffset ?? Schema.GetOffset(0x7573D7ABE436AC5B);
+            if (_KvContainerOffset == -1) _KvContainerOffset = Schema.GetOffset(0x7573D7ABE436AC5B);
             var instance = _KvContainerInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _KvContainerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _KvContainerOffset);
             return instance;
         }
     }

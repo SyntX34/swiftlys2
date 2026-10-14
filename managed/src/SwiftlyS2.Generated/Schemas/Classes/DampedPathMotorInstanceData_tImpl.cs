@@ -16,34 +16,34 @@ internal partial class DampedPathMotorInstanceData_tImpl : SchemaClass, DampedPa
 {
     public DampedPathMotorInstanceData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _VelocityOffset;
+    private static nint _VelocityOffset = -1;
 
     public ref Vector Velocity
     {
         get
         {
-            _VelocityOffset = _VelocityOffset ?? Schema.GetOffset(0x29D3A01A4344653E);
-            return ref _Handle.AsRef<Vector>(_VelocityOffset!.Value);
+            if (_VelocityOffset == -1) _VelocityOffset = Schema.GetOffset(0x29D3A01A4344653E);
+            return ref _Handle.AsRef<Vector>(_VelocityOffset);
         }
     }
-    private static nint? _AccelerationOffset;
+    private static nint _AccelerationOffset = -1;
 
     public ref Vector Acceleration
     {
         get
         {
-            _AccelerationOffset = _AccelerationOffset ?? Schema.GetOffset(0x29D3A01A18AF3A91);
-            return ref _Handle.AsRef<Vector>(_AccelerationOffset!.Value);
+            if (_AccelerationOffset == -1) _AccelerationOffset = Schema.GetOffset(0x29D3A01A18AF3A91);
+            return ref _Handle.AsRef<Vector>(_AccelerationOffset);
         }
     }
-    private static nint? _StoppingOffset;
+    private static nint _StoppingOffset = -1;
 
     public ref bool Stopping
     {
         get
         {
-            _StoppingOffset = _StoppingOffset ?? Schema.GetOffset(0x29D3A01AE082F209);
-            return ref _Handle.AsRef<bool>(_StoppingOffset!.Value);
+            if (_StoppingOffset == -1) _StoppingOffset = Schema.GetOffset(0x29D3A01AE082F209);
+            return ref _Handle.AsRef<bool>(_StoppingOffset);
         }
     }
 

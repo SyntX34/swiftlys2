@@ -16,34 +16,34 @@ internal partial class CAssetWarningImpl : SchemaClass, CAssetWarning
 {
     public CAssetWarningImpl(nint handle) : base(handle) { }
 
-    private static nint? _TitleOffset;
+    private static nint _TitleOffset = -1;
 
     public ref CBufferString Title
     {
         get
         {
-            _TitleOffset = _TitleOffset ?? Schema.GetOffset(0xC93C4FEA32B76A89);
-            return ref _Handle.AsRef<CBufferString>(_TitleOffset!.Value);
+            if (_TitleOffset == -1) _TitleOffset = Schema.GetOffset(0xC93C4FEA32B76A89);
+            return ref _Handle.AsRef<CBufferString>(_TitleOffset);
         }
     }
-    private static nint? _MessageOffset;
+    private static nint _MessageOffset = -1;
 
     public ref CBufferString Message
     {
         get
         {
-            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0xC93C4FEACBF47A64);
-            return ref _Handle.AsRef<CBufferString>(_MessageOffset!.Value);
+            if (_MessageOffset == -1) _MessageOffset = Schema.GetOffset(0xC93C4FEACBF47A64);
+            return ref _Handle.AsRef<CBufferString>(_MessageOffset);
         }
     }
-    private static nint? _ChecksOffset;
+    private static nint _ChecksOffset = -1;
 
     public ref CUtlVector<CAssetWarningCheck> Checks
     {
         get
         {
-            _ChecksOffset = _ChecksOffset ?? Schema.GetOffset(0xC93C4FEA1DB01E5C);
-            return ref _Handle.AsRef<CUtlVector<CAssetWarningCheck>>(_ChecksOffset!.Value);
+            if (_ChecksOffset == -1) _ChecksOffset = Schema.GetOffset(0xC93C4FEA1DB01E5C);
+            return ref _Handle.AsRef<CUtlVector<CAssetWarningCheck>>(_ChecksOffset);
         }
     }
 

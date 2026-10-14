@@ -16,39 +16,39 @@ internal partial class ModelBoneFlexDriver_tImpl : SchemaClass, ModelBoneFlexDri
 {
     public ModelBoneFlexDriver_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoneNameOffset;
+    private static nint _BoneNameOffset = -1;
 
     public string BoneName
     {
         get
         {
-            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0xBCBDE5AAFDEE0E0C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
+            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0xBCBDE5AAFDEE0E0C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
         }
         set
         {
-            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0xBCBDE5AAFDEE0E0C);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
+            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0xBCBDE5AAFDEE0E0C);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
         }
     }
-    private static nint? _BoneNameTokenOffset;
+    private static nint _BoneNameTokenOffset = -1;
 
     public ref uint BoneNameToken
     {
         get
         {
-            _BoneNameTokenOffset = _BoneNameTokenOffset ?? Schema.GetOffset(0xBCBDE5AA44D1E369);
-            return ref _Handle.AsRef<uint>(_BoneNameTokenOffset!.Value);
+            if (_BoneNameTokenOffset == -1) _BoneNameTokenOffset = Schema.GetOffset(0xBCBDE5AA44D1E369);
+            return ref _Handle.AsRef<uint>(_BoneNameTokenOffset);
         }
     }
-    private static nint? _ControlsOffset;
+    private static nint _ControlsOffset = -1;
 
     public ref CUtlVector<ModelBoneFlexDriverControl_t> Controls
     {
         get
         {
-            _ControlsOffset = _ControlsOffset ?? Schema.GetOffset(0xBCBDE5AA5FCAD2B7);
-            return ref _Handle.AsRef<CUtlVector<ModelBoneFlexDriverControl_t>>(_ControlsOffset!.Value);
+            if (_ControlsOffset == -1) _ControlsOffset = Schema.GetOffset(0xBCBDE5AA5FCAD2B7);
+            return ref _Handle.AsRef<CUtlVector<ModelBoneFlexDriverControl_t>>(_ControlsOffset);
         }
     }
 

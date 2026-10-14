@@ -16,14 +16,14 @@ internal partial class CKnifeImpl : CCSWeaponBaseImpl, CKnife
 {
     public CKnifeImpl(nint handle) : base(handle) { }
 
-    private static nint? _FirstAttackOffset;
+    private static nint _FirstAttackOffset = -1;
 
     public ref bool FirstAttack
     {
         get
         {
-            _FirstAttackOffset = _FirstAttackOffset ?? Schema.GetOffset(0x2551A83B441D83D9);
-            return ref _Handle.AsRef<bool>(_FirstAttackOffset!.Value);
+            if (_FirstAttackOffset == -1) _FirstAttackOffset = Schema.GetOffset(0x2551A83B441D83D9);
+            return ref _Handle.AsRef<bool>(_FirstAttackOffset);
         }
     }
 

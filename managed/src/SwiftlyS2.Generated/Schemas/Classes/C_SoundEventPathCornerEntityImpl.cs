@@ -16,16 +16,16 @@ internal partial class C_SoundEventPathCornerEntityImpl : C_SoundEventMultiPoint
 {
     public C_SoundEventPathCornerEntityImpl(nint handle) : base(handle) { }
 
-    private static nint? _CornerPairsNetworkedOffset;
+    private static nint _CornerPairsNetworkedOffset = -1;
     private SchemaUntypedField? _CornerPairsNetworkedInstance;
 
     public SchemaUntypedField CornerPairsNetworked
     {
         get
         {
-            _CornerPairsNetworkedOffset = _CornerPairsNetworkedOffset ?? Schema.GetOffset(0xB00D08974C7A9B2C);
+            if (_CornerPairsNetworkedOffset == -1) _CornerPairsNetworkedOffset = Schema.GetOffset(0xB00D08974C7A9B2C);
             var instance = _CornerPairsNetworkedInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CornerPairsNetworkedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CornerPairsNetworkedOffset);
             return instance;
         }
     }

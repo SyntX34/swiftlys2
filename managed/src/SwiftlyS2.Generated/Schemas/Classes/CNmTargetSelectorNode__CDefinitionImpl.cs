@@ -16,77 +16,77 @@ internal partial class CNmTargetSelectorNode__CDefinitionImpl : CNmClipReference
 {
     public CNmTargetSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _OptionNodeIndicesOffset;
+    private static nint _OptionNodeIndicesOffset = -1;
     private SchemaUntypedField? _OptionNodeIndicesInstance;
 
     public SchemaUntypedField OptionNodeIndices
     {
         get
         {
-            _OptionNodeIndicesOffset = _OptionNodeIndicesOffset ?? Schema.GetOffset(0xFEF535E9DA97B15D);
+            if (_OptionNodeIndicesOffset == -1) _OptionNodeIndicesOffset = Schema.GetOffset(0xFEF535E9DA97B15D);
             var instance = _OptionNodeIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OptionNodeIndicesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OptionNodeIndicesOffset);
             return instance;
         }
     }
-    private static nint? _OrientationScoreWeightOffset;
+    private static nint _OrientationScoreWeightOffset = -1;
 
     public ref float OrientationScoreWeight
     {
         get
         {
-            _OrientationScoreWeightOffset = _OrientationScoreWeightOffset ?? Schema.GetOffset(0xFEF535E984AD2F6B);
-            return ref _Handle.AsRef<float>(_OrientationScoreWeightOffset!.Value);
+            if (_OrientationScoreWeightOffset == -1) _OrientationScoreWeightOffset = Schema.GetOffset(0xFEF535E984AD2F6B);
+            return ref _Handle.AsRef<float>(_OrientationScoreWeightOffset);
         }
     }
-    private static nint? _PositionScoreWeightOffset;
+    private static nint _PositionScoreWeightOffset = -1;
 
     public ref float PositionScoreWeight
     {
         get
         {
-            _PositionScoreWeightOffset = _PositionScoreWeightOffset ?? Schema.GetOffset(0xFEF535E9DD432F1E);
-            return ref _Handle.AsRef<float>(_PositionScoreWeightOffset!.Value);
+            if (_PositionScoreWeightOffset == -1) _PositionScoreWeightOffset = Schema.GetOffset(0xFEF535E9DD432F1E);
+            return ref _Handle.AsRef<float>(_PositionScoreWeightOffset);
         }
     }
-    private static nint? _ParameterNodeIdxOffset;
+    private static nint _ParameterNodeIdxOffset = -1;
 
     public ref short ParameterNodeIdx
     {
         get
         {
-            _ParameterNodeIdxOffset = _ParameterNodeIdxOffset ?? Schema.GetOffset(0xFEF535E966C6F2AB);
-            return ref _Handle.AsRef<short>(_ParameterNodeIdxOffset!.Value);
+            if (_ParameterNodeIdxOffset == -1) _ParameterNodeIdxOffset = Schema.GetOffset(0xFEF535E966C6F2AB);
+            return ref _Handle.AsRef<short>(_ParameterNodeIdxOffset);
         }
     }
-    private static nint? _IgnoreInvalidOptionsOffset;
+    private static nint _IgnoreInvalidOptionsOffset = -1;
 
     public ref bool IgnoreInvalidOptions
     {
         get
         {
-            _IgnoreInvalidOptionsOffset = _IgnoreInvalidOptionsOffset ?? Schema.GetOffset(0xFEF535E9507C679C);
-            return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset!.Value);
+            if (_IgnoreInvalidOptionsOffset == -1) _IgnoreInvalidOptionsOffset = Schema.GetOffset(0xFEF535E9507C679C);
+            return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset);
         }
     }
-    private static nint? _IsWorldSpaceTargetOffset;
+    private static nint _IsWorldSpaceTargetOffset = -1;
 
     public ref bool IsWorldSpaceTarget
     {
         get
         {
-            _IsWorldSpaceTargetOffset = _IsWorldSpaceTargetOffset ?? Schema.GetOffset(0xFEF535E9B81D53F2);
-            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset!.Value);
+            if (_IsWorldSpaceTargetOffset == -1) _IsWorldSpaceTargetOffset = Schema.GetOffset(0xFEF535E9B81D53F2);
+            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset);
         }
     }
-    private static nint? _AlignmentBoneIDOffset;
+    private static nint _AlignmentBoneIDOffset = -1;
 
     public ref CGlobalSymbol AlignmentBoneID
     {
         get
         {
-            _AlignmentBoneIDOffset = _AlignmentBoneIDOffset ?? Schema.GetOffset(0xFEF535E9491318B5);
-            return ref _Handle.AsRef<CGlobalSymbol>(_AlignmentBoneIDOffset!.Value);
+            if (_AlignmentBoneIDOffset == -1) _AlignmentBoneIDOffset = Schema.GetOffset(0xFEF535E9491318B5);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AlignmentBoneIDOffset);
         }
     }
 

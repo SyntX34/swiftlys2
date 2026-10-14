@@ -16,19 +16,19 @@ internal partial class CNmGraphDocParameterBaseNodeImpl : CNmGraphDocFlowNodeImp
 {
     public CNmGraphDocParameterBaseNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _GroupNameOffset;
+    private static nint _GroupNameOffset = -1;
 
     public string GroupName
     {
         get
         {
-            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xD59AD5E9025FB2C7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset!.Value));
+            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0xD59AD5E9025FB2C7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset));
         }
         set
         {
-            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xD59AD5E9025FB2C7);
-            Schema.SetCUtlString(_Handle, _GroupNameOffset!.Value, value);
+            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0xD59AD5E9025FB2C7);
+            Schema.SetCUtlString(_Handle, _GroupNameOffset, value);
         }
     }
 

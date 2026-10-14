@@ -16,49 +16,49 @@ internal partial class CSoundOpvarSetPathCornerEntityImpl : CSoundOpvarSetPointE
 {
     public CSoundOpvarSetPathCornerEntityImpl(nint handle) : base(handle) { }
 
-    private static nint? _UseParentedPathOffset;
+    private static nint _UseParentedPathOffset = -1;
 
     public ref bool UseParentedPath
     {
         get
         {
-            _UseParentedPathOffset = _UseParentedPathOffset ?? Schema.GetOffset(0x368409545340666E);
-            return ref _Handle.AsRef<bool>(_UseParentedPathOffset!.Value);
+            if (_UseParentedPathOffset == -1) _UseParentedPathOffset = Schema.GetOffset(0x368409545340666E);
+            return ref _Handle.AsRef<bool>(_UseParentedPathOffset);
         }
     }
-    private static nint? _DistMinSqrOffset;
+    private static nint _DistMinSqrOffset = -1;
 
     public ref float DistMinSqr
     {
         get
         {
-            _DistMinSqrOffset = _DistMinSqrOffset ?? Schema.GetOffset(0x368409543D1989CD);
-            return ref _Handle.AsRef<float>(_DistMinSqrOffset!.Value);
+            if (_DistMinSqrOffset == -1) _DistMinSqrOffset = Schema.GetOffset(0x368409543D1989CD);
+            return ref _Handle.AsRef<float>(_DistMinSqrOffset);
         }
     }
-    private static nint? _DistMaxSqrOffset;
+    private static nint _DistMaxSqrOffset = -1;
 
     public ref float DistMaxSqr
     {
         get
         {
-            _DistMaxSqrOffset = _DistMaxSqrOffset ?? Schema.GetOffset(0x36840954993EE3BF);
-            return ref _Handle.AsRef<float>(_DistMaxSqrOffset!.Value);
+            if (_DistMaxSqrOffset == -1) _DistMaxSqrOffset = Schema.GetOffset(0x36840954993EE3BF);
+            return ref _Handle.AsRef<float>(_DistMaxSqrOffset);
         }
     }
-    private static nint? _PathCornerEntityNameOffset;
+    private static nint _PathCornerEntityNameOffset = -1;
 
     public string PathCornerEntityName
     {
         get
         {
-            _PathCornerEntityNameOffset = _PathCornerEntityNameOffset ?? Schema.GetOffset(0x36840954EF6D6403);
-            return Schema.GetString(_Handle.Read<nint>(_PathCornerEntityNameOffset!.Value));
+            if (_PathCornerEntityNameOffset == -1) _PathCornerEntityNameOffset = Schema.GetOffset(0x36840954EF6D6403);
+            return Schema.GetString(_Handle.Read<nint>(_PathCornerEntityNameOffset));
         }
         set
         {
-            _PathCornerEntityNameOffset = _PathCornerEntityNameOffset ?? Schema.GetOffset(0x36840954EF6D6403);
-            Schema.SetString(_Handle, _PathCornerEntityNameOffset!.Value, value);
+            if (_PathCornerEntityNameOffset == -1) _PathCornerEntityNameOffset = Schema.GetOffset(0x36840954EF6D6403);
+            Schema.SetString(_Handle, _PathCornerEntityNameOffset, value);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class SolveIKChainPoseOpFixedSettings_tImpl : SchemaClass, Solv
 {
     public SolveIKChainPoseOpFixedSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChainsToSolveDataOffset;
+    private static nint _ChainsToSolveDataOffset = -1;
 
     public ref CUtlVector<ChainToSolveData_t> ChainsToSolveData
     {
         get
         {
-            _ChainsToSolveDataOffset = _ChainsToSolveDataOffset ?? Schema.GetOffset(0x983BF8BD94B979E5);
-            return ref _Handle.AsRef<CUtlVector<ChainToSolveData_t>>(_ChainsToSolveDataOffset!.Value);
+            if (_ChainsToSolveDataOffset == -1) _ChainsToSolveDataOffset = Schema.GetOffset(0x983BF8BD94B979E5);
+            return ref _Handle.AsRef<CUtlVector<ChainToSolveData_t>>(_ChainsToSolveDataOffset);
         }
     }
 

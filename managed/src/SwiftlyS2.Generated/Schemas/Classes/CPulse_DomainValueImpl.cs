@@ -16,36 +16,36 @@ internal partial class CPulse_DomainValueImpl : SchemaClass, CPulse_DomainValue
 {
     public CPulse_DomainValueImpl(nint handle) : base(handle) { }
 
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref PulseDomainValueType_t Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x8F29D60118853D59);
-            return ref _Handle.AsRef<PulseDomainValueType_t>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x8F29D60118853D59);
+            return ref _Handle.AsRef<PulseDomainValueType_t>(_TypeOffset);
         }
     }
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public ref CGlobalSymbol Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x8F29D601DCB0894A);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ValueOffset!.Value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x8F29D601DCB0894A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ValueOffset);
         }
     }
-    private static nint? _RequiredRuntimeTypeOffset;
+    private static nint _RequiredRuntimeTypeOffset = -1;
     private SchemaUntypedField? _RequiredRuntimeTypeInstance;
 
     public SchemaUntypedField RequiredRuntimeType
     {
         get
         {
-            _RequiredRuntimeTypeOffset = _RequiredRuntimeTypeOffset ?? Schema.GetOffset(0x8F29D6013355393C);
+            if (_RequiredRuntimeTypeOffset == -1) _RequiredRuntimeTypeOffset = Schema.GetOffset(0x8F29D6013355393C);
             var instance = _RequiredRuntimeTypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RequiredRuntimeTypeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RequiredRuntimeTypeOffset);
             return instance;
         }
     }

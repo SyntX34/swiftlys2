@@ -16,44 +16,44 @@ internal partial class C_OP_TwistAroundAxisImpl : CParticleFunctionForceImpl, C_
 {
     public C_OP_TwistAroundAxisImpl(nint handle) : base(handle) { }
 
-    private static nint? _ForceAmountOffset;
+    private static nint _ForceAmountOffset = -1;
 
     public ref float ForceAmount
     {
         get
         {
-            _ForceAmountOffset = _ForceAmountOffset ?? Schema.GetOffset(0xE1FA036870831A84);
-            return ref _Handle.AsRef<float>(_ForceAmountOffset!.Value);
+            if (_ForceAmountOffset == -1) _ForceAmountOffset = Schema.GetOffset(0xE1FA036870831A84);
+            return ref _Handle.AsRef<float>(_ForceAmountOffset);
         }
     }
-    private static nint? _TwistAxisOffset;
+    private static nint _TwistAxisOffset = -1;
 
     public ref Vector TwistAxis
     {
         get
         {
-            _TwistAxisOffset = _TwistAxisOffset ?? Schema.GetOffset(0xE1FA0368BEAAB521);
-            return ref _Handle.AsRef<Vector>(_TwistAxisOffset!.Value);
+            if (_TwistAxisOffset == -1) _TwistAxisOffset = Schema.GetOffset(0xE1FA0368BEAAB521);
+            return ref _Handle.AsRef<Vector>(_TwistAxisOffset);
         }
     }
-    private static nint? _LocalSpaceOffset;
+    private static nint _LocalSpaceOffset = -1;
 
     public ref bool LocalSpace
     {
         get
         {
-            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0xE1FA036862418E6E);
-            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+            if (_LocalSpaceOffset == -1) _LocalSpaceOffset = Schema.GetOffset(0xE1FA036862418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset);
         }
     }
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xE1FA03683F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0xE1FA03683F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
 

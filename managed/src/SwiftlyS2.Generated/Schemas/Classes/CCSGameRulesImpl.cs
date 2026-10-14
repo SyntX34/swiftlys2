@@ -16,2009 +16,2009 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
 {
     public CCSGameRulesImpl(nint handle) : base(handle) { }
 
-    private static nint? _FreezePeriodOffset;
+    private static nint _FreezePeriodOffset = -1;
 
     public ref bool FreezePeriod
     {
         get
         {
-            _FreezePeriodOffset = _FreezePeriodOffset ?? Schema.GetOffset(0x6295CF650DE408E3);
-            return ref _Handle.AsRef<bool>(_FreezePeriodOffset!.Value);
+            if (_FreezePeriodOffset == -1) _FreezePeriodOffset = Schema.GetOffset(0x6295CF650DE408E3);
+            return ref _Handle.AsRef<bool>(_FreezePeriodOffset);
         }
     }
-    private static nint? _WarmupPeriodOffset;
+    private static nint _WarmupPeriodOffset = -1;
 
     public ref bool WarmupPeriod
     {
         get
         {
-            _WarmupPeriodOffset = _WarmupPeriodOffset ?? Schema.GetOffset(0x6295CF6569684C44);
-            return ref _Handle.AsRef<bool>(_WarmupPeriodOffset!.Value);
+            if (_WarmupPeriodOffset == -1) _WarmupPeriodOffset = Schema.GetOffset(0x6295CF6569684C44);
+            return ref _Handle.AsRef<bool>(_WarmupPeriodOffset);
         }
     }
-    private static nint? _WarmupPeriodEndOffset;
+    private static nint _WarmupPeriodEndOffset = -1;
     private GameTime_tImpl? _WarmupPeriodEndInstance;
 
     public GameTime_t WarmupPeriodEnd
     {
         get
         {
-            _WarmupPeriodEndOffset = _WarmupPeriodEndOffset ?? Schema.GetOffset(0x6295CF65BD3AFF1D);
+            if (_WarmupPeriodEndOffset == -1) _WarmupPeriodEndOffset = Schema.GetOffset(0x6295CF65BD3AFF1D);
             var instance = _WarmupPeriodEndInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _WarmupPeriodEndOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WarmupPeriodEndOffset);
             return instance;
         }
     }
-    private static nint? _WarmupPeriodStartOffset;
+    private static nint _WarmupPeriodStartOffset = -1;
     private GameTime_tImpl? _WarmupPeriodStartInstance;
 
     public GameTime_t WarmupPeriodStart
     {
         get
         {
-            _WarmupPeriodStartOffset = _WarmupPeriodStartOffset ?? Schema.GetOffset(0x6295CF6541805884);
+            if (_WarmupPeriodStartOffset == -1) _WarmupPeriodStartOffset = Schema.GetOffset(0x6295CF6541805884);
             var instance = _WarmupPeriodStartInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _WarmupPeriodStartOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WarmupPeriodStartOffset);
             return instance;
         }
     }
-    private static nint? _TerroristTimeOutActiveOffset;
+    private static nint _TerroristTimeOutActiveOffset = -1;
 
     public ref bool TerroristTimeOutActive
     {
         get
         {
-            _TerroristTimeOutActiveOffset = _TerroristTimeOutActiveOffset ?? Schema.GetOffset(0x6295CF654A7D1ECE);
-            return ref _Handle.AsRef<bool>(_TerroristTimeOutActiveOffset!.Value);
+            if (_TerroristTimeOutActiveOffset == -1) _TerroristTimeOutActiveOffset = Schema.GetOffset(0x6295CF654A7D1ECE);
+            return ref _Handle.AsRef<bool>(_TerroristTimeOutActiveOffset);
         }
     }
-    private static nint? _CTTimeOutActiveOffset;
+    private static nint _CTTimeOutActiveOffset = -1;
 
     public ref bool CTTimeOutActive
     {
         get
         {
-            _CTTimeOutActiveOffset = _CTTimeOutActiveOffset ?? Schema.GetOffset(0x6295CF65E0DDAFEF);
-            return ref _Handle.AsRef<bool>(_CTTimeOutActiveOffset!.Value);
+            if (_CTTimeOutActiveOffset == -1) _CTTimeOutActiveOffset = Schema.GetOffset(0x6295CF65E0DDAFEF);
+            return ref _Handle.AsRef<bool>(_CTTimeOutActiveOffset);
         }
     }
-    private static nint? _TerroristTimeOutRemainingOffset;
+    private static nint _TerroristTimeOutRemainingOffset = -1;
 
     public ref float TerroristTimeOutRemaining
     {
         get
         {
-            _TerroristTimeOutRemainingOffset = _TerroristTimeOutRemainingOffset ?? Schema.GetOffset(0x6295CF652F2C703E);
-            return ref _Handle.AsRef<float>(_TerroristTimeOutRemainingOffset!.Value);
+            if (_TerroristTimeOutRemainingOffset == -1) _TerroristTimeOutRemainingOffset = Schema.GetOffset(0x6295CF652F2C703E);
+            return ref _Handle.AsRef<float>(_TerroristTimeOutRemainingOffset);
         }
     }
-    private static nint? _CTTimeOutRemainingOffset;
+    private static nint _CTTimeOutRemainingOffset = -1;
 
     public ref float CTTimeOutRemaining
     {
         get
         {
-            _CTTimeOutRemainingOffset = _CTTimeOutRemainingOffset ?? Schema.GetOffset(0x6295CF655CCA1E5D);
-            return ref _Handle.AsRef<float>(_CTTimeOutRemainingOffset!.Value);
+            if (_CTTimeOutRemainingOffset == -1) _CTTimeOutRemainingOffset = Schema.GetOffset(0x6295CF655CCA1E5D);
+            return ref _Handle.AsRef<float>(_CTTimeOutRemainingOffset);
         }
     }
-    private static nint? _TerroristTimeOutsOffset;
+    private static nint _TerroristTimeOutsOffset = -1;
 
     public ref int TerroristTimeOuts
     {
         get
         {
-            _TerroristTimeOutsOffset = _TerroristTimeOutsOffset ?? Schema.GetOffset(0x6295CF65D622E821);
-            return ref _Handle.AsRef<int>(_TerroristTimeOutsOffset!.Value);
+            if (_TerroristTimeOutsOffset == -1) _TerroristTimeOutsOffset = Schema.GetOffset(0x6295CF65D622E821);
+            return ref _Handle.AsRef<int>(_TerroristTimeOutsOffset);
         }
     }
-    private static nint? _CTTimeOutsOffset;
+    private static nint _CTTimeOutsOffset = -1;
 
     public ref int CTTimeOuts
     {
         get
         {
-            _CTTimeOutsOffset = _CTTimeOutsOffset ?? Schema.GetOffset(0x6295CF659A215FA6);
-            return ref _Handle.AsRef<int>(_CTTimeOutsOffset!.Value);
+            if (_CTTimeOutsOffset == -1) _CTTimeOutsOffset = Schema.GetOffset(0x6295CF659A215FA6);
+            return ref _Handle.AsRef<int>(_CTTimeOutsOffset);
         }
     }
-    private static nint? _TechnicalTimeOutOffset;
+    private static nint _TechnicalTimeOutOffset = -1;
 
     public ref bool TechnicalTimeOut
     {
         get
         {
-            _TechnicalTimeOutOffset = _TechnicalTimeOutOffset ?? Schema.GetOffset(0x6295CF656F9E16DB);
-            return ref _Handle.AsRef<bool>(_TechnicalTimeOutOffset!.Value);
+            if (_TechnicalTimeOutOffset == -1) _TechnicalTimeOutOffset = Schema.GetOffset(0x6295CF656F9E16DB);
+            return ref _Handle.AsRef<bool>(_TechnicalTimeOutOffset);
         }
     }
-    private static nint? _MatchWaitingForResumeOffset;
+    private static nint _MatchWaitingForResumeOffset = -1;
 
     public ref bool MatchWaitingForResume
     {
         get
         {
-            _MatchWaitingForResumeOffset = _MatchWaitingForResumeOffset ?? Schema.GetOffset(0x6295CF6597B2188B);
-            return ref _Handle.AsRef<bool>(_MatchWaitingForResumeOffset!.Value);
+            if (_MatchWaitingForResumeOffset == -1) _MatchWaitingForResumeOffset = Schema.GetOffset(0x6295CF6597B2188B);
+            return ref _Handle.AsRef<bool>(_MatchWaitingForResumeOffset);
         }
     }
-    private static nint? _FreezeTimeOffset;
+    private static nint _FreezeTimeOffset = -1;
 
     public ref int FreezeTime
     {
         get
         {
-            _FreezeTimeOffset = _FreezeTimeOffset ?? Schema.GetOffset(0x6295CF6525D5D12E);
-            return ref _Handle.AsRef<int>(_FreezeTimeOffset!.Value);
+            if (_FreezeTimeOffset == -1) _FreezeTimeOffset = Schema.GetOffset(0x6295CF6525D5D12E);
+            return ref _Handle.AsRef<int>(_FreezeTimeOffset);
         }
     }
-    private static nint? _RoundTimeOffset;
+    private static nint _RoundTimeOffset = -1;
 
     public ref int RoundTime
     {
         get
         {
-            _RoundTimeOffset = _RoundTimeOffset ?? Schema.GetOffset(0x6295CF659A5A5155);
-            return ref _Handle.AsRef<int>(_RoundTimeOffset!.Value);
+            if (_RoundTimeOffset == -1) _RoundTimeOffset = Schema.GetOffset(0x6295CF659A5A5155);
+            return ref _Handle.AsRef<int>(_RoundTimeOffset);
         }
     }
-    private static nint? _MatchStartTimeOffset;
+    private static nint _MatchStartTimeOffset = -1;
 
     public ref float MatchStartTime
     {
         get
         {
-            _MatchStartTimeOffset = _MatchStartTimeOffset ?? Schema.GetOffset(0x6295CF65386C0C9B);
-            return ref _Handle.AsRef<float>(_MatchStartTimeOffset!.Value);
+            if (_MatchStartTimeOffset == -1) _MatchStartTimeOffset = Schema.GetOffset(0x6295CF65386C0C9B);
+            return ref _Handle.AsRef<float>(_MatchStartTimeOffset);
         }
     }
-    private static nint? _RoundStartTimeOffset;
+    private static nint _RoundStartTimeOffset = -1;
     private GameTime_tImpl? _RoundStartTimeInstance;
 
     public GameTime_t RoundStartTime
     {
         get
         {
-            _RoundStartTimeOffset = _RoundStartTimeOffset ?? Schema.GetOffset(0x6295CF65C262EE3C);
+            if (_RoundStartTimeOffset == -1) _RoundStartTimeOffset = Schema.GetOffset(0x6295CF65C262EE3C);
             var instance = _RoundStartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RoundStartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RoundStartTimeOffset);
             return instance;
         }
     }
-    private static nint? _RestartRoundTimeOffset;
+    private static nint _RestartRoundTimeOffset = -1;
     private GameTime_tImpl? _RestartRoundTimeInstance;
 
     public GameTime_t RestartRoundTime
     {
         get
         {
-            _RestartRoundTimeOffset = _RestartRoundTimeOffset ?? Schema.GetOffset(0x6295CF65F8CD3077);
+            if (_RestartRoundTimeOffset == -1) _RestartRoundTimeOffset = Schema.GetOffset(0x6295CF65F8CD3077);
             var instance = _RestartRoundTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RestartRoundTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RestartRoundTimeOffset);
             return instance;
         }
     }
-    private static nint? _GameRestartOffset;
+    private static nint _GameRestartOffset = -1;
 
     public ref bool GameRestart
     {
         get
         {
-            _GameRestartOffset = _GameRestartOffset ?? Schema.GetOffset(0x6295CF6532CBD44E);
-            return ref _Handle.AsRef<bool>(_GameRestartOffset!.Value);
+            if (_GameRestartOffset == -1) _GameRestartOffset = Schema.GetOffset(0x6295CF6532CBD44E);
+            return ref _Handle.AsRef<bool>(_GameRestartOffset);
         }
     }
-    private static nint? _GameStartTimeOffset;
+    private static nint _GameStartTimeOffset = -1;
 
     public ref float GameStartTime
     {
         get
         {
-            _GameStartTimeOffset = _GameStartTimeOffset ?? Schema.GetOffset(0x6295CF6504E0446E);
-            return ref _Handle.AsRef<float>(_GameStartTimeOffset!.Value);
+            if (_GameStartTimeOffset == -1) _GameStartTimeOffset = Schema.GetOffset(0x6295CF6504E0446E);
+            return ref _Handle.AsRef<float>(_GameStartTimeOffset);
         }
     }
-    private static nint? _TimeUntilNextPhaseStartsOffset;
+    private static nint _TimeUntilNextPhaseStartsOffset = -1;
 
     public ref float TimeUntilNextPhaseStarts
     {
         get
         {
-            _TimeUntilNextPhaseStartsOffset = _TimeUntilNextPhaseStartsOffset ?? Schema.GetOffset(0x6295CF65B603E0DD);
-            return ref _Handle.AsRef<float>(_TimeUntilNextPhaseStartsOffset!.Value);
+            if (_TimeUntilNextPhaseStartsOffset == -1) _TimeUntilNextPhaseStartsOffset = Schema.GetOffset(0x6295CF65B603E0DD);
+            return ref _Handle.AsRef<float>(_TimeUntilNextPhaseStartsOffset);
         }
     }
-    private static nint? _GamePhaseOffset;
+    private static nint _GamePhaseOffset = -1;
 
     public ref int GamePhase
     {
         get
         {
-            _GamePhaseOffset = _GamePhaseOffset ?? Schema.GetOffset(0x6295CF65CEC62EE2);
-            return ref _Handle.AsRef<int>(_GamePhaseOffset!.Value);
+            if (_GamePhaseOffset == -1) _GamePhaseOffset = Schema.GetOffset(0x6295CF65CEC62EE2);
+            return ref _Handle.AsRef<int>(_GamePhaseOffset);
         }
     }
-    private static nint? _TotalRoundsPlayedOffset;
+    private static nint _TotalRoundsPlayedOffset = -1;
 
     public ref int TotalRoundsPlayed
     {
         get
         {
-            _TotalRoundsPlayedOffset = _TotalRoundsPlayedOffset ?? Schema.GetOffset(0x6295CF6556632103);
-            return ref _Handle.AsRef<int>(_TotalRoundsPlayedOffset!.Value);
+            if (_TotalRoundsPlayedOffset == -1) _TotalRoundsPlayedOffset = Schema.GetOffset(0x6295CF6556632103);
+            return ref _Handle.AsRef<int>(_TotalRoundsPlayedOffset);
         }
     }
-    private static nint? _RoundsPlayedThisPhaseOffset;
+    private static nint _RoundsPlayedThisPhaseOffset = -1;
 
     public ref int RoundsPlayedThisPhase
     {
         get
         {
-            _RoundsPlayedThisPhaseOffset = _RoundsPlayedThisPhaseOffset ?? Schema.GetOffset(0x6295CF65B48D294A);
-            return ref _Handle.AsRef<int>(_RoundsPlayedThisPhaseOffset!.Value);
+            if (_RoundsPlayedThisPhaseOffset == -1) _RoundsPlayedThisPhaseOffset = Schema.GetOffset(0x6295CF65B48D294A);
+            return ref _Handle.AsRef<int>(_RoundsPlayedThisPhaseOffset);
         }
     }
-    private static nint? _OvertimePlayingOffset;
+    private static nint _OvertimePlayingOffset = -1;
 
     public ref int OvertimePlaying
     {
         get
         {
-            _OvertimePlayingOffset = _OvertimePlayingOffset ?? Schema.GetOffset(0x6295CF6528CE7C44);
-            return ref _Handle.AsRef<int>(_OvertimePlayingOffset!.Value);
+            if (_OvertimePlayingOffset == -1) _OvertimePlayingOffset = Schema.GetOffset(0x6295CF6528CE7C44);
+            return ref _Handle.AsRef<int>(_OvertimePlayingOffset);
         }
     }
-    private static nint? _HostagesRemainingOffset;
+    private static nint _HostagesRemainingOffset = -1;
 
     public ref int HostagesRemaining
     {
         get
         {
-            _HostagesRemainingOffset = _HostagesRemainingOffset ?? Schema.GetOffset(0x6295CF653EA141EE);
-            return ref _Handle.AsRef<int>(_HostagesRemainingOffset!.Value);
+            if (_HostagesRemainingOffset == -1) _HostagesRemainingOffset = Schema.GetOffset(0x6295CF653EA141EE);
+            return ref _Handle.AsRef<int>(_HostagesRemainingOffset);
         }
     }
-    private static nint? _AnyHostageReachedOffset;
+    private static nint _AnyHostageReachedOffset = -1;
 
     public ref bool AnyHostageReached
     {
         get
         {
-            _AnyHostageReachedOffset = _AnyHostageReachedOffset ?? Schema.GetOffset(0x6295CF652B1C585C);
-            return ref _Handle.AsRef<bool>(_AnyHostageReachedOffset!.Value);
+            if (_AnyHostageReachedOffset == -1) _AnyHostageReachedOffset = Schema.GetOffset(0x6295CF652B1C585C);
+            return ref _Handle.AsRef<bool>(_AnyHostageReachedOffset);
         }
     }
-    private static nint? _MapHasBombTargetOffset;
+    private static nint _MapHasBombTargetOffset = -1;
 
     public ref bool MapHasBombTarget
     {
         get
         {
-            _MapHasBombTargetOffset = _MapHasBombTargetOffset ?? Schema.GetOffset(0x6295CF654D11B002);
-            return ref _Handle.AsRef<bool>(_MapHasBombTargetOffset!.Value);
+            if (_MapHasBombTargetOffset == -1) _MapHasBombTargetOffset = Schema.GetOffset(0x6295CF654D11B002);
+            return ref _Handle.AsRef<bool>(_MapHasBombTargetOffset);
         }
     }
-    private static nint? _MapHasRescueZoneOffset;
+    private static nint _MapHasRescueZoneOffset = -1;
 
     public ref bool MapHasRescueZone
     {
         get
         {
-            _MapHasRescueZoneOffset = _MapHasRescueZoneOffset ?? Schema.GetOffset(0x6295CF659173C714);
-            return ref _Handle.AsRef<bool>(_MapHasRescueZoneOffset!.Value);
+            if (_MapHasRescueZoneOffset == -1) _MapHasRescueZoneOffset = Schema.GetOffset(0x6295CF659173C714);
+            return ref _Handle.AsRef<bool>(_MapHasRescueZoneOffset);
         }
     }
-    private static nint? _MapHasBuyZoneOffset;
+    private static nint _MapHasBuyZoneOffset = -1;
 
     public ref bool MapHasBuyZone
     {
         get
         {
-            _MapHasBuyZoneOffset = _MapHasBuyZoneOffset ?? Schema.GetOffset(0x6295CF654E29CC07);
-            return ref _Handle.AsRef<bool>(_MapHasBuyZoneOffset!.Value);
+            if (_MapHasBuyZoneOffset == -1) _MapHasBuyZoneOffset = Schema.GetOffset(0x6295CF654E29CC07);
+            return ref _Handle.AsRef<bool>(_MapHasBuyZoneOffset);
         }
     }
-    private static nint? _IsQueuedMatchmakingOffset;
+    private static nint _IsQueuedMatchmakingOffset = -1;
 
     public ref bool IsQueuedMatchmaking
     {
         get
         {
-            _IsQueuedMatchmakingOffset = _IsQueuedMatchmakingOffset ?? Schema.GetOffset(0x6295CF659312AC70);
-            return ref _Handle.AsRef<bool>(_IsQueuedMatchmakingOffset!.Value);
+            if (_IsQueuedMatchmakingOffset == -1) _IsQueuedMatchmakingOffset = Schema.GetOffset(0x6295CF659312AC70);
+            return ref _Handle.AsRef<bool>(_IsQueuedMatchmakingOffset);
         }
     }
-    private static nint? _QueuedMatchmakingModeOffset;
+    private static nint _QueuedMatchmakingModeOffset = -1;
 
     public ref int QueuedMatchmakingMode
     {
         get
         {
-            _QueuedMatchmakingModeOffset = _QueuedMatchmakingModeOffset ?? Schema.GetOffset(0x6295CF65B864CCF7);
-            return ref _Handle.AsRef<int>(_QueuedMatchmakingModeOffset!.Value);
+            if (_QueuedMatchmakingModeOffset == -1) _QueuedMatchmakingModeOffset = Schema.GetOffset(0x6295CF65B864CCF7);
+            return ref _Handle.AsRef<int>(_QueuedMatchmakingModeOffset);
         }
     }
-    private static nint? _IsValveDSOffset;
+    private static nint _IsValveDSOffset = -1;
 
     public ref bool IsValveDS
     {
         get
         {
-            _IsValveDSOffset = _IsValveDSOffset ?? Schema.GetOffset(0x6295CF65B14BF634);
-            return ref _Handle.AsRef<bool>(_IsValveDSOffset!.Value);
+            if (_IsValveDSOffset == -1) _IsValveDSOffset = Schema.GetOffset(0x6295CF65B14BF634);
+            return ref _Handle.AsRef<bool>(_IsValveDSOffset);
         }
     }
-    private static nint? _LogoMapOffset;
+    private static nint _LogoMapOffset = -1;
 
     public ref bool LogoMap
     {
         get
         {
-            _LogoMapOffset = _LogoMapOffset ?? Schema.GetOffset(0x6295CF65B7FCD584);
-            return ref _Handle.AsRef<bool>(_LogoMapOffset!.Value);
+            if (_LogoMapOffset == -1) _LogoMapOffset = Schema.GetOffset(0x6295CF65B7FCD584);
+            return ref _Handle.AsRef<bool>(_LogoMapOffset);
         }
     }
-    private static nint? _PlayAllStepSoundsOnServerOffset;
+    private static nint _PlayAllStepSoundsOnServerOffset = -1;
 
     public ref bool PlayAllStepSoundsOnServer
     {
         get
         {
-            _PlayAllStepSoundsOnServerOffset = _PlayAllStepSoundsOnServerOffset ?? Schema.GetOffset(0x6295CF652A99CD66);
-            return ref _Handle.AsRef<bool>(_PlayAllStepSoundsOnServerOffset!.Value);
+            if (_PlayAllStepSoundsOnServerOffset == -1) _PlayAllStepSoundsOnServerOffset = Schema.GetOffset(0x6295CF652A99CD66);
+            return ref _Handle.AsRef<bool>(_PlayAllStepSoundsOnServerOffset);
         }
     }
-    private static nint? _SpectatorSlotCountOffset;
+    private static nint _SpectatorSlotCountOffset = -1;
 
     public ref int SpectatorSlotCount
     {
         get
         {
-            _SpectatorSlotCountOffset = _SpectatorSlotCountOffset ?? Schema.GetOffset(0x6295CF65EAB6814C);
-            return ref _Handle.AsRef<int>(_SpectatorSlotCountOffset!.Value);
+            if (_SpectatorSlotCountOffset == -1) _SpectatorSlotCountOffset = Schema.GetOffset(0x6295CF65EAB6814C);
+            return ref _Handle.AsRef<int>(_SpectatorSlotCountOffset);
         }
     }
-    private static nint? _MatchDeviceOffset;
+    private static nint _MatchDeviceOffset = -1;
 
     public ref int MatchDevice
     {
         get
         {
-            _MatchDeviceOffset = _MatchDeviceOffset ?? Schema.GetOffset(0x6295CF65A68647C8);
-            return ref _Handle.AsRef<int>(_MatchDeviceOffset!.Value);
+            if (_MatchDeviceOffset == -1) _MatchDeviceOffset = Schema.GetOffset(0x6295CF65A68647C8);
+            return ref _Handle.AsRef<int>(_MatchDeviceOffset);
         }
     }
-    private static nint? _HasMatchStartedOffset;
+    private static nint _HasMatchStartedOffset = -1;
 
     public ref bool HasMatchStarted
     {
         get
         {
-            _HasMatchStartedOffset = _HasMatchStartedOffset ?? Schema.GetOffset(0x6295CF65366EB219);
-            return ref _Handle.AsRef<bool>(_HasMatchStartedOffset!.Value);
+            if (_HasMatchStartedOffset == -1) _HasMatchStartedOffset = Schema.GetOffset(0x6295CF65366EB219);
+            return ref _Handle.AsRef<bool>(_HasMatchStartedOffset);
         }
     }
-    private static nint? _NextMapInMapgroupOffset;
+    private static nint _NextMapInMapgroupOffset = -1;
 
     public ref int NextMapInMapgroup
     {
         get
         {
-            _NextMapInMapgroupOffset = _NextMapInMapgroupOffset ?? Schema.GetOffset(0x6295CF65C6613F50);
-            return ref _Handle.AsRef<int>(_NextMapInMapgroupOffset!.Value);
+            if (_NextMapInMapgroupOffset == -1) _NextMapInMapgroupOffset = Schema.GetOffset(0x6295CF65C6613F50);
+            return ref _Handle.AsRef<int>(_NextMapInMapgroupOffset);
         }
     }
-    private static nint? _TournamentEventNameOffset;
+    private static nint _TournamentEventNameOffset = -1;
 
     public string TournamentEventName
     {
         get
         {
-            _TournamentEventNameOffset = _TournamentEventNameOffset ?? Schema.GetOffset(0x6295CF65D2FCF8C2);
-            return Schema.GetString(_Handle + _TournamentEventNameOffset!.Value);
+            if (_TournamentEventNameOffset == -1) _TournamentEventNameOffset = Schema.GetOffset(0x6295CF65D2FCF8C2);
+            return Schema.GetString(_Handle + _TournamentEventNameOffset);
         }
         set
         {
-            _TournamentEventNameOffset = _TournamentEventNameOffset ?? Schema.GetOffset(0x6295CF65D2FCF8C2);
-            Schema.SetFixedString(_Handle, _TournamentEventNameOffset!.Value, value, 512);
+            if (_TournamentEventNameOffset == -1) _TournamentEventNameOffset = Schema.GetOffset(0x6295CF65D2FCF8C2);
+            Schema.SetFixedString(_Handle, _TournamentEventNameOffset, value, 512);
         }
     }
-    private static nint? _TournamentEventStageOffset;
+    private static nint _TournamentEventStageOffset = -1;
 
     public string TournamentEventStage
     {
         get
         {
-            _TournamentEventStageOffset = _TournamentEventStageOffset ?? Schema.GetOffset(0x6295CF658177EF71);
-            return Schema.GetString(_Handle + _TournamentEventStageOffset!.Value);
+            if (_TournamentEventStageOffset == -1) _TournamentEventStageOffset = Schema.GetOffset(0x6295CF658177EF71);
+            return Schema.GetString(_Handle + _TournamentEventStageOffset);
         }
         set
         {
-            _TournamentEventStageOffset = _TournamentEventStageOffset ?? Schema.GetOffset(0x6295CF658177EF71);
-            Schema.SetFixedString(_Handle, _TournamentEventStageOffset!.Value, value, 512);
+            if (_TournamentEventStageOffset == -1) _TournamentEventStageOffset = Schema.GetOffset(0x6295CF658177EF71);
+            Schema.SetFixedString(_Handle, _TournamentEventStageOffset, value, 512);
         }
     }
-    private static nint? _MatchStatTxtOffset;
+    private static nint _MatchStatTxtOffset = -1;
 
     public string MatchStatTxt
     {
         get
         {
-            _MatchStatTxtOffset = _MatchStatTxtOffset ?? Schema.GetOffset(0x6295CF65D6472911);
-            return Schema.GetString(_Handle + _MatchStatTxtOffset!.Value);
+            if (_MatchStatTxtOffset == -1) _MatchStatTxtOffset = Schema.GetOffset(0x6295CF65D6472911);
+            return Schema.GetString(_Handle + _MatchStatTxtOffset);
         }
         set
         {
-            _MatchStatTxtOffset = _MatchStatTxtOffset ?? Schema.GetOffset(0x6295CF65D6472911);
-            Schema.SetFixedString(_Handle, _MatchStatTxtOffset!.Value, value, 512);
+            if (_MatchStatTxtOffset == -1) _MatchStatTxtOffset = Schema.GetOffset(0x6295CF65D6472911);
+            Schema.SetFixedString(_Handle, _MatchStatTxtOffset, value, 512);
         }
     }
-    private static nint? _TournamentPredictionsTxtOffset;
+    private static nint _TournamentPredictionsTxtOffset = -1;
 
     public string TournamentPredictionsTxt
     {
         get
         {
-            _TournamentPredictionsTxtOffset = _TournamentPredictionsTxtOffset ?? Schema.GetOffset(0x6295CF65A974A2B9);
-            return Schema.GetString(_Handle + _TournamentPredictionsTxtOffset!.Value);
+            if (_TournamentPredictionsTxtOffset == -1) _TournamentPredictionsTxtOffset = Schema.GetOffset(0x6295CF65A974A2B9);
+            return Schema.GetString(_Handle + _TournamentPredictionsTxtOffset);
         }
         set
         {
-            _TournamentPredictionsTxtOffset = _TournamentPredictionsTxtOffset ?? Schema.GetOffset(0x6295CF65A974A2B9);
-            Schema.SetFixedString(_Handle, _TournamentPredictionsTxtOffset!.Value, value, 512);
+            if (_TournamentPredictionsTxtOffset == -1) _TournamentPredictionsTxtOffset = Schema.GetOffset(0x6295CF65A974A2B9);
+            Schema.SetFixedString(_Handle, _TournamentPredictionsTxtOffset, value, 512);
         }
     }
-    private static nint? _TournamentPredictionsPctOffset;
+    private static nint _TournamentPredictionsPctOffset = -1;
 
     public ref int TournamentPredictionsPct
     {
         get
         {
-            _TournamentPredictionsPctOffset = _TournamentPredictionsPctOffset ?? Schema.GetOffset(0x6295CF658E233B97);
-            return ref _Handle.AsRef<int>(_TournamentPredictionsPctOffset!.Value);
+            if (_TournamentPredictionsPctOffset == -1) _TournamentPredictionsPctOffset = Schema.GetOffset(0x6295CF658E233B97);
+            return ref _Handle.AsRef<int>(_TournamentPredictionsPctOffset);
         }
     }
-    private static nint? _CMMItemDropRevealStartTimeOffset;
+    private static nint _CMMItemDropRevealStartTimeOffset = -1;
     private GameTime_tImpl? _CMMItemDropRevealStartTimeInstance;
 
     public GameTime_t CMMItemDropRevealStartTime
     {
         get
         {
-            _CMMItemDropRevealStartTimeOffset = _CMMItemDropRevealStartTimeOffset ?? Schema.GetOffset(0x6295CF659669E4BE);
+            if (_CMMItemDropRevealStartTimeOffset == -1) _CMMItemDropRevealStartTimeOffset = Schema.GetOffset(0x6295CF659669E4BE);
             var instance = _CMMItemDropRevealStartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _CMMItemDropRevealStartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CMMItemDropRevealStartTimeOffset);
             return instance;
         }
     }
-    private static nint? _CMMItemDropRevealEndTimeOffset;
+    private static nint _CMMItemDropRevealEndTimeOffset = -1;
     private GameTime_tImpl? _CMMItemDropRevealEndTimeInstance;
 
     public GameTime_t CMMItemDropRevealEndTime
     {
         get
         {
-            _CMMItemDropRevealEndTimeOffset = _CMMItemDropRevealEndTimeOffset ?? Schema.GetOffset(0x6295CF65DDD1C05B);
+            if (_CMMItemDropRevealEndTimeOffset == -1) _CMMItemDropRevealEndTimeOffset = Schema.GetOffset(0x6295CF65DDD1C05B);
             var instance = _CMMItemDropRevealEndTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _CMMItemDropRevealEndTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CMMItemDropRevealEndTimeOffset);
             return instance;
         }
     }
-    private static nint? _IsDroppingItemsOffset;
+    private static nint _IsDroppingItemsOffset = -1;
 
     public ref bool IsDroppingItems
     {
         get
         {
-            _IsDroppingItemsOffset = _IsDroppingItemsOffset ?? Schema.GetOffset(0x6295CF65A3EB7908);
-            return ref _Handle.AsRef<bool>(_IsDroppingItemsOffset!.Value);
+            if (_IsDroppingItemsOffset == -1) _IsDroppingItemsOffset = Schema.GetOffset(0x6295CF65A3EB7908);
+            return ref _Handle.AsRef<bool>(_IsDroppingItemsOffset);
         }
     }
-    private static nint? _IsQuestEligibleOffset;
+    private static nint _IsQuestEligibleOffset = -1;
 
     public ref bool IsQuestEligible
     {
         get
         {
-            _IsQuestEligibleOffset = _IsQuestEligibleOffset ?? Schema.GetOffset(0x6295CF65814483B8);
-            return ref _Handle.AsRef<bool>(_IsQuestEligibleOffset!.Value);
+            if (_IsQuestEligibleOffset == -1) _IsQuestEligibleOffset = Schema.GetOffset(0x6295CF65814483B8);
+            return ref _Handle.AsRef<bool>(_IsQuestEligibleOffset);
         }
     }
-    private static nint? _IsHltvActiveOffset;
+    private static nint _IsHltvActiveOffset = -1;
 
     public ref bool IsHltvActive
     {
         get
         {
-            _IsHltvActiveOffset = _IsHltvActiveOffset ?? Schema.GetOffset(0x6295CF657F4E0DA5);
-            return ref _Handle.AsRef<bool>(_IsHltvActiveOffset!.Value);
+            if (_IsHltvActiveOffset == -1) _IsHltvActiveOffset = Schema.GetOffset(0x6295CF657F4E0DA5);
+            return ref _Handle.AsRef<bool>(_IsHltvActiveOffset);
         }
     }
-    private static nint? _BombPlantedOffset;
+    private static nint _BombPlantedOffset = -1;
 
     public ref bool BombPlanted
     {
         get
         {
-            _BombPlantedOffset = _BombPlantedOffset ?? Schema.GetOffset(0x6295CF653C00B55F);
-            return ref _Handle.AsRef<bool>(_BombPlantedOffset!.Value);
+            if (_BombPlantedOffset == -1) _BombPlantedOffset = Schema.GetOffset(0x6295CF653C00B55F);
+            return ref _Handle.AsRef<bool>(_BombPlantedOffset);
         }
     }
-    private static nint? _ProhibitedItemIndicesOffset;
+    private static nint _ProhibitedItemIndicesOffset = -1;
     private SchemaFixedArray<ushort>? _ProhibitedItemIndicesInstance;
 
     public ISchemaFixedArray<ushort> ProhibitedItemIndices
     {
         get
         {
-            _ProhibitedItemIndicesOffset = _ProhibitedItemIndicesOffset ?? Schema.GetOffset(0x6295CF65BFE8D026);
+            if (_ProhibitedItemIndicesOffset == -1) _ProhibitedItemIndicesOffset = Schema.GetOffset(0x6295CF65BFE8D026);
             var instance = _ProhibitedItemIndicesInstance ??= new SchemaFixedArray<ushort>(0, 0x6295CF65BFE8D026, 100, 2, 2);
-            instance.DangerousSetHandle(_Handle + _ProhibitedItemIndicesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ProhibitedItemIndicesOffset);
             return instance;
         }
     }
-    private static nint? _TournamentActiveCasterAccountsOffset;
+    private static nint _TournamentActiveCasterAccountsOffset = -1;
     private SchemaFixedArray<uint>? _TournamentActiveCasterAccountsInstance;
 
     public ISchemaFixedArray<uint> TournamentActiveCasterAccounts
     {
         get
         {
-            _TournamentActiveCasterAccountsOffset = _TournamentActiveCasterAccountsOffset ?? Schema.GetOffset(0x6295CF6525481301);
+            if (_TournamentActiveCasterAccountsOffset == -1) _TournamentActiveCasterAccountsOffset = Schema.GetOffset(0x6295CF6525481301);
             var instance = _TournamentActiveCasterAccountsInstance ??= new SchemaFixedArray<uint>(0, 0x6295CF6525481301, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _TournamentActiveCasterAccountsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TournamentActiveCasterAccountsOffset);
             return instance;
         }
     }
-    private static nint? _NumBestOfMapsOffset;
+    private static nint _NumBestOfMapsOffset = -1;
 
     public ref int NumBestOfMaps
     {
         get
         {
-            _NumBestOfMapsOffset = _NumBestOfMapsOffset ?? Schema.GetOffset(0x6295CF6581B0F2D7);
-            return ref _Handle.AsRef<int>(_NumBestOfMapsOffset!.Value);
+            if (_NumBestOfMapsOffset == -1) _NumBestOfMapsOffset = Schema.GetOffset(0x6295CF6581B0F2D7);
+            return ref _Handle.AsRef<int>(_NumBestOfMapsOffset);
         }
     }
-    private static nint? _HalloweenMaskListSeedOffset;
+    private static nint _HalloweenMaskListSeedOffset = -1;
 
     public ref int HalloweenMaskListSeed
     {
         get
         {
-            _HalloweenMaskListSeedOffset = _HalloweenMaskListSeedOffset ?? Schema.GetOffset(0x6295CF65EDB3E1E1);
-            return ref _Handle.AsRef<int>(_HalloweenMaskListSeedOffset!.Value);
+            if (_HalloweenMaskListSeedOffset == -1) _HalloweenMaskListSeedOffset = Schema.GetOffset(0x6295CF65EDB3E1E1);
+            return ref _Handle.AsRef<int>(_HalloweenMaskListSeedOffset);
         }
     }
-    private static nint? _BombDroppedOffset;
+    private static nint _BombDroppedOffset = -1;
 
     public ref bool BombDropped
     {
         get
         {
-            _BombDroppedOffset = _BombDroppedOffset ?? Schema.GetOffset(0x6295CF65D690B299);
-            return ref _Handle.AsRef<bool>(_BombDroppedOffset!.Value);
+            if (_BombDroppedOffset == -1) _BombDroppedOffset = Schema.GetOffset(0x6295CF65D690B299);
+            return ref _Handle.AsRef<bool>(_BombDroppedOffset);
         }
     }
-    private static nint? _RoundWinStatusOffset;
+    private static nint _RoundWinStatusOffset = -1;
 
     public ref int RoundWinStatus
     {
         get
         {
-            _RoundWinStatusOffset = _RoundWinStatusOffset ?? Schema.GetOffset(0x6295CF6538E1FC04);
-            return ref _Handle.AsRef<int>(_RoundWinStatusOffset!.Value);
+            if (_RoundWinStatusOffset == -1) _RoundWinStatusOffset = Schema.GetOffset(0x6295CF6538E1FC04);
+            return ref _Handle.AsRef<int>(_RoundWinStatusOffset);
         }
     }
-    private static nint? _RoundWinReasonOffset;
+    private static nint _RoundWinReasonOffset = -1;
 
     public ref int RoundWinReason
     {
         get
         {
-            _RoundWinReasonOffset = _RoundWinReasonOffset ?? Schema.GetOffset(0x6295CF65879CEBD2);
-            return ref _Handle.AsRef<int>(_RoundWinReasonOffset!.Value);
+            if (_RoundWinReasonOffset == -1) _RoundWinReasonOffset = Schema.GetOffset(0x6295CF65879CEBD2);
+            return ref _Handle.AsRef<int>(_RoundWinReasonOffset);
         }
     }
-    private static nint? _TCantBuyOffset;
+    private static nint _TCantBuyOffset = -1;
 
     public ref bool TCantBuy
     {
         get
         {
-            _TCantBuyOffset = _TCantBuyOffset ?? Schema.GetOffset(0x6295CF65E60964EF);
-            return ref _Handle.AsRef<bool>(_TCantBuyOffset!.Value);
+            if (_TCantBuyOffset == -1) _TCantBuyOffset = Schema.GetOffset(0x6295CF65E60964EF);
+            return ref _Handle.AsRef<bool>(_TCantBuyOffset);
         }
     }
-    private static nint? _CTCantBuyOffset;
+    private static nint _CTCantBuyOffset = -1;
 
     public ref bool CTCantBuy
     {
         get
         {
-            _CTCantBuyOffset = _CTCantBuyOffset ?? Schema.GetOffset(0x6295CF655A190494);
-            return ref _Handle.AsRef<bool>(_CTCantBuyOffset!.Value);
+            if (_CTCantBuyOffset == -1) _CTCantBuyOffset = Schema.GetOffset(0x6295CF655A190494);
+            return ref _Handle.AsRef<bool>(_CTCantBuyOffset);
         }
     }
-    private static nint? _MatchStats_RoundResultsOffset;
+    private static nint _MatchStats_RoundResultsOffset = -1;
     private SchemaFixedArray<int>? _MatchStats_RoundResultsInstance;
 
     public ISchemaFixedArray<int> MatchStats_RoundResults
     {
         get
         {
-            _MatchStats_RoundResultsOffset = _MatchStats_RoundResultsOffset ?? Schema.GetOffset(0x6295CF652BF6608F);
+            if (_MatchStats_RoundResultsOffset == -1) _MatchStats_RoundResultsOffset = Schema.GetOffset(0x6295CF652BF6608F);
             var instance = _MatchStats_RoundResultsInstance ??= new SchemaFixedArray<int>(0, 0x6295CF652BF6608F, 30, 4, 4);
-            instance.DangerousSetHandle(_Handle + _MatchStats_RoundResultsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MatchStats_RoundResultsOffset);
             return instance;
         }
     }
-    private static nint? _MatchStats_PlayersAlive_CTOffset;
+    private static nint _MatchStats_PlayersAlive_CTOffset = -1;
     private SchemaFixedArray<int>? _MatchStats_PlayersAlive_CTInstance;
 
     public ISchemaFixedArray<int> MatchStats_PlayersAlive_CT
     {
         get
         {
-            _MatchStats_PlayersAlive_CTOffset = _MatchStats_PlayersAlive_CTOffset ?? Schema.GetOffset(0x6295CF650A468F9C);
+            if (_MatchStats_PlayersAlive_CTOffset == -1) _MatchStats_PlayersAlive_CTOffset = Schema.GetOffset(0x6295CF650A468F9C);
             var instance = _MatchStats_PlayersAlive_CTInstance ??= new SchemaFixedArray<int>(0, 0x6295CF650A468F9C, 30, 4, 4);
-            instance.DangerousSetHandle(_Handle + _MatchStats_PlayersAlive_CTOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MatchStats_PlayersAlive_CTOffset);
             return instance;
         }
     }
-    private static nint? _MatchStats_PlayersAlive_TOffset;
+    private static nint _MatchStats_PlayersAlive_TOffset = -1;
     private SchemaFixedArray<int>? _MatchStats_PlayersAlive_TInstance;
 
     public ISchemaFixedArray<int> MatchStats_PlayersAlive_T
     {
         get
         {
-            _MatchStats_PlayersAlive_TOffset = _MatchStats_PlayersAlive_TOffset ?? Schema.GetOffset(0x6295CF65DCEE8755);
+            if (_MatchStats_PlayersAlive_TOffset == -1) _MatchStats_PlayersAlive_TOffset = Schema.GetOffset(0x6295CF65DCEE8755);
             var instance = _MatchStats_PlayersAlive_TInstance ??= new SchemaFixedArray<int>(0, 0x6295CF65DCEE8755, 30, 4, 4);
-            instance.DangerousSetHandle(_Handle + _MatchStats_PlayersAlive_TOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MatchStats_PlayersAlive_TOffset);
             return instance;
         }
     }
-    private static nint? _TeamRespawnWaveTimesOffset;
+    private static nint _TeamRespawnWaveTimesOffset = -1;
     private SchemaFixedArray<float>? _TeamRespawnWaveTimesInstance;
 
     public ISchemaFixedArray<float> TeamRespawnWaveTimes
     {
         get
         {
-            _TeamRespawnWaveTimesOffset = _TeamRespawnWaveTimesOffset ?? Schema.GetOffset(0x6295CF65A15A30B1);
+            if (_TeamRespawnWaveTimesOffset == -1) _TeamRespawnWaveTimesOffset = Schema.GetOffset(0x6295CF65A15A30B1);
             var instance = _TeamRespawnWaveTimesInstance ??= new SchemaFixedArray<float>(0, 0x6295CF65A15A30B1, 32, 4, 4);
-            instance.DangerousSetHandle(_Handle + _TeamRespawnWaveTimesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TeamRespawnWaveTimesOffset);
             return instance;
         }
     }
-    private static nint? _NextRespawnWaveOffset;
+    private static nint _NextRespawnWaveOffset = -1;
     private SchemaClassFixedArray<GameTime_t>? _NextRespawnWaveInstance;
 
     public ISchemaClassFixedArray<GameTime_t> NextRespawnWave
     {
         get
         {
-            _NextRespawnWaveOffset = _NextRespawnWaveOffset ?? Schema.GetOffset(0x6295CF65F28FB62F);
+            if (_NextRespawnWaveOffset == -1) _NextRespawnWaveOffset = Schema.GetOffset(0x6295CF65F28FB62F);
             var instance = _NextRespawnWaveInstance ??= new SchemaClassFixedArray<GameTime_t>(0, 0x6295CF65F28FB62F, 32, 4, 4);
-            instance.DangerousSetHandle(_Handle + _NextRespawnWaveOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NextRespawnWaveOffset);
             return instance;
         }
     }
-    private static nint? _MinimapMinsOffset;
+    private static nint _MinimapMinsOffset = -1;
 
     public ref Vector MinimapMins
     {
         get
         {
-            _MinimapMinsOffset = _MinimapMinsOffset ?? Schema.GetOffset(0x6295CF6589AD2CA5);
-            return ref _Handle.AsRef<Vector>(_MinimapMinsOffset!.Value);
+            if (_MinimapMinsOffset == -1) _MinimapMinsOffset = Schema.GetOffset(0x6295CF6589AD2CA5);
+            return ref _Handle.AsRef<Vector>(_MinimapMinsOffset);
         }
     }
-    private static nint? _MinimapMaxsOffset;
+    private static nint _MinimapMaxsOffset = -1;
 
     public ref Vector MinimapMaxs
     {
         get
         {
-            _MinimapMaxsOffset = _MinimapMaxsOffset ?? Schema.GetOffset(0x6295CF65F2B86C5F);
-            return ref _Handle.AsRef<Vector>(_MinimapMaxsOffset!.Value);
+            if (_MinimapMaxsOffset == -1) _MinimapMaxsOffset = Schema.GetOffset(0x6295CF65F2B86C5F);
+            return ref _Handle.AsRef<Vector>(_MinimapMaxsOffset);
         }
     }
-    private static nint? _MinimapVerticalSectionHeightsOffset;
+    private static nint _MinimapVerticalSectionHeightsOffset = -1;
     private SchemaFixedArray<float>? _MinimapVerticalSectionHeightsInstance;
 
     public ISchemaFixedArray<float> MinimapVerticalSectionHeights
     {
         get
         {
-            _MinimapVerticalSectionHeightsOffset = _MinimapVerticalSectionHeightsOffset ?? Schema.GetOffset(0x6295CF6537ADB2EF);
+            if (_MinimapVerticalSectionHeightsOffset == -1) _MinimapVerticalSectionHeightsOffset = Schema.GetOffset(0x6295CF6537ADB2EF);
             var instance = _MinimapVerticalSectionHeightsInstance ??= new SchemaFixedArray<float>(0, 0x6295CF6537ADB2EF, 8, 4, 4);
-            instance.DangerousSetHandle(_Handle + _MinimapVerticalSectionHeightsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MinimapVerticalSectionHeightsOffset);
             return instance;
         }
     }
-    private static nint? _UllLocalMatchIDOffset;
+    private static nint _UllLocalMatchIDOffset = -1;
 
     public ref ulong UllLocalMatchID
     {
         get
         {
-            _UllLocalMatchIDOffset = _UllLocalMatchIDOffset ?? Schema.GetOffset(0x6295CF657D14A239);
-            return ref _Handle.AsRef<ulong>(_UllLocalMatchIDOffset!.Value);
+            if (_UllLocalMatchIDOffset == -1) _UllLocalMatchIDOffset = Schema.GetOffset(0x6295CF657D14A239);
+            return ref _Handle.AsRef<ulong>(_UllLocalMatchIDOffset);
         }
     }
-    private static nint? _EndMatchMapGroupVoteTypesOffset;
+    private static nint _EndMatchMapGroupVoteTypesOffset = -1;
     private SchemaFixedArray<int>? _EndMatchMapGroupVoteTypesInstance;
 
     public ISchemaFixedArray<int> EndMatchMapGroupVoteTypes
     {
         get
         {
-            _EndMatchMapGroupVoteTypesOffset = _EndMatchMapGroupVoteTypesOffset ?? Schema.GetOffset(0x6295CF65B4DAF10B);
+            if (_EndMatchMapGroupVoteTypesOffset == -1) _EndMatchMapGroupVoteTypesOffset = Schema.GetOffset(0x6295CF65B4DAF10B);
             var instance = _EndMatchMapGroupVoteTypesInstance ??= new SchemaFixedArray<int>(0, 0x6295CF65B4DAF10B, 10, 4, 4);
-            instance.DangerousSetHandle(_Handle + _EndMatchMapGroupVoteTypesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndMatchMapGroupVoteTypesOffset);
             return instance;
         }
     }
-    private static nint? _EndMatchMapGroupVoteOptionsOffset;
+    private static nint _EndMatchMapGroupVoteOptionsOffset = -1;
     private SchemaFixedArray<int>? _EndMatchMapGroupVoteOptionsInstance;
 
     public ISchemaFixedArray<int> EndMatchMapGroupVoteOptions
     {
         get
         {
-            _EndMatchMapGroupVoteOptionsOffset = _EndMatchMapGroupVoteOptionsOffset ?? Schema.GetOffset(0x6295CF65BCAA50F4);
+            if (_EndMatchMapGroupVoteOptionsOffset == -1) _EndMatchMapGroupVoteOptionsOffset = Schema.GetOffset(0x6295CF65BCAA50F4);
             var instance = _EndMatchMapGroupVoteOptionsInstance ??= new SchemaFixedArray<int>(0, 0x6295CF65BCAA50F4, 10, 4, 4);
-            instance.DangerousSetHandle(_Handle + _EndMatchMapGroupVoteOptionsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndMatchMapGroupVoteOptionsOffset);
             return instance;
         }
     }
-    private static nint? _EndMatchMapVoteWinnerOffset;
+    private static nint _EndMatchMapVoteWinnerOffset = -1;
 
     public ref int EndMatchMapVoteWinner
     {
         get
         {
-            _EndMatchMapVoteWinnerOffset = _EndMatchMapVoteWinnerOffset ?? Schema.GetOffset(0x6295CF65F340D3E0);
-            return ref _Handle.AsRef<int>(_EndMatchMapVoteWinnerOffset!.Value);
+            if (_EndMatchMapVoteWinnerOffset == -1) _EndMatchMapVoteWinnerOffset = Schema.GetOffset(0x6295CF65F340D3E0);
+            return ref _Handle.AsRef<int>(_EndMatchMapVoteWinnerOffset);
         }
     }
-    private static nint? _NumConsecutiveCTLosesOffset;
+    private static nint _NumConsecutiveCTLosesOffset = -1;
 
     public ref int NumConsecutiveCTLoses
     {
         get
         {
-            _NumConsecutiveCTLosesOffset = _NumConsecutiveCTLosesOffset ?? Schema.GetOffset(0x6295CF6548E3E309);
-            return ref _Handle.AsRef<int>(_NumConsecutiveCTLosesOffset!.Value);
+            if (_NumConsecutiveCTLosesOffset == -1) _NumConsecutiveCTLosesOffset = Schema.GetOffset(0x6295CF6548E3E309);
+            return ref _Handle.AsRef<int>(_NumConsecutiveCTLosesOffset);
         }
     }
-    private static nint? _NumConsecutiveTerroristLosesOffset;
+    private static nint _NumConsecutiveTerroristLosesOffset = -1;
 
     public ref int NumConsecutiveTerroristLoses
     {
         get
         {
-            _NumConsecutiveTerroristLosesOffset = _NumConsecutiveTerroristLosesOffset ?? Schema.GetOffset(0x6295CF652335F53E);
-            return ref _Handle.AsRef<int>(_NumConsecutiveTerroristLosesOffset!.Value);
+            if (_NumConsecutiveTerroristLosesOffset == -1) _NumConsecutiveTerroristLosesOffset = Schema.GetOffset(0x6295CF652335F53E);
+            return ref _Handle.AsRef<int>(_NumConsecutiveTerroristLosesOffset);
         }
     }
-    private static nint? _HasHostageBeenTouchedOffset;
+    private static nint _HasHostageBeenTouchedOffset = -1;
 
     public ref bool HasHostageBeenTouched
     {
         get
         {
-            _HasHostageBeenTouchedOffset = _HasHostageBeenTouchedOffset ?? Schema.GetOffset(0x6295CF6577F64274);
-            return ref _Handle.AsRef<bool>(_HasHostageBeenTouchedOffset!.Value);
+            if (_HasHostageBeenTouchedOffset == -1) _HasHostageBeenTouchedOffset = Schema.GetOffset(0x6295CF6577F64274);
+            return ref _Handle.AsRef<bool>(_HasHostageBeenTouchedOffset);
         }
     }
-    private static nint? _IntermissionStartTimeOffset;
+    private static nint _IntermissionStartTimeOffset = -1;
     private GameTime_tImpl? _IntermissionStartTimeInstance;
 
     public GameTime_t IntermissionStartTime
     {
         get
         {
-            _IntermissionStartTimeOffset = _IntermissionStartTimeOffset ?? Schema.GetOffset(0x6295CF65AAE918DC);
+            if (_IntermissionStartTimeOffset == -1) _IntermissionStartTimeOffset = Schema.GetOffset(0x6295CF65AAE918DC);
             var instance = _IntermissionStartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _IntermissionStartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IntermissionStartTimeOffset);
             return instance;
         }
     }
-    private static nint? _IntermissionEndTimeOffset;
+    private static nint _IntermissionEndTimeOffset = -1;
     private GameTime_tImpl? _IntermissionEndTimeInstance;
 
     public GameTime_t IntermissionEndTime
     {
         get
         {
-            _IntermissionEndTimeOffset = _IntermissionEndTimeOffset ?? Schema.GetOffset(0x6295CF652001CDA5);
+            if (_IntermissionEndTimeOffset == -1) _IntermissionEndTimeOffset = Schema.GetOffset(0x6295CF652001CDA5);
             var instance = _IntermissionEndTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _IntermissionEndTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IntermissionEndTimeOffset);
             return instance;
         }
     }
-    private static nint? _LevelInitializedOffset;
+    private static nint _LevelInitializedOffset = -1;
 
     public ref bool LevelInitialized
     {
         get
         {
-            _LevelInitializedOffset = _LevelInitializedOffset ?? Schema.GetOffset(0x6295CF6578E1A1F5);
-            return ref _Handle.AsRef<bool>(_LevelInitializedOffset!.Value);
+            if (_LevelInitializedOffset == -1) _LevelInitializedOffset = Schema.GetOffset(0x6295CF6578E1A1F5);
+            return ref _Handle.AsRef<bool>(_LevelInitializedOffset);
         }
     }
-    private static nint? _TotalRoundsPlayed1Offset;
+    private static nint _TotalRoundsPlayed1Offset = -1;
 
     public ref int TotalRoundsPlayed1
     {
         get
         {
-            _TotalRoundsPlayed1Offset = _TotalRoundsPlayed1Offset ?? Schema.GetOffset(0x6295CF65CE8C6A6C);
-            return ref _Handle.AsRef<int>(_TotalRoundsPlayed1Offset!.Value);
+            if (_TotalRoundsPlayed1Offset == -1) _TotalRoundsPlayed1Offset = Schema.GetOffset(0x6295CF65CE8C6A6C);
+            return ref _Handle.AsRef<int>(_TotalRoundsPlayed1Offset);
         }
     }
-    private static nint? _UnBalancedRoundsOffset;
+    private static nint _UnBalancedRoundsOffset = -1;
 
     public ref int UnBalancedRounds
     {
         get
         {
-            _UnBalancedRoundsOffset = _UnBalancedRoundsOffset ?? Schema.GetOffset(0x6295CF65CA0B6F6E);
-            return ref _Handle.AsRef<int>(_UnBalancedRoundsOffset!.Value);
+            if (_UnBalancedRoundsOffset == -1) _UnBalancedRoundsOffset = Schema.GetOffset(0x6295CF65CA0B6F6E);
+            return ref _Handle.AsRef<int>(_UnBalancedRoundsOffset);
         }
     }
-    private static nint? _EndMatchOnRoundResetOffset;
+    private static nint _EndMatchOnRoundResetOffset = -1;
 
     public ref bool EndMatchOnRoundReset
     {
         get
         {
-            _EndMatchOnRoundResetOffset = _EndMatchOnRoundResetOffset ?? Schema.GetOffset(0x6295CF65D38350A1);
-            return ref _Handle.AsRef<bool>(_EndMatchOnRoundResetOffset!.Value);
+            if (_EndMatchOnRoundResetOffset == -1) _EndMatchOnRoundResetOffset = Schema.GetOffset(0x6295CF65D38350A1);
+            return ref _Handle.AsRef<bool>(_EndMatchOnRoundResetOffset);
         }
     }
-    private static nint? _EndMatchOnThinkOffset;
+    private static nint _EndMatchOnThinkOffset = -1;
 
     public ref bool EndMatchOnThink
     {
         get
         {
-            _EndMatchOnThinkOffset = _EndMatchOnThinkOffset ?? Schema.GetOffset(0x6295CF650888575A);
-            return ref _Handle.AsRef<bool>(_EndMatchOnThinkOffset!.Value);
+            if (_EndMatchOnThinkOffset == -1) _EndMatchOnThinkOffset = Schema.GetOffset(0x6295CF650888575A);
+            return ref _Handle.AsRef<bool>(_EndMatchOnThinkOffset);
         }
     }
-    private static nint? _NumTerroristOffset;
+    private static nint _NumTerroristOffset = -1;
 
     public ref int NumTerrorist
     {
         get
         {
-            _NumTerroristOffset = _NumTerroristOffset ?? Schema.GetOffset(0x6295CF65E58F0B9A);
-            return ref _Handle.AsRef<int>(_NumTerroristOffset!.Value);
+            if (_NumTerroristOffset == -1) _NumTerroristOffset = Schema.GetOffset(0x6295CF65E58F0B9A);
+            return ref _Handle.AsRef<int>(_NumTerroristOffset);
         }
     }
-    private static nint? _NumCTOffset;
+    private static nint _NumCTOffset = -1;
 
     public ref int NumCT
     {
         get
         {
-            _NumCTOffset = _NumCTOffset ?? Schema.GetOffset(0x6295CF659668BCF3);
-            return ref _Handle.AsRef<int>(_NumCTOffset!.Value);
+            if (_NumCTOffset == -1) _NumCTOffset = Schema.GetOffset(0x6295CF659668BCF3);
+            return ref _Handle.AsRef<int>(_NumCTOffset);
         }
     }
-    private static nint? _NumSpawnableTerroristOffset;
+    private static nint _NumSpawnableTerroristOffset = -1;
 
     public ref int NumSpawnableTerrorist
     {
         get
         {
-            _NumSpawnableTerroristOffset = _NumSpawnableTerroristOffset ?? Schema.GetOffset(0x6295CF65EBC4398B);
-            return ref _Handle.AsRef<int>(_NumSpawnableTerroristOffset!.Value);
+            if (_NumSpawnableTerroristOffset == -1) _NumSpawnableTerroristOffset = Schema.GetOffset(0x6295CF65EBC4398B);
+            return ref _Handle.AsRef<int>(_NumSpawnableTerroristOffset);
         }
     }
-    private static nint? _NumSpawnableCTOffset;
+    private static nint _NumSpawnableCTOffset = -1;
 
     public ref int NumSpawnableCT
     {
         get
         {
-            _NumSpawnableCTOffset = _NumSpawnableCTOffset ?? Schema.GetOffset(0x6295CF65A0723378);
-            return ref _Handle.AsRef<int>(_NumSpawnableCTOffset!.Value);
+            if (_NumSpawnableCTOffset == -1) _NumSpawnableCTOffset = Schema.GetOffset(0x6295CF65A0723378);
+            return ref _Handle.AsRef<int>(_NumSpawnableCTOffset);
         }
     }
-    private static nint? _SelectedHostageSpawnIndicesOffset;
+    private static nint _SelectedHostageSpawnIndicesOffset = -1;
 
     public ref CUtlVector<int> SelectedHostageSpawnIndices
     {
         get
         {
-            _SelectedHostageSpawnIndicesOffset = _SelectedHostageSpawnIndicesOffset ?? Schema.GetOffset(0x6295CF65A24826BE);
-            return ref _Handle.AsRef<CUtlVector<int>>(_SelectedHostageSpawnIndicesOffset!.Value);
+            if (_SelectedHostageSpawnIndicesOffset == -1) _SelectedHostageSpawnIndicesOffset = Schema.GetOffset(0x6295CF65A24826BE);
+            return ref _Handle.AsRef<CUtlVector<int>>(_SelectedHostageSpawnIndicesOffset);
         }
     }
-    private static nint? _SpawnPointsRandomSeedOffset;
+    private static nint _SpawnPointsRandomSeedOffset = -1;
 
     public ref int SpawnPointsRandomSeed
     {
         get
         {
-            _SpawnPointsRandomSeedOffset = _SpawnPointsRandomSeedOffset ?? Schema.GetOffset(0x6295CF65EBBE08D1);
-            return ref _Handle.AsRef<int>(_SpawnPointsRandomSeedOffset!.Value);
+            if (_SpawnPointsRandomSeedOffset == -1) _SpawnPointsRandomSeedOffset = Schema.GetOffset(0x6295CF65EBBE08D1);
+            return ref _Handle.AsRef<int>(_SpawnPointsRandomSeedOffset);
         }
     }
-    private static nint? _FirstConnectedOffset;
+    private static nint _FirstConnectedOffset = -1;
 
     public ref bool FirstConnected
     {
         get
         {
-            _FirstConnectedOffset = _FirstConnectedOffset ?? Schema.GetOffset(0x6295CF6579971CBC);
-            return ref _Handle.AsRef<bool>(_FirstConnectedOffset!.Value);
+            if (_FirstConnectedOffset == -1) _FirstConnectedOffset = Schema.GetOffset(0x6295CF6579971CBC);
+            return ref _Handle.AsRef<bool>(_FirstConnectedOffset);
         }
     }
-    private static nint? _CompleteResetOffset;
+    private static nint _CompleteResetOffset = -1;
 
     public ref bool CompleteReset
     {
         get
         {
-            _CompleteResetOffset = _CompleteResetOffset ?? Schema.GetOffset(0x6295CF65BE966675);
-            return ref _Handle.AsRef<bool>(_CompleteResetOffset!.Value);
+            if (_CompleteResetOffset == -1) _CompleteResetOffset = Schema.GetOffset(0x6295CF65BE966675);
+            return ref _Handle.AsRef<bool>(_CompleteResetOffset);
         }
     }
-    private static nint? _PickNewTeamsOnResetOffset;
+    private static nint _PickNewTeamsOnResetOffset = -1;
 
     public ref bool PickNewTeamsOnReset
     {
         get
         {
-            _PickNewTeamsOnResetOffset = _PickNewTeamsOnResetOffset ?? Schema.GetOffset(0x6295CF65CFEB1018);
-            return ref _Handle.AsRef<bool>(_PickNewTeamsOnResetOffset!.Value);
+            if (_PickNewTeamsOnResetOffset == -1) _PickNewTeamsOnResetOffset = Schema.GetOffset(0x6295CF65CFEB1018);
+            return ref _Handle.AsRef<bool>(_PickNewTeamsOnResetOffset);
         }
     }
-    private static nint? _ScrambleTeamsOnRestartOffset;
+    private static nint _ScrambleTeamsOnRestartOffset = -1;
 
     public ref bool ScrambleTeamsOnRestart
     {
         get
         {
-            _ScrambleTeamsOnRestartOffset = _ScrambleTeamsOnRestartOffset ?? Schema.GetOffset(0x6295CF65170E54FC);
-            return ref _Handle.AsRef<bool>(_ScrambleTeamsOnRestartOffset!.Value);
+            if (_ScrambleTeamsOnRestartOffset == -1) _ScrambleTeamsOnRestartOffset = Schema.GetOffset(0x6295CF65170E54FC);
+            return ref _Handle.AsRef<bool>(_ScrambleTeamsOnRestartOffset);
         }
     }
-    private static nint? _SwapTeamsOnRestartOffset;
+    private static nint _SwapTeamsOnRestartOffset = -1;
 
     public ref bool SwapTeamsOnRestart
     {
         get
         {
-            _SwapTeamsOnRestartOffset = _SwapTeamsOnRestartOffset ?? Schema.GetOffset(0x6295CF65AC86A5EC);
-            return ref _Handle.AsRef<bool>(_SwapTeamsOnRestartOffset!.Value);
+            if (_SwapTeamsOnRestartOffset == -1) _SwapTeamsOnRestartOffset = Schema.GetOffset(0x6295CF65AC86A5EC);
+            return ref _Handle.AsRef<bool>(_SwapTeamsOnRestartOffset);
         }
     }
-    private static nint? _EndMatchTiedVotesOffset;
+    private static nint _EndMatchTiedVotesOffset = -1;
 
     public ref CUtlVector<int> EndMatchTiedVotes
     {
         get
         {
-            _EndMatchTiedVotesOffset = _EndMatchTiedVotesOffset ?? Schema.GetOffset(0x6295CF65FF26054E);
-            return ref _Handle.AsRef<CUtlVector<int>>(_EndMatchTiedVotesOffset!.Value);
+            if (_EndMatchTiedVotesOffset == -1) _EndMatchTiedVotesOffset = Schema.GetOffset(0x6295CF65FF26054E);
+            return ref _Handle.AsRef<CUtlVector<int>>(_EndMatchTiedVotesOffset);
         }
     }
-    private static nint? _NeedToAskPlayersForContinueVoteOffset;
+    private static nint _NeedToAskPlayersForContinueVoteOffset = -1;
 
     public ref bool NeedToAskPlayersForContinueVote
     {
         get
         {
-            _NeedToAskPlayersForContinueVoteOffset = _NeedToAskPlayersForContinueVoteOffset ?? Schema.GetOffset(0x6295CF65515BA5BD);
-            return ref _Handle.AsRef<bool>(_NeedToAskPlayersForContinueVoteOffset!.Value);
+            if (_NeedToAskPlayersForContinueVoteOffset == -1) _NeedToAskPlayersForContinueVoteOffset = Schema.GetOffset(0x6295CF65515BA5BD);
+            return ref _Handle.AsRef<bool>(_NeedToAskPlayersForContinueVoteOffset);
         }
     }
-    private static nint? _NumQueuedMatchmakingAccountsOffset;
+    private static nint _NumQueuedMatchmakingAccountsOffset = -1;
 
     public ref uint NumQueuedMatchmakingAccounts
     {
         get
         {
-            _NumQueuedMatchmakingAccountsOffset = _NumQueuedMatchmakingAccountsOffset ?? Schema.GetOffset(0x6295CF65A76A455A);
-            return ref _Handle.AsRef<uint>(_NumQueuedMatchmakingAccountsOffset!.Value);
+            if (_NumQueuedMatchmakingAccountsOffset == -1) _NumQueuedMatchmakingAccountsOffset = Schema.GetOffset(0x6295CF65A76A455A);
+            return ref _Handle.AsRef<uint>(_NumQueuedMatchmakingAccountsOffset);
         }
     }
-    private static nint? _AvgPlayerRankOffset;
+    private static nint _AvgPlayerRankOffset = -1;
 
     public ref float AvgPlayerRank
     {
         get
         {
-            _AvgPlayerRankOffset = _AvgPlayerRankOffset ?? Schema.GetOffset(0x6295CF6549B0B220);
-            return ref _Handle.AsRef<float>(_AvgPlayerRankOffset!.Value);
+            if (_AvgPlayerRankOffset == -1) _AvgPlayerRankOffset = Schema.GetOffset(0x6295CF6549B0B220);
+            return ref _Handle.AsRef<float>(_AvgPlayerRankOffset);
         }
     }
-    private static nint? _QueuedMatchmakingReservationStringOffset;
+    private static nint _QueuedMatchmakingReservationStringOffset = -1;
 
     public string QueuedMatchmakingReservationString
     {
         get
         {
-            _QueuedMatchmakingReservationStringOffset = _QueuedMatchmakingReservationStringOffset ?? Schema.GetOffset(0x6295CF6559B26DA9);
-            return Schema.GetString(_Handle.Read<nint>(_QueuedMatchmakingReservationStringOffset!.Value));
+            if (_QueuedMatchmakingReservationStringOffset == -1) _QueuedMatchmakingReservationStringOffset = Schema.GetOffset(0x6295CF6559B26DA9);
+            return Schema.GetString(_Handle.Read<nint>(_QueuedMatchmakingReservationStringOffset));
         }
         set
         {
-            _QueuedMatchmakingReservationStringOffset = _QueuedMatchmakingReservationStringOffset ?? Schema.GetOffset(0x6295CF6559B26DA9);
-            Schema.SetString(_Handle, _QueuedMatchmakingReservationStringOffset!.Value, value);
+            if (_QueuedMatchmakingReservationStringOffset == -1) _QueuedMatchmakingReservationStringOffset = Schema.GetOffset(0x6295CF6559B26DA9);
+            Schema.SetString(_Handle, _QueuedMatchmakingReservationStringOffset, value);
         }
     }
-    private static nint? _NumTotalTournamentDropsOffset;
+    private static nint _NumTotalTournamentDropsOffset = -1;
 
     public ref uint NumTotalTournamentDrops
     {
         get
         {
-            _NumTotalTournamentDropsOffset = _NumTotalTournamentDropsOffset ?? Schema.GetOffset(0x6295CF65076A6E9A);
-            return ref _Handle.AsRef<uint>(_NumTotalTournamentDropsOffset!.Value);
+            if (_NumTotalTournamentDropsOffset == -1) _NumTotalTournamentDropsOffset = Schema.GetOffset(0x6295CF65076A6E9A);
+            return ref _Handle.AsRef<uint>(_NumTotalTournamentDropsOffset);
         }
     }
-    private static nint? _NumSpectatorsCountMaxOffset;
+    private static nint _NumSpectatorsCountMaxOffset = -1;
 
     public ref uint NumSpectatorsCountMax
     {
         get
         {
-            _NumSpectatorsCountMaxOffset = _NumSpectatorsCountMaxOffset ?? Schema.GetOffset(0x6295CF65F56B5802);
-            return ref _Handle.AsRef<uint>(_NumSpectatorsCountMaxOffset!.Value);
+            if (_NumSpectatorsCountMaxOffset == -1) _NumSpectatorsCountMaxOffset = Schema.GetOffset(0x6295CF65F56B5802);
+            return ref _Handle.AsRef<uint>(_NumSpectatorsCountMaxOffset);
         }
     }
-    private static nint? _NumSpectatorsCountMaxTVOffset;
+    private static nint _NumSpectatorsCountMaxTVOffset = -1;
 
     public ref uint NumSpectatorsCountMaxTV
     {
         get
         {
-            _NumSpectatorsCountMaxTVOffset = _NumSpectatorsCountMaxTVOffset ?? Schema.GetOffset(0x6295CF6517CBEEDC);
-            return ref _Handle.AsRef<uint>(_NumSpectatorsCountMaxTVOffset!.Value);
+            if (_NumSpectatorsCountMaxTVOffset == -1) _NumSpectatorsCountMaxTVOffset = Schema.GetOffset(0x6295CF6517CBEEDC);
+            return ref _Handle.AsRef<uint>(_NumSpectatorsCountMaxTVOffset);
         }
     }
-    private static nint? _NumSpectatorsCountMaxLnkOffset;
+    private static nint _NumSpectatorsCountMaxLnkOffset = -1;
 
     public ref uint NumSpectatorsCountMaxLnk
     {
         get
         {
-            _NumSpectatorsCountMaxLnkOffset = _NumSpectatorsCountMaxLnkOffset ?? Schema.GetOffset(0x6295CF65A5E767C5);
-            return ref _Handle.AsRef<uint>(_NumSpectatorsCountMaxLnkOffset!.Value);
+            if (_NumSpectatorsCountMaxLnkOffset == -1) _NumSpectatorsCountMaxLnkOffset = Schema.GetOffset(0x6295CF65A5E767C5);
+            return ref _Handle.AsRef<uint>(_NumSpectatorsCountMaxLnkOffset);
         }
     }
-    private static nint? _CTsAliveAtFreezetimeEndOffset;
+    private static nint _CTsAliveAtFreezetimeEndOffset = -1;
 
     public ref int CTsAliveAtFreezetimeEnd
     {
         get
         {
-            _CTsAliveAtFreezetimeEndOffset = _CTsAliveAtFreezetimeEndOffset ?? Schema.GetOffset(0x6295CF6538E98EA0);
-            return ref _Handle.AsRef<int>(_CTsAliveAtFreezetimeEndOffset!.Value);
+            if (_CTsAliveAtFreezetimeEndOffset == -1) _CTsAliveAtFreezetimeEndOffset = Schema.GetOffset(0x6295CF6538E98EA0);
+            return ref _Handle.AsRef<int>(_CTsAliveAtFreezetimeEndOffset);
         }
     }
-    private static nint? _TerroristsAliveAtFreezetimeEndOffset;
+    private static nint _TerroristsAliveAtFreezetimeEndOffset = -1;
 
     public ref int TerroristsAliveAtFreezetimeEnd
     {
         get
         {
-            _TerroristsAliveAtFreezetimeEndOffset = _TerroristsAliveAtFreezetimeEndOffset ?? Schema.GetOffset(0x6295CF65F0B1C429);
-            return ref _Handle.AsRef<int>(_TerroristsAliveAtFreezetimeEndOffset!.Value);
+            if (_TerroristsAliveAtFreezetimeEndOffset == -1) _TerroristsAliveAtFreezetimeEndOffset = Schema.GetOffset(0x6295CF65F0B1C429);
+            return ref _Handle.AsRef<int>(_TerroristsAliveAtFreezetimeEndOffset);
         }
     }
-    private static nint? _ForceTeamChangeSilentOffset;
+    private static nint _ForceTeamChangeSilentOffset = -1;
 
     public ref bool ForceTeamChangeSilent
     {
         get
         {
-            _ForceTeamChangeSilentOffset = _ForceTeamChangeSilentOffset ?? Schema.GetOffset(0x6295CF651F43946C);
-            return ref _Handle.AsRef<bool>(_ForceTeamChangeSilentOffset!.Value);
+            if (_ForceTeamChangeSilentOffset == -1) _ForceTeamChangeSilentOffset = Schema.GetOffset(0x6295CF651F43946C);
+            return ref _Handle.AsRef<bool>(_ForceTeamChangeSilentOffset);
         }
     }
-    private static nint? _LoadingRoundBackupDataOffset;
+    private static nint _LoadingRoundBackupDataOffset = -1;
 
     public ref bool LoadingRoundBackupData
     {
         get
         {
-            _LoadingRoundBackupDataOffset = _LoadingRoundBackupDataOffset ?? Schema.GetOffset(0x6295CF656F470127);
-            return ref _Handle.AsRef<bool>(_LoadingRoundBackupDataOffset!.Value);
+            if (_LoadingRoundBackupDataOffset == -1) _LoadingRoundBackupDataOffset = Schema.GetOffset(0x6295CF656F470127);
+            return ref _Handle.AsRef<bool>(_LoadingRoundBackupDataOffset);
         }
     }
-    private static nint? _MatchInfoShowTypeOffset;
+    private static nint _MatchInfoShowTypeOffset = -1;
 
     public ref int MatchInfoShowType
     {
         get
         {
-            _MatchInfoShowTypeOffset = _MatchInfoShowTypeOffset ?? Schema.GetOffset(0x6295CF6507378C3F);
-            return ref _Handle.AsRef<int>(_MatchInfoShowTypeOffset!.Value);
+            if (_MatchInfoShowTypeOffset == -1) _MatchInfoShowTypeOffset = Schema.GetOffset(0x6295CF6507378C3F);
+            return ref _Handle.AsRef<int>(_MatchInfoShowTypeOffset);
         }
     }
-    private static nint? _MatchInfoDecidedTimeOffset;
+    private static nint _MatchInfoDecidedTimeOffset = -1;
 
     public ref float MatchInfoDecidedTime
     {
         get
         {
-            _MatchInfoDecidedTimeOffset = _MatchInfoDecidedTimeOffset ?? Schema.GetOffset(0x6295CF656BDD2C29);
-            return ref _Handle.AsRef<float>(_MatchInfoDecidedTimeOffset!.Value);
+            if (_MatchInfoDecidedTimeOffset == -1) _MatchInfoDecidedTimeOffset = Schema.GetOffset(0x6295CF656BDD2C29);
+            return ref _Handle.AsRef<float>(_MatchInfoDecidedTimeOffset);
         }
     }
-    private static nint? _MTeamDMLastWinningTeamNumberOffset;
+    private static nint _MTeamDMLastWinningTeamNumberOffset = -1;
 
     public ref int MTeamDMLastWinningTeamNumber
     {
         get
         {
-            _MTeamDMLastWinningTeamNumberOffset = _MTeamDMLastWinningTeamNumberOffset ?? Schema.GetOffset(0x6295CF6542E24ADA);
-            return ref _Handle.AsRef<int>(_MTeamDMLastWinningTeamNumberOffset!.Value);
+            if (_MTeamDMLastWinningTeamNumberOffset == -1) _MTeamDMLastWinningTeamNumberOffset = Schema.GetOffset(0x6295CF6542E24ADA);
+            return ref _Handle.AsRef<int>(_MTeamDMLastWinningTeamNumberOffset);
         }
     }
-    private static nint? _MTeamDMLastThinkTimeOffset;
+    private static nint _MTeamDMLastThinkTimeOffset = -1;
 
     public ref float MTeamDMLastThinkTime
     {
         get
         {
-            _MTeamDMLastThinkTimeOffset = _MTeamDMLastThinkTimeOffset ?? Schema.GetOffset(0x6295CF65A25AB0DF);
-            return ref _Handle.AsRef<float>(_MTeamDMLastThinkTimeOffset!.Value);
+            if (_MTeamDMLastThinkTimeOffset == -1) _MTeamDMLastThinkTimeOffset = Schema.GetOffset(0x6295CF65A25AB0DF);
+            return ref _Handle.AsRef<float>(_MTeamDMLastThinkTimeOffset);
         }
     }
-    private static nint? _TeamDMLastAnnouncementTimeOffset;
+    private static nint _TeamDMLastAnnouncementTimeOffset = -1;
 
     public ref float TeamDMLastAnnouncementTime
     {
         get
         {
-            _TeamDMLastAnnouncementTimeOffset = _TeamDMLastAnnouncementTimeOffset ?? Schema.GetOffset(0x6295CF653FA12D43);
-            return ref _Handle.AsRef<float>(_TeamDMLastAnnouncementTimeOffset!.Value);
+            if (_TeamDMLastAnnouncementTimeOffset == -1) _TeamDMLastAnnouncementTimeOffset = Schema.GetOffset(0x6295CF653FA12D43);
+            return ref _Handle.AsRef<float>(_TeamDMLastAnnouncementTimeOffset);
         }
     }
-    private static nint? _AccountTerroristOffset;
+    private static nint _AccountTerroristOffset = -1;
 
     public ref int AccountTerrorist
     {
         get
         {
-            _AccountTerroristOffset = _AccountTerroristOffset ?? Schema.GetOffset(0x6295CF6521CAD297);
-            return ref _Handle.AsRef<int>(_AccountTerroristOffset!.Value);
+            if (_AccountTerroristOffset == -1) _AccountTerroristOffset = Schema.GetOffset(0x6295CF6521CAD297);
+            return ref _Handle.AsRef<int>(_AccountTerroristOffset);
         }
     }
-    private static nint? _AccountCTOffset;
+    private static nint _AccountCTOffset = -1;
 
     public ref int AccountCT
     {
         get
         {
-            _AccountCTOffset = _AccountCTOffset ?? Schema.GetOffset(0x6295CF65A26CBB64);
-            return ref _Handle.AsRef<int>(_AccountCTOffset!.Value);
+            if (_AccountCTOffset == -1) _AccountCTOffset = Schema.GetOffset(0x6295CF65A26CBB64);
+            return ref _Handle.AsRef<int>(_AccountCTOffset);
         }
     }
-    private static nint? _SpawnPointCount_TerroristOffset;
+    private static nint _SpawnPointCount_TerroristOffset = -1;
 
     public ref int SpawnPointCount_Terrorist
     {
         get
         {
-            _SpawnPointCount_TerroristOffset = _SpawnPointCount_TerroristOffset ?? Schema.GetOffset(0x6295CF658D0E3AFB);
-            return ref _Handle.AsRef<int>(_SpawnPointCount_TerroristOffset!.Value);
+            if (_SpawnPointCount_TerroristOffset == -1) _SpawnPointCount_TerroristOffset = Schema.GetOffset(0x6295CF658D0E3AFB);
+            return ref _Handle.AsRef<int>(_SpawnPointCount_TerroristOffset);
         }
     }
-    private static nint? _SpawnPointCount_CTOffset;
+    private static nint _SpawnPointCount_CTOffset = -1;
 
     public ref int SpawnPointCount_CT
     {
         get
         {
-            _SpawnPointCount_CTOffset = _SpawnPointCount_CTOffset ?? Schema.GetOffset(0x6295CF65015F15A8);
-            return ref _Handle.AsRef<int>(_SpawnPointCount_CTOffset!.Value);
+            if (_SpawnPointCount_CTOffset == -1) _SpawnPointCount_CTOffset = Schema.GetOffset(0x6295CF65015F15A8);
+            return ref _Handle.AsRef<int>(_SpawnPointCount_CTOffset);
         }
     }
-    private static nint? _MaxNumTerroristsOffset;
+    private static nint _MaxNumTerroristsOffset = -1;
 
     public ref int MaxNumTerrorists
     {
         get
         {
-            _MaxNumTerroristsOffset = _MaxNumTerroristsOffset ?? Schema.GetOffset(0x6295CF65A1A2CFF9);
-            return ref _Handle.AsRef<int>(_MaxNumTerroristsOffset!.Value);
+            if (_MaxNumTerroristsOffset == -1) _MaxNumTerroristsOffset = Schema.GetOffset(0x6295CF65A1A2CFF9);
+            return ref _Handle.AsRef<int>(_MaxNumTerroristsOffset);
         }
     }
-    private static nint? _MaxNumCTsOffset;
+    private static nint _MaxNumCTsOffset = -1;
 
     public ref int MaxNumCTs
     {
         get
         {
-            _MaxNumCTsOffset = _MaxNumCTsOffset ?? Schema.GetOffset(0x6295CF65FD61C7CA);
-            return ref _Handle.AsRef<int>(_MaxNumCTsOffset!.Value);
+            if (_MaxNumCTsOffset == -1) _MaxNumCTsOffset = Schema.GetOffset(0x6295CF65FD61C7CA);
+            return ref _Handle.AsRef<int>(_MaxNumCTsOffset);
         }
     }
-    private static nint? _LoserBonusMostRecentTeamOffset;
+    private static nint _LoserBonusMostRecentTeamOffset = -1;
 
     public ref int LoserBonusMostRecentTeam
     {
         get
         {
-            _LoserBonusMostRecentTeamOffset = _LoserBonusMostRecentTeamOffset ?? Schema.GetOffset(0x6295CF657213B991);
-            return ref _Handle.AsRef<int>(_LoserBonusMostRecentTeamOffset!.Value);
+            if (_LoserBonusMostRecentTeamOffset == -1) _LoserBonusMostRecentTeamOffset = Schema.GetOffset(0x6295CF657213B991);
+            return ref _Handle.AsRef<int>(_LoserBonusMostRecentTeamOffset);
         }
     }
-    private static nint? _TmNextPeriodicThinkOffset;
+    private static nint _TmNextPeriodicThinkOffset = -1;
 
     public ref float TmNextPeriodicThink
     {
         get
         {
-            _TmNextPeriodicThinkOffset = _TmNextPeriodicThinkOffset ?? Schema.GetOffset(0x6295CF65A086B6B6);
-            return ref _Handle.AsRef<float>(_TmNextPeriodicThinkOffset!.Value);
+            if (_TmNextPeriodicThinkOffset == -1) _TmNextPeriodicThinkOffset = Schema.GetOffset(0x6295CF65A086B6B6);
+            return ref _Handle.AsRef<float>(_TmNextPeriodicThinkOffset);
         }
     }
-    private static nint? _VoiceWonMatchBragFiredOffset;
+    private static nint _VoiceWonMatchBragFiredOffset = -1;
 
     public ref bool VoiceWonMatchBragFired
     {
         get
         {
-            _VoiceWonMatchBragFiredOffset = _VoiceWonMatchBragFiredOffset ?? Schema.GetOffset(0x6295CF65D9ADDBEC);
-            return ref _Handle.AsRef<bool>(_VoiceWonMatchBragFiredOffset!.Value);
+            if (_VoiceWonMatchBragFiredOffset == -1) _VoiceWonMatchBragFiredOffset = Schema.GetOffset(0x6295CF65D9ADDBEC);
+            return ref _Handle.AsRef<bool>(_VoiceWonMatchBragFiredOffset);
         }
     }
-    private static nint? _WarmupNextChatNoticeTimeOffset;
+    private static nint _WarmupNextChatNoticeTimeOffset = -1;
 
     public ref float WarmupNextChatNoticeTime
     {
         get
         {
-            _WarmupNextChatNoticeTimeOffset = _WarmupNextChatNoticeTimeOffset ?? Schema.GetOffset(0x6295CF65F187B14B);
-            return ref _Handle.AsRef<float>(_WarmupNextChatNoticeTimeOffset!.Value);
+            if (_WarmupNextChatNoticeTimeOffset == -1) _WarmupNextChatNoticeTimeOffset = Schema.GetOffset(0x6295CF65F187B14B);
+            return ref _Handle.AsRef<float>(_WarmupNextChatNoticeTimeOffset);
         }
     }
-    private static nint? _HostagesRescuedOffset;
+    private static nint _HostagesRescuedOffset = -1;
 
     public ref int HostagesRescued
     {
         get
         {
-            _HostagesRescuedOffset = _HostagesRescuedOffset ?? Schema.GetOffset(0x6295CF652486FAA5);
-            return ref _Handle.AsRef<int>(_HostagesRescuedOffset!.Value);
+            if (_HostagesRescuedOffset == -1) _HostagesRescuedOffset = Schema.GetOffset(0x6295CF652486FAA5);
+            return ref _Handle.AsRef<int>(_HostagesRescuedOffset);
         }
     }
-    private static nint? _HostagesTouchedOffset;
+    private static nint _HostagesTouchedOffset = -1;
 
     public ref int HostagesTouched
     {
         get
         {
-            _HostagesTouchedOffset = _HostagesTouchedOffset ?? Schema.GetOffset(0x6295CF65321A1F08);
-            return ref _Handle.AsRef<int>(_HostagesTouchedOffset!.Value);
+            if (_HostagesTouchedOffset == -1) _HostagesTouchedOffset = Schema.GetOffset(0x6295CF65321A1F08);
+            return ref _Handle.AsRef<int>(_HostagesTouchedOffset);
         }
     }
-    private static nint? _NextHostageAnnouncementOffset;
+    private static nint _NextHostageAnnouncementOffset = -1;
 
     public ref float NextHostageAnnouncement
     {
         get
         {
-            _NextHostageAnnouncementOffset = _NextHostageAnnouncementOffset ?? Schema.GetOffset(0x6295CF65DEE66A30);
-            return ref _Handle.AsRef<float>(_NextHostageAnnouncementOffset!.Value);
+            if (_NextHostageAnnouncementOffset == -1) _NextHostageAnnouncementOffset = Schema.GetOffset(0x6295CF65DEE66A30);
+            return ref _Handle.AsRef<float>(_NextHostageAnnouncementOffset);
         }
     }
-    private static nint? _NoTerroristsKilledOffset;
+    private static nint _NoTerroristsKilledOffset = -1;
 
     public ref bool NoTerroristsKilled
     {
         get
         {
-            _NoTerroristsKilledOffset = _NoTerroristsKilledOffset ?? Schema.GetOffset(0x6295CF6555F64934);
-            return ref _Handle.AsRef<bool>(_NoTerroristsKilledOffset!.Value);
+            if (_NoTerroristsKilledOffset == -1) _NoTerroristsKilledOffset = Schema.GetOffset(0x6295CF6555F64934);
+            return ref _Handle.AsRef<bool>(_NoTerroristsKilledOffset);
         }
     }
-    private static nint? _NoCTsKilledOffset;
+    private static nint _NoCTsKilledOffset = -1;
 
     public ref bool NoCTsKilled
     {
         get
         {
-            _NoCTsKilledOffset = _NoCTsKilledOffset ?? Schema.GetOffset(0x6295CF6592A7F5BF);
-            return ref _Handle.AsRef<bool>(_NoCTsKilledOffset!.Value);
+            if (_NoCTsKilledOffset == -1) _NoCTsKilledOffset = Schema.GetOffset(0x6295CF6592A7F5BF);
+            return ref _Handle.AsRef<bool>(_NoCTsKilledOffset);
         }
     }
-    private static nint? _NoEnemiesKilledOffset;
+    private static nint _NoEnemiesKilledOffset = -1;
 
     public ref bool NoEnemiesKilled
     {
         get
         {
-            _NoEnemiesKilledOffset = _NoEnemiesKilledOffset ?? Schema.GetOffset(0x6295CF658FA47D23);
-            return ref _Handle.AsRef<bool>(_NoEnemiesKilledOffset!.Value);
+            if (_NoEnemiesKilledOffset == -1) _NoEnemiesKilledOffset = Schema.GetOffset(0x6295CF658FA47D23);
+            return ref _Handle.AsRef<bool>(_NoEnemiesKilledOffset);
         }
     }
-    private static nint? _CanDonateWeaponsOffset;
+    private static nint _CanDonateWeaponsOffset = -1;
 
     public ref bool CanDonateWeapons
     {
         get
         {
-            _CanDonateWeaponsOffset = _CanDonateWeaponsOffset ?? Schema.GetOffset(0x6295CF6591A6B97B);
-            return ref _Handle.AsRef<bool>(_CanDonateWeaponsOffset!.Value);
+            if (_CanDonateWeaponsOffset == -1) _CanDonateWeaponsOffset = Schema.GetOffset(0x6295CF6591A6B97B);
+            return ref _Handle.AsRef<bool>(_CanDonateWeaponsOffset);
         }
     }
-    private static nint? _FirstKillTimeOffset;
+    private static nint _FirstKillTimeOffset = -1;
 
     public ref float FirstKillTime
     {
         get
         {
-            _FirstKillTimeOffset = _FirstKillTimeOffset ?? Schema.GetOffset(0x6295CF6501D98E54);
-            return ref _Handle.AsRef<float>(_FirstKillTimeOffset!.Value);
+            if (_FirstKillTimeOffset == -1) _FirstKillTimeOffset = Schema.GetOffset(0x6295CF6501D98E54);
+            return ref _Handle.AsRef<float>(_FirstKillTimeOffset);
         }
     }
-    private static nint? _FirstBloodTimeOffset;
+    private static nint _FirstBloodTimeOffset = -1;
 
     public ref float FirstBloodTime
     {
         get
         {
-            _FirstBloodTimeOffset = _FirstBloodTimeOffset ?? Schema.GetOffset(0x6295CF65A6A092F2);
-            return ref _Handle.AsRef<float>(_FirstBloodTimeOffset!.Value);
+            if (_FirstBloodTimeOffset == -1) _FirstBloodTimeOffset = Schema.GetOffset(0x6295CF65A6A092F2);
+            return ref _Handle.AsRef<float>(_FirstBloodTimeOffset);
         }
     }
-    private static nint? _HostageWasInjuredOffset;
+    private static nint _HostageWasInjuredOffset = -1;
 
     public ref bool HostageWasInjured
     {
         get
         {
-            _HostageWasInjuredOffset = _HostageWasInjuredOffset ?? Schema.GetOffset(0x6295CF65AAB4D014);
-            return ref _Handle.AsRef<bool>(_HostageWasInjuredOffset!.Value);
+            if (_HostageWasInjuredOffset == -1) _HostageWasInjuredOffset = Schema.GetOffset(0x6295CF65AAB4D014);
+            return ref _Handle.AsRef<bool>(_HostageWasInjuredOffset);
         }
     }
-    private static nint? _HostageWasKilledOffset;
+    private static nint _HostageWasKilledOffset = -1;
 
     public ref bool HostageWasKilled
     {
         get
         {
-            _HostageWasKilledOffset = _HostageWasKilledOffset ?? Schema.GetOffset(0x6295CF65578A226E);
-            return ref _Handle.AsRef<bool>(_HostageWasKilledOffset!.Value);
+            if (_HostageWasKilledOffset == -1) _HostageWasKilledOffset = Schema.GetOffset(0x6295CF65578A226E);
+            return ref _Handle.AsRef<bool>(_HostageWasKilledOffset);
         }
     }
-    private static nint? _VoteCalledOffset;
+    private static nint _VoteCalledOffset = -1;
 
     public ref bool VoteCalled
     {
         get
         {
-            _VoteCalledOffset = _VoteCalledOffset ?? Schema.GetOffset(0x6295CF657DE14E10);
-            return ref _Handle.AsRef<bool>(_VoteCalledOffset!.Value);
+            if (_VoteCalledOffset == -1) _VoteCalledOffset = Schema.GetOffset(0x6295CF657DE14E10);
+            return ref _Handle.AsRef<bool>(_VoteCalledOffset);
         }
     }
-    private static nint? _ServerVoteOnResetOffset;
+    private static nint _ServerVoteOnResetOffset = -1;
 
     public ref bool ServerVoteOnReset
     {
         get
         {
-            _ServerVoteOnResetOffset = _ServerVoteOnResetOffset ?? Schema.GetOffset(0x6295CF659AE52F3E);
-            return ref _Handle.AsRef<bool>(_ServerVoteOnResetOffset!.Value);
+            if (_ServerVoteOnResetOffset == -1) _ServerVoteOnResetOffset = Schema.GetOffset(0x6295CF659AE52F3E);
+            return ref _Handle.AsRef<bool>(_ServerVoteOnResetOffset);
         }
     }
-    private static nint? _VoteCheckThrottleOffset;
+    private static nint _VoteCheckThrottleOffset = -1;
 
     public ref float VoteCheckThrottle
     {
         get
         {
-            _VoteCheckThrottleOffset = _VoteCheckThrottleOffset ?? Schema.GetOffset(0x6295CF656F57ACF1);
-            return ref _Handle.AsRef<float>(_VoteCheckThrottleOffset!.Value);
+            if (_VoteCheckThrottleOffset == -1) _VoteCheckThrottleOffset = Schema.GetOffset(0x6295CF656F57ACF1);
+            return ref _Handle.AsRef<float>(_VoteCheckThrottleOffset);
         }
     }
-    private static nint? _BuyTimeEndedOffset;
+    private static nint _BuyTimeEndedOffset = -1;
 
     public ref bool BuyTimeEnded
     {
         get
         {
-            _BuyTimeEndedOffset = _BuyTimeEndedOffset ?? Schema.GetOffset(0x6295CF65092EBA8E);
-            return ref _Handle.AsRef<bool>(_BuyTimeEndedOffset!.Value);
+            if (_BuyTimeEndedOffset == -1) _BuyTimeEndedOffset = Schema.GetOffset(0x6295CF65092EBA8E);
+            return ref _Handle.AsRef<bool>(_BuyTimeEndedOffset);
         }
     }
-    private static nint? _LastFreezeEndBeepOffset;
+    private static nint _LastFreezeEndBeepOffset = -1;
 
     public ref int LastFreezeEndBeep
     {
         get
         {
-            _LastFreezeEndBeepOffset = _LastFreezeEndBeepOffset ?? Schema.GetOffset(0x6295CF65296880DB);
-            return ref _Handle.AsRef<int>(_LastFreezeEndBeepOffset!.Value);
+            if (_LastFreezeEndBeepOffset == -1) _LastFreezeEndBeepOffset = Schema.GetOffset(0x6295CF65296880DB);
+            return ref _Handle.AsRef<int>(_LastFreezeEndBeepOffset);
         }
     }
-    private static nint? _TargetBombedOffset;
+    private static nint _TargetBombedOffset = -1;
 
     public ref bool TargetBombed
     {
         get
         {
-            _TargetBombedOffset = _TargetBombedOffset ?? Schema.GetOffset(0x6295CF653A83E0F9);
-            return ref _Handle.AsRef<bool>(_TargetBombedOffset!.Value);
+            if (_TargetBombedOffset == -1) _TargetBombedOffset = Schema.GetOffset(0x6295CF653A83E0F9);
+            return ref _Handle.AsRef<bool>(_TargetBombedOffset);
         }
     }
-    private static nint? _BombDefusedOffset;
+    private static nint _BombDefusedOffset = -1;
 
     public ref bool BombDefused
     {
         get
         {
-            _BombDefusedOffset = _BombDefusedOffset ?? Schema.GetOffset(0x6295CF65CA9F868D);
-            return ref _Handle.AsRef<bool>(_BombDefusedOffset!.Value);
+            if (_BombDefusedOffset == -1) _BombDefusedOffset = Schema.GetOffset(0x6295CF65CA9F868D);
+            return ref _Handle.AsRef<bool>(_BombDefusedOffset);
         }
     }
-    private static nint? _MapHasBombZoneOffset;
+    private static nint _MapHasBombZoneOffset = -1;
 
     public ref bool MapHasBombZone
     {
         get
         {
-            _MapHasBombZoneOffset = _MapHasBombZoneOffset ?? Schema.GetOffset(0x6295CF65D3F4FD4D);
-            return ref _Handle.AsRef<bool>(_MapHasBombZoneOffset!.Value);
+            if (_MapHasBombZoneOffset == -1) _MapHasBombZoneOffset = Schema.GetOffset(0x6295CF65D3F4FD4D);
+            return ref _Handle.AsRef<bool>(_MapHasBombZoneOffset);
         }
     }
-    private static nint? _MainCTSpawnPosOffset;
+    private static nint _MainCTSpawnPosOffset = -1;
 
     public ref Vector MainCTSpawnPos
     {
         get
         {
-            _MainCTSpawnPosOffset = _MainCTSpawnPosOffset ?? Schema.GetOffset(0x6295CF65F44AF710);
-            return ref _Handle.AsRef<Vector>(_MainCTSpawnPosOffset!.Value);
+            if (_MainCTSpawnPosOffset == -1) _MainCTSpawnPosOffset = Schema.GetOffset(0x6295CF65F44AF710);
+            return ref _Handle.AsRef<Vector>(_MainCTSpawnPosOffset);
         }
     }
-    private static nint? _CTSpawnPointsMasterListOffset;
+    private static nint _CTSpawnPointsMasterListOffset = -1;
 
     public ref CUtlVector<CHandle<SpawnPoint>> CTSpawnPointsMasterList
     {
         get
         {
-            _CTSpawnPointsMasterListOffset = _CTSpawnPointsMasterListOffset ?? Schema.GetOffset(0x6295CF6582901578);
-            return ref _Handle.AsRef<CUtlVector<CHandle<SpawnPoint>>>(_CTSpawnPointsMasterListOffset!.Value);
+            if (_CTSpawnPointsMasterListOffset == -1) _CTSpawnPointsMasterListOffset = Schema.GetOffset(0x6295CF6582901578);
+            return ref _Handle.AsRef<CUtlVector<CHandle<SpawnPoint>>>(_CTSpawnPointsMasterListOffset);
         }
     }
-    private static nint? _TerroristSpawnPointsMasterListOffset;
+    private static nint _TerroristSpawnPointsMasterListOffset = -1;
 
     public ref CUtlVector<CHandle<SpawnPoint>> TerroristSpawnPointsMasterList
     {
         get
         {
-            _TerroristSpawnPointsMasterListOffset = _TerroristSpawnPointsMasterListOffset ?? Schema.GetOffset(0x6295CF65EC3D3B5D);
-            return ref _Handle.AsRef<CUtlVector<CHandle<SpawnPoint>>>(_TerroristSpawnPointsMasterListOffset!.Value);
+            if (_TerroristSpawnPointsMasterListOffset == -1) _TerroristSpawnPointsMasterListOffset = Schema.GetOffset(0x6295CF65EC3D3B5D);
+            return ref _Handle.AsRef<CUtlVector<CHandle<SpawnPoint>>>(_TerroristSpawnPointsMasterListOffset);
         }
     }
-    private static nint? _RespawningAllRespawnablePlayersOffset;
+    private static nint _RespawningAllRespawnablePlayersOffset = -1;
 
     public ref bool RespawningAllRespawnablePlayers
     {
         get
         {
-            _RespawningAllRespawnablePlayersOffset = _RespawningAllRespawnablePlayersOffset ?? Schema.GetOffset(0x6295CF65F400C2A6);
-            return ref _Handle.AsRef<bool>(_RespawningAllRespawnablePlayersOffset!.Value);
+            if (_RespawningAllRespawnablePlayersOffset == -1) _RespawningAllRespawnablePlayersOffset = Schema.GetOffset(0x6295CF65F400C2A6);
+            return ref _Handle.AsRef<bool>(_RespawningAllRespawnablePlayersOffset);
         }
     }
-    private static nint? _NextCTSpawnPointOffset;
+    private static nint _NextCTSpawnPointOffset = -1;
 
     public ref int NextCTSpawnPoint
     {
         get
         {
-            _NextCTSpawnPointOffset = _NextCTSpawnPointOffset ?? Schema.GetOffset(0x6295CF65932F53AD);
-            return ref _Handle.AsRef<int>(_NextCTSpawnPointOffset!.Value);
+            if (_NextCTSpawnPointOffset == -1) _NextCTSpawnPointOffset = Schema.GetOffset(0x6295CF65932F53AD);
+            return ref _Handle.AsRef<int>(_NextCTSpawnPointOffset);
         }
     }
-    private static nint? _CTSpawnPointUsedTimeOffset;
+    private static nint _CTSpawnPointUsedTimeOffset = -1;
 
     public ref float CTSpawnPointUsedTime
     {
         get
         {
-            _CTSpawnPointUsedTimeOffset = _CTSpawnPointUsedTimeOffset ?? Schema.GetOffset(0x6295CF65D6E09027);
-            return ref _Handle.AsRef<float>(_CTSpawnPointUsedTimeOffset!.Value);
+            if (_CTSpawnPointUsedTimeOffset == -1) _CTSpawnPointUsedTimeOffset = Schema.GetOffset(0x6295CF65D6E09027);
+            return ref _Handle.AsRef<float>(_CTSpawnPointUsedTimeOffset);
         }
     }
-    private static nint? _NextTerroristSpawnPointOffset;
+    private static nint _NextTerroristSpawnPointOffset = -1;
 
     public ref int NextTerroristSpawnPoint
     {
         get
         {
-            _NextTerroristSpawnPointOffset = _NextTerroristSpawnPointOffset ?? Schema.GetOffset(0x6295CF65516AD03A);
-            return ref _Handle.AsRef<int>(_NextTerroristSpawnPointOffset!.Value);
+            if (_NextTerroristSpawnPointOffset == -1) _NextTerroristSpawnPointOffset = Schema.GetOffset(0x6295CF65516AD03A);
+            return ref _Handle.AsRef<int>(_NextTerroristSpawnPointOffset);
         }
     }
-    private static nint? _TerroristSpawnPointUsedTimeOffset;
+    private static nint _TerroristSpawnPointUsedTimeOffset = -1;
 
     public ref float TerroristSpawnPointUsedTime
     {
         get
         {
-            _TerroristSpawnPointUsedTimeOffset = _TerroristSpawnPointUsedTimeOffset ?? Schema.GetOffset(0x6295CF653A8AC4CC);
-            return ref _Handle.AsRef<float>(_TerroristSpawnPointUsedTimeOffset!.Value);
+            if (_TerroristSpawnPointUsedTimeOffset == -1) _TerroristSpawnPointUsedTimeOffset = Schema.GetOffset(0x6295CF653A8AC4CC);
+            return ref _Handle.AsRef<float>(_TerroristSpawnPointUsedTimeOffset);
         }
     }
-    private static nint? _CTSpawnPointsOffset;
+    private static nint _CTSpawnPointsOffset = -1;
 
     public ref CUtlVector<CHandle<SpawnPoint>> CTSpawnPoints
     {
         get
         {
-            _CTSpawnPointsOffset = _CTSpawnPointsOffset ?? Schema.GetOffset(0x6295CF6537BA1FB2);
-            return ref _Handle.AsRef<CUtlVector<CHandle<SpawnPoint>>>(_CTSpawnPointsOffset!.Value);
+            if (_CTSpawnPointsOffset == -1) _CTSpawnPointsOffset = Schema.GetOffset(0x6295CF6537BA1FB2);
+            return ref _Handle.AsRef<CUtlVector<CHandle<SpawnPoint>>>(_CTSpawnPointsOffset);
         }
     }
-    private static nint? _TerroristSpawnPointsOffset;
+    private static nint _TerroristSpawnPointsOffset = -1;
 
     public ref CUtlVector<CHandle<SpawnPoint>> TerroristSpawnPoints
     {
         get
         {
-            _TerroristSpawnPointsOffset = _TerroristSpawnPointsOffset ?? Schema.GetOffset(0x6295CF6506BE8E93);
-            return ref _Handle.AsRef<CUtlVector<CHandle<SpawnPoint>>>(_TerroristSpawnPointsOffset!.Value);
+            if (_TerroristSpawnPointsOffset == -1) _TerroristSpawnPointsOffset = Schema.GetOffset(0x6295CF6506BE8E93);
+            return ref _Handle.AsRef<CUtlVector<CHandle<SpawnPoint>>>(_TerroristSpawnPointsOffset);
         }
     }
-    private static nint? _IsUnreservedGameServerOffset;
+    private static nint _IsUnreservedGameServerOffset = -1;
 
     public ref bool IsUnreservedGameServer
     {
         get
         {
-            _IsUnreservedGameServerOffset = _IsUnreservedGameServerOffset ?? Schema.GetOffset(0x6295CF65C691B4FF);
-            return ref _Handle.AsRef<bool>(_IsUnreservedGameServerOffset!.Value);
+            if (_IsUnreservedGameServerOffset == -1) _IsUnreservedGameServerOffset = Schema.GetOffset(0x6295CF65C691B4FF);
+            return ref _Handle.AsRef<bool>(_IsUnreservedGameServerOffset);
         }
     }
-    private static nint? _AutobalanceDisplayTimeOffset;
+    private static nint _AutobalanceDisplayTimeOffset = -1;
 
     public ref float AutobalanceDisplayTime
     {
         get
         {
-            _AutobalanceDisplayTimeOffset = _AutobalanceDisplayTimeOffset ?? Schema.GetOffset(0x6295CF65E23EE205);
-            return ref _Handle.AsRef<float>(_AutobalanceDisplayTimeOffset!.Value);
+            if (_AutobalanceDisplayTimeOffset == -1) _AutobalanceDisplayTimeOffset = Schema.GetOffset(0x6295CF65E23EE205);
+            return ref _Handle.AsRef<float>(_AutobalanceDisplayTimeOffset);
         }
     }
-    private static nint? _AllowWeaponSwitchOffset;
+    private static nint _AllowWeaponSwitchOffset = -1;
 
     public ref bool AllowWeaponSwitch
     {
         get
         {
-            _AllowWeaponSwitchOffset = _AllowWeaponSwitchOffset ?? Schema.GetOffset(0x6295CF65390E309A);
-            return ref _Handle.AsRef<bool>(_AllowWeaponSwitchOffset!.Value);
+            if (_AllowWeaponSwitchOffset == -1) _AllowWeaponSwitchOffset = Schema.GetOffset(0x6295CF65390E309A);
+            return ref _Handle.AsRef<bool>(_AllowWeaponSwitchOffset);
         }
     }
-    private static nint? _RoundTimeWarningTriggeredOffset;
+    private static nint _RoundTimeWarningTriggeredOffset = -1;
 
     public ref bool RoundTimeWarningTriggered
     {
         get
         {
-            _RoundTimeWarningTriggeredOffset = _RoundTimeWarningTriggeredOffset ?? Schema.GetOffset(0x6295CF650F402BE7);
-            return ref _Handle.AsRef<bool>(_RoundTimeWarningTriggeredOffset!.Value);
+            if (_RoundTimeWarningTriggeredOffset == -1) _RoundTimeWarningTriggeredOffset = Schema.GetOffset(0x6295CF650F402BE7);
+            return ref _Handle.AsRef<bool>(_RoundTimeWarningTriggeredOffset);
         }
     }
-    private static nint? _PhaseChangeAnnouncementTimeOffset;
+    private static nint _PhaseChangeAnnouncementTimeOffset = -1;
     private GameTime_tImpl? _PhaseChangeAnnouncementTimeInstance;
 
     public GameTime_t PhaseChangeAnnouncementTime
     {
         get
         {
-            _PhaseChangeAnnouncementTimeOffset = _PhaseChangeAnnouncementTimeOffset ?? Schema.GetOffset(0x6295CF65C4D59336);
+            if (_PhaseChangeAnnouncementTimeOffset == -1) _PhaseChangeAnnouncementTimeOffset = Schema.GetOffset(0x6295CF65C4D59336);
             var instance = _PhaseChangeAnnouncementTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PhaseChangeAnnouncementTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PhaseChangeAnnouncementTimeOffset);
             return instance;
         }
     }
-    private static nint? _NextUpdateTeamClanNamesTimeOffset;
+    private static nint _NextUpdateTeamClanNamesTimeOffset = -1;
 
     public ref float NextUpdateTeamClanNamesTime
     {
         get
         {
-            _NextUpdateTeamClanNamesTimeOffset = _NextUpdateTeamClanNamesTimeOffset ?? Schema.GetOffset(0x6295CF659127E011);
-            return ref _Handle.AsRef<float>(_NextUpdateTeamClanNamesTimeOffset!.Value);
+            if (_NextUpdateTeamClanNamesTimeOffset == -1) _NextUpdateTeamClanNamesTimeOffset = Schema.GetOffset(0x6295CF659127E011);
+            return ref _Handle.AsRef<float>(_NextUpdateTeamClanNamesTimeOffset);
         }
     }
-    private static nint? _LastThinkTimeOffset;
+    private static nint _LastThinkTimeOffset = -1;
     private GameTime_tImpl? _LastThinkTimeInstance;
 
     public GameTime_t LastThinkTime
     {
         get
         {
-            _LastThinkTimeOffset = _LastThinkTimeOffset ?? Schema.GetOffset(0x6295CF65D901F6A0);
+            if (_LastThinkTimeOffset == -1) _LastThinkTimeOffset = Schema.GetOffset(0x6295CF65D901F6A0);
             var instance = _LastThinkTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastThinkTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LastThinkTimeOffset);
             return instance;
         }
     }
-    private static nint? _AccumulatedRoundOffDamageOffset;
+    private static nint _AccumulatedRoundOffDamageOffset = -1;
 
     public ref float AccumulatedRoundOffDamage
     {
         get
         {
-            _AccumulatedRoundOffDamageOffset = _AccumulatedRoundOffDamageOffset ?? Schema.GetOffset(0x6295CF658FEFA145);
-            return ref _Handle.AsRef<float>(_AccumulatedRoundOffDamageOffset!.Value);
+            if (_AccumulatedRoundOffDamageOffset == -1) _AccumulatedRoundOffDamageOffset = Schema.GetOffset(0x6295CF658FEFA145);
+            return ref _Handle.AsRef<float>(_AccumulatedRoundOffDamageOffset);
         }
     }
-    private static nint? _ShorthandedBonusLastEvalRoundOffset;
+    private static nint _ShorthandedBonusLastEvalRoundOffset = -1;
 
     public ref int ShorthandedBonusLastEvalRound
     {
         get
         {
-            _ShorthandedBonusLastEvalRoundOffset = _ShorthandedBonusLastEvalRoundOffset ?? Schema.GetOffset(0x6295CF65AFC72D22);
-            return ref _Handle.AsRef<int>(_ShorthandedBonusLastEvalRoundOffset!.Value);
+            if (_ShorthandedBonusLastEvalRoundOffset == -1) _ShorthandedBonusLastEvalRoundOffset = Schema.GetOffset(0x6295CF65AFC72D22);
+            return ref _Handle.AsRef<int>(_ShorthandedBonusLastEvalRoundOffset);
         }
     }
-    private static nint? _MatchAbortedEarlyReasonOffset;
+    private static nint _MatchAbortedEarlyReasonOffset = -1;
 
     public ref int MatchAbortedEarlyReason
     {
         get
         {
-            _MatchAbortedEarlyReasonOffset = _MatchAbortedEarlyReasonOffset ?? Schema.GetOffset(0x6295CF658B4CFCE8);
-            return ref _Handle.AsRef<int>(_MatchAbortedEarlyReasonOffset!.Value);
+            if (_MatchAbortedEarlyReasonOffset == -1) _MatchAbortedEarlyReasonOffset = Schema.GetOffset(0x6295CF658B4CFCE8);
+            return ref _Handle.AsRef<int>(_MatchAbortedEarlyReasonOffset);
         }
     }
-    private static nint? _HasTriggeredRoundStartMusicOffset;
+    private static nint _HasTriggeredRoundStartMusicOffset = -1;
 
     public ref bool HasTriggeredRoundStartMusic
     {
         get
         {
-            _HasTriggeredRoundStartMusicOffset = _HasTriggeredRoundStartMusicOffset ?? Schema.GetOffset(0x6295CF65E34D873B);
-            return ref _Handle.AsRef<bool>(_HasTriggeredRoundStartMusicOffset!.Value);
+            if (_HasTriggeredRoundStartMusicOffset == -1) _HasTriggeredRoundStartMusicOffset = Schema.GetOffset(0x6295CF65E34D873B);
+            return ref _Handle.AsRef<bool>(_HasTriggeredRoundStartMusicOffset);
         }
     }
-    private static nint? _SwitchingTeamsAtRoundResetOffset;
+    private static nint _SwitchingTeamsAtRoundResetOffset = -1;
 
     public ref bool SwitchingTeamsAtRoundReset
     {
         get
         {
-            _SwitchingTeamsAtRoundResetOffset = _SwitchingTeamsAtRoundResetOffset ?? Schema.GetOffset(0x6295CF65AE3AF0A5);
-            return ref _Handle.AsRef<bool>(_SwitchingTeamsAtRoundResetOffset!.Value);
+            if (_SwitchingTeamsAtRoundResetOffset == -1) _SwitchingTeamsAtRoundResetOffset = Schema.GetOffset(0x6295CF65AE3AF0A5);
+            return ref _Handle.AsRef<bool>(_SwitchingTeamsAtRoundResetOffset);
         }
     }
-    private static nint? _GameModeRulesOffset;
+    private static nint _GameModeRulesOffset = -1;
     private CCSGameModeRulesImpl? _GameModeRulesInstance;
 
     public CCSGameModeRules? GameModeRules
     {
         get
         {
-            _GameModeRulesOffset = _GameModeRulesOffset ?? Schema.GetOffset(0x6295CF650B12F105);
-            var ptr = _Handle.Read<nint>(_GameModeRulesOffset!.Value);
+            if (_GameModeRulesOffset == -1) _GameModeRulesOffset = Schema.GetOffset(0x6295CF650B12F105);
+            var ptr = _Handle.Read<nint>(_GameModeRulesOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _GameModeRulesInstance ??= new CCSGameModeRulesImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _BtGlobalBlackboardOffset;
+    private static nint _BtGlobalBlackboardOffset = -1;
     private SchemaUntypedField? _BtGlobalBlackboardInstance;
 
     public SchemaUntypedField BtGlobalBlackboard
     {
         get
         {
-            _BtGlobalBlackboardOffset = _BtGlobalBlackboardOffset ?? Schema.GetOffset(0x6295CF654E62FE91);
+            if (_BtGlobalBlackboardOffset == -1) _BtGlobalBlackboardOffset = Schema.GetOffset(0x6295CF654E62FE91);
             var instance = _BtGlobalBlackboardInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _BtGlobalBlackboardOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BtGlobalBlackboardOffset);
             return instance;
         }
     }
-    private static nint? _PlayerResourceOffset;
+    private static nint _PlayerResourceOffset = -1;
 
     public ref CHandle<CBaseEntity> PlayerResource
     {
         get
         {
-            _PlayerResourceOffset = _PlayerResourceOffset ?? Schema.GetOffset(0x6295CF6553F9E5AE);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PlayerResourceOffset!.Value);
+            if (_PlayerResourceOffset == -1) _PlayerResourceOffset = Schema.GetOffset(0x6295CF6553F9E5AE);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PlayerResourceOffset);
         }
     }
-    private static nint? _RetakeRulesOffset;
+    private static nint _RetakeRulesOffset = -1;
     private CRetakeGameRulesImpl? _RetakeRulesInstance;
 
     public CRetakeGameRules RetakeRules
     {
         get
         {
-            _RetakeRulesOffset = _RetakeRulesOffset ?? Schema.GetOffset(0x6295CF65DB6D258A);
+            if (_RetakeRulesOffset == -1) _RetakeRulesOffset = Schema.GetOffset(0x6295CF65DB6D258A);
             var instance = _RetakeRulesInstance ??= new CRetakeGameRulesImpl(0);
-            instance.DangerousSetHandle(_Handle + _RetakeRulesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RetakeRulesOffset);
             return instance;
         }
     }
-    private static nint? _TeamUniqueKillWeaponsMatchOffset;
+    private static nint _TeamUniqueKillWeaponsMatchOffset = -1;
     private SchemaFixedArray<CUtlVector<int>>? _TeamUniqueKillWeaponsMatchInstance;
 
     public ISchemaFixedArray<CUtlVector<int>> TeamUniqueKillWeaponsMatch
     {
         get
         {
-            _TeamUniqueKillWeaponsMatchOffset = _TeamUniqueKillWeaponsMatchOffset ?? Schema.GetOffset(0x6295CF65EB474B78);
+            if (_TeamUniqueKillWeaponsMatchOffset == -1) _TeamUniqueKillWeaponsMatchOffset = Schema.GetOffset(0x6295CF65EB474B78);
             var instance = _TeamUniqueKillWeaponsMatchInstance ??= new SchemaFixedArray<CUtlVector<int>>(0, 0x6295CF65EB474B78, 4, 24, 8);
-            instance.DangerousSetHandle(_Handle + _TeamUniqueKillWeaponsMatchOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TeamUniqueKillWeaponsMatchOffset);
             return instance;
         }
     }
-    private static nint? _TeamLastKillUsedUniqueWeaponMatchOffset;
+    private static nint _TeamLastKillUsedUniqueWeaponMatchOffset = -1;
     private SchemaFixedArray<bool>? _TeamLastKillUsedUniqueWeaponMatchInstance;
 
     public ISchemaFixedArray<bool> TeamLastKillUsedUniqueWeaponMatch
     {
         get
         {
-            _TeamLastKillUsedUniqueWeaponMatchOffset = _TeamLastKillUsedUniqueWeaponMatchOffset ?? Schema.GetOffset(0x6295CF65BCB471EB);
+            if (_TeamLastKillUsedUniqueWeaponMatchOffset == -1) _TeamLastKillUsedUniqueWeaponMatchOffset = Schema.GetOffset(0x6295CF65BCB471EB);
             var instance = _TeamLastKillUsedUniqueWeaponMatchInstance ??= new SchemaFixedArray<bool>(0, 0x6295CF65BCB471EB, 4, 1, 1);
-            instance.DangerousSetHandle(_Handle + _TeamLastKillUsedUniqueWeaponMatchOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TeamLastKillUsedUniqueWeaponMatchOffset);
             return instance;
         }
     }
-    private static nint? _MatchEndCountOffset;
+    private static nint _MatchEndCountOffset = -1;
 
     public ref byte MatchEndCount
     {
         get
         {
-            _MatchEndCountOffset = _MatchEndCountOffset ?? Schema.GetOffset(0x6295CF65FCD08D2E);
-            return ref _Handle.AsRef<byte>(_MatchEndCountOffset!.Value);
+            if (_MatchEndCountOffset == -1) _MatchEndCountOffset = Schema.GetOffset(0x6295CF65FCD08D2E);
+            return ref _Handle.AsRef<byte>(_MatchEndCountOffset);
         }
     }
-    private static nint? _TTeamIntroVariantOffset;
+    private static nint _TTeamIntroVariantOffset = -1;
 
     public ref int TTeamIntroVariant
     {
         get
         {
-            _TTeamIntroVariantOffset = _TTeamIntroVariantOffset ?? Schema.GetOffset(0x6295CF652843B819);
-            return ref _Handle.AsRef<int>(_TTeamIntroVariantOffset!.Value);
+            if (_TTeamIntroVariantOffset == -1) _TTeamIntroVariantOffset = Schema.GetOffset(0x6295CF652843B819);
+            return ref _Handle.AsRef<int>(_TTeamIntroVariantOffset);
         }
     }
-    private static nint? _CTTeamIntroVariantOffset;
+    private static nint _CTTeamIntroVariantOffset = -1;
 
     public ref int CTTeamIntroVariant
     {
         get
         {
-            _CTTeamIntroVariantOffset = _CTTeamIntroVariantOffset ?? Schema.GetOffset(0x6295CF65A4E902BC);
-            return ref _Handle.AsRef<int>(_CTTeamIntroVariantOffset!.Value);
+            if (_CTTeamIntroVariantOffset == -1) _CTTeamIntroVariantOffset = Schema.GetOffset(0x6295CF65A4E902BC);
+            return ref _Handle.AsRef<int>(_CTTeamIntroVariantOffset);
         }
     }
-    private static nint? _TeamIntroPeriodOffset;
+    private static nint _TeamIntroPeriodOffset = -1;
 
     public ref bool TeamIntroPeriod
     {
         get
         {
-            _TeamIntroPeriodOffset = _TeamIntroPeriodOffset ?? Schema.GetOffset(0x6295CF6550FCE177);
-            return ref _Handle.AsRef<bool>(_TeamIntroPeriodOffset!.Value);
+            if (_TeamIntroPeriodOffset == -1) _TeamIntroPeriodOffset = Schema.GetOffset(0x6295CF6550FCE177);
+            return ref _Handle.AsRef<bool>(_TeamIntroPeriodOffset);
         }
     }
-    private static nint? _TeamIntroPeriodEndOffset;
+    private static nint _TeamIntroPeriodEndOffset = -1;
     private GameTime_tImpl? _TeamIntroPeriodEndInstance;
 
     public GameTime_t TeamIntroPeriodEnd
     {
         get
         {
-            _TeamIntroPeriodEndOffset = _TeamIntroPeriodEndOffset ?? Schema.GetOffset(0x6295CF65E9D7AE78);
+            if (_TeamIntroPeriodEndOffset == -1) _TeamIntroPeriodEndOffset = Schema.GetOffset(0x6295CF65E9D7AE78);
             var instance = _TeamIntroPeriodEndInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TeamIntroPeriodEndOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TeamIntroPeriodEndOffset);
             return instance;
         }
     }
-    private static nint? _PlayedTeamIntroVOOffset;
+    private static nint _PlayedTeamIntroVOOffset = -1;
 
     public ref bool PlayedTeamIntroVO
     {
         get
         {
-            _PlayedTeamIntroVOOffset = _PlayedTeamIntroVOOffset ?? Schema.GetOffset(0x6295CF6520AF50EC);
-            return ref _Handle.AsRef<bool>(_PlayedTeamIntroVOOffset!.Value);
+            if (_PlayedTeamIntroVOOffset == -1) _PlayedTeamIntroVOOffset = Schema.GetOffset(0x6295CF6520AF50EC);
+            return ref _Handle.AsRef<bool>(_PlayedTeamIntroVOOffset);
         }
     }
-    private static nint? _RoundEndWinnerTeamOffset;
+    private static nint _RoundEndWinnerTeamOffset = -1;
 
     public ref int RoundEndWinnerTeam
     {
         get
         {
-            _RoundEndWinnerTeamOffset = _RoundEndWinnerTeamOffset ?? Schema.GetOffset(0x6295CF6556870D0B);
-            return ref _Handle.AsRef<int>(_RoundEndWinnerTeamOffset!.Value);
+            if (_RoundEndWinnerTeamOffset == -1) _RoundEndWinnerTeamOffset = Schema.GetOffset(0x6295CF6556870D0B);
+            return ref _Handle.AsRef<int>(_RoundEndWinnerTeamOffset);
         }
     }
-    private static nint? _RoundEndReasonOffset;
+    private static nint _RoundEndReasonOffset = -1;
 
     public ref int RoundEndReason
     {
         get
         {
-            _RoundEndReasonOffset = _RoundEndReasonOffset ?? Schema.GetOffset(0x6295CF6507672B11);
-            return ref _Handle.AsRef<int>(_RoundEndReasonOffset!.Value);
+            if (_RoundEndReasonOffset == -1) _RoundEndReasonOffset = Schema.GetOffset(0x6295CF6507672B11);
+            return ref _Handle.AsRef<int>(_RoundEndReasonOffset);
         }
     }
-    private static nint? _RoundEndShowTimerDefendOffset;
+    private static nint _RoundEndShowTimerDefendOffset = -1;
 
     public ref bool RoundEndShowTimerDefend
     {
         get
         {
-            _RoundEndShowTimerDefendOffset = _RoundEndShowTimerDefendOffset ?? Schema.GetOffset(0x6295CF6594C342DA);
-            return ref _Handle.AsRef<bool>(_RoundEndShowTimerDefendOffset!.Value);
+            if (_RoundEndShowTimerDefendOffset == -1) _RoundEndShowTimerDefendOffset = Schema.GetOffset(0x6295CF6594C342DA);
+            return ref _Handle.AsRef<bool>(_RoundEndShowTimerDefendOffset);
         }
     }
-    private static nint? _RoundEndTimerTimeOffset;
+    private static nint _RoundEndTimerTimeOffset = -1;
 
     public ref int RoundEndTimerTime
     {
         get
         {
-            _RoundEndTimerTimeOffset = _RoundEndTimerTimeOffset ?? Schema.GetOffset(0x6295CF65ED1EF5CF);
-            return ref _Handle.AsRef<int>(_RoundEndTimerTimeOffset!.Value);
+            if (_RoundEndTimerTimeOffset == -1) _RoundEndTimerTimeOffset = Schema.GetOffset(0x6295CF65ED1EF5CF);
+            return ref _Handle.AsRef<int>(_RoundEndTimerTimeOffset);
         }
     }
-    private static nint? _RoundEndFunFactTokenOffset;
+    private static nint _RoundEndFunFactTokenOffset = -1;
 
     public string RoundEndFunFactToken
     {
         get
         {
-            _RoundEndFunFactTokenOffset = _RoundEndFunFactTokenOffset ?? Schema.GetOffset(0x6295CF653C86499F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_RoundEndFunFactTokenOffset!.Value));
+            if (_RoundEndFunFactTokenOffset == -1) _RoundEndFunFactTokenOffset = Schema.GetOffset(0x6295CF653C86499F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_RoundEndFunFactTokenOffset));
         }
         set
         {
-            _RoundEndFunFactTokenOffset = _RoundEndFunFactTokenOffset ?? Schema.GetOffset(0x6295CF653C86499F);
-            Schema.SetCUtlString(_Handle, _RoundEndFunFactTokenOffset!.Value, value);
+            if (_RoundEndFunFactTokenOffset == -1) _RoundEndFunFactTokenOffset = Schema.GetOffset(0x6295CF653C86499F);
+            Schema.SetCUtlString(_Handle, _RoundEndFunFactTokenOffset, value);
         }
     }
-    private static nint? _RoundEndFunFactPlayerSlotOffset;
+    private static nint _RoundEndFunFactPlayerSlotOffset = -1;
 
     public ref uint RoundEndFunFactPlayerSlot
     {
         get
         {
-            _RoundEndFunFactPlayerSlotOffset = _RoundEndFunFactPlayerSlotOffset ?? Schema.GetOffset(0x6295CF65FA215C79);
-            return ref _Handle.AsRef<uint>(_RoundEndFunFactPlayerSlotOffset!.Value);
+            if (_RoundEndFunFactPlayerSlotOffset == -1) _RoundEndFunFactPlayerSlotOffset = Schema.GetOffset(0x6295CF65FA215C79);
+            return ref _Handle.AsRef<uint>(_RoundEndFunFactPlayerSlotOffset);
         }
     }
-    private static nint? _RoundEndFunFactData1Offset;
+    private static nint _RoundEndFunFactData1Offset = -1;
 
     public ref int RoundEndFunFactData1
     {
         get
         {
-            _RoundEndFunFactData1Offset = _RoundEndFunFactData1Offset ?? Schema.GetOffset(0x6295CF657F5515C3);
-            return ref _Handle.AsRef<int>(_RoundEndFunFactData1Offset!.Value);
+            if (_RoundEndFunFactData1Offset == -1) _RoundEndFunFactData1Offset = Schema.GetOffset(0x6295CF657F5515C3);
+            return ref _Handle.AsRef<int>(_RoundEndFunFactData1Offset);
         }
     }
-    private static nint? _RoundEndFunFactData2Offset;
+    private static nint _RoundEndFunFactData2Offset = -1;
 
     public ref int RoundEndFunFactData2
     {
         get
         {
-            _RoundEndFunFactData2Offset = _RoundEndFunFactData2Offset ?? Schema.GetOffset(0x6295CF6580551756);
-            return ref _Handle.AsRef<int>(_RoundEndFunFactData2Offset!.Value);
+            if (_RoundEndFunFactData2Offset == -1) _RoundEndFunFactData2Offset = Schema.GetOffset(0x6295CF6580551756);
+            return ref _Handle.AsRef<int>(_RoundEndFunFactData2Offset);
         }
     }
-    private static nint? _RoundEndFunFactData3Offset;
+    private static nint _RoundEndFunFactData3Offset = -1;
 
     public ref int RoundEndFunFactData3
     {
         get
         {
-            _RoundEndFunFactData3Offset = _RoundEndFunFactData3Offset ?? Schema.GetOffset(0x6295CF65815518E9);
-            return ref _Handle.AsRef<int>(_RoundEndFunFactData3Offset!.Value);
+            if (_RoundEndFunFactData3Offset == -1) _RoundEndFunFactData3Offset = Schema.GetOffset(0x6295CF65815518E9);
+            return ref _Handle.AsRef<int>(_RoundEndFunFactData3Offset);
         }
     }
-    private static nint? _RoundEndMessageOffset;
+    private static nint _RoundEndMessageOffset = -1;
 
     public string RoundEndMessage
     {
         get
         {
-            _RoundEndMessageOffset = _RoundEndMessageOffset ?? Schema.GetOffset(0x6295CF65CE64850E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_RoundEndMessageOffset!.Value));
+            if (_RoundEndMessageOffset == -1) _RoundEndMessageOffset = Schema.GetOffset(0x6295CF65CE64850E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_RoundEndMessageOffset));
         }
         set
         {
-            _RoundEndMessageOffset = _RoundEndMessageOffset ?? Schema.GetOffset(0x6295CF65CE64850E);
-            Schema.SetCUtlString(_Handle, _RoundEndMessageOffset!.Value, value);
+            if (_RoundEndMessageOffset == -1) _RoundEndMessageOffset = Schema.GetOffset(0x6295CF65CE64850E);
+            Schema.SetCUtlString(_Handle, _RoundEndMessageOffset, value);
         }
     }
-    private static nint? _RoundEndPlayerCountOffset;
+    private static nint _RoundEndPlayerCountOffset = -1;
 
     public ref int RoundEndPlayerCount
     {
         get
         {
-            _RoundEndPlayerCountOffset = _RoundEndPlayerCountOffset ?? Schema.GetOffset(0x6295CF65C873652B);
-            return ref _Handle.AsRef<int>(_RoundEndPlayerCountOffset!.Value);
+            if (_RoundEndPlayerCountOffset == -1) _RoundEndPlayerCountOffset = Schema.GetOffset(0x6295CF65C873652B);
+            return ref _Handle.AsRef<int>(_RoundEndPlayerCountOffset);
         }
     }
-    private static nint? _RoundEndNoMusicOffset;
+    private static nint _RoundEndNoMusicOffset = -1;
 
     public ref bool RoundEndNoMusic
     {
         get
         {
-            _RoundEndNoMusicOffset = _RoundEndNoMusicOffset ?? Schema.GetOffset(0x6295CF65E76CDBDA);
-            return ref _Handle.AsRef<bool>(_RoundEndNoMusicOffset!.Value);
+            if (_RoundEndNoMusicOffset == -1) _RoundEndNoMusicOffset = Schema.GetOffset(0x6295CF65E76CDBDA);
+            return ref _Handle.AsRef<bool>(_RoundEndNoMusicOffset);
         }
     }
-    private static nint? _RoundEndLegacyOffset;
+    private static nint _RoundEndLegacyOffset = -1;
 
     public ref int RoundEndLegacy
     {
         get
         {
-            _RoundEndLegacyOffset = _RoundEndLegacyOffset ?? Schema.GetOffset(0x6295CF658DA31C1A);
-            return ref _Handle.AsRef<int>(_RoundEndLegacyOffset!.Value);
+            if (_RoundEndLegacyOffset == -1) _RoundEndLegacyOffset = Schema.GetOffset(0x6295CF658DA31C1A);
+            return ref _Handle.AsRef<int>(_RoundEndLegacyOffset);
         }
     }
-    private static nint? _RoundEndCountOffset;
+    private static nint _RoundEndCountOffset = -1;
 
     public ref byte RoundEndCount
     {
         get
         {
-            _RoundEndCountOffset = _RoundEndCountOffset ?? Schema.GetOffset(0x6295CF650FBD0053);
-            return ref _Handle.AsRef<byte>(_RoundEndCountOffset!.Value);
+            if (_RoundEndCountOffset == -1) _RoundEndCountOffset = Schema.GetOffset(0x6295CF650FBD0053);
+            return ref _Handle.AsRef<byte>(_RoundEndCountOffset);
         }
     }
-    private static nint? _RoundStartRoundNumberOffset;
+    private static nint _RoundStartRoundNumberOffset = -1;
 
     public ref int RoundStartRoundNumber
     {
         get
         {
-            _RoundStartRoundNumberOffset = _RoundStartRoundNumberOffset ?? Schema.GetOffset(0x6295CF65F4340311);
-            return ref _Handle.AsRef<int>(_RoundStartRoundNumberOffset!.Value);
+            if (_RoundStartRoundNumberOffset == -1) _RoundStartRoundNumberOffset = Schema.GetOffset(0x6295CF65F4340311);
+            return ref _Handle.AsRef<int>(_RoundStartRoundNumberOffset);
         }
     }
-    private static nint? _RoundStartCountOffset;
+    private static nint _RoundStartCountOffset = -1;
 
     public ref byte RoundStartCount
     {
         get
         {
-            _RoundStartCountOffset = _RoundStartCountOffset ?? Schema.GetOffset(0x6295CF65B018A784);
-            return ref _Handle.AsRef<byte>(_RoundStartCountOffset!.Value);
+            if (_RoundStartCountOffset == -1) _RoundStartCountOffset = Schema.GetOffset(0x6295CF65B018A784);
+            return ref _Handle.AsRef<byte>(_RoundStartCountOffset);
         }
     }
-    private static nint? _LastPerfSampleTimeOffset;
+    private static nint _LastPerfSampleTimeOffset = -1;
 
     public ref double LastPerfSampleTime
     {
         get
         {
-            _LastPerfSampleTimeOffset = _LastPerfSampleTimeOffset ?? Schema.GetOffset(0x6295CF650AB327AB);
-            return ref _Handle.AsRef<double>(_LastPerfSampleTimeOffset!.Value);
+            if (_LastPerfSampleTimeOffset == -1) _LastPerfSampleTimeOffset = Schema.GetOffset(0x6295CF650AB327AB);
+            return ref _Handle.AsRef<double>(_LastPerfSampleTimeOffset);
         }
     }
 

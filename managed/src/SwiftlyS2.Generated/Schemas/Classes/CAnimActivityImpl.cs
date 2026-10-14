@@ -16,44 +16,44 @@ internal partial class CAnimActivityImpl : SchemaClass, CAnimActivity
 {
     public CAnimActivityImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public ref CBufferString Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xB773FBB24D8F5786);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xB773FBB24D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset);
         }
     }
-    private static nint? _ActivityOffset;
+    private static nint _ActivityOffset = -1;
 
     public ref int Activity
     {
         get
         {
-            _ActivityOffset = _ActivityOffset ?? Schema.GetOffset(0xB773FBB2E3986930);
-            return ref _Handle.AsRef<int>(_ActivityOffset!.Value);
+            if (_ActivityOffset == -1) _ActivityOffset = Schema.GetOffset(0xB773FBB2E3986930);
+            return ref _Handle.AsRef<int>(_ActivityOffset);
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref int Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xB773FBB2CE6E9C28);
-            return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xB773FBB2CE6E9C28);
+            return ref _Handle.AsRef<int>(_FlagsOffset);
         }
     }
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
 
     public ref int Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xB773FBB2C5CC6905);
-            return ref _Handle.AsRef<int>(_WeightOffset!.Value);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0xB773FBB2C5CC6905);
+            return ref _Handle.AsRef<int>(_WeightOffset);
         }
     }
 

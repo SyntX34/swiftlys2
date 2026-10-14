@@ -16,50 +16,50 @@ internal partial class FeKelagerBend2_tImpl : SchemaClass, FeKelagerBend2_t
 {
     public FeKelagerBend2_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
     private SchemaFixedArray<float>? _WeightInstance;
 
     public ISchemaFixedArray<float> Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x702E10E1CFFC66CB);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0x702E10E1CFFC66CB);
             var instance = _WeightInstance ??= new SchemaFixedArray<float>(0, 0x702E10E1CFFC66CB, 3, 4, 4);
-            instance.DangerousSetHandle(_Handle + _WeightOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WeightOffset);
             return instance;
         }
     }
-    private static nint? _Height0Offset;
+    private static nint _Height0Offset = -1;
 
     public ref float Height0
     {
         get
         {
-            _Height0Offset = _Height0Offset ?? Schema.GetOffset(0x702E10E1AA7896A0);
-            return ref _Handle.AsRef<float>(_Height0Offset!.Value);
+            if (_Height0Offset == -1) _Height0Offset = Schema.GetOffset(0x702E10E1AA7896A0);
+            return ref _Handle.AsRef<float>(_Height0Offset);
         }
     }
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x702E10E1CD6694B9);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x702E10E1CD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x702E10E1CD6694B9, 3, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeOffset);
             return instance;
         }
     }
-    private static nint? _ReservedOffset;
+    private static nint _ReservedOffset = -1;
 
     public ref ushort Reserved
     {
         get
         {
-            _ReservedOffset = _ReservedOffset ?? Schema.GetOffset(0x702E10E1156749A1);
-            return ref _Handle.AsRef<ushort>(_ReservedOffset!.Value);
+            if (_ReservedOffset == -1) _ReservedOffset = Schema.GetOffset(0x702E10E1156749A1);
+            return ref _Handle.AsRef<ushort>(_ReservedOffset);
         }
     }
 

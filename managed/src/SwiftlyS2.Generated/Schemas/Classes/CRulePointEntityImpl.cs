@@ -16,14 +16,14 @@ internal partial class CRulePointEntityImpl : CRuleEntityImpl, CRulePointEntity
 {
     public CRulePointEntityImpl(nint handle) : base(handle) { }
 
-    private static nint? _ScoreOffset;
+    private static nint _ScoreOffset = -1;
 
     public ref int Score
     {
         get
         {
-            _ScoreOffset = _ScoreOffset ?? Schema.GetOffset(0x9E2258396C814615);
-            return ref _Handle.AsRef<int>(_ScoreOffset!.Value);
+            if (_ScoreOffset == -1) _ScoreOffset = Schema.GetOffset(0x9E2258396C814615);
+            return ref _Handle.AsRef<int>(_ScoreOffset);
         }
     }
 

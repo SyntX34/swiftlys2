@@ -16,70 +16,70 @@ internal partial class PulseGraphExecutionHistoryCursorDesc_tImpl : SchemaClass,
 {
     public PulseGraphExecutionHistoryCursorDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _AncestorCursorIDsOffset;
+    private static nint _AncestorCursorIDsOffset = -1;
 
     public ref CUtlVector<PulseCursorID_t> AncestorCursorIDs
     {
         get
         {
-            _AncestorCursorIDsOffset = _AncestorCursorIDsOffset ?? Schema.GetOffset(0xC94C4C1C39FD1094);
-            return ref _Handle.AsRef<CUtlVector<PulseCursorID_t>>(_AncestorCursorIDsOffset!.Value);
+            if (_AncestorCursorIDsOffset == -1) _AncestorCursorIDsOffset = Schema.GetOffset(0xC94C4C1C39FD1094);
+            return ref _Handle.AsRef<CUtlVector<PulseCursorID_t>>(_AncestorCursorIDsOffset);
         }
     }
-    private static nint? _SpawnNodeIDOffset;
+    private static nint _SpawnNodeIDOffset = -1;
     private PulseDocNodeID_tImpl? _SpawnNodeIDInstance;
 
     public PulseDocNodeID_t SpawnNodeID
     {
         get
         {
-            _SpawnNodeIDOffset = _SpawnNodeIDOffset ?? Schema.GetOffset(0xC94C4C1C95FE4E15);
+            if (_SpawnNodeIDOffset == -1) _SpawnNodeIDOffset = Schema.GetOffset(0xC94C4C1C95FE4E15);
             var instance = _SpawnNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpawnNodeIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SpawnNodeIDOffset);
             return instance;
         }
     }
-    private static nint? _RetiredAtNodeIDOffset;
+    private static nint _RetiredAtNodeIDOffset = -1;
     private PulseDocNodeID_tImpl? _RetiredAtNodeIDInstance;
 
     public PulseDocNodeID_t RetiredAtNodeID
     {
         get
         {
-            _RetiredAtNodeIDOffset = _RetiredAtNodeIDOffset ?? Schema.GetOffset(0xC94C4C1C7FD10E42);
+            if (_RetiredAtNodeIDOffset == -1) _RetiredAtNodeIDOffset = Schema.GetOffset(0xC94C4C1C7FD10E42);
             var instance = _RetiredAtNodeIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RetiredAtNodeIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RetiredAtNodeIDOffset);
             return instance;
         }
     }
-    private static nint? _LastReferencedOffset;
+    private static nint _LastReferencedOffset = -1;
 
     public ref float LastReferenced
     {
         get
         {
-            _LastReferencedOffset = _LastReferencedOffset ?? Schema.GetOffset(0xC94C4C1C22F5B0C8);
-            return ref _Handle.AsRef<float>(_LastReferencedOffset!.Value);
+            if (_LastReferencedOffset == -1) _LastReferencedOffset = Schema.GetOffset(0xC94C4C1C22F5B0C8);
+            return ref _Handle.AsRef<float>(_LastReferencedOffset);
         }
     }
-    private static nint? _LastValidEntryIdxOffset;
+    private static nint _LastValidEntryIdxOffset = -1;
 
     public ref int LastValidEntryIdx
     {
         get
         {
-            _LastValidEntryIdxOffset = _LastValidEntryIdxOffset ?? Schema.GetOffset(0xC94C4C1CBFAF995E);
-            return ref _Handle.AsRef<int>(_LastValidEntryIdxOffset!.Value);
+            if (_LastValidEntryIdxOffset == -1) _LastValidEntryIdxOffset = Schema.GetOffset(0xC94C4C1CBFAF995E);
+            return ref _Handle.AsRef<int>(_LastValidEntryIdxOffset);
         }
     }
-    private static nint? _WasAnObservableComputationOffset;
+    private static nint _WasAnObservableComputationOffset = -1;
 
     public ref bool WasAnObservableComputation
     {
         get
         {
-            _WasAnObservableComputationOffset = _WasAnObservableComputationOffset ?? Schema.GetOffset(0xC94C4C1C451F142F);
-            return ref _Handle.AsRef<bool>(_WasAnObservableComputationOffset!.Value);
+            if (_WasAnObservableComputationOffset == -1) _WasAnObservableComputationOffset = Schema.GetOffset(0xC94C4C1C451F142F);
+            return ref _Handle.AsRef<bool>(_WasAnObservableComputationOffset);
         }
     }
 

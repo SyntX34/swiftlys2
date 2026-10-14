@@ -16,44 +16,44 @@ internal partial class CPulseTurtleGraphicsCursorImpl : CPulseExecCursorImpl, CP
 {
     public CPulseTurtleGraphicsCursorImpl(nint handle) : base(handle) { }
 
-    private static nint? _ColorOffset;
+    private static nint _ColorOffset = -1;
 
     public ref Color Color
     {
         get
         {
-            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x6153058ED7D017D8);
-            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x6153058ED7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset);
         }
     }
-    private static nint? _PosOffset;
+    private static nint _PosOffset = -1;
 
     public ref Vector2D Pos
     {
         get
         {
-            _PosOffset = _PosOffset ?? Schema.GetOffset(0x6153058EDE9CFC5D);
-            return ref _Handle.AsRef<Vector2D>(_PosOffset!.Value);
+            if (_PosOffset == -1) _PosOffset = Schema.GetOffset(0x6153058EDE9CFC5D);
+            return ref _Handle.AsRef<Vector2D>(_PosOffset);
         }
     }
-    private static nint? _HeadingDegOffset;
+    private static nint _HeadingDegOffset = -1;
 
     public ref float HeadingDeg
     {
         get
         {
-            _HeadingDegOffset = _HeadingDegOffset ?? Schema.GetOffset(0x6153058E63288B7D);
-            return ref _Handle.AsRef<float>(_HeadingDegOffset!.Value);
+            if (_HeadingDegOffset == -1) _HeadingDegOffset = Schema.GetOffset(0x6153058E63288B7D);
+            return ref _Handle.AsRef<float>(_HeadingDegOffset);
         }
     }
-    private static nint? _PenUpOffset;
+    private static nint _PenUpOffset = -1;
 
     public ref bool PenUp
     {
         get
         {
-            _PenUpOffset = _PenUpOffset ?? Schema.GetOffset(0x6153058E2252C6FD);
-            return ref _Handle.AsRef<bool>(_PenUpOffset!.Value);
+            if (_PenUpOffset == -1) _PenUpOffset = Schema.GetOffset(0x6153058E2252C6FD);
+            return ref _Handle.AsRef<bool>(_PenUpOffset);
         }
     }
 

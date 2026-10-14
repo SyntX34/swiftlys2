@@ -16,29 +16,29 @@ internal partial class CSSDSEndFrameViewInfoImpl : SchemaClass, CSSDSEndFrameVie
 {
     public CSSDSEndFrameViewInfoImpl(nint handle) : base(handle) { }
 
-    private static nint? _ViewIdOffset;
+    private static nint _ViewIdOffset = -1;
 
     public ref ulong ViewId
     {
         get
         {
-            _ViewIdOffset = _ViewIdOffset ?? Schema.GetOffset(0xE2792496AE3CB1A1);
-            return ref _Handle.AsRef<ulong>(_ViewIdOffset!.Value);
+            if (_ViewIdOffset == -1) _ViewIdOffset = Schema.GetOffset(0xE2792496AE3CB1A1);
+            return ref _Handle.AsRef<ulong>(_ViewIdOffset);
         }
     }
-    private static nint? _ViewNameOffset;
+    private static nint _ViewNameOffset = -1;
 
     public string ViewName
     {
         get
         {
-            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0xE2792496BA5BBDBB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ViewNameOffset!.Value));
+            if (_ViewNameOffset == -1) _ViewNameOffset = Schema.GetOffset(0xE2792496BA5BBDBB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ViewNameOffset));
         }
         set
         {
-            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0xE2792496BA5BBDBB);
-            Schema.SetCUtlString(_Handle, _ViewNameOffset!.Value, value);
+            if (_ViewNameOffset == -1) _ViewNameOffset = Schema.GetOffset(0xE2792496BA5BBDBB);
+            Schema.SetCUtlString(_Handle, _ViewNameOffset, value);
         }
     }
 

@@ -16,104 +16,104 @@ internal partial class VMixDynamicsBand_tImpl : SchemaClass, VMixDynamicsBand_t
 {
     public VMixDynamicsBand_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _FldbGainInputOffset;
+    private static nint _FldbGainInputOffset = -1;
 
     public ref float FldbGainInput
     {
         get
         {
-            _FldbGainInputOffset = _FldbGainInputOffset ?? Schema.GetOffset(0xC3A63113E9F143B6);
-            return ref _Handle.AsRef<float>(_FldbGainInputOffset!.Value);
+            if (_FldbGainInputOffset == -1) _FldbGainInputOffset = Schema.GetOffset(0xC3A63113E9F143B6);
+            return ref _Handle.AsRef<float>(_FldbGainInputOffset);
         }
     }
-    private static nint? _FldbGainOutputOffset;
+    private static nint _FldbGainOutputOffset = -1;
 
     public ref float FldbGainOutput
     {
         get
         {
-            _FldbGainOutputOffset = _FldbGainOutputOffset ?? Schema.GetOffset(0xC3A63113FC3C16D3);
-            return ref _Handle.AsRef<float>(_FldbGainOutputOffset!.Value);
+            if (_FldbGainOutputOffset == -1) _FldbGainOutputOffset = Schema.GetOffset(0xC3A63113FC3C16D3);
+            return ref _Handle.AsRef<float>(_FldbGainOutputOffset);
         }
     }
-    private static nint? _FldbThresholdBelowOffset;
+    private static nint _FldbThresholdBelowOffset = -1;
 
     public ref float FldbThresholdBelow
     {
         get
         {
-            _FldbThresholdBelowOffset = _FldbThresholdBelowOffset ?? Schema.GetOffset(0xC3A6311311693729);
-            return ref _Handle.AsRef<float>(_FldbThresholdBelowOffset!.Value);
+            if (_FldbThresholdBelowOffset == -1) _FldbThresholdBelowOffset = Schema.GetOffset(0xC3A6311311693729);
+            return ref _Handle.AsRef<float>(_FldbThresholdBelowOffset);
         }
     }
-    private static nint? _FldbThresholdAboveOffset;
+    private static nint _FldbThresholdAboveOffset = -1;
 
     public ref float FldbThresholdAbove
     {
         get
         {
-            _FldbThresholdAboveOffset = _FldbThresholdAboveOffset ?? Schema.GetOffset(0xC3A631134516A525);
-            return ref _Handle.AsRef<float>(_FldbThresholdAboveOffset!.Value);
+            if (_FldbThresholdAboveOffset == -1) _FldbThresholdAboveOffset = Schema.GetOffset(0xC3A631134516A525);
+            return ref _Handle.AsRef<float>(_FldbThresholdAboveOffset);
         }
     }
-    private static nint? _RatioBelowOffset;
+    private static nint _RatioBelowOffset = -1;
 
     public ref float RatioBelow
     {
         get
         {
-            _RatioBelowOffset = _RatioBelowOffset ?? Schema.GetOffset(0xC3A63113560F0E57);
-            return ref _Handle.AsRef<float>(_RatioBelowOffset!.Value);
+            if (_RatioBelowOffset == -1) _RatioBelowOffset = Schema.GetOffset(0xC3A63113560F0E57);
+            return ref _Handle.AsRef<float>(_RatioBelowOffset);
         }
     }
-    private static nint? _RatioAboveOffset;
+    private static nint _RatioAboveOffset = -1;
 
     public ref float RatioAbove
     {
         get
         {
-            _RatioAboveOffset = _RatioAboveOffset ?? Schema.GetOffset(0xC3A631139E701FCB);
-            return ref _Handle.AsRef<float>(_RatioAboveOffset!.Value);
+            if (_RatioAboveOffset == -1) _RatioAboveOffset = Schema.GetOffset(0xC3A631139E701FCB);
+            return ref _Handle.AsRef<float>(_RatioAboveOffset);
         }
     }
-    private static nint? _AttackTimeMSOffset;
+    private static nint _AttackTimeMSOffset = -1;
 
     public ref float AttackTimeMS
     {
         get
         {
-            _AttackTimeMSOffset = _AttackTimeMSOffset ?? Schema.GetOffset(0xC3A63113D4A28216);
-            return ref _Handle.AsRef<float>(_AttackTimeMSOffset!.Value);
+            if (_AttackTimeMSOffset == -1) _AttackTimeMSOffset = Schema.GetOffset(0xC3A63113D4A28216);
+            return ref _Handle.AsRef<float>(_AttackTimeMSOffset);
         }
     }
-    private static nint? _ReleaseTimeMSOffset;
+    private static nint _ReleaseTimeMSOffset = -1;
 
     public ref float ReleaseTimeMS
     {
         get
         {
-            _ReleaseTimeMSOffset = _ReleaseTimeMSOffset ?? Schema.GetOffset(0xC3A63113EBB62791);
-            return ref _Handle.AsRef<float>(_ReleaseTimeMSOffset!.Value);
+            if (_ReleaseTimeMSOffset == -1) _ReleaseTimeMSOffset = Schema.GetOffset(0xC3A63113EBB62791);
+            return ref _Handle.AsRef<float>(_ReleaseTimeMSOffset);
         }
     }
-    private static nint? _EnableOffset;
+    private static nint _EnableOffset = -1;
 
     public ref bool Enable
     {
         get
         {
-            _EnableOffset = _EnableOffset ?? Schema.GetOffset(0xC3A6311313C00D2E);
-            return ref _Handle.AsRef<bool>(_EnableOffset!.Value);
+            if (_EnableOffset == -1) _EnableOffset = Schema.GetOffset(0xC3A6311313C00D2E);
+            return ref _Handle.AsRef<bool>(_EnableOffset);
         }
     }
-    private static nint? _SoloOffset;
+    private static nint _SoloOffset = -1;
 
     public ref bool Solo
     {
         get
         {
-            _SoloOffset = _SoloOffset ?? Schema.GetOffset(0xC3A63113CF623EAA);
-            return ref _Handle.AsRef<bool>(_SoloOffset!.Value);
+            if (_SoloOffset == -1) _SoloOffset = Schema.GetOffset(0xC3A63113CF623EAA);
+            return ref _Handle.AsRef<bool>(_SoloOffset);
         }
     }
 

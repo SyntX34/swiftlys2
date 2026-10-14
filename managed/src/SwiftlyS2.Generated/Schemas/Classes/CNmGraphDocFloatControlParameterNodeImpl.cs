@@ -16,34 +16,34 @@ internal partial class CNmGraphDocFloatControlParameterNodeImpl : CNmGraphDocCon
 {
     public CNmGraphDocFloatControlParameterNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _PreviewStartValueOffset;
+    private static nint _PreviewStartValueOffset = -1;
 
     public ref float PreviewStartValue
     {
         get
         {
-            _PreviewStartValueOffset = _PreviewStartValueOffset ?? Schema.GetOffset(0xB7657A5D3A841402);
-            return ref _Handle.AsRef<float>(_PreviewStartValueOffset!.Value);
+            if (_PreviewStartValueOffset == -1) _PreviewStartValueOffset = Schema.GetOffset(0xB7657A5D3A841402);
+            return ref _Handle.AsRef<float>(_PreviewStartValueOffset);
         }
     }
-    private static nint? _PreviewMinOffset;
+    private static nint _PreviewMinOffset = -1;
 
     public ref float PreviewMin
     {
         get
         {
-            _PreviewMinOffset = _PreviewMinOffset ?? Schema.GetOffset(0xB7657A5D75691551);
-            return ref _Handle.AsRef<float>(_PreviewMinOffset!.Value);
+            if (_PreviewMinOffset == -1) _PreviewMinOffset = Schema.GetOffset(0xB7657A5D75691551);
+            return ref _Handle.AsRef<float>(_PreviewMinOffset);
         }
     }
-    private static nint? _PreviewMaxOffset;
+    private static nint _PreviewMaxOffset = -1;
 
     public ref float PreviewMax
     {
         get
         {
-            _PreviewMaxOffset = _PreviewMaxOffset ?? Schema.GetOffset(0xB7657A5D877CB95F);
-            return ref _Handle.AsRef<float>(_PreviewMaxOffset!.Value);
+            if (_PreviewMaxOffset == -1) _PreviewMaxOffset = Schema.GetOffset(0xB7657A5D877CB95F);
+            return ref _Handle.AsRef<float>(_PreviewMaxOffset);
         }
     }
 

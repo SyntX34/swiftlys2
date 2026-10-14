@@ -16,84 +16,84 @@ internal partial class CInfoChoreoAnchorPositionImpl : SchemaClass, CInfoChoreoA
 {
     public CInfoChoreoAnchorPositionImpl(nint handle) : base(handle) { }
 
-    private static nint? _OriginLSOffset;
+    private static nint _OriginLSOffset = -1;
 
     public ref Vector OriginLS
     {
         get
         {
-            _OriginLSOffset = _OriginLSOffset ?? Schema.GetOffset(0xFA471256524669D2);
-            return ref _Handle.AsRef<Vector>(_OriginLSOffset!.Value);
+            if (_OriginLSOffset == -1) _OriginLSOffset = Schema.GetOffset(0xFA471256524669D2);
+            return ref _Handle.AsRef<Vector>(_OriginLSOffset);
         }
     }
-    private static nint? _AnglesLSOffset;
+    private static nint _AnglesLSOffset = -1;
 
     public ref Quaternion AnglesLS
     {
         get
         {
-            _AnglesLSOffset = _AnglesLSOffset ?? Schema.GetOffset(0xFA471256B665ECB9);
-            return ref _Handle.AsRef<Quaternion>(_AnglesLSOffset!.Value);
+            if (_AnglesLSOffset == -1) _AnglesLSOffset = Schema.GetOffset(0xFA471256B665ECB9);
+            return ref _Handle.AsRef<Quaternion>(_AnglesLSOffset);
         }
     }
-    private static nint? _ExtentsMinOffset;
+    private static nint _ExtentsMinOffset = -1;
 
     public ref Vector ExtentsMin
     {
         get
         {
-            _ExtentsMinOffset = _ExtentsMinOffset ?? Schema.GetOffset(0xFA47125608FFBE26);
-            return ref _Handle.AsRef<Vector>(_ExtentsMinOffset!.Value);
+            if (_ExtentsMinOffset == -1) _ExtentsMinOffset = Schema.GetOffset(0xFA47125608FFBE26);
+            return ref _Handle.AsRef<Vector>(_ExtentsMinOffset);
         }
     }
-    private static nint? _ExtentsMaxOffset;
+    private static nint _ExtentsMaxOffset = -1;
 
     public ref Vector ExtentsMax
     {
         get
         {
-            _ExtentsMaxOffset = _ExtentsMaxOffset ?? Schema.GetOffset(0xFA4712561B14F534);
-            return ref _Handle.AsRef<Vector>(_ExtentsMaxOffset!.Value);
+            if (_ExtentsMaxOffset == -1) _ExtentsMaxOffset = Schema.GetOffset(0xFA4712561B14F534);
+            return ref _Handle.AsRef<Vector>(_ExtentsMaxOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xFA4712565ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0xFA4712565ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _OnlyWarpPositionOffset;
+    private static nint _OnlyWarpPositionOffset = -1;
 
     public ref bool OnlyWarpPosition
     {
         get
         {
-            _OnlyWarpPositionOffset = _OnlyWarpPositionOffset ?? Schema.GetOffset(0xFA471256277706AE);
-            return ref _Handle.AsRef<bool>(_OnlyWarpPositionOffset!.Value);
+            if (_OnlyWarpPositionOffset == -1) _OnlyWarpPositionOffset = Schema.GetOffset(0xFA471256277706AE);
+            return ref _Handle.AsRef<bool>(_OnlyWarpPositionOffset);
         }
     }
-    private static nint? _ParentOffset;
+    private static nint _ParentOffset = -1;
 
     public ref CHandle<CBaseEntity> Parent
     {
         get
         {
-            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0xFA4712569FD3A1B7);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ParentOffset!.Value);
+            if (_ParentOffset == -1) _ParentOffset = Schema.GetOffset(0xFA4712569FD3A1B7);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ParentOffset);
         }
     }
-    private static nint? _ShapeTypeOffset;
+    private static nint _ShapeTypeOffset = -1;
 
     public ref CInfoChoreoLocatorShapeType_t ShapeType
     {
         get
         {
-            _ShapeTypeOffset = _ShapeTypeOffset ?? Schema.GetOffset(0xFA471256AE159B72);
-            return ref _Handle.AsRef<CInfoChoreoLocatorShapeType_t>(_ShapeTypeOffset!.Value);
+            if (_ShapeTypeOffset == -1) _ShapeTypeOffset = Schema.GetOffset(0xFA471256AE159B72);
+            return ref _Handle.AsRef<CInfoChoreoLocatorShapeType_t>(_ShapeTypeOffset);
         }
     }
 

@@ -16,67 +16,67 @@ internal partial class CAnimGraphDoc_FollowAttachmentNodeImpl : CAnimGraphDoc_No
 {
     public CAnimGraphDoc_FollowAttachmentNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x152EC64E1F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x152EC64E1F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _BoneNameOffset;
+    private static nint _BoneNameOffset = -1;
 
     public string BoneName
     {
         get
         {
-            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x152EC64EFDEE0E0C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset!.Value));
+            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x152EC64EFDEE0E0C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BoneNameOffset));
         }
         set
         {
-            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x152EC64EFDEE0E0C);
-            Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
+            if (_BoneNameOffset == -1) _BoneNameOffset = Schema.GetOffset(0x152EC64EFDEE0E0C);
+            Schema.SetCUtlString(_Handle, _BoneNameOffset, value);
         }
     }
-    private static nint? _AttachmentNameOffset;
+    private static nint _AttachmentNameOffset = -1;
 
     public string AttachmentName
     {
         get
         {
-            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x152EC64E295DA9CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
+            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x152EC64E295DA9CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttachmentNameOffset));
         }
         set
         {
-            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x152EC64E295DA9CB);
-            Schema.SetCUtlString(_Handle, _AttachmentNameOffset!.Value, value);
+            if (_AttachmentNameOffset == -1) _AttachmentNameOffset = Schema.GetOffset(0x152EC64E295DA9CB);
+            Schema.SetCUtlString(_Handle, _AttachmentNameOffset, value);
         }
     }
-    private static nint? _MatchTranslationOffset;
+    private static nint _MatchTranslationOffset = -1;
 
     public ref bool MatchTranslation
     {
         get
         {
-            _MatchTranslationOffset = _MatchTranslationOffset ?? Schema.GetOffset(0x152EC64E96FCC779);
-            return ref _Handle.AsRef<bool>(_MatchTranslationOffset!.Value);
+            if (_MatchTranslationOffset == -1) _MatchTranslationOffset = Schema.GetOffset(0x152EC64E96FCC779);
+            return ref _Handle.AsRef<bool>(_MatchTranslationOffset);
         }
     }
-    private static nint? _MatchRotationOffset;
+    private static nint _MatchRotationOffset = -1;
 
     public ref bool MatchRotation
     {
         get
         {
-            _MatchRotationOffset = _MatchRotationOffset ?? Schema.GetOffset(0x152EC64EA4FB561C);
-            return ref _Handle.AsRef<bool>(_MatchRotationOffset!.Value);
+            if (_MatchRotationOffset == -1) _MatchRotationOffset = Schema.GetOffset(0x152EC64EA4FB561C);
+            return ref _Handle.AsRef<bool>(_MatchRotationOffset);
         }
     }
 

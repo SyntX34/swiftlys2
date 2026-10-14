@@ -51,10 +51,14 @@ internal class ConVar : IConVar
         set => NativeConvars.SetFlags(Name, (ulong)value);
     }
 
-    internal ConVar( string name, IConVarService conVarService )
+    internal ConVar( string name, IConVarService conVarService ) : this(name, conVarService, (EConVarType)NativeConvars.GetConvarType(name))
+    {
+    }
+
+    internal ConVar( string name, IConVarService conVarService, EConVarType type )
     {
         Name = name;
-        Type = (EConVarType)NativeConvars.GetConvarType(Name);
+        Type = type;
 
         if (Type == EConVarType.EConVarType_Invalid)
         {
@@ -148,6 +152,11 @@ internal class ConVar<T> : ConVar, IConVar<T>
         ValidateType();
     }
 
+    internal ConVar( string name, IConVarService conVarService, EConVarType type ) : base(name, conVarService, type)
+    {
+        ValidateType();
+    }
+
     public void ValidateType()
     {
         if (!IsCompatibleWith(Type))
@@ -177,7 +186,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
             _ => throw new ArgumentException($"Invalid type {typeof(T).Name}")
         };
 
-        _ = SchedulerManager.QueueOrNow(() => ReplicateToClientAsString(clientId, text));
+        ReplicateToClientAsString(clientId, text);
     }
 
     public unsafe T GetValue()
@@ -306,23 +315,11 @@ internal class ConVar<T> : ConVar, IConVar<T>
 
     private static bool IsCompatibleWith( EConVarType type )
     {
-        if (typeof(T) == typeof(bool)) return type == EConVarType.EConVarType_Bool;
-        if (typeof(T) == typeof(short)) return type == EConVarType.EConVarType_Int16;
-        if (typeof(T) == typeof(ushort)) return type == EConVarType.EConVarType_UInt16;
-        if (typeof(T) == typeof(int)) return type == EConVarType.EConVarType_Int32;
-        if (typeof(T) == typeof(uint)) return type == EConVarType.EConVarType_UInt32;
-        if (typeof(T) == typeof(float)) return type == EConVarType.EConVarType_Float32;
-        if (typeof(T) == typeof(long)) return type == EConVarType.EConVarType_Int64;
-        if (typeof(T) == typeof(ulong)) return type == EConVarType.EConVarType_UInt64;
-        if (typeof(T) == typeof(double)) return type == EConVarType.EConVarType_Float64;
-        if (typeof(T) == typeof(Color)) return type == EConVarType.EConVarType_Color;
-        if (typeof(T) == typeof(QAngle)) return type == EConVarType.EConVarType_Qangle;
-        if (typeof(T) == typeof(Vector)) return type is EConVarType.EConVarType_Vector3 or EConVarType.EConVarType_VectorWS;
-        if (typeof(T) == typeof(Vector2D)) return type == EConVarType.EConVarType_Vector2;
-        if (typeof(T) == typeof(Vector4D)) return type == EConVarType.EConVarType_Vector4;
-        if (typeof(T) == typeof(string)) return type == EConVarType.EConVarType_String;
+        if (!ConVarTypes.TryGet<T>(out var expected)) return true;
 
-        return true;
+        return expected is EConVarType.EConVarType_Vector3 or EConVarType.EConVarType_VectorWS
+            ? type is EConVarType.EConVarType_Vector3 or EConVarType.EConVarType_VectorWS
+            : type == expected;
     }
 
     private static string Format<TNumber>( TNumber value ) where TNumber : IFormattable =>

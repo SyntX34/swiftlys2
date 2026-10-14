@@ -16,24 +16,24 @@ internal partial class CFuncNavBlockerImpl : CBaseModelEntityImpl, CFuncNavBlock
 {
     public CFuncNavBlockerImpl(nint handle) : base(handle) { }
 
-    private static nint? _DisabledOffset;
+    private static nint _DisabledOffset = -1;
 
     public ref bool Disabled
     {
         get
         {
-            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x3F066D113A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x3F066D113A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset);
         }
     }
-    private static nint? _BlockedTeamNumberOffset;
+    private static nint _BlockedTeamNumberOffset = -1;
 
     public ref int BlockedTeamNumber
     {
         get
         {
-            _BlockedTeamNumberOffset = _BlockedTeamNumberOffset ?? Schema.GetOffset(0x3F066D11B33D3543);
-            return ref _Handle.AsRef<int>(_BlockedTeamNumberOffset!.Value);
+            if (_BlockedTeamNumberOffset == -1) _BlockedTeamNumberOffset = Schema.GetOffset(0x3F066D11B33D3543);
+            return ref _Handle.AsRef<int>(_BlockedTeamNumberOffset);
         }
     }
 

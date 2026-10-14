@@ -16,24 +16,24 @@ internal partial class CCSPlayerLegacyJumpImpl : SchemaClass, CCSPlayerLegacyJum
 {
     public CCSPlayerLegacyJumpImpl(nint handle) : base(handle) { }
 
-    private static nint? _OldJumpPressedOffset;
+    private static nint _OldJumpPressedOffset = -1;
 
     public ref bool OldJumpPressed
     {
         get
         {
-            _OldJumpPressedOffset = _OldJumpPressedOffset ?? Schema.GetOffset(0x5D0369C6030FC474);
-            return ref _Handle.AsRef<bool>(_OldJumpPressedOffset!.Value);
+            if (_OldJumpPressedOffset == -1) _OldJumpPressedOffset = Schema.GetOffset(0x5D0369C6030FC474);
+            return ref _Handle.AsRef<bool>(_OldJumpPressedOffset);
         }
     }
-    private static nint? _JumpPressedTimeOffset;
+    private static nint _JumpPressedTimeOffset = -1;
 
     public ref float JumpPressedTime
     {
         get
         {
-            _JumpPressedTimeOffset = _JumpPressedTimeOffset ?? Schema.GetOffset(0x5D0369C621A2A38A);
-            return ref _Handle.AsRef<float>(_JumpPressedTimeOffset!.Value);
+            if (_JumpPressedTimeOffset == -1) _JumpPressedTimeOffset = Schema.GetOffset(0x5D0369C621A2A38A);
+            return ref _Handle.AsRef<float>(_JumpPressedTimeOffset);
         }
     }
 

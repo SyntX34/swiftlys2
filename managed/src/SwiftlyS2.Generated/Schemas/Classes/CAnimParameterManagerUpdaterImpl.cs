@@ -16,72 +16,72 @@ internal partial class CAnimParameterManagerUpdaterImpl : SchemaClass, CAnimPara
 {
     public CAnimParameterManagerUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParametersOffset;
+    private static nint _ParametersOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> Parameters
     {
         get
         {
-            _ParametersOffset = _ParametersOffset ?? Schema.GetOffset(0x2289044E99935479);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParametersOffset!.Value);
+            if (_ParametersOffset == -1) _ParametersOffset = Schema.GetOffset(0x2289044E99935479);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParametersOffset);
         }
     }
-    private static nint? _IdToIndexMapOffset;
+    private static nint _IdToIndexMapOffset = -1;
     private SchemaUntypedField? _IdToIndexMapInstance;
 
     public SchemaUntypedField IdToIndexMap
     {
         get
         {
-            _IdToIndexMapOffset = _IdToIndexMapOffset ?? Schema.GetOffset(0x2289044E7B873A5F);
+            if (_IdToIndexMapOffset == -1) _IdToIndexMapOffset = Schema.GetOffset(0x2289044E7B873A5F);
             var instance = _IdToIndexMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IdToIndexMapOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IdToIndexMapOffset);
             return instance;
         }
     }
-    private static nint? _NameToIndexMapOffset;
+    private static nint _NameToIndexMapOffset = -1;
     private SchemaUntypedField? _NameToIndexMapInstance;
 
     public SchemaUntypedField NameToIndexMap
     {
         get
         {
-            _NameToIndexMapOffset = _NameToIndexMapOffset ?? Schema.GetOffset(0x2289044EDA1FC14D);
+            if (_NameToIndexMapOffset == -1) _NameToIndexMapOffset = Schema.GetOffset(0x2289044EDA1FC14D);
             var instance = _NameToIndexMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NameToIndexMapOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NameToIndexMapOffset);
             return instance;
         }
     }
-    private static nint? _IndexToHandleOffset;
+    private static nint _IndexToHandleOffset = -1;
 
     public ref CUtlVector<CAnimParamHandle> IndexToHandle
     {
         get
         {
-            _IndexToHandleOffset = _IndexToHandleOffset ?? Schema.GetOffset(0x2289044E3F943600);
-            return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_IndexToHandleOffset!.Value);
+            if (_IndexToHandleOffset == -1) _IndexToHandleOffset = Schema.GetOffset(0x2289044E3F943600);
+            return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_IndexToHandleOffset);
         }
     }
-    private static nint? _AutoResetParamsOffset;
+    private static nint _AutoResetParamsOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> AutoResetParams
     {
         get
         {
-            _AutoResetParamsOffset = _AutoResetParamsOffset ?? Schema.GetOffset(0x2289044EA74F889F);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AutoResetParamsOffset!.Value);
+            if (_AutoResetParamsOffset == -1) _AutoResetParamsOffset = Schema.GetOffset(0x2289044EA74F889F);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AutoResetParamsOffset);
         }
     }
-    private static nint? _AutoResetMapOffset;
+    private static nint _AutoResetMapOffset = -1;
     private SchemaUntypedField? _AutoResetMapInstance;
 
     public SchemaUntypedField AutoResetMap
     {
         get
         {
-            _AutoResetMapOffset = _AutoResetMapOffset ?? Schema.GetOffset(0x2289044E024CB2F5);
+            if (_AutoResetMapOffset == -1) _AutoResetMapOffset = Schema.GetOffset(0x2289044E024CB2F5);
             var instance = _AutoResetMapInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AutoResetMapOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AutoResetMapOffset);
             return instance;
         }
     }

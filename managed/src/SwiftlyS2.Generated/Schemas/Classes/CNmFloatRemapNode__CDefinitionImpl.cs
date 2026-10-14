@@ -16,39 +16,39 @@ internal partial class CNmFloatRemapNode__CDefinitionImpl : CNmFloatValueNode__C
 {
     public CNmFloatRemapNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputValueNodeIdxOffset;
+    private static nint _InputValueNodeIdxOffset = -1;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x5169293495E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x5169293495E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
         }
     }
-    private static nint? _InputRangeOffset;
+    private static nint _InputRangeOffset = -1;
     private CNmFloatRemapNode__RemapRange_tImpl? _InputRangeInstance;
 
     public CNmFloatRemapNode__RemapRange_t InputRange
     {
         get
         {
-            _InputRangeOffset = _InputRangeOffset ?? Schema.GetOffset(0x51692934096AEBF0);
+            if (_InputRangeOffset == -1) _InputRangeOffset = Schema.GetOffset(0x51692934096AEBF0);
             var instance = _InputRangeInstance ??= new CNmFloatRemapNode__RemapRange_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputRangeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputRangeOffset);
             return instance;
         }
     }
-    private static nint? _OutputRangeOffset;
+    private static nint _OutputRangeOffset = -1;
     private CNmFloatRemapNode__RemapRange_tImpl? _OutputRangeInstance;
 
     public CNmFloatRemapNode__RemapRange_t OutputRange
     {
         get
         {
-            _OutputRangeOffset = _OutputRangeOffset ?? Schema.GetOffset(0x5169293437E0CA29);
+            if (_OutputRangeOffset == -1) _OutputRangeOffset = Schema.GetOffset(0x5169293437E0CA29);
             var instance = _OutputRangeInstance ??= new CNmFloatRemapNode__RemapRange_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputRangeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutputRangeOffset);
             return instance;
         }
     }

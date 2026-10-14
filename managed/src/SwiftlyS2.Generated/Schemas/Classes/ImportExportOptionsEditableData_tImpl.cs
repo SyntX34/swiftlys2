@@ -16,84 +16,84 @@ internal partial class ImportExportOptionsEditableData_tImpl : SchemaClass, Impo
 {
     public ImportExportOptionsEditableData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ExportPropsOffset;
+    private static nint _ExportPropsOffset = -1;
 
     public ref bool ExportProps
     {
         get
         {
-            _ExportPropsOffset = _ExportPropsOffset ?? Schema.GetOffset(0xAF39C5039EE3AEB7);
-            return ref _Handle.AsRef<bool>(_ExportPropsOffset!.Value);
+            if (_ExportPropsOffset == -1) _ExportPropsOffset = Schema.GetOffset(0xAF39C5039EE3AEB7);
+            return ref _Handle.AsRef<bool>(_ExportPropsOffset);
         }
     }
-    private static nint? _ExportHiddenOffset;
+    private static nint _ExportHiddenOffset = -1;
 
     public ref bool ExportHidden
     {
         get
         {
-            _ExportHiddenOffset = _ExportHiddenOffset ?? Schema.GetOffset(0xAF39C503216EC573);
-            return ref _Handle.AsRef<bool>(_ExportHiddenOffset!.Value);
+            if (_ExportHiddenOffset == -1) _ExportHiddenOffset = Schema.GetOffset(0xAF39C503216EC573);
+            return ref _Handle.AsRef<bool>(_ExportHiddenOffset);
         }
     }
-    private static nint? _ExportBonesOffset;
+    private static nint _ExportBonesOffset = -1;
 
     public ref bool ExportBones
     {
         get
         {
-            _ExportBonesOffset = _ExportBonesOffset ?? Schema.GetOffset(0xAF39C5034AA831B6);
-            return ref _Handle.AsRef<bool>(_ExportBonesOffset!.Value);
+            if (_ExportBonesOffset == -1) _ExportBonesOffset = Schema.GetOffset(0xAF39C5034AA831B6);
+            return ref _Handle.AsRef<bool>(_ExportBonesOffset);
         }
     }
-    private static nint? _ExportSkinningOffset;
+    private static nint _ExportSkinningOffset = -1;
 
     public ref bool ExportSkinning
     {
         get
         {
-            _ExportSkinningOffset = _ExportSkinningOffset ?? Schema.GetOffset(0xAF39C50344525E04);
-            return ref _Handle.AsRef<bool>(_ExportSkinningOffset!.Value);
+            if (_ExportSkinningOffset == -1) _ExportSkinningOffset = Schema.GetOffset(0xAF39C50344525E04);
+            return ref _Handle.AsRef<bool>(_ExportSkinningOffset);
         }
     }
-    private static nint? _ExportFbxEmbedTexturesOffset;
+    private static nint _ExportFbxEmbedTexturesOffset = -1;
 
     public ref bool ExportFbxEmbedTextures
     {
         get
         {
-            _ExportFbxEmbedTexturesOffset = _ExportFbxEmbedTexturesOffset ?? Schema.GetOffset(0xAF39C503B57F044E);
-            return ref _Handle.AsRef<bool>(_ExportFbxEmbedTexturesOffset!.Value);
+            if (_ExportFbxEmbedTexturesOffset == -1) _ExportFbxEmbedTexturesOffset = Schema.GetOffset(0xAF39C503B57F044E);
+            return ref _Handle.AsRef<bool>(_ExportFbxEmbedTexturesOffset);
         }
     }
-    private static nint? _ExportFbxUnitOffset;
+    private static nint _ExportFbxUnitOffset = -1;
 
     public ref ImportExportOptionsEditableData_t__ExportFbxUnit_t ExportFbxUnit
     {
         get
         {
-            _ExportFbxUnitOffset = _ExportFbxUnitOffset ?? Schema.GetOffset(0xAF39C5031E002FFB);
-            return ref _Handle.AsRef<ImportExportOptionsEditableData_t__ExportFbxUnit_t>(_ExportFbxUnitOffset!.Value);
+            if (_ExportFbxUnitOffset == -1) _ExportFbxUnitOffset = Schema.GetOffset(0xAF39C5031E002FFB);
+            return ref _Handle.AsRef<ImportExportOptionsEditableData_t__ExportFbxUnit_t>(_ExportFbxUnitOffset);
         }
     }
-    private static nint? _ExportDefaultFormatOffset;
+    private static nint _ExportDefaultFormatOffset = -1;
 
     public ref ImportExportOptionsEditableData_t__ExportDefaultFormat_t ExportDefaultFormat
     {
         get
         {
-            _ExportDefaultFormatOffset = _ExportDefaultFormatOffset ?? Schema.GetOffset(0xAF39C503141E75F3);
-            return ref _Handle.AsRef<ImportExportOptionsEditableData_t__ExportDefaultFormat_t>(_ExportDefaultFormatOffset!.Value);
+            if (_ExportDefaultFormatOffset == -1) _ExportDefaultFormatOffset = Schema.GetOffset(0xAF39C503141E75F3);
+            return ref _Handle.AsRef<ImportExportOptionsEditableData_t__ExportDefaultFormat_t>(_ExportDefaultFormatOffset);
         }
     }
-    private static nint? _ExportEncodingOffset;
+    private static nint _ExportEncodingOffset = -1;
 
     public ref ImportExportOptionsEditableData_t__ExportEncoding_t ExportEncoding
     {
         get
         {
-            _ExportEncodingOffset = _ExportEncodingOffset ?? Schema.GetOffset(0xAF39C5039DB400F6);
-            return ref _Handle.AsRef<ImportExportOptionsEditableData_t__ExportEncoding_t>(_ExportEncodingOffset!.Value);
+            if (_ExportEncodingOffset == -1) _ExportEncodingOffset = Schema.GetOffset(0xAF39C5039DB400F6);
+            return ref _Handle.AsRef<ImportExportOptionsEditableData_t__ExportEncoding_t>(_ExportEncodingOffset);
         }
     }
 

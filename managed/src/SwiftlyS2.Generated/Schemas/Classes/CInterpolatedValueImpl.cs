@@ -16,54 +16,54 @@ internal partial class CInterpolatedValueImpl : SchemaClass, CInterpolatedValue
 {
     public CInterpolatedValueImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
 
     public ref float StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xF00CC97467FE9DC4);
-            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0xF00CC97467FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset);
         }
     }
-    private static nint? _EndTimeOffset;
+    private static nint _EndTimeOffset = -1;
 
     public ref float EndTime
     {
         get
         {
-            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0xF00CC9742041DF9D);
-            return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
+            if (_EndTimeOffset == -1) _EndTimeOffset = Schema.GetOffset(0xF00CC9742041DF9D);
+            return ref _Handle.AsRef<float>(_EndTimeOffset);
         }
     }
-    private static nint? _StartValueOffset;
+    private static nint _StartValueOffset = -1;
 
     public ref float StartValue
     {
         get
         {
-            _StartValueOffset = _StartValueOffset ?? Schema.GetOffset(0xF00CC97451C82C2A);
-            return ref _Handle.AsRef<float>(_StartValueOffset!.Value);
+            if (_StartValueOffset == -1) _StartValueOffset = Schema.GetOffset(0xF00CC97451C82C2A);
+            return ref _Handle.AsRef<float>(_StartValueOffset);
         }
     }
-    private static nint? _EndValueOffset;
+    private static nint _EndValueOffset = -1;
 
     public ref float EndValue
     {
         get
         {
-            _EndValueOffset = _EndValueOffset ?? Schema.GetOffset(0xF00CC9746EDBBCD5);
-            return ref _Handle.AsRef<float>(_EndValueOffset!.Value);
+            if (_EndValueOffset == -1) _EndValueOffset = Schema.GetOffset(0xF00CC9746EDBBCD5);
+            return ref _Handle.AsRef<float>(_EndValueOffset);
         }
     }
-    private static nint? _InterpTypeOffset;
+    private static nint _InterpTypeOffset = -1;
 
     public ref int InterpType
     {
         get
         {
-            _InterpTypeOffset = _InterpTypeOffset ?? Schema.GetOffset(0xF00CC974EAD5EAD7);
-            return ref _Handle.AsRef<int>(_InterpTypeOffset!.Value);
+            if (_InterpTypeOffset == -1) _InterpTypeOffset = Schema.GetOffset(0xF00CC974EAD5EAD7);
+            return ref _Handle.AsRef<int>(_InterpTypeOffset);
         }
     }
 

@@ -16,44 +16,44 @@ internal partial class C_OP_SetControlPointToHandImpl : CParticleFunctionPreEmis
 {
     public C_OP_SetControlPointToHandImpl(nint handle) : base(handle) { }
 
-    private static nint? _CP1Offset;
+    private static nint _CP1Offset = -1;
 
     public ref int CP1
     {
         get
         {
-            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0x5D527B26D4B1E579);
-            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+            if (_CP1Offset == -1) _CP1Offset = Schema.GetOffset(0x5D527B26D4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset);
         }
     }
-    private static nint? _HandOffset;
+    private static nint _HandOffset = -1;
 
     public ref int Hand
     {
         get
         {
-            _HandOffset = _HandOffset ?? Schema.GetOffset(0x5D527B26D49ECB4C);
-            return ref _Handle.AsRef<int>(_HandOffset!.Value);
+            if (_HandOffset == -1) _HandOffset = Schema.GetOffset(0x5D527B26D49ECB4C);
+            return ref _Handle.AsRef<int>(_HandOffset);
         }
     }
-    private static nint? _CP1PosOffset;
+    private static nint _CP1PosOffset = -1;
 
     public ref Vector CP1Pos
     {
         get
         {
-            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0x5D527B26408288D9);
-            return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+            if (_CP1PosOffset == -1) _CP1PosOffset = Schema.GetOffset(0x5D527B26408288D9);
+            return ref _Handle.AsRef<Vector>(_CP1PosOffset);
         }
     }
-    private static nint? _OrientToHandOffset;
+    private static nint _OrientToHandOffset = -1;
 
     public ref bool OrientToHand
     {
         get
         {
-            _OrientToHandOffset = _OrientToHandOffset ?? Schema.GetOffset(0x5D527B26372CF7D8);
-            return ref _Handle.AsRef<bool>(_OrientToHandOffset!.Value);
+            if (_OrientToHandOffset == -1) _OrientToHandOffset = Schema.GetOffset(0x5D527B26372CF7D8);
+            return ref _Handle.AsRef<bool>(_OrientToHandOffset);
         }
     }
 

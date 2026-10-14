@@ -16,47 +16,47 @@ internal partial class CMixDynamicsCompressorImpl : CMixPropertyBaseImpl, CMixDy
 {
     public CMixDynamicsCompressorImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChannelsOffset;
+    private static nint _ChannelsOffset = -1;
 
     public ref int Channels
     {
         get
         {
-            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0x717CEE075A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
+            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0x717CEE075A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset);
         }
     }
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixDynamicsCompressorDesc_tImpl? _DescInstance;
 
     public VMixDynamicsCompressorDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0x717CEE0727917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x717CEE0727917BC0);
             var instance = _DescInstance ??= new VMixDynamicsCompressorDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }
-    private static nint? _UIPageOffset;
+    private static nint _UIPageOffset = -1;
 
     public ref int UIPage
     {
         get
         {
-            _UIPageOffset = _UIPageOffset ?? Schema.GetOffset(0x717CEE079AAB3D24);
-            return ref _Handle.AsRef<int>(_UIPageOffset!.Value);
+            if (_UIPageOffset == -1) _UIPageOffset = Schema.GetOffset(0x717CEE079AAB3D24);
+            return ref _Handle.AsRef<int>(_UIPageOffset);
         }
     }
-    private static nint? _IsLimiterOffset;
+    private static nint _IsLimiterOffset = -1;
 
     public ref bool IsLimiter
     {
         get
         {
-            _IsLimiterOffset = _IsLimiterOffset ?? Schema.GetOffset(0x717CEE074B88DE13);
-            return ref _Handle.AsRef<bool>(_IsLimiterOffset!.Value);
+            if (_IsLimiterOffset == -1) _IsLimiterOffset = Schema.GetOffset(0x717CEE074B88DE13);
+            return ref _Handle.AsRef<bool>(_IsLimiterOffset);
         }
     }
 

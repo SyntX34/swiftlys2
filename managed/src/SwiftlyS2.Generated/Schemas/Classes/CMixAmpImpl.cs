@@ -16,14 +16,14 @@ internal partial class CMixAmpImpl : CMixPropertyBaseImpl, CMixAmp
 {
     public CMixAmpImpl(nint handle) : base(handle) { }
 
-    private static nint? _VolumeOffset;
+    private static nint _VolumeOffset = -1;
 
     public ref float Volume
     {
         get
         {
-            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0x44B66C4A7647E0C9);
-            return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
+            if (_VolumeOffset == -1) _VolumeOffset = Schema.GetOffset(0x44B66C4A7647E0C9);
+            return ref _Handle.AsRef<float>(_VolumeOffset);
         }
     }
 

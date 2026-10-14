@@ -16,54 +16,54 @@ internal partial class CNmFloatComparisonNode__CDefinitionImpl : CNmBoolValueNod
 {
     public CNmFloatComparisonNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputValueNodeIdxOffset;
+    private static nint _InputValueNodeIdxOffset = -1;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x48A96E9A95E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x48A96E9A95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
         }
     }
-    private static nint? _ComparandValueNodeIdxOffset;
+    private static nint _ComparandValueNodeIdxOffset = -1;
 
     public ref short ComparandValueNodeIdx
     {
         get
         {
-            _ComparandValueNodeIdxOffset = _ComparandValueNodeIdxOffset ?? Schema.GetOffset(0x48A96E9AF7CFFAF6);
-            return ref _Handle.AsRef<short>(_ComparandValueNodeIdxOffset!.Value);
+            if (_ComparandValueNodeIdxOffset == -1) _ComparandValueNodeIdxOffset = Schema.GetOffset(0x48A96E9AF7CFFAF6);
+            return ref _Handle.AsRef<short>(_ComparandValueNodeIdxOffset);
         }
     }
-    private static nint? _ComparisonOffset;
+    private static nint _ComparisonOffset = -1;
 
     public ref CNmFloatComparisonNode__Comparison_t Comparison
     {
         get
         {
-            _ComparisonOffset = _ComparisonOffset ?? Schema.GetOffset(0x48A96E9A897F8DE4);
-            return ref _Handle.AsRef<CNmFloatComparisonNode__Comparison_t>(_ComparisonOffset!.Value);
+            if (_ComparisonOffset == -1) _ComparisonOffset = Schema.GetOffset(0x48A96E9A897F8DE4);
+            return ref _Handle.AsRef<CNmFloatComparisonNode__Comparison_t>(_ComparisonOffset);
         }
     }
-    private static nint? _EpsilonOffset;
+    private static nint _EpsilonOffset = -1;
 
     public ref float Epsilon
     {
         get
         {
-            _EpsilonOffset = _EpsilonOffset ?? Schema.GetOffset(0x48A96E9A34090A67);
-            return ref _Handle.AsRef<float>(_EpsilonOffset!.Value);
+            if (_EpsilonOffset == -1) _EpsilonOffset = Schema.GetOffset(0x48A96E9A34090A67);
+            return ref _Handle.AsRef<float>(_EpsilonOffset);
         }
     }
-    private static nint? _ComparisonValueOffset;
+    private static nint _ComparisonValueOffset = -1;
 
     public ref float ComparisonValue
     {
         get
         {
-            _ComparisonValueOffset = _ComparisonValueOffset ?? Schema.GetOffset(0x48A96E9A4C176B7F);
-            return ref _Handle.AsRef<float>(_ComparisonValueOffset!.Value);
+            if (_ComparisonValueOffset == -1) _ComparisonValueOffset = Schema.GetOffset(0x48A96E9A4C176B7F);
+            return ref _Handle.AsRef<float>(_ComparisonValueOffset);
         }
     }
 

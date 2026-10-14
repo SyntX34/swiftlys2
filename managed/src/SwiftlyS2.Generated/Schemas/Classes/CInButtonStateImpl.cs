@@ -16,16 +16,16 @@ internal partial class CInButtonStateImpl : SchemaClass, CInButtonState
 {
     public CInButtonStateImpl(nint handle) : base(handle) { }
 
-    private static nint? _ButtonStatesOffset;
+    private static nint _ButtonStatesOffset = -1;
     private SchemaFixedArray<ulong>? _ButtonStatesInstance;
 
     public ISchemaFixedArray<ulong> ButtonStates
     {
         get
         {
-            _ButtonStatesOffset = _ButtonStatesOffset ?? Schema.GetOffset(0x6C8AF06A00121DF9);
+            if (_ButtonStatesOffset == -1) _ButtonStatesOffset = Schema.GetOffset(0x6C8AF06A00121DF9);
             var instance = _ButtonStatesInstance ??= new SchemaFixedArray<ulong>(0, 0x6C8AF06A00121DF9, 3, 8, 8);
-            instance.DangerousSetHandle(_Handle + _ButtonStatesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ButtonStatesOffset);
             return instance;
         }
     }

@@ -16,46 +16,46 @@ internal partial class CNmFloatCurveEventNode__CDefinitionImpl : CNmFloatValueNo
 {
     public CNmFloatCurveEventNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _EventIDOffset;
+    private static nint _EventIDOffset = -1;
 
     public ref CGlobalSymbol EventID
     {
         get
         {
-            _EventIDOffset = _EventIDOffset ?? Schema.GetOffset(0x4512F5A69D798A72);
-            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+            if (_EventIDOffset == -1) _EventIDOffset = Schema.GetOffset(0x4512F5A69D798A72);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset);
         }
     }
-    private static nint? _DefaultNodeIdxOffset;
+    private static nint _DefaultNodeIdxOffset = -1;
 
     public ref short DefaultNodeIdx
     {
         get
         {
-            _DefaultNodeIdxOffset = _DefaultNodeIdxOffset ?? Schema.GetOffset(0x4512F5A6C14C9521);
-            return ref _Handle.AsRef<short>(_DefaultNodeIdxOffset!.Value);
+            if (_DefaultNodeIdxOffset == -1) _DefaultNodeIdxOffset = Schema.GetOffset(0x4512F5A6C14C9521);
+            return ref _Handle.AsRef<short>(_DefaultNodeIdxOffset);
         }
     }
-    private static nint? _DefaultValueOffset;
+    private static nint _DefaultValueOffset = -1;
 
     public ref float DefaultValue
     {
         get
         {
-            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x4512F5A6700AB429);
-            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x4512F5A6700AB429);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset);
         }
     }
-    private static nint? _EventConditionRulesOffset;
+    private static nint _EventConditionRulesOffset = -1;
     private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
-            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x4512F5A6A904315F);
+            if (_EventConditionRulesOffset == -1) _EventConditionRulesOffset = Schema.GetOffset(0x4512F5A6A904315F);
             var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
-            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset);
             return instance;
         }
     }

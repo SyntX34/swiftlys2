@@ -16,47 +16,47 @@ internal partial class CAnimGraphDoc_ExpressionActionImpl : CAnimGraphDoc_Action
 {
     public CAnimGraphDoc_ExpressionActionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParamNameOffset;
+    private static nint _ParamNameOffset = -1;
 
     public string ParamName
     {
         get
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0x4BB4EF32E87A9639);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset!.Value));
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0x4BB4EF32E87A9639);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset));
         }
         set
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0x4BB4EF32E87A9639);
-            Schema.SetCUtlString(_Handle, _ParamNameOffset!.Value, value);
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0x4BB4EF32E87A9639);
+            Schema.SetCUtlString(_Handle, _ParamNameOffset, value);
         }
     }
-    private static nint? _ParamOffset;
+    private static nint _ParamOffset = -1;
     private AnimParamIDImpl? _ParamInstance;
 
     public AnimParamID Param
     {
         get
         {
-            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x4BB4EF32BCD4D752);
+            if (_ParamOffset == -1) _ParamOffset = Schema.GetOffset(0x4BB4EF32BCD4D752);
             var instance = _ParamInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamOffset);
             return instance;
         }
     }
-    private static nint? _ExpressionOffset;
+    private static nint _ExpressionOffset = -1;
 
     public string Expression
     {
         get
         {
-            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x4BB4EF3287957D8B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ExpressionOffset!.Value));
+            if (_ExpressionOffset == -1) _ExpressionOffset = Schema.GetOffset(0x4BB4EF3287957D8B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ExpressionOffset));
         }
         set
         {
-            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x4BB4EF3287957D8B);
-            Schema.SetCUtlString(_Handle, _ExpressionOffset!.Value, value);
+            if (_ExpressionOffset == -1) _ExpressionOffset = Schema.GetOffset(0x4BB4EF3287957D8B);
+            Schema.SetCUtlString(_Handle, _ExpressionOffset, value);
         }
     }
 

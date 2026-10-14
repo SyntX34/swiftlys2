@@ -16,114 +16,114 @@ internal partial class FootFixedData_tImpl : SchemaClass, FootFixedData_t
 {
     public FootFixedData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ToeOffsetOffset;
+    private static nint _ToeOffsetOffset = -1;
 
     public ref Vector ToeOffset
     {
         get
         {
-            _ToeOffsetOffset = _ToeOffsetOffset ?? Schema.GetOffset(0x20A34186E7F8869C);
-            return ref _Handle.AsRef<Vector>(_ToeOffsetOffset!.Value);
+            if (_ToeOffsetOffset == -1) _ToeOffsetOffset = Schema.GetOffset(0x20A34186E7F8869C);
+            return ref _Handle.AsRef<Vector>(_ToeOffsetOffset);
         }
     }
-    private static nint? _HeelOffsetOffset;
+    private static nint _HeelOffsetOffset = -1;
 
     public ref Vector HeelOffset
     {
         get
         {
-            _HeelOffsetOffset = _HeelOffsetOffset ?? Schema.GetOffset(0x20A34186306AE608);
-            return ref _Handle.AsRef<Vector>(_HeelOffsetOffset!.Value);
+            if (_HeelOffsetOffset == -1) _HeelOffsetOffset = Schema.GetOffset(0x20A34186306AE608);
+            return ref _Handle.AsRef<Vector>(_HeelOffsetOffset);
         }
     }
-    private static nint? _TargetBoneIndexOffset;
+    private static nint _TargetBoneIndexOffset = -1;
 
     public ref int TargetBoneIndex
     {
         get
         {
-            _TargetBoneIndexOffset = _TargetBoneIndexOffset ?? Schema.GetOffset(0x20A341862EDA7BBE);
-            return ref _Handle.AsRef<int>(_TargetBoneIndexOffset!.Value);
+            if (_TargetBoneIndexOffset == -1) _TargetBoneIndexOffset = Schema.GetOffset(0x20A341862EDA7BBE);
+            return ref _Handle.AsRef<int>(_TargetBoneIndexOffset);
         }
     }
-    private static nint? _AnkleBoneIndexOffset;
+    private static nint _AnkleBoneIndexOffset = -1;
 
     public ref int AnkleBoneIndex
     {
         get
         {
-            _AnkleBoneIndexOffset = _AnkleBoneIndexOffset ?? Schema.GetOffset(0x20A34186A0D156BA);
-            return ref _Handle.AsRef<int>(_AnkleBoneIndexOffset!.Value);
+            if (_AnkleBoneIndexOffset == -1) _AnkleBoneIndexOffset = Schema.GetOffset(0x20A34186A0D156BA);
+            return ref _Handle.AsRef<int>(_AnkleBoneIndexOffset);
         }
     }
-    private static nint? _IKAnchorBoneIndexOffset;
+    private static nint _IKAnchorBoneIndexOffset = -1;
 
     public ref int IKAnchorBoneIndex
     {
         get
         {
-            _IKAnchorBoneIndexOffset = _IKAnchorBoneIndexOffset ?? Schema.GetOffset(0x20A341867F68400A);
-            return ref _Handle.AsRef<int>(_IKAnchorBoneIndexOffset!.Value);
+            if (_IKAnchorBoneIndexOffset == -1) _IKAnchorBoneIndexOffset = Schema.GetOffset(0x20A341867F68400A);
+            return ref _Handle.AsRef<int>(_IKAnchorBoneIndexOffset);
         }
     }
-    private static nint? _IkChainIndexOffset;
+    private static nint _IkChainIndexOffset = -1;
 
     public ref int IkChainIndex
     {
         get
         {
-            _IkChainIndexOffset = _IkChainIndexOffset ?? Schema.GetOffset(0x20A3418605785BF2);
-            return ref _Handle.AsRef<int>(_IkChainIndexOffset!.Value);
+            if (_IkChainIndexOffset == -1) _IkChainIndexOffset = Schema.GetOffset(0x20A3418605785BF2);
+            return ref _Handle.AsRef<int>(_IkChainIndexOffset);
         }
     }
-    private static nint? _MaxIKLengthOffset;
+    private static nint _MaxIKLengthOffset = -1;
 
     public ref float MaxIKLength
     {
         get
         {
-            _MaxIKLengthOffset = _MaxIKLengthOffset ?? Schema.GetOffset(0x20A341863E04849B);
-            return ref _Handle.AsRef<float>(_MaxIKLengthOffset!.Value);
+            if (_MaxIKLengthOffset == -1) _MaxIKLengthOffset = Schema.GetOffset(0x20A341863E04849B);
+            return ref _Handle.AsRef<float>(_MaxIKLengthOffset);
         }
     }
-    private static nint? _FootIndexOffset;
+    private static nint _FootIndexOffset = -1;
 
     public ref int FootIndex
     {
         get
         {
-            _FootIndexOffset = _FootIndexOffset ?? Schema.GetOffset(0x20A3418667D56BAB);
-            return ref _Handle.AsRef<int>(_FootIndexOffset!.Value);
+            if (_FootIndexOffset == -1) _FootIndexOffset = Schema.GetOffset(0x20A3418667D56BAB);
+            return ref _Handle.AsRef<int>(_FootIndexOffset);
         }
     }
-    private static nint? _TagIndexOffset;
+    private static nint _TagIndexOffset = -1;
 
     public ref int TagIndex
     {
         get
         {
-            _TagIndexOffset = _TagIndexOffset ?? Schema.GetOffset(0x20A34186C2026AAD);
-            return ref _Handle.AsRef<int>(_TagIndexOffset!.Value);
+            if (_TagIndexOffset == -1) _TagIndexOffset = Schema.GetOffset(0x20A34186C2026AAD);
+            return ref _Handle.AsRef<int>(_TagIndexOffset);
         }
     }
-    private static nint? _MaxRotationLeftOffset;
+    private static nint _MaxRotationLeftOffset = -1;
 
     public ref float MaxRotationLeft
     {
         get
         {
-            _MaxRotationLeftOffset = _MaxRotationLeftOffset ?? Schema.GetOffset(0x20A34186FA1CDF44);
-            return ref _Handle.AsRef<float>(_MaxRotationLeftOffset!.Value);
+            if (_MaxRotationLeftOffset == -1) _MaxRotationLeftOffset = Schema.GetOffset(0x20A34186FA1CDF44);
+            return ref _Handle.AsRef<float>(_MaxRotationLeftOffset);
         }
     }
-    private static nint? _MaxRotationRightOffset;
+    private static nint _MaxRotationRightOffset = -1;
 
     public ref float MaxRotationRight
     {
         get
         {
-            _MaxRotationRightOffset = _MaxRotationRightOffset ?? Schema.GetOffset(0x20A341868C95FA31);
-            return ref _Handle.AsRef<float>(_MaxRotationRightOffset!.Value);
+            if (_MaxRotationRightOffset == -1) _MaxRotationRightOffset = Schema.GetOffset(0x20A341868C95FA31);
+            return ref _Handle.AsRef<float>(_MaxRotationRightOffset);
         }
     }
 

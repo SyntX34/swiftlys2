@@ -16,34 +16,34 @@ internal partial class BakedLightingInfo_t__BakedShadowAssignment_tImpl : Schema
 {
     public BakedLightingInfo_t__BakedShadowAssignment_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _LightHashOffset;
+    private static nint _LightHashOffset = -1;
 
     public ref uint LightHash
     {
         get
         {
-            _LightHashOffset = _LightHashOffset ?? Schema.GetOffset(0x1A17A94C74E0509B);
-            return ref _Handle.AsRef<uint>(_LightHashOffset!.Value);
+            if (_LightHashOffset == -1) _LightHashOffset = Schema.GetOffset(0x1A17A94C74E0509B);
+            return ref _Handle.AsRef<uint>(_LightHashOffset);
         }
     }
-    private static nint? _MapHashOffset;
+    private static nint _MapHashOffset = -1;
 
     public ref uint MapHash
     {
         get
         {
-            _MapHashOffset = _MapHashOffset ?? Schema.GetOffset(0x1A17A94CD5C02B59);
-            return ref _Handle.AsRef<uint>(_MapHashOffset!.Value);
+            if (_MapHashOffset == -1) _MapHashOffset = Schema.GetOffset(0x1A17A94CD5C02B59);
+            return ref _Handle.AsRef<uint>(_MapHashOffset);
         }
     }
-    private static nint? _ShadowChannelOffset;
+    private static nint _ShadowChannelOffset = -1;
 
     public ref byte ShadowChannel
     {
         get
         {
-            _ShadowChannelOffset = _ShadowChannelOffset ?? Schema.GetOffset(0x1A17A94C10A02654);
-            return ref _Handle.AsRef<byte>(_ShadowChannelOffset!.Value);
+            if (_ShadowChannelOffset == -1) _ShadowChannelOffset = Schema.GetOffset(0x1A17A94C10A02654);
+            return ref _Handle.AsRef<byte>(_ShadowChannelOffset);
         }
     }
 

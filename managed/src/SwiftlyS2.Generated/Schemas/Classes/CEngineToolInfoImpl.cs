@@ -16,134 +16,134 @@ internal partial class CEngineToolInfoImpl : CBaseToolInfoImpl, CEngineToolInfo
 {
     public CEngineToolInfoImpl(nint handle) : base(handle) { }
 
-    private static nint? _LibraryOffset;
+    private static nint _LibraryOffset = -1;
 
     public string Library
     {
         get
         {
-            _LibraryOffset = _LibraryOffset ?? Schema.GetOffset(0xAC7DD6A37F96D50);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_LibraryOffset!.Value));
+            if (_LibraryOffset == -1) _LibraryOffset = Schema.GetOffset(0xAC7DD6A37F96D50);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_LibraryOffset));
         }
         set
         {
-            _LibraryOffset = _LibraryOffset ?? Schema.GetOffset(0xAC7DD6A37F96D50);
-            Schema.SetCUtlString(_Handle, _LibraryOffset!.Value, value);
+            if (_LibraryOffset == -1) _LibraryOffset = Schema.GetOffset(0xAC7DD6A37F96D50);
+            Schema.SetCUtlString(_Handle, _LibraryOffset, value);
         }
     }
-    private static nint? _InterfaceNameOffset;
+    private static nint _InterfaceNameOffset = -1;
 
     public string InterfaceName
     {
         get
         {
-            _InterfaceNameOffset = _InterfaceNameOffset ?? Schema.GetOffset(0xAC7DD6ABBE55A13);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_InterfaceNameOffset!.Value));
+            if (_InterfaceNameOffset == -1) _InterfaceNameOffset = Schema.GetOffset(0xAC7DD6ABBE55A13);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_InterfaceNameOffset));
         }
         set
         {
-            _InterfaceNameOffset = _InterfaceNameOffset ?? Schema.GetOffset(0xAC7DD6ABBE55A13);
-            Schema.SetCUtlString(_Handle, _InterfaceNameOffset!.Value, value);
+            if (_InterfaceNameOffset == -1) _InterfaceNameOffset = Schema.GetOffset(0xAC7DD6ABBE55A13);
+            Schema.SetCUtlString(_Handle, _InterfaceNameOffset, value);
         }
     }
-    private static nint? _ShowInRevisionSubMenuOffset;
+    private static nint _ShowInRevisionSubMenuOffset = -1;
 
     public ref bool ShowInRevisionSubMenu
     {
         get
         {
-            _ShowInRevisionSubMenuOffset = _ShowInRevisionSubMenuOffset ?? Schema.GetOffset(0xAC7DD6A916755C7);
-            return ref _Handle.AsRef<bool>(_ShowInRevisionSubMenuOffset!.Value);
+            if (_ShowInRevisionSubMenuOffset == -1) _ShowInRevisionSubMenuOffset = Schema.GetOffset(0xAC7DD6A916755C7);
+            return ref _Handle.AsRef<bool>(_ShowInRevisionSubMenuOffset);
         }
     }
-    private static nint? _ShowInToolsMenuOffset;
+    private static nint _ShowInToolsMenuOffset = -1;
 
     public ref bool ShowInToolsMenu
     {
         get
         {
-            _ShowInToolsMenuOffset = _ShowInToolsMenuOffset ?? Schema.GetOffset(0xAC7DD6A0EA6972D);
-            return ref _Handle.AsRef<bool>(_ShowInToolsMenuOffset!.Value);
+            if (_ShowInToolsMenuOffset == -1) _ShowInToolsMenuOffset = Schema.GetOffset(0xAC7DD6A0EA6972D);
+            return ref _Handle.AsRef<bool>(_ShowInToolsMenuOffset);
         }
     }
-    private static nint? _IsSecondaryToolOffset;
+    private static nint _IsSecondaryToolOffset = -1;
 
     public ref bool IsSecondaryTool
     {
         get
         {
-            _IsSecondaryToolOffset = _IsSecondaryToolOffset ?? Schema.GetOffset(0xAC7DD6A96FC4103);
-            return ref _Handle.AsRef<bool>(_IsSecondaryToolOffset!.Value);
+            if (_IsSecondaryToolOffset == -1) _IsSecondaryToolOffset = Schema.GetOffset(0xAC7DD6A96FC4103);
+            return ref _Handle.AsRef<bool>(_IsSecondaryToolOffset);
         }
     }
-    private static nint? _DoNotWarnAboutLargeAssetBatchesOffset;
+    private static nint _DoNotWarnAboutLargeAssetBatchesOffset = -1;
 
     public ref bool DoNotWarnAboutLargeAssetBatches
     {
         get
         {
-            _DoNotWarnAboutLargeAssetBatchesOffset = _DoNotWarnAboutLargeAssetBatchesOffset ?? Schema.GetOffset(0xAC7DD6A46C4D3B1);
-            return ref _Handle.AsRef<bool>(_DoNotWarnAboutLargeAssetBatchesOffset!.Value);
+            if (_DoNotWarnAboutLargeAssetBatchesOffset == -1) _DoNotWarnAboutLargeAssetBatchesOffset = Schema.GetOffset(0xAC7DD6A46C4D3B1);
+            return ref _Handle.AsRef<bool>(_DoNotWarnAboutLargeAssetBatchesOffset);
         }
     }
-    private static nint? _IsWorkshopManagerToolOffset;
+    private static nint _IsWorkshopManagerToolOffset = -1;
 
     public ref bool IsWorkshopManagerTool
     {
         get
         {
-            _IsWorkshopManagerToolOffset = _IsWorkshopManagerToolOffset ?? Schema.GetOffset(0xAC7DD6A29817DCD);
-            return ref _Handle.AsRef<bool>(_IsWorkshopManagerToolOffset!.Value);
+            if (_IsWorkshopManagerToolOffset == -1) _IsWorkshopManagerToolOffset = Schema.GetOffset(0xAC7DD6A29817DCD);
+            return ref _Handle.AsRef<bool>(_IsWorkshopManagerToolOffset);
         }
     }
-    private static nint? _IsWorkshopItemToolOffset;
+    private static nint _IsWorkshopItemToolOffset = -1;
 
     public ref bool IsWorkshopItemTool
     {
         get
         {
-            _IsWorkshopItemToolOffset = _IsWorkshopItemToolOffset ?? Schema.GetOffset(0xAC7DD6AC6F8273D);
-            return ref _Handle.AsRef<bool>(_IsWorkshopItemToolOffset!.Value);
+            if (_IsWorkshopItemToolOffset == -1) _IsWorkshopItemToolOffset = Schema.GetOffset(0xAC7DD6AC6F8273D);
+            return ref _Handle.AsRef<bool>(_IsWorkshopItemToolOffset);
         }
     }
-    private static nint? _CanHighlightSubassetsOffset;
+    private static nint _CanHighlightSubassetsOffset = -1;
 
     public ref bool CanHighlightSubassets
     {
         get
         {
-            _CanHighlightSubassetsOffset = _CanHighlightSubassetsOffset ?? Schema.GetOffset(0xAC7DD6AC53630FA);
-            return ref _Handle.AsRef<bool>(_CanHighlightSubassetsOffset!.Value);
+            if (_CanHighlightSubassetsOffset == -1) _CanHighlightSubassetsOffset = Schema.GetOffset(0xAC7DD6AC53630FA);
+            return ref _Handle.AsRef<bool>(_CanHighlightSubassetsOffset);
         }
     }
-    private static nint? _AssetTypesOffset;
+    private static nint _AssetTypesOffset = -1;
 
     public ref CUtlVector<CUtlString> AssetTypes
     {
         get
         {
-            _AssetTypesOffset = _AssetTypesOffset ?? Schema.GetOffset(0xAC7DD6A6C2AC4F0);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_AssetTypesOffset!.Value);
+            if (_AssetTypesOffset == -1) _AssetTypesOffset = Schema.GetOffset(0xAC7DD6A6C2AC4F0);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_AssetTypesOffset);
         }
     }
-    private static nint? _LimitToModsOffset;
+    private static nint _LimitToModsOffset = -1;
 
     public ref CUtlVector<CUtlString> LimitToMods
     {
         get
         {
-            _LimitToModsOffset = _LimitToModsOffset ?? Schema.GetOffset(0xAC7DD6A7C371728);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_LimitToModsOffset!.Value);
+            if (_LimitToModsOffset == -1) _LimitToModsOffset = Schema.GetOffset(0xAC7DD6A7C371728);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_LimitToModsOffset);
         }
     }
-    private static nint? _ExcludeFromModsOffset;
+    private static nint _ExcludeFromModsOffset = -1;
 
     public ref CUtlVector<CUtlString> ExcludeFromMods
     {
         get
         {
-            _ExcludeFromModsOffset = _ExcludeFromModsOffset ?? Schema.GetOffset(0xAC7DD6A01089B94);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ExcludeFromModsOffset!.Value);
+            if (_ExcludeFromModsOffset == -1) _ExcludeFromModsOffset = Schema.GetOffset(0xAC7DD6A01089B94);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ExcludeFromModsOffset);
         }
     }
 

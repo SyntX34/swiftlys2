@@ -16,16 +16,16 @@ internal partial class CFogTriggerImpl : CBaseTriggerImpl, CFogTrigger
 {
     public CFogTriggerImpl(nint handle) : base(handle) { }
 
-    private static nint? _FogOffset;
+    private static nint _FogOffset = -1;
     private fogparams_tImpl? _FogInstance;
 
     public fogparams_t Fog
     {
         get
         {
-            _FogOffset = _FogOffset ?? Schema.GetOffset(0x18A9AE6A9014635F);
+            if (_FogOffset == -1) _FogOffset = Schema.GetOffset(0x18A9AE6A9014635F);
             var instance = _FogInstance ??= new fogparams_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FogOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FogOffset);
             return instance;
         }
     }

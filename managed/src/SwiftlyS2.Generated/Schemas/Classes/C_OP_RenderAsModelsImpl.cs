@@ -16,93 +16,93 @@ internal partial class C_OP_RenderAsModelsImpl : CParticleFunctionRendererImpl, 
 {
     public C_OP_RenderAsModelsImpl(nint handle) : base(handle) { }
 
-    private static nint? _ModelListOffset;
+    private static nint _ModelListOffset = -1;
 
     public ref CUtlVector<ModelReference_t> ModelList
     {
         get
         {
-            _ModelListOffset = _ModelListOffset ?? Schema.GetOffset(0x634E6CCB05FC11B6);
-            return ref _Handle.AsRef<CUtlVector<ModelReference_t>>(_ModelListOffset!.Value);
+            if (_ModelListOffset == -1) _ModelListOffset = Schema.GetOffset(0x634E6CCB05FC11B6);
+            return ref _Handle.AsRef<CUtlVector<ModelReference_t>>(_ModelListOffset);
         }
     }
-    private static nint? _ModelScaleOffset;
+    private static nint _ModelScaleOffset = -1;
 
     public ref float ModelScale
     {
         get
         {
-            _ModelScaleOffset = _ModelScaleOffset ?? Schema.GetOffset(0x634E6CCBD28B2146);
-            return ref _Handle.AsRef<float>(_ModelScaleOffset!.Value);
+            if (_ModelScaleOffset == -1) _ModelScaleOffset = Schema.GetOffset(0x634E6CCBD28B2146);
+            return ref _Handle.AsRef<float>(_ModelScaleOffset);
         }
     }
-    private static nint? _FitToModelSizeOffset;
+    private static nint _FitToModelSizeOffset = -1;
 
     public ref bool FitToModelSize
     {
         get
         {
-            _FitToModelSizeOffset = _FitToModelSizeOffset ?? Schema.GetOffset(0x634E6CCBF444BB23);
-            return ref _Handle.AsRef<bool>(_FitToModelSizeOffset!.Value);
+            if (_FitToModelSizeOffset == -1) _FitToModelSizeOffset = Schema.GetOffset(0x634E6CCBF444BB23);
+            return ref _Handle.AsRef<bool>(_FitToModelSizeOffset);
         }
     }
-    private static nint? _NonUniformScalingOffset;
+    private static nint _NonUniformScalingOffset = -1;
 
     public ref bool NonUniformScaling
     {
         get
         {
-            _NonUniformScalingOffset = _NonUniformScalingOffset ?? Schema.GetOffset(0x634E6CCBC2ADF0D9);
-            return ref _Handle.AsRef<bool>(_NonUniformScalingOffset!.Value);
+            if (_NonUniformScalingOffset == -1) _NonUniformScalingOffset = Schema.GetOffset(0x634E6CCBC2ADF0D9);
+            return ref _Handle.AsRef<bool>(_NonUniformScalingOffset);
         }
     }
-    private static nint? _XAxisScalingAttributeOffset;
+    private static nint _XAxisScalingAttributeOffset = -1;
     private ParticleAttributeIndex_tImpl? _XAxisScalingAttributeInstance;
 
     public ParticleAttributeIndex_t XAxisScalingAttribute
     {
         get
         {
-            _XAxisScalingAttributeOffset = _XAxisScalingAttributeOffset ?? Schema.GetOffset(0x634E6CCB0E363ADD);
+            if (_XAxisScalingAttributeOffset == -1) _XAxisScalingAttributeOffset = Schema.GetOffset(0x634E6CCB0E363ADD);
             var instance = _XAxisScalingAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _XAxisScalingAttributeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _XAxisScalingAttributeOffset);
             return instance;
         }
     }
-    private static nint? _YAxisScalingAttributeOffset;
+    private static nint _YAxisScalingAttributeOffset = -1;
     private ParticleAttributeIndex_tImpl? _YAxisScalingAttributeInstance;
 
     public ParticleAttributeIndex_t YAxisScalingAttribute
     {
         get
         {
-            _YAxisScalingAttributeOffset = _YAxisScalingAttributeOffset ?? Schema.GetOffset(0x634E6CCBC293ED92);
+            if (_YAxisScalingAttributeOffset == -1) _YAxisScalingAttributeOffset = Schema.GetOffset(0x634E6CCBC293ED92);
             var instance = _YAxisScalingAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _YAxisScalingAttributeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _YAxisScalingAttributeOffset);
             return instance;
         }
     }
-    private static nint? _ZAxisScalingAttributeOffset;
+    private static nint _ZAxisScalingAttributeOffset = -1;
     private ParticleAttributeIndex_tImpl? _ZAxisScalingAttributeInstance;
 
     public ParticleAttributeIndex_t ZAxisScalingAttribute
     {
         get
         {
-            _ZAxisScalingAttributeOffset = _ZAxisScalingAttributeOffset ?? Schema.GetOffset(0x634E6CCBC34C4EDF);
+            if (_ZAxisScalingAttributeOffset == -1) _ZAxisScalingAttributeOffset = Schema.GetOffset(0x634E6CCBC34C4EDF);
             var instance = _ZAxisScalingAttributeInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ZAxisScalingAttributeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ZAxisScalingAttributeOffset);
             return instance;
         }
     }
-    private static nint? _SizeCullBloatOffset;
+    private static nint _SizeCullBloatOffset = -1;
 
     public ref int SizeCullBloat
     {
         get
         {
-            _SizeCullBloatOffset = _SizeCullBloatOffset ?? Schema.GetOffset(0x634E6CCB5EB61122);
-            return ref _Handle.AsRef<int>(_SizeCullBloatOffset!.Value);
+            if (_SizeCullBloatOffset == -1) _SizeCullBloatOffset = Schema.GetOffset(0x634E6CCB5EB61122);
+            return ref _Handle.AsRef<int>(_SizeCullBloatOffset);
         }
     }
 

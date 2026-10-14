@@ -16,50 +16,50 @@ internal partial class CColorCorrectionLayerImpl : SchemaClass, CColorCorrection
 {
     public CColorCorrectionLayerImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x56C7CEA4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x56C7CEA4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x56C7CEA4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x56C7CEA4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _OpacityPercentOffset;
+    private static nint _OpacityPercentOffset = -1;
 
     public ref int OpacityPercent
     {
         get
         {
-            _OpacityPercentOffset = _OpacityPercentOffset ?? Schema.GetOffset(0x56C7CEA79B5A93B);
-            return ref _Handle.AsRef<int>(_OpacityPercentOffset!.Value);
+            if (_OpacityPercentOffset == -1) _OpacityPercentOffset = Schema.GetOffset(0x56C7CEA79B5A93B);
+            return ref _Handle.AsRef<int>(_OpacityPercentOffset);
         }
     }
-    private static nint? _VisibleOffset;
+    private static nint _VisibleOffset = -1;
 
     public ref bool Visible
     {
         get
         {
-            _VisibleOffset = _VisibleOffset ?? Schema.GetOffset(0x56C7CEA73EEB681);
-            return ref _Handle.AsRef<bool>(_VisibleOffset!.Value);
+            if (_VisibleOffset == -1) _VisibleOffset = Schema.GetOffset(0x56C7CEA73EEB681);
+            return ref _Handle.AsRef<bool>(_VisibleOffset);
         }
     }
-    private static nint? _LayerMaskOffset;
+    private static nint _LayerMaskOffset = -1;
     private CLayerMaskImpl? _LayerMaskInstance;
 
     public CLayerMask? LayerMask
     {
         get
         {
-            _LayerMaskOffset = _LayerMaskOffset ?? Schema.GetOffset(0x56C7CEADE43E2B8);
-            var ptr = _Handle.Read<nint>(_LayerMaskOffset!.Value);
+            if (_LayerMaskOffset == -1) _LayerMaskOffset = Schema.GetOffset(0x56C7CEADE43E2B8);
+            var ptr = _Handle.Read<nint>(_LayerMaskOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _LayerMaskInstance ??= new CLayerMaskImpl(0);
             instance.DangerousSetHandle(ptr);

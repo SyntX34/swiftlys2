@@ -16,37 +16,37 @@ internal partial class FeSimdAnimStrayRadius_tImpl : SchemaClass, FeSimdAnimStra
 {
     public FeSimdAnimStrayRadius_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
     private SchemaUntypedField? _NodeInstance;
 
     public SchemaUntypedField Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xEEC96A9CCD6694B9);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0xEEC96A9CCD6694B9);
             var instance = _NodeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeOffset);
             return instance;
         }
     }
-    private static nint? _MaxDistOffset;
+    private static nint _MaxDistOffset = -1;
 
     public ref fltx4 MaxDist
     {
         get
         {
-            _MaxDistOffset = _MaxDistOffset ?? Schema.GetOffset(0xEEC96A9CC9FFDD57);
-            return ref _Handle.AsRef<fltx4>(_MaxDistOffset!.Value);
+            if (_MaxDistOffset == -1) _MaxDistOffset = Schema.GetOffset(0xEEC96A9CC9FFDD57);
+            return ref _Handle.AsRef<fltx4>(_MaxDistOffset);
         }
     }
-    private static nint? _RelaxationFactorOffset;
+    private static nint _RelaxationFactorOffset = -1;
 
     public ref fltx4 RelaxationFactor
     {
         get
         {
-            _RelaxationFactorOffset = _RelaxationFactorOffset ?? Schema.GetOffset(0xEEC96A9C357F3BFF);
-            return ref _Handle.AsRef<fltx4>(_RelaxationFactorOffset!.Value);
+            if (_RelaxationFactorOffset == -1) _RelaxationFactorOffset = Schema.GetOffset(0xEEC96A9C357F3BFF);
+            return ref _Handle.AsRef<fltx4>(_RelaxationFactorOffset);
         }
     }
 

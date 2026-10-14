@@ -16,44 +16,44 @@ internal partial class EngineLoopState_tImpl : SchemaClass, EngineLoopState_t
 {
     public EngineLoopState_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _PlatWindowWidthOffset;
+    private static nint _PlatWindowWidthOffset = -1;
 
     public ref int PlatWindowWidth
     {
         get
         {
-            _PlatWindowWidthOffset = _PlatWindowWidthOffset ?? Schema.GetOffset(0x8A7EC4513AF18278);
-            return ref _Handle.AsRef<int>(_PlatWindowWidthOffset!.Value);
+            if (_PlatWindowWidthOffset == -1) _PlatWindowWidthOffset = Schema.GetOffset(0x8A7EC4513AF18278);
+            return ref _Handle.AsRef<int>(_PlatWindowWidthOffset);
         }
     }
-    private static nint? _PlatWindowHeightOffset;
+    private static nint _PlatWindowHeightOffset = -1;
 
     public ref int PlatWindowHeight
     {
         get
         {
-            _PlatWindowHeightOffset = _PlatWindowHeightOffset ?? Schema.GetOffset(0x8A7EC45157A7B88F);
-            return ref _Handle.AsRef<int>(_PlatWindowHeightOffset!.Value);
+            if (_PlatWindowHeightOffset == -1) _PlatWindowHeightOffset = Schema.GetOffset(0x8A7EC45157A7B88F);
+            return ref _Handle.AsRef<int>(_PlatWindowHeightOffset);
         }
     }
-    private static nint? _RenderWidthOffset;
+    private static nint _RenderWidthOffset = -1;
 
     public ref int RenderWidth
     {
         get
         {
-            _RenderWidthOffset = _RenderWidthOffset ?? Schema.GetOffset(0x8A7EC45179B0DC63);
-            return ref _Handle.AsRef<int>(_RenderWidthOffset!.Value);
+            if (_RenderWidthOffset == -1) _RenderWidthOffset = Schema.GetOffset(0x8A7EC45179B0DC63);
+            return ref _Handle.AsRef<int>(_RenderWidthOffset);
         }
     }
-    private static nint? _RenderHeightOffset;
+    private static nint _RenderHeightOffset = -1;
 
     public ref int RenderHeight
     {
         get
         {
-            _RenderHeightOffset = _RenderHeightOffset ?? Schema.GetOffset(0x8A7EC451A184E51E);
-            return ref _Handle.AsRef<int>(_RenderHeightOffset!.Value);
+            if (_RenderHeightOffset == -1) _RenderHeightOffset = Schema.GetOffset(0x8A7EC451A184E51E);
+            return ref _Handle.AsRef<int>(_RenderHeightOffset);
         }
     }
 

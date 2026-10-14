@@ -16,46 +16,46 @@ internal partial class CDestructiblePartsComponentImpl : SchemaClass, CDestructi
 {
     public CDestructiblePartsComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? ___m_pChainEntityOffset;
+    private static nint ___m_pChainEntityOffset = -1;
 
     public ref CNetworkVarChainer __m_pChainEntity
     {
         get
         {
-            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0xE69A9E51F63F0E7D);
-            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+            if (___m_pChainEntityOffset == -1) ___m_pChainEntityOffset = Schema.GetOffset(0xE69A9E51F63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset);
         }
     }
-    private static nint? _DamageTakenByHitGroupOffset;
+    private static nint _DamageTakenByHitGroupOffset = -1;
 
     public ref CUtlVector<ushort> DamageTakenByHitGroup
     {
         get
         {
-            _DamageTakenByHitGroupOffset = _DamageTakenByHitGroupOffset ?? Schema.GetOffset(0xE69A9E51F137427A);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_DamageTakenByHitGroupOffset!.Value);
+            if (_DamageTakenByHitGroupOffset == -1) _DamageTakenByHitGroupOffset = Schema.GetOffset(0xE69A9E51F137427A);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_DamageTakenByHitGroupOffset);
         }
     }
-    private static nint? _OwnerOffset;
+    private static nint _OwnerOffset = -1;
 
     public ref CHandle<CBaseModelEntity> Owner
     {
         get
         {
-            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0xE69A9E51F6D89572);
-            return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset!.Value);
+            if (_OwnerOffset == -1) _OwnerOffset = Schema.GetOffset(0xE69A9E51F6D89572);
+            return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset);
         }
     }
-    private static nint? _AnimGraphDestructibleGraphControllerOffset;
+    private static nint _AnimGraphDestructibleGraphControllerOffset = -1;
     private CAnimGraphControllerPtrImpl? _AnimGraphDestructibleGraphControllerInstance;
 
     public CAnimGraphControllerPtr AnimGraphDestructibleGraphController
     {
         get
         {
-            _AnimGraphDestructibleGraphControllerOffset = _AnimGraphDestructibleGraphControllerOffset ?? Schema.GetOffset(0xE69A9E5185A33CD0);
+            if (_AnimGraphDestructibleGraphControllerOffset == -1) _AnimGraphDestructibleGraphControllerOffset = Schema.GetOffset(0xE69A9E5185A33CD0);
             var instance = _AnimGraphDestructibleGraphControllerInstance ??= new CAnimGraphControllerPtrImpl(0);
-            instance.DangerousSetHandle(_Handle + _AnimGraphDestructibleGraphControllerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AnimGraphDestructibleGraphControllerOffset);
             return instance;
         }
     }

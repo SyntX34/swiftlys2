@@ -16,24 +16,24 @@ internal partial class CNmGraphDocDataDictionaryImpl : SchemaClass, CNmGraphDocD
 {
     public CNmGraphDocDataDictionaryImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParameterSetsOffset;
+    private static nint _ParameterSetsOffset = -1;
 
     public ref CUtlVector<CNmGraphDocDataDictionary__ParameterSet_t> ParameterSets
     {
         get
         {
-            _ParameterSetsOffset = _ParameterSetsOffset ?? Schema.GetOffset(0x97159C6154372A89);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocDataDictionary__ParameterSet_t>>(_ParameterSetsOffset!.Value);
+            if (_ParameterSetsOffset == -1) _ParameterSetsOffset = Schema.GetOffset(0x97159C6154372A89);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocDataDictionary__ParameterSet_t>>(_ParameterSetsOffset);
         }
     }
-    private static nint? _IDSetsOffset;
+    private static nint _IDSetsOffset = -1;
 
     public ref CUtlVector<CNmGraphDocDataDictionary__IDSet_t> IDSets
     {
         get
         {
-            _IDSetsOffset = _IDSetsOffset ?? Schema.GetOffset(0x97159C6138934D39);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocDataDictionary__IDSet_t>>(_IDSetsOffset!.Value);
+            if (_IDSetsOffset == -1) _IDSetsOffset = Schema.GetOffset(0x97159C6138934D39);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocDataDictionary__IDSet_t>>(_IDSetsOffset);
         }
     }
 

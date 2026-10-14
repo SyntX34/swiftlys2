@@ -16,50 +16,50 @@ internal partial class CSingleFrameUpdateNodeImpl : CLeafUpdateNodeImpl, CSingle
 {
     public CSingleFrameUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _ActionsOffset;
+    private static nint _ActionsOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> Actions
     {
         get
         {
-            _ActionsOffset = _ActionsOffset ?? Schema.GetOffset(0x5A65D6168D622684);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset!.Value);
+            if (_ActionsOffset == -1) _ActionsOffset = Schema.GetOffset(0x5A65D6168D622684);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset);
         }
     }
-    private static nint? _PoseCacheHandleOffset;
+    private static nint _PoseCacheHandleOffset = -1;
     private CPoseHandleImpl? _PoseCacheHandleInstance;
 
     public CPoseHandle PoseCacheHandle
     {
         get
         {
-            _PoseCacheHandleOffset = _PoseCacheHandleOffset ?? Schema.GetOffset(0x5A65D6164719447A);
+            if (_PoseCacheHandleOffset == -1) _PoseCacheHandleOffset = Schema.GetOffset(0x5A65D6164719447A);
             var instance = _PoseCacheHandleInstance ??= new CPoseHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _PoseCacheHandleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PoseCacheHandleOffset);
             return instance;
         }
     }
-    private static nint? _SequenceOffset;
+    private static nint _SequenceOffset = -1;
     private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
-            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x5A65D616E0A0598E);
+            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0x5A65D616E0A0598E);
             var instance = _SequenceInstance ??= new HSequenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset);
             return instance;
         }
     }
-    private static nint? _CycleOffset;
+    private static nint _CycleOffset = -1;
 
     public ref float Cycle
     {
         get
         {
-            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x5A65D6160C77829F);
-            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+            if (_CycleOffset == -1) _CycleOffset = Schema.GetOffset(0x5A65D6160C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset);
         }
     }
 

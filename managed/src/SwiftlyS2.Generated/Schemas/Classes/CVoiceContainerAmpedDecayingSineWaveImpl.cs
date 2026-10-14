@@ -16,14 +16,14 @@ internal partial class CVoiceContainerAmpedDecayingSineWaveImpl : CVoiceContaine
 {
     public CVoiceContainerAmpedDecayingSineWaveImpl(nint handle) : base(handle) { }
 
-    private static nint? _GainAmountOffset;
+    private static nint _GainAmountOffset = -1;
 
     public ref float GainAmount
     {
         get
         {
-            _GainAmountOffset = _GainAmountOffset ?? Schema.GetOffset(0x312CFD9CB3BC88F4);
-            return ref _Handle.AsRef<float>(_GainAmountOffset!.Value);
+            if (_GainAmountOffset == -1) _GainAmountOffset = Schema.GetOffset(0x312CFD9CB3BC88F4);
+            return ref _Handle.AsRef<float>(_GainAmountOffset);
         }
     }
 

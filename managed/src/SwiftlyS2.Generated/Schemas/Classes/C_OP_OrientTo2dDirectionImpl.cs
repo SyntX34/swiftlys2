@@ -16,49 +16,49 @@ internal partial class C_OP_OrientTo2dDirectionImpl : CParticleFunctionOperatorI
 {
     public C_OP_OrientTo2dDirectionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputOffset;
+    private static nint _InputOffset = -1;
     private CPerParticleVecInputImpl? _InputInstance;
 
     public CPerParticleVecInput Input
     {
         get
         {
-            _InputOffset = _InputOffset ?? Schema.GetOffset(0x2AC61F041EA0ED5B);
+            if (_InputOffset == -1) _InputOffset = Schema.GetOffset(0x2AC61F041EA0ED5B);
             var instance = _InputInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputOffset);
             return instance;
         }
     }
-    private static nint? _RotOffsetOffset;
+    private static nint _RotOffsetOffset = -1;
 
     public ref float RotOffset
     {
         get
         {
-            _RotOffsetOffset = _RotOffsetOffset ?? Schema.GetOffset(0x2AC61F04D1EA9CDF);
-            return ref _Handle.AsRef<float>(_RotOffsetOffset!.Value);
+            if (_RotOffsetOffset == -1) _RotOffsetOffset = Schema.GetOffset(0x2AC61F04D1EA9CDF);
+            return ref _Handle.AsRef<float>(_RotOffsetOffset);
         }
     }
-    private static nint? _SpinStrengthOffset;
+    private static nint _SpinStrengthOffset = -1;
 
     public ref float SpinStrength
     {
         get
         {
-            _SpinStrengthOffset = _SpinStrengthOffset ?? Schema.GetOffset(0x2AC61F0412520F26);
-            return ref _Handle.AsRef<float>(_SpinStrengthOffset!.Value);
+            if (_SpinStrengthOffset == -1) _SpinStrengthOffset = Schema.GetOffset(0x2AC61F0412520F26);
+            return ref _Handle.AsRef<float>(_SpinStrengthOffset);
         }
     }
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x2AC61F04E5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x2AC61F04E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }

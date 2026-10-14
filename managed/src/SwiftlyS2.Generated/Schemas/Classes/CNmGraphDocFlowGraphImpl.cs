@@ -16,14 +16,14 @@ internal partial class CNmGraphDocFlowGraphImpl : CNmGraphDocGraphImpl, CNmGraph
 {
     public CNmGraphDocFlowGraphImpl(nint handle) : base(handle) { }
 
-    private static nint? _ConnectionsOffset;
+    private static nint _ConnectionsOffset = -1;
 
     public ref CUtlVector<CNmGraphDocFlowGraph__Connection_t> Connections
     {
         get
         {
-            _ConnectionsOffset = _ConnectionsOffset ?? Schema.GetOffset(0x47E1D81358F33FBE);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocFlowGraph__Connection_t>>(_ConnectionsOffset!.Value);
+            if (_ConnectionsOffset == -1) _ConnectionsOffset = Schema.GetOffset(0x47E1D81358F33FBE);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocFlowGraph__Connection_t>>(_ConnectionsOffset);
         }
     }
 

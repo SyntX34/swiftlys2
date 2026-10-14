@@ -16,274 +16,274 @@ internal partial class CInfernoImpl : CBaseModelEntityImpl, CInferno
 {
     public CInfernoImpl(nint handle) : base(handle) { }
 
-    private static nint? _FirePositionsOffset;
+    private static nint _FirePositionsOffset = -1;
     private SchemaFixedArray<Vector>? _FirePositionsInstance;
 
     public ISchemaFixedArray<Vector> FirePositions
     {
         get
         {
-            _FirePositionsOffset = _FirePositionsOffset ?? Schema.GetOffset(0xABE104C91E992007);
+            if (_FirePositionsOffset == -1) _FirePositionsOffset = Schema.GetOffset(0xABE104C91E992007);
             var instance = _FirePositionsInstance ??= new SchemaFixedArray<Vector>(0, 0xABE104C91E992007, 64, 12, 4);
-            instance.DangerousSetHandle(_Handle + _FirePositionsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FirePositionsOffset);
             return instance;
         }
     }
-    private static nint? _FireParentPositionsOffset;
+    private static nint _FireParentPositionsOffset = -1;
     private SchemaFixedArray<Vector>? _FireParentPositionsInstance;
 
     public ISchemaFixedArray<Vector> FireParentPositions
     {
         get
         {
-            _FireParentPositionsOffset = _FireParentPositionsOffset ?? Schema.GetOffset(0xABE104C9A58B35D7);
+            if (_FireParentPositionsOffset == -1) _FireParentPositionsOffset = Schema.GetOffset(0xABE104C9A58B35D7);
             var instance = _FireParentPositionsInstance ??= new SchemaFixedArray<Vector>(0, 0xABE104C9A58B35D7, 64, 12, 4);
-            instance.DangerousSetHandle(_Handle + _FireParentPositionsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FireParentPositionsOffset);
             return instance;
         }
     }
-    private static nint? _FireIsBurningOffset;
+    private static nint _FireIsBurningOffset = -1;
     private SchemaFixedArray<bool>? _FireIsBurningInstance;
 
     public ISchemaFixedArray<bool> FireIsBurning
     {
         get
         {
-            _FireIsBurningOffset = _FireIsBurningOffset ?? Schema.GetOffset(0xABE104C9E5CD906C);
+            if (_FireIsBurningOffset == -1) _FireIsBurningOffset = Schema.GetOffset(0xABE104C9E5CD906C);
             var instance = _FireIsBurningInstance ??= new SchemaFixedArray<bool>(0, 0xABE104C9E5CD906C, 64, 1, 1);
-            instance.DangerousSetHandle(_Handle + _FireIsBurningOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FireIsBurningOffset);
             return instance;
         }
     }
-    private static nint? _BurnNormalOffset;
+    private static nint _BurnNormalOffset = -1;
     private SchemaFixedArray<Vector>? _BurnNormalInstance;
 
     public ISchemaFixedArray<Vector> BurnNormal
     {
         get
         {
-            _BurnNormalOffset = _BurnNormalOffset ?? Schema.GetOffset(0xABE104C9382663DB);
+            if (_BurnNormalOffset == -1) _BurnNormalOffset = Schema.GetOffset(0xABE104C9382663DB);
             var instance = _BurnNormalInstance ??= new SchemaFixedArray<Vector>(0, 0xABE104C9382663DB, 64, 12, 4);
-            instance.DangerousSetHandle(_Handle + _BurnNormalOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BurnNormalOffset);
             return instance;
         }
     }
-    private static nint? _FireCountOffset;
+    private static nint _FireCountOffset = -1;
 
     public ref int FireCount
     {
         get
         {
-            _FireCountOffset = _FireCountOffset ?? Schema.GetOffset(0xABE104C9820942A0);
-            return ref _Handle.AsRef<int>(_FireCountOffset!.Value);
+            if (_FireCountOffset == -1) _FireCountOffset = Schema.GetOffset(0xABE104C9820942A0);
+            return ref _Handle.AsRef<int>(_FireCountOffset);
         }
     }
-    private static nint? _InfernoTypeOffset;
+    private static nint _InfernoTypeOffset = -1;
 
     public ref int InfernoType
     {
         get
         {
-            _InfernoTypeOffset = _InfernoTypeOffset ?? Schema.GetOffset(0xABE104C903C628B8);
-            return ref _Handle.AsRef<int>(_InfernoTypeOffset!.Value);
+            if (_InfernoTypeOffset == -1) _InfernoTypeOffset = Schema.GetOffset(0xABE104C903C628B8);
+            return ref _Handle.AsRef<int>(_InfernoTypeOffset);
         }
     }
-    private static nint? _FireEffectTickBeginOffset;
+    private static nint _FireEffectTickBeginOffset = -1;
 
     public ref int FireEffectTickBegin
     {
         get
         {
-            _FireEffectTickBeginOffset = _FireEffectTickBeginOffset ?? Schema.GetOffset(0xABE104C989EB57F2);
-            return ref _Handle.AsRef<int>(_FireEffectTickBeginOffset!.Value);
+            if (_FireEffectTickBeginOffset == -1) _FireEffectTickBeginOffset = Schema.GetOffset(0xABE104C989EB57F2);
+            return ref _Handle.AsRef<int>(_FireEffectTickBeginOffset);
         }
     }
-    private static nint? _FireLifetimeOffset;
+    private static nint _FireLifetimeOffset = -1;
 
     public ref float FireLifetime
     {
         get
         {
-            _FireLifetimeOffset = _FireLifetimeOffset ?? Schema.GetOffset(0xABE104C9B2E34E7E);
-            return ref _Handle.AsRef<float>(_FireLifetimeOffset!.Value);
+            if (_FireLifetimeOffset == -1) _FireLifetimeOffset = Schema.GetOffset(0xABE104C9B2E34E7E);
+            return ref _Handle.AsRef<float>(_FireLifetimeOffset);
         }
     }
-    private static nint? _InPostEffectTimeOffset;
+    private static nint _InPostEffectTimeOffset = -1;
 
     public ref bool InPostEffectTime
     {
         get
         {
-            _InPostEffectTimeOffset = _InPostEffectTimeOffset ?? Schema.GetOffset(0xABE104C963E4F6B8);
-            return ref _Handle.AsRef<bool>(_InPostEffectTimeOffset!.Value);
+            if (_InPostEffectTimeOffset == -1) _InPostEffectTimeOffset = Schema.GetOffset(0xABE104C963E4F6B8);
+            return ref _Handle.AsRef<bool>(_InPostEffectTimeOffset);
         }
     }
-    private static nint? _WasCreatedInSmokeOffset;
+    private static nint _WasCreatedInSmokeOffset = -1;
 
     public ref bool WasCreatedInSmoke
     {
         get
         {
-            _WasCreatedInSmokeOffset = _WasCreatedInSmokeOffset ?? Schema.GetOffset(0xABE104C95CC1EF2A);
-            return ref _Handle.AsRef<bool>(_WasCreatedInSmokeOffset!.Value);
+            if (_WasCreatedInSmokeOffset == -1) _WasCreatedInSmokeOffset = Schema.GetOffset(0xABE104C95CC1EF2A);
+            return ref _Handle.AsRef<bool>(_WasCreatedInSmokeOffset);
         }
     }
-    private static nint? _ExtentOffset;
+    private static nint _ExtentOffset = -1;
     private ExtentImpl? _ExtentInstance;
 
     public Extent Extent
     {
         get
         {
-            _ExtentOffset = _ExtentOffset ?? Schema.GetOffset(0xABE104C9DD2CA0B9);
+            if (_ExtentOffset == -1) _ExtentOffset = Schema.GetOffset(0xABE104C9DD2CA0B9);
             var instance = _ExtentInstance ??= new ExtentImpl(0);
-            instance.DangerousSetHandle(_Handle + _ExtentOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ExtentOffset);
             return instance;
         }
     }
-    private static nint? _DamageTimerOffset;
+    private static nint _DamageTimerOffset = -1;
     private CountdownTimerImpl? _DamageTimerInstance;
 
     public CountdownTimer DamageTimer
     {
         get
         {
-            _DamageTimerOffset = _DamageTimerOffset ?? Schema.GetOffset(0xABE104C979F45751);
+            if (_DamageTimerOffset == -1) _DamageTimerOffset = Schema.GetOffset(0xABE104C979F45751);
             var instance = _DamageTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _DamageTimerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DamageTimerOffset);
             return instance;
         }
     }
-    private static nint? _DamageRampTimerOffset;
+    private static nint _DamageRampTimerOffset = -1;
     private CountdownTimerImpl? _DamageRampTimerInstance;
 
     public CountdownTimer DamageRampTimer
     {
         get
         {
-            _DamageRampTimerOffset = _DamageRampTimerOffset ?? Schema.GetOffset(0xABE104C9400054C9);
+            if (_DamageRampTimerOffset == -1) _DamageRampTimerOffset = Schema.GetOffset(0xABE104C9400054C9);
             var instance = _DamageRampTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _DamageRampTimerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DamageRampTimerOffset);
             return instance;
         }
     }
-    private static nint? _SplashVelocityOffset;
+    private static nint _SplashVelocityOffset = -1;
 
     public ref Vector SplashVelocity
     {
         get
         {
-            _SplashVelocityOffset = _SplashVelocityOffset ?? Schema.GetOffset(0xABE104C963461F75);
-            return ref _Handle.AsRef<Vector>(_SplashVelocityOffset!.Value);
+            if (_SplashVelocityOffset == -1) _SplashVelocityOffset = Schema.GetOffset(0xABE104C963461F75);
+            return ref _Handle.AsRef<Vector>(_SplashVelocityOffset);
         }
     }
-    private static nint? _InitialSplashVelocityOffset;
+    private static nint _InitialSplashVelocityOffset = -1;
 
     public ref Vector InitialSplashVelocity
     {
         get
         {
-            _InitialSplashVelocityOffset = _InitialSplashVelocityOffset ?? Schema.GetOffset(0xABE104C9757A42BF);
-            return ref _Handle.AsRef<Vector>(_InitialSplashVelocityOffset!.Value);
+            if (_InitialSplashVelocityOffset == -1) _InitialSplashVelocityOffset = Schema.GetOffset(0xABE104C9757A42BF);
+            return ref _Handle.AsRef<Vector>(_InitialSplashVelocityOffset);
         }
     }
-    private static nint? _StartPosOffset;
+    private static nint _StartPosOffset = -1;
 
     public ref Vector StartPos
     {
         get
         {
-            _StartPosOffset = _StartPosOffset ?? Schema.GetOffset(0xABE104C9676FC33F);
-            return ref _Handle.AsRef<Vector>(_StartPosOffset!.Value);
+            if (_StartPosOffset == -1) _StartPosOffset = Schema.GetOffset(0xABE104C9676FC33F);
+            return ref _Handle.AsRef<Vector>(_StartPosOffset);
         }
     }
-    private static nint? _OriginalSpawnLocationOffset;
+    private static nint _OriginalSpawnLocationOffset = -1;
 
     public ref Vector OriginalSpawnLocation
     {
         get
         {
-            _OriginalSpawnLocationOffset = _OriginalSpawnLocationOffset ?? Schema.GetOffset(0xABE104C95E59F382);
-            return ref _Handle.AsRef<Vector>(_OriginalSpawnLocationOffset!.Value);
+            if (_OriginalSpawnLocationOffset == -1) _OriginalSpawnLocationOffset = Schema.GetOffset(0xABE104C95E59F382);
+            return ref _Handle.AsRef<Vector>(_OriginalSpawnLocationOffset);
         }
     }
-    private static nint? _ActiveTimerOffset;
+    private static nint _ActiveTimerOffset = -1;
     private IntervalTimerImpl? _ActiveTimerInstance;
 
     public IntervalTimer ActiveTimer
     {
         get
         {
-            _ActiveTimerOffset = _ActiveTimerOffset ?? Schema.GetOffset(0xABE104C946FF8D04);
+            if (_ActiveTimerOffset == -1) _ActiveTimerOffset = Schema.GetOffset(0xABE104C946FF8D04);
             var instance = _ActiveTimerInstance ??= new IntervalTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ActiveTimerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ActiveTimerOffset);
             return instance;
         }
     }
-    private static nint? _FireSpawnOffsetOffset;
+    private static nint _FireSpawnOffsetOffset = -1;
 
     public ref int FireSpawnOffset
     {
         get
         {
-            _FireSpawnOffsetOffset = _FireSpawnOffsetOffset ?? Schema.GetOffset(0xABE104C90C7D268F);
-            return ref _Handle.AsRef<int>(_FireSpawnOffsetOffset!.Value);
+            if (_FireSpawnOffsetOffset == -1) _FireSpawnOffsetOffset = Schema.GetOffset(0xABE104C90C7D268F);
+            return ref _Handle.AsRef<int>(_FireSpawnOffsetOffset);
         }
     }
-    private static nint? _MaxFlamesOffset;
+    private static nint _MaxFlamesOffset = -1;
 
     public ref int MaxFlames
     {
         get
         {
-            _MaxFlamesOffset = _MaxFlamesOffset ?? Schema.GetOffset(0xABE104C972805F39);
-            return ref _Handle.AsRef<int>(_MaxFlamesOffset!.Value);
+            if (_MaxFlamesOffset == -1) _MaxFlamesOffset = Schema.GetOffset(0xABE104C972805F39);
+            return ref _Handle.AsRef<int>(_MaxFlamesOffset);
         }
     }
-    private static nint? _SpreadCountOffset;
+    private static nint _SpreadCountOffset = -1;
 
     public ref int SpreadCount
     {
         get
         {
-            _SpreadCountOffset = _SpreadCountOffset ?? Schema.GetOffset(0xABE104C9F27833E1);
-            return ref _Handle.AsRef<int>(_SpreadCountOffset!.Value);
+            if (_SpreadCountOffset == -1) _SpreadCountOffset = Schema.GetOffset(0xABE104C9F27833E1);
+            return ref _Handle.AsRef<int>(_SpreadCountOffset);
         }
     }
-    private static nint? _BookkeepingTimerOffset;
+    private static nint _BookkeepingTimerOffset = -1;
     private CountdownTimerImpl? _BookkeepingTimerInstance;
 
     public CountdownTimer BookkeepingTimer
     {
         get
         {
-            _BookkeepingTimerOffset = _BookkeepingTimerOffset ?? Schema.GetOffset(0xABE104C975065DCC);
+            if (_BookkeepingTimerOffset == -1) _BookkeepingTimerOffset = Schema.GetOffset(0xABE104C975065DCC);
             var instance = _BookkeepingTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _BookkeepingTimerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BookkeepingTimerOffset);
             return instance;
         }
     }
-    private static nint? _NextSpreadTimerOffset;
+    private static nint _NextSpreadTimerOffset = -1;
     private CountdownTimerImpl? _NextSpreadTimerInstance;
 
     public CountdownTimer NextSpreadTimer
     {
         get
         {
-            _NextSpreadTimerOffset = _NextSpreadTimerOffset ?? Schema.GetOffset(0xABE104C93045281C);
+            if (_NextSpreadTimerOffset == -1) _NextSpreadTimerOffset = Schema.GetOffset(0xABE104C93045281C);
             var instance = _NextSpreadTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextSpreadTimerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NextSpreadTimerOffset);
             return instance;
         }
     }
-    private static nint? _SourceItemDefIndexOffset;
+    private static nint _SourceItemDefIndexOffset = -1;
 
     public ref ushort SourceItemDefIndex
     {
         get
         {
-            _SourceItemDefIndexOffset = _SourceItemDefIndexOffset ?? Schema.GetOffset(0xABE104C905A4D2E6);
-            return ref _Handle.AsRef<ushort>(_SourceItemDefIndexOffset!.Value);
+            if (_SourceItemDefIndexOffset == -1) _SourceItemDefIndexOffset = Schema.GetOffset(0xABE104C905A4D2E6);
+            return ref _Handle.AsRef<ushort>(_SourceItemDefIndexOffset);
         }
     }
 

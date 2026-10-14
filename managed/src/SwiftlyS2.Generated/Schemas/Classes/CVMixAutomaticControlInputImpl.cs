@@ -16,39 +16,39 @@ internal partial class CVMixAutomaticControlInputImpl : SchemaClass, CVMixAutoma
 {
     public CVMixAutomaticControlInputImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x4A833C224D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x4A833C224D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x4A833C224D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x4A833C224D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _GraphInputIndexOffset;
+    private static nint _GraphInputIndexOffset = -1;
 
     public ref int GraphInputIndex
     {
         get
         {
-            _GraphInputIndexOffset = _GraphInputIndexOffset ?? Schema.GetOffset(0x4A833C22DADDBB47);
-            return ref _Handle.AsRef<int>(_GraphInputIndexOffset!.Value);
+            if (_GraphInputIndexOffset == -1) _GraphInputIndexOffset = Schema.GetOffset(0x4A833C22DADDBB47);
+            return ref _Handle.AsRef<int>(_GraphInputIndexOffset);
         }
     }
-    private static nint? _ControlTypeOffset;
+    private static nint _ControlTypeOffset = -1;
 
     public ref VMixAutoControlType_t ControlType
     {
         get
         {
-            _ControlTypeOffset = _ControlTypeOffset ?? Schema.GetOffset(0x4A833C22556057DA);
-            return ref _Handle.AsRef<VMixAutoControlType_t>(_ControlTypeOffset!.Value);
+            if (_ControlTypeOffset == -1) _ControlTypeOffset = Schema.GetOffset(0x4A833C22556057DA);
+            return ref _Handle.AsRef<VMixAutoControlType_t>(_ControlTypeOffset);
         }
     }
 

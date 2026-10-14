@@ -16,115 +16,115 @@ internal partial class CSeqMultiFetchImpl : SchemaClass, CSeqMultiFetch
 {
     public CSeqMultiFetchImpl(nint handle) : base(handle) { }
 
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
     private CSeqMultiFetchFlagImpl? _FlagsInstance;
 
     public CSeqMultiFetchFlag Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x3846FD62DC74A14C);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x3846FD62DC74A14C);
             var instance = _FlagsInstance ??= new CSeqMultiFetchFlagImpl(0);
-            instance.DangerousSetHandle(_Handle + _FlagsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FlagsOffset);
             return instance;
         }
     }
-    private static nint? _LocalReferenceArrayOffset;
+    private static nint _LocalReferenceArrayOffset = -1;
 
     public ref CUtlVector<short> LocalReferenceArray
     {
         get
         {
-            _LocalReferenceArrayOffset = _LocalReferenceArrayOffset ?? Schema.GetOffset(0x3846FD6290C98686);
-            return ref _Handle.AsRef<CUtlVector<short>>(_LocalReferenceArrayOffset!.Value);
+            if (_LocalReferenceArrayOffset == -1) _LocalReferenceArrayOffset = Schema.GetOffset(0x3846FD6290C98686);
+            return ref _Handle.AsRef<CUtlVector<short>>(_LocalReferenceArrayOffset);
         }
     }
-    private static nint? _GroupSizeOffset;
+    private static nint _GroupSizeOffset = -1;
     private SchemaFixedArray<int>? _GroupSizeInstance;
 
     public ISchemaFixedArray<int> GroupSize
     {
         get
         {
-            _GroupSizeOffset = _GroupSizeOffset ?? Schema.GetOffset(0x3846FD6258533CF9);
+            if (_GroupSizeOffset == -1) _GroupSizeOffset = Schema.GetOffset(0x3846FD6258533CF9);
             var instance = _GroupSizeInstance ??= new SchemaFixedArray<int>(0, 0x3846FD6258533CF9, 2, 4, 4);
-            instance.DangerousSetHandle(_Handle + _GroupSizeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GroupSizeOffset);
             return instance;
         }
     }
-    private static nint? _LocalPoseOffset;
+    private static nint _LocalPoseOffset = -1;
     private SchemaFixedArray<int>? _LocalPoseInstance;
 
     public ISchemaFixedArray<int> LocalPose
     {
         get
         {
-            _LocalPoseOffset = _LocalPoseOffset ?? Schema.GetOffset(0x3846FD6270BF8111);
+            if (_LocalPoseOffset == -1) _LocalPoseOffset = Schema.GetOffset(0x3846FD6270BF8111);
             var instance = _LocalPoseInstance ??= new SchemaFixedArray<int>(0, 0x3846FD6270BF8111, 2, 4, 4);
-            instance.DangerousSetHandle(_Handle + _LocalPoseOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LocalPoseOffset);
             return instance;
         }
     }
-    private static nint? _PoseKeyArray0Offset;
+    private static nint _PoseKeyArray0Offset = -1;
 
     public ref CUtlVector<float> PoseKeyArray0
     {
         get
         {
-            _PoseKeyArray0Offset = _PoseKeyArray0Offset ?? Schema.GetOffset(0x3846FD62E139B398);
-            return ref _Handle.AsRef<CUtlVector<float>>(_PoseKeyArray0Offset!.Value);
+            if (_PoseKeyArray0Offset == -1) _PoseKeyArray0Offset = Schema.GetOffset(0x3846FD62E139B398);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PoseKeyArray0Offset);
         }
     }
-    private static nint? _PoseKeyArray1Offset;
+    private static nint _PoseKeyArray1Offset = -1;
 
     public ref CUtlVector<float> PoseKeyArray1
     {
         get
         {
-            _PoseKeyArray1Offset = _PoseKeyArray1Offset ?? Schema.GetOffset(0x3846FD62E239B52B);
-            return ref _Handle.AsRef<CUtlVector<float>>(_PoseKeyArray1Offset!.Value);
+            if (_PoseKeyArray1Offset == -1) _PoseKeyArray1Offset = Schema.GetOffset(0x3846FD62E239B52B);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PoseKeyArray1Offset);
         }
     }
-    private static nint? _LocalCyclePoseParameterOffset;
+    private static nint _LocalCyclePoseParameterOffset = -1;
 
     public ref int LocalCyclePoseParameter
     {
         get
         {
-            _LocalCyclePoseParameterOffset = _LocalCyclePoseParameterOffset ?? Schema.GetOffset(0x3846FD62722CCD8E);
-            return ref _Handle.AsRef<int>(_LocalCyclePoseParameterOffset!.Value);
+            if (_LocalCyclePoseParameterOffset == -1) _LocalCyclePoseParameterOffset = Schema.GetOffset(0x3846FD62722CCD8E);
+            return ref _Handle.AsRef<int>(_LocalCyclePoseParameterOffset);
         }
     }
-    private static nint? _CalculatePoseParametersOffset;
+    private static nint _CalculatePoseParametersOffset = -1;
 
     public ref bool CalculatePoseParameters
     {
         get
         {
-            _CalculatePoseParametersOffset = _CalculatePoseParametersOffset ?? Schema.GetOffset(0x3846FD6259BED3FE);
-            return ref _Handle.AsRef<bool>(_CalculatePoseParametersOffset!.Value);
+            if (_CalculatePoseParametersOffset == -1) _CalculatePoseParametersOffset = Schema.GetOffset(0x3846FD6259BED3FE);
+            return ref _Handle.AsRef<bool>(_CalculatePoseParametersOffset);
         }
     }
-    private static nint? _FixedBlendWeightOffset;
+    private static nint _FixedBlendWeightOffset = -1;
 
     public ref bool FixedBlendWeight
     {
         get
         {
-            _FixedBlendWeightOffset = _FixedBlendWeightOffset ?? Schema.GetOffset(0x3846FD626C68A6B4);
-            return ref _Handle.AsRef<bool>(_FixedBlendWeightOffset!.Value);
+            if (_FixedBlendWeightOffset == -1) _FixedBlendWeightOffset = Schema.GetOffset(0x3846FD626C68A6B4);
+            return ref _Handle.AsRef<bool>(_FixedBlendWeightOffset);
         }
     }
-    private static nint? _FixedBlendWeightValsOffset;
+    private static nint _FixedBlendWeightValsOffset = -1;
     private SchemaFixedArray<float>? _FixedBlendWeightValsInstance;
 
     public ISchemaFixedArray<float> FixedBlendWeightVals
     {
         get
         {
-            _FixedBlendWeightValsOffset = _FixedBlendWeightValsOffset ?? Schema.GetOffset(0x3846FD6221B3BB76);
+            if (_FixedBlendWeightValsOffset == -1) _FixedBlendWeightValsOffset = Schema.GetOffset(0x3846FD6221B3BB76);
             var instance = _FixedBlendWeightValsInstance ??= new SchemaFixedArray<float>(0, 0x3846FD6221B3BB76, 2, 4, 4);
-            instance.DangerousSetHandle(_Handle + _FixedBlendWeightValsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FixedBlendWeightValsOffset);
             return instance;
         }
     }

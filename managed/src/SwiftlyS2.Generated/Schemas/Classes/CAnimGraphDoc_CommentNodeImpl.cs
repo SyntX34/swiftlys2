@@ -16,39 +16,39 @@ internal partial class CAnimGraphDoc_CommentNodeImpl : CAnimGraphDoc_NodeImpl, C
 {
     public CAnimGraphDoc_CommentNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _CommentTextOffset;
+    private static nint _CommentTextOffset = -1;
 
     public string CommentText
     {
         get
         {
-            _CommentTextOffset = _CommentTextOffset ?? Schema.GetOffset(0x5E644787F83EE73D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentTextOffset!.Value));
+            if (_CommentTextOffset == -1) _CommentTextOffset = Schema.GetOffset(0x5E644787F83EE73D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentTextOffset));
         }
         set
         {
-            _CommentTextOffset = _CommentTextOffset ?? Schema.GetOffset(0x5E644787F83EE73D);
-            Schema.SetCUtlString(_Handle, _CommentTextOffset!.Value, value);
+            if (_CommentTextOffset == -1) _CommentTextOffset = Schema.GetOffset(0x5E644787F83EE73D);
+            Schema.SetCUtlString(_Handle, _CommentTextOffset, value);
         }
     }
-    private static nint? _SizeOffset;
+    private static nint _SizeOffset = -1;
 
     public ref Vector2D Size
     {
         get
         {
-            _SizeOffset = _SizeOffset ?? Schema.GetOffset(0x5E644787E3F672FC);
-            return ref _Handle.AsRef<Vector2D>(_SizeOffset!.Value);
+            if (_SizeOffset == -1) _SizeOffset = Schema.GetOffset(0x5E644787E3F672FC);
+            return ref _Handle.AsRef<Vector2D>(_SizeOffset);
         }
     }
-    private static nint? _ColorOffset;
+    private static nint _ColorOffset = -1;
 
     public ref Color Color
     {
         get
         {
-            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x5E6447878005F278);
-            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x5E6447878005F278);
+            return ref _Handle.AsRef<Color>(_ColorOffset);
         }
     }
 

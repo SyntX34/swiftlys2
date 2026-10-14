@@ -16,54 +16,54 @@ internal partial class CHitBoxSetImpl : SchemaClass, CHitBoxSet
 {
     public CHitBoxSetImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x742AE9EC4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x742AE9EC4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x742AE9EC4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x742AE9EC4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _NameHashOffset;
+    private static nint _NameHashOffset = -1;
 
     public ref uint NameHash
     {
         get
         {
-            _NameHashOffset = _NameHashOffset ?? Schema.GetOffset(0x742AE9ECDE15EEFE);
-            return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
+            if (_NameHashOffset == -1) _NameHashOffset = Schema.GetOffset(0x742AE9ECDE15EEFE);
+            return ref _Handle.AsRef<uint>(_NameHashOffset);
         }
     }
-    private static nint? _HitBoxesOffset;
+    private static nint _HitBoxesOffset = -1;
 
     public ref CUtlVector<CHitBox> HitBoxes
     {
         get
         {
-            _HitBoxesOffset = _HitBoxesOffset ?? Schema.GetOffset(0x742AE9EC07A4113F);
-            return ref _Handle.AsRef<CUtlVector<CHitBox>>(_HitBoxesOffset!.Value);
+            if (_HitBoxesOffset == -1) _HitBoxesOffset = Schema.GetOffset(0x742AE9EC07A4113F);
+            return ref _Handle.AsRef<CUtlVector<CHitBox>>(_HitBoxesOffset);
         }
     }
-    private static nint? _SourceFilenameOffset;
+    private static nint _SourceFilenameOffset = -1;
 
     public string SourceFilename
     {
         get
         {
-            _SourceFilenameOffset = _SourceFilenameOffset ?? Schema.GetOffset(0x742AE9ECD49CE26D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SourceFilenameOffset!.Value));
+            if (_SourceFilenameOffset == -1) _SourceFilenameOffset = Schema.GetOffset(0x742AE9ECD49CE26D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SourceFilenameOffset));
         }
         set
         {
-            _SourceFilenameOffset = _SourceFilenameOffset ?? Schema.GetOffset(0x742AE9ECD49CE26D);
-            Schema.SetCUtlString(_Handle, _SourceFilenameOffset!.Value, value);
+            if (_SourceFilenameOffset == -1) _SourceFilenameOffset = Schema.GetOffset(0x742AE9ECD49CE26D);
+            Schema.SetCUtlString(_Handle, _SourceFilenameOffset, value);
         }
     }
 

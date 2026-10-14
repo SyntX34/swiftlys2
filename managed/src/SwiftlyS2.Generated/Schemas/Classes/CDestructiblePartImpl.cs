@@ -16,74 +16,74 @@ internal partial class CDestructiblePartImpl : SchemaClass, CDestructiblePart
 {
     public CDestructiblePartImpl(nint handle) : base(handle) { }
 
-    private static nint? _DebugNameOffset;
+    private static nint _DebugNameOffset = -1;
 
     public ref CGlobalSymbol DebugName
     {
         get
         {
-            _DebugNameOffset = _DebugNameOffset ?? Schema.GetOffset(0xD9E4C935CAC1909B);
-            return ref _Handle.AsRef<CGlobalSymbol>(_DebugNameOffset!.Value);
+            if (_DebugNameOffset == -1) _DebugNameOffset = Schema.GetOffset(0xD9E4C935CAC1909B);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DebugNameOffset);
         }
     }
-    private static nint? _HitGroupOffset;
+    private static nint _HitGroupOffset = -1;
 
     public ref HitGroup_t HitGroup
     {
         get
         {
-            _HitGroupOffset = _HitGroupOffset ?? Schema.GetOffset(0xD9E4C9359C854D19);
-            return ref _Handle.AsRef<HitGroup_t>(_HitGroupOffset!.Value);
+            if (_HitGroupOffset == -1) _HitGroupOffset = Schema.GetOffset(0xD9E4C9359C854D19);
+            return ref _Handle.AsRef<HitGroup_t>(_HitGroupOffset);
         }
     }
-    private static nint? _DisableHitGroupWhenDestroyedOffset;
+    private static nint _DisableHitGroupWhenDestroyedOffset = -1;
 
     public ref bool DisableHitGroupWhenDestroyed
     {
         get
         {
-            _DisableHitGroupWhenDestroyedOffset = _DisableHitGroupWhenDestroyedOffset ?? Schema.GetOffset(0xD9E4C935AA847E82);
-            return ref _Handle.AsRef<bool>(_DisableHitGroupWhenDestroyedOffset!.Value);
+            if (_DisableHitGroupWhenDestroyedOffset == -1) _DisableHitGroupWhenDestroyedOffset = Schema.GetOffset(0xD9E4C935AA847E82);
+            return ref _Handle.AsRef<bool>(_DisableHitGroupWhenDestroyedOffset);
         }
     }
-    private static nint? _OtherHitgroupsToDestroyWhenFullyDestructedOffset;
+    private static nint _OtherHitgroupsToDestroyWhenFullyDestructedOffset = -1;
 
     public ref CUtlVector<HitGroup_t> OtherHitgroupsToDestroyWhenFullyDestructed
     {
         get
         {
-            _OtherHitgroupsToDestroyWhenFullyDestructedOffset = _OtherHitgroupsToDestroyWhenFullyDestructedOffset ?? Schema.GetOffset(0xD9E4C9352ECFEA5A);
-            return ref _Handle.AsRef<CUtlVector<HitGroup_t>>(_OtherHitgroupsToDestroyWhenFullyDestructedOffset!.Value);
+            if (_OtherHitgroupsToDestroyWhenFullyDestructedOffset == -1) _OtherHitgroupsToDestroyWhenFullyDestructedOffset = Schema.GetOffset(0xD9E4C9352ECFEA5A);
+            return ref _Handle.AsRef<CUtlVector<HitGroup_t>>(_OtherHitgroupsToDestroyWhenFullyDestructedOffset);
         }
     }
-    private static nint? _OnlyDestroyWhenGibbingOffset;
+    private static nint _OnlyDestroyWhenGibbingOffset = -1;
 
     public ref bool OnlyDestroyWhenGibbing
     {
         get
         {
-            _OnlyDestroyWhenGibbingOffset = _OnlyDestroyWhenGibbingOffset ?? Schema.GetOffset(0xD9E4C9350F77EEC1);
-            return ref _Handle.AsRef<bool>(_OnlyDestroyWhenGibbingOffset!.Value);
+            if (_OnlyDestroyWhenGibbingOffset == -1) _OnlyDestroyWhenGibbingOffset = Schema.GetOffset(0xD9E4C9350F77EEC1);
+            return ref _Handle.AsRef<bool>(_OnlyDestroyWhenGibbingOffset);
         }
     }
-    private static nint? _BodyGroupNameOffset;
+    private static nint _BodyGroupNameOffset = -1;
 
     public ref CGlobalSymbol BodyGroupName
     {
         get
         {
-            _BodyGroupNameOffset = _BodyGroupNameOffset ?? Schema.GetOffset(0xD9E4C935FFA38852);
-            return ref _Handle.AsRef<CGlobalSymbol>(_BodyGroupNameOffset!.Value);
+            if (_BodyGroupNameOffset == -1) _BodyGroupNameOffset = Schema.GetOffset(0xD9E4C935FFA38852);
+            return ref _Handle.AsRef<CGlobalSymbol>(_BodyGroupNameOffset);
         }
     }
-    private static nint? _DamageLevelsOffset;
+    private static nint _DamageLevelsOffset = -1;
 
     public ref CUtlVector<CDestructiblePart_DamageLevel> DamageLevels
     {
         get
         {
-            _DamageLevelsOffset = _DamageLevelsOffset ?? Schema.GetOffset(0xD9E4C9353B88DC4F);
-            return ref _Handle.AsRef<CUtlVector<CDestructiblePart_DamageLevel>>(_DamageLevelsOffset!.Value);
+            if (_DamageLevelsOffset == -1) _DamageLevelsOffset = Schema.GetOffset(0xD9E4C9353B88DC4F);
+            return ref _Handle.AsRef<CUtlVector<CDestructiblePart_DamageLevel>>(_DamageLevelsOffset);
         }
     }
 

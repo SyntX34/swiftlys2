@@ -16,24 +16,24 @@ internal partial class VertexPositionNormal_tImpl : SchemaClass, VertexPositionN
 {
     public VertexPositionNormal_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _PositionOffset;
+    private static nint _PositionOffset = -1;
 
     public ref Vector Position
     {
         get
         {
-            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x47BDE764BD6A6C9E);
-            return ref _Handle.AsRef<Vector>(_PositionOffset!.Value);
+            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0x47BDE764BD6A6C9E);
+            return ref _Handle.AsRef<Vector>(_PositionOffset);
         }
     }
-    private static nint? _NormalOffset;
+    private static nint _NormalOffset = -1;
 
     public ref Vector Normal
     {
         get
         {
-            _NormalOffset = _NormalOffset ?? Schema.GetOffset(0x47BDE764AFB36E96);
-            return ref _Handle.AsRef<Vector>(_NormalOffset!.Value);
+            if (_NormalOffset == -1) _NormalOffset = Schema.GetOffset(0x47BDE764AFB36E96);
+            return ref _Handle.AsRef<Vector>(_NormalOffset);
         }
     }
 

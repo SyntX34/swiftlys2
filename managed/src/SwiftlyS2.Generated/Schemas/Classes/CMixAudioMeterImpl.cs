@@ -16,44 +16,44 @@ internal partial class CMixAudioMeterImpl : CMixPropertyBaseImpl, CMixAudioMeter
 {
     public CMixAudioMeterImpl(nint handle) : base(handle) { }
 
-    private static nint? _LeftLevelOffset;
+    private static nint _LeftLevelOffset = -1;
 
     public ref float LeftLevel
     {
         get
         {
-            _LeftLevelOffset = _LeftLevelOffset ?? Schema.GetOffset(0xADC05E4FD25C4CD4);
-            return ref _Handle.AsRef<float>(_LeftLevelOffset!.Value);
+            if (_LeftLevelOffset == -1) _LeftLevelOffset = Schema.GetOffset(0xADC05E4FD25C4CD4);
+            return ref _Handle.AsRef<float>(_LeftLevelOffset);
         }
     }
-    private static nint? _LeftPeakOffset;
+    private static nint _LeftPeakOffset = -1;
 
     public ref float LeftPeak
     {
         get
         {
-            _LeftPeakOffset = _LeftPeakOffset ?? Schema.GetOffset(0xADC05E4FA68B9225);
-            return ref _Handle.AsRef<float>(_LeftPeakOffset!.Value);
+            if (_LeftPeakOffset == -1) _LeftPeakOffset = Schema.GetOffset(0xADC05E4FA68B9225);
+            return ref _Handle.AsRef<float>(_LeftPeakOffset);
         }
     }
-    private static nint? _RightLevelOffset;
+    private static nint _RightLevelOffset = -1;
 
     public ref float RightLevel
     {
         get
         {
-            _RightLevelOffset = _RightLevelOffset ?? Schema.GetOffset(0xADC05E4FA477A0DB);
-            return ref _Handle.AsRef<float>(_RightLevelOffset!.Value);
+            if (_RightLevelOffset == -1) _RightLevelOffset = Schema.GetOffset(0xADC05E4FA477A0DB);
+            return ref _Handle.AsRef<float>(_RightLevelOffset);
         }
     }
-    private static nint? _RightPeakOffset;
+    private static nint _RightPeakOffset = -1;
 
     public ref float RightPeak
     {
         get
         {
-            _RightPeakOffset = _RightPeakOffset ?? Schema.GetOffset(0xADC05E4FFC7F26C4);
-            return ref _Handle.AsRef<float>(_RightPeakOffset!.Value);
+            if (_RightPeakOffset == -1) _RightPeakOffset = Schema.GetOffset(0xADC05E4FFC7F26C4);
+            return ref _Handle.AsRef<float>(_RightPeakOffset);
         }
     }
 

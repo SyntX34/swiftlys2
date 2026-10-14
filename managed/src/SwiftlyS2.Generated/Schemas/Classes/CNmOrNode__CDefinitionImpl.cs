@@ -16,16 +16,16 @@ internal partial class CNmOrNode__CDefinitionImpl : CNmBoolValueNode__CDefinitio
 {
     public CNmOrNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ConditionNodeIndicesOffset;
+    private static nint _ConditionNodeIndicesOffset = -1;
     private SchemaUntypedField? _ConditionNodeIndicesInstance;
 
     public SchemaUntypedField ConditionNodeIndices
     {
         get
         {
-            _ConditionNodeIndicesOffset = _ConditionNodeIndicesOffset ?? Schema.GetOffset(0x9BF82E864A144D0F);
+            if (_ConditionNodeIndicesOffset == -1) _ConditionNodeIndicesOffset = Schema.GetOffset(0x9BF82E864A144D0F);
             var instance = _ConditionNodeIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ConditionNodeIndicesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ConditionNodeIndicesOffset);
             return instance;
         }
     }

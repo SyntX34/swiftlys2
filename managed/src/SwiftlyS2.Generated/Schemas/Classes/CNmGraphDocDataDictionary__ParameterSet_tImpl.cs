@@ -16,29 +16,29 @@ internal partial class CNmGraphDocDataDictionary__ParameterSet_tImpl : SchemaCla
 {
     public CNmGraphDocDataDictionary__ParameterSet_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x607E5B074D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x607E5B074D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x607E5B074D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x607E5B074D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _ParametersOffset;
+    private static nint _ParametersOffset = -1;
 
     public ref CUtlVector<CNmGraphDocDataDictionary__Parameter_t> Parameters
     {
         get
         {
-            _ParametersOffset = _ParametersOffset ?? Schema.GetOffset(0x607E5B0799935479);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocDataDictionary__Parameter_t>>(_ParametersOffset!.Value);
+            if (_ParametersOffset == -1) _ParametersOffset = Schema.GetOffset(0x607E5B0799935479);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocDataDictionary__Parameter_t>>(_ParametersOffset);
         }
     }
 

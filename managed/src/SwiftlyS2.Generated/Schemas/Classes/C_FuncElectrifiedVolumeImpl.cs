@@ -16,42 +16,42 @@ internal partial class C_FuncElectrifiedVolumeImpl : C_FuncBrushImpl, C_FuncElec
 {
     public C_FuncElectrifiedVolumeImpl(nint handle) : base(handle) { }
 
-    private static nint? _AmbientEffectOffset;
+    private static nint _AmbientEffectOffset = -1;
     private ParticleIndex_tImpl? _AmbientEffectInstance;
 
     public ParticleIndex_t AmbientEffect
     {
         get
         {
-            _AmbientEffectOffset = _AmbientEffectOffset ?? Schema.GetOffset(0x97217C675DA335FA);
+            if (_AmbientEffectOffset == -1) _AmbientEffectOffset = Schema.GetOffset(0x97217C675DA335FA);
             var instance = _AmbientEffectInstance ??= new ParticleIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AmbientEffectOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AmbientEffectOffset);
             return instance;
         }
     }
-    private static nint? _EffectNameOffset;
+    private static nint _EffectNameOffset = -1;
 
     public string EffectName
     {
         get
         {
-            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x97217C6766CD81EF);
-            return Schema.GetString(_Handle.Read<nint>(_EffectNameOffset!.Value));
+            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0x97217C6766CD81EF);
+            return Schema.GetString(_Handle.Read<nint>(_EffectNameOffset));
         }
         set
         {
-            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x97217C6766CD81EF);
-            Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
+            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0x97217C6766CD81EF);
+            Schema.SetString(_Handle, _EffectNameOffset, value);
         }
     }
-    private static nint? _StateOffset;
+    private static nint _StateOffset = -1;
 
     public ref bool State
     {
         get
         {
-            _StateOffset = _StateOffset ?? Schema.GetOffset(0x97217C670CC206D6);
-            return ref _Handle.AsRef<bool>(_StateOffset!.Value);
+            if (_StateOffset == -1) _StateOffset = Schema.GetOffset(0x97217C670CC206D6);
+            return ref _Handle.AsRef<bool>(_StateOffset);
         }
     }
 

@@ -16,54 +16,54 @@ internal partial class CompositeMaterialMatchFilter_tImpl : SchemaClass, Composi
 {
     public CompositeMaterialMatchFilter_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _CompositeMaterialMatchFilterTypeOffset;
+    private static nint _CompositeMaterialMatchFilterTypeOffset = -1;
 
     public ref CompositeMaterialMatchFilterType_t CompositeMaterialMatchFilterType
     {
         get
         {
-            _CompositeMaterialMatchFilterTypeOffset = _CompositeMaterialMatchFilterTypeOffset ?? Schema.GetOffset(0xD0E160C3AED812E4);
-            return ref _Handle.AsRef<CompositeMaterialMatchFilterType_t>(_CompositeMaterialMatchFilterTypeOffset!.Value);
+            if (_CompositeMaterialMatchFilterTypeOffset == -1) _CompositeMaterialMatchFilterTypeOffset = Schema.GetOffset(0xD0E160C3AED812E4);
+            return ref _Handle.AsRef<CompositeMaterialMatchFilterType_t>(_CompositeMaterialMatchFilterTypeOffset);
         }
     }
-    private static nint? _StrMatchFilterOffset;
+    private static nint _StrMatchFilterOffset = -1;
 
     public string StrMatchFilter
     {
         get
         {
-            _StrMatchFilterOffset = _StrMatchFilterOffset ?? Schema.GetOffset(0xD0E160C32AFA3143);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMatchFilterOffset!.Value));
+            if (_StrMatchFilterOffset == -1) _StrMatchFilterOffset = Schema.GetOffset(0xD0E160C32AFA3143);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMatchFilterOffset));
         }
         set
         {
-            _StrMatchFilterOffset = _StrMatchFilterOffset ?? Schema.GetOffset(0xD0E160C32AFA3143);
-            Schema.SetCUtlString(_Handle, _StrMatchFilterOffset!.Value, value);
+            if (_StrMatchFilterOffset == -1) _StrMatchFilterOffset = Schema.GetOffset(0xD0E160C32AFA3143);
+            Schema.SetCUtlString(_Handle, _StrMatchFilterOffset, value);
         }
     }
-    private static nint? _StrMatchValueOffset;
+    private static nint _StrMatchValueOffset = -1;
 
     public string StrMatchValue
     {
         get
         {
-            _StrMatchValueOffset = _StrMatchValueOffset ?? Schema.GetOffset(0xD0E160C3BA26CB3E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMatchValueOffset!.Value));
+            if (_StrMatchValueOffset == -1) _StrMatchValueOffset = Schema.GetOffset(0xD0E160C3BA26CB3E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMatchValueOffset));
         }
         set
         {
-            _StrMatchValueOffset = _StrMatchValueOffset ?? Schema.GetOffset(0xD0E160C3BA26CB3E);
-            Schema.SetCUtlString(_Handle, _StrMatchValueOffset!.Value, value);
+            if (_StrMatchValueOffset == -1) _StrMatchValueOffset = Schema.GetOffset(0xD0E160C3BA26CB3E);
+            Schema.SetCUtlString(_Handle, _StrMatchValueOffset, value);
         }
     }
-    private static nint? _PassWhenTrueOffset;
+    private static nint _PassWhenTrueOffset = -1;
 
     public ref bool PassWhenTrue
     {
         get
         {
-            _PassWhenTrueOffset = _PassWhenTrueOffset ?? Schema.GetOffset(0xD0E160C35B723AC8);
-            return ref _Handle.AsRef<bool>(_PassWhenTrueOffset!.Value);
+            if (_PassWhenTrueOffset == -1) _PassWhenTrueOffset = Schema.GetOffset(0xD0E160C35B723AC8);
+            return ref _Handle.AsRef<bool>(_PassWhenTrueOffset);
         }
     }
 

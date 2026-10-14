@@ -16,14 +16,14 @@ internal partial class CScriptTriggerMultipleImpl : CTriggerMultipleImpl, CScrip
 {
     public CScriptTriggerMultipleImpl(nint handle) : base(handle) { }
 
-    private static nint? _ExtentOffset;
+    private static nint _ExtentOffset = -1;
 
     public ref Vector Extent
     {
         get
         {
-            _ExtentOffset = _ExtentOffset ?? Schema.GetOffset(0xE1F82C9B7AB1ED15);
-            return ref _Handle.AsRef<Vector>(_ExtentOffset!.Value);
+            if (_ExtentOffset == -1) _ExtentOffset = Schema.GetOffset(0xE1F82C9B7AB1ED15);
+            return ref _Handle.AsRef<Vector>(_ExtentOffset);
         }
     }
 

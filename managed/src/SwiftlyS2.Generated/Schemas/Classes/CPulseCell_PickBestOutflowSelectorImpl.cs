@@ -16,26 +16,26 @@ internal partial class CPulseCell_PickBestOutflowSelectorImpl : CPulseCell_BaseF
 {
     public CPulseCell_PickBestOutflowSelectorImpl(nint handle) : base(handle) { }
 
-    private static nint? _CheckTypeOffset;
+    private static nint _CheckTypeOffset = -1;
 
     public ref PulseBestOutflowRules_t CheckType
     {
         get
         {
-            _CheckTypeOffset = _CheckTypeOffset ?? Schema.GetOffset(0x7239DF04A94C6E6B);
-            return ref _Handle.AsRef<PulseBestOutflowRules_t>(_CheckTypeOffset!.Value);
+            if (_CheckTypeOffset == -1) _CheckTypeOffset = Schema.GetOffset(0x7239DF04A94C6E6B);
+            return ref _Handle.AsRef<PulseBestOutflowRules_t>(_CheckTypeOffset);
         }
     }
-    private static nint? _OutflowListOffset;
+    private static nint _OutflowListOffset = -1;
     private PulseSelectorOutflowList_tImpl? _OutflowListInstance;
 
     public PulseSelectorOutflowList_t OutflowList
     {
         get
         {
-            _OutflowListOffset = _OutflowListOffset ?? Schema.GetOffset(0x7239DF041461E743);
+            if (_OutflowListOffset == -1) _OutflowListOffset = Schema.GetOffset(0x7239DF041461E743);
             var instance = _OutflowListInstance ??= new PulseSelectorOutflowList_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutflowListOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutflowListOffset);
             return instance;
         }
     }

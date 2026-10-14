@@ -16,59 +16,59 @@ internal partial class CSndBeatTrackImpl : SchemaClass, CSndBeatTrack
 {
     public CSndBeatTrackImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3ADADD704D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x3ADADD704D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3ADADD704D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x3ADADD704D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _PlaybackTypeOffset;
+    private static nint _PlaybackTypeOffset = -1;
 
     public ref SndBeatTrackPlaybackType_t PlaybackType
     {
         get
         {
-            _PlaybackTypeOffset = _PlaybackTypeOffset ?? Schema.GetOffset(0x3ADADD702FA779E4);
-            return ref _Handle.AsRef<SndBeatTrackPlaybackType_t>(_PlaybackTypeOffset!.Value);
+            if (_PlaybackTypeOffset == -1) _PlaybackTypeOffset = Schema.GetOffset(0x3ADADD702FA779E4);
+            return ref _Handle.AsRef<SndBeatTrackPlaybackType_t>(_PlaybackTypeOffset);
         }
     }
-    private static nint? _TransposeOffset;
+    private static nint _TransposeOffset = -1;
 
     public ref int Transpose
     {
         get
         {
-            _TransposeOffset = _TransposeOffset ?? Schema.GetOffset(0x3ADADD7041B577D4);
-            return ref _Handle.AsRef<int>(_TransposeOffset!.Value);
+            if (_TransposeOffset == -1) _TransposeOffset = Schema.GetOffset(0x3ADADD7041B577D4);
+            return ref _Handle.AsRef<int>(_TransposeOffset);
         }
     }
-    private static nint? _SyncToVoiceOffset;
+    private static nint _SyncToVoiceOffset = -1;
 
     public ref bool SyncToVoice
     {
         get
         {
-            _SyncToVoiceOffset = _SyncToVoiceOffset ?? Schema.GetOffset(0x3ADADD70E5542463);
-            return ref _Handle.AsRef<bool>(_SyncToVoiceOffset!.Value);
+            if (_SyncToVoiceOffset == -1) _SyncToVoiceOffset = Schema.GetOffset(0x3ADADD70E5542463);
+            return ref _Handle.AsRef<bool>(_SyncToVoiceOffset);
         }
     }
-    private static nint? _BPMOffset;
+    private static nint _BPMOffset = -1;
 
     public ref float BPM
     {
         get
         {
-            _BPMOffset = _BPMOffset ?? Schema.GetOffset(0x3ADADD70E4D810F8);
-            return ref _Handle.AsRef<float>(_BPMOffset!.Value);
+            if (_BPMOffset == -1) _BPMOffset = Schema.GetOffset(0x3ADADD70E4D810F8);
+            return ref _Handle.AsRef<float>(_BPMOffset);
         }
     }
 

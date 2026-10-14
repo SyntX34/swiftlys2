@@ -16,37 +16,37 @@ internal partial class NmBoneMaskSetDefinition_tImpl : SchemaClass, NmBoneMaskSe
 {
     public NmBoneMaskSetDefinition_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0xEA12116095066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xEA12116095066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
         }
     }
-    private static nint? _PrimaryWeightListOffset;
+    private static nint _PrimaryWeightListOffset = -1;
     private CNmBoneWeightListImpl? _PrimaryWeightListInstance;
 
     public CNmBoneWeightList PrimaryWeightList
     {
         get
         {
-            _PrimaryWeightListOffset = _PrimaryWeightListOffset ?? Schema.GetOffset(0xEA1211603AF7FF49);
+            if (_PrimaryWeightListOffset == -1) _PrimaryWeightListOffset = Schema.GetOffset(0xEA1211603AF7FF49);
             var instance = _PrimaryWeightListInstance ??= new CNmBoneWeightListImpl(0);
-            instance.DangerousSetHandle(_Handle + _PrimaryWeightListOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PrimaryWeightListOffset);
             return instance;
         }
     }
-    private static nint? _SecondaryWeightListsOffset;
+    private static nint _SecondaryWeightListsOffset = -1;
 
     public ref CUtlLeanVector<CNmBoneWeightList, int> SecondaryWeightLists
     {
         get
         {
-            _SecondaryWeightListsOffset = _SecondaryWeightListsOffset ?? Schema.GetOffset(0xEA12116021DB2776);
-            return ref _Handle.AsRef<CUtlLeanVector<CNmBoneWeightList, int>>(_SecondaryWeightListsOffset!.Value);
+            if (_SecondaryWeightListsOffset == -1) _SecondaryWeightListsOffset = Schema.GetOffset(0xEA12116021DB2776);
+            return ref _Handle.AsRef<CUtlLeanVector<CNmBoneWeightList, int>>(_SecondaryWeightListsOffset);
         }
     }
 

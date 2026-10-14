@@ -19,6 +19,7 @@
 #ifndef src_api_server_players_player_h
 #define src_api_server_players_player_h
 
+#include <atomic>
 #include <cstdint>
 #include <string>
 
@@ -46,6 +47,27 @@ struct BlockedTransmitInfo
 {
     CBitVector<MAX_EDICTS> blockedTransmitBits;
     QueueMutex mutex;
+    std::atomic<int> blockedCount{0};
+
+    void Block(int entityidx)
+    {
+        if (blockedTransmitBits.IsBitSet(entityidx)) return;
+        blockedTransmitBits.Set(entityidx);
+        blockedCount.fetch_add(1, std::memory_order_relaxed);
+    }
+
+    void Unblock(int entityidx)
+    {
+        if (!blockedTransmitBits.IsBitSet(entityidx)) return;
+        blockedTransmitBits.Clear(entityidx);
+        blockedCount.fetch_sub(1, std::memory_order_relaxed);
+    }
+
+    void UnblockAll()
+    {
+        blockedTransmitBits.ClearAll();
+        blockedCount.store(0, std::memory_order_relaxed);
+    }
 };
 
 class IPlayer

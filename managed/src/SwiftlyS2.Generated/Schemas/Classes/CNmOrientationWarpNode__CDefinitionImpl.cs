@@ -16,74 +16,74 @@ internal partial class CNmOrientationWarpNode__CDefinitionImpl : CNmPoseNode__CD
 {
     public CNmOrientationWarpNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ClipReferenceNodeIdxOffset;
+    private static nint _ClipReferenceNodeIdxOffset = -1;
 
     public ref short ClipReferenceNodeIdx
     {
         get
         {
-            _ClipReferenceNodeIdxOffset = _ClipReferenceNodeIdxOffset ?? Schema.GetOffset(0x1265525761EC8947);
-            return ref _Handle.AsRef<short>(_ClipReferenceNodeIdxOffset!.Value);
+            if (_ClipReferenceNodeIdxOffset == -1) _ClipReferenceNodeIdxOffset = Schema.GetOffset(0x1265525761EC8947);
+            return ref _Handle.AsRef<short>(_ClipReferenceNodeIdxOffset);
         }
     }
-    private static nint? _TargetValueNodeIdxOffset;
+    private static nint _TargetValueNodeIdxOffset = -1;
 
     public ref short TargetValueNodeIdx
     {
         get
         {
-            _TargetValueNodeIdxOffset = _TargetValueNodeIdxOffset ?? Schema.GetOffset(0x12655257A040C7E8);
-            return ref _Handle.AsRef<short>(_TargetValueNodeIdxOffset!.Value);
+            if (_TargetValueNodeIdxOffset == -1) _TargetValueNodeIdxOffset = Schema.GetOffset(0x12655257A040C7E8);
+            return ref _Handle.AsRef<short>(_TargetValueNodeIdxOffset);
         }
     }
-    private static nint? _IsOffsetNodeOffset;
+    private static nint _IsOffsetNodeOffset = -1;
 
     public ref bool IsOffsetNode
     {
         get
         {
-            _IsOffsetNodeOffset = _IsOffsetNodeOffset ?? Schema.GetOffset(0x12655257174AF9D6);
-            return ref _Handle.AsRef<bool>(_IsOffsetNodeOffset!.Value);
+            if (_IsOffsetNodeOffset == -1) _IsOffsetNodeOffset = Schema.GetOffset(0x12655257174AF9D6);
+            return ref _Handle.AsRef<bool>(_IsOffsetNodeOffset);
         }
     }
-    private static nint? _IsOffsetRelativeToCharacterOffset;
+    private static nint _IsOffsetRelativeToCharacterOffset = -1;
 
     public ref bool IsOffsetRelativeToCharacter
     {
         get
         {
-            _IsOffsetRelativeToCharacterOffset = _IsOffsetRelativeToCharacterOffset ?? Schema.GetOffset(0x1265525793271816);
-            return ref _Handle.AsRef<bool>(_IsOffsetRelativeToCharacterOffset!.Value);
+            if (_IsOffsetRelativeToCharacterOffset == -1) _IsOffsetRelativeToCharacterOffset = Schema.GetOffset(0x1265525793271816);
+            return ref _Handle.AsRef<bool>(_IsOffsetRelativeToCharacterOffset);
         }
     }
-    private static nint? _WarpTranslationOffset;
+    private static nint _WarpTranslationOffset = -1;
 
     public ref bool WarpTranslation
     {
         get
         {
-            _WarpTranslationOffset = _WarpTranslationOffset ?? Schema.GetOffset(0x12655257AF94D4C6);
-            return ref _Handle.AsRef<bool>(_WarpTranslationOffset!.Value);
+            if (_WarpTranslationOffset == -1) _WarpTranslationOffset = Schema.GetOffset(0x12655257AF94D4C6);
+            return ref _Handle.AsRef<bool>(_WarpTranslationOffset);
         }
     }
-    private static nint? _AlignmentModeOffset;
+    private static nint _AlignmentModeOffset = -1;
 
     public ref CNmOrientationWarpNode__AlignmentMode_t AlignmentMode
     {
         get
         {
-            _AlignmentModeOffset = _AlignmentModeOffset ?? Schema.GetOffset(0x12655257A76010A5);
-            return ref _Handle.AsRef<CNmOrientationWarpNode__AlignmentMode_t>(_AlignmentModeOffset!.Value);
+            if (_AlignmentModeOffset == -1) _AlignmentModeOffset = Schema.GetOffset(0x12655257A76010A5);
+            return ref _Handle.AsRef<CNmOrientationWarpNode__AlignmentMode_t>(_AlignmentModeOffset);
         }
     }
-    private static nint? _SamplingModeOffset;
+    private static nint _SamplingModeOffset = -1;
 
     public ref CNmRootMotionData__SamplingMode_t SamplingMode
     {
         get
         {
-            _SamplingModeOffset = _SamplingModeOffset ?? Schema.GetOffset(0x12655257DDB31BE3);
-            return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset!.Value);
+            if (_SamplingModeOffset == -1) _SamplingModeOffset = Schema.GetOffset(0x12655257DDB31BE3);
+            return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset);
         }
     }
 

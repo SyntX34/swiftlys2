@@ -16,75 +16,75 @@ internal partial class C_INIT_PositionOffsetImpl : CParticleFunctionInitializerI
 {
     public C_INIT_PositionOffsetImpl(nint handle) : base(handle) { }
 
-    private static nint? _OffsetMinOffset;
+    private static nint _OffsetMinOffset = -1;
     private CPerParticleVecInputImpl? _OffsetMinInstance;
 
     public CPerParticleVecInput OffsetMin
     {
         get
         {
-            _OffsetMinOffset = _OffsetMinOffset ?? Schema.GetOffset(0x263FD76A7E1ECBDE);
+            if (_OffsetMinOffset == -1) _OffsetMinOffset = Schema.GetOffset(0x263FD76A7E1ECBDE);
             var instance = _OffsetMinInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OffsetMinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OffsetMinOffset);
             return instance;
         }
     }
-    private static nint? _OffsetMaxOffset;
+    private static nint _OffsetMaxOffset = -1;
     private CPerParticleVecInputImpl? _OffsetMaxInstance;
 
     public CPerParticleVecInput OffsetMax
     {
         get
         {
-            _OffsetMaxOffset = _OffsetMaxOffset ?? Schema.GetOffset(0x263FD76A9009CD7C);
+            if (_OffsetMaxOffset == -1) _OffsetMaxOffset = Schema.GetOffset(0x263FD76A9009CD7C);
             var instance = _OffsetMaxInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OffsetMaxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OffsetMaxOffset);
             return instance;
         }
     }
-    private static nint? _TransformInputOffset;
+    private static nint _TransformInputOffset = -1;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x263FD76AB3FDC289);
+            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0x263FD76AB3FDC289);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
             return instance;
         }
     }
-    private static nint? _LocalCoordsOffset;
+    private static nint _LocalCoordsOffset = -1;
 
     public ref bool LocalCoords
     {
         get
         {
-            _LocalCoordsOffset = _LocalCoordsOffset ?? Schema.GetOffset(0x263FD76A30E716DE);
-            return ref _Handle.AsRef<bool>(_LocalCoordsOffset!.Value);
+            if (_LocalCoordsOffset == -1) _LocalCoordsOffset = Schema.GetOffset(0x263FD76A30E716DE);
+            return ref _Handle.AsRef<bool>(_LocalCoordsOffset);
         }
     }
-    private static nint? _ProportionalOffset;
+    private static nint _ProportionalOffset = -1;
 
     public ref bool Proportional
     {
         get
         {
-            _ProportionalOffset = _ProportionalOffset ?? Schema.GetOffset(0x263FD76A891F328A);
-            return ref _Handle.AsRef<bool>(_ProportionalOffset!.Value);
+            if (_ProportionalOffset == -1) _ProportionalOffset = Schema.GetOffset(0x263FD76A891F328A);
+            return ref _Handle.AsRef<bool>(_ProportionalOffset);
         }
     }
-    private static nint? _RandomnessParametersOffset;
+    private static nint _RandomnessParametersOffset = -1;
     private CRandomNumberGeneratorParametersImpl? _RandomnessParametersInstance;
 
     public CRandomNumberGeneratorParameters RandomnessParameters
     {
         get
         {
-            _RandomnessParametersOffset = _RandomnessParametersOffset ?? Schema.GetOffset(0x263FD76A7EDF50AD);
+            if (_RandomnessParametersOffset == -1) _RandomnessParametersOffset = Schema.GetOffset(0x263FD76A7EDF50AD);
             var instance = _RandomnessParametersInstance ??= new CRandomNumberGeneratorParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset);
             return instance;
         }
     }

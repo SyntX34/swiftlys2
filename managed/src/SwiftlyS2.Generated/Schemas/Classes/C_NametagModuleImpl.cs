@@ -16,19 +16,19 @@ internal partial class C_NametagModuleImpl : C_CS2WeaponModuleBaseImpl, C_Nameta
 {
     public C_NametagModuleImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrNametagStringOffset;
+    private static nint _StrNametagStringOffset = -1;
 
     public string StrNametagString
     {
         get
         {
-            _StrNametagStringOffset = _StrNametagStringOffset ?? Schema.GetOffset(0x21AB1C5487C1D06C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrNametagStringOffset!.Value));
+            if (_StrNametagStringOffset == -1) _StrNametagStringOffset = Schema.GetOffset(0x21AB1C5487C1D06C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrNametagStringOffset));
         }
         set
         {
-            _StrNametagStringOffset = _StrNametagStringOffset ?? Schema.GetOffset(0x21AB1C5487C1D06C);
-            Schema.SetCUtlString(_Handle, _StrNametagStringOffset!.Value, value);
+            if (_StrNametagStringOffset == -1) _StrNametagStringOffset = Schema.GetOffset(0x21AB1C5487C1D06C);
+            Schema.SetCUtlString(_Handle, _StrNametagStringOffset, value);
         }
     }
 

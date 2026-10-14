@@ -16,53 +16,53 @@ internal partial class CompositeMaterial_tImpl : SchemaClass, CompositeMaterial_
 {
     public CompositeMaterial_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _TargetKVsOffset;
+    private static nint _TargetKVsOffset = -1;
     private SchemaUntypedField? _TargetKVsInstance;
 
     public SchemaUntypedField TargetKVs
     {
         get
         {
-            _TargetKVsOffset = _TargetKVsOffset ?? Schema.GetOffset(0x377DD636D0B16C4A);
+            if (_TargetKVsOffset == -1) _TargetKVsOffset = Schema.GetOffset(0x377DD636D0B16C4A);
             var instance = _TargetKVsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TargetKVsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TargetKVsOffset);
             return instance;
         }
     }
-    private static nint? _PreGenerationKVsOffset;
+    private static nint _PreGenerationKVsOffset = -1;
     private SchemaUntypedField? _PreGenerationKVsInstance;
 
     public SchemaUntypedField PreGenerationKVs
     {
         get
         {
-            _PreGenerationKVsOffset = _PreGenerationKVsOffset ?? Schema.GetOffset(0x377DD636899F61EA);
+            if (_PreGenerationKVsOffset == -1) _PreGenerationKVsOffset = Schema.GetOffset(0x377DD636899F61EA);
             var instance = _PreGenerationKVsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PreGenerationKVsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PreGenerationKVsOffset);
             return instance;
         }
     }
-    private static nint? _FinalKVsOffset;
+    private static nint _FinalKVsOffset = -1;
     private SchemaUntypedField? _FinalKVsInstance;
 
     public SchemaUntypedField FinalKVs
     {
         get
         {
-            _FinalKVsOffset = _FinalKVsOffset ?? Schema.GetOffset(0x377DD636ED5FE46F);
+            if (_FinalKVsOffset == -1) _FinalKVsOffset = Schema.GetOffset(0x377DD636ED5FE46F);
             var instance = _FinalKVsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FinalKVsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FinalKVsOffset);
             return instance;
         }
     }
-    private static nint? _GeneratedTexturesOffset;
+    private static nint _GeneratedTexturesOffset = -1;
 
     public ref CUtlVector<GeneratedTextureHandle_t> GeneratedTextures
     {
         get
         {
-            _GeneratedTexturesOffset = _GeneratedTexturesOffset ?? Schema.GetOffset(0x377DD636EEB6BB92);
-            return ref _Handle.AsRef<CUtlVector<GeneratedTextureHandle_t>>(_GeneratedTexturesOffset!.Value);
+            if (_GeneratedTexturesOffset == -1) _GeneratedTexturesOffset = Schema.GetOffset(0x377DD636EEB6BB92);
+            return ref _Handle.AsRef<CUtlVector<GeneratedTextureHandle_t>>(_GeneratedTexturesOffset);
         }
     }
 

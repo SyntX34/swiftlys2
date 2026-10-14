@@ -16,14 +16,14 @@ internal partial class EventServerEndSimulate_tImpl : SchemaClass, EventServerEn
 {
     public EventServerEndSimulate_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _LastTickOffset;
+    private static nint _LastTickOffset = -1;
 
     public ref bool LastTick
     {
         get
         {
-            _LastTickOffset = _LastTickOffset ?? Schema.GetOffset(0xDDD446A81704CC30);
-            return ref _Handle.AsRef<bool>(_LastTickOffset!.Value);
+            if (_LastTickOffset == -1) _LastTickOffset = Schema.GetOffset(0xDDD446A81704CC30);
+            return ref _Handle.AsRef<bool>(_LastTickOffset);
         }
     }
 

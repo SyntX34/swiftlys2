@@ -16,44 +16,44 @@ internal partial class CWayPointHelperInstanceDataImpl : SchemaClass, CWayPointH
 {
     public CWayPointHelperInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _MovementOffset;
+    private static nint _MovementOffset = -1;
 
     public ref Vector Movement
     {
         get
         {
-            _MovementOffset = _MovementOffset ?? Schema.GetOffset(0x2B35DC8AC72B27FC);
-            return ref _Handle.AsRef<Vector>(_MovementOffset!.Value);
+            if (_MovementOffset == -1) _MovementOffset = Schema.GetOffset(0x2B35DC8AC72B27FC);
+            return ref _Handle.AsRef<Vector>(_MovementOffset);
         }
     }
-    private static nint? _RotationOffset;
+    private static nint _RotationOffset = -1;
 
     public ref QAngle Rotation
     {
         get
         {
-            _RotationOffset = _RotationOffset ?? Schema.GetOffset(0x2B35DC8A379AFF0B);
-            return ref _Handle.AsRef<QAngle>(_RotationOffset!.Value);
+            if (_RotationOffset == -1) _RotationOffset = Schema.GetOffset(0x2B35DC8A379AFF0B);
+            return ref _Handle.AsRef<QAngle>(_RotationOffset);
         }
     }
-    private static nint? _WaypointPosWSOffset;
+    private static nint _WaypointPosWSOffset = -1;
 
     public ref Vector WaypointPosWS
     {
         get
         {
-            _WaypointPosWSOffset = _WaypointPosWSOffset ?? Schema.GetOffset(0x2B35DC8AE6239AAE);
-            return ref _Handle.AsRef<Vector>(_WaypointPosWSOffset!.Value);
+            if (_WaypointPosWSOffset == -1) _WaypointPosWSOffset = Schema.GetOffset(0x2B35DC8AE6239AAE);
+            return ref _Handle.AsRef<Vector>(_WaypointPosWSOffset);
         }
     }
-    private static nint? _StopUpdatingWaypointPosOffset;
+    private static nint _StopUpdatingWaypointPosOffset = -1;
 
     public ref bool StopUpdatingWaypointPos
     {
         get
         {
-            _StopUpdatingWaypointPosOffset = _StopUpdatingWaypointPosOffset ?? Schema.GetOffset(0x2B35DC8A6867CCDA);
-            return ref _Handle.AsRef<bool>(_StopUpdatingWaypointPosOffset!.Value);
+            if (_StopUpdatingWaypointPosOffset == -1) _StopUpdatingWaypointPosOffset = Schema.GetOffset(0x2B35DC8A6867CCDA);
+            return ref _Handle.AsRef<bool>(_StopUpdatingWaypointPosOffset);
         }
     }
 

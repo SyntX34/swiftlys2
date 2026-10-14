@@ -16,37 +16,37 @@ internal partial class C_OP_DiffusionImpl : CParticleFunctionOperatorImpl, C_OP_
 {
     public C_OP_DiffusionImpl(nint handle) : base(handle) { }
 
-    private static nint? _RadiusScaleOffset;
+    private static nint _RadiusScaleOffset = -1;
 
     public ref float RadiusScale
     {
         get
         {
-            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x2D5ABEF4A7A20159);
-            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0x2D5ABEF4A7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset);
         }
     }
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x2D5ABEF4E5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x2D5ABEF4E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _VoxelGridResolutionOffset;
+    private static nint _VoxelGridResolutionOffset = -1;
 
     public ref int VoxelGridResolution
     {
         get
         {
-            _VoxelGridResolutionOffset = _VoxelGridResolutionOffset ?? Schema.GetOffset(0x2D5ABEF45AA7D7ED);
-            return ref _Handle.AsRef<int>(_VoxelGridResolutionOffset!.Value);
+            if (_VoxelGridResolutionOffset == -1) _VoxelGridResolutionOffset = Schema.GetOffset(0x2D5ABEF45AA7D7ED);
+            return ref _Handle.AsRef<int>(_VoxelGridResolutionOffset);
         }
     }
 

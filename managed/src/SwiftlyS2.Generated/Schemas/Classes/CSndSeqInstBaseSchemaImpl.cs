@@ -16,54 +16,54 @@ internal partial class CSndSeqInstBaseSchemaImpl : SchemaClass, CSndSeqInstBaseS
 {
     public CSndSeqInstBaseSchemaImpl(nint handle) : base(handle) { }
 
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref SndSeqInstrumentType_t Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xEEA54D3618853D59);
-            return ref _Handle.AsRef<SndSeqInstrumentType_t>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0xEEA54D3618853D59);
+            return ref _Handle.AsRef<SndSeqInstrumentType_t>(_TypeOffset);
         }
     }
-    private static nint? _StopCurrentEventsOffset;
+    private static nint _StopCurrentEventsOffset = -1;
 
     public ref bool StopCurrentEvents
     {
         get
         {
-            _StopCurrentEventsOffset = _StopCurrentEventsOffset ?? Schema.GetOffset(0xEEA54D3613A9CEBF);
-            return ref _Handle.AsRef<bool>(_StopCurrentEventsOffset!.Value);
+            if (_StopCurrentEventsOffset == -1) _StopCurrentEventsOffset = Schema.GetOffset(0xEEA54D3613A9CEBF);
+            return ref _Handle.AsRef<bool>(_StopCurrentEventsOffset);
         }
     }
-    private static nint? _BPMOffset;
+    private static nint _BPMOffset = -1;
 
     public ref float BPM
     {
         get
         {
-            _BPMOffset = _BPMOffset ?? Schema.GetOffset(0xEEA54D36E4D810F8);
-            return ref _Handle.AsRef<float>(_BPMOffset!.Value);
+            if (_BPMOffset == -1) _BPMOffset = Schema.GetOffset(0xEEA54D36E4D810F8);
+            return ref _Handle.AsRef<float>(_BPMOffset);
         }
     }
-    private static nint? _BPMFactorOffset;
+    private static nint _BPMFactorOffset = -1;
 
     public ref float BPMFactor
     {
         get
         {
-            _BPMFactorOffset = _BPMFactorOffset ?? Schema.GetOffset(0xEEA54D36DC81506B);
-            return ref _Handle.AsRef<float>(_BPMFactorOffset!.Value);
+            if (_BPMFactorOffset == -1) _BPMFactorOffset = Schema.GetOffset(0xEEA54D36DC81506B);
+            return ref _Handle.AsRef<float>(_BPMFactorOffset);
         }
     }
-    private static nint? _BPMInvFactorOffset;
+    private static nint _BPMInvFactorOffset = -1;
 
     public ref float BPMInvFactor
     {
         get
         {
-            _BPMInvFactorOffset = _BPMInvFactorOffset ?? Schema.GetOffset(0xEEA54D365569EE9C);
-            return ref _Handle.AsRef<float>(_BPMInvFactorOffset!.Value);
+            if (_BPMInvFactorOffset == -1) _BPMInvFactorOffset = Schema.GetOffset(0xEEA54D365569EE9C);
+            return ref _Handle.AsRef<float>(_BPMInvFactorOffset);
         }
     }
 

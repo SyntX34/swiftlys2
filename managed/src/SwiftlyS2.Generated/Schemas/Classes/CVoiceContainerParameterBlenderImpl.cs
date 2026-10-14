@@ -16,101 +16,101 @@ internal partial class CVoiceContainerParameterBlenderImpl : CVoiceContainerBase
 {
     public CVoiceContainerParameterBlenderImpl(nint handle) : base(handle) { }
 
-    private static nint? _FirstSoundOffset;
+    private static nint _FirstSoundOffset = -1;
     private CSoundContainerReferenceImpl? _FirstSoundInstance;
 
     public CSoundContainerReference FirstSound
     {
         get
         {
-            _FirstSoundOffset = _FirstSoundOffset ?? Schema.GetOffset(0xEC5F1A42666B0138);
+            if (_FirstSoundOffset == -1) _FirstSoundOffset = Schema.GetOffset(0xEC5F1A42666B0138);
             var instance = _FirstSoundInstance ??= new CSoundContainerReferenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _FirstSoundOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FirstSoundOffset);
             return instance;
         }
     }
-    private static nint? _SecondSoundOffset;
+    private static nint _SecondSoundOffset = -1;
     private CSoundContainerReferenceImpl? _SecondSoundInstance;
 
     public CSoundContainerReference SecondSound
     {
         get
         {
-            _SecondSoundOffset = _SecondSoundOffset ?? Schema.GetOffset(0xEC5F1A42A2BC3E5C);
+            if (_SecondSoundOffset == -1) _SecondSoundOffset = Schema.GetOffset(0xEC5F1A42A2BC3E5C);
             var instance = _SecondSoundInstance ??= new CSoundContainerReferenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SecondSoundOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SecondSoundOffset);
             return instance;
         }
     }
-    private static nint? _EnableOcclusionBlendOffset;
+    private static nint _EnableOcclusionBlendOffset = -1;
 
     public ref bool EnableOcclusionBlend
     {
         get
         {
-            _EnableOcclusionBlendOffset = _EnableOcclusionBlendOffset ?? Schema.GetOffset(0xEC5F1A42041C67C2);
-            return ref _Handle.AsRef<bool>(_EnableOcclusionBlendOffset!.Value);
+            if (_EnableOcclusionBlendOffset == -1) _EnableOcclusionBlendOffset = Schema.GetOffset(0xEC5F1A42041C67C2);
+            return ref _Handle.AsRef<bool>(_EnableOcclusionBlendOffset);
         }
     }
-    private static nint? _Curve1Offset;
+    private static nint _Curve1Offset = -1;
     private SchemaUntypedField? _Curve1Instance;
 
     public SchemaUntypedField Curve1
     {
         get
         {
-            _Curve1Offset = _Curve1Offset ?? Schema.GetOffset(0xEC5F1A423B9F58DF);
+            if (_Curve1Offset == -1) _Curve1Offset = Schema.GetOffset(0xEC5F1A423B9F58DF);
             var instance = _Curve1Instance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _Curve1Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Curve1Offset);
             return instance;
         }
     }
-    private static nint? _Curve2Offset;
+    private static nint _Curve2Offset = -1;
     private SchemaUntypedField? _Curve2Instance;
 
     public SchemaUntypedField Curve2
     {
         get
         {
-            _Curve2Offset = _Curve2Offset ?? Schema.GetOffset(0xEC5F1A423C9F5A72);
+            if (_Curve2Offset == -1) _Curve2Offset = Schema.GetOffset(0xEC5F1A423C9F5A72);
             var instance = _Curve2Instance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _Curve2Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Curve2Offset);
             return instance;
         }
     }
-    private static nint? _EnableDistanceBlendOffset;
+    private static nint _EnableDistanceBlendOffset = -1;
 
     public ref bool EnableDistanceBlend
     {
         get
         {
-            _EnableDistanceBlendOffset = _EnableDistanceBlendOffset ?? Schema.GetOffset(0xEC5F1A428EDC5388);
-            return ref _Handle.AsRef<bool>(_EnableDistanceBlendOffset!.Value);
+            if (_EnableDistanceBlendOffset == -1) _EnableDistanceBlendOffset = Schema.GetOffset(0xEC5F1A428EDC5388);
+            return ref _Handle.AsRef<bool>(_EnableDistanceBlendOffset);
         }
     }
-    private static nint? _Curve3Offset;
+    private static nint _Curve3Offset = -1;
     private SchemaUntypedField? _Curve3Instance;
 
     public SchemaUntypedField Curve3
     {
         get
         {
-            _Curve3Offset = _Curve3Offset ?? Schema.GetOffset(0xEC5F1A423D9F5C05);
+            if (_Curve3Offset == -1) _Curve3Offset = Schema.GetOffset(0xEC5F1A423D9F5C05);
             var instance = _Curve3Instance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _Curve3Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Curve3Offset);
             return instance;
         }
     }
-    private static nint? _Curve4Offset;
+    private static nint _Curve4Offset = -1;
     private SchemaUntypedField? _Curve4Instance;
 
     public SchemaUntypedField Curve4
     {
         get
         {
-            _Curve4Offset = _Curve4Offset ?? Schema.GetOffset(0xEC5F1A42369F5100);
+            if (_Curve4Offset == -1) _Curve4Offset = Schema.GetOffset(0xEC5F1A42369F5100);
             var instance = _Curve4Instance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _Curve4Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Curve4Offset);
             return instance;
         }
     }

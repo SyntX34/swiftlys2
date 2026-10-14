@@ -16,39 +16,39 @@ internal partial class CCSPlayer_UseServicesImpl : CPlayer_UseServicesImpl, CCSP
 {
     public CCSPlayer_UseServicesImpl(nint handle) : base(handle) { }
 
-    private static nint? _LastKnownUseEntityOffset;
+    private static nint _LastKnownUseEntityOffset = -1;
 
     public ref CHandle<CBaseEntity> LastKnownUseEntity
     {
         get
         {
-            _LastKnownUseEntityOffset = _LastKnownUseEntityOffset ?? Schema.GetOffset(0xE5F718912806F946);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LastKnownUseEntityOffset!.Value);
+            if (_LastKnownUseEntityOffset == -1) _LastKnownUseEntityOffset = Schema.GetOffset(0xE5F718912806F946);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LastKnownUseEntityOffset);
         }
     }
-    private static nint? _LastUseTimeStampOffset;
+    private static nint _LastUseTimeStampOffset = -1;
     private GameTime_tImpl? _LastUseTimeStampInstance;
 
     public GameTime_t LastUseTimeStamp
     {
         get
         {
-            _LastUseTimeStampOffset = _LastUseTimeStampOffset ?? Schema.GetOffset(0xE5F7189104BF376E);
+            if (_LastUseTimeStampOffset == -1) _LastUseTimeStampOffset = Schema.GetOffset(0xE5F7189104BF376E);
             var instance = _LastUseTimeStampInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastUseTimeStampOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LastUseTimeStampOffset);
             return instance;
         }
     }
-    private static nint? _TimeLastUsedWindowOffset;
+    private static nint _TimeLastUsedWindowOffset = -1;
     private GameTime_tImpl? _TimeLastUsedWindowInstance;
 
     public GameTime_t TimeLastUsedWindow
     {
         get
         {
-            _TimeLastUsedWindowOffset = _TimeLastUsedWindowOffset ?? Schema.GetOffset(0xE5F7189165762AEB);
+            if (_TimeLastUsedWindowOffset == -1) _TimeLastUsedWindowOffset = Schema.GetOffset(0xE5F7189165762AEB);
             var instance = _TimeLastUsedWindowInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TimeLastUsedWindowOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TimeLastUsedWindowOffset);
             return instance;
         }
     }

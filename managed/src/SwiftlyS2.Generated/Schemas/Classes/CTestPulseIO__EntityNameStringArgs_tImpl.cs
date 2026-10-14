@@ -16,32 +16,32 @@ internal partial class CTestPulseIO__EntityNameStringArgs_tImpl : SchemaClass, C
 {
     public CTestPulseIO__EntityNameStringArgs_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameAOffset;
+    private static nint _NameAOffset = -1;
     private SchemaUntypedField? _NameAInstance;
 
     public SchemaUntypedField NameA
     {
         get
         {
-            _NameAOffset = _NameAOffset ?? Schema.GetOffset(0xD922F2E0F8E58DE5);
+            if (_NameAOffset == -1) _NameAOffset = Schema.GetOffset(0xD922F2E0F8E58DE5);
             var instance = _NameAInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NameAOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NameAOffset);
             return instance;
         }
     }
-    private static nint? _StrValueBOffset;
+    private static nint _StrValueBOffset = -1;
 
     public string StrValueB
     {
         get
         {
-            _StrValueBOffset = _StrValueBOffset ?? Schema.GetOffset(0xD922F2E08F89A299);
-            return Schema.GetString(_Handle.Read<nint>(_StrValueBOffset!.Value));
+            if (_StrValueBOffset == -1) _StrValueBOffset = Schema.GetOffset(0xD922F2E08F89A299);
+            return Schema.GetString(_Handle.Read<nint>(_StrValueBOffset));
         }
         set
         {
-            _StrValueBOffset = _StrValueBOffset ?? Schema.GetOffset(0xD922F2E08F89A299);
-            Schema.SetString(_Handle, _StrValueBOffset!.Value, value);
+            if (_StrValueBOffset == -1) _StrValueBOffset = Schema.GetOffset(0xD922F2E08F89A299);
+            Schema.SetString(_Handle, _StrValueBOffset, value);
         }
     }
 

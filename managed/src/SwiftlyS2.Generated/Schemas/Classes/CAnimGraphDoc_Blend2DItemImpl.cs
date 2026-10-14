@@ -16,34 +16,34 @@ internal partial class CAnimGraphDoc_Blend2DItemImpl : SchemaClass, CAnimGraphDo
 {
     public CAnimGraphDoc_Blend2DItemImpl(nint handle) : base(handle) { }
 
-    private static nint? _BlendValueOffset;
+    private static nint _BlendValueOffset = -1;
 
     public ref Vector2D BlendValue
     {
         get
         {
-            _BlendValueOffset = _BlendValueOffset ?? Schema.GetOffset(0x30FB42F0EB055369);
-            return ref _Handle.AsRef<Vector2D>(_BlendValueOffset!.Value);
+            if (_BlendValueOffset == -1) _BlendValueOffset = Schema.GetOffset(0x30FB42F0EB055369);
+            return ref _Handle.AsRef<Vector2D>(_BlendValueOffset);
         }
     }
-    private static nint? _UseCustomDurationOffset;
+    private static nint _UseCustomDurationOffset = -1;
 
     public ref bool UseCustomDuration
     {
         get
         {
-            _UseCustomDurationOffset = _UseCustomDurationOffset ?? Schema.GetOffset(0x30FB42F0F9BF05AB);
-            return ref _Handle.AsRef<bool>(_UseCustomDurationOffset!.Value);
+            if (_UseCustomDurationOffset == -1) _UseCustomDurationOffset = Schema.GetOffset(0x30FB42F0F9BF05AB);
+            return ref _Handle.AsRef<bool>(_UseCustomDurationOffset);
         }
     }
-    private static nint? _CustomDurationOffset;
+    private static nint _CustomDurationOffset = -1;
 
     public ref float CustomDuration
     {
         get
         {
-            _CustomDurationOffset = _CustomDurationOffset ?? Schema.GetOffset(0x30FB42F07493C5D4);
-            return ref _Handle.AsRef<float>(_CustomDurationOffset!.Value);
+            if (_CustomDurationOffset == -1) _CustomDurationOffset = Schema.GetOffset(0x30FB42F07493C5D4);
+            return ref _Handle.AsRef<float>(_CustomDurationOffset);
         }
     }
 

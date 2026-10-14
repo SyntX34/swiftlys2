@@ -16,44 +16,44 @@ internal partial class MaterialOverride_tImpl : BaseSceneObjectOverride_tImpl, M
 {
     public MaterialOverride_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SubSceneObjectOffset;
+    private static nint _SubSceneObjectOffset = -1;
 
     public ref uint SubSceneObject
     {
         get
         {
-            _SubSceneObjectOffset = _SubSceneObjectOffset ?? Schema.GetOffset(0xFB7BFECB55C3CCBC);
-            return ref _Handle.AsRef<uint>(_SubSceneObjectOffset!.Value);
+            if (_SubSceneObjectOffset == -1) _SubSceneObjectOffset = Schema.GetOffset(0xFB7BFECB55C3CCBC);
+            return ref _Handle.AsRef<uint>(_SubSceneObjectOffset);
         }
     }
-    private static nint? _DrawCallIndexOffset;
+    private static nint _DrawCallIndexOffset = -1;
 
     public ref uint DrawCallIndex
     {
         get
         {
-            _DrawCallIndexOffset = _DrawCallIndexOffset ?? Schema.GetOffset(0xFB7BFECBFA5614D5);
-            return ref _Handle.AsRef<uint>(_DrawCallIndexOffset!.Value);
+            if (_DrawCallIndexOffset == -1) _DrawCallIndexOffset = Schema.GetOffset(0xFB7BFECBFA5614D5);
+            return ref _Handle.AsRef<uint>(_DrawCallIndexOffset);
         }
     }
-    private static nint? _MaterialOffset;
+    private static nint _MaterialOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material
     {
         get
         {
-            _MaterialOffset = _MaterialOffset ?? Schema.GetOffset(0xFB7BFECB972B1076);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+            if (_MaterialOffset == -1) _MaterialOffset = Schema.GetOffset(0xFB7BFECB972B1076);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset);
         }
     }
-    private static nint? _LinearTintColorOffset;
+    private static nint _LinearTintColorOffset = -1;
 
     public ref Vector LinearTintColor
     {
         get
         {
-            _LinearTintColorOffset = _LinearTintColorOffset ?? Schema.GetOffset(0xFB7BFECB6901D28C);
-            return ref _Handle.AsRef<Vector>(_LinearTintColorOffset!.Value);
+            if (_LinearTintColorOffset == -1) _LinearTintColorOffset = Schema.GetOffset(0xFB7BFECB6901D28C);
+            return ref _Handle.AsRef<Vector>(_LinearTintColorOffset);
         }
     }
 

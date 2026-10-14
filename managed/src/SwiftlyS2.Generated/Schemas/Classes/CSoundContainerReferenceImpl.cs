@@ -16,50 +16,50 @@ internal partial class CSoundContainerReferenceImpl : SchemaClass, CSoundContain
 {
     public CSoundContainerReferenceImpl(nint handle) : base(handle) { }
 
-    private static nint? _NamespaceOffset;
+    private static nint _NamespaceOffset = -1;
 
     public string Namespace
     {
         get
         {
-            _NamespaceOffset = _NamespaceOffset ?? Schema.GetOffset(0x4663CCA16245CFC0);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NamespaceOffset!.Value));
+            if (_NamespaceOffset == -1) _NamespaceOffset = Schema.GetOffset(0x4663CCA16245CFC0);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NamespaceOffset));
         }
         set
         {
-            _NamespaceOffset = _NamespaceOffset ?? Schema.GetOffset(0x4663CCA16245CFC0);
-            Schema.SetCUtlString(_Handle, _NamespaceOffset!.Value, value);
+            if (_NamespaceOffset == -1) _NamespaceOffset = Schema.GetOffset(0x4663CCA16245CFC0);
+            Schema.SetCUtlString(_Handle, _NamespaceOffset, value);
         }
     }
-    private static nint? _UseReferenceOffset;
+    private static nint _UseReferenceOffset = -1;
 
     public ref bool UseReference
     {
         get
         {
-            _UseReferenceOffset = _UseReferenceOffset ?? Schema.GetOffset(0x4663CCA145BCD5C9);
-            return ref _Handle.AsRef<bool>(_UseReferenceOffset!.Value);
+            if (_UseReferenceOffset == -1) _UseReferenceOffset = Schema.GetOffset(0x4663CCA145BCD5C9);
+            return ref _Handle.AsRef<bool>(_UseReferenceOffset);
         }
     }
-    private static nint? _SoundOffset;
+    private static nint _SoundOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> Sound
     {
         get
         {
-            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x4663CCA14E1C4FB4);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SoundOffset!.Value);
+            if (_SoundOffset == -1) _SoundOffset = Schema.GetOffset(0x4663CCA14E1C4FB4);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SoundOffset);
         }
     }
-    private static nint? _Sound1Offset;
+    private static nint _Sound1Offset = -1;
     private CVoiceContainerBaseImpl? _Sound1Instance;
 
     public CVoiceContainerBase? Sound1
     {
         get
         {
-            _Sound1Offset = _Sound1Offset ?? Schema.GetOffset(0x4663CCA13D8D58B6);
-            var ptr = _Handle.Read<nint>(_Sound1Offset!.Value);
+            if (_Sound1Offset == -1) _Sound1Offset = Schema.GetOffset(0x4663CCA13D8D58B6);
+            var ptr = _Handle.Read<nint>(_Sound1Offset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _Sound1Instance ??= new CVoiceContainerBaseImpl(0);
             instance.DangerousSetHandle(ptr);

@@ -16,159 +16,159 @@ internal partial class CVoteControllerImpl : CBaseEntityImpl, CVoteController
 {
     public CVoteControllerImpl(nint handle) : base(handle) { }
 
-    private static nint? _ActiveIssueIndexOffset;
+    private static nint _ActiveIssueIndexOffset = -1;
 
     public ref int ActiveIssueIndex
     {
         get
         {
-            _ActiveIssueIndexOffset = _ActiveIssueIndexOffset ?? Schema.GetOffset(0x6F560B06D557A463);
-            return ref _Handle.AsRef<int>(_ActiveIssueIndexOffset!.Value);
+            if (_ActiveIssueIndexOffset == -1) _ActiveIssueIndexOffset = Schema.GetOffset(0x6F560B06D557A463);
+            return ref _Handle.AsRef<int>(_ActiveIssueIndexOffset);
         }
     }
-    private static nint? _OnlyTeamToVoteOffset;
+    private static nint _OnlyTeamToVoteOffset = -1;
 
     public ref int OnlyTeamToVote
     {
         get
         {
-            _OnlyTeamToVoteOffset = _OnlyTeamToVoteOffset ?? Schema.GetOffset(0x6F560B06C957B8C6);
-            return ref _Handle.AsRef<int>(_OnlyTeamToVoteOffset!.Value);
+            if (_OnlyTeamToVoteOffset == -1) _OnlyTeamToVoteOffset = Schema.GetOffset(0x6F560B06C957B8C6);
+            return ref _Handle.AsRef<int>(_OnlyTeamToVoteOffset);
         }
     }
-    private static nint? _VoteOptionCountOffset;
+    private static nint _VoteOptionCountOffset = -1;
     private SchemaFixedArray<int>? _VoteOptionCountInstance;
 
     public ISchemaFixedArray<int> VoteOptionCount
     {
         get
         {
-            _VoteOptionCountOffset = _VoteOptionCountOffset ?? Schema.GetOffset(0x6F560B0614DBD0DF);
+            if (_VoteOptionCountOffset == -1) _VoteOptionCountOffset = Schema.GetOffset(0x6F560B0614DBD0DF);
             var instance = _VoteOptionCountInstance ??= new SchemaFixedArray<int>(0, 0x6F560B0614DBD0DF, 5, 4, 4);
-            instance.DangerousSetHandle(_Handle + _VoteOptionCountOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VoteOptionCountOffset);
             return instance;
         }
     }
-    private static nint? _PotentialVotesOffset;
+    private static nint _PotentialVotesOffset = -1;
 
     public ref int PotentialVotes
     {
         get
         {
-            _PotentialVotesOffset = _PotentialVotesOffset ?? Schema.GetOffset(0x6F560B060198673E);
-            return ref _Handle.AsRef<int>(_PotentialVotesOffset!.Value);
+            if (_PotentialVotesOffset == -1) _PotentialVotesOffset = Schema.GetOffset(0x6F560B060198673E);
+            return ref _Handle.AsRef<int>(_PotentialVotesOffset);
         }
     }
-    private static nint? _IsYesNoVoteOffset;
+    private static nint _IsYesNoVoteOffset = -1;
 
     public ref bool IsYesNoVote
     {
         get
         {
-            _IsYesNoVoteOffset = _IsYesNoVoteOffset ?? Schema.GetOffset(0x6F560B069A553B97);
-            return ref _Handle.AsRef<bool>(_IsYesNoVoteOffset!.Value);
+            if (_IsYesNoVoteOffset == -1) _IsYesNoVoteOffset = Schema.GetOffset(0x6F560B069A553B97);
+            return ref _Handle.AsRef<bool>(_IsYesNoVoteOffset);
         }
     }
-    private static nint? _AcceptingVotesTimerOffset;
+    private static nint _AcceptingVotesTimerOffset = -1;
     private CountdownTimerImpl? _AcceptingVotesTimerInstance;
 
     public CountdownTimer AcceptingVotesTimer
     {
         get
         {
-            _AcceptingVotesTimerOffset = _AcceptingVotesTimerOffset ?? Schema.GetOffset(0x6F560B069E336B15);
+            if (_AcceptingVotesTimerOffset == -1) _AcceptingVotesTimerOffset = Schema.GetOffset(0x6F560B069E336B15);
             var instance = _AcceptingVotesTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _AcceptingVotesTimerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AcceptingVotesTimerOffset);
             return instance;
         }
     }
-    private static nint? _ExecuteCommandTimerOffset;
+    private static nint _ExecuteCommandTimerOffset = -1;
     private CountdownTimerImpl? _ExecuteCommandTimerInstance;
 
     public CountdownTimer ExecuteCommandTimer
     {
         get
         {
-            _ExecuteCommandTimerOffset = _ExecuteCommandTimerOffset ?? Schema.GetOffset(0x6F560B06CAF2ECEE);
+            if (_ExecuteCommandTimerOffset == -1) _ExecuteCommandTimerOffset = Schema.GetOffset(0x6F560B06CAF2ECEE);
             var instance = _ExecuteCommandTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ExecuteCommandTimerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ExecuteCommandTimerOffset);
             return instance;
         }
     }
-    private static nint? _ResetVoteTimerOffset;
+    private static nint _ResetVoteTimerOffset = -1;
     private CountdownTimerImpl? _ResetVoteTimerInstance;
 
     public CountdownTimer ResetVoteTimer
     {
         get
         {
-            _ResetVoteTimerOffset = _ResetVoteTimerOffset ?? Schema.GetOffset(0x6F560B06B54CD305);
+            if (_ResetVoteTimerOffset == -1) _ResetVoteTimerOffset = Schema.GetOffset(0x6F560B06B54CD305);
             var instance = _ResetVoteTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ResetVoteTimerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ResetVoteTimerOffset);
             return instance;
         }
     }
-    private static nint? _VotesCastOffset;
+    private static nint _VotesCastOffset = -1;
     private SchemaFixedArray<int>? _VotesCastInstance;
 
     public ISchemaFixedArray<int> VotesCast
     {
         get
         {
-            _VotesCastOffset = _VotesCastOffset ?? Schema.GetOffset(0x6F560B060247527D);
+            if (_VotesCastOffset == -1) _VotesCastOffset = Schema.GetOffset(0x6F560B060247527D);
             var instance = _VotesCastInstance ??= new SchemaFixedArray<int>(0, 0x6F560B060247527D, 64, 4, 4);
-            instance.DangerousSetHandle(_Handle + _VotesCastOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VotesCastOffset);
             return instance;
         }
     }
-    private static nint? _PlayerHoldingVoteOffset;
+    private static nint _PlayerHoldingVoteOffset = -1;
 
     public ref uint PlayerHoldingVote
     {
         get
         {
-            _PlayerHoldingVoteOffset = _PlayerHoldingVoteOffset ?? Schema.GetOffset(0x6F560B06C170B10B);
-            return ref _Handle.AsRef<uint>(_PlayerHoldingVoteOffset!.Value);
+            if (_PlayerHoldingVoteOffset == -1) _PlayerHoldingVoteOffset = Schema.GetOffset(0x6F560B06C170B10B);
+            return ref _Handle.AsRef<uint>(_PlayerHoldingVoteOffset);
         }
     }
-    private static nint? _PlayerOverrideForVoteOffset;
+    private static nint _PlayerOverrideForVoteOffset = -1;
 
     public ref uint PlayerOverrideForVote
     {
         get
         {
-            _PlayerOverrideForVoteOffset = _PlayerOverrideForVoteOffset ?? Schema.GetOffset(0x6F560B06BF6B0097);
-            return ref _Handle.AsRef<uint>(_PlayerOverrideForVoteOffset!.Value);
+            if (_PlayerOverrideForVoteOffset == -1) _PlayerOverrideForVoteOffset = Schema.GetOffset(0x6F560B06BF6B0097);
+            return ref _Handle.AsRef<uint>(_PlayerOverrideForVoteOffset);
         }
     }
-    private static nint? _HighestCountIndexOffset;
+    private static nint _HighestCountIndexOffset = -1;
 
     public ref int HighestCountIndex
     {
         get
         {
-            _HighestCountIndexOffset = _HighestCountIndexOffset ?? Schema.GetOffset(0x6F560B0602AF14EE);
-            return ref _Handle.AsRef<int>(_HighestCountIndexOffset!.Value);
+            if (_HighestCountIndexOffset == -1) _HighestCountIndexOffset = Schema.GetOffset(0x6F560B0602AF14EE);
+            return ref _Handle.AsRef<int>(_HighestCountIndexOffset);
         }
     }
-    private static nint? _PotentialIssuesOffset;
+    private static nint _PotentialIssuesOffset = -1;
 
     public ref CUtlVector<PointerTo<CBaseIssue>> PotentialIssues
     {
         get
         {
-            _PotentialIssuesOffset = _PotentialIssuesOffset ?? Schema.GetOffset(0x6F560B065742E1F9);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CBaseIssue>>>(_PotentialIssuesOffset!.Value);
+            if (_PotentialIssuesOffset == -1) _PotentialIssuesOffset = Schema.GetOffset(0x6F560B065742E1F9);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CBaseIssue>>>(_PotentialIssuesOffset);
         }
     }
-    private static nint? _VoteOptionsOffset;
+    private static nint _VoteOptionsOffset = -1;
 
     public ref CUtlVector<CString> VoteOptions
     {
         get
         {
-            _VoteOptionsOffset = _VoteOptionsOffset ?? Schema.GetOffset(0x6F560B0604D2BA55);
-            return ref _Handle.AsRef<CUtlVector<CString>>(_VoteOptionsOffset!.Value);
+            if (_VoteOptionsOffset == -1) _VoteOptionsOffset = Schema.GetOffset(0x6F560B0604D2BA55);
+            return ref _Handle.AsRef<CUtlVector<CString>>(_VoteOptionsOffset);
         }
     }
 

@@ -16,44 +16,44 @@ internal partial class CNmVectorCreateNode__CDefinitionImpl : CNmVectorValueNode
 {
     public CNmVectorCreateNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputVectorValueNodeIdxOffset;
+    private static nint _InputVectorValueNodeIdxOffset = -1;
 
     public ref short InputVectorValueNodeIdx
     {
         get
         {
-            _InputVectorValueNodeIdxOffset = _InputVectorValueNodeIdxOffset ?? Schema.GetOffset(0xA7AE86C01EF0C864);
-            return ref _Handle.AsRef<short>(_InputVectorValueNodeIdxOffset!.Value);
+            if (_InputVectorValueNodeIdxOffset == -1) _InputVectorValueNodeIdxOffset = Schema.GetOffset(0xA7AE86C01EF0C864);
+            return ref _Handle.AsRef<short>(_InputVectorValueNodeIdxOffset);
         }
     }
-    private static nint? _InputValueXNodeIdxOffset;
+    private static nint _InputValueXNodeIdxOffset = -1;
 
     public ref short InputValueXNodeIdx
     {
         get
         {
-            _InputValueXNodeIdxOffset = _InputValueXNodeIdxOffset ?? Schema.GetOffset(0xA7AE86C0F25367BB);
-            return ref _Handle.AsRef<short>(_InputValueXNodeIdxOffset!.Value);
+            if (_InputValueXNodeIdxOffset == -1) _InputValueXNodeIdxOffset = Schema.GetOffset(0xA7AE86C0F25367BB);
+            return ref _Handle.AsRef<short>(_InputValueXNodeIdxOffset);
         }
     }
-    private static nint? _InputValueYNodeIdxOffset;
+    private static nint _InputValueYNodeIdxOffset = -1;
 
     public ref short InputValueYNodeIdx
     {
         get
         {
-            _InputValueYNodeIdxOffset = _InputValueYNodeIdxOffset ?? Schema.GetOffset(0xA7AE86C0D056A5E2);
-            return ref _Handle.AsRef<short>(_InputValueYNodeIdxOffset!.Value);
+            if (_InputValueYNodeIdxOffset == -1) _InputValueYNodeIdxOffset = Schema.GetOffset(0xA7AE86C0D056A5E2);
+            return ref _Handle.AsRef<short>(_InputValueYNodeIdxOffset);
         }
     }
-    private static nint? _InputValueZNodeIdxOffset;
+    private static nint _InputValueZNodeIdxOffset = -1;
 
     public ref short InputValueZNodeIdx
     {
         get
         {
-            _InputValueZNodeIdxOffset = _InputValueZNodeIdxOffset ?? Schema.GetOffset(0xA7AE86C05ED1BD45);
-            return ref _Handle.AsRef<short>(_InputValueZNodeIdxOffset!.Value);
+            if (_InputValueZNodeIdxOffset == -1) _InputValueZNodeIdxOffset = Schema.GetOffset(0xA7AE86C05ED1BD45);
+            return ref _Handle.AsRef<short>(_InputValueZNodeIdxOffset);
         }
     }
 

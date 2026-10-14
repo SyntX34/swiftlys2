@@ -16,24 +16,24 @@ internal partial class StanceInfo_tImpl : SchemaClass, StanceInfo_t
 {
     public StanceInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _PositionOffset;
+    private static nint _PositionOffset = -1;
 
     public ref Vector Position
     {
         get
         {
-            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x5DBAB98EBD6A6C9E);
-            return ref _Handle.AsRef<Vector>(_PositionOffset!.Value);
+            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0x5DBAB98EBD6A6C9E);
+            return ref _Handle.AsRef<Vector>(_PositionOffset);
         }
     }
-    private static nint? _DirectionOffset;
+    private static nint _DirectionOffset = -1;
 
     public ref float Direction
     {
         get
         {
-            _DirectionOffset = _DirectionOffset ?? Schema.GetOffset(0x5DBAB98E28D81988);
-            return ref _Handle.AsRef<float>(_DirectionOffset!.Value);
+            if (_DirectionOffset == -1) _DirectionOffset = Schema.GetOffset(0x5DBAB98E28D81988);
+            return ref _Handle.AsRef<float>(_DirectionOffset);
         }
     }
 

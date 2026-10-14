@@ -16,29 +16,29 @@ internal partial class CFuncPlatImpl : CBasePlatTrainImpl, CFuncPlat
 {
     public CFuncPlatImpl(nint handle) : base(handle) { }
 
-    private static nint? _SpeedOffset;
+    private static nint _SpeedOffset = -1;
 
     public ref float Speed
     {
         get
         {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x57400D65C631B7EA);
-            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0x57400D65C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset);
         }
     }
-    private static nint? _NoiseOffset;
+    private static nint _NoiseOffset = -1;
 
     public string Noise
     {
         get
         {
-            _NoiseOffset = _NoiseOffset ?? Schema.GetOffset(0x57400D651F22B8CC);
-            return Schema.GetString(_Handle.Read<nint>(_NoiseOffset!.Value));
+            if (_NoiseOffset == -1) _NoiseOffset = Schema.GetOffset(0x57400D651F22B8CC);
+            return Schema.GetString(_Handle.Read<nint>(_NoiseOffset));
         }
         set
         {
-            _NoiseOffset = _NoiseOffset ?? Schema.GetOffset(0x57400D651F22B8CC);
-            Schema.SetString(_Handle, _NoiseOffset!.Value, value);
+            if (_NoiseOffset == -1) _NoiseOffset = Schema.GetOffset(0x57400D651F22B8CC);
+            Schema.SetString(_Handle, _NoiseOffset, value);
         }
     }
 

@@ -16,19 +16,19 @@ internal partial class CAnimGraphDoc_AimCameraNode_PropJointImpl : SchemaClass, 
 {
     public CAnimGraphDoc_AimCameraNode_PropJointImpl(nint handle) : base(handle) { }
 
-    private static nint? _JointNameOffset;
+    private static nint _JointNameOffset = -1;
 
     public string JointName
     {
         get
         {
-            _JointNameOffset = _JointNameOffset ?? Schema.GetOffset(0xD8DA23E0D6967874);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_JointNameOffset!.Value));
+            if (_JointNameOffset == -1) _JointNameOffset = Schema.GetOffset(0xD8DA23E0D6967874);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_JointNameOffset));
         }
         set
         {
-            _JointNameOffset = _JointNameOffset ?? Schema.GetOffset(0xD8DA23E0D6967874);
-            Schema.SetCUtlString(_Handle, _JointNameOffset!.Value, value);
+            if (_JointNameOffset == -1) _JointNameOffset = Schema.GetOffset(0xD8DA23E0D6967874);
+            Schema.SetCUtlString(_Handle, _JointNameOffset, value);
         }
     }
 

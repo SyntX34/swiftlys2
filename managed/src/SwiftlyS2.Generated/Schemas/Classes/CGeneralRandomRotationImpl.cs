@@ -16,67 +16,67 @@ internal partial class CGeneralRandomRotationImpl : CParticleFunctionInitializer
 {
     public CGeneralRandomRotationImpl(nint handle) : base(handle) { }
 
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xB15F344FE5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xB15F344FE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _DegreesOffset;
+    private static nint _DegreesOffset = -1;
 
     public ref float Degrees
     {
         get
         {
-            _DegreesOffset = _DegreesOffset ?? Schema.GetOffset(0xB15F344FB2A877A0);
-            return ref _Handle.AsRef<float>(_DegreesOffset!.Value);
+            if (_DegreesOffset == -1) _DegreesOffset = Schema.GetOffset(0xB15F344FB2A877A0);
+            return ref _Handle.AsRef<float>(_DegreesOffset);
         }
     }
-    private static nint? _DegreesMinOffset;
+    private static nint _DegreesMinOffset = -1;
 
     public ref float DegreesMin
     {
         get
         {
-            _DegreesMinOffset = _DegreesMinOffset ?? Schema.GetOffset(0xB15F344F6D22DDDC);
-            return ref _Handle.AsRef<float>(_DegreesMinOffset!.Value);
+            if (_DegreesMinOffset == -1) _DegreesMinOffset = Schema.GetOffset(0xB15F344F6D22DDDC);
+            return ref _Handle.AsRef<float>(_DegreesMinOffset);
         }
     }
-    private static nint? _DegreesMaxOffset;
+    private static nint _DegreesMaxOffset = -1;
 
     public ref float DegreesMax
     {
         get
         {
-            _DegreesMaxOffset = _DegreesMaxOffset ?? Schema.GetOffset(0xB15F344F5B0F39CE);
-            return ref _Handle.AsRef<float>(_DegreesMaxOffset!.Value);
+            if (_DegreesMaxOffset == -1) _DegreesMaxOffset = Schema.GetOffset(0xB15F344F5B0F39CE);
+            return ref _Handle.AsRef<float>(_DegreesMaxOffset);
         }
     }
-    private static nint? _RotationRandExponentOffset;
+    private static nint _RotationRandExponentOffset = -1;
 
     public ref float RotationRandExponent
     {
         get
         {
-            _RotationRandExponentOffset = _RotationRandExponentOffset ?? Schema.GetOffset(0xB15F344F348610D5);
-            return ref _Handle.AsRef<float>(_RotationRandExponentOffset!.Value);
+            if (_RotationRandExponentOffset == -1) _RotationRandExponentOffset = Schema.GetOffset(0xB15F344F348610D5);
+            return ref _Handle.AsRef<float>(_RotationRandExponentOffset);
         }
     }
-    private static nint? _RandomlyFlipDirectionOffset;
+    private static nint _RandomlyFlipDirectionOffset = -1;
 
     public ref bool RandomlyFlipDirection
     {
         get
         {
-            _RandomlyFlipDirectionOffset = _RandomlyFlipDirectionOffset ?? Schema.GetOffset(0xB15F344F26D0F2EF);
-            return ref _Handle.AsRef<bool>(_RandomlyFlipDirectionOffset!.Value);
+            if (_RandomlyFlipDirectionOffset == -1) _RandomlyFlipDirectionOffset = Schema.GetOffset(0xB15F344F26D0F2EF);
+            return ref _Handle.AsRef<bool>(_RandomlyFlipDirectionOffset);
         }
     }
 

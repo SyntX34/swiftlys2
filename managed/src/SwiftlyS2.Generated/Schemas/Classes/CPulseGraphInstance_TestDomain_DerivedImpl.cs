@@ -16,14 +16,14 @@ internal partial class CPulseGraphInstance_TestDomain_DerivedImpl : CPulseGraphI
 {
     public CPulseGraphInstance_TestDomain_DerivedImpl(nint handle) : base(handle) { }
 
-    private static nint? _InstanceValueXOffset;
+    private static nint _InstanceValueXOffset = -1;
 
     public ref int InstanceValueX
     {
         get
         {
-            _InstanceValueXOffset = _InstanceValueXOffset ?? Schema.GetOffset(0x439D00CDD2DC0135);
-            return ref _Handle.AsRef<int>(_InstanceValueXOffset!.Value);
+            if (_InstanceValueXOffset == -1) _InstanceValueXOffset = Schema.GetOffset(0x439D00CDD2DC0135);
+            return ref _Handle.AsRef<int>(_InstanceValueXOffset);
         }
     }
 

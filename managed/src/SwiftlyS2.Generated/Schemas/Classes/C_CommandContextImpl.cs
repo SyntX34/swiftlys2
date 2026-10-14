@@ -16,24 +16,24 @@ internal partial class C_CommandContextImpl : SchemaClass, C_CommandContext
 {
     public C_CommandContextImpl(nint handle) : base(handle) { }
 
-    private static nint? _NeedsprocessingOffset;
+    private static nint _NeedsprocessingOffset = -1;
 
     public ref bool Needsprocessing
     {
         get
         {
-            _NeedsprocessingOffset = _NeedsprocessingOffset ?? Schema.GetOffset(0x3A6A8A875B2C2AD1);
-            return ref _Handle.AsRef<bool>(_NeedsprocessingOffset!.Value);
+            if (_NeedsprocessingOffset == -1) _NeedsprocessingOffset = Schema.GetOffset(0x3A6A8A875B2C2AD1);
+            return ref _Handle.AsRef<bool>(_NeedsprocessingOffset);
         }
     }
-    private static nint? _Command_numberOffset;
+    private static nint _Command_numberOffset = -1;
 
     public ref int Command_number
     {
         get
         {
-            _Command_numberOffset = _Command_numberOffset ?? Schema.GetOffset(0x3A6A8A87C6348ED6);
-            return ref _Handle.AsRef<int>(_Command_numberOffset!.Value);
+            if (_Command_numberOffset == -1) _Command_numberOffset = Schema.GetOffset(0x3A6A8A87C6348ED6);
+            return ref _Handle.AsRef<int>(_Command_numberOffset);
         }
     }
 

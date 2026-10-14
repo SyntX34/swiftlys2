@@ -16,27 +16,27 @@ internal partial class CPulseCell_Outflow_CycleShuffled__InstanceState_tImpl : S
 {
     public CPulseCell_Outflow_CycleShuffled__InstanceState_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ShuffleOffset;
+    private static nint _ShuffleOffset = -1;
     private SchemaUntypedField? _ShuffleInstance;
 
     public SchemaUntypedField Shuffle
     {
         get
         {
-            _ShuffleOffset = _ShuffleOffset ?? Schema.GetOffset(0xD33F67BD200E9ACE);
+            if (_ShuffleOffset == -1) _ShuffleOffset = Schema.GetOffset(0xD33F67BD200E9ACE);
             var instance = _ShuffleInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ShuffleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ShuffleOffset);
             return instance;
         }
     }
-    private static nint? _NextShuffleOffset;
+    private static nint _NextShuffleOffset = -1;
 
     public ref int NextShuffle
     {
         get
         {
-            _NextShuffleOffset = _NextShuffleOffset ?? Schema.GetOffset(0xD33F67BD741282A5);
-            return ref _Handle.AsRef<int>(_NextShuffleOffset!.Value);
+            if (_NextShuffleOffset == -1) _NextShuffleOffset = Schema.GetOffset(0xD33F67BD741282A5);
+            return ref _Handle.AsRef<int>(_NextShuffleOffset);
         }
     }
 

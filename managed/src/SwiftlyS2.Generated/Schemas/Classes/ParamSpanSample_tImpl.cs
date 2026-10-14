@@ -16,27 +16,27 @@ internal partial class ParamSpanSample_tImpl : SchemaClass, ParamSpanSample_t
 {
     public ParamSpanSample_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
     private SchemaUntypedField? _ValueInstance;
 
     public SchemaUntypedField Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x37E203136B99AEEA);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x37E203136B99AEEA);
             var instance = _ValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ValueOffset);
             return instance;
         }
     }
-    private static nint? _CycleOffset;
+    private static nint _CycleOffset = -1;
 
     public ref float Cycle
     {
         get
         {
-            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x37E203130C77829F);
-            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+            if (_CycleOffset == -1) _CycleOffset = Schema.GetOffset(0x37E203130C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset);
         }
     }
 

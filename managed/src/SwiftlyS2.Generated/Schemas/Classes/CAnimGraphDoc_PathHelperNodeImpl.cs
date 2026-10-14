@@ -16,37 +16,37 @@ internal partial class CAnimGraphDoc_PathHelperNodeImpl : CAnimGraphDoc_NodeImpl
 {
     public CAnimGraphDoc_PathHelperNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x4C0F86E11F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x4C0F86E11F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _StoppingRadiusOffset;
+    private static nint _StoppingRadiusOffset = -1;
 
     public ref float StoppingRadius
     {
         get
         {
-            _StoppingRadiusOffset = _StoppingRadiusOffset ?? Schema.GetOffset(0x4C0F86E13172E3D9);
-            return ref _Handle.AsRef<float>(_StoppingRadiusOffset!.Value);
+            if (_StoppingRadiusOffset == -1) _StoppingRadiusOffset = Schema.GetOffset(0x4C0F86E13172E3D9);
+            return ref _Handle.AsRef<float>(_StoppingRadiusOffset);
         }
     }
-    private static nint? _StoppingSpeedScaleOffset;
+    private static nint _StoppingSpeedScaleOffset = -1;
 
     public ref float StoppingSpeedScale
     {
         get
         {
-            _StoppingSpeedScaleOffset = _StoppingSpeedScaleOffset ?? Schema.GetOffset(0x4C0F86E1A2389D04);
-            return ref _Handle.AsRef<float>(_StoppingSpeedScaleOffset!.Value);
+            if (_StoppingSpeedScaleOffset == -1) _StoppingSpeedScaleOffset = Schema.GetOffset(0x4C0F86E1A2389D04);
+            return ref _Handle.AsRef<float>(_StoppingSpeedScaleOffset);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CBonePositionMetricEvaluatorImpl : CMotionMetricEvaluator
 {
     public CBonePositionMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoneIndexOffset;
+    private static nint _BoneIndexOffset = -1;
 
     public ref int BoneIndex
     {
         get
         {
-            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xB36923389F407B79);
-            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+            if (_BoneIndexOffset == -1) _BoneIndexOffset = Schema.GetOffset(0xB36923389F407B79);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset);
         }
     }
 

@@ -16,27 +16,27 @@ internal partial class CVoiceContainerSetElementImpl : SchemaClass, CVoiceContai
 {
     public CVoiceContainerSetElementImpl(nint handle) : base(handle) { }
 
-    private static nint? _SoundOffset;
+    private static nint _SoundOffset = -1;
     private CSoundContainerReferenceImpl? _SoundInstance;
 
     public CSoundContainerReference Sound
     {
         get
         {
-            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x1280027B4E1C4FB4);
+            if (_SoundOffset == -1) _SoundOffset = Schema.GetOffset(0x1280027B4E1C4FB4);
             var instance = _SoundInstance ??= new CSoundContainerReferenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SoundOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SoundOffset);
             return instance;
         }
     }
-    private static nint? _VolumeDBOffset;
+    private static nint _VolumeDBOffset = -1;
 
     public ref float VolumeDB
     {
         get
         {
-            _VolumeDBOffset = _VolumeDBOffset ?? Schema.GetOffset(0x1280027B3197E3EF);
-            return ref _Handle.AsRef<float>(_VolumeDBOffset!.Value);
+            if (_VolumeDBOffset == -1) _VolumeDBOffset = Schema.GetOffset(0x1280027B3197E3EF);
+            return ref _Handle.AsRef<float>(_VolumeDBOffset);
         }
     }
 

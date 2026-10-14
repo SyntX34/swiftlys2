@@ -16,62 +16,62 @@ internal partial class CCSPlayer_ActionTrackingServicesImpl : CPlayerPawnCompone
 {
     public CCSPlayer_ActionTrackingServicesImpl(nint handle) : base(handle) { }
 
-    private static nint? _LastWeaponBeforeC4AutoSwitchOffset;
+    private static nint _LastWeaponBeforeC4AutoSwitchOffset = -1;
 
     public ref CHandle<CBasePlayerWeapon> LastWeaponBeforeC4AutoSwitch
     {
         get
         {
-            _LastWeaponBeforeC4AutoSwitchOffset = _LastWeaponBeforeC4AutoSwitchOffset ?? Schema.GetOffset(0xC890019D6687BAC0);
-            return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponBeforeC4AutoSwitchOffset!.Value);
+            if (_LastWeaponBeforeC4AutoSwitchOffset == -1) _LastWeaponBeforeC4AutoSwitchOffset = Schema.GetOffset(0xC890019D6687BAC0);
+            return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponBeforeC4AutoSwitchOffset);
         }
     }
-    private static nint? _IsRescuingOffset;
+    private static nint _IsRescuingOffset = -1;
 
     public ref bool IsRescuing
     {
         get
         {
-            _IsRescuingOffset = _IsRescuingOffset ?? Schema.GetOffset(0xC890019D225BDB2F);
-            return ref _Handle.AsRef<bool>(_IsRescuingOffset!.Value);
+            if (_IsRescuingOffset == -1) _IsRescuingOffset = Schema.GetOffset(0xC890019D225BDB2F);
+            return ref _Handle.AsRef<bool>(_IsRescuingOffset);
         }
     }
-    private static nint? _WeaponPurchasesThisMatchOffset;
+    private static nint _WeaponPurchasesThisMatchOffset = -1;
     private WeaponPurchaseTracker_tImpl? _WeaponPurchasesThisMatchInstance;
 
     public WeaponPurchaseTracker_t WeaponPurchasesThisMatch
     {
         get
         {
-            _WeaponPurchasesThisMatchOffset = _WeaponPurchasesThisMatchOffset ?? Schema.GetOffset(0xC890019D43F68EE0);
+            if (_WeaponPurchasesThisMatchOffset == -1) _WeaponPurchasesThisMatchOffset = Schema.GetOffset(0xC890019D43F68EE0);
             var instance = _WeaponPurchasesThisMatchInstance ??= new WeaponPurchaseTracker_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _WeaponPurchasesThisMatchOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WeaponPurchasesThisMatchOffset);
             return instance;
         }
     }
-    private static nint? _WeaponPurchasesThisRoundOffset;
+    private static nint _WeaponPurchasesThisRoundOffset = -1;
     private WeaponPurchaseTracker_tImpl? _WeaponPurchasesThisRoundInstance;
 
     public WeaponPurchaseTracker_t WeaponPurchasesThisRound
     {
         get
         {
-            _WeaponPurchasesThisRoundOffset = _WeaponPurchasesThisRoundOffset ?? Schema.GetOffset(0xC890019D7C64F835);
+            if (_WeaponPurchasesThisRoundOffset == -1) _WeaponPurchasesThisRoundOffset = Schema.GetOffset(0xC890019D7C64F835);
             var instance = _WeaponPurchasesThisRoundInstance ??= new WeaponPurchaseTracker_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _WeaponPurchasesThisRoundOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WeaponPurchasesThisRoundOffset);
             return instance;
         }
     }
-    private static nint? _WeaponCarryOverIntoThisRoundOffset;
+    private static nint _WeaponCarryOverIntoThisRoundOffset = -1;
     private WeaponPurchaseTracker_tImpl? _WeaponCarryOverIntoThisRoundInstance;
 
     public WeaponPurchaseTracker_t WeaponCarryOverIntoThisRound
     {
         get
         {
-            _WeaponCarryOverIntoThisRoundOffset = _WeaponCarryOverIntoThisRoundOffset ?? Schema.GetOffset(0xC890019D18B5B34C);
+            if (_WeaponCarryOverIntoThisRoundOffset == -1) _WeaponCarryOverIntoThisRoundOffset = Schema.GetOffset(0xC890019D18B5B34C);
             var instance = _WeaponCarryOverIntoThisRoundInstance ??= new WeaponPurchaseTracker_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _WeaponCarryOverIntoThisRoundOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WeaponCarryOverIntoThisRoundOffset);
             return instance;
         }
     }

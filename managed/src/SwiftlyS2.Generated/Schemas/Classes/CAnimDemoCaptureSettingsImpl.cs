@@ -16,159 +16,159 @@ internal partial class CAnimDemoCaptureSettingsImpl : SchemaClass, CAnimDemoCapt
 {
     public CAnimDemoCaptureSettingsImpl(nint handle) : base(handle) { }
 
-    private static nint? _ErrorRangeSplineRotationOffset;
+    private static nint _ErrorRangeSplineRotationOffset = -1;
 
     public ref Vector2D ErrorRangeSplineRotation
     {
         get
         {
-            _ErrorRangeSplineRotationOffset = _ErrorRangeSplineRotationOffset ?? Schema.GetOffset(0xD4FC71974DBFEF49);
-            return ref _Handle.AsRef<Vector2D>(_ErrorRangeSplineRotationOffset!.Value);
+            if (_ErrorRangeSplineRotationOffset == -1) _ErrorRangeSplineRotationOffset = Schema.GetOffset(0xD4FC71974DBFEF49);
+            return ref _Handle.AsRef<Vector2D>(_ErrorRangeSplineRotationOffset);
         }
     }
-    private static nint? _ErrorRangeSplineTranslationOffset;
+    private static nint _ErrorRangeSplineTranslationOffset = -1;
 
     public ref Vector2D ErrorRangeSplineTranslation
     {
         get
         {
-            _ErrorRangeSplineTranslationOffset = _ErrorRangeSplineTranslationOffset ?? Schema.GetOffset(0xD4FC71972D53C5DE);
-            return ref _Handle.AsRef<Vector2D>(_ErrorRangeSplineTranslationOffset!.Value);
+            if (_ErrorRangeSplineTranslationOffset == -1) _ErrorRangeSplineTranslationOffset = Schema.GetOffset(0xD4FC71972D53C5DE);
+            return ref _Handle.AsRef<Vector2D>(_ErrorRangeSplineTranslationOffset);
         }
     }
-    private static nint? _ErrorRangeSplineScaleOffset;
+    private static nint _ErrorRangeSplineScaleOffset = -1;
 
     public ref Vector2D ErrorRangeSplineScale
     {
         get
         {
-            _ErrorRangeSplineScaleOffset = _ErrorRangeSplineScaleOffset ?? Schema.GetOffset(0xD4FC7197E6E421C7);
-            return ref _Handle.AsRef<Vector2D>(_ErrorRangeSplineScaleOffset!.Value);
+            if (_ErrorRangeSplineScaleOffset == -1) _ErrorRangeSplineScaleOffset = Schema.GetOffset(0xD4FC7197E6E421C7);
+            return ref _Handle.AsRef<Vector2D>(_ErrorRangeSplineScaleOffset);
         }
     }
-    private static nint? _IkRotation_MaxSplineErrorOffset;
+    private static nint _IkRotation_MaxSplineErrorOffset = -1;
 
     public ref float IkRotation_MaxSplineError
     {
         get
         {
-            _IkRotation_MaxSplineErrorOffset = _IkRotation_MaxSplineErrorOffset ?? Schema.GetOffset(0xD4FC71971DA8FCB5);
-            return ref _Handle.AsRef<float>(_IkRotation_MaxSplineErrorOffset!.Value);
+            if (_IkRotation_MaxSplineErrorOffset == -1) _IkRotation_MaxSplineErrorOffset = Schema.GetOffset(0xD4FC71971DA8FCB5);
+            return ref _Handle.AsRef<float>(_IkRotation_MaxSplineErrorOffset);
         }
     }
-    private static nint? _IkTranslation_MaxSplineErrorOffset;
+    private static nint _IkTranslation_MaxSplineErrorOffset = -1;
 
     public ref float IkTranslation_MaxSplineError
     {
         get
         {
-            _IkTranslation_MaxSplineErrorOffset = _IkTranslation_MaxSplineErrorOffset ?? Schema.GetOffset(0xD4FC719732DF1990);
-            return ref _Handle.AsRef<float>(_IkTranslation_MaxSplineErrorOffset!.Value);
+            if (_IkTranslation_MaxSplineErrorOffset == -1) _IkTranslation_MaxSplineErrorOffset = Schema.GetOffset(0xD4FC719732DF1990);
+            return ref _Handle.AsRef<float>(_IkTranslation_MaxSplineErrorOffset);
         }
     }
-    private static nint? _ErrorRangeQuantizationRotationOffset;
+    private static nint _ErrorRangeQuantizationRotationOffset = -1;
 
     public ref Vector2D ErrorRangeQuantizationRotation
     {
         get
         {
-            _ErrorRangeQuantizationRotationOffset = _ErrorRangeQuantizationRotationOffset ?? Schema.GetOffset(0xD4FC7197D6AADA59);
-            return ref _Handle.AsRef<Vector2D>(_ErrorRangeQuantizationRotationOffset!.Value);
+            if (_ErrorRangeQuantizationRotationOffset == -1) _ErrorRangeQuantizationRotationOffset = Schema.GetOffset(0xD4FC7197D6AADA59);
+            return ref _Handle.AsRef<Vector2D>(_ErrorRangeQuantizationRotationOffset);
         }
     }
-    private static nint? _ErrorRangeQuantizationTranslationOffset;
+    private static nint _ErrorRangeQuantizationTranslationOffset = -1;
 
     public ref Vector2D ErrorRangeQuantizationTranslation
     {
         get
         {
-            _ErrorRangeQuantizationTranslationOffset = _ErrorRangeQuantizationTranslationOffset ?? Schema.GetOffset(0xD4FC71975BCCF6AE);
-            return ref _Handle.AsRef<Vector2D>(_ErrorRangeQuantizationTranslationOffset!.Value);
+            if (_ErrorRangeQuantizationTranslationOffset == -1) _ErrorRangeQuantizationTranslationOffset = Schema.GetOffset(0xD4FC71975BCCF6AE);
+            return ref _Handle.AsRef<Vector2D>(_ErrorRangeQuantizationTranslationOffset);
         }
     }
-    private static nint? _ErrorRangeQuantizationScaleOffset;
+    private static nint _ErrorRangeQuantizationScaleOffset = -1;
 
     public ref Vector2D ErrorRangeQuantizationScale
     {
         get
         {
-            _ErrorRangeQuantizationScaleOffset = _ErrorRangeQuantizationScaleOffset ?? Schema.GetOffset(0xD4FC7197E7487A37);
-            return ref _Handle.AsRef<Vector2D>(_ErrorRangeQuantizationScaleOffset!.Value);
+            if (_ErrorRangeQuantizationScaleOffset == -1) _ErrorRangeQuantizationScaleOffset = Schema.GetOffset(0xD4FC7197E7487A37);
+            return ref _Handle.AsRef<Vector2D>(_ErrorRangeQuantizationScaleOffset);
         }
     }
-    private static nint? _IkRotation_MaxQuantizationErrorOffset;
+    private static nint _IkRotation_MaxQuantizationErrorOffset = -1;
 
     public ref float IkRotation_MaxQuantizationError
     {
         get
         {
-            _IkRotation_MaxQuantizationErrorOffset = _IkRotation_MaxQuantizationErrorOffset ?? Schema.GetOffset(0xD4FC71973F1ED56D);
-            return ref _Handle.AsRef<float>(_IkRotation_MaxQuantizationErrorOffset!.Value);
+            if (_IkRotation_MaxQuantizationErrorOffset == -1) _IkRotation_MaxQuantizationErrorOffset = Schema.GetOffset(0xD4FC71973F1ED56D);
+            return ref _Handle.AsRef<float>(_IkRotation_MaxQuantizationErrorOffset);
         }
     }
-    private static nint? _IkTranslation_MaxQuantizationErrorOffset;
+    private static nint _IkTranslation_MaxQuantizationErrorOffset = -1;
 
     public ref float IkTranslation_MaxQuantizationError
     {
         get
         {
-            _IkTranslation_MaxQuantizationErrorOffset = _IkTranslation_MaxQuantizationErrorOffset ?? Schema.GetOffset(0xD4FC7197BF5570E8);
-            return ref _Handle.AsRef<float>(_IkTranslation_MaxQuantizationErrorOffset!.Value);
+            if (_IkTranslation_MaxQuantizationErrorOffset == -1) _IkTranslation_MaxQuantizationErrorOffset = Schema.GetOffset(0xD4FC7197BF5570E8);
+            return ref _Handle.AsRef<float>(_IkTranslation_MaxQuantizationErrorOffset);
         }
     }
-    private static nint? _BaseSequenceOffset;
+    private static nint _BaseSequenceOffset = -1;
 
     public string BaseSequence
     {
         get
         {
-            _BaseSequenceOffset = _BaseSequenceOffset ?? Schema.GetOffset(0xD4FC719704AABA45);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BaseSequenceOffset!.Value));
+            if (_BaseSequenceOffset == -1) _BaseSequenceOffset = Schema.GetOffset(0xD4FC719704AABA45);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BaseSequenceOffset));
         }
         set
         {
-            _BaseSequenceOffset = _BaseSequenceOffset ?? Schema.GetOffset(0xD4FC719704AABA45);
-            Schema.SetCUtlString(_Handle, _BaseSequenceOffset!.Value, value);
+            if (_BaseSequenceOffset == -1) _BaseSequenceOffset = Schema.GetOffset(0xD4FC719704AABA45);
+            Schema.SetCUtlString(_Handle, _BaseSequenceOffset, value);
         }
     }
-    private static nint? _BaseSequenceFrameOffset;
+    private static nint _BaseSequenceFrameOffset = -1;
 
     public ref int BaseSequenceFrame
     {
         get
         {
-            _BaseSequenceFrameOffset = _BaseSequenceFrameOffset ?? Schema.GetOffset(0xD4FC71972BAAA932);
-            return ref _Handle.AsRef<int>(_BaseSequenceFrameOffset!.Value);
+            if (_BaseSequenceFrameOffset == -1) _BaseSequenceFrameOffset = Schema.GetOffset(0xD4FC71972BAAA932);
+            return ref _Handle.AsRef<int>(_BaseSequenceFrameOffset);
         }
     }
-    private static nint? _BoneSelectionModeOffset;
+    private static nint _BoneSelectionModeOffset = -1;
 
     public ref EDemoBoneSelectionMode BoneSelectionMode
     {
         get
         {
-            _BoneSelectionModeOffset = _BoneSelectionModeOffset ?? Schema.GetOffset(0xD4FC71971C4BEF04);
-            return ref _Handle.AsRef<EDemoBoneSelectionMode>(_BoneSelectionModeOffset!.Value);
+            if (_BoneSelectionModeOffset == -1) _BoneSelectionModeOffset = Schema.GetOffset(0xD4FC71971C4BEF04);
+            return ref _Handle.AsRef<EDemoBoneSelectionMode>(_BoneSelectionModeOffset);
         }
     }
-    private static nint? _BonesOffset;
+    private static nint _BonesOffset = -1;
 
     public ref CUtlVector<BoneDemoCaptureSettings_t> Bones
     {
         get
         {
-            _BonesOffset = _BonesOffset ?? Schema.GetOffset(0xD4FC71970FDA60D4);
-            return ref _Handle.AsRef<CUtlVector<BoneDemoCaptureSettings_t>>(_BonesOffset!.Value);
+            if (_BonesOffset == -1) _BonesOffset = Schema.GetOffset(0xD4FC71970FDA60D4);
+            return ref _Handle.AsRef<CUtlVector<BoneDemoCaptureSettings_t>>(_BonesOffset);
         }
     }
-    private static nint? _IkChainsOffset;
+    private static nint _IkChainsOffset = -1;
 
     public ref CUtlVector<IKDemoCaptureSettings_t> IkChains
     {
         get
         {
-            _IkChainsOffset = _IkChainsOffset ?? Schema.GetOffset(0xD4FC7197A467D4E7);
-            return ref _Handle.AsRef<CUtlVector<IKDemoCaptureSettings_t>>(_IkChainsOffset!.Value);
+            if (_IkChainsOffset == -1) _IkChainsOffset = Schema.GetOffset(0xD4FC7197A467D4E7);
+            return ref _Handle.AsRef<CUtlVector<IKDemoCaptureSettings_t>>(_IkChainsOffset);
         }
     }
 

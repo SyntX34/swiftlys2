@@ -16,44 +16,44 @@ internal partial class CInstructorEventEntityImpl : CPointEntityImpl, CInstructo
 {
     public CInstructorEventEntityImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x6DE6628874FF65FE);
-            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x6DE6628874FF65FE);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x6DE6628874FF65FE);
-            Schema.SetString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x6DE6628874FF65FE);
+            Schema.SetString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _HintTargetEntityOffset;
+    private static nint _HintTargetEntityOffset = -1;
 
     public string HintTargetEntity
     {
         get
         {
-            _HintTargetEntityOffset = _HintTargetEntityOffset ?? Schema.GetOffset(0x6DE662880024C1BE);
-            return Schema.GetString(_Handle.Read<nint>(_HintTargetEntityOffset!.Value));
+            if (_HintTargetEntityOffset == -1) _HintTargetEntityOffset = Schema.GetOffset(0x6DE662880024C1BE);
+            return Schema.GetString(_Handle.Read<nint>(_HintTargetEntityOffset));
         }
         set
         {
-            _HintTargetEntityOffset = _HintTargetEntityOffset ?? Schema.GetOffset(0x6DE662880024C1BE);
-            Schema.SetString(_Handle, _HintTargetEntityOffset!.Value, value);
+            if (_HintTargetEntityOffset == -1) _HintTargetEntityOffset = Schema.GetOffset(0x6DE662880024C1BE);
+            Schema.SetString(_Handle, _HintTargetEntityOffset, value);
         }
     }
-    private static nint? _TargetPlayerOffset;
+    private static nint _TargetPlayerOffset = -1;
 
     public ref CHandle<CBasePlayerPawn> TargetPlayer
     {
         get
         {
-            _TargetPlayerOffset = _TargetPlayerOffset ?? Schema.GetOffset(0x6DE66288BA425153);
-            return ref _Handle.AsRef<CHandle<CBasePlayerPawn>>(_TargetPlayerOffset!.Value);
+            if (_TargetPlayerOffset == -1) _TargetPlayerOffset = Schema.GetOffset(0x6DE66288BA425153);
+            return ref _Handle.AsRef<CHandle<CBasePlayerPawn>>(_TargetPlayerOffset);
         }
     }
 

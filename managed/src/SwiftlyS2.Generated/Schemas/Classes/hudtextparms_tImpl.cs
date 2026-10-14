@@ -16,64 +16,64 @@ internal partial class hudtextparms_tImpl : SchemaClass, hudtextparms_t
 {
     public hudtextparms_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _Color1Offset;
+    private static nint _Color1Offset = -1;
 
     public ref Color Color1
     {
         get
         {
-            _Color1Offset = _Color1Offset ?? Schema.GetOffset(0x827B8DBF36F4EB4B);
-            return ref _Handle.AsRef<Color>(_Color1Offset!.Value);
+            if (_Color1Offset == -1) _Color1Offset = Schema.GetOffset(0x827B8DBF36F4EB4B);
+            return ref _Handle.AsRef<Color>(_Color1Offset);
         }
     }
-    private static nint? _Color2Offset;
+    private static nint _Color2Offset = -1;
 
     public ref Color Color2
     {
         get
         {
-            _Color2Offset = _Color2Offset ?? Schema.GetOffset(0x827B8DBF37F4ECDE);
-            return ref _Handle.AsRef<Color>(_Color2Offset!.Value);
+            if (_Color2Offset == -1) _Color2Offset = Schema.GetOffset(0x827B8DBF37F4ECDE);
+            return ref _Handle.AsRef<Color>(_Color2Offset);
         }
     }
-    private static nint? _EffectOffset;
+    private static nint _EffectOffset = -1;
 
     public ref byte Effect
     {
         get
         {
-            _EffectOffset = _EffectOffset ?? Schema.GetOffset(0x827B8DBF6E6E8D54);
-            return ref _Handle.AsRef<byte>(_EffectOffset!.Value);
+            if (_EffectOffset == -1) _EffectOffset = Schema.GetOffset(0x827B8DBF6E6E8D54);
+            return ref _Handle.AsRef<byte>(_EffectOffset);
         }
     }
-    private static nint? _ChannelOffset;
+    private static nint _ChannelOffset = -1;
 
     public ref byte Channel
     {
         get
         {
-            _ChannelOffset = _ChannelOffset ?? Schema.GetOffset(0x827B8DBF21C252A4);
-            return ref _Handle.AsRef<byte>(_ChannelOffset!.Value);
+            if (_ChannelOffset == -1) _ChannelOffset = Schema.GetOffset(0x827B8DBF21C252A4);
+            return ref _Handle.AsRef<byte>(_ChannelOffset);
         }
     }
-    private static nint? _XOffset;
+    private static nint _XOffset = -1;
 
     public ref float X
     {
         get
         {
-            _XOffset = _XOffset ?? Schema.GetOffset(0x827B8DBFFD0C5087);
-            return ref _Handle.AsRef<float>(_XOffset!.Value);
+            if (_XOffset == -1) _XOffset = Schema.GetOffset(0x827B8DBFFD0C5087);
+            return ref _Handle.AsRef<float>(_XOffset);
         }
     }
-    private static nint? _YOffset;
+    private static nint _YOffset = -1;
 
     public ref float Y
     {
         get
         {
-            _YOffset = _YOffset ?? Schema.GetOffset(0x827B8DBFFC0C4EF4);
-            return ref _Handle.AsRef<float>(_YOffset!.Value);
+            if (_YOffset == -1) _YOffset = Schema.GetOffset(0x827B8DBFFC0C4EF4);
+            return ref _Handle.AsRef<float>(_YOffset);
         }
     }
 

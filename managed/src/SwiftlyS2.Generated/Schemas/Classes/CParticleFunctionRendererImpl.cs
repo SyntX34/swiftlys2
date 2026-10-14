@@ -16,27 +16,27 @@ internal partial class CParticleFunctionRendererImpl : CParticleFunctionImpl, CP
 {
     public CParticleFunctionRendererImpl(nint handle) : base(handle) { }
 
-    private static nint? _VisibilityInputsOffset;
+    private static nint _VisibilityInputsOffset = -1;
     private CParticleVisibilityInputsImpl? _VisibilityInputsInstance;
 
     public CParticleVisibilityInputs VisibilityInputs
     {
         get
         {
-            _VisibilityInputsOffset = _VisibilityInputsOffset ?? Schema.GetOffset(0xAE332DA3CF8264F8);
+            if (_VisibilityInputsOffset == -1) _VisibilityInputsOffset = Schema.GetOffset(0xAE332DA3CF8264F8);
             var instance = _VisibilityInputsInstance ??= new CParticleVisibilityInputsImpl(0);
-            instance.DangerousSetHandle(_Handle + _VisibilityInputsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VisibilityInputsOffset);
             return instance;
         }
     }
-    private static nint? _CannotBeRefractedOffset;
+    private static nint _CannotBeRefractedOffset = -1;
 
     public ref bool CannotBeRefracted
     {
         get
         {
-            _CannotBeRefractedOffset = _CannotBeRefractedOffset ?? Schema.GetOffset(0xAE332DA3CC78C4FB);
-            return ref _Handle.AsRef<bool>(_CannotBeRefractedOffset!.Value);
+            if (_CannotBeRefractedOffset == -1) _CannotBeRefractedOffset = Schema.GetOffset(0xAE332DA3CC78C4FB);
+            return ref _Handle.AsRef<bool>(_CannotBeRefractedOffset);
         }
     }
 

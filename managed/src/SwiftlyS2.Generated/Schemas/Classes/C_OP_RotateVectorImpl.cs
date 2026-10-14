@@ -16,79 +16,79 @@ internal partial class C_OP_RotateVectorImpl : CParticleFunctionOperatorImpl, C_
 {
     public C_OP_RotateVectorImpl(nint handle) : base(handle) { }
 
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x43DEF471E5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x43DEF471E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _RotAxisMinOffset;
+    private static nint _RotAxisMinOffset = -1;
 
     public ref Vector RotAxisMin
     {
         get
         {
-            _RotAxisMinOffset = _RotAxisMinOffset ?? Schema.GetOffset(0x43DEF471E51ED175);
-            return ref _Handle.AsRef<Vector>(_RotAxisMinOffset!.Value);
+            if (_RotAxisMinOffset == -1) _RotAxisMinOffset = Schema.GetOffset(0x43DEF471E51ED175);
+            return ref _Handle.AsRef<Vector>(_RotAxisMinOffset);
         }
     }
-    private static nint? _RotAxisMaxOffset;
+    private static nint _RotAxisMaxOffset = -1;
 
     public ref Vector RotAxisMax
     {
         get
         {
-            _RotAxisMaxOffset = _RotAxisMaxOffset ?? Schema.GetOffset(0x43DEF471CF32368B);
-            return ref _Handle.AsRef<Vector>(_RotAxisMaxOffset!.Value);
+            if (_RotAxisMaxOffset == -1) _RotAxisMaxOffset = Schema.GetOffset(0x43DEF471CF32368B);
+            return ref _Handle.AsRef<Vector>(_RotAxisMaxOffset);
         }
     }
-    private static nint? _RotRateMinOffset;
+    private static nint _RotRateMinOffset = -1;
 
     public ref float RotRateMin
     {
         get
         {
-            _RotRateMinOffset = _RotRateMinOffset ?? Schema.GetOffset(0x43DEF4710EE55F62);
-            return ref _Handle.AsRef<float>(_RotRateMinOffset!.Value);
+            if (_RotRateMinOffset == -1) _RotRateMinOffset = Schema.GetOffset(0x43DEF4710EE55F62);
+            return ref _Handle.AsRef<float>(_RotRateMinOffset);
         }
     }
-    private static nint? _RotRateMaxOffset;
+    private static nint _RotRateMaxOffset = -1;
 
     public ref float RotRateMax
     {
         get
         {
-            _RotRateMaxOffset = _RotRateMaxOffset ?? Schema.GetOffset(0x43DEF471F8D1B508);
-            return ref _Handle.AsRef<float>(_RotRateMaxOffset!.Value);
+            if (_RotRateMaxOffset == -1) _RotRateMaxOffset = Schema.GetOffset(0x43DEF471F8D1B508);
+            return ref _Handle.AsRef<float>(_RotRateMaxOffset);
         }
     }
-    private static nint? _NormalizeOffset;
+    private static nint _NormalizeOffset = -1;
 
     public ref bool Normalize
     {
         get
         {
-            _NormalizeOffset = _NormalizeOffset ?? Schema.GetOffset(0x43DEF47148BC424C);
-            return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+            if (_NormalizeOffset == -1) _NormalizeOffset = Schema.GetOffset(0x43DEF47148BC424C);
+            return ref _Handle.AsRef<bool>(_NormalizeOffset);
         }
     }
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
     private CPerParticleFloatInputImpl? _ScaleInstance;
 
     public CPerParticleFloatInput Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x43DEF471B731A42F);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x43DEF471B731A42F);
             var instance = _ScaleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset);
             return instance;
         }
     }

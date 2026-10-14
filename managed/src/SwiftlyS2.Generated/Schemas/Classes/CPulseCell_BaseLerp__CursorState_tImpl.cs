@@ -16,29 +16,29 @@ internal partial class CPulseCell_BaseLerp__CursorState_tImpl : SchemaClass, CPu
 {
     public CPulseCell_BaseLerp__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
     private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x1FAAE76897B5FA8E);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x1FAAE76897B5FA8E);
             var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
             return instance;
         }
     }
-    private static nint? _EndTimeOffset;
+    private static nint _EndTimeOffset = -1;
     private GameTime_tImpl? _EndTimeInstance;
 
     public GameTime_t EndTime
     {
         get
         {
-            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0x1FAAE7687AA8F56B);
+            if (_EndTimeOffset == -1) _EndTimeOffset = Schema.GetOffset(0x1FAAE7687AA8F56B);
             var instance = _EndTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndTimeOffset);
             return instance;
         }
     }

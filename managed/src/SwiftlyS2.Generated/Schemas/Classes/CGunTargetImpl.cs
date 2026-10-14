@@ -16,44 +16,44 @@ internal partial class CGunTargetImpl : CBaseToggleImpl, CGunTarget
 {
     public CGunTargetImpl(nint handle) : base(handle) { }
 
-    private static nint? _SpeedOffset;
+    private static nint _SpeedOffset = -1;
 
     public ref float Speed
     {
         get
         {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x4CB42969C631B7EA);
-            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0x4CB42969C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset);
         }
     }
-    private static nint? _OnOffset;
+    private static nint _OnOffset = -1;
 
     public ref bool On
     {
         get
         {
-            _OnOffset = _OnOffset ?? Schema.GetOffset(0x4CB42969DEB2AE70);
-            return ref _Handle.AsRef<bool>(_OnOffset!.Value);
+            if (_OnOffset == -1) _OnOffset = Schema.GetOffset(0x4CB42969DEB2AE70);
+            return ref _Handle.AsRef<bool>(_OnOffset);
         }
     }
-    private static nint? _TargetEntOffset;
+    private static nint _TargetEntOffset = -1;
 
     public ref CHandle<CBaseEntity> TargetEnt
     {
         get
         {
-            _TargetEntOffset = _TargetEntOffset ?? Schema.GetOffset(0x4CB429692DD292D7);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntOffset!.Value);
+            if (_TargetEntOffset == -1) _TargetEntOffset = Schema.GetOffset(0x4CB429692DD292D7);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntOffset);
         }
     }
-    private static nint? _OnDeathOffset;
+    private static nint _OnDeathOffset = -1;
 
     public ref CEntityIOOutput OnDeath
     {
         get
         {
-            _OnDeathOffset = _OnDeathOffset ?? Schema.GetOffset(0x4CB429696F756BD2);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnDeathOffset!.Value);
+            if (_OnDeathOffset == -1) _OnDeathOffset = Schema.GetOffset(0x4CB429696F756BD2);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDeathOffset);
         }
     }
 

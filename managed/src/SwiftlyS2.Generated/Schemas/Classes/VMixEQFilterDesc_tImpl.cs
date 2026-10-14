@@ -16,14 +16,14 @@ internal partial class VMixEQFilterDesc_tImpl : VMixFilterDesc_tImpl, VMixEQFilt
 {
     public VMixEQFilterDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChannelSetOffset;
+    private static nint _ChannelSetOffset = -1;
 
     public ref VMixFilterChannelSet_t ChannelSet
     {
         get
         {
-            _ChannelSetOffset = _ChannelSetOffset ?? Schema.GetOffset(0x755E0F539B251258);
-            return ref _Handle.AsRef<VMixFilterChannelSet_t>(_ChannelSetOffset!.Value);
+            if (_ChannelSetOffset == -1) _ChannelSetOffset = Schema.GetOffset(0x755E0F539B251258);
+            return ref _Handle.AsRef<VMixFilterChannelSet_t>(_ChannelSetOffset);
         }
     }
 

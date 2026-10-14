@@ -16,170 +16,170 @@ internal partial class CPointAngularVelocitySensorImpl : CPointEntityImpl, CPoin
 {
     public CPointAngularVelocitySensorImpl(nint handle) : base(handle) { }
 
-    private static nint? _TargetEntityOffset;
+    private static nint _TargetEntityOffset = -1;
 
     public ref CHandle<CBaseEntity> TargetEntity
     {
         get
         {
-            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x5B09D8F25D042A9);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset!.Value);
+            if (_TargetEntityOffset == -1) _TargetEntityOffset = Schema.GetOffset(0x5B09D8F25D042A9);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset);
         }
     }
-    private static nint? _ThresholdOffset;
+    private static nint _ThresholdOffset = -1;
 
     public ref float Threshold
     {
         get
         {
-            _ThresholdOffset = _ThresholdOffset ?? Schema.GetOffset(0x5B09D8F7872FFEA);
-            return ref _Handle.AsRef<float>(_ThresholdOffset!.Value);
+            if (_ThresholdOffset == -1) _ThresholdOffset = Schema.GetOffset(0x5B09D8F7872FFEA);
+            return ref _Handle.AsRef<float>(_ThresholdOffset);
         }
     }
-    private static nint? _LastCompareResultOffset;
+    private static nint _LastCompareResultOffset = -1;
 
     public ref int LastCompareResult
     {
         get
         {
-            _LastCompareResultOffset = _LastCompareResultOffset ?? Schema.GetOffset(0x5B09D8F696B400D);
-            return ref _Handle.AsRef<int>(_LastCompareResultOffset!.Value);
+            if (_LastCompareResultOffset == -1) _LastCompareResultOffset = Schema.GetOffset(0x5B09D8F696B400D);
+            return ref _Handle.AsRef<int>(_LastCompareResultOffset);
         }
     }
-    private static nint? _LastFireResultOffset;
+    private static nint _LastFireResultOffset = -1;
 
     public ref int LastFireResult
     {
         get
         {
-            _LastFireResultOffset = _LastFireResultOffset ?? Schema.GetOffset(0x5B09D8FBC50E238);
-            return ref _Handle.AsRef<int>(_LastFireResultOffset!.Value);
+            if (_LastFireResultOffset == -1) _LastFireResultOffset = Schema.GetOffset(0x5B09D8FBC50E238);
+            return ref _Handle.AsRef<int>(_LastFireResultOffset);
         }
     }
-    private static nint? _FireTimeOffset;
+    private static nint _FireTimeOffset = -1;
     private GameTime_tImpl? _FireTimeInstance;
 
     public GameTime_t FireTime
     {
         get
         {
-            _FireTimeOffset = _FireTimeOffset ?? Schema.GetOffset(0x5B09D8F873CD172);
+            if (_FireTimeOffset == -1) _FireTimeOffset = Schema.GetOffset(0x5B09D8F873CD172);
             var instance = _FireTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FireTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FireTimeOffset);
             return instance;
         }
     }
-    private static nint? _FireIntervalOffset;
+    private static nint _FireIntervalOffset = -1;
 
     public ref float FireInterval
     {
         get
         {
-            _FireIntervalOffset = _FireIntervalOffset ?? Schema.GetOffset(0x5B09D8F1B1AA6D2);
-            return ref _Handle.AsRef<float>(_FireIntervalOffset!.Value);
+            if (_FireIntervalOffset == -1) _FireIntervalOffset = Schema.GetOffset(0x5B09D8F1B1AA6D2);
+            return ref _Handle.AsRef<float>(_FireIntervalOffset);
         }
     }
-    private static nint? _LastAngVelocityOffset;
+    private static nint _LastAngVelocityOffset = -1;
 
     public ref float LastAngVelocity
     {
         get
         {
-            _LastAngVelocityOffset = _LastAngVelocityOffset ?? Schema.GetOffset(0x5B09D8F10D82166);
-            return ref _Handle.AsRef<float>(_LastAngVelocityOffset!.Value);
+            if (_LastAngVelocityOffset == -1) _LastAngVelocityOffset = Schema.GetOffset(0x5B09D8F10D82166);
+            return ref _Handle.AsRef<float>(_LastAngVelocityOffset);
         }
     }
-    private static nint? _LastOrientationOffset;
+    private static nint _LastOrientationOffset = -1;
 
     public ref QAngle LastOrientation
     {
         get
         {
-            _LastOrientationOffset = _LastOrientationOffset ?? Schema.GetOffset(0x5B09D8FBB4E87E5);
-            return ref _Handle.AsRef<QAngle>(_LastOrientationOffset!.Value);
+            if (_LastOrientationOffset == -1) _LastOrientationOffset = Schema.GetOffset(0x5B09D8FBB4E87E5);
+            return ref _Handle.AsRef<QAngle>(_LastOrientationOffset);
         }
     }
-    private static nint? _AxisOffset;
+    private static nint _AxisOffset = -1;
 
     public ref Vector Axis
     {
         get
         {
-            _AxisOffset = _AxisOffset ?? Schema.GetOffset(0x5B09D8F0AF9CE54);
-            return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+            if (_AxisOffset == -1) _AxisOffset = Schema.GetOffset(0x5B09D8F0AF9CE54);
+            return ref _Handle.AsRef<Vector>(_AxisOffset);
         }
     }
-    private static nint? _UseHelperOffset;
+    private static nint _UseHelperOffset = -1;
 
     public ref bool UseHelper
     {
         get
         {
-            _UseHelperOffset = _UseHelperOffset ?? Schema.GetOffset(0x5B09D8F7370F54C);
-            return ref _Handle.AsRef<bool>(_UseHelperOffset!.Value);
+            if (_UseHelperOffset == -1) _UseHelperOffset = Schema.GetOffset(0x5B09D8F7370F54C);
+            return ref _Handle.AsRef<bool>(_UseHelperOffset);
         }
     }
-    private static nint? _AngularVelocityOffset;
+    private static nint _AngularVelocityOffset = -1;
     private SchemaUntypedField? _AngularVelocityInstance;
 
     public SchemaUntypedField AngularVelocity
     {
         get
         {
-            _AngularVelocityOffset = _AngularVelocityOffset ?? Schema.GetOffset(0x5B09D8FA4D9E2BE);
+            if (_AngularVelocityOffset == -1) _AngularVelocityOffset = Schema.GetOffset(0x5B09D8FA4D9E2BE);
             var instance = _AngularVelocityInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _AngularVelocityOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AngularVelocityOffset);
             return instance;
         }
     }
-    private static nint? _OnLessThanOffset;
+    private static nint _OnLessThanOffset = -1;
 
     public ref CEntityIOOutput OnLessThan
     {
         get
         {
-            _OnLessThanOffset = _OnLessThanOffset ?? Schema.GetOffset(0x5B09D8FB6AC02FE);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnLessThanOffset!.Value);
+            if (_OnLessThanOffset == -1) _OnLessThanOffset = Schema.GetOffset(0x5B09D8FB6AC02FE);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnLessThanOffset);
         }
     }
-    private static nint? _OnLessThanOrEqualToOffset;
+    private static nint _OnLessThanOrEqualToOffset = -1;
 
     public ref CEntityIOOutput OnLessThanOrEqualTo
     {
         get
         {
-            _OnLessThanOrEqualToOffset = _OnLessThanOrEqualToOffset ?? Schema.GetOffset(0x5B09D8F28E696D8);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnLessThanOrEqualToOffset!.Value);
+            if (_OnLessThanOrEqualToOffset == -1) _OnLessThanOrEqualToOffset = Schema.GetOffset(0x5B09D8F28E696D8);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnLessThanOrEqualToOffset);
         }
     }
-    private static nint? _OnGreaterThanOffset;
+    private static nint _OnGreaterThanOffset = -1;
 
     public ref CEntityIOOutput OnGreaterThan
     {
         get
         {
-            _OnGreaterThanOffset = _OnGreaterThanOffset ?? Schema.GetOffset(0x5B09D8F50BD472D);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnGreaterThanOffset!.Value);
+            if (_OnGreaterThanOffset == -1) _OnGreaterThanOffset = Schema.GetOffset(0x5B09D8F50BD472D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnGreaterThanOffset);
         }
     }
-    private static nint? _OnGreaterThanOrEqualToOffset;
+    private static nint _OnGreaterThanOrEqualToOffset = -1;
 
     public ref CEntityIOOutput OnGreaterThanOrEqualTo
     {
         get
         {
-            _OnGreaterThanOrEqualToOffset = _OnGreaterThanOrEqualToOffset ?? Schema.GetOffset(0x5B09D8F6483CABD);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnGreaterThanOrEqualToOffset!.Value);
+            if (_OnGreaterThanOrEqualToOffset == -1) _OnGreaterThanOrEqualToOffset = Schema.GetOffset(0x5B09D8F6483CABD);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnGreaterThanOrEqualToOffset);
         }
     }
-    private static nint? _OnEqualToOffset;
+    private static nint _OnEqualToOffset = -1;
 
     public ref CEntityIOOutput OnEqualTo
     {
         get
         {
-            _OnEqualToOffset = _OnEqualToOffset ?? Schema.GetOffset(0x5B09D8F87EEC581);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnEqualToOffset!.Value);
+            if (_OnEqualToOffset == -1) _OnEqualToOffset = Schema.GetOffset(0x5B09D8F87EEC581);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEqualToOffset);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class C_PhysMagnetImpl : CBaseAnimGraphImpl, C_PhysMagnet
 {
     public C_PhysMagnetImpl(nint handle) : base(handle) { }
 
-    private static nint? _AttachedObjectsFromServerOffset;
+    private static nint _AttachedObjectsFromServerOffset = -1;
 
     public ref CUtlVector<int> AttachedObjectsFromServer
     {
         get
         {
-            _AttachedObjectsFromServerOffset = _AttachedObjectsFromServerOffset ?? Schema.GetOffset(0x6F22787DDABD68BF);
-            return ref _Handle.AsRef<CUtlVector<int>>(_AttachedObjectsFromServerOffset!.Value);
+            if (_AttachedObjectsFromServerOffset == -1) _AttachedObjectsFromServerOffset = Schema.GetOffset(0x6F22787DDABD68BF);
+            return ref _Handle.AsRef<CUtlVector<int>>(_AttachedObjectsFromServerOffset);
         }
     }
-    private static nint? _AttachedObjectsOffset;
+    private static nint _AttachedObjectsOffset = -1;
 
     public ref CUtlVector<CHandle<C_BaseEntity>> AttachedObjects
     {
         get
         {
-            _AttachedObjectsOffset = _AttachedObjectsOffset ?? Schema.GetOffset(0x6F22787D7ECAEAF4);
-            return ref _Handle.AsRef<CUtlVector<CHandle<C_BaseEntity>>>(_AttachedObjectsOffset!.Value);
+            if (_AttachedObjectsOffset == -1) _AttachedObjectsOffset = Schema.GetOffset(0x6F22787D7ECAEAF4);
+            return ref _Handle.AsRef<CUtlVector<CHandle<C_BaseEntity>>>(_AttachedObjectsOffset);
         }
     }
 

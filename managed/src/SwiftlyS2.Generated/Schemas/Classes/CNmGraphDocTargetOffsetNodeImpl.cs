@@ -16,34 +16,34 @@ internal partial class CNmGraphDocTargetOffsetNodeImpl : CNmGraphDocFlowNodeImpl
 {
     public CNmGraphDocTargetOffsetNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _IsBoneSpaceOffsetOffset;
+    private static nint _IsBoneSpaceOffsetOffset = -1;
 
     public ref bool IsBoneSpaceOffset
     {
         get
         {
-            _IsBoneSpaceOffsetOffset = _IsBoneSpaceOffsetOffset ?? Schema.GetOffset(0xF44BB17F7B33F588);
-            return ref _Handle.AsRef<bool>(_IsBoneSpaceOffsetOffset!.Value);
+            if (_IsBoneSpaceOffsetOffset == -1) _IsBoneSpaceOffsetOffset = Schema.GetOffset(0xF44BB17F7B33F588);
+            return ref _Handle.AsRef<bool>(_IsBoneSpaceOffsetOffset);
         }
     }
-    private static nint? _RotationOffsetOffset;
+    private static nint _RotationOffsetOffset = -1;
 
     public ref QAngle RotationOffset
     {
         get
         {
-            _RotationOffsetOffset = _RotationOffsetOffset ?? Schema.GetOffset(0xF44BB17FD70314A4);
-            return ref _Handle.AsRef<QAngle>(_RotationOffsetOffset!.Value);
+            if (_RotationOffsetOffset == -1) _RotationOffsetOffset = Schema.GetOffset(0xF44BB17FD70314A4);
+            return ref _Handle.AsRef<QAngle>(_RotationOffsetOffset);
         }
     }
-    private static nint? _TranslationOffsetOffset;
+    private static nint _TranslationOffsetOffset = -1;
 
     public ref Vector TranslationOffset
     {
         get
         {
-            _TranslationOffsetOffset = _TranslationOffsetOffset ?? Schema.GetOffset(0xF44BB17F1ABA9777);
-            return ref _Handle.AsRef<Vector>(_TranslationOffsetOffset!.Value);
+            if (_TranslationOffsetOffset == -1) _TranslationOffsetOffset = Schema.GetOffset(0xF44BB17F1ABA9777);
+            return ref _Handle.AsRef<Vector>(_TranslationOffsetOffset);
         }
     }
 

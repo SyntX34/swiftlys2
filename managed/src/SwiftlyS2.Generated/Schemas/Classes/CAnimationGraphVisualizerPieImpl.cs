@@ -16,44 +16,44 @@ internal partial class CAnimationGraphVisualizerPieImpl : CAnimationGraphVisuali
 {
     public CAnimationGraphVisualizerPieImpl(nint handle) : base(handle) { }
 
-    private static nint? _WsCenterOffset;
+    private static nint _WsCenterOffset = -1;
 
     public ref Vector WsCenter
     {
         get
         {
-            _WsCenterOffset = _WsCenterOffset ?? Schema.GetOffset(0x152844C290A3905E);
-            return ref _Handle.AsRef<Vector>(_WsCenterOffset!.Value);
+            if (_WsCenterOffset == -1) _WsCenterOffset = Schema.GetOffset(0x152844C290A3905E);
+            return ref _Handle.AsRef<Vector>(_WsCenterOffset);
         }
     }
-    private static nint? _WsStartOffset;
+    private static nint _WsStartOffset = -1;
 
     public ref Vector WsStart
     {
         get
         {
-            _WsStartOffset = _WsStartOffset ?? Schema.GetOffset(0x152844C2EFF42149);
-            return ref _Handle.AsRef<Vector>(_WsStartOffset!.Value);
+            if (_WsStartOffset == -1) _WsStartOffset = Schema.GetOffset(0x152844C2EFF42149);
+            return ref _Handle.AsRef<Vector>(_WsStartOffset);
         }
     }
-    private static nint? _WsEndOffset;
+    private static nint _WsEndOffset = -1;
 
     public ref Vector WsEnd
     {
         get
         {
-            _WsEndOffset = _WsEndOffset ?? Schema.GetOffset(0x152844C280C1EC98);
-            return ref _Handle.AsRef<Vector>(_WsEndOffset!.Value);
+            if (_WsEndOffset == -1) _WsEndOffset = Schema.GetOffset(0x152844C280C1EC98);
+            return ref _Handle.AsRef<Vector>(_WsEndOffset);
         }
     }
-    private static nint? _ColorOffset;
+    private static nint _ColorOffset = -1;
 
     public ref Color Color
     {
         get
         {
-            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x152844C2D7D017D8);
-            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x152844C2D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset);
         }
     }
 

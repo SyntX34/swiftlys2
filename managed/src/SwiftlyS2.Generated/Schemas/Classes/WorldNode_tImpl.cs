@@ -16,172 +16,172 @@ internal partial class WorldNode_tImpl : SchemaClass, WorldNode_t
 {
     public WorldNode_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SceneObjectsOffset;
+    private static nint _SceneObjectsOffset = -1;
 
     public ref CUtlVector<SceneObject_t> SceneObjects
     {
         get
         {
-            _SceneObjectsOffset = _SceneObjectsOffset ?? Schema.GetOffset(0xFC310480332235A1);
-            return ref _Handle.AsRef<CUtlVector<SceneObject_t>>(_SceneObjectsOffset!.Value);
+            if (_SceneObjectsOffset == -1) _SceneObjectsOffset = Schema.GetOffset(0xFC310480332235A1);
+            return ref _Handle.AsRef<CUtlVector<SceneObject_t>>(_SceneObjectsOffset);
         }
     }
-    private static nint? _VisClusterMembershipOffset;
+    private static nint _VisClusterMembershipOffset = -1;
 
     public ref CUtlVector<ushort> VisClusterMembership
     {
         get
         {
-            _VisClusterMembershipOffset = _VisClusterMembershipOffset ?? Schema.GetOffset(0xFC310480F2C828CD);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_VisClusterMembershipOffset!.Value);
+            if (_VisClusterMembershipOffset == -1) _VisClusterMembershipOffset = Schema.GetOffset(0xFC310480F2C828CD);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_VisClusterMembershipOffset);
         }
     }
-    private static nint? _AggregateSceneObjectsOffset;
+    private static nint _AggregateSceneObjectsOffset = -1;
 
     public ref CUtlVector<AggregateSceneObject_t> AggregateSceneObjects
     {
         get
         {
-            _AggregateSceneObjectsOffset = _AggregateSceneObjectsOffset ?? Schema.GetOffset(0xFC31048072C832FC);
-            return ref _Handle.AsRef<CUtlVector<AggregateSceneObject_t>>(_AggregateSceneObjectsOffset!.Value);
+            if (_AggregateSceneObjectsOffset == -1) _AggregateSceneObjectsOffset = Schema.GetOffset(0xFC31048072C832FC);
+            return ref _Handle.AsRef<CUtlVector<AggregateSceneObject_t>>(_AggregateSceneObjectsOffset);
         }
     }
-    private static nint? _ClutterSceneObjectsOffset;
+    private static nint _ClutterSceneObjectsOffset = -1;
 
     public ref CUtlVector<ClutterSceneObject_t> ClutterSceneObjects
     {
         get
         {
-            _ClutterSceneObjectsOffset = _ClutterSceneObjectsOffset ?? Schema.GetOffset(0xFC310480CB15C9CA);
-            return ref _Handle.AsRef<CUtlVector<ClutterSceneObject_t>>(_ClutterSceneObjectsOffset!.Value);
+            if (_ClutterSceneObjectsOffset == -1) _ClutterSceneObjectsOffset = Schema.GetOffset(0xFC310480CB15C9CA);
+            return ref _Handle.AsRef<CUtlVector<ClutterSceneObject_t>>(_ClutterSceneObjectsOffset);
         }
     }
-    private static nint? _RtProxiesOffset;
+    private static nint _RtProxiesOffset = -1;
 
     public ref CUtlVector<AggregateRTProxySceneObject_t> RtProxies
     {
         get
         {
-            _RtProxiesOffset = _RtProxiesOffset ?? Schema.GetOffset(0xFC310480EC4824A1);
-            return ref _Handle.AsRef<CUtlVector<AggregateRTProxySceneObject_t>>(_RtProxiesOffset!.Value);
+            if (_RtProxiesOffset == -1) _RtProxiesOffset = Schema.GetOffset(0xFC310480EC4824A1);
+            return ref _Handle.AsRef<CUtlVector<AggregateRTProxySceneObject_t>>(_RtProxiesOffset);
         }
     }
-    private static nint? _ExtraVertexStreamOverridesOffset;
+    private static nint _ExtraVertexStreamOverridesOffset = -1;
 
     public ref CUtlVector<ExtraVertexStreamOverride_t> ExtraVertexStreamOverrides
     {
         get
         {
-            _ExtraVertexStreamOverridesOffset = _ExtraVertexStreamOverridesOffset ?? Schema.GetOffset(0xFC310480E2732A38);
-            return ref _Handle.AsRef<CUtlVector<ExtraVertexStreamOverride_t>>(_ExtraVertexStreamOverridesOffset!.Value);
+            if (_ExtraVertexStreamOverridesOffset == -1) _ExtraVertexStreamOverridesOffset = Schema.GetOffset(0xFC310480E2732A38);
+            return ref _Handle.AsRef<CUtlVector<ExtraVertexStreamOverride_t>>(_ExtraVertexStreamOverridesOffset);
         }
     }
-    private static nint? _MaterialOverridesOffset;
+    private static nint _MaterialOverridesOffset = -1;
 
     public ref CUtlVector<MaterialOverride_t> MaterialOverrides
     {
         get
         {
-            _MaterialOverridesOffset = _MaterialOverridesOffset ?? Schema.GetOffset(0xFC3104809D810D99);
-            return ref _Handle.AsRef<CUtlVector<MaterialOverride_t>>(_MaterialOverridesOffset!.Value);
+            if (_MaterialOverridesOffset == -1) _MaterialOverridesOffset = Schema.GetOffset(0xFC3104809D810D99);
+            return ref _Handle.AsRef<CUtlVector<MaterialOverride_t>>(_MaterialOverridesOffset);
         }
     }
-    private static nint? _ExtraVertexStreamsOffset;
+    private static nint _ExtraVertexStreamsOffset = -1;
 
     public ref CUtlVector<WorldNodeOnDiskBufferData_t> ExtraVertexStreams
     {
         get
         {
-            _ExtraVertexStreamsOffset = _ExtraVertexStreamsOffset ?? Schema.GetOffset(0xFC310480544F1AA0);
-            return ref _Handle.AsRef<CUtlVector<WorldNodeOnDiskBufferData_t>>(_ExtraVertexStreamsOffset!.Value);
+            if (_ExtraVertexStreamsOffset == -1) _ExtraVertexStreamsOffset = Schema.GetOffset(0xFC310480544F1AA0);
+            return ref _Handle.AsRef<CUtlVector<WorldNodeOnDiskBufferData_t>>(_ExtraVertexStreamsOffset);
         }
     }
-    private static nint? _AggregateInstanceStreamsOffset;
+    private static nint _AggregateInstanceStreamsOffset = -1;
 
     public ref CUtlVector<AggregateInstanceStreamOnDiskData_t> AggregateInstanceStreams
     {
         get
         {
-            _AggregateInstanceStreamsOffset = _AggregateInstanceStreamsOffset ?? Schema.GetOffset(0xFC31048038CAE4B8);
-            return ref _Handle.AsRef<CUtlVector<AggregateInstanceStreamOnDiskData_t>>(_AggregateInstanceStreamsOffset!.Value);
+            if (_AggregateInstanceStreamsOffset == -1) _AggregateInstanceStreamsOffset = Schema.GetOffset(0xFC31048038CAE4B8);
+            return ref _Handle.AsRef<CUtlVector<AggregateInstanceStreamOnDiskData_t>>(_AggregateInstanceStreamsOffset);
         }
     }
-    private static nint? _VertexAlbedoStreamsOffset;
+    private static nint _VertexAlbedoStreamsOffset = -1;
 
     public ref CUtlVector<AggregateVertexAlbedoStreamOnDiskData_t> VertexAlbedoStreams
     {
         get
         {
-            _VertexAlbedoStreamsOffset = _VertexAlbedoStreamsOffset ?? Schema.GetOffset(0xFC3104803DD793DB);
-            return ref _Handle.AsRef<CUtlVector<AggregateVertexAlbedoStreamOnDiskData_t>>(_VertexAlbedoStreamsOffset!.Value);
+            if (_VertexAlbedoStreamsOffset == -1) _VertexAlbedoStreamsOffset = Schema.GetOffset(0xFC3104803DD793DB);
+            return ref _Handle.AsRef<CUtlVector<AggregateVertexAlbedoStreamOnDiskData_t>>(_VertexAlbedoStreamsOffset);
         }
     }
-    private static nint? _VertexEmissiveStreamsOffset;
+    private static nint _VertexEmissiveStreamsOffset = -1;
 
     public ref CUtlVector<AggregateVertexEmissiveStreamOnDiskData_t> VertexEmissiveStreams
     {
         get
         {
-            _VertexEmissiveStreamsOffset = _VertexEmissiveStreamsOffset ?? Schema.GetOffset(0xFC31048013723AA5);
-            return ref _Handle.AsRef<CUtlVector<AggregateVertexEmissiveStreamOnDiskData_t>>(_VertexEmissiveStreamsOffset!.Value);
+            if (_VertexEmissiveStreamsOffset == -1) _VertexEmissiveStreamsOffset = Schema.GetOffset(0xFC31048013723AA5);
+            return ref _Handle.AsRef<CUtlVector<AggregateVertexEmissiveStreamOnDiskData_t>>(_VertexEmissiveStreamsOffset);
         }
     }
-    private static nint? _LayerNamesOffset;
+    private static nint _LayerNamesOffset = -1;
 
     public ref CUtlVector<CUtlString> LayerNames
     {
         get
         {
-            _LayerNamesOffset = _LayerNamesOffset ?? Schema.GetOffset(0xFC3104806E877012);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_LayerNamesOffset!.Value);
+            if (_LayerNamesOffset == -1) _LayerNamesOffset = Schema.GetOffset(0xFC3104806E877012);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_LayerNamesOffset);
         }
     }
-    private static nint? _SceneObjectLayerIndicesOffset;
+    private static nint _SceneObjectLayerIndicesOffset = -1;
 
     public ref CUtlVector<byte> SceneObjectLayerIndices
     {
         get
         {
-            _SceneObjectLayerIndicesOffset = _SceneObjectLayerIndicesOffset ?? Schema.GetOffset(0xFC310480F769C8CA);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_SceneObjectLayerIndicesOffset!.Value);
+            if (_SceneObjectLayerIndicesOffset == -1) _SceneObjectLayerIndicesOffset = Schema.GetOffset(0xFC310480F769C8CA);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_SceneObjectLayerIndicesOffset);
         }
     }
-    private static nint? _GrassFileNameOffset;
+    private static nint _GrassFileNameOffset = -1;
 
     public string GrassFileName
     {
         get
         {
-            _GrassFileNameOffset = _GrassFileNameOffset ?? Schema.GetOffset(0xFC310480FDDFCFE0);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_GrassFileNameOffset!.Value));
+            if (_GrassFileNameOffset == -1) _GrassFileNameOffset = Schema.GetOffset(0xFC310480FDDFCFE0);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_GrassFileNameOffset));
         }
         set
         {
-            _GrassFileNameOffset = _GrassFileNameOffset ?? Schema.GetOffset(0xFC310480FDDFCFE0);
-            Schema.SetCUtlString(_Handle, _GrassFileNameOffset!.Value, value);
+            if (_GrassFileNameOffset == -1) _GrassFileNameOffset = Schema.GetOffset(0xFC310480FDDFCFE0);
+            Schema.SetCUtlString(_Handle, _GrassFileNameOffset, value);
         }
     }
-    private static nint? _NodeLightingInfoOffset;
+    private static nint _NodeLightingInfoOffset = -1;
     private BakedLightingInfo_tImpl? _NodeLightingInfoInstance;
 
     public BakedLightingInfo_t NodeLightingInfo
     {
         get
         {
-            _NodeLightingInfoOffset = _NodeLightingInfoOffset ?? Schema.GetOffset(0xFC3104800E25D839);
+            if (_NodeLightingInfoOffset == -1) _NodeLightingInfoOffset = Schema.GetOffset(0xFC3104800E25D839);
             var instance = _NodeLightingInfoInstance ??= new BakedLightingInfo_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NodeLightingInfoOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeLightingInfoOffset);
             return instance;
         }
     }
-    private static nint? _HasBakedGeometryFlagOffset;
+    private static nint _HasBakedGeometryFlagOffset = -1;
 
     public ref bool HasBakedGeometryFlag
     {
         get
         {
-            _HasBakedGeometryFlagOffset = _HasBakedGeometryFlagOffset ?? Schema.GetOffset(0xFC310480943F4594);
-            return ref _Handle.AsRef<bool>(_HasBakedGeometryFlagOffset!.Value);
+            if (_HasBakedGeometryFlagOffset == -1) _HasBakedGeometryFlagOffset = Schema.GetOffset(0xFC310480943F4594);
+            return ref _Handle.AsRef<bool>(_HasBakedGeometryFlagOffset);
         }
     }
 

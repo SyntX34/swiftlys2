@@ -16,67 +16,67 @@ internal partial class C_OP_SetGravityToCPImpl : CParticleFunctionPreEmissionImp
 {
     public C_OP_SetGravityToCPImpl(nint handle) : base(handle) { }
 
-    private static nint? _CPInputOffset;
+    private static nint _CPInputOffset = -1;
 
     public ref int CPInput
     {
         get
         {
-            _CPInputOffset = _CPInputOffset ?? Schema.GetOffset(0xBA369CBDFB805736);
-            return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
+            if (_CPInputOffset == -1) _CPInputOffset = Schema.GetOffset(0xBA369CBDFB805736);
+            return ref _Handle.AsRef<int>(_CPInputOffset);
         }
     }
-    private static nint? _CPOutputOffset;
+    private static nint _CPOutputOffset = -1;
 
     public ref int CPOutput
     {
         get
         {
-            _CPOutputOffset = _CPOutputOffset ?? Schema.GetOffset(0xBA369CBD2077C953);
-            return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
+            if (_CPOutputOffset == -1) _CPOutputOffset = Schema.GetOffset(0xBA369CBD2077C953);
+            return ref _Handle.AsRef<int>(_CPOutputOffset);
         }
     }
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
     private CParticleCollectionFloatInputImpl? _ScaleInstance;
 
     public CParticleCollectionFloatInput Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xBA369CBDB731A42F);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xBA369CBDB731A42F);
             var instance = _ScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset);
             return instance;
         }
     }
-    private static nint? _SetPositionOffset;
+    private static nint _SetPositionOffset = -1;
 
     public ref bool SetPosition
     {
         get
         {
-            _SetPositionOffset = _SetPositionOffset ?? Schema.GetOffset(0xBA369CBDD2968690);
-            return ref _Handle.AsRef<bool>(_SetPositionOffset!.Value);
+            if (_SetPositionOffset == -1) _SetPositionOffset = Schema.GetOffset(0xBA369CBDD2968690);
+            return ref _Handle.AsRef<bool>(_SetPositionOffset);
         }
     }
-    private static nint? _SetOrientationOffset;
+    private static nint _SetOrientationOffset = -1;
 
     public ref bool SetOrientation
     {
         get
         {
-            _SetOrientationOffset = _SetOrientationOffset ?? Schema.GetOffset(0xBA369CBDE1390E37);
-            return ref _Handle.AsRef<bool>(_SetOrientationOffset!.Value);
+            if (_SetOrientationOffset == -1) _SetOrientationOffset = Schema.GetOffset(0xBA369CBDE1390E37);
+            return ref _Handle.AsRef<bool>(_SetOrientationOffset);
         }
     }
-    private static nint? _SetZDownOffset;
+    private static nint _SetZDownOffset = -1;
 
     public ref bool SetZDown
     {
         get
         {
-            _SetZDownOffset = _SetZDownOffset ?? Schema.GetOffset(0xBA369CBDE2673E97);
-            return ref _Handle.AsRef<bool>(_SetZDownOffset!.Value);
+            if (_SetZDownOffset == -1) _SetZDownOffset = Schema.GetOffset(0xBA369CBDE2673E97);
+            return ref _Handle.AsRef<bool>(_SetZDownOffset);
         }
     }
 

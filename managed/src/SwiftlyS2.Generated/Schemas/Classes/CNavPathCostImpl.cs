@@ -16,124 +16,124 @@ internal partial class CNavPathCostImpl : INavPathCostImpl, CNavPathCost
 {
     public CNavPathCostImpl(nint handle) : base(handle) { }
 
-    private static nint? _AllowLaddersOffset;
+    private static nint _AllowLaddersOffset = -1;
 
     public ref bool AllowLadders
     {
         get
         {
-            _AllowLaddersOffset = _AllowLaddersOffset ?? Schema.GetOffset(0x2BDEF75106C7F8EB);
-            return ref _Handle.AsRef<bool>(_AllowLaddersOffset!.Value);
+            if (_AllowLaddersOffset == -1) _AllowLaddersOffset = Schema.GetOffset(0x2BDEF75106C7F8EB);
+            return ref _Handle.AsRef<bool>(_AllowLaddersOffset);
         }
     }
-    private static nint? _CanFlyOffset;
+    private static nint _CanFlyOffset = -1;
 
     public ref bool CanFly
     {
         get
         {
-            _CanFlyOffset = _CanFlyOffset ?? Schema.GetOffset(0x2BDEF751AADF0602);
-            return ref _Handle.AsRef<bool>(_CanFlyOffset!.Value);
+            if (_CanFlyOffset == -1) _CanFlyOffset = Schema.GetOffset(0x2BDEF751AADF0602);
+            return ref _Handle.AsRef<bool>(_CanFlyOffset);
         }
     }
-    private static nint? _CanSwimOffset;
+    private static nint _CanSwimOffset = -1;
 
     public ref bool CanSwim
     {
         get
         {
-            _CanSwimOffset = _CanSwimOffset ?? Schema.GetOffset(0x2BDEF75125F17AAD);
-            return ref _Handle.AsRef<bool>(_CanSwimOffset!.Value);
+            if (_CanSwimOffset == -1) _CanSwimOffset = Schema.GetOffset(0x2BDEF75125F17AAD);
+            return ref _Handle.AsRef<bool>(_CanSwimOffset);
         }
     }
-    private static nint? _WaterToGroundMaxHeightOffset;
+    private static nint _WaterToGroundMaxHeightOffset = -1;
 
     public ref float WaterToGroundMaxHeight
     {
         get
         {
-            _WaterToGroundMaxHeightOffset = _WaterToGroundMaxHeightOffset ?? Schema.GetOffset(0x2BDEF7515273FD09);
-            return ref _Handle.AsRef<float>(_WaterToGroundMaxHeightOffset!.Value);
+            if (_WaterToGroundMaxHeightOffset == -1) _WaterToGroundMaxHeightOffset = Schema.GetOffset(0x2BDEF7515273FD09);
+            return ref _Handle.AsRef<float>(_WaterToGroundMaxHeightOffset);
         }
     }
-    private static nint? _GroundToWaterMaxHeightOffset;
+    private static nint _GroundToWaterMaxHeightOffset = -1;
 
     public ref float GroundToWaterMaxHeight
     {
         get
         {
-            _GroundToWaterMaxHeightOffset = _GroundToWaterMaxHeightOffset ?? Schema.GetOffset(0x2BDEF7518C4656E1);
-            return ref _Handle.AsRef<float>(_GroundToWaterMaxHeightOffset!.Value);
+            if (_GroundToWaterMaxHeightOffset == -1) _GroundToWaterMaxHeightOffset = Schema.GetOffset(0x2BDEF7518C4656E1);
+            return ref _Handle.AsRef<float>(_GroundToWaterMaxHeightOffset);
         }
     }
-    private static nint? _GroundToWaterTransitionDistanceOffset;
+    private static nint _GroundToWaterTransitionDistanceOffset = -1;
 
     public ref float GroundToWaterTransitionDistance
     {
         get
         {
-            _GroundToWaterTransitionDistanceOffset = _GroundToWaterTransitionDistanceOffset ?? Schema.GetOffset(0x2BDEF751EA8FD398);
-            return ref _Handle.AsRef<float>(_GroundToWaterTransitionDistanceOffset!.Value);
+            if (_GroundToWaterTransitionDistanceOffset == -1) _GroundToWaterTransitionDistanceOffset = Schema.GetOffset(0x2BDEF751EA8FD398);
+            return ref _Handle.AsRef<float>(_GroundToWaterTransitionDistanceOffset);
         }
     }
-    private static nint? _WaterToGroundTransitionDistanceOffset;
+    private static nint _WaterToGroundTransitionDistanceOffset = -1;
 
     public ref float WaterToGroundTransitionDistance
     {
         get
         {
-            _WaterToGroundTransitionDistanceOffset = _WaterToGroundTransitionDistanceOffset ?? Schema.GetOffset(0x2BDEF7512C0330D0);
-            return ref _Handle.AsRef<float>(_WaterToGroundTransitionDistanceOffset!.Value);
+            if (_WaterToGroundTransitionDistanceOffset == -1) _WaterToGroundTransitionDistanceOffset = Schema.GetOffset(0x2BDEF7512C0330D0);
+            return ref _Handle.AsRef<float>(_WaterToGroundTransitionDistanceOffset);
         }
     }
-    private static nint? _FlyingTransitionToleranceOffset;
+    private static nint _FlyingTransitionToleranceOffset = -1;
 
     public ref float FlyingTransitionTolerance
     {
         get
         {
-            _FlyingTransitionToleranceOffset = _FlyingTransitionToleranceOffset ?? Schema.GetOffset(0x2BDEF751EA3D127E);
-            return ref _Handle.AsRef<float>(_FlyingTransitionToleranceOffset!.Value);
+            if (_FlyingTransitionToleranceOffset == -1) _FlyingTransitionToleranceOffset = Schema.GetOffset(0x2BDEF751EA3D127E);
+            return ref _Handle.AsRef<float>(_FlyingTransitionToleranceOffset);
         }
     }
-    private static nint? _OptimizeFlySpacePathfindsOffset;
+    private static nint _OptimizeFlySpacePathfindsOffset = -1;
 
     public ref bool OptimizeFlySpacePathfinds
     {
         get
         {
-            _OptimizeFlySpacePathfindsOffset = _OptimizeFlySpacePathfindsOffset ?? Schema.GetOffset(0x2BDEF751407EAEF4);
-            return ref _Handle.AsRef<bool>(_OptimizeFlySpacePathfindsOffset!.Value);
+            if (_OptimizeFlySpacePathfindsOffset == -1) _OptimizeFlySpacePathfindsOffset = Schema.GetOffset(0x2BDEF751407EAEF4);
+            return ref _Handle.AsRef<bool>(_OptimizeFlySpacePathfindsOffset);
         }
     }
-    private static nint? _StringPullFlySpacePathfindsOffset;
+    private static nint _StringPullFlySpacePathfindsOffset = -1;
 
     public ref bool StringPullFlySpacePathfinds
     {
         get
         {
-            _StringPullFlySpacePathfindsOffset = _StringPullFlySpacePathfindsOffset ?? Schema.GetOffset(0x2BDEF7519A681477);
-            return ref _Handle.AsRef<bool>(_StringPullFlySpacePathfindsOffset!.Value);
+            if (_StringPullFlySpacePathfindsOffset == -1) _StringPullFlySpacePathfindsOffset = Schema.GetOffset(0x2BDEF7519A681477);
+            return ref _Handle.AsRef<bool>(_StringPullFlySpacePathfindsOffset);
         }
     }
-    private static nint? _SupportsTransitionsOffset;
+    private static nint _SupportsTransitionsOffset = -1;
 
     public ref bool SupportsTransitions
     {
         get
         {
-            _SupportsTransitionsOffset = _SupportsTransitionsOffset ?? Schema.GetOffset(0x2BDEF7518357F4DF);
-            return ref _Handle.AsRef<bool>(_SupportsTransitionsOffset!.Value);
+            if (_SupportsTransitionsOffset == -1) _SupportsTransitionsOffset = Schema.GetOffset(0x2BDEF7518357F4DF);
+            return ref _Handle.AsRef<bool>(_SupportsTransitionsOffset);
         }
     }
-    private static nint? _TransitionPenaltyOffset;
+    private static nint _TransitionPenaltyOffset = -1;
 
     public ref float TransitionPenalty
     {
         get
         {
-            _TransitionPenaltyOffset = _TransitionPenaltyOffset ?? Schema.GetOffset(0x2BDEF751840E6E35);
-            return ref _Handle.AsRef<float>(_TransitionPenaltyOffset!.Value);
+            if (_TransitionPenaltyOffset == -1) _TransitionPenaltyOffset = Schema.GetOffset(0x2BDEF751840E6E35);
+            return ref _Handle.AsRef<float>(_TransitionPenaltyOffset);
         }
     }
 

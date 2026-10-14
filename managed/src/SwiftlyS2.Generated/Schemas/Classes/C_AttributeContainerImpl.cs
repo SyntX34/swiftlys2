@@ -16,37 +16,37 @@ internal partial class C_AttributeContainerImpl : CAttributeManagerImpl, C_Attri
 {
     public C_AttributeContainerImpl(nint handle) : base(handle) { }
 
-    private static nint? _ItemOffset;
+    private static nint _ItemOffset = -1;
     private C_EconItemViewImpl? _ItemInstance;
 
     public C_EconItemView Item
     {
         get
         {
-            _ItemOffset = _ItemOffset ?? Schema.GetOffset(0xB85CFA30DCE71866);
+            if (_ItemOffset == -1) _ItemOffset = Schema.GetOffset(0xB85CFA30DCE71866);
             var instance = _ItemInstance ??= new C_EconItemViewImpl(0);
-            instance.DangerousSetHandle(_Handle + _ItemOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ItemOffset);
             return instance;
         }
     }
-    private static nint? _ExternalItemProviderRegisteredTokenOffset;
+    private static nint _ExternalItemProviderRegisteredTokenOffset = -1;
 
     public ref int ExternalItemProviderRegisteredToken
     {
         get
         {
-            _ExternalItemProviderRegisteredTokenOffset = _ExternalItemProviderRegisteredTokenOffset ?? Schema.GetOffset(0xB85CFA305A75F7FA);
-            return ref _Handle.AsRef<int>(_ExternalItemProviderRegisteredTokenOffset!.Value);
+            if (_ExternalItemProviderRegisteredTokenOffset == -1) _ExternalItemProviderRegisteredTokenOffset = Schema.GetOffset(0xB85CFA305A75F7FA);
+            return ref _Handle.AsRef<int>(_ExternalItemProviderRegisteredTokenOffset);
         }
     }
-    private static nint? _UllRegisteredAsItemIDOffset;
+    private static nint _UllRegisteredAsItemIDOffset = -1;
 
     public ref ulong UllRegisteredAsItemID
     {
         get
         {
-            _UllRegisteredAsItemIDOffset = _UllRegisteredAsItemIDOffset ?? Schema.GetOffset(0xB85CFA30D69E23EA);
-            return ref _Handle.AsRef<ulong>(_UllRegisteredAsItemIDOffset!.Value);
+            if (_UllRegisteredAsItemIDOffset == -1) _UllRegisteredAsItemIDOffset = Schema.GetOffset(0xB85CFA30D69E23EA);
+            return ref _Handle.AsRef<ulong>(_UllRegisteredAsItemIDOffset);
         }
     }
 

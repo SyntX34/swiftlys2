@@ -16,29 +16,29 @@ internal partial class CAnimGraphDoc_ClipDataImpl : SchemaClass, CAnimGraphDoc_C
 {
     public CAnimGraphDoc_ClipDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _TagSpansOffset;
+    private static nint _TagSpansOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> TagSpans
     {
         get
         {
-            _TagSpansOffset = _TagSpansOffset ?? Schema.GetOffset(0x867ABAF4A56106AC);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TagSpansOffset!.Value);
+            if (_TagSpansOffset == -1) _TagSpansOffset = Schema.GetOffset(0x867ABAF4A56106AC);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TagSpansOffset);
         }
     }
-    private static nint? _ClipNameOffset;
+    private static nint _ClipNameOffset = -1;
 
     public string ClipName
     {
         get
         {
-            _ClipNameOffset = _ClipNameOffset ?? Schema.GetOffset(0x867ABAF477D84420);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ClipNameOffset!.Value));
+            if (_ClipNameOffset == -1) _ClipNameOffset = Schema.GetOffset(0x867ABAF477D84420);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ClipNameOffset));
         }
         set
         {
-            _ClipNameOffset = _ClipNameOffset ?? Schema.GetOffset(0x867ABAF477D84420);
-            Schema.SetCUtlString(_Handle, _ClipNameOffset!.Value, value);
+            if (_ClipNameOffset == -1) _ClipNameOffset = Schema.GetOffset(0x867ABAF477D84420);
+            Schema.SetCUtlString(_Handle, _ClipNameOffset, value);
         }
     }
 

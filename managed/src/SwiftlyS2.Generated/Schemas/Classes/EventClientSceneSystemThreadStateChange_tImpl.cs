@@ -16,14 +16,14 @@ internal partial class EventClientSceneSystemThreadStateChange_tImpl : SchemaCla
 {
     public EventClientSceneSystemThreadStateChange_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ThreadsActiveOffset;
+    private static nint _ThreadsActiveOffset = -1;
 
     public ref bool ThreadsActive
     {
         get
         {
-            _ThreadsActiveOffset = _ThreadsActiveOffset ?? Schema.GetOffset(0x28053E1174AC2EF0);
-            return ref _Handle.AsRef<bool>(_ThreadsActiveOffset!.Value);
+            if (_ThreadsActiveOffset == -1) _ThreadsActiveOffset = Schema.GetOffset(0x28053E1174AC2EF0);
+            return ref _Handle.AsRef<bool>(_ThreadsActiveOffset);
         }
     }
 

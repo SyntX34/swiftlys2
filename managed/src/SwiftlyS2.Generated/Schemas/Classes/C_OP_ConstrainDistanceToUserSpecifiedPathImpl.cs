@@ -16,54 +16,54 @@ internal partial class C_OP_ConstrainDistanceToUserSpecifiedPathImpl : CParticle
 {
     public C_OP_ConstrainDistanceToUserSpecifiedPathImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinDistanceOffset;
+    private static nint _MinDistanceOffset = -1;
 
     public ref float MinDistance
     {
         get
         {
-            _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0x42F2CE28F016B7AC);
-            return ref _Handle.AsRef<float>(_MinDistanceOffset!.Value);
+            if (_MinDistanceOffset == -1) _MinDistanceOffset = Schema.GetOffset(0x42F2CE28F016B7AC);
+            return ref _Handle.AsRef<float>(_MinDistanceOffset);
         }
     }
-    private static nint? _MaxDistanceOffset;
+    private static nint _MaxDistanceOffset = -1;
 
     public ref float MaxDistance
     {
         get
         {
-            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x42F2CE2898893360);
-            return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+            if (_MaxDistanceOffset == -1) _MaxDistanceOffset = Schema.GetOffset(0x42F2CE2898893360);
+            return ref _Handle.AsRef<float>(_MaxDistanceOffset);
         }
     }
-    private static nint? _TimeScaleOffset;
+    private static nint _TimeScaleOffset = -1;
 
     public ref float TimeScale
     {
         get
         {
-            _TimeScaleOffset = _TimeScaleOffset ?? Schema.GetOffset(0x42F2CE28B49D735C);
-            return ref _Handle.AsRef<float>(_TimeScaleOffset!.Value);
+            if (_TimeScaleOffset == -1) _TimeScaleOffset = Schema.GetOffset(0x42F2CE28B49D735C);
+            return ref _Handle.AsRef<float>(_TimeScaleOffset);
         }
     }
-    private static nint? _LoopedPathOffset;
+    private static nint _LoopedPathOffset = -1;
 
     public ref bool LoopedPath
     {
         get
         {
-            _LoopedPathOffset = _LoopedPathOffset ?? Schema.GetOffset(0x42F2CE284D64C459);
-            return ref _Handle.AsRef<bool>(_LoopedPathOffset!.Value);
+            if (_LoopedPathOffset == -1) _LoopedPathOffset = Schema.GetOffset(0x42F2CE284D64C459);
+            return ref _Handle.AsRef<bool>(_LoopedPathOffset);
         }
     }
-    private static nint? _PointListOffset;
+    private static nint _PointListOffset = -1;
 
     public ref CUtlVector<PointDefinitionWithTimeValues_t> PointList
     {
         get
         {
-            _PointListOffset = _PointListOffset ?? Schema.GetOffset(0x42F2CE28976AB4FD);
-            return ref _Handle.AsRef<CUtlVector<PointDefinitionWithTimeValues_t>>(_PointListOffset!.Value);
+            if (_PointListOffset == -1) _PointListOffset = Schema.GetOffset(0x42F2CE28976AB4FD);
+            return ref _Handle.AsRef<CUtlVector<PointDefinitionWithTimeValues_t>>(_PointListOffset);
         }
     }
 

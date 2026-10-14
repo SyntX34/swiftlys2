@@ -16,34 +16,34 @@ internal partial class FilterHealthImpl : CBaseFilterImpl, FilterHealth
 {
     public FilterHealthImpl(nint handle) : base(handle) { }
 
-    private static nint? _AdrenalineActiveOffset;
+    private static nint _AdrenalineActiveOffset = -1;
 
     public ref bool AdrenalineActive
     {
         get
         {
-            _AdrenalineActiveOffset = _AdrenalineActiveOffset ?? Schema.GetOffset(0x4DD06C81671CFB30);
-            return ref _Handle.AsRef<bool>(_AdrenalineActiveOffset!.Value);
+            if (_AdrenalineActiveOffset == -1) _AdrenalineActiveOffset = Schema.GetOffset(0x4DD06C81671CFB30);
+            return ref _Handle.AsRef<bool>(_AdrenalineActiveOffset);
         }
     }
-    private static nint? _HealthMinOffset;
+    private static nint _HealthMinOffset = -1;
 
     public ref int HealthMin
     {
         get
         {
-            _HealthMinOffset = _HealthMinOffset ?? Schema.GetOffset(0x4DD06C8117D5C166);
-            return ref _Handle.AsRef<int>(_HealthMinOffset!.Value);
+            if (_HealthMinOffset == -1) _HealthMinOffset = Schema.GetOffset(0x4DD06C8117D5C166);
+            return ref _Handle.AsRef<int>(_HealthMinOffset);
         }
     }
-    private static nint? _HealthMaxOffset;
+    private static nint _HealthMaxOffset = -1;
 
     public ref int HealthMax
     {
         get
         {
-            _HealthMaxOffset = _HealthMaxOffset ?? Schema.GetOffset(0x4DD06C8129E96574);
-            return ref _Handle.AsRef<int>(_HealthMaxOffset!.Value);
+            if (_HealthMaxOffset == -1) _HealthMaxOffset = Schema.GetOffset(0x4DD06C8129E96574);
+            return ref _Handle.AsRef<int>(_HealthMaxOffset);
         }
     }
 

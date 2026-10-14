@@ -16,16 +16,16 @@ internal partial class CPhysicsBodyGameMarkupDataImpl : SchemaClass, CPhysicsBod
 {
     public CPhysicsBodyGameMarkupDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _PhysicsBodyMarkupByBoneNameOffset;
+    private static nint _PhysicsBodyMarkupByBoneNameOffset = -1;
     private SchemaUntypedField? _PhysicsBodyMarkupByBoneNameInstance;
 
     public SchemaUntypedField PhysicsBodyMarkupByBoneName
     {
         get
         {
-            _PhysicsBodyMarkupByBoneNameOffset = _PhysicsBodyMarkupByBoneNameOffset ?? Schema.GetOffset(0x29262AE188A1FE22);
+            if (_PhysicsBodyMarkupByBoneNameOffset == -1) _PhysicsBodyMarkupByBoneNameOffset = Schema.GetOffset(0x29262AE188A1FE22);
             var instance = _PhysicsBodyMarkupByBoneNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PhysicsBodyMarkupByBoneNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PhysicsBodyMarkupByBoneNameOffset);
             return instance;
         }
     }

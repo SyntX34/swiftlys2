@@ -16,53 +16,53 @@ internal partial class C_OP_MovementRotateParticleAroundAxisImpl : CParticleFunc
 {
     public C_OP_MovementRotateParticleAroundAxisImpl(nint handle) : base(handle) { }
 
-    private static nint? _RotAxisOffset;
+    private static nint _RotAxisOffset = -1;
     private CParticleCollectionVecInputImpl? _RotAxisInstance;
 
     public CParticleCollectionVecInput RotAxis
     {
         get
         {
-            _RotAxisOffset = _RotAxisOffset ?? Schema.GetOffset(0x44C1E1F191872163);
+            if (_RotAxisOffset == -1) _RotAxisOffset = Schema.GetOffset(0x44C1E1F191872163);
             var instance = _RotAxisInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RotAxisOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RotAxisOffset);
             return instance;
         }
     }
-    private static nint? _RotRateOffset;
+    private static nint _RotRateOffset = -1;
     private CParticleCollectionFloatInputImpl? _RotRateInstance;
 
     public CParticleCollectionFloatInput RotRate
     {
         get
         {
-            _RotRateOffset = _RotRateOffset ?? Schema.GetOffset(0x44C1E1F16747B556);
+            if (_RotRateOffset == -1) _RotRateOffset = Schema.GetOffset(0x44C1E1F16747B556);
             var instance = _RotRateInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RotRateOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RotRateOffset);
             return instance;
         }
     }
-    private static nint? _TransformInputOffset;
+    private static nint _TransformInputOffset = -1;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x44C1E1F1B3FDC289);
+            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0x44C1E1F1B3FDC289);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
             return instance;
         }
     }
-    private static nint? _LocalSpaceOffset;
+    private static nint _LocalSpaceOffset = -1;
 
     public ref bool LocalSpace
     {
         get
         {
-            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0x44C1E1F162418E6E);
-            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+            if (_LocalSpaceOffset == -1) _LocalSpaceOffset = Schema.GetOffset(0x44C1E1F162418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset);
         }
     }
 

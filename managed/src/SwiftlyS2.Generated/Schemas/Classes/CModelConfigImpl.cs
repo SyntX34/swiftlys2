@@ -16,49 +16,49 @@ internal partial class CModelConfigImpl : SchemaClass, CModelConfig
 {
     public CModelConfigImpl(nint handle) : base(handle) { }
 
-    private static nint? _ConfigNameOffset;
+    private static nint _ConfigNameOffset = -1;
 
     public string ConfigName
     {
         get
         {
-            _ConfigNameOffset = _ConfigNameOffset ?? Schema.GetOffset(0xF6401D5DA7B74064);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ConfigNameOffset!.Value));
+            if (_ConfigNameOffset == -1) _ConfigNameOffset = Schema.GetOffset(0xF6401D5DA7B74064);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ConfigNameOffset));
         }
         set
         {
-            _ConfigNameOffset = _ConfigNameOffset ?? Schema.GetOffset(0xF6401D5DA7B74064);
-            Schema.SetCUtlString(_Handle, _ConfigNameOffset!.Value, value);
+            if (_ConfigNameOffset == -1) _ConfigNameOffset = Schema.GetOffset(0xF6401D5DA7B74064);
+            Schema.SetCUtlString(_Handle, _ConfigNameOffset, value);
         }
     }
-    private static nint? _ElementsOffset;
+    private static nint _ElementsOffset = -1;
 
     public ref CUtlVector<PointerTo<CModelConfigElement>> Elements
     {
         get
         {
-            _ElementsOffset = _ElementsOffset ?? Schema.GetOffset(0xF6401D5DC36D5D4C);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfigElement>>>(_ElementsOffset!.Value);
+            if (_ElementsOffset == -1) _ElementsOffset = Schema.GetOffset(0xF6401D5DC36D5D4C);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfigElement>>>(_ElementsOffset);
         }
     }
-    private static nint? _TopLevelOffset;
+    private static nint _TopLevelOffset = -1;
 
     public ref bool TopLevel
     {
         get
         {
-            _TopLevelOffset = _TopLevelOffset ?? Schema.GetOffset(0xF6401D5D0EC64BE2);
-            return ref _Handle.AsRef<bool>(_TopLevelOffset!.Value);
+            if (_TopLevelOffset == -1) _TopLevelOffset = Schema.GetOffset(0xF6401D5D0EC64BE2);
+            return ref _Handle.AsRef<bool>(_TopLevelOffset);
         }
     }
-    private static nint? _ActiveInEditorByDefaultOffset;
+    private static nint _ActiveInEditorByDefaultOffset = -1;
 
     public ref bool ActiveInEditorByDefault
     {
         get
         {
-            _ActiveInEditorByDefaultOffset = _ActiveInEditorByDefaultOffset ?? Schema.GetOffset(0xF6401D5D6E287741);
-            return ref _Handle.AsRef<bool>(_ActiveInEditorByDefaultOffset!.Value);
+            if (_ActiveInEditorByDefaultOffset == -1) _ActiveInEditorByDefaultOffset = Schema.GetOffset(0xF6401D5D6E287741);
+            return ref _Handle.AsRef<bool>(_ActiveInEditorByDefaultOffset);
         }
     }
 

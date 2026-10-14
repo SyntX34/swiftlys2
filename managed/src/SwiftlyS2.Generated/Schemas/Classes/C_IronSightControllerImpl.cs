@@ -16,137 +16,137 @@ internal partial class C_IronSightControllerImpl : SchemaClass, C_IronSightContr
 {
     public C_IronSightControllerImpl(nint handle) : base(handle) { }
 
-    private static nint? _IronSightAvailableOffset;
+    private static nint _IronSightAvailableOffset = -1;
 
     public ref bool IronSightAvailable
     {
         get
         {
-            _IronSightAvailableOffset = _IronSightAvailableOffset ?? Schema.GetOffset(0x46AC8CFA31BCE9D3);
-            return ref _Handle.AsRef<bool>(_IronSightAvailableOffset!.Value);
+            if (_IronSightAvailableOffset == -1) _IronSightAvailableOffset = Schema.GetOffset(0x46AC8CFA31BCE9D3);
+            return ref _Handle.AsRef<bool>(_IronSightAvailableOffset);
         }
     }
-    private static nint? _IronSightAmountOffset;
+    private static nint _IronSightAmountOffset = -1;
 
     public ref float IronSightAmount
     {
         get
         {
-            _IronSightAmountOffset = _IronSightAmountOffset ?? Schema.GetOffset(0x46AC8CFAD64422F6);
-            return ref _Handle.AsRef<float>(_IronSightAmountOffset!.Value);
+            if (_IronSightAmountOffset == -1) _IronSightAmountOffset = Schema.GetOffset(0x46AC8CFAD64422F6);
+            return ref _Handle.AsRef<float>(_IronSightAmountOffset);
         }
     }
-    private static nint? _IronSightAmountGainedOffset;
+    private static nint _IronSightAmountGainedOffset = -1;
 
     public ref float IronSightAmountGained
     {
         get
         {
-            _IronSightAmountGainedOffset = _IronSightAmountGainedOffset ?? Schema.GetOffset(0x46AC8CFA6631E9A0);
-            return ref _Handle.AsRef<float>(_IronSightAmountGainedOffset!.Value);
+            if (_IronSightAmountGainedOffset == -1) _IronSightAmountGainedOffset = Schema.GetOffset(0x46AC8CFA6631E9A0);
+            return ref _Handle.AsRef<float>(_IronSightAmountGainedOffset);
         }
     }
-    private static nint? _IronSightAmountBiasedOffset;
+    private static nint _IronSightAmountBiasedOffset = -1;
 
     public ref float IronSightAmountBiased
     {
         get
         {
-            _IronSightAmountBiasedOffset = _IronSightAmountBiasedOffset ?? Schema.GetOffset(0x46AC8CFA526716FA);
-            return ref _Handle.AsRef<float>(_IronSightAmountBiasedOffset!.Value);
+            if (_IronSightAmountBiasedOffset == -1) _IronSightAmountBiasedOffset = Schema.GetOffset(0x46AC8CFA526716FA);
+            return ref _Handle.AsRef<float>(_IronSightAmountBiasedOffset);
         }
     }
-    private static nint? _IronSightAmount_InterpolatedOffset;
+    private static nint _IronSightAmount_InterpolatedOffset = -1;
 
     public ref float IronSightAmount_Interpolated
     {
         get
         {
-            _IronSightAmount_InterpolatedOffset = _IronSightAmount_InterpolatedOffset ?? Schema.GetOffset(0x46AC8CFAFA9E78FE);
-            return ref _Handle.AsRef<float>(_IronSightAmount_InterpolatedOffset!.Value);
+            if (_IronSightAmount_InterpolatedOffset == -1) _IronSightAmount_InterpolatedOffset = Schema.GetOffset(0x46AC8CFAFA9E78FE);
+            return ref _Handle.AsRef<float>(_IronSightAmount_InterpolatedOffset);
         }
     }
-    private static nint? _IronSightAmountGained_InterpolatedOffset;
+    private static nint _IronSightAmountGained_InterpolatedOffset = -1;
 
     public ref float IronSightAmountGained_Interpolated
     {
         get
         {
-            _IronSightAmountGained_InterpolatedOffset = _IronSightAmountGained_InterpolatedOffset ?? Schema.GetOffset(0x46AC8CFA05DA2EC4);
-            return ref _Handle.AsRef<float>(_IronSightAmountGained_InterpolatedOffset!.Value);
+            if (_IronSightAmountGained_InterpolatedOffset == -1) _IronSightAmountGained_InterpolatedOffset = Schema.GetOffset(0x46AC8CFA05DA2EC4);
+            return ref _Handle.AsRef<float>(_IronSightAmountGained_InterpolatedOffset);
         }
     }
-    private static nint? _IronSightAmountBiased_InterpolatedOffset;
+    private static nint _IronSightAmountBiased_InterpolatedOffset = -1;
 
     public ref float IronSightAmountBiased_Interpolated
     {
         get
         {
-            _IronSightAmountBiased_InterpolatedOffset = _IronSightAmountBiased_InterpolatedOffset ?? Schema.GetOffset(0x46AC8CFA94418BA2);
-            return ref _Handle.AsRef<float>(_IronSightAmountBiased_InterpolatedOffset!.Value);
+            if (_IronSightAmountBiased_InterpolatedOffset == -1) _IronSightAmountBiased_InterpolatedOffset = Schema.GetOffset(0x46AC8CFA94418BA2);
+            return ref _Handle.AsRef<float>(_IronSightAmountBiased_InterpolatedOffset);
         }
     }
-    private static nint? _InterpolationLastUpdatedOffset;
+    private static nint _InterpolationLastUpdatedOffset = -1;
 
     public ref float InterpolationLastUpdated
     {
         get
         {
-            _InterpolationLastUpdatedOffset = _InterpolationLastUpdatedOffset ?? Schema.GetOffset(0x46AC8CFA0CD9DB66);
-            return ref _Handle.AsRef<float>(_InterpolationLastUpdatedOffset!.Value);
+            if (_InterpolationLastUpdatedOffset == -1) _InterpolationLastUpdatedOffset = Schema.GetOffset(0x46AC8CFA0CD9DB66);
+            return ref _Handle.AsRef<float>(_InterpolationLastUpdatedOffset);
         }
     }
-    private static nint? _DeltaAverageOffset;
+    private static nint _DeltaAverageOffset = -1;
     private SchemaFixedArray<QAngle>? _DeltaAverageInstance;
 
     public ISchemaFixedArray<QAngle> DeltaAverage
     {
         get
         {
-            _DeltaAverageOffset = _DeltaAverageOffset ?? Schema.GetOffset(0x46AC8CFA27E04F4E);
+            if (_DeltaAverageOffset == -1) _DeltaAverageOffset = Schema.GetOffset(0x46AC8CFA27E04F4E);
             var instance = _DeltaAverageInstance ??= new SchemaFixedArray<QAngle>(0, 0x46AC8CFA27E04F4E, 8, 12, 4);
-            instance.DangerousSetHandle(_Handle + _DeltaAverageOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DeltaAverageOffset);
             return instance;
         }
     }
-    private static nint? _ViewLastOffset;
+    private static nint _ViewLastOffset = -1;
 
     public ref QAngle ViewLast
     {
         get
         {
-            _ViewLastOffset = _ViewLastOffset ?? Schema.GetOffset(0x46AC8CFA2E2E8B9A);
-            return ref _Handle.AsRef<QAngle>(_ViewLastOffset!.Value);
+            if (_ViewLastOffset == -1) _ViewLastOffset = Schema.GetOffset(0x46AC8CFA2E2E8B9A);
+            return ref _Handle.AsRef<QAngle>(_ViewLastOffset);
         }
     }
-    private static nint? _DotCoordsOffset;
+    private static nint _DotCoordsOffset = -1;
 
     public ref Vector2D DotCoords
     {
         get
         {
-            _DotCoordsOffset = _DotCoordsOffset ?? Schema.GetOffset(0x46AC8CFAB46CCC96);
-            return ref _Handle.AsRef<Vector2D>(_DotCoordsOffset!.Value);
+            if (_DotCoordsOffset == -1) _DotCoordsOffset = Schema.GetOffset(0x46AC8CFAB46CCC96);
+            return ref _Handle.AsRef<Vector2D>(_DotCoordsOffset);
         }
     }
-    private static nint? _FiringInaccuracyExtraWidthMultiplierOffset;
+    private static nint _FiringInaccuracyExtraWidthMultiplierOffset = -1;
 
     public ref float FiringInaccuracyExtraWidthMultiplier
     {
         get
         {
-            _FiringInaccuracyExtraWidthMultiplierOffset = _FiringInaccuracyExtraWidthMultiplierOffset ?? Schema.GetOffset(0x46AC8CFA1B25F163);
-            return ref _Handle.AsRef<float>(_FiringInaccuracyExtraWidthMultiplierOffset!.Value);
+            if (_FiringInaccuracyExtraWidthMultiplierOffset == -1) _FiringInaccuracyExtraWidthMultiplierOffset = Schema.GetOffset(0x46AC8CFA1B25F163);
+            return ref _Handle.AsRef<float>(_FiringInaccuracyExtraWidthMultiplierOffset);
         }
     }
-    private static nint? _SpeedRatioOffset;
+    private static nint _SpeedRatioOffset = -1;
 
     public ref float SpeedRatio
     {
         get
         {
-            _SpeedRatioOffset = _SpeedRatioOffset ?? Schema.GetOffset(0x46AC8CFA94AC6979);
-            return ref _Handle.AsRef<float>(_SpeedRatioOffset!.Value);
+            if (_SpeedRatioOffset == -1) _SpeedRatioOffset = Schema.GetOffset(0x46AC8CFA94AC6979);
+            return ref _Handle.AsRef<float>(_SpeedRatioOffset);
         }
     }
 

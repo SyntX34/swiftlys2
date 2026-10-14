@@ -16,176 +16,176 @@ internal partial class CPhysMotorImpl : CLogicalEntityImpl, CPhysMotor
 {
     public CPhysMotorImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameAttachOffset;
+    private static nint _NameAttachOffset = -1;
 
     public string NameAttach
     {
         get
         {
-            _NameAttachOffset = _NameAttachOffset ?? Schema.GetOffset(0x88C095BFBECAEF3F);
-            return Schema.GetString(_Handle.Read<nint>(_NameAttachOffset!.Value));
+            if (_NameAttachOffset == -1) _NameAttachOffset = Schema.GetOffset(0x88C095BFBECAEF3F);
+            return Schema.GetString(_Handle.Read<nint>(_NameAttachOffset));
         }
         set
         {
-            _NameAttachOffset = _NameAttachOffset ?? Schema.GetOffset(0x88C095BFBECAEF3F);
-            Schema.SetString(_Handle, _NameAttachOffset!.Value, value);
+            if (_NameAttachOffset == -1) _NameAttachOffset = Schema.GetOffset(0x88C095BFBECAEF3F);
+            Schema.SetString(_Handle, _NameAttachOffset, value);
         }
     }
-    private static nint? _NameAnchorOffset;
+    private static nint _NameAnchorOffset = -1;
 
     public string NameAnchor
     {
         get
         {
-            _NameAnchorOffset = _NameAnchorOffset ?? Schema.GetOffset(0x88C095BFAD43DD27);
-            return Schema.GetString(_Handle.Read<nint>(_NameAnchorOffset!.Value));
+            if (_NameAnchorOffset == -1) _NameAnchorOffset = Schema.GetOffset(0x88C095BFAD43DD27);
+            return Schema.GetString(_Handle.Read<nint>(_NameAnchorOffset));
         }
         set
         {
-            _NameAnchorOffset = _NameAnchorOffset ?? Schema.GetOffset(0x88C095BFAD43DD27);
-            Schema.SetString(_Handle, _NameAnchorOffset!.Value, value);
+            if (_NameAnchorOffset == -1) _NameAnchorOffset = Schema.GetOffset(0x88C095BFAD43DD27);
+            Schema.SetString(_Handle, _NameAnchorOffset, value);
         }
     }
-    private static nint? _AttachedObjectOffset;
+    private static nint _AttachedObjectOffset = -1;
 
     public ref CHandle<CBaseEntity> AttachedObject
     {
         get
         {
-            _AttachedObjectOffset = _AttachedObjectOffset ?? Schema.GetOffset(0x88C095BF5B0EDB58);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedObjectOffset!.Value);
+            if (_AttachedObjectOffset == -1) _AttachedObjectOffset = Schema.GetOffset(0x88C095BF5B0EDB58);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedObjectOffset);
         }
     }
-    private static nint? _AnchorObjectOffset;
+    private static nint _AnchorObjectOffset = -1;
 
     public ref CHandle<CBaseEntity> AnchorObject
     {
         get
         {
-            _AnchorObjectOffset = _AnchorObjectOffset ?? Schema.GetOffset(0x88C095BFDE8F702D);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AnchorObjectOffset!.Value);
+            if (_AnchorObjectOffset == -1) _AnchorObjectOffset = Schema.GetOffset(0x88C095BFDE8F702D);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AnchorObjectOffset);
         }
     }
-    private static nint? _SpinUpOffset;
+    private static nint _SpinUpOffset = -1;
 
     public ref float SpinUp
     {
         get
         {
-            _SpinUpOffset = _SpinUpOffset ?? Schema.GetOffset(0x88C095BFB2CBE21C);
-            return ref _Handle.AsRef<float>(_SpinUpOffset!.Value);
+            if (_SpinUpOffset == -1) _SpinUpOffset = Schema.GetOffset(0x88C095BFB2CBE21C);
+            return ref _Handle.AsRef<float>(_SpinUpOffset);
         }
     }
-    private static nint? _SpinDownOffset;
+    private static nint _SpinDownOffset = -1;
 
     public ref float SpinDown
     {
         get
         {
-            _SpinDownOffset = _SpinDownOffset ?? Schema.GetOffset(0x88C095BF5AA77109);
-            return ref _Handle.AsRef<float>(_SpinDownOffset!.Value);
+            if (_SpinDownOffset == -1) _SpinDownOffset = Schema.GetOffset(0x88C095BF5AA77109);
+            return ref _Handle.AsRef<float>(_SpinDownOffset);
         }
     }
-    private static nint? _MotorFrictionOffset;
+    private static nint _MotorFrictionOffset = -1;
 
     public ref float MotorFriction
     {
         get
         {
-            _MotorFrictionOffset = _MotorFrictionOffset ?? Schema.GetOffset(0x88C095BF36C3170E);
-            return ref _Handle.AsRef<float>(_MotorFrictionOffset!.Value);
+            if (_MotorFrictionOffset == -1) _MotorFrictionOffset = Schema.GetOffset(0x88C095BF36C3170E);
+            return ref _Handle.AsRef<float>(_MotorFrictionOffset);
         }
     }
-    private static nint? _AdditionalAccelerationOffset;
+    private static nint _AdditionalAccelerationOffset = -1;
 
     public ref float AdditionalAcceleration
     {
         get
         {
-            _AdditionalAccelerationOffset = _AdditionalAccelerationOffset ?? Schema.GetOffset(0x88C095BF60106F50);
-            return ref _Handle.AsRef<float>(_AdditionalAccelerationOffset!.Value);
+            if (_AdditionalAccelerationOffset == -1) _AdditionalAccelerationOffset = Schema.GetOffset(0x88C095BF60106F50);
+            return ref _Handle.AsRef<float>(_AdditionalAccelerationOffset);
         }
     }
-    private static nint? _AngularAccelerationOffset;
+    private static nint _AngularAccelerationOffset = -1;
 
     public ref float AngularAcceleration
     {
         get
         {
-            _AngularAccelerationOffset = _AngularAccelerationOffset ?? Schema.GetOffset(0x88C095BFEB676AF1);
-            return ref _Handle.AsRef<float>(_AngularAccelerationOffset!.Value);
+            if (_AngularAccelerationOffset == -1) _AngularAccelerationOffset = Schema.GetOffset(0x88C095BFEB676AF1);
+            return ref _Handle.AsRef<float>(_AngularAccelerationOffset);
         }
     }
-    private static nint? _TorqueScaleOffset;
+    private static nint _TorqueScaleOffset = -1;
 
     public ref float TorqueScale
     {
         get
         {
-            _TorqueScaleOffset = _TorqueScaleOffset ?? Schema.GetOffset(0x88C095BF50218E89);
-            return ref _Handle.AsRef<float>(_TorqueScaleOffset!.Value);
+            if (_TorqueScaleOffset == -1) _TorqueScaleOffset = Schema.GetOffset(0x88C095BF50218E89);
+            return ref _Handle.AsRef<float>(_TorqueScaleOffset);
         }
     }
-    private static nint? _TargetSpeedOffset;
+    private static nint _TargetSpeedOffset = -1;
 
     public ref float TargetSpeed
     {
         get
         {
-            _TargetSpeedOffset = _TargetSpeedOffset ?? Schema.GetOffset(0x88C095BF9C627845);
-            return ref _Handle.AsRef<float>(_TargetSpeedOffset!.Value);
+            if (_TargetSpeedOffset == -1) _TargetSpeedOffset = Schema.GetOffset(0x88C095BF9C627845);
+            return ref _Handle.AsRef<float>(_TargetSpeedOffset);
         }
     }
-    private static nint? _SpeedWhenSpinUpOrSpinDownStartedOffset;
+    private static nint _SpeedWhenSpinUpOrSpinDownStartedOffset = -1;
 
     public ref float SpeedWhenSpinUpOrSpinDownStarted
     {
         get
         {
-            _SpeedWhenSpinUpOrSpinDownStartedOffset = _SpeedWhenSpinUpOrSpinDownStartedOffset ?? Schema.GetOffset(0x88C095BF86577537);
-            return ref _Handle.AsRef<float>(_SpeedWhenSpinUpOrSpinDownStartedOffset!.Value);
+            if (_SpeedWhenSpinUpOrSpinDownStartedOffset == -1) _SpeedWhenSpinUpOrSpinDownStartedOffset = Schema.GetOffset(0x88C095BF86577537);
+            return ref _Handle.AsRef<float>(_SpeedWhenSpinUpOrSpinDownStartedOffset);
         }
     }
-    private static nint? _FixedWorldBodyOffset;
+    private static nint _FixedWorldBodyOffset = -1;
     private IPhysicsBodyImpl? _FixedWorldBodyInstance;
 
     public IPhysicsBody? FixedWorldBody
     {
         get
         {
-            _FixedWorldBodyOffset = _FixedWorldBodyOffset ?? Schema.GetOffset(0x88C095BF146EC531);
-            var ptr = _Handle.Read<nint>(_FixedWorldBodyOffset!.Value);
+            if (_FixedWorldBodyOffset == -1) _FixedWorldBodyOffset = Schema.GetOffset(0x88C095BF146EC531);
+            var ptr = _Handle.Read<nint>(_FixedWorldBodyOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _FixedWorldBodyInstance ??= new IPhysicsBodyImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _MotorJointOffset;
+    private static nint _MotorJointOffset = -1;
     private IPhysicsJointImpl? _MotorJointInstance;
 
     public IPhysicsJoint? MotorJoint
     {
         get
         {
-            _MotorJointOffset = _MotorJointOffset ?? Schema.GetOffset(0x88C095BFDD87FD18);
-            var ptr = _Handle.Read<nint>(_MotorJointOffset!.Value);
+            if (_MotorJointOffset == -1) _MotorJointOffset = Schema.GetOffset(0x88C095BFDD87FD18);
+            var ptr = _Handle.Read<nint>(_MotorJointOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _MotorJointInstance ??= new IPhysicsJointImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _MotorOffset;
+    private static nint _MotorOffset = -1;
     private CMotorControllerImpl? _MotorInstance;
 
     public CMotorController Motor
     {
         get
         {
-            _MotorOffset = _MotorOffset ?? Schema.GetOffset(0x88C095BF373E4F92);
+            if (_MotorOffset == -1) _MotorOffset = Schema.GetOffset(0x88C095BF373E4F92);
             var instance = _MotorInstance ??= new CMotorControllerImpl(0);
-            instance.DangerousSetHandle(_Handle + _MotorOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MotorOffset);
             return instance;
         }
     }

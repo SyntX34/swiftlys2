@@ -16,261 +16,261 @@ internal partial class CSchemaSystemInternalRegistrationImpl : SchemaClass, CSch
 {
     public CSchemaSystemInternalRegistrationImpl(nint handle) : base(handle) { }
 
-    private static nint? _Vector2DOffset;
+    private static nint _Vector2DOffset = -1;
 
     public ref Vector2D Vector2D
     {
         get
         {
-            _Vector2DOffset = _Vector2DOffset ?? Schema.GetOffset(0xDDD6CA303570333C);
-            return ref _Handle.AsRef<Vector2D>(_Vector2DOffset!.Value);
+            if (_Vector2DOffset == -1) _Vector2DOffset = Schema.GetOffset(0xDDD6CA303570333C);
+            return ref _Handle.AsRef<Vector2D>(_Vector2DOffset);
         }
     }
-    private static nint? _VectorOffset;
+    private static nint _VectorOffset = -1;
 
     public ref Vector Vector
     {
         get
         {
-            _VectorOffset = _VectorOffset ?? Schema.GetOffset(0xDDD6CA30FE2AA082);
-            return ref _Handle.AsRef<Vector>(_VectorOffset!.Value);
+            if (_VectorOffset == -1) _VectorOffset = Schema.GetOffset(0xDDD6CA30FE2AA082);
+            return ref _Handle.AsRef<Vector>(_VectorOffset);
         }
     }
-    private static nint? _VectorWSOffset;
+    private static nint _VectorWSOffset = -1;
 
     public ref Vector VectorWS
     {
         get
         {
-            _VectorWSOffset = _VectorWSOffset ?? Schema.GetOffset(0xDDD6CA303CCB2914);
-            return ref _Handle.AsRef<Vector>(_VectorWSOffset!.Value);
+            if (_VectorWSOffset == -1) _VectorWSOffset = Schema.GetOffset(0xDDD6CA303CCB2914);
+            return ref _Handle.AsRef<Vector>(_VectorWSOffset);
         }
     }
-    private static nint? _VectorAlignedOffset;
+    private static nint _VectorAlignedOffset = -1;
 
     public ref Vector VectorAligned
     {
         get
         {
-            _VectorAlignedOffset = _VectorAlignedOffset ?? Schema.GetOffset(0xDDD6CA3076A2F792);
-            return ref _Handle.AsRef<Vector>(_VectorAlignedOffset!.Value);
+            if (_VectorAlignedOffset == -1) _VectorAlignedOffset = Schema.GetOffset(0xDDD6CA3076A2F792);
+            return ref _Handle.AsRef<Vector>(_VectorAlignedOffset);
         }
     }
-    private static nint? _QuaternionOffset;
+    private static nint _QuaternionOffset = -1;
 
     public ref Quaternion Quaternion
     {
         get
         {
-            _QuaternionOffset = _QuaternionOffset ?? Schema.GetOffset(0xDDD6CA308FFA070D);
-            return ref _Handle.AsRef<Quaternion>(_QuaternionOffset!.Value);
+            if (_QuaternionOffset == -1) _QuaternionOffset = Schema.GetOffset(0xDDD6CA308FFA070D);
+            return ref _Handle.AsRef<Quaternion>(_QuaternionOffset);
         }
     }
-    private static nint? _QAngleOffset;
+    private static nint _QAngleOffset = -1;
 
     public ref QAngle QAngle
     {
         get
         {
-            _QAngleOffset = _QAngleOffset ?? Schema.GetOffset(0xDDD6CA30D3989847);
-            return ref _Handle.AsRef<QAngle>(_QAngleOffset!.Value);
+            if (_QAngleOffset == -1) _QAngleOffset = Schema.GetOffset(0xDDD6CA30D3989847);
+            return ref _Handle.AsRef<QAngle>(_QAngleOffset);
         }
     }
-    private static nint? _RotationVectorOffset;
+    private static nint _RotationVectorOffset = -1;
     private SchemaUntypedField? _RotationVectorInstance;
 
     public SchemaUntypedField RotationVector
     {
         get
         {
-            _RotationVectorOffset = _RotationVectorOffset ?? Schema.GetOffset(0xDDD6CA30D5A2443C);
+            if (_RotationVectorOffset == -1) _RotationVectorOffset = Schema.GetOffset(0xDDD6CA30D5A2443C);
             var instance = _RotationVectorInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RotationVectorOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RotationVectorOffset);
             return instance;
         }
     }
-    private static nint? _RadianEulerOffset;
+    private static nint _RadianEulerOffset = -1;
 
     public ref RadianEuler RadianEuler
     {
         get
         {
-            _RadianEulerOffset = _RadianEulerOffset ?? Schema.GetOffset(0xDDD6CA30E6A91A09);
-            return ref _Handle.AsRef<RadianEuler>(_RadianEulerOffset!.Value);
+            if (_RadianEulerOffset == -1) _RadianEulerOffset = Schema.GetOffset(0xDDD6CA30E6A91A09);
+            return ref _Handle.AsRef<RadianEuler>(_RadianEulerOffset);
         }
     }
-    private static nint? _DegreeEulerOffset;
+    private static nint _DegreeEulerOffset = -1;
     private SchemaUntypedField? _DegreeEulerInstance;
 
     public SchemaUntypedField DegreeEuler
     {
         get
         {
-            _DegreeEulerOffset = _DegreeEulerOffset ?? Schema.GetOffset(0xDDD6CA30FCD6D92E);
+            if (_DegreeEulerOffset == -1) _DegreeEulerOffset = Schema.GetOffset(0xDDD6CA30FCD6D92E);
             var instance = _DegreeEulerInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DegreeEulerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DegreeEulerOffset);
             return instance;
         }
     }
-    private static nint? _QuaternionStorageOffset;
+    private static nint _QuaternionStorageOffset = -1;
 
     public ref QuaternionStorage QuaternionStorage
     {
         get
         {
-            _QuaternionStorageOffset = _QuaternionStorageOffset ?? Schema.GetOffset(0xDDD6CA303C6C2D0E);
-            return ref _Handle.AsRef<QuaternionStorage>(_QuaternionStorageOffset!.Value);
+            if (_QuaternionStorageOffset == -1) _QuaternionStorageOffset = Schema.GetOffset(0xDDD6CA303C6C2D0E);
+            return ref _Handle.AsRef<QuaternionStorage>(_QuaternionStorageOffset);
         }
     }
-    private static nint? _Matrix3x4_tOffset;
+    private static nint _Matrix3x4_tOffset = -1;
 
     public ref matrix3x4_t Matrix3x4_t
     {
         get
         {
-            _Matrix3x4_tOffset = _Matrix3x4_tOffset ?? Schema.GetOffset(0xDDD6CA30EC15D3EA);
-            return ref _Handle.AsRef<matrix3x4_t>(_Matrix3x4_tOffset!.Value);
+            if (_Matrix3x4_tOffset == -1) _Matrix3x4_tOffset = Schema.GetOffset(0xDDD6CA30EC15D3EA);
+            return ref _Handle.AsRef<matrix3x4_t>(_Matrix3x4_tOffset);
         }
     }
-    private static nint? _Matrix3x4a_tOffset;
+    private static nint _Matrix3x4a_tOffset = -1;
 
     public ref matrix3x4_t Matrix3x4a_t
     {
         get
         {
-            _Matrix3x4a_tOffset = _Matrix3x4a_tOffset ?? Schema.GetOffset(0xDDD6CA30E298503B);
-            return ref _Handle.AsRef<matrix3x4_t>(_Matrix3x4a_tOffset!.Value);
+            if (_Matrix3x4a_tOffset == -1) _Matrix3x4a_tOffset = Schema.GetOffset(0xDDD6CA30E298503B);
+            return ref _Handle.AsRef<matrix3x4_t>(_Matrix3x4a_tOffset);
         }
     }
-    private static nint? _ColorOffset;
+    private static nint _ColorOffset = -1;
 
     public ref Color Color
     {
         get
         {
-            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0xDDD6CA30D7D017D8);
-            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0xDDD6CA30D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset);
         }
     }
-    private static nint? _Vector4DOffset;
+    private static nint _Vector4DOffset = -1;
 
     public ref Vector4D Vector4D
     {
         get
         {
-            _Vector4DOffset = _Vector4DOffset ?? Schema.GetOffset(0xDDD6CA30197F11B2);
-            return ref _Handle.AsRef<Vector4D>(_Vector4DOffset!.Value);
+            if (_Vector4DOffset == -1) _Vector4DOffset = Schema.GetOffset(0xDDD6CA30197F11B2);
+            return ref _Handle.AsRef<Vector4D>(_Vector4DOffset);
         }
     }
-    private static nint? _CTransformOffset;
+    private static nint _CTransformOffset = -1;
 
     public ref CTransform CTransform
     {
         get
         {
-            _CTransformOffset = _CTransformOffset ?? Schema.GetOffset(0xDDD6CA3045C7677A);
-            return ref _Handle.AsRef<CTransform>(_CTransformOffset!.Value);
+            if (_CTransformOffset == -1) _CTransformOffset = Schema.GetOffset(0xDDD6CA3045C7677A);
+            return ref _Handle.AsRef<CTransform>(_CTransformOffset);
         }
     }
-    private static nint? _KeyValuesOffset;
+    private static nint _KeyValuesOffset = -1;
     private SchemaUntypedField? _KeyValuesInstance;
 
     public SchemaUntypedField? KeyValues
     {
         get
         {
-            _KeyValuesOffset = _KeyValuesOffset ?? Schema.GetOffset(0xDDD6CA3011F5FBEC);
-            var ptr = _Handle.Read<nint>(_KeyValuesOffset!.Value);
+            if (_KeyValuesOffset == -1) _KeyValuesOffset = Schema.GetOffset(0xDDD6CA3011F5FBEC);
+            var ptr = _Handle.Read<nint>(_KeyValuesOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _KeyValuesInstance ??= new SchemaUntypedField(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _CUtlBinaryBlockOffset;
+    private static nint _CUtlBinaryBlockOffset = -1;
 
     public ref CUtlBinaryBlock CUtlBinaryBlock
     {
         get
         {
-            _CUtlBinaryBlockOffset = _CUtlBinaryBlockOffset ?? Schema.GetOffset(0xDDD6CA307F63D33D);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_CUtlBinaryBlockOffset!.Value);
+            if (_CUtlBinaryBlockOffset == -1) _CUtlBinaryBlockOffset = Schema.GetOffset(0xDDD6CA307F63D33D);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_CUtlBinaryBlockOffset);
         }
     }
-    private static nint? _CUtlStringOffset;
+    private static nint _CUtlStringOffset = -1;
 
     public string CUtlString
     {
         get
         {
-            _CUtlStringOffset = _CUtlStringOffset ?? Schema.GetOffset(0xDDD6CA3041577950);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CUtlStringOffset!.Value));
+            if (_CUtlStringOffset == -1) _CUtlStringOffset = Schema.GetOffset(0xDDD6CA3041577950);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CUtlStringOffset));
         }
         set
         {
-            _CUtlStringOffset = _CUtlStringOffset ?? Schema.GetOffset(0xDDD6CA3041577950);
-            Schema.SetCUtlString(_Handle, _CUtlStringOffset!.Value, value);
+            if (_CUtlStringOffset == -1) _CUtlStringOffset = Schema.GetOffset(0xDDD6CA3041577950);
+            Schema.SetCUtlString(_Handle, _CUtlStringOffset, value);
         }
     }
-    private static nint? _CUtlSymbolOffset;
+    private static nint _CUtlSymbolOffset = -1;
     private SchemaUntypedField? _CUtlSymbolInstance;
 
     public SchemaUntypedField CUtlSymbol
     {
         get
         {
-            _CUtlSymbolOffset = _CUtlSymbolOffset ?? Schema.GetOffset(0xDDD6CA30EA008FA9);
+            if (_CUtlSymbolOffset == -1) _CUtlSymbolOffset = Schema.GetOffset(0xDDD6CA30EA008FA9);
             var instance = _CUtlSymbolInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CUtlSymbolOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CUtlSymbolOffset);
             return instance;
         }
     }
-    private static nint? _StringTokenOffset;
+    private static nint _StringTokenOffset = -1;
 
     public ref CUtlStringToken StringToken
     {
         get
         {
-            _StringTokenOffset = _StringTokenOffset ?? Schema.GetOffset(0xDDD6CA3049D8C20D);
-            return ref _Handle.AsRef<CUtlStringToken>(_StringTokenOffset!.Value);
+            if (_StringTokenOffset == -1) _StringTokenOffset = Schema.GetOffset(0xDDD6CA3049D8C20D);
+            return ref _Handle.AsRef<CUtlStringToken>(_StringTokenOffset);
         }
     }
-    private static nint? _StringTokenWithStorageOffset;
+    private static nint _StringTokenWithStorageOffset = -1;
     private SchemaUntypedField? _StringTokenWithStorageInstance;
 
     public SchemaUntypedField StringTokenWithStorage
     {
         get
         {
-            _StringTokenWithStorageOffset = _StringTokenWithStorageOffset ?? Schema.GetOffset(0xDDD6CA30A8DD475A);
+            if (_StringTokenWithStorageOffset == -1) _StringTokenWithStorageOffset = Schema.GetOffset(0xDDD6CA30A8DD475A);
             var instance = _StringTokenWithStorageInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StringTokenWithStorageOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StringTokenWithStorageOffset);
             return instance;
         }
     }
-    private static nint? _ResourceTypesOffset;
+    private static nint _ResourceTypesOffset = -1;
     private SchemaUntypedField? _ResourceTypesInstance;
 
     public SchemaUntypedField ResourceTypes
     {
         get
         {
-            _ResourceTypesOffset = _ResourceTypesOffset ?? Schema.GetOffset(0xDDD6CA30410F830A);
+            if (_ResourceTypesOffset == -1) _ResourceTypesOffset = Schema.GetOffset(0xDDD6CA30410F830A);
             var instance = _ResourceTypesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ResourceTypesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ResourceTypesOffset);
             return instance;
         }
     }
-    private static nint? _KV3Offset;
+    private static nint _KV3Offset = -1;
     private SchemaUntypedField? _KV3Instance;
 
     public SchemaUntypedField KV3
     {
         get
         {
-            _KV3Offset = _KV3Offset ?? Schema.GetOffset(0xDDD6CA302E1AEFC5);
+            if (_KV3Offset == -1) _KV3Offset = Schema.GetOffset(0xDDD6CA302E1AEFC5);
             var instance = _KV3Instance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _KV3Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _KV3Offset);
             return instance;
         }
     }

@@ -16,24 +16,24 @@ internal partial class SkeletonAnimCapture_t__Camera_tImpl : SchemaClass, Skelet
 {
     public SkeletonAnimCapture_t__Camera_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _TmCameraOffset;
+    private static nint _TmCameraOffset = -1;
 
     public ref CTransform TmCamera
     {
         get
         {
-            _TmCameraOffset = _TmCameraOffset ?? Schema.GetOffset(0xEBD053249D7ED559);
-            return ref _Handle.AsRef<CTransform>(_TmCameraOffset!.Value);
+            if (_TmCameraOffset == -1) _TmCameraOffset = Schema.GetOffset(0xEBD053249D7ED559);
+            return ref _Handle.AsRef<CTransform>(_TmCameraOffset);
         }
     }
-    private static nint? _TimeOffset;
+    private static nint _TimeOffset = -1;
 
     public ref float Time
     {
         get
         {
-            _TimeOffset = _TimeOffset ?? Schema.GetOffset(0xEBD05324C957229E);
-            return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+            if (_TimeOffset == -1) _TimeOffset = Schema.GetOffset(0xEBD05324C957229E);
+            return ref _Handle.AsRef<float>(_TimeOffset);
         }
     }
 

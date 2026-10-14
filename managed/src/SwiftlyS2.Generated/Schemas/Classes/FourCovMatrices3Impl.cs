@@ -16,44 +16,44 @@ internal partial class FourCovMatrices3Impl : SchemaClass, FourCovMatrices3
 {
     public FourCovMatrices3Impl(nint handle) : base(handle) { }
 
-    private static nint? _DiagOffset;
+    private static nint _DiagOffset = -1;
 
     public ref FourVectors Diag
     {
         get
         {
-            _DiagOffset = _DiagOffset ?? Schema.GetOffset(0xCEA91E487CC0D332);
-            return ref _Handle.AsRef<FourVectors>(_DiagOffset!.Value);
+            if (_DiagOffset == -1) _DiagOffset = Schema.GetOffset(0xCEA91E487CC0D332);
+            return ref _Handle.AsRef<FourVectors>(_DiagOffset);
         }
     }
-    private static nint? _XYOffset;
+    private static nint _XYOffset = -1;
 
     public ref fltx4 XY
     {
         get
         {
-            _XYOffset = _XYOffset ?? Schema.GetOffset(0xCEA91E48A58DC304);
-            return ref _Handle.AsRef<fltx4>(_XYOffset!.Value);
+            if (_XYOffset == -1) _XYOffset = Schema.GetOffset(0xCEA91E48A58DC304);
+            return ref _Handle.AsRef<fltx4>(_XYOffset);
         }
     }
-    private static nint? _XZOffset;
+    private static nint _XZOffset = -1;
 
     public ref fltx4 XZ
     {
         get
         {
-            _XZOffset = _XZOffset ?? Schema.GetOffset(0xCEA91E48A88DC7BD);
-            return ref _Handle.AsRef<fltx4>(_XZOffset!.Value);
+            if (_XZOffset == -1) _XZOffset = Schema.GetOffset(0xCEA91E48A88DC7BD);
+            return ref _Handle.AsRef<fltx4>(_XZOffset);
         }
     }
-    private static nint? _YZOffset;
+    private static nint _YZOffset = -1;
 
     public ref fltx4 YZ
     {
         get
         {
-            _YZOffset = _YZOffset ?? Schema.GetOffset(0xCEA91E489E8B7968);
-            return ref _Handle.AsRef<fltx4>(_YZOffset!.Value);
+            if (_YZOffset == -1) _YZOffset = Schema.GetOffset(0xCEA91E489E8B7968);
+            return ref _Handle.AsRef<fltx4>(_YZOffset);
         }
     }
 

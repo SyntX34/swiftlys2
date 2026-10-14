@@ -16,25 +16,25 @@ internal partial class CNmGraphDocVariationDataNode__OverrideValue_tImpl : Schem
 {
     public CNmGraphDocVariationDataNode__OverrideValue_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _VariationIDOffset;
+    private static nint _VariationIDOffset = -1;
 
     public ref CGlobalSymbol VariationID
     {
         get
         {
-            _VariationIDOffset = _VariationIDOffset ?? Schema.GetOffset(0x832EC9A08B90A5E3);
-            return ref _Handle.AsRef<CGlobalSymbol>(_VariationIDOffset!.Value);
+            if (_VariationIDOffset == -1) _VariationIDOffset = Schema.GetOffset(0x832EC9A08B90A5E3);
+            return ref _Handle.AsRef<CGlobalSymbol>(_VariationIDOffset);
         }
     }
-    private static nint? _DataOffset;
+    private static nint _DataOffset = -1;
     private CNmGraphDocVariationDataNode__CDataImpl? _DataInstance;
 
     public CNmGraphDocVariationDataNode__CData? Data
     {
         get
         {
-            _DataOffset = _DataOffset ?? Schema.GetOffset(0x832EC9A027938BB7);
-            var ptr = _Handle.Read<nint>(_DataOffset!.Value);
+            if (_DataOffset == -1) _DataOffset = Schema.GetOffset(0x832EC9A027938BB7);
+            var ptr = _Handle.Read<nint>(_DataOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _DataInstance ??= new CNmGraphDocVariationDataNode__CDataImpl(0);
             instance.DangerousSetHandle(ptr);

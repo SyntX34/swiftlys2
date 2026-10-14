@@ -16,132 +16,132 @@ internal partial class CRR_ResponseImpl : SchemaClass, CRR_Response
 {
     public CRR_ResponseImpl(nint handle) : base(handle) { }
 
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref byte Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x7B8008788ED6D5CD);
-            return ref _Handle.AsRef<byte>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x7B8008788ED6D5CD);
+            return ref _Handle.AsRef<byte>(_TypeOffset);
         }
     }
-    private static nint? _ResponseNameOffset;
+    private static nint _ResponseNameOffset = -1;
 
     public string ResponseName
     {
         get
         {
-            _ResponseNameOffset = _ResponseNameOffset ?? Schema.GetOffset(0x7B800878C2716964);
-            return Schema.GetString(_Handle + _ResponseNameOffset!.Value);
+            if (_ResponseNameOffset == -1) _ResponseNameOffset = Schema.GetOffset(0x7B800878C2716964);
+            return Schema.GetString(_Handle + _ResponseNameOffset);
         }
         set
         {
-            _ResponseNameOffset = _ResponseNameOffset ?? Schema.GetOffset(0x7B800878C2716964);
-            Schema.SetFixedString(_Handle, _ResponseNameOffset!.Value, value, 192);
+            if (_ResponseNameOffset == -1) _ResponseNameOffset = Schema.GetOffset(0x7B800878C2716964);
+            Schema.SetFixedString(_Handle, _ResponseNameOffset, value, 192);
         }
     }
-    private static nint? _MatchingRuleOffset;
+    private static nint _MatchingRuleOffset = -1;
 
     public string MatchingRule
     {
         get
         {
-            _MatchingRuleOffset = _MatchingRuleOffset ?? Schema.GetOffset(0x7B80087820850239);
-            return Schema.GetString(_Handle + _MatchingRuleOffset!.Value);
+            if (_MatchingRuleOffset == -1) _MatchingRuleOffset = Schema.GetOffset(0x7B80087820850239);
+            return Schema.GetString(_Handle + _MatchingRuleOffset);
         }
         set
         {
-            _MatchingRuleOffset = _MatchingRuleOffset ?? Schema.GetOffset(0x7B80087820850239);
-            Schema.SetFixedString(_Handle, _MatchingRuleOffset!.Value, value, 128);
+            if (_MatchingRuleOffset == -1) _MatchingRuleOffset = Schema.GetOffset(0x7B80087820850239);
+            Schema.SetFixedString(_Handle, _MatchingRuleOffset, value, 128);
         }
     }
-    private static nint? _ParamsOffset;
+    private static nint _ParamsOffset = -1;
     private ResponseParamsImpl? _ParamsInstance;
 
     public ResponseParams Params
     {
         get
         {
-            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x7B800878900020D3);
+            if (_ParamsOffset == -1) _ParamsOffset = Schema.GetOffset(0x7B800878900020D3);
             var instance = _ParamsInstance ??= new ResponseParamsImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset);
             return instance;
         }
     }
-    private static nint? _MatchScoreOffset;
+    private static nint _MatchScoreOffset = -1;
 
     public ref float MatchScore
     {
         get
         {
-            _MatchScoreOffset = _MatchScoreOffset ?? Schema.GetOffset(0x7B80087861BE6F08);
-            return ref _Handle.AsRef<float>(_MatchScoreOffset!.Value);
+            if (_MatchScoreOffset == -1) _MatchScoreOffset = Schema.GetOffset(0x7B80087861BE6F08);
+            return ref _Handle.AsRef<float>(_MatchScoreOffset);
         }
     }
-    private static nint? _AnyMatchingRulesInCooldownOffset;
+    private static nint _AnyMatchingRulesInCooldownOffset = -1;
 
     public ref bool AnyMatchingRulesInCooldown
     {
         get
         {
-            _AnyMatchingRulesInCooldownOffset = _AnyMatchingRulesInCooldownOffset ?? Schema.GetOffset(0x7B800878579F1BE7);
-            return ref _Handle.AsRef<bool>(_AnyMatchingRulesInCooldownOffset!.Value);
+            if (_AnyMatchingRulesInCooldownOffset == -1) _AnyMatchingRulesInCooldownOffset = Schema.GetOffset(0x7B800878579F1BE7);
+            return ref _Handle.AsRef<bool>(_AnyMatchingRulesInCooldownOffset);
         }
     }
-    private static nint? _SpeakerContextOffset;
+    private static nint _SpeakerContextOffset = -1;
 
     public string SpeakerContext
     {
         get
         {
-            _SpeakerContextOffset = _SpeakerContextOffset ?? Schema.GetOffset(0x7B80087877C70A38);
-            return Schema.GetString(_Handle.Read<nint>(_SpeakerContextOffset!.Value));
+            if (_SpeakerContextOffset == -1) _SpeakerContextOffset = Schema.GetOffset(0x7B80087877C70A38);
+            return Schema.GetString(_Handle.Read<nint>(_SpeakerContextOffset));
         }
         set
         {
-            _SpeakerContextOffset = _SpeakerContextOffset ?? Schema.GetOffset(0x7B80087877C70A38);
-            Schema.SetString(_Handle, _SpeakerContextOffset!.Value, value);
+            if (_SpeakerContextOffset == -1) _SpeakerContextOffset = Schema.GetOffset(0x7B80087877C70A38);
+            Schema.SetString(_Handle, _SpeakerContextOffset, value);
         }
     }
-    private static nint? _WorldContextOffset;
+    private static nint _WorldContextOffset = -1;
 
     public string WorldContext
     {
         get
         {
-            _WorldContextOffset = _WorldContextOffset ?? Schema.GetOffset(0x7B8008781DC998DF);
-            return Schema.GetString(_Handle.Read<nint>(_WorldContextOffset!.Value));
+            if (_WorldContextOffset == -1) _WorldContextOffset = Schema.GetOffset(0x7B8008781DC998DF);
+            return Schema.GetString(_Handle.Read<nint>(_WorldContextOffset));
         }
         set
         {
-            _WorldContextOffset = _WorldContextOffset ?? Schema.GetOffset(0x7B8008781DC998DF);
-            Schema.SetString(_Handle, _WorldContextOffset!.Value, value);
+            if (_WorldContextOffset == -1) _WorldContextOffset = Schema.GetOffset(0x7B8008781DC998DF);
+            Schema.SetString(_Handle, _WorldContextOffset, value);
         }
     }
-    private static nint? _FollowupOffset;
+    private static nint _FollowupOffset = -1;
     private ResponseFollowupImpl? _FollowupInstance;
 
     public ResponseFollowup Followup
     {
         get
         {
-            _FollowupOffset = _FollowupOffset ?? Schema.GetOffset(0x7B800878B1F72BFD);
+            if (_FollowupOffset == -1) _FollowupOffset = Schema.GetOffset(0x7B800878B1F72BFD);
             var instance = _FollowupInstance ??= new ResponseFollowupImpl(0);
-            instance.DangerousSetHandle(_Handle + _FollowupOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FollowupOffset);
             return instance;
         }
     }
-    private static nint? _RecipientFilterOffset;
+    private static nint _RecipientFilterOffset = -1;
     private SchemaUntypedField? _RecipientFilterInstance;
 
     public SchemaUntypedField RecipientFilter
     {
         get
         {
-            _RecipientFilterOffset = _RecipientFilterOffset ?? Schema.GetOffset(0x7B800878CC301E4A);
+            if (_RecipientFilterOffset == -1) _RecipientFilterOffset = Schema.GetOffset(0x7B800878CC301E4A);
             var instance = _RecipientFilterInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RecipientFilterOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RecipientFilterOffset);
             return instance;
         }
     }

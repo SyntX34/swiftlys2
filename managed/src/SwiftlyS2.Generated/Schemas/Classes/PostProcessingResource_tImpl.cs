@@ -16,171 +16,171 @@ internal partial class PostProcessingResource_tImpl : SchemaClass, PostProcessin
 {
     public PostProcessingResource_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _HasTonemapParamsOffset;
+    private static nint _HasTonemapParamsOffset = -1;
 
     public ref bool HasTonemapParams
     {
         get
         {
-            _HasTonemapParamsOffset = _HasTonemapParamsOffset ?? Schema.GetOffset(0x81127543E6A6D70D);
-            return ref _Handle.AsRef<bool>(_HasTonemapParamsOffset!.Value);
+            if (_HasTonemapParamsOffset == -1) _HasTonemapParamsOffset = Schema.GetOffset(0x81127543E6A6D70D);
+            return ref _Handle.AsRef<bool>(_HasTonemapParamsOffset);
         }
     }
-    private static nint? _ToneMapParamsOffset;
+    private static nint _ToneMapParamsOffset = -1;
     private PostProcessingTonemapParameters_tImpl? _ToneMapParamsInstance;
 
     public PostProcessingTonemapParameters_t ToneMapParams
     {
         get
         {
-            _ToneMapParamsOffset = _ToneMapParamsOffset ?? Schema.GetOffset(0x811275437AD3669B);
+            if (_ToneMapParamsOffset == -1) _ToneMapParamsOffset = Schema.GetOffset(0x811275437AD3669B);
             var instance = _ToneMapParamsInstance ??= new PostProcessingTonemapParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ToneMapParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ToneMapParamsOffset);
             return instance;
         }
     }
-    private static nint? _HasBloomParamsOffset;
+    private static nint _HasBloomParamsOffset = -1;
 
     public ref bool HasBloomParams
     {
         get
         {
-            _HasBloomParamsOffset = _HasBloomParamsOffset ?? Schema.GetOffset(0x81127543754C1410);
-            return ref _Handle.AsRef<bool>(_HasBloomParamsOffset!.Value);
+            if (_HasBloomParamsOffset == -1) _HasBloomParamsOffset = Schema.GetOffset(0x81127543754C1410);
+            return ref _Handle.AsRef<bool>(_HasBloomParamsOffset);
         }
     }
-    private static nint? _BloomParamsOffset;
+    private static nint _BloomParamsOffset = -1;
     private PostProcessingBloomParameters_tImpl? _BloomParamsInstance;
 
     public PostProcessingBloomParameters_t BloomParams
     {
         get
         {
-            _BloomParamsOffset = _BloomParamsOffset ?? Schema.GetOffset(0x81127543CEC3092A);
+            if (_BloomParamsOffset == -1) _BloomParamsOffset = Schema.GetOffset(0x81127543CEC3092A);
             var instance = _BloomParamsInstance ??= new PostProcessingBloomParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BloomParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BloomParamsOffset);
             return instance;
         }
     }
-    private static nint? _HasVignetteParamsOffset;
+    private static nint _HasVignetteParamsOffset = -1;
 
     public ref bool HasVignetteParams
     {
         get
         {
-            _HasVignetteParamsOffset = _HasVignetteParamsOffset ?? Schema.GetOffset(0x81127543593E9813);
-            return ref _Handle.AsRef<bool>(_HasVignetteParamsOffset!.Value);
+            if (_HasVignetteParamsOffset == -1) _HasVignetteParamsOffset = Schema.GetOffset(0x81127543593E9813);
+            return ref _Handle.AsRef<bool>(_HasVignetteParamsOffset);
         }
     }
-    private static nint? _VignetteParamsOffset;
+    private static nint _VignetteParamsOffset = -1;
     private PostProcessingVignetteParameters_tImpl? _VignetteParamsInstance;
 
     public PostProcessingVignetteParameters_t VignetteParams
     {
         get
         {
-            _VignetteParamsOffset = _VignetteParamsOffset ?? Schema.GetOffset(0x81127543FBBFC5B9);
+            if (_VignetteParamsOffset == -1) _VignetteParamsOffset = Schema.GetOffset(0x81127543FBBFC5B9);
             var instance = _VignetteParamsInstance ??= new PostProcessingVignetteParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _VignetteParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VignetteParamsOffset);
             return instance;
         }
     }
-    private static nint? _HasLocalContrastParamsOffset;
+    private static nint _HasLocalContrastParamsOffset = -1;
 
     public ref bool HasLocalContrastParams
     {
         get
         {
-            _HasLocalContrastParamsOffset = _HasLocalContrastParamsOffset ?? Schema.GetOffset(0x81127543247F8B76);
-            return ref _Handle.AsRef<bool>(_HasLocalContrastParamsOffset!.Value);
+            if (_HasLocalContrastParamsOffset == -1) _HasLocalContrastParamsOffset = Schema.GetOffset(0x81127543247F8B76);
+            return ref _Handle.AsRef<bool>(_HasLocalContrastParamsOffset);
         }
     }
-    private static nint? _LocalConstrastParamsOffset;
+    private static nint _LocalConstrastParamsOffset = -1;
     private PostProcessingLocalContrastParameters_tImpl? _LocalConstrastParamsInstance;
 
     public PostProcessingLocalContrastParameters_t LocalConstrastParams
     {
         get
         {
-            _LocalConstrastParamsOffset = _LocalConstrastParamsOffset ?? Schema.GetOffset(0x811275437AB7080F);
+            if (_LocalConstrastParamsOffset == -1) _LocalConstrastParamsOffset = Schema.GetOffset(0x811275437AB7080F);
             var instance = _LocalConstrastParamsInstance ??= new PostProcessingLocalContrastParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LocalConstrastParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LocalConstrastParamsOffset);
             return instance;
         }
     }
-    private static nint? _ColorCorrectionVolumeDimOffset;
+    private static nint _ColorCorrectionVolumeDimOffset = -1;
 
     public ref int ColorCorrectionVolumeDim
     {
         get
         {
-            _ColorCorrectionVolumeDimOffset = _ColorCorrectionVolumeDimOffset ?? Schema.GetOffset(0x81127543BF8A2F78);
-            return ref _Handle.AsRef<int>(_ColorCorrectionVolumeDimOffset!.Value);
+            if (_ColorCorrectionVolumeDimOffset == -1) _ColorCorrectionVolumeDimOffset = Schema.GetOffset(0x81127543BF8A2F78);
+            return ref _Handle.AsRef<int>(_ColorCorrectionVolumeDimOffset);
         }
     }
-    private static nint? _ColorCorrectionVolumeDataOffset;
+    private static nint _ColorCorrectionVolumeDataOffset = -1;
 
     public ref CUtlBinaryBlock ColorCorrectionVolumeData
     {
         get
         {
-            _ColorCorrectionVolumeDataOffset = _ColorCorrectionVolumeDataOffset ?? Schema.GetOffset(0x81127543211CF8FA);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_ColorCorrectionVolumeDataOffset!.Value);
+            if (_ColorCorrectionVolumeDataOffset == -1) _ColorCorrectionVolumeDataOffset = Schema.GetOffset(0x81127543211CF8FA);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_ColorCorrectionVolumeDataOffset);
         }
     }
-    private static nint? _HasColorCorrectionOffset;
+    private static nint _HasColorCorrectionOffset = -1;
 
     public ref bool HasColorCorrection
     {
         get
         {
-            _HasColorCorrectionOffset = _HasColorCorrectionOffset ?? Schema.GetOffset(0x811275434EDD24C6);
-            return ref _Handle.AsRef<bool>(_HasColorCorrectionOffset!.Value);
+            if (_HasColorCorrectionOffset == -1) _HasColorCorrectionOffset = Schema.GetOffset(0x811275434EDD24C6);
+            return ref _Handle.AsRef<bool>(_HasColorCorrectionOffset);
         }
     }
-    private static nint? _HasFogScatteringParamsOffset;
+    private static nint _HasFogScatteringParamsOffset = -1;
 
     public ref bool HasFogScatteringParams
     {
         get
         {
-            _HasFogScatteringParamsOffset = _HasFogScatteringParamsOffset ?? Schema.GetOffset(0x81127543EBB4887D);
-            return ref _Handle.AsRef<bool>(_HasFogScatteringParamsOffset!.Value);
+            if (_HasFogScatteringParamsOffset == -1) _HasFogScatteringParamsOffset = Schema.GetOffset(0x81127543EBB4887D);
+            return ref _Handle.AsRef<bool>(_HasFogScatteringParamsOffset);
         }
     }
-    private static nint? _FogScatteringParamsOffset;
+    private static nint _FogScatteringParamsOffset = -1;
     private PostProcessingFogScatteringParameters_tImpl? _FogScatteringParamsInstance;
 
     public PostProcessingFogScatteringParameters_t FogScatteringParams
     {
         get
         {
-            _FogScatteringParamsOffset = _FogScatteringParamsOffset ?? Schema.GetOffset(0x8112754373861903);
+            if (_FogScatteringParamsOffset == -1) _FogScatteringParamsOffset = Schema.GetOffset(0x8112754373861903);
             var instance = _FogScatteringParamsInstance ??= new PostProcessingFogScatteringParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FogScatteringParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FogScatteringParamsOffset);
             return instance;
         }
     }
-    private static nint? _HasLocalExposureParamsOffset;
+    private static nint _HasLocalExposureParamsOffset = -1;
 
     public ref bool HasLocalExposureParams
     {
         get
         {
-            _HasLocalExposureParamsOffset = _HasLocalExposureParamsOffset ?? Schema.GetOffset(0x81127543713ED0F1);
-            return ref _Handle.AsRef<bool>(_HasLocalExposureParamsOffset!.Value);
+            if (_HasLocalExposureParamsOffset == -1) _HasLocalExposureParamsOffset = Schema.GetOffset(0x81127543713ED0F1);
+            return ref _Handle.AsRef<bool>(_HasLocalExposureParamsOffset);
         }
     }
-    private static nint? _LocalExposureParamsOffset;
+    private static nint _LocalExposureParamsOffset = -1;
     private PostProcessingLocalExposureParameters_tImpl? _LocalExposureParamsInstance;
 
     public PostProcessingLocalExposureParameters_t LocalExposureParams
     {
         get
         {
-            _LocalExposureParamsOffset = _LocalExposureParamsOffset ?? Schema.GetOffset(0x81127543A03A73BB);
+            if (_LocalExposureParamsOffset == -1) _LocalExposureParamsOffset = Schema.GetOffset(0x81127543A03A73BB);
             var instance = _LocalExposureParamsInstance ??= new PostProcessingLocalExposureParameters_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LocalExposureParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LocalExposureParamsOffset);
             return instance;
         }
     }

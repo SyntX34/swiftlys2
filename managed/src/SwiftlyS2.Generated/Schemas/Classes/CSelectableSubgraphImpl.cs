@@ -16,34 +16,34 @@ internal partial class CSelectableSubgraphImpl : SchemaClass, CSelectableSubgrap
 {
     public CSelectableSubgraphImpl(nint handle) : base(handle) { }
 
-    private static nint? _FileOffset;
+    private static nint _FileOffset = -1;
 
     public string File
     {
         get
         {
-            _FileOffset = _FileOffset ?? Schema.GetOffset(0x15432DF0AAEA5743);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FileOffset!.Value));
+            if (_FileOffset == -1) _FileOffset = Schema.GetOffset(0x15432DF0AAEA5743);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FileOffset));
         }
         set
         {
-            _FileOffset = _FileOffset ?? Schema.GetOffset(0x15432DF0AAEA5743);
-            Schema.SetCUtlString(_Handle, _FileOffset!.Value, value);
+            if (_FileOffset == -1) _FileOffset = Schema.GetOffset(0x15432DF0AAEA5743);
+            Schema.SetCUtlString(_Handle, _FileOffset, value);
         }
     }
-    private static nint? _SubgraphNameOffset;
+    private static nint _SubgraphNameOffset = -1;
 
     public string SubgraphName
     {
         get
         {
-            _SubgraphNameOffset = _SubgraphNameOffset ?? Schema.GetOffset(0x15432DF012802694);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SubgraphNameOffset!.Value));
+            if (_SubgraphNameOffset == -1) _SubgraphNameOffset = Schema.GetOffset(0x15432DF012802694);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SubgraphNameOffset));
         }
         set
         {
-            _SubgraphNameOffset = _SubgraphNameOffset ?? Schema.GetOffset(0x15432DF012802694);
-            Schema.SetCUtlString(_Handle, _SubgraphNameOffset!.Value, value);
+            if (_SubgraphNameOffset == -1) _SubgraphNameOffset = Schema.GetOffset(0x15432DF012802694);
+            Schema.SetCUtlString(_Handle, _SubgraphNameOffset, value);
         }
     }
 

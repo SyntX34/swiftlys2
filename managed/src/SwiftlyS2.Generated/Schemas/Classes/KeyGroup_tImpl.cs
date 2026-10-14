@@ -16,55 +16,55 @@ internal partial class KeyGroup_tImpl : SchemaClass, KeyGroup_t
 {
     public KeyGroup_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _CenterNoteOffset;
+    private static nint _CenterNoteOffset = -1;
 
     public ref byte CenterNote
     {
         get
         {
-            _CenterNoteOffset = _CenterNoteOffset ?? Schema.GetOffset(0xE9753CBC85B57A1C);
-            return ref _Handle.AsRef<byte>(_CenterNoteOffset!.Value);
+            if (_CenterNoteOffset == -1) _CenterNoteOffset = Schema.GetOffset(0xE9753CBC85B57A1C);
+            return ref _Handle.AsRef<byte>(_CenterNoteOffset);
         }
     }
-    private static nint? _MinNoteOffset;
+    private static nint _MinNoteOffset = -1;
 
     public ref byte MinNote
     {
         get
         {
-            _MinNoteOffset = _MinNoteOffset ?? Schema.GetOffset(0xE9753CBC268911CB);
-            return ref _Handle.AsRef<byte>(_MinNoteOffset!.Value);
+            if (_MinNoteOffset == -1) _MinNoteOffset = Schema.GetOffset(0xE9753CBC268911CB);
+            return ref _Handle.AsRef<byte>(_MinNoteOffset);
         }
     }
-    private static nint? _MaxNoteOffset;
+    private static nint _MaxNoteOffset = -1;
 
     public ref byte MaxNote
     {
         get
         {
-            _MaxNoteOffset = _MaxNoteOffset ?? Schema.GetOffset(0xE9753CBC79A4158D);
-            return ref _Handle.AsRef<byte>(_MaxNoteOffset!.Value);
+            if (_MaxNoteOffset == -1) _MaxNoteOffset = Schema.GetOffset(0xE9753CBC79A4158D);
+            return ref _Handle.AsRef<byte>(_MaxNoteOffset);
         }
     }
-    private static nint? _NumVelocityZonesOffset;
+    private static nint _NumVelocityZonesOffset = -1;
 
     public ref byte NumVelocityZones
     {
         get
         {
-            _NumVelocityZonesOffset = _NumVelocityZonesOffset ?? Schema.GetOffset(0xE9753CBC47D13CE7);
-            return ref _Handle.AsRef<byte>(_NumVelocityZonesOffset!.Value);
+            if (_NumVelocityZonesOffset == -1) _NumVelocityZonesOffset = Schema.GetOffset(0xE9753CBC47D13CE7);
+            return ref _Handle.AsRef<byte>(_NumVelocityZonesOffset);
         }
     }
-    private static nint? _VelocityZonesOffset;
+    private static nint _VelocityZonesOffset = -1;
     private VelocityZone_tImpl? _VelocityZonesInstance;
 
     public VelocityZone_t? VelocityZones
     {
         get
         {
-            _VelocityZonesOffset = _VelocityZonesOffset ?? Schema.GetOffset(0xE9753CBCCDE38D17);
-            var ptr = _Handle.Read<nint>(_VelocityZonesOffset!.Value);
+            if (_VelocityZonesOffset == -1) _VelocityZonesOffset = Schema.GetOffset(0xE9753CBCCDE38D17);
+            var ptr = _Handle.Read<nint>(_VelocityZonesOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _VelocityZonesInstance ??= new VelocityZone_tImpl(0);
             instance.DangerousSetHandle(ptr);

@@ -16,94 +16,94 @@ internal partial class CEnvDecalImpl : CBaseModelEntityImpl, CEnvDecal
 {
     public CEnvDecalImpl(nint handle) : base(handle) { }
 
-    private static nint? _DecalMaterialOffset;
+    private static nint _DecalMaterialOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> DecalMaterial
     {
         get
         {
-            _DecalMaterialOffset = _DecalMaterialOffset ?? Schema.GetOffset(0xF52AFA9ED892BA39);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_DecalMaterialOffset!.Value);
+            if (_DecalMaterialOffset == -1) _DecalMaterialOffset = Schema.GetOffset(0xF52AFA9ED892BA39);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_DecalMaterialOffset);
         }
     }
-    private static nint? _WidthOffset;
+    private static nint _WidthOffset = -1;
 
     public ref float Width
     {
         get
         {
-            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0xF52AFA9EB91935E1);
-            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+            if (_WidthOffset == -1) _WidthOffset = Schema.GetOffset(0xF52AFA9EB91935E1);
+            return ref _Handle.AsRef<float>(_WidthOffset);
         }
     }
-    private static nint? _HeightOffset;
+    private static nint _HeightOffset = -1;
 
     public ref float Height
     {
         get
         {
-            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0xF52AFA9EEADD7FB0);
-            return ref _Handle.AsRef<float>(_HeightOffset!.Value);
+            if (_HeightOffset == -1) _HeightOffset = Schema.GetOffset(0xF52AFA9EEADD7FB0);
+            return ref _Handle.AsRef<float>(_HeightOffset);
         }
     }
-    private static nint? _DepthOffset;
+    private static nint _DepthOffset = -1;
 
     public ref float Depth
     {
         get
         {
-            _DepthOffset = _DepthOffset ?? Schema.GetOffset(0xF52AFA9ED3AD54E8);
-            return ref _Handle.AsRef<float>(_DepthOffset!.Value);
+            if (_DepthOffset == -1) _DepthOffset = Schema.GetOffset(0xF52AFA9ED3AD54E8);
+            return ref _Handle.AsRef<float>(_DepthOffset);
         }
     }
-    private static nint? _RenderOrderOffset;
+    private static nint _RenderOrderOffset = -1;
 
     public ref uint RenderOrder
     {
         get
         {
-            _RenderOrderOffset = _RenderOrderOffset ?? Schema.GetOffset(0xF52AFA9E554E763B);
-            return ref _Handle.AsRef<uint>(_RenderOrderOffset!.Value);
+            if (_RenderOrderOffset == -1) _RenderOrderOffset = Schema.GetOffset(0xF52AFA9E554E763B);
+            return ref _Handle.AsRef<uint>(_RenderOrderOffset);
         }
     }
-    private static nint? _ProjectOnWorldOffset;
+    private static nint _ProjectOnWorldOffset = -1;
 
     public ref bool ProjectOnWorld
     {
         get
         {
-            _ProjectOnWorldOffset = _ProjectOnWorldOffset ?? Schema.GetOffset(0xF52AFA9E213B0285);
-            return ref _Handle.AsRef<bool>(_ProjectOnWorldOffset!.Value);
+            if (_ProjectOnWorldOffset == -1) _ProjectOnWorldOffset = Schema.GetOffset(0xF52AFA9E213B0285);
+            return ref _Handle.AsRef<bool>(_ProjectOnWorldOffset);
         }
     }
-    private static nint? _ProjectOnCharactersOffset;
+    private static nint _ProjectOnCharactersOffset = -1;
 
     public ref bool ProjectOnCharacters
     {
         get
         {
-            _ProjectOnCharactersOffset = _ProjectOnCharactersOffset ?? Schema.GetOffset(0xF52AFA9EE0371FB7);
-            return ref _Handle.AsRef<bool>(_ProjectOnCharactersOffset!.Value);
+            if (_ProjectOnCharactersOffset == -1) _ProjectOnCharactersOffset = Schema.GetOffset(0xF52AFA9EE0371FB7);
+            return ref _Handle.AsRef<bool>(_ProjectOnCharactersOffset);
         }
     }
-    private static nint? _ProjectOnWaterOffset;
+    private static nint _ProjectOnWaterOffset = -1;
 
     public ref bool ProjectOnWater
     {
         get
         {
-            _ProjectOnWaterOffset = _ProjectOnWaterOffset ?? Schema.GetOffset(0xF52AFA9ED4AF2E96);
-            return ref _Handle.AsRef<bool>(_ProjectOnWaterOffset!.Value);
+            if (_ProjectOnWaterOffset == -1) _ProjectOnWaterOffset = Schema.GetOffset(0xF52AFA9ED4AF2E96);
+            return ref _Handle.AsRef<bool>(_ProjectOnWaterOffset);
         }
     }
-    private static nint? _DepthSortBiasOffset;
+    private static nint _DepthSortBiasOffset = -1;
 
     public ref float DepthSortBias
     {
         get
         {
-            _DepthSortBiasOffset = _DepthSortBiasOffset ?? Schema.GetOffset(0xF52AFA9ED8EE79D9);
-            return ref _Handle.AsRef<float>(_DepthSortBiasOffset!.Value);
+            if (_DepthSortBiasOffset == -1) _DepthSortBiasOffset = Schema.GetOffset(0xF52AFA9ED8EE79D9);
+            return ref _Handle.AsRef<float>(_DepthSortBiasOffset);
         }
     }
 

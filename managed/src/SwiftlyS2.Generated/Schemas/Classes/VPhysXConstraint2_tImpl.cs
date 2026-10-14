@@ -16,46 +16,46 @@ internal partial class VPhysXConstraint2_tImpl : SchemaClass, VPhysXConstraint2_
 {
     public VPhysXConstraint2_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref uint Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x6FB758FDCE6E9C28);
-            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x6FB758FDCE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset);
         }
     }
-    private static nint? _ParentOffset;
+    private static nint _ParentOffset = -1;
 
     public ref ushort Parent
     {
         get
         {
-            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0x6FB758FD0AABB9D1);
-            return ref _Handle.AsRef<ushort>(_ParentOffset!.Value);
+            if (_ParentOffset == -1) _ParentOffset = Schema.GetOffset(0x6FB758FD0AABB9D1);
+            return ref _Handle.AsRef<ushort>(_ParentOffset);
         }
     }
-    private static nint? _ChildOffset;
+    private static nint _ChildOffset = -1;
 
     public ref ushort Child
     {
         get
         {
-            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0x6FB758FDFE653481);
-            return ref _Handle.AsRef<ushort>(_ChildOffset!.Value);
+            if (_ChildOffset == -1) _ChildOffset = Schema.GetOffset(0x6FB758FDFE653481);
+            return ref _Handle.AsRef<ushort>(_ChildOffset);
         }
     }
-    private static nint? _ParamsOffset;
+    private static nint _ParamsOffset = -1;
     private VPhysXConstraintParams_tImpl? _ParamsInstance;
 
     public VPhysXConstraintParams_t Params
     {
         get
         {
-            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x6FB758FD640EA8F3);
+            if (_ParamsOffset == -1) _ParamsOffset = Schema.GetOffset(0x6FB758FD640EA8F3);
             var instance = _ParamsInstance ??= new VPhysXConstraintParams_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamsOffset);
             return instance;
         }
     }

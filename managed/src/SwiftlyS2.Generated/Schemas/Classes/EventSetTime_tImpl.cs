@@ -16,87 +16,87 @@ internal partial class EventSetTime_tImpl : SchemaClass, EventSetTime_t
 {
     public EventSetTime_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _LoopStateOffset;
+    private static nint _LoopStateOffset = -1;
     private EngineLoopState_tImpl? _LoopStateInstance;
 
     public EngineLoopState_t LoopState
     {
         get
         {
-            _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0x260F6EEFF928A2EC);
+            if (_LoopStateOffset == -1) _LoopStateOffset = Schema.GetOffset(0x260F6EEFF928A2EC);
             var instance = _LoopStateInstance ??= new EngineLoopState_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LoopStateOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LoopStateOffset);
             return instance;
         }
     }
-    private static nint? _ClientOutputFramesOffset;
+    private static nint _ClientOutputFramesOffset = -1;
 
     public ref int ClientOutputFrames
     {
         get
         {
-            _ClientOutputFramesOffset = _ClientOutputFramesOffset ?? Schema.GetOffset(0x260F6EEF19578919);
-            return ref _Handle.AsRef<int>(_ClientOutputFramesOffset!.Value);
+            if (_ClientOutputFramesOffset == -1) _ClientOutputFramesOffset = Schema.GetOffset(0x260F6EEF19578919);
+            return ref _Handle.AsRef<int>(_ClientOutputFramesOffset);
         }
     }
-    private static nint? _RealTimeOffset;
+    private static nint _RealTimeOffset = -1;
 
     public ref double RealTime
     {
         get
         {
-            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0x260F6EEF1168EC02);
-            return ref _Handle.AsRef<double>(_RealTimeOffset!.Value);
+            if (_RealTimeOffset == -1) _RealTimeOffset = Schema.GetOffset(0x260F6EEF1168EC02);
+            return ref _Handle.AsRef<double>(_RealTimeOffset);
         }
     }
-    private static nint? _RenderTimeOffset;
+    private static nint _RenderTimeOffset = -1;
 
     public ref double RenderTime
     {
         get
         {
-            _RenderTimeOffset = _RenderTimeOffset ?? Schema.GetOffset(0x260F6EEF3C2AE65A);
-            return ref _Handle.AsRef<double>(_RenderTimeOffset!.Value);
+            if (_RenderTimeOffset == -1) _RenderTimeOffset = Schema.GetOffset(0x260F6EEF3C2AE65A);
+            return ref _Handle.AsRef<double>(_RenderTimeOffset);
         }
     }
-    private static nint? _RenderFrameTimeOffset;
+    private static nint _RenderFrameTimeOffset = -1;
 
     public ref double RenderFrameTime
     {
         get
         {
-            _RenderFrameTimeOffset = _RenderFrameTimeOffset ?? Schema.GetOffset(0x260F6EEFF2FB2D81);
-            return ref _Handle.AsRef<double>(_RenderFrameTimeOffset!.Value);
+            if (_RenderFrameTimeOffset == -1) _RenderFrameTimeOffset = Schema.GetOffset(0x260F6EEFF2FB2D81);
+            return ref _Handle.AsRef<double>(_RenderFrameTimeOffset);
         }
     }
-    private static nint? _RenderFrameTimeUnboundedOffset;
+    private static nint _RenderFrameTimeUnboundedOffset = -1;
 
     public ref double RenderFrameTimeUnbounded
     {
         get
         {
-            _RenderFrameTimeUnboundedOffset = _RenderFrameTimeUnboundedOffset ?? Schema.GetOffset(0x260F6EEF735692FF);
-            return ref _Handle.AsRef<double>(_RenderFrameTimeUnboundedOffset!.Value);
+            if (_RenderFrameTimeUnboundedOffset == -1) _RenderFrameTimeUnboundedOffset = Schema.GetOffset(0x260F6EEF735692FF);
+            return ref _Handle.AsRef<double>(_RenderFrameTimeUnboundedOffset);
         }
     }
-    private static nint? _RenderFrameTimeUnscaledOffset;
+    private static nint _RenderFrameTimeUnscaledOffset = -1;
 
     public ref double RenderFrameTimeUnscaled
     {
         get
         {
-            _RenderFrameTimeUnscaledOffset = _RenderFrameTimeUnscaledOffset ?? Schema.GetOffset(0x260F6EEFCCC75750);
-            return ref _Handle.AsRef<double>(_RenderFrameTimeUnscaledOffset!.Value);
+            if (_RenderFrameTimeUnscaledOffset == -1) _RenderFrameTimeUnscaledOffset = Schema.GetOffset(0x260F6EEFCCC75750);
+            return ref _Handle.AsRef<double>(_RenderFrameTimeUnscaledOffset);
         }
     }
-    private static nint? _TickRemainderOffset;
+    private static nint _TickRemainderOffset = -1;
 
     public ref double TickRemainder
     {
         get
         {
-            _TickRemainderOffset = _TickRemainderOffset ?? Schema.GetOffset(0x260F6EEF330ED365);
-            return ref _Handle.AsRef<double>(_TickRemainderOffset!.Value);
+            if (_TickRemainderOffset == -1) _TickRemainderOffset = Schema.GetOffset(0x260F6EEF330ED365);
+            return ref _Handle.AsRef<double>(_TickRemainderOffset);
         }
     }
 

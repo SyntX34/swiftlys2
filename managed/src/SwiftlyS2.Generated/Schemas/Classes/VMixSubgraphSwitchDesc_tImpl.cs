@@ -16,74 +16,74 @@ internal partial class VMixSubgraphSwitchDesc_tImpl : SchemaClass, VMixSubgraphS
 {
     public VMixSubgraphSwitchDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x9671DF894D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x9671DF894D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x9671DF894D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x9671DF894D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _EffectNameOffset;
+    private static nint _EffectNameOffset = -1;
 
     public string EffectName
     {
         get
         {
-            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x9671DF894DF4F5CF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectNameOffset!.Value));
+            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0x9671DF894DF4F5CF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectNameOffset));
         }
         set
         {
-            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x9671DF894DF4F5CF);
-            Schema.SetCUtlString(_Handle, _EffectNameOffset!.Value, value);
+            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0x9671DF894DF4F5CF);
+            Schema.SetCUtlString(_Handle, _EffectNameOffset, value);
         }
     }
-    private static nint? _SubgraphsOffset;
+    private static nint _SubgraphsOffset = -1;
 
     public ref CUtlVector<CUtlString> Subgraphs
     {
         get
         {
-            _SubgraphsOffset = _SubgraphsOffset ?? Schema.GetOffset(0x9671DF89ECCF80EC);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_SubgraphsOffset!.Value);
+            if (_SubgraphsOffset == -1) _SubgraphsOffset = Schema.GetOffset(0x9671DF89ECCF80EC);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_SubgraphsOffset);
         }
     }
-    private static nint? _InterpolationModeOffset;
+    private static nint _InterpolationModeOffset = -1;
 
     public ref VMixSubgraphSwitchInterpolationType_t InterpolationMode
     {
         get
         {
-            _InterpolationModeOffset = _InterpolationModeOffset ?? Schema.GetOffset(0x9671DF890C06348A);
-            return ref _Handle.AsRef<VMixSubgraphSwitchInterpolationType_t>(_InterpolationModeOffset!.Value);
+            if (_InterpolationModeOffset == -1) _InterpolationModeOffset = Schema.GetOffset(0x9671DF890C06348A);
+            return ref _Handle.AsRef<VMixSubgraphSwitchInterpolationType_t>(_InterpolationModeOffset);
         }
     }
-    private static nint? _OnlyTailsOnFadeOutOffset;
+    private static nint _OnlyTailsOnFadeOutOffset = -1;
 
     public ref bool OnlyTailsOnFadeOut
     {
         get
         {
-            _OnlyTailsOnFadeOutOffset = _OnlyTailsOnFadeOutOffset ?? Schema.GetOffset(0x9671DF89B74519D7);
-            return ref _Handle.AsRef<bool>(_OnlyTailsOnFadeOutOffset!.Value);
+            if (_OnlyTailsOnFadeOutOffset == -1) _OnlyTailsOnFadeOutOffset = Schema.GetOffset(0x9671DF89B74519D7);
+            return ref _Handle.AsRef<bool>(_OnlyTailsOnFadeOutOffset);
         }
     }
-    private static nint? _InterpolationTimeOffset;
+    private static nint _InterpolationTimeOffset = -1;
 
     public ref float InterpolationTime
     {
         get
         {
-            _InterpolationTimeOffset = _InterpolationTimeOffset ?? Schema.GetOffset(0x9671DF896D3B0FB6);
-            return ref _Handle.AsRef<float>(_InterpolationTimeOffset!.Value);
+            if (_InterpolationTimeOffset == -1) _InterpolationTimeOffset = Schema.GetOffset(0x9671DF896D3B0FB6);
+            return ref _Handle.AsRef<float>(_InterpolationTimeOffset);
         }
     }
 

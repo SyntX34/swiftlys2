@@ -16,14 +16,14 @@ internal partial class MaterialParamTexture_tImpl : MaterialParam_tImpl, Materia
 {
     public MaterialParamTexture_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x17803E3B7F437844);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_ValueOffset!.Value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x17803E3B7F437844);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_ValueOffset);
         }
     }
 

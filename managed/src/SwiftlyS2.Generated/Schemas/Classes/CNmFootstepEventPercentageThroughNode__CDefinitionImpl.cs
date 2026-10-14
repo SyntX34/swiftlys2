@@ -16,36 +16,36 @@ internal partial class CNmFootstepEventPercentageThroughNode__CDefinitionImpl : 
 {
     public CNmFootstepEventPercentageThroughNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceStateNodeIdxOffset;
+    private static nint _SourceStateNodeIdxOffset = -1;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x998F83E463F0228C);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0x998F83E463F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
         }
     }
-    private static nint? _PhaseConditionOffset;
+    private static nint _PhaseConditionOffset = -1;
 
     public ref NmFootPhaseCondition_t PhaseCondition
     {
         get
         {
-            _PhaseConditionOffset = _PhaseConditionOffset ?? Schema.GetOffset(0x998F83E479D4BD7D);
-            return ref _Handle.AsRef<NmFootPhaseCondition_t>(_PhaseConditionOffset!.Value);
+            if (_PhaseConditionOffset == -1) _PhaseConditionOffset = Schema.GetOffset(0x998F83E479D4BD7D);
+            return ref _Handle.AsRef<NmFootPhaseCondition_t>(_PhaseConditionOffset);
         }
     }
-    private static nint? _EventConditionRulesOffset;
+    private static nint _EventConditionRulesOffset = -1;
     private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
-            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x998F83E4A904315F);
+            if (_EventConditionRulesOffset == -1) _EventConditionRulesOffset = Schema.GetOffset(0x998F83E4A904315F);
             var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
-            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset);
             return instance;
         }
     }

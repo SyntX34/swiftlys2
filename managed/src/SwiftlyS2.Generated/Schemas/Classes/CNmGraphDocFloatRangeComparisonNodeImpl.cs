@@ -16,27 +16,27 @@ internal partial class CNmGraphDocFloatRangeComparisonNodeImpl : CNmGraphDocFlow
 {
     public CNmGraphDocFloatRangeComparisonNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _RangeOffset;
+    private static nint _RangeOffset = -1;
     private SchemaUntypedField? _RangeInstance;
 
     public SchemaUntypedField Range
     {
         get
         {
-            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0xEC9B7F873D639CF2);
+            if (_RangeOffset == -1) _RangeOffset = Schema.GetOffset(0xEC9B7F873D639CF2);
             var instance = _RangeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RangeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RangeOffset);
             return instance;
         }
     }
-    private static nint? _IsInclusiveCheckOffset;
+    private static nint _IsInclusiveCheckOffset = -1;
 
     public ref bool IsInclusiveCheck
     {
         get
         {
-            _IsInclusiveCheckOffset = _IsInclusiveCheckOffset ?? Schema.GetOffset(0xEC9B7F875FC3DE03);
-            return ref _Handle.AsRef<bool>(_IsInclusiveCheckOffset!.Value);
+            if (_IsInclusiveCheckOffset == -1) _IsInclusiveCheckOffset = Schema.GetOffset(0xEC9B7F875FC3DE03);
+            return ref _Handle.AsRef<bool>(_IsInclusiveCheckOffset);
         }
     }
 

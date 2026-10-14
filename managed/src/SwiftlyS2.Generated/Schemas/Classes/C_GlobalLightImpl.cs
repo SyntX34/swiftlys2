@@ -16,14 +16,14 @@ internal partial class C_GlobalLightImpl : C_BaseEntityImpl, C_GlobalLight
 {
     public C_GlobalLightImpl(nint handle) : base(handle) { }
 
-    private static nint? _WindClothForceHandleOffset;
+    private static nint _WindClothForceHandleOffset = -1;
 
     public ref ushort WindClothForceHandle
     {
         get
         {
-            _WindClothForceHandleOffset = _WindClothForceHandleOffset ?? Schema.GetOffset(0xFE3192F05542DD2E);
-            return ref _Handle.AsRef<ushort>(_WindClothForceHandleOffset!.Value);
+            if (_WindClothForceHandleOffset == -1) _WindClothForceHandleOffset = Schema.GetOffset(0xFE3192F05542DD2E);
+            return ref _Handle.AsRef<ushort>(_WindClothForceHandleOffset);
         }
     }
 

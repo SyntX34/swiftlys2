@@ -16,14 +16,14 @@ internal partial class CCashStackImpl : CBaseModelEntityImpl, CCashStack
 {
     public CCashStackImpl(nint handle) : base(handle) { }
 
-    private static nint? _CashStackValueOffset;
+    private static nint _CashStackValueOffset = -1;
 
     public ref int CashStackValue
     {
         get
         {
-            _CashStackValueOffset = _CashStackValueOffset ?? Schema.GetOffset(0x2BB7B63FABAA051F);
-            return ref _Handle.AsRef<int>(_CashStackValueOffset!.Value);
+            if (_CashStackValueOffset == -1) _CashStackValueOffset = Schema.GetOffset(0x2BB7B63FABAA051F);
+            return ref _Handle.AsRef<int>(_CashStackValueOffset);
         }
     }
 

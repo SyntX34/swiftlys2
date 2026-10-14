@@ -16,37 +16,37 @@ internal partial class CVoiceContainerEnumImpl : CVoiceContainerBaseImpl, CVoice
 {
     public CVoiceContainerEnumImpl(nint handle) : base(handle) { }
 
-    private static nint? _SoundsToPlayOffset;
+    private static nint _SoundsToPlayOffset = -1;
     private CSoundContainerReferenceArrayImpl? _SoundsToPlayInstance;
 
     public CSoundContainerReferenceArray SoundsToPlay
     {
         get
         {
-            _SoundsToPlayOffset = _SoundsToPlayOffset ?? Schema.GetOffset(0x7B05DBE2DCB5F70E);
+            if (_SoundsToPlayOffset == -1) _SoundsToPlayOffset = Schema.GetOffset(0x7B05DBE2DCB5F70E);
             var instance = _SoundsToPlayInstance ??= new CSoundContainerReferenceArrayImpl(0);
-            instance.DangerousSetHandle(_Handle + _SoundsToPlayOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SoundsToPlayOffset);
             return instance;
         }
     }
-    private static nint? _SelectionOffset;
+    private static nint _SelectionOffset = -1;
 
     public ref int Selection
     {
         get
         {
-            _SelectionOffset = _SelectionOffset ?? Schema.GetOffset(0x7B05DBE242040D4A);
-            return ref _Handle.AsRef<int>(_SelectionOffset!.Value);
+            if (_SelectionOffset == -1) _SelectionOffset = Schema.GetOffset(0x7B05DBE242040D4A);
+            return ref _Handle.AsRef<int>(_SelectionOffset);
         }
     }
-    private static nint? _CrossfadeTimeOffset;
+    private static nint _CrossfadeTimeOffset = -1;
 
     public ref float CrossfadeTime
     {
         get
         {
-            _CrossfadeTimeOffset = _CrossfadeTimeOffset ?? Schema.GetOffset(0x7B05DBE2C5C1DD52);
-            return ref _Handle.AsRef<float>(_CrossfadeTimeOffset!.Value);
+            if (_CrossfadeTimeOffset == -1) _CrossfadeTimeOffset = Schema.GetOffset(0x7B05DBE2C5C1DD52);
+            return ref _Handle.AsRef<float>(_CrossfadeTimeOffset);
         }
     }
 

@@ -16,141 +16,141 @@ internal partial class C_OP_RenderSoundImpl : CParticleFunctionRendererImpl, C_O
 {
     public C_OP_RenderSoundImpl(nint handle) : base(handle) { }
 
-    private static nint? _DurationScaleOffset;
+    private static nint _DurationScaleOffset = -1;
 
     public ref float DurationScale
     {
         get
         {
-            _DurationScaleOffset = _DurationScaleOffset ?? Schema.GetOffset(0xBDBBFDFC776D4203);
-            return ref _Handle.AsRef<float>(_DurationScaleOffset!.Value);
+            if (_DurationScaleOffset == -1) _DurationScaleOffset = Schema.GetOffset(0xBDBBFDFC776D4203);
+            return ref _Handle.AsRef<float>(_DurationScaleOffset);
         }
     }
-    private static nint? _SndLvlScaleOffset;
+    private static nint _SndLvlScaleOffset = -1;
 
     public ref float SndLvlScale
     {
         get
         {
-            _SndLvlScaleOffset = _SndLvlScaleOffset ?? Schema.GetOffset(0xBDBBFDFC19AAA97E);
-            return ref _Handle.AsRef<float>(_SndLvlScaleOffset!.Value);
+            if (_SndLvlScaleOffset == -1) _SndLvlScaleOffset = Schema.GetOffset(0xBDBBFDFC19AAA97E);
+            return ref _Handle.AsRef<float>(_SndLvlScaleOffset);
         }
     }
-    private static nint? _PitchScaleOffset;
+    private static nint _PitchScaleOffset = -1;
 
     public ref float PitchScale
     {
         get
         {
-            _PitchScaleOffset = _PitchScaleOffset ?? Schema.GetOffset(0xBDBBFDFCBBEE57F3);
-            return ref _Handle.AsRef<float>(_PitchScaleOffset!.Value);
+            if (_PitchScaleOffset == -1) _PitchScaleOffset = Schema.GetOffset(0xBDBBFDFCBBEE57F3);
+            return ref _Handle.AsRef<float>(_PitchScaleOffset);
         }
     }
-    private static nint? _VolumeScaleOffset;
+    private static nint _VolumeScaleOffset = -1;
 
     public ref float VolumeScale
     {
         get
         {
-            _VolumeScaleOffset = _VolumeScaleOffset ?? Schema.GetOffset(0xBDBBFDFCDFBFD5FD);
-            return ref _Handle.AsRef<float>(_VolumeScaleOffset!.Value);
+            if (_VolumeScaleOffset == -1) _VolumeScaleOffset = Schema.GetOffset(0xBDBBFDFCDFBFD5FD);
+            return ref _Handle.AsRef<float>(_VolumeScaleOffset);
         }
     }
-    private static nint? _SndLvlFieldOffset;
+    private static nint _SndLvlFieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _SndLvlFieldInstance;
 
     public ParticleAttributeIndex_t SndLvlField
     {
         get
         {
-            _SndLvlFieldOffset = _SndLvlFieldOffset ?? Schema.GetOffset(0xBDBBFDFC17E2BD46);
+            if (_SndLvlFieldOffset == -1) _SndLvlFieldOffset = Schema.GetOffset(0xBDBBFDFC17E2BD46);
             var instance = _SndLvlFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SndLvlFieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SndLvlFieldOffset);
             return instance;
         }
     }
-    private static nint? _DurationFieldOffset;
+    private static nint _DurationFieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _DurationFieldInstance;
 
     public ParticleAttributeIndex_t DurationField
     {
         get
         {
-            _DurationFieldOffset = _DurationFieldOffset ?? Schema.GetOffset(0xBDBBFDFCB21EDAAB);
+            if (_DurationFieldOffset == -1) _DurationFieldOffset = Schema.GetOffset(0xBDBBFDFCB21EDAAB);
             var instance = _DurationFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DurationFieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DurationFieldOffset);
             return instance;
         }
     }
-    private static nint? _PitchFieldOffset;
+    private static nint _PitchFieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _PitchFieldInstance;
 
     public ParticleAttributeIndex_t PitchField
     {
         get
         {
-            _PitchFieldOffset = _PitchFieldOffset ?? Schema.GetOffset(0xBDBBFDFC6E37791F);
+            if (_PitchFieldOffset == -1) _PitchFieldOffset = Schema.GetOffset(0xBDBBFDFC6E37791F);
             var instance = _PitchFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PitchFieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PitchFieldOffset);
             return instance;
         }
     }
-    private static nint? _VolumeFieldOffset;
+    private static nint _VolumeFieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _VolumeFieldInstance;
 
     public ParticleAttributeIndex_t VolumeField
     {
         get
         {
-            _VolumeFieldOffset = _VolumeFieldOffset ?? Schema.GetOffset(0xBDBBFDFC3F07D465);
+            if (_VolumeFieldOffset == -1) _VolumeFieldOffset = Schema.GetOffset(0xBDBBFDFC3F07D465);
             var instance = _VolumeFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _VolumeFieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VolumeFieldOffset);
             return instance;
         }
     }
-    private static nint? _ChannelOffset;
+    private static nint _ChannelOffset = -1;
 
     public ref int Channel
     {
         get
         {
-            _ChannelOffset = _ChannelOffset ?? Schema.GetOffset(0xBDBBFDFCC4CD80F8);
-            return ref _Handle.AsRef<int>(_ChannelOffset!.Value);
+            if (_ChannelOffset == -1) _ChannelOffset = Schema.GetOffset(0xBDBBFDFCC4CD80F8);
+            return ref _Handle.AsRef<int>(_ChannelOffset);
         }
     }
-    private static nint? _CPReferenceOffset;
+    private static nint _CPReferenceOffset = -1;
 
     public ref int CPReference
     {
         get
         {
-            _CPReferenceOffset = _CPReferenceOffset ?? Schema.GetOffset(0xBDBBFDFC1349FFE7);
-            return ref _Handle.AsRef<int>(_CPReferenceOffset!.Value);
+            if (_CPReferenceOffset == -1) _CPReferenceOffset = Schema.GetOffset(0xBDBBFDFC1349FFE7);
+            return ref _Handle.AsRef<int>(_CPReferenceOffset);
         }
     }
-    private static nint? _SoundNameOffset;
+    private static nint _SoundNameOffset = -1;
 
     public string SoundName
     {
         get
         {
-            _SoundNameOffset = _SoundNameOffset ?? Schema.GetOffset(0xBDBBFDFC26D82A1A);
-            return Schema.GetString(_Handle + _SoundNameOffset!.Value);
+            if (_SoundNameOffset == -1) _SoundNameOffset = Schema.GetOffset(0xBDBBFDFC26D82A1A);
+            return Schema.GetString(_Handle + _SoundNameOffset);
         }
         set
         {
-            _SoundNameOffset = _SoundNameOffset ?? Schema.GetOffset(0xBDBBFDFC26D82A1A);
-            Schema.SetFixedString(_Handle, _SoundNameOffset!.Value, value, 256);
+            if (_SoundNameOffset == -1) _SoundNameOffset = Schema.GetOffset(0xBDBBFDFC26D82A1A);
+            Schema.SetFixedString(_Handle, _SoundNameOffset, value, 256);
         }
     }
-    private static nint? _SuppressStopSoundEventOffset;
+    private static nint _SuppressStopSoundEventOffset = -1;
 
     public ref bool SuppressStopSoundEvent
     {
         get
         {
-            _SuppressStopSoundEventOffset = _SuppressStopSoundEventOffset ?? Schema.GetOffset(0xBDBBFDFC76AD7797);
-            return ref _Handle.AsRef<bool>(_SuppressStopSoundEventOffset!.Value);
+            if (_SuppressStopSoundEventOffset == -1) _SuppressStopSoundEventOffset = Schema.GetOffset(0xBDBBFDFC76AD7797);
+            return ref _Handle.AsRef<bool>(_SuppressStopSoundEventOffset);
         }
     }
 

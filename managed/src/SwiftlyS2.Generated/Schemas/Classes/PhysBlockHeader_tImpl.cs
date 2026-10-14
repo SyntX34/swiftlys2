@@ -16,24 +16,24 @@ internal partial class PhysBlockHeader_tImpl : SchemaClass, PhysBlockHeader_t
 {
     public PhysBlockHeader_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SavedOffset;
+    private static nint _SavedOffset = -1;
 
     public ref int Saved
     {
         get
         {
-            _SavedOffset = _SavedOffset ?? Schema.GetOffset(0x92435DA85698EE00);
-            return ref _Handle.AsRef<int>(_SavedOffset!.Value);
+            if (_SavedOffset == -1) _SavedOffset = Schema.GetOffset(0x92435DA85698EE00);
+            return ref _Handle.AsRef<int>(_SavedOffset);
         }
     }
-    private static nint? _WorldObjectOffset;
+    private static nint _WorldObjectOffset = -1;
 
     public ref ulong WorldObject
     {
         get
         {
-            _WorldObjectOffset = _WorldObjectOffset ?? Schema.GetOffset(0x92435DA8DFF44742);
-            return ref _Handle.AsRef<ulong>(_WorldObjectOffset!.Value);
+            if (_WorldObjectOffset == -1) _WorldObjectOffset = Schema.GetOffset(0x92435DA8DFF44742);
+            return ref _Handle.AsRef<ulong>(_WorldObjectOffset);
         }
     }
 

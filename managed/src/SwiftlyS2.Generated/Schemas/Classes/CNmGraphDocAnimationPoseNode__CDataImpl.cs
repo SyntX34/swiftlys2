@@ -16,29 +16,29 @@ internal partial class CNmGraphDocAnimationPoseNode__CDataImpl : CNmGraphDocVari
 {
     public CNmGraphDocAnimationPoseNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _ClipOffset;
+    private static nint _ClipOffset = -1;
 
     public string Clip
     {
         get
         {
-            _ClipOffset = _ClipOffset ?? Schema.GetOffset(0x695ED8A910ECBF9B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ClipOffset!.Value));
+            if (_ClipOffset == -1) _ClipOffset = Schema.GetOffset(0x695ED8A910ECBF9B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ClipOffset));
         }
         set
         {
-            _ClipOffset = _ClipOffset ?? Schema.GetOffset(0x695ED8A910ECBF9B);
-            Schema.SetCUtlString(_Handle, _ClipOffset!.Value, value);
+            if (_ClipOffset == -1) _ClipOffset = Schema.GetOffset(0x695ED8A910ECBF9B);
+            Schema.SetCUtlString(_Handle, _ClipOffset, value);
         }
     }
-    private static nint? _VariationTimeValueOffset;
+    private static nint _VariationTimeValueOffset = -1;
 
     public ref float VariationTimeValue
     {
         get
         {
-            _VariationTimeValueOffset = _VariationTimeValueOffset ?? Schema.GetOffset(0x695ED8A9673D45EC);
-            return ref _Handle.AsRef<float>(_VariationTimeValueOffset!.Value);
+            if (_VariationTimeValueOffset == -1) _VariationTimeValueOffset = Schema.GetOffset(0x695ED8A9673D45EC);
+            return ref _Handle.AsRef<float>(_VariationTimeValueOffset);
         }
     }
 

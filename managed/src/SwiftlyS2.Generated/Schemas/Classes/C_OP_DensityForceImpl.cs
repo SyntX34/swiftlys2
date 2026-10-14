@@ -16,34 +16,34 @@ internal partial class C_OP_DensityForceImpl : CParticleFunctionForceImpl, C_OP_
 {
     public C_OP_DensityForceImpl(nint handle) : base(handle) { }
 
-    private static nint? _RadiusScaleOffset;
+    private static nint _RadiusScaleOffset = -1;
 
     public ref float RadiusScale
     {
         get
         {
-            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x7846D656A7A20159);
-            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0x7846D656A7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset);
         }
     }
-    private static nint? _ForceScaleOffset;
+    private static nint _ForceScaleOffset = -1;
 
     public ref float ForceScale
     {
         get
         {
-            _ForceScaleOffset = _ForceScaleOffset ?? Schema.GetOffset(0x7846D6564817F390);
-            return ref _Handle.AsRef<float>(_ForceScaleOffset!.Value);
+            if (_ForceScaleOffset == -1) _ForceScaleOffset = Schema.GetOffset(0x7846D6564817F390);
+            return ref _Handle.AsRef<float>(_ForceScaleOffset);
         }
     }
-    private static nint? _TargetDensityOffset;
+    private static nint _TargetDensityOffset = -1;
 
     public ref float TargetDensity
     {
         get
         {
-            _TargetDensityOffset = _TargetDensityOffset ?? Schema.GetOffset(0x7846D656157E0796);
-            return ref _Handle.AsRef<float>(_TargetDensityOffset!.Value);
+            if (_TargetDensityOffset == -1) _TargetDensityOffset = Schema.GetOffset(0x7846D656157E0796);
+            return ref _Handle.AsRef<float>(_TargetDensityOffset);
         }
     }
 

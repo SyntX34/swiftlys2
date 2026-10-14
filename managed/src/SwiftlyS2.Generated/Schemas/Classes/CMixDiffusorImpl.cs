@@ -16,44 +16,44 @@ internal partial class CMixDiffusorImpl : CMixPropertyBaseImpl, CMixDiffusor
 {
     public CMixDiffusorImpl(nint handle) : base(handle) { }
 
-    private static nint? _SizeOffset;
+    private static nint _SizeOffset = -1;
 
     public ref float Size
     {
         get
         {
-            _SizeOffset = _SizeOffset ?? Schema.GetOffset(0x54D720BA4CF0EBC6);
-            return ref _Handle.AsRef<float>(_SizeOffset!.Value);
+            if (_SizeOffset == -1) _SizeOffset = Schema.GetOffset(0x54D720BA4CF0EBC6);
+            return ref _Handle.AsRef<float>(_SizeOffset);
         }
     }
-    private static nint? _ComplexityOffset;
+    private static nint _ComplexityOffset = -1;
 
     public ref float Complexity
     {
         get
         {
-            _ComplexityOffset = _ComplexityOffset ?? Schema.GetOffset(0x54D720BAF222266B);
-            return ref _Handle.AsRef<float>(_ComplexityOffset!.Value);
+            if (_ComplexityOffset == -1) _ComplexityOffset = Schema.GetOffset(0x54D720BAF222266B);
+            return ref _Handle.AsRef<float>(_ComplexityOffset);
         }
     }
-    private static nint? _FeedbackOffset;
+    private static nint _FeedbackOffset = -1;
 
     public ref float Feedback
     {
         get
         {
-            _FeedbackOffset = _FeedbackOffset ?? Schema.GetOffset(0x54D720BACD5446D4);
-            return ref _Handle.AsRef<float>(_FeedbackOffset!.Value);
+            if (_FeedbackOffset == -1) _FeedbackOffset = Schema.GetOffset(0x54D720BACD5446D4);
+            return ref _Handle.AsRef<float>(_FeedbackOffset);
         }
     }
-    private static nint? _OutputGainOffset;
+    private static nint _OutputGainOffset = -1;
 
     public ref float OutputGain
     {
         get
         {
-            _OutputGainOffset = _OutputGainOffset ?? Schema.GetOffset(0x54D720BA73DB9445);
-            return ref _Handle.AsRef<float>(_OutputGainOffset!.Value);
+            if (_OutputGainOffset == -1) _OutputGainOffset = Schema.GetOffset(0x54D720BA73DB9445);
+            return ref _Handle.AsRef<float>(_OutputGainOffset);
         }
     }
 

@@ -16,19 +16,19 @@ internal partial class SndBeatEventKeyedSndEvts_tImpl : SndBeatEventKeys_tImpl, 
 {
     public SndBeatEventKeyedSndEvts_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrSoundEventNameOffset;
+    private static nint _StrSoundEventNameOffset = -1;
 
     public string StrSoundEventName
     {
         get
         {
-            _StrSoundEventNameOffset = _StrSoundEventNameOffset ?? Schema.GetOffset(0x84509DB42522677E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrSoundEventNameOffset!.Value));
+            if (_StrSoundEventNameOffset == -1) _StrSoundEventNameOffset = Schema.GetOffset(0x84509DB42522677E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrSoundEventNameOffset));
         }
         set
         {
-            _StrSoundEventNameOffset = _StrSoundEventNameOffset ?? Schema.GetOffset(0x84509DB42522677E);
-            Schema.SetCUtlString(_Handle, _StrSoundEventNameOffset!.Value, value);
+            if (_StrSoundEventNameOffset == -1) _StrSoundEventNameOffset = Schema.GetOffset(0x84509DB42522677E);
+            Schema.SetCUtlString(_Handle, _StrSoundEventNameOffset, value);
         }
     }
 

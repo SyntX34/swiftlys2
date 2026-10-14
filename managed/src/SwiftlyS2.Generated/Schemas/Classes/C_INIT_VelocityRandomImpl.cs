@@ -16,88 +16,88 @@ internal partial class C_INIT_VelocityRandomImpl : CParticleFunctionInitializerI
 {
     public C_INIT_VelocityRandomImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xFCCBA9E3F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0xFCCBA9E3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _SpeedMinOffset;
+    private static nint _SpeedMinOffset = -1;
     private CPerParticleFloatInputImpl? _SpeedMinInstance;
 
     public CPerParticleFloatInput SpeedMin
     {
         get
         {
-            _SpeedMinOffset = _SpeedMinOffset ?? Schema.GetOffset(0xFCCBA9EB989E1F8);
+            if (_SpeedMinOffset == -1) _SpeedMinOffset = Schema.GetOffset(0xFCCBA9EB989E1F8);
             var instance = _SpeedMinInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpeedMinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SpeedMinOffset);
             return instance;
         }
     }
-    private static nint? _SpeedMaxOffset;
+    private static nint _SpeedMaxOffset = -1;
     private CPerParticleFloatInputImpl? _SpeedMaxInstance;
 
     public CPerParticleFloatInput SpeedMax
     {
         get
         {
-            _SpeedMaxOffset = _SpeedMaxOffset ?? Schema.GetOffset(0xFCCBA9ECF9D8C52);
+            if (_SpeedMaxOffset == -1) _SpeedMaxOffset = Schema.GetOffset(0xFCCBA9ECF9D8C52);
             var instance = _SpeedMaxInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SpeedMaxOffset);
             return instance;
         }
     }
-    private static nint? _LocalCoordinateSystemSpeedMinOffset;
+    private static nint _LocalCoordinateSystemSpeedMinOffset = -1;
     private CPerParticleVecInputImpl? _LocalCoordinateSystemSpeedMinInstance;
 
     public CPerParticleVecInput LocalCoordinateSystemSpeedMin
     {
         get
         {
-            _LocalCoordinateSystemSpeedMinOffset = _LocalCoordinateSystemSpeedMinOffset ?? Schema.GetOffset(0xFCCBA9EA4A0F1AE);
+            if (_LocalCoordinateSystemSpeedMinOffset == -1) _LocalCoordinateSystemSpeedMinOffset = Schema.GetOffset(0xFCCBA9EA4A0F1AE);
             var instance = _LocalCoordinateSystemSpeedMinInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LocalCoordinateSystemSpeedMinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LocalCoordinateSystemSpeedMinOffset);
             return instance;
         }
     }
-    private static nint? _LocalCoordinateSystemSpeedMaxOffset;
+    private static nint _LocalCoordinateSystemSpeedMaxOffset = -1;
     private CPerParticleVecInputImpl? _LocalCoordinateSystemSpeedMaxInstance;
 
     public CPerParticleVecInput LocalCoordinateSystemSpeedMax
     {
         get
         {
-            _LocalCoordinateSystemSpeedMaxOffset = _LocalCoordinateSystemSpeedMaxOffset ?? Schema.GetOffset(0xFCCBA9E968D53EC);
+            if (_LocalCoordinateSystemSpeedMaxOffset == -1) _LocalCoordinateSystemSpeedMaxOffset = Schema.GetOffset(0xFCCBA9E968D53EC);
             var instance = _LocalCoordinateSystemSpeedMaxInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LocalCoordinateSystemSpeedMaxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LocalCoordinateSystemSpeedMaxOffset);
             return instance;
         }
     }
-    private static nint? _IgnoreDTOffset;
+    private static nint _IgnoreDTOffset = -1;
 
     public ref bool IgnoreDT
     {
         get
         {
-            _IgnoreDTOffset = _IgnoreDTOffset ?? Schema.GetOffset(0xFCCBA9E530C3863);
-            return ref _Handle.AsRef<bool>(_IgnoreDTOffset!.Value);
+            if (_IgnoreDTOffset == -1) _IgnoreDTOffset = Schema.GetOffset(0xFCCBA9E530C3863);
+            return ref _Handle.AsRef<bool>(_IgnoreDTOffset);
         }
     }
-    private static nint? _RandomnessParametersOffset;
+    private static nint _RandomnessParametersOffset = -1;
     private CRandomNumberGeneratorParametersImpl? _RandomnessParametersInstance;
 
     public CRandomNumberGeneratorParameters RandomnessParameters
     {
         get
         {
-            _RandomnessParametersOffset = _RandomnessParametersOffset ?? Schema.GetOffset(0xFCCBA9E7EDF50AD);
+            if (_RandomnessParametersOffset == -1) _RandomnessParametersOffset = Schema.GetOffset(0xFCCBA9E7EDF50AD);
             var instance = _RandomnessParametersInstance ??= new CRandomNumberGeneratorParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset);
             return instance;
         }
     }

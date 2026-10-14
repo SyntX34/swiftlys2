@@ -16,27 +16,27 @@ internal partial class NmFloatCurveCompressionSettings_tImpl : SchemaClass, NmFl
 {
     public NmFloatCurveCompressionSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _RangeOffset;
+    private static nint _RangeOffset = -1;
     private NmCompressionSettings_t__QuantizationRange_tImpl? _RangeInstance;
 
     public NmCompressionSettings_t__QuantizationRange_t Range
     {
         get
         {
-            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0x5BD5686F3D639CF2);
+            if (_RangeOffset == -1) _RangeOffset = Schema.GetOffset(0x5BD5686F3D639CF2);
             var instance = _RangeInstance ??= new NmCompressionSettings_t__QuantizationRange_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _RangeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RangeOffset);
             return instance;
         }
     }
-    private static nint? _IsStaticOffset;
+    private static nint _IsStaticOffset = -1;
 
     public ref bool IsStatic
     {
         get
         {
-            _IsStaticOffset = _IsStaticOffset ?? Schema.GetOffset(0x5BD5686F57ECC7EB);
-            return ref _Handle.AsRef<bool>(_IsStaticOffset!.Value);
+            if (_IsStaticOffset == -1) _IsStaticOffset = Schema.GetOffset(0x5BD5686F57ECC7EB);
+            return ref _Handle.AsRef<bool>(_IsStaticOffset);
         }
     }
 

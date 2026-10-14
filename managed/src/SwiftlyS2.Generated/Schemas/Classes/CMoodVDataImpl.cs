@@ -16,37 +16,37 @@ internal partial class CMoodVDataImpl : SchemaClass, CMoodVData
 {
     public CMoodVDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _ModelNameOffset;
+    private static nint _ModelNameOffset = -1;
     private SchemaUntypedField? _ModelNameInstance;
 
     public SchemaUntypedField ModelName
     {
         get
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0x3C9F4201002A227C);
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0x3C9F4201002A227C);
             var instance = _ModelNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ModelNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ModelNameOffset);
             return instance;
         }
     }
-    private static nint? _MoodTypeOffset;
+    private static nint _MoodTypeOffset = -1;
 
     public ref MoodType_t MoodType
     {
         get
         {
-            _MoodTypeOffset = _MoodTypeOffset ?? Schema.GetOffset(0x3C9F42019039BEAA);
-            return ref _Handle.AsRef<MoodType_t>(_MoodTypeOffset!.Value);
+            if (_MoodTypeOffset == -1) _MoodTypeOffset = Schema.GetOffset(0x3C9F42019039BEAA);
+            return ref _Handle.AsRef<MoodType_t>(_MoodTypeOffset);
         }
     }
-    private static nint? _AnimationLayersOffset;
+    private static nint _AnimationLayersOffset = -1;
 
     public ref CUtlVector<MoodAnimationLayer_t> AnimationLayers
     {
         get
         {
-            _AnimationLayersOffset = _AnimationLayersOffset ?? Schema.GetOffset(0x3C9F420179729D37);
-            return ref _Handle.AsRef<CUtlVector<MoodAnimationLayer_t>>(_AnimationLayersOffset!.Value);
+            if (_AnimationLayersOffset == -1) _AnimationLayersOffset = Schema.GetOffset(0x3C9F420179729D37);
+            return ref _Handle.AsRef<CUtlVector<MoodAnimationLayer_t>>(_AnimationLayersOffset);
         }
     }
 

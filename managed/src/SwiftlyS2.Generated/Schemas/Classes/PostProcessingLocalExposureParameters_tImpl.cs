@@ -16,44 +16,44 @@ internal partial class PostProcessingLocalExposureParameters_tImpl : SchemaClass
 {
     public PostProcessingLocalExposureParameters_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ShadowOffsetEVOffset;
+    private static nint _ShadowOffsetEVOffset = -1;
 
     public ref float ShadowOffsetEV
     {
         get
         {
-            _ShadowOffsetEVOffset = _ShadowOffsetEVOffset ?? Schema.GetOffset(0xB93A68C570208EB9);
-            return ref _Handle.AsRef<float>(_ShadowOffsetEVOffset!.Value);
+            if (_ShadowOffsetEVOffset == -1) _ShadowOffsetEVOffset = Schema.GetOffset(0xB93A68C570208EB9);
+            return ref _Handle.AsRef<float>(_ShadowOffsetEVOffset);
         }
     }
-    private static nint? _HighlightOffsetEVOffset;
+    private static nint _HighlightOffsetEVOffset = -1;
 
     public ref float HighlightOffsetEV
     {
         get
         {
-            _HighlightOffsetEVOffset = _HighlightOffsetEVOffset ?? Schema.GetOffset(0xB93A68C5BA56DBEB);
-            return ref _Handle.AsRef<float>(_HighlightOffsetEVOffset!.Value);
+            if (_HighlightOffsetEVOffset == -1) _HighlightOffsetEVOffset = Schema.GetOffset(0xB93A68C5BA56DBEB);
+            return ref _Handle.AsRef<float>(_HighlightOffsetEVOffset);
         }
     }
-    private static nint? _SigmaOffset;
+    private static nint _SigmaOffset = -1;
 
     public ref float Sigma
     {
         get
         {
-            _SigmaOffset = _SigmaOffset ?? Schema.GetOffset(0xB93A68C5E523A720);
-            return ref _Handle.AsRef<float>(_SigmaOffset!.Value);
+            if (_SigmaOffset == -1) _SigmaOffset = Schema.GetOffset(0xB93A68C5E523A720);
+            return ref _Handle.AsRef<float>(_SigmaOffset);
         }
     }
-    private static nint? _BoostLocalContrastOffset;
+    private static nint _BoostLocalContrastOffset = -1;
 
     public ref float BoostLocalContrast
     {
         get
         {
-            _BoostLocalContrastOffset = _BoostLocalContrastOffset ?? Schema.GetOffset(0xB93A68C526D26025);
-            return ref _Handle.AsRef<float>(_BoostLocalContrastOffset!.Value);
+            if (_BoostLocalContrastOffset == -1) _BoostLocalContrastOffset = Schema.GetOffset(0xB93A68C526D26025);
+            return ref _Handle.AsRef<float>(_BoostLocalContrastOffset);
         }
     }
 

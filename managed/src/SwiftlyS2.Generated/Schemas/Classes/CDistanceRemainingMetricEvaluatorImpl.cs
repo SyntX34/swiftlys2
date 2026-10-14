@@ -16,74 +16,74 @@ internal partial class CDistanceRemainingMetricEvaluatorImpl : CMotionMetricEval
 {
     public CDistanceRemainingMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-    private static nint? _MaxDistanceOffset;
+    private static nint _MaxDistanceOffset = -1;
 
     public ref float MaxDistance
     {
         get
         {
-            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0xEF12BCC898893360);
-            return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+            if (_MaxDistanceOffset == -1) _MaxDistanceOffset = Schema.GetOffset(0xEF12BCC898893360);
+            return ref _Handle.AsRef<float>(_MaxDistanceOffset);
         }
     }
-    private static nint? _MinDistanceOffset;
+    private static nint _MinDistanceOffset = -1;
 
     public ref float MinDistance
     {
         get
         {
-            _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0xEF12BCC892BCAD06);
-            return ref _Handle.AsRef<float>(_MinDistanceOffset!.Value);
+            if (_MinDistanceOffset == -1) _MinDistanceOffset = Schema.GetOffset(0xEF12BCC892BCAD06);
+            return ref _Handle.AsRef<float>(_MinDistanceOffset);
         }
     }
-    private static nint? _StartGoalFilterDistanceOffset;
+    private static nint _StartGoalFilterDistanceOffset = -1;
 
     public ref float StartGoalFilterDistance
     {
         get
         {
-            _StartGoalFilterDistanceOffset = _StartGoalFilterDistanceOffset ?? Schema.GetOffset(0xEF12BCC8531B6E2B);
-            return ref _Handle.AsRef<float>(_StartGoalFilterDistanceOffset!.Value);
+            if (_StartGoalFilterDistanceOffset == -1) _StartGoalFilterDistanceOffset = Schema.GetOffset(0xEF12BCC8531B6E2B);
+            return ref _Handle.AsRef<float>(_StartGoalFilterDistanceOffset);
         }
     }
-    private static nint? _MaxGoalOvershootScaleOffset;
+    private static nint _MaxGoalOvershootScaleOffset = -1;
 
     public ref float MaxGoalOvershootScale
     {
         get
         {
-            _MaxGoalOvershootScaleOffset = _MaxGoalOvershootScaleOffset ?? Schema.GetOffset(0xEF12BCC8D2E0A335);
-            return ref _Handle.AsRef<float>(_MaxGoalOvershootScaleOffset!.Value);
+            if (_MaxGoalOvershootScaleOffset == -1) _MaxGoalOvershootScaleOffset = Schema.GetOffset(0xEF12BCC8D2E0A335);
+            return ref _Handle.AsRef<float>(_MaxGoalOvershootScaleOffset);
         }
     }
-    private static nint? _FilterFixedMinDistanceOffset;
+    private static nint _FilterFixedMinDistanceOffset = -1;
 
     public ref bool FilterFixedMinDistance
     {
         get
         {
-            _FilterFixedMinDistanceOffset = _FilterFixedMinDistanceOffset ?? Schema.GetOffset(0xEF12BCC85AD937B2);
-            return ref _Handle.AsRef<bool>(_FilterFixedMinDistanceOffset!.Value);
+            if (_FilterFixedMinDistanceOffset == -1) _FilterFixedMinDistanceOffset = Schema.GetOffset(0xEF12BCC85AD937B2);
+            return ref _Handle.AsRef<bool>(_FilterFixedMinDistanceOffset);
         }
     }
-    private static nint? _FilterGoalDistanceOffset;
+    private static nint _FilterGoalDistanceOffset = -1;
 
     public ref bool FilterGoalDistance
     {
         get
         {
-            _FilterGoalDistanceOffset = _FilterGoalDistanceOffset ?? Schema.GetOffset(0xEF12BCC8A9641DB3);
-            return ref _Handle.AsRef<bool>(_FilterGoalDistanceOffset!.Value);
+            if (_FilterGoalDistanceOffset == -1) _FilterGoalDistanceOffset = Schema.GetOffset(0xEF12BCC8A9641DB3);
+            return ref _Handle.AsRef<bool>(_FilterGoalDistanceOffset);
         }
     }
-    private static nint? _FilterGoalOvershootOffset;
+    private static nint _FilterGoalOvershootOffset = -1;
 
     public ref bool FilterGoalOvershoot
     {
         get
         {
-            _FilterGoalOvershootOffset = _FilterGoalOvershootOffset ?? Schema.GetOffset(0xEF12BCC89A875DD1);
-            return ref _Handle.AsRef<bool>(_FilterGoalOvershootOffset!.Value);
+            if (_FilterGoalOvershootOffset == -1) _FilterGoalOvershootOffset = Schema.GetOffset(0xEF12BCC89A875DD1);
+            return ref _Handle.AsRef<bool>(_FilterGoalOvershootOffset);
         }
     }
 

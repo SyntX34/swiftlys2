@@ -16,14 +16,14 @@ internal partial class ModelConfigHandle_tImpl : SchemaClass, ModelConfigHandle_
 {
     public ModelConfigHandle_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public ref uint Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x5DC9B751DCB0894A);
-            return ref _Handle.AsRef<uint>(_ValueOffset!.Value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x5DC9B751DCB0894A);
+            return ref _Handle.AsRef<uint>(_ValueOffset);
         }
     }
 

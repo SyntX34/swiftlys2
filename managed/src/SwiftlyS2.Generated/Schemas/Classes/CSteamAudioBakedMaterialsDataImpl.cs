@@ -16,37 +16,37 @@ internal partial class CSteamAudioBakedMaterialsDataImpl : SchemaClass, CSteamAu
 {
     public CSteamAudioBakedMaterialsDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _ProbesOffset;
+    private static nint _ProbesOffset = -1;
     private CSteamAudioProbeDataImpl? _ProbesInstance;
 
     public CSteamAudioProbeData Probes
     {
         get
         {
-            _ProbesOffset = _ProbesOffset ?? Schema.GetOffset(0xDC9AF7EF49D37E06);
+            if (_ProbesOffset == -1) _ProbesOffset = Schema.GetOffset(0xDC9AF7EF49D37E06);
             var instance = _ProbesInstance ??= new CSteamAudioProbeDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _ProbesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ProbesOffset);
             return instance;
         }
     }
-    private static nint? _MaterialTokensOffset;
+    private static nint _MaterialTokensOffset = -1;
 
     public ref CUtlVector<uint> MaterialTokens
     {
         get
         {
-            _MaterialTokensOffset = _MaterialTokensOffset ?? Schema.GetOffset(0xDC9AF7EF023FE732);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_MaterialTokensOffset!.Value);
+            if (_MaterialTokensOffset == -1) _MaterialTokensOffset = Schema.GetOffset(0xDC9AF7EF023FE732);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_MaterialTokensOffset);
         }
     }
-    private static nint? _MaterialWeightsOffset;
+    private static nint _MaterialWeightsOffset = -1;
 
     public ref CUtlVector<float> MaterialWeights
     {
         get
         {
-            _MaterialWeightsOffset = _MaterialWeightsOffset ?? Schema.GetOffset(0xDC9AF7EF809822A9);
-            return ref _Handle.AsRef<CUtlVector<float>>(_MaterialWeightsOffset!.Value);
+            if (_MaterialWeightsOffset == -1) _MaterialWeightsOffset = Schema.GetOffset(0xDC9AF7EF809822A9);
+            return ref _Handle.AsRef<CUtlVector<float>>(_MaterialWeightsOffset);
         }
     }
 

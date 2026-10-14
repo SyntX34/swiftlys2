@@ -16,27 +16,27 @@ internal partial class CNmSyncTrack__EventMarker_tImpl : SchemaClass, CNmSyncTra
 {
     public CNmSyncTrack__EventMarker_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
     private NmPercent_tImpl? _StartTimeInstance;
 
     public NmPercent_t StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x1BCC69006330E7EE);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x1BCC69006330E7EE);
             var instance = _StartTimeInstance ??= new NmPercent_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
             return instance;
         }
     }
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0x1BCC690095066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0x1BCC690095066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
         }
     }
 

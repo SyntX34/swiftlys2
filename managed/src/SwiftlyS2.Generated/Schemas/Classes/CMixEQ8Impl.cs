@@ -16,26 +16,26 @@ internal partial class CMixEQ8Impl : CMixPropertyBaseImpl, CMixEQ8
 {
     public CMixEQ8Impl(nint handle) : base(handle) { }
 
-    private static nint? _ChannelsOffset;
+    private static nint _ChannelsOffset = -1;
 
     public ref int Channels
     {
         get
         {
-            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0xCA761F325A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
+            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0xCA761F325A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset);
         }
     }
-    private static nint? _StagesOffset;
+    private static nint _StagesOffset = -1;
     private SchemaClassFixedArray<CFilterStage>? _StagesInstance;
 
     public ISchemaClassFixedArray<CFilterStage> Stages
     {
         get
         {
-            _StagesOffset = _StagesOffset ?? Schema.GetOffset(0xCA761F32B955349A);
+            if (_StagesOffset == -1) _StagesOffset = Schema.GetOffset(0xCA761F32B955349A);
             var instance = _StagesInstance ??= new SchemaClassFixedArray<CFilterStage>(0, 0xCA761F32B955349A, 8, 24, 8);
-            instance.DangerousSetHandle(_Handle + _StagesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StagesOffset);
             return instance;
         }
     }

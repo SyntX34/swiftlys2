@@ -16,24 +16,24 @@ internal partial class CNmGraphDocBoneMaskSwitchNodeImpl : CNmGraphDocFlowNodeIm
 {
     public CNmGraphDocBoneMaskSwitchNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _SwitchDynamicallyOffset;
+    private static nint _SwitchDynamicallyOffset = -1;
 
     public ref bool SwitchDynamically
     {
         get
         {
-            _SwitchDynamicallyOffset = _SwitchDynamicallyOffset ?? Schema.GetOffset(0x1C0387D746047CB8);
-            return ref _Handle.AsRef<bool>(_SwitchDynamicallyOffset!.Value);
+            if (_SwitchDynamicallyOffset == -1) _SwitchDynamicallyOffset = Schema.GetOffset(0x1C0387D746047CB8);
+            return ref _Handle.AsRef<bool>(_SwitchDynamicallyOffset);
         }
     }
-    private static nint? _BlendTimeSecondsOffset;
+    private static nint _BlendTimeSecondsOffset = -1;
 
     public ref float BlendTimeSeconds
     {
         get
         {
-            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0x1C0387D76D3A08FC);
-            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+            if (_BlendTimeSecondsOffset == -1) _BlendTimeSecondsOffset = Schema.GetOffset(0x1C0387D76D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset);
         }
     }
 

@@ -16,16 +16,16 @@ internal partial class CVMixPlateReverbProcessorDescImpl : CVMixBaseProcessorDes
 {
     public CVMixPlateReverbProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixPlateverbDesc_tImpl? _DescInstance;
 
     public VMixPlateverbDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0xF6AFE63B27917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0xF6AFE63B27917BC0);
             var instance = _DescInstance ??= new VMixPlateverbDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }

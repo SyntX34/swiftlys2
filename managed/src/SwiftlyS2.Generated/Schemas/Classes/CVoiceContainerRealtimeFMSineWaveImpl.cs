@@ -16,34 +16,34 @@ internal partial class CVoiceContainerRealtimeFMSineWaveImpl : CVoiceContainerGe
 {
     public CVoiceContainerRealtimeFMSineWaveImpl(nint handle) : base(handle) { }
 
-    private static nint? _CarrierFrequencyOffset;
+    private static nint _CarrierFrequencyOffset = -1;
 
     public ref float CarrierFrequency
     {
         get
         {
-            _CarrierFrequencyOffset = _CarrierFrequencyOffset ?? Schema.GetOffset(0x3AB0D193041DC311);
-            return ref _Handle.AsRef<float>(_CarrierFrequencyOffset!.Value);
+            if (_CarrierFrequencyOffset == -1) _CarrierFrequencyOffset = Schema.GetOffset(0x3AB0D193041DC311);
+            return ref _Handle.AsRef<float>(_CarrierFrequencyOffset);
         }
     }
-    private static nint? _ModulatorFrequencyOffset;
+    private static nint _ModulatorFrequencyOffset = -1;
 
     public ref float ModulatorFrequency
     {
         get
         {
-            _ModulatorFrequencyOffset = _ModulatorFrequencyOffset ?? Schema.GetOffset(0x3AB0D193656A8FFE);
-            return ref _Handle.AsRef<float>(_ModulatorFrequencyOffset!.Value);
+            if (_ModulatorFrequencyOffset == -1) _ModulatorFrequencyOffset = Schema.GetOffset(0x3AB0D193656A8FFE);
+            return ref _Handle.AsRef<float>(_ModulatorFrequencyOffset);
         }
     }
-    private static nint? _ModulatorAmountOffset;
+    private static nint _ModulatorAmountOffset = -1;
 
     public ref float ModulatorAmount
     {
         get
         {
-            _ModulatorAmountOffset = _ModulatorAmountOffset ?? Schema.GetOffset(0x3AB0D1939B320E5C);
-            return ref _Handle.AsRef<float>(_ModulatorAmountOffset!.Value);
+            if (_ModulatorAmountOffset == -1) _ModulatorAmountOffset = Schema.GetOffset(0x3AB0D1939B320E5C);
+            return ref _Handle.AsRef<float>(_ModulatorAmountOffset);
         }
     }
 

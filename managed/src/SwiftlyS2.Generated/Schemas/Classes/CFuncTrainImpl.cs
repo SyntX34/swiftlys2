@@ -16,82 +16,82 @@ internal partial class CFuncTrainImpl : CBasePlatTrainImpl, CFuncTrain
 {
     public CFuncTrainImpl(nint handle) : base(handle) { }
 
-    private static nint? _CurrentTargetOffset;
+    private static nint _CurrentTargetOffset = -1;
 
     public ref CHandle<CBaseEntity> CurrentTarget
     {
         get
         {
-            _CurrentTargetOffset = _CurrentTargetOffset ?? Schema.GetOffset(0xAAD8EE8EBD175911);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CurrentTargetOffset!.Value);
+            if (_CurrentTargetOffset == -1) _CurrentTargetOffset = Schema.GetOffset(0xAAD8EE8EBD175911);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CurrentTargetOffset);
         }
     }
-    private static nint? _ActivatedOffset;
+    private static nint _ActivatedOffset = -1;
 
     public ref bool Activated
     {
         get
         {
-            _ActivatedOffset = _ActivatedOffset ?? Schema.GetOffset(0xAAD8EE8E4337A09C);
-            return ref _Handle.AsRef<bool>(_ActivatedOffset!.Value);
+            if (_ActivatedOffset == -1) _ActivatedOffset = Schema.GetOffset(0xAAD8EE8E4337A09C);
+            return ref _Handle.AsRef<bool>(_ActivatedOffset);
         }
     }
-    private static nint? _EnemyOffset;
+    private static nint _EnemyOffset = -1;
 
     public ref CHandle<CBaseEntity> Enemy
     {
         get
         {
-            _EnemyOffset = _EnemyOffset ?? Schema.GetOffset(0xAAD8EE8E430EC2D5);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EnemyOffset!.Value);
+            if (_EnemyOffset == -1) _EnemyOffset = Schema.GetOffset(0xAAD8EE8E430EC2D5);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EnemyOffset);
         }
     }
-    private static nint? _BlockDamageOffset;
+    private static nint _BlockDamageOffset = -1;
 
     public ref float BlockDamage
     {
         get
         {
-            _BlockDamageOffset = _BlockDamageOffset ?? Schema.GetOffset(0xAAD8EE8EA5348091);
-            return ref _Handle.AsRef<float>(_BlockDamageOffset!.Value);
+            if (_BlockDamageOffset == -1) _BlockDamageOffset = Schema.GetOffset(0xAAD8EE8EA5348091);
+            return ref _Handle.AsRef<float>(_BlockDamageOffset);
         }
     }
-    private static nint? _NextBlockTimeOffset;
+    private static nint _NextBlockTimeOffset = -1;
     private GameTime_tImpl? _NextBlockTimeInstance;
 
     public GameTime_t NextBlockTime
     {
         get
         {
-            _NextBlockTimeOffset = _NextBlockTimeOffset ?? Schema.GetOffset(0xAAD8EE8E82BC1902);
+            if (_NextBlockTimeOffset == -1) _NextBlockTimeOffset = Schema.GetOffset(0xAAD8EE8E82BC1902);
             var instance = _NextBlockTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextBlockTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NextBlockTimeOffset);
             return instance;
         }
     }
-    private static nint? _LastTargetOffset;
+    private static nint _LastTargetOffset = -1;
 
     public string LastTarget
     {
         get
         {
-            _LastTargetOffset = _LastTargetOffset ?? Schema.GetOffset(0xAAD8EE8ECF22FD34);
-            return Schema.GetString(_Handle.Read<nint>(_LastTargetOffset!.Value));
+            if (_LastTargetOffset == -1) _LastTargetOffset = Schema.GetOffset(0xAAD8EE8ECF22FD34);
+            return Schema.GetString(_Handle.Read<nint>(_LastTargetOffset));
         }
         set
         {
-            _LastTargetOffset = _LastTargetOffset ?? Schema.GetOffset(0xAAD8EE8ECF22FD34);
-            Schema.SetString(_Handle, _LastTargetOffset!.Value, value);
+            if (_LastTargetOffset == -1) _LastTargetOffset = Schema.GetOffset(0xAAD8EE8ECF22FD34);
+            Schema.SetString(_Handle, _LastTargetOffset, value);
         }
     }
-    private static nint? _SpeedOffset;
+    private static nint _SpeedOffset = -1;
 
     public ref float Speed
     {
         get
         {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xAAD8EE8EC631B7EA);
-            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0xAAD8EE8EC631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset);
         }
     }
 

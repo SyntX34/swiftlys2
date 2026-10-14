@@ -16,34 +16,34 @@ internal partial class C_OP_SnapshotRigidSkinToBonesImpl : CParticleFunctionOper
 {
     public C_OP_SnapshotRigidSkinToBonesImpl(nint handle) : base(handle) { }
 
-    private static nint? _TransformNormalsOffset;
+    private static nint _TransformNormalsOffset = -1;
 
     public ref bool TransformNormals
     {
         get
         {
-            _TransformNormalsOffset = _TransformNormalsOffset ?? Schema.GetOffset(0x208C05EB3C6BFD75);
-            return ref _Handle.AsRef<bool>(_TransformNormalsOffset!.Value);
+            if (_TransformNormalsOffset == -1) _TransformNormalsOffset = Schema.GetOffset(0x208C05EB3C6BFD75);
+            return ref _Handle.AsRef<bool>(_TransformNormalsOffset);
         }
     }
-    private static nint? _TransformRadiiOffset;
+    private static nint _TransformRadiiOffset = -1;
 
     public ref bool TransformRadii
     {
         get
         {
-            _TransformRadiiOffset = _TransformRadiiOffset ?? Schema.GetOffset(0x208C05EB8183F664);
-            return ref _Handle.AsRef<bool>(_TransformRadiiOffset!.Value);
+            if (_TransformRadiiOffset == -1) _TransformRadiiOffset = Schema.GetOffset(0x208C05EB8183F664);
+            return ref _Handle.AsRef<bool>(_TransformRadiiOffset);
         }
     }
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x208C05EB3F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x208C05EB3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
 

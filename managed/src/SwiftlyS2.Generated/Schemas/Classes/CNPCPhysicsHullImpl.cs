@@ -16,84 +16,84 @@ internal partial class CNPCPhysicsHullImpl : SchemaClass, CNPCPhysicsHull
 {
     public CNPCPhysicsHullImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public ref CGlobalSymbol Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x6C27881963D22D49);
-            return ref _Handle.AsRef<CGlobalSymbol>(_NameOffset!.Value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x6C27881963D22D49);
+            return ref _Handle.AsRef<CGlobalSymbol>(_NameOffset);
         }
     }
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref NPCPhysicsHullType_t Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x6C27881921B39888);
-            return ref _Handle.AsRef<NPCPhysicsHullType_t>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x6C27881921B39888);
+            return ref _Handle.AsRef<NPCPhysicsHullType_t>(_TypeOffset);
         }
     }
-    private static nint? _CapsuleHeightOffset;
+    private static nint _CapsuleHeightOffset = -1;
 
     public ref float CapsuleHeight
     {
         get
         {
-            _CapsuleHeightOffset = _CapsuleHeightOffset ?? Schema.GetOffset(0x6C278819043CF691);
-            return ref _Handle.AsRef<float>(_CapsuleHeightOffset!.Value);
+            if (_CapsuleHeightOffset == -1) _CapsuleHeightOffset = Schema.GetOffset(0x6C278819043CF691);
+            return ref _Handle.AsRef<float>(_CapsuleHeightOffset);
         }
     }
-    private static nint? _CapsuleRadiusOffset;
+    private static nint _CapsuleRadiusOffset = -1;
 
     public ref float CapsuleRadius
     {
         get
         {
-            _CapsuleRadiusOffset = _CapsuleRadiusOffset ?? Schema.GetOffset(0x6C278819A1A593D0);
-            return ref _Handle.AsRef<float>(_CapsuleRadiusOffset!.Value);
+            if (_CapsuleRadiusOffset == -1) _CapsuleRadiusOffset = Schema.GetOffset(0x6C278819A1A593D0);
+            return ref _Handle.AsRef<float>(_CapsuleRadiusOffset);
         }
     }
-    private static nint? _CapsuleCenter1Offset;
+    private static nint _CapsuleCenter1Offset = -1;
 
     public ref Vector CapsuleCenter1
     {
         get
         {
-            _CapsuleCenter1Offset = _CapsuleCenter1Offset ?? Schema.GetOffset(0x6C278819A5E81978);
-            return ref _Handle.AsRef<Vector>(_CapsuleCenter1Offset!.Value);
+            if (_CapsuleCenter1Offset == -1) _CapsuleCenter1Offset = Schema.GetOffset(0x6C278819A5E81978);
+            return ref _Handle.AsRef<Vector>(_CapsuleCenter1Offset);
         }
     }
-    private static nint? _CapsuleCenter2Offset;
+    private static nint _CapsuleCenter2Offset = -1;
 
     public ref Vector CapsuleCenter2
     {
         get
         {
-            _CapsuleCenter2Offset = _CapsuleCenter2Offset ?? Schema.GetOffset(0x6C278819A8E81E31);
-            return ref _Handle.AsRef<Vector>(_CapsuleCenter2Offset!.Value);
+            if (_CapsuleCenter2Offset == -1) _CapsuleCenter2Offset = Schema.GetOffset(0x6C278819A8E81E31);
+            return ref _Handle.AsRef<Vector>(_CapsuleCenter2Offset);
         }
     }
-    private static nint? _GroundBoxHeightOffset;
+    private static nint _GroundBoxHeightOffset = -1;
 
     public ref float GroundBoxHeight
     {
         get
         {
-            _GroundBoxHeightOffset = _GroundBoxHeightOffset ?? Schema.GetOffset(0x6C2788195B2D099E);
-            return ref _Handle.AsRef<float>(_GroundBoxHeightOffset!.Value);
+            if (_GroundBoxHeightOffset == -1) _GroundBoxHeightOffset = Schema.GetOffset(0x6C2788195B2D099E);
+            return ref _Handle.AsRef<float>(_GroundBoxHeightOffset);
         }
     }
-    private static nint? _GroundBoxWidthOffset;
+    private static nint _GroundBoxWidthOffset = -1;
 
     public ref float GroundBoxWidth
     {
         get
         {
-            _GroundBoxWidthOffset = _GroundBoxWidthOffset ?? Schema.GetOffset(0x6C2788194A30F5E3);
-            return ref _Handle.AsRef<float>(_GroundBoxWidthOffset!.Value);
+            if (_GroundBoxWidthOffset == -1) _GroundBoxWidthOffset = Schema.GetOffset(0x6C2788194A30F5E3);
+            return ref _Handle.AsRef<float>(_GroundBoxWidthOffset);
         }
     }
 

@@ -16,34 +16,34 @@ internal partial class CNmTargetInfoNode__CDefinitionImpl : CNmFloatValueNode__C
 {
     public CNmTargetInfoNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputValueNodeIdxOffset;
+    private static nint _InputValueNodeIdxOffset = -1;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x2288EABA95E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x2288EABA95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
         }
     }
-    private static nint? _InfoTypeOffset;
+    private static nint _InfoTypeOffset = -1;
 
     public ref CNmTargetInfoNode__Info_t InfoType
     {
         get
         {
-            _InfoTypeOffset = _InfoTypeOffset ?? Schema.GetOffset(0x2288EABACE6BA20D);
-            return ref _Handle.AsRef<CNmTargetInfoNode__Info_t>(_InfoTypeOffset!.Value);
+            if (_InfoTypeOffset == -1) _InfoTypeOffset = Schema.GetOffset(0x2288EABACE6BA20D);
+            return ref _Handle.AsRef<CNmTargetInfoNode__Info_t>(_InfoTypeOffset);
         }
     }
-    private static nint? _IsWorldSpaceTargetOffset;
+    private static nint _IsWorldSpaceTargetOffset = -1;
 
     public ref bool IsWorldSpaceTarget
     {
         get
         {
-            _IsWorldSpaceTargetOffset = _IsWorldSpaceTargetOffset ?? Schema.GetOffset(0x2288EABAB81D53F2);
-            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset!.Value);
+            if (_IsWorldSpaceTargetOffset == -1) _IsWorldSpaceTargetOffset = Schema.GetOffset(0x2288EABAB81D53F2);
+            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset);
         }
     }
 

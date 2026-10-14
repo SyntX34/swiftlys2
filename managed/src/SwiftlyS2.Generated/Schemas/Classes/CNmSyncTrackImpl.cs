@@ -16,27 +16,27 @@ internal partial class CNmSyncTrackImpl : SchemaClass, CNmSyncTrack
 {
     public CNmSyncTrackImpl(nint handle) : base(handle) { }
 
-    private static nint? _SyncEventsOffset;
+    private static nint _SyncEventsOffset = -1;
     private SchemaUntypedField? _SyncEventsInstance;
 
     public SchemaUntypedField SyncEvents
     {
         get
         {
-            _SyncEventsOffset = _SyncEventsOffset ?? Schema.GetOffset(0x29C7FA0336BAB4FF);
+            if (_SyncEventsOffset == -1) _SyncEventsOffset = Schema.GetOffset(0x29C7FA0336BAB4FF);
             var instance = _SyncEventsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SyncEventsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SyncEventsOffset);
             return instance;
         }
     }
-    private static nint? _StartEventOffsetOffset;
+    private static nint _StartEventOffsetOffset = -1;
 
     public ref int StartEventOffset
     {
         get
         {
-            _StartEventOffsetOffset = _StartEventOffsetOffset ?? Schema.GetOffset(0x29C7FA03DDBC640E);
-            return ref _Handle.AsRef<int>(_StartEventOffsetOffset!.Value);
+            if (_StartEventOffsetOffset == -1) _StartEventOffsetOffset = Schema.GetOffset(0x29C7FA03DDBC640E);
+            return ref _Handle.AsRef<int>(_StartEventOffsetOffset);
         }
     }
 

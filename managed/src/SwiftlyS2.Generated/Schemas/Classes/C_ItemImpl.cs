@@ -16,19 +16,19 @@ internal partial class C_ItemImpl : C_EconEntityImpl, C_Item
 {
     public C_ItemImpl(nint handle) : base(handle) { }
 
-    private static nint? _ReticleHintTextNameOffset;
+    private static nint _ReticleHintTextNameOffset = -1;
 
     public string ReticleHintTextName
     {
         get
         {
-            _ReticleHintTextNameOffset = _ReticleHintTextNameOffset ?? Schema.GetOffset(0xFC218C3092CED5CC);
-            return Schema.GetString(_Handle + _ReticleHintTextNameOffset!.Value);
+            if (_ReticleHintTextNameOffset == -1) _ReticleHintTextNameOffset = Schema.GetOffset(0xFC218C3092CED5CC);
+            return Schema.GetString(_Handle + _ReticleHintTextNameOffset);
         }
         set
         {
-            _ReticleHintTextNameOffset = _ReticleHintTextNameOffset ?? Schema.GetOffset(0xFC218C3092CED5CC);
-            Schema.SetFixedString(_Handle, _ReticleHintTextNameOffset!.Value, value, 256);
+            if (_ReticleHintTextNameOffset == -1) _ReticleHintTextNameOffset = Schema.GetOffset(0xFC218C3092CED5CC);
+            Schema.SetFixedString(_Handle, _ReticleHintTextNameOffset, value, 256);
         }
     }
 

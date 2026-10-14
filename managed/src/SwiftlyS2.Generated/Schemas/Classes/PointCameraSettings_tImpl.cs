@@ -16,44 +16,44 @@ internal partial class PointCameraSettings_tImpl : SchemaClass, PointCameraSetti
 {
     public PointCameraSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NearBlurryDistanceOffset;
+    private static nint _NearBlurryDistanceOffset = -1;
 
     public ref float NearBlurryDistance
     {
         get
         {
-            _NearBlurryDistanceOffset = _NearBlurryDistanceOffset ?? Schema.GetOffset(0x4BE8175CEB0CA47E);
-            return ref _Handle.AsRef<float>(_NearBlurryDistanceOffset!.Value);
+            if (_NearBlurryDistanceOffset == -1) _NearBlurryDistanceOffset = Schema.GetOffset(0x4BE8175CEB0CA47E);
+            return ref _Handle.AsRef<float>(_NearBlurryDistanceOffset);
         }
     }
-    private static nint? _NearCrispDistanceOffset;
+    private static nint _NearCrispDistanceOffset = -1;
 
     public ref float NearCrispDistance
     {
         get
         {
-            _NearCrispDistanceOffset = _NearCrispDistanceOffset ?? Schema.GetOffset(0x4BE8175CF0C9A8C7);
-            return ref _Handle.AsRef<float>(_NearCrispDistanceOffset!.Value);
+            if (_NearCrispDistanceOffset == -1) _NearCrispDistanceOffset = Schema.GetOffset(0x4BE8175CF0C9A8C7);
+            return ref _Handle.AsRef<float>(_NearCrispDistanceOffset);
         }
     }
-    private static nint? _FarCrispDistanceOffset;
+    private static nint _FarCrispDistanceOffset = -1;
 
     public ref float FarCrispDistance
     {
         get
         {
-            _FarCrispDistanceOffset = _FarCrispDistanceOffset ?? Schema.GetOffset(0x4BE8175CE95AEE28);
-            return ref _Handle.AsRef<float>(_FarCrispDistanceOffset!.Value);
+            if (_FarCrispDistanceOffset == -1) _FarCrispDistanceOffset = Schema.GetOffset(0x4BE8175CE95AEE28);
+            return ref _Handle.AsRef<float>(_FarCrispDistanceOffset);
         }
     }
-    private static nint? _FarBlurryDistanceOffset;
+    private static nint _FarBlurryDistanceOffset = -1;
 
     public ref float FarBlurryDistance
     {
         get
         {
-            _FarBlurryDistanceOffset = _FarBlurryDistanceOffset ?? Schema.GetOffset(0x4BE8175CF8892257);
-            return ref _Handle.AsRef<float>(_FarBlurryDistanceOffset!.Value);
+            if (_FarBlurryDistanceOffset == -1) _FarBlurryDistanceOffset = Schema.GetOffset(0x4BE8175CF8892257);
+            return ref _Handle.AsRef<float>(_FarBlurryDistanceOffset);
         }
     }
 

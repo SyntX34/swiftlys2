@@ -16,34 +16,34 @@ internal partial class CToolsConfigImpl : SchemaClass, CToolsConfig
 {
     public CToolsConfigImpl(nint handle) : base(handle) { }
 
-    private static nint? _EngineToolsOffset;
+    private static nint _EngineToolsOffset = -1;
 
     public ref CUtlVector<CEngineToolInfo> EngineTools
     {
         get
         {
-            _EngineToolsOffset = _EngineToolsOffset ?? Schema.GetOffset(0xF03B672FC9DC7B32);
-            return ref _Handle.AsRef<CUtlVector<CEngineToolInfo>>(_EngineToolsOffset!.Value);
+            if (_EngineToolsOffset == -1) _EngineToolsOffset = Schema.GetOffset(0xF03B672FC9DC7B32);
+            return ref _Handle.AsRef<CUtlVector<CEngineToolInfo>>(_EngineToolsOffset);
         }
     }
-    private static nint? _ExternalToolsOffset;
+    private static nint _ExternalToolsOffset = -1;
 
     public ref CUtlVector<CExternalToolInfo> ExternalTools
     {
         get
         {
-            _ExternalToolsOffset = _ExternalToolsOffset ?? Schema.GetOffset(0xF03B672F8905AFF5);
-            return ref _Handle.AsRef<CUtlVector<CExternalToolInfo>>(_ExternalToolsOffset!.Value);
+            if (_ExternalToolsOffset == -1) _ExternalToolsOffset = Schema.GetOffset(0xF03B672F8905AFF5);
+            return ref _Handle.AsRef<CUtlVector<CExternalToolInfo>>(_ExternalToolsOffset);
         }
     }
-    private static nint? _EngineModulesThatReferenceAssetsOffset;
+    private static nint _EngineModulesThatReferenceAssetsOffset = -1;
 
     public ref CUtlVector<CUtlString> EngineModulesThatReferenceAssets
     {
         get
         {
-            _EngineModulesThatReferenceAssetsOffset = _EngineModulesThatReferenceAssetsOffset ?? Schema.GetOffset(0xF03B672F329F14A7);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_EngineModulesThatReferenceAssetsOffset!.Value);
+            if (_EngineModulesThatReferenceAssetsOffset == -1) _EngineModulesThatReferenceAssetsOffset = Schema.GetOffset(0xF03B672F329F14A7);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_EngineModulesThatReferenceAssetsOffset);
         }
     }
 

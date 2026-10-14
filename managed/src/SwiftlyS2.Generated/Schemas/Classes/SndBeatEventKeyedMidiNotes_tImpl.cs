@@ -16,34 +16,34 @@ internal partial class SndBeatEventKeyedMidiNotes_tImpl : SndBeatEventKeys_tImpl
 {
     public SndBeatEventKeyedMidiNotes_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _StatusOffset;
+    private static nint _StatusOffset = -1;
 
     public ref byte Status
     {
         get
         {
-            _StatusOffset = _StatusOffset ?? Schema.GetOffset(0x31F224C351E75613);
-            return ref _Handle.AsRef<byte>(_StatusOffset!.Value);
+            if (_StatusOffset == -1) _StatusOffset = Schema.GetOffset(0x31F224C351E75613);
+            return ref _Handle.AsRef<byte>(_StatusOffset);
         }
     }
-    private static nint? _NoteOffset;
+    private static nint _NoteOffset = -1;
 
     public ref byte Note
     {
         get
         {
-            _NoteOffset = _NoteOffset ?? Schema.GetOffset(0x31F224C31722DCE9);
-            return ref _Handle.AsRef<byte>(_NoteOffset!.Value);
+            if (_NoteOffset == -1) _NoteOffset = Schema.GetOffset(0x31F224C31722DCE9);
+            return ref _Handle.AsRef<byte>(_NoteOffset);
         }
     }
-    private static nint? _VelocityOffset;
+    private static nint _VelocityOffset = -1;
 
     public ref byte Velocity
     {
         get
         {
-            _VelocityOffset = _VelocityOffset ?? Schema.GetOffset(0x31F224C39921E566);
-            return ref _Handle.AsRef<byte>(_VelocityOffset!.Value);
+            if (_VelocityOffset == -1) _VelocityOffset = Schema.GetOffset(0x31F224C39921E566);
+            return ref _Handle.AsRef<byte>(_VelocityOffset);
         }
     }
 

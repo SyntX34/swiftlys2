@@ -16,107 +16,107 @@ internal partial class inv_image_data_tImpl : SchemaClass, inv_image_data_t
 {
     public inv_image_data_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _MapOffset;
+    private static nint _MapOffset = -1;
     private inv_image_map_tImpl? _MapInstance;
 
     public inv_image_map_t Map
     {
         get
         {
-            _MapOffset = _MapOffset ?? Schema.GetOffset(0x55B40874DFA2EFB1);
+            if (_MapOffset == -1) _MapOffset = Schema.GetOffset(0x55B40874DFA2EFB1);
             var instance = _MapInstance ??= new inv_image_map_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _MapOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MapOffset);
             return instance;
         }
     }
-    private static nint? _ItemOffset;
+    private static nint _ItemOffset = -1;
     private inv_image_item_tImpl? _ItemInstance;
 
     public inv_image_item_t Item
     {
         get
         {
-            _ItemOffset = _ItemOffset ?? Schema.GetOffset(0x55B408749F3833E6);
+            if (_ItemOffset == -1) _ItemOffset = Schema.GetOffset(0x55B408749F3833E6);
             var instance = _ItemInstance ??= new inv_image_item_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ItemOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ItemOffset);
             return instance;
         }
     }
-    private static nint? _CameraOffset;
+    private static nint _CameraOffset = -1;
     private inv_image_camera_tImpl? _CameraInstance;
 
     public inv_image_camera_t Camera
     {
         get
         {
-            _CameraOffset = _CameraOffset ?? Schema.GetOffset(0x55B408749EBE984E);
+            if (_CameraOffset == -1) _CameraOffset = Schema.GetOffset(0x55B408749EBE984E);
             var instance = _CameraInstance ??= new inv_image_camera_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _CameraOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CameraOffset);
             return instance;
         }
     }
-    private static nint? _LightsunOffset;
+    private static nint _LightsunOffset = -1;
     private inv_image_light_sun_tImpl? _LightsunInstance;
 
     public inv_image_light_sun_t Lightsun
     {
         get
         {
-            _LightsunOffset = _LightsunOffset ?? Schema.GetOffset(0x55B40874E66B4EA7);
+            if (_LightsunOffset == -1) _LightsunOffset = Schema.GetOffset(0x55B40874E66B4EA7);
             var instance = _LightsunInstance ??= new inv_image_light_sun_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LightsunOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LightsunOffset);
             return instance;
         }
     }
-    private static nint? _LightfillOffset;
+    private static nint _LightfillOffset = -1;
     private inv_image_light_fill_tImpl? _LightfillInstance;
 
     public inv_image_light_fill_t Lightfill
     {
         get
         {
-            _LightfillOffset = _LightfillOffset ?? Schema.GetOffset(0x55B40874DB27FCD6);
+            if (_LightfillOffset == -1) _LightfillOffset = Schema.GetOffset(0x55B40874DB27FCD6);
             var instance = _LightfillInstance ??= new inv_image_light_fill_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LightfillOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LightfillOffset);
             return instance;
         }
     }
-    private static nint? _Light0Offset;
+    private static nint _Light0Offset = -1;
     private inv_image_light_barn_tImpl? _Light0Instance;
 
     public inv_image_light_barn_t Light0
     {
         get
         {
-            _Light0Offset = _Light0Offset ?? Schema.GetOffset(0x55B40874DC566ACD);
+            if (_Light0Offset == -1) _Light0Offset = Schema.GetOffset(0x55B40874DC566ACD);
             var instance = _Light0Instance ??= new inv_image_light_barn_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _Light0Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Light0Offset);
             return instance;
         }
     }
-    private static nint? _Light1Offset;
+    private static nint _Light1Offset = -1;
     private inv_image_light_barn_tImpl? _Light1Instance;
 
     public inv_image_light_barn_t Light1
     {
         get
         {
-            _Light1Offset = _Light1Offset ?? Schema.GetOffset(0x55B40874DB56693A);
+            if (_Light1Offset == -1) _Light1Offset = Schema.GetOffset(0x55B40874DB56693A);
             var instance = _Light1Instance ??= new inv_image_light_barn_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _Light1Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Light1Offset);
             return instance;
         }
     }
-    private static nint? _ClearcolorOffset;
+    private static nint _ClearcolorOffset = -1;
     private inv_image_clearcolor_tImpl? _ClearcolorInstance;
 
     public inv_image_clearcolor_t Clearcolor
     {
         get
         {
-            _ClearcolorOffset = _ClearcolorOffset ?? Schema.GetOffset(0x55B408749A1A92B5);
+            if (_ClearcolorOffset == -1) _ClearcolorOffset = Schema.GetOffset(0x55B408749A1A92B5);
             var instance = _ClearcolorInstance ??= new inv_image_clearcolor_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ClearcolorOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ClearcolorOffset);
             return instance;
         }
     }

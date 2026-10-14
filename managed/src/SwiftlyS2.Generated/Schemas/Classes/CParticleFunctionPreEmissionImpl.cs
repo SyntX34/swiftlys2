@@ -16,14 +16,14 @@ internal partial class CParticleFunctionPreEmissionImpl : CParticleFunctionOpera
 {
     public CParticleFunctionPreEmissionImpl(nint handle) : base(handle) { }
 
-    private static nint? _RunOnceOffset;
+    private static nint _RunOnceOffset = -1;
 
     public ref bool RunOnce
     {
         get
         {
-            _RunOnceOffset = _RunOnceOffset ?? Schema.GetOffset(0x60FF68618CD905F);
-            return ref _Handle.AsRef<bool>(_RunOnceOffset!.Value);
+            if (_RunOnceOffset == -1) _RunOnceOffset = Schema.GetOffset(0x60FF68618CD905F);
+            return ref _Handle.AsRef<bool>(_RunOnceOffset);
         }
     }
 

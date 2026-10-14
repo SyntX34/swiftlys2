@@ -127,12 +127,14 @@ void Bridge_Convars_DeleteConvar(const char* convarName)
 
 bool Bridge_Convars_ExistsConvar(const char* convarName)
 {
-    return g_pConvarManager->ExistsConvar(convarName);
+    auto& cvar = GetConVarRef(convarName);
+    return cvar.IsValidRef() && cvar.IsConVarDataValid();
 }
 
 int Bridge_Convars_GetConvarType(const char* convarName)
 {
-    return (int)(g_pConvarManager->GetConvarType(convarName));
+    auto& cvar = GetConVarRef(convarName);
+    return (int)(cvar.GetType());
 }
 
 uint64_t Bridge_Convars_GetFlags(const char* cvarName)

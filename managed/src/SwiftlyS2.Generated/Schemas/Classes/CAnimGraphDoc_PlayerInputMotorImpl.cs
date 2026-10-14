@@ -16,99 +16,99 @@ internal partial class CAnimGraphDoc_PlayerInputMotorImpl : CAnimGraphDoc_MotorI
 {
     public CAnimGraphDoc_PlayerInputMotorImpl(nint handle) : base(handle) { }
 
-    private static nint? _SampleTimesOffset;
+    private static nint _SampleTimesOffset = -1;
 
     public ref CUtlVector<float> SampleTimes
     {
         get
         {
-            _SampleTimesOffset = _SampleTimesOffset ?? Schema.GetOffset(0x314C1356471975DF);
-            return ref _Handle.AsRef<CUtlVector<float>>(_SampleTimesOffset!.Value);
+            if (_SampleTimesOffset == -1) _SampleTimesOffset = Schema.GetOffset(0x314C1356471975DF);
+            return ref _Handle.AsRef<CUtlVector<float>>(_SampleTimesOffset);
         }
     }
-    private static nint? _UseAccelerationOffset;
+    private static nint _UseAccelerationOffset = -1;
 
     public ref bool UseAcceleration
     {
         get
         {
-            _UseAccelerationOffset = _UseAccelerationOffset ?? Schema.GetOffset(0x314C1356254F8B08);
-            return ref _Handle.AsRef<bool>(_UseAccelerationOffset!.Value);
+            if (_UseAccelerationOffset == -1) _UseAccelerationOffset = Schema.GetOffset(0x314C1356254F8B08);
+            return ref _Handle.AsRef<bool>(_UseAccelerationOffset);
         }
     }
-    private static nint? _SpringConstantOffset;
+    private static nint _SpringConstantOffset = -1;
 
     public ref float SpringConstant
     {
         get
         {
-            _SpringConstantOffset = _SpringConstantOffset ?? Schema.GetOffset(0x314C1356CE2260BE);
-            return ref _Handle.AsRef<float>(_SpringConstantOffset!.Value);
+            if (_SpringConstantOffset == -1) _SpringConstantOffset = Schema.GetOffset(0x314C1356CE2260BE);
+            return ref _Handle.AsRef<float>(_SpringConstantOffset);
         }
     }
-    private static nint? _AnticipationDistanceOffset;
+    private static nint _AnticipationDistanceOffset = -1;
 
     public ref float AnticipationDistance
     {
         get
         {
-            _AnticipationDistanceOffset = _AnticipationDistanceOffset ?? Schema.GetOffset(0x314C135664273401);
-            return ref _Handle.AsRef<float>(_AnticipationDistanceOffset!.Value);
+            if (_AnticipationDistanceOffset == -1) _AnticipationDistanceOffset = Schema.GetOffset(0x314C135664273401);
+            return ref _Handle.AsRef<float>(_AnticipationDistanceOffset);
         }
     }
-    private static nint? _AnticipationPosParamNameOffset;
+    private static nint _AnticipationPosParamNameOffset = -1;
 
     public string AnticipationPosParamName
     {
         get
         {
-            _AnticipationPosParamNameOffset = _AnticipationPosParamNameOffset ?? Schema.GetOffset(0x314C1356EBBAA830);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AnticipationPosParamNameOffset!.Value));
+            if (_AnticipationPosParamNameOffset == -1) _AnticipationPosParamNameOffset = Schema.GetOffset(0x314C1356EBBAA830);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AnticipationPosParamNameOffset));
         }
         set
         {
-            _AnticipationPosParamNameOffset = _AnticipationPosParamNameOffset ?? Schema.GetOffset(0x314C1356EBBAA830);
-            Schema.SetCUtlString(_Handle, _AnticipationPosParamNameOffset!.Value, value);
+            if (_AnticipationPosParamNameOffset == -1) _AnticipationPosParamNameOffset = Schema.GetOffset(0x314C1356EBBAA830);
+            Schema.SetCUtlString(_Handle, _AnticipationPosParamNameOffset, value);
         }
     }
-    private static nint? _AnticipationPosParamOffset;
+    private static nint _AnticipationPosParamOffset = -1;
     private AnimParamIDImpl? _AnticipationPosParamInstance;
 
     public AnimParamID AnticipationPosParam
     {
         get
         {
-            _AnticipationPosParamOffset = _AnticipationPosParamOffset ?? Schema.GetOffset(0x314C1356C3BF072B);
+            if (_AnticipationPosParamOffset == -1) _AnticipationPosParamOffset = Schema.GetOffset(0x314C1356C3BF072B);
             var instance = _AnticipationPosParamInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _AnticipationPosParamOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AnticipationPosParamOffset);
             return instance;
         }
     }
-    private static nint? _AnticipationHeadingParamNameOffset;
+    private static nint _AnticipationHeadingParamNameOffset = -1;
 
     public string AnticipationHeadingParamName
     {
         get
         {
-            _AnticipationHeadingParamNameOffset = _AnticipationHeadingParamNameOffset ?? Schema.GetOffset(0x314C13560803781C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AnticipationHeadingParamNameOffset!.Value));
+            if (_AnticipationHeadingParamNameOffset == -1) _AnticipationHeadingParamNameOffset = Schema.GetOffset(0x314C13560803781C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AnticipationHeadingParamNameOffset));
         }
         set
         {
-            _AnticipationHeadingParamNameOffset = _AnticipationHeadingParamNameOffset ?? Schema.GetOffset(0x314C13560803781C);
-            Schema.SetCUtlString(_Handle, _AnticipationHeadingParamNameOffset!.Value, value);
+            if (_AnticipationHeadingParamNameOffset == -1) _AnticipationHeadingParamNameOffset = Schema.GetOffset(0x314C13560803781C);
+            Schema.SetCUtlString(_Handle, _AnticipationHeadingParamNameOffset, value);
         }
     }
-    private static nint? _AnticipationHeadingParamOffset;
+    private static nint _AnticipationHeadingParamOffset = -1;
     private AnimParamIDImpl? _AnticipationHeadingParamInstance;
 
     public AnimParamID AnticipationHeadingParam
     {
         get
         {
-            _AnticipationHeadingParamOffset = _AnticipationHeadingParamOffset ?? Schema.GetOffset(0x314C1356D8BD043F);
+            if (_AnticipationHeadingParamOffset == -1) _AnticipationHeadingParamOffset = Schema.GetOffset(0x314C1356D8BD043F);
             var instance = _AnticipationHeadingParamInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _AnticipationHeadingParamOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AnticipationHeadingParamOffset);
             return instance;
         }
     }

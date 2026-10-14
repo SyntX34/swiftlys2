@@ -16,34 +16,34 @@ internal partial class CNmGraphDocBodyGroupNode__CDataImpl : CNmGraphDocVariatio
 {
     public CNmGraphDocBodyGroupNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _GroupNameOffset;
+    private static nint _GroupNameOffset = -1;
 
     public string GroupName
     {
         get
         {
-            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xF16CF1A9025FB2C7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset!.Value));
+            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0xF16CF1A9025FB2C7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupNameOffset));
         }
         set
         {
-            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xF16CF1A9025FB2C7);
-            Schema.SetCUtlString(_Handle, _GroupNameOffset!.Value, value);
+            if (_GroupNameOffset == -1) _GroupNameOffset = Schema.GetOffset(0xF16CF1A9025FB2C7);
+            Schema.SetCUtlString(_Handle, _GroupNameOffset, value);
         }
     }
-    private static nint? _ChoiceNameOffset;
+    private static nint _ChoiceNameOffset = -1;
 
     public string ChoiceName
     {
         get
         {
-            _ChoiceNameOffset = _ChoiceNameOffset ?? Schema.GetOffset(0xF16CF1A906409935);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ChoiceNameOffset!.Value));
+            if (_ChoiceNameOffset == -1) _ChoiceNameOffset = Schema.GetOffset(0xF16CF1A906409935);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ChoiceNameOffset));
         }
         set
         {
-            _ChoiceNameOffset = _ChoiceNameOffset ?? Schema.GetOffset(0xF16CF1A906409935);
-            Schema.SetCUtlString(_Handle, _ChoiceNameOffset!.Value, value);
+            if (_ChoiceNameOffset == -1) _ChoiceNameOffset = Schema.GetOffset(0xF16CF1A906409935);
+            Schema.SetCUtlString(_Handle, _ChoiceNameOffset, value);
         }
     }
 

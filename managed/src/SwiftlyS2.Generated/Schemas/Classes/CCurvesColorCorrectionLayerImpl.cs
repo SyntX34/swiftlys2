@@ -16,44 +16,44 @@ internal partial class CCurvesColorCorrectionLayerImpl : CColorCorrectionLayerIm
 {
     public CCurvesColorCorrectionLayerImpl(nint handle) : base(handle) { }
 
-    private static nint? _CurvePointsRGBOffset;
+    private static nint _CurvePointsRGBOffset = -1;
 
     public ref CUtlVector<Vector2D> CurvePointsRGB
     {
         get
         {
-            _CurvePointsRGBOffset = _CurvePointsRGBOffset ?? Schema.GetOffset(0x134C626A552ED952);
-            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_CurvePointsRGBOffset!.Value);
+            if (_CurvePointsRGBOffset == -1) _CurvePointsRGBOffset = Schema.GetOffset(0x134C626A552ED952);
+            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_CurvePointsRGBOffset);
         }
     }
-    private static nint? _CurvePointsROffset;
+    private static nint _CurvePointsROffset = -1;
 
     public ref CUtlVector<Vector2D> CurvePointsR
     {
         get
         {
-            _CurvePointsROffset = _CurvePointsROffset ?? Schema.GetOffset(0x134C626AEBE9CE4B);
-            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_CurvePointsROffset!.Value);
+            if (_CurvePointsROffset == -1) _CurvePointsROffset = Schema.GetOffset(0x134C626AEBE9CE4B);
+            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_CurvePointsROffset);
         }
     }
-    private static nint? _CurvePointsGOffset;
+    private static nint _CurvePointsGOffset = -1;
 
     public ref CUtlVector<Vector2D> CurvePointsG
     {
         get
         {
-            _CurvePointsGOffset = _CurvePointsGOffset ?? Schema.GetOffset(0x134C626AFEE9EC34);
-            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_CurvePointsGOffset!.Value);
+            if (_CurvePointsGOffset == -1) _CurvePointsGOffset = Schema.GetOffset(0x134C626AFEE9EC34);
+            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_CurvePointsGOffset);
         }
     }
-    private static nint? _CurvePointsBOffset;
+    private static nint _CurvePointsBOffset = -1;
 
     public ref CUtlVector<Vector2D> CurvePointsB
     {
         get
         {
-            _CurvePointsBOffset = _CurvePointsBOffset ?? Schema.GetOffset(0x134C626AFBE9E77B);
-            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_CurvePointsBOffset!.Value);
+            if (_CurvePointsBOffset == -1) _CurvePointsBOffset = Schema.GetOffset(0x134C626AFBE9E77B);
+            return ref _Handle.AsRef<CUtlVector<Vector2D>>(_CurvePointsBOffset);
         }
     }
 

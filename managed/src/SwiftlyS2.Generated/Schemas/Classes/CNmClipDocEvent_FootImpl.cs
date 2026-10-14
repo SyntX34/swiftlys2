@@ -16,14 +16,14 @@ internal partial class CNmClipDocEvent_FootImpl : CNmClipDocEventImpl, CNmClipDo
 {
     public CNmClipDocEvent_FootImpl(nint handle) : base(handle) { }
 
-    private static nint? _PhaseOffset;
+    private static nint _PhaseOffset = -1;
 
     public ref NmFootPhase_t Phase
     {
         get
         {
-            _PhaseOffset = _PhaseOffset ?? Schema.GetOffset(0x44C1A74C4846D318);
-            return ref _Handle.AsRef<NmFootPhase_t>(_PhaseOffset!.Value);
+            if (_PhaseOffset == -1) _PhaseOffset = Schema.GetOffset(0x44C1A74C4846D318);
+            return ref _Handle.AsRef<NmFootPhase_t>(_PhaseOffset);
         }
     }
 

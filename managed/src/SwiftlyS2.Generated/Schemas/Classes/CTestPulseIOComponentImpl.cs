@@ -16,31 +16,31 @@ internal partial class CTestPulseIOComponentImpl : SchemaClass, CTestPulseIOComp
 {
     public CTestPulseIOComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? _ComponentDataOffset;
+    private static nint _ComponentDataOffset = -1;
 
     public string ComponentData
     {
         get
         {
-            _ComponentDataOffset = _ComponentDataOffset ?? Schema.GetOffset(0x38B7AE6EF07BDB48);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ComponentDataOffset!.Value));
+            if (_ComponentDataOffset == -1) _ComponentDataOffset = Schema.GetOffset(0x38B7AE6EF07BDB48);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ComponentDataOffset));
         }
         set
         {
-            _ComponentDataOffset = _ComponentDataOffset ?? Schema.GetOffset(0x38B7AE6EF07BDB48);
-            Schema.SetCUtlString(_Handle, _ComponentDataOffset!.Value, value);
+            if (_ComponentDataOffset == -1) _ComponentDataOffset = Schema.GetOffset(0x38B7AE6EF07BDB48);
+            Schema.SetCUtlString(_Handle, _ComponentDataOffset, value);
         }
     }
-    private static nint? _OnComponentTestFuncOffset;
+    private static nint _OnComponentTestFuncOffset = -1;
     private SchemaUntypedField? _OnComponentTestFuncInstance;
 
     public SchemaUntypedField OnComponentTestFunc
     {
         get
         {
-            _OnComponentTestFuncOffset = _OnComponentTestFuncOffset ?? Schema.GetOffset(0x38B7AE6E61B44981);
+            if (_OnComponentTestFuncOffset == -1) _OnComponentTestFuncOffset = Schema.GetOffset(0x38B7AE6E61B44981);
             var instance = _OnComponentTestFuncInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnComponentTestFuncOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnComponentTestFuncOffset);
             return instance;
         }
     }

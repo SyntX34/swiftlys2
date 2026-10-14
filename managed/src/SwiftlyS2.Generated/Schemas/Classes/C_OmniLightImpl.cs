@@ -16,34 +16,34 @@ internal partial class C_OmniLightImpl : C_BarnLightImpl, C_OmniLight
 {
     public C_OmniLightImpl(nint handle) : base(handle) { }
 
-    private static nint? _InnerAngleOffset;
+    private static nint _InnerAngleOffset = -1;
 
     public ref float InnerAngle
     {
         get
         {
-            _InnerAngleOffset = _InnerAngleOffset ?? Schema.GetOffset(0xF6CFC362142C32F4);
-            return ref _Handle.AsRef<float>(_InnerAngleOffset!.Value);
+            if (_InnerAngleOffset == -1) _InnerAngleOffset = Schema.GetOffset(0xF6CFC362142C32F4);
+            return ref _Handle.AsRef<float>(_InnerAngleOffset);
         }
     }
-    private static nint? _OuterAngleOffset;
+    private static nint _OuterAngleOffset = -1;
 
     public ref float OuterAngle
     {
         get
         {
-            _OuterAngleOffset = _OuterAngleOffset ?? Schema.GetOffset(0xF6CFC362ECB8B519);
-            return ref _Handle.AsRef<float>(_OuterAngleOffset!.Value);
+            if (_OuterAngleOffset == -1) _OuterAngleOffset = Schema.GetOffset(0xF6CFC362ECB8B519);
+            return ref _Handle.AsRef<float>(_OuterAngleOffset);
         }
     }
-    private static nint? _ShowLightOffset;
+    private static nint _ShowLightOffset = -1;
 
     public ref bool ShowLight
     {
         get
         {
-            _ShowLightOffset = _ShowLightOffset ?? Schema.GetOffset(0xF6CFC362D67BC720);
-            return ref _Handle.AsRef<bool>(_ShowLightOffset!.Value);
+            if (_ShowLightOffset == -1) _ShowLightOffset = Schema.GetOffset(0xF6CFC362D67BC720);
+            return ref _Handle.AsRef<bool>(_ShowLightOffset);
         }
     }
 

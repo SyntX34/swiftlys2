@@ -16,15 +16,15 @@ internal partial class C_RopeKeyframe__CPhysicsDelegateImpl : SchemaClass, C_Rop
 {
     public C_RopeKeyframe__CPhysicsDelegateImpl(nint handle) : base(handle) { }
 
-    private static nint? _KeyframeOffset;
+    private static nint _KeyframeOffset = -1;
     private C_RopeKeyframeImpl? _KeyframeInstance;
 
     public C_RopeKeyframe? Keyframe
     {
         get
         {
-            _KeyframeOffset = _KeyframeOffset ?? Schema.GetOffset(0xC5F0857AF88E03A7);
-            var ptr = _Handle.Read<nint>(_KeyframeOffset!.Value);
+            if (_KeyframeOffset == -1) _KeyframeOffset = Schema.GetOffset(0xC5F0857AF88E03A7);
+            var ptr = _Handle.Read<nint>(_KeyframeOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _KeyframeInstance ??= new C_RopeKeyframeImpl(0);
             instance.DangerousSetHandle(ptr);

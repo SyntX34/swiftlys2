@@ -53,6 +53,12 @@ internal class NetMessage<T> : TypedProtobuf<T>, INativeHandle, IDisposable
     {
         CheckIsManuallyAllocated();
 
+        if (NativeBinding.IsMainThread)
+        {
+            NativeNetMessages.SendMessageToPlayers(_allocatedHandle!.Address, T.MessageId, _filter.ToMask());
+            return;
+        }
+
         _ = SchedulerManager.QueueOrNow(() =>
         {
             CheckIsManuallyAllocated();

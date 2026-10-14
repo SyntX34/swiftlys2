@@ -16,14 +16,14 @@ internal partial class C_OP_ForceControlPointStubImpl : CParticleFunctionPreEmis
 {
     public C_OP_ForceControlPointStubImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControlPointOffset;
+    private static nint _ControlPointOffset = -1;
 
     public ref int ControlPoint
     {
         get
         {
-            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xE0FD255D5EDF730);
-            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+            if (_ControlPointOffset == -1) _ControlPointOffset = Schema.GetOffset(0xE0FD255D5EDF730);
+            return ref _Handle.AsRef<int>(_ControlPointOffset);
         }
     }
 

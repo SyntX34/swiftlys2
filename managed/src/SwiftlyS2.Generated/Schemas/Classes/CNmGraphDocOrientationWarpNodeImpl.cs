@@ -16,44 +16,44 @@ internal partial class CNmGraphDocOrientationWarpNodeImpl : CNmGraphDocFlowNodeI
 {
     public CNmGraphDocOrientationWarpNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _OffsetTypeOffset;
+    private static nint _OffsetTypeOffset = -1;
 
     public ref CNmGraphDocOrientationWarpNode__OffsetType_t OffsetType
     {
         get
         {
-            _OffsetTypeOffset = _OffsetTypeOffset ?? Schema.GetOffset(0x57FC67B782288EAA);
-            return ref _Handle.AsRef<CNmGraphDocOrientationWarpNode__OffsetType_t>(_OffsetTypeOffset!.Value);
+            if (_OffsetTypeOffset == -1) _OffsetTypeOffset = Schema.GetOffset(0x57FC67B782288EAA);
+            return ref _Handle.AsRef<CNmGraphDocOrientationWarpNode__OffsetType_t>(_OffsetTypeOffset);
         }
     }
-    private static nint? _SamplingModeOffset;
+    private static nint _SamplingModeOffset = -1;
 
     public ref CNmRootMotionData__SamplingMode_t SamplingMode
     {
         get
         {
-            _SamplingModeOffset = _SamplingModeOffset ?? Schema.GetOffset(0x57FC67B7DDB31BE3);
-            return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset!.Value);
+            if (_SamplingModeOffset == -1) _SamplingModeOffset = Schema.GetOffset(0x57FC67B7DDB31BE3);
+            return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset);
         }
     }
-    private static nint? _AlignmentModeOffset;
+    private static nint _AlignmentModeOffset = -1;
 
     public ref CNmOrientationWarpNode__AlignmentMode_t AlignmentMode
     {
         get
         {
-            _AlignmentModeOffset = _AlignmentModeOffset ?? Schema.GetOffset(0x57FC67B7A76010A5);
-            return ref _Handle.AsRef<CNmOrientationWarpNode__AlignmentMode_t>(_AlignmentModeOffset!.Value);
+            if (_AlignmentModeOffset == -1) _AlignmentModeOffset = Schema.GetOffset(0x57FC67B7A76010A5);
+            return ref _Handle.AsRef<CNmOrientationWarpNode__AlignmentMode_t>(_AlignmentModeOffset);
         }
     }
-    private static nint? _WarpTranslationOffset;
+    private static nint _WarpTranslationOffset = -1;
 
     public ref bool WarpTranslation
     {
         get
         {
-            _WarpTranslationOffset = _WarpTranslationOffset ?? Schema.GetOffset(0x57FC67B7AF94D4C6);
-            return ref _Handle.AsRef<bool>(_WarpTranslationOffset!.Value);
+            if (_WarpTranslationOffset == -1) _WarpTranslationOffset = Schema.GetOffset(0x57FC67B7AF94D4C6);
+            return ref _Handle.AsRef<bool>(_WarpTranslationOffset);
         }
     }
 

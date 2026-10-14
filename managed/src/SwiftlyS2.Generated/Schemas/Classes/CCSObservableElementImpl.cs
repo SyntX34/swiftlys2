@@ -16,49 +16,49 @@ internal partial class CCSObservableElementImpl : CBaseEntityImpl, CCSObservable
 {
     public CCSObservableElementImpl(nint handle) : base(handle) { }
 
-    private static nint? _ObservableModelEntityOffset;
+    private static nint _ObservableModelEntityOffset = -1;
 
     public string ObservableModelEntity
     {
         get
         {
-            _ObservableModelEntityOffset = _ObservableModelEntityOffset ?? Schema.GetOffset(0xE7DAA353E2DEBFF2);
-            return Schema.GetString(_Handle.Read<nint>(_ObservableModelEntityOffset!.Value));
+            if (_ObservableModelEntityOffset == -1) _ObservableModelEntityOffset = Schema.GetOffset(0xE7DAA353E2DEBFF2);
+            return Schema.GetString(_Handle.Read<nint>(_ObservableModelEntityOffset));
         }
         set
         {
-            _ObservableModelEntityOffset = _ObservableModelEntityOffset ?? Schema.GetOffset(0xE7DAA353E2DEBFF2);
-            Schema.SetString(_Handle, _ObservableModelEntityOffset!.Value, value);
+            if (_ObservableModelEntityOffset == -1) _ObservableModelEntityOffset = Schema.GetOffset(0xE7DAA353E2DEBFF2);
+            Schema.SetString(_Handle, _ObservableModelEntityOffset, value);
         }
     }
-    private static nint? _ObservableModelEntity1Offset;
+    private static nint _ObservableModelEntity1Offset = -1;
 
     public ref CHandle<CBaseEntity> ObservableModelEntity1
     {
         get
         {
-            _ObservableModelEntity1Offset = _ObservableModelEntity1Offset ?? Schema.GetOffset(0xE7DAA3531BC96308);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ObservableModelEntity1Offset!.Value);
+            if (_ObservableModelEntity1Offset == -1) _ObservableModelEntity1Offset = Schema.GetOffset(0xE7DAA3531BC96308);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ObservableModelEntity1Offset);
         }
     }
-    private static nint? _ObservableModelEntity2Offset;
+    private static nint _ObservableModelEntity2Offset = -1;
 
     public ref CHandle<CBaseEntity> ObservableModelEntity2
     {
         get
         {
-            _ObservableModelEntity2Offset = _ObservableModelEntity2Offset ?? Schema.GetOffset(0xE7DAA353F807344E);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ObservableModelEntity2Offset!.Value);
+            if (_ObservableModelEntity2Offset == -1) _ObservableModelEntity2Offset = Schema.GetOffset(0xE7DAA353F807344E);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ObservableModelEntity2Offset);
         }
     }
-    private static nint? _TeamFilterOffset;
+    private static nint _TeamFilterOffset = -1;
 
     public ref uint TeamFilter
     {
         get
         {
-            _TeamFilterOffset = _TeamFilterOffset ?? Schema.GetOffset(0xE7DAA353919CFBA2);
-            return ref _Handle.AsRef<uint>(_TeamFilterOffset!.Value);
+            if (_TeamFilterOffset == -1) _TeamFilterOffset = Schema.GetOffset(0xE7DAA353919CFBA2);
+            return ref _Handle.AsRef<uint>(_TeamFilterOffset);
         }
     }
 

@@ -16,31 +16,31 @@ internal partial class CMotionNodeImpl : SchemaClass, CMotionNode
 {
     public CMotionNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xB29D04644D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xB29D04644D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xB29D04644D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xB29D04644D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _IdOffset;
+    private static nint _IdOffset = -1;
     private AnimNodeIDImpl? _IdInstance;
 
     public AnimNodeID Id
     {
         get
         {
-            _IdOffset = _IdOffset ?? Schema.GetOffset(0xB29D0464B4B6E980);
+            if (_IdOffset == -1) _IdOffset = Schema.GetOffset(0xB29D0464B4B6E980);
             var instance = _IdInstance ??= new AnimNodeIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _IdOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IdOffset);
             return instance;
         }
     }

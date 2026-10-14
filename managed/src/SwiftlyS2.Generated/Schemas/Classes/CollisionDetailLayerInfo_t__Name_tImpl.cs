@@ -16,29 +16,29 @@ internal partial class CollisionDetailLayerInfo_t__Name_tImpl : SchemaClass, Col
 {
     public CollisionDetailLayerInfo_t__Name_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameTokenOffset;
+    private static nint _NameTokenOffset = -1;
 
     public ref CUtlStringToken NameToken
     {
         get
         {
-            _NameTokenOffset = _NameTokenOffset ?? Schema.GetOffset(0x1875C420C9D4AD7F);
-            return ref _Handle.AsRef<CUtlStringToken>(_NameTokenOffset!.Value);
+            if (_NameTokenOffset == -1) _NameTokenOffset = Schema.GetOffset(0x1875C420C9D4AD7F);
+            return ref _Handle.AsRef<CUtlStringToken>(_NameTokenOffset);
         }
     }
-    private static nint? _NameStringOffset;
+    private static nint _NameStringOffset = -1;
 
     public string NameString
     {
         get
         {
-            _NameStringOffset = _NameStringOffset ?? Schema.GetOffset(0x1875C4204ED9FF04);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameStringOffset!.Value));
+            if (_NameStringOffset == -1) _NameStringOffset = Schema.GetOffset(0x1875C4204ED9FF04);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameStringOffset));
         }
         set
         {
-            _NameStringOffset = _NameStringOffset ?? Schema.GetOffset(0x1875C4204ED9FF04);
-            Schema.SetCUtlString(_Handle, _NameStringOffset!.Value, value);
+            if (_NameStringOffset == -1) _NameStringOffset = Schema.GetOffset(0x1875C4204ED9FF04);
+            Schema.SetCUtlString(_Handle, _NameStringOffset, value);
         }
     }
 

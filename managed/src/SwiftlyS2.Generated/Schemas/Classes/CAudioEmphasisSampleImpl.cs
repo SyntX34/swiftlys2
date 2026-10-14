@@ -16,24 +16,24 @@ internal partial class CAudioEmphasisSampleImpl : SchemaClass, CAudioEmphasisSam
 {
     public CAudioEmphasisSampleImpl(nint handle) : base(handle) { }
 
-    private static nint? _TimeOffset;
+    private static nint _TimeOffset = -1;
 
     public ref float Time
     {
         get
         {
-            _TimeOffset = _TimeOffset ?? Schema.GetOffset(0x37D4D710C957229E);
-            return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+            if (_TimeOffset == -1) _TimeOffset = Schema.GetOffset(0x37D4D710C957229E);
+            return ref _Handle.AsRef<float>(_TimeOffset);
         }
     }
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public ref float Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x37D4D7108DFCB984);
-            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x37D4D7108DFCB984);
+            return ref _Handle.AsRef<float>(_ValueOffset);
         }
     }
 

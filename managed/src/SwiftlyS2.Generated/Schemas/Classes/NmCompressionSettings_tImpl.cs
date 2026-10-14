@@ -16,106 +16,106 @@ internal partial class NmCompressionSettings_tImpl : SchemaClass, NmCompressionS
 {
     public NmCompressionSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _TranslationRangeXOffset;
+    private static nint _TranslationRangeXOffset = -1;
     private NmCompressionSettings_t__QuantizationRange_tImpl? _TranslationRangeXInstance;
 
     public NmCompressionSettings_t__QuantizationRange_t TranslationRangeX
     {
         get
         {
-            _TranslationRangeXOffset = _TranslationRangeXOffset ?? Schema.GetOffset(0xA8EC8858BF2C2B);
+            if (_TranslationRangeXOffset == -1) _TranslationRangeXOffset = Schema.GetOffset(0xA8EC8858BF2C2B);
             var instance = _TranslationRangeXInstance ??= new NmCompressionSettings_t__QuantizationRange_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TranslationRangeXOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TranslationRangeXOffset);
             return instance;
         }
     }
-    private static nint? _TranslationRangeYOffset;
+    private static nint _TranslationRangeYOffset = -1;
     private NmCompressionSettings_t__QuantizationRange_tImpl? _TranslationRangeYInstance;
 
     public NmCompressionSettings_t__QuantizationRange_t TranslationRangeY
     {
         get
         {
-            _TranslationRangeYOffset = _TranslationRangeYOffset ?? Schema.GetOffset(0xA8EC8857BF2A98);
+            if (_TranslationRangeYOffset == -1) _TranslationRangeYOffset = Schema.GetOffset(0xA8EC8857BF2A98);
             var instance = _TranslationRangeYInstance ??= new NmCompressionSettings_t__QuantizationRange_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TranslationRangeYOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TranslationRangeYOffset);
             return instance;
         }
     }
-    private static nint? _TranslationRangeZOffset;
+    private static nint _TranslationRangeZOffset = -1;
     private NmCompressionSettings_t__QuantizationRange_tImpl? _TranslationRangeZInstance;
 
     public NmCompressionSettings_t__QuantizationRange_t TranslationRangeZ
     {
         get
         {
-            _TranslationRangeZOffset = _TranslationRangeZOffset ?? Schema.GetOffset(0xA8EC885ABF2F51);
+            if (_TranslationRangeZOffset == -1) _TranslationRangeZOffset = Schema.GetOffset(0xA8EC885ABF2F51);
             var instance = _TranslationRangeZInstance ??= new NmCompressionSettings_t__QuantizationRange_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TranslationRangeZOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TranslationRangeZOffset);
             return instance;
         }
     }
-    private static nint? _ScaleRangeOffset;
+    private static nint _ScaleRangeOffset = -1;
     private NmCompressionSettings_t__QuantizationRange_tImpl? _ScaleRangeInstance;
 
     public NmCompressionSettings_t__QuantizationRange_t ScaleRange
     {
         get
         {
-            _ScaleRangeOffset = _ScaleRangeOffset ?? Schema.GetOffset(0xA8EC88E96F803E);
+            if (_ScaleRangeOffset == -1) _ScaleRangeOffset = Schema.GetOffset(0xA8EC88E96F803E);
             var instance = _ScaleRangeInstance ??= new NmCompressionSettings_t__QuantizationRange_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleRangeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScaleRangeOffset);
             return instance;
         }
     }
-    private static nint? _TrackReadOffsetOffset;
+    private static nint _TrackReadOffsetOffset = -1;
 
     public ref int TrackReadOffset
     {
         get
         {
-            _TrackReadOffsetOffset = _TrackReadOffsetOffset ?? Schema.GetOffset(0xA8EC88177A1647);
-            return ref _Handle.AsRef<int>(_TrackReadOffsetOffset!.Value);
+            if (_TrackReadOffsetOffset == -1) _TrackReadOffsetOffset = Schema.GetOffset(0xA8EC88177A1647);
+            return ref _Handle.AsRef<int>(_TrackReadOffsetOffset);
         }
     }
-    private static nint? _ConstantRotationOffset;
+    private static nint _ConstantRotationOffset = -1;
 
     public ref Quaternion ConstantRotation
     {
         get
         {
-            _ConstantRotationOffset = _ConstantRotationOffset ?? Schema.GetOffset(0xA8EC88C609717F);
-            return ref _Handle.AsRef<Quaternion>(_ConstantRotationOffset!.Value);
+            if (_ConstantRotationOffset == -1) _ConstantRotationOffset = Schema.GetOffset(0xA8EC88C609717F);
+            return ref _Handle.AsRef<Quaternion>(_ConstantRotationOffset);
         }
     }
-    private static nint? _IsRotationStaticOffset;
+    private static nint _IsRotationStaticOffset = -1;
 
     public ref bool IsRotationStatic
     {
         get
         {
-            _IsRotationStaticOffset = _IsRotationStaticOffset ?? Schema.GetOffset(0xA8EC88D75373C5);
-            return ref _Handle.AsRef<bool>(_IsRotationStaticOffset!.Value);
+            if (_IsRotationStaticOffset == -1) _IsRotationStaticOffset = Schema.GetOffset(0xA8EC88D75373C5);
+            return ref _Handle.AsRef<bool>(_IsRotationStaticOffset);
         }
     }
-    private static nint? _IsTranslationStaticOffset;
+    private static nint _IsTranslationStaticOffset = -1;
 
     public ref bool IsTranslationStatic
     {
         get
         {
-            _IsTranslationStaticOffset = _IsTranslationStaticOffset ?? Schema.GetOffset(0xA8EC888ABDF382);
-            return ref _Handle.AsRef<bool>(_IsTranslationStaticOffset!.Value);
+            if (_IsTranslationStaticOffset == -1) _IsTranslationStaticOffset = Schema.GetOffset(0xA8EC888ABDF382);
+            return ref _Handle.AsRef<bool>(_IsTranslationStaticOffset);
         }
     }
-    private static nint? _IsScaleStaticOffset;
+    private static nint _IsScaleStaticOffset = -1;
 
     public ref bool IsScaleStatic
     {
         get
         {
-            _IsScaleStaticOffset = _IsScaleStaticOffset ?? Schema.GetOffset(0xA8EC88FDB26607);
-            return ref _Handle.AsRef<bool>(_IsScaleStaticOffset!.Value);
+            if (_IsScaleStaticOffset == -1) _IsScaleStaticOffset = Schema.GetOffset(0xA8EC88FDB26607);
+            return ref _Handle.AsRef<bool>(_IsScaleStaticOffset);
         }
     }
 

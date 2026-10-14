@@ -16,57 +16,57 @@ internal partial class CPhysLengthImpl : CPhysConstraintImpl, CPhysLength
 {
     public CPhysLengthImpl(nint handle) : base(handle) { }
 
-    private static nint? _OffsetOffset;
+    private static nint _OffsetOffset = -1;
     private SchemaFixedArray<Vector>? _OffsetInstance;
 
     public ISchemaFixedArray<Vector> Offset
     {
         get
         {
-            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x9203A50AF836806A);
+            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x9203A50AF836806A);
             var instance = _OffsetInstance ??= new SchemaFixedArray<Vector>(0, 0x9203A50AF836806A, 2, 12, 4);
-            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset);
             return instance;
         }
     }
-    private static nint? _AttachOffset;
+    private static nint _AttachOffset = -1;
 
     public ref Vector Attach
     {
         get
         {
-            _AttachOffset = _AttachOffset ?? Schema.GetOffset(0x9203A50A4CAEA9A4);
-            return ref _Handle.AsRef<Vector>(_AttachOffset!.Value);
+            if (_AttachOffset == -1) _AttachOffset = Schema.GetOffset(0x9203A50A4CAEA9A4);
+            return ref _Handle.AsRef<Vector>(_AttachOffset);
         }
     }
-    private static nint? _AddLengthOffset;
+    private static nint _AddLengthOffset = -1;
 
     public ref float AddLength
     {
         get
         {
-            _AddLengthOffset = _AddLengthOffset ?? Schema.GetOffset(0x9203A50AA30AA6D8);
-            return ref _Handle.AsRef<float>(_AddLengthOffset!.Value);
+            if (_AddLengthOffset == -1) _AddLengthOffset = Schema.GetOffset(0x9203A50AA30AA6D8);
+            return ref _Handle.AsRef<float>(_AddLengthOffset);
         }
     }
-    private static nint? _MinLengthOffset;
+    private static nint _MinLengthOffset = -1;
 
     public ref float MinLength
     {
         get
         {
-            _MinLengthOffset = _MinLengthOffset ?? Schema.GetOffset(0x9203A50A8FD988D7);
-            return ref _Handle.AsRef<float>(_MinLengthOffset!.Value);
+            if (_MinLengthOffset == -1) _MinLengthOffset = Schema.GetOffset(0x9203A50A8FD988D7);
+            return ref _Handle.AsRef<float>(_MinLengthOffset);
         }
     }
-    private static nint? _TotalLengthOffset;
+    private static nint _TotalLengthOffset = -1;
 
     public ref float TotalLength
     {
         get
         {
-            _TotalLengthOffset = _TotalLengthOffset ?? Schema.GetOffset(0x9203A50A6825671D);
-            return ref _Handle.AsRef<float>(_TotalLengthOffset!.Value);
+            if (_TotalLengthOffset == -1) _TotalLengthOffset = Schema.GetOffset(0x9203A50A6825671D);
+            return ref _Handle.AsRef<float>(_TotalLengthOffset);
         }
     }
 

@@ -16,76 +16,76 @@ internal partial class C_OP_SetAttributeToScalarExpressionImpl : CParticleFuncti
 {
     public C_OP_SetAttributeToScalarExpressionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ExpressionOffset;
+    private static nint _ExpressionOffset = -1;
 
     public ref ScalarExpressionType_t Expression
     {
         get
         {
-            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x3D6339D6160B2427);
-            return ref _Handle.AsRef<ScalarExpressionType_t>(_ExpressionOffset!.Value);
+            if (_ExpressionOffset == -1) _ExpressionOffset = Schema.GetOffset(0x3D6339D6160B2427);
+            return ref _Handle.AsRef<ScalarExpressionType_t>(_ExpressionOffset);
         }
     }
-    private static nint? _Input1Offset;
+    private static nint _Input1Offset = -1;
     private CPerParticleFloatInputImpl? _Input1Instance;
 
     public CPerParticleFloatInput Input1
     {
         get
         {
-            _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x3D6339D6E9DA2E24);
+            if (_Input1Offset == -1) _Input1Offset = Schema.GetOffset(0x3D6339D6E9DA2E24);
             var instance = _Input1Instance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Input1Offset);
             return instance;
         }
     }
-    private static nint? _Input2Offset;
+    private static nint _Input2Offset = -1;
     private CPerParticleFloatInputImpl? _Input2Instance;
 
     public CPerParticleFloatInput Input2
     {
         get
         {
-            _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x3D6339D6ECDA32DD);
+            if (_Input2Offset == -1) _Input2Offset = Schema.GetOffset(0x3D6339D6ECDA32DD);
             var instance = _Input2Instance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Input2Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Input2Offset);
             return instance;
         }
     }
-    private static nint? _OutputRemapOffset;
+    private static nint _OutputRemapOffset = -1;
     private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
-            _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x3D6339D61239396F);
+            if (_OutputRemapOffset == -1) _OutputRemapOffset = Schema.GetOffset(0x3D6339D61239396F);
             var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset);
             return instance;
         }
     }
-    private static nint? _OutputFieldOffset;
+    private static nint _OutputFieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
-            _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x3D6339D6324F6F74);
+            if (_OutputFieldOffset == -1) _OutputFieldOffset = Schema.GetOffset(0x3D6339D6324F6F74);
             var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset);
             return instance;
         }
     }
-    private static nint? _SetMethodOffset;
+    private static nint _SetMethodOffset = -1;
 
     public ref ParticleSetMethod_t SetMethod
     {
         get
         {
-            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x3D6339D6FB53C31E);
-            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+            if (_SetMethodOffset == -1) _SetMethodOffset = Schema.GetOffset(0x3D6339D6FB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset);
         }
     }
 

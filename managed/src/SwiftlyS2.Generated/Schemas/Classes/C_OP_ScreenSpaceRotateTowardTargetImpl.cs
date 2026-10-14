@@ -16,52 +16,52 @@ internal partial class C_OP_ScreenSpaceRotateTowardTargetImpl : CParticleFunctio
 {
     public C_OP_ScreenSpaceRotateTowardTargetImpl(nint handle) : base(handle) { }
 
-    private static nint? _TargetPositionOffset;
+    private static nint _TargetPositionOffset = -1;
     private CPerParticleVecInputImpl? _TargetPositionInstance;
 
     public CPerParticleVecInput TargetPosition
     {
         get
         {
-            _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0xD66164FC554C563B);
+            if (_TargetPositionOffset == -1) _TargetPositionOffset = Schema.GetOffset(0xD66164FC554C563B);
             var instance = _TargetPositionInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TargetPositionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TargetPositionOffset);
             return instance;
         }
     }
-    private static nint? _OutputRemapOffset;
+    private static nint _OutputRemapOffset = -1;
     private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
-            _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0xD66164FC1239396F);
+            if (_OutputRemapOffset == -1) _OutputRemapOffset = Schema.GetOffset(0xD66164FC1239396F);
             var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset);
             return instance;
         }
     }
-    private static nint? _SetMethodOffset;
+    private static nint _SetMethodOffset = -1;
 
     public ref ParticleSetMethod_t SetMethod
     {
         get
         {
-            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0xD66164FCFB53C31E);
-            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+            if (_SetMethodOffset == -1) _SetMethodOffset = Schema.GetOffset(0xD66164FCFB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset);
         }
     }
-    private static nint? _ScreenEdgeAlignmentDistanceOffset;
+    private static nint _ScreenEdgeAlignmentDistanceOffset = -1;
     private CPerParticleFloatInputImpl? _ScreenEdgeAlignmentDistanceInstance;
 
     public CPerParticleFloatInput ScreenEdgeAlignmentDistance
     {
         get
         {
-            _ScreenEdgeAlignmentDistanceOffset = _ScreenEdgeAlignmentDistanceOffset ?? Schema.GetOffset(0xD66164FCDB3D3EAC);
+            if (_ScreenEdgeAlignmentDistanceOffset == -1) _ScreenEdgeAlignmentDistanceOffset = Schema.GetOffset(0xD66164FCDB3D3EAC);
             var instance = _ScreenEdgeAlignmentDistanceInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScreenEdgeAlignmentDistanceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScreenEdgeAlignmentDistanceOffset);
             return instance;
         }
     }

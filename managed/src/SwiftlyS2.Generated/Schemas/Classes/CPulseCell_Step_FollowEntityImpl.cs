@@ -16,34 +16,34 @@ internal partial class CPulseCell_Step_FollowEntityImpl : CPulseCell_BaseFlowImp
 {
     public CPulseCell_Step_FollowEntityImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParamBoneOrAttachNameOffset;
+    private static nint _ParamBoneOrAttachNameOffset = -1;
 
     public string ParamBoneOrAttachName
     {
         get
         {
-            _ParamBoneOrAttachNameOffset = _ParamBoneOrAttachNameOffset ?? Schema.GetOffset(0x75FAF4A9B89867BB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamBoneOrAttachNameOffset!.Value));
+            if (_ParamBoneOrAttachNameOffset == -1) _ParamBoneOrAttachNameOffset = Schema.GetOffset(0x75FAF4A9B89867BB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamBoneOrAttachNameOffset));
         }
         set
         {
-            _ParamBoneOrAttachNameOffset = _ParamBoneOrAttachNameOffset ?? Schema.GetOffset(0x75FAF4A9B89867BB);
-            Schema.SetCUtlString(_Handle, _ParamBoneOrAttachNameOffset!.Value, value);
+            if (_ParamBoneOrAttachNameOffset == -1) _ParamBoneOrAttachNameOffset = Schema.GetOffset(0x75FAF4A9B89867BB);
+            Schema.SetCUtlString(_Handle, _ParamBoneOrAttachNameOffset, value);
         }
     }
-    private static nint? _ParamBoneOrAttachNameChildOffset;
+    private static nint _ParamBoneOrAttachNameChildOffset = -1;
 
     public string ParamBoneOrAttachNameChild
     {
         get
         {
-            _ParamBoneOrAttachNameChildOffset = _ParamBoneOrAttachNameChildOffset ?? Schema.GetOffset(0x75FAF4A902011093);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamBoneOrAttachNameChildOffset!.Value));
+            if (_ParamBoneOrAttachNameChildOffset == -1) _ParamBoneOrAttachNameChildOffset = Schema.GetOffset(0x75FAF4A902011093);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamBoneOrAttachNameChildOffset));
         }
         set
         {
-            _ParamBoneOrAttachNameChildOffset = _ParamBoneOrAttachNameChildOffset ?? Schema.GetOffset(0x75FAF4A902011093);
-            Schema.SetCUtlString(_Handle, _ParamBoneOrAttachNameChildOffset!.Value, value);
+            if (_ParamBoneOrAttachNameChildOffset == -1) _ParamBoneOrAttachNameChildOffset = Schema.GetOffset(0x75FAF4A902011093);
+            Schema.SetCUtlString(_Handle, _ParamBoneOrAttachNameChildOffset, value);
         }
     }
 

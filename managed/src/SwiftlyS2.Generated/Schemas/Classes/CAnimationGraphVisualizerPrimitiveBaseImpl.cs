@@ -16,37 +16,37 @@ internal partial class CAnimationGraphVisualizerPrimitiveBaseImpl : SchemaClass,
 {
     public CAnimationGraphVisualizerPrimitiveBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref CAnimationGraphVisualizerPrimitiveType Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x5204B0848ED6D5CD);
-            return ref _Handle.AsRef<CAnimationGraphVisualizerPrimitiveType>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x5204B0848ED6D5CD);
+            return ref _Handle.AsRef<CAnimationGraphVisualizerPrimitiveType>(_TypeOffset);
         }
     }
-    private static nint? _OwningAnimNodePathsOffset;
+    private static nint _OwningAnimNodePathsOffset = -1;
     private SchemaClassFixedArray<AnimNodeID>? _OwningAnimNodePathsInstance;
 
     public ISchemaClassFixedArray<AnimNodeID> OwningAnimNodePaths
     {
         get
         {
-            _OwningAnimNodePathsOffset = _OwningAnimNodePathsOffset ?? Schema.GetOffset(0x5204B08461A2E55C);
+            if (_OwningAnimNodePathsOffset == -1) _OwningAnimNodePathsOffset = Schema.GetOffset(0x5204B08461A2E55C);
             var instance = _OwningAnimNodePathsInstance ??= new SchemaClassFixedArray<AnimNodeID>(0, 0x5204B08461A2E55C, 11, 4, 4);
-            instance.DangerousSetHandle(_Handle + _OwningAnimNodePathsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OwningAnimNodePathsOffset);
             return instance;
         }
     }
-    private static nint? _OwningAnimNodePathCountOffset;
+    private static nint _OwningAnimNodePathCountOffset = -1;
 
     public ref int OwningAnimNodePathCount
     {
         get
         {
-            _OwningAnimNodePathCountOffset = _OwningAnimNodePathCountOffset ?? Schema.GetOffset(0x5204B0844241A972);
-            return ref _Handle.AsRef<int>(_OwningAnimNodePathCountOffset!.Value);
+            if (_OwningAnimNodePathCountOffset == -1) _OwningAnimNodePathCountOffset = Schema.GetOffset(0x5204B0844241A972);
+            return ref _Handle.AsRef<int>(_OwningAnimNodePathCountOffset);
         }
     }
 

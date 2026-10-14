@@ -16,44 +16,44 @@ internal partial class CPulseRuntimeMethodArgImpl : SchemaClass, CPulseRuntimeMe
 {
     public CPulseRuntimeMethodArgImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
     private SchemaUntypedField? _NameInstance;
 
     public SchemaUntypedField Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA8B175BCCAE8A266);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xA8B175BCCAE8A266);
             var instance = _NameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _NameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NameOffset);
             return instance;
         }
     }
-    private static nint? _DescriptionOffset;
+    private static nint _DescriptionOffset = -1;
 
     public string Description
     {
         get
         {
-            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0xA8B175BC678744E9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset!.Value));
+            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0xA8B175BC678744E9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset));
         }
         set
         {
-            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0xA8B175BC678744E9);
-            Schema.SetCUtlString(_Handle, _DescriptionOffset!.Value, value);
+            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0xA8B175BC678744E9);
+            Schema.SetCUtlString(_Handle, _DescriptionOffset, value);
         }
     }
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
     private SchemaUntypedField? _TypeInstance;
 
     public SchemaUntypedField Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xA8B175BC8ED6D5CD);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0xA8B175BC8ED6D5CD);
             var instance = _TypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TypeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TypeOffset);
             return instance;
         }
     }

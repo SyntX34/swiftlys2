@@ -16,161 +16,161 @@ internal partial class C_ClientRagdollImpl : CBaseAnimGraphImpl, C_ClientRagdoll
 {
     public C_ClientRagdollImpl(nint handle) : base(handle) { }
 
-    private static nint? _FadeOutOffset;
+    private static nint _FadeOutOffset = -1;
 
     public ref bool FadeOut
     {
         get
         {
-            _FadeOutOffset = _FadeOutOffset ?? Schema.GetOffset(0x5DD183D384392CA5);
-            return ref _Handle.AsRef<bool>(_FadeOutOffset!.Value);
+            if (_FadeOutOffset == -1) _FadeOutOffset = Schema.GetOffset(0x5DD183D384392CA5);
+            return ref _Handle.AsRef<bool>(_FadeOutOffset);
         }
     }
-    private static nint? _ImportantOffset;
+    private static nint _ImportantOffset = -1;
 
     public ref bool Important
     {
         get
         {
-            _ImportantOffset = _ImportantOffset ?? Schema.GetOffset(0x5DD183D31D12F605);
-            return ref _Handle.AsRef<bool>(_ImportantOffset!.Value);
+            if (_ImportantOffset == -1) _ImportantOffset = Schema.GetOffset(0x5DD183D31D12F605);
+            return ref _Handle.AsRef<bool>(_ImportantOffset);
         }
     }
-    private static nint? _EffectTimeOffset;
+    private static nint _EffectTimeOffset = -1;
     private GameTime_tImpl? _EffectTimeInstance;
 
     public GameTime_t EffectTime
     {
         get
         {
-            _EffectTimeOffset = _EffectTimeOffset ?? Schema.GetOffset(0x5DD183D3C4A6D0EB);
+            if (_EffectTimeOffset == -1) _EffectTimeOffset = Schema.GetOffset(0x5DD183D3C4A6D0EB);
             var instance = _EffectTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EffectTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EffectTimeOffset);
             return instance;
         }
     }
-    private static nint? _GibDespawnTimeOffset;
+    private static nint _GibDespawnTimeOffset = -1;
     private GameTime_tImpl? _GibDespawnTimeInstance;
 
     public GameTime_t GibDespawnTime
     {
         get
         {
-            _GibDespawnTimeOffset = _GibDespawnTimeOffset ?? Schema.GetOffset(0x5DD183D3C5E3FD68);
+            if (_GibDespawnTimeOffset == -1) _GibDespawnTimeOffset = Schema.GetOffset(0x5DD183D3C5E3FD68);
             var instance = _GibDespawnTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _GibDespawnTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GibDespawnTimeOffset);
             return instance;
         }
     }
-    private static nint? _CurrentFrictionOffset;
+    private static nint _CurrentFrictionOffset = -1;
 
     public ref int CurrentFriction
     {
         get
         {
-            _CurrentFrictionOffset = _CurrentFrictionOffset ?? Schema.GetOffset(0x5DD183D3B0BDB767);
-            return ref _Handle.AsRef<int>(_CurrentFrictionOffset!.Value);
+            if (_CurrentFrictionOffset == -1) _CurrentFrictionOffset = Schema.GetOffset(0x5DD183D3B0BDB767);
+            return ref _Handle.AsRef<int>(_CurrentFrictionOffset);
         }
     }
-    private static nint? _MinFrictionOffset;
+    private static nint _MinFrictionOffset = -1;
 
     public ref int MinFriction
     {
         get
         {
-            _MinFrictionOffset = _MinFrictionOffset ?? Schema.GetOffset(0x5DD183D3F5CE358A);
-            return ref _Handle.AsRef<int>(_MinFrictionOffset!.Value);
+            if (_MinFrictionOffset == -1) _MinFrictionOffset = Schema.GetOffset(0x5DD183D3F5CE358A);
+            return ref _Handle.AsRef<int>(_MinFrictionOffset);
         }
     }
-    private static nint? _MaxFrictionOffset;
+    private static nint _MaxFrictionOffset = -1;
 
     public ref int MaxFriction
     {
         get
         {
-            _MaxFrictionOffset = _MaxFrictionOffset ?? Schema.GetOffset(0x5DD183D3E65F0BF0);
-            return ref _Handle.AsRef<int>(_MaxFrictionOffset!.Value);
+            if (_MaxFrictionOffset == -1) _MaxFrictionOffset = Schema.GetOffset(0x5DD183D3E65F0BF0);
+            return ref _Handle.AsRef<int>(_MaxFrictionOffset);
         }
     }
-    private static nint? _FrictionAnimStateOffset;
+    private static nint _FrictionAnimStateOffset = -1;
 
     public ref int FrictionAnimState
     {
         get
         {
-            _FrictionAnimStateOffset = _FrictionAnimStateOffset ?? Schema.GetOffset(0x5DD183D37188C9A0);
-            return ref _Handle.AsRef<int>(_FrictionAnimStateOffset!.Value);
+            if (_FrictionAnimStateOffset == -1) _FrictionAnimStateOffset = Schema.GetOffset(0x5DD183D37188C9A0);
+            return ref _Handle.AsRef<int>(_FrictionAnimStateOffset);
         }
     }
-    private static nint? _ReleaseRagdollOffset;
+    private static nint _ReleaseRagdollOffset = -1;
 
     public ref bool ReleaseRagdoll
     {
         get
         {
-            _ReleaseRagdollOffset = _ReleaseRagdollOffset ?? Schema.GetOffset(0x5DD183D367AFABB1);
-            return ref _Handle.AsRef<bool>(_ReleaseRagdollOffset!.Value);
+            if (_ReleaseRagdollOffset == -1) _ReleaseRagdollOffset = Schema.GetOffset(0x5DD183D367AFABB1);
+            return ref _Handle.AsRef<bool>(_ReleaseRagdollOffset);
         }
     }
-    private static nint? _EyeAttachmentOffset;
+    private static nint _EyeAttachmentOffset = -1;
     private AttachmentHandle_tImpl? _EyeAttachmentInstance;
 
     public AttachmentHandle_t EyeAttachment
     {
         get
         {
-            _EyeAttachmentOffset = _EyeAttachmentOffset ?? Schema.GetOffset(0x5DD183D3CDE31574);
+            if (_EyeAttachmentOffset == -1) _EyeAttachmentOffset = Schema.GetOffset(0x5DD183D3CDE31574);
             var instance = _EyeAttachmentInstance ??= new AttachmentHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EyeAttachmentOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EyeAttachmentOffset);
             return instance;
         }
     }
-    private static nint? _FadingOutOffset;
+    private static nint _FadingOutOffset = -1;
 
     public ref bool FadingOut
     {
         get
         {
-            _FadingOutOffset = _FadingOutOffset ?? Schema.GetOffset(0x5DD183D32002BDB8);
-            return ref _Handle.AsRef<bool>(_FadingOutOffset!.Value);
+            if (_FadingOutOffset == -1) _FadingOutOffset = Schema.GetOffset(0x5DD183D32002BDB8);
+            return ref _Handle.AsRef<bool>(_FadingOutOffset);
         }
     }
-    private static nint? _ScaleEndOffset;
+    private static nint _ScaleEndOffset = -1;
     private SchemaFixedArray<float>? _ScaleEndInstance;
 
     public ISchemaFixedArray<float> ScaleEnd
     {
         get
         {
-            _ScaleEndOffset = _ScaleEndOffset ?? Schema.GetOffset(0x5DD183D3544BE79C);
+            if (_ScaleEndOffset == -1) _ScaleEndOffset = Schema.GetOffset(0x5DD183D3544BE79C);
             var instance = _ScaleEndInstance ??= new SchemaFixedArray<float>(0, 0x5DD183D3544BE79C, 10, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ScaleEndOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScaleEndOffset);
             return instance;
         }
     }
-    private static nint? _ScaleTimeStartOffset;
+    private static nint _ScaleTimeStartOffset = -1;
     private SchemaClassFixedArray<GameTime_t>? _ScaleTimeStartInstance;
 
     public ISchemaClassFixedArray<GameTime_t> ScaleTimeStart
     {
         get
         {
-            _ScaleTimeStartOffset = _ScaleTimeStartOffset ?? Schema.GetOffset(0x5DD183D303EA4A2E);
+            if (_ScaleTimeStartOffset == -1) _ScaleTimeStartOffset = Schema.GetOffset(0x5DD183D303EA4A2E);
             var instance = _ScaleTimeStartInstance ??= new SchemaClassFixedArray<GameTime_t>(0, 0x5DD183D303EA4A2E, 10, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ScaleTimeStartOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScaleTimeStartOffset);
             return instance;
         }
     }
-    private static nint? _ScaleTimeEndOffset;
+    private static nint _ScaleTimeEndOffset = -1;
     private SchemaClassFixedArray<GameTime_t>? _ScaleTimeEndInstance;
 
     public ISchemaClassFixedArray<GameTime_t> ScaleTimeEnd
     {
         get
         {
-            _ScaleTimeEndOffset = _ScaleTimeEndOffset ?? Schema.GetOffset(0x5DD183D3E1CF0D3B);
+            if (_ScaleTimeEndOffset == -1) _ScaleTimeEndOffset = Schema.GetOffset(0x5DD183D3E1CF0D3B);
             var instance = _ScaleTimeEndInstance ??= new SchemaClassFixedArray<GameTime_t>(0, 0x5DD183D3E1CF0D3B, 10, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ScaleTimeEndOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScaleTimeEndOffset);
             return instance;
         }
     }

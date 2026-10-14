@@ -16,44 +16,44 @@ internal partial class CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance
 {
     public CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinVolumeOffset;
+    private static nint _MinVolumeOffset = -1;
 
     public ref float MinVolume
     {
         get
         {
-            _MinVolumeOffset = _MinVolumeOffset ?? Schema.GetOffset(0x9089F81B2CA4E2A3);
-            return ref _Handle.AsRef<float>(_MinVolumeOffset!.Value);
+            if (_MinVolumeOffset == -1) _MinVolumeOffset = Schema.GetOffset(0x9089F81B2CA4E2A3);
+            return ref _Handle.AsRef<float>(_MinVolumeOffset);
         }
     }
-    private static nint? _InstancesAtMinVolumeOffset;
+    private static nint _InstancesAtMinVolumeOffset = -1;
 
     public ref int InstancesAtMinVolume
     {
         get
         {
-            _InstancesAtMinVolumeOffset = _InstancesAtMinVolumeOffset ?? Schema.GetOffset(0x9089F81BBA3DF3B8);
-            return ref _Handle.AsRef<int>(_InstancesAtMinVolumeOffset!.Value);
+            if (_InstancesAtMinVolumeOffset == -1) _InstancesAtMinVolumeOffset = Schema.GetOffset(0x9089F81BBA3DF3B8);
+            return ref _Handle.AsRef<int>(_InstancesAtMinVolumeOffset);
         }
     }
-    private static nint? _MaxVolumeOffset;
+    private static nint _MaxVolumeOffset = -1;
 
     public ref float MaxVolume
     {
         get
         {
-            _MaxVolumeOffset = _MaxVolumeOffset ?? Schema.GetOffset(0x9089F81B25691B11);
-            return ref _Handle.AsRef<float>(_MaxVolumeOffset!.Value);
+            if (_MaxVolumeOffset == -1) _MaxVolumeOffset = Schema.GetOffset(0x9089F81B25691B11);
+            return ref _Handle.AsRef<float>(_MaxVolumeOffset);
         }
     }
-    private static nint? _InstancesAtMaxVolumeOffset;
+    private static nint _InstancesAtMaxVolumeOffset = -1;
 
     public ref int InstancesAtMaxVolume
     {
         get
         {
-            _InstancesAtMaxVolumeOffset = _InstancesAtMaxVolumeOffset ?? Schema.GetOffset(0x9089F81B18EB3E46);
-            return ref _Handle.AsRef<int>(_InstancesAtMaxVolumeOffset!.Value);
+            if (_InstancesAtMaxVolumeOffset == -1) _InstancesAtMaxVolumeOffset = Schema.GetOffset(0x9089F81B18EB3E46);
+            return ref _Handle.AsRef<int>(_InstancesAtMaxVolumeOffset);
         }
     }
 

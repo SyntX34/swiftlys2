@@ -16,29 +16,29 @@ internal partial class CAnimMotorUpdaterBaseImpl : SchemaClass, CAnimMotorUpdate
 {
     public CAnimMotorUpdaterBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3FB6E1144D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x3FB6E1144D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3FB6E1144D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x3FB6E1144D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _DefaultOffset;
+    private static nint _DefaultOffset = -1;
 
     public ref bool Default
     {
         get
         {
-            _DefaultOffset = _DefaultOffset ?? Schema.GetOffset(0x3FB6E11485F067BE);
-            return ref _Handle.AsRef<bool>(_DefaultOffset!.Value);
+            if (_DefaultOffset == -1) _DefaultOffset = Schema.GetOffset(0x3FB6E11485F067BE);
+            return ref _Handle.AsRef<bool>(_DefaultOffset);
         }
     }
 

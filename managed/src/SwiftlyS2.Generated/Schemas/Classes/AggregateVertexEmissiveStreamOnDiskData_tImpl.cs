@@ -16,14 +16,14 @@ internal partial class AggregateVertexEmissiveStreamOnDiskData_tImpl : SchemaCla
 {
     public AggregateVertexEmissiveStreamOnDiskData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _BufferDataOffset;
+    private static nint _BufferDataOffset = -1;
 
     public ref CUtlBinaryBlock BufferData
     {
         get
         {
-            _BufferDataOffset = _BufferDataOffset ?? Schema.GetOffset(0x863A20EAED884C43);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_BufferDataOffset!.Value);
+            if (_BufferDataOffset == -1) _BufferDataOffset = Schema.GetOffset(0x863A20EAED884C43);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_BufferDataOffset);
         }
     }
 

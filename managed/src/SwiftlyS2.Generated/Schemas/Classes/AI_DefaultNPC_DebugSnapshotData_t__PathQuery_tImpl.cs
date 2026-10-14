@@ -16,54 +16,54 @@ internal partial class AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl : Sche
 {
     public AI_DefaultNPC_DebugSnapshotData_t__PathQuery_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _InitialMovementIdOffset;
+    private static nint _InitialMovementIdOffset = -1;
 
     public ref CGlobalSymbol InitialMovementId
     {
         get
         {
-            _InitialMovementIdOffset = _InitialMovementIdOffset ?? Schema.GetOffset(0x694C69B73FDEDBCB);
-            return ref _Handle.AsRef<CGlobalSymbol>(_InitialMovementIdOffset!.Value);
+            if (_InitialMovementIdOffset == -1) _InitialMovementIdOffset = Schema.GetOffset(0x694C69B73FDEDBCB);
+            return ref _Handle.AsRef<CGlobalSymbol>(_InitialMovementIdOffset);
         }
     }
-    private static nint? _CurrentMovementIdOffset;
+    private static nint _CurrentMovementIdOffset = -1;
 
     public ref CGlobalSymbol CurrentMovementId
     {
         get
         {
-            _CurrentMovementIdOffset = _CurrentMovementIdOffset ?? Schema.GetOffset(0x694C69B7009EA592);
-            return ref _Handle.AsRef<CGlobalSymbol>(_CurrentMovementIdOffset!.Value);
+            if (_CurrentMovementIdOffset == -1) _CurrentMovementIdOffset = Schema.GetOffset(0x694C69B7009EA592);
+            return ref _Handle.AsRef<CGlobalSymbol>(_CurrentMovementIdOffset);
         }
     }
-    private static nint? _ModeOffset;
+    private static nint _ModeOffset = -1;
 
     public ref CGlobalSymbol Mode
     {
         get
         {
-            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0x694C69B7137F1E0E);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ModeOffset!.Value);
+            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0x694C69B7137F1E0E);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ModeOffset);
         }
     }
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref CGlobalSymbol Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x694C69B718853D59);
-            return ref _Handle.AsRef<CGlobalSymbol>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x694C69B718853D59);
+            return ref _Handle.AsRef<CGlobalSymbol>(_TypeOffset);
         }
     }
-    private static nint? _StateOffset;
+    private static nint _StateOffset = -1;
 
     public ref CGlobalSymbol State
     {
         get
         {
-            _StateOffset = _StateOffset ?? Schema.GetOffset(0x694C69B77C824322);
-            return ref _Handle.AsRef<CGlobalSymbol>(_StateOffset!.Value);
+            if (_StateOffset == -1) _StateOffset = Schema.GetOffset(0x694C69B77C824322);
+            return ref _Handle.AsRef<CGlobalSymbol>(_StateOffset);
         }
     }
 

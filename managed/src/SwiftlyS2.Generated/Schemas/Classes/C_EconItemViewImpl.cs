@@ -16,345 +16,345 @@ internal partial class C_EconItemViewImpl : IEconItemInterfaceImpl, C_EconItemVi
 {
     public C_EconItemViewImpl(nint handle) : base(handle) { }
 
-    private static nint? _InventoryImageRgbaRequestedOffset;
+    private static nint _InventoryImageRgbaRequestedOffset = -1;
 
     public ref bool InventoryImageRgbaRequested
     {
         get
         {
-            _InventoryImageRgbaRequestedOffset = _InventoryImageRgbaRequestedOffset ?? Schema.GetOffset(0x3753663C5AFD907E);
-            return ref _Handle.AsRef<bool>(_InventoryImageRgbaRequestedOffset!.Value);
+            if (_InventoryImageRgbaRequestedOffset == -1) _InventoryImageRgbaRequestedOffset = Schema.GetOffset(0x3753663C5AFD907E);
+            return ref _Handle.AsRef<bool>(_InventoryImageRgbaRequestedOffset);
         }
     }
-    private static nint? _InventoryImageTriedCacheOffset;
+    private static nint _InventoryImageTriedCacheOffset = -1;
 
     public ref bool InventoryImageTriedCache
     {
         get
         {
-            _InventoryImageTriedCacheOffset = _InventoryImageTriedCacheOffset ?? Schema.GetOffset(0x3753663C20B213BE);
-            return ref _Handle.AsRef<bool>(_InventoryImageTriedCacheOffset!.Value);
+            if (_InventoryImageTriedCacheOffset == -1) _InventoryImageTriedCacheOffset = Schema.GetOffset(0x3753663C20B213BE);
+            return ref _Handle.AsRef<bool>(_InventoryImageTriedCacheOffset);
         }
     }
-    private static nint? _InventoryImageRgbaWidthOffset;
+    private static nint _InventoryImageRgbaWidthOffset = -1;
 
     public ref int InventoryImageRgbaWidth
     {
         get
         {
-            _InventoryImageRgbaWidthOffset = _InventoryImageRgbaWidthOffset ?? Schema.GetOffset(0x3753663C1E5437DA);
-            return ref _Handle.AsRef<int>(_InventoryImageRgbaWidthOffset!.Value);
+            if (_InventoryImageRgbaWidthOffset == -1) _InventoryImageRgbaWidthOffset = Schema.GetOffset(0x3753663C1E5437DA);
+            return ref _Handle.AsRef<int>(_InventoryImageRgbaWidthOffset);
         }
     }
-    private static nint? _InventoryImageRgbaHeightOffset;
+    private static nint _InventoryImageRgbaHeightOffset = -1;
 
     public ref int InventoryImageRgbaHeight
     {
         get
         {
-            _InventoryImageRgbaHeightOffset = _InventoryImageRgbaHeightOffset ?? Schema.GetOffset(0x3753663C2B81DEB5);
-            return ref _Handle.AsRef<int>(_InventoryImageRgbaHeightOffset!.Value);
+            if (_InventoryImageRgbaHeightOffset == -1) _InventoryImageRgbaHeightOffset = Schema.GetOffset(0x3753663C2B81DEB5);
+            return ref _Handle.AsRef<int>(_InventoryImageRgbaHeightOffset);
         }
     }
-    private static nint? _CurrentLoadCachedFileNameOffset;
+    private static nint _CurrentLoadCachedFileNameOffset = -1;
 
     public string CurrentLoadCachedFileName
     {
         get
         {
-            _CurrentLoadCachedFileNameOffset = _CurrentLoadCachedFileNameOffset ?? Schema.GetOffset(0x3753663C23CED1AA);
-            return Schema.GetString(_Handle + _CurrentLoadCachedFileNameOffset!.Value);
+            if (_CurrentLoadCachedFileNameOffset == -1) _CurrentLoadCachedFileNameOffset = Schema.GetOffset(0x3753663C23CED1AA);
+            return Schema.GetString(_Handle + _CurrentLoadCachedFileNameOffset);
         }
         set
         {
-            _CurrentLoadCachedFileNameOffset = _CurrentLoadCachedFileNameOffset ?? Schema.GetOffset(0x3753663C23CED1AA);
-            Schema.SetFixedString(_Handle, _CurrentLoadCachedFileNameOffset!.Value, value, 260);
+            if (_CurrentLoadCachedFileNameOffset == -1) _CurrentLoadCachedFileNameOffset = Schema.GetOffset(0x3753663C23CED1AA);
+            Schema.SetFixedString(_Handle, _CurrentLoadCachedFileNameOffset, value, 260);
         }
     }
-    private static nint? _RestoreCustomMaterialAfterPrecacheOffset;
+    private static nint _RestoreCustomMaterialAfterPrecacheOffset = -1;
 
     public ref bool RestoreCustomMaterialAfterPrecache
     {
         get
         {
-            _RestoreCustomMaterialAfterPrecacheOffset = _RestoreCustomMaterialAfterPrecacheOffset ?? Schema.GetOffset(0x3753663C33E8AE5A);
-            return ref _Handle.AsRef<bool>(_RestoreCustomMaterialAfterPrecacheOffset!.Value);
+            if (_RestoreCustomMaterialAfterPrecacheOffset == -1) _RestoreCustomMaterialAfterPrecacheOffset = Schema.GetOffset(0x3753663C33E8AE5A);
+            return ref _Handle.AsRef<bool>(_RestoreCustomMaterialAfterPrecacheOffset);
         }
     }
-    private static nint? _ItemDefinitionIndexOffset;
+    private static nint _ItemDefinitionIndexOffset = -1;
 
     public ref ushort ItemDefinitionIndex
     {
         get
         {
-            _ItemDefinitionIndexOffset = _ItemDefinitionIndexOffset ?? Schema.GetOffset(0x3753663CA2CCB41A);
-            return ref _Handle.AsRef<ushort>(_ItemDefinitionIndexOffset!.Value);
+            if (_ItemDefinitionIndexOffset == -1) _ItemDefinitionIndexOffset = Schema.GetOffset(0x3753663CA2CCB41A);
+            return ref _Handle.AsRef<ushort>(_ItemDefinitionIndexOffset);
         }
     }
-    private static nint? _EntityQualityOffset;
+    private static nint _EntityQualityOffset = -1;
 
     public ref int EntityQuality
     {
         get
         {
-            _EntityQualityOffset = _EntityQualityOffset ?? Schema.GetOffset(0x3753663C6A67D4C4);
-            return ref _Handle.AsRef<int>(_EntityQualityOffset!.Value);
+            if (_EntityQualityOffset == -1) _EntityQualityOffset = Schema.GetOffset(0x3753663C6A67D4C4);
+            return ref _Handle.AsRef<int>(_EntityQualityOffset);
         }
     }
-    private static nint? _EntityLevelOffset;
+    private static nint _EntityLevelOffset = -1;
 
     public ref uint EntityLevel
     {
         get
         {
-            _EntityLevelOffset = _EntityLevelOffset ?? Schema.GetOffset(0x3753663C55EF3B5F);
-            return ref _Handle.AsRef<uint>(_EntityLevelOffset!.Value);
+            if (_EntityLevelOffset == -1) _EntityLevelOffset = Schema.GetOffset(0x3753663C55EF3B5F);
+            return ref _Handle.AsRef<uint>(_EntityLevelOffset);
         }
     }
-    private static nint? _ItemIDOffset;
+    private static nint _ItemIDOffset = -1;
 
     public ref ulong ItemID
     {
         get
         {
-            _ItemIDOffset = _ItemIDOffset ?? Schema.GetOffset(0x3753663C34B55816);
-            return ref _Handle.AsRef<ulong>(_ItemIDOffset!.Value);
+            if (_ItemIDOffset == -1) _ItemIDOffset = Schema.GetOffset(0x3753663C34B55816);
+            return ref _Handle.AsRef<ulong>(_ItemIDOffset);
         }
     }
-    private static nint? _ItemIDHighOffset;
+    private static nint _ItemIDHighOffset = -1;
 
     public ref uint ItemIDHigh
     {
         get
         {
-            _ItemIDHighOffset = _ItemIDHighOffset ?? Schema.GetOffset(0x3753663C373EE446);
-            return ref _Handle.AsRef<uint>(_ItemIDHighOffset!.Value);
+            if (_ItemIDHighOffset == -1) _ItemIDHighOffset = Schema.GetOffset(0x3753663C373EE446);
+            return ref _Handle.AsRef<uint>(_ItemIDHighOffset);
         }
     }
-    private static nint? _ItemIDLowOffset;
+    private static nint _ItemIDLowOffset = -1;
 
     public ref uint ItemIDLow
     {
         get
         {
-            _ItemIDLowOffset = _ItemIDLowOffset ?? Schema.GetOffset(0x3753663C0DF29C2C);
-            return ref _Handle.AsRef<uint>(_ItemIDLowOffset!.Value);
+            if (_ItemIDLowOffset == -1) _ItemIDLowOffset = Schema.GetOffset(0x3753663C0DF29C2C);
+            return ref _Handle.AsRef<uint>(_ItemIDLowOffset);
         }
     }
-    private static nint? _AccountIDOffset;
+    private static nint _AccountIDOffset = -1;
 
     public ref uint AccountID
     {
         get
         {
-            _AccountIDOffset = _AccountIDOffset ?? Schema.GetOffset(0x3753663CC65DE986);
-            return ref _Handle.AsRef<uint>(_AccountIDOffset!.Value);
+            if (_AccountIDOffset == -1) _AccountIDOffset = Schema.GetOffset(0x3753663CC65DE986);
+            return ref _Handle.AsRef<uint>(_AccountIDOffset);
         }
     }
-    private static nint? _InventoryPositionOffset;
+    private static nint _InventoryPositionOffset = -1;
 
     public ref uint InventoryPosition
     {
         get
         {
-            _InventoryPositionOffset = _InventoryPositionOffset ?? Schema.GetOffset(0x3753663C92F42873);
-            return ref _Handle.AsRef<uint>(_InventoryPositionOffset!.Value);
+            if (_InventoryPositionOffset == -1) _InventoryPositionOffset = Schema.GetOffset(0x3753663C92F42873);
+            return ref _Handle.AsRef<uint>(_InventoryPositionOffset);
         }
     }
-    private static nint? _InitializedOffset;
+    private static nint _InitializedOffset = -1;
 
     public ref bool Initialized
     {
         get
         {
-            _InitializedOffset = _InitializedOffset ?? Schema.GetOffset(0x3753663C0710ABDD);
-            return ref _Handle.AsRef<bool>(_InitializedOffset!.Value);
+            if (_InitializedOffset == -1) _InitializedOffset = Schema.GetOffset(0x3753663C0710ABDD);
+            return ref _Handle.AsRef<bool>(_InitializedOffset);
         }
     }
-    private static nint? _DisallowSOCOffset;
+    private static nint _DisallowSOCOffset = -1;
 
     public ref bool DisallowSOC
     {
         get
         {
-            _DisallowSOCOffset = _DisallowSOCOffset ?? Schema.GetOffset(0x3753663C216DB5E3);
-            return ref _Handle.AsRef<bool>(_DisallowSOCOffset!.Value);
+            if (_DisallowSOCOffset == -1) _DisallowSOCOffset = Schema.GetOffset(0x3753663C216DB5E3);
+            return ref _Handle.AsRef<bool>(_DisallowSOCOffset);
         }
     }
-    private static nint? _IsStoreItemOffset;
+    private static nint _IsStoreItemOffset = -1;
 
     public ref bool IsStoreItem
     {
         get
         {
-            _IsStoreItemOffset = _IsStoreItemOffset ?? Schema.GetOffset(0x3753663CC620B69D);
-            return ref _Handle.AsRef<bool>(_IsStoreItemOffset!.Value);
+            if (_IsStoreItemOffset == -1) _IsStoreItemOffset = Schema.GetOffset(0x3753663CC620B69D);
+            return ref _Handle.AsRef<bool>(_IsStoreItemOffset);
         }
     }
-    private static nint? _IsTradeItemOffset;
+    private static nint _IsTradeItemOffset = -1;
 
     public ref bool IsTradeItem
     {
         get
         {
-            _IsTradeItemOffset = _IsTradeItemOffset ?? Schema.GetOffset(0x3753663CF0FD6A22);
-            return ref _Handle.AsRef<bool>(_IsTradeItemOffset!.Value);
+            if (_IsTradeItemOffset == -1) _IsTradeItemOffset = Schema.GetOffset(0x3753663CF0FD6A22);
+            return ref _Handle.AsRef<bool>(_IsTradeItemOffset);
         }
     }
-    private static nint? _EntityQuantityOffset;
+    private static nint _EntityQuantityOffset = -1;
 
     public ref int EntityQuantity
     {
         get
         {
-            _EntityQuantityOffset = _EntityQuantityOffset ?? Schema.GetOffset(0x3753663C0802B73E);
-            return ref _Handle.AsRef<int>(_EntityQuantityOffset!.Value);
+            if (_EntityQuantityOffset == -1) _EntityQuantityOffset = Schema.GetOffset(0x3753663C0802B73E);
+            return ref _Handle.AsRef<int>(_EntityQuantityOffset);
         }
     }
-    private static nint? _RarityOverrideOffset;
+    private static nint _RarityOverrideOffset = -1;
 
     public ref int RarityOverride
     {
         get
         {
-            _RarityOverrideOffset = _RarityOverrideOffset ?? Schema.GetOffset(0x3753663CB77F0387);
-            return ref _Handle.AsRef<int>(_RarityOverrideOffset!.Value);
+            if (_RarityOverrideOffset == -1) _RarityOverrideOffset = Schema.GetOffset(0x3753663CB77F0387);
+            return ref _Handle.AsRef<int>(_RarityOverrideOffset);
         }
     }
-    private static nint? _QualityOverrideOffset;
+    private static nint _QualityOverrideOffset = -1;
 
     public ref int QualityOverride
     {
         get
         {
-            _QualityOverrideOffset = _QualityOverrideOffset ?? Schema.GetOffset(0x3753663CBD89EC1D);
-            return ref _Handle.AsRef<int>(_QualityOverrideOffset!.Value);
+            if (_QualityOverrideOffset == -1) _QualityOverrideOffset = Schema.GetOffset(0x3753663CBD89EC1D);
+            return ref _Handle.AsRef<int>(_QualityOverrideOffset);
         }
     }
-    private static nint? _OriginOverrideOffset;
+    private static nint _OriginOverrideOffset = -1;
 
     public ref int OriginOverride
     {
         get
         {
-            _OriginOverrideOffset = _OriginOverrideOffset ?? Schema.GetOffset(0x3753663C5CCD594E);
-            return ref _Handle.AsRef<int>(_OriginOverrideOffset!.Value);
+            if (_OriginOverrideOffset == -1) _OriginOverrideOffset = Schema.GetOffset(0x3753663C5CCD594E);
+            return ref _Handle.AsRef<int>(_OriginOverrideOffset);
         }
     }
-    private static nint? _StyleOverrideOffset;
+    private static nint _StyleOverrideOffset = -1;
 
     public ref byte StyleOverride
     {
         get
         {
-            _StyleOverrideOffset = _StyleOverrideOffset ?? Schema.GetOffset(0x3753663C0C9DBF63);
-            return ref _Handle.AsRef<byte>(_StyleOverrideOffset!.Value);
+            if (_StyleOverrideOffset == -1) _StyleOverrideOffset = Schema.GetOffset(0x3753663C0C9DBF63);
+            return ref _Handle.AsRef<byte>(_StyleOverrideOffset);
         }
     }
-    private static nint? _ClientFlagsOffset;
+    private static nint _ClientFlagsOffset = -1;
 
     public ref byte ClientFlags
     {
         get
         {
-            _ClientFlagsOffset = _ClientFlagsOffset ?? Schema.GetOffset(0x3753663C417D6890);
-            return ref _Handle.AsRef<byte>(_ClientFlagsOffset!.Value);
+            if (_ClientFlagsOffset == -1) _ClientFlagsOffset = Schema.GetOffset(0x3753663C417D6890);
+            return ref _Handle.AsRef<byte>(_ClientFlagsOffset);
         }
     }
-    private static nint? _AttributeListOffset;
+    private static nint _AttributeListOffset = -1;
     private CAttributeListImpl? _AttributeListInstance;
 
     public CAttributeList AttributeList
     {
         get
         {
-            _AttributeListOffset = _AttributeListOffset ?? Schema.GetOffset(0x3753663CEF065D97);
+            if (_AttributeListOffset == -1) _AttributeListOffset = Schema.GetOffset(0x3753663CEF065D97);
             var instance = _AttributeListInstance ??= new CAttributeListImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttributeListOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AttributeListOffset);
             return instance;
         }
     }
-    private static nint? _NetworkedDynamicAttributesOffset;
+    private static nint _NetworkedDynamicAttributesOffset = -1;
     private CAttributeListImpl? _NetworkedDynamicAttributesInstance;
 
     public CAttributeList NetworkedDynamicAttributes
     {
         get
         {
-            _NetworkedDynamicAttributesOffset = _NetworkedDynamicAttributesOffset ?? Schema.GetOffset(0x3753663CB576449C);
+            if (_NetworkedDynamicAttributesOffset == -1) _NetworkedDynamicAttributesOffset = Schema.GetOffset(0x3753663CB576449C);
             var instance = _NetworkedDynamicAttributesInstance ??= new CAttributeListImpl(0);
-            instance.DangerousSetHandle(_Handle + _NetworkedDynamicAttributesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NetworkedDynamicAttributesOffset);
             return instance;
         }
     }
-    private static nint? _CustomNameOffset;
+    private static nint _CustomNameOffset = -1;
 
     public string CustomName
     {
         get
         {
-            _CustomNameOffset = _CustomNameOffset ?? Schema.GetOffset(0x3753663CAFD12EE8);
-            return Schema.GetString(_Handle + _CustomNameOffset!.Value);
+            if (_CustomNameOffset == -1) _CustomNameOffset = Schema.GetOffset(0x3753663CAFD12EE8);
+            return Schema.GetString(_Handle + _CustomNameOffset);
         }
         set
         {
-            _CustomNameOffset = _CustomNameOffset ?? Schema.GetOffset(0x3753663CAFD12EE8);
-            Schema.SetFixedString(_Handle, _CustomNameOffset!.Value, value, 161);
+            if (_CustomNameOffset == -1) _CustomNameOffset = Schema.GetOffset(0x3753663CAFD12EE8);
+            Schema.SetFixedString(_Handle, _CustomNameOffset, value, 161);
         }
     }
-    private static nint? _CustomNameOverrideOffset;
+    private static nint _CustomNameOverrideOffset = -1;
 
     public string CustomNameOverride
     {
         get
         {
-            _CustomNameOverrideOffset = _CustomNameOverrideOffset ?? Schema.GetOffset(0x3753663CA74A6ED8);
-            return Schema.GetString(_Handle + _CustomNameOverrideOffset!.Value);
+            if (_CustomNameOverrideOffset == -1) _CustomNameOverrideOffset = Schema.GetOffset(0x3753663CA74A6ED8);
+            return Schema.GetString(_Handle + _CustomNameOverrideOffset);
         }
         set
         {
-            _CustomNameOverrideOffset = _CustomNameOverrideOffset ?? Schema.GetOffset(0x3753663CA74A6ED8);
-            Schema.SetFixedString(_Handle, _CustomNameOverrideOffset!.Value, value, 161);
+            if (_CustomNameOverrideOffset == -1) _CustomNameOverrideOffset = Schema.GetOffset(0x3753663CA74A6ED8);
+            Schema.SetFixedString(_Handle, _CustomNameOverrideOffset, value, 161);
         }
     }
-    private static nint? _CustomNameOverride2Offset;
+    private static nint _CustomNameOverride2Offset = -1;
 
     public string CustomNameOverride2
     {
         get
         {
-            _CustomNameOverride2Offset = _CustomNameOverride2Offset ?? Schema.GetOffset(0x3753663C442C9A5E);
-            return Schema.GetString(_Handle + _CustomNameOverride2Offset!.Value);
+            if (_CustomNameOverride2Offset == -1) _CustomNameOverride2Offset = Schema.GetOffset(0x3753663C442C9A5E);
+            return Schema.GetString(_Handle + _CustomNameOverride2Offset);
         }
         set
         {
-            _CustomNameOverride2Offset = _CustomNameOverride2Offset ?? Schema.GetOffset(0x3753663C442C9A5E);
-            Schema.SetFixedString(_Handle, _CustomNameOverride2Offset!.Value, value, 161);
+            if (_CustomNameOverride2Offset == -1) _CustomNameOverride2Offset = Schema.GetOffset(0x3753663C442C9A5E);
+            Schema.SetFixedString(_Handle, _CustomNameOverride2Offset, value, 161);
         }
     }
-    private static nint? _CustomNameOverride3Offset;
+    private static nint _CustomNameOverride3Offset = -1;
 
     public string CustomNameOverride3
     {
         get
         {
-            _CustomNameOverride3Offset = _CustomNameOverride3Offset ?? Schema.GetOffset(0x3753663C452C9BF1);
-            return Schema.GetString(_Handle + _CustomNameOverride3Offset!.Value);
+            if (_CustomNameOverride3Offset == -1) _CustomNameOverride3Offset = Schema.GetOffset(0x3753663C452C9BF1);
+            return Schema.GetString(_Handle + _CustomNameOverride3Offset);
         }
         set
         {
-            _CustomNameOverride3Offset = _CustomNameOverride3Offset ?? Schema.GetOffset(0x3753663C452C9BF1);
-            Schema.SetFixedString(_Handle, _CustomNameOverride3Offset!.Value, value, 161);
+            if (_CustomNameOverride3Offset == -1) _CustomNameOverride3Offset = Schema.GetOffset(0x3753663C452C9BF1);
+            Schema.SetFixedString(_Handle, _CustomNameOverride3Offset, value, 161);
         }
     }
-    private static nint? _InitializedTagsOffset;
+    private static nint _InitializedTagsOffset = -1;
 
     public ref bool InitializedTags
     {
         get
         {
-            _InitializedTagsOffset = _InitializedTagsOffset ?? Schema.GetOffset(0x3753663C49D33578);
-            return ref _Handle.AsRef<bool>(_InitializedTagsOffset!.Value);
+            if (_InitializedTagsOffset == -1) _InitializedTagsOffset = Schema.GetOffset(0x3753663C49D33578);
+            return ref _Handle.AsRef<bool>(_InitializedTagsOffset);
         }
     }
 

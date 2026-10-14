@@ -16,89 +16,89 @@ internal partial class C_INIT_RtEnvCullImpl : CParticleFunctionInitializerImpl, 
 {
     public C_INIT_RtEnvCullImpl(nint handle) : base(handle) { }
 
-    private static nint? _TestDirOffset;
+    private static nint _TestDirOffset = -1;
 
     public ref Vector TestDir
     {
         get
         {
-            _TestDirOffset = _TestDirOffset ?? Schema.GetOffset(0xEA96DD4FC17166B4);
-            return ref _Handle.AsRef<Vector>(_TestDirOffset!.Value);
+            if (_TestDirOffset == -1) _TestDirOffset = Schema.GetOffset(0xEA96DD4FC17166B4);
+            return ref _Handle.AsRef<Vector>(_TestDirOffset);
         }
     }
-    private static nint? _TestNormalOffset;
+    private static nint _TestNormalOffset = -1;
 
     public ref Vector TestNormal
     {
         get
         {
-            _TestNormalOffset = _TestNormalOffset ?? Schema.GetOffset(0xEA96DD4FD4AC77F2);
-            return ref _Handle.AsRef<Vector>(_TestNormalOffset!.Value);
+            if (_TestNormalOffset == -1) _TestNormalOffset = Schema.GetOffset(0xEA96DD4FD4AC77F2);
+            return ref _Handle.AsRef<Vector>(_TestNormalOffset);
         }
     }
-    private static nint? _UseVelocityOffset;
+    private static nint _UseVelocityOffset = -1;
 
     public ref bool UseVelocity
     {
         get
         {
-            _UseVelocityOffset = _UseVelocityOffset ?? Schema.GetOffset(0xEA96DD4F5E806BAF);
-            return ref _Handle.AsRef<bool>(_UseVelocityOffset!.Value);
+            if (_UseVelocityOffset == -1) _UseVelocityOffset = Schema.GetOffset(0xEA96DD4F5E806BAF);
+            return ref _Handle.AsRef<bool>(_UseVelocityOffset);
         }
     }
-    private static nint? _CullOnMissOffset;
+    private static nint _CullOnMissOffset = -1;
 
     public ref bool CullOnMiss
     {
         get
         {
-            _CullOnMissOffset = _CullOnMissOffset ?? Schema.GetOffset(0xEA96DD4F5E118398);
-            return ref _Handle.AsRef<bool>(_CullOnMissOffset!.Value);
+            if (_CullOnMissOffset == -1) _CullOnMissOffset = Schema.GetOffset(0xEA96DD4F5E118398);
+            return ref _Handle.AsRef<bool>(_CullOnMissOffset);
         }
     }
-    private static nint? _LifeAdjustOffset;
+    private static nint _LifeAdjustOffset = -1;
 
     public ref bool LifeAdjust
     {
         get
         {
-            _LifeAdjustOffset = _LifeAdjustOffset ?? Schema.GetOffset(0xEA96DD4FA38568F0);
-            return ref _Handle.AsRef<bool>(_LifeAdjustOffset!.Value);
+            if (_LifeAdjustOffset == -1) _LifeAdjustOffset = Schema.GetOffset(0xEA96DD4FA38568F0);
+            return ref _Handle.AsRef<bool>(_LifeAdjustOffset);
         }
     }
-    private static nint? _RtEnvNameOffset;
+    private static nint _RtEnvNameOffset = -1;
 
     public string RtEnvName
     {
         get
         {
-            _RtEnvNameOffset = _RtEnvNameOffset ?? Schema.GetOffset(0xEA96DD4FC32A9775);
-            return Schema.GetString(_Handle + _RtEnvNameOffset!.Value);
+            if (_RtEnvNameOffset == -1) _RtEnvNameOffset = Schema.GetOffset(0xEA96DD4FC32A9775);
+            return Schema.GetString(_Handle + _RtEnvNameOffset);
         }
         set
         {
-            _RtEnvNameOffset = _RtEnvNameOffset ?? Schema.GetOffset(0xEA96DD4FC32A9775);
-            Schema.SetFixedString(_Handle, _RtEnvNameOffset!.Value, value, 128);
+            if (_RtEnvNameOffset == -1) _RtEnvNameOffset = Schema.GetOffset(0xEA96DD4FC32A9775);
+            Schema.SetFixedString(_Handle, _RtEnvNameOffset, value, 128);
         }
     }
-    private static nint? _RTEnvCPOffset;
+    private static nint _RTEnvCPOffset = -1;
 
     public ref int RTEnvCP
     {
         get
         {
-            _RTEnvCPOffset = _RTEnvCPOffset ?? Schema.GetOffset(0xEA96DD4F01881731);
-            return ref _Handle.AsRef<int>(_RTEnvCPOffset!.Value);
+            if (_RTEnvCPOffset == -1) _RTEnvCPOffset = Schema.GetOffset(0xEA96DD4F01881731);
+            return ref _Handle.AsRef<int>(_RTEnvCPOffset);
         }
     }
-    private static nint? _ComponentOffset;
+    private static nint _ComponentOffset = -1;
 
     public ref int Component
     {
         get
         {
-            _ComponentOffset = _ComponentOffset ?? Schema.GetOffset(0xEA96DD4FBFD0952C);
-            return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
+            if (_ComponentOffset == -1) _ComponentOffset = Schema.GetOffset(0xEA96DD4FBFD0952C);
+            return ref _Handle.AsRef<int>(_ComponentOffset);
         }
     }
 

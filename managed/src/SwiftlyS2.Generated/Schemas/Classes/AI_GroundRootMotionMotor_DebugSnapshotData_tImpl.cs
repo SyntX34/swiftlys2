@@ -16,194 +16,194 @@ internal partial class AI_GroundRootMotionMotor_DebugSnapshotData_tImpl : DebugS
 {
     public AI_GroundRootMotionMotor_DebugSnapshotData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _Desired_movement_gait_setOffset;
+    private static nint _Desired_movement_gait_setOffset = -1;
 
     public ref CGlobalSymbol Desired_movement_gait_set
     {
         get
         {
-            _Desired_movement_gait_setOffset = _Desired_movement_gait_setOffset ?? Schema.GetOffset(0xE3E5EB79A00E041A);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Desired_movement_gait_setOffset!.Value);
+            if (_Desired_movement_gait_setOffset == -1) _Desired_movement_gait_setOffset = Schema.GetOffset(0xE3E5EB79A00E041A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Desired_movement_gait_setOffset);
         }
     }
-    private static nint? _Desired_movement_gaitOffset;
+    private static nint _Desired_movement_gaitOffset = -1;
 
     public ref CGlobalSymbol Desired_movement_gait
     {
         get
         {
-            _Desired_movement_gaitOffset = _Desired_movement_gaitOffset ?? Schema.GetOffset(0xE3E5EB7923CCEE81);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Desired_movement_gaitOffset!.Value);
+            if (_Desired_movement_gaitOffset == -1) _Desired_movement_gaitOffset = Schema.GetOffset(0xE3E5EB7923CCEE81);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Desired_movement_gaitOffset);
         }
     }
-    private static nint? _Current_movement_gait_setOffset;
+    private static nint _Current_movement_gait_setOffset = -1;
 
     public ref CGlobalSymbol Current_movement_gait_set
     {
         get
         {
-            _Current_movement_gait_setOffset = _Current_movement_gait_setOffset ?? Schema.GetOffset(0xE3E5EB79A785FDBD);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Current_movement_gait_setOffset!.Value);
+            if (_Current_movement_gait_setOffset == -1) _Current_movement_gait_setOffset = Schema.GetOffset(0xE3E5EB79A785FDBD);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Current_movement_gait_setOffset);
         }
     }
-    private static nint? _Current_movement_gaitOffset;
+    private static nint _Current_movement_gaitOffset = -1;
 
     public ref CGlobalSymbol Current_movement_gait
     {
         get
         {
-            _Current_movement_gaitOffset = _Current_movement_gaitOffset ?? Schema.GetOffset(0xE3E5EB79F92ACAC2);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Current_movement_gaitOffset!.Value);
+            if (_Current_movement_gaitOffset == -1) _Current_movement_gaitOffset = Schema.GetOffset(0xE3E5EB79F92ACAC2);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Current_movement_gaitOffset);
         }
     }
-    private static nint? _Movement_setting_idOffset;
+    private static nint _Movement_setting_idOffset = -1;
 
     public ref CGlobalSymbol Movement_setting_id
     {
         get
         {
-            _Movement_setting_idOffset = _Movement_setting_idOffset ?? Schema.GetOffset(0xE3E5EB79E024CE51);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Movement_setting_idOffset!.Value);
+            if (_Movement_setting_idOffset == -1) _Movement_setting_idOffset = Schema.GetOffset(0xE3E5EB79E024CE51);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Movement_setting_idOffset);
         }
     }
-    private static nint? _Gait_switch_blocked_reasonOffset;
+    private static nint _Gait_switch_blocked_reasonOffset = -1;
 
     public ref CGlobalSymbol Gait_switch_blocked_reason
     {
         get
         {
-            _Gait_switch_blocked_reasonOffset = _Gait_switch_blocked_reasonOffset ?? Schema.GetOffset(0xE3E5EB7924CD403F);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Gait_switch_blocked_reasonOffset!.Value);
+            if (_Gait_switch_blocked_reasonOffset == -1) _Gait_switch_blocked_reasonOffset = Schema.GetOffset(0xE3E5EB7924CD403F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Gait_switch_blocked_reasonOffset);
         }
     }
-    private static nint? _B_goal_completion_allowedOffset;
+    private static nint _B_goal_completion_allowedOffset = -1;
 
     public ref bool B_goal_completion_allowed
     {
         get
         {
-            _B_goal_completion_allowedOffset = _B_goal_completion_allowedOffset ?? Schema.GetOffset(0xE3E5EB79D462DBFB);
-            return ref _Handle.AsRef<bool>(_B_goal_completion_allowedOffset!.Value);
+            if (_B_goal_completion_allowedOffset == -1) _B_goal_completion_allowedOffset = Schema.GetOffset(0xE3E5EB79D462DBFB);
+            return ref _Handle.AsRef<bool>(_B_goal_completion_allowedOffset);
         }
     }
-    private static nint? _StateOffset;
+    private static nint _StateOffset = -1;
 
     public ref CGlobalSymbol State
     {
         get
         {
-            _StateOffset = _StateOffset ?? Schema.GetOffset(0xE3E5EB79783132F6);
-            return ref _Handle.AsRef<CGlobalSymbol>(_StateOffset!.Value);
+            if (_StateOffset == -1) _StateOffset = Schema.GetOffset(0xE3E5EB79783132F6);
+            return ref _Handle.AsRef<CGlobalSymbol>(_StateOffset);
         }
     }
-    private static nint? _N_state_active_tick_countOffset;
+    private static nint _N_state_active_tick_countOffset = -1;
 
     public ref int N_state_active_tick_count
     {
         get
         {
-            _N_state_active_tick_countOffset = _N_state_active_tick_countOffset ?? Schema.GetOffset(0xE3E5EB798364EEF2);
-            return ref _Handle.AsRef<int>(_N_state_active_tick_countOffset!.Value);
+            if (_N_state_active_tick_countOffset == -1) _N_state_active_tick_countOffset = Schema.GetOffset(0xE3E5EB798364EEF2);
+            return ref _Handle.AsRef<int>(_N_state_active_tick_countOffset);
         }
     }
-    private static nint? _B_has_pathOffset;
+    private static nint _B_has_pathOffset = -1;
 
     public ref bool B_has_path
     {
         get
         {
-            _B_has_pathOffset = _B_has_pathOffset ?? Schema.GetOffset(0xE3E5EB793D2AEA64);
-            return ref _Handle.AsRef<bool>(_B_has_pathOffset!.Value);
+            if (_B_has_pathOffset == -1) _B_has_pathOffset = Schema.GetOffset(0xE3E5EB793D2AEA64);
+            return ref _Handle.AsRef<bool>(_B_has_pathOffset);
         }
     }
-    private static nint? _F_remaining_ground_path_lengthOffset;
+    private static nint _F_remaining_ground_path_lengthOffset = -1;
 
     public ref float F_remaining_ground_path_length
     {
         get
         {
-            _F_remaining_ground_path_lengthOffset = _F_remaining_ground_path_lengthOffset ?? Schema.GetOffset(0xE3E5EB7955E02803);
-            return ref _Handle.AsRef<float>(_F_remaining_ground_path_lengthOffset!.Value);
+            if (_F_remaining_ground_path_lengthOffset == -1) _F_remaining_ground_path_lengthOffset = Schema.GetOffset(0xE3E5EB7955E02803);
+            return ref _Handle.AsRef<float>(_F_remaining_ground_path_lengthOffset);
         }
     }
-    private static nint? _F_current_speedOffset;
+    private static nint _F_current_speedOffset = -1;
 
     public ref float F_current_speed
     {
         get
         {
-            _F_current_speedOffset = _F_current_speedOffset ?? Schema.GetOffset(0xE3E5EB795E56C26F);
-            return ref _Handle.AsRef<float>(_F_current_speedOffset!.Value);
+            if (_F_current_speedOffset == -1) _F_current_speedOffset = Schema.GetOffset(0xE3E5EB795E56C26F);
+            return ref _Handle.AsRef<float>(_F_current_speedOffset);
         }
     }
-    private static nint? _Move_typeOffset;
+    private static nint _Move_typeOffset = -1;
 
     public ref CGlobalSymbol Move_type
     {
         get
         {
-            _Move_typeOffset = _Move_typeOffset ?? Schema.GetOffset(0xE3E5EB79108798F9);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Move_typeOffset!.Value);
+            if (_Move_typeOffset == -1) _Move_typeOffset = Schema.GetOffset(0xE3E5EB79108798F9);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Move_typeOffset);
         }
     }
-    private static nint? _F_forward_strafing_angle_actualOffset;
+    private static nint _F_forward_strafing_angle_actualOffset = -1;
 
     public ref float F_forward_strafing_angle_actual
     {
         get
         {
-            _F_forward_strafing_angle_actualOffset = _F_forward_strafing_angle_actualOffset ?? Schema.GetOffset(0xE3E5EB79BB989523);
-            return ref _Handle.AsRef<float>(_F_forward_strafing_angle_actualOffset!.Value);
+            if (_F_forward_strafing_angle_actualOffset == -1) _F_forward_strafing_angle_actualOffset = Schema.GetOffset(0xE3E5EB79BB989523);
+            return ref _Handle.AsRef<float>(_F_forward_strafing_angle_actualOffset);
         }
     }
-    private static nint? _F_forward_strafing_angle_desiredOffset;
+    private static nint _F_forward_strafing_angle_desiredOffset = -1;
 
     public ref float F_forward_strafing_angle_desired
     {
         get
         {
-            _F_forward_strafing_angle_desiredOffset = _F_forward_strafing_angle_desiredOffset ?? Schema.GetOffset(0xE3E5EB79AFB92611);
-            return ref _Handle.AsRef<float>(_F_forward_strafing_angle_desiredOffset!.Value);
+            if (_F_forward_strafing_angle_desiredOffset == -1) _F_forward_strafing_angle_desiredOffset = Schema.GetOffset(0xE3E5EB79AFB92611);
+            return ref _Handle.AsRef<float>(_F_forward_strafing_angle_desiredOffset);
         }
     }
-    private static nint? _F_forward_strafing_angle_committedOffset;
+    private static nint _F_forward_strafing_angle_committedOffset = -1;
 
     public ref float F_forward_strafing_angle_committed
     {
         get
         {
-            _F_forward_strafing_angle_committedOffset = _F_forward_strafing_angle_committedOffset ?? Schema.GetOffset(0xE3E5EB79A42C1A3D);
-            return ref _Handle.AsRef<float>(_F_forward_strafing_angle_committedOffset!.Value);
+            if (_F_forward_strafing_angle_committedOffset == -1) _F_forward_strafing_angle_committedOffset = Schema.GetOffset(0xE3E5EB79A42C1A3D);
+            return ref _Handle.AsRef<float>(_F_forward_strafing_angle_committedOffset);
         }
     }
-    private static nint? _F_current_leanOffset;
+    private static nint _F_current_leanOffset = -1;
 
     public ref float F_current_lean
     {
         get
         {
-            _F_current_leanOffset = _F_current_leanOffset ?? Schema.GetOffset(0xE3E5EB791067BC54);
-            return ref _Handle.AsRef<float>(_F_current_leanOffset!.Value);
+            if (_F_current_leanOffset == -1) _F_current_leanOffset = Schema.GetOffset(0xE3E5EB791067BC54);
+            return ref _Handle.AsRef<float>(_F_current_leanOffset);
         }
     }
-    private static nint? _F_target_leanOffset;
+    private static nint _F_target_leanOffset = -1;
 
     public ref float F_target_lean
     {
         get
         {
-            _F_target_leanOffset = _F_target_leanOffset ?? Schema.GetOffset(0xE3E5EB799AB8C214);
-            return ref _Handle.AsRef<float>(_F_target_leanOffset!.Value);
+            if (_F_target_leanOffset == -1) _F_target_leanOffset = Schema.GetOffset(0xE3E5EB799AB8C214);
+            return ref _Handle.AsRef<float>(_F_target_leanOffset);
         }
     }
-    private static nint? _Vec_eventsOffset;
+    private static nint _Vec_eventsOffset = -1;
 
     public ref CUtlVector<AI_GroundRootMotionMotor_DebugSnapshotData_t__Event_t> Vec_events
     {
         get
         {
-            _Vec_eventsOffset = _Vec_eventsOffset ?? Schema.GetOffset(0xE3E5EB79C197E10B);
-            return ref _Handle.AsRef<CUtlVector<AI_GroundRootMotionMotor_DebugSnapshotData_t__Event_t>>(_Vec_eventsOffset!.Value);
+            if (_Vec_eventsOffset == -1) _Vec_eventsOffset = Schema.GetOffset(0xE3E5EB79C197E10B);
+            return ref _Handle.AsRef<CUtlVector<AI_GroundRootMotionMotor_DebugSnapshotData_t__Event_t>>(_Vec_eventsOffset);
         }
     }
 

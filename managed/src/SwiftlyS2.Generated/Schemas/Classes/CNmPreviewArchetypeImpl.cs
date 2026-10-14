@@ -16,59 +16,59 @@ internal partial class CNmPreviewArchetypeImpl : SchemaClass, CNmPreviewArchetyp
 {
     public CNmPreviewArchetypeImpl(nint handle) : base(handle) { }
 
-    private static nint? _PrimarySkeletonOffset;
+    private static nint _PrimarySkeletonOffset = -1;
 
     public string PrimarySkeleton
     {
         get
         {
-            _PrimarySkeletonOffset = _PrimarySkeletonOffset ?? Schema.GetOffset(0xE2080984BA712062);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PrimarySkeletonOffset!.Value));
+            if (_PrimarySkeletonOffset == -1) _PrimarySkeletonOffset = Schema.GetOffset(0xE2080984BA712062);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PrimarySkeletonOffset));
         }
         set
         {
-            _PrimarySkeletonOffset = _PrimarySkeletonOffset ?? Schema.GetOffset(0xE2080984BA712062);
-            Schema.SetCUtlString(_Handle, _PrimarySkeletonOffset!.Value, value);
+            if (_PrimarySkeletonOffset == -1) _PrimarySkeletonOffset = Schema.GetOffset(0xE2080984BA712062);
+            Schema.SetCUtlString(_Handle, _PrimarySkeletonOffset, value);
         }
     }
-    private static nint? _PreviewModelOffset;
+    private static nint _PreviewModelOffset = -1;
 
     public string PreviewModel
     {
         get
         {
-            _PreviewModelOffset = _PreviewModelOffset ?? Schema.GetOffset(0xE2080984BC4FDC14);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewModelOffset!.Value));
+            if (_PreviewModelOffset == -1) _PreviewModelOffset = Schema.GetOffset(0xE2080984BC4FDC14);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewModelOffset));
         }
         set
         {
-            _PreviewModelOffset = _PreviewModelOffset ?? Schema.GetOffset(0xE2080984BC4FDC14);
-            Schema.SetCUtlString(_Handle, _PreviewModelOffset!.Value, value);
+            if (_PreviewModelOffset == -1) _PreviewModelOffset = Schema.GetOffset(0xE2080984BC4FDC14);
+            Schema.SetCUtlString(_Handle, _PreviewModelOffset, value);
         }
     }
-    private static nint? _BodyPartChoiceNameOffset;
+    private static nint _BodyPartChoiceNameOffset = -1;
 
     public string BodyPartChoiceName
     {
         get
         {
-            _BodyPartChoiceNameOffset = _BodyPartChoiceNameOffset ?? Schema.GetOffset(0xE2080984E3E16E6C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BodyPartChoiceNameOffset!.Value));
+            if (_BodyPartChoiceNameOffset == -1) _BodyPartChoiceNameOffset = Schema.GetOffset(0xE2080984E3E16E6C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BodyPartChoiceNameOffset));
         }
         set
         {
-            _BodyPartChoiceNameOffset = _BodyPartChoiceNameOffset ?? Schema.GetOffset(0xE2080984E3E16E6C);
-            Schema.SetCUtlString(_Handle, _BodyPartChoiceNameOffset!.Value, value);
+            if (_BodyPartChoiceNameOffset == -1) _BodyPartChoiceNameOffset = Schema.GetOffset(0xE2080984E3E16E6C);
+            Schema.SetCUtlString(_Handle, _BodyPartChoiceNameOffset, value);
         }
     }
-    private static nint? _SecondarySkeletonSettingsOffset;
+    private static nint _SecondarySkeletonSettingsOffset = -1;
 
     public ref CUtlVector<CNmPreviewArchetype__SecondarySkeleton_t> SecondarySkeletonSettings
     {
         get
         {
-            _SecondarySkeletonSettingsOffset = _SecondarySkeletonSettingsOffset ?? Schema.GetOffset(0xE2080984B424AE1F);
-            return ref _Handle.AsRef<CUtlVector<CNmPreviewArchetype__SecondarySkeleton_t>>(_SecondarySkeletonSettingsOffset!.Value);
+            if (_SecondarySkeletonSettingsOffset == -1) _SecondarySkeletonSettingsOffset = Schema.GetOffset(0xE2080984B424AE1F);
+            return ref _Handle.AsRef<CUtlVector<CNmPreviewArchetype__SecondarySkeleton_t>>(_SecondarySkeletonSettingsOffset);
         }
     }
 

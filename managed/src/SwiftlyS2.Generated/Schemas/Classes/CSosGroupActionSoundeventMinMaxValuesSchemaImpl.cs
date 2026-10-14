@@ -16,124 +16,124 @@ internal partial class CSosGroupActionSoundeventMinMaxValuesSchemaImpl : CSosGro
 {
     public CSosGroupActionSoundeventMinMaxValuesSchemaImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrQueryPublicFieldNameOffset;
+    private static nint _StrQueryPublicFieldNameOffset = -1;
 
     public string StrQueryPublicFieldName
     {
         get
         {
-            _StrQueryPublicFieldNameOffset = _StrQueryPublicFieldNameOffset ?? Schema.GetOffset(0xDC3C5E1C40839714);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrQueryPublicFieldNameOffset!.Value));
+            if (_StrQueryPublicFieldNameOffset == -1) _StrQueryPublicFieldNameOffset = Schema.GetOffset(0xDC3C5E1C40839714);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrQueryPublicFieldNameOffset));
         }
         set
         {
-            _StrQueryPublicFieldNameOffset = _StrQueryPublicFieldNameOffset ?? Schema.GetOffset(0xDC3C5E1C40839714);
-            Schema.SetCUtlString(_Handle, _StrQueryPublicFieldNameOffset!.Value, value);
+            if (_StrQueryPublicFieldNameOffset == -1) _StrQueryPublicFieldNameOffset = Schema.GetOffset(0xDC3C5E1C40839714);
+            Schema.SetCUtlString(_Handle, _StrQueryPublicFieldNameOffset, value);
         }
     }
-    private static nint? _StrDelayPublicFieldNameOffset;
+    private static nint _StrDelayPublicFieldNameOffset = -1;
 
     public string StrDelayPublicFieldName
     {
         get
         {
-            _StrDelayPublicFieldNameOffset = _StrDelayPublicFieldNameOffset ?? Schema.GetOffset(0xDC3C5E1CC2E1170D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrDelayPublicFieldNameOffset!.Value));
+            if (_StrDelayPublicFieldNameOffset == -1) _StrDelayPublicFieldNameOffset = Schema.GetOffset(0xDC3C5E1CC2E1170D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrDelayPublicFieldNameOffset));
         }
         set
         {
-            _StrDelayPublicFieldNameOffset = _StrDelayPublicFieldNameOffset ?? Schema.GetOffset(0xDC3C5E1CC2E1170D);
-            Schema.SetCUtlString(_Handle, _StrDelayPublicFieldNameOffset!.Value, value);
+            if (_StrDelayPublicFieldNameOffset == -1) _StrDelayPublicFieldNameOffset = Schema.GetOffset(0xDC3C5E1CC2E1170D);
+            Schema.SetCUtlString(_Handle, _StrDelayPublicFieldNameOffset, value);
         }
     }
-    private static nint? _ExcludeStoppedSoundsOffset;
+    private static nint _ExcludeStoppedSoundsOffset = -1;
 
     public ref bool ExcludeStoppedSounds
     {
         get
         {
-            _ExcludeStoppedSoundsOffset = _ExcludeStoppedSoundsOffset ?? Schema.GetOffset(0xDC3C5E1C1BDF6FB6);
-            return ref _Handle.AsRef<bool>(_ExcludeStoppedSoundsOffset!.Value);
+            if (_ExcludeStoppedSoundsOffset == -1) _ExcludeStoppedSoundsOffset = Schema.GetOffset(0xDC3C5E1C1BDF6FB6);
+            return ref _Handle.AsRef<bool>(_ExcludeStoppedSoundsOffset);
         }
     }
-    private static nint? _ExcludeDelayedSoundsOffset;
+    private static nint _ExcludeDelayedSoundsOffset = -1;
 
     public ref bool ExcludeDelayedSounds
     {
         get
         {
-            _ExcludeDelayedSoundsOffset = _ExcludeDelayedSoundsOffset ?? Schema.GetOffset(0xDC3C5E1CA849B37D);
-            return ref _Handle.AsRef<bool>(_ExcludeDelayedSoundsOffset!.Value);
+            if (_ExcludeDelayedSoundsOffset == -1) _ExcludeDelayedSoundsOffset = Schema.GetOffset(0xDC3C5E1CA849B37D);
+            return ref _Handle.AsRef<bool>(_ExcludeDelayedSoundsOffset);
         }
     }
-    private static nint? _ExcludeSoundsBelowThresholdOffset;
+    private static nint _ExcludeSoundsBelowThresholdOffset = -1;
 
     public ref bool ExcludeSoundsBelowThreshold
     {
         get
         {
-            _ExcludeSoundsBelowThresholdOffset = _ExcludeSoundsBelowThresholdOffset ?? Schema.GetOffset(0xDC3C5E1CBEF10829);
-            return ref _Handle.AsRef<bool>(_ExcludeSoundsBelowThresholdOffset!.Value);
+            if (_ExcludeSoundsBelowThresholdOffset == -1) _ExcludeSoundsBelowThresholdOffset = Schema.GetOffset(0xDC3C5E1CBEF10829);
+            return ref _Handle.AsRef<bool>(_ExcludeSoundsBelowThresholdOffset);
         }
     }
-    private static nint? _ExcludeSoundsMinThresholdValueOffset;
+    private static nint _ExcludeSoundsMinThresholdValueOffset = -1;
 
     public ref float ExcludeSoundsMinThresholdValue
     {
         get
         {
-            _ExcludeSoundsMinThresholdValueOffset = _ExcludeSoundsMinThresholdValueOffset ?? Schema.GetOffset(0xDC3C5E1CBAF64DF9);
-            return ref _Handle.AsRef<float>(_ExcludeSoundsMinThresholdValueOffset!.Value);
+            if (_ExcludeSoundsMinThresholdValueOffset == -1) _ExcludeSoundsMinThresholdValueOffset = Schema.GetOffset(0xDC3C5E1CBAF64DF9);
+            return ref _Handle.AsRef<float>(_ExcludeSoundsMinThresholdValueOffset);
         }
     }
-    private static nint? _ExcludSoundsAboveThresholdOffset;
+    private static nint _ExcludSoundsAboveThresholdOffset = -1;
 
     public ref bool ExcludSoundsAboveThreshold
     {
         get
         {
-            _ExcludSoundsAboveThresholdOffset = _ExcludSoundsAboveThresholdOffset ?? Schema.GetOffset(0xDC3C5E1CBD2BDEAE);
-            return ref _Handle.AsRef<bool>(_ExcludSoundsAboveThresholdOffset!.Value);
+            if (_ExcludSoundsAboveThresholdOffset == -1) _ExcludSoundsAboveThresholdOffset = Schema.GetOffset(0xDC3C5E1CBD2BDEAE);
+            return ref _Handle.AsRef<bool>(_ExcludSoundsAboveThresholdOffset);
         }
     }
-    private static nint? _ExcludeSoundsMaxThresholdValueOffset;
+    private static nint _ExcludeSoundsMaxThresholdValueOffset = -1;
 
     public ref float ExcludeSoundsMaxThresholdValue
     {
         get
         {
-            _ExcludeSoundsMaxThresholdValueOffset = _ExcludeSoundsMaxThresholdValueOffset ?? Schema.GetOffset(0xDC3C5E1C67D717C7);
-            return ref _Handle.AsRef<float>(_ExcludeSoundsMaxThresholdValueOffset!.Value);
+            if (_ExcludeSoundsMaxThresholdValueOffset == -1) _ExcludeSoundsMaxThresholdValueOffset = Schema.GetOffset(0xDC3C5E1C67D717C7);
+            return ref _Handle.AsRef<float>(_ExcludeSoundsMaxThresholdValueOffset);
         }
     }
-    private static nint? _StrMinValueNameOffset;
+    private static nint _StrMinValueNameOffset = -1;
 
     public string StrMinValueName
     {
         get
         {
-            _StrMinValueNameOffset = _StrMinValueNameOffset ?? Schema.GetOffset(0xDC3C5E1CCF654B06);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMinValueNameOffset!.Value));
+            if (_StrMinValueNameOffset == -1) _StrMinValueNameOffset = Schema.GetOffset(0xDC3C5E1CCF654B06);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMinValueNameOffset));
         }
         set
         {
-            _StrMinValueNameOffset = _StrMinValueNameOffset ?? Schema.GetOffset(0xDC3C5E1CCF654B06);
-            Schema.SetCUtlString(_Handle, _StrMinValueNameOffset!.Value, value);
+            if (_StrMinValueNameOffset == -1) _StrMinValueNameOffset = Schema.GetOffset(0xDC3C5E1CCF654B06);
+            Schema.SetCUtlString(_Handle, _StrMinValueNameOffset, value);
         }
     }
-    private static nint? _StrMaxValueNameOffset;
+    private static nint _StrMaxValueNameOffset = -1;
 
     public string StrMaxValueName
     {
         get
         {
-            _StrMaxValueNameOffset = _StrMaxValueNameOffset ?? Schema.GetOffset(0xDC3C5E1CEF3A2D5C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMaxValueNameOffset!.Value));
+            if (_StrMaxValueNameOffset == -1) _StrMaxValueNameOffset = Schema.GetOffset(0xDC3C5E1CEF3A2D5C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMaxValueNameOffset));
         }
         set
         {
-            _StrMaxValueNameOffset = _StrMaxValueNameOffset ?? Schema.GetOffset(0xDC3C5E1CEF3A2D5C);
-            Schema.SetCUtlString(_Handle, _StrMaxValueNameOffset!.Value, value);
+            if (_StrMaxValueNameOffset == -1) _StrMaxValueNameOffset = Schema.GetOffset(0xDC3C5E1CEF3A2D5C);
+            Schema.SetCUtlString(_Handle, _StrMaxValueNameOffset, value);
         }
     }
 

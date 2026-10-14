@@ -16,19 +16,19 @@ internal partial class GeneratedTextureHandle_tImpl : SchemaClass, GeneratedText
 {
     public GeneratedTextureHandle_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrBitmapNameOffset;
+    private static nint _StrBitmapNameOffset = -1;
 
     public string StrBitmapName
     {
         get
         {
-            _StrBitmapNameOffset = _StrBitmapNameOffset ?? Schema.GetOffset(0x271E6160EA9C7EF0);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrBitmapNameOffset!.Value));
+            if (_StrBitmapNameOffset == -1) _StrBitmapNameOffset = Schema.GetOffset(0x271E6160EA9C7EF0);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrBitmapNameOffset));
         }
         set
         {
-            _StrBitmapNameOffset = _StrBitmapNameOffset ?? Schema.GetOffset(0x271E6160EA9C7EF0);
-            Schema.SetCUtlString(_Handle, _StrBitmapNameOffset!.Value, value);
+            if (_StrBitmapNameOffset == -1) _StrBitmapNameOffset = Schema.GetOffset(0x271E6160EA9C7EF0);
+            Schema.SetCUtlString(_Handle, _StrBitmapNameOffset, value);
         }
     }
 

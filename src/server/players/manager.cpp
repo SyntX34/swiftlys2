@@ -101,6 +101,7 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
         }
 
         auto& blockedBits = player->GetBlockedTransmittingBits();
+        if (blockedBits.blockedCount.load(std::memory_order_relaxed) == 0) continue;
 
         QueueLockGuard lock(blockedBits.mutex);
 

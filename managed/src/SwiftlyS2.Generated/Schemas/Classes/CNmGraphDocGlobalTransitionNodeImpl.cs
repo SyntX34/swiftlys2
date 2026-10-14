@@ -16,16 +16,16 @@ internal partial class CNmGraphDocGlobalTransitionNodeImpl : CNmGraphDocTransiti
 {
     public CNmGraphDocGlobalTransitionNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _StateIDOffset;
+    private static nint _StateIDOffset = -1;
     private SchemaUntypedField? _StateIDInstance;
 
     public SchemaUntypedField StateID
     {
         get
         {
-            _StateIDOffset = _StateIDOffset ?? Schema.GetOffset(0xD714DAC15362B56B);
+            if (_StateIDOffset == -1) _StateIDOffset = Schema.GetOffset(0xD714DAC15362B56B);
             var instance = _StateIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _StateIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StateIDOffset);
             return instance;
         }
     }

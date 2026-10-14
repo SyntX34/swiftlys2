@@ -16,29 +16,29 @@ internal partial class IPhysAggregateInstanceImpl : IPhysicsBodyListImpl, IPhysA
 {
     public IPhysAggregateInstanceImpl(nint handle) : base(handle) { }
 
-    private static nint? _SkeletonOffset;
+    private static nint _SkeletonOffset = -1;
     private SchemaUntypedField? _SkeletonInstance;
 
     public SchemaUntypedField? Skeleton
     {
         get
         {
-            _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0xF10205DC44BBF688);
-            var ptr = _Handle.Read<nint>(_SkeletonOffset!.Value);
+            if (_SkeletonOffset == -1) _SkeletonOffset = Schema.GetOffset(0xF10205DC44BBF688);
+            var ptr = _Handle.Read<nint>(_SkeletonOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _SkeletonInstance ??= new SchemaUntypedField(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _IsAxisAlignedOffset;
+    private static nint _IsAxisAlignedOffset = -1;
 
     public ref bool IsAxisAligned
     {
         get
         {
-            _IsAxisAlignedOffset = _IsAxisAlignedOffset ?? Schema.GetOffset(0xF10205DC24D04088);
-            return ref _Handle.AsRef<bool>(_IsAxisAlignedOffset!.Value);
+            if (_IsAxisAlignedOffset == -1) _IsAxisAlignedOffset = Schema.GetOffset(0xF10205DC24D04088);
+            return ref _Handle.AsRef<bool>(_IsAxisAlignedOffset);
         }
     }
 

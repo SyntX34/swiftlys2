@@ -16,24 +16,24 @@ internal partial class CPathHelperUpdateNodeImpl : CUnaryUpdateNodeImpl, CPathHe
 {
     public CPathHelperUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _StoppingRadiusOffset;
+    private static nint _StoppingRadiusOffset = -1;
 
     public ref float StoppingRadius
     {
         get
         {
-            _StoppingRadiusOffset = _StoppingRadiusOffset ?? Schema.GetOffset(0xB24262C3172E3D9);
-            return ref _Handle.AsRef<float>(_StoppingRadiusOffset!.Value);
+            if (_StoppingRadiusOffset == -1) _StoppingRadiusOffset = Schema.GetOffset(0xB24262C3172E3D9);
+            return ref _Handle.AsRef<float>(_StoppingRadiusOffset);
         }
     }
-    private static nint? _StoppingSpeedScaleOffset;
+    private static nint _StoppingSpeedScaleOffset = -1;
 
     public ref float StoppingSpeedScale
     {
         get
         {
-            _StoppingSpeedScaleOffset = _StoppingSpeedScaleOffset ?? Schema.GetOffset(0xB24262CA2389D04);
-            return ref _Handle.AsRef<float>(_StoppingSpeedScaleOffset!.Value);
+            if (_StoppingSpeedScaleOffset == -1) _StoppingSpeedScaleOffset = Schema.GetOffset(0xB24262CA2389D04);
+            return ref _Handle.AsRef<float>(_StoppingSpeedScaleOffset);
         }
     }
 

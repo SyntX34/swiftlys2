@@ -16,85 +16,85 @@ internal partial class C_OP_MaintainSequentialPathImpl : CParticleFunctionOperat
 {
     public C_OP_MaintainSequentialPathImpl(nint handle) : base(handle) { }
 
-    private static nint? _MaxDistanceOffset;
+    private static nint _MaxDistanceOffset = -1;
     private CParticleCollectionFloatInputImpl? _MaxDistanceInstance;
 
     public CParticleCollectionFloatInput MaxDistance
     {
         get
         {
-            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x3F7004B8844E396A);
+            if (_MaxDistanceOffset == -1) _MaxDistanceOffset = Schema.GetOffset(0x3F7004B8844E396A);
             var instance = _MaxDistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset);
             return instance;
         }
     }
-    private static nint? _NumToAssignOffset;
+    private static nint _NumToAssignOffset = -1;
     private CParticleCollectionFloatInputImpl? _NumToAssignInstance;
 
     public CParticleCollectionFloatInput NumToAssign
     {
         get
         {
-            _NumToAssignOffset = _NumToAssignOffset ?? Schema.GetOffset(0x3F7004B8F73366BD);
+            if (_NumToAssignOffset == -1) _NumToAssignOffset = Schema.GetOffset(0x3F7004B8F73366BD);
             var instance = _NumToAssignInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _NumToAssignOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NumToAssignOffset);
             return instance;
         }
     }
-    private static nint? _CohesionStrengthOffset;
+    private static nint _CohesionStrengthOffset = -1;
     private CParticleCollectionFloatInputImpl? _CohesionStrengthInstance;
 
     public CParticleCollectionFloatInput CohesionStrength
     {
         get
         {
-            _CohesionStrengthOffset = _CohesionStrengthOffset ?? Schema.GetOffset(0x3F7004B8A5A506EA);
+            if (_CohesionStrengthOffset == -1) _CohesionStrengthOffset = Schema.GetOffset(0x3F7004B8A5A506EA);
             var instance = _CohesionStrengthInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _CohesionStrengthOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CohesionStrengthOffset);
             return instance;
         }
     }
-    private static nint? _ToleranceOffset;
+    private static nint _ToleranceOffset = -1;
 
     public ref float Tolerance
     {
         get
         {
-            _ToleranceOffset = _ToleranceOffset ?? Schema.GetOffset(0x3F7004B88C29728E);
-            return ref _Handle.AsRef<float>(_ToleranceOffset!.Value);
+            if (_ToleranceOffset == -1) _ToleranceOffset = Schema.GetOffset(0x3F7004B88C29728E);
+            return ref _Handle.AsRef<float>(_ToleranceOffset);
         }
     }
-    private static nint? _LoopOffset;
+    private static nint _LoopOffset = -1;
 
     public ref bool Loop
     {
         get
         {
-            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0x3F7004B8C668A4CB);
-            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+            if (_LoopOffset == -1) _LoopOffset = Schema.GetOffset(0x3F7004B8C668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset);
         }
     }
-    private static nint? _UseParticleCountOffset;
+    private static nint _UseParticleCountOffset = -1;
 
     public ref bool UseParticleCount
     {
         get
         {
-            _UseParticleCountOffset = _UseParticleCountOffset ?? Schema.GetOffset(0x3F7004B8D4DA0515);
-            return ref _Handle.AsRef<bool>(_UseParticleCountOffset!.Value);
+            if (_UseParticleCountOffset == -1) _UseParticleCountOffset = Schema.GetOffset(0x3F7004B8D4DA0515);
+            return ref _Handle.AsRef<bool>(_UseParticleCountOffset);
         }
     }
-    private static nint? _PathParamsOffset;
+    private static nint _PathParamsOffset = -1;
     private CPathParametersImpl? _PathParamsInstance;
 
     public CPathParameters PathParams
     {
         get
         {
-            _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0x3F7004B83C10092C);
+            if (_PathParamsOffset == -1) _PathParamsOffset = Schema.GetOffset(0x3F7004B83C10092C);
             var instance = _PathParamsInstance ??= new CPathParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _PathParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PathParamsOffset);
             return instance;
         }
     }

@@ -16,80 +16,80 @@ internal partial class ParticleNode_tImpl : SchemaClass, ParticleNode_t
 {
     public ParticleNode_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EntityOffset;
+    private static nint _EntityOffset = -1;
 
     public ref CHandle<C_BaseEntity> Entity
     {
         get
         {
-            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xBECF421C6EBADCB0);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset!.Value);
+            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0xBECF421C6EBADCB0);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset);
         }
     }
-    private static nint? _IndexOffset;
+    private static nint _IndexOffset = -1;
     private ParticleIndex_tImpl? _IndexInstance;
 
     public ParticleIndex_t Index
     {
         get
         {
-            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0xBECF421C8F270140);
+            if (_IndexOffset == -1) _IndexOffset = Schema.GetOffset(0xBECF421C8F270140);
             var instance = _IndexInstance ??= new ParticleIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _IndexOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IndexOffset);
             return instance;
         }
     }
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
     private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xBECF421C67FE9DC4);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0xBECF421C67FE9DC4);
             var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
             return instance;
         }
     }
-    private static nint? _GrowthDurationOffset;
+    private static nint _GrowthDurationOffset = -1;
 
     public ref float GrowthDuration
     {
         get
         {
-            _GrowthDurationOffset = _GrowthDurationOffset ?? Schema.GetOffset(0xBECF421CF0D91F70);
-            return ref _Handle.AsRef<float>(_GrowthDurationOffset!.Value);
+            if (_GrowthDurationOffset == -1) _GrowthDurationOffset = Schema.GetOffset(0xBECF421CF0D91F70);
+            return ref _Handle.AsRef<float>(_GrowthDurationOffset);
         }
     }
-    private static nint? _GrowthOriginOffset;
+    private static nint _GrowthOriginOffset = -1;
 
     public ref Vector GrowthOrigin
     {
         get
         {
-            _GrowthOriginOffset = _GrowthOriginOffset ?? Schema.GetOffset(0xBECF421C4A651090);
-            return ref _Handle.AsRef<Vector>(_GrowthOriginOffset!.Value);
+            if (_GrowthOriginOffset == -1) _GrowthOriginOffset = Schema.GetOffset(0xBECF421C4A651090);
+            return ref _Handle.AsRef<Vector>(_GrowthOriginOffset);
         }
     }
-    private static nint? _EndcapTimeOffset;
+    private static nint _EndcapTimeOffset = -1;
 
     public ref float EndcapTime
     {
         get
         {
-            _EndcapTimeOffset = _EndcapTimeOffset ?? Schema.GetOffset(0xBECF421CCF1342BD);
-            return ref _Handle.AsRef<float>(_EndcapTimeOffset!.Value);
+            if (_EndcapTimeOffset == -1) _EndcapTimeOffset = Schema.GetOffset(0xBECF421CCF1342BD);
+            return ref _Handle.AsRef<float>(_EndcapTimeOffset);
         }
     }
-    private static nint? _MarkedForDeleteOffset;
+    private static nint _MarkedForDeleteOffset = -1;
 
     public ref bool MarkedForDelete
     {
         get
         {
-            _MarkedForDeleteOffset = _MarkedForDeleteOffset ?? Schema.GetOffset(0xBECF421C6C9EC48F);
-            return ref _Handle.AsRef<bool>(_MarkedForDeleteOffset!.Value);
+            if (_MarkedForDeleteOffset == -1) _MarkedForDeleteOffset = Schema.GetOffset(0xBECF421C6C9EC48F);
+            return ref _Handle.AsRef<bool>(_MarkedForDeleteOffset);
         }
     }
 

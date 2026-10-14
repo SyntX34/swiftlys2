@@ -16,29 +16,29 @@ internal partial class CBodyGroupSettingImpl : SchemaClass, CBodyGroupSetting
 {
     public CBodyGroupSettingImpl(nint handle) : base(handle) { }
 
-    private static nint? _BodyGroupNameOffset;
+    private static nint _BodyGroupNameOffset = -1;
 
     public string BodyGroupName
     {
         get
         {
-            _BodyGroupNameOffset = _BodyGroupNameOffset ?? Schema.GetOffset(0xC078388F0E290077);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BodyGroupNameOffset!.Value));
+            if (_BodyGroupNameOffset == -1) _BodyGroupNameOffset = Schema.GetOffset(0xC078388F0E290077);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BodyGroupNameOffset));
         }
         set
         {
-            _BodyGroupNameOffset = _BodyGroupNameOffset ?? Schema.GetOffset(0xC078388F0E290077);
-            Schema.SetCUtlString(_Handle, _BodyGroupNameOffset!.Value, value);
+            if (_BodyGroupNameOffset == -1) _BodyGroupNameOffset = Schema.GetOffset(0xC078388F0E290077);
+            Schema.SetCUtlString(_Handle, _BodyGroupNameOffset, value);
         }
     }
-    private static nint? _BodyGroupOptionOffset;
+    private static nint _BodyGroupOptionOffset = -1;
 
     public ref int BodyGroupOption
     {
         get
         {
-            _BodyGroupOptionOffset = _BodyGroupOptionOffset ?? Schema.GetOffset(0xC078388F09FA2D31);
-            return ref _Handle.AsRef<int>(_BodyGroupOptionOffset!.Value);
+            if (_BodyGroupOptionOffset == -1) _BodyGroupOptionOffset = Schema.GetOffset(0xC078388F09FA2D31);
+            return ref _Handle.AsRef<int>(_BodyGroupOptionOffset);
         }
     }
 

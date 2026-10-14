@@ -16,24 +16,24 @@ internal partial class C_WeaponBaseItemImpl : C_CSWeaponBaseImpl, C_WeaponBaseIt
 {
     public C_WeaponBaseItemImpl(nint handle) : base(handle) { }
 
-    private static nint? _SequenceInProgressOffset;
+    private static nint _SequenceInProgressOffset = -1;
 
     public ref bool SequenceInProgress
     {
         get
         {
-            _SequenceInProgressOffset = _SequenceInProgressOffset ?? Schema.GetOffset(0x4CCED8516DDA8858);
-            return ref _Handle.AsRef<bool>(_SequenceInProgressOffset!.Value);
+            if (_SequenceInProgressOffset == -1) _SequenceInProgressOffset = Schema.GetOffset(0x4CCED8516DDA8858);
+            return ref _Handle.AsRef<bool>(_SequenceInProgressOffset);
         }
     }
-    private static nint? _RedrawOffset;
+    private static nint _RedrawOffset = -1;
 
     public ref bool Redraw
     {
         get
         {
-            _RedrawOffset = _RedrawOffset ?? Schema.GetOffset(0x4CCED851612F4EB2);
-            return ref _Handle.AsRef<bool>(_RedrawOffset!.Value);
+            if (_RedrawOffset == -1) _RedrawOffset = Schema.GetOffset(0x4CCED851612F4EB2);
+            return ref _Handle.AsRef<bool>(_RedrawOffset);
         }
     }
 

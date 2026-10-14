@@ -16,24 +16,24 @@ internal partial class EntityRenderAttribute_tImpl : SchemaClass, EntityRenderAt
 {
     public EntityRenderAttribute_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
 
     public ref CUtlStringToken ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0xBC8CD39195066900);
-            return ref _Handle.AsRef<CUtlStringToken>(_IDOffset!.Value);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xBC8CD39195066900);
+            return ref _Handle.AsRef<CUtlStringToken>(_IDOffset);
         }
     }
-    private static nint? _ValuesOffset;
+    private static nint _ValuesOffset = -1;
 
     public ref Vector4D Values
     {
         get
         {
-            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0xBC8CD391A2E804BB);
-            return ref _Handle.AsRef<Vector4D>(_ValuesOffset!.Value);
+            if (_ValuesOffset == -1) _ValuesOffset = Schema.GetOffset(0xBC8CD391A2E804BB);
+            return ref _Handle.AsRef<Vector4D>(_ValuesOffset);
         }
     }
 

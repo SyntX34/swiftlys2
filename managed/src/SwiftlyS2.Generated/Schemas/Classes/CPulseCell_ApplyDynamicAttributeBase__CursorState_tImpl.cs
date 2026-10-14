@@ -16,29 +16,29 @@ internal partial class CPulseCell_ApplyDynamicAttributeBase__CursorState_tImpl :
 {
     public CPulseCell_ApplyDynamicAttributeBase__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EntityOffset;
+    private static nint _EntityOffset = -1;
 
     public ref CHandle<CBaseEntity> Entity
     {
         get
         {
-            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x91CD5BA26EBADCB0);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0x91CD5BA26EBADCB0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset);
         }
     }
-    private static nint? _AttributeKeyOffset;
+    private static nint _AttributeKeyOffset = -1;
 
     public string AttributeKey
     {
         get
         {
-            _AttributeKeyOffset = _AttributeKeyOffset ?? Schema.GetOffset(0x91CD5BA2562E1337);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttributeKeyOffset!.Value));
+            if (_AttributeKeyOffset == -1) _AttributeKeyOffset = Schema.GetOffset(0x91CD5BA2562E1337);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttributeKeyOffset));
         }
         set
         {
-            _AttributeKeyOffset = _AttributeKeyOffset ?? Schema.GetOffset(0x91CD5BA2562E1337);
-            Schema.SetCUtlString(_Handle, _AttributeKeyOffset!.Value, value);
+            if (_AttributeKeyOffset == -1) _AttributeKeyOffset = Schema.GetOffset(0x91CD5BA2562E1337);
+            Schema.SetCUtlString(_Handle, _AttributeKeyOffset, value);
         }
     }
 

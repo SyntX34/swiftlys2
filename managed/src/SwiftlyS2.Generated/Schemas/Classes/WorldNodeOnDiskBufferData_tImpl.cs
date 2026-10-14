@@ -16,44 +16,44 @@ internal partial class WorldNodeOnDiskBufferData_tImpl : SchemaClass, WorldNodeO
 {
     public WorldNodeOnDiskBufferData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ElementCountOffset;
+    private static nint _ElementCountOffset = -1;
 
     public ref int ElementCount
     {
         get
         {
-            _ElementCountOffset = _ElementCountOffset ?? Schema.GetOffset(0xC4F557DA51A2EF12);
-            return ref _Handle.AsRef<int>(_ElementCountOffset!.Value);
+            if (_ElementCountOffset == -1) _ElementCountOffset = Schema.GetOffset(0xC4F557DA51A2EF12);
+            return ref _Handle.AsRef<int>(_ElementCountOffset);
         }
     }
-    private static nint? _ElementSizeInBytesOffset;
+    private static nint _ElementSizeInBytesOffset = -1;
 
     public ref int ElementSizeInBytes
     {
         get
         {
-            _ElementSizeInBytesOffset = _ElementSizeInBytesOffset ?? Schema.GetOffset(0xC4F557DAF602975C);
-            return ref _Handle.AsRef<int>(_ElementSizeInBytesOffset!.Value);
+            if (_ElementSizeInBytesOffset == -1) _ElementSizeInBytesOffset = Schema.GetOffset(0xC4F557DAF602975C);
+            return ref _Handle.AsRef<int>(_ElementSizeInBytesOffset);
         }
     }
-    private static nint? _InputLayoutFieldsOffset;
+    private static nint _InputLayoutFieldsOffset = -1;
 
     public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields
     {
         get
         {
-            _InputLayoutFieldsOffset = _InputLayoutFieldsOffset ?? Schema.GetOffset(0xC4F557DAFDECA2D8);
-            return ref _Handle.AsRef<CUtlVector<RenderInputLayoutField_t>>(_InputLayoutFieldsOffset!.Value);
+            if (_InputLayoutFieldsOffset == -1) _InputLayoutFieldsOffset = Schema.GetOffset(0xC4F557DAFDECA2D8);
+            return ref _Handle.AsRef<CUtlVector<RenderInputLayoutField_t>>(_InputLayoutFieldsOffset);
         }
     }
-    private static nint? _DataOffset;
+    private static nint _DataOffset = -1;
 
     public ref CUtlVector<byte> Data
     {
         get
         {
-            _DataOffset = _DataOffset ?? Schema.GetOffset(0xC4F557DA27938BB7);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_DataOffset!.Value);
+            if (_DataOffset == -1) _DataOffset = Schema.GetOffset(0xC4F557DA27938BB7);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_DataOffset);
         }
     }
 

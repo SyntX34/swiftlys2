@@ -16,46 +16,46 @@ internal partial class CEnvTiltImpl : CPointEntityImpl, CEnvTilt
 {
     public CEnvTiltImpl(nint handle) : base(handle) { }
 
-    private static nint? _DurationOffset;
+    private static nint _DurationOffset = -1;
 
     public ref float Duration
     {
         get
         {
-            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xF90425169879A98D);
-            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0xF90425169879A98D);
+            return ref _Handle.AsRef<float>(_DurationOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xF90425167C5B0533);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0xF90425167C5B0533);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _TiltTimeOffset;
+    private static nint _TiltTimeOffset = -1;
 
     public ref float TiltTime
     {
         get
         {
-            _TiltTimeOffset = _TiltTimeOffset ?? Schema.GetOffset(0xF9042516B3956BFF);
-            return ref _Handle.AsRef<float>(_TiltTimeOffset!.Value);
+            if (_TiltTimeOffset == -1) _TiltTimeOffset = Schema.GetOffset(0xF9042516B3956BFF);
+            return ref _Handle.AsRef<float>(_TiltTimeOffset);
         }
     }
-    private static nint? _StopTimeOffset;
+    private static nint _StopTimeOffset = -1;
     private GameTime_tImpl? _StopTimeInstance;
 
     public GameTime_t StopTime
     {
         get
         {
-            _StopTimeOffset = _StopTimeOffset ?? Schema.GetOffset(0xF90425166BFFEDC4);
+            if (_StopTimeOffset == -1) _StopTimeOffset = Schema.GetOffset(0xF90425166BFFEDC4);
             var instance = _StopTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StopTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StopTimeOffset);
             return instance;
         }
     }

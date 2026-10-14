@@ -16,14 +16,14 @@ internal partial class AnimGraph2SerializedPoseRecipeSlot_tImpl : SchemaClass, A
 {
     public AnimGraph2SerializedPoseRecipeSlot_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _TopologyOffset;
+    private static nint _TopologyOffset = -1;
 
     public ref CUtlBinaryBlock Topology
     {
         get
         {
-            _TopologyOffset = _TopologyOffset ?? Schema.GetOffset(0x53900E1C0A5A1224);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_TopologyOffset!.Value);
+            if (_TopologyOffset == -1) _TopologyOffset = Schema.GetOffset(0x53900E1C0A5A1224);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_TopologyOffset);
         }
     }
 

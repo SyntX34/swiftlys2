@@ -16,86 +16,86 @@ internal partial class CNmBlend2DNode__CDefinitionImpl : CNmPoseNode__CDefinitio
 {
     public CNmBlend2DNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceNodeIndicesOffset;
+    private static nint _SourceNodeIndicesOffset = -1;
     private SchemaUntypedField? _SourceNodeIndicesInstance;
 
     public SchemaUntypedField SourceNodeIndices
     {
         get
         {
-            _SourceNodeIndicesOffset = _SourceNodeIndicesOffset ?? Schema.GetOffset(0x965A04D8E90F1FE1);
+            if (_SourceNodeIndicesOffset == -1) _SourceNodeIndicesOffset = Schema.GetOffset(0x965A04D8E90F1FE1);
             var instance = _SourceNodeIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SourceNodeIndicesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SourceNodeIndicesOffset);
             return instance;
         }
     }
-    private static nint? _ValuesOffset;
+    private static nint _ValuesOffset = -1;
     private SchemaUntypedField? _ValuesInstance;
 
     public SchemaUntypedField Values
     {
         get
         {
-            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x965A04D8FBEDDADB);
+            if (_ValuesOffset == -1) _ValuesOffset = Schema.GetOffset(0x965A04D8FBEDDADB);
             var instance = _ValuesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ValuesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ValuesOffset);
             return instance;
         }
     }
-    private static nint? _IndicesOffset;
+    private static nint _IndicesOffset = -1;
     private SchemaUntypedField? _IndicesInstance;
 
     public SchemaUntypedField Indices
     {
         get
         {
-            _IndicesOffset = _IndicesOffset ?? Schema.GetOffset(0x965A04D8CF5DEE92);
+            if (_IndicesOffset == -1) _IndicesOffset = Schema.GetOffset(0x965A04D8CF5DEE92);
             var instance = _IndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IndicesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IndicesOffset);
             return instance;
         }
     }
-    private static nint? _HullIndicesOffset;
+    private static nint _HullIndicesOffset = -1;
     private SchemaUntypedField? _HullIndicesInstance;
 
     public SchemaUntypedField HullIndices
     {
         get
         {
-            _HullIndicesOffset = _HullIndicesOffset ?? Schema.GetOffset(0x965A04D8A014D83B);
+            if (_HullIndicesOffset == -1) _HullIndicesOffset = Schema.GetOffset(0x965A04D8A014D83B);
             var instance = _HullIndicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _HullIndicesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HullIndicesOffset);
             return instance;
         }
     }
-    private static nint? _InputParameterNodeIdx0Offset;
+    private static nint _InputParameterNodeIdx0Offset = -1;
 
     public ref short InputParameterNodeIdx0
     {
         get
         {
-            _InputParameterNodeIdx0Offset = _InputParameterNodeIdx0Offset ?? Schema.GetOffset(0x965A04D85A96A1AF);
-            return ref _Handle.AsRef<short>(_InputParameterNodeIdx0Offset!.Value);
+            if (_InputParameterNodeIdx0Offset == -1) _InputParameterNodeIdx0Offset = Schema.GetOffset(0x965A04D85A96A1AF);
+            return ref _Handle.AsRef<short>(_InputParameterNodeIdx0Offset);
         }
     }
-    private static nint? _InputParameterNodeIdx1Offset;
+    private static nint _InputParameterNodeIdx1Offset = -1;
 
     public ref short InputParameterNodeIdx1
     {
         get
         {
-            _InputParameterNodeIdx1Offset = _InputParameterNodeIdx1Offset ?? Schema.GetOffset(0x965A04D85996A01C);
-            return ref _Handle.AsRef<short>(_InputParameterNodeIdx1Offset!.Value);
+            if (_InputParameterNodeIdx1Offset == -1) _InputParameterNodeIdx1Offset = Schema.GetOffset(0x965A04D85996A01C);
+            return ref _Handle.AsRef<short>(_InputParameterNodeIdx1Offset);
         }
     }
-    private static nint? _AllowLoopingOffset;
+    private static nint _AllowLoopingOffset = -1;
 
     public ref bool AllowLooping
     {
         get
         {
-            _AllowLoopingOffset = _AllowLoopingOffset ?? Schema.GetOffset(0x965A04D8FEB26D98);
-            return ref _Handle.AsRef<bool>(_AllowLoopingOffset!.Value);
+            if (_AllowLoopingOffset == -1) _AllowLoopingOffset = Schema.GetOffset(0x965A04D8FEB26D98);
+            return ref _Handle.AsRef<bool>(_AllowLoopingOffset);
         }
     }
 

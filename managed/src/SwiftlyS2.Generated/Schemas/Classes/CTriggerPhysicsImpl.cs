@@ -16,159 +16,159 @@ internal partial class CTriggerPhysicsImpl : CBaseTriggerImpl, CTriggerPhysics
 {
     public CTriggerPhysicsImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControllerOffset;
+    private static nint _ControllerOffset = -1;
     private IPhysicsMotionControllerImpl? _ControllerInstance;
 
     public IPhysicsMotionController? Controller
     {
         get
         {
-            _ControllerOffset = _ControllerOffset ?? Schema.GetOffset(0xD6C7C8D38F2DD553);
-            var ptr = _Handle.Read<nint>(_ControllerOffset!.Value);
+            if (_ControllerOffset == -1) _ControllerOffset = Schema.GetOffset(0xD6C7C8D38F2DD553);
+            var ptr = _Handle.Read<nint>(_ControllerOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ControllerInstance ??= new IPhysicsMotionControllerImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _GravityScaleOffset;
+    private static nint _GravityScaleOffset = -1;
 
     public ref float GravityScale
     {
         get
         {
-            _GravityScaleOffset = _GravityScaleOffset ?? Schema.GetOffset(0xD6C7C8D3F22682F1);
-            return ref _Handle.AsRef<float>(_GravityScaleOffset!.Value);
+            if (_GravityScaleOffset == -1) _GravityScaleOffset = Schema.GetOffset(0xD6C7C8D3F22682F1);
+            return ref _Handle.AsRef<float>(_GravityScaleOffset);
         }
     }
-    private static nint? _LinearLimitOffset;
+    private static nint _LinearLimitOffset = -1;
 
     public ref float LinearLimit
     {
         get
         {
-            _LinearLimitOffset = _LinearLimitOffset ?? Schema.GetOffset(0xD6C7C8D38455E743);
-            return ref _Handle.AsRef<float>(_LinearLimitOffset!.Value);
+            if (_LinearLimitOffset == -1) _LinearLimitOffset = Schema.GetOffset(0xD6C7C8D38455E743);
+            return ref _Handle.AsRef<float>(_LinearLimitOffset);
         }
     }
-    private static nint? _LinearDampingOffset;
+    private static nint _LinearDampingOffset = -1;
 
     public ref float LinearDamping
     {
         get
         {
-            _LinearDampingOffset = _LinearDampingOffset ?? Schema.GetOffset(0xD6C7C8D395E4E646);
-            return ref _Handle.AsRef<float>(_LinearDampingOffset!.Value);
+            if (_LinearDampingOffset == -1) _LinearDampingOffset = Schema.GetOffset(0xD6C7C8D395E4E646);
+            return ref _Handle.AsRef<float>(_LinearDampingOffset);
         }
     }
-    private static nint? _AngularLimitOffset;
+    private static nint _AngularLimitOffset = -1;
 
     public ref float AngularLimit
     {
         get
         {
-            _AngularLimitOffset = _AngularLimitOffset ?? Schema.GetOffset(0xD6C7C8D3497B8D18);
-            return ref _Handle.AsRef<float>(_AngularLimitOffset!.Value);
+            if (_AngularLimitOffset == -1) _AngularLimitOffset = Schema.GetOffset(0xD6C7C8D3497B8D18);
+            return ref _Handle.AsRef<float>(_AngularLimitOffset);
         }
     }
-    private static nint? _AngularDampingOffset;
+    private static nint _AngularDampingOffset = -1;
 
     public ref float AngularDamping
     {
         get
         {
-            _AngularDampingOffset = _AngularDampingOffset ?? Schema.GetOffset(0xD6C7C8D36F1B9C61);
-            return ref _Handle.AsRef<float>(_AngularDampingOffset!.Value);
+            if (_AngularDampingOffset == -1) _AngularDampingOffset = Schema.GetOffset(0xD6C7C8D36F1B9C61);
+            return ref _Handle.AsRef<float>(_AngularDampingOffset);
         }
     }
-    private static nint? _LinearForceOffset;
+    private static nint _LinearForceOffset = -1;
 
     public ref float LinearForce
     {
         get
         {
-            _LinearForceOffset = _LinearForceOffset ?? Schema.GetOffset(0xD6C7C8D32DAF4653);
-            return ref _Handle.AsRef<float>(_LinearForceOffset!.Value);
+            if (_LinearForceOffset == -1) _LinearForceOffset = Schema.GetOffset(0xD6C7C8D32DAF4653);
+            return ref _Handle.AsRef<float>(_LinearForceOffset);
         }
     }
-    private static nint? _FrequencyOffset;
+    private static nint _FrequencyOffset = -1;
 
     public ref float Frequency
     {
         get
         {
-            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0xD6C7C8D3D2C16DD7);
-            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+            if (_FrequencyOffset == -1) _FrequencyOffset = Schema.GetOffset(0xD6C7C8D3D2C16DD7);
+            return ref _Handle.AsRef<float>(_FrequencyOffset);
         }
     }
-    private static nint? _DampingRatioOffset;
+    private static nint _DampingRatioOffset = -1;
 
     public ref float DampingRatio
     {
         get
         {
-            _DampingRatioOffset = _DampingRatioOffset ?? Schema.GetOffset(0xD6C7C8D3B40C859E);
-            return ref _Handle.AsRef<float>(_DampingRatioOffset!.Value);
+            if (_DampingRatioOffset == -1) _DampingRatioOffset = Schema.GetOffset(0xD6C7C8D3B40C859E);
+            return ref _Handle.AsRef<float>(_DampingRatioOffset);
         }
     }
-    private static nint? _LinearForcePointAtOffset;
+    private static nint _LinearForcePointAtOffset = -1;
 
     public ref Vector LinearForcePointAt
     {
         get
         {
-            _LinearForcePointAtOffset = _LinearForcePointAtOffset ?? Schema.GetOffset(0xD6C7C8D3C27DF46E);
-            return ref _Handle.AsRef<Vector>(_LinearForcePointAtOffset!.Value);
+            if (_LinearForcePointAtOffset == -1) _LinearForcePointAtOffset = Schema.GetOffset(0xD6C7C8D3C27DF46E);
+            return ref _Handle.AsRef<Vector>(_LinearForcePointAtOffset);
         }
     }
-    private static nint? _CollapseToForcePointOffset;
+    private static nint _CollapseToForcePointOffset = -1;
 
     public ref bool CollapseToForcePoint
     {
         get
         {
-            _CollapseToForcePointOffset = _CollapseToForcePointOffset ?? Schema.GetOffset(0xD6C7C8D3EB895D00);
-            return ref _Handle.AsRef<bool>(_CollapseToForcePointOffset!.Value);
+            if (_CollapseToForcePointOffset == -1) _CollapseToForcePointOffset = Schema.GetOffset(0xD6C7C8D3EB895D00);
+            return ref _Handle.AsRef<bool>(_CollapseToForcePointOffset);
         }
     }
-    private static nint? _LinearForcePointAtWorldOffset;
+    private static nint _LinearForcePointAtWorldOffset = -1;
 
     public ref Vector LinearForcePointAtWorld
     {
         get
         {
-            _LinearForcePointAtWorldOffset = _LinearForcePointAtWorldOffset ?? Schema.GetOffset(0xD6C7C8D3C80D3782);
-            return ref _Handle.AsRef<Vector>(_LinearForcePointAtWorldOffset!.Value);
+            if (_LinearForcePointAtWorldOffset == -1) _LinearForcePointAtWorldOffset = Schema.GetOffset(0xD6C7C8D3C80D3782);
+            return ref _Handle.AsRef<Vector>(_LinearForcePointAtWorldOffset);
         }
     }
-    private static nint? _LinearForceDirectionOffset;
+    private static nint _LinearForceDirectionOffset = -1;
 
     public ref Vector LinearForceDirection
     {
         get
         {
-            _LinearForceDirectionOffset = _LinearForceDirectionOffset ?? Schema.GetOffset(0xD6C7C8D36076B2FC);
-            return ref _Handle.AsRef<Vector>(_LinearForceDirectionOffset!.Value);
+            if (_LinearForceDirectionOffset == -1) _LinearForceDirectionOffset = Schema.GetOffset(0xD6C7C8D36076B2FC);
+            return ref _Handle.AsRef<Vector>(_LinearForceDirectionOffset);
         }
     }
-    private static nint? _ForceDirectionIsInLocalSpaceOffset;
+    private static nint _ForceDirectionIsInLocalSpaceOffset = -1;
 
     public ref bool ForceDirectionIsInLocalSpace
     {
         get
         {
-            _ForceDirectionIsInLocalSpaceOffset = _ForceDirectionIsInLocalSpaceOffset ?? Schema.GetOffset(0xD6C7C8D3C74995B5);
-            return ref _Handle.AsRef<bool>(_ForceDirectionIsInLocalSpaceOffset!.Value);
+            if (_ForceDirectionIsInLocalSpaceOffset == -1) _ForceDirectionIsInLocalSpaceOffset = Schema.GetOffset(0xD6C7C8D3C74995B5);
+            return ref _Handle.AsRef<bool>(_ForceDirectionIsInLocalSpaceOffset);
         }
     }
-    private static nint? _ConvertToDebrisWhenPossibleOffset;
+    private static nint _ConvertToDebrisWhenPossibleOffset = -1;
 
     public ref bool ConvertToDebrisWhenPossible
     {
         get
         {
-            _ConvertToDebrisWhenPossibleOffset = _ConvertToDebrisWhenPossibleOffset ?? Schema.GetOffset(0xD6C7C8D36AD4D155);
-            return ref _Handle.AsRef<bool>(_ConvertToDebrisWhenPossibleOffset!.Value);
+            if (_ConvertToDebrisWhenPossibleOffset == -1) _ConvertToDebrisWhenPossibleOffset = Schema.GetOffset(0xD6C7C8D36AD4D155);
+            return ref _Handle.AsRef<bool>(_ConvertToDebrisWhenPossibleOffset);
         }
     }
 

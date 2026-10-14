@@ -16,91 +16,91 @@ internal partial class CSlopeComponentImpl : CAnimGraphDoc_ComponentImpl, CSlope
 {
     public CSlopeComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? _TraceDistanceOffset;
+    private static nint _TraceDistanceOffset = -1;
 
     public ref float TraceDistance
     {
         get
         {
-            _TraceDistanceOffset = _TraceDistanceOffset ?? Schema.GetOffset(0x20E587E0B2F3B0F7);
-            return ref _Handle.AsRef<float>(_TraceDistanceOffset!.Value);
+            if (_TraceDistanceOffset == -1) _TraceDistanceOffset = Schema.GetOffset(0x20E587E0B2F3B0F7);
+            return ref _Handle.AsRef<float>(_TraceDistanceOffset);
         }
     }
-    private static nint? _SlopeAngleIDOffset;
+    private static nint _SlopeAngleIDOffset = -1;
     private AnimParamIDImpl? _SlopeAngleIDInstance;
 
     public AnimParamID SlopeAngleID
     {
         get
         {
-            _SlopeAngleIDOffset = _SlopeAngleIDOffset ?? Schema.GetOffset(0x20E587E0890611A6);
+            if (_SlopeAngleIDOffset == -1) _SlopeAngleIDOffset = Schema.GetOffset(0x20E587E0890611A6);
             var instance = _SlopeAngleIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _SlopeAngleIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SlopeAngleIDOffset);
             return instance;
         }
     }
-    private static nint? _SlopeHeadingIDOffset;
+    private static nint _SlopeHeadingIDOffset = -1;
     private AnimParamIDImpl? _SlopeHeadingIDInstance;
 
     public AnimParamID SlopeHeadingID
     {
         get
         {
-            _SlopeHeadingIDOffset = _SlopeHeadingIDOffset ?? Schema.GetOffset(0x20E587E096AD25BB);
+            if (_SlopeHeadingIDOffset == -1) _SlopeHeadingIDOffset = Schema.GetOffset(0x20E587E096AD25BB);
             var instance = _SlopeHeadingIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _SlopeHeadingIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SlopeHeadingIDOffset);
             return instance;
         }
     }
-    private static nint? _SlopeAngleSideIDOffset;
+    private static nint _SlopeAngleSideIDOffset = -1;
     private AnimParamIDImpl? _SlopeAngleSideIDInstance;
 
     public AnimParamID SlopeAngleSideID
     {
         get
         {
-            _SlopeAngleSideIDOffset = _SlopeAngleSideIDOffset ?? Schema.GetOffset(0x20E587E0DB71918D);
+            if (_SlopeAngleSideIDOffset == -1) _SlopeAngleSideIDOffset = Schema.GetOffset(0x20E587E0DB71918D);
             var instance = _SlopeAngleSideIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _SlopeAngleSideIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SlopeAngleSideIDOffset);
             return instance;
         }
     }
-    private static nint? _SlopeAngleFrontIDOffset;
+    private static nint _SlopeAngleFrontIDOffset = -1;
     private AnimParamIDImpl? _SlopeAngleFrontIDInstance;
 
     public AnimParamID SlopeAngleFrontID
     {
         get
         {
-            _SlopeAngleFrontIDOffset = _SlopeAngleFrontIDOffset ?? Schema.GetOffset(0x20E587E095255D07);
+            if (_SlopeAngleFrontIDOffset == -1) _SlopeAngleFrontIDOffset = Schema.GetOffset(0x20E587E095255D07);
             var instance = _SlopeAngleFrontIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _SlopeAngleFrontIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SlopeAngleFrontIDOffset);
             return instance;
         }
     }
-    private static nint? _SlopeNormalIDOffset;
+    private static nint _SlopeNormalIDOffset = -1;
     private AnimParamIDImpl? _SlopeNormalIDInstance;
 
     public AnimParamID SlopeNormalID
     {
         get
         {
-            _SlopeNormalIDOffset = _SlopeNormalIDOffset ?? Schema.GetOffset(0x20E587E0FC301F06);
+            if (_SlopeNormalIDOffset == -1) _SlopeNormalIDOffset = Schema.GetOffset(0x20E587E0FC301F06);
             var instance = _SlopeNormalIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _SlopeNormalIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SlopeNormalIDOffset);
             return instance;
         }
     }
-    private static nint? _SlopeNormal_WorldSpaceIDOffset;
+    private static nint _SlopeNormal_WorldSpaceIDOffset = -1;
     private AnimParamIDImpl? _SlopeNormal_WorldSpaceIDInstance;
 
     public AnimParamID SlopeNormal_WorldSpaceID
     {
         get
         {
-            _SlopeNormal_WorldSpaceIDOffset = _SlopeNormal_WorldSpaceIDOffset ?? Schema.GetOffset(0x20E587E01C320CB3);
+            if (_SlopeNormal_WorldSpaceIDOffset == -1) _SlopeNormal_WorldSpaceIDOffset = Schema.GetOffset(0x20E587E01C320CB3);
             var instance = _SlopeNormal_WorldSpaceIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _SlopeNormal_WorldSpaceIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SlopeNormal_WorldSpaceIDOffset);
             return instance;
         }
     }

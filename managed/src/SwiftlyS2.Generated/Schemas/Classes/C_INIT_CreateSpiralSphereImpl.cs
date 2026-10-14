@@ -16,79 +16,79 @@ internal partial class C_INIT_CreateSpiralSphereImpl : CParticleFunctionInitiali
 {
     public C_INIT_CreateSpiralSphereImpl(nint handle) : base(handle) { }
 
-    private static nint? _TransformInputOffset;
+    private static nint _TransformInputOffset = -1;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x97C2018AB3FDC289);
+            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0x97C2018AB3FDC289);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
             return instance;
         }
     }
-    private static nint? _DensityOffset;
+    private static nint _DensityOffset = -1;
     private CPerParticleFloatInputImpl? _DensityInstance;
 
     public CPerParticleFloatInput Density
     {
         get
         {
-            _DensityOffset = _DensityOffset ?? Schema.GetOffset(0x97C2018AA7E7CAA1);
+            if (_DensityOffset == -1) _DensityOffset = Schema.GetOffset(0x97C2018AA7E7CAA1);
             var instance = _DensityInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DensityOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DensityOffset);
             return instance;
         }
     }
-    private static nint? _InitialRadiusOffset;
+    private static nint _InitialRadiusOffset = -1;
     private CPerParticleFloatInputImpl? _InitialRadiusInstance;
 
     public CPerParticleFloatInput InitialRadius
     {
         get
         {
-            _InitialRadiusOffset = _InitialRadiusOffset ?? Schema.GetOffset(0x97C2018A8B8AAB8B);
+            if (_InitialRadiusOffset == -1) _InitialRadiusOffset = Schema.GetOffset(0x97C2018A8B8AAB8B);
             var instance = _InitialRadiusInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InitialRadiusOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InitialRadiusOffset);
             return instance;
         }
     }
-    private static nint? _InitialSpeedMinOffset;
+    private static nint _InitialSpeedMinOffset = -1;
     private CPerParticleFloatInputImpl? _InitialSpeedMinInstance;
 
     public CPerParticleFloatInput InitialSpeedMin
     {
         get
         {
-            _InitialSpeedMinOffset = _InitialSpeedMinOffset ?? Schema.GetOffset(0x97C2018AE36FD694);
+            if (_InitialSpeedMinOffset == -1) _InitialSpeedMinOffset = Schema.GetOffset(0x97C2018AE36FD694);
             var instance = _InitialSpeedMinInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InitialSpeedMinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InitialSpeedMinOffset);
             return instance;
         }
     }
-    private static nint? _InitialSpeedMaxOffset;
+    private static nint _InitialSpeedMaxOffset = -1;
     private CPerParticleFloatInputImpl? _InitialSpeedMaxInstance;
 
     public CPerParticleFloatInput InitialSpeedMax
     {
         get
         {
-            _InitialSpeedMaxOffset = _InitialSpeedMaxOffset ?? Schema.GetOffset(0x97C2018AD184D4F6);
+            if (_InitialSpeedMaxOffset == -1) _InitialSpeedMaxOffset = Schema.GetOffset(0x97C2018AD184D4F6);
             var instance = _InitialSpeedMaxInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InitialSpeedMaxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InitialSpeedMaxOffset);
             return instance;
         }
     }
-    private static nint? _UseParticleCountOffset;
+    private static nint _UseParticleCountOffset = -1;
 
     public ref bool UseParticleCount
     {
         get
         {
-            _UseParticleCountOffset = _UseParticleCountOffset ?? Schema.GetOffset(0x97C2018AD4DA0515);
-            return ref _Handle.AsRef<bool>(_UseParticleCountOffset!.Value);
+            if (_UseParticleCountOffset == -1) _UseParticleCountOffset = Schema.GetOffset(0x97C2018AD4DA0515);
+            return ref _Handle.AsRef<bool>(_UseParticleCountOffset);
         }
     }
 

@@ -16,214 +16,214 @@ internal partial class CHueSaturationColorCorrectionLayerImpl : CColorCorrection
 {
     public CHueSaturationColorCorrectionLayerImpl(nint handle) : base(handle) { }
 
-    private static nint? _HueMasterOffset;
+    private static nint _HueMasterOffset = -1;
 
     public ref int HueMaster
     {
         get
         {
-            _HueMasterOffset = _HueMasterOffset ?? Schema.GetOffset(0xB4F61654B9C01C1B);
-            return ref _Handle.AsRef<int>(_HueMasterOffset!.Value);
+            if (_HueMasterOffset == -1) _HueMasterOffset = Schema.GetOffset(0xB4F61654B9C01C1B);
+            return ref _Handle.AsRef<int>(_HueMasterOffset);
         }
     }
-    private static nint? _HueRedOffset;
+    private static nint _HueRedOffset = -1;
 
     public ref int HueRed
     {
         get
         {
-            _HueRedOffset = _HueRedOffset ?? Schema.GetOffset(0xB4F61654E2992224);
-            return ref _Handle.AsRef<int>(_HueRedOffset!.Value);
+            if (_HueRedOffset == -1) _HueRedOffset = Schema.GetOffset(0xB4F61654E2992224);
+            return ref _Handle.AsRef<int>(_HueRedOffset);
         }
     }
-    private static nint? _HueYellowOffset;
+    private static nint _HueYellowOffset = -1;
 
     public ref int HueYellow
     {
         get
         {
-            _HueYellowOffset = _HueYellowOffset ?? Schema.GetOffset(0xB4F61654E1396D21);
-            return ref _Handle.AsRef<int>(_HueYellowOffset!.Value);
+            if (_HueYellowOffset == -1) _HueYellowOffset = Schema.GetOffset(0xB4F61654E1396D21);
+            return ref _Handle.AsRef<int>(_HueYellowOffset);
         }
     }
-    private static nint? _HueGreenOffset;
+    private static nint _HueGreenOffset = -1;
 
     public ref int HueGreen
     {
         get
         {
-            _HueGreenOffset = _HueGreenOffset ?? Schema.GetOffset(0xB4F61654793FF554);
-            return ref _Handle.AsRef<int>(_HueGreenOffset!.Value);
+            if (_HueGreenOffset == -1) _HueGreenOffset = Schema.GetOffset(0xB4F61654793FF554);
+            return ref _Handle.AsRef<int>(_HueGreenOffset);
         }
     }
-    private static nint? _HueCyanOffset;
+    private static nint _HueCyanOffset = -1;
 
     public ref int HueCyan
     {
         get
         {
-            _HueCyanOffset = _HueCyanOffset ?? Schema.GetOffset(0xB4F6165407B73292);
-            return ref _Handle.AsRef<int>(_HueCyanOffset!.Value);
+            if (_HueCyanOffset == -1) _HueCyanOffset = Schema.GetOffset(0xB4F6165407B73292);
+            return ref _Handle.AsRef<int>(_HueCyanOffset);
         }
     }
-    private static nint? _HueBlueOffset;
+    private static nint _HueBlueOffset = -1;
 
     public ref int HueBlue
     {
         get
         {
-            _HueBlueOffset = _HueBlueOffset ?? Schema.GetOffset(0xB4F6165437B58775);
-            return ref _Handle.AsRef<int>(_HueBlueOffset!.Value);
+            if (_HueBlueOffset == -1) _HueBlueOffset = Schema.GetOffset(0xB4F6165437B58775);
+            return ref _Handle.AsRef<int>(_HueBlueOffset);
         }
     }
-    private static nint? _HueMagentaOffset;
+    private static nint _HueMagentaOffset = -1;
 
     public ref int HueMagenta
     {
         get
         {
-            _HueMagentaOffset = _HueMagentaOffset ?? Schema.GetOffset(0xB4F61654D06C8F70);
-            return ref _Handle.AsRef<int>(_HueMagentaOffset!.Value);
+            if (_HueMagentaOffset == -1) _HueMagentaOffset = Schema.GetOffset(0xB4F61654D06C8F70);
+            return ref _Handle.AsRef<int>(_HueMagentaOffset);
         }
     }
-    private static nint? _SaturationMasterOffset;
+    private static nint _SaturationMasterOffset = -1;
 
     public ref int SaturationMaster
     {
         get
         {
-            _SaturationMasterOffset = _SaturationMasterOffset ?? Schema.GetOffset(0xB4F61654BB76147B);
-            return ref _Handle.AsRef<int>(_SaturationMasterOffset!.Value);
+            if (_SaturationMasterOffset == -1) _SaturationMasterOffset = Schema.GetOffset(0xB4F61654BB76147B);
+            return ref _Handle.AsRef<int>(_SaturationMasterOffset);
         }
     }
-    private static nint? _SaturationRedOffset;
+    private static nint _SaturationRedOffset = -1;
 
     public ref int SaturationRed
     {
         get
         {
-            _SaturationRedOffset = _SaturationRedOffset ?? Schema.GetOffset(0xB4F616546270D304);
-            return ref _Handle.AsRef<int>(_SaturationRedOffset!.Value);
+            if (_SaturationRedOffset == -1) _SaturationRedOffset = Schema.GetOffset(0xB4F616546270D304);
+            return ref _Handle.AsRef<int>(_SaturationRedOffset);
         }
     }
-    private static nint? _SaturationYellowOffset;
+    private static nint _SaturationYellowOffset = -1;
 
     public ref int SaturationYellow
     {
         get
         {
-            _SaturationYellowOffset = _SaturationYellowOffset ?? Schema.GetOffset(0xB4F6165422595A81);
-            return ref _Handle.AsRef<int>(_SaturationYellowOffset!.Value);
+            if (_SaturationYellowOffset == -1) _SaturationYellowOffset = Schema.GetOffset(0xB4F6165422595A81);
+            return ref _Handle.AsRef<int>(_SaturationYellowOffset);
         }
     }
-    private static nint? _SaturationGreenOffset;
+    private static nint _SaturationGreenOffset = -1;
 
     public ref int SaturationGreen
     {
         get
         {
-            _SaturationGreenOffset = _SaturationGreenOffset ?? Schema.GetOffset(0xB4F6165415614034);
-            return ref _Handle.AsRef<int>(_SaturationGreenOffset!.Value);
+            if (_SaturationGreenOffset == -1) _SaturationGreenOffset = Schema.GetOffset(0xB4F6165415614034);
+            return ref _Handle.AsRef<int>(_SaturationGreenOffset);
         }
     }
-    private static nint? _SaturationCyanOffset;
+    private static nint _SaturationCyanOffset = -1;
 
     public ref int SaturationCyan
     {
         get
         {
-            _SaturationCyanOffset = _SaturationCyanOffset ?? Schema.GetOffset(0xB4F61654684174F2);
-            return ref _Handle.AsRef<int>(_SaturationCyanOffset!.Value);
+            if (_SaturationCyanOffset == -1) _SaturationCyanOffset = Schema.GetOffset(0xB4F61654684174F2);
+            return ref _Handle.AsRef<int>(_SaturationCyanOffset);
         }
     }
-    private static nint? _SaturationBlueOffset;
+    private static nint _SaturationBlueOffset = -1;
 
     public ref int SaturationBlue
     {
         get
         {
-            _SaturationBlueOffset = _SaturationBlueOffset ?? Schema.GetOffset(0xB4F61654B18E11D5);
-            return ref _Handle.AsRef<int>(_SaturationBlueOffset!.Value);
+            if (_SaturationBlueOffset == -1) _SaturationBlueOffset = Schema.GetOffset(0xB4F61654B18E11D5);
+            return ref _Handle.AsRef<int>(_SaturationBlueOffset);
         }
     }
-    private static nint? _SaturationMagentaOffset;
+    private static nint _SaturationMagentaOffset = -1;
 
     public ref int SaturationMagenta
     {
         get
         {
-            _SaturationMagentaOffset = _SaturationMagentaOffset ?? Schema.GetOffset(0xB4F616544E220450);
-            return ref _Handle.AsRef<int>(_SaturationMagentaOffset!.Value);
+            if (_SaturationMagentaOffset == -1) _SaturationMagentaOffset = Schema.GetOffset(0xB4F616544E220450);
+            return ref _Handle.AsRef<int>(_SaturationMagentaOffset);
         }
     }
-    private static nint? _BrightnessMasterOffset;
+    private static nint _BrightnessMasterOffset = -1;
 
     public ref int BrightnessMaster
     {
         get
         {
-            _BrightnessMasterOffset = _BrightnessMasterOffset ?? Schema.GetOffset(0xB4F616543A7FF96C);
-            return ref _Handle.AsRef<int>(_BrightnessMasterOffset!.Value);
+            if (_BrightnessMasterOffset == -1) _BrightnessMasterOffset = Schema.GetOffset(0xB4F616543A7FF96C);
+            return ref _Handle.AsRef<int>(_BrightnessMasterOffset);
         }
     }
-    private static nint? _BrightnessRedOffset;
+    private static nint _BrightnessRedOffset = -1;
 
     public ref int BrightnessRed
     {
         get
         {
-            _BrightnessRedOffset = _BrightnessRedOffset ?? Schema.GetOffset(0xB4F616549CF29B0D);
-            return ref _Handle.AsRef<int>(_BrightnessRedOffset!.Value);
+            if (_BrightnessRedOffset == -1) _BrightnessRedOffset = Schema.GetOffset(0xB4F616549CF29B0D);
+            return ref _Handle.AsRef<int>(_BrightnessRedOffset);
         }
     }
-    private static nint? _BrightnessYellowOffset;
+    private static nint _BrightnessYellowOffset = -1;
 
     public ref int BrightnessYellow
     {
         get
         {
-            _BrightnessYellowOffset = _BrightnessYellowOffset ?? Schema.GetOffset(0xB4F61654D15A8FEE);
-            return ref _Handle.AsRef<int>(_BrightnessYellowOffset!.Value);
+            if (_BrightnessYellowOffset == -1) _BrightnessYellowOffset = Schema.GetOffset(0xB4F61654D15A8FEE);
+            return ref _Handle.AsRef<int>(_BrightnessYellowOffset);
         }
     }
-    private static nint? _BrightnessGreenOffset;
+    private static nint _BrightnessGreenOffset = -1;
 
     public ref int BrightnessGreen
     {
         get
         {
-            _BrightnessGreenOffset = _BrightnessGreenOffset ?? Schema.GetOffset(0xB4F6165443F0A951);
-            return ref _Handle.AsRef<int>(_BrightnessGreenOffset!.Value);
+            if (_BrightnessGreenOffset == -1) _BrightnessGreenOffset = Schema.GetOffset(0xB4F6165443F0A951);
+            return ref _Handle.AsRef<int>(_BrightnessGreenOffset);
         }
     }
-    private static nint? _BrightnessCyanOffset;
+    private static nint _BrightnessCyanOffset = -1;
 
     public ref int BrightnessCyan
     {
         get
         {
-            _BrightnessCyanOffset = _BrightnessCyanOffset ?? Schema.GetOffset(0xB4F616546A248DC5);
-            return ref _Handle.AsRef<int>(_BrightnessCyanOffset!.Value);
+            if (_BrightnessCyanOffset == -1) _BrightnessCyanOffset = Schema.GetOffset(0xB4F616546A248DC5);
+            return ref _Handle.AsRef<int>(_BrightnessCyanOffset);
         }
     }
-    private static nint? _BrightnessBlueOffset;
+    private static nint _BrightnessBlueOffset = -1;
 
     public ref int BrightnessBlue
     {
         get
         {
-            _BrightnessBlueOffset = _BrightnessBlueOffset ?? Schema.GetOffset(0xB4F616544041913E);
-            return ref _Handle.AsRef<int>(_BrightnessBlueOffset!.Value);
+            if (_BrightnessBlueOffset == -1) _BrightnessBlueOffset = Schema.GetOffset(0xB4F616544041913E);
+            return ref _Handle.AsRef<int>(_BrightnessBlueOffset);
         }
     }
-    private static nint? _BrightnessMagentaOffset;
+    private static nint _BrightnessMagentaOffset = -1;
 
     public ref int BrightnessMagenta
     {
         get
         {
-            _BrightnessMagentaOffset = _BrightnessMagentaOffset ?? Schema.GetOffset(0xB4F61654B5F2B631);
-            return ref _Handle.AsRef<int>(_BrightnessMagentaOffset!.Value);
+            if (_BrightnessMagentaOffset == -1) _BrightnessMagentaOffset = Schema.GetOffset(0xB4F61654B5F2B631);
+            return ref _Handle.AsRef<int>(_BrightnessMagentaOffset);
         }
     }
 

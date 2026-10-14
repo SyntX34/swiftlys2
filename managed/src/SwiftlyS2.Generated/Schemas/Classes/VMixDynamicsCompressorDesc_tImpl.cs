@@ -16,114 +16,114 @@ internal partial class VMixDynamicsCompressorDesc_tImpl : SchemaClass, VMixDynam
 {
     public VMixDynamicsCompressorDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _FldbOutputGainOffset;
+    private static nint _FldbOutputGainOffset = -1;
 
     public ref float FldbOutputGain
     {
         get
         {
-            _FldbOutputGainOffset = _FldbOutputGainOffset ?? Schema.GetOffset(0x4AC2D50067F97C23);
-            return ref _Handle.AsRef<float>(_FldbOutputGainOffset!.Value);
+            if (_FldbOutputGainOffset == -1) _FldbOutputGainOffset = Schema.GetOffset(0x4AC2D50067F97C23);
+            return ref _Handle.AsRef<float>(_FldbOutputGainOffset);
         }
     }
-    private static nint? _FldbCompressionThresholdOffset;
+    private static nint _FldbCompressionThresholdOffset = -1;
 
     public ref float FldbCompressionThreshold
     {
         get
         {
-            _FldbCompressionThresholdOffset = _FldbCompressionThresholdOffset ?? Schema.GetOffset(0x4AC2D500C45CDA7C);
-            return ref _Handle.AsRef<float>(_FldbCompressionThresholdOffset!.Value);
+            if (_FldbCompressionThresholdOffset == -1) _FldbCompressionThresholdOffset = Schema.GetOffset(0x4AC2D500C45CDA7C);
+            return ref _Handle.AsRef<float>(_FldbCompressionThresholdOffset);
         }
     }
-    private static nint? _FldbKneeWidthOffset;
+    private static nint _FldbKneeWidthOffset = -1;
 
     public ref float FldbKneeWidth
     {
         get
         {
-            _FldbKneeWidthOffset = _FldbKneeWidthOffset ?? Schema.GetOffset(0x4AC2D50035532FF2);
-            return ref _Handle.AsRef<float>(_FldbKneeWidthOffset!.Value);
+            if (_FldbKneeWidthOffset == -1) _FldbKneeWidthOffset = Schema.GetOffset(0x4AC2D50035532FF2);
+            return ref _Handle.AsRef<float>(_FldbKneeWidthOffset);
         }
     }
-    private static nint? _CompressionRatioOffset;
+    private static nint _CompressionRatioOffset = -1;
 
     public ref float CompressionRatio
     {
         get
         {
-            _CompressionRatioOffset = _CompressionRatioOffset ?? Schema.GetOffset(0x4AC2D5008B1A1E1A);
-            return ref _Handle.AsRef<float>(_CompressionRatioOffset!.Value);
+            if (_CompressionRatioOffset == -1) _CompressionRatioOffset = Schema.GetOffset(0x4AC2D5008B1A1E1A);
+            return ref _Handle.AsRef<float>(_CompressionRatioOffset);
         }
     }
-    private static nint? _AttackTimeMSOffset;
+    private static nint _AttackTimeMSOffset = -1;
 
     public ref float AttackTimeMS
     {
         get
         {
-            _AttackTimeMSOffset = _AttackTimeMSOffset ?? Schema.GetOffset(0x4AC2D500D4A28216);
-            return ref _Handle.AsRef<float>(_AttackTimeMSOffset!.Value);
+            if (_AttackTimeMSOffset == -1) _AttackTimeMSOffset = Schema.GetOffset(0x4AC2D500D4A28216);
+            return ref _Handle.AsRef<float>(_AttackTimeMSOffset);
         }
     }
-    private static nint? _ReleaseTimeMSOffset;
+    private static nint _ReleaseTimeMSOffset = -1;
 
     public ref float ReleaseTimeMS
     {
         get
         {
-            _ReleaseTimeMSOffset = _ReleaseTimeMSOffset ?? Schema.GetOffset(0x4AC2D500EBB62791);
-            return ref _Handle.AsRef<float>(_ReleaseTimeMSOffset!.Value);
+            if (_ReleaseTimeMSOffset == -1) _ReleaseTimeMSOffset = Schema.GetOffset(0x4AC2D500EBB62791);
+            return ref _Handle.AsRef<float>(_ReleaseTimeMSOffset);
         }
     }
-    private static nint? _RMSTimeMSOffset;
+    private static nint _RMSTimeMSOffset = -1;
 
     public ref float RMSTimeMS
     {
         get
         {
-            _RMSTimeMSOffset = _RMSTimeMSOffset ?? Schema.GetOffset(0x4AC2D500FB749526);
-            return ref _Handle.AsRef<float>(_RMSTimeMSOffset!.Value);
+            if (_RMSTimeMSOffset == -1) _RMSTimeMSOffset = Schema.GetOffset(0x4AC2D500FB749526);
+            return ref _Handle.AsRef<float>(_RMSTimeMSOffset);
         }
     }
-    private static nint? _WetMixOffset;
+    private static nint _WetMixOffset = -1;
 
     public ref float WetMix
     {
         get
         {
-            _WetMixOffset = _WetMixOffset ?? Schema.GetOffset(0x4AC2D500D5453C15);
-            return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
+            if (_WetMixOffset == -1) _WetMixOffset = Schema.GetOffset(0x4AC2D500D5453C15);
+            return ref _Handle.AsRef<float>(_WetMixOffset);
         }
     }
-    private static nint? _SCHighPassFreqOffset;
+    private static nint _SCHighPassFreqOffset = -1;
 
     public ref float SCHighPassFreq
     {
         get
         {
-            _SCHighPassFreqOffset = _SCHighPassFreqOffset ?? Schema.GetOffset(0x4AC2D5006B75D8AA);
-            return ref _Handle.AsRef<float>(_SCHighPassFreqOffset!.Value);
+            if (_SCHighPassFreqOffset == -1) _SCHighPassFreqOffset = Schema.GetOffset(0x4AC2D5006B75D8AA);
+            return ref _Handle.AsRef<float>(_SCHighPassFreqOffset);
         }
     }
-    private static nint? _PeakModeOffset;
+    private static nint _PeakModeOffset = -1;
 
     public ref bool PeakMode
     {
         get
         {
-            _PeakModeOffset = _PeakModeOffset ?? Schema.GetOffset(0x4AC2D50087DF35F9);
-            return ref _Handle.AsRef<bool>(_PeakModeOffset!.Value);
+            if (_PeakModeOffset == -1) _PeakModeOffset = Schema.GetOffset(0x4AC2D50087DF35F9);
+            return ref _Handle.AsRef<bool>(_PeakModeOffset);
         }
     }
-    private static nint? _AutoMakeupGainOffset;
+    private static nint _AutoMakeupGainOffset = -1;
 
     public ref bool AutoMakeupGain
     {
         get
         {
-            _AutoMakeupGainOffset = _AutoMakeupGainOffset ?? Schema.GetOffset(0x4AC2D500F8A2ECAA);
-            return ref _Handle.AsRef<bool>(_AutoMakeupGainOffset!.Value);
+            if (_AutoMakeupGainOffset == -1) _AutoMakeupGainOffset = Schema.GetOffset(0x4AC2D500F8A2ECAA);
+            return ref _Handle.AsRef<bool>(_AutoMakeupGainOffset);
         }
     }
 

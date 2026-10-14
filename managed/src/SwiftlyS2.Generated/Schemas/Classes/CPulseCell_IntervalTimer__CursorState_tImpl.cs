@@ -16,60 +16,60 @@ internal partial class CPulseCell_IntervalTimer__CursorState_tImpl : SchemaClass
 {
     public CPulseCell_IntervalTimer__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
     private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x63BF122697B5FA8E);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x63BF122697B5FA8E);
             var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
             return instance;
         }
     }
-    private static nint? _EndTimeOffset;
+    private static nint _EndTimeOffset = -1;
     private GameTime_tImpl? _EndTimeInstance;
 
     public GameTime_t EndTime
     {
         get
         {
-            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0x63BF12267AA8F56B);
+            if (_EndTimeOffset == -1) _EndTimeOffset = Schema.GetOffset(0x63BF12267AA8F56B);
             var instance = _EndTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndTimeOffset);
             return instance;
         }
     }
-    private static nint? _WaitIntervalOffset;
+    private static nint _WaitIntervalOffset = -1;
 
     public ref float WaitInterval
     {
         get
         {
-            _WaitIntervalOffset = _WaitIntervalOffset ?? Schema.GetOffset(0x63BF122677B6B563);
-            return ref _Handle.AsRef<float>(_WaitIntervalOffset!.Value);
+            if (_WaitIntervalOffset == -1) _WaitIntervalOffset = Schema.GetOffset(0x63BF122677B6B563);
+            return ref _Handle.AsRef<float>(_WaitIntervalOffset);
         }
     }
-    private static nint? _WaitIntervalHighOffset;
+    private static nint _WaitIntervalHighOffset = -1;
 
     public ref float WaitIntervalHigh
     {
         get
         {
-            _WaitIntervalHighOffset = _WaitIntervalHighOffset ?? Schema.GetOffset(0x63BF12267540534F);
-            return ref _Handle.AsRef<float>(_WaitIntervalHighOffset!.Value);
+            if (_WaitIntervalHighOffset == -1) _WaitIntervalHighOffset = Schema.GetOffset(0x63BF12267540534F);
+            return ref _Handle.AsRef<float>(_WaitIntervalHighOffset);
         }
     }
-    private static nint? _CompleteOnNextWakeOffset;
+    private static nint _CompleteOnNextWakeOffset = -1;
 
     public ref bool CompleteOnNextWake
     {
         get
         {
-            _CompleteOnNextWakeOffset = _CompleteOnNextWakeOffset ?? Schema.GetOffset(0x63BF122684615952);
-            return ref _Handle.AsRef<bool>(_CompleteOnNextWakeOffset!.Value);
+            if (_CompleteOnNextWakeOffset == -1) _CompleteOnNextWakeOffset = Schema.GetOffset(0x63BF122684615952);
+            return ref _Handle.AsRef<bool>(_CompleteOnNextWakeOffset);
         }
     }
 

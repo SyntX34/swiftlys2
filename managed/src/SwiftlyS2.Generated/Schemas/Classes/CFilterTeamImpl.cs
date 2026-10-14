@@ -16,14 +16,14 @@ internal partial class CFilterTeamImpl : CBaseFilterImpl, CFilterTeam
 {
     public CFilterTeamImpl(nint handle) : base(handle) { }
 
-    private static nint? _FilterTeamOffset;
+    private static nint _FilterTeamOffset = -1;
 
     public ref int FilterTeam
     {
         get
         {
-            _FilterTeamOffset = _FilterTeamOffset ?? Schema.GetOffset(0x46DA651D4D36160F);
-            return ref _Handle.AsRef<int>(_FilterTeamOffset!.Value);
+            if (_FilterTeamOffset == -1) _FilterTeamOffset = Schema.GetOffset(0x46DA651D4D36160F);
+            return ref _Handle.AsRef<int>(_FilterTeamOffset);
         }
     }
 

@@ -16,44 +16,44 @@ internal partial class CPropDoorRotatingBreakableImpl : CPropDoorRotatingImpl, C
 {
     public CPropDoorRotatingBreakableImpl(nint handle) : base(handle) { }
 
-    private static nint? _BreakableOffset;
+    private static nint _BreakableOffset = -1;
 
     public ref bool Breakable
     {
         get
         {
-            _BreakableOffset = _BreakableOffset ?? Schema.GetOffset(0xCB925ACA549B5310);
-            return ref _Handle.AsRef<bool>(_BreakableOffset!.Value);
+            if (_BreakableOffset == -1) _BreakableOffset = Schema.GetOffset(0xCB925ACA549B5310);
+            return ref _Handle.AsRef<bool>(_BreakableOffset);
         }
     }
-    private static nint? _IsAbleToCloseAreaPortalsOffset;
+    private static nint _IsAbleToCloseAreaPortalsOffset = -1;
 
     public ref bool IsAbleToCloseAreaPortals
     {
         get
         {
-            _IsAbleToCloseAreaPortalsOffset = _IsAbleToCloseAreaPortalsOffset ?? Schema.GetOffset(0xCB925ACAAC381C84);
-            return ref _Handle.AsRef<bool>(_IsAbleToCloseAreaPortalsOffset!.Value);
+            if (_IsAbleToCloseAreaPortalsOffset == -1) _IsAbleToCloseAreaPortalsOffset = Schema.GetOffset(0xCB925ACAAC381C84);
+            return ref _Handle.AsRef<bool>(_IsAbleToCloseAreaPortalsOffset);
         }
     }
-    private static nint? _CurrentDamageStateOffset;
+    private static nint _CurrentDamageStateOffset = -1;
 
     public ref int CurrentDamageState
     {
         get
         {
-            _CurrentDamageStateOffset = _CurrentDamageStateOffset ?? Schema.GetOffset(0xCB925ACA29591458);
-            return ref _Handle.AsRef<int>(_CurrentDamageStateOffset!.Value);
+            if (_CurrentDamageStateOffset == -1) _CurrentDamageStateOffset = Schema.GetOffset(0xCB925ACA29591458);
+            return ref _Handle.AsRef<int>(_CurrentDamageStateOffset);
         }
     }
-    private static nint? _DamageStatesOffset;
+    private static nint _DamageStatesOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> DamageStates
     {
         get
         {
-            _DamageStatesOffset = _DamageStatesOffset ?? Schema.GetOffset(0xCB925ACA4FD16F52);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_DamageStatesOffset!.Value);
+            if (_DamageStatesOffset == -1) _DamageStatesOffset = Schema.GetOffset(0xCB925ACA4FD16F52);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_DamageStatesOffset);
         }
     }
 

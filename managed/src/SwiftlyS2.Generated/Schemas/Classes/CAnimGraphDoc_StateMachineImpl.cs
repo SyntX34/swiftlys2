@@ -16,14 +16,14 @@ internal partial class CAnimGraphDoc_StateMachineImpl : SchemaClass, CAnimGraphD
 {
     public CAnimGraphDoc_StateMachineImpl(nint handle) : base(handle) { }
 
-    private static nint? _StatesOffset;
+    private static nint _StatesOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> States
     {
         get
         {
-            _StatesOffset = _StatesOffset ?? Schema.GetOffset(0xB5CB1B3C6F284CFF);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_StatesOffset!.Value);
+            if (_StatesOffset == -1) _StatesOffset = Schema.GetOffset(0xB5CB1B3C6F284CFF);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_StatesOffset);
         }
     }
 

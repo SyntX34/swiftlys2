@@ -16,114 +16,114 @@ internal partial class PermModelInfo_tImpl : SchemaClass, PermModelInfo_t
 {
     public PermModelInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref uint Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x1B48585FCE6E9C28);
-            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x1B48585FCE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset);
         }
     }
-    private static nint? _HullMinOffset;
+    private static nint _HullMinOffset = -1;
 
     public ref Vector HullMin
     {
         get
         {
-            _HullMinOffset = _HullMinOffset ?? Schema.GetOffset(0x1B48585FAC1193D6);
-            return ref _Handle.AsRef<Vector>(_HullMinOffset!.Value);
+            if (_HullMinOffset == -1) _HullMinOffset = Schema.GetOffset(0x1B48585FAC1193D6);
+            return ref _Handle.AsRef<Vector>(_HullMinOffset);
         }
     }
-    private static nint? _HullMaxOffset;
+    private static nint _HullMaxOffset = -1;
 
     public ref Vector HullMax
     {
         get
         {
-            _HullMaxOffset = _HullMaxOffset ?? Schema.GetOffset(0x1B48585F9E269884);
-            return ref _Handle.AsRef<Vector>(_HullMaxOffset!.Value);
+            if (_HullMaxOffset == -1) _HullMaxOffset = Schema.GetOffset(0x1B48585F9E269884);
+            return ref _Handle.AsRef<Vector>(_HullMaxOffset);
         }
     }
-    private static nint? _ViewMinOffset;
+    private static nint _ViewMinOffset = -1;
 
     public ref Vector ViewMin
     {
         get
         {
-            _ViewMinOffset = _ViewMinOffset ?? Schema.GetOffset(0x1B48585F22A936E8);
-            return ref _Handle.AsRef<Vector>(_ViewMinOffset!.Value);
+            if (_ViewMinOffset == -1) _ViewMinOffset = Schema.GetOffset(0x1B48585F22A936E8);
+            return ref _Handle.AsRef<Vector>(_ViewMinOffset);
         }
     }
-    private static nint? _ViewMaxOffset;
+    private static nint _ViewMaxOffset = -1;
 
     public ref Vector ViewMax
     {
         get
         {
-            _ViewMaxOffset = _ViewMaxOffset ?? Schema.GetOffset(0x1B48585F18BCAEE2);
-            return ref _Handle.AsRef<Vector>(_ViewMaxOffset!.Value);
+            if (_ViewMaxOffset == -1) _ViewMaxOffset = Schema.GetOffset(0x1B48585F18BCAEE2);
+            return ref _Handle.AsRef<Vector>(_ViewMaxOffset);
         }
     }
-    private static nint? _MassOffset;
+    private static nint _MassOffset = -1;
 
     public ref float Mass
     {
         get
         {
-            _MassOffset = _MassOffset ?? Schema.GetOffset(0x1B48585FCD83D263);
-            return ref _Handle.AsRef<float>(_MassOffset!.Value);
+            if (_MassOffset == -1) _MassOffset = Schema.GetOffset(0x1B48585FCD83D263);
+            return ref _Handle.AsRef<float>(_MassOffset);
         }
     }
-    private static nint? _EyePositionOffset;
+    private static nint _EyePositionOffset = -1;
 
     public ref Vector EyePosition
     {
         get
         {
-            _EyePositionOffset = _EyePositionOffset ?? Schema.GetOffset(0x1B48585FA0F51EB1);
-            return ref _Handle.AsRef<Vector>(_EyePositionOffset!.Value);
+            if (_EyePositionOffset == -1) _EyePositionOffset = Schema.GetOffset(0x1B48585FA0F51EB1);
+            return ref _Handle.AsRef<Vector>(_EyePositionOffset);
         }
     }
-    private static nint? _MaxEyeDeflectionOffset;
+    private static nint _MaxEyeDeflectionOffset = -1;
 
     public ref float MaxEyeDeflection
     {
         get
         {
-            _MaxEyeDeflectionOffset = _MaxEyeDeflectionOffset ?? Schema.GetOffset(0x1B48585F1C6CE157);
-            return ref _Handle.AsRef<float>(_MaxEyeDeflectionOffset!.Value);
+            if (_MaxEyeDeflectionOffset == -1) _MaxEyeDeflectionOffset = Schema.GetOffset(0x1B48585F1C6CE157);
+            return ref _Handle.AsRef<float>(_MaxEyeDeflectionOffset);
         }
     }
-    private static nint? _SurfacePropertyOffset;
+    private static nint _SurfacePropertyOffset = -1;
 
     public string SurfaceProperty
     {
         get
         {
-            _SurfacePropertyOffset = _SurfacePropertyOffset ?? Schema.GetOffset(0x1B48585F1A25534C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SurfacePropertyOffset!.Value));
+            if (_SurfacePropertyOffset == -1) _SurfacePropertyOffset = Schema.GetOffset(0x1B48585F1A25534C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SurfacePropertyOffset));
         }
         set
         {
-            _SurfacePropertyOffset = _SurfacePropertyOffset ?? Schema.GetOffset(0x1B48585F1A25534C);
-            Schema.SetCUtlString(_Handle, _SurfacePropertyOffset!.Value, value);
+            if (_SurfacePropertyOffset == -1) _SurfacePropertyOffset = Schema.GetOffset(0x1B48585F1A25534C);
+            Schema.SetCUtlString(_Handle, _SurfacePropertyOffset, value);
         }
     }
-    private static nint? _KeyValueTextOffset;
+    private static nint _KeyValueTextOffset = -1;
 
     public string KeyValueText
     {
         get
         {
-            _KeyValueTextOffset = _KeyValueTextOffset ?? Schema.GetOffset(0x1B48585F2156929E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_KeyValueTextOffset!.Value));
+            if (_KeyValueTextOffset == -1) _KeyValueTextOffset = Schema.GetOffset(0x1B48585F2156929E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_KeyValueTextOffset));
         }
         set
         {
-            _KeyValueTextOffset = _KeyValueTextOffset ?? Schema.GetOffset(0x1B48585F2156929E);
-            Schema.SetCUtlString(_Handle, _KeyValueTextOffset!.Value, value);
+            if (_KeyValueTextOffset == -1) _KeyValueTextOffset = Schema.GetOffset(0x1B48585F2156929E);
+            Schema.SetCUtlString(_Handle, _KeyValueTextOffset, value);
         }
     }
 

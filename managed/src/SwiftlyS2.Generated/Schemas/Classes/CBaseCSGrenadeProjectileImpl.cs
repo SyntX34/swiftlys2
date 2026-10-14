@@ -16,173 +16,173 @@ internal partial class CBaseCSGrenadeProjectileImpl : CBaseGrenadeImpl, CBaseCSG
 {
     public CBaseCSGrenadeProjectileImpl(nint handle) : base(handle) { }
 
-    private static nint? _InitialPositionOffset;
+    private static nint _InitialPositionOffset = -1;
 
     public ref Vector InitialPosition
     {
         get
         {
-            _InitialPositionOffset = _InitialPositionOffset ?? Schema.GetOffset(0xC09C67027E9CA9C4);
-            return ref _Handle.AsRef<Vector>(_InitialPositionOffset!.Value);
+            if (_InitialPositionOffset == -1) _InitialPositionOffset = Schema.GetOffset(0xC09C67027E9CA9C4);
+            return ref _Handle.AsRef<Vector>(_InitialPositionOffset);
         }
     }
-    private static nint? _InitialVelocityOffset;
+    private static nint _InitialVelocityOffset = -1;
 
     public ref Vector InitialVelocity
     {
         get
         {
-            _InitialVelocityOffset = _InitialVelocityOffset ?? Schema.GetOffset(0xC09C67027C20BD90);
-            return ref _Handle.AsRef<Vector>(_InitialVelocityOffset!.Value);
+            if (_InitialVelocityOffset == -1) _InitialVelocityOffset = Schema.GetOffset(0xC09C67027C20BD90);
+            return ref _Handle.AsRef<Vector>(_InitialVelocityOffset);
         }
     }
-    private static nint? _BouncesOffset;
+    private static nint _BouncesOffset = -1;
 
     public ref int Bounces
     {
         get
         {
-            _BouncesOffset = _BouncesOffset ?? Schema.GetOffset(0xC09C67026B81EBCE);
-            return ref _Handle.AsRef<int>(_BouncesOffset!.Value);
+            if (_BouncesOffset == -1) _BouncesOffset = Schema.GetOffset(0xC09C67026B81EBCE);
+            return ref _Handle.AsRef<int>(_BouncesOffset);
         }
     }
-    private static nint? _ExplodeEffectIndexOffset;
+    private static nint _ExplodeEffectIndexOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ExplodeEffectIndex
     {
         get
         {
-            _ExplodeEffectIndexOffset = _ExplodeEffectIndexOffset ?? Schema.GetOffset(0xC09C6702178B5975);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_ExplodeEffectIndexOffset!.Value);
+            if (_ExplodeEffectIndexOffset == -1) _ExplodeEffectIndexOffset = Schema.GetOffset(0xC09C6702178B5975);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_ExplodeEffectIndexOffset);
         }
     }
-    private static nint? _ExplodeEffectTickBeginOffset;
+    private static nint _ExplodeEffectTickBeginOffset = -1;
 
     public ref int ExplodeEffectTickBegin
     {
         get
         {
-            _ExplodeEffectTickBeginOffset = _ExplodeEffectTickBeginOffset ?? Schema.GetOffset(0xC09C67022F04F603);
-            return ref _Handle.AsRef<int>(_ExplodeEffectTickBeginOffset!.Value);
+            if (_ExplodeEffectTickBeginOffset == -1) _ExplodeEffectTickBeginOffset = Schema.GetOffset(0xC09C67022F04F603);
+            return ref _Handle.AsRef<int>(_ExplodeEffectTickBeginOffset);
         }
     }
-    private static nint? _ExplodeEffectOriginOffset;
+    private static nint _ExplodeEffectOriginOffset = -1;
 
     public ref Vector ExplodeEffectOrigin
     {
         get
         {
-            _ExplodeEffectOriginOffset = _ExplodeEffectOriginOffset ?? Schema.GetOffset(0xC09C6702AA7B4525);
-            return ref _Handle.AsRef<Vector>(_ExplodeEffectOriginOffset!.Value);
+            if (_ExplodeEffectOriginOffset == -1) _ExplodeEffectOriginOffset = Schema.GetOffset(0xC09C6702AA7B4525);
+            return ref _Handle.AsRef<Vector>(_ExplodeEffectOriginOffset);
         }
     }
-    private static nint? _SpawnTimeOffset;
+    private static nint _SpawnTimeOffset = -1;
     private GameTime_tImpl? _SpawnTimeInstance;
 
     public GameTime_t SpawnTime
     {
         get
         {
-            _SpawnTimeOffset = _SpawnTimeOffset ?? Schema.GetOffset(0xC09C67029596A16B);
+            if (_SpawnTimeOffset == -1) _SpawnTimeOffset = Schema.GetOffset(0xC09C67029596A16B);
             var instance = _SpawnTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SpawnTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SpawnTimeOffset);
             return instance;
         }
     }
-    private static nint? _OGSExtraFlagsOffset;
+    private static nint _OGSExtraFlagsOffset = -1;
 
     public ref byte OGSExtraFlags
     {
         get
         {
-            _OGSExtraFlagsOffset = _OGSExtraFlagsOffset ?? Schema.GetOffset(0xC09C670221F95684);
-            return ref _Handle.AsRef<byte>(_OGSExtraFlagsOffset!.Value);
+            if (_OGSExtraFlagsOffset == -1) _OGSExtraFlagsOffset = Schema.GetOffset(0xC09C670221F95684);
+            return ref _Handle.AsRef<byte>(_OGSExtraFlagsOffset);
         }
     }
-    private static nint? _DetonationRecordedOffset;
+    private static nint _DetonationRecordedOffset = -1;
 
     public ref bool DetonationRecorded
     {
         get
         {
-            _DetonationRecordedOffset = _DetonationRecordedOffset ?? Schema.GetOffset(0xC09C67024164A13C);
-            return ref _Handle.AsRef<bool>(_DetonationRecordedOffset!.Value);
+            if (_DetonationRecordedOffset == -1) _DetonationRecordedOffset = Schema.GetOffset(0xC09C67024164A13C);
+            return ref _Handle.AsRef<bool>(_DetonationRecordedOffset);
         }
     }
-    private static nint? _ItemIndexOffset;
+    private static nint _ItemIndexOffset = -1;
 
     public ref ushort ItemIndex
     {
         get
         {
-            _ItemIndexOffset = _ItemIndexOffset ?? Schema.GetOffset(0xC09C67025D8A6E7E);
-            return ref _Handle.AsRef<ushort>(_ItemIndexOffset!.Value);
+            if (_ItemIndexOffset == -1) _ItemIndexOffset = Schema.GetOffset(0xC09C67025D8A6E7E);
+            return ref _Handle.AsRef<ushort>(_ItemIndexOffset);
         }
     }
-    private static nint? _OriginalSpawnLocationOffset;
+    private static nint _OriginalSpawnLocationOffset = -1;
 
     public ref Vector OriginalSpawnLocation
     {
         get
         {
-            _OriginalSpawnLocationOffset = _OriginalSpawnLocationOffset ?? Schema.GetOffset(0xC09C67025E59F382);
-            return ref _Handle.AsRef<Vector>(_OriginalSpawnLocationOffset!.Value);
+            if (_OriginalSpawnLocationOffset == -1) _OriginalSpawnLocationOffset = Schema.GetOffset(0xC09C67025E59F382);
+            return ref _Handle.AsRef<Vector>(_OriginalSpawnLocationOffset);
         }
     }
-    private static nint? _LastBounceSoundTimeOffset;
+    private static nint _LastBounceSoundTimeOffset = -1;
     private GameTime_tImpl? _LastBounceSoundTimeInstance;
 
     public GameTime_t LastBounceSoundTime
     {
         get
         {
-            _LastBounceSoundTimeOffset = _LastBounceSoundTimeOffset ?? Schema.GetOffset(0xC09C670206AF4AB7);
+            if (_LastBounceSoundTimeOffset == -1) _LastBounceSoundTimeOffset = Schema.GetOffset(0xC09C670206AF4AB7);
             var instance = _LastBounceSoundTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LastBounceSoundTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LastBounceSoundTimeOffset);
             return instance;
         }
     }
-    private static nint? _GrenadeSpinOffset;
+    private static nint _GrenadeSpinOffset = -1;
     private SchemaUntypedField? _GrenadeSpinInstance;
 
     public SchemaUntypedField GrenadeSpin
     {
         get
         {
-            _GrenadeSpinOffset = _GrenadeSpinOffset ?? Schema.GetOffset(0xC09C67025A836591);
+            if (_GrenadeSpinOffset == -1) _GrenadeSpinOffset = Schema.GetOffset(0xC09C67025A836591);
             var instance = _GrenadeSpinInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _GrenadeSpinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GrenadeSpinOffset);
             return instance;
         }
     }
-    private static nint? _LastHitSurfaceNormalOffset;
+    private static nint _LastHitSurfaceNormalOffset = -1;
 
     public ref Vector LastHitSurfaceNormal
     {
         get
         {
-            _LastHitSurfaceNormalOffset = _LastHitSurfaceNormalOffset ?? Schema.GetOffset(0xC09C6702FAEF57FA);
-            return ref _Handle.AsRef<Vector>(_LastHitSurfaceNormalOffset!.Value);
+            if (_LastHitSurfaceNormalOffset == -1) _LastHitSurfaceNormalOffset = Schema.GetOffset(0xC09C6702FAEF57FA);
+            return ref _Handle.AsRef<Vector>(_LastHitSurfaceNormalOffset);
         }
     }
-    private static nint? _TicksAtZeroVelocityOffset;
+    private static nint _TicksAtZeroVelocityOffset = -1;
 
     public ref int TicksAtZeroVelocity
     {
         get
         {
-            _TicksAtZeroVelocityOffset = _TicksAtZeroVelocityOffset ?? Schema.GetOffset(0xC09C6702A4946C6D);
-            return ref _Handle.AsRef<int>(_TicksAtZeroVelocityOffset!.Value);
+            if (_TicksAtZeroVelocityOffset == -1) _TicksAtZeroVelocityOffset = Schema.GetOffset(0xC09C6702A4946C6D);
+            return ref _Handle.AsRef<int>(_TicksAtZeroVelocityOffset);
         }
     }
-    private static nint? _HasEverHitEnemyOffset;
+    private static nint _HasEverHitEnemyOffset = -1;
 
     public ref bool HasEverHitEnemy
     {
         get
         {
-            _HasEverHitEnemyOffset = _HasEverHitEnemyOffset ?? Schema.GetOffset(0xC09C670259285A50);
-            return ref _Handle.AsRef<bool>(_HasEverHitEnemyOffset!.Value);
+            if (_HasEverHitEnemyOffset == -1) _HasEverHitEnemyOffset = Schema.GetOffset(0xC09C670259285A50);
+            return ref _Handle.AsRef<bool>(_HasEverHitEnemyOffset);
         }
     }
 

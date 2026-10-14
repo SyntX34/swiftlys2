@@ -16,126 +16,126 @@ internal partial class CMixDynamics3BandImpl : CMixPropertyBaseImpl, CMixDynamic
 {
     public CMixDynamics3BandImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChannelsOffset;
+    private static nint _ChannelsOffset = -1;
 
     public ref int Channels
     {
         get
         {
-            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0xC405DD1C5A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
+            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0xC405DD1C5A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset);
         }
     }
-    private static nint? _FldbOutputGainOffset;
+    private static nint _FldbOutputGainOffset = -1;
 
     public ref float FldbOutputGain
     {
         get
         {
-            _FldbOutputGainOffset = _FldbOutputGainOffset ?? Schema.GetOffset(0xC405DD1C67F97C23);
-            return ref _Handle.AsRef<float>(_FldbOutputGainOffset!.Value);
+            if (_FldbOutputGainOffset == -1) _FldbOutputGainOffset = Schema.GetOffset(0xC405DD1C67F97C23);
+            return ref _Handle.AsRef<float>(_FldbOutputGainOffset);
         }
     }
-    private static nint? _RMSTimeOffset;
+    private static nint _RMSTimeOffset = -1;
 
     public ref float RMSTime
     {
         get
         {
-            _RMSTimeOffset = _RMSTimeOffset ?? Schema.GetOffset(0xC405DD1C097B7746);
-            return ref _Handle.AsRef<float>(_RMSTimeOffset!.Value);
+            if (_RMSTimeOffset == -1) _RMSTimeOffset = Schema.GetOffset(0xC405DD1C097B7746);
+            return ref _Handle.AsRef<float>(_RMSTimeOffset);
         }
     }
-    private static nint? _DepthOffset;
+    private static nint _DepthOffset = -1;
 
     public ref float Depth
     {
         get
         {
-            _DepthOffset = _DepthOffset ?? Schema.GetOffset(0xC405DD1CD3AD54E8);
-            return ref _Handle.AsRef<float>(_DepthOffset!.Value);
+            if (_DepthOffset == -1) _DepthOffset = Schema.GetOffset(0xC405DD1CD3AD54E8);
+            return ref _Handle.AsRef<float>(_DepthOffset);
         }
     }
-    private static nint? _WetMixOffset;
+    private static nint _WetMixOffset = -1;
 
     public ref float WetMix
     {
         get
         {
-            _WetMixOffset = _WetMixOffset ?? Schema.GetOffset(0xC405DD1CD5453C15);
-            return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
+            if (_WetMixOffset == -1) _WetMixOffset = Schema.GetOffset(0xC405DD1CD5453C15);
+            return ref _Handle.AsRef<float>(_WetMixOffset);
         }
     }
-    private static nint? _TimeScaleOffset;
+    private static nint _TimeScaleOffset = -1;
 
     public ref float TimeScale
     {
         get
         {
-            _TimeScaleOffset = _TimeScaleOffset ?? Schema.GetOffset(0xC405DD1CB49D735C);
-            return ref _Handle.AsRef<float>(_TimeScaleOffset!.Value);
+            if (_TimeScaleOffset == -1) _TimeScaleOffset = Schema.GetOffset(0xC405DD1CB49D735C);
+            return ref _Handle.AsRef<float>(_TimeScaleOffset);
         }
     }
-    private static nint? _FldbKneeWidthOffset;
+    private static nint _FldbKneeWidthOffset = -1;
 
     public ref float FldbKneeWidth
     {
         get
         {
-            _FldbKneeWidthOffset = _FldbKneeWidthOffset ?? Schema.GetOffset(0xC405DD1C35532FF2);
-            return ref _Handle.AsRef<float>(_FldbKneeWidthOffset!.Value);
+            if (_FldbKneeWidthOffset == -1) _FldbKneeWidthOffset = Schema.GetOffset(0xC405DD1C35532FF2);
+            return ref _Handle.AsRef<float>(_FldbKneeWidthOffset);
         }
     }
-    private static nint? _LowCutoffFreqOffset;
+    private static nint _LowCutoffFreqOffset = -1;
 
     public ref float LowCutoffFreq
     {
         get
         {
-            _LowCutoffFreqOffset = _LowCutoffFreqOffset ?? Schema.GetOffset(0xC405DD1C1E9A1CCC);
-            return ref _Handle.AsRef<float>(_LowCutoffFreqOffset!.Value);
+            if (_LowCutoffFreqOffset == -1) _LowCutoffFreqOffset = Schema.GetOffset(0xC405DD1C1E9A1CCC);
+            return ref _Handle.AsRef<float>(_LowCutoffFreqOffset);
         }
     }
-    private static nint? _HighCutoffFreqOffset;
+    private static nint _HighCutoffFreqOffset = -1;
 
     public ref float HighCutoffFreq
     {
         get
         {
-            _HighCutoffFreqOffset = _HighCutoffFreqOffset ?? Schema.GetOffset(0xC405DD1C3FE556C8);
-            return ref _Handle.AsRef<float>(_HighCutoffFreqOffset!.Value);
+            if (_HighCutoffFreqOffset == -1) _HighCutoffFreqOffset = Schema.GetOffset(0xC405DD1C3FE556C8);
+            return ref _Handle.AsRef<float>(_HighCutoffFreqOffset);
         }
     }
-    private static nint? _PeakModeOffset;
+    private static nint _PeakModeOffset = -1;
 
     public ref bool PeakMode
     {
         get
         {
-            _PeakModeOffset = _PeakModeOffset ?? Schema.GetOffset(0xC405DD1C87DF35F9);
-            return ref _Handle.AsRef<bool>(_PeakModeOffset!.Value);
+            if (_PeakModeOffset == -1) _PeakModeOffset = Schema.GetOffset(0xC405DD1C87DF35F9);
+            return ref _Handle.AsRef<bool>(_PeakModeOffset);
         }
     }
-    private static nint? _SelectedPageOffset;
+    private static nint _SelectedPageOffset = -1;
 
     public ref int SelectedPage
     {
         get
         {
-            _SelectedPageOffset = _SelectedPageOffset ?? Schema.GetOffset(0xC405DD1CAC5A97CB);
-            return ref _Handle.AsRef<int>(_SelectedPageOffset!.Value);
+            if (_SelectedPageOffset == -1) _SelectedPageOffset = Schema.GetOffset(0xC405DD1CAC5A97CB);
+            return ref _Handle.AsRef<int>(_SelectedPageOffset);
         }
     }
-    private static nint? _BandsOffset;
+    private static nint _BandsOffset = -1;
     private SchemaClassFixedArray<VMixDynamicsBand_t>? _BandsInstance;
 
     public ISchemaClassFixedArray<VMixDynamicsBand_t> Bands
     {
         get
         {
-            _BandsOffset = _BandsOffset ?? Schema.GetOffset(0xC405DD1C1C09328F);
+            if (_BandsOffset == -1) _BandsOffset = Schema.GetOffset(0xC405DD1C1C09328F);
             var instance = _BandsInstance ??= new SchemaClassFixedArray<VMixDynamicsBand_t>(0, 0xC405DD1C1C09328F, 3, 36, 4);
-            instance.DangerousSetHandle(_Handle + _BandsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BandsOffset);
             return instance;
         }
     }

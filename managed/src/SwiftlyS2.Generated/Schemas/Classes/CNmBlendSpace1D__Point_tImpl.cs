@@ -16,41 +16,41 @@ internal partial class CNmBlendSpace1D__Point_tImpl : SchemaClass, CNmBlendSpace
 {
     public CNmBlendSpace1D__Point_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x2EEFC4764D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x2EEFC4764D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x2EEFC4764D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x2EEFC4764D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public ref float Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x2EEFC4768DFCB984);
-            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x2EEFC4768DFCB984);
+            return ref _Handle.AsRef<float>(_ValueOffset);
         }
     }
-    private static nint? _PinIDOffset;
+    private static nint _PinIDOffset = -1;
     private SchemaUntypedField? _PinIDInstance;
 
     public SchemaUntypedField PinID
     {
         get
         {
-            _PinIDOffset = _PinIDOffset ?? Schema.GetOffset(0x2EEFC4764A4939B9);
+            if (_PinIDOffset == -1) _PinIDOffset = Schema.GetOffset(0x2EEFC4764A4939B9);
             var instance = _PinIDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PinIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PinIDOffset);
             return instance;
         }
     }

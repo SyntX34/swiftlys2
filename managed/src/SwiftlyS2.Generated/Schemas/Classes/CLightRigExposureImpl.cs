@@ -16,34 +16,34 @@ internal partial class CLightRigExposureImpl : SchemaClass, CLightRigExposure
 {
     public CLightRigExposureImpl(nint handle) : base(handle) { }
 
-    private static nint? _EnabledOffset;
+    private static nint _EnabledOffset = -1;
 
     public ref bool Enabled
     {
         get
         {
-            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x29AB049D6154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x29AB049D6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset);
         }
     }
-    private static nint? _MinEVOffset;
+    private static nint _MinEVOffset = -1;
 
     public ref float MinEV
     {
         get
         {
-            _MinEVOffset = _MinEVOffset ?? Schema.GetOffset(0x29AB049D0CE6B436);
-            return ref _Handle.AsRef<float>(_MinEVOffset!.Value);
+            if (_MinEVOffset == -1) _MinEVOffset = Schema.GetOffset(0x29AB049D0CE6B436);
+            return ref _Handle.AsRef<float>(_MinEVOffset);
         }
     }
-    private static nint? _MaxEVOffset;
+    private static nint _MaxEVOffset = -1;
 
     public ref float MaxEV
     {
         get
         {
-            _MaxEVOffset = _MaxEVOffset ?? Schema.GetOffset(0x29AB049DB351E690);
-            return ref _Handle.AsRef<float>(_MaxEVOffset!.Value);
+            if (_MaxEVOffset == -1) _MaxEVOffset = Schema.GetOffset(0x29AB049DB351E690);
+            return ref _Handle.AsRef<float>(_MaxEVOffset);
         }
     }
 

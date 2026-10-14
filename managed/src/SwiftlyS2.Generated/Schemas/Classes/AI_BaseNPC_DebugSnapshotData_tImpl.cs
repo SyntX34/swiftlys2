@@ -16,165 +16,165 @@ internal partial class AI_BaseNPC_DebugSnapshotData_tImpl : DebugSnapshotBaseStr
 {
     public AI_BaseNPC_DebugSnapshotData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _Npc_stateOffset;
+    private static nint _Npc_stateOffset = -1;
 
     public ref CGlobalSymbol Npc_state
     {
         get
         {
-            _Npc_stateOffset = _Npc_stateOffset ?? Schema.GetOffset(0x92164B5757DA063E);
-            return ref _Handle.AsRef<CGlobalSymbol>(_Npc_stateOffset!.Value);
+            if (_Npc_stateOffset == -1) _Npc_stateOffset = Schema.GetOffset(0x92164B5757DA063E);
+            return ref _Handle.AsRef<CGlobalSymbol>(_Npc_stateOffset);
         }
     }
-    private static nint? _Current_enemyOffset;
+    private static nint _Current_enemyOffset = -1;
 
     public ref CHandle<C_BaseEntity> Current_enemy
     {
         get
         {
-            _Current_enemyOffset = _Current_enemyOffset ?? Schema.GetOffset(0x92164B573B77EA5D);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_Current_enemyOffset!.Value);
+            if (_Current_enemyOffset == -1) _Current_enemyOffset = Schema.GetOffset(0x92164B573B77EA5D);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_Current_enemyOffset);
         }
     }
-    private static nint? _S_current_scheduleOffset;
+    private static nint _S_current_scheduleOffset = -1;
 
     public string S_current_schedule
     {
         get
         {
-            _S_current_scheduleOffset = _S_current_scheduleOffset ?? Schema.GetOffset(0x92164B577C36272C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_S_current_scheduleOffset!.Value));
+            if (_S_current_scheduleOffset == -1) _S_current_scheduleOffset = Schema.GetOffset(0x92164B577C36272C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_S_current_scheduleOffset));
         }
         set
         {
-            _S_current_scheduleOffset = _S_current_scheduleOffset ?? Schema.GetOffset(0x92164B577C36272C);
-            Schema.SetCUtlString(_Handle, _S_current_scheduleOffset!.Value, value);
+            if (_S_current_scheduleOffset == -1) _S_current_scheduleOffset = Schema.GetOffset(0x92164B577C36272C);
+            Schema.SetCUtlString(_Handle, _S_current_scheduleOffset, value);
         }
     }
-    private static nint? _S_current_taskOffset;
+    private static nint _S_current_taskOffset = -1;
 
     public ref CGlobalSymbol S_current_task
     {
         get
         {
-            _S_current_taskOffset = _S_current_taskOffset ?? Schema.GetOffset(0x92164B573CBAABCC);
-            return ref _Handle.AsRef<CGlobalSymbol>(_S_current_taskOffset!.Value);
+            if (_S_current_taskOffset == -1) _S_current_taskOffset = Schema.GetOffset(0x92164B573CBAABCC);
+            return ref _Handle.AsRef<CGlobalSymbol>(_S_current_taskOffset);
         }
     }
-    private static nint? _S_prev_scheduleOffset;
+    private static nint _S_prev_scheduleOffset = -1;
 
     public string S_prev_schedule
     {
         get
         {
-            _S_prev_scheduleOffset = _S_prev_scheduleOffset ?? Schema.GetOffset(0x92164B574799DD26);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_S_prev_scheduleOffset!.Value));
+            if (_S_prev_scheduleOffset == -1) _S_prev_scheduleOffset = Schema.GetOffset(0x92164B574799DD26);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_S_prev_scheduleOffset));
         }
         set
         {
-            _S_prev_scheduleOffset = _S_prev_scheduleOffset ?? Schema.GetOffset(0x92164B574799DD26);
-            Schema.SetCUtlString(_Handle, _S_prev_scheduleOffset!.Value, value);
+            if (_S_prev_scheduleOffset == -1) _S_prev_scheduleOffset = Schema.GetOffset(0x92164B574799DD26);
+            Schema.SetCUtlString(_Handle, _S_prev_scheduleOffset, value);
         }
     }
-    private static nint? _S_npc_current_movementOffset;
+    private static nint _S_npc_current_movementOffset = -1;
 
     public string S_npc_current_movement
     {
         get
         {
-            _S_npc_current_movementOffset = _S_npc_current_movementOffset ?? Schema.GetOffset(0x92164B5740D0BBF4);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_S_npc_current_movementOffset!.Value));
+            if (_S_npc_current_movementOffset == -1) _S_npc_current_movementOffset = Schema.GetOffset(0x92164B5740D0BBF4);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_S_npc_current_movementOffset));
         }
         set
         {
-            _S_npc_current_movementOffset = _S_npc_current_movementOffset ?? Schema.GetOffset(0x92164B5740D0BBF4);
-            Schema.SetCUtlString(_Handle, _S_npc_current_movementOffset!.Value, value);
+            if (_S_npc_current_movementOffset == -1) _S_npc_current_movementOffset = Schema.GetOffset(0x92164B5740D0BBF4);
+            Schema.SetCUtlString(_Handle, _S_npc_current_movementOffset, value);
         }
     }
-    private static nint? _S_last_task_end_locationOffset;
+    private static nint _S_last_task_end_locationOffset = -1;
 
     public string S_last_task_end_location
     {
         get
         {
-            _S_last_task_end_locationOffset = _S_last_task_end_locationOffset ?? Schema.GetOffset(0x92164B57CD46DB23);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_S_last_task_end_locationOffset!.Value));
+            if (_S_last_task_end_locationOffset == -1) _S_last_task_end_locationOffset = Schema.GetOffset(0x92164B57CD46DB23);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_S_last_task_end_locationOffset));
         }
         set
         {
-            _S_last_task_end_locationOffset = _S_last_task_end_locationOffset ?? Schema.GetOffset(0x92164B57CD46DB23);
-            Schema.SetCUtlString(_Handle, _S_last_task_end_locationOffset!.Value, value);
+            if (_S_last_task_end_locationOffset == -1) _S_last_task_end_locationOffset = Schema.GetOffset(0x92164B57CD46DB23);
+            Schema.SetCUtlString(_Handle, _S_last_task_end_locationOffset, value);
         }
     }
-    private static nint? _ConditionsOffset;
+    private static nint _ConditionsOffset = -1;
 
     public ref CUtlVector<CGlobalSymbol> Conditions
     {
         get
         {
-            _ConditionsOffset = _ConditionsOffset ?? Schema.GetOffset(0x92164B5780E0D0B7);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ConditionsOffset!.Value);
+            if (_ConditionsOffset == -1) _ConditionsOffset = Schema.GetOffset(0x92164B5780E0D0B7);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ConditionsOffset);
         }
     }
-    private static nint? _Anim_eventsOffset;
+    private static nint _Anim_eventsOffset = -1;
 
     public ref CUtlVector<CGlobalSymbol> Anim_events
     {
         get
         {
-            _Anim_eventsOffset = _Anim_eventsOffset ?? Schema.GetOffset(0x92164B5772C71F2C);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_Anim_eventsOffset!.Value);
+            if (_Anim_eventsOffset == -1) _Anim_eventsOffset = Schema.GetOffset(0x92164B5772C71F2C);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_Anim_eventsOffset);
         }
     }
-    private static nint? _AnimgraphOffset;
+    private static nint _AnimgraphOffset = -1;
     private AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl? _AnimgraphInstance;
 
     public AI_BaseNPCAnimGraph_DebugSnapshotData_t Animgraph
     {
         get
         {
-            _AnimgraphOffset = _AnimgraphOffset ?? Schema.GetOffset(0x92164B57BA9B5054);
+            if (_AnimgraphOffset == -1) _AnimgraphOffset = Schema.GetOffset(0x92164B57BA9B5054);
             var instance = _AnimgraphInstance ??= new AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AnimgraphOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AnimgraphOffset);
             return instance;
         }
     }
-    private static nint? _NavigatorOffset;
+    private static nint _NavigatorOffset = -1;
     private AI_Navigator_DebugSnapshotData_tImpl? _NavigatorInstance;
 
     public AI_Navigator_DebugSnapshotData_t Navigator
     {
         get
         {
-            _NavigatorOffset = _NavigatorOffset ?? Schema.GetOffset(0x92164B5702BB9C3E);
+            if (_NavigatorOffset == -1) _NavigatorOffset = Schema.GetOffset(0x92164B5702BB9C3E);
             var instance = _NavigatorInstance ??= new AI_Navigator_DebugSnapshotData_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NavigatorOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NavigatorOffset);
             return instance;
         }
     }
-    private static nint? _MotorServicesOffset;
+    private static nint _MotorServicesOffset = -1;
     private AI_MotorServices_DebugSnapshotData_tImpl? _MotorServicesInstance;
 
     public AI_MotorServices_DebugSnapshotData_t MotorServices
     {
         get
         {
-            _MotorServicesOffset = _MotorServicesOffset ?? Schema.GetOffset(0x92164B573FC09BDE);
+            if (_MotorServicesOffset == -1) _MotorServicesOffset = Schema.GetOffset(0x92164B573FC09BDE);
             var instance = _MotorServicesInstance ??= new AI_MotorServices_DebugSnapshotData_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _MotorServicesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MotorServicesOffset);
             return instance;
         }
     }
-    private static nint? _FacingServicesOffset;
+    private static nint _FacingServicesOffset = -1;
     private AI_FacingServices_DebugSnapshotData_tImpl? _FacingServicesInstance;
 
     public AI_FacingServices_DebugSnapshotData_t FacingServices
     {
         get
         {
-            _FacingServicesOffset = _FacingServicesOffset ?? Schema.GetOffset(0x92164B57F3306973);
+            if (_FacingServicesOffset == -1) _FacingServicesOffset = Schema.GetOffset(0x92164B57F3306973);
             var instance = _FacingServicesInstance ??= new AI_FacingServices_DebugSnapshotData_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FacingServicesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FacingServicesOffset);
             return instance;
         }
     }

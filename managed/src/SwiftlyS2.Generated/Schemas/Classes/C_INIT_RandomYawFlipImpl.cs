@@ -16,14 +16,14 @@ internal partial class C_INIT_RandomYawFlipImpl : CParticleFunctionInitializerIm
 {
     public C_INIT_RandomYawFlipImpl(nint handle) : base(handle) { }
 
-    private static nint? _PercentOffset;
+    private static nint _PercentOffset = -1;
 
     public ref float Percent
     {
         get
         {
-            _PercentOffset = _PercentOffset ?? Schema.GetOffset(0x86C3C253183D7FC4);
-            return ref _Handle.AsRef<float>(_PercentOffset!.Value);
+            if (_PercentOffset == -1) _PercentOffset = Schema.GetOffset(0x86C3C253183D7FC4);
+            return ref _Handle.AsRef<float>(_PercentOffset);
         }
     }
 

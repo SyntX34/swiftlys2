@@ -16,24 +16,24 @@ internal partial class CNmGraphDocTimeControlledClipNodeImpl : CNmGraphDocVariat
 {
     public CNmGraphDocTimeControlledClipNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _SampleRootMotionOffset;
+    private static nint _SampleRootMotionOffset = -1;
 
     public ref bool SampleRootMotion
     {
         get
         {
-            _SampleRootMotionOffset = _SampleRootMotionOffset ?? Schema.GetOffset(0x49D5B2B09443A5E9);
-            return ref _Handle.AsRef<bool>(_SampleRootMotionOffset!.Value);
+            if (_SampleRootMotionOffset == -1) _SampleRootMotionOffset = Schema.GetOffset(0x49D5B2B09443A5E9);
+            return ref _Handle.AsRef<bool>(_SampleRootMotionOffset);
         }
     }
-    private static nint? _GraphEventsOffset;
+    private static nint _GraphEventsOffset = -1;
 
     public ref CUtlVector<CGlobalSymbol> GraphEvents
     {
         get
         {
-            _GraphEventsOffset = _GraphEventsOffset ?? Schema.GetOffset(0x49D5B2B014A73162);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_GraphEventsOffset!.Value);
+            if (_GraphEventsOffset == -1) _GraphEventsOffset = Schema.GetOffset(0x49D5B2B014A73162);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_GraphEventsOffset);
         }
     }
 

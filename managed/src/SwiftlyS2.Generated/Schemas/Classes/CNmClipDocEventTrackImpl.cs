@@ -16,59 +16,59 @@ internal partial class CNmClipDocEventTrackImpl : SchemaClass, CNmClipDocEventTr
 {
     public CNmClipDocEventTrackImpl(nint handle) : base(handle) { }
 
-    private static nint? _EventsOffset;
+    private static nint _EventsOffset = -1;
 
     public ref CUtlVector<PointerTo<CNmClipDocEvent>> Events
     {
         get
         {
-            _EventsOffset = _EventsOffset ?? Schema.GetOffset(0xCB9358966ED4D924);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CNmClipDocEvent>>>(_EventsOffset!.Value);
+            if (_EventsOffset == -1) _EventsOffset = Schema.GetOffset(0xCB9358966ED4D924);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CNmClipDocEvent>>>(_EventsOffset);
         }
     }
-    private static nint? _EventClassNameOffset;
+    private static nint _EventClassNameOffset = -1;
 
     public string EventClassName
     {
         get
         {
-            _EventClassNameOffset = _EventClassNameOffset ?? Schema.GetOffset(0xCB935896BD9C8BDA);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EventClassNameOffset!.Value));
+            if (_EventClassNameOffset == -1) _EventClassNameOffset = Schema.GetOffset(0xCB935896BD9C8BDA);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EventClassNameOffset));
         }
         set
         {
-            _EventClassNameOffset = _EventClassNameOffset ?? Schema.GetOffset(0xCB935896BD9C8BDA);
-            Schema.SetCUtlString(_Handle, _EventClassNameOffset!.Value, value);
+            if (_EventClassNameOffset == -1) _EventClassNameOffset = Schema.GetOffset(0xCB935896BD9C8BDA);
+            Schema.SetCUtlString(_Handle, _EventClassNameOffset, value);
         }
     }
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref CNmClipDocEventTrack__Type_t Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xCB9358960F04B4ED);
-            return ref _Handle.AsRef<CNmClipDocEventTrack__Type_t>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0xCB9358960F04B4ED);
+            return ref _Handle.AsRef<CNmClipDocEventTrack__Type_t>(_TypeOffset);
         }
     }
-    private static nint? _IsSyncTrackOffset;
+    private static nint _IsSyncTrackOffset = -1;
 
     public ref bool IsSyncTrack
     {
         get
         {
-            _IsSyncTrackOffset = _IsSyncTrackOffset ?? Schema.GetOffset(0xCB935896CF1AE879);
-            return ref _Handle.AsRef<bool>(_IsSyncTrackOffset!.Value);
+            if (_IsSyncTrackOffset == -1) _IsSyncTrackOffset = Schema.GetOffset(0xCB935896CF1AE879);
+            return ref _Handle.AsRef<bool>(_IsSyncTrackOffset);
         }
     }
-    private static nint? _IsDisabledOffset;
+    private static nint _IsDisabledOffset = -1;
 
     public ref bool IsDisabled
     {
         get
         {
-            _IsDisabledOffset = _IsDisabledOffset ?? Schema.GetOffset(0xCB9358961816F6B5);
-            return ref _Handle.AsRef<bool>(_IsDisabledOffset!.Value);
+            if (_IsDisabledOffset == -1) _IsDisabledOffset = Schema.GetOffset(0xCB9358961816F6B5);
+            return ref _Handle.AsRef<bool>(_IsDisabledOffset);
         }
     }
 

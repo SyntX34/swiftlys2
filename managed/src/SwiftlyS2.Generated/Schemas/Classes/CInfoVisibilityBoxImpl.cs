@@ -16,34 +16,34 @@ internal partial class CInfoVisibilityBoxImpl : CBaseEntityImpl, CInfoVisibility
 {
     public CInfoVisibilityBoxImpl(nint handle) : base(handle) { }
 
-    private static nint? _ModeOffset;
+    private static nint _ModeOffset = -1;
 
     public ref int Mode
     {
         get
         {
-            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xD226824F137F1E0E);
-            return ref _Handle.AsRef<int>(_ModeOffset!.Value);
+            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0xD226824F137F1E0E);
+            return ref _Handle.AsRef<int>(_ModeOffset);
         }
     }
-    private static nint? _BoxSizeOffset;
+    private static nint _BoxSizeOffset = -1;
 
     public ref Vector BoxSize
     {
         get
         {
-            _BoxSizeOffset = _BoxSizeOffset ?? Schema.GetOffset(0xD226824FE553E487);
-            return ref _Handle.AsRef<Vector>(_BoxSizeOffset!.Value);
+            if (_BoxSizeOffset == -1) _BoxSizeOffset = Schema.GetOffset(0xD226824FE553E487);
+            return ref _Handle.AsRef<Vector>(_BoxSizeOffset);
         }
     }
-    private static nint? _EnabledOffset;
+    private static nint _EnabledOffset = -1;
 
     public ref bool Enabled
     {
         get
         {
-            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xD226824F6154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0xD226824F6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset);
         }
     }
 

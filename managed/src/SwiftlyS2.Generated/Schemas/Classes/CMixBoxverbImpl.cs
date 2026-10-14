@@ -16,167 +16,167 @@ internal partial class CMixBoxverbImpl : CMixPropertyBaseImpl, CMixBoxverb
 {
     public CMixBoxverbImpl(nint handle) : base(handle) { }
 
-    private static nint? _SizeMaxOffset;
+    private static nint _SizeMaxOffset = -1;
 
     public ref float SizeMax
     {
         get
         {
-            _SizeMaxOffset = _SizeMaxOffset ?? Schema.GetOffset(0x41617E70B9D7F5B8);
-            return ref _Handle.AsRef<float>(_SizeMaxOffset!.Value);
+            if (_SizeMaxOffset == -1) _SizeMaxOffset = Schema.GetOffset(0x41617E70B9D7F5B8);
+            return ref _Handle.AsRef<float>(_SizeMaxOffset);
         }
     }
-    private static nint? _SizeMinOffset;
+    private static nint _SizeMinOffset = -1;
 
     public ref float SizeMin
     {
         get
         {
-            _SizeMinOffset = _SizeMinOffset ?? Schema.GetOffset(0x41617E70AFEB6DB2);
-            return ref _Handle.AsRef<float>(_SizeMinOffset!.Value);
+            if (_SizeMinOffset == -1) _SizeMinOffset = Schema.GetOffset(0x41617E70AFEB6DB2);
+            return ref _Handle.AsRef<float>(_SizeMinOffset);
         }
     }
-    private static nint? _ComplexityOffset;
+    private static nint _ComplexityOffset = -1;
 
     public ref float Complexity
     {
         get
         {
-            _ComplexityOffset = _ComplexityOffset ?? Schema.GetOffset(0x41617E70F222266B);
-            return ref _Handle.AsRef<float>(_ComplexityOffset!.Value);
+            if (_ComplexityOffset == -1) _ComplexityOffset = Schema.GetOffset(0x41617E70F222266B);
+            return ref _Handle.AsRef<float>(_ComplexityOffset);
         }
     }
-    private static nint? _ModDepthOffset;
+    private static nint _ModDepthOffset = -1;
 
     public ref float ModDepth
     {
         get
         {
-            _ModDepthOffset = _ModDepthOffset ?? Schema.GetOffset(0x41617E70F59E0B82);
-            return ref _Handle.AsRef<float>(_ModDepthOffset!.Value);
+            if (_ModDepthOffset == -1) _ModDepthOffset = Schema.GetOffset(0x41617E70F59E0B82);
+            return ref _Handle.AsRef<float>(_ModDepthOffset);
         }
     }
-    private static nint? _ModRateOffset;
+    private static nint _ModRateOffset = -1;
 
     public ref float ModRate
     {
         get
         {
-            _ModRateOffset = _ModRateOffset ?? Schema.GetOffset(0x41617E700EA039FF);
-            return ref _Handle.AsRef<float>(_ModRateOffset!.Value);
+            if (_ModRateOffset == -1) _ModRateOffset = Schema.GetOffset(0x41617E700EA039FF);
+            return ref _Handle.AsRef<float>(_ModRateOffset);
         }
     }
-    private static nint? _ParallelOffset;
+    private static nint _ParallelOffset = -1;
 
     public ref bool Parallel
     {
         get
         {
-            _ParallelOffset = _ParallelOffset ?? Schema.GetOffset(0x41617E708971ED92);
-            return ref _Handle.AsRef<bool>(_ParallelOffset!.Value);
+            if (_ParallelOffset == -1) _ParallelOffset = Schema.GetOffset(0x41617E708971ED92);
+            return ref _Handle.AsRef<bool>(_ParallelOffset);
         }
     }
-    private static nint? _FilterTypeOffset;
+    private static nint _FilterTypeOffset = -1;
     private VMixFilterDesc_tImpl? _FilterTypeInstance;
 
     public VMixFilterDesc_t FilterType
     {
         get
         {
-            _FilterTypeOffset = _FilterTypeOffset ?? Schema.GetOffset(0x41617E707E582F6F);
+            if (_FilterTypeOffset == -1) _FilterTypeOffset = Schema.GetOffset(0x41617E707E582F6F);
             var instance = _FilterTypeInstance ??= new VMixFilterDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FilterTypeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FilterTypeOffset);
             return instance;
         }
     }
-    private static nint? _WidthOffset;
+    private static nint _WidthOffset = -1;
 
     public ref float Width
     {
         get
         {
-            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0x41617E70B91935E1);
-            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+            if (_WidthOffset == -1) _WidthOffset = Schema.GetOffset(0x41617E70B91935E1);
+            return ref _Handle.AsRef<float>(_WidthOffset);
         }
     }
-    private static nint? _HeightOffset;
+    private static nint _HeightOffset = -1;
 
     public ref float Height
     {
         get
         {
-            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0x41617E70EADD7FB0);
-            return ref _Handle.AsRef<float>(_HeightOffset!.Value);
+            if (_HeightOffset == -1) _HeightOffset = Schema.GetOffset(0x41617E70EADD7FB0);
+            return ref _Handle.AsRef<float>(_HeightOffset);
         }
     }
-    private static nint? _DepthOffset;
+    private static nint _DepthOffset = -1;
 
     public ref float Depth
     {
         get
         {
-            _DepthOffset = _DepthOffset ?? Schema.GetOffset(0x41617E70D3AD54E8);
-            return ref _Handle.AsRef<float>(_DepthOffset!.Value);
+            if (_DepthOffset == -1) _DepthOffset = Schema.GetOffset(0x41617E70D3AD54E8);
+            return ref _Handle.AsRef<float>(_DepthOffset);
         }
     }
-    private static nint? _FeedbackScaleOffset;
+    private static nint _FeedbackScaleOffset = -1;
 
     public ref float FeedbackScale
     {
         get
         {
-            _FeedbackScaleOffset = _FeedbackScaleOffset ?? Schema.GetOffset(0x41617E702CE35D6E);
-            return ref _Handle.AsRef<float>(_FeedbackScaleOffset!.Value);
+            if (_FeedbackScaleOffset == -1) _FeedbackScaleOffset = Schema.GetOffset(0x41617E702CE35D6E);
+            return ref _Handle.AsRef<float>(_FeedbackScaleOffset);
         }
     }
-    private static nint? _FeedbackWidthOffset;
+    private static nint _FeedbackWidthOffset = -1;
 
     public ref float FeedbackWidth
     {
         get
         {
-            _FeedbackWidthOffset = _FeedbackWidthOffset ?? Schema.GetOffset(0x41617E7050275950);
-            return ref _Handle.AsRef<float>(_FeedbackWidthOffset!.Value);
+            if (_FeedbackWidthOffset == -1) _FeedbackWidthOffset = Schema.GetOffset(0x41617E7050275950);
+            return ref _Handle.AsRef<float>(_FeedbackWidthOffset);
         }
     }
-    private static nint? _FeedbackHeightOffset;
+    private static nint _FeedbackHeightOffset = -1;
 
     public ref float FeedbackHeight
     {
         get
         {
-            _FeedbackHeightOffset = _FeedbackHeightOffset ?? Schema.GetOffset(0x41617E70FB780A47);
-            return ref _Handle.AsRef<float>(_FeedbackHeightOffset!.Value);
+            if (_FeedbackHeightOffset == -1) _FeedbackHeightOffset = Schema.GetOffset(0x41617E70FB780A47);
+            return ref _Handle.AsRef<float>(_FeedbackHeightOffset);
         }
     }
-    private static nint? _FeedbackDepthOffset;
+    private static nint _FeedbackDepthOffset = -1;
 
     public ref float FeedbackDepth
     {
         get
         {
-            _FeedbackDepthOffset = _FeedbackDepthOffset ?? Schema.GetOffset(0x41617E70B71B2D09);
-            return ref _Handle.AsRef<float>(_FeedbackDepthOffset!.Value);
+            if (_FeedbackDepthOffset == -1) _FeedbackDepthOffset = Schema.GetOffset(0x41617E70B71B2D09);
+            return ref _Handle.AsRef<float>(_FeedbackDepthOffset);
         }
     }
-    private static nint? _OutputGainOffset;
+    private static nint _OutputGainOffset = -1;
 
     public ref float OutputGain
     {
         get
         {
-            _OutputGainOffset = _OutputGainOffset ?? Schema.GetOffset(0x41617E7073DB9445);
-            return ref _Handle.AsRef<float>(_OutputGainOffset!.Value);
+            if (_OutputGainOffset == -1) _OutputGainOffset = Schema.GetOffset(0x41617E7073DB9445);
+            return ref _Handle.AsRef<float>(_OutputGainOffset);
         }
     }
-    private static nint? _TapsOffset;
+    private static nint _TapsOffset = -1;
 
     public ref float Taps
     {
         get
         {
-            _TapsOffset = _TapsOffset ?? Schema.GetOffset(0x41617E705C502CB9);
-            return ref _Handle.AsRef<float>(_TapsOffset!.Value);
+            if (_TapsOffset == -1) _TapsOffset = Schema.GetOffset(0x41617E705C502CB9);
+            return ref _Handle.AsRef<float>(_TapsOffset);
         }
     }
 

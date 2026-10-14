@@ -16,24 +16,24 @@ internal partial class VPhysXRange_tImpl : SchemaClass, VPhysXRange_t
 {
     public VPhysXRange_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinOffset;
+    private static nint _MinOffset = -1;
 
     public ref float Min
     {
         get
         {
-            _MinOffset = _MinOffset ?? Schema.GetOffset(0x7A251AB33B1A5649);
-            return ref _Handle.AsRef<float>(_MinOffset!.Value);
+            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0x7A251AB33B1A5649);
+            return ref _Handle.AsRef<float>(_MinOffset);
         }
     }
-    private static nint? _MaxOffset;
+    private static nint _MaxOffset = -1;
 
     public ref float Max
     {
         get
         {
-            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x7A251AB32D06B887);
-            return ref _Handle.AsRef<float>(_MaxOffset!.Value);
+            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0x7A251AB32D06B887);
+            return ref _Handle.AsRef<float>(_MaxOffset);
         }
     }
 

@@ -16,95 +16,95 @@ internal partial class CSolveIKChainAnimNodeChainDataImpl : SchemaClass, CSolveI
 {
     public CSolveIKChainAnimNodeChainDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _IkChainOffset;
+    private static nint _IkChainOffset = -1;
 
     public string IkChain
     {
         get
         {
-            _IkChainOffset = _IkChainOffset ?? Schema.GetOffset(0x44F7608CA2987ACE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainOffset!.Value));
+            if (_IkChainOffset == -1) _IkChainOffset = Schema.GetOffset(0x44F7608CA2987ACE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainOffset));
         }
         set
         {
-            _IkChainOffset = _IkChainOffset ?? Schema.GetOffset(0x44F7608CA2987ACE);
-            Schema.SetCUtlString(_Handle, _IkChainOffset!.Value, value);
+            if (_IkChainOffset == -1) _IkChainOffset = Schema.GetOffset(0x44F7608CA2987ACE);
+            Schema.SetCUtlString(_Handle, _IkChainOffset, value);
         }
     }
-    private static nint? _SolverSettingSourceOffset;
+    private static nint _SolverSettingSourceOffset = -1;
 
     public ref SolveIKChainAnimNodeSettingSource SolverSettingSource
     {
         get
         {
-            _SolverSettingSourceOffset = _SolverSettingSourceOffset ?? Schema.GetOffset(0x44F7608CA1467B0F);
-            return ref _Handle.AsRef<SolveIKChainAnimNodeSettingSource>(_SolverSettingSourceOffset!.Value);
+            if (_SolverSettingSourceOffset == -1) _SolverSettingSourceOffset = Schema.GetOffset(0x44F7608CA1467B0F);
+            return ref _Handle.AsRef<SolveIKChainAnimNodeSettingSource>(_SolverSettingSourceOffset);
         }
     }
-    private static nint? _OverrideSolverSettingsOffset;
+    private static nint _OverrideSolverSettingsOffset = -1;
     private IKSolverSettings_tImpl? _OverrideSolverSettingsInstance;
 
     public IKSolverSettings_t OverrideSolverSettings
     {
         get
         {
-            _OverrideSolverSettingsOffset = _OverrideSolverSettingsOffset ?? Schema.GetOffset(0x44F7608CC8BAF10B);
+            if (_OverrideSolverSettingsOffset == -1) _OverrideSolverSettingsOffset = Schema.GetOffset(0x44F7608CC8BAF10B);
             var instance = _OverrideSolverSettingsInstance ??= new IKSolverSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OverrideSolverSettingsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OverrideSolverSettingsOffset);
             return instance;
         }
     }
-    private static nint? _TargetSettingSourceOffset;
+    private static nint _TargetSettingSourceOffset = -1;
 
     public ref SolveIKChainAnimNodeSettingSource TargetSettingSource
     {
         get
         {
-            _TargetSettingSourceOffset = _TargetSettingSourceOffset ?? Schema.GetOffset(0x44F7608C376B5F01);
-            return ref _Handle.AsRef<SolveIKChainAnimNodeSettingSource>(_TargetSettingSourceOffset!.Value);
+            if (_TargetSettingSourceOffset == -1) _TargetSettingSourceOffset = Schema.GetOffset(0x44F7608C376B5F01);
+            return ref _Handle.AsRef<SolveIKChainAnimNodeSettingSource>(_TargetSettingSourceOffset);
         }
     }
-    private static nint? _OverrideTargetSettingsOffset;
+    private static nint _OverrideTargetSettingsOffset = -1;
     private IKTargetSettings_tImpl? _OverrideTargetSettingsInstance;
 
     public IKTargetSettings_t OverrideTargetSettings
     {
         get
         {
-            _OverrideTargetSettingsOffset = _OverrideTargetSettingsOffset ?? Schema.GetOffset(0x44F7608CD383D3CD);
+            if (_OverrideTargetSettingsOffset == -1) _OverrideTargetSettingsOffset = Schema.GetOffset(0x44F7608CD383D3CD);
             var instance = _OverrideTargetSettingsInstance ??= new IKTargetSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OverrideTargetSettingsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OverrideTargetSettingsOffset);
             return instance;
         }
     }
-    private static nint? _DebugSettingOffset;
+    private static nint _DebugSettingOffset = -1;
 
     public ref SolveIKChainAnimNodeDebugSetting DebugSetting
     {
         get
         {
-            _DebugSettingOffset = _DebugSettingOffset ?? Schema.GetOffset(0x44F7608C624CC0B4);
-            return ref _Handle.AsRef<SolveIKChainAnimNodeDebugSetting>(_DebugSettingOffset!.Value);
+            if (_DebugSettingOffset == -1) _DebugSettingOffset = Schema.GetOffset(0x44F7608C624CC0B4);
+            return ref _Handle.AsRef<SolveIKChainAnimNodeDebugSetting>(_DebugSettingOffset);
         }
     }
-    private static nint? _DebugNormalizedLengthOffset;
+    private static nint _DebugNormalizedLengthOffset = -1;
 
     public ref float DebugNormalizedLength
     {
         get
         {
-            _DebugNormalizedLengthOffset = _DebugNormalizedLengthOffset ?? Schema.GetOffset(0x44F7608C7FACD6EB);
-            return ref _Handle.AsRef<float>(_DebugNormalizedLengthOffset!.Value);
+            if (_DebugNormalizedLengthOffset == -1) _DebugNormalizedLengthOffset = Schema.GetOffset(0x44F7608C7FACD6EB);
+            return ref _Handle.AsRef<float>(_DebugNormalizedLengthOffset);
         }
     }
-    private static nint? _DebugOffsetOffset;
+    private static nint _DebugOffsetOffset = -1;
 
     public ref Vector DebugOffset
     {
         get
         {
-            _DebugOffsetOffset = _DebugOffsetOffset ?? Schema.GetOffset(0x44F7608C2FF28BBF);
-            return ref _Handle.AsRef<Vector>(_DebugOffsetOffset!.Value);
+            if (_DebugOffsetOffset == -1) _DebugOffsetOffset = Schema.GetOffset(0x44F7608C2FF28BBF);
+            return ref _Handle.AsRef<Vector>(_DebugOffsetOffset);
         }
     }
 

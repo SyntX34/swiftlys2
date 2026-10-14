@@ -16,14 +16,14 @@ internal partial class CNmGraphDocCachedIDNodeImpl : CNmGraphDocFlowNodeImpl, CN
 {
     public CNmGraphDocCachedIDNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _ModeOffset;
+    private static nint _ModeOffset = -1;
 
     public ref NmCachedValueMode_t Mode
     {
         get
         {
-            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0x8FAA814E90FD5BB2);
-            return ref _Handle.AsRef<NmCachedValueMode_t>(_ModeOffset!.Value);
+            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0x8FAA814E90FD5BB2);
+            return ref _Handle.AsRef<NmCachedValueMode_t>(_ModeOffset);
         }
     }
 

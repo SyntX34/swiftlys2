@@ -16,16 +16,16 @@ internal partial class CMixAutoFilterImpl : CMixPropertyBaseImpl, CMixAutoFilter
 {
     public CMixAutoFilterImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixAutoFilterDesc_tImpl? _DescInstance;
 
     public VMixAutoFilterDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0x3F7FC21527917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x3F7FC21527917BC0);
             var instance = _DescInstance ??= new VMixAutoFilterDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }

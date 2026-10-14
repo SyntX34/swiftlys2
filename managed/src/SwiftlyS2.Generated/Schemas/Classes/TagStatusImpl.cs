@@ -16,24 +16,24 @@ internal partial class TagStatusImpl : SchemaClass, TagStatus
 {
     public TagStatusImpl(nint handle) : base(handle) { }
 
-    private static nint? _TagStatusOffset;
+    private static nint _TagStatusOffset = -1;
 
     public ref TagActionStatus TagStatus
     {
         get
         {
-            _TagStatusOffset = _TagStatusOffset ?? Schema.GetOffset(0xE24342A56AC527C5);
-            return ref _Handle.AsRef<TagActionStatus>(_TagStatusOffset!.Value);
+            if (_TagStatusOffset == -1) _TagStatusOffset = Schema.GetOffset(0xE24342A56AC527C5);
+            return ref _Handle.AsRef<TagActionStatus>(_TagStatusOffset);
         }
     }
-    private static nint? _TagStartAnimTimeOffset;
+    private static nint _TagStartAnimTimeOffset = -1;
 
     public ref float TagStartAnimTime
     {
         get
         {
-            _TagStartAnimTimeOffset = _TagStartAnimTimeOffset ?? Schema.GetOffset(0xE24342A5D6A7F39F);
-            return ref _Handle.AsRef<float>(_TagStartAnimTimeOffset!.Value);
+            if (_TagStartAnimTimeOffset == -1) _TagStartAnimTimeOffset = Schema.GetOffset(0xE24342A5D6A7F39F);
+            return ref _Handle.AsRef<float>(_TagStartAnimTimeOffset);
         }
     }
 

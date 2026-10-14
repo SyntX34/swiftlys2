@@ -16,62 +16,62 @@ internal partial class CPulseCell_TestWaitWithCursorState__CursorState_tImpl : S
 {
     public CPulseCell_TestWaitWithCursorState__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _WaitValueOffset;
+    private static nint _WaitValueOffset = -1;
 
     public ref float WaitValue
     {
         get
         {
-            _WaitValueOffset = _WaitValueOffset ?? Schema.GetOffset(0x9C2318A48BB02277);
-            return ref _Handle.AsRef<float>(_WaitValueOffset!.Value);
+            if (_WaitValueOffset == -1) _WaitValueOffset = Schema.GetOffset(0x9C2318A48BB02277);
+            return ref _Handle.AsRef<float>(_WaitValueOffset);
         }
     }
-    private static nint? _FailOffset;
+    private static nint _FailOffset = -1;
 
     public ref bool Fail
     {
         get
         {
-            _FailOffset = _FailOffset ?? Schema.GetOffset(0x9C2318A497AC176D);
-            return ref _Handle.AsRef<bool>(_FailOffset!.Value);
+            if (_FailOffset == -1) _FailOffset = Schema.GetOffset(0x9C2318A497AC176D);
+            return ref _Handle.AsRef<bool>(_FailOffset);
         }
     }
-    private static nint? _SelfCursorOffset;
+    private static nint _SelfCursorOffset = -1;
     private SchemaUntypedField? _SelfCursorInstance;
 
     public SchemaUntypedField SelfCursor
     {
         get
         {
-            _SelfCursorOffset = _SelfCursorOffset ?? Schema.GetOffset(0x9C2318A405F3C953);
+            if (_SelfCursorOffset == -1) _SelfCursorOffset = Schema.GetOffset(0x9C2318A405F3C953);
             var instance = _SelfCursorInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SelfCursorOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SelfCursorOffset);
             return instance;
         }
     }
-    private static nint? _SelfCellInstanceUntypedOffset;
+    private static nint _SelfCellInstanceUntypedOffset = -1;
     private SchemaUntypedField? _SelfCellInstanceUntypedInstance;
 
     public SchemaUntypedField SelfCellInstanceUntyped
     {
         get
         {
-            _SelfCellInstanceUntypedOffset = _SelfCellInstanceUntypedOffset ?? Schema.GetOffset(0x9C2318A42AA23A43);
+            if (_SelfCellInstanceUntypedOffset == -1) _SelfCellInstanceUntypedOffset = Schema.GetOffset(0x9C2318A42AA23A43);
             var instance = _SelfCellInstanceUntypedInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SelfCellInstanceUntypedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SelfCellInstanceUntypedOffset);
             return instance;
         }
     }
-    private static nint? _SelfCellInstanceOffset;
+    private static nint _SelfCellInstanceOffset = -1;
     private SchemaUntypedField? _SelfCellInstanceInstance;
 
     public SchemaUntypedField SelfCellInstance
     {
         get
         {
-            _SelfCellInstanceOffset = _SelfCellInstanceOffset ?? Schema.GetOffset(0x9C2318A4F6CABDEE);
+            if (_SelfCellInstanceOffset == -1) _SelfCellInstanceOffset = Schema.GetOffset(0x9C2318A4F6CABDEE);
             var instance = _SelfCellInstanceInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SelfCellInstanceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SelfCellInstanceOffset);
             return instance;
         }
     }
