@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
@@ -44,4 +45,7 @@ internal static partial class GameHooksPublisher
 
     private static readonly DummyEntityPool<CUserCmd> _userCmdPool =
         new(DummyPoolSizeLarge, static () => new() { Address = 0 });
+
+    private static readonly DummyEntityPool<List<IUserCmd>> _usercmdsListPool =
+        new(DummyPoolSize, static () => new(32));
 }

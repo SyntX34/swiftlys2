@@ -20,6 +20,9 @@
 #include <memory/hooks/vfunction.h>
 #include <memory/hooks/function.h>
 #include "cstrike15_usermessages.pb.h"
+#include "gameevents.pb.h"
+
+#include <vector>
 
 #include <api/interfaces/interfaces.h>
 #include <api/sdk/serversideclient.h>
@@ -83,7 +86,18 @@ bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
 
     auto playerid = *(int*)((uintptr_t)client + playerIndex);
     int msgid = cMsg->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
-
+    if(msgid == GE_Source1LegacyListenEvents)
+    {
+        CMsgSource1LegacyListenEvents* msg = (CMsgSource1LegacyListenEvents*)cMsg->AsProto();
+        std::vector<uint32_t> eventIDs = {};
+        auto eventArrayBits = msg->mutable_eventarraybits();
+        for(int i = 0; i < eventArrayBits->size(); i++)
+            eventIDs.push_back(eventArrayBits->Get(i));
+        
+        auto player = g_pPlayerManager->GetPlayer(playerid);
+        if(player) player->SetListeningGameEvents(eventIDs);
+    }
+    
     bool stopOriginal = false;
 
     if (g_pNetMessages->IsMessageRegistered(NetMessageHook_Client, msgid))

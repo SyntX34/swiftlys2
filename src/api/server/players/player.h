@@ -29,6 +29,7 @@
 #include <api/utils/bitvec.h>
 #include <public/bitvec.h>
 #include <public/const.h>
+#include <public/igameevents.h>
 
 #include "networkbasetypes.pb.h"
 
@@ -108,6 +109,9 @@ public:
     /** Engine Stuff **/
     virtual std::string GetIPAddress() = 0;
     virtual void Kick(const std::string& sReason, int uReason) = 0;
+    virtual void SetListeningGameEvents(std::vector<uint32_t>& eventIDs) = 0;
+    virtual bool IsListeningGameEvent(int eventID) = 0;
+    virtual void SendGameEvent(IGameEvent* event) = 0;
 
     /** Transmit Stuff **/
     virtual BlockedTransmitInfo& GetBlockedTransmittingBits() = 0;

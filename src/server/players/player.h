@@ -61,6 +61,9 @@ public:
 
     virtual std::string GetIPAddress() override;
     virtual void Kick(const std::string& sReason, int uReason) override;
+    virtual void SetListeningGameEvents(std::vector<uint32_t>& eventIDs) override;
+    virtual bool IsListeningGameEvent(int eventID) override;
+    virtual void SendGameEvent(IGameEvent* event) override;
 
     virtual BlockedTransmitInfo& GetBlockedTransmittingBits() override;
 
@@ -102,6 +105,9 @@ private:
     QueueMutex centerMenuMutex;
     std::string centerMenuText = "";
     uint64_t m_uSessionId = 0;
+
+    QueueMutex m_listeningGameEventsMutex;
+    std::set<int> m_listeningGameEvents = {};
 };
 
 #endif

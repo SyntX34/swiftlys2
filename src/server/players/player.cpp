@@ -28,6 +28,7 @@
 #include <public/const.h>
 
 #include "usermessages.pb.h"
+#include "gameevents.pb.h"
 #include <api/sdk/serversideclient.h>
 #include <public/iserver.h>
 
@@ -65,6 +66,7 @@ void CPlayer::Initialize(int playerid)
 
     m_uConnectedTimeStart = std::chrono::high_resolution_clock::now();
     m_uSessionId = sessionId++;
+    centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status");
 }
 
 void CPlayer::Shutdown()
@@ -72,11 +74,8 @@ void CPlayer::Shutdown()
     m_iPlayerId = -1;
     m_bAuthorized = false;
 
-    if (centerMessageEvent)
-    {
-        g_pGameEventManager->GetGameEventManager()->FreeEvent(centerMessageEvent);
-        centerMessageEvent = nullptr;
-    }
+    g_pGameEventManager->GetGameEventManager()->FreeEvent(centerMessageEvent);
+    centerMessageEvent = nullptr;
 }
 
 extern bool bypassPostEventAbstractHook;
@@ -352,7 +351,6 @@ void CPlayer::SetFirstSpawn(bool state)
 }
 
 extern void* g_pOnClientKeyStateChangedCallback;
-typedef IGameEventListener2* (*GetLegacyGameEventListener)(CPlayerSlot slot);
 
 void CPlayer::Think()
 {
@@ -365,25 +363,10 @@ void CPlayer::Think()
     }
     else
     {
-        static auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
-        if (pListenerSig)
-        {
-            auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(m_iPlayerId);
-            if (listener)
-            {
-                if (!centerMessageEvent)
-                    centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status");
-
-                if (centerMessageEvent)
-                {
-                    centerMessageEvent->SetString("loc_token", (showMenu ? centerMenuText : centerMessageText).c_str());
-                    centerMessageEvent->SetInt("duration", 1);
-                    centerMessageEvent->SetInt("userid", m_iPlayerId);
-
-                    listener->FireGameEvent(centerMessageEvent);
-                }
-            }
-        }
+        centerMessageEvent->SetString("loc_token", (showMenu ? centerMenuText : centerMessageText).c_str());
+        centerMessageEvent->SetInt("duration", 1);
+        centerMessageEvent->SetInt("userid", m_iPlayerId);
+        SendGameEvent(centerMessageEvent);
     }
 
     auto pawn = GetPawn();
@@ -454,4 +437,38 @@ bool CPlayer::HasMenuShown()
 uint64_t CPlayer::GetSessionID()
 {
     return m_uSessionId;
+}
+
+bool CPlayer::IsListeningGameEvent(int eventID)
+{
+    QueueLockGuard lock(m_listeningGameEventsMutex);
+    return m_listeningGameEvents.find(eventID) != m_listeningGameEvents.end();
+}
+
+void CPlayer::SetListeningGameEvents(std::vector<uint32_t>& eventIDs)
+{
+    QueueLockGuard lock(m_listeningGameEventsMutex);
+
+    m_listeningGameEvents.clear();
+    for(int i = 0; i < eventIDs.size(); i++)
+        for(int j = 0; j < 32; j++)
+            if(eventIDs[i] & (1 << j))
+                m_listeningGameEvents.insert((i*32) + j);
+}
+
+void CPlayer::SendGameEvent(IGameEvent* event)
+{
+    if(!event) return;
+
+    auto msg = g_pNetworkMessages->FindNetworkMessageById(GE_Source1LegacyGameEvent);
+    if(!msg) return;
+
+    auto data = msg->AllocateMessage()->ToPB<CMsgSource1LegacyGameEvent>();
+    CSingleRecipientFilter filter(m_iPlayerId);
+
+    bypassPostEventAbstractHook = true;
+    g_pGameEventManager->GetGameEventManager()->SerializeEvent(event, data);
+    g_pGameEventSystem->PostEventAbstract(-1, false, &filter, msg, data, 0);
+    delete data;
+    bypassPostEventAbstractHook = false;
 }

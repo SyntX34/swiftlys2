@@ -1021,10 +1021,7 @@ public class TestPlugin : BasePlugin
     [Command("kurotest", registerRaw: true)]
     public void Command_kurotest( ICommandContext context )
     {
-        foreach (var client in Core.PlayerManager.GetAllPlayers())
-        {
-            Console.WriteLine($"{client.Name}");
-        }
+        Console.WriteLine($"{Core.GameEvent.IsListeningToEvent(context.Sender!.PlayerID, "round_start")} {Core.GameEvent.IsListeningToEvent(context.Sender!.PlayerID, "achievement_earned_local")}");
     }
 
     private Callback<GCMessageAvailable_t>? _authTicketResponse;

@@ -25,6 +25,8 @@
 
 #include <set>
 #include <unordered_set>
+#include <map>
+#include <string>
 
  // WHY THE ACTUAL FUCK YOU NEED THIS TO COMPILE ?????????????
 #include <public/entity2/entitysystem.h>
@@ -42,6 +44,9 @@ public:
 
     virtual void SetGameEventFireHandler(GameEventFireHandler handler) override;
     virtual void SetPostGameEventFireHandler(GameEventFireHandler handler) override;
+    
+    virtual int GetGameEventListenerID(std::string event_name) override;
+    virtual void RegisterGameEventListenerID(std::string event_name, int id) override;
 
     virtual IGameEventManager2* GetGameEventManager() override;
 
@@ -56,6 +61,7 @@ private:
 
     QueueMutex m_mtxRegisteredEvents;
     std::unordered_set<uint32_t> m_registeredEvents;
+    std::map<std::string, int> m_eventListenerIDs;
 };
 
 #endif

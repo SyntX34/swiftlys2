@@ -27,6 +27,7 @@
 #include <api/memory/virtual/call.h>
 
 #include <public/iserver.h>
+#include <public/tier1/KeyValues.h>
 
 #include <fmt/format.h>
 
@@ -193,6 +194,8 @@ void CEventManager::QueueListener(const std::string& event_name)
     AddEngineListener(event_name);
 }
 
+bool bInitializedEvents = false;
+
 void CEventManager::AddEngineListener(const std::string& event_name)
 {
     if (!g_gameEventManager) return;
@@ -201,4 +204,26 @@ void CEventManager::AddEngineListener(const std::string& event_name)
         g_gameEventManager->AddListener(this, event_name.c_str(), true);
 
     g_pLogger->Debug("Game Events", fmt::format("Registered listener for event '{}'.\n", event_name));
+    if(!bInitializedEvents)
+    {
+        bInitializedEvents = true;
+        std::vector<std::string> fileNames = {"resource/mod.gameevents", "resource/core.gameevents", "resource/game.gameevents"};
+        for(const auto& file : fileNames)
+        {
+            KeyValues v("");
+            v.LoadFromFile(g_pGameFileSystem, file.c_str());
+            FOR_EACH_SUBKEY((&v), sub)
+                RegisterGameEventListenerID(sub->GetName(), g_gameEventManager->LookupEventId(sub->GetName()));
+        }
+    }
+}
+
+int CEventManager::GetGameEventListenerID(std::string event_name)
+{
+    return m_eventListenerIDs.contains(event_name) ? m_eventListenerIDs[event_name] : -1;
+}
+
+void CEventManager::RegisterGameEventListenerID(std::string event_name, int id)
+{
+    m_eventListenerIDs[event_name] = id;
 }
