@@ -73,12 +73,6 @@
         "windows": 23,
         "linux": 24
     },
-    // Not a pointer: the CCSPlayerInventory is embedded in CCSPlayerController_InventoryServices
-    // here, right after m_nPersonaDataXpTrailLevel (+4, aligned to 8).
-    "CCSPlayerController_InventoryServices::m_pInventory": {
-        "windows": 112,
-        "linux": 112
-    },
     "CCSPlayer_WeaponServices::CanUse": {
         "windows": 27,
         "linux": 28

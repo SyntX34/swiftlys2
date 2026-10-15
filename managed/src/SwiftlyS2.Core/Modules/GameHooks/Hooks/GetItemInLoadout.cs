@@ -1,4 +1,5 @@
 using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Misc;
@@ -22,18 +23,10 @@ internal static partial class GameHooksPublisher
         return _core.Memory.GetUnmanagedFunctionByAddress<CCSPlayerInventoryGetItemInLoadout>(getItemInLoadoutPtr);
     }
 
-    /// <summary>
-    /// The CCSPlayerInventory is embedded in CCSPlayerController_InventoryServices at this offset.
-    /// </summary>
-    private static nint InventoryOffset()
-    {
-        if (_core == null) throw new InvalidOperationException("GameHooksCore is not initialized.");
-
-        if (!_core.GameData.TryGetOffset("CCSPlayerController_InventoryServices::m_pInventory", out var offset))
-            throw new InvalidOperationException("Failed to find offset for CCSPlayerController_InventoryServices::m_pInventory.");
-
-        return offset;
-    }
+    // The CCSPlayerInventory is embedded in CCSPlayerController_InventoryServices (not a pointer), right after
+    // m_nPersonaDataXpTrailLevel (hash: 0xC1D0078228192B7D): + sizeof(int), aligned to 8 for its vtable.
+    private static readonly Lazy<nint> InventoryOffsetLazy = new(() => (Schema.GetOffset(0xC1D0078228192B7D) + sizeof(int) + 7) & ~7, LazyThreadSafetyMode.None);
+    private static nint InventoryOffset() => InventoryOffsetLazy.Value;
 
     /// <summary>
     /// Looks up a loadout slot through the original function, so GetItemInLoadout hooks don't run
