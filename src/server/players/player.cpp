@@ -363,6 +363,9 @@ void CPlayer::Think()
     }
     else
     {
+        if(!centerMessageEvent)
+            centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status");
+            
         centerMessageEvent->SetString("loc_token", (showMenu ? centerMenuText : centerMessageText).c_str());
         centerMessageEvent->SetInt("duration", 1);
         centerMessageEvent->SetInt("userid", m_iPlayerId);
