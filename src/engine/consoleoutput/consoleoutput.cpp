@@ -79,6 +79,9 @@ struct ConsoleFilter
     }
 };
 
+CConsoleOutput::CConsoleOutput() = default;
+CConsoleOutput::~CConsoleOutput() = default;
+
 bool CConsoleOutput::ProcessLogMessage(const char* str, va_list* args)
 {
     if (m_SkipNextNewlineOnlyLog.load(std::memory_order_relaxed) && strcmp(str, "\n") == 0) {

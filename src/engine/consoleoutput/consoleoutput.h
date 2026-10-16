@@ -34,6 +34,9 @@ struct ConsoleFilter;
 class CConsoleOutput : public IConsoleOutput
 {
 public:
+    CConsoleOutput();
+    ~CConsoleOutput();
+
     bool ProcessLogMessage(const char* str, va_list* args);
 
     virtual void Initialize() override;
