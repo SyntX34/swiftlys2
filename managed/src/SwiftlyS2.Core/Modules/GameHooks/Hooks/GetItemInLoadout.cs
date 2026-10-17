@@ -16,11 +16,15 @@ internal static partial class GameHooksPublisher
     {
         if (_core == null) throw new InvalidOperationException("GameHooksCore is not initialized.");
 
-        var getItemInLoadoutPtr = _core.GameData.GetSignature("CCSPlayerInventory::GetItemInLoadout");
-        if (getItemInLoadoutPtr == 0)
-            throw new InvalidOperationException("Failed to find signature for CCSPlayerInventory::GetItemInLoadout.");
+        var offset = _core.GameData.GetOffset("CCSPlayerInventory::GetItemInLoadout");
+        if (offset < 0)
+            throw new InvalidOperationException("Failed to find offset for CCSPlayerInventory::GetItemInLoadout.");
 
-        return _core.Memory.GetUnmanagedFunctionByAddress<CCSPlayerInventoryGetItemInLoadout>(getItemInLoadoutPtr);
+        var pVTable = _core.Memory.GetVTableAddress(Library.Server, "CCSPlayerInventory");
+        if (pVTable == null)
+            throw new InvalidOperationException("Failed to find the CCSPlayerInventory vtable.");
+
+        return _core.Memory.GetUnmanagedFunctionByVTable<CCSPlayerInventoryGetItemInLoadout>(pVTable.Value, offset);
     }
 
     // The CCSPlayerInventory is embedded in CCSPlayerController_InventoryServices (not a pointer), right after

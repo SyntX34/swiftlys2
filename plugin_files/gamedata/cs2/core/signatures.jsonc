@@ -144,17 +144,6 @@
         "windows": "44 89 44 24 ? 48 89 54 24 ? 48 89 4C 24 ? 55 53 56 57 41 54 41 55 41 56 41 57 48 8B EC",
         "linux": "55 48 89 E5 41 57 41 56 49 89 F6 41 55 41 54 49 89 CC 53 48 89 FB 48 83 EC 78"
     },
-    // CEconItemView* CCSPlayerInventory::GetItemInLoadout(int team, int slot), a virtual.
-    // Find the CCSPlayerInventory vtable through its RTTI, it's entry 9 on linux.
-    // The function returns null if slot > 57 or team > 3, then looks up the item equipped for
-    // that team and slot, falling back to the default item.
-    // It also has "item_sub_position2" and "spray0" (2 other functions have both too).
-    // Pattern from ianlucas/cs2-ss2-inventory-simulator (MIT).
-    "CCSPlayerInventory::GetItemInLoadout": {
-        "lib": "server",
-        "windows": "48 8B C4 56 48 83 EC ? 49 63 F0",
-        "linux": "55 48 89 E5 41 57 41 56 41 55 41 54 53 48 83 EC ? 83 FA"
-    },
     // Find string 'Client %d(%s) tried to send a RebroadcastSourceId msg.' which is in
     // a logging call. On linux search for the one which is being used in CServerSideClient.
     "INetworkMessageProcessingPreFilter::FilterMessage": {
