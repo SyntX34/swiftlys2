@@ -1,4 +1,5 @@
 using SwiftlyS2.Core.Players;
+using SwiftlyS2.Core.Translations;
 using SwiftlyS2.Shared.Menu;
 using SwiftlyS2.Shared.Players;
 
@@ -81,12 +82,15 @@ internal sealed class MenuInstance : IMenu
 
     public void Add( MenuRegion region, IMenuComponent component )
     {
+        Track(component);
         Replace(region, current => [.. current, component]);
         InvalidateAll();
     }
 
     public void Insert( MenuRegion region, int index, IMenuComponent component )
     {
+        Track(component);
+
         Replace(region, current => {
             var list = current.ToList();
             list.Insert(Math.Clamp(index, 0, list.Count), component);
@@ -112,6 +116,11 @@ internal sealed class MenuInstance : IMenu
                 {
                     next[region] = [.. next[region][..position], .. next[region][(position + 1)..]];
                     removed = true;
+
+                    if (component is IMenuRowSource rowSource)
+                    {
+                        rowSource.RowsChanged -= InvalidateAll;
+                    }
                 }
             }
 
@@ -209,7 +218,38 @@ internal sealed class MenuInstance : IMenu
         }
     }
 
-    internal IMenuComponent[] Snapshot( MenuRegion region ) => regions[(int)region];
+    internal IMenuComponent[] Snapshot( MenuRegion region )
+    {
+        var source = regions[(int)region];
+        return region == MenuRegion.Body ? ExpandRows(source) : source;
+    }
+
+    private static IMenuComponent[] ExpandRows( IMenuComponent[] source )
+    {
+        var expanded = new List<IMenuComponent>(source.Length);
+
+        foreach (var component in source)
+        {
+            if (component is IMenuRowSource rowSource)
+            {
+                expanded.AddRange(rowSource.GetRows(GlobalLocalization.Get));
+            }
+            else
+            {
+                expanded.Add(component);
+            }
+        }
+
+        return [.. expanded];
+    }
+
+    private void Track( IMenuComponent component )
+    {
+        if (component is IMenuRowSource rowSource)
+        {
+            rowSource.RowsChanged += InvalidateAll;
+        }
+    }
 
     internal List<IMenuComponent> GetVisible( MenuRegion region, IMenuSession session )
     {

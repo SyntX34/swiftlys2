@@ -1482,6 +1482,34 @@ public class TestPlugin : BasePlugin
         context.Reply($"Opened '{menu.Id}' for {sessions.Count} player(s).");
     }
 
+    [Command("collection")]
+    public void CollectionMenuTestCommand( ICommandContext context )
+    {
+        var player = context.Sender!;
+        var calls = 0;
+
+        var collection = new PagedCollectionComponent<IPlayer>(async () => {
+            await Task.Delay(1500);
+
+            return ++calls % 3 == 0
+                ? throw new InvalidOperationException("simulated failure")
+                : Core.PlayerManager.GetAllPlayers().Where(p => p.IsValid && !p.IsFakeClient).ToList();
+        }) {
+            Formatter = p => p.Controller?.PlayerName ?? "unknown",
+            ItemHint = p => $"SteamID: {p.SteamID}",
+            OnItemSelected = ctx => ctx.Player.SendChat($"Selected {ctx.Item.Controller?.PlayerName}"),
+            ShowFailureMessage = true,
+        };
+
+        var menu = Core.Menu.CreateMenu("testplugin.collection")
+            .WithTitle("Paged Collection")
+            .Add(new ButtonComponent("Reload", _ => { collection.Reload(); return ValueTask.CompletedTask; }))
+            .Add(collection)
+            .Build();
+
+        _ = menu.Open(player);
+    }
+
     [Command("cm")]
     public void ChatMenuTestCommand( ICommandContext context )
     {

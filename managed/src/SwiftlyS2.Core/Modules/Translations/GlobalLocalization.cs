@@ -67,7 +67,7 @@ internal static class GlobalLocalization
         return parsed;
     }
 
-    private static string Get( string key )
+    public static string Get( string key )
     {
         return _values.TryGetValue(key, out var value) && !string.IsNullOrWhiteSpace(value) ? value : key;
     }
