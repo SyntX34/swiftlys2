@@ -1482,6 +1482,26 @@ public class TestPlugin : BasePlugin
         context.Reply($"Opened '{menu.Id}' for {sessions.Count} player(s).");
     }
 
+    [Command("playerlist")]
+    public void PlayerListMenuTestCommand( ICommandContext context )
+    {
+        var player = context.Sender!;
+
+        var list = new PlayerListComponent() {
+            SearchMode = TargetSearchMode.IncludeSelf,
+            Sorter = found => found.OrderBy(p => p.Controller?.PlayerName),
+            ItemHint = p => $"SteamID: {p.SteamID}",
+            OnPlayerSelected = ctx => ctx.Player.SendChat($"Selected {ctx.Target.Controller?.PlayerName}"),
+        };
+
+        var menu = Core.Menu.CreateMenu("testplugin.playerlist")
+            .WithTitle("Players")
+            .Add(list)
+            .Build();
+
+        _ = menu.Open(player);
+    }
+
     [Command("collection")]
     public void CollectionMenuTestCommand( ICommandContext context )
     {

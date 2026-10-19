@@ -20,6 +20,34 @@ public readonly record struct MenuCollectionItemContext<TItem>
     public IPlayer Player => Session.Player;
 }
 
+public readonly record struct MenuCollectionRowContext<TItem>
+{
+    /// <summary>
+    /// The session being drawn.
+    /// </summary>
+    public required IMenuSession Session { get; init; }
+
+    /// <summary>
+    /// The item the row stands for.
+    /// </summary>
+    public required TItem Item { get; init; }
+
+    /// <summary>
+    /// The position of the item in the loaded list, from zero.
+    /// </summary>
+    public required int Index { get; init; }
+
+    /// <summary>
+    /// Whether the row holds the selection.
+    /// </summary>
+    public required bool IsFocused { get; init; }
+
+    /// <summary>
+    /// The player who is looking at the menu.
+    /// </summary>
+    public IPlayer Player => Session.Player;
+}
+
 public sealed class PagedCollectionComponent<TItem> : MenuComponentBase, IMenuRowSource
 {
     private readonly Func<Task<IReadOnlyList<TItem>>> loader;
@@ -51,6 +79,12 @@ public sealed class PagedCollectionComponent<TItem> : MenuComponentBase, IMenuRo
     /// Turns an item into a full node, for lines with several colours. Takes over from <see cref="Formatter"/> when set.
     /// </summary>
     public Func<TItem, MenuNode>? NodeFormatter { get; set; }
+
+    /// <summary>
+    /// Draws an item row with full control over its layout, including its index and focus. Takes over from <see cref="NodeFormatter"/> and <see cref="Formatter"/> when set.
+    /// The busy placeholder still shows while a row waits on an action.
+    /// </summary>
+    public Func<MenuCollectionRowContext<TItem>, MenuNode>? RowRenderer { get; set; }
 
     /// <summary>
     /// The style of an item row.
@@ -103,11 +137,11 @@ public sealed class PagedCollectionComponent<TItem> : MenuComponentBase, IMenuRo
     public bool ShowFailureMessage { get; set; }
 
     /// <inheritdoc/>
-    public IReadOnlyList<IMenuComponent> GetRows( Func<string, string> translate )
+    public IReadOnlyList<IMenuComponent> GetRows( IMenuSession session, MenuRowContext context )
     {
         lock (gate)
         {
-            this.translate = translate;
+            translate = context.Translate;
 
             if (!started)
             {
@@ -157,7 +191,7 @@ public sealed class PagedCollectionComponent<TItem> : MenuComponentBase, IMenuRo
 
                 next = items.Count == 0
                     ? [new StatusRow(EmptyText ?? translate("menu.collection.empty"), EmptyColor)]
-                    : items.Select(item => (IMenuComponent)new ItemRow(this, item)).ToList();
+                    : items.Select((item, index) => (IMenuComponent)new ItemRow(this, item, index)).ToList();
             }
             catch (Exception ex)
             {
@@ -191,7 +225,7 @@ public sealed class PagedCollectionComponent<TItem> : MenuComponentBase, IMenuRo
             => new MenuTextNode(text, MenuTextStyle.Default.WithSize(MenuTextSize.SmallMedium).WithColor(color));
     }
 
-    private sealed class ItemRow( PagedCollectionComponent<TItem> owner, TItem item ) : MenuComponentBase
+    private sealed class ItemRow( PagedCollectionComponent<TItem> owner, TItem item, int index ) : MenuComponentBase
     {
         public override bool IsFocusable => true;
 
@@ -202,6 +236,16 @@ public sealed class PagedCollectionComponent<TItem> : MenuComponentBase, IMenuRo
             if (IsBusy(context.Session))
             {
                 return new MenuTextNode(WaitingText, owner.ItemStyle.WithColor(WaitingColor));
+            }
+
+            if (owner.RowRenderer is { } render)
+            {
+                return render(new MenuCollectionRowContext<TItem> {
+                    Session = context.Session,
+                    Item = item,
+                    Index = index,
+                    IsFocused = context.IsFocused,
+                });
             }
 
             return owner.NodeFormatter?.Invoke(item) ?? new MenuTextNode(owner.Formatter(item), owner.ItemStyle);

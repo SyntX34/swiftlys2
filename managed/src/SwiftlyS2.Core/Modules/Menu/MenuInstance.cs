@@ -13,12 +13,14 @@ internal sealed class MenuInstance : IMenu
     private readonly Lock sessionLock = new();
     private readonly Lock componentLock = new();
     private readonly MenuRuntime runtime;
+    private readonly IPlayerManagerService players;
     private readonly IReadOnlyDictionary<string, Func<MenuActionContext, ValueTask>> actionHandlers;
 
     public MenuInstance(
         string id,
         string owner,
         MenuRuntime runtime,
+        IPlayerManagerService players,
         IMenuRenderer renderer,
         IMenuKeymap keymap,
         MenuInputMethod inputMethod,
@@ -30,6 +32,7 @@ internal sealed class MenuInstance : IMenu
         Id = id;
         Owner = owner;
         this.runtime = runtime;
+        this.players = players;
         Renderer = renderer;
         Keymap = keymap;
         InputMethod = inputMethod;
@@ -218,21 +221,22 @@ internal sealed class MenuInstance : IMenu
         }
     }
 
-    internal IMenuComponent[] Snapshot( MenuRegion region )
+    internal IMenuComponent[] Snapshot( MenuRegion region, IMenuSession session )
     {
         var source = regions[(int)region];
-        return region == MenuRegion.Body ? ExpandRows(source) : source;
+        return region == MenuRegion.Body ? ExpandRows(source, session) : source;
     }
 
-    private static IMenuComponent[] ExpandRows( IMenuComponent[] source )
+    private IMenuComponent[] ExpandRows( IMenuComponent[] source, IMenuSession session )
     {
         var expanded = new List<IMenuComponent>(source.Length);
+        var context = new MenuRowContext { Translate = GlobalLocalization.Get, Players = players };
 
         foreach (var component in source)
         {
             if (component is IMenuRowSource rowSource)
             {
-                expanded.AddRange(rowSource.GetRows(GlobalLocalization.Get));
+                expanded.AddRange(rowSource.GetRows(session, context));
             }
             else
             {
@@ -253,7 +257,7 @@ internal sealed class MenuInstance : IMenu
 
     internal List<IMenuComponent> GetVisible( MenuRegion region, IMenuSession session )
     {
-        var source = Snapshot(region);
+        var source = Snapshot(region, session);
         var visible = new List<IMenuComponent>(source.Length);
 
         foreach (var component in source)
@@ -269,7 +273,7 @@ internal sealed class MenuInstance : IMenu
 
     internal List<IMenuComponent> GetFocusables( IMenuSession session )
     {
-        var source = Snapshot(MenuRegion.Body);
+        var source = Snapshot(MenuRegion.Body, session);
         var focusables = new List<IMenuComponent>(source.Length);
 
         foreach (var component in source)
@@ -287,7 +291,7 @@ internal sealed class MenuInstance : IMenu
     {
         var count = 0;
 
-        foreach (var component in Snapshot(MenuRegion.Body))
+        foreach (var component in Snapshot(MenuRegion.Body, session))
         {
             if (component.IsFocusable && component.IsVisible(session))
             {
@@ -302,7 +306,7 @@ internal sealed class MenuInstance : IMenu
     {
         var position = 0;
 
-        foreach (var component in Snapshot(MenuRegion.Body))
+        foreach (var component in Snapshot(MenuRegion.Body, session))
         {
             if (component.IsFocusable && component.IsVisible(session) && position++ == index)
             {
@@ -317,7 +321,7 @@ internal sealed class MenuInstance : IMenu
     {
         var position = 0;
 
-        foreach (var component in Snapshot(MenuRegion.Body))
+        foreach (var component in Snapshot(MenuRegion.Body, session))
         {
             if (component.IsFocusable && component.IsVisible(session))
             {

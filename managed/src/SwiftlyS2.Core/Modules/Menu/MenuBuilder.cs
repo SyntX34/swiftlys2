@@ -1,5 +1,6 @@
 using SwiftlyS2.Shared.Menu;
 using SwiftlyS2.Shared.Menu.Components;
+using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.Menu;
 
@@ -7,6 +8,7 @@ internal sealed class MenuBuilder(
     string menuId,
     string owner,
     MenuRuntime runtime,
+    IPlayerManagerService players,
     MenuActionRegistry actions,
     MenuRendererRegistry renderers,
     MenuKeybindResolver resolver,
@@ -145,7 +147,7 @@ internal sealed class MenuBuilder(
 
         var resolvedInputMethod = inputMethodResolver.Resolve(menuId, codeInputMethod, inputMethodSources);
 
-        var menu = new MenuInstance(menuId, owner, runtime, renderer, keymap, resolvedInputMethod, autoCloseDelay, actionHandlers, parent, itemsPerPage);
+        var menu = new MenuInstance(menuId, owner, runtime, players, renderer, keymap, resolvedInputMethod, autoCloseDelay, actionHandlers, parent, itemsPerPage);
 
         foreach (var component in header)
         {

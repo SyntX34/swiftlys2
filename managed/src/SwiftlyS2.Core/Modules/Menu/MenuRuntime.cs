@@ -115,7 +115,7 @@ internal sealed class MenuRuntime(
     {
         foreach (var region in Regions)
         {
-            foreach (var component in session.Instance.Snapshot(region))
+            foreach (var component in session.Instance.Snapshot(region, session))
             {
                 try
                 {
