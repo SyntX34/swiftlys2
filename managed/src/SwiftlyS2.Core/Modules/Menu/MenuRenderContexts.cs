@@ -9,7 +9,8 @@ internal sealed class ComponentRenderContext(
     IMenuComponent component,
     bool isFocused,
     bool isEnabled,
-    string rendererId ) : IMenuComponentRenderContext
+    string rendererId,
+    Func<string, string> translate ) : IMenuComponentRenderContext
 {
     public IMenu Menu { get; } = menu;
 
@@ -24,6 +25,8 @@ internal sealed class ComponentRenderContext(
     public bool IsEnabled { get; } = isEnabled;
 
     public string RendererId { get; } = rendererId;
+
+    public Func<string, string> Translate { get; } = translate;
 }
 
 internal sealed class MenuRenderContext(

@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "فارغ",
     "menu.selector.claim_left": "ي",
     "menu.selector.claim_right": "ي",
+    "menu.player_list.search_empty": "(جميع اللاعبين)",
+    "menu.player_list.search_hint": "اكتب اسمًا أو #slot أو SteamID أو محددًا مثل @ct في الدردشة.",
+    "menu.component.waiting": "جارٍ الانتظار...",
+    "menu.input.empty": "(فارغ)",
+    "menu.input.waiting_chat": "في انتظار إدخال الدردشة... (اختر مرة أخرى للإلغاء)",
+    "menu.input.chat_hint": "اكتب إجابتك في الدردشة.",
+    "menu.choice.empty": "غير متوفر",
+    "menu.player.unknown": "غير معروف",
+    "menu.component.change_hint": "يسار/يمين للتغيير.",
     "permission.command.denied": "ليس لديك الإذن باستخدام هذا الأمر."
 }

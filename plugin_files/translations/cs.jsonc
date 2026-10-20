@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Prázdné",
     "menu.selector.claim_left": "L",
     "menu.selector.claim_right": "P",
+    "menu.player_list.search_empty": "(všichni hráči)",
+    "menu.player_list.search_hint": "Napište jméno, #slot, SteamID nebo selektor jako @ct do chatu.",
+    "menu.component.waiting": "Čekání...",
+    "menu.input.empty": "(prázdné)",
+    "menu.input.waiting_chat": "Čekání na zprávu v chatu... (vyberte znovu pro zrušení)",
+    "menu.input.chat_hint": "Napište odpověď do chatu.",
+    "menu.choice.empty": "N/A",
+    "menu.player.unknown": "Neznámý",
+    "menu.component.change_hint": "Doleva/doprava pro změnu.",
     "permission.command.denied": "Nemáte oprávnění k používání tohoto příkazu."
 }

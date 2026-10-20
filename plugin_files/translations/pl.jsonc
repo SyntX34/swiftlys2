@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Puste",
     "menu.selector.claim_left": "L",
     "menu.selector.claim_right": "P",
+    "menu.player_list.search_empty": "(wszyscy gracze)",
+    "menu.player_list.search_hint": "Wpisz nazwę, #slot, SteamID lub selektor, np. @ct, na czacie.",
+    "menu.component.waiting": "Oczekiwanie...",
+    "menu.input.empty": "(pusty)",
+    "menu.input.waiting_chat": "Oczekiwanie na wpis na czacie... (wybierz ponownie, aby anulować)",
+    "menu.input.chat_hint": "Wpisz odpowiedź na czacie.",
+    "menu.choice.empty": "Brak",
+    "menu.player.unknown": "Nieznany",
+    "menu.component.change_hint": "Lewo/prawo, aby zmienić.",
     "permission.command.denied": "Nie masz uprawnień do korzystania z tego polecenia."
 }

@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Tyhjä",
     "menu.selector.claim_left": "V",
     "menu.selector.claim_right": "O",
+    "menu.player_list.search_empty": "(kaikki pelaajat)",
+    "menu.player_list.search_hint": "Kirjoita nimi, #slot, SteamID tai valitsin, kuten @ct, chattiin.",
+    "menu.component.waiting": "Odotetaan...",
+    "menu.input.empty": "(tyhjä)",
+    "menu.input.waiting_chat": "Odotetaan chat-syötettä... (valitse uudelleen peruuttaaksesi)",
+    "menu.input.chat_hint": "Kirjoita vastauksesi chattiin.",
+    "menu.choice.empty": "Ei saatavilla",
+    "menu.player.unknown": "Tuntematon",
+    "menu.component.change_hint": "Vasen/oikea vaihtaaksesi.",
     "permission.command.denied": "Sinulla ei ole oikeutta käyttää tätä komentoa."
 }

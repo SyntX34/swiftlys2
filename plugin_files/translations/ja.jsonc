@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "空",
     "menu.selector.claim_left": "左",
     "menu.selector.claim_right": "右",
+    "menu.player_list.search_empty": "(全プレイヤー)",
+    "menu.player_list.search_hint": "チャットに名前、#slot、SteamID、または @ct のようなセレクターを入力してください。",
+    "menu.component.waiting": "待機中...",
+    "menu.input.empty": "(空)",
+    "menu.input.waiting_chat": "チャット入力を待機中... (もう一度選択するとキャンセル)",
+    "menu.input.chat_hint": "チャットで回答を入力してください。",
+    "menu.choice.empty": "なし",
+    "menu.player.unknown": "不明",
+    "menu.component.change_hint": "左/右で変更。",
     "permission.command.denied": "このコマンドを使用する権限がありません。"
 }

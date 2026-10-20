@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Boş",
     "menu.selector.claim_left": "S",
     "menu.selector.claim_right": "D",
+    "menu.player_list.search_empty": "(tüm oyuncular)",
+    "menu.player_list.search_hint": "Sohbete bir ad, #slot, SteamID veya @ct gibi bir seçici yazın.",
+    "menu.component.waiting": "Bekleniyor...",
+    "menu.input.empty": "(boş)",
+    "menu.input.waiting_chat": "Sohbet girişi bekleniyor... (iptal etmek için tekrar seçin)",
+    "menu.input.chat_hint": "Yanıtınızı sohbete yazın.",
+    "menu.choice.empty": "Yok",
+    "menu.player.unknown": "Bilinmiyor",
+    "menu.component.change_hint": "Değiştirmek için Sol/Sağ.",
     "permission.command.denied": "Bu komutu kullanmak için yetkiniz yok."
 }

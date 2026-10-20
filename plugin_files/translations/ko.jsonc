@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "빈 상태",
     "menu.selector.claim_left": "좌",
     "menu.selector.claim_right": "우",
+    "menu.player_list.search_empty": "(모든 플레이어)",
+    "menu.player_list.search_hint": "채팅에 이름, #slot, SteamID 또는 @ct 같은 선택자를 입력하세요.",
+    "menu.component.waiting": "대기 중...",
+    "menu.input.empty": "(비어 있음)",
+    "menu.input.waiting_chat": "채팅 입력 대기 중... (다시 선택하면 취소)",
+    "menu.input.chat_hint": "채팅으로 답변을 입력하세요.",
+    "menu.choice.empty": "없음",
+    "menu.player.unknown": "알 수 없음",
+    "menu.component.change_hint": "좌/우로 변경.",
     "permission.command.denied": "이 명령을 사용할 권한이 없습니다."
 }

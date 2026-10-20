@@ -43,6 +43,11 @@ public readonly record struct MenuPlayerRowContext
     public required bool IsFocused { get; init; }
 
     /// <summary>
+    /// Translates a key for the player who is looking at the menu.
+    /// </summary>
+    public required Func<string, string> Translate { get; init; }
+
+    /// <summary>
     /// The player who is looking at the menu.
     /// </summary>
     public IPlayer Player => Session.Player;
@@ -57,8 +62,6 @@ public sealed class PlayerListComponent : MenuComponentBase, IMenuRowSource
     public PlayerListComponent( string? id = null ) : base(id)
     {
         SearchInput = new InputComponent("Search", string.Empty, onChanged: ctx => Apply(ctx.Session)) {
-            EmptyText = "(all players)",
-            HintMessage = "Type a name, #slot, SteamID or a selector like @ct in chat.",
             MaxLength = 32,
         };
 
@@ -75,7 +78,7 @@ public sealed class PlayerListComponent : MenuComponentBase, IMenuRowSource
     }
 
     /// <summary>
-    /// The search line. Use it to change its label, texts, colours or length limit.
+    /// The search line. Its empty text and hint come from the translation file on every rebuild, so set them there.
     /// </summary>
     public InputComponent SearchInput { get; }
 
@@ -130,9 +133,9 @@ public sealed class PlayerListComponent : MenuComponentBase, IMenuRowSource
     public TimeSpan RefreshInterval { get; set; } = TimeSpan.FromSeconds(1);
 
     /// <summary>
-    /// Turns a player into the text shown for them.
+    /// Turns a player into the text shown for them. An empty result shows the translated unknown-player text.
     /// </summary>
-    public Func<IPlayer, string> Formatter { get; set; } = player => player.Controller?.PlayerName ?? "unknown";
+    public Func<IPlayer, string> Formatter { get; set; } = player => player.Controller?.PlayerName ?? string.Empty;
 
     /// <summary>
     /// Turns a player into a full node, for lines with several colours. Takes over from <see cref="Formatter"/> when set.
@@ -315,6 +318,8 @@ public sealed class PlayerListComponent : MenuComponentBase, IMenuRowSource
 
         if (ShowSearch)
         {
+            SearchInput.EmptyText = translate("menu.player_list.search_empty");
+            SearchInput.HintMessage = translate("menu.player_list.search_hint");
             rows.Add(SearchInput);
 
             if (ShowClearButton && filter.Length > 0)
@@ -386,13 +391,13 @@ public sealed class PlayerListComponent : MenuComponentBase, IMenuRowSource
 
         public int Index { get; set; }
 
-        public override string? GetHint( IMenuSession session ) => owner.ItemHint?.Invoke(target);
+        public override string? GetHint( IMenuSession session, Func<string, string> translate ) => owner.ItemHint?.Invoke(target);
 
         public override MenuNode Render( IMenuComponentRenderContext context )
         {
             if (IsBusy(context.Session))
             {
-                return new MenuTextNode(WaitingText, owner.ItemStyle.WithColor(WaitingColor));
+                return new MenuTextNode(GetWaitingText(context), owner.ItemStyle.WithColor(WaitingColor));
             }
 
             if (owner.RowRenderer is { } render)
@@ -402,10 +407,17 @@ public sealed class PlayerListComponent : MenuComponentBase, IMenuRowSource
                     Target = target,
                     Index = Index,
                     IsFocused = context.IsFocused,
+                    Translate = context.Translate,
                 });
             }
 
-            return owner.NodeFormatter?.Invoke(target) ?? new MenuTextNode(owner.Formatter(target), owner.ItemStyle);
+            if (owner.NodeFormatter is { } node)
+            {
+                return node(target);
+            }
+
+            var name = owner.Formatter(target);
+            return new MenuTextNode(name.Length > 0 ? name : context.Translate("menu.player.unknown"), owner.ItemStyle);
         }
 
         public override ValueTask<bool> HandleActionAsync( MenuActionContext context )

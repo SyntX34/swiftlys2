@@ -31,4 +31,9 @@ public readonly record struct MenuActionContext
     /// The menu the action was dispatched to.
     /// </summary>
     public IMenu Menu => Session.Menu;
+
+    /// <summary>
+    /// Translates a key from the translation file, returning the key when it is missing.
+    /// </summary>
+    public required Func<string, string> Translate { get; init; }
 }

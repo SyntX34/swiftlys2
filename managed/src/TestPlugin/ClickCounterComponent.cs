@@ -13,7 +13,7 @@ public sealed class ClickCounterComponent( string text, int maxClicks = 5 ) : Me
     public override bool IsEnabled( IMenuSession session )
         => base.IsEnabled(session) && session.GetState<ClickState>(this).Clicks < MaxClicks;
 
-    public override string? GetHint( IMenuSession session )
+    public override string? GetHint( IMenuSession session, Func<string, string> translate )
     {
         var remaining = MaxClicks - session.GetState<ClickState>(this).Clicks;
         return remaining > 0 ? $"{remaining} click(s) left" : "No clicks left";
@@ -23,7 +23,7 @@ public sealed class ClickCounterComponent( string text, int maxClicks = 5 ) : Me
     {
         if (IsBusy(context.Session))
         {
-            return new MenuTextNode(WaitingText, MenuTextStyle.Default.WithColor(WaitingColor));
+            return new MenuTextNode(GetWaitingText(context), MenuTextStyle.Default.WithColor(WaitingColor));
         }
 
         var clicks = context.Session.GetState<ClickState>(this).Clicks;

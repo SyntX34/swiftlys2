@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "ว่าง",
     "menu.selector.claim_left": "ซ้าย",
     "menu.selector.claim_right": "ขวา",
+    "menu.player_list.search_empty": "(ผู้เล่นทั้งหมด)",
+    "menu.player_list.search_hint": "พิมพ์ชื่อ, #slot, SteamID หรือตัวเลือกอย่าง @ct ในแชต",
+    "menu.component.waiting": "กำลังรอ...",
+    "menu.input.empty": "(ว่าง)",
+    "menu.input.waiting_chat": "กำลังรอการป้อนข้อความในแชท... (เลือกอีกครั้งเพื่อยกเลิก)",
+    "menu.input.chat_hint": "พิมพ์คำตอบของคุณในแชท",
+    "menu.choice.empty": "ไม่มี",
+    "menu.player.unknown": "ไม่ทราบ",
+    "menu.component.change_hint": "ซ้าย/ขวาเพื่อเปลี่ยน",
     "permission.command.denied": "คุณไม่มีสิทธิ์ใช้คำสั่งนี้"
 }

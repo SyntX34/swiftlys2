@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Vuoto",
     "menu.selector.claim_left": "S",
     "menu.selector.claim_right": "D",
+    "menu.player_list.search_empty": "(tutti i giocatori)",
+    "menu.player_list.search_hint": "Scrivi un nome, #slot, SteamID o un selettore come @ct in chat.",
+    "menu.component.waiting": "In attesa...",
+    "menu.input.empty": "(vuoto)",
+    "menu.input.waiting_chat": "In attesa dell'input in chat... (seleziona di nuovo per annullare)",
+    "menu.input.chat_hint": "Scrivi la tua risposta in chat.",
+    "menu.choice.empty": "N/D",
+    "menu.player.unknown": "Sconosciuto",
+    "menu.component.change_hint": "Sinistra/Destra per cambiare.",
     "permission.command.denied": "Non hai il permesso di utilizzare questo comando."
 }

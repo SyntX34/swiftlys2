@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Порожньо",
     "menu.selector.claim_left": "Л",
     "menu.selector.claim_right": "П",
+    "menu.player_list.search_empty": "(усі гравці)",
+    "menu.player_list.search_hint": "Введіть імʼя, #slot, SteamID або селектор, наприклад @ct, у чат.",
+    "menu.component.waiting": "Очікування...",
+    "menu.input.empty": "(порожньо)",
+    "menu.input.waiting_chat": "Очікування введення в чаті... (оберіть знову, щоб скасувати)",
+    "menu.input.chat_hint": "Напишіть відповідь у чаті.",
+    "menu.choice.empty": "Немає",
+    "menu.player.unknown": "Невідомо",
+    "menu.component.change_hint": "Вліво/вправо для зміни.",
     "permission.command.denied": "У вас немає дозволу використовувати цю команду."
 }

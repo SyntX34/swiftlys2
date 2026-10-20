@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using SwiftlyS2.Core.Players;
 using SwiftlyS2.Core.Translations;
 using SwiftlyS2.Shared.Menu;
@@ -64,7 +65,7 @@ internal sealed class MenuInstance : IMenu
 
     internal MenuHintCache? ButtonHints { get; set; }
 
-    internal MenuNode? ChatHints { get; set; }
+    internal ConcurrentDictionary<Func<string, string>, MenuNode> ChatHints { get; } = new();
 
     public IReadOnlyList<IMenuSession> Sessions {
         get {
@@ -230,7 +231,7 @@ internal sealed class MenuInstance : IMenu
     private IMenuComponent[] ExpandRows( IMenuComponent[] source, IMenuSession session )
     {
         var expanded = new List<IMenuComponent>(source.Length);
-        var context = new MenuRowContext { Translate = GlobalLocalization.Get, Players = players };
+        var context = new MenuRowContext { Translate = GlobalLocalization.For(session.Player), Players = players };
 
         foreach (var component in source)
         {

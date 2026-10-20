@@ -26,8 +26,11 @@ public class SelectorComponent<TItem> : MenuChoiceComponentBase<TItem>
         string? id = null ) : base(text, choices, defaultIndex, id)
     {
         OnItemChanged = onItemChanged;
-        Comment = "Left/Right to change";
     }
+
+    /// <inheritdoc/>
+    public override string? GetHint( IMenuSession session, Func<string, string> translate )
+        => Comment ?? translate("menu.component.change_hint");
 
     /// <summary>
     /// Whether the items either side of the current one are shown.
@@ -67,16 +70,16 @@ public class SelectorComponent<TItem> : MenuChoiceComponentBase<TItem>
 
         if (ShowNeighbours && Choices.Count > 1)
         {
-            parts.Add(RenderValue(context, $"{Format(Neighbour(index, -1))} ", NeighbourColor));
+            parts.Add(RenderValue(context, $"{Format(context, Neighbour(index, -1))}", NeighbourColor));
         }
 
         parts.Add(RenderValue(context, OpeningBracket));
-        parts.Add(RenderValue(context, Format(index)));
+        parts.Add(RenderValue(context, Format(context, index)));
         parts.Add(RenderValue(context, ClosingBracket));
 
         if (ShowNeighbours && Choices.Count > 1)
         {
-            parts.Add(RenderValue(context, $" {Format(Neighbour(index, 1))}", NeighbourColor));
+            parts.Add(RenderValue(context, $" {Format(context, Neighbour(index, 1))}", NeighbourColor));
         }
 
         return new MenuLineNode(parts);

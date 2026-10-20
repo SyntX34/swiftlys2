@@ -38,8 +38,11 @@ public class SliderComponent : MenuValueComponent<float>
         Step = step;
         DefaultValue = defaultValue ?? Min;
         OnChanged = onChanged;
-        Comment = "Left/Right to change";
     }
+
+    /// <inheritdoc/>
+    public override string? GetHint( IMenuSession session, Func<string, string> translate )
+        => Comment ?? translate("menu.component.change_hint");
 
     /// <summary>
     /// The lowest value.

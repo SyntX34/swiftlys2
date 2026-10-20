@@ -50,7 +50,7 @@ public abstract class MenuComponentBase : IMenuComponent
     public Func<IMenuSession, bool>? EnabledWhen { get; set; }
 
     /// <summary>
-    /// The hint shown while this component holds the selection, or null for none.
+    /// The hint shown while this component holds the selection, or null for the component's translated default (none for most). An empty string shows nothing.
     /// </summary>
     public string? Comment { get; set; }
 
@@ -68,9 +68,9 @@ public abstract class MenuComponentBase : IMenuComponent
     public Func<MenuActionContext, ValueTask<bool>>? Validating { get; set; }
 
     /// <summary>
-    /// The text shown in place of this component's own while an activation is still running.
+    /// The text shown in place of this component's own while an activation is still running, or null for the translated default.
     /// </summary>
-    public string WaitingText { get; set; } = "Waiting...";
+    public string? WaitingText { get; set; }
 
     /// <summary>
     /// The colour applied to <see cref="WaitingText"/>, or null to keep the normal style.
@@ -89,7 +89,7 @@ public abstract class MenuComponentBase : IMenuComponent
     public virtual bool IsEnabled( IMenuSession session ) => Enabled && (EnabledWhen?.Invoke(session) ?? true);
 
     /// <inheritdoc/>
-    public virtual string? GetHint( IMenuSession session ) => Comment;
+    public virtual string? GetHint( IMenuSession session, Func<string, string> translate ) => Comment;
 
     /// <inheritdoc/>
     public virtual bool NeedsRedraw( IMenuSession session, DateTime now ) => false;
@@ -106,6 +106,12 @@ public abstract class MenuComponentBase : IMenuComponent
     /// <param name="session">The session to check.</param>
     /// <returns><see langword="true"/> while the previous activation has not finished.</returns>
     protected bool IsBusy( IMenuSession session ) => session.GetState<MenuActivationState>(this).IsBusy;
+
+    /// <summary>
+    /// The text to draw while busy: <see cref="WaitingText"/>, or the translated default when it is null.
+    /// </summary>
+    /// <param name="context">The context being drawn.</param>
+    protected string GetWaitingText( IMenuComponentRenderContext context ) => WaitingText ?? context.Translate("menu.component.waiting");
 
     /// <summary>
     /// Runs an activation through the shared pipeline.

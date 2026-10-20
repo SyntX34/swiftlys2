@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Leer",
     "menu.selector.claim_left": "L",
     "menu.selector.claim_right": "R",
+    "menu.player_list.search_empty": "(alle Spieler)",
+    "menu.player_list.search_hint": "Geben Sie einen Namen, #slot, SteamID oder einen Selektor wie @ct im Chat ein.",
+    "menu.component.waiting": "Warten...",
+    "menu.input.empty": "(leer)",
+    "menu.input.waiting_chat": "Warten auf Chat-Eingabe... (erneut auswählen zum Abbrechen)",
+    "menu.input.chat_hint": "Schreibe deine Antwort in den Chat.",
+    "menu.choice.empty": "k. A.",
+    "menu.player.unknown": "Unbekannt",
+    "menu.component.change_hint": "Links/Rechts zum Ändern.",
     "permission.command.denied": "Sie haben keine Berechtigung, diesen Befehl zu verwenden."
 }

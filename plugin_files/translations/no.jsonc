@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Tom",
     "menu.selector.claim_left": "V",
     "menu.selector.claim_right": "H",
+    "menu.player_list.search_empty": "(alle spillere)",
+    "menu.player_list.search_hint": "Skriv et navn, #slot, SteamID eller en velger som @ct i chatten.",
+    "menu.component.waiting": "Venter...",
+    "menu.input.empty": "(tom)",
+    "menu.input.waiting_chat": "Venter på chat-input... (velg igjen for å avbryte)",
+    "menu.input.chat_hint": "Skriv svaret ditt i chatten.",
+    "menu.choice.empty": "Ingen",
+    "menu.player.unknown": "Ukjent",
+    "menu.component.change_hint": "Venstre/høyre for å endre.",
     "permission.command.denied": "Du har ikke tillatelse til å bruke denne kommandoen."
 }

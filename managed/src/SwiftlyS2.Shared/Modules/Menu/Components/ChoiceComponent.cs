@@ -66,7 +66,7 @@ public class ChoiceComponent<TItem> : MenuChoiceComponentBase<TItem>
         }
 
         parts.Add(RenderValue(context, OpeningBracket, OpeningBracketColor));
-        parts.Add(RenderValue(context, Format(GetValue(context.Session))));
+        parts.Add(RenderValue(context, Format(context, GetValue(context.Session))));
         parts.Add(RenderValue(context, ClosingBracket, ClosingBracketColor));
 
         return new MenuLineNode(parts);

@@ -29,8 +29,11 @@ public class InputComponent : MenuValueComponent<string>
         DefaultValue = defaultValue;
         Validator = validator;
         OnChanged = onChanged;
-        Comment = "Type your answer in chat";
     }
+
+    /// <inheritdoc/>
+    public override string? GetHint( IMenuSession session, Func<string, string> translate )
+        => Comment ?? translate("menu.input.chat_hint");
 
     /// <summary>
     /// The longest value accepted. Longer input is cut. Never below one.
@@ -46,29 +49,29 @@ public class InputComponent : MenuValueComponent<string>
     public Func<string, bool>? Validator { get; set; }
 
     /// <summary>
-    /// The message sent to the player when the capture starts, or null to send nothing.
+    /// The message sent to the player when the capture starts. Null sends the translated default, and an empty string sends nothing.
     /// </summary>
-    public string? HintMessage { get; set; } = "Type your answer in chat.";
+    public string? HintMessage { get; set; }
 
     /// <summary>
-    /// The text shown while no value has been entered.
+    /// The text shown while no value has been entered, or null for the translated default.
     /// </summary>
-    public string EmptyText { get; set; } = "(empty)";
+    public string? EmptyText { get; set; }
 
     /// <summary>
-    /// The text shown while waiting for the player to type.
+    /// The text shown while waiting for the player to type, or null for the translated default.
     /// </summary>
-    public string WaitingForInputText { get; set; } = "Waiting for chat input... (select again to cancel)";
+    public string? WaitingForInputText { get; set; }
 
     /// <summary>
-    /// The text shown briefly after a value is accepted.
+    /// The text shown briefly after a value is accepted, or null for the translated default.
     /// </summary>
-    public string AcceptedText { get; set; } = "Accepted";
+    public string? AcceptedText { get; set; }
 
     /// <summary>
-    /// The text shown briefly after a value is rejected.
+    /// The text shown briefly after a value is rejected, or null for the translated default.
     /// </summary>
-    public string InvalidText { get; set; } = "Invalid input";
+    public string? InvalidText { get; set; }
 
     /// <summary>
     /// The colour of <see cref="WaitingForInputText"/>.
@@ -122,14 +125,14 @@ public class InputComponent : MenuValueComponent<string>
         }
         else if (state.Waiting)
         {
-            parts.Add(RenderValue(context, WaitingForInputText, WaitingForInputColor));
+            parts.Add(RenderValue(context, WaitingForInputText ?? context.Translate("menu.input.waiting_chat"), WaitingForInputColor));
         }
         else
         {
             var value = GetValue(context.Session);
 
             parts.Add(string.IsNullOrEmpty(value)
-                ? RenderValue(context, EmptyText, DisabledColor)
+                ? RenderValue(context, EmptyText ?? context.Translate("menu.input.empty"), DisabledColor)
                 : RenderValue(context, value));
         }
 
@@ -156,11 +159,13 @@ public class InputComponent : MenuValueComponent<string>
 
             state.Status = null;
             state.Waiting = true;
-            state.Capture = ctx.Session.CaptureChat(message => OnChatMessage(ctx.Session, state, message));
+            state.Capture = ctx.Session.CaptureChat(message => OnChatMessage(ctx.Session, state, message, ctx.Translate));
 
-            if (!string.IsNullOrEmpty(HintMessage))
+            var hint = HintMessage ?? ctx.Translate("menu.input.chat_hint");
+
+            if (!string.IsNullOrEmpty(hint))
             {
-                ctx.Player.SendChat(HintMessage);
+                ctx.Player.SendChat(hint);
             }
 
             ctx.Session.Invalidate();
@@ -172,7 +177,7 @@ public class InputComponent : MenuValueComponent<string>
     protected override string Coerce( IMenuSession session, string value )
         => value.Length > MaxLength ? value[..MaxLength] : value;
 
-    private bool OnChatMessage( IMenuSession session, InputState state, string message )
+    private bool OnChatMessage( IMenuSession session, InputState state, string message, Func<string, string> translate )
     {
         if (!state.Waiting)
         {
@@ -189,7 +194,7 @@ public class InputComponent : MenuValueComponent<string>
             _ = SetValue(session, trimmed);
         }
 
-        state.Status = accepted ? AcceptedText : InvalidText;
+        state.Status = accepted ? AcceptedText ?? translate("menu.input.accepted") : InvalidText ?? translate("menu.input.invalid");
         state.StatusColor = accepted ? AcceptedColor : InvalidColor;
         state.StatusUntil = DateTime.UtcNow.AddMilliseconds(StatusDurationMs);
 

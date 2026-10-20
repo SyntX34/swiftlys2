@@ -11,8 +11,9 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
         var menu = session.Instance;
         var rendererId = menu.Renderer.Id;
 
-        var header = RenderRegion(menu, session, MenuRegion.Header, rendererId);
-        var footer = RenderRegion(menu, session, MenuRegion.Footer, rendererId);
+        var translate = GlobalLocalization.For(session.Player);
+        var header = RenderRegion(menu, session, MenuRegion.Header, rendererId, translate);
+        var footer = RenderRegion(menu, session, MenuRegion.Footer, rendererId, translate);
 
         var body = menu.GetVisible(MenuRegion.Body, session);
         var focusables = new List<IMenuComponent>(body.Count);
@@ -38,7 +39,7 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
         {
             var component = body[index];
             var isFocused = ReferenceEquals(component, focused);
-            var node = RenderComponent(menu, session, component, isFocused, rendererId);
+            var node = RenderComponent(menu, session, component, isFocused, rendererId, translate);
 
             if (!component.IsFocusable)
             {
@@ -52,12 +53,12 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
 
         session.PageSelectables = selectables;
 
-        if (focused?.GetHint(session) is { Length: > 0 } hint)
+        if (focused?.GetHint(session, translate) is { Length: > 0 } hint)
         {
             footer.Add(new MenuTextNode(hint, MenuTextStyle.Default.WithSize(MenuTextSize.Small)));
         }
 
-        var hints = BuildKeybindHints(menu);
+        var hints = BuildKeybindHints(menu, translate);
 
         if (hints is not null)
         {
@@ -73,14 +74,14 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
         };
     }
 
-    private List<MenuNode> RenderRegion( MenuInstance menu, MenuSession session, MenuRegion region, string rendererId )
+    private List<MenuNode> RenderRegion( MenuInstance menu, MenuSession session, MenuRegion region, string rendererId, Func<string, string> translate )
     {
         var components = menu.GetVisible(region, session);
         var nodes = new List<MenuNode>(components.Count);
 
         foreach (var component in components)
         {
-            nodes.Add(RenderComponent(menu, session, component, false, rendererId));
+            nodes.Add(RenderComponent(menu, session, component, false, rendererId, translate));
         }
 
         return nodes;
@@ -91,7 +92,8 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
         MenuSession session,
         IMenuComponent component,
         bool isFocused,
-        string rendererId )
+        string rendererId,
+        Func<string, string> translate )
     {
         var context = new ComponentRenderContext(
             menu,
@@ -99,7 +101,8 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
             component,
             isFocused,
             component.IsEnabled(session),
-            rendererId);
+            rendererId,
+            translate);
 
         var specialised = renderers.ResolveComponentRenderer(rendererId, component.GetType());
 
@@ -179,16 +182,16 @@ internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLay
     private static readonly MenuTextStyle FooterLabelStyle = MenuTextStyle.Default.WithSize(MenuTextSize.Small).WithColor("#FF0000");
     private static readonly MenuTextStyle FooterValueStyle = MenuTextStyle.Default.WithSize(MenuTextSize.Small).WithColor("#FFFFFF");
 
-    private static MenuNode? BuildKeybindHints( MenuInstance menu )
+    private static MenuNode? BuildKeybindHints( MenuInstance menu, Func<string, string> translate )
     {
         if (menu.InputMethod == MenuInputMethod.Chat)
         {
-            return menu.ChatHints ??= MenuLineNode.Of(
-                new MenuTextNode($"{GlobalLocalization.MenuUseLabel()}: ", FooterLabelStyle),
-                new MenuTextNode($"!<{GlobalLocalization.MenuChatNumberLabel()}>", FooterValueStyle),
+            return menu.ChatHints.GetOrAdd(translate, static t => MenuLineNode.Of(
+                new MenuTextNode($"{t("menu.footer.use")}: ", FooterLabelStyle),
+                new MenuTextNode($"!<{t("menu.footer.chat_number")}>", FooterValueStyle),
                 new MenuTextNode(" | ", FooterValueStyle),
-                new MenuTextNode($"{GlobalLocalization.MenuExitLabel()}: ", FooterLabelStyle),
-                new MenuTextNode("!0", FooterValueStyle));
+                new MenuTextNode($"{t("menu.footer.exit")}: ", FooterLabelStyle),
+                new MenuTextNode("!0", FooterValueStyle)));
         }
 
         if (menu.Keymap is not MenuKeymap keymap)

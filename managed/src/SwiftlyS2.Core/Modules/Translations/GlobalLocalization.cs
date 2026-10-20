@@ -1,6 +1,8 @@
+using System.Collections.Concurrent;
 using System.Text.Json;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared;
+using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.Translations;
 
@@ -8,6 +10,9 @@ internal static class GlobalLocalization
 {
     private static IReadOnlyDictionary<string, string> _values = new Dictionary<string, string>();
     private static readonly Lock _sync = new();
+    private static readonly ConcurrentDictionary<string, Func<string, string>> _translators = new();
+    private static string _translationsDir = string.Empty;
+    private static string _serverLanguage = string.Empty;
 
     public static void InitializeFromCore( string basePath )
     {
@@ -16,7 +21,29 @@ internal static class GlobalLocalization
             var language = NativeServerHelpers.GetServerLanguage();
             var translationsDir = Path.Combine(basePath, "translations");
             _values = ParseTranslations(translationsDir, language);
+            _translationsDir = translationsDir;
+            _serverLanguage = language;
+            _translators.Clear();
         }
+    }
+
+    public static Func<string, string> For( IPlayer player )
+    {
+        var code = player.IsValid && NativeServerHelpers.UsePlayerLanguage() ? player.PlayerLanguage.Value : _serverLanguage;
+        return _translators.GetOrAdd(code, CreateTranslator);
+    }
+
+    private static Func<string, string> CreateTranslator( string code )
+    {
+        var file = Path.Combine(_translationsDir, $"{code}.jsonc");
+
+        if (code.Length == 0 || Path.GetFileName(code) != code || !File.Exists(file))
+        {
+            return Get;
+        }
+
+        var values = ReadFile(file);
+        return key => values.TryGetValue(key, out var value) && !string.IsNullOrWhiteSpace(value) ? value : Get(key);
     }
 
     public static string MenuDefaultTitle() => Get("menu.default_title");
@@ -53,6 +80,11 @@ internal static class GlobalLocalization
             throw new Exception($"No translation file found for language: {language}");
         }
 
+        return ReadFile(languageFile);
+    }
+
+    private static Dictionary<string, string> ReadFile( string languageFile )
+    {
         var options = new JsonSerializerOptions {
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip,

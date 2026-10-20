@@ -43,9 +43,9 @@ public abstract class MenuChoiceComponentBase<TItem> : MenuValueComponent<int>
     public bool WrapAround { get; set; } = true;
 
     /// <summary>
-    /// The text shown when <see cref="Choices"/> is empty.
+    /// The text shown when <see cref="Choices"/> is empty, or null for the translated default.
     /// </summary>
-    public string EmptyText { get; set; } = "N/A";
+    public string? EmptyText { get; set; }
 
     /// <summary>
     /// Runs after a player moves to a different item.
@@ -106,12 +106,13 @@ public abstract class MenuChoiceComponentBase<TItem> : MenuValueComponent<int>
     /// <summary>
     /// Formats the item at an index, tolerating an empty list.
     /// </summary>
+    /// <param name="context">The context being drawn, used for the translated default.</param>
     /// <param name="index">The index to format.</param>
     /// <returns>The formatted item, or <see cref="EmptyText"/>.</returns>
-    protected string Format( int index )
+    protected string Format( IMenuComponentRenderContext context, int index )
     {
         return Choices.Count == 0 || index < 0 || index >= Choices.Count
-            ? EmptyText
+            ? EmptyText ?? context.Translate("menu.choice.empty")
             : Formatter(Choices[index]);
     }
 

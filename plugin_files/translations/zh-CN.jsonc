@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "空",
     "menu.selector.claim_left": "左",
     "menu.selector.claim_right": "右",
+    "menu.player_list.search_empty": "(所有玩家)",
+    "menu.player_list.search_hint": "在聊天中输入名称、#slot、SteamID 或 @ct 等选择器。",
+    "menu.component.waiting": "等待中...",
+    "menu.input.empty": "（空）",
+    "menu.input.waiting_chat": "等待聊天输入...（再次选择可取消）",
+    "menu.input.chat_hint": "请在聊天框中输入答案。",
+    "menu.choice.empty": "无",
+    "menu.player.unknown": "未知",
+    "menu.component.change_hint": "按左/右键更改。",
     "permission.command.denied": "您没有权限使用此命令。"
 }

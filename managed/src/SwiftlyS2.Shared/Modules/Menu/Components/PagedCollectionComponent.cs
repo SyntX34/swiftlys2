@@ -43,6 +43,11 @@ public readonly record struct MenuCollectionRowContext<TItem>
     public required bool IsFocused { get; init; }
 
     /// <summary>
+    /// Translates a key for the player who is looking at the menu.
+    /// </summary>
+    public required Func<string, string> Translate { get; init; }
+
+    /// <summary>
     /// The player who is looking at the menu.
     /// </summary>
     public IPlayer Player => Session.Player;
@@ -229,13 +234,13 @@ public sealed class PagedCollectionComponent<TItem> : MenuComponentBase, IMenuRo
     {
         public override bool IsFocusable => true;
 
-        public override string? GetHint( IMenuSession session ) => owner.ItemHint?.Invoke(item);
+        public override string? GetHint( IMenuSession session, Func<string, string> translate ) => owner.ItemHint?.Invoke(item);
 
         public override MenuNode Render( IMenuComponentRenderContext context )
         {
             if (IsBusy(context.Session))
             {
-                return new MenuTextNode(WaitingText, owner.ItemStyle.WithColor(WaitingColor));
+                return new MenuTextNode(GetWaitingText(context), owner.ItemStyle.WithColor(WaitingColor));
             }
 
             if (owner.RowRenderer is { } render)
@@ -245,6 +250,7 @@ public sealed class PagedCollectionComponent<TItem> : MenuComponentBase, IMenuRo
                     Item = item,
                     Index = index,
                     IsFocused = context.IsFocused,
+                    Translate = context.Translate,
                 });
             }
 

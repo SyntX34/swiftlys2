@@ -115,7 +115,7 @@ public class TextComponent : MenuComponentBase
             return null;
         }
 
-        return new MenuTextNode(WaitingText, WaitingColor is null ? Style : Style.WithColor(WaitingColor));
+        return new MenuTextNode(GetWaitingText(context), WaitingColor is null ? Style : Style.WithColor(WaitingColor));
     }
 
     /// <summary>

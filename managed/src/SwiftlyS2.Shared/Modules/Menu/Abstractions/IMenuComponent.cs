@@ -59,12 +59,13 @@ public interface IMenuComponent
     /// Produces the hint shown while this component holds the selection.
     /// </summary>
     /// <param name="session">The session asking.</param>
+    /// <param name="translate">Translates a key into the language of the player asking. Returns the key when it is missing.</param>
     /// <returns>The hint text, or null to show nothing.</returns>
     /// <remarks>
     /// Use this for a per-entry explanation, or to advertise keys the component takes over through
     /// <see cref="HandleActionAsync"/>.
     /// </remarks>
-    public string? GetHint( IMenuSession session ) => null;
+    public string? GetHint( IMenuSession session, Func<string, string> translate ) => null;
 
     /// <summary>
     /// Whether this component needs a new frame even though nothing invalidated the session.

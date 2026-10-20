@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Üres",
     "menu.selector.claim_left": "B",
     "menu.selector.claim_right": "J",
+    "menu.player_list.search_empty": "(minden játékos)",
+    "menu.player_list.search_hint": "Írj be nevet, #slot-ot, SteamID-t vagy kiválasztót, például @ct-t, a chatbe.",
+    "menu.component.waiting": "Várakozás...",
+    "menu.input.empty": "(üres)",
+    "menu.input.waiting_chat": "Várakozás chat-bevitelre... (válassza újra a megszakításhoz)",
+    "menu.input.chat_hint": "Írja be válaszát a chatbe.",
+    "menu.choice.empty": "N/A",
+    "menu.player.unknown": "Ismeretlen",
+    "menu.component.change_hint": "Balra/jobbra a módosításhoz.",
     "permission.command.denied": "Nincs engedélye az parancs használatához."
 }

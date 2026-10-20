@@ -45,6 +45,11 @@ public interface IMenuComponentRenderContext
     /// about. Components must still return usable nodes when they do not recognise the id.
     /// </remarks>
     public string RendererId { get; }
+
+    /// <summary>
+    /// Translates a key from the translation file, returning the key when it is missing.
+    /// </summary>
+    public Func<string, string> Translate { get; }
 }
 
 /// <summary>

@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Gol",
     "menu.selector.claim_left": "S",
     "menu.selector.claim_right": "D",
+    "menu.player_list.search_empty": "(toți jucătorii)",
+    "menu.player_list.search_hint": "Scrie un nume, #slot, SteamID sau un selector precum @ct în chat.",
+    "menu.component.waiting": "Se așteaptă...",
+    "menu.input.empty": "(gol)",
+    "menu.input.waiting_chat": "Se așteaptă introducerea în chat... (selectați din nou pentru a anula)",
+    "menu.input.chat_hint": "Scrieți răspunsul în chat.",
+    "menu.choice.empty": "N/A",
+    "menu.player.unknown": "Necunoscut",
+    "menu.component.change_hint": "Stânga/Dreapta pentru a schimba.",
     "permission.command.denied": "Nu aveți permisiune să utilizați această comandă."
 }

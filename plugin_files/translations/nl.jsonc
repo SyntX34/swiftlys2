@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Leeg",
     "menu.selector.claim_left": "L",
     "menu.selector.claim_right": "R",
+    "menu.player_list.search_empty": "(alle spelers)",
+    "menu.player_list.search_hint": "Typ een naam, #slot, SteamID of een selector zoals @ct in de chat.",
+    "menu.component.waiting": "Wachten...",
+    "menu.input.empty": "(leeg)",
+    "menu.input.waiting_chat": "Wachten op chatinvoer... (selecteer opnieuw om te annuleren)",
+    "menu.input.chat_hint": "Typ je antwoord in de chat.",
+    "menu.choice.empty": "n.v.t.",
+    "menu.player.unknown": "Onbekend",
+    "menu.component.change_hint": "Links/rechts om te wijzigen.",
     "permission.command.denied": "U hebt geen toestemming om deze opdracht te gebruiken."
 }

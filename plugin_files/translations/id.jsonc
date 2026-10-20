@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Kosong",
     "menu.selector.claim_left": "K",
     "menu.selector.claim_right": "N",
+    "menu.player_list.search_empty": "(semua pemain)",
+    "menu.player_list.search_hint": "Ketik nama, #slot, SteamID, atau selektor seperti @ct di chat.",
+    "menu.component.waiting": "Menunggu...",
+    "menu.input.empty": "(kosong)",
+    "menu.input.waiting_chat": "Menunggu input chat... (pilih lagi untuk membatalkan)",
+    "menu.input.chat_hint": "Ketik jawaban Anda di chat.",
+    "menu.choice.empty": "T/S",
+    "menu.player.unknown": "Tidak diketahui",
+    "menu.component.change_hint": "Kiri/Kanan untuk mengubah.",
     "permission.command.denied": "Anda tidak memiliki izin untuk menggunakan perintah ini."
 }

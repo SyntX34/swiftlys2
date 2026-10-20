@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Празно",
     "menu.selector.claim_left": "Л",
     "menu.selector.claim_right": "Д",
+    "menu.player_list.search_empty": "(всички играчи)",
+    "menu.player_list.search_hint": "Въведете име, #slot, SteamID или селектор като @ct в чата.",
+    "menu.component.waiting": "Изчакване...",
+    "menu.input.empty": "(празно)",
+    "menu.input.waiting_chat": "Изчакване на въвеждане в чата... (изберете отново за отказ)",
+    "menu.input.chat_hint": "Напишете отговора си в чата.",
+    "menu.choice.empty": "Няма",
+    "menu.player.unknown": "Неизвестно",
+    "menu.component.change_hint": "Наляво/надясно за промяна.",
     "permission.command.denied": "Нямате разрешение да използвате тази команда."
 }

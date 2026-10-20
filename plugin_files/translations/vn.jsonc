@@ -18,5 +18,14 @@
     "menu.selector.empty_value": "Trống",
     "menu.selector.claim_left": "T",
     "menu.selector.claim_right": "P",
+    "menu.player_list.search_empty": "(tất cả người chơi)",
+    "menu.player_list.search_hint": "Nhập tên, #slot, SteamID hoặc bộ chọn như @ct vào chat.",
+    "menu.component.waiting": "Đang chờ...",
+    "menu.input.empty": "(trống)",
+    "menu.input.waiting_chat": "Đang chờ nhập trong chat... (chọn lại để hủy)",
+    "menu.input.chat_hint": "Nhập câu trả lời của bạn trong chat.",
+    "menu.choice.empty": "N/A",
+    "menu.player.unknown": "Không rõ",
+    "menu.component.change_hint": "Trái/Phải để thay đổi.",
     "permission.command.denied": "Bạn không có quyền sử dụng lệnh này."
 }

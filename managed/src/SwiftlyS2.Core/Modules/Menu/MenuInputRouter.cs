@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared.Events;
+using SwiftlyS2.Core.Translations;
 using SwiftlyS2.Shared.Menu;
 
 namespace SwiftlyS2.Core.Menu;
@@ -35,7 +36,8 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
         var context = new MenuActionContext {
             Action = action,
             Key = key,
-            Session = session
+            Session = session,
+            Translate = GlobalLocalization.For(session.Player)
         };
 
         Dispatch(session, context);
@@ -62,7 +64,8 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
             Dispatch(session, new MenuActionContext {
                 Action = MenuActions.Close,
                 Key = MenuKey.None,
-                Session = session
+                Session = session,
+                Translate = GlobalLocalization.For(session.Player)
             });
 
             return true;
@@ -90,7 +93,8 @@ internal sealed class MenuInputRouter( MenuRuntime runtime, MenuSoundPlayer soun
         Dispatch(session, new MenuActionContext {
             Action = MenuActions.Select,
             Key = MenuKey.None,
-            Session = session
+            Session = session,
+            Translate = GlobalLocalization.For(session.Player)
         }, target);
 
         return true;
