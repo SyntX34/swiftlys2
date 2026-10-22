@@ -126,9 +126,9 @@ void ConsoleLogger::Initialize()
         }
     }
 
+    StopWorker();
     m_running = true;
     m_thread = std::thread(&ConsoleLogger::WorkerThread, this);
-    m_thread.detach();
 
     m_listenerId = g_pConsoleOutput->AddConsoleListener([this](const std::string& message) {
         QueueLockGuard lock(m_mutex);
@@ -147,8 +147,24 @@ void ConsoleLogger::Shutdown()
         m_listenerId = UINT64_MAX;
     }
 
-    m_running = false;
+    StopWorker();
     FlushQueue();
+}
+
+ConsoleLogger::~ConsoleLogger()
+{
+    StopWorker();
+}
+
+void ConsoleLogger::StopWorker()
+{
+    {
+        QueueLockGuard lock(m_mutex);
+        m_running = false;
+    }
+    m_cv.notify_all();
+    if (m_thread.joinable())
+        m_thread.join();
 }
 
 void ConsoleLogger::FlushQueue()
@@ -177,41 +193,47 @@ void ConsoleLogger::FlushQueue()
 
 void ConsoleLogger::WorkerThread()
 {
+    std::unique_lock<QueueMutex> lock(m_mutex);
     while (m_running)
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(m_writeIntervalMs));
+        m_cv.wait_for(lock, std::chrono::milliseconds(m_writeIntervalMs), [this] { return !m_running.load(); });
 
         std::queue<std::string> local;
+        std::swap(local, m_queue);
+        lock.unlock();
+
+        ProcessBatch(local);
+
+        lock.lock();
+    }
+}
+
+void ConsoleLogger::ProcessBatch(std::queue<std::string>& entries)
+{
+    if (entries.empty())
+        return;
+
+    std::string dayPath = GetDailyLogPath();
+    // Compare only the yyyy-MM-dd prefix (10 chars after m_logDir)
+    if (dayPath.compare(m_logDir.size(), 10, m_currentLogFile, m_logDir.size(), 10) != 0)
+        m_currentLogFile = dayPath;
+
+    if (m_currentLogFile.empty())
+        return;
+
+    WriteEntries(entries, m_currentLogFile);
+
+    if (m_rotationEnabled)
+    {
+        if (m_rotationMode == "file_count")
         {
-            QueueLockGuard lock(m_mutex);
-            std::swap(local, m_queue);
+            ApplyFileCountRotation(m_logDir);
+            if (m_managedEnabled) ApplyFileCountRotation(m_managedLogDir);
         }
-
-        if (local.empty())
-            continue;
-
-        std::string dayPath = GetDailyLogPath();
-        // Compare only the yyyy-MM-dd prefix (10 chars after m_logDir)
-        if (dayPath.compare(m_logDir.size(), 10, m_currentLogFile, m_logDir.size(), 10) != 0)
-            m_currentLogFile = dayPath;
-
-        if (m_currentLogFile.empty())
-            continue;
-
-        WriteEntries(local, m_currentLogFile);
-
-        if (m_rotationEnabled)
+        else if (m_rotationMode == "time_interval")
         {
-            if (m_rotationMode == "file_count")
-            {
-                ApplyFileCountRotation(m_logDir);
-                if (m_managedEnabled) ApplyFileCountRotation(m_managedLogDir);
-            }
-            else if (m_rotationMode == "time_interval")
-            {
-                ApplyTimeIntervalRotation(m_logDir);
-                if (m_managedEnabled) ApplyTimeIntervalRotation(m_managedLogDir);
-            }
+            ApplyTimeIntervalRotation(m_logDir);
+            if (m_managedEnabled) ApplyTimeIntervalRotation(m_managedLogDir);
         }
     }
 }

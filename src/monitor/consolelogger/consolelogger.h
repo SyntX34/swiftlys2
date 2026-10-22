@@ -22,6 +22,7 @@
 #include <atomic>
 #include <api/utils/mutex.h>
 
+#include <condition_variable>
 #include <cstdint>
 #include <queue>
 #include <string>
@@ -30,12 +31,16 @@
 class ConsoleLogger
 {
 public:
+    ~ConsoleLogger();
+
     void Initialize();
     void Shutdown();
     void FlushQueue();
 
 private:
     void        WorkerThread();
+    void        ProcessBatch(std::queue<std::string>& entries);
+    void        StopWorker();
     std::string GetDailyLogPath() const;
     void        ApplyFileCountRotation(const std::string& dir);
     void        ApplyTimeIntervalRotation(const std::string& dir);
@@ -43,6 +48,7 @@ private:
 
     std::queue<std::string>  m_queue;
     QueueMutex               m_mutex;
+    std::condition_variable_any m_cv;
     std::thread              m_thread;
     std::atomic<bool>        m_running{ false };
 
