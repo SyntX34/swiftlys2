@@ -55,8 +55,3 @@ bool InitGameSystem()
 
     return true;
 }
-
-bool ShutdownGameSystem()
-{
-    return true;
-}

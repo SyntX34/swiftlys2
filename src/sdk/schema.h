@@ -53,8 +53,6 @@ public:
 
 struct SchemaField
 {
-    bool m_bChainer;
-    bool m_bIsStruct;
     int32_t m_nChainerOffset;
     int32_t m_nStateChangedOffset;
     uint32_t m_uOffset;

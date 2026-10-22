@@ -23,7 +23,6 @@
 #include <game/shared/igamesystemfactory.h>
 
 bool InitGameSystem();
-bool ShutdownGameSystem();
 
 class CGameSystem : public CBaseGameSystem
 {

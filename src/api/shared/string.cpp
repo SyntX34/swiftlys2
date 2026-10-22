@@ -371,13 +371,6 @@ std::vector<std::string> TokenizeCommand(std::string cmd)
     return tokens;
 }
 
-void PrintTextTable(LogType type, std::string category, TextTable table)
-{
-    std::vector<std::string> rows = explode(TableToString(table), "\n");
-    for (int i = 0; i < rows.size() - 1; i++)
-        g_pLogger->Log(type, category, rows[i] + "\n");
-}
-
 std::string& rtrim(std::string& s, const char* t)
 {
     s.erase(s.find_last_not_of(t) + 1);

@@ -97,25 +97,16 @@ void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
 
     auto& fieldInfo = fieldData->second;
 
-    if (fieldInfo.m_nStateChangedOffset != -1)
-    {
+    if (fieldInfo.m_nStateChangedOffset != -1) {
         auto networkVar = reinterpret_cast<NetworkVar*>(pEntity);
         networkVar->StateChanged(fieldInfo.m_nStateChangedOffset, NetworkStateChangedData(fieldInfo.m_uOffset));
-    }
-
-    if (fieldInfo.m_bChainer) {
+    } else if (fieldInfo.m_nChainerOffset != -1) {
         CNetworkVarChainer* pChainer = (CNetworkVarChainer*)((uintptr_t)pEntity + fieldInfo.m_nChainerOffset);
 
         CEntityInstance* pEntity = pChainer->m_pEntity;
         if (pEntity != nullptr)
             pEntity->NetworkStateChanged(NetworkStateChangedData(fieldInfo.m_uOffset, -1, pChainer->m_PathIndex));
-    }
-    else if (fieldInfo.m_bIsStruct) {
-        // logger->Error("SDK", fmt::format("State changed is called on an unsupported field (hash={}), please report this to the developer.\n", uHash));
-        // NetworkStateChangedData data(fieldInfo.m_uOffset);
-        // CALL_VIRTUAL(void, WIN_LINUX(27, 28), pEntity, &data);
-    }
-    else {
+    } else {
         reinterpret_cast<CEntityInstance*>(pEntity)->NetworkStateChanged(NetworkStateChangedData(fieldInfo.m_uOffset));
     }
 }

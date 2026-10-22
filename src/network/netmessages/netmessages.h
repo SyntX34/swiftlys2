@@ -22,8 +22,7 @@
 #include <api/network/netmessages/netmessages.h>
 
 #include <api/utils/mutex.h>
-
-#include <unordered_set>
+#include <api/utils/bitvec.h>
 
  // ofc you need to stay here
 #include <public/engine/igameeventsystem.h>
@@ -41,7 +40,7 @@ public:
     virtual void SetServerMessageInternalSendHandler(std::function<int(int, int, void*)> handler) override;
 private:
     QueueMutex m_mtxRegisteredMessages;
-    std::unordered_set<int> m_registeredMessages[NetMessageHook_Count];
+    CBitVector<16385> m_registeredMessages[NetMessageHook_Count];
 };
 
 #endif

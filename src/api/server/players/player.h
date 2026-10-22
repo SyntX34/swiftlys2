@@ -109,7 +109,7 @@ public:
     /** Engine Stuff **/
     virtual std::string GetIPAddress() = 0;
     virtual void Kick(const std::string& sReason, int uReason) = 0;
-    virtual void SetListeningGameEvents(std::vector<uint32_t>& eventIDs) = 0;
+    virtual void SetListeningGameEvents(CBitVector<8192>& eventIDs) = 0;
     virtual bool IsListeningGameEvent(int eventID) = 0;
     virtual void SendGameEvent(IGameEvent* event) = 0;
 

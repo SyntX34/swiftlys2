@@ -445,18 +445,13 @@ uint64_t CPlayer::GetSessionID()
 bool CPlayer::IsListeningGameEvent(int eventID)
 {
     QueueLockGuard lock(m_listeningGameEventsMutex);
-    return m_listeningGameEvents.find(eventID) != m_listeningGameEvents.end();
+    return m_listeningGameEvents.IsBitSet(eventID);
 }
 
-void CPlayer::SetListeningGameEvents(std::vector<uint32_t>& eventIDs)
+void CPlayer::SetListeningGameEvents(CBitVector<8192>& eventIDs)
 {
     QueueLockGuard lock(m_listeningGameEventsMutex);
-
-    m_listeningGameEvents.clear();
-    for(int i = 0; i < eventIDs.size(); i++)
-        for(int j = 0; j < 32; j++)
-            if(eventIDs[i] & (1 << j))
-                m_listeningGameEvents.insert((i*32) + j);
+    m_listeningGameEvents.CopyFrom(eventIDs);
 }
 
 void CPlayer::SendGameEvent(IGameEvent* event)

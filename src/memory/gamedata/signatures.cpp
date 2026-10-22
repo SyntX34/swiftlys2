@@ -30,7 +30,7 @@
 
 #include <nlohmann/json.hpp>
 
-#include <fmt/format.h>
+#include <format>
 
 using json = nlohmann::json;
 
@@ -46,32 +46,32 @@ void GameDataSignatures::Load(const std::string& game)
 
             for (auto& [key, value] : signaturesJson.items()) {
                 if (!value.contains("lib")) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse signature '{}'.\nError: Couldn't find the field for Library. ('{}.lib')\n", key, key));
+                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Couldn't find the field for Library. ('{}.lib')\n", key, key));
                     continue;
                 }
 
                 if (!value["lib"].is_string()) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse signature '{}'.\nError: Library is not a string. ('{}.lib')\n", key, key));
+                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Library is not a string. ('{}.lib')\n", key, key));
                     continue;
                 }
 
                 if (!value.contains("windows")) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse signature '{}'.\nError: Couldn't find the signature field for Windows. ('{}.windows')\n", key, key));
+                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Couldn't find the signature field for Windows. ('{}.windows')\n", key, key));
                     continue;
                 }
 
                 if (!value["windows"].is_string()) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse signature '{}'.\nError: Windows signature is not a string. ('{}.windows')\n", key, key));
+                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Windows signature is not a string. ('{}.windows')\n", key, key));
                     continue;
                 }
 
                 if (!value.contains("linux")) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse signature '{}'.\nError: Couldn't find the signature field for Linux. ('{}.linux')\n", key, key));
+                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Couldn't find the signature field for Linux. ('{}.linux')\n", key, key));
                     continue;
                 }
 
                 if (!value["linux"].is_string()) {
-                    g_pLogger->Error("GameData", fmt::format("Failed to parse signature '{}'.\nError: Linux signature is not a string. ('{}.linux')\n", key, key));
+                    g_pLogger->Error("GameData", std::format("Failed to parse signature '{}'.\nError: Linux signature is not a string. ('{}.linux')\n", key, key));
                     continue;
                 }
 
@@ -84,7 +84,7 @@ void GameDataSignatures::Load(const std::string& game)
 
                 if (!sig)
                 {
-                    g_pLogger->Error("GameData", fmt::format("Couldn't find signature '{}'. (lib='{}')\n", key, lib));
+                    g_pLogger->Error("GameData", std::format("Couldn't find signature '{}'. (lib='{}')\n", key, lib));
                 }
                 else
                 {
@@ -93,12 +93,12 @@ void GameDataSignatures::Load(const std::string& game)
             }
         }
         catch (json::parse_error& e) {
-            g_pLogger->Error("GameData", fmt::format("Failed to parse file '{}'.\nError: {}.\n", file, e.what()));
+            g_pLogger->Error("GameData", std::format("Failed to parse file '{}'.\nError: {}.\n", file, e.what()));
             continue;
         }
     }
 
-    g_pLogger->Info("GameData", fmt::format("Loaded {} signatures.\n", m_mSignatures.size()));
+    g_pLogger->Info("GameData", std::format("Loaded {} signatures.\n", m_mSignatures.size()));
 }
 
 bool GameDataSignatures::Exists(const std::string& name)

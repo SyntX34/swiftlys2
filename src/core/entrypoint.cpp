@@ -254,7 +254,6 @@ bool SwiftlyCore::Unload()
     g_pPlayerManager->Shutdown();
     g_pEntSystem->Shutdown();
     g_pConvarManager->Shutdown();
-    ShutdownGameSystem();
 
     g_ConsoleLogger.Shutdown();
     g_pConsoleOutput->Shutdown();

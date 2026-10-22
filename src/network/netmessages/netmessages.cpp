@@ -49,8 +49,6 @@ VFunctionHook g_SendNetMessageHook(reinterpret_cast<void*>(SendNetMessage), "eng
 template <typename T>
 int DispatchClientUserMessage(int playerid, int messageid, const std::string& payload)
 {
-    static_assert(sizeof(CNetMessage) == 48);
-
     if (!g_pNetMessages->IsMessageRegistered(NetMessageHook_Client, messageid)) return 0;
 
     T innerMessage;
@@ -89,10 +87,10 @@ bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
     if(msgid == GE_Source1LegacyListenEvents)
     {
         CMsgSource1LegacyListenEvents* msg = (CMsgSource1LegacyListenEvents*)cMsg->AsProto();
-        std::vector<uint32_t> eventIDs = {};
+        CBitVector<8192> eventIDs = {};
         auto eventArrayBits = msg->mutable_eventarraybits();
         for(int i = 0; i < eventArrayBits->size(); i++)
-            eventIDs.push_back(eventArrayBits->Get(i));
+            eventIDs.SetDWord(i, eventArrayBits->Get(i));
         
         auto player = g_pPlayerManager->GetPlayer(playerid);
         if(player) player->SetListeningGameEvents(eventIDs);
@@ -161,7 +159,7 @@ void CNetMessages::RegisterMessageHook(NetMessageHookType type, int messageid)
     if (type < 0 || type >= NetMessageHook_Count) return;
 
     QueueLockGuard lock(m_mtxRegisteredMessages);
-    m_registeredMessages[type].insert(messageid);
+    m_registeredMessages[type].Set(messageid);
 }
 
 void CNetMessages::UnregisterMessageHook(NetMessageHookType type, int messageid)
@@ -169,7 +167,7 @@ void CNetMessages::UnregisterMessageHook(NetMessageHookType type, int messageid)
     if (type < 0 || type >= NetMessageHook_Count) return;
 
     QueueLockGuard lock(m_mtxRegisteredMessages);
-    m_registeredMessages[type].erase(messageid);
+    m_registeredMessages[type].Clear(messageid);
 }
 
 bool CNetMessages::IsMessageRegistered(NetMessageHookType type, int messageid)
@@ -177,7 +175,7 @@ bool CNetMessages::IsMessageRegistered(NetMessageHookType type, int messageid)
     if (type < 0 || type >= NetMessageHook_Count) return false;
 
     QueueLockGuard lock(m_mtxRegisteredMessages);
-    return m_registeredMessages[type].contains(messageid);
+    return m_registeredMessages[type].IsBitSet(messageid);
 }
 
 void CNetMessages::SetServerMessageSendHandler(std::function<int(uint64_t*, int, void*)> handler)
