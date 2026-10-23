@@ -112,11 +112,11 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
 
                 bool startsWithColor = (msg.at(0) == '[');
 
-                auto controller = GetController();
-                if (!controller)
+                auto team = GetTeam();
+                if (!team)
                     return;
 
-                msg = ProcessColor(message, *(int*)(g_pSDKSchema->GetPropPtr(controller, CBaseEntity_m_iTeamNum)));
+                msg = ProcessColor(message, *team);
 
                 if (startsWithColor)
                     msg = " " + msg;
@@ -271,6 +271,15 @@ void* CPlayer::GetController()
 
     CEntityInstance* controller = entitySystem->GetEntityInstance(CEntityIndex(m_iPlayerId + 1));
     return controller;
+}
+
+std::optional<int> CPlayer::GetTeam()
+{
+    void* controller = GetController();
+    if (!controller)
+        return std::nullopt;
+
+    return *static_cast<int*>(g_pSDKSchema->GetPropPtr(controller, CBaseEntity_m_iTeamNum));
 }
 
 void* CPlayer::GetPawn()

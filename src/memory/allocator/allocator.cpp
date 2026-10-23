@@ -61,7 +61,3 @@ void MemoryAllocator::Move(void* dest, void* src, uint64_t size)
 {
     memmove(dest, src, size);
 }
-
-MemoryAllocator::~MemoryAllocator()
-{
-}

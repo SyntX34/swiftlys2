@@ -54,6 +54,7 @@ public:
     virtual void* GetController() override;
     virtual void* GetPawn() override;
     virtual void* GetPlayerPawn() override;
+    virtual std::optional<int> GetTeam() override;
 
     virtual ListenOverride& GetListenOverride(int targetid) override;
     virtual VoiceFlagValue& GetVoiceFlags() override;

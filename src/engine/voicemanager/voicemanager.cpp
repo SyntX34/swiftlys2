@@ -22,6 +22,9 @@
 #include <api/interfaces/interfaces.h>
 #include <scripting/engine/events.h>
 
+#include <cstdio>
+#include <cstring>
+
 bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSender, bool bListen);
 void ClientCommandHook(void* _this, CPlayerSlot slot, const CCommand& args);
 void ClientVoiceHook(void* _this, CPlayerSlot slot);
@@ -30,55 +33,35 @@ VFunctionHook g_SetClientListeningHook(reinterpret_cast<void*>(SetClientListenin
 VFunctionHook g_ClientCommandHook(reinterpret_cast<void*>(ClientCommandHook), "server", "CSource2GameClients", "IServerGameClients::ClientCommand");
 VFunctionHook g_ClientVoiceHook(reinterpret_cast<void*>(ClientVoiceHook), "server", "CSource2GameClients", "IServerGameClients::ClientVoice");
 
-#define CBaseEntity_m_iTeamNum 0x9DC483B8A5BFEFB3
+bool ResolveListen(IPlayer* receiver, IPlayer* sender, int senderSlot, bool bListen)
+{
+    const VoiceFlagValue senderFlags = sender->GetVoiceFlags();
+    const VoiceFlagValue receiverFlags = receiver->GetVoiceFlags();
+    const ListenOverride listenOverride = receiver->GetListenOverride(senderSlot);
+
+    if (receiver->GetSelfMutes().Get(senderSlot) || (senderFlags & Speak_Muted) || listenOverride == Listen_Mute)
+        return false;
+
+    if (listenOverride == Listen_Hear || (senderFlags & Speak_All) || (receiverFlags & Speak_ListenAll))
+        return true;
+
+    if ((senderFlags & Speak_Team) || (receiverFlags & Speak_ListenTeam))
+    {
+        auto senderTeam = sender->GetTeam();
+        auto receiverTeam = receiver->GetTeam();
+        if (senderTeam && receiverTeam)
+            return *senderTeam == *receiverTeam;
+    }
+
+    return bListen;
+}
 
 bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSender, bool bListen)
 {
     IPlayer* receiver = g_pPlayerManager->GetPlayer(iReceiver.Get());
-    if (!receiver) return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
-
     IPlayer* sender = g_pPlayerManager->GetPlayer(iSender.Get());
-    if (!sender) return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
-
-    auto& listenOverride = receiver->GetListenOverride(iSender.Get());
-    auto& senderFlags = sender->GetVoiceFlags();
-    auto& receiverFlags = receiver->GetVoiceFlags();
-    auto& selfmutes = receiver->GetSelfMutes();
-
-    if (selfmutes.Get(iSender.Get()))
-    {
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, false);
-    }
-
-    if (senderFlags & VoiceFlagValue::Speak_Muted)
-    {
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, false);
-    }
-
-    if (listenOverride == ListenOverride::Listen_Mute)
-    {
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, false);
-    }
-    else if (listenOverride == ListenOverride::Listen_Hear)
-    {
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, true);
-    }
-
-    if ((senderFlags & VoiceFlagValue::Speak_All) || (receiverFlags & VoiceFlagValue::Speak_ListenAll))
-    {
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, true);
-    }
-
-    if ((senderFlags & VoiceFlagValue::Speak_Team) || (receiverFlags & VoiceFlagValue::Speak_ListenTeam))
-    {
-        auto senderController = sender->GetController();
-        auto receiverController = receiver->GetController();
-        if (!senderController || !receiverController)
-            return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
-
-        bListen = (*(int*)(g_pSDKSchema->GetPropPtr(senderController, CBaseEntity_m_iTeamNum))) == (*(int*)(g_pSDKSchema->GetPropPtr(receiverController, CBaseEntity_m_iTeamNum)));
-        return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
-    }
+    if (receiver && sender)
+        bListen = ResolveListen(receiver, sender, iSender.Get(), bListen);
 
     return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
 }
@@ -86,17 +69,14 @@ bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSen
 void ClientCommandHook(void* _this, CPlayerSlot slot, const CCommand& args)
 {
     IPlayer* receiver = g_pPlayerManager->GetPlayer(slot.Get());
-    if (!receiver) return reinterpret_cast<decltype(&ClientCommandHook)>(g_ClientCommandHook.GetOriginal())(_this, slot, args);
-
-    if (args.ArgC() > 1 && std::string(args.Arg(0)) == "vban")
+    if (receiver && args.ArgC() > 1 && std::strcmp(args.Arg(0), "vban") == 0)
     {
         uint32_t mask = 0;
         sscanf(args.Arg(1), "%x", &mask);
-        auto& selfmutes = receiver->GetSelfMutes();
-        selfmutes.SetDWord(0, mask);
+        receiver->GetSelfMutes().SetDWord(0, mask);
     }
 
-    return reinterpret_cast<decltype(&ClientCommandHook)>(g_ClientCommandHook.GetOriginal())(_this, slot, args);
+    reinterpret_cast<decltype(&ClientCommandHook)>(g_ClientCommandHook.GetOriginal())(_this, slot, args);
 }
 
 void ClientVoiceHook(void* _this, CPlayerSlot slot)
@@ -107,22 +87,18 @@ void ClientVoiceHook(void* _this, CPlayerSlot slot)
         g_pOnClientVoiceCallback(slot.Get());
 }
 
-void CVoiceManager::SetClientListenOverride(int playerid, int targetid, ListenOverride override)
+void CVoiceManager::SetClientListenOverride(int playerid, int targetid, ListenOverride value)
 {
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return;
-
-    auto& listenOverrider = player->GetListenOverride(targetid);
-    listenOverrider = override;
+    player->GetListenOverride(targetid) = value;
 }
 
 ListenOverride CVoiceManager::GetClientListenOverride(int playerid, int targetid)
 {
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return Listen_Default;
-
-    auto& listenOverrider = player->GetListenOverride(targetid);
-    return listenOverrider;
+    return player->GetListenOverride(targetid);
 }
 
 void CVoiceManager::SetClientVoiceFlags(int playerid, VoiceFlagValue flags)
@@ -130,15 +106,12 @@ void CVoiceManager::SetClientVoiceFlags(int playerid, VoiceFlagValue flags)
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return;
 
-    auto& voiceFlags = player->GetVoiceFlags();
-    voiceFlags = flags;
+    player->GetVoiceFlags() = flags;
 }
 
 VoiceFlagValue CVoiceManager::GetClientVoiceFlags(int playerid)
 {
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return Speak_Normal;
-
-    auto& voiceFlags = player->GetVoiceFlags();
-    return voiceFlags;
+    return player->GetVoiceFlags();
 }

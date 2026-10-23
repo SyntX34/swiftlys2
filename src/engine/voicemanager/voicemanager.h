@@ -26,12 +26,11 @@
 class CVoiceManager : public IVoiceManager
 {
 public:
+    void SetClientListenOverride(int playerid, int targetid, ListenOverride value) override;
+    ListenOverride GetClientListenOverride(int playerid, int targetid) override;
 
-    virtual void SetClientListenOverride(int playerid, int targetid, ListenOverride override) override;
-    virtual ListenOverride GetClientListenOverride(int playerid, int targetid) override;
-
-    virtual void SetClientVoiceFlags(int playerid, VoiceFlagValue flags) override;
-    virtual VoiceFlagValue GetClientVoiceFlags(int playerid) override;
+    void SetClientVoiceFlags(int playerid, VoiceFlagValue flags) override;
+    VoiceFlagValue GetClientVoiceFlags(int playerid) override;
 };
 
 #endif
