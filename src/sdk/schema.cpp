@@ -35,6 +35,7 @@
 #define CBaseEntity_m_nSubclassID 0x9DC483B8C02CE796
 
 std::unordered_map<uint64_t, SchemaField, FNV1aHasher64> offsets;
+std::unordered_map<void*, int32_t> networkVarStateChangedOffsets;
 
 class CNetworkVarChainer
 {
@@ -54,6 +55,9 @@ private:
 void CSDKSchema::Load()
 {
     g_pLogger->Info("SDK", "Loading SDK classes and network var vtables...\n");
+
+    offsets.clear();
+    networkVarStateChangedOffsets.clear();
 
     auto gts = g_pGameSchemaSystem->GlobalTypeScope();
 
@@ -98,15 +102,30 @@ void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
     auto& fieldInfo = fieldData->second;
 
     if (fieldInfo.m_nStateChangedOffset != -1) {
-        auto networkVar = reinterpret_cast<NetworkVar*>(pEntity);
-        networkVar->StateChanged(fieldInfo.m_nStateChangedOffset, NetworkStateChangedData(fieldInfo.m_uOffset));
-    } else if (fieldInfo.m_nChainerOffset != -1) {
+        // This slot belongs to the embedded field's vtable. Its thunk adds the
+        // field offset when forwarding the notification to its enclosing object.
+        auto networkVar = reinterpret_cast<NetworkVar*>((uintptr_t)pEntity + fieldInfo.m_uOffset);
+        networkVar->StateChanged(fieldInfo.m_nStateChangedOffset, NetworkStateChangedData(uint32_t(0)));
+        return;
+    }
+
+    if (fieldInfo.m_bHasVtable) {
+        // A nested schema handle can itself point at a NetworkVar subclass,
+        // e.g. fogparams_t inside CFogController. Use its actual runtime vtable.
+        auto stateChanged = networkVarStateChangedOffsets.find(*reinterpret_cast<void**>(pEntity));
+        if (stateChanged != networkVarStateChangedOffsets.end()) {
+            reinterpret_cast<NetworkVar*>(pEntity)->StateChanged(stateChanged->second, NetworkStateChangedData(fieldInfo.m_uOffset));
+            return;
+        }
+    }
+
+    if (fieldInfo.m_nChainerOffset != -1) {
         CNetworkVarChainer* pChainer = (CNetworkVarChainer*)((uintptr_t)pEntity + fieldInfo.m_nChainerOffset);
 
         CEntityInstance* pEntity = pChainer->m_pEntity;
         if (pEntity != nullptr)
             pEntity->NetworkStateChanged(NetworkStateChangedData(fieldInfo.m_uOffset, -1, pChainer->m_PathIndex));
-    } else {
+    } else if (!fieldInfo.m_bIsStruct) {
         reinterpret_cast<CEntityInstance*>(pEntity)->NetworkStateChanged(NetworkStateChangedData(fieldInfo.m_uOffset));
     }
 }
