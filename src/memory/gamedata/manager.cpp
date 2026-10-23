@@ -40,7 +40,8 @@ void ForEachGameDataEntry(const std::string& game, const std::string& suffix, co
         if (!ends_with(file, suffix)) continue;
 
         try {
-            for (auto& [key, value] : parseJsonc(Files::Read(file)).items())
+            auto entries = parseJsonc(Files::Read(file));
+            for (auto& [key, value] : entries.items())
                 callback(key, value);
         }
         catch (const nlohmann::json::exception& e) {
