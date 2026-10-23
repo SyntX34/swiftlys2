@@ -68,7 +68,7 @@ void CPlayer::Initialize(int playerid)
 
     m_uConnectedTimeStart = std::chrono::high_resolution_clock::now();
     m_uSessionId = sessionId++;
-    centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status");
+    centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status", true);
 }
 
 void CPlayer::Shutdown()
@@ -371,7 +371,7 @@ void CPlayer::Think()
     else
     {
         if(!centerMessageEvent)
-            centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status");
+            centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status", true);
             
         centerMessageEvent->SetString("loc_token", (showMenu ? menuText : centerMessageText).c_str());
         centerMessageEvent->SetInt("duration", 1);
