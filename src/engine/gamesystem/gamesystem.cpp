@@ -20,9 +20,9 @@
 #include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
+#include <scripting/engine/events.h>
 
 CBaseGameSystemFactory** CBaseGameSystemFactory::sm_pFirst = nullptr;
-extern void* g_pOnPrecacheResourceCallback;
 
 void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* msg);
 VFunctionHook g_BuildGameSessionManifestHook(reinterpret_cast<void*>(BuildGameSessionManifestHook), "server", "CGameRulesGameSystem", "IGameSystem::BuildGameSessionManifest");
@@ -32,7 +32,7 @@ void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* 
     reinterpret_cast<decltype(&BuildGameSessionManifestHook)>(g_BuildGameSessionManifestHook.GetOriginal())(_this, msg);
 
     IEntityResourceManifest* pResourceManifest = msg->m_pResourceManifest;
-    if (g_pOnPrecacheResourceCallback) reinterpret_cast<void(*)(void*)>(g_pOnPrecacheResourceCallback)(pResourceManifest);
+    if (g_pOnPrecacheResourceCallback) g_pOnPrecacheResourceCallback(pResourceManifest);
 }
 
 bool InitGameSystem()

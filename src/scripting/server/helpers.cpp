@@ -23,14 +23,7 @@ char* Bridge_ServerHelpers_GetServerLanguage(int* size)
 {
     std::string s = std::get<std::string>(g_pConfiguration->GetValue("core.Language"));
 
-    int sz = s.size();
-    *size = sz;
-    char* out = (char*)g_pMemoryAllocator->Alloc(sz + 1);
-
-    g_pMemoryAllocator->Copy(out, (void*)s.c_str(), sz);
-    out[sz] = '\0';
-
-    return out;
+    return Bridge_CopyString(s, size);
 }
 
 bool Bridge_ServerHelpers_UsePlayerLanguage()

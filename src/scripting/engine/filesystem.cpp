@@ -19,28 +19,13 @@
 #include <scripting/scripting.h>
 #include <api/interfaces/interfaces.h>
 
-static char* Bridge_FileSystem_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    if (outSize > 0)
-    {
-        g_pMemoryAllocator->Copy(out, (void*)value.data(), outSize);
-    }
-
-    out[outSize] = '\0';
-    return out;
-}
-
 char* Bridge_FileSystem_GetSearchPath(int* size, char* pathId, int32_t searchPathType, int32_t searchPathsToGet)
 {
     CBufferStringGrowable<MAX_PATH> searchPath;
     g_pGameFileSystem->GetSearchPath(pathId, (GetSearchPathTypes_t)searchPathType, searchPath, searchPathsToGet);
 
     std::string result = searchPath.Get();
-    return Bridge_FileSystem_CopyString(result, size);
+    return Bridge_CopyString(result, size);
 }
 
 bool Bridge_FileSystem_FileExists(char* fileName, char* pathId)
@@ -75,7 +60,7 @@ char* Bridge_FileSystem_ReadFile(int* size, char* fileName, char* pathId)
     int fileSize = g_pGameFileSystem->Size(fileName, pathId);
     if (fileSize <= 0)
     {
-        return Bridge_FileSystem_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     buf.EnsureCapacity(fileSize);
@@ -84,11 +69,11 @@ char* Bridge_FileSystem_ReadFile(int* size, char* fileName, char* pathId)
 
     if (!success)
     {
-        return Bridge_FileSystem_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     std::string result((const char*)buf.Base(), fileSize);
-    return Bridge_FileSystem_CopyString(result, size);
+    return Bridge_CopyString(result, size);
 }
 
 bool Bridge_FileSystem_WriteFile(char* fileName, char* pathId, char* inputBuffer)

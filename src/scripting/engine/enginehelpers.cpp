@@ -42,18 +42,6 @@ struct CBaseGameSystemFactory_t : public IGameSystemFactory {
     void** reallocating_ptr;
 };
 
-static char* Bridge_EngineHelpers_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-
-    return out;
-}
-
 bool Bridge_EngineHelpers_IsMapValid(const char* map_name)
 {
     if (!map_name) return false;
@@ -101,20 +89,20 @@ void Bridge_EngineHelpers_SendMessageToConsole(const char* message)
 char* Bridge_EngineHelpers_GetGameDirectoryPath(int* size)
 {
     std::string s = Plat_GetGameDirectory();
-    return Bridge_EngineHelpers_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 char* Bridge_EngineHelpers_GetCurrentGame(int* size)
 {
     std::string s = g_SwiftlyCore.GetCurrentGame();
-    return Bridge_EngineHelpers_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 char* Bridge_EngineHelpers_GetNativeVersion(int* size)
 {
     std::string s = g_SwiftlyCore.GetVersion();
 
-    return Bridge_EngineHelpers_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 char* Bridge_EngineHelpers_GetMenuSettings(int* size)
@@ -145,7 +133,7 @@ char* Bridge_EngineHelpers_GetMenuSettings(int* size)
         printf("Exception: %s\n", e.what());
     }
 
-    return Bridge_EngineHelpers_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 void* Bridge_EngineHelpers_GetGlobalVars()
@@ -163,7 +151,7 @@ char* Bridge_EngineHelpers_GetIP(int* size)
     auto& addr = g_pGameNetworkSystem->GetPublicAdr();
     std::string s = fmt::format("{}.{}.{}.{}", addr.ip[0], addr.ip[1], addr.ip[2], addr.ip[3]);
 
-    return Bridge_EngineHelpers_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 extern std::string workshop_map;
@@ -172,7 +160,7 @@ extern std::mutex g_qmMapLoadQueue;
 char* Bridge_EngineHelpers_GetWorkshopId(int* size)
 {
     std::lock_guard<std::mutex> lock(g_qmMapLoadQueue);
-    return Bridge_EngineHelpers_CopyString(workshop_map, size);
+    return Bridge_CopyString(workshop_map, size);
 }
 
 void Bridge_EngineHelpers_DispatchParticleEffect(const char* particleName, uint attachmentType, void* entity, byte attachmentPoint, const char* attachmentName, bool resetAllParticlesOnEntity, int splitScreenSlot, uint64_t filtermask)

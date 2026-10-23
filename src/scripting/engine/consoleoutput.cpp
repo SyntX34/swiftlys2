@@ -21,21 +21,12 @@
 
 #include <api/shared/string.h>
 
-static char* Bridge_ConsoleOutput_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
+typedef void (*ConsoleListenerCallback)(const char*);
 
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
-uint64_t Bridge_ConsoleOutput_AddConsoleListener(void* callback)
+uint64_t Bridge_ConsoleOutput_AddConsoleListener(ConsoleListenerCallback callback)
 {
     return g_pConsoleOutput->AddConsoleListener([callback](const std::string& text) {
-        reinterpret_cast<void(*)(const char*)>(callback)(text.c_str());
+        callback(text.c_str());
         });
 }
 
@@ -73,7 +64,7 @@ char* Bridge_ConsoleOutput_GetCounterText(int* size)
 {
     std::string counterText = g_pConsoleOutput->GetCounterText();
 
-    return Bridge_ConsoleOutput_CopyString(counterText, size);
+    return Bridge_CopyString(counterText, size);
 }
 
 DEFINE_NATIVE("ConsoleOutput.AddConsoleListener", Bridge_ConsoleOutput_AddConsoleListener);

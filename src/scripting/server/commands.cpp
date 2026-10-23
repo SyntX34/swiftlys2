@@ -21,19 +21,23 @@
 
 #include <api/shared/string.h>
 
+typedef void (*CommandCallback)(const char*, int, const char*, const char*, const char*, uint8_t);
+typedef int (*ClientCommandCallback)(int, const char*);
+typedef int (*ClientChatCallback)(int, const char*, uint8_t);
+
 uint64_t Bridge_Commands_RegisterCommand(const char* commandName, bool registerRaw, const char* helpText)
 {
     return g_pServerCommands->RegisterCommand(commandName, registerRaw, helpText);
 }
 
-void Bridge_Commands_SetCommandHandler(void* callback)
+void Bridge_Commands_SetCommandHandler(CommandCallback callback)
 {
     g_pServerCommands->SetCommandHandler(
         [callback](const std::string& commandName, int playerid, const std::vector<std::string>& args, const std::string& originalCommandName, const std::string& selectedPrefix, bool isSilentCommand) -> void
         {
             std::string imploded_args = implode(args, "\x01");
 
-            reinterpret_cast<void (*)(const char*, int, const char*, const char*, const char*, uint8_t)>(callback)(commandName.c_str(), playerid, imploded_args.c_str(), originalCommandName.c_str(), selectedPrefix.c_str(), isSilentCommand ? 1 : 0);
+            callback(commandName.c_str(), playerid, imploded_args.c_str(), originalCommandName.c_str(), selectedPrefix.c_str(), isSilentCommand ? 1 : 0);
         });
 }
 
@@ -57,7 +61,7 @@ void Bridge_Commands_UnregisterAlias(uint64_t callbackID)
     g_pServerCommands->UnregisterAlias(callbackID);
 }
 
-void Bridge_Commands_SetClientCommandHandler(void* callback)
+void Bridge_Commands_SetClientCommandHandler(ClientCommandCallback callback)
 {
     if (!callback)
     {
@@ -66,11 +70,11 @@ void Bridge_Commands_SetClientCommandHandler(void* callback)
     }
 
     g_pServerCommands->SetClientCommandHandler([callback](int playerid, const char* command) -> int {
-        return reinterpret_cast<int (*)(int, const char*)>(callback)(playerid, command);
+        return callback(playerid, command);
         });
 }
 
-void Bridge_Commands_SetClientChatHandler(void* callback)
+void Bridge_Commands_SetClientChatHandler(ClientChatCallback callback)
 {
     if (!callback)
     {
@@ -79,7 +83,7 @@ void Bridge_Commands_SetClientChatHandler(void* callback)
     }
 
     g_pServerCommands->SetClientChatHandler([callback](int playerid, const std::string& text, bool teamonly) -> int {
-        return reinterpret_cast<int (*)(int, const char*, uint8_t)>(callback)(playerid, text.c_str(), teamonly ? 1 : 0);
+        return callback(playerid, text.c_str(), teamonly ? 1 : 0);
         });
 }
 

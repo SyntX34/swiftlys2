@@ -20,6 +20,7 @@
 #include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
+#include <scripting/engine/events.h>
 
 bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSender, bool bListen);
 void ClientCommandHook(void* _this, CPlayerSlot slot, const CCommand& args);
@@ -98,14 +99,12 @@ void ClientCommandHook(void* _this, CPlayerSlot slot, const CCommand& args)
     return reinterpret_cast<decltype(&ClientCommandHook)>(g_ClientCommandHook.GetOriginal())(_this, slot, args);
 }
 
-extern void* g_pOnClientVoiceCallback;
-
 void ClientVoiceHook(void* _this, CPlayerSlot slot)
 {
     reinterpret_cast<decltype(&ClientVoiceHook)>(g_ClientVoiceHook.GetOriginal())(_this, slot);
 
     if (g_pOnClientVoiceCallback != nullptr)
-        reinterpret_cast<void(*)(int)>(g_pOnClientVoiceCallback)(slot.Get());
+        g_pOnClientVoiceCallback(slot.Get());
 }
 
 void CVoiceManager::SetClientListenOverride(int playerid, int targetid, ListenOverride override)

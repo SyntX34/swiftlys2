@@ -21,17 +21,6 @@
 #include <scripting/scripting.h>
 #include <sstream>
 
-static char* Bridge_StringTable_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
 INetworkStringTable* Bridge_StringTable_ContainerFindTable(const char* tableName)
 {
     return g_pGameNetworkStringTableContainer->FindTable(tableName);
@@ -51,11 +40,11 @@ char* Bridge_StringTable_GetTableName(int* size, INetworkStringTable* table)
 {
     if (!table)
     {
-        return Bridge_StringTable_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     std::string s = table->GetTableName();
-    return Bridge_StringTable_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 int Bridge_StringTable_GetNumStrings(INetworkStringTable* table)
@@ -77,17 +66,17 @@ char* Bridge_StringTable_GetString(int* size, INetworkStringTable* table, int in
 {
     if (!table)
     {
-        return Bridge_StringTable_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     auto ptr = table->GetString(index);
     if (!ptr)
     {
-        return Bridge_StringTable_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     std::string s = ptr;
-    return Bridge_StringTable_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 const void* Bridge_StringTable_GetStringUserData(INetworkStringTable* table, int index)

@@ -58,6 +58,7 @@
 #include <cstdlib>
 
 #include <monitor/consolelogger/consolelogger.h>
+#include <scripting/engine/events.h>
 
 SwiftlyCore g_SwiftlyCore;
 std::thread::id g_mainThreadId;
@@ -302,16 +303,13 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
     return ret;
 }
 
-extern void* g_pOnMapLoadCallback;
-extern void* g_pOnMapUnloadCallback;
-
 void SwiftlyCore::OnMapLoad(std::string map_name)
 {
     current_map = map_name;
 
     if (g_pOnMapLoadCallback)
     {
-        reinterpret_cast<void (*)(const char*)>(g_pOnMapLoadCallback)(map_name.c_str());
+        g_pOnMapLoadCallback(map_name.c_str());
     }
 }
 
@@ -319,7 +317,7 @@ void SwiftlyCore::OnMapUnload()
 {
     if (g_pOnMapUnloadCallback)
     {
-        reinterpret_cast<void (*)(const char*)>(g_pOnMapUnloadCallback)(current_map.c_str());
+        g_pOnMapUnloadCallback(current_map.c_str());
     }
 
     current_map = "";

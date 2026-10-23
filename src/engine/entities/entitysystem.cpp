@@ -29,10 +29,9 @@
 #include "listener.h"
 
 #include <api/interfaces/interfaces.h>
+#include <scripting/engine/events.h>
 
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
-
-extern void* g_pOnStartupServerCallback;
 
 bool g_bDone = false;
 
@@ -64,9 +63,7 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
     }
 
     if (g_pOnStartupServerCallback)
-    {
-        reinterpret_cast<void(*)()>(g_pOnStartupServerCallback)();
-    }
+        g_pOnStartupServerCallback();
 }
 
 void CEntSystem::AddEntityListener(IEntityListener* listener)

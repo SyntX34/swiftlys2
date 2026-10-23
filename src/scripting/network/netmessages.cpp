@@ -28,6 +28,9 @@
 #undef GetMessage
 #endif
 
+typedef int (*ServerNetMessageCallback)(uint64_t*, int, void*);
+typedef int (*NetMessageCallback)(int, int, void*);
+
 #define GETCHECK_FIELD(return_value)                                                                                                                                                                                                                           \
     if (!msg)                                                                                                                                                                                                                                                  \
         return return_value;                                                                                                                                                                                                                                   \
@@ -83,17 +86,6 @@
     {                                                                                                                                                                                                                                                          \
         return return_value;                                                                                                                                                                                                                                   \
     }
-
-static char* Bridge_NetMessages_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
 
 void* Bridge_NetMessages_AllocateNetMessageByID(int msgid)
 {
@@ -421,11 +413,11 @@ char* Bridge_NetMessages_GetString(int* size, void* pmsg, const char* fieldName,
 
     const FieldDescriptor* field = FindField(msg, fieldName, index);
     if (!field || field->cpp_type() != FieldDescriptor::CPPTYPE_STRING)
-        return Bridge_NetMessages_CopyString("", size);
+        return Bridge_CopyString("", size);
 
     const google::protobuf::Reflection* reflection = msg->GetReflection();
     std::string s = index >= 0 ? reflection->GetRepeatedString(*msg, field, index) : reflection->GetString(*msg, field);
-    return Bridge_NetMessages_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 void Bridge_NetMessages_SetString(void* pmsg, const char* fieldName, int index, const char* value)
@@ -601,24 +593,24 @@ void Bridge_NetMessages_UnregisterMessageHook(int hookType, int messageid)
     g_pNetMessages->UnregisterMessageHook((NetMessageHookType)hookType, messageid);
 }
 
-void Bridge_NetMessages_SetNetMessageServerHook(void* callback_ptr)
+void Bridge_NetMessages_SetNetMessageServerHook(ServerNetMessageCallback callback_ptr)
 {
     g_pNetMessages->SetServerMessageSendHandler([callback_ptr](uint64_t* clients, int messageid, void* msg) {
-        return ((int (*)(uint64_t*, int, void*))callback_ptr)(clients, messageid, msg);
+        return callback_ptr(clients, messageid, msg);
         });
 }
 
-void Bridge_NetMessages_SetNetMessageClientHook(void* callback_ptr)
+void Bridge_NetMessages_SetNetMessageClientHook(NetMessageCallback callback_ptr)
 {
     g_pNetMessages->SetClientMessageSendHandler([callback_ptr](int playerid, int messageid, void* msg) {
-        return ((int (*)(int, int, void*))callback_ptr)(playerid, messageid, msg);
+        return callback_ptr(playerid, messageid, msg);
         });
 }
 
-void Bridge_NetMessages_SetNetMessageServerHookInternal(void* callback_ptr)
+void Bridge_NetMessages_SetNetMessageServerHookInternal(NetMessageCallback callback_ptr)
 {
     g_pNetMessages->SetServerMessageInternalSendHandler([callback_ptr](int playerid, int messageid, void* msg) {
-        return ((int (*)(int, int, void*))callback_ptr)(playerid, messageid, msg);
+        return callback_ptr(playerid, messageid, msg);
         });
 }
 

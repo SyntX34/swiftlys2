@@ -22,17 +22,6 @@
 
 #include <memory/gamedata/manager.h>
 
-static char* Bridge_MemoryHelpers_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
 void* Bridge_MemoryHelpers_FetchInterfaceByName(const char* iface_name)
 {
     return g_SwiftlyCore.GetInterface(iface_name);
@@ -87,10 +76,10 @@ char* Bridge_MemoryHelpers_GetObjectPtrVtableName(int* size, void* objptr)
     int ret = g_pS2BinLib->GetObjectPtrVtableName(objptr, buffer, sizeof(buffer));
     if (ret != 0)
     {
-        return Bridge_MemoryHelpers_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
-    return Bridge_MemoryHelpers_CopyString(buffer, size);
+    return Bridge_CopyString(buffer, size);
 }
 
 bool Bridge_MemoryHelpers_ObjectPtrHasVtable(void* objptr)

@@ -24,17 +24,6 @@
 
 #include <string>
 
-static char* Scripting_CommandLine_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
 bool Scripting_CommandLine_HasParameter(const char* param)
 {
     ICommandLine* cmdLine = CommandLine();
@@ -57,12 +46,12 @@ char* Scripting_CommandLine_GetParameterValueString(int* size, const char* param
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine)
     {
-        return Scripting_CommandLine_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     CUtlStringToken token(param);
     std::string s = cmdLine->ParmValue(token, defaultValue);
-    return Scripting_CommandLine_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 int Scripting_CommandLine_GetParameterValueInt(const char* param, int defaultValue)
@@ -88,11 +77,11 @@ char* Scripting_CommandLine_GetCommandLine(int* size)
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine)
     {
-        return Scripting_CommandLine_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     std::string s = cmdLine->GetCmdLine();
-    return Scripting_CommandLine_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 bool Scripting_CommandLine_HasParameters()

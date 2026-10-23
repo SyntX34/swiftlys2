@@ -21,17 +21,6 @@
 
 #include <nlohmann/json.hpp>
 
-static char* Bridge_Extensions_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
 char* Bridge_Extensions_GetExtensions(int* size)
 {
     nlohmann::json result = nlohmann::json::array();
@@ -48,7 +37,7 @@ char* Bridge_Extensions_GetExtensions(int* size)
         });
     }
 
-    return Bridge_Extensions_CopyString(result.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace), size);
+    return Bridge_CopyString(result.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace), size);
 }
 
 bool Bridge_Extensions_Load(const char* id)

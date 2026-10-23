@@ -21,32 +21,28 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/plat.h>
+#include <scripting/engine/events.h>
 
 #define CCSGameRulesProxy_m_pGameRules 0x242D3ADB925C1F40
 
 CEntityListener g_entityListener;
 
-extern void* g_pOnEntityCreatedCallback;
-extern void* g_pOnEntityDeletedCallback;
-extern void* g_pOnEntityParentChangedCallback;
-extern void* g_pOnEntitySpawnedCallback;
-
 void CEntityListener::OnEntitySpawned(CEntityInstance* pEntity)
 {
     if (g_pOnEntitySpawnedCallback)
-        reinterpret_cast<void(*)(void*)>(g_pOnEntitySpawnedCallback)(pEntity);
+        g_pOnEntitySpawnedCallback(pEntity);
 }
 
 void CEntityListener::OnEntityParentChanged(CEntityInstance* pEntity, CEntityInstance* pNewParent)
 {
     if (g_pOnEntityParentChangedCallback)
-        reinterpret_cast<void(*)(void*, void*)>(g_pOnEntityParentChangedCallback)(pEntity, pNewParent);
+        g_pOnEntityParentChangedCallback(pEntity, pNewParent);
 }
 
 void CEntityListener::OnEntityCreated(CEntityInstance* pEntity)
 {
     if (g_pOnEntityCreatedCallback)
-        reinterpret_cast<void(*)(void*)>(g_pOnEntityCreatedCallback)(pEntity);
+        g_pOnEntityCreatedCallback(pEntity);
 }
 
 void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
@@ -64,5 +60,5 @@ void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
     }
 
     if (g_pOnEntityDeletedCallback)
-        reinterpret_cast<void(*)(void*)>(g_pOnEntityDeletedCallback)(pEntity);
+        g_pOnEntityDeletedCallback(pEntity);
 }

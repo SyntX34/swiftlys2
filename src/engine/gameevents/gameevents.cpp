@@ -30,6 +30,7 @@
 #include <public/tier1/KeyValues.h>
 
 #include <fmt/format.h>
+#include <scripting/engine/events.h>
 
 GameEventFireHandler g_fnEventFireHandler;
 GameEventFireHandler g_fnPostEventFireHandler;
@@ -63,14 +64,13 @@ void CEventManager::Initialize()
     QueueListener("player_spawn");
 }
 
-extern void* g_pOnPreworldUpdateCallback;
 
 void PreworldUpdateHook(void* _this, bool simulate)
 {
     reinterpret_cast<decltype(&PreworldUpdateHook)>(g_PreworldUpdateHook.GetOriginal())(_this, simulate);
 
     if (g_pOnPreworldUpdateCallback)
-        reinterpret_cast<void(*)(bool)>(g_pOnPreworldUpdateCallback)(simulate);
+        g_pOnPreworldUpdateCallback(simulate);
 }
 
 bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast)

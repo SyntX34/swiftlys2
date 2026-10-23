@@ -26,17 +26,6 @@
 
 #include <scripting/scripting.h>
 
-static char* Bridge_GameEvents_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
 enum GameEventValueKind
 {
     GameEventValueKind_Bool,
@@ -120,11 +109,11 @@ char* Bridge_GameEvents_GetString(int* size, void* event, const char* key)
 {
     if (!event)
     {
-        return Bridge_GameEvents_CopyString("", size);
+        return Bridge_CopyString("", size);
     }
 
     std::string s = ((IGameEvent*)event)->GetString(key);
-    return Bridge_GameEvents_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 void Bridge_GameEvents_SetString(void* event, const char* key, const char* value)

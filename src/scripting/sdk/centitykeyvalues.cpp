@@ -22,17 +22,6 @@
 #include <public/entity2/entitykeyvalues.h>
 #include <public/tier1/utlstringtoken.h>
 
-static char* Bridge_CEntityKeyValues_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
 void* Bridge_CEntityKeyValues_Allocate()
 {
     CEntityKeyValues* kv = new CEntityKeyValues();
@@ -110,7 +99,7 @@ void Bridge_CEntityKeyValues_SetValue(void* keyvalues, const char* keyName, int 
 char* Bridge_CEntityKeyValues_GetString(int* size, void* keyvalues, const char* keyName)
 {
     std::string s = ((CEntityKeyValues*)keyvalues)->GetString(keyName);
-    return Bridge_CEntityKeyValues_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 void Bridge_CEntityKeyValues_SetString(void* keyvalues, const char* keyName, const char* value)

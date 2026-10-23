@@ -22,17 +22,6 @@
 #include <api/memory/virtual/call.h>
 #include <api/sdk/serversideclient.h>
 
-static char* Bridge_Player_CopyString(const std::string& value, int* size)
-{
-    int outSize = static_cast<int>(value.size());
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    g_pMemoryAllocator->Copy(out, (void*)value.c_str(), outSize);
-    out[outSize] = '\0';
-    return out;
-}
-
 void Bridge_Player_SendMessage(int playerid, int kind, const char* message, int duration)
 {
     auto player = g_pPlayerManager->GetPlayer(playerid);
@@ -91,11 +80,11 @@ char* Bridge_Player_GetIPAddress(int* size, int playerid)
 {
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
-        return Bridge_Player_CopyString("", size);
+        return Bridge_CopyString("", size);
 
     std::string s = player->GetIPAddress();
 
-    return Bridge_Player_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 void Bridge_Player_Kick(int playerid, const char* reason, int gamereason)
@@ -150,10 +139,10 @@ char* Bridge_Player_GetLanguage(int* size, int playerid)
 {
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
-        return Bridge_Player_CopyString("", size);
+        return Bridge_CopyString("", size);
 
     std::string s = player->GetLanguage();
-    return Bridge_Player_CopyString(s, size);
+    return Bridge_CopyString(s, size);
 }
 
 void Bridge_Player_SetCenterMenuRender(int playerid, const char* text)
@@ -232,10 +221,10 @@ char* Bridge_Player_GetClientConvarValue(int* size, int playerid, const char* co
 {
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
-        return Bridge_Player_CopyString("", size);
+        return Bridge_CopyString("", size);
 
     auto value = g_pGameEngine->GetClientConVarValue(CPlayerSlot(playerid), convarName);
-    return Bridge_Player_CopyString(value, size);
+    return Bridge_CopyString(value, size);
 }
 
 CServerSideClient* GetServerSideClient(int playerid);

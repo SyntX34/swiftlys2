@@ -33,6 +33,7 @@
 #include <public/networksystem/inetworkmessages.h>
 #include <public/networksystem/netmessage.h>
 #include "usermessages.pb.h"
+#include <scripting/engine/events.h>
 
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last);
 
@@ -63,8 +64,6 @@ void CPlayerManager::Shutdown()
 
 }
 
-extern void* g_pOnClientPutInServerCallback;
-
 void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid)
 {
     reinterpret_cast<decltype(&OnClientPutInServerHook)>(g_ClientPutInServerHook.GetOriginal())(_this, slot, pszName, type, xuid);
@@ -82,7 +81,7 @@ void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName,
     }
 
     if (g_pOnClientPutInServerCallback)
-        reinterpret_cast<void (*)(int, int)>(g_pOnClientPutInServerCallback)(slot.Get(), type);
+        g_pOnClientPutInServerCallback(slot.Get(), type);
 }
 
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities)
@@ -110,14 +109,12 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
     }
 }
 
-extern void* g_pOnGameTickCallback;
-
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last)
 {
     reinterpret_cast<decltype(&OnGameFramePlayerHook)>(g_OnGameFramePlayerHook.GetOriginal())(_this, simulate, first, last);
 
     if (g_pOnGameTickCallback)
-        reinterpret_cast<void (*)(bool, bool, bool)>(g_pOnGameTickCallback)(simulate, first, last);
+        g_pOnGameTickCallback(simulate, first, last);
 
     for (int i = 0; i < 64; i++)
     {
@@ -127,8 +124,6 @@ void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last)
 
     g_pCrashReporter->OnTick();
 }
-
-extern void* g_pOnClientConnectCallback;
 
 bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, bool unk1, CBufferString* pRejectReason)
 {
@@ -144,7 +139,7 @@ bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint6
 
     if (g_pOnClientConnectCallback)
     {
-        if (reinterpret_cast<bool (*)(int)>(g_pOnClientConnectCallback)(playerid) == false)
+        if (g_pOnClientConnectCallback(playerid) == false)
         {
             g_pPlayerManager->UnregisterPlayer(playerid);
             return false;
@@ -165,7 +160,7 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
 
         if (g_pOnClientConnectCallback)
         {
-            if (reinterpret_cast<bool (*)(int)>(g_pOnClientConnectCallback)(playerid) == false)
+            if (g_pOnClientConnectCallback(playerid) == false)
             {
                 player->Kick("Connection rejected by plugin.", 0);
                 return;
@@ -185,8 +180,6 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
     reinterpret_cast<decltype(&OnClientConnectedHook)>(g_OnClientConnectedHook.GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, pszAddress, bFakePlayer);
 }
 
-extern void* g_pOnClientDisconnectCallback;
-
 void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char* pszName, uint64 xuid, const char* pszNetworkID)
 {
     reinterpret_cast<decltype(&ClientDisconnectHook)>(g_ClientDisconnectHook.GetOriginal())(_this, slot, reason, pszName, xuid, pszNetworkID);
@@ -194,7 +187,7 @@ void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char*
     auto playerid = slot.Get();
 
     if (g_pOnClientDisconnectCallback)
-        reinterpret_cast<void (*)(int, int)>(g_pOnClientDisconnectCallback)(playerid, reason);
+        g_pOnClientDisconnectCallback(playerid, reason);
 
     g_pPlayerManager->UnregisterPlayer(playerid);
 }

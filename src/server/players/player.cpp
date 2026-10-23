@@ -33,6 +33,7 @@
 #include "gameevents.pb.h"
 #include <api/sdk/serversideclient.h>
 #include <public/iserver.h>
+#include <scripting/engine/events.h>
 
 #define CBaseEntity_m_iTeamNum 0x9DC483B8A5BFEFB3
 
@@ -227,9 +228,6 @@ uint64_t CPlayer::GetSteamID()
         return 0;
 }
 
-extern void* g_pOnClientSteamAuthorizeCallback;
-extern void* g_pOnClientSteamAuthorizeFailCallback;
-
 void CPlayer::ChangeAuthorizationState(bool bAuthorized)
 {
     if (m_bAuthorized == bAuthorized)
@@ -240,12 +238,12 @@ void CPlayer::ChangeAuthorizationState(bool bAuthorized)
     if (bAuthorized)
     {
         if (g_pOnClientSteamAuthorizeCallback)
-            reinterpret_cast<void (*)(int)>(g_pOnClientSteamAuthorizeCallback)(m_iPlayerId);
+            g_pOnClientSteamAuthorizeCallback(m_iPlayerId);
     }
     else
     {
         if (g_pOnClientSteamAuthorizeFailCallback)
-            reinterpret_cast<void (*)(int)>(g_pOnClientSteamAuthorizeFailCallback)(m_iPlayerId);
+            g_pOnClientSteamAuthorizeFailCallback(m_iPlayerId);
     }
 }
 
@@ -352,8 +350,6 @@ void CPlayer::SetFirstSpawn(bool state)
     m_bFirstSpawn = state;
 }
 
-extern void* g_pOnClientKeyStateChangedCallback;
-
 void CPlayer::Think()
 {
     std::string menuText;
@@ -404,8 +400,6 @@ void CPlayer::Think()
 
     if (g_pOnClientKeyStateChangedCallback)
     {
-        auto callback = reinterpret_cast<void (*)(int, uint32_t, bool)>(g_pOnClientKeyStateChangedCallback);
-
         for (int i = 0; i < 64; i++)
         {
             uint64_t mask = (1ULL << i);
@@ -414,11 +408,11 @@ void CPlayer::Think()
 
             if (oldState == 0 && newState != 0)
             {
-                callback(m_iPlayerId, i, true);
+                g_pOnClientKeyStateChangedCallback(m_iPlayerId, i, true);
             }
             else if (oldState != 0 && newState == 0)
             {
-                callback(m_iPlayerId, i, false);
+                g_pOnClientKeyStateChangedCallback(m_iPlayerId, i, false);
             }
         }
     }

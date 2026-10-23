@@ -24,22 +24,11 @@
 #include <optional>
 #include <variant>
 
+typedef void (*QueryClientCvarCallback)(int, const char*, const char*);
+typedef void (*GlobalChangeListenerCallback)(const char*, int, const char*, const char*);
+typedef void (*ConvarNameCallback)(const char*);
+
 extern bool bypassConvarCallbacks;
-
-static char* Bridge_Convars_CopyString(const char* value, int* size)
-{
-    int outSize = value ? static_cast<int>(strlen(value)) : 0;
-    *size = outSize;
-
-    char* out = (char*)g_pMemoryAllocator->Alloc(outSize + 1);
-    if (outSize > 0)
-    {
-        g_pMemoryAllocator->Copy(out, (void*)value, outSize);
-    }
-
-    out[outSize] = '\0';
-    return out;
-}
 
 ConVarRefAbstract& GetConVarRef(const char* cvarName)
 {
@@ -51,10 +40,10 @@ void Bridge_Convars_QueryClientConvar(int playerid, const char* cvarName)
     g_pConvarManager->QueryClientConvar(playerid, cvarName);
 }
 
-int Bridge_Convars_AddQueryClientCvarCallback(void* callback)
+int Bridge_Convars_AddQueryClientCvarCallback(QueryClientCvarCallback callback)
 {
     return g_pConvarManager->AddQueryClientCvarCallback([callback](int playerid, std::string cvarName, std::string cvarValue) -> void {
-        ((void(*)(int, const char*, const char*))callback)(playerid, cvarName.c_str(), cvarValue.c_str());
+        callback(playerid, cvarName.c_str(), cvarValue.c_str());
         });
 }
 
@@ -149,10 +138,10 @@ void Bridge_Convars_SetFlags(const char* cvarName, uint64_t flags)
     cvar.GetConVarData()->m_nFlags = flags;
 }
 
-uint64_t Bridge_Convars_AddGlobalChangeListener(void* callback)
+uint64_t Bridge_Convars_AddGlobalChangeListener(GlobalChangeListenerCallback callback)
 {
     return g_pConvarManager->AddGlobalChangeListener([callback](const char* convarName, int slot, const char* newValue, const char* oldValue) -> void {
-        ((void(*)(const char*, int, const char*, const char*))callback)(convarName, slot, newValue, oldValue);
+        callback(convarName, slot, newValue, oldValue);
         });
 }
 
@@ -161,10 +150,10 @@ void Bridge_Convars_RemoveGlobalChangeListener(uint64_t listenerID)
     g_pConvarManager->RemoveGlobalChangeListener(listenerID);
 }
 
-uint64_t Bridge_Convars_AddConvarCreatedListener(void* callback)
+uint64_t Bridge_Convars_AddConvarCreatedListener(ConvarNameCallback callback)
 {
     return g_pConvarManager->AddConvarCreatedListener([callback](const char* convarName) -> void {
-        ((void(*)(const char*))callback)(convarName);
+        callback(convarName);
         });
 }
 
@@ -173,10 +162,10 @@ void Bridge_Convars_RemoveConvarCreatedListener(uint64_t listenerID)
     g_pConvarManager->RemoveConvarCreatedListener(listenerID);
 }
 
-uint64_t Bridge_Convars_AddConCommandCreatedListener(void* callback)
+uint64_t Bridge_Convars_AddConCommandCreatedListener(ConvarNameCallback callback)
 {
     return g_pConvarManager->AddConCommandCreatedListener([callback](const char* convarName) -> void {
-        ((void(*)(const char*))callback)(convarName);
+        callback(convarName);
         });
 }
 
@@ -245,7 +234,7 @@ char* Bridge_Convars_GetValueAsString(int* size, const char* cvarName)
     CBufferString buf;
     cvar.GetValueAsString(buf, CSplitScreenSlot(0));
 
-    return Bridge_Convars_CopyString(buf.Get(), size);
+    return Bridge_CopyString(buf.Get(), size);
 }
 
 bool Bridge_Convars_SetDefaultValueAsString(const char* cvarName, const char* defaultValue)
@@ -265,7 +254,7 @@ char* Bridge_Convars_GetDefaultValueAsString(int* size, const char* cvarName)
     CBufferString buf;
     cvar.GetConVarData()->DefaultValueToString(buf);
 
-    return Bridge_Convars_CopyString(buf.Get(), size);
+    return Bridge_CopyString(buf.Get(), size);
 }
 
 char* Bridge_Convars_GetMinValueAsString(int* size, const char* cvarName)
@@ -274,7 +263,7 @@ char* Bridge_Convars_GetMinValueAsString(int* size, const char* cvarName)
     CBufferString buf;
     cvar.GetConVarData()->MinValueToString(buf);
 
-    return Bridge_Convars_CopyString(buf.Get(), size);
+    return Bridge_CopyString(buf.Get(), size);
 }
 
 bool Bridge_Convars_SetMinValueAsString(const char* cvarName, const char* minValue)
@@ -294,7 +283,7 @@ char* Bridge_Convars_GetMaxValueAsString(int* size, const char* cvarName)
     CBufferString buf;
     cvar.GetConVarData()->MaxValueToString(buf);
 
-    return Bridge_Convars_CopyString(buf.Get(), size);
+    return Bridge_CopyString(buf.Get(), size);
 }
 
 bool Bridge_Convars_SetMaxValueAsString(const char* cvarName, const char* maxValue)
@@ -321,7 +310,7 @@ char* Bridge_Convars_GetDescription(int* size, const char* cvarName)
     auto& cvar = GetConVarRef(cvarName);
     std::string s = cvar.GetHelpText();
 
-    return Bridge_Convars_CopyString(s.c_str(), size);
+    return Bridge_CopyString(s.c_str(), size);
 }
 
 DEFINE_NATIVE("Convars.QueryClientConvar", Bridge_Convars_QueryClientConvar);
