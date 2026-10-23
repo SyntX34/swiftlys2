@@ -17,6 +17,8 @@
  ************************************************************************************************/
 
 #include "manager.h"
+
+#include <memory>
 #include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
@@ -61,11 +63,13 @@ void CServerCommands::LoadPrefixes()
 
 bool CServerCommands::ResolveCommandName(std::string& commandName)
 {
-    if (m_commands.contains(commandName))
+    auto command = m_commands.find(commandName);
+    if (command != m_commands.end() && command->second)
         return true;
 
     std::string prefixedName = "sw_" + commandName;
-    if (!m_commands.contains(prefixedName))
+    command = m_commands.find(prefixedName);
+    if (command == m_commands.end() || !command->second)
         return false;
 
     commandName = std::move(prefixedName);
@@ -116,7 +120,7 @@ int CServerCommands::HandleCommand(int playerid, const std::string& text, bool d
     args.erase(args.begin());
 
     {
-        QueueLockGuard lock(m_mtxCommands);
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
         if (!ResolveCommandName(commandName))
         {
             return 0;
@@ -142,7 +146,7 @@ void CServerCommands::HandleRegisteredCommand(int playerid, const char* commandL
     args.erase(args.begin());
 
     {
-        QueueLockGuard lock(m_mtxCommands);
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
         if (!ResolveCommandName(commandName))
         {
             return;
@@ -172,28 +176,36 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
 {
     commandName = str_tolower(commandName);
 
-    QueueLockGuard lock(m_mtxCommands);
-    if (!registerRaw)
     {
-        if (m_commands.contains(commandName))
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        if (!registerRaw)
         {
-            return 0;
+            if (m_commands.contains(commandName)) return 0;
+            commandName.insert(0, "sw_");
         }
 
-        commandName.insert(0, "sw_");
+        // Reserve the name while engine registration invokes creation callbacks.
+        if (!m_commands.try_emplace(commandName, nullptr).second) return 0;
     }
 
-    if (m_commands.contains(commandName))
+    try
     {
-        return 0;
+        auto conCommand = std::make_unique<ConCommand>(commandName.c_str(), CommandsCallback, strdup(helpText.c_str()), FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND);
+        conCommand->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
+
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        const uint64_t commandId = m_lastCommandId + 1;
+        m_commandNames.emplace(commandId, commandName);
+        m_commands.find(commandName)->second = conCommand.release();
+        m_lastCommandId = commandId;
+        return commandId;
     }
-
-    auto* conCommand = new ConCommand(commandName.c_str(), CommandsCallback, strdup(helpText.c_str()), FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND);
-    conCommand->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
-
-    m_commands[commandName] = conCommand;
-    m_commandNames[++m_lastCommandId] = commandName;
-    return m_lastCommandId;
+    catch (...)
+    {
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        m_commands.erase(commandName);
+        throw;
+    }
 }
 
 void CServerCommands::SetCommandHandler(CommandHandler handler)
@@ -203,29 +215,33 @@ void CServerCommands::SetCommandHandler(CommandHandler handler)
 
 void CServerCommands::UnregisterCommand(uint64_t commandId)
 {
-    QueueLockGuard lock(m_mtxCommands);
-
-    auto nameIt = m_commandNames.find(commandId);
-    if (nameIt == m_commandNames.end())
+    ConCommand* command = nullptr;
+    std::string commandName;
     {
-        return;
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        auto nameIt = m_commandNames.find(commandId);
+        if (nameIt == m_commandNames.end()) return;
+
+        commandName = std::move(nameIt->second);
+        auto commandIt = m_commands.find(commandName);
+        if (commandIt != m_commands.end())
+        {
+            command = commandIt->second;
+            commandIt->second = nullptr;
+        }
+        m_commandNames.erase(nameIt);
     }
 
-    auto commandIt = m_commands.find(nameIt->second);
-    if (commandIt != m_commands.end())
-    {
-        delete commandIt->second;
-        m_commands.erase(commandIt);
-    }
-
-    m_commandNames.erase(nameIt);
+    delete command;
+    std::lock_guard<std::mutex> lock(m_mtxCommands);
+    m_commands.erase(commandName);
 }
 
 bool CServerCommands::IsCommandRegistered(std::string commandName)
 {
     commandName = str_tolower(commandName);
 
-    QueueLockGuard lock(m_mtxCommands);
+    std::lock_guard<std::mutex> lock(m_mtxCommands);
     return ResolveCommandName(commandName);
 }
 
@@ -233,7 +249,7 @@ uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string co
 {
     std::string helpText;
     {
-        QueueLockGuard lock(m_mtxCommands);
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
 
         commandName = str_tolower(commandName);
         if (!ResolveCommandName(commandName))
@@ -241,7 +257,7 @@ uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string co
             return 0;
         }
 
-        helpText = m_commands[commandName]->GetHelpText();
+        helpText = m_commands.find(commandName)->second->GetHelpText();
     }
 
     return RegisterCommand(aliasCommand, registerRaw, helpText);
