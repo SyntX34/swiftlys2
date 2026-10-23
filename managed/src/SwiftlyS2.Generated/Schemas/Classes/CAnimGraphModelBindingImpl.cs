@@ -16,31 +16,31 @@ internal partial class CAnimGraphModelBindingImpl : SchemaClass, CAnimGraphModel
 {
     public CAnimGraphModelBindingImpl(nint handle) : base(handle) { }
 
-    private static nint? _ModelNameOffset;
+    private static nint _ModelNameOffset = -1;
 
     public string ModelName
     {
         get
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xC0F296335D35B6E1);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ModelNameOffset!.Value));
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xC0F296335D35B6E1);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ModelNameOffset));
         }
         set
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xC0F296335D35B6E1);
-            Schema.SetCUtlString(_Handle, _ModelNameOffset!.Value, value);
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xC0F296335D35B6E1);
+            Schema.SetCUtlString(_Handle, _ModelNameOffset, value);
         }
     }
-    private static nint? _SharedDataOffset;
+    private static nint _SharedDataOffset = -1;
     private SchemaUntypedField? _SharedDataInstance;
 
     public SchemaUntypedField SharedData
     {
         get
         {
-            _SharedDataOffset = _SharedDataOffset ?? Schema.GetOffset(0xC0F29633D0085FE6);
+            if (_SharedDataOffset == -1) _SharedDataOffset = Schema.GetOffset(0xC0F29633D0085FE6);
             var instance = _SharedDataInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SharedDataOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SharedDataOffset);
             return instance;
         }
     }

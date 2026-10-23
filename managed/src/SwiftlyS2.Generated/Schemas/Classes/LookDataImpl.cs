@@ -16,16 +16,16 @@ internal partial class LookDataImpl : SchemaClass, LookData
 {
     public LookDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _LookTargetOffset;
+    private static nint _LookTargetOffset = -1;
     private SchemaUntypedField? _LookTargetInstance;
 
     public SchemaUntypedField LookTarget
     {
         get
         {
-            _LookTargetOffset = _LookTargetOffset ?? Schema.GetOffset(0xED005936027CDD73);
+            if (_LookTargetOffset == -1) _LookTargetOffset = Schema.GetOffset(0xED005936027CDD73);
             var instance = _LookTargetInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _LookTargetOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LookTargetOffset);
             return instance;
         }
     }

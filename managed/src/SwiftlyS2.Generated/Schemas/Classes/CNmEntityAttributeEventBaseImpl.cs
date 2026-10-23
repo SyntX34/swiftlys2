@@ -16,29 +16,29 @@ internal partial class CNmEntityAttributeEventBaseImpl : CNmEventImpl, CNmEntity
 {
     public CNmEntityAttributeEventBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _TargetOffset;
+    private static nint _TargetOffset = -1;
 
     public ref CNmEventTargetEntity_t Target
     {
         get
         {
-            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x92D29AE9FA08A9E8);
-            return ref _Handle.AsRef<CNmEventTargetEntity_t>(_TargetOffset!.Value);
+            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0x92D29AE9FA08A9E8);
+            return ref _Handle.AsRef<CNmEventTargetEntity_t>(_TargetOffset);
         }
     }
-    private static nint? _AttributeNameOffset;
+    private static nint _AttributeNameOffset = -1;
 
     public string AttributeName
     {
         get
         {
-            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x92D29AE99168F02C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AttributeNameOffset!.Value));
+            if (_AttributeNameOffset == -1) _AttributeNameOffset = Schema.GetOffset(0x92D29AE99168F02C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AttributeNameOffset));
         }
         set
         {
-            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x92D29AE99168F02C);
-            Schema.SetCUtlString(_Handle, _AttributeNameOffset!.Value, value);
+            if (_AttributeNameOffset == -1) _AttributeNameOffset = Schema.GetOffset(0x92D29AE99168F02C);
+            Schema.SetCUtlString(_Handle, _AttributeNameOffset, value);
         }
     }
 

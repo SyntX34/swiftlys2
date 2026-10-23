@@ -16,184 +16,184 @@ internal partial class C_EnvVolumetricFogVolumeImpl : C_BaseEntityImpl, C_EnvVol
 {
     public C_EnvVolumetricFogVolumeImpl(nint handle) : base(handle) { }
 
-    private static nint? _ActiveOffset;
+    private static nint _ActiveOffset = -1;
 
     public ref bool Active
     {
         get
         {
-            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0x3A1C5F1C8334208F);
-            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+            if (_ActiveOffset == -1) _ActiveOffset = Schema.GetOffset(0x3A1C5F1C8334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset);
         }
     }
-    private static nint? _BoxMinsOffset;
+    private static nint _BoxMinsOffset = -1;
 
     public ref Vector BoxMins
     {
         get
         {
-            _BoxMinsOffset = _BoxMinsOffset ?? Schema.GetOffset(0x3A1C5F1CD8201373);
-            return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
+            if (_BoxMinsOffset == -1) _BoxMinsOffset = Schema.GetOffset(0x3A1C5F1CD8201373);
+            return ref _Handle.AsRef<Vector>(_BoxMinsOffset);
         }
     }
-    private static nint? _BoxMaxsOffset;
+    private static nint _BoxMaxsOffset = -1;
 
     public ref Vector BoxMaxs
     {
         get
         {
-            _BoxMaxsOffset = _BoxMaxsOffset ?? Schema.GetOffset(0x3A1C5F1C817A3B31);
-            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
+            if (_BoxMaxsOffset == -1) _BoxMaxsOffset = Schema.GetOffset(0x3A1C5F1C817A3B31);
+            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset);
         }
     }
-    private static nint? _StartDisabledOffset;
+    private static nint _StartDisabledOffset = -1;
 
     public ref bool StartDisabled
     {
         get
         {
-            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0x3A1C5F1C61ED0C4F);
-            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+            if (_StartDisabledOffset == -1) _StartDisabledOffset = Schema.GetOffset(0x3A1C5F1C61ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset);
         }
     }
-    private static nint? _IndirectUseLPVsOffset;
+    private static nint _IndirectUseLPVsOffset = -1;
 
     public ref bool IndirectUseLPVs
     {
         get
         {
-            _IndirectUseLPVsOffset = _IndirectUseLPVsOffset ?? Schema.GetOffset(0x3A1C5F1CF6508E3D);
-            return ref _Handle.AsRef<bool>(_IndirectUseLPVsOffset!.Value);
+            if (_IndirectUseLPVsOffset == -1) _IndirectUseLPVsOffset = Schema.GetOffset(0x3A1C5F1CF6508E3D);
+            return ref _Handle.AsRef<bool>(_IndirectUseLPVsOffset);
         }
     }
-    private static nint? _StrengthOffset;
+    private static nint _StrengthOffset = -1;
 
     public ref float Strength
     {
         get
         {
-            _StrengthOffset = _StrengthOffset ?? Schema.GetOffset(0x3A1C5F1C8F67AF1A);
-            return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+            if (_StrengthOffset == -1) _StrengthOffset = Schema.GetOffset(0x3A1C5F1C8F67AF1A);
+            return ref _Handle.AsRef<float>(_StrengthOffset);
         }
     }
-    private static nint? _FalloffShapeOffset;
+    private static nint _FalloffShapeOffset = -1;
 
     public ref int FalloffShape
     {
         get
         {
-            _FalloffShapeOffset = _FalloffShapeOffset ?? Schema.GetOffset(0x3A1C5F1C413F21CA);
-            return ref _Handle.AsRef<int>(_FalloffShapeOffset!.Value);
+            if (_FalloffShapeOffset == -1) _FalloffShapeOffset = Schema.GetOffset(0x3A1C5F1C413F21CA);
+            return ref _Handle.AsRef<int>(_FalloffShapeOffset);
         }
     }
-    private static nint? _FalloffExponentOffset;
+    private static nint _FalloffExponentOffset = -1;
 
     public ref float FalloffExponent
     {
         get
         {
-            _FalloffExponentOffset = _FalloffExponentOffset ?? Schema.GetOffset(0x3A1C5F1CE4B7D948);
-            return ref _Handle.AsRef<float>(_FalloffExponentOffset!.Value);
+            if (_FalloffExponentOffset == -1) _FalloffExponentOffset = Schema.GetOffset(0x3A1C5F1CE4B7D948);
+            return ref _Handle.AsRef<float>(_FalloffExponentOffset);
         }
     }
-    private static nint? _HeightFogDepthOffset;
+    private static nint _HeightFogDepthOffset = -1;
 
     public ref float HeightFogDepth
     {
         get
         {
-            _HeightFogDepthOffset = _HeightFogDepthOffset ?? Schema.GetOffset(0x3A1C5F1CE7A4BA15);
-            return ref _Handle.AsRef<float>(_HeightFogDepthOffset!.Value);
+            if (_HeightFogDepthOffset == -1) _HeightFogDepthOffset = Schema.GetOffset(0x3A1C5F1CE7A4BA15);
+            return ref _Handle.AsRef<float>(_HeightFogDepthOffset);
         }
     }
-    private static nint? _HeightFogEdgeWidthOffset;
+    private static nint _HeightFogEdgeWidthOffset = -1;
 
     public ref float HeightFogEdgeWidth
     {
         get
         {
-            _HeightFogEdgeWidthOffset = _HeightFogEdgeWidthOffset ?? Schema.GetOffset(0x3A1C5F1C4605AE81);
-            return ref _Handle.AsRef<float>(_HeightFogEdgeWidthOffset!.Value);
+            if (_HeightFogEdgeWidthOffset == -1) _HeightFogEdgeWidthOffset = Schema.GetOffset(0x3A1C5F1C4605AE81);
+            return ref _Handle.AsRef<float>(_HeightFogEdgeWidthOffset);
         }
     }
-    private static nint? _IndirectLightStrengthOffset;
+    private static nint _IndirectLightStrengthOffset = -1;
 
     public ref float IndirectLightStrength
     {
         get
         {
-            _IndirectLightStrengthOffset = _IndirectLightStrengthOffset ?? Schema.GetOffset(0x3A1C5F1C1CE20160);
-            return ref _Handle.AsRef<float>(_IndirectLightStrengthOffset!.Value);
+            if (_IndirectLightStrengthOffset == -1) _IndirectLightStrengthOffset = Schema.GetOffset(0x3A1C5F1C1CE20160);
+            return ref _Handle.AsRef<float>(_IndirectLightStrengthOffset);
         }
     }
-    private static nint? _SunLightStrengthOffset;
+    private static nint _SunLightStrengthOffset = -1;
 
     public ref float SunLightStrength
     {
         get
         {
-            _SunLightStrengthOffset = _SunLightStrengthOffset ?? Schema.GetOffset(0x3A1C5F1CDE47D3A2);
-            return ref _Handle.AsRef<float>(_SunLightStrengthOffset!.Value);
+            if (_SunLightStrengthOffset == -1) _SunLightStrengthOffset = Schema.GetOffset(0x3A1C5F1CDE47D3A2);
+            return ref _Handle.AsRef<float>(_SunLightStrengthOffset);
         }
     }
-    private static nint? _NoiseStrengthOffset;
+    private static nint _NoiseStrengthOffset = -1;
 
     public ref float NoiseStrength
     {
         get
         {
-            _NoiseStrengthOffset = _NoiseStrengthOffset ?? Schema.GetOffset(0x3A1C5F1C556ED5D0);
-            return ref _Handle.AsRef<float>(_NoiseStrengthOffset!.Value);
+            if (_NoiseStrengthOffset == -1) _NoiseStrengthOffset = Schema.GetOffset(0x3A1C5F1C556ED5D0);
+            return ref _Handle.AsRef<float>(_NoiseStrengthOffset);
         }
     }
-    private static nint? _TintColorOffset;
+    private static nint _TintColorOffset = -1;
 
     public ref Color TintColor
     {
         get
         {
-            _TintColorOffset = _TintColorOffset ?? Schema.GetOffset(0x3A1C5F1CAF2613F3);
-            return ref _Handle.AsRef<Color>(_TintColorOffset!.Value);
+            if (_TintColorOffset == -1) _TintColorOffset = Schema.GetOffset(0x3A1C5F1CAF2613F3);
+            return ref _Handle.AsRef<Color>(_TintColorOffset);
         }
     }
-    private static nint? _OverrideTintColorOffset;
+    private static nint _OverrideTintColorOffset = -1;
 
     public ref bool OverrideTintColor
     {
         get
         {
-            _OverrideTintColorOffset = _OverrideTintColorOffset ?? Schema.GetOffset(0x3A1C5F1CF384934B);
-            return ref _Handle.AsRef<bool>(_OverrideTintColorOffset!.Value);
+            if (_OverrideTintColorOffset == -1) _OverrideTintColorOffset = Schema.GetOffset(0x3A1C5F1CF384934B);
+            return ref _Handle.AsRef<bool>(_OverrideTintColorOffset);
         }
     }
-    private static nint? _OverrideIndirectLightStrengthOffset;
+    private static nint _OverrideIndirectLightStrengthOffset = -1;
 
     public ref bool OverrideIndirectLightStrength
     {
         get
         {
-            _OverrideIndirectLightStrengthOffset = _OverrideIndirectLightStrengthOffset ?? Schema.GetOffset(0x3A1C5F1C9AA2A58C);
-            return ref _Handle.AsRef<bool>(_OverrideIndirectLightStrengthOffset!.Value);
+            if (_OverrideIndirectLightStrengthOffset == -1) _OverrideIndirectLightStrengthOffset = Schema.GetOffset(0x3A1C5F1C9AA2A58C);
+            return ref _Handle.AsRef<bool>(_OverrideIndirectLightStrengthOffset);
         }
     }
-    private static nint? _OverrideSunLightStrengthOffset;
+    private static nint _OverrideSunLightStrengthOffset = -1;
 
     public ref bool OverrideSunLightStrength
     {
         get
         {
-            _OverrideSunLightStrengthOffset = _OverrideSunLightStrengthOffset ?? Schema.GetOffset(0x3A1C5F1C892B7A46);
-            return ref _Handle.AsRef<bool>(_OverrideSunLightStrengthOffset!.Value);
+            if (_OverrideSunLightStrengthOffset == -1) _OverrideSunLightStrengthOffset = Schema.GetOffset(0x3A1C5F1C892B7A46);
+            return ref _Handle.AsRef<bool>(_OverrideSunLightStrengthOffset);
         }
     }
-    private static nint? _OverrideNoiseStrengthOffset;
+    private static nint _OverrideNoiseStrengthOffset = -1;
 
     public ref bool OverrideNoiseStrength
     {
         get
         {
-            _OverrideNoiseStrengthOffset = _OverrideNoiseStrengthOffset ?? Schema.GetOffset(0x3A1C5F1C47655E8C);
-            return ref _Handle.AsRef<bool>(_OverrideNoiseStrengthOffset!.Value);
+            if (_OverrideNoiseStrengthOffset == -1) _OverrideNoiseStrengthOffset = Schema.GetOffset(0x3A1C5F1C47655E8C);
+            return ref _Handle.AsRef<bool>(_OverrideNoiseStrengthOffset);
         }
     }
 

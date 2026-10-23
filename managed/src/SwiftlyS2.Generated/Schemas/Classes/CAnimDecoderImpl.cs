@@ -16,34 +16,34 @@ internal partial class CAnimDecoderImpl : SchemaClass, CAnimDecoder
 {
     public CAnimDecoderImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public ref CBufferString Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA6D7DF2D6750BACB);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xA6D7DF2D6750BACB);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset);
         }
     }
-    private static nint? _VersionOffset;
+    private static nint _VersionOffset = -1;
 
     public ref int Version
     {
         get
         {
-            _VersionOffset = _VersionOffset ?? Schema.GetOffset(0xA6D7DF2DB0AB8B1B);
-            return ref _Handle.AsRef<int>(_VersionOffset!.Value);
+            if (_VersionOffset == -1) _VersionOffset = Schema.GetOffset(0xA6D7DF2DB0AB8B1B);
+            return ref _Handle.AsRef<int>(_VersionOffset);
         }
     }
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref int Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xA6D7DF2D18853D59);
-            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0xA6D7DF2D18853D59);
+            return ref _Handle.AsRef<int>(_TypeOffset);
         }
     }
 

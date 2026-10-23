@@ -16,14 +16,14 @@ internal partial class AnimParamIDImpl : SchemaClass, AnimParamID
 {
     public AnimParamIDImpl(nint handle) : base(handle) { }
 
-    private static nint? _IdOffset;
+    private static nint _IdOffset = -1;
 
     public ref uint Id
     {
         get
         {
-            _IdOffset = _IdOffset ?? Schema.GetOffset(0xFD66F334B4B6E980);
-            return ref _Handle.AsRef<uint>(_IdOffset!.Value);
+            if (_IdOffset == -1) _IdOffset = Schema.GetOffset(0xFD66F334B4B6E980);
+            return ref _Handle.AsRef<uint>(_IdOffset);
         }
     }
 

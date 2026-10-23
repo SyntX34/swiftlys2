@@ -16,46 +16,46 @@ internal partial class VelocityZone_tImpl : SchemaClass, VelocityZone_t
 {
     public VelocityZone_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _MaxVelOffset;
+    private static nint _MaxVelOffset = -1;
 
     public ref byte MaxVel
     {
         get
         {
-            _MaxVelOffset = _MaxVelOffset ?? Schema.GetOffset(0xEA1490275CA763E8);
-            return ref _Handle.AsRef<byte>(_MaxVelOffset!.Value);
+            if (_MaxVelOffset == -1) _MaxVelOffset = Schema.GetOffset(0xEA1490275CA763E8);
+            return ref _Handle.AsRef<byte>(_MaxVelOffset);
         }
     }
-    private static nint? _NextSelectionOffset;
+    private static nint _NextSelectionOffset = -1;
 
     public ref byte NextSelection
     {
         get
         {
-            _NextSelectionOffset = _NextSelectionOffset ?? Schema.GetOffset(0xEA149027333B01B2);
-            return ref _Handle.AsRef<byte>(_NextSelectionOffset!.Value);
+            if (_NextSelectionOffset == -1) _NextSelectionOffset = Schema.GetOffset(0xEA149027333B01B2);
+            return ref _Handle.AsRef<byte>(_NextSelectionOffset);
         }
     }
-    private static nint? _NumSamplesOffset;
+    private static nint _NumSamplesOffset = -1;
 
     public ref byte NumSamples
     {
         get
         {
-            _NumSamplesOffset = _NumSamplesOffset ?? Schema.GetOffset(0xEA149027D602013A);
-            return ref _Handle.AsRef<byte>(_NumSamplesOffset!.Value);
+            if (_NumSamplesOffset == -1) _NumSamplesOffset = Schema.GetOffset(0xEA149027D602013A);
+            return ref _Handle.AsRef<byte>(_NumSamplesOffset);
         }
     }
-    private static nint? _SamplesOffset;
+    private static nint _SamplesOffset = -1;
     private SchemaFixedArray<uint>? _SamplesInstance;
 
     public ISchemaFixedArray<uint> Samples
     {
         get
         {
-            _SamplesOffset = _SamplesOffset ?? Schema.GetOffset(0xEA149027730A51EA);
+            if (_SamplesOffset == -1) _SamplesOffset = Schema.GetOffset(0xEA149027730A51EA);
             var instance = _SamplesInstance ??= new SchemaFixedArray<uint>(0, 0xEA149027730A51EA, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _SamplesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SamplesOffset);
             return instance;
         }
     }

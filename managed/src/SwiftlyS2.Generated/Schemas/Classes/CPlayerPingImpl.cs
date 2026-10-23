@@ -16,59 +16,59 @@ internal partial class CPlayerPingImpl : CBaseEntityImpl, CPlayerPing
 {
     public CPlayerPingImpl(nint handle) : base(handle) { }
 
-    private static nint? _PlayerOffset;
+    private static nint _PlayerOffset = -1;
 
     public ref CHandle<CCSPlayerPawn> Player
     {
         get
         {
-            _PlayerOffset = _PlayerOffset ?? Schema.GetOffset(0x5943E25F68856C16);
-            return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_PlayerOffset!.Value);
+            if (_PlayerOffset == -1) _PlayerOffset = Schema.GetOffset(0x5943E25F68856C16);
+            return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_PlayerOffset);
         }
     }
-    private static nint? _PingedEntityOffset;
+    private static nint _PingedEntityOffset = -1;
 
     public ref CHandle<CBaseEntity> PingedEntity
     {
         get
         {
-            _PingedEntityOffset = _PingedEntityOffset ?? Schema.GetOffset(0x5943E25F35D9D429);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PingedEntityOffset!.Value);
+            if (_PingedEntityOffset == -1) _PingedEntityOffset = Schema.GetOffset(0x5943E25F35D9D429);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PingedEntityOffset);
         }
     }
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref int Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x5943E25FC932D7CC);
-            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x5943E25FC932D7CC);
+            return ref _Handle.AsRef<int>(_TypeOffset);
         }
     }
-    private static nint? _UrgentOffset;
+    private static nint _UrgentOffset = -1;
 
     public ref bool Urgent
     {
         get
         {
-            _UrgentOffset = _UrgentOffset ?? Schema.GetOffset(0x5943E25F4F5EE9D0);
-            return ref _Handle.AsRef<bool>(_UrgentOffset!.Value);
+            if (_UrgentOffset == -1) _UrgentOffset = Schema.GetOffset(0x5943E25F4F5EE9D0);
+            return ref _Handle.AsRef<bool>(_UrgentOffset);
         }
     }
-    private static nint? _PlaceNameOffset;
+    private static nint _PlaceNameOffset = -1;
 
     public string PlaceName
     {
         get
         {
-            _PlaceNameOffset = _PlaceNameOffset ?? Schema.GetOffset(0x5943E25F6039F660);
-            return Schema.GetString(_Handle + _PlaceNameOffset!.Value);
+            if (_PlaceNameOffset == -1) _PlaceNameOffset = Schema.GetOffset(0x5943E25F6039F660);
+            return Schema.GetString(_Handle + _PlaceNameOffset);
         }
         set
         {
-            _PlaceNameOffset = _PlaceNameOffset ?? Schema.GetOffset(0x5943E25F6039F660);
-            Schema.SetFixedString(_Handle, _PlaceNameOffset!.Value, value, 18);
+            if (_PlaceNameOffset == -1) _PlaceNameOffset = Schema.GetOffset(0x5943E25F6039F660);
+            Schema.SetFixedString(_Handle, _PlaceNameOffset, value, 18);
         }
     }
 

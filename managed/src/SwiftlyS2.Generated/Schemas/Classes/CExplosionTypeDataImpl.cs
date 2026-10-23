@@ -16,60 +16,60 @@ internal partial class CExplosionTypeDataImpl : SchemaClass, CExplosionTypeData
 {
     public CExplosionTypeDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _SoundNameOffset;
+    private static nint _SoundNameOffset = -1;
     private SchemaUntypedField? _SoundNameInstance;
 
     public SchemaUntypedField SoundName
     {
         get
         {
-            _SoundNameOffset = _SoundNameOffset ?? Schema.GetOffset(0x53BD97FD87A55E2F);
+            if (_SoundNameOffset == -1) _SoundNameOffset = Schema.GetOffset(0x53BD97FD87A55E2F);
             var instance = _SoundNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SoundNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SoundNameOffset);
             return instance;
         }
     }
-    private static nint? _ParticleEffectOffset;
+    private static nint _ParticleEffectOffset = -1;
     private SchemaUntypedField? _ParticleEffectInstance;
 
     public SchemaUntypedField ParticleEffect
     {
         get
         {
-            _ParticleEffectOffset = _ParticleEffectOffset ?? Schema.GetOffset(0x53BD97FDB4EA2DBA);
+            if (_ParticleEffectOffset == -1) _ParticleEffectOffset = Schema.GetOffset(0x53BD97FDB4EA2DBA);
             var instance = _ParticleEffectInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ParticleEffectOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParticleEffectOffset);
             return instance;
         }
     }
-    private static nint? _IsIncindiaryOffset;
+    private static nint _IsIncindiaryOffset = -1;
 
     public ref bool IsIncindiary
     {
         get
         {
-            _IsIncindiaryOffset = _IsIncindiaryOffset ?? Schema.GetOffset(0x53BD97FDB9614A8F);
-            return ref _Handle.AsRef<bool>(_IsIncindiaryOffset!.Value);
+            if (_IsIncindiaryOffset == -1) _IsIncindiaryOffset = Schema.GetOffset(0x53BD97FDB9614A8F);
+            return ref _Handle.AsRef<bool>(_IsIncindiaryOffset);
         }
     }
-    private static nint? _HasForcesOffset;
+    private static nint _HasForcesOffset = -1;
 
     public ref bool HasForces
     {
         get
         {
-            _HasForcesOffset = _HasForcesOffset ?? Schema.GetOffset(0x53BD97FD35E7AC67);
-            return ref _Handle.AsRef<bool>(_HasForcesOffset!.Value);
+            if (_HasForcesOffset == -1) _HasForcesOffset = Schema.GetOffset(0x53BD97FD35E7AC67);
+            return ref _Handle.AsRef<bool>(_HasForcesOffset);
         }
     }
-    private static nint? _DecalTypeOffset;
+    private static nint _DecalTypeOffset = -1;
 
     public ref CGlobalSymbol DecalType
     {
         get
         {
-            _DecalTypeOffset = _DecalTypeOffset ?? Schema.GetOffset(0x53BD97FD0E753AAE);
-            return ref _Handle.AsRef<CGlobalSymbol>(_DecalTypeOffset!.Value);
+            if (_DecalTypeOffset == -1) _DecalTypeOffset = Schema.GetOffset(0x53BD97FD0E753AAE);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DecalTypeOffset);
         }
     }
 

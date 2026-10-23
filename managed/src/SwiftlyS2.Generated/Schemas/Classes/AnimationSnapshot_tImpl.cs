@@ -16,29 +16,29 @@ internal partial class AnimationSnapshot_tImpl : AnimationSnapshotBase_tImpl, An
 {
     public AnimationSnapshot_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EntIndexOffset;
+    private static nint _EntIndexOffset = -1;
 
     public ref int EntIndex
     {
         get
         {
-            _EntIndexOffset = _EntIndexOffset ?? Schema.GetOffset(0xAC640D3E5558C54A);
-            return ref _Handle.AsRef<int>(_EntIndexOffset!.Value);
+            if (_EntIndexOffset == -1) _EntIndexOffset = Schema.GetOffset(0xAC640D3E5558C54A);
+            return ref _Handle.AsRef<int>(_EntIndexOffset);
         }
     }
-    private static nint? _ModelNameOffset;
+    private static nint _ModelNameOffset = -1;
 
     public string ModelName
     {
         get
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xAC640D3E5D35B6E1);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ModelNameOffset!.Value));
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xAC640D3E5D35B6E1);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ModelNameOffset));
         }
         set
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xAC640D3E5D35B6E1);
-            Schema.SetCUtlString(_Handle, _ModelNameOffset!.Value, value);
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xAC640D3E5D35B6E1);
+            Schema.SetCUtlString(_Handle, _ModelNameOffset, value);
         }
     }
 

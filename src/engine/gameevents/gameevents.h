@@ -21,10 +21,16 @@
 
 #include <api/engine/gameevents/gameevents.h>
 
-#include <api/utils/mutex.h>
+#include <array>
+#include <atomic>
+#include <memory>
+#include <mutex>
 
 #include <set>
 #include <unordered_set>
+#include <string>
+#include <utility>
+#include <vector>
 
  // WHY THE ACTUAL FUCK YOU NEED THIS TO COMPILE ?????????????
 #include <public/entity2/entitysystem.h>
@@ -33,7 +39,6 @@ class CEventManager : public IEventManager, public IGameEventListener2
 {
 public:
     virtual void Initialize() override;
-    virtual void Shutdown() override;
 
     virtual void OnServerStartup() override;
 
@@ -43,6 +48,9 @@ public:
 
     virtual void SetGameEventFireHandler(GameEventFireHandler handler) override;
     virtual void SetPostGameEventFireHandler(GameEventFireHandler handler) override;
+    
+    virtual int GetGameEventListenerID(std::string event_name) override;
+    virtual void RegisterGameEventListenerID(std::string event_name, int id) override;
 
     virtual IGameEventManager2* GetGameEventManager() override;
 
@@ -50,13 +58,29 @@ public:
 private:
     void QueueListener(const std::string& event_name);
     void AddEngineListener(const std::string& event_name);
+    void DrainEngineListeners();
 
-    QueueMutex m_mtxLock;
+    std::mutex m_mtxLock;
     std::set<std::string> m_pendingListeners;
     bool m_bListenersReady = false;
+    bool m_bDrainingListeners = false;
 
-    QueueMutex m_mtxRegisteredEvents;
+    std::mutex m_mtxRegisteredEvents;
     std::unordered_set<uint32_t> m_registeredEvents;
+
+    struct EventListenerID
+    {
+        const std::string name;
+        std::atomic<int> id;
+        EventListenerID* const next;
+
+        EventListenerID(std::string event_name, int value, EventListenerID* next_entry)
+            : name(std::move(event_name)), id(value), next(next_entry) {}
+    };
+
+    // Entries stay alive until manager destruction; published names and links never change.
+    std::array<std::atomic<EventListenerID*>, 256> m_eventListenerIDs{};
+    std::vector<std::unique_ptr<EventListenerID>> m_eventListenerIDEntries;
 };
 
 #endif

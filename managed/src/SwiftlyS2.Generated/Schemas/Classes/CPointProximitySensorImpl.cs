@@ -16,36 +16,36 @@ internal partial class CPointProximitySensorImpl : CPointEntityImpl, CPointProxi
 {
     public CPointProximitySensorImpl(nint handle) : base(handle) { }
 
-    private static nint? _DisabledOffset;
+    private static nint _DisabledOffset = -1;
 
     public ref bool Disabled
     {
         get
         {
-            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x769A8B133A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x769A8B133A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset);
         }
     }
-    private static nint? _TargetEntityOffset;
+    private static nint _TargetEntityOffset = -1;
 
     public ref CHandle<CBaseEntity> TargetEntity
     {
         get
         {
-            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x769A8B1325D042A9);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset!.Value);
+            if (_TargetEntityOffset == -1) _TargetEntityOffset = Schema.GetOffset(0x769A8B1325D042A9);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset);
         }
     }
-    private static nint? _DistanceOffset;
+    private static nint _DistanceOffset = -1;
     private SchemaUntypedField? _DistanceInstance;
 
     public SchemaUntypedField Distance
     {
         get
         {
-            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x769A8B13978BC0E2);
+            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0x769A8B13978BC0E2);
             var instance = _DistanceInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DistanceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DistanceOffset);
             return instance;
         }
     }

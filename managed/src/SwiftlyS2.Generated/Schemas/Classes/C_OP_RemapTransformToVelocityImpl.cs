@@ -16,16 +16,16 @@ internal partial class C_OP_RemapTransformToVelocityImpl : CParticleFunctionOper
 {
     public C_OP_RemapTransformToVelocityImpl(nint handle) : base(handle) { }
 
-    private static nint? _TransformInputOffset;
+    private static nint _TransformInputOffset = -1;
     private CParticleTransformInputImpl? _TransformInputInstance;
 
     public CParticleTransformInput TransformInput
     {
         get
         {
-            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xC1A2CC64B3FDC289);
+            if (_TransformInputOffset == -1) _TransformInputOffset = Schema.GetOffset(0xC1A2CC64B3FDC289);
             var instance = _TransformInputInstance ??= new CParticleTransformInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransformInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TransformInputOffset);
             return instance;
         }
     }

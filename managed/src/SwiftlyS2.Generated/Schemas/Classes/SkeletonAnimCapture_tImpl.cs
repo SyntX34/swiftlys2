@@ -16,114 +16,114 @@ internal partial class SkeletonAnimCapture_tImpl : SchemaClass, SkeletonAnimCapt
 {
     public SkeletonAnimCapture_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EntIndexOffset;
+    private static nint _EntIndexOffset = -1;
 
     public ref uint EntIndex
     {
         get
         {
-            _EntIndexOffset = _EntIndexOffset ?? Schema.GetOffset(0x79FB6D7C5558C54A);
-            return ref _Handle.AsRef<uint>(_EntIndexOffset!.Value);
+            if (_EntIndexOffset == -1) _EntIndexOffset = Schema.GetOffset(0x79FB6D7C5558C54A);
+            return ref _Handle.AsRef<uint>(_EntIndexOffset);
         }
     }
-    private static nint? _EntParentOffset;
+    private static nint _EntParentOffset = -1;
 
     public ref uint EntParent
     {
         get
         {
-            _EntParentOffset = _EntParentOffset ?? Schema.GetOffset(0x79FB6D7C7D9203A6);
-            return ref _Handle.AsRef<uint>(_EntParentOffset!.Value);
+            if (_EntParentOffset == -1) _EntParentOffset = Schema.GetOffset(0x79FB6D7C7D9203A6);
+            return ref _Handle.AsRef<uint>(_EntParentOffset);
         }
     }
-    private static nint? _ImportedCollisionOffset;
+    private static nint _ImportedCollisionOffset = -1;
 
     public ref CUtlVector<uint> ImportedCollision
     {
         get
         {
-            _ImportedCollisionOffset = _ImportedCollisionOffset ?? Schema.GetOffset(0x79FB6D7C5A900B2F);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_ImportedCollisionOffset!.Value);
+            if (_ImportedCollisionOffset == -1) _ImportedCollisionOffset = Schema.GetOffset(0x79FB6D7C5A900B2F);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_ImportedCollisionOffset);
         }
     }
-    private static nint? _ModelNameOffset;
+    private static nint _ModelNameOffset = -1;
 
     public string ModelName
     {
         get
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0x79FB6D7CD7A1D881);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ModelNameOffset!.Value));
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0x79FB6D7CD7A1D881);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ModelNameOffset));
         }
         set
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0x79FB6D7CD7A1D881);
-            Schema.SetCUtlString(_Handle, _ModelNameOffset!.Value, value);
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0x79FB6D7CD7A1D881);
+            Schema.SetCUtlString(_Handle, _ModelNameOffset, value);
         }
     }
-    private static nint? _CaptureNameOffset;
+    private static nint _CaptureNameOffset = -1;
 
     public string CaptureName
     {
         get
         {
-            _CaptureNameOffset = _CaptureNameOffset ?? Schema.GetOffset(0x79FB6D7CB508C2DA);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CaptureNameOffset!.Value));
+            if (_CaptureNameOffset == -1) _CaptureNameOffset = Schema.GetOffset(0x79FB6D7CB508C2DA);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CaptureNameOffset));
         }
         set
         {
-            _CaptureNameOffset = _CaptureNameOffset ?? Schema.GetOffset(0x79FB6D7CB508C2DA);
-            Schema.SetCUtlString(_Handle, _CaptureNameOffset!.Value, value);
+            if (_CaptureNameOffset == -1) _CaptureNameOffset = Schema.GetOffset(0x79FB6D7CB508C2DA);
+            Schema.SetCUtlString(_Handle, _CaptureNameOffset, value);
         }
     }
-    private static nint? _ModelBindPoseOffset;
+    private static nint _ModelBindPoseOffset = -1;
 
     public ref CUtlVector<SkeletonAnimCapture_t__Bone_t> ModelBindPose
     {
         get
         {
-            _ModelBindPoseOffset = _ModelBindPoseOffset ?? Schema.GetOffset(0x79FB6D7C9960EBF8);
-            return ref _Handle.AsRef<CUtlVector<SkeletonAnimCapture_t__Bone_t>>(_ModelBindPoseOffset!.Value);
+            if (_ModelBindPoseOffset == -1) _ModelBindPoseOffset = Schema.GetOffset(0x79FB6D7C9960EBF8);
+            return ref _Handle.AsRef<CUtlVector<SkeletonAnimCapture_t__Bone_t>>(_ModelBindPoseOffset);
         }
     }
-    private static nint? _FeModelInitPoseOffset;
+    private static nint _FeModelInitPoseOffset = -1;
 
     public ref CUtlVector<SkeletonAnimCapture_t__Bone_t> FeModelInitPose
     {
         get
         {
-            _FeModelInitPoseOffset = _FeModelInitPoseOffset ?? Schema.GetOffset(0x79FB6D7C0F3CC12E);
-            return ref _Handle.AsRef<CUtlVector<SkeletonAnimCapture_t__Bone_t>>(_FeModelInitPoseOffset!.Value);
+            if (_FeModelInitPoseOffset == -1) _FeModelInitPoseOffset = Schema.GetOffset(0x79FB6D7C0F3CC12E);
+            return ref _Handle.AsRef<CUtlVector<SkeletonAnimCapture_t__Bone_t>>(_FeModelInitPoseOffset);
         }
     }
-    private static nint? _FlexControllersOffset;
+    private static nint _FlexControllersOffset = -1;
 
     public ref int FlexControllers
     {
         get
         {
-            _FlexControllersOffset = _FlexControllersOffset ?? Schema.GetOffset(0x79FB6D7C024CF17F);
-            return ref _Handle.AsRef<int>(_FlexControllersOffset!.Value);
+            if (_FlexControllersOffset == -1) _FlexControllersOffset = Schema.GetOffset(0x79FB6D7C024CF17F);
+            return ref _Handle.AsRef<int>(_FlexControllersOffset);
         }
     }
-    private static nint? _PredictedOffset;
+    private static nint _PredictedOffset = -1;
 
     public ref bool Predicted
     {
         get
         {
-            _PredictedOffset = _PredictedOffset ?? Schema.GetOffset(0x79FB6D7C419B6D9B);
-            return ref _Handle.AsRef<bool>(_PredictedOffset!.Value);
+            if (_PredictedOffset == -1) _PredictedOffset = Schema.GetOffset(0x79FB6D7C419B6D9B);
+            return ref _Handle.AsRef<bool>(_PredictedOffset);
         }
     }
-    private static nint? _FramesOffset;
+    private static nint _FramesOffset = -1;
 
     public ref CUtlVector<SkeletonAnimCapture_t__Frame_t> Frames
     {
         get
         {
-            _FramesOffset = _FramesOffset ?? Schema.GetOffset(0x79FB6D7CEA11EACF);
-            return ref _Handle.AsRef<CUtlVector<SkeletonAnimCapture_t__Frame_t>>(_FramesOffset!.Value);
+            if (_FramesOffset == -1) _FramesOffset = Schema.GetOffset(0x79FB6D7CEA11EACF);
+            return ref _Handle.AsRef<CUtlVector<SkeletonAnimCapture_t__Frame_t>>(_FramesOffset);
         }
     }
 

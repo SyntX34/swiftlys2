@@ -16,27 +16,27 @@ internal partial class CAnimGraphDoc_ToggleComponentActionImpl : CAnimGraphDoc_A
 {
     public CAnimGraphDoc_ToggleComponentActionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ComponentIDOffset;
+    private static nint _ComponentIDOffset = -1;
     private AnimComponentIDImpl? _ComponentIDInstance;
 
     public AnimComponentID ComponentID
     {
         get
         {
-            _ComponentIDOffset = _ComponentIDOffset ?? Schema.GetOffset(0xADB55163C1B9267D);
+            if (_ComponentIDOffset == -1) _ComponentIDOffset = Schema.GetOffset(0xADB55163C1B9267D);
             var instance = _ComponentIDInstance ??= new AnimComponentIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ComponentIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ComponentIDOffset);
             return instance;
         }
     }
-    private static nint? _SetEnabledOffset;
+    private static nint _SetEnabledOffset = -1;
 
     public ref bool SetEnabled
     {
         get
         {
-            _SetEnabledOffset = _SetEnabledOffset ?? Schema.GetOffset(0xADB55163BC6294B8);
-            return ref _Handle.AsRef<bool>(_SetEnabledOffset!.Value);
+            if (_SetEnabledOffset == -1) _SetEnabledOffset = Schema.GetOffset(0xADB55163BC6294B8);
+            return ref _Handle.AsRef<bool>(_SetEnabledOffset);
         }
     }
 

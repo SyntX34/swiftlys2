@@ -16,137 +16,137 @@ internal partial class CAnimGraphDoc_StateImpl : SchemaClass, CAnimGraphDoc_Stat
 {
     public CAnimGraphDoc_StateImpl(nint handle) : base(handle) { }
 
-    private static nint? _TransitionsOffset;
+    private static nint _TransitionsOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> Transitions
     {
         get
         {
-            _TransitionsOffset = _TransitionsOffset ?? Schema.GetOffset(0xFFD6856FAD108163);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TransitionsOffset!.Value);
+            if (_TransitionsOffset == -1) _TransitionsOffset = Schema.GetOffset(0xFFD6856FAD108163);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TransitionsOffset);
         }
     }
-    private static nint? _ActionsOffset;
+    private static nint _ActionsOffset = -1;
 
     public ref CUtlVector<CStateAction> Actions
     {
         get
         {
-            _ActionsOffset = _ActionsOffset ?? Schema.GetOffset(0xFFD6856F8D622684);
-            return ref _Handle.AsRef<CUtlVector<CStateAction>>(_ActionsOffset!.Value);
+            if (_ActionsOffset == -1) _ActionsOffset = Schema.GetOffset(0xFFD6856F8D622684);
+            return ref _Handle.AsRef<CUtlVector<CStateAction>>(_ActionsOffset);
         }
     }
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFFD6856F4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFFD6856F4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFFD6856F4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFFD6856F4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _CommentOffset;
+    private static nint _CommentOffset = -1;
 
     public string Comment
     {
         get
         {
-            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0xFFD6856F88A0B4DF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset!.Value));
+            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0xFFD6856F88A0B4DF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset));
         }
         set
         {
-            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0xFFD6856F88A0B4DF);
-            Schema.SetCUtlString(_Handle, _CommentOffset!.Value, value);
+            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0xFFD6856F88A0B4DF);
+            Schema.SetCUtlString(_Handle, _CommentOffset, value);
         }
     }
-    private static nint? _StateIDOffset;
+    private static nint _StateIDOffset = -1;
     private AnimStateIDImpl? _StateIDInstance;
 
     public AnimStateID StateID
     {
         get
         {
-            _StateIDOffset = _StateIDOffset ?? Schema.GetOffset(0xFFD6856F5362B56B);
+            if (_StateIDOffset == -1) _StateIDOffset = Schema.GetOffset(0xFFD6856F5362B56B);
             var instance = _StateIDInstance ??= new AnimStateIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _StateIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StateIDOffset);
             return instance;
         }
     }
-    private static nint? _PositionOffset;
+    private static nint _PositionOffset = -1;
 
     public ref Vector2D Position
     {
         get
         {
-            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0xFFD6856F4B57E0AA);
-            return ref _Handle.AsRef<Vector2D>(_PositionOffset!.Value);
+            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0xFFD6856F4B57E0AA);
+            return ref _Handle.AsRef<Vector2D>(_PositionOffset);
         }
     }
-    private static nint? _IsStartStateOffset;
+    private static nint _IsStartStateOffset = -1;
 
     public ref bool IsStartState
     {
         get
         {
-            _IsStartStateOffset = _IsStartStateOffset ?? Schema.GetOffset(0xFFD6856FB4CEE040);
-            return ref _Handle.AsRef<bool>(_IsStartStateOffset!.Value);
+            if (_IsStartStateOffset == -1) _IsStartStateOffset = Schema.GetOffset(0xFFD6856FB4CEE040);
+            return ref _Handle.AsRef<bool>(_IsStartStateOffset);
         }
     }
-    private static nint? _IsEndtStateOffset;
+    private static nint _IsEndtStateOffset = -1;
 
     public ref bool IsEndtState
     {
         get
         {
-            _IsEndtStateOffset = _IsEndtStateOffset ?? Schema.GetOffset(0xFFD6856F6CF6DD3F);
-            return ref _Handle.AsRef<bool>(_IsEndtStateOffset!.Value);
+            if (_IsEndtStateOffset == -1) _IsEndtStateOffset = Schema.GetOffset(0xFFD6856F6CF6DD3F);
+            return ref _Handle.AsRef<bool>(_IsEndtStateOffset);
         }
     }
-    private static nint? _IsInputToGraphOffset;
+    private static nint _IsInputToGraphOffset = -1;
 
     public ref bool IsInputToGraph
     {
         get
         {
-            _IsInputToGraphOffset = _IsInputToGraphOffset ?? Schema.GetOffset(0xFFD6856F1F43460E);
-            return ref _Handle.AsRef<bool>(_IsInputToGraphOffset!.Value);
+            if (_IsInputToGraphOffset == -1) _IsInputToGraphOffset = Schema.GetOffset(0xFFD6856F1F43460E);
+            return ref _Handle.AsRef<bool>(_IsInputToGraphOffset);
         }
     }
-    private static nint? _IsPassthroughOffset;
+    private static nint _IsPassthroughOffset = -1;
 
     public ref bool IsPassthrough
     {
         get
         {
-            _IsPassthroughOffset = _IsPassthroughOffset ?? Schema.GetOffset(0xFFD6856FF0AD9431);
-            return ref _Handle.AsRef<bool>(_IsPassthroughOffset!.Value);
+            if (_IsPassthroughOffset == -1) _IsPassthroughOffset = Schema.GetOffset(0xFFD6856FF0AD9431);
+            return ref _Handle.AsRef<bool>(_IsPassthroughOffset);
         }
     }
-    private static nint? _IsPassthroughRootMotionOffset;
+    private static nint _IsPassthroughRootMotionOffset = -1;
 
     public ref bool IsPassthroughRootMotion
     {
         get
         {
-            _IsPassthroughRootMotionOffset = _IsPassthroughRootMotionOffset ?? Schema.GetOffset(0xFFD6856F4B319C83);
-            return ref _Handle.AsRef<bool>(_IsPassthroughRootMotionOffset!.Value);
+            if (_IsPassthroughRootMotionOffset == -1) _IsPassthroughRootMotionOffset = Schema.GetOffset(0xFFD6856F4B319C83);
+            return ref _Handle.AsRef<bool>(_IsPassthroughRootMotionOffset);
         }
     }
-    private static nint? _PreEvaluatePassthroughTransitionPathOffset;
+    private static nint _PreEvaluatePassthroughTransitionPathOffset = -1;
 
     public ref bool PreEvaluatePassthroughTransitionPath
     {
         get
         {
-            _PreEvaluatePassthroughTransitionPathOffset = _PreEvaluatePassthroughTransitionPathOffset ?? Schema.GetOffset(0xFFD6856F0DFCB92D);
-            return ref _Handle.AsRef<bool>(_PreEvaluatePassthroughTransitionPathOffset!.Value);
+            if (_PreEvaluatePassthroughTransitionPathOffset == -1) _PreEvaluatePassthroughTransitionPathOffset = Schema.GetOffset(0xFFD6856F0DFCB92D);
+            return ref _Handle.AsRef<bool>(_PreEvaluatePassthroughTransitionPathOffset);
         }
     }
 

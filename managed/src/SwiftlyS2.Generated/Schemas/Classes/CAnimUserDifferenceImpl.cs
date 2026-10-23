@@ -16,24 +16,24 @@ internal partial class CAnimUserDifferenceImpl : SchemaClass, CAnimUserDifferenc
 {
     public CAnimUserDifferenceImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public ref CBufferString Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8F174EDB4D8F5786);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x8F174EDB4D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset);
         }
     }
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref int Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x8F174EDB18853D59);
-            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x8F174EDB18853D59);
+            return ref _Handle.AsRef<int>(_TypeOffset);
         }
     }
 

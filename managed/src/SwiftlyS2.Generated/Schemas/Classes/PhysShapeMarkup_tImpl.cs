@@ -16,34 +16,34 @@ internal partial class PhysShapeMarkup_tImpl : SchemaClass, PhysShapeMarkup_t
 {
     public PhysShapeMarkup_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _BodyInAggregateOffset;
+    private static nint _BodyInAggregateOffset = -1;
 
     public ref int BodyInAggregate
     {
         get
         {
-            _BodyInAggregateOffset = _BodyInAggregateOffset ?? Schema.GetOffset(0x87CE340954AFE651);
-            return ref _Handle.AsRef<int>(_BodyInAggregateOffset!.Value);
+            if (_BodyInAggregateOffset == -1) _BodyInAggregateOffset = Schema.GetOffset(0x87CE340954AFE651);
+            return ref _Handle.AsRef<int>(_BodyInAggregateOffset);
         }
     }
-    private static nint? _ShapeInBodyOffset;
+    private static nint _ShapeInBodyOffset = -1;
 
     public ref int ShapeInBody
     {
         get
         {
-            _ShapeInBodyOffset = _ShapeInBodyOffset ?? Schema.GetOffset(0x87CE3409C45F6FDD);
-            return ref _Handle.AsRef<int>(_ShapeInBodyOffset!.Value);
+            if (_ShapeInBodyOffset == -1) _ShapeInBodyOffset = Schema.GetOffset(0x87CE3409C45F6FDD);
+            return ref _Handle.AsRef<int>(_ShapeInBodyOffset);
         }
     }
-    private static nint? _HitGroupOffset;
+    private static nint _HitGroupOffset = -1;
 
     public ref CGlobalSymbol HitGroup
     {
         get
         {
-            _HitGroupOffset = _HitGroupOffset ?? Schema.GetOffset(0x87CE3409A13CBDEA);
-            return ref _Handle.AsRef<CGlobalSymbol>(_HitGroupOffset!.Value);
+            if (_HitGroupOffset == -1) _HitGroupOffset = Schema.GetOffset(0x87CE3409A13CBDEA);
+            return ref _Handle.AsRef<CGlobalSymbol>(_HitGroupOffset);
         }
     }
 

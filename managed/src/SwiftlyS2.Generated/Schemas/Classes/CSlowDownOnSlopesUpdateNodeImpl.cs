@@ -16,14 +16,14 @@ internal partial class CSlowDownOnSlopesUpdateNodeImpl : CUnaryUpdateNodeImpl, C
 {
     public CSlowDownOnSlopesUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _SlowDownStrengthOffset;
+    private static nint _SlowDownStrengthOffset = -1;
 
     public ref float SlowDownStrength
     {
         get
         {
-            _SlowDownStrengthOffset = _SlowDownStrengthOffset ?? Schema.GetOffset(0x196FB4938D85E247);
-            return ref _Handle.AsRef<float>(_SlowDownStrengthOffset!.Value);
+            if (_SlowDownStrengthOffset == -1) _SlowDownStrengthOffset = Schema.GetOffset(0x196FB4938D85E247);
+            return ref _Handle.AsRef<float>(_SlowDownStrengthOffset);
         }
     }
 

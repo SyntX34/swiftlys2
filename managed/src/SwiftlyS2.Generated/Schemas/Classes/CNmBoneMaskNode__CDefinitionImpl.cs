@@ -16,14 +16,14 @@ internal partial class CNmBoneMaskNode__CDefinitionImpl : CNmBoneMaskValueNode__
 {
     public CNmBoneMaskNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoneMaskIDOffset;
+    private static nint _BoneMaskIDOffset = -1;
 
     public ref CGlobalSymbol BoneMaskID
     {
         get
         {
-            _BoneMaskIDOffset = _BoneMaskIDOffset ?? Schema.GetOffset(0xC50CAD4B5F09FD66);
-            return ref _Handle.AsRef<CGlobalSymbol>(_BoneMaskIDOffset!.Value);
+            if (_BoneMaskIDOffset == -1) _BoneMaskIDOffset = Schema.GetOffset(0xC50CAD4B5F09FD66);
+            return ref _Handle.AsRef<CGlobalSymbol>(_BoneMaskIDOffset);
         }
     }
 

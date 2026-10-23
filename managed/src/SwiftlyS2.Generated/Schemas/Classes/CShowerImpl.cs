@@ -16,14 +16,14 @@ internal partial class CShowerImpl : CModelPointEntityImpl, CShower
 {
     public CShowerImpl(nint handle) : base(handle) { }
 
-    private static nint? _SpeedOffset;
+    private static nint _SpeedOffset = -1;
 
     public ref float Speed
     {
         get
         {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x1E4708BCC631B7EA);
-            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0x1E4708BCC631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset);
         }
     }
 

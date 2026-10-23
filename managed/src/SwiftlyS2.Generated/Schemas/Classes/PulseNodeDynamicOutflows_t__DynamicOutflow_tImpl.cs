@@ -16,26 +16,26 @@ internal partial class PulseNodeDynamicOutflows_t__DynamicOutflow_tImpl : Schema
 {
     public PulseNodeDynamicOutflows_t__DynamicOutflow_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _OutflowIDOffset;
+    private static nint _OutflowIDOffset = -1;
 
     public ref CGlobalSymbol OutflowID
     {
         get
         {
-            _OutflowIDOffset = _OutflowIDOffset ?? Schema.GetOffset(0x4ACC8D59E16DD56);
-            return ref _Handle.AsRef<CGlobalSymbol>(_OutflowIDOffset!.Value);
+            if (_OutflowIDOffset == -1) _OutflowIDOffset = Schema.GetOffset(0x4ACC8D59E16DD56);
+            return ref _Handle.AsRef<CGlobalSymbol>(_OutflowIDOffset);
         }
     }
-    private static nint? _ConnectionOffset;
+    private static nint _ConnectionOffset = -1;
     private CPulse_OutflowConnectionImpl? _ConnectionInstance;
 
     public CPulse_OutflowConnection Connection
     {
         get
         {
-            _ConnectionOffset = _ConnectionOffset ?? Schema.GetOffset(0x4ACC8D5D4CD5F59);
+            if (_ConnectionOffset == -1) _ConnectionOffset = Schema.GetOffset(0x4ACC8D5D4CD5F59);
             var instance = _ConnectionInstance ??= new CPulse_OutflowConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _ConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ConnectionOffset);
             return instance;
         }
     }

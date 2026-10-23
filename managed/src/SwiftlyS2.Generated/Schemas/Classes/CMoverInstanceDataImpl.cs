@@ -16,49 +16,49 @@ internal partial class CMoverInstanceDataImpl : SchemaClass, CMoverInstanceData
 {
     public CMoverInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _DampedValueOffset;
+    private static nint _DampedValueOffset = -1;
 
     public ref float DampedValue
     {
         get
         {
-            _DampedValueOffset = _DampedValueOffset ?? Schema.GetOffset(0x4E0C5C3C3BD4B675);
-            return ref _Handle.AsRef<float>(_DampedValueOffset!.Value);
+            if (_DampedValueOffset == -1) _DampedValueOffset = Schema.GetOffset(0x4E0C5C3C3BD4B675);
+            return ref _Handle.AsRef<float>(_DampedValueOffset);
         }
     }
-    private static nint? _MovementOffset;
+    private static nint _MovementOffset = -1;
 
     public ref Vector Movement
     {
         get
         {
-            _MovementOffset = _MovementOffset ?? Schema.GetOffset(0x4E0C5C3CC72B27FC);
-            return ref _Handle.AsRef<Vector>(_MovementOffset!.Value);
+            if (_MovementOffset == -1) _MovementOffset = Schema.GetOffset(0x4E0C5C3CC72B27FC);
+            return ref _Handle.AsRef<Vector>(_MovementOffset);
         }
     }
-    private static nint? _RotationOffset;
+    private static nint _RotationOffset = -1;
     private SchemaUntypedField? _RotationInstance;
 
     public SchemaUntypedField Rotation
     {
         get
         {
-            _RotationOffset = _RotationOffset ?? Schema.GetOffset(0x4E0C5C3C8A84EDDF);
+            if (_RotationOffset == -1) _RotationOffset = Schema.GetOffset(0x4E0C5C3C8A84EDDF);
             var instance = _RotationInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RotationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RotationOffset);
             return instance;
         }
     }
-    private static nint? _TargetOrientationOffset;
+    private static nint _TargetOrientationOffset = -1;
     private SchemaUntypedField? _TargetOrientationInstance;
 
     public SchemaUntypedField TargetOrientation
     {
         get
         {
-            _TargetOrientationOffset = _TargetOrientationOffset ?? Schema.GetOffset(0x4E0C5C3CEA8C11A2);
+            if (_TargetOrientationOffset == -1) _TargetOrientationOffset = Schema.GetOffset(0x4E0C5C3CEA8C11A2);
             var instance = _TargetOrientationInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TargetOrientationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TargetOrientationOffset);
             return instance;
         }
     }

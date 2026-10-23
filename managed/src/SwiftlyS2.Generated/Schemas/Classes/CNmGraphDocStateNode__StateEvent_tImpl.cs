@@ -16,44 +16,44 @@ internal partial class CNmGraphDocStateNode__StateEvent_tImpl : SchemaClass, CNm
 {
     public CNmGraphDocStateNode__StateEvent_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0xDC5E5FAE95066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xDC5E5FAE95066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
         }
     }
-    private static nint? _IsEntryOffset;
+    private static nint _IsEntryOffset = -1;
 
     public ref bool IsEntry
     {
         get
         {
-            _IsEntryOffset = _IsEntryOffset ?? Schema.GetOffset(0xDC5E5FAE846CDB23);
-            return ref _Handle.AsRef<bool>(_IsEntryOffset!.Value);
+            if (_IsEntryOffset == -1) _IsEntryOffset = Schema.GetOffset(0xDC5E5FAE846CDB23);
+            return ref _Handle.AsRef<bool>(_IsEntryOffset);
         }
     }
-    private static nint? _IsFullyInStateOffset;
+    private static nint _IsFullyInStateOffset = -1;
 
     public ref bool IsFullyInState
     {
         get
         {
-            _IsFullyInStateOffset = _IsFullyInStateOffset ?? Schema.GetOffset(0xDC5E5FAE52773EC9);
-            return ref _Handle.AsRef<bool>(_IsFullyInStateOffset!.Value);
+            if (_IsFullyInStateOffset == -1) _IsFullyInStateOffset = Schema.GetOffset(0xDC5E5FAE52773EC9);
+            return ref _Handle.AsRef<bool>(_IsFullyInStateOffset);
         }
     }
-    private static nint? _IsExitOffset;
+    private static nint _IsExitOffset = -1;
 
     public ref bool IsExit
     {
         get
         {
-            _IsExitOffset = _IsExitOffset ?? Schema.GetOffset(0xDC5E5FAE7D4AC7D5);
-            return ref _Handle.AsRef<bool>(_IsExitOffset!.Value);
+            if (_IsExitOffset == -1) _IsExitOffset = Schema.GetOffset(0xDC5E5FAE7D4AC7D5);
+            return ref _Handle.AsRef<bool>(_IsExitOffset);
         }
     }
 

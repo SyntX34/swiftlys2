@@ -16,54 +16,54 @@ internal partial class ResourceBlockTypeInfo_tImpl : SchemaClass, ResourceBlockT
 {
     public ResourceBlockTypeInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EncodingOffset;
+    private static nint _EncodingOffset = -1;
 
     public ref ResourceDataEncodingType_t Encoding
     {
         get
         {
-            _EncodingOffset = _EncodingOffset ?? Schema.GetOffset(0x6282D1B127D47E70);
-            return ref _Handle.AsRef<ResourceDataEncodingType_t>(_EncodingOffset!.Value);
+            if (_EncodingOffset == -1) _EncodingOffset = Schema.GetOffset(0x6282D1B127D47E70);
+            return ref _Handle.AsRef<ResourceDataEncodingType_t>(_EncodingOffset);
         }
     }
-    private static nint? _BlockIDOffset;
+    private static nint _BlockIDOffset = -1;
 
     public string BlockID
     {
         get
         {
-            _BlockIDOffset = _BlockIDOffset ?? Schema.GetOffset(0x6282D1B141B8F12F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BlockIDOffset!.Value));
+            if (_BlockIDOffset == -1) _BlockIDOffset = Schema.GetOffset(0x6282D1B141B8F12F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BlockIDOffset));
         }
         set
         {
-            _BlockIDOffset = _BlockIDOffset ?? Schema.GetOffset(0x6282D1B141B8F12F);
-            Schema.SetCUtlString(_Handle, _BlockIDOffset!.Value, value);
+            if (_BlockIDOffset == -1) _BlockIDOffset = Schema.GetOffset(0x6282D1B141B8F12F);
+            Schema.SetCUtlString(_Handle, _BlockIDOffset, value);
         }
     }
-    private static nint? _IntrospectedRootStructOffset;
+    private static nint _IntrospectedRootStructOffset = -1;
 
     public string IntrospectedRootStruct
     {
         get
         {
-            _IntrospectedRootStructOffset = _IntrospectedRootStructOffset ?? Schema.GetOffset(0x6282D1B19186D3DE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IntrospectedRootStructOffset!.Value));
+            if (_IntrospectedRootStructOffset == -1) _IntrospectedRootStructOffset = Schema.GetOffset(0x6282D1B19186D3DE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IntrospectedRootStructOffset));
         }
         set
         {
-            _IntrospectedRootStructOffset = _IntrospectedRootStructOffset ?? Schema.GetOffset(0x6282D1B19186D3DE);
-            Schema.SetCUtlString(_Handle, _IntrospectedRootStructOffset!.Value, value);
+            if (_IntrospectedRootStructOffset == -1) _IntrospectedRootStructOffset = Schema.GetOffset(0x6282D1B19186D3DE);
+            Schema.SetCUtlString(_Handle, _IntrospectedRootStructOffset, value);
         }
     }
-    private static nint? _ResourceVersionOffset;
+    private static nint _ResourceVersionOffset = -1;
 
     public ref int ResourceVersion
     {
         get
         {
-            _ResourceVersionOffset = _ResourceVersionOffset ?? Schema.GetOffset(0x6282D1B1E4B0EF27);
-            return ref _Handle.AsRef<int>(_ResourceVersionOffset!.Value);
+            if (_ResourceVersionOffset == -1) _ResourceVersionOffset = Schema.GetOffset(0x6282D1B1E4B0EF27);
+            return ref _Handle.AsRef<int>(_ResourceVersionOffset);
         }
     }
 

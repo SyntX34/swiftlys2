@@ -16,34 +16,34 @@ internal partial class PointDefinition_tImpl : SchemaClass, PointDefinition_t
 {
     public PointDefinition_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControlPointOffset;
+    private static nint _ControlPointOffset = -1;
 
     public ref int ControlPoint
     {
         get
         {
-            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0x731F83DF0D0DDF8C);
-            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+            if (_ControlPointOffset == -1) _ControlPointOffset = Schema.GetOffset(0x731F83DF0D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset);
         }
     }
-    private static nint? _LocalCoordsOffset;
+    private static nint _LocalCoordsOffset = -1;
 
     public ref bool LocalCoords
     {
         get
         {
-            _LocalCoordsOffset = _LocalCoordsOffset ?? Schema.GetOffset(0x731F83DF30E716DE);
-            return ref _Handle.AsRef<bool>(_LocalCoordsOffset!.Value);
+            if (_LocalCoordsOffset == -1) _LocalCoordsOffset = Schema.GetOffset(0x731F83DF30E716DE);
+            return ref _Handle.AsRef<bool>(_LocalCoordsOffset);
         }
     }
-    private static nint? _OffsetOffset;
+    private static nint _OffsetOffset = -1;
 
     public ref Vector Offset
     {
         get
         {
-            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x731F83DFFE159136);
-            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x731F83DFFE159136);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset);
         }
     }
 

@@ -16,84 +16,84 @@ internal partial class CChangeLevelImpl : CBaseTriggerImpl, CChangeLevel
 {
     public CChangeLevelImpl(nint handle) : base(handle) { }
 
-    private static nint? _MapNameOffset;
+    private static nint _MapNameOffset = -1;
 
     public string MapName
     {
         get
         {
-            _MapNameOffset = _MapNameOffset ?? Schema.GetOffset(0x52008134CE11EF47);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_MapNameOffset!.Value));
+            if (_MapNameOffset == -1) _MapNameOffset = Schema.GetOffset(0x52008134CE11EF47);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_MapNameOffset));
         }
         set
         {
-            _MapNameOffset = _MapNameOffset ?? Schema.GetOffset(0x52008134CE11EF47);
-            Schema.SetCUtlString(_Handle, _MapNameOffset!.Value, value);
+            if (_MapNameOffset == -1) _MapNameOffset = Schema.GetOffset(0x52008134CE11EF47);
+            Schema.SetCUtlString(_Handle, _MapNameOffset, value);
         }
     }
-    private static nint? _LandmarkNameOffset;
+    private static nint _LandmarkNameOffset = -1;
 
     public string LandmarkName
     {
         get
         {
-            _LandmarkNameOffset = _LandmarkNameOffset ?? Schema.GetOffset(0x520081342DEE941D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_LandmarkNameOffset!.Value));
+            if (_LandmarkNameOffset == -1) _LandmarkNameOffset = Schema.GetOffset(0x520081342DEE941D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_LandmarkNameOffset));
         }
         set
         {
-            _LandmarkNameOffset = _LandmarkNameOffset ?? Schema.GetOffset(0x520081342DEE941D);
-            Schema.SetCUtlString(_Handle, _LandmarkNameOffset!.Value, value);
+            if (_LandmarkNameOffset == -1) _LandmarkNameOffset = Schema.GetOffset(0x520081342DEE941D);
+            Schema.SetCUtlString(_Handle, _LandmarkNameOffset, value);
         }
     }
-    private static nint? _OnChangeLevelOffset;
+    private static nint _OnChangeLevelOffset = -1;
 
     public ref CEntityIOOutput OnChangeLevel
     {
         get
         {
-            _OnChangeLevelOffset = _OnChangeLevelOffset ?? Schema.GetOffset(0x52008134EED57EDE);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnChangeLevelOffset!.Value);
+            if (_OnChangeLevelOffset == -1) _OnChangeLevelOffset = Schema.GetOffset(0x52008134EED57EDE);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnChangeLevelOffset);
         }
     }
-    private static nint? _TouchedOffset;
+    private static nint _TouchedOffset = -1;
 
     public ref bool Touched
     {
         get
         {
-            _TouchedOffset = _TouchedOffset ?? Schema.GetOffset(0x520081342BF07839);
-            return ref _Handle.AsRef<bool>(_TouchedOffset!.Value);
+            if (_TouchedOffset == -1) _TouchedOffset = Schema.GetOffset(0x520081342BF07839);
+            return ref _Handle.AsRef<bool>(_TouchedOffset);
         }
     }
-    private static nint? _NoTouchOffset;
+    private static nint _NoTouchOffset = -1;
 
     public ref bool NoTouch
     {
         get
         {
-            _NoTouchOffset = _NoTouchOffset ?? Schema.GetOffset(0x520081343004899D);
-            return ref _Handle.AsRef<bool>(_NoTouchOffset!.Value);
+            if (_NoTouchOffset == -1) _NoTouchOffset = Schema.GetOffset(0x520081343004899D);
+            return ref _Handle.AsRef<bool>(_NoTouchOffset);
         }
     }
-    private static nint? _NewChapterOffset;
+    private static nint _NewChapterOffset = -1;
 
     public ref bool NewChapter
     {
         get
         {
-            _NewChapterOffset = _NewChapterOffset ?? Schema.GetOffset(0x520081342D184126);
-            return ref _Handle.AsRef<bool>(_NewChapterOffset!.Value);
+            if (_NewChapterOffset == -1) _NewChapterOffset = Schema.GetOffset(0x520081342D184126);
+            return ref _Handle.AsRef<bool>(_NewChapterOffset);
         }
     }
-    private static nint? _OnChangeLevelFiredOffset;
+    private static nint _OnChangeLevelFiredOffset = -1;
 
     public ref bool OnChangeLevelFired
     {
         get
         {
-            _OnChangeLevelFiredOffset = _OnChangeLevelFiredOffset ?? Schema.GetOffset(0x520081341173C672);
-            return ref _Handle.AsRef<bool>(_OnChangeLevelFiredOffset!.Value);
+            if (_OnChangeLevelFiredOffset == -1) _OnChangeLevelFiredOffset = Schema.GetOffset(0x520081341173C672);
+            return ref _Handle.AsRef<bool>(_OnChangeLevelFiredOffset);
         }
     }
 

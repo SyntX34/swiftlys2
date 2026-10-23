@@ -16,52 +16,52 @@ internal partial class CAnimConflictBaseImpl : SchemaClass, CAnimConflictBase
 {
     public CAnimConflictBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _ConflictDescOffset;
+    private static nint _ConflictDescOffset = -1;
 
     public string ConflictDesc
     {
         get
         {
-            _ConflictDescOffset = _ConflictDescOffset ?? Schema.GetOffset(0x29013DC31507801);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ConflictDescOffset!.Value));
+            if (_ConflictDescOffset == -1) _ConflictDescOffset = Schema.GetOffset(0x29013DC31507801);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ConflictDescOffset));
         }
         set
         {
-            _ConflictDescOffset = _ConflictDescOffset ?? Schema.GetOffset(0x29013DC31507801);
-            Schema.SetCUtlString(_Handle, _ConflictDescOffset!.Value, value);
+            if (_ConflictDescOffset == -1) _ConflictDescOffset = Schema.GetOffset(0x29013DC31507801);
+            Schema.SetCUtlString(_Handle, _ConflictDescOffset, value);
         }
     }
-    private static nint? _ResolveIdxOffset;
+    private static nint _ResolveIdxOffset = -1;
 
     public ref int ResolveIdx
     {
         get
         {
-            _ResolveIdxOffset = _ResolveIdxOffset ?? Schema.GetOffset(0x29013DC4E58CCBE);
-            return ref _Handle.AsRef<int>(_ResolveIdxOffset!.Value);
+            if (_ResolveIdxOffset == -1) _ResolveIdxOffset = Schema.GetOffset(0x29013DC4E58CCBE);
+            return ref _Handle.AsRef<int>(_ResolveIdxOffset);
         }
     }
-    private static nint? _ConflictDataOffset;
+    private static nint _ConflictDataOffset = -1;
     private SchemaClassFixedArray<CAnimConflictInfo_t>? _ConflictDataInstance;
 
     public ISchemaClassFixedArray<CAnimConflictInfo_t> ConflictData
     {
         get
         {
-            _ConflictDataOffset = _ConflictDataOffset ?? Schema.GetOffset(0x29013DC8B7AD5D7);
+            if (_ConflictDataOffset == -1) _ConflictDataOffset = Schema.GetOffset(0x29013DC8B7AD5D7);
             var instance = _ConflictDataInstance ??= new SchemaClassFixedArray<CAnimConflictInfo_t>(0, 0x29013DC8B7AD5D7, 2, 32, 8);
-            instance.DangerousSetHandle(_Handle + _ConflictDataOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ConflictDataOffset);
             return instance;
         }
     }
-    private static nint? _ConflictTypeOffset;
+    private static nint _ConflictTypeOffset = -1;
 
     public ref AnimConflictType_t ConflictType
     {
         get
         {
-            _ConflictTypeOffset = _ConflictTypeOffset ?? Schema.GetOffset(0x29013DCCC569E92);
-            return ref _Handle.AsRef<AnimConflictType_t>(_ConflictTypeOffset!.Value);
+            if (_ConflictTypeOffset == -1) _ConflictTypeOffset = Schema.GetOffset(0x29013DCCC569E92);
+            return ref _Handle.AsRef<AnimConflictType_t>(_ConflictTypeOffset);
         }
     }
 

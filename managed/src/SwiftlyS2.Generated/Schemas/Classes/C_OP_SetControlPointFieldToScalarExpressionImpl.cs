@@ -16,85 +16,85 @@ internal partial class C_OP_SetControlPointFieldToScalarExpressionImpl : CPartic
 {
     public C_OP_SetControlPointFieldToScalarExpressionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ExpressionOffset;
+    private static nint _ExpressionOffset = -1;
 
     public ref ScalarExpressionType_t Expression
     {
         get
         {
-            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x6A8A3411160B2427);
-            return ref _Handle.AsRef<ScalarExpressionType_t>(_ExpressionOffset!.Value);
+            if (_ExpressionOffset == -1) _ExpressionOffset = Schema.GetOffset(0x6A8A3411160B2427);
+            return ref _Handle.AsRef<ScalarExpressionType_t>(_ExpressionOffset);
         }
     }
-    private static nint? _Input1Offset;
+    private static nint _Input1Offset = -1;
     private CParticleCollectionFloatInputImpl? _Input1Instance;
 
     public CParticleCollectionFloatInput Input1
     {
         get
         {
-            _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x6A8A3411E9DA2E24);
+            if (_Input1Offset == -1) _Input1Offset = Schema.GetOffset(0x6A8A3411E9DA2E24);
             var instance = _Input1Instance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Input1Offset);
             return instance;
         }
     }
-    private static nint? _Input2Offset;
+    private static nint _Input2Offset = -1;
     private CParticleCollectionFloatInputImpl? _Input2Instance;
 
     public CParticleCollectionFloatInput Input2
     {
         get
         {
-            _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x6A8A3411ECDA32DD);
+            if (_Input2Offset == -1) _Input2Offset = Schema.GetOffset(0x6A8A3411ECDA32DD);
             var instance = _Input2Instance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Input2Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Input2Offset);
             return instance;
         }
     }
-    private static nint? _OutputRemapOffset;
+    private static nint _OutputRemapOffset = -1;
     private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
-            _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x6A8A34111239396F);
+            if (_OutputRemapOffset == -1) _OutputRemapOffset = Schema.GetOffset(0x6A8A34111239396F);
             var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset);
             return instance;
         }
     }
-    private static nint? _OutputCPOffset;
+    private static nint _OutputCPOffset = -1;
 
     public ref int OutputCP
     {
         get
         {
-            _OutputCPOffset = _OutputCPOffset ?? Schema.GetOffset(0x6A8A341150DF5703);
-            return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
+            if (_OutputCPOffset == -1) _OutputCPOffset = Schema.GetOffset(0x6A8A341150DF5703);
+            return ref _Handle.AsRef<int>(_OutputCPOffset);
         }
     }
-    private static nint? _OutVectorFieldOffset;
+    private static nint _OutVectorFieldOffset = -1;
 
     public ref int OutVectorField
     {
         get
         {
-            _OutVectorFieldOffset = _OutVectorFieldOffset ?? Schema.GetOffset(0x6A8A3411F9041E74);
-            return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
+            if (_OutVectorFieldOffset == -1) _OutVectorFieldOffset = Schema.GetOffset(0x6A8A3411F9041E74);
+            return ref _Handle.AsRef<int>(_OutVectorFieldOffset);
         }
     }
-    private static nint? _InterpolationOffset;
+    private static nint _InterpolationOffset = -1;
     private CParticleCollectionFloatInputImpl? _InterpolationInstance;
 
     public CParticleCollectionFloatInput Interpolation
     {
         get
         {
-            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x6A8A3411CF55B987);
+            if (_InterpolationOffset == -1) _InterpolationOffset = Schema.GetOffset(0x6A8A3411CF55B987);
             var instance = _InterpolationInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset);
             return instance;
         }
     }

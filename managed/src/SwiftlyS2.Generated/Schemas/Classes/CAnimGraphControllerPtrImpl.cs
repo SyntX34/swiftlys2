@@ -16,15 +16,15 @@ internal partial class CAnimGraphControllerPtrImpl : SchemaClass, CAnimGraphCont
 {
     public CAnimGraphControllerPtrImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControllerOffset;
+    private static nint _ControllerOffset = -1;
     private CAnimGraphControllerBaseImpl? _ControllerInstance;
 
     public CAnimGraphControllerBase? Controller
     {
         get
         {
-            _ControllerOffset = _ControllerOffset ?? Schema.GetOffset(0xCC326F418F2DD553);
-            var ptr = _Handle.Read<nint>(_ControllerOffset!.Value);
+            if (_ControllerOffset == -1) _ControllerOffset = Schema.GetOffset(0xCC326F418F2DD553);
+            var ptr = _Handle.Read<nint>(_ControllerOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ControllerInstance ??= new CAnimGraphControllerBaseImpl(0);
             instance.DangerousSetHandle(ptr);

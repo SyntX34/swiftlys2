@@ -16,44 +16,44 @@ internal partial class CMotorControllerImpl : SchemaClass, CMotorController
 {
     public CMotorControllerImpl(nint handle) : base(handle) { }
 
-    private static nint? _SpeedOffset;
+    private static nint _SpeedOffset = -1;
 
     public ref float Speed
     {
         get
         {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x1A8B9067A4BD35A0);
-            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0x1A8B9067A4BD35A0);
+            return ref _Handle.AsRef<float>(_SpeedOffset);
         }
     }
-    private static nint? _MaxTorqueOffset;
+    private static nint _MaxTorqueOffset = -1;
 
     public ref float MaxTorque
     {
         get
         {
-            _MaxTorqueOffset = _MaxTorqueOffset ?? Schema.GetOffset(0x1A8B90677880BF37);
-            return ref _Handle.AsRef<float>(_MaxTorqueOffset!.Value);
+            if (_MaxTorqueOffset == -1) _MaxTorqueOffset = Schema.GetOffset(0x1A8B90677880BF37);
+            return ref _Handle.AsRef<float>(_MaxTorqueOffset);
         }
     }
-    private static nint? _AxisOffset;
+    private static nint _AxisOffset = -1;
 
     public ref Vector Axis
     {
         get
         {
-            _AxisOffset = _AxisOffset ?? Schema.GetOffset(0x1A8B90672B06DE94);
-            return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+            if (_AxisOffset == -1) _AxisOffset = Schema.GetOffset(0x1A8B90672B06DE94);
+            return ref _Handle.AsRef<Vector>(_AxisOffset);
         }
     }
-    private static nint? _InertiaFactorOffset;
+    private static nint _InertiaFactorOffset = -1;
 
     public ref float InertiaFactor
     {
         get
         {
-            _InertiaFactorOffset = _InertiaFactorOffset ?? Schema.GetOffset(0x1A8B9067B824C94A);
-            return ref _Handle.AsRef<float>(_InertiaFactorOffset!.Value);
+            if (_InertiaFactorOffset == -1) _InertiaFactorOffset = Schema.GetOffset(0x1A8B9067B824C94A);
+            return ref _Handle.AsRef<float>(_InertiaFactorOffset);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CResponseCriteriaSetImpl : SchemaClass, CResponseCriteria
 {
     public CResponseCriteriaSetImpl(nint handle) : base(handle) { }
 
-    private static nint? _OverrideOnAppendOffset;
+    private static nint _OverrideOnAppendOffset = -1;
 
     public ref bool OverrideOnAppend
     {
         get
         {
-            _OverrideOnAppendOffset = _OverrideOnAppendOffset ?? Schema.GetOffset(0x96E391140E1014F0);
-            return ref _Handle.AsRef<bool>(_OverrideOnAppendOffset!.Value);
+            if (_OverrideOnAppendOffset == -1) _OverrideOnAppendOffset = Schema.GetOffset(0x96E391140E1014F0);
+            return ref _Handle.AsRef<bool>(_OverrideOnAppendOffset);
         }
     }
 

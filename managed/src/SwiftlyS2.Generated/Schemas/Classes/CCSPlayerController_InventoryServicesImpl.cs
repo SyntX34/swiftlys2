@@ -16,110 +16,110 @@ internal partial class CCSPlayerController_InventoryServicesImpl : CPlayerContro
 {
     public CCSPlayerController_InventoryServicesImpl(nint handle) : base(handle) { }
 
-    private static nint? _MusicIDOffset;
+    private static nint _MusicIDOffset = -1;
 
     public ref ushort MusicID
     {
         get
         {
-            _MusicIDOffset = _MusicIDOffset ?? Schema.GetOffset(0xC1D0078289F71A5C);
-            return ref _Handle.AsRef<ushort>(_MusicIDOffset!.Value);
+            if (_MusicIDOffset == -1) _MusicIDOffset = Schema.GetOffset(0xC1D0078289F71A5C);
+            return ref _Handle.AsRef<ushort>(_MusicIDOffset);
         }
     }
-    private static nint? _RankOffset;
+    private static nint _RankOffset = -1;
     private SchemaFixedArray<MedalRank_t>? _RankInstance;
 
     public ISchemaFixedArray<MedalRank_t> Rank
     {
         get
         {
-            _RankOffset = _RankOffset ?? Schema.GetOffset(0xC1D007826A7861C7);
+            if (_RankOffset == -1) _RankOffset = Schema.GetOffset(0xC1D007826A7861C7);
             var instance = _RankInstance ??= new SchemaFixedArray<MedalRank_t>(0, 0xC1D007826A7861C7, 6, 4, 4);
-            instance.DangerousSetHandle(_Handle + _RankOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RankOffset);
             return instance;
         }
     }
-    private static nint? _PersonaDataPublicLevelOffset;
+    private static nint _PersonaDataPublicLevelOffset = -1;
 
     public ref int PersonaDataPublicLevel
     {
         get
         {
-            _PersonaDataPublicLevelOffset = _PersonaDataPublicLevelOffset ?? Schema.GetOffset(0xC1D00782BE2880D0);
-            return ref _Handle.AsRef<int>(_PersonaDataPublicLevelOffset!.Value);
+            if (_PersonaDataPublicLevelOffset == -1) _PersonaDataPublicLevelOffset = Schema.GetOffset(0xC1D00782BE2880D0);
+            return ref _Handle.AsRef<int>(_PersonaDataPublicLevelOffset);
         }
     }
-    private static nint? _PersonaDataPublicCommendsLeaderOffset;
+    private static nint _PersonaDataPublicCommendsLeaderOffset = -1;
 
     public ref int PersonaDataPublicCommendsLeader
     {
         get
         {
-            _PersonaDataPublicCommendsLeaderOffset = _PersonaDataPublicCommendsLeaderOffset ?? Schema.GetOffset(0xC1D00782671B0B25);
-            return ref _Handle.AsRef<int>(_PersonaDataPublicCommendsLeaderOffset!.Value);
+            if (_PersonaDataPublicCommendsLeaderOffset == -1) _PersonaDataPublicCommendsLeaderOffset = Schema.GetOffset(0xC1D00782671B0B25);
+            return ref _Handle.AsRef<int>(_PersonaDataPublicCommendsLeaderOffset);
         }
     }
-    private static nint? _PersonaDataPublicCommendsTeacherOffset;
+    private static nint _PersonaDataPublicCommendsTeacherOffset = -1;
 
     public ref int PersonaDataPublicCommendsTeacher
     {
         get
         {
-            _PersonaDataPublicCommendsTeacherOffset = _PersonaDataPublicCommendsTeacherOffset ?? Schema.GetOffset(0xC1D00782610CA282);
-            return ref _Handle.AsRef<int>(_PersonaDataPublicCommendsTeacherOffset!.Value);
+            if (_PersonaDataPublicCommendsTeacherOffset == -1) _PersonaDataPublicCommendsTeacherOffset = Schema.GetOffset(0xC1D00782610CA282);
+            return ref _Handle.AsRef<int>(_PersonaDataPublicCommendsTeacherOffset);
         }
     }
-    private static nint? _PersonaDataPublicCommendsFriendlyOffset;
+    private static nint _PersonaDataPublicCommendsFriendlyOffset = -1;
 
     public ref int PersonaDataPublicCommendsFriendly
     {
         get
         {
-            _PersonaDataPublicCommendsFriendlyOffset = _PersonaDataPublicCommendsFriendlyOffset ?? Schema.GetOffset(0xC1D00782B3DA495B);
-            return ref _Handle.AsRef<int>(_PersonaDataPublicCommendsFriendlyOffset!.Value);
+            if (_PersonaDataPublicCommendsFriendlyOffset == -1) _PersonaDataPublicCommendsFriendlyOffset = Schema.GetOffset(0xC1D00782B3DA495B);
+            return ref _Handle.AsRef<int>(_PersonaDataPublicCommendsFriendlyOffset);
         }
     }
-    private static nint? _PersonaDataXpTrailLevelOffset;
+    private static nint _PersonaDataXpTrailLevelOffset = -1;
 
     public ref int PersonaDataXpTrailLevel
     {
         get
         {
-            _PersonaDataXpTrailLevelOffset = _PersonaDataXpTrailLevelOffset ?? Schema.GetOffset(0xC1D0078228192B7D);
-            return ref _Handle.AsRef<int>(_PersonaDataXpTrailLevelOffset!.Value);
+            if (_PersonaDataXpTrailLevelOffset == -1) _PersonaDataXpTrailLevelOffset = Schema.GetOffset(0xC1D0078228192B7D);
+            return ref _Handle.AsRef<int>(_PersonaDataXpTrailLevelOffset);
         }
     }
-    private static nint? _EquippedPlayerSprayIDsOffset;
+    private static nint _EquippedPlayerSprayIDsOffset = -1;
     private SchemaFixedArray<uint>? _EquippedPlayerSprayIDsInstance;
 
     public ISchemaFixedArray<uint> EquippedPlayerSprayIDs
     {
         get
         {
-            _EquippedPlayerSprayIDsOffset = _EquippedPlayerSprayIDsOffset ?? Schema.GetOffset(0xC1D00782CE970C93);
+            if (_EquippedPlayerSprayIDsOffset == -1) _EquippedPlayerSprayIDsOffset = Schema.GetOffset(0xC1D00782CE970C93);
             var instance = _EquippedPlayerSprayIDsInstance ??= new SchemaFixedArray<uint>(0, 0xC1D00782CE970C93, 1, 4, 4);
-            instance.DangerousSetHandle(_Handle + _EquippedPlayerSprayIDsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EquippedPlayerSprayIDsOffset);
             return instance;
         }
     }
-    private static nint? _CurrentLoadoutHashOffset;
+    private static nint _CurrentLoadoutHashOffset = -1;
 
     public ref ulong CurrentLoadoutHash
     {
         get
         {
-            _CurrentLoadoutHashOffset = _CurrentLoadoutHashOffset ?? Schema.GetOffset(0xC1D007824F832E99);
-            return ref _Handle.AsRef<ulong>(_CurrentLoadoutHashOffset!.Value);
+            if (_CurrentLoadoutHashOffset == -1) _CurrentLoadoutHashOffset = Schema.GetOffset(0xC1D007824F832E99);
+            return ref _Handle.AsRef<ulong>(_CurrentLoadoutHashOffset);
         }
     }
-    private static nint? _ServerAuthoritativeWeaponSlotsOffset;
+    private static nint _ServerAuthoritativeWeaponSlotsOffset = -1;
 
     public ref CUtlVector<ServerAuthoritativeWeaponSlot_t> ServerAuthoritativeWeaponSlots
     {
         get
         {
-            _ServerAuthoritativeWeaponSlotsOffset = _ServerAuthoritativeWeaponSlotsOffset ?? Schema.GetOffset(0xC1D007826EED2FF6);
-            return ref _Handle.AsRef<CUtlVector<ServerAuthoritativeWeaponSlot_t>>(_ServerAuthoritativeWeaponSlotsOffset!.Value);
+            if (_ServerAuthoritativeWeaponSlotsOffset == -1) _ServerAuthoritativeWeaponSlotsOffset = Schema.GetOffset(0xC1D007826EED2FF6);
+            return ref _Handle.AsRef<CUtlVector<ServerAuthoritativeWeaponSlot_t>>(_ServerAuthoritativeWeaponSlotsOffset);
         }
     }
 

@@ -16,177 +16,177 @@ internal partial class CEnvWindSharedImpl : SchemaClass, CEnvWindShared
 {
     public CEnvWindSharedImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
     private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x4E8F86FE67FE9DC4);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x4E8F86FE67FE9DC4);
             var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
             return instance;
         }
     }
-    private static nint? _WindSeedOffset;
+    private static nint _WindSeedOffset = -1;
 
     public ref uint WindSeed
     {
         get
         {
-            _WindSeedOffset = _WindSeedOffset ?? Schema.GetOffset(0x4E8F86FE2F7E304B);
-            return ref _Handle.AsRef<uint>(_WindSeedOffset!.Value);
+            if (_WindSeedOffset == -1) _WindSeedOffset = Schema.GetOffset(0x4E8F86FE2F7E304B);
+            return ref _Handle.AsRef<uint>(_WindSeedOffset);
         }
     }
-    private static nint? _MinWindOffset;
+    private static nint _MinWindOffset = -1;
 
     public ref ushort MinWind
     {
         get
         {
-            _MinWindOffset = _MinWindOffset ?? Schema.GetOffset(0x4E8F86FE19B7F0B6);
-            return ref _Handle.AsRef<ushort>(_MinWindOffset!.Value);
+            if (_MinWindOffset == -1) _MinWindOffset = Schema.GetOffset(0x4E8F86FE19B7F0B6);
+            return ref _Handle.AsRef<ushort>(_MinWindOffset);
         }
     }
-    private static nint? _MaxWindOffset;
+    private static nint _MaxWindOffset = -1;
 
     public ref ushort MaxWind
     {
         get
         {
-            _MaxWindOffset = _MaxWindOffset ?? Schema.GetOffset(0x4E8F86FE427465A0);
-            return ref _Handle.AsRef<ushort>(_MaxWindOffset!.Value);
+            if (_MaxWindOffset == -1) _MaxWindOffset = Schema.GetOffset(0x4E8F86FE427465A0);
+            return ref _Handle.AsRef<ushort>(_MaxWindOffset);
         }
     }
-    private static nint? _WindRadiusOffset;
+    private static nint _WindRadiusOffset = -1;
 
     public ref int WindRadius
     {
         get
         {
-            _WindRadiusOffset = _WindRadiusOffset ?? Schema.GetOffset(0x4E8F86FED57577F5);
-            return ref _Handle.AsRef<int>(_WindRadiusOffset!.Value);
+            if (_WindRadiusOffset == -1) _WindRadiusOffset = Schema.GetOffset(0x4E8F86FED57577F5);
+            return ref _Handle.AsRef<int>(_WindRadiusOffset);
         }
     }
-    private static nint? _MinGustOffset;
+    private static nint _MinGustOffset = -1;
 
     public ref ushort MinGust
     {
         get
         {
-            _MinGustOffset = _MinGustOffset ?? Schema.GetOffset(0x4E8F86FEA1FFC04F);
-            return ref _Handle.AsRef<ushort>(_MinGustOffset!.Value);
+            if (_MinGustOffset == -1) _MinGustOffset = Schema.GetOffset(0x4E8F86FEA1FFC04F);
+            return ref _Handle.AsRef<ushort>(_MinGustOffset);
         }
     }
-    private static nint? _MaxGustOffset;
+    private static nint _MaxGustOffset = -1;
 
     public ref ushort MaxGust
     {
         get
         {
-            _MaxGustOffset = _MaxGustOffset ?? Schema.GetOffset(0x4E8F86FEF0A3B1C9);
-            return ref _Handle.AsRef<ushort>(_MaxGustOffset!.Value);
+            if (_MaxGustOffset == -1) _MaxGustOffset = Schema.GetOffset(0x4E8F86FEF0A3B1C9);
+            return ref _Handle.AsRef<ushort>(_MaxGustOffset);
         }
     }
-    private static nint? _MinGustDelayOffset;
+    private static nint _MinGustDelayOffset = -1;
 
     public ref float MinGustDelay
     {
         get
         {
-            _MinGustDelayOffset = _MinGustDelayOffset ?? Schema.GetOffset(0x4E8F86FE2A8BCB2D);
-            return ref _Handle.AsRef<float>(_MinGustDelayOffset!.Value);
+            if (_MinGustDelayOffset == -1) _MinGustDelayOffset = Schema.GetOffset(0x4E8F86FE2A8BCB2D);
+            return ref _Handle.AsRef<float>(_MinGustDelayOffset);
         }
     }
-    private static nint? _MaxGustDelayOffset;
+    private static nint _MaxGustDelayOffset = -1;
 
     public ref float MaxGustDelay
     {
         get
         {
-            _MaxGustDelayOffset = _MaxGustDelayOffset ?? Schema.GetOffset(0x4E8F86FE53D781CF);
-            return ref _Handle.AsRef<float>(_MaxGustDelayOffset!.Value);
+            if (_MaxGustDelayOffset == -1) _MaxGustDelayOffset = Schema.GetOffset(0x4E8F86FE53D781CF);
+            return ref _Handle.AsRef<float>(_MaxGustDelayOffset);
         }
     }
-    private static nint? _GustDurationOffset;
+    private static nint _GustDurationOffset = -1;
 
     public ref float GustDuration
     {
         get
         {
-            _GustDurationOffset = _GustDurationOffset ?? Schema.GetOffset(0x4E8F86FE1FD88D18);
-            return ref _Handle.AsRef<float>(_GustDurationOffset!.Value);
+            if (_GustDurationOffset == -1) _GustDurationOffset = Schema.GetOffset(0x4E8F86FE1FD88D18);
+            return ref _Handle.AsRef<float>(_GustDurationOffset);
         }
     }
-    private static nint? _GustDirChangeOffset;
+    private static nint _GustDirChangeOffset = -1;
 
     public ref ushort GustDirChange
     {
         get
         {
-            _GustDirChangeOffset = _GustDirChangeOffset ?? Schema.GetOffset(0x4E8F86FE945BF5C6);
-            return ref _Handle.AsRef<ushort>(_GustDirChangeOffset!.Value);
+            if (_GustDirChangeOffset == -1) _GustDirChangeOffset = Schema.GetOffset(0x4E8F86FE945BF5C6);
+            return ref _Handle.AsRef<ushort>(_GustDirChangeOffset);
         }
     }
-    private static nint? _InitialWindDirOffset;
+    private static nint _InitialWindDirOffset = -1;
 
     public ref ushort InitialWindDir
     {
         get
         {
-            _InitialWindDirOffset = _InitialWindDirOffset ?? Schema.GetOffset(0x4E8F86FE84BFDBBD);
-            return ref _Handle.AsRef<ushort>(_InitialWindDirOffset!.Value);
+            if (_InitialWindDirOffset == -1) _InitialWindDirOffset = Schema.GetOffset(0x4E8F86FE84BFDBBD);
+            return ref _Handle.AsRef<ushort>(_InitialWindDirOffset);
         }
     }
-    private static nint? _InitialWindSpeedOffset;
+    private static nint _InitialWindSpeedOffset = -1;
 
     public ref float InitialWindSpeed
     {
         get
         {
-            _InitialWindSpeedOffset = _InitialWindSpeedOffset ?? Schema.GetOffset(0x4E8F86FE1670F5CA);
-            return ref _Handle.AsRef<float>(_InitialWindSpeedOffset!.Value);
+            if (_InitialWindSpeedOffset == -1) _InitialWindSpeedOffset = Schema.GetOffset(0x4E8F86FE1670F5CA);
+            return ref _Handle.AsRef<float>(_InitialWindSpeedOffset);
         }
     }
-    private static nint? _LocationOffset;
+    private static nint _LocationOffset = -1;
 
     public ref Vector Location
     {
         get
         {
-            _LocationOffset = _LocationOffset ?? Schema.GetOffset(0x4E8F86FEC4993A46);
-            return ref _Handle.AsRef<Vector>(_LocationOffset!.Value);
+            if (_LocationOffset == -1) _LocationOffset = Schema.GetOffset(0x4E8F86FEC4993A46);
+            return ref _Handle.AsRef<Vector>(_LocationOffset);
         }
     }
-    private static nint? _OnGustStartOffset;
+    private static nint _OnGustStartOffset = -1;
 
     public ref CEntityIOOutput OnGustStart
     {
         get
         {
-            _OnGustStartOffset = _OnGustStartOffset ?? Schema.GetOffset(0x4E8F86FE2832424D);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnGustStartOffset!.Value);
+            if (_OnGustStartOffset == -1) _OnGustStartOffset = Schema.GetOffset(0x4E8F86FE2832424D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnGustStartOffset);
         }
     }
-    private static nint? _OnGustEndOffset;
+    private static nint _OnGustEndOffset = -1;
 
     public ref CEntityIOOutput OnGustEnd
     {
         get
         {
-            _OnGustEndOffset = _OnGustEndOffset ?? Schema.GetOffset(0x4E8F86FE82E285B4);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnGustEndOffset!.Value);
+            if (_OnGustEndOffset == -1) _OnGustEndOffset = Schema.GetOffset(0x4E8F86FE82E285B4);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnGustEndOffset);
         }
     }
-    private static nint? _EntOwnerOffset;
+    private static nint _EntOwnerOffset = -1;
 
     public ref CHandle<CBaseEntity> EntOwner
     {
         get
         {
-            _EntOwnerOffset = _EntOwnerOffset ?? Schema.GetOffset(0x4E8F86FED837CB33);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOwnerOffset!.Value);
+            if (_EntOwnerOffset == -1) _EntOwnerOffset = Schema.GetOffset(0x4E8F86FED837CB33);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOwnerOffset);
         }
     }
 

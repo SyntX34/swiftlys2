@@ -16,93 +16,93 @@ internal partial class CAnimGraphDoc_StanceOverrideNodeImpl : CAnimGraphDoc_Node
 {
     public CAnimGraphDoc_StanceOverrideNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0xCC30BC721F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0xCC30BC721F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _StanceSourceConnectionOffset;
+    private static nint _StanceSourceConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _StanceSourceConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection StanceSourceConnection
     {
         get
         {
-            _StanceSourceConnectionOffset = _StanceSourceConnectionOffset ?? Schema.GetOffset(0xCC30BC728F1A8810);
+            if (_StanceSourceConnectionOffset == -1) _StanceSourceConnectionOffset = Schema.GetOffset(0xCC30BC728F1A8810);
             var instance = _StanceSourceConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _StanceSourceConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StanceSourceConnectionOffset);
             return instance;
         }
     }
-    private static nint? _BlendParamNameOffset;
+    private static nint _BlendParamNameOffset = -1;
 
     public string BlendParamName
     {
         get
         {
-            _BlendParamNameOffset = _BlendParamNameOffset ?? Schema.GetOffset(0xCC30BC72F3F3C142);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_BlendParamNameOffset!.Value));
+            if (_BlendParamNameOffset == -1) _BlendParamNameOffset = Schema.GetOffset(0xCC30BC72F3F3C142);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_BlendParamNameOffset));
         }
         set
         {
-            _BlendParamNameOffset = _BlendParamNameOffset ?? Schema.GetOffset(0xCC30BC72F3F3C142);
-            Schema.SetCUtlString(_Handle, _BlendParamNameOffset!.Value, value);
+            if (_BlendParamNameOffset == -1) _BlendParamNameOffset = Schema.GetOffset(0xCC30BC72F3F3C142);
+            Schema.SetCUtlString(_Handle, _BlendParamNameOffset, value);
         }
     }
-    private static nint? _BlendParamIDOffset;
+    private static nint _BlendParamIDOffset = -1;
     private AnimParamIDImpl? _BlendParamIDInstance;
 
     public AnimParamID BlendParamID
     {
         get
         {
-            _BlendParamIDOffset = _BlendParamIDOffset ?? Schema.GetOffset(0xCC30BC7217D6700C);
+            if (_BlendParamIDOffset == -1) _BlendParamIDOffset = Schema.GetOffset(0xCC30BC7217D6700C);
             var instance = _BlendParamIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _BlendParamIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BlendParamIDOffset);
             return instance;
         }
     }
-    private static nint? _ModeOffset;
+    private static nint _ModeOffset = -1;
 
     public ref StanceOverrideMode Mode
     {
         get
         {
-            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xCC30BC721050A633);
-            return ref _Handle.AsRef<StanceOverrideMode>(_ModeOffset!.Value);
+            if (_ModeOffset == -1) _ModeOffset = Schema.GetOffset(0xCC30BC721050A633);
+            return ref _Handle.AsRef<StanceOverrideMode>(_ModeOffset);
         }
     }
-    private static nint? _SequenceNameOffset;
+    private static nint _SequenceNameOffset = -1;
 
     public string SequenceName
     {
         get
         {
-            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0xCC30BC722B4A24CB);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset!.Value));
+            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0xCC30BC722B4A24CB);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SequenceNameOffset));
         }
         set
         {
-            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0xCC30BC722B4A24CB);
-            Schema.SetCUtlString(_Handle, _SequenceNameOffset!.Value, value);
+            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0xCC30BC722B4A24CB);
+            Schema.SetCUtlString(_Handle, _SequenceNameOffset, value);
         }
     }
-    private static nint? _FrameIndexOffset;
+    private static nint _FrameIndexOffset = -1;
 
     public ref int FrameIndex
     {
         get
         {
-            _FrameIndexOffset = _FrameIndexOffset ?? Schema.GetOffset(0xCC30BC72A816E9B6);
-            return ref _Handle.AsRef<int>(_FrameIndexOffset!.Value);
+            if (_FrameIndexOffset == -1) _FrameIndexOffset = Schema.GetOffset(0xCC30BC72A816E9B6);
+            return ref _Handle.AsRef<int>(_FrameIndexOffset);
         }
     }
 

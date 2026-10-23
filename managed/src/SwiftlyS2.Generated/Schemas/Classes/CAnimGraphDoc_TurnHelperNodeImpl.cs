@@ -16,77 +16,77 @@ internal partial class CAnimGraphDoc_TurnHelperNodeImpl : CAnimGraphDoc_NodeImpl
 {
     public CAnimGraphDoc_TurnHelperNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x8E092D511F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x8E092D511F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _FacingTargetOffset;
+    private static nint _FacingTargetOffset = -1;
 
     public ref AnimValueSource FacingTarget
     {
         get
         {
-            _FacingTargetOffset = _FacingTargetOffset ?? Schema.GetOffset(0x8E092D51ED73C452);
-            return ref _Handle.AsRef<AnimValueSource>(_FacingTargetOffset!.Value);
+            if (_FacingTargetOffset == -1) _FacingTargetOffset = Schema.GetOffset(0x8E092D51ED73C452);
+            return ref _Handle.AsRef<AnimValueSource>(_FacingTargetOffset);
         }
     }
-    private static nint? _TurnStartTimeOffset;
+    private static nint _TurnStartTimeOffset = -1;
 
     public ref float TurnStartTime
     {
         get
         {
-            _TurnStartTimeOffset = _TurnStartTimeOffset ?? Schema.GetOffset(0x8E092D5175897B83);
-            return ref _Handle.AsRef<float>(_TurnStartTimeOffset!.Value);
+            if (_TurnStartTimeOffset == -1) _TurnStartTimeOffset = Schema.GetOffset(0x8E092D5175897B83);
+            return ref _Handle.AsRef<float>(_TurnStartTimeOffset);
         }
     }
-    private static nint? _TurnDurationOffset;
+    private static nint _TurnDurationOffset = -1;
 
     public ref float TurnDuration
     {
         get
         {
-            _TurnDurationOffset = _TurnDurationOffset ?? Schema.GetOffset(0x8E092D51879BD946);
-            return ref _Handle.AsRef<float>(_TurnDurationOffset!.Value);
+            if (_TurnDurationOffset == -1) _TurnDurationOffset = Schema.GetOffset(0x8E092D51879BD946);
+            return ref _Handle.AsRef<float>(_TurnDurationOffset);
         }
     }
-    private static nint? _MatchChildDurationOffset;
+    private static nint _MatchChildDurationOffset = -1;
 
     public ref bool MatchChildDuration
     {
         get
         {
-            _MatchChildDurationOffset = _MatchChildDurationOffset ?? Schema.GetOffset(0x8E092D516B6788BC);
-            return ref _Handle.AsRef<bool>(_MatchChildDurationOffset!.Value);
+            if (_MatchChildDurationOffset == -1) _MatchChildDurationOffset = Schema.GetOffset(0x8E092D516B6788BC);
+            return ref _Handle.AsRef<bool>(_MatchChildDurationOffset);
         }
     }
-    private static nint? _UseManualTurnOffsetOffset;
+    private static nint _UseManualTurnOffsetOffset = -1;
 
     public ref bool UseManualTurnOffset
     {
         get
         {
-            _UseManualTurnOffsetOffset = _UseManualTurnOffsetOffset ?? Schema.GetOffset(0x8E092D519290C2BE);
-            return ref _Handle.AsRef<bool>(_UseManualTurnOffsetOffset!.Value);
+            if (_UseManualTurnOffsetOffset == -1) _UseManualTurnOffsetOffset = Schema.GetOffset(0x8E092D519290C2BE);
+            return ref _Handle.AsRef<bool>(_UseManualTurnOffsetOffset);
         }
     }
-    private static nint? _ManualTurnOffsetOffset;
+    private static nint _ManualTurnOffsetOffset = -1;
 
     public ref float ManualTurnOffset
     {
         get
         {
-            _ManualTurnOffsetOffset = _ManualTurnOffsetOffset ?? Schema.GetOffset(0x8E092D5161F53BBB);
-            return ref _Handle.AsRef<float>(_ManualTurnOffsetOffset!.Value);
+            if (_ManualTurnOffsetOffset == -1) _ManualTurnOffsetOffset = Schema.GetOffset(0x8E092D5161F53BBB);
+            return ref _Handle.AsRef<float>(_ManualTurnOffsetOffset);
         }
     }
 

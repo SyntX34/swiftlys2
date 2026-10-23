@@ -16,44 +16,44 @@ internal partial class SteamAudioCustomDataOcclusionSettings_tImpl : SchemaClass
 {
     public SteamAudioCustomDataOcclusionSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EnablePathingOffset;
+    private static nint _EnablePathingOffset = -1;
 
     public ref bool EnablePathing
     {
         get
         {
-            _EnablePathingOffset = _EnablePathingOffset ?? Schema.GetOffset(0xE59CA82B50A2B85B);
-            return ref _Handle.AsRef<bool>(_EnablePathingOffset!.Value);
+            if (_EnablePathingOffset == -1) _EnablePathingOffset = Schema.GetOffset(0xE59CA82B50A2B85B);
+            return ref _Handle.AsRef<bool>(_EnablePathingOffset);
         }
     }
-    private static nint? _EnableReflectionsOffset;
+    private static nint _EnableReflectionsOffset = -1;
 
     public ref bool EnableReflections
     {
         get
         {
-            _EnableReflectionsOffset = _EnableReflectionsOffset ?? Schema.GetOffset(0xE59CA82B017A026C);
-            return ref _Handle.AsRef<bool>(_EnableReflectionsOffset!.Value);
+            if (_EnableReflectionsOffset == -1) _EnableReflectionsOffset = Schema.GetOffset(0xE59CA82B017A026C);
+            return ref _Handle.AsRef<bool>(_EnableReflectionsOffset);
         }
     }
-    private static nint? _ReflectionRaysOffset;
+    private static nint _ReflectionRaysOffset = -1;
 
     public ref int ReflectionRays
     {
         get
         {
-            _ReflectionRaysOffset = _ReflectionRaysOffset ?? Schema.GetOffset(0xE59CA82B7F30AD8D);
-            return ref _Handle.AsRef<int>(_ReflectionRaysOffset!.Value);
+            if (_ReflectionRaysOffset == -1) _ReflectionRaysOffset = Schema.GetOffset(0xE59CA82B7F30AD8D);
+            return ref _Handle.AsRef<int>(_ReflectionRaysOffset);
         }
     }
-    private static nint? _ReflectionBouncesOffset;
+    private static nint _ReflectionBouncesOffset = -1;
 
     public ref int ReflectionBounces
     {
         get
         {
-            _ReflectionBouncesOffset = _ReflectionBouncesOffset ?? Schema.GetOffset(0xE59CA82BC9012049);
-            return ref _Handle.AsRef<int>(_ReflectionBouncesOffset!.Value);
+            if (_ReflectionBouncesOffset == -1) _ReflectionBouncesOffset = Schema.GetOffset(0xE59CA82BC9012049);
+            return ref _Handle.AsRef<int>(_ReflectionBouncesOffset);
         }
     }
 

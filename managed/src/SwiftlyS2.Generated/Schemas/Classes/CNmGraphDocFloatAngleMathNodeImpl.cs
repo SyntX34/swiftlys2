@@ -16,14 +16,14 @@ internal partial class CNmGraphDocFloatAngleMathNodeImpl : CNmGraphDocFlowNodeIm
 {
     public CNmGraphDocFloatAngleMathNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _OperationOffset;
+    private static nint _OperationOffset = -1;
 
     public ref CNmFloatAngleMathNode__Operation_t Operation
     {
         get
         {
-            _OperationOffset = _OperationOffset ?? Schema.GetOffset(0x80B17B3EAEA59026);
-            return ref _Handle.AsRef<CNmFloatAngleMathNode__Operation_t>(_OperationOffset!.Value);
+            if (_OperationOffset == -1) _OperationOffset = Schema.GetOffset(0x80B17B3EAEA59026);
+            return ref _Handle.AsRef<CNmFloatAngleMathNode__Operation_t>(_OperationOffset);
         }
     }
 

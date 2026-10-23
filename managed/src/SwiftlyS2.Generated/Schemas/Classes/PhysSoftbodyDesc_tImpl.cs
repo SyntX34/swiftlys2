@@ -16,64 +16,64 @@ internal partial class PhysSoftbodyDesc_tImpl : SchemaClass, PhysSoftbodyDesc_t
 {
     public PhysSoftbodyDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParticleBoneHashOffset;
+    private static nint _ParticleBoneHashOffset = -1;
 
     public ref CUtlVector<uint> ParticleBoneHash
     {
         get
         {
-            _ParticleBoneHashOffset = _ParticleBoneHashOffset ?? Schema.GetOffset(0xD390C8BBCC44F471);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_ParticleBoneHashOffset!.Value);
+            if (_ParticleBoneHashOffset == -1) _ParticleBoneHashOffset = Schema.GetOffset(0xD390C8BBCC44F471);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_ParticleBoneHashOffset);
         }
     }
-    private static nint? _ParticlesOffset;
+    private static nint _ParticlesOffset = -1;
 
     public ref CUtlVector<RnSoftbodyParticle_t> Particles
     {
         get
         {
-            _ParticlesOffset = _ParticlesOffset ?? Schema.GetOffset(0xD390C8BB6C0747A4);
-            return ref _Handle.AsRef<CUtlVector<RnSoftbodyParticle_t>>(_ParticlesOffset!.Value);
+            if (_ParticlesOffset == -1) _ParticlesOffset = Schema.GetOffset(0xD390C8BB6C0747A4);
+            return ref _Handle.AsRef<CUtlVector<RnSoftbodyParticle_t>>(_ParticlesOffset);
         }
     }
-    private static nint? _SpringsOffset;
+    private static nint _SpringsOffset = -1;
 
     public ref CUtlVector<RnSoftbodySpring_t> Springs
     {
         get
         {
-            _SpringsOffset = _SpringsOffset ?? Schema.GetOffset(0xD390C8BB1AB5EB4D);
-            return ref _Handle.AsRef<CUtlVector<RnSoftbodySpring_t>>(_SpringsOffset!.Value);
+            if (_SpringsOffset == -1) _SpringsOffset = Schema.GetOffset(0xD390C8BB1AB5EB4D);
+            return ref _Handle.AsRef<CUtlVector<RnSoftbodySpring_t>>(_SpringsOffset);
         }
     }
-    private static nint? _CapsulesOffset;
+    private static nint _CapsulesOffset = -1;
 
     public ref CUtlVector<RnSoftbodyCapsule_t> Capsules
     {
         get
         {
-            _CapsulesOffset = _CapsulesOffset ?? Schema.GetOffset(0xD390C8BBFC27BB2D);
-            return ref _Handle.AsRef<CUtlVector<RnSoftbodyCapsule_t>>(_CapsulesOffset!.Value);
+            if (_CapsulesOffset == -1) _CapsulesOffset = Schema.GetOffset(0xD390C8BBFC27BB2D);
+            return ref _Handle.AsRef<CUtlVector<RnSoftbodyCapsule_t>>(_CapsulesOffset);
         }
     }
-    private static nint? _InitPoseOffset;
+    private static nint _InitPoseOffset = -1;
 
     public ref CUtlVector<CTransform> InitPose
     {
         get
         {
-            _InitPoseOffset = _InitPoseOffset ?? Schema.GetOffset(0xD390C8BB5E468732);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_InitPoseOffset!.Value);
+            if (_InitPoseOffset == -1) _InitPoseOffset = Schema.GetOffset(0xD390C8BB5E468732);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_InitPoseOffset);
         }
     }
-    private static nint? _ParticleBoneNameOffset;
+    private static nint _ParticleBoneNameOffset = -1;
 
     public ref CUtlVector<CUtlString> ParticleBoneName
     {
         get
         {
-            _ParticleBoneNameOffset = _ParticleBoneNameOffset ?? Schema.GetOffset(0xD390C8BB8D321086);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ParticleBoneNameOffset!.Value);
+            if (_ParticleBoneNameOffset == -1) _ParticleBoneNameOffset = Schema.GetOffset(0xD390C8BB8D321086);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ParticleBoneNameOffset);
         }
     }
 

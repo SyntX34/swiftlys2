@@ -16,31 +16,31 @@ internal partial class CNmClipDocEvent_LegacyImpl : CNmClipDocEventImpl, CNmClip
 {
     public CNmClipDocEvent_LegacyImpl(nint handle) : base(handle) { }
 
-    private static nint? _EventClassOffset;
+    private static nint _EventClassOffset = -1;
 
     public string EventClass
     {
         get
         {
-            _EventClassOffset = _EventClassOffset ?? Schema.GetOffset(0x23B652570B93C441);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EventClassOffset!.Value));
+            if (_EventClassOffset == -1) _EventClassOffset = Schema.GetOffset(0x23B652570B93C441);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EventClassOffset));
         }
         set
         {
-            _EventClassOffset = _EventClassOffset ?? Schema.GetOffset(0x23B652570B93C441);
-            Schema.SetCUtlString(_Handle, _EventClassOffset!.Value, value);
+            if (_EventClassOffset == -1) _EventClassOffset = Schema.GetOffset(0x23B652570B93C441);
+            Schema.SetCUtlString(_Handle, _EventClassOffset, value);
         }
     }
-    private static nint? _KVOffset;
+    private static nint _KVOffset = -1;
     private SchemaUntypedField? _KVInstance;
 
     public SchemaUntypedField KV
     {
         get
         {
-            _KVOffset = _KVOffset ?? Schema.GetOffset(0x23B65257F70B8074);
+            if (_KVOffset == -1) _KVOffset = Schema.GetOffset(0x23B65257F70B8074);
             var instance = _KVInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _KVOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _KVOffset);
             return instance;
         }
     }

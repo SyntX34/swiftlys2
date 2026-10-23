@@ -16,34 +16,34 @@ internal partial class IKSolverSettings_tImpl : SchemaClass, IKSolverSettings_t
 {
     public IKSolverSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SolverTypeOffset;
+    private static nint _SolverTypeOffset = -1;
 
     public ref IKSolverType SolverType
     {
         get
         {
-            _SolverTypeOffset = _SolverTypeOffset ?? Schema.GetOffset(0x368DC59819CA61B6);
-            return ref _Handle.AsRef<IKSolverType>(_SolverTypeOffset!.Value);
+            if (_SolverTypeOffset == -1) _SolverTypeOffset = Schema.GetOffset(0x368DC59819CA61B6);
+            return ref _Handle.AsRef<IKSolverType>(_SolverTypeOffset);
         }
     }
-    private static nint? _NumIterationsOffset;
+    private static nint _NumIterationsOffset = -1;
 
     public ref int NumIterations
     {
         get
         {
-            _NumIterationsOffset = _NumIterationsOffset ?? Schema.GetOffset(0x368DC59878BB0057);
-            return ref _Handle.AsRef<int>(_NumIterationsOffset!.Value);
+            if (_NumIterationsOffset == -1) _NumIterationsOffset = Schema.GetOffset(0x368DC59878BB0057);
+            return ref _Handle.AsRef<int>(_NumIterationsOffset);
         }
     }
-    private static nint? _EndEffectorRotationFixUpModeOffset;
+    private static nint _EndEffectorRotationFixUpModeOffset = -1;
 
     public ref EIKEndEffectorRotationFixUpMode EndEffectorRotationFixUpMode
     {
         get
         {
-            _EndEffectorRotationFixUpModeOffset = _EndEffectorRotationFixUpModeOffset ?? Schema.GetOffset(0x368DC5980B45E281);
-            return ref _Handle.AsRef<EIKEndEffectorRotationFixUpMode>(_EndEffectorRotationFixUpModeOffset!.Value);
+            if (_EndEffectorRotationFixUpModeOffset == -1) _EndEffectorRotationFixUpModeOffset = Schema.GetOffset(0x368DC5980B45E281);
+            return ref _Handle.AsRef<EIKEndEffectorRotationFixUpMode>(_EndEffectorRotationFixUpModeOffset);
         }
     }
 

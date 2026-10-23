@@ -16,44 +16,44 @@ internal partial class CTriggerSaveImpl : CBaseTriggerImpl, CTriggerSave
 {
     public CTriggerSaveImpl(nint handle) : base(handle) { }
 
-    private static nint? _ForceNewLevelUnitOffset;
+    private static nint _ForceNewLevelUnitOffset = -1;
 
     public ref bool ForceNewLevelUnit
     {
         get
         {
-            _ForceNewLevelUnitOffset = _ForceNewLevelUnitOffset ?? Schema.GetOffset(0xFA0C03F1473BFDE);
-            return ref _Handle.AsRef<bool>(_ForceNewLevelUnitOffset!.Value);
+            if (_ForceNewLevelUnitOffset == -1) _ForceNewLevelUnitOffset = Schema.GetOffset(0xFA0C03F1473BFDE);
+            return ref _Handle.AsRef<bool>(_ForceNewLevelUnitOffset);
         }
     }
-    private static nint? _DangerousTimerOffset;
+    private static nint _DangerousTimerOffset = -1;
 
     public ref float DangerousTimer
     {
         get
         {
-            _DangerousTimerOffset = _DangerousTimerOffset ?? Schema.GetOffset(0xFA0C03F5CF80EC4);
-            return ref _Handle.AsRef<float>(_DangerousTimerOffset!.Value);
+            if (_DangerousTimerOffset == -1) _DangerousTimerOffset = Schema.GetOffset(0xFA0C03F5CF80EC4);
+            return ref _Handle.AsRef<float>(_DangerousTimerOffset);
         }
     }
-    private static nint? _MinHitPointsOffset;
+    private static nint _MinHitPointsOffset = -1;
 
     public ref int MinHitPoints
     {
         get
         {
-            _MinHitPointsOffset = _MinHitPointsOffset ?? Schema.GetOffset(0xFA0C03F2C7E0C57);
-            return ref _Handle.AsRef<int>(_MinHitPointsOffset!.Value);
+            if (_MinHitPointsOffset == -1) _MinHitPointsOffset = Schema.GetOffset(0xFA0C03F2C7E0C57);
+            return ref _Handle.AsRef<int>(_MinHitPointsOffset);
         }
     }
-    private static nint? _RetriggerDelayOffset;
+    private static nint _RetriggerDelayOffset = -1;
 
     public ref float RetriggerDelay
     {
         get
         {
-            _RetriggerDelayOffset = _RetriggerDelayOffset ?? Schema.GetOffset(0xFA0C03F32E33F01);
-            return ref _Handle.AsRef<float>(_RetriggerDelayOffset!.Value);
+            if (_RetriggerDelayOffset == -1) _RetriggerDelayOffset = Schema.GetOffset(0xFA0C03F32E33F01);
+            return ref _Handle.AsRef<float>(_RetriggerDelayOffset);
         }
     }
 

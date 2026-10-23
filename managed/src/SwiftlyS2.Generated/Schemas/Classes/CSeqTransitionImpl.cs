@@ -16,24 +16,24 @@ internal partial class CSeqTransitionImpl : SchemaClass, CSeqTransition
 {
     public CSeqTransitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _FadeInTimeOffset;
+    private static nint _FadeInTimeOffset = -1;
 
     public ref float FadeInTime
     {
         get
         {
-            _FadeInTimeOffset = _FadeInTimeOffset ?? Schema.GetOffset(0xF641804E1F0255B3);
-            return ref _Handle.AsRef<float>(_FadeInTimeOffset!.Value);
+            if (_FadeInTimeOffset == -1) _FadeInTimeOffset = Schema.GetOffset(0xF641804E1F0255B3);
+            return ref _Handle.AsRef<float>(_FadeInTimeOffset);
         }
     }
-    private static nint? _FadeOutTimeOffset;
+    private static nint _FadeOutTimeOffset = -1;
 
     public ref float FadeOutTime
     {
         get
         {
-            _FadeOutTimeOffset = _FadeOutTimeOffset ?? Schema.GetOffset(0xF641804EE86D2FC2);
-            return ref _Handle.AsRef<float>(_FadeOutTimeOffset!.Value);
+            if (_FadeOutTimeOffset == -1) _FadeOutTimeOffset = Schema.GetOffset(0xF641804EE86D2FC2);
+            return ref _Handle.AsRef<float>(_FadeOutTimeOffset);
         }
     }
 

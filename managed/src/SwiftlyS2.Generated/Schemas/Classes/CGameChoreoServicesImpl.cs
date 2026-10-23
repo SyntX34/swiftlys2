@@ -16,56 +16,56 @@ internal partial class CGameChoreoServicesImpl : IChoreoServicesImpl, CGameChore
 {
     public CGameChoreoServicesImpl(nint handle) : base(handle) { }
 
-    private static nint? _OwnerOffset;
+    private static nint _OwnerOffset = -1;
 
     public ref CHandle<CBaseModelEntity> Owner
     {
         get
         {
-            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0xF5FFE2B2F6D89572);
-            return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset!.Value);
+            if (_OwnerOffset == -1) _OwnerOffset = Schema.GetOffset(0xF5FFE2B2F6D89572);
+            return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset);
         }
     }
-    private static nint? _ScriptedSequenceOffset;
+    private static nint _ScriptedSequenceOffset = -1;
 
     public ref CHandle<CScriptedSequence> ScriptedSequence
     {
         get
         {
-            _ScriptedSequenceOffset = _ScriptedSequenceOffset ?? Schema.GetOffset(0xF5FFE2B2E43BF85C);
-            return ref _Handle.AsRef<CHandle<CScriptedSequence>>(_ScriptedSequenceOffset!.Value);
+            if (_ScriptedSequenceOffset == -1) _ScriptedSequenceOffset = Schema.GetOffset(0xF5FFE2B2E43BF85C);
+            return ref _Handle.AsRef<CHandle<CScriptedSequence>>(_ScriptedSequenceOffset);
         }
     }
-    private static nint? _ScriptStateOffset;
+    private static nint _ScriptStateOffset = -1;
 
     public ref IChoreoServices__ScriptState_t ScriptState
     {
         get
         {
-            _ScriptStateOffset = _ScriptStateOffset ?? Schema.GetOffset(0xF5FFE2B2E4CD331F);
-            return ref _Handle.AsRef<IChoreoServices__ScriptState_t>(_ScriptStateOffset!.Value);
+            if (_ScriptStateOffset == -1) _ScriptStateOffset = Schema.GetOffset(0xF5FFE2B2E4CD331F);
+            return ref _Handle.AsRef<IChoreoServices__ScriptState_t>(_ScriptStateOffset);
         }
     }
-    private static nint? _ChoreoStateOffset;
+    private static nint _ChoreoStateOffset = -1;
 
     public ref IChoreoServices__ChoreoState_t ChoreoState
     {
         get
         {
-            _ChoreoStateOffset = _ChoreoStateOffset ?? Schema.GetOffset(0xF5FFE2B251730DD8);
-            return ref _Handle.AsRef<IChoreoServices__ChoreoState_t>(_ChoreoStateOffset!.Value);
+            if (_ChoreoStateOffset == -1) _ChoreoStateOffset = Schema.GetOffset(0xF5FFE2B251730DD8);
+            return ref _Handle.AsRef<IChoreoServices__ChoreoState_t>(_ChoreoStateOffset);
         }
     }
-    private static nint? _TimeStartedStateOffset;
+    private static nint _TimeStartedStateOffset = -1;
     private GameTime_tImpl? _TimeStartedStateInstance;
 
     public GameTime_t TimeStartedState
     {
         get
         {
-            _TimeStartedStateOffset = _TimeStartedStateOffset ?? Schema.GetOffset(0xF5FFE2B20BD38900);
+            if (_TimeStartedStateOffset == -1) _TimeStartedStateOffset = Schema.GetOffset(0xF5FFE2B20BD38900);
             var instance = _TimeStartedStateInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TimeStartedStateOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TimeStartedStateOffset);
             return instance;
         }
     }

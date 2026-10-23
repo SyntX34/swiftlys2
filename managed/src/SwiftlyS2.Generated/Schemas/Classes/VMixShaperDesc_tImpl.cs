@@ -16,54 +16,54 @@ internal partial class VMixShaperDesc_tImpl : SchemaClass, VMixShaperDesc_t
 {
     public VMixShaperDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ShapeOffset;
+    private static nint _ShapeOffset = -1;
 
     public ref int Shape
     {
         get
         {
-            _ShapeOffset = _ShapeOffset ?? Schema.GetOffset(0x80E2A73621208A02);
-            return ref _Handle.AsRef<int>(_ShapeOffset!.Value);
+            if (_ShapeOffset == -1) _ShapeOffset = Schema.GetOffset(0x80E2A73621208A02);
+            return ref _Handle.AsRef<int>(_ShapeOffset);
         }
     }
-    private static nint? _FldbDriveOffset;
+    private static nint _FldbDriveOffset = -1;
 
     public ref float FldbDrive
     {
         get
         {
-            _FldbDriveOffset = _FldbDriveOffset ?? Schema.GetOffset(0x80E2A7360E12679B);
-            return ref _Handle.AsRef<float>(_FldbDriveOffset!.Value);
+            if (_FldbDriveOffset == -1) _FldbDriveOffset = Schema.GetOffset(0x80E2A7360E12679B);
+            return ref _Handle.AsRef<float>(_FldbDriveOffset);
         }
     }
-    private static nint? _FldbOutputGainOffset;
+    private static nint _FldbOutputGainOffset = -1;
 
     public ref float FldbOutputGain
     {
         get
         {
-            _FldbOutputGainOffset = _FldbOutputGainOffset ?? Schema.GetOffset(0x80E2A73667F97C23);
-            return ref _Handle.AsRef<float>(_FldbOutputGainOffset!.Value);
+            if (_FldbOutputGainOffset == -1) _FldbOutputGainOffset = Schema.GetOffset(0x80E2A73667F97C23);
+            return ref _Handle.AsRef<float>(_FldbOutputGainOffset);
         }
     }
-    private static nint? _WetMixOffset;
+    private static nint _WetMixOffset = -1;
 
     public ref float WetMix
     {
         get
         {
-            _WetMixOffset = _WetMixOffset ?? Schema.GetOffset(0x80E2A736D5453C15);
-            return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
+            if (_WetMixOffset == -1) _WetMixOffset = Schema.GetOffset(0x80E2A736D5453C15);
+            return ref _Handle.AsRef<float>(_WetMixOffset);
         }
     }
-    private static nint? _OversampleFactorOffset;
+    private static nint _OversampleFactorOffset = -1;
 
     public ref int OversampleFactor
     {
         get
         {
-            _OversampleFactorOffset = _OversampleFactorOffset ?? Schema.GetOffset(0x80E2A736142D0AF2);
-            return ref _Handle.AsRef<int>(_OversampleFactorOffset!.Value);
+            if (_OversampleFactorOffset == -1) _OversampleFactorOffset = Schema.GetOffset(0x80E2A736142D0AF2);
+            return ref _Handle.AsRef<int>(_OversampleFactorOffset);
         }
     }
 

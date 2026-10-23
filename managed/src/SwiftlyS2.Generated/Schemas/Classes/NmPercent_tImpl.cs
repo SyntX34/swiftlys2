@@ -16,14 +16,14 @@ internal partial class NmPercent_tImpl : SchemaClass, NmPercent_t
 {
     public NmPercent_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public ref float Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xF12966B68DFCB984);
-            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xF12966B68DFCB984);
+            return ref _Handle.AsRef<float>(_ValueOffset);
         }
     }
 

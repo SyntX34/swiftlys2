@@ -16,39 +16,39 @@ internal partial class CNmGraphDocCommentNodeImpl : CNmGraphDocNodeImpl, CNmGrap
 {
     public CNmGraphDocCommentNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _SizeOffset;
+    private static nint _SizeOffset = -1;
 
     public ref Vector2D Size
     {
         get
         {
-            _SizeOffset = _SizeOffset ?? Schema.GetOffset(0x1961982EE3F672FC);
-            return ref _Handle.AsRef<Vector2D>(_SizeOffset!.Value);
+            if (_SizeOffset == -1) _SizeOffset = Schema.GetOffset(0x1961982EE3F672FC);
+            return ref _Handle.AsRef<Vector2D>(_SizeOffset);
         }
     }
-    private static nint? _CommentOffset;
+    private static nint _CommentOffset = -1;
 
     public string Comment
     {
         get
         {
-            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0x1961982E3F52117E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset!.Value));
+            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0x1961982E3F52117E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset));
         }
         set
         {
-            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0x1961982E3F52117E);
-            Schema.SetCUtlString(_Handle, _CommentOffset!.Value, value);
+            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0x1961982E3F52117E);
+            Schema.SetCUtlString(_Handle, _CommentOffset, value);
         }
     }
-    private static nint? _NodeColorOffset;
+    private static nint _NodeColorOffset = -1;
 
     public ref Color NodeColor
     {
         get
         {
-            _NodeColorOffset = _NodeColorOffset ?? Schema.GetOffset(0x1961982ED74C1AA0);
-            return ref _Handle.AsRef<Color>(_NodeColorOffset!.Value);
+            if (_NodeColorOffset == -1) _NodeColorOffset = Schema.GetOffset(0x1961982ED74C1AA0);
+            return ref _Handle.AsRef<Color>(_NodeColorOffset);
         }
     }
 

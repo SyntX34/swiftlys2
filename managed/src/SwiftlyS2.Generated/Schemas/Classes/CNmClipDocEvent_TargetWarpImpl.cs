@@ -16,24 +16,24 @@ internal partial class CNmClipDocEvent_TargetWarpImpl : CNmClipDocEventImpl, CNm
 {
     public CNmClipDocEvent_TargetWarpImpl(nint handle) : base(handle) { }
 
-    private static nint? _RuleOffset;
+    private static nint _RuleOffset = -1;
 
     public ref NmTargetWarpRule_t Rule
     {
         get
         {
-            _RuleOffset = _RuleOffset ?? Schema.GetOffset(0x8BFCB323BA097173);
-            return ref _Handle.AsRef<NmTargetWarpRule_t>(_RuleOffset!.Value);
+            if (_RuleOffset == -1) _RuleOffset = Schema.GetOffset(0x8BFCB323BA097173);
+            return ref _Handle.AsRef<NmTargetWarpRule_t>(_RuleOffset);
         }
     }
-    private static nint? _AlgorithmOffset;
+    private static nint _AlgorithmOffset = -1;
 
     public ref NmTargetWarpAlgorithm_t Algorithm
     {
         get
         {
-            _AlgorithmOffset = _AlgorithmOffset ?? Schema.GetOffset(0x8BFCB323265CAE8A);
-            return ref _Handle.AsRef<NmTargetWarpAlgorithm_t>(_AlgorithmOffset!.Value);
+            if (_AlgorithmOffset == -1) _AlgorithmOffset = Schema.GetOffset(0x8BFCB323265CAE8A);
+            return ref _Handle.AsRef<NmTargetWarpAlgorithm_t>(_AlgorithmOffset);
         }
     }
 

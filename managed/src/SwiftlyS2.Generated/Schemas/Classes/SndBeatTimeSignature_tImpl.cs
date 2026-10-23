@@ -16,24 +16,24 @@ internal partial class SndBeatTimeSignature_tImpl : SchemaClass, SndBeatTimeSign
 {
     public SndBeatTimeSignature_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NumeratorOffset;
+    private static nint _NumeratorOffset = -1;
 
     public ref byte Numerator
     {
         get
         {
-            _NumeratorOffset = _NumeratorOffset ?? Schema.GetOffset(0xDF5A5DD690CCC408);
-            return ref _Handle.AsRef<byte>(_NumeratorOffset!.Value);
+            if (_NumeratorOffset == -1) _NumeratorOffset = Schema.GetOffset(0xDF5A5DD690CCC408);
+            return ref _Handle.AsRef<byte>(_NumeratorOffset);
         }
     }
-    private static nint? _DenominatorOffset;
+    private static nint _DenominatorOffset = -1;
 
     public ref byte Denominator
     {
         get
         {
-            _DenominatorOffset = _DenominatorOffset ?? Schema.GetOffset(0xDF5A5DD6B3F53217);
-            return ref _Handle.AsRef<byte>(_DenominatorOffset!.Value);
+            if (_DenominatorOffset == -1) _DenominatorOffset = Schema.GetOffset(0xDF5A5DD6B3F53217);
+            return ref _Handle.AsRef<byte>(_DenominatorOffset);
         }
     }
 

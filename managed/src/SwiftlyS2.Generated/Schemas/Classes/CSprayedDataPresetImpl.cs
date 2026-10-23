@@ -16,94 +16,94 @@ internal partial class CSprayedDataPresetImpl : SchemaClass, CSprayedDataPreset
 {
     public CSprayedDataPresetImpl(nint handle) : base(handle) { }
 
-    private static nint? _CounterMinOffset;
+    private static nint _CounterMinOffset = -1;
 
     public ref int CounterMin
     {
         get
         {
-            _CounterMinOffset = _CounterMinOffset ?? Schema.GetOffset(0xDE33C3715B40FDD9);
-            return ref _Handle.AsRef<int>(_CounterMinOffset!.Value);
+            if (_CounterMinOffset == -1) _CounterMinOffset = Schema.GetOffset(0xDE33C3715B40FDD9);
+            return ref _Handle.AsRef<int>(_CounterMinOffset);
         }
     }
-    private static nint? _CounterMaxOffset;
+    private static nint _CounterMaxOffset = -1;
 
     public ref int CounterMax
     {
         get
         {
-            _CounterMaxOffset = _CounterMaxOffset ?? Schema.GetOffset(0xDE33C3716D2BFF77);
-            return ref _Handle.AsRef<int>(_CounterMaxOffset!.Value);
+            if (_CounterMaxOffset == -1) _CounterMaxOffset = Schema.GetOffset(0xDE33C3716D2BFF77);
+            return ref _Handle.AsRef<int>(_CounterMaxOffset);
         }
     }
-    private static nint? _SpacingOffset;
+    private static nint _SpacingOffset = -1;
 
     public ref float Spacing
     {
         get
         {
-            _SpacingOffset = _SpacingOffset ?? Schema.GetOffset(0xDE33C3712B86F1BC);
-            return ref _Handle.AsRef<float>(_SpacingOffset!.Value);
+            if (_SpacingOffset == -1) _SpacingOffset = Schema.GetOffset(0xDE33C3712B86F1BC);
+            return ref _Handle.AsRef<float>(_SpacingOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xDE33C3715ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0xDE33C3715ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _EraseAmountOffset;
+    private static nint _EraseAmountOffset = -1;
 
     public ref float EraseAmount
     {
         get
         {
-            _EraseAmountOffset = _EraseAmountOffset ?? Schema.GetOffset(0xDE33C3711106ED57);
-            return ref _Handle.AsRef<float>(_EraseAmountOffset!.Value);
+            if (_EraseAmountOffset == -1) _EraseAmountOffset = Schema.GetOffset(0xDE33C3711106ED57);
+            return ref _Handle.AsRef<float>(_EraseAmountOffset);
         }
     }
-    private static nint? _ConstantDensityOffset;
+    private static nint _ConstantDensityOffset = -1;
 
     public ref bool ConstantDensity
     {
         get
         {
-            _ConstantDensityOffset = _ConstantDensityOffset ?? Schema.GetOffset(0xDE33C371F35E5CFB);
-            return ref _Handle.AsRef<bool>(_ConstantDensityOffset!.Value);
+            if (_ConstantDensityOffset == -1) _ConstantDensityOffset = Schema.GetOffset(0xDE33C371F35E5CFB);
+            return ref _Handle.AsRef<bool>(_ConstantDensityOffset);
         }
     }
-    private static nint? _OnlyHitMeshesOffset;
+    private static nint _OnlyHitMeshesOffset = -1;
 
     public ref bool OnlyHitMeshes
     {
         get
         {
-            _OnlyHitMeshesOffset = _OnlyHitMeshesOffset ?? Schema.GetOffset(0xDE33C37106993061);
-            return ref _Handle.AsRef<bool>(_OnlyHitMeshesOffset!.Value);
+            if (_OnlyHitMeshesOffset == -1) _OnlyHitMeshesOffset = Schema.GetOffset(0xDE33C37106993061);
+            return ref _Handle.AsRef<bool>(_OnlyHitMeshesOffset);
         }
     }
-    private static nint? _RadialFalloffOffset;
+    private static nint _RadialFalloffOffset = -1;
 
     public ref bool RadialFalloff
     {
         get
         {
-            _RadialFalloffOffset = _RadialFalloffOffset ?? Schema.GetOffset(0xDE33C3714F915238);
-            return ref _Handle.AsRef<bool>(_RadialFalloffOffset!.Value);
+            if (_RadialFalloffOffset == -1) _RadialFalloffOffset = Schema.GetOffset(0xDE33C3714F915238);
+            return ref _Handle.AsRef<bool>(_RadialFalloffOffset);
         }
     }
-    private static nint? _ElementsOffset;
+    private static nint _ElementsOffset = -1;
 
     public ref CUtlVector<CSprayedDataPresetElement> Elements
     {
         get
         {
-            _ElementsOffset = _ElementsOffset ?? Schema.GetOffset(0xDE33C3716B0FA56C);
-            return ref _Handle.AsRef<CUtlVector<CSprayedDataPresetElement>>(_ElementsOffset!.Value);
+            if (_ElementsOffset == -1) _ElementsOffset = Schema.GetOffset(0xDE33C3716B0FA56C);
+            return ref _Handle.AsRef<CUtlVector<CSprayedDataPresetElement>>(_ElementsOffset);
         }
     }
 

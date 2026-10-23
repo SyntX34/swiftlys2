@@ -16,70 +16,70 @@ internal partial class SequenceHistory_tImpl : SchemaClass, SequenceHistory_t
 {
     public SequenceHistory_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SequenceOffset;
+    private static nint _SequenceOffset = -1;
     private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
-            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x8B1B0C2BE0A0598E);
+            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0x8B1B0C2BE0A0598E);
             var instance = _SequenceInstance ??= new HSequenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset);
             return instance;
         }
     }
-    private static nint? _SeqStartTimeOffset;
+    private static nint _SeqStartTimeOffset = -1;
     private GameTime_tImpl? _SeqStartTimeInstance;
 
     public GameTime_t SeqStartTime
     {
         get
         {
-            _SeqStartTimeOffset = _SeqStartTimeOffset ?? Schema.GetOffset(0x8B1B0C2B9120356F);
+            if (_SeqStartTimeOffset == -1) _SeqStartTimeOffset = Schema.GetOffset(0x8B1B0C2B9120356F);
             var instance = _SeqStartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SeqStartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SeqStartTimeOffset);
             return instance;
         }
     }
-    private static nint? _SeqFixedCycleOffset;
+    private static nint _SeqFixedCycleOffset = -1;
 
     public ref float SeqFixedCycle
     {
         get
         {
-            _SeqFixedCycleOffset = _SeqFixedCycleOffset ?? Schema.GetOffset(0x8B1B0C2B77103EAE);
-            return ref _Handle.AsRef<float>(_SeqFixedCycleOffset!.Value);
+            if (_SeqFixedCycleOffset == -1) _SeqFixedCycleOffset = Schema.GetOffset(0x8B1B0C2B77103EAE);
+            return ref _Handle.AsRef<float>(_SeqFixedCycleOffset);
         }
     }
-    private static nint? _SeqLoopModeOffset;
+    private static nint _SeqLoopModeOffset = -1;
 
     public ref AnimLoopMode_t SeqLoopMode
     {
         get
         {
-            _SeqLoopModeOffset = _SeqLoopModeOffset ?? Schema.GetOffset(0x8B1B0C2BB011340D);
-            return ref _Handle.AsRef<AnimLoopMode_t>(_SeqLoopModeOffset!.Value);
+            if (_SeqLoopModeOffset == -1) _SeqLoopModeOffset = Schema.GetOffset(0x8B1B0C2BB011340D);
+            return ref _Handle.AsRef<AnimLoopMode_t>(_SeqLoopModeOffset);
         }
     }
-    private static nint? _PlaybackRateOffset;
+    private static nint _PlaybackRateOffset = -1;
 
     public ref float PlaybackRate
     {
         get
         {
-            _PlaybackRateOffset = _PlaybackRateOffset ?? Schema.GetOffset(0x8B1B0C2BC396F9D8);
-            return ref _Handle.AsRef<float>(_PlaybackRateOffset!.Value);
+            if (_PlaybackRateOffset == -1) _PlaybackRateOffset = Schema.GetOffset(0x8B1B0C2BC396F9D8);
+            return ref _Handle.AsRef<float>(_PlaybackRateOffset);
         }
     }
-    private static nint? _CyclesPerSecondOffset;
+    private static nint _CyclesPerSecondOffset = -1;
 
     public ref float CyclesPerSecond
     {
         get
         {
-            _CyclesPerSecondOffset = _CyclesPerSecondOffset ?? Schema.GetOffset(0x8B1B0C2B44417193);
-            return ref _Handle.AsRef<float>(_CyclesPerSecondOffset!.Value);
+            if (_CyclesPerSecondOffset == -1) _CyclesPerSecondOffset = Schema.GetOffset(0x8B1B0C2B44417193);
+            return ref _Handle.AsRef<float>(_CyclesPerSecondOffset);
         }
     }
 

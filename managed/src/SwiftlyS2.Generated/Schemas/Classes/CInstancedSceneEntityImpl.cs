@@ -16,64 +16,64 @@ internal partial class CInstancedSceneEntityImpl : CSceneEntityImpl, CInstancedS
 {
     public CInstancedSceneEntityImpl(nint handle) : base(handle) { }
 
-    private static nint? _OwnerOffset;
+    private static nint _OwnerOffset = -1;
 
     public ref CHandle<CBaseEntity> Owner
     {
         get
         {
-            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0x2D9E341EF6D89572);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OwnerOffset!.Value);
+            if (_OwnerOffset == -1) _OwnerOffset = Schema.GetOffset(0x2D9E341EF6D89572);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OwnerOffset);
         }
     }
-    private static nint? _HadOwnerOffset;
+    private static nint _HadOwnerOffset = -1;
 
     public ref bool HadOwner
     {
         get
         {
-            _HadOwnerOffset = _HadOwnerOffset ?? Schema.GetOffset(0x2D9E341EB77772CD);
-            return ref _Handle.AsRef<bool>(_HadOwnerOffset!.Value);
+            if (_HadOwnerOffset == -1) _HadOwnerOffset = Schema.GetOffset(0x2D9E341EB77772CD);
+            return ref _Handle.AsRef<bool>(_HadOwnerOffset);
         }
     }
-    private static nint? _PostSpeakDelayOffset;
+    private static nint _PostSpeakDelayOffset = -1;
 
     public ref float PostSpeakDelay
     {
         get
         {
-            _PostSpeakDelayOffset = _PostSpeakDelayOffset ?? Schema.GetOffset(0x2D9E341E56890308);
-            return ref _Handle.AsRef<float>(_PostSpeakDelayOffset!.Value);
+            if (_PostSpeakDelayOffset == -1) _PostSpeakDelayOffset = Schema.GetOffset(0x2D9E341E56890308);
+            return ref _Handle.AsRef<float>(_PostSpeakDelayOffset);
         }
     }
-    private static nint? _PreDelayOffset;
+    private static nint _PreDelayOffset = -1;
 
     public ref float PreDelay
     {
         get
         {
-            _PreDelayOffset = _PreDelayOffset ?? Schema.GetOffset(0x2D9E341E0C9072B7);
-            return ref _Handle.AsRef<float>(_PreDelayOffset!.Value);
+            if (_PreDelayOffset == -1) _PreDelayOffset = Schema.GetOffset(0x2D9E341E0C9072B7);
+            return ref _Handle.AsRef<float>(_PreDelayOffset);
         }
     }
-    private static nint? _IsBackgroundOffset;
+    private static nint _IsBackgroundOffset = -1;
 
     public ref bool IsBackground
     {
         get
         {
-            _IsBackgroundOffset = _IsBackgroundOffset ?? Schema.GetOffset(0x2D9E341E380A60AD);
-            return ref _Handle.AsRef<bool>(_IsBackgroundOffset!.Value);
+            if (_IsBackgroundOffset == -1) _IsBackgroundOffset = Schema.GetOffset(0x2D9E341E380A60AD);
+            return ref _Handle.AsRef<bool>(_IsBackgroundOffset);
         }
     }
-    private static nint? _TargetOffset;
+    private static nint _TargetOffset = -1;
 
     public ref CHandle<CBaseEntity> Target
     {
         get
         {
-            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x2D9E341ECE35901A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0x2D9E341ECE35901A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset);
         }
     }
 

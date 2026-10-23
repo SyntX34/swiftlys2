@@ -16,14 +16,14 @@ internal partial class CNmIsExternalPoseSetNode__CDefinitionImpl : CNmBoolValueN
 {
     public CNmIsExternalPoseSetNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ExternalPoseNodeIdxOffset;
+    private static nint _ExternalPoseNodeIdxOffset = -1;
 
     public ref short ExternalPoseNodeIdx
     {
         get
         {
-            _ExternalPoseNodeIdxOffset = _ExternalPoseNodeIdxOffset ?? Schema.GetOffset(0xB81951058EE54182);
-            return ref _Handle.AsRef<short>(_ExternalPoseNodeIdxOffset!.Value);
+            if (_ExternalPoseNodeIdxOffset == -1) _ExternalPoseNodeIdxOffset = Schema.GetOffset(0xB81951058EE54182);
+            return ref _Handle.AsRef<short>(_ExternalPoseNodeIdxOffset);
         }
     }
 

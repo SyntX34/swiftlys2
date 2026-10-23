@@ -16,54 +16,54 @@ internal partial class CNmIDSwitchNode__CDefinitionImpl : CNmIDValueNode__CDefin
 {
     public CNmIDSwitchNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SwitchValueNodeIdxOffset;
+    private static nint _SwitchValueNodeIdxOffset = -1;
 
     public ref short SwitchValueNodeIdx
     {
         get
         {
-            _SwitchValueNodeIdxOffset = _SwitchValueNodeIdxOffset ?? Schema.GetOffset(0x24752DA7FBD7561);
-            return ref _Handle.AsRef<short>(_SwitchValueNodeIdxOffset!.Value);
+            if (_SwitchValueNodeIdxOffset == -1) _SwitchValueNodeIdxOffset = Schema.GetOffset(0x24752DA7FBD7561);
+            return ref _Handle.AsRef<short>(_SwitchValueNodeIdxOffset);
         }
     }
-    private static nint? _TrueValueNodeIdxOffset;
+    private static nint _TrueValueNodeIdxOffset = -1;
 
     public ref short TrueValueNodeIdx
     {
         get
         {
-            _TrueValueNodeIdxOffset = _TrueValueNodeIdxOffset ?? Schema.GetOffset(0x24752DAFDE74365);
-            return ref _Handle.AsRef<short>(_TrueValueNodeIdxOffset!.Value);
+            if (_TrueValueNodeIdxOffset == -1) _TrueValueNodeIdxOffset = Schema.GetOffset(0x24752DAFDE74365);
+            return ref _Handle.AsRef<short>(_TrueValueNodeIdxOffset);
         }
     }
-    private static nint? _FalseValueNodeIdxOffset;
+    private static nint _FalseValueNodeIdxOffset = -1;
 
     public ref short FalseValueNodeIdx
     {
         get
         {
-            _FalseValueNodeIdxOffset = _FalseValueNodeIdxOffset ?? Schema.GetOffset(0x24752DA8DBA2C78);
-            return ref _Handle.AsRef<short>(_FalseValueNodeIdxOffset!.Value);
+            if (_FalseValueNodeIdxOffset == -1) _FalseValueNodeIdxOffset = Schema.GetOffset(0x24752DA8DBA2C78);
+            return ref _Handle.AsRef<short>(_FalseValueNodeIdxOffset);
         }
     }
-    private static nint? _FalseValueOffset;
+    private static nint _FalseValueOffset = -1;
 
     public ref CGlobalSymbol FalseValue
     {
         get
         {
-            _FalseValueOffset = _FalseValueOffset ?? Schema.GetOffset(0x24752DAD3506AE9);
-            return ref _Handle.AsRef<CGlobalSymbol>(_FalseValueOffset!.Value);
+            if (_FalseValueOffset == -1) _FalseValueOffset = Schema.GetOffset(0x24752DAD3506AE9);
+            return ref _Handle.AsRef<CGlobalSymbol>(_FalseValueOffset);
         }
     }
-    private static nint? _TrueValueOffset;
+    private static nint _TrueValueOffset = -1;
 
     public ref CGlobalSymbol TrueValue
     {
         get
         {
-            _TrueValueOffset = _TrueValueOffset ?? Schema.GetOffset(0x24752DAF134112A);
-            return ref _Handle.AsRef<CGlobalSymbol>(_TrueValueOffset!.Value);
+            if (_TrueValueOffset == -1) _TrueValueOffset = Schema.GetOffset(0x24752DAF134112A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_TrueValueOffset);
         }
     }
 

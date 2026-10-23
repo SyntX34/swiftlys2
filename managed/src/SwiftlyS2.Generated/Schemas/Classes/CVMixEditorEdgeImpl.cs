@@ -16,34 +16,34 @@ internal partial class CVMixEditorEdgeImpl : SchemaClass, CVMixEditorEdge
 {
     public CVMixEditorEdgeImpl(nint handle) : base(handle) { }
 
-    private static nint? _Plug0Offset;
+    private static nint _Plug0Offset = -1;
 
     public string Plug0
     {
         get
         {
-            _Plug0Offset = _Plug0Offset ?? Schema.GetOffset(0xA58F371ED6AA900B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Plug0Offset!.Value));
+            if (_Plug0Offset == -1) _Plug0Offset = Schema.GetOffset(0xA58F371ED6AA900B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_Plug0Offset));
         }
         set
         {
-            _Plug0Offset = _Plug0Offset ?? Schema.GetOffset(0xA58F371ED6AA900B);
-            Schema.SetCUtlString(_Handle, _Plug0Offset!.Value, value);
+            if (_Plug0Offset == -1) _Plug0Offset = Schema.GetOffset(0xA58F371ED6AA900B);
+            Schema.SetCUtlString(_Handle, _Plug0Offset, value);
         }
     }
-    private static nint? _Plug1Offset;
+    private static nint _Plug1Offset = -1;
 
     public string Plug1
     {
         get
         {
-            _Plug1Offset = _Plug1Offset ?? Schema.GetOffset(0xA58F371ED5AA8E78);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Plug1Offset!.Value));
+            if (_Plug1Offset == -1) _Plug1Offset = Schema.GetOffset(0xA58F371ED5AA8E78);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_Plug1Offset));
         }
         set
         {
-            _Plug1Offset = _Plug1Offset ?? Schema.GetOffset(0xA58F371ED5AA8E78);
-            Schema.SetCUtlString(_Handle, _Plug1Offset!.Value, value);
+            if (_Plug1Offset == -1) _Plug1Offset = Schema.GetOffset(0xA58F371ED5AA8E78);
+            Schema.SetCUtlString(_Handle, _Plug1Offset, value);
         }
     }
 

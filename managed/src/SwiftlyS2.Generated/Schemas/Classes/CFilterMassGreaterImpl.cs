@@ -16,14 +16,14 @@ internal partial class CFilterMassGreaterImpl : CBaseFilterImpl, CFilterMassGrea
 {
     public CFilterMassGreaterImpl(nint handle) : base(handle) { }
 
-    private static nint? _FilterMassOffset;
+    private static nint _FilterMassOffset = -1;
 
     public ref float FilterMass
     {
         get
         {
-            _FilterMassOffset = _FilterMassOffset ?? Schema.GetOffset(0xBF74FA22FF3F08E7);
-            return ref _Handle.AsRef<float>(_FilterMassOffset!.Value);
+            if (_FilterMassOffset == -1) _FilterMassOffset = Schema.GetOffset(0xBF74FA22FF3F08E7);
+            return ref _Handle.AsRef<float>(_FilterMassOffset);
         }
     }
 

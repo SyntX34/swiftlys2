@@ -16,26 +16,26 @@ internal partial class CNmFloatCurveNode__CDefinitionImpl : CNmFloatValueNode__C
 {
     public CNmFloatCurveNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputValueNodeIdxOffset;
+    private static nint _InputValueNodeIdxOffset = -1;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x34D6839A95E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x34D6839A95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
         }
     }
-    private static nint? _CurveOffset;
+    private static nint _CurveOffset = -1;
     private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
-            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0x34D6839ABFFA0B34);
+            if (_CurveOffset == -1) _CurveOffset = Schema.GetOffset(0x34D6839ABFFA0B34);
             var instance = _CurveInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CurveOffset);
             return instance;
         }
     }

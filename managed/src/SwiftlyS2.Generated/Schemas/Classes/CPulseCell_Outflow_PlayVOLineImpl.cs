@@ -16,16 +16,16 @@ internal partial class CPulseCell_Outflow_PlayVOLineImpl : CPulseCell_BaseYieldi
 {
     public CPulseCell_Outflow_PlayVOLineImpl(nint handle) : base(handle) { }
 
-    private static nint? _OnFinishedOffset;
+    private static nint _OnFinishedOffset = -1;
     private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
-            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0x54A0846E8D903E5E);
+            if (_OnFinishedOffset == -1) _OnFinishedOffset = Schema.GetOffset(0x54A0846E8D903E5E);
             var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset);
             return instance;
         }
     }

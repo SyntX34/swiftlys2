@@ -16,50 +16,50 @@ internal partial class CSequenceUpdateNodeImpl : CSequenceUpdateNodeBaseImpl, CS
 {
     public CSequenceUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _SequenceOffset;
+    private static nint _SequenceOffset = -1;
     private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
-            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xB5F91396E0A0598E);
+            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0xB5F91396E0A0598E);
             var instance = _SequenceInstance ??= new HSequenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset);
             return instance;
         }
     }
-    private static nint? _DurationOffset;
+    private static nint _DurationOffset = -1;
 
     public ref float Duration
     {
         get
         {
-            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xB5F913963D9FF5AD);
-            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0xB5F913963D9FF5AD);
+            return ref _Handle.AsRef<float>(_DurationOffset);
         }
     }
-    private static nint? _ParamSpansOffset;
+    private static nint _ParamSpansOffset = -1;
     private CParamSpanUpdaterImpl? _ParamSpansInstance;
 
     public CParamSpanUpdater ParamSpans
     {
         get
         {
-            _ParamSpansOffset = _ParamSpansOffset ?? Schema.GetOffset(0xB5F91396DAC91553);
+            if (_ParamSpansOffset == -1) _ParamSpansOffset = Schema.GetOffset(0xB5F91396DAC91553);
             var instance = _ParamSpansInstance ??= new CParamSpanUpdaterImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamSpansOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamSpansOffset);
             return instance;
         }
     }
-    private static nint? _TagsOffset;
+    private static nint _TagsOffset = -1;
 
     public ref CUtlVector<TagSpan_t> Tags
     {
         get
         {
-            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0xB5F91396B46C8540);
-            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+            if (_TagsOffset == -1) _TagsOffset = Schema.GetOffset(0xB5F91396B46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset);
         }
     }
 

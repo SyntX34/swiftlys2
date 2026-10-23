@@ -16,62 +16,62 @@ internal partial class CNmGraphDocumentImpl : CNmAnimDocumentImpl, CNmGraphDocum
 {
     public CNmGraphDocumentImpl(nint handle) : base(handle) { }
 
-    private static nint? _RootGraphOffset;
+    private static nint _RootGraphOffset = -1;
     private CNmGraphDocFlowGraphImpl? _RootGraphInstance;
 
     public CNmGraphDocFlowGraph? RootGraph
     {
         get
         {
-            _RootGraphOffset = _RootGraphOffset ?? Schema.GetOffset(0xCBDD50904EF94581);
-            var ptr = _Handle.Read<nint>(_RootGraphOffset!.Value);
+            if (_RootGraphOffset == -1) _RootGraphOffset = Schema.GetOffset(0xCBDD50904EF94581);
+            var ptr = _Handle.Read<nint>(_RootGraphOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _RootGraphInstance ??= new CNmGraphDocFlowGraphImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _VariationHierarchyOffset;
+    private static nint _VariationHierarchyOffset = -1;
     private CNmVariationHierarchyImpl? _VariationHierarchyInstance;
 
     public CNmVariationHierarchy VariationHierarchy
     {
         get
         {
-            _VariationHierarchyOffset = _VariationHierarchyOffset ?? Schema.GetOffset(0xCBDD509018422BB1);
+            if (_VariationHierarchyOffset == -1) _VariationHierarchyOffset = Schema.GetOffset(0xCBDD509018422BB1);
             var instance = _VariationHierarchyInstance ??= new CNmVariationHierarchyImpl(0);
-            instance.DangerousSetHandle(_Handle + _VariationHierarchyOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VariationHierarchyOffset);
             return instance;
         }
     }
-    private static nint? _DebugParameterSetsOffset;
+    private static nint _DebugParameterSetsOffset = -1;
 
     public ref CUtlLeanVector<CNmGraphDocument__DebugParameterSet_t, int> DebugParameterSets
     {
         get
         {
-            _DebugParameterSetsOffset = _DebugParameterSetsOffset ?? Schema.GetOffset(0xCBDD50902DB9FEAA);
-            return ref _Handle.AsRef<CUtlLeanVector<CNmGraphDocument__DebugParameterSet_t, int>>(_DebugParameterSetsOffset!.Value);
+            if (_DebugParameterSetsOffset == -1) _DebugParameterSetsOffset = Schema.GetOffset(0xCBDD50902DB9FEAA);
+            return ref _Handle.AsRef<CUtlLeanVector<CNmGraphDocument__DebugParameterSet_t, int>>(_DebugParameterSetsOffset);
         }
     }
-    private static nint? _DebugBoneFilterSetsOffset;
+    private static nint _DebugBoneFilterSetsOffset = -1;
 
     public ref CUtlLeanVector<CNmGraphDocument__DebugBoneFilterSet_t, int> DebugBoneFilterSets
     {
         get
         {
-            _DebugBoneFilterSetsOffset = _DebugBoneFilterSetsOffset ?? Schema.GetOffset(0xCBDD5090F9904B39);
-            return ref _Handle.AsRef<CUtlLeanVector<CNmGraphDocument__DebugBoneFilterSet_t, int>>(_DebugBoneFilterSetsOffset!.Value);
+            if (_DebugBoneFilterSetsOffset == -1) _DebugBoneFilterSetsOffset = Schema.GetOffset(0xCBDD5090F9904B39);
+            return ref _Handle.AsRef<CUtlLeanVector<CNmGraphDocument__DebugBoneFilterSet_t, int>>(_DebugBoneFilterSetsOffset);
         }
     }
-    private static nint? _DictionaryIDSetIDsOffset;
+    private static nint _DictionaryIDSetIDsOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> DictionaryIDSetIDs
     {
         get
         {
-            _DictionaryIDSetIDsOffset = _DictionaryIDSetIDsOffset ?? Schema.GetOffset(0xCBDD5090D35A94CA);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_DictionaryIDSetIDsOffset!.Value);
+            if (_DictionaryIDSetIDsOffset == -1) _DictionaryIDSetIDsOffset = Schema.GetOffset(0xCBDD5090D35A94CA);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_DictionaryIDSetIDsOffset);
         }
     }
 

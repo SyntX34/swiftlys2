@@ -16,134 +16,134 @@ internal partial class CSprayedDataSettingsBlockImpl : SchemaClass, CSprayedData
 {
     public CSprayedDataSettingsBlockImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinDensityOffset;
+    private static nint _MinDensityOffset = -1;
 
     public ref float MinDensity
     {
         get
         {
-            _MinDensityOffset = _MinDensityOffset ?? Schema.GetOffset(0xA8EE0C104EC7C6A7);
-            return ref _Handle.AsRef<float>(_MinDensityOffset!.Value);
+            if (_MinDensityOffset == -1) _MinDensityOffset = Schema.GetOffset(0xA8EE0C104EC7C6A7);
+            return ref _Handle.AsRef<float>(_MinDensityOffset);
         }
     }
-    private static nint? _MaxDensityOffset;
+    private static nint _MaxDensityOffset = -1;
 
     public ref float MaxDensity
     {
         get
         {
-            _MaxDensityOffset = _MaxDensityOffset ?? Schema.GetOffset(0xA8EE0C105F134A79);
-            return ref _Handle.AsRef<float>(_MaxDensityOffset!.Value);
+            if (_MaxDensityOffset == -1) _MaxDensityOffset = Schema.GetOffset(0xA8EE0C105F134A79);
+            return ref _Handle.AsRef<float>(_MaxDensityOffset);
         }
     }
-    private static nint? _MinScaleOffset;
+    private static nint _MinScaleOffset = -1;
 
     public ref float MinScale
     {
         get
         {
-            _MinScaleOffset = _MinScaleOffset ?? Schema.GetOffset(0xA8EE0C10D125D67D);
-            return ref _Handle.AsRef<float>(_MinScaleOffset!.Value);
+            if (_MinScaleOffset == -1) _MinScaleOffset = Schema.GetOffset(0xA8EE0C10D125D67D);
+            return ref _Handle.AsRef<float>(_MinScaleOffset);
         }
     }
-    private static nint? _MaxScaleOffset;
+    private static nint _MaxScaleOffset = -1;
 
     public ref float MaxScale
     {
         get
         {
-            _MaxScaleOffset = _MaxScaleOffset ?? Schema.GetOffset(0xA8EE0C10FF4EC8E7);
-            return ref _Handle.AsRef<float>(_MaxScaleOffset!.Value);
+            if (_MaxScaleOffset == -1) _MaxScaleOffset = Schema.GetOffset(0xA8EE0C10FF4EC8E7);
+            return ref _Handle.AsRef<float>(_MaxScaleOffset);
         }
     }
-    private static nint? _MinAngleOffset;
+    private static nint _MinAngleOffset = -1;
 
     public ref QAngle MinAngle
     {
         get
         {
-            _MinAngleOffset = _MinAngleOffset ?? Schema.GetOffset(0xA8EE0C108BD4DC62);
-            return ref _Handle.AsRef<QAngle>(_MinAngleOffset!.Value);
+            if (_MinAngleOffset == -1) _MinAngleOffset = Schema.GetOffset(0xA8EE0C108BD4DC62);
+            return ref _Handle.AsRef<QAngle>(_MinAngleOffset);
         }
     }
-    private static nint? _MaxAngleOffset;
+    private static nint _MaxAngleOffset = -1;
 
     public ref QAngle MaxAngle
     {
         get
         {
-            _MaxAngleOffset = _MaxAngleOffset ?? Schema.GetOffset(0xA8EE0C10B168C600);
-            return ref _Handle.AsRef<QAngle>(_MaxAngleOffset!.Value);
+            if (_MaxAngleOffset == -1) _MaxAngleOffset = Schema.GetOffset(0xA8EE0C10B168C600);
+            return ref _Handle.AsRef<QAngle>(_MaxAngleOffset);
         }
     }
-    private static nint? _MinColorOffset;
+    private static nint _MinColorOffset = -1;
 
     public ref Vector MinColor
     {
         get
         {
-            _MinColorOffset = _MinColorOffset ?? Schema.GetOffset(0xA8EE0C10297B4222);
-            return ref _Handle.AsRef<Vector>(_MinColorOffset!.Value);
+            if (_MinColorOffset == -1) _MinColorOffset = Schema.GetOffset(0xA8EE0C10297B4222);
+            return ref _Handle.AsRef<Vector>(_MinColorOffset);
         }
     }
-    private static nint? _MaxColorOffset;
+    private static nint _MaxColorOffset = -1;
 
     public ref Vector MaxColor
     {
         get
         {
-            _MaxColorOffset = _MaxColorOffset ?? Schema.GetOffset(0xA8EE0C1010588090);
-            return ref _Handle.AsRef<Vector>(_MaxColorOffset!.Value);
+            if (_MaxColorOffset == -1) _MaxColorOffset = Schema.GetOffset(0xA8EE0C1010588090);
+            return ref _Handle.AsRef<Vector>(_MaxColorOffset);
         }
     }
-    private static nint? _SpacingMulOffset;
+    private static nint _SpacingMulOffset = -1;
 
     public ref float SpacingMul
     {
         get
         {
-            _SpacingMulOffset = _SpacingMulOffset ?? Schema.GetOffset(0xA8EE0C10957BD84A);
-            return ref _Handle.AsRef<float>(_SpacingMulOffset!.Value);
+            if (_SpacingMulOffset == -1) _SpacingMulOffset = Schema.GetOffset(0xA8EE0C10957BD84A);
+            return ref _Handle.AsRef<float>(_SpacingMulOffset);
         }
     }
-    private static nint? _SlopeThresholdOffset;
+    private static nint _SlopeThresholdOffset = -1;
 
     public ref float SlopeThreshold
     {
         get
         {
-            _SlopeThresholdOffset = _SlopeThresholdOffset ?? Schema.GetOffset(0xA8EE0C1027A61D09);
-            return ref _Handle.AsRef<float>(_SlopeThresholdOffset!.Value);
+            if (_SlopeThresholdOffset == -1) _SlopeThresholdOffset = Schema.GetOffset(0xA8EE0C1027A61D09);
+            return ref _Handle.AsRef<float>(_SlopeThresholdOffset);
         }
     }
-    private static nint? _MasterDirectionOffset;
+    private static nint _MasterDirectionOffset = -1;
 
     public ref Vector MasterDirection
     {
         get
         {
-            _MasterDirectionOffset = _MasterDirectionOffset ?? Schema.GetOffset(0xA8EE0C108DC13178);
-            return ref _Handle.AsRef<Vector>(_MasterDirectionOffset!.Value);
+            if (_MasterDirectionOffset == -1) _MasterDirectionOffset = Schema.GetOffset(0xA8EE0C108DC13178);
+            return ref _Handle.AsRef<Vector>(_MasterDirectionOffset);
         }
     }
-    private static nint? _MasterDirectionInfluenceOffset;
+    private static nint _MasterDirectionInfluenceOffset = -1;
 
     public ref float MasterDirectionInfluence
     {
         get
         {
-            _MasterDirectionInfluenceOffset = _MasterDirectionInfluenceOffset ?? Schema.GetOffset(0xA8EE0C10FB517BFD);
-            return ref _Handle.AsRef<float>(_MasterDirectionInfluenceOffset!.Value);
+            if (_MasterDirectionInfluenceOffset == -1) _MasterDirectionInfluenceOffset = Schema.GetOffset(0xA8EE0C10FB517BFD);
+            return ref _Handle.AsRef<float>(_MasterDirectionInfluenceOffset);
         }
     }
-    private static nint? _EnabledOffset;
+    private static nint _EnabledOffset = -1;
 
     public ref bool Enabled
     {
         get
         {
-            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xA8EE0C106154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0xA8EE0C106154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset);
         }
     }
 

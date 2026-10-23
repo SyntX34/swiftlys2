@@ -16,47 +16,47 @@ internal partial class CountdownTimerImpl : SchemaClass, CountdownTimer
 {
     public CountdownTimerImpl(nint handle) : base(handle) { }
 
-    private static nint? _DurationOffset;
+    private static nint _DurationOffset = -1;
 
     public ref float Duration
     {
         get
         {
-            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x8A632F13D9FF5AD);
-            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x8A632F13D9FF5AD);
+            return ref _Handle.AsRef<float>(_DurationOffset);
         }
     }
-    private static nint? _TimestampOffset;
+    private static nint _TimestampOffset = -1;
     private GameTime_tImpl? _TimestampInstance;
 
     public GameTime_t Timestamp
     {
         get
         {
-            _TimestampOffset = _TimestampOffset ?? Schema.GetOffset(0x8A632F1B6C56F43);
+            if (_TimestampOffset == -1) _TimestampOffset = Schema.GetOffset(0x8A632F1B6C56F43);
             var instance = _TimestampInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TimestampOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TimestampOffset);
             return instance;
         }
     }
-    private static nint? _TimescaleOffset;
+    private static nint _TimescaleOffset = -1;
 
     public ref float Timescale
     {
         get
         {
-            _TimescaleOffset = _TimescaleOffset ?? Schema.GetOffset(0x8A632F18A240BBE);
-            return ref _Handle.AsRef<float>(_TimescaleOffset!.Value);
+            if (_TimescaleOffset == -1) _TimescaleOffset = Schema.GetOffset(0x8A632F18A240BBE);
+            return ref _Handle.AsRef<float>(_TimescaleOffset);
         }
     }
-    private static nint? _WorldGroupIdOffset;
+    private static nint _WorldGroupIdOffset = -1;
 
     public ref uint WorldGroupId
     {
         get
         {
-            _WorldGroupIdOffset = _WorldGroupIdOffset ?? Schema.GetOffset(0x8A632F17414B193);
-            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+            if (_WorldGroupIdOffset == -1) _WorldGroupIdOffset = Schema.GetOffset(0x8A632F17414B193);
+            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset);
         }
     }
 

@@ -16,39 +16,39 @@ internal partial class CPhysImpactImpl : CPointEntityImpl, CPhysImpact
 {
     public CPhysImpactImpl(nint handle) : base(handle) { }
 
-    private static nint? _DamageOffset;
+    private static nint _DamageOffset = -1;
 
     public ref float Damage
     {
         get
         {
-            _DamageOffset = _DamageOffset ?? Schema.GetOffset(0x2C5E7E549C988CE0);
-            return ref _Handle.AsRef<float>(_DamageOffset!.Value);
+            if (_DamageOffset == -1) _DamageOffset = Schema.GetOffset(0x2C5E7E549C988CE0);
+            return ref _Handle.AsRef<float>(_DamageOffset);
         }
     }
-    private static nint? _DistanceOffset;
+    private static nint _DistanceOffset = -1;
 
     public ref float Distance
     {
         get
         {
-            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x2C5E7E543CB20D02);
-            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0x2C5E7E543CB20D02);
+            return ref _Handle.AsRef<float>(_DistanceOffset);
         }
     }
-    private static nint? _DirectionEntityNameOffset;
+    private static nint _DirectionEntityNameOffset = -1;
 
     public string DirectionEntityName
     {
         get
         {
-            _DirectionEntityNameOffset = _DirectionEntityNameOffset ?? Schema.GetOffset(0x2C5E7E54329C8132);
-            return Schema.GetString(_Handle.Read<nint>(_DirectionEntityNameOffset!.Value));
+            if (_DirectionEntityNameOffset == -1) _DirectionEntityNameOffset = Schema.GetOffset(0x2C5E7E54329C8132);
+            return Schema.GetString(_Handle.Read<nint>(_DirectionEntityNameOffset));
         }
         set
         {
-            _DirectionEntityNameOffset = _DirectionEntityNameOffset ?? Schema.GetOffset(0x2C5E7E54329C8132);
-            Schema.SetString(_Handle, _DirectionEntityNameOffset!.Value, value);
+            if (_DirectionEntityNameOffset == -1) _DirectionEntityNameOffset = Schema.GetOffset(0x2C5E7E54329C8132);
+            Schema.SetString(_Handle, _DirectionEntityNameOffset, value);
         }
     }
 

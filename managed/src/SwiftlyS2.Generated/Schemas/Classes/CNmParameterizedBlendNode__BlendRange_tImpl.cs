@@ -16,36 +16,36 @@ internal partial class CNmParameterizedBlendNode__BlendRange_tImpl : SchemaClass
 {
     public CNmParameterizedBlendNode__BlendRange_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputIdx0Offset;
+    private static nint _InputIdx0Offset = -1;
 
     public ref short InputIdx0
     {
         get
         {
-            _InputIdx0Offset = _InputIdx0Offset ?? Schema.GetOffset(0x17812ECC5A8983D2);
-            return ref _Handle.AsRef<short>(_InputIdx0Offset!.Value);
+            if (_InputIdx0Offset == -1) _InputIdx0Offset = Schema.GetOffset(0x17812ECC5A8983D2);
+            return ref _Handle.AsRef<short>(_InputIdx0Offset);
         }
     }
-    private static nint? _InputIdx1Offset;
+    private static nint _InputIdx1Offset = -1;
 
     public ref short InputIdx1
     {
         get
         {
-            _InputIdx1Offset = _InputIdx1Offset ?? Schema.GetOffset(0x17812ECC5B898565);
-            return ref _Handle.AsRef<short>(_InputIdx1Offset!.Value);
+            if (_InputIdx1Offset == -1) _InputIdx1Offset = Schema.GetOffset(0x17812ECC5B898565);
+            return ref _Handle.AsRef<short>(_InputIdx1Offset);
         }
     }
-    private static nint? _ParameterValueRangeOffset;
+    private static nint _ParameterValueRangeOffset = -1;
     private SchemaUntypedField? _ParameterValueRangeInstance;
 
     public SchemaUntypedField ParameterValueRange
     {
         get
         {
-            _ParameterValueRangeOffset = _ParameterValueRangeOffset ?? Schema.GetOffset(0x17812ECC64AF37AE);
+            if (_ParameterValueRangeOffset == -1) _ParameterValueRangeOffset = Schema.GetOffset(0x17812ECC64AF37AE);
             var instance = _ParameterValueRangeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ParameterValueRangeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParameterValueRangeOffset);
             return instance;
         }
     }

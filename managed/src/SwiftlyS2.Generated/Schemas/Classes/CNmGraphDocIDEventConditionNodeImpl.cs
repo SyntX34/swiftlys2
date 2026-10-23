@@ -16,54 +16,54 @@ internal partial class CNmGraphDocIDEventConditionNodeImpl : CNmGraphDocFlowNode
 {
     public CNmGraphDocIDEventConditionNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _OperatorOffset;
+    private static nint _OperatorOffset = -1;
 
     public ref NmEventConditionOperator_t Operator
     {
         get
         {
-            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0xE48D19118ABE049D);
-            return ref _Handle.AsRef<NmEventConditionOperator_t>(_OperatorOffset!.Value);
+            if (_OperatorOffset == -1) _OperatorOffset = Schema.GetOffset(0xE48D19118ABE049D);
+            return ref _Handle.AsRef<NmEventConditionOperator_t>(_OperatorOffset);
         }
     }
-    private static nint? _SearchRuleOffset;
+    private static nint _SearchRuleOffset = -1;
 
     public ref CNmGraphDocIDEventConditionNode__SearchRule_t SearchRule
     {
         get
         {
-            _SearchRuleOffset = _SearchRuleOffset ?? Schema.GetOffset(0xE48D19112ADF3C6F);
-            return ref _Handle.AsRef<CNmGraphDocIDEventConditionNode__SearchRule_t>(_SearchRuleOffset!.Value);
+            if (_SearchRuleOffset == -1) _SearchRuleOffset = Schema.GetOffset(0xE48D19112ADF3C6F);
+            return ref _Handle.AsRef<CNmGraphDocIDEventConditionNode__SearchRule_t>(_SearchRuleOffset);
         }
     }
-    private static nint? _LimitSearchToSourceStateOffset;
+    private static nint _LimitSearchToSourceStateOffset = -1;
 
     public ref bool LimitSearchToSourceState
     {
         get
         {
-            _LimitSearchToSourceStateOffset = _LimitSearchToSourceStateOffset ?? Schema.GetOffset(0xE48D191115D4BD01);
-            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset!.Value);
+            if (_LimitSearchToSourceStateOffset == -1) _LimitSearchToSourceStateOffset = Schema.GetOffset(0xE48D191115D4BD01);
+            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset);
         }
     }
-    private static nint? _IgnoreInactiveBranchEventsOffset;
+    private static nint _IgnoreInactiveBranchEventsOffset = -1;
 
     public ref bool IgnoreInactiveBranchEvents
     {
         get
         {
-            _IgnoreInactiveBranchEventsOffset = _IgnoreInactiveBranchEventsOffset ?? Schema.GetOffset(0xE48D191140B77877);
-            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset!.Value);
+            if (_IgnoreInactiveBranchEventsOffset == -1) _IgnoreInactiveBranchEventsOffset = Schema.GetOffset(0xE48D191140B77877);
+            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset);
         }
     }
-    private static nint? _EventIDsOffset;
+    private static nint _EventIDsOffset = -1;
 
     public ref CUtlVector<CGlobalSymbol> EventIDs
     {
         get
         {
-            _EventIDsOffset = _EventIDsOffset ?? Schema.GetOffset(0xE48D1911E7543F93);
-            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_EventIDsOffset!.Value);
+            if (_EventIDsOffset == -1) _EventIDsOffset = Schema.GetOffset(0xE48D1911E7543F93);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_EventIDsOffset);
         }
     }
 

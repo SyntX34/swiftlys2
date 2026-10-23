@@ -26,8 +26,6 @@
 
 #include <scripting/scripting.h>
 
-typedef IGameEventListener2* (*GetLegacyGameEventListener)(CPlayerSlot slot);
-
 static char* Bridge_GameEvents_CopyString(const std::string& value, int* size)
 {
     int outSize = static_cast<int>(value.size());
@@ -201,41 +199,26 @@ void Bridge_GameEvents_FireEvent(void* event, bool dontBroadcast)
 void Bridge_GameEvents_FireEventToClient(void* event, int playerid)
 {
     if (!event) return;
-
-    static auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
-    if (!pListenerSig) return;
-
-    auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(playerid);
-    if (!listener) return;
-
-    if (!g_pGameEventManager->GetGameEventManager()->FindListener(listener, ((IGameEvent*)event)->GetName()))
-    {
-        return g_pCrashReporter->ReportPreventionIncident("GameEvents", fmt::format("Tried to fire event '{}' but the client isn't listening to this event.", ((IGameEvent*)event)->GetName()));
-    }
-
-    listener->FireGameEvent((IGameEvent*)event);
+    auto player = g_pPlayerManager->GetPlayer(playerid);
+    if (!player) return;
+    if(!player->IsListeningGameEvent(((IGameEvent*)event)->GetID())) return;
+    player->SendGameEvent((IGameEvent*)event);
 }
 
 bool Bridge_GameEvents_IsPlayerListeningToEventName(int playerid, const char* eventName)
 {
-    auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
-    if (!pListenerSig) return false;
+    auto player = g_pPlayerManager->GetPlayer(playerid);
+    if (!player) return false;
 
-    auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(playerid);
-    if (!listener) return false;
-
-    return g_pGameEventManager->GetGameEventManager()->FindListener(listener, eventName);
+    return player->IsListeningGameEvent(g_pGameEventManager->GetGameEventListenerID(eventName));
 }
 
 bool Bridge_GameEvents_IsPlayerListeningToEvent(int playerid, void* event)
 {
-    auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
-    if (!pListenerSig) return false;
+    auto player = g_pPlayerManager->GetPlayer(playerid);
+    if (!player) return false;
 
-    auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(playerid);
-    if (!listener) return false;
-
-    return g_pGameEventManager->GetGameEventManager()->FindListener(listener, ((IGameEvent*)event)->GetName());
+    return player->IsListeningGameEvent(((IGameEvent*)event)->GetID());
 }
 
 DEFINE_NATIVE("GameEvents.GetValue", Bridge_GameEvents_GetValue);

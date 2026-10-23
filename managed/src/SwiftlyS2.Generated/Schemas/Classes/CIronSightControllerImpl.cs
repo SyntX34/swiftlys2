@@ -16,44 +16,44 @@ internal partial class CIronSightControllerImpl : SchemaClass, CIronSightControl
 {
     public CIronSightControllerImpl(nint handle) : base(handle) { }
 
-    private static nint? _IronSightAvailableOffset;
+    private static nint _IronSightAvailableOffset = -1;
 
     public ref bool IronSightAvailable
     {
         get
         {
-            _IronSightAvailableOffset = _IronSightAvailableOffset ?? Schema.GetOffset(0x9E147D3131BCE9D3);
-            return ref _Handle.AsRef<bool>(_IronSightAvailableOffset!.Value);
+            if (_IronSightAvailableOffset == -1) _IronSightAvailableOffset = Schema.GetOffset(0x9E147D3131BCE9D3);
+            return ref _Handle.AsRef<bool>(_IronSightAvailableOffset);
         }
     }
-    private static nint? _IronSightAmountOffset;
+    private static nint _IronSightAmountOffset = -1;
 
     public ref float IronSightAmount
     {
         get
         {
-            _IronSightAmountOffset = _IronSightAmountOffset ?? Schema.GetOffset(0x9E147D31D64422F6);
-            return ref _Handle.AsRef<float>(_IronSightAmountOffset!.Value);
+            if (_IronSightAmountOffset == -1) _IronSightAmountOffset = Schema.GetOffset(0x9E147D31D64422F6);
+            return ref _Handle.AsRef<float>(_IronSightAmountOffset);
         }
     }
-    private static nint? _IronSightAmountGainedOffset;
+    private static nint _IronSightAmountGainedOffset = -1;
 
     public ref float IronSightAmountGained
     {
         get
         {
-            _IronSightAmountGainedOffset = _IronSightAmountGainedOffset ?? Schema.GetOffset(0x9E147D316631E9A0);
-            return ref _Handle.AsRef<float>(_IronSightAmountGainedOffset!.Value);
+            if (_IronSightAmountGainedOffset == -1) _IronSightAmountGainedOffset = Schema.GetOffset(0x9E147D316631E9A0);
+            return ref _Handle.AsRef<float>(_IronSightAmountGainedOffset);
         }
     }
-    private static nint? _IronSightAmountBiasedOffset;
+    private static nint _IronSightAmountBiasedOffset = -1;
 
     public ref float IronSightAmountBiased
     {
         get
         {
-            _IronSightAmountBiasedOffset = _IronSightAmountBiasedOffset ?? Schema.GetOffset(0x9E147D31526716FA);
-            return ref _Handle.AsRef<float>(_IronSightAmountBiasedOffset!.Value);
+            if (_IronSightAmountBiasedOffset == -1) _IronSightAmountBiasedOffset = Schema.GetOffset(0x9E147D31526716FA);
+            return ref _Handle.AsRef<float>(_IronSightAmountBiasedOffset);
         }
     }
 

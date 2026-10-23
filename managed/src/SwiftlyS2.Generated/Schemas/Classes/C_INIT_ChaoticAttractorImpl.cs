@@ -16,94 +16,94 @@ internal partial class C_INIT_ChaoticAttractorImpl : CParticleFunctionInitialize
 {
     public C_INIT_ChaoticAttractorImpl(nint handle) : base(handle) { }
 
-    private static nint? _AParmOffset;
+    private static nint _AParmOffset = -1;
 
     public ref float AParm
     {
         get
         {
-            _AParmOffset = _AParmOffset ?? Schema.GetOffset(0x31993BA100370330);
-            return ref _Handle.AsRef<float>(_AParmOffset!.Value);
+            if (_AParmOffset == -1) _AParmOffset = Schema.GetOffset(0x31993BA100370330);
+            return ref _Handle.AsRef<float>(_AParmOffset);
         }
     }
-    private static nint? _BParmOffset;
+    private static nint _BParmOffset = -1;
 
     public ref float BParm
     {
         get
         {
-            _BParmOffset = _BParmOffset ?? Schema.GetOffset(0x31993BA13711CFD5);
-            return ref _Handle.AsRef<float>(_BParmOffset!.Value);
+            if (_BParmOffset == -1) _BParmOffset = Schema.GetOffset(0x31993BA13711CFD5);
+            return ref _Handle.AsRef<float>(_BParmOffset);
         }
     }
-    private static nint? _CParmOffset;
+    private static nint _CParmOffset = -1;
 
     public ref float CParm
     {
         get
         {
-            _CParmOffset = _CParmOffset ?? Schema.GetOffset(0x31993BA14C9F79E6);
-            return ref _Handle.AsRef<float>(_CParmOffset!.Value);
+            if (_CParmOffset == -1) _CParmOffset = Schema.GetOffset(0x31993BA14C9F79E6);
+            return ref _Handle.AsRef<float>(_CParmOffset);
         }
     }
-    private static nint? _DParmOffset;
+    private static nint _DParmOffset = -1;
 
     public ref float DParm
     {
         get
         {
-            _DParmOffset = _DParmOffset ?? Schema.GetOffset(0x31993BA175D11173);
-            return ref _Handle.AsRef<float>(_DParmOffset!.Value);
+            if (_DParmOffset == -1) _DParmOffset = Schema.GetOffset(0x31993BA175D11173);
+            return ref _Handle.AsRef<float>(_DParmOffset);
         }
     }
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
 
     public ref float Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x31993BA1B731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x31993BA1B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset);
         }
     }
-    private static nint? _SpeedMinOffset;
+    private static nint _SpeedMinOffset = -1;
 
     public ref float SpeedMin
     {
         get
         {
-            _SpeedMinOffset = _SpeedMinOffset ?? Schema.GetOffset(0x31993BA1B52776BE);
-            return ref _Handle.AsRef<float>(_SpeedMinOffset!.Value);
+            if (_SpeedMinOffset == -1) _SpeedMinOffset = Schema.GetOffset(0x31993BA1B52776BE);
+            return ref _Handle.AsRef<float>(_SpeedMinOffset);
         }
     }
-    private static nint? _SpeedMaxOffset;
+    private static nint _SpeedMaxOffset = -1;
 
     public ref float SpeedMax
     {
         get
         {
-            _SpeedMaxOffset = _SpeedMaxOffset ?? Schema.GetOffset(0x31993BA1C7140B5C);
-            return ref _Handle.AsRef<float>(_SpeedMaxOffset!.Value);
+            if (_SpeedMaxOffset == -1) _SpeedMaxOffset = Schema.GetOffset(0x31993BA1C7140B5C);
+            return ref _Handle.AsRef<float>(_SpeedMaxOffset);
         }
     }
-    private static nint? _BaseCPOffset;
+    private static nint _BaseCPOffset = -1;
 
     public ref int BaseCP
     {
         get
         {
-            _BaseCPOffset = _BaseCPOffset ?? Schema.GetOffset(0x31993BA1959440C7);
-            return ref _Handle.AsRef<int>(_BaseCPOffset!.Value);
+            if (_BaseCPOffset == -1) _BaseCPOffset = Schema.GetOffset(0x31993BA1959440C7);
+            return ref _Handle.AsRef<int>(_BaseCPOffset);
         }
     }
-    private static nint? _UniformSpeedOffset;
+    private static nint _UniformSpeedOffset = -1;
 
     public ref bool UniformSpeed
     {
         get
         {
-            _UniformSpeedOffset = _UniformSpeedOffset ?? Schema.GetOffset(0x31993BA117685F4E);
-            return ref _Handle.AsRef<bool>(_UniformSpeedOffset!.Value);
+            if (_UniformSpeedOffset == -1) _UniformSpeedOffset = Schema.GetOffset(0x31993BA117685F4E);
+            return ref _Handle.AsRef<bool>(_UniformSpeedOffset);
         }
     }
 

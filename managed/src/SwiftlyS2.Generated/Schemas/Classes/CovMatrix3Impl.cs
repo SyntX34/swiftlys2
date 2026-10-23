@@ -16,44 +16,44 @@ internal partial class CovMatrix3Impl : SchemaClass, CovMatrix3
 {
     public CovMatrix3Impl(nint handle) : base(handle) { }
 
-    private static nint? _DiagOffset;
+    private static nint _DiagOffset = -1;
 
     public ref Vector Diag
     {
         get
         {
-            _DiagOffset = _DiagOffset ?? Schema.GetOffset(0xA222FA6F7CC0D332);
-            return ref _Handle.AsRef<Vector>(_DiagOffset!.Value);
+            if (_DiagOffset == -1) _DiagOffset = Schema.GetOffset(0xA222FA6F7CC0D332);
+            return ref _Handle.AsRef<Vector>(_DiagOffset);
         }
     }
-    private static nint? _XYOffset;
+    private static nint _XYOffset = -1;
 
     public ref float XY
     {
         get
         {
-            _XYOffset = _XYOffset ?? Schema.GetOffset(0xA222FA6FA58DC304);
-            return ref _Handle.AsRef<float>(_XYOffset!.Value);
+            if (_XYOffset == -1) _XYOffset = Schema.GetOffset(0xA222FA6FA58DC304);
+            return ref _Handle.AsRef<float>(_XYOffset);
         }
     }
-    private static nint? _XZOffset;
+    private static nint _XZOffset = -1;
 
     public ref float XZ
     {
         get
         {
-            _XZOffset = _XZOffset ?? Schema.GetOffset(0xA222FA6FA88DC7BD);
-            return ref _Handle.AsRef<float>(_XZOffset!.Value);
+            if (_XZOffset == -1) _XZOffset = Schema.GetOffset(0xA222FA6FA88DC7BD);
+            return ref _Handle.AsRef<float>(_XZOffset);
         }
     }
-    private static nint? _YZOffset;
+    private static nint _YZOffset = -1;
 
     public ref float YZ
     {
         get
         {
-            _YZOffset = _YZOffset ?? Schema.GetOffset(0xA222FA6F9E8B7968);
-            return ref _Handle.AsRef<float>(_YZOffset!.Value);
+            if (_YZOffset == -1) _YZOffset = Schema.GetOffset(0xA222FA6F9E8B7968);
+            return ref _Handle.AsRef<float>(_YZOffset);
         }
     }
 

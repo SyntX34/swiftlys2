@@ -32,7 +32,6 @@ class IEventManager
 {
 public:
     virtual void Initialize() = 0;
-    virtual void Shutdown() = 0;
 
     virtual void OnServerStartup() = 0;
     // only registered events are forwarded to the fire handlers
@@ -42,6 +41,8 @@ public:
 
     virtual void SetGameEventFireHandler(GameEventFireHandler handler) = 0;
     virtual void SetPostGameEventFireHandler(GameEventFireHandler handler) = 0;
+    virtual int GetGameEventListenerID(std::string event_name) = 0;
+    virtual void RegisterGameEventListenerID(std::string event_name, int id) = 0;
 
     virtual IGameEventManager2* GetGameEventManager() = 0;
 };

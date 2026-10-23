@@ -16,24 +16,24 @@ internal partial class CNmGraphEventConditionNode__Condition_tImpl : SchemaClass
 {
     public CNmGraphEventConditionNode__Condition_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EventIDOffset;
+    private static nint _EventIDOffset = -1;
 
     public ref CGlobalSymbol EventID
     {
         get
         {
-            _EventIDOffset = _EventIDOffset ?? Schema.GetOffset(0xA3252A829D798A72);
-            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+            if (_EventIDOffset == -1) _EventIDOffset = Schema.GetOffset(0xA3252A829D798A72);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset);
         }
     }
-    private static nint? _EventTypeConditionOffset;
+    private static nint _EventTypeConditionOffset = -1;
 
     public ref NmGraphEventTypeCondition_t EventTypeCondition
     {
         get
         {
-            _EventTypeConditionOffset = _EventTypeConditionOffset ?? Schema.GetOffset(0xA3252A829BED2960);
-            return ref _Handle.AsRef<NmGraphEventTypeCondition_t>(_EventTypeConditionOffset!.Value);
+            if (_EventTypeConditionOffset == -1) _EventTypeConditionOffset = Schema.GetOffset(0xA3252A829BED2960);
+            return ref _Handle.AsRef<NmGraphEventTypeCondition_t>(_EventTypeConditionOffset);
         }
     }
 

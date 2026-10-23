@@ -16,185 +16,185 @@ internal partial class C_OP_GameDecalRendererImpl : CParticleFunctionRendererImp
 {
     public C_OP_GameDecalRendererImpl(nint handle) : base(handle) { }
 
-    private static nint? _DecalGroupNameOffset;
+    private static nint _DecalGroupNameOffset = -1;
 
     public ref CGlobalSymbol DecalGroupName
     {
         get
         {
-            _DecalGroupNameOffset = _DecalGroupNameOffset ?? Schema.GetOffset(0x42DAAA6713ADF275);
-            return ref _Handle.AsRef<CGlobalSymbol>(_DecalGroupNameOffset!.Value);
+            if (_DecalGroupNameOffset == -1) _DecalGroupNameOffset = Schema.GetOffset(0x42DAAA6713ADF275);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DecalGroupNameOffset);
         }
     }
-    private static nint? _EventTypeOffset;
+    private static nint _EventTypeOffset = -1;
 
     public ref EventTypeSelection_t EventType
     {
         get
         {
-            _EventTypeOffset = _EventTypeOffset ?? Schema.GetOffset(0x42DAAA67E1F9AA93);
-            return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+            if (_EventTypeOffset == -1) _EventTypeOffset = Schema.GetOffset(0x42DAAA67E1F9AA93);
+            return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset);
         }
     }
-    private static nint? _InteractionMaskOffset;
+    private static nint _InteractionMaskOffset = -1;
 
     public ref ParticleCollisionMask_t InteractionMask
     {
         get
         {
-            _InteractionMaskOffset = _InteractionMaskOffset ?? Schema.GetOffset(0x42DAAA6776E7F97B);
-            return ref _Handle.AsRef<ParticleCollisionMask_t>(_InteractionMaskOffset!.Value);
+            if (_InteractionMaskOffset == -1) _InteractionMaskOffset = Schema.GetOffset(0x42DAAA6776E7F97B);
+            return ref _Handle.AsRef<ParticleCollisionMask_t>(_InteractionMaskOffset);
         }
     }
-    private static nint? _CollisionGroupOffset;
+    private static nint _CollisionGroupOffset = -1;
 
     public ref ParticleCollisionGroup_t CollisionGroup
     {
         get
         {
-            _CollisionGroupOffset = _CollisionGroupOffset ?? Schema.GetOffset(0x42DAAA670AC0C752);
-            return ref _Handle.AsRef<ParticleCollisionGroup_t>(_CollisionGroupOffset!.Value);
+            if (_CollisionGroupOffset == -1) _CollisionGroupOffset = Schema.GetOffset(0x42DAAA670AC0C752);
+            return ref _Handle.AsRef<ParticleCollisionGroup_t>(_CollisionGroupOffset);
         }
     }
-    private static nint? _StartPosOffset;
+    private static nint _StartPosOffset = -1;
     private CPerParticleVecInputImpl? _StartPosInstance;
 
     public CPerParticleVecInput StartPos
     {
         get
         {
-            _StartPosOffset = _StartPosOffset ?? Schema.GetOffset(0x42DAAA6726654BFF);
+            if (_StartPosOffset == -1) _StartPosOffset = Schema.GetOffset(0x42DAAA6726654BFF);
             var instance = _StartPosInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartPosOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartPosOffset);
             return instance;
         }
     }
-    private static nint? _EndPosOffset;
+    private static nint _EndPosOffset = -1;
     private CPerParticleVecInputImpl? _EndPosInstance;
 
     public CPerParticleVecInput EndPos
     {
         get
         {
-            _EndPosOffset = _EndPosOffset ?? Schema.GetOffset(0x42DAAA678DD24760);
+            if (_EndPosOffset == -1) _EndPosOffset = Schema.GetOffset(0x42DAAA678DD24760);
             var instance = _EndPosInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndPosOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndPosOffset);
             return instance;
         }
     }
-    private static nint? _TraceBloatOffset;
+    private static nint _TraceBloatOffset = -1;
     private CPerParticleFloatInputImpl? _TraceBloatInstance;
 
     public CPerParticleFloatInput TraceBloat
     {
         get
         {
-            _TraceBloatOffset = _TraceBloatOffset ?? Schema.GetOffset(0x42DAAA674BE375F2);
+            if (_TraceBloatOffset == -1) _TraceBloatOffset = Schema.GetOffset(0x42DAAA674BE375F2);
             var instance = _TraceBloatInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TraceBloatOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TraceBloatOffset);
             return instance;
         }
     }
-    private static nint? _DecalSizeOffset;
+    private static nint _DecalSizeOffset = -1;
     private CPerParticleFloatInputImpl? _DecalSizeInstance;
 
     public CPerParticleFloatInput DecalSize
     {
         get
         {
-            _DecalSizeOffset = _DecalSizeOffset ?? Schema.GetOffset(0x42DAAA6788E12609);
+            if (_DecalSizeOffset == -1) _DecalSizeOffset = Schema.GetOffset(0x42DAAA6788E12609);
             var instance = _DecalSizeInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DecalSizeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DecalSizeOffset);
             return instance;
         }
     }
-    private static nint? _DecalGroupIndexOffset;
+    private static nint _DecalGroupIndexOffset = -1;
     private CPerParticleFloatInputImpl? _DecalGroupIndexInstance;
 
     public CPerParticleFloatInput DecalGroupIndex
     {
         get
         {
-            _DecalGroupIndexOffset = _DecalGroupIndexOffset ?? Schema.GetOffset(0x42DAAA6784206313);
+            if (_DecalGroupIndexOffset == -1) _DecalGroupIndexOffset = Schema.GetOffset(0x42DAAA6784206313);
             var instance = _DecalGroupIndexInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DecalGroupIndexOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DecalGroupIndexOffset);
             return instance;
         }
     }
-    private static nint? _DecalRotationOffset;
+    private static nint _DecalRotationOffset = -1;
     private CPerParticleFloatInputImpl? _DecalRotationInstance;
 
     public CPerParticleFloatInput DecalRotation
     {
         get
         {
-            _DecalRotationOffset = _DecalRotationOffset ?? Schema.GetOffset(0x42DAAA6788A29A9E);
+            if (_DecalRotationOffset == -1) _DecalRotationOffset = Schema.GetOffset(0x42DAAA6788A29A9E);
             var instance = _DecalRotationInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DecalRotationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DecalRotationOffset);
             return instance;
         }
     }
-    private static nint? _ModulationColorOffset;
+    private static nint _ModulationColorOffset = -1;
     private CPerParticleVecInputImpl? _ModulationColorInstance;
 
     public CPerParticleVecInput ModulationColor
     {
         get
         {
-            _ModulationColorOffset = _ModulationColorOffset ?? Schema.GetOffset(0x42DAAA67C39DA78E);
+            if (_ModulationColorOffset == -1) _ModulationColorOffset = Schema.GetOffset(0x42DAAA67C39DA78E);
             var instance = _ModulationColorInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ModulationColorOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ModulationColorOffset);
             return instance;
         }
     }
-    private static nint? _UseGameDefaultDecalSizeOffset;
+    private static nint _UseGameDefaultDecalSizeOffset = -1;
 
     public ref bool UseGameDefaultDecalSize
     {
         get
         {
-            _UseGameDefaultDecalSizeOffset = _UseGameDefaultDecalSizeOffset ?? Schema.GetOffset(0x42DAAA6749D51905);
-            return ref _Handle.AsRef<bool>(_UseGameDefaultDecalSizeOffset!.Value);
+            if (_UseGameDefaultDecalSizeOffset == -1) _UseGameDefaultDecalSizeOffset = Schema.GetOffset(0x42DAAA6749D51905);
+            return ref _Handle.AsRef<bool>(_UseGameDefaultDecalSizeOffset);
         }
     }
-    private static nint? _RandomDecalRotationOffset;
+    private static nint _RandomDecalRotationOffset = -1;
 
     public ref bool RandomDecalRotation
     {
         get
         {
-            _RandomDecalRotationOffset = _RandomDecalRotationOffset ?? Schema.GetOffset(0x42DAAA673B9BD1F1);
-            return ref _Handle.AsRef<bool>(_RandomDecalRotationOffset!.Value);
+            if (_RandomDecalRotationOffset == -1) _RandomDecalRotationOffset = Schema.GetOffset(0x42DAAA673B9BD1F1);
+            return ref _Handle.AsRef<bool>(_RandomDecalRotationOffset);
         }
     }
-    private static nint? _RandomlySelectDecalInGroupOffset;
+    private static nint _RandomlySelectDecalInGroupOffset = -1;
 
     public ref bool RandomlySelectDecalInGroup
     {
         get
         {
-            _RandomlySelectDecalInGroupOffset = _RandomlySelectDecalInGroupOffset ?? Schema.GetOffset(0x42DAAA670519A84C);
-            return ref _Handle.AsRef<bool>(_RandomlySelectDecalInGroupOffset!.Value);
+            if (_RandomlySelectDecalInGroupOffset == -1) _RandomlySelectDecalInGroupOffset = Schema.GetOffset(0x42DAAA670519A84C);
+            return ref _Handle.AsRef<bool>(_RandomlySelectDecalInGroupOffset);
         }
     }
-    private static nint? _NoDecalsOnOwnerOffset;
+    private static nint _NoDecalsOnOwnerOffset = -1;
 
     public ref bool NoDecalsOnOwner
     {
         get
         {
-            _NoDecalsOnOwnerOffset = _NoDecalsOnOwnerOffset ?? Schema.GetOffset(0x42DAAA672B2ECEB4);
-            return ref _Handle.AsRef<bool>(_NoDecalsOnOwnerOffset!.Value);
+            if (_NoDecalsOnOwnerOffset == -1) _NoDecalsOnOwnerOffset = Schema.GetOffset(0x42DAAA672B2ECEB4);
+            return ref _Handle.AsRef<bool>(_NoDecalsOnOwnerOffset);
         }
     }
-    private static nint? _VisualizeTracesOffset;
+    private static nint _VisualizeTracesOffset = -1;
 
     public ref bool VisualizeTraces
     {
         get
         {
-            _VisualizeTracesOffset = _VisualizeTracesOffset ?? Schema.GetOffset(0x42DAAA67ED707633);
-            return ref _Handle.AsRef<bool>(_VisualizeTracesOffset!.Value);
+            if (_VisualizeTracesOffset == -1) _VisualizeTracesOffset = Schema.GetOffset(0x42DAAA67ED707633);
+            return ref _Handle.AsRef<bool>(_VisualizeTracesOffset);
         }
     }
 

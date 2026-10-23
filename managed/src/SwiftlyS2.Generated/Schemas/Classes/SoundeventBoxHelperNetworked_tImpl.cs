@@ -16,44 +16,44 @@ internal partial class SoundeventBoxHelperNetworked_tImpl : SchemaClass, Soundev
 {
     public SoundeventBoxHelperNetworked_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _OriginOffset;
+    private static nint _OriginOffset = -1;
 
     public ref Vector Origin
     {
         get
         {
-            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0xF721D61FD32910BB);
-            return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
+            if (_OriginOffset == -1) _OriginOffset = Schema.GetOffset(0xF721D61FD32910BB);
+            return ref _Handle.AsRef<Vector>(_OriginOffset);
         }
     }
-    private static nint? _AnglesOffset;
+    private static nint _AnglesOffset = -1;
 
     public ref QAngle Angles
     {
         get
         {
-            _AnglesOffset = _AnglesOffset ?? Schema.GetOffset(0xF721D61FA635285C);
-            return ref _Handle.AsRef<QAngle>(_AnglesOffset!.Value);
+            if (_AnglesOffset == -1) _AnglesOffset = Schema.GetOffset(0xF721D61FA635285C);
+            return ref _Handle.AsRef<QAngle>(_AnglesOffset);
         }
     }
-    private static nint? _MinsOffset;
+    private static nint _MinsOffset = -1;
 
     public ref Vector Mins
     {
         get
         {
-            _MinsOffset = _MinsOffset ?? Schema.GetOffset(0xF721D61F0268BB50);
-            return ref _Handle.AsRef<Vector>(_MinsOffset!.Value);
+            if (_MinsOffset == -1) _MinsOffset = Schema.GetOffset(0xF721D61F0268BB50);
+            return ref _Handle.AsRef<Vector>(_MinsOffset);
         }
     }
-    private static nint? _MaxsOffset;
+    private static nint _MaxsOffset = -1;
 
     public ref Vector Maxs
     {
         get
         {
-            _MaxsOffset = _MaxsOffset ?? Schema.GetOffset(0xF721D61F810D3F8A);
-            return ref _Handle.AsRef<Vector>(_MaxsOffset!.Value);
+            if (_MaxsOffset == -1) _MaxsOffset = Schema.GetOffset(0xF721D61F810D3F8A);
+            return ref _Handle.AsRef<Vector>(_MaxsOffset);
         }
     }
 

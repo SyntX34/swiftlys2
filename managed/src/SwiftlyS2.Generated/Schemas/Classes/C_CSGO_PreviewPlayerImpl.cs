@@ -16,24 +16,24 @@ internal partial class C_CSGO_PreviewPlayerImpl : C_CSPlayerPawnImpl, C_CSGO_Pre
 {
     public C_CSGO_PreviewPlayerImpl(nint handle) : base(handle) { }
 
-    private static nint? _AnimgraphCharacterModeStringOffset;
+    private static nint _AnimgraphCharacterModeStringOffset = -1;
 
     public ref CGlobalSymbol AnimgraphCharacterModeString
     {
         get
         {
-            _AnimgraphCharacterModeStringOffset = _AnimgraphCharacterModeStringOffset ?? Schema.GetOffset(0x9E22D435A3B1C545);
-            return ref _Handle.AsRef<CGlobalSymbol>(_AnimgraphCharacterModeStringOffset!.Value);
+            if (_AnimgraphCharacterModeStringOffset == -1) _AnimgraphCharacterModeStringOffset = Schema.GetOffset(0x9E22D435A3B1C545);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AnimgraphCharacterModeStringOffset);
         }
     }
-    private static nint? _InitialModelScaleOffset;
+    private static nint _InitialModelScaleOffset = -1;
 
     public ref float InitialModelScale
     {
         get
         {
-            _InitialModelScaleOffset = _InitialModelScaleOffset ?? Schema.GetOffset(0x9E22D43529183C78);
-            return ref _Handle.AsRef<float>(_InitialModelScaleOffset!.Value);
+            if (_InitialModelScaleOffset == -1) _InitialModelScaleOffset = Schema.GetOffset(0x9E22D43529183C78);
+            return ref _Handle.AsRef<float>(_InitialModelScaleOffset);
         }
     }
 

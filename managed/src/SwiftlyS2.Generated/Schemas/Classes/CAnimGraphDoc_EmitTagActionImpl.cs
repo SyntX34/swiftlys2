@@ -16,16 +16,16 @@ internal partial class CAnimGraphDoc_EmitTagActionImpl : CAnimGraphDoc_ActionImp
 {
     public CAnimGraphDoc_EmitTagActionImpl(nint handle) : base(handle) { }
 
-    private static nint? _TagOffset;
+    private static nint _TagOffset = -1;
     private AnimTagIDImpl? _TagInstance;
 
     public AnimTagID Tag
     {
         get
         {
-            _TagOffset = _TagOffset ?? Schema.GetOffset(0x446896A98419ADB3);
+            if (_TagOffset == -1) _TagOffset = Schema.GetOffset(0x446896A98419ADB3);
             var instance = _TagInstance ??= new AnimTagIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _TagOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TagOffset);
             return instance;
         }
     }

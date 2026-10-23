@@ -16,29 +16,29 @@ internal partial class CPulseCell_IntervalTimerImpl : CPulseCell_BaseYieldingInf
 {
     public CPulseCell_IntervalTimerImpl(nint handle) : base(handle) { }
 
-    private static nint? _CompletedOffset;
+    private static nint _CompletedOffset = -1;
     private CPulse_ResumePointImpl? _CompletedInstance;
 
     public CPulse_ResumePoint Completed
     {
         get
         {
-            _CompletedOffset = _CompletedOffset ?? Schema.GetOffset(0x33EF5E76818C0E92);
+            if (_CompletedOffset == -1) _CompletedOffset = Schema.GetOffset(0x33EF5E76818C0E92);
             var instance = _CompletedInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _CompletedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CompletedOffset);
             return instance;
         }
     }
-    private static nint? _OnIntervalOffset;
+    private static nint _OnIntervalOffset = -1;
     private SignatureOutflow_ContinueImpl? _OnIntervalInstance;
 
     public SignatureOutflow_Continue OnInterval
     {
         get
         {
-            _OnIntervalOffset = _OnIntervalOffset ?? Schema.GetOffset(0x33EF5E761A4FEF89);
+            if (_OnIntervalOffset == -1) _OnIntervalOffset = Schema.GetOffset(0x33EF5E761A4FEF89);
             var instance = _OnIntervalInstance ??= new SignatureOutflow_ContinueImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnIntervalOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnIntervalOffset);
             return instance;
         }
     }

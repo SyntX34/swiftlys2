@@ -16,59 +16,59 @@ internal partial class VsInputSignatureElement_tImpl : SchemaClass, VsInputSigna
 {
     public VsInputSignatureElement_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFD3BBE5B5B47C92C);
-            return Schema.GetString(_Handle + _NameOffset!.Value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFD3BBE5B5B47C92C);
+            return Schema.GetString(_Handle + _NameOffset);
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFD3BBE5B5B47C92C);
-            Schema.SetFixedString(_Handle, _NameOffset!.Value, value, 64);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFD3BBE5B5B47C92C);
+            Schema.SetFixedString(_Handle, _NameOffset, value, 64);
         }
     }
-    private static nint? _SemanticOffset;
+    private static nint _SemanticOffset = -1;
 
     public string Semantic
     {
         get
         {
-            _SemanticOffset = _SemanticOffset ?? Schema.GetOffset(0xFD3BBE5B14684E6F);
-            return Schema.GetString(_Handle + _SemanticOffset!.Value);
+            if (_SemanticOffset == -1) _SemanticOffset = Schema.GetOffset(0xFD3BBE5B14684E6F);
+            return Schema.GetString(_Handle + _SemanticOffset);
         }
         set
         {
-            _SemanticOffset = _SemanticOffset ?? Schema.GetOffset(0xFD3BBE5B14684E6F);
-            Schema.SetFixedString(_Handle, _SemanticOffset!.Value, value, 64);
+            if (_SemanticOffset == -1) _SemanticOffset = Schema.GetOffset(0xFD3BBE5B14684E6F);
+            Schema.SetFixedString(_Handle, _SemanticOffset, value, 64);
         }
     }
-    private static nint? _D3DSemanticNameOffset;
+    private static nint _D3DSemanticNameOffset = -1;
 
     public string D3DSemanticName
     {
         get
         {
-            _D3DSemanticNameOffset = _D3DSemanticNameOffset ?? Schema.GetOffset(0xFD3BBE5B66524995);
-            return Schema.GetString(_Handle + _D3DSemanticNameOffset!.Value);
+            if (_D3DSemanticNameOffset == -1) _D3DSemanticNameOffset = Schema.GetOffset(0xFD3BBE5B66524995);
+            return Schema.GetString(_Handle + _D3DSemanticNameOffset);
         }
         set
         {
-            _D3DSemanticNameOffset = _D3DSemanticNameOffset ?? Schema.GetOffset(0xFD3BBE5B66524995);
-            Schema.SetFixedString(_Handle, _D3DSemanticNameOffset!.Value, value, 64);
+            if (_D3DSemanticNameOffset == -1) _D3DSemanticNameOffset = Schema.GetOffset(0xFD3BBE5B66524995);
+            Schema.SetFixedString(_Handle, _D3DSemanticNameOffset, value, 64);
         }
     }
-    private static nint? _D3DSemanticIndexOffset;
+    private static nint _D3DSemanticIndexOffset = -1;
 
     public ref int D3DSemanticIndex
     {
         get
         {
-            _D3DSemanticIndexOffset = _D3DSemanticIndexOffset ?? Schema.GetOffset(0xFD3BBE5B67F2BA80);
-            return ref _Handle.AsRef<int>(_D3DSemanticIndexOffset!.Value);
+            if (_D3DSemanticIndexOffset == -1) _D3DSemanticIndexOffset = Schema.GetOffset(0xFD3BBE5B67F2BA80);
+            return ref _Handle.AsRef<int>(_D3DSemanticIndexOffset);
         }
     }
 

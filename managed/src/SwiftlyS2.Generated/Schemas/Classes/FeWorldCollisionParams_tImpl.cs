@@ -16,44 +16,44 @@ internal partial class FeWorldCollisionParams_tImpl : SchemaClass, FeWorldCollis
 {
     public FeWorldCollisionParams_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _WorldFrictionOffset;
+    private static nint _WorldFrictionOffset = -1;
 
     public ref float WorldFriction
     {
         get
         {
-            _WorldFrictionOffset = _WorldFrictionOffset ?? Schema.GetOffset(0x85D16E65E1266C23);
-            return ref _Handle.AsRef<float>(_WorldFrictionOffset!.Value);
+            if (_WorldFrictionOffset == -1) _WorldFrictionOffset = Schema.GetOffset(0x85D16E65E1266C23);
+            return ref _Handle.AsRef<float>(_WorldFrictionOffset);
         }
     }
-    private static nint? _GroundFrictionOffset;
+    private static nint _GroundFrictionOffset = -1;
 
     public ref float GroundFriction
     {
         get
         {
-            _GroundFrictionOffset = _GroundFrictionOffset ?? Schema.GetOffset(0x85D16E652D394B72);
-            return ref _Handle.AsRef<float>(_GroundFrictionOffset!.Value);
+            if (_GroundFrictionOffset == -1) _GroundFrictionOffset = Schema.GetOffset(0x85D16E652D394B72);
+            return ref _Handle.AsRef<float>(_GroundFrictionOffset);
         }
     }
-    private static nint? _ListBeginOffset;
+    private static nint _ListBeginOffset = -1;
 
     public ref ushort ListBegin
     {
         get
         {
-            _ListBeginOffset = _ListBeginOffset ?? Schema.GetOffset(0x85D16E650BA98846);
-            return ref _Handle.AsRef<ushort>(_ListBeginOffset!.Value);
+            if (_ListBeginOffset == -1) _ListBeginOffset = Schema.GetOffset(0x85D16E650BA98846);
+            return ref _Handle.AsRef<ushort>(_ListBeginOffset);
         }
     }
-    private static nint? _ListEndOffset;
+    private static nint _ListEndOffset = -1;
 
     public ref ushort ListEnd
     {
         get
         {
-            _ListEndOffset = _ListEndOffset ?? Schema.GetOffset(0x85D16E658683DD62);
-            return ref _Handle.AsRef<ushort>(_ListEndOffset!.Value);
+            if (_ListEndOffset == -1) _ListEndOffset = Schema.GetOffset(0x85D16E658683DD62);
+            return ref _Handle.AsRef<ushort>(_ListEndOffset);
         }
     }
 

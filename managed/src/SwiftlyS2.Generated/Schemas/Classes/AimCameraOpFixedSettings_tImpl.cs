@@ -16,74 +16,74 @@ internal partial class AimCameraOpFixedSettings_tImpl : SchemaClass, AimCameraOp
 {
     public AimCameraOpFixedSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChainIndexOffset;
+    private static nint _ChainIndexOffset = -1;
 
     public ref int ChainIndex
     {
         get
         {
-            _ChainIndexOffset = _ChainIndexOffset ?? Schema.GetOffset(0xA3971F52A34589B6);
-            return ref _Handle.AsRef<int>(_ChainIndexOffset!.Value);
+            if (_ChainIndexOffset == -1) _ChainIndexOffset = Schema.GetOffset(0xA3971F52A34589B6);
+            return ref _Handle.AsRef<int>(_ChainIndexOffset);
         }
     }
-    private static nint? _CameraJointIndexOffset;
+    private static nint _CameraJointIndexOffset = -1;
 
     public ref int CameraJointIndex
     {
         get
         {
-            _CameraJointIndexOffset = _CameraJointIndexOffset ?? Schema.GetOffset(0xA3971F52346981DA);
-            return ref _Handle.AsRef<int>(_CameraJointIndexOffset!.Value);
+            if (_CameraJointIndexOffset == -1) _CameraJointIndexOffset = Schema.GetOffset(0xA3971F52346981DA);
+            return ref _Handle.AsRef<int>(_CameraJointIndexOffset);
         }
     }
-    private static nint? _PelvisJointIndexOffset;
+    private static nint _PelvisJointIndexOffset = -1;
 
     public ref int PelvisJointIndex
     {
         get
         {
-            _PelvisJointIndexOffset = _PelvisJointIndexOffset ?? Schema.GetOffset(0xA3971F52800F5FB4);
-            return ref _Handle.AsRef<int>(_PelvisJointIndexOffset!.Value);
+            if (_PelvisJointIndexOffset == -1) _PelvisJointIndexOffset = Schema.GetOffset(0xA3971F52800F5FB4);
+            return ref _Handle.AsRef<int>(_PelvisJointIndexOffset);
         }
     }
-    private static nint? _ClavicleLeftJointIndexOffset;
+    private static nint _ClavicleLeftJointIndexOffset = -1;
 
     public ref int ClavicleLeftJointIndex
     {
         get
         {
-            _ClavicleLeftJointIndexOffset = _ClavicleLeftJointIndexOffset ?? Schema.GetOffset(0xA3971F5207F7ABDB);
-            return ref _Handle.AsRef<int>(_ClavicleLeftJointIndexOffset!.Value);
+            if (_ClavicleLeftJointIndexOffset == -1) _ClavicleLeftJointIndexOffset = Schema.GetOffset(0xA3971F5207F7ABDB);
+            return ref _Handle.AsRef<int>(_ClavicleLeftJointIndexOffset);
         }
     }
-    private static nint? _ClavicleRightJointIndexOffset;
+    private static nint _ClavicleRightJointIndexOffset = -1;
 
     public ref int ClavicleRightJointIndex
     {
         get
         {
-            _ClavicleRightJointIndexOffset = _ClavicleRightJointIndexOffset ?? Schema.GetOffset(0xA3971F522F2C40A4);
-            return ref _Handle.AsRef<int>(_ClavicleRightJointIndexOffset!.Value);
+            if (_ClavicleRightJointIndexOffset == -1) _ClavicleRightJointIndexOffset = Schema.GetOffset(0xA3971F522F2C40A4);
+            return ref _Handle.AsRef<int>(_ClavicleRightJointIndexOffset);
         }
     }
-    private static nint? _DepenetrationJointIndexOffset;
+    private static nint _DepenetrationJointIndexOffset = -1;
 
     public ref int DepenetrationJointIndex
     {
         get
         {
-            _DepenetrationJointIndexOffset = _DepenetrationJointIndexOffset ?? Schema.GetOffset(0xA3971F526307286F);
-            return ref _Handle.AsRef<int>(_DepenetrationJointIndexOffset!.Value);
+            if (_DepenetrationJointIndexOffset == -1) _DepenetrationJointIndexOffset = Schema.GetOffset(0xA3971F526307286F);
+            return ref _Handle.AsRef<int>(_DepenetrationJointIndexOffset);
         }
     }
-    private static nint? _PropJointsOffset;
+    private static nint _PropJointsOffset = -1;
 
     public ref CUtlVector<int> PropJoints
     {
         get
         {
-            _PropJointsOffset = _PropJointsOffset ?? Schema.GetOffset(0xA3971F5224880565);
-            return ref _Handle.AsRef<CUtlVector<int>>(_PropJointsOffset!.Value);
+            if (_PropJointsOffset == -1) _PropJointsOffset = Schema.GetOffset(0xA3971F5224880565);
+            return ref _Handle.AsRef<CUtlVector<int>>(_PropJointsOffset);
         }
     }
 

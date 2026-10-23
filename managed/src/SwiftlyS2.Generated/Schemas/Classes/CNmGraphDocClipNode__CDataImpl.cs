@@ -16,39 +16,39 @@ internal partial class CNmGraphDocClipNode__CDataImpl : CNmGraphDocVariationData
 {
     public CNmGraphDocClipNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _ClipOffset;
+    private static nint _ClipOffset = -1;
 
     public string Clip
     {
         get
         {
-            _ClipOffset = _ClipOffset ?? Schema.GetOffset(0xF8ADC0C10ECBF9B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ClipOffset!.Value));
+            if (_ClipOffset == -1) _ClipOffset = Schema.GetOffset(0xF8ADC0C10ECBF9B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ClipOffset));
         }
         set
         {
-            _ClipOffset = _ClipOffset ?? Schema.GetOffset(0xF8ADC0C10ECBF9B);
-            Schema.SetCUtlString(_Handle, _ClipOffset!.Value, value);
+            if (_ClipOffset == -1) _ClipOffset = Schema.GetOffset(0xF8ADC0C10ECBF9B);
+            Schema.SetCUtlString(_Handle, _ClipOffset, value);
         }
     }
-    private static nint? _SpeedMultiplierOffset;
+    private static nint _SpeedMultiplierOffset = -1;
 
     public ref float SpeedMultiplier
     {
         get
         {
-            _SpeedMultiplierOffset = _SpeedMultiplierOffset ?? Schema.GetOffset(0xF8ADC0C5D5B304D);
-            return ref _Handle.AsRef<float>(_SpeedMultiplierOffset!.Value);
+            if (_SpeedMultiplierOffset == -1) _SpeedMultiplierOffset = Schema.GetOffset(0xF8ADC0C5D5B304D);
+            return ref _Handle.AsRef<float>(_SpeedMultiplierOffset);
         }
     }
-    private static nint? _StartSyncEventOffsetOffset;
+    private static nint _StartSyncEventOffsetOffset = -1;
 
     public ref int StartSyncEventOffset
     {
         get
         {
-            _StartSyncEventOffsetOffset = _StartSyncEventOffsetOffset ?? Schema.GetOffset(0xF8ADC0C8A6F2A97);
-            return ref _Handle.AsRef<int>(_StartSyncEventOffsetOffset!.Value);
+            if (_StartSyncEventOffsetOffset == -1) _StartSyncEventOffsetOffset = Schema.GetOffset(0xF8ADC0C8A6F2A97);
+            return ref _Handle.AsRef<int>(_StartSyncEventOffsetOffset);
         }
     }
 

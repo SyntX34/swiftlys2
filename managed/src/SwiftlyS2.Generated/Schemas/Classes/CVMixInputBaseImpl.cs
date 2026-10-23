@@ -16,19 +16,19 @@ internal partial class CVMixInputBaseImpl : SchemaClass, CVMixInputBase
 {
     public CVMixInputBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xCD40814B4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xCD40814B4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xCD40814B4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xCD40814B4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
 

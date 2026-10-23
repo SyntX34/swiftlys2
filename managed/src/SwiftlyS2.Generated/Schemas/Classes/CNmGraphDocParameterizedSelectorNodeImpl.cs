@@ -16,24 +16,24 @@ internal partial class CNmGraphDocParameterizedSelectorNodeImpl : CNmGraphDocVar
 {
     public CNmGraphDocParameterizedSelectorNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _OptionLabelsOffset;
+    private static nint _OptionLabelsOffset = -1;
 
     public ref CUtlVector<CUtlString> OptionLabels
     {
         get
         {
-            _OptionLabelsOffset = _OptionLabelsOffset ?? Schema.GetOffset(0x72BF64F3D071C433);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OptionLabelsOffset!.Value);
+            if (_OptionLabelsOffset == -1) _OptionLabelsOffset = Schema.GetOffset(0x72BF64F3D071C433);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OptionLabelsOffset);
         }
     }
-    private static nint? _IgnoreInvalidOptionsOffset;
+    private static nint _IgnoreInvalidOptionsOffset = -1;
 
     public ref bool IgnoreInvalidOptions
     {
         get
         {
-            _IgnoreInvalidOptionsOffset = _IgnoreInvalidOptionsOffset ?? Schema.GetOffset(0x72BF64F3507C679C);
-            return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset!.Value);
+            if (_IgnoreInvalidOptionsOffset == -1) _IgnoreInvalidOptionsOffset = Schema.GetOffset(0x72BF64F3507C679C);
+            return ref _Handle.AsRef<bool>(_IgnoreInvalidOptionsOffset);
         }
     }
 

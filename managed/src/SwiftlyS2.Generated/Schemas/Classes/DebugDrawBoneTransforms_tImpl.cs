@@ -16,16 +16,16 @@ internal partial class DebugDrawBoneTransforms_tImpl : DebugSnapshotBaseStructur
 {
     public DebugDrawBoneTransforms_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _BonesOffset;
+    private static nint _BonesOffset = -1;
     private SchemaUntypedField? _BonesInstance;
 
     public SchemaUntypedField Bones
     {
         get
         {
-            _BonesOffset = _BonesOffset ?? Schema.GetOffset(0xADDDBF0A41BA18B4);
+            if (_BonesOffset == -1) _BonesOffset = Schema.GetOffset(0xADDDBF0A41BA18B4);
             var instance = _BonesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _BonesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BonesOffset);
             return instance;
         }
     }

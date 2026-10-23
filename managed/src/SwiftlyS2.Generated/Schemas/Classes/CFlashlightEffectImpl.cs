@@ -16,139 +16,139 @@ internal partial class CFlashlightEffectImpl : SchemaClass, CFlashlightEffect
 {
     public CFlashlightEffectImpl(nint handle) : base(handle) { }
 
-    private static nint? _IsOnOffset;
+    private static nint _IsOnOffset = -1;
 
     public ref bool IsOn
     {
         get
         {
-            _IsOnOffset = _IsOnOffset ?? Schema.GetOffset(0xEBDE2D256387DB60);
-            return ref _Handle.AsRef<bool>(_IsOnOffset!.Value);
+            if (_IsOnOffset == -1) _IsOnOffset = Schema.GetOffset(0xEBDE2D256387DB60);
+            return ref _Handle.AsRef<bool>(_IsOnOffset);
         }
     }
-    private static nint? _MuzzleFlashEnabledOffset;
+    private static nint _MuzzleFlashEnabledOffset = -1;
 
     public ref bool MuzzleFlashEnabled
     {
         get
         {
-            _MuzzleFlashEnabledOffset = _MuzzleFlashEnabledOffset ?? Schema.GetOffset(0xEBDE2D25D6D5860B);
-            return ref _Handle.AsRef<bool>(_MuzzleFlashEnabledOffset!.Value);
+            if (_MuzzleFlashEnabledOffset == -1) _MuzzleFlashEnabledOffset = Schema.GetOffset(0xEBDE2D25D6D5860B);
+            return ref _Handle.AsRef<bool>(_MuzzleFlashEnabledOffset);
         }
     }
-    private static nint? _MuzzleFlashBrightnessOffset;
+    private static nint _MuzzleFlashBrightnessOffset = -1;
 
     public ref float MuzzleFlashBrightness
     {
         get
         {
-            _MuzzleFlashBrightnessOffset = _MuzzleFlashBrightnessOffset ?? Schema.GetOffset(0xEBDE2D25415CEFF3);
-            return ref _Handle.AsRef<float>(_MuzzleFlashBrightnessOffset!.Value);
+            if (_MuzzleFlashBrightnessOffset == -1) _MuzzleFlashBrightnessOffset = Schema.GetOffset(0xEBDE2D25415CEFF3);
+            return ref _Handle.AsRef<float>(_MuzzleFlashBrightnessOffset);
         }
     }
-    private static nint? _QuatMuzzleFlashOrientationOffset;
+    private static nint _QuatMuzzleFlashOrientationOffset = -1;
 
     public ref Quaternion QuatMuzzleFlashOrientation
     {
         get
         {
-            _QuatMuzzleFlashOrientationOffset = _QuatMuzzleFlashOrientationOffset ?? Schema.GetOffset(0xEBDE2D250975C41F);
-            return ref _Handle.AsRef<Quaternion>(_QuatMuzzleFlashOrientationOffset!.Value);
+            if (_QuatMuzzleFlashOrientationOffset == -1) _QuatMuzzleFlashOrientationOffset = Schema.GetOffset(0xEBDE2D250975C41F);
+            return ref _Handle.AsRef<Quaternion>(_QuatMuzzleFlashOrientationOffset);
         }
     }
-    private static nint? _MuzzleFlashOriginOffset;
+    private static nint _MuzzleFlashOriginOffset = -1;
 
     public ref Vector MuzzleFlashOrigin
     {
         get
         {
-            _MuzzleFlashOriginOffset = _MuzzleFlashOriginOffset ?? Schema.GetOffset(0xEBDE2D2545E17058);
-            return ref _Handle.AsRef<Vector>(_MuzzleFlashOriginOffset!.Value);
+            if (_MuzzleFlashOriginOffset == -1) _MuzzleFlashOriginOffset = Schema.GetOffset(0xEBDE2D2545E17058);
+            return ref _Handle.AsRef<Vector>(_MuzzleFlashOriginOffset);
         }
     }
-    private static nint? _FovOffset;
+    private static nint _FovOffset = -1;
 
     public ref float Fov
     {
         get
         {
-            _FovOffset = _FovOffset ?? Schema.GetOffset(0xEBDE2D252B42860E);
-            return ref _Handle.AsRef<float>(_FovOffset!.Value);
+            if (_FovOffset == -1) _FovOffset = Schema.GetOffset(0xEBDE2D252B42860E);
+            return ref _Handle.AsRef<float>(_FovOffset);
         }
     }
-    private static nint? _FarZOffset;
+    private static nint _FarZOffset = -1;
 
     public ref float FarZ
     {
         get
         {
-            _FarZOffset = _FarZOffset ?? Schema.GetOffset(0xEBDE2D2538F5E41A);
-            return ref _Handle.AsRef<float>(_FarZOffset!.Value);
+            if (_FarZOffset == -1) _FarZOffset = Schema.GetOffset(0xEBDE2D2538F5E41A);
+            return ref _Handle.AsRef<float>(_FarZOffset);
         }
     }
-    private static nint? _LinearAttenOffset;
+    private static nint _LinearAttenOffset = -1;
 
     public ref float LinearAtten
     {
         get
         {
-            _LinearAttenOffset = _LinearAttenOffset ?? Schema.GetOffset(0xEBDE2D25C8181E8E);
-            return ref _Handle.AsRef<float>(_LinearAttenOffset!.Value);
+            if (_LinearAttenOffset == -1) _LinearAttenOffset = Schema.GetOffset(0xEBDE2D25C8181E8E);
+            return ref _Handle.AsRef<float>(_LinearAttenOffset);
         }
     }
-    private static nint? _CastsShadowsOffset;
+    private static nint _CastsShadowsOffset = -1;
 
     public ref bool CastsShadows
     {
         get
         {
-            _CastsShadowsOffset = _CastsShadowsOffset ?? Schema.GetOffset(0xEBDE2D2550106BD4);
-            return ref _Handle.AsRef<bool>(_CastsShadowsOffset!.Value);
+            if (_CastsShadowsOffset == -1) _CastsShadowsOffset = Schema.GetOffset(0xEBDE2D2550106BD4);
+            return ref _Handle.AsRef<bool>(_CastsShadowsOffset);
         }
     }
-    private static nint? _CurrentPullBackDistOffset;
+    private static nint _CurrentPullBackDistOffset = -1;
 
     public ref float CurrentPullBackDist
     {
         get
         {
-            _CurrentPullBackDistOffset = _CurrentPullBackDistOffset ?? Schema.GetOffset(0xEBDE2D25D54681B8);
-            return ref _Handle.AsRef<float>(_CurrentPullBackDistOffset!.Value);
+            if (_CurrentPullBackDistOffset == -1) _CurrentPullBackDistOffset = Schema.GetOffset(0xEBDE2D25D54681B8);
+            return ref _Handle.AsRef<float>(_CurrentPullBackDistOffset);
         }
     }
-    private static nint? _FlashlightTextureOffset;
+    private static nint _FlashlightTextureOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> FlashlightTexture
     {
         get
         {
-            _FlashlightTextureOffset = _FlashlightTextureOffset ?? Schema.GetOffset(0xEBDE2D25EB8A7FE2);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_FlashlightTextureOffset!.Value);
+            if (_FlashlightTextureOffset == -1) _FlashlightTextureOffset = Schema.GetOffset(0xEBDE2D25EB8A7FE2);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_FlashlightTextureOffset);
         }
     }
-    private static nint? _MuzzleFlashTextureOffset;
+    private static nint _MuzzleFlashTextureOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> MuzzleFlashTexture
     {
         get
         {
-            _MuzzleFlashTextureOffset = _MuzzleFlashTextureOffset ?? Schema.GetOffset(0xEBDE2D253CB41B51);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_MuzzleFlashTextureOffset!.Value);
+            if (_MuzzleFlashTextureOffset == -1) _MuzzleFlashTextureOffset = Schema.GetOffset(0xEBDE2D253CB41B51);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_MuzzleFlashTextureOffset);
         }
     }
-    private static nint? _TextureNameOffset;
+    private static nint _TextureNameOffset = -1;
 
     public string TextureName
     {
         get
         {
-            _TextureNameOffset = _TextureNameOffset ?? Schema.GetOffset(0xEBDE2D25DE109A2F);
-            return Schema.GetString(_Handle + _TextureNameOffset!.Value);
+            if (_TextureNameOffset == -1) _TextureNameOffset = Schema.GetOffset(0xEBDE2D25DE109A2F);
+            return Schema.GetString(_Handle + _TextureNameOffset);
         }
         set
         {
-            _TextureNameOffset = _TextureNameOffset ?? Schema.GetOffset(0xEBDE2D25DE109A2F);
-            Schema.SetFixedString(_Handle, _TextureNameOffset!.Value, value, 64);
+            if (_TextureNameOffset == -1) _TextureNameOffset = Schema.GetOffset(0xEBDE2D25DE109A2F);
+            Schema.SetFixedString(_Handle, _TextureNameOffset, value, 64);
         }
     }
 

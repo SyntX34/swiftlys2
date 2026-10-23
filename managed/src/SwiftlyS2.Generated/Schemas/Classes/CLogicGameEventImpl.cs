@@ -16,19 +16,19 @@ internal partial class CLogicGameEventImpl : CLogicalEntityImpl, CLogicGameEvent
 {
     public CLogicGameEventImpl(nint handle) : base(handle) { }
 
-    private static nint? _EventNameOffset;
+    private static nint _EventNameOffset = -1;
 
     public string EventName
     {
         get
         {
-            _EventNameOffset = _EventNameOffset ?? Schema.GetOffset(0xBED9751E78114A54);
-            return Schema.GetString(_Handle.Read<nint>(_EventNameOffset!.Value));
+            if (_EventNameOffset == -1) _EventNameOffset = Schema.GetOffset(0xBED9751E78114A54);
+            return Schema.GetString(_Handle.Read<nint>(_EventNameOffset));
         }
         set
         {
-            _EventNameOffset = _EventNameOffset ?? Schema.GetOffset(0xBED9751E78114A54);
-            Schema.SetString(_Handle, _EventNameOffset!.Value, value);
+            if (_EventNameOffset == -1) _EventNameOffset = Schema.GetOffset(0xBED9751E78114A54);
+            Schema.SetString(_Handle, _EventNameOffset, value);
         }
     }
 

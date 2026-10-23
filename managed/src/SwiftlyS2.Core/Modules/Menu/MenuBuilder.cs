@@ -1,0 +1,169 @@
+using SwiftlyS2.Shared.Menu;
+using SwiftlyS2.Shared.Menu.Components;
+using SwiftlyS2.Shared.Players;
+
+namespace SwiftlyS2.Core.Menu;
+
+internal sealed class MenuBuilder(
+    string menuId,
+    string owner,
+    MenuRuntime runtime,
+    IPlayerManagerService players,
+    MenuActionRegistry actions,
+    MenuRendererRegistry renderers,
+    MenuKeybindResolver resolver,
+    MenuRendererResolver rendererResolver,
+    MenuInputMethodResolver inputMethodResolver,
+    IMenuActionRegistry ownedActions ) : IMenuBuilder
+{
+    private readonly List<MenuActionDescriptor> declaredActions = [];
+    private readonly List<IMenuKeybindSource> keybindSources = [];
+    private readonly List<IMenuRendererSource> rendererSources = [];
+    private readonly List<IMenuInputMethodSource> inputMethodSources = [];
+    private readonly List<IMenuComponent> header = [];
+    private readonly List<IMenuComponent> body = [];
+    private readonly List<IMenuComponent> footer = [];
+    private readonly Dictionary<string, Func<MenuActionContext, ValueTask>> actionHandlers = [];
+
+    private string rendererId = MenuRendererIds.CenterHtml;
+    private MenuInputMethod? inputMethod;
+    private TimeSpan? autoCloseDelay;
+    private IMenu? parent;
+    private int itemsPerPage = 5;
+
+    public IMenuBuilder WithRenderer( string rendererId )
+    {
+        this.rendererId = rendererId;
+        return this;
+    }
+
+    public IMenuBuilder WithInputMethod( MenuInputMethod inputMethod )
+    {
+        this.inputMethod = inputMethod;
+        return this;
+    }
+
+    public IMenuBuilder WithInputMethodSource( IMenuInputMethodSource source )
+    {
+        inputMethodSources.Add(source);
+        return this;
+    }
+
+    public IMenuBuilder WithRendererSource( IMenuRendererSource source )
+    {
+        rendererSources.Add(source);
+        return this;
+    }
+
+    public IMenuBuilder WithParent( IMenu parent )
+    {
+        this.parent = parent;
+        return this;
+    }
+
+    public IMenuBuilder WithItemsPerPage( int itemsPerPage )
+    {
+        this.itemsPerPage = Math.Max(1, itemsPerPage);
+        return this;
+    }
+
+    public IMenuBuilder WithAutoClose( TimeSpan? delay )
+    {
+        autoCloseDelay = delay is { Ticks: > 0 } ? delay : null;
+        return this;
+    }
+
+    public IMenuBuilder WithAction( MenuActionDescriptor descriptor )
+    {
+        declaredActions.Add(descriptor);
+        return this;
+    }
+
+    public IMenuBuilder WithAction( string name, MenuKey defaultKey, string? label = null )
+    {
+        return WithAction(new MenuActionDescriptor {
+            Id = new MenuActionId(menuId, name),
+            DefaultKey = defaultKey,
+            Label = label
+        });
+    }
+
+    public IMenuBuilder WithAction( string name, MenuKey defaultKey, Func<MenuActionContext, ValueTask> handler, string? label = null )
+    {
+        actionHandlers[name] = handler;
+        return WithAction(name, defaultKey, label);
+    }
+
+    public IMenuBuilder WithKeybindSource( IMenuKeybindSource source )
+    {
+        keybindSources.Add(source);
+        return this;
+    }
+
+    public IMenuBuilder WithTitle( string title )
+    {
+        header.Add(new TitleComponent(title));
+        return this;
+    }
+
+    public IMenuBuilder AddHeader( IMenuComponent component )
+    {
+        header.Add(component);
+        return this;
+    }
+
+    public IMenuBuilder Add( IMenuComponent component )
+    {
+        body.Add(component);
+        return this;
+    }
+
+    public IMenuBuilder AddFooter( IMenuComponent component )
+    {
+        footer.Add(component);
+        return this;
+    }
+
+    public IMenu Build()
+    {
+        var resolvedRendererId = rendererResolver.Resolve(menuId, rendererId, rendererSources);
+
+        if (!renderers.TryGet(resolvedRendererId, out var renderer))
+        {
+            throw new InvalidOperationException(
+                $"Menu '{menuId}' requested renderer '{resolvedRendererId}', which is not registered. Registered renderers: {string.Join(", ", renderers.RendererIds)}.");
+        }
+
+        foreach (var descriptor in declaredActions)
+        {
+            _ = ownedActions.Register(descriptor);
+        }
+
+        var keymap = new MenuKeymap(menuId, actions, resolver, keybindSources);
+        var codeInputMethod = inputMethod
+            ?? (string.Equals(resolvedRendererId, MenuRendererIds.Chat, StringComparison.OrdinalIgnoreCase)
+                ? MenuInputMethod.Chat
+                : MenuInputMethod.Buttons);
+
+        var resolvedInputMethod = inputMethodResolver.Resolve(menuId, codeInputMethod, inputMethodSources);
+
+        var menu = new MenuInstance(menuId, owner, runtime, players, renderer, keymap, resolvedInputMethod, autoCloseDelay, actionHandlers, parent, itemsPerPage);
+
+        foreach (var component in header)
+        {
+            menu.Add(MenuRegion.Header, component);
+        }
+
+        foreach (var component in body)
+        {
+            menu.Add(MenuRegion.Body, component);
+        }
+
+        foreach (var component in footer)
+        {
+            menu.Add(MenuRegion.Footer, component);
+        }
+
+        return menu;
+    }
+}

@@ -16,47 +16,47 @@ internal partial class CShatterGlassShardPhysicsImpl : CBaseModelEntityImpl, CSh
 {
     public CShatterGlassShardPhysicsImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParentShardOffset;
+    private static nint _ParentShardOffset = -1;
 
     public ref uint ParentShard
     {
         get
         {
-            _ParentShardOffset = _ParentShardOffset ?? Schema.GetOffset(0xC24E7798E3717B41);
-            return ref _Handle.AsRef<uint>(_ParentShardOffset!.Value);
+            if (_ParentShardOffset == -1) _ParentShardOffset = Schema.GetOffset(0xC24E7798E3717B41);
+            return ref _Handle.AsRef<uint>(_ParentShardOffset);
         }
     }
-    private static nint? _ShardDescOffset;
+    private static nint _ShardDescOffset = -1;
     private shard_model_desc_tImpl? _ShardDescInstance;
 
     public shard_model_desc_t ShardDesc
     {
         get
         {
-            _ShardDescOffset = _ShardDescOffset ?? Schema.GetOffset(0xC24E77982CBF17C6);
+            if (_ShardDescOffset == -1) _ShardDescOffset = Schema.GetOffset(0xC24E77982CBF17C6);
             var instance = _ShardDescInstance ??= new shard_model_desc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ShardDescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ShardDescOffset);
             return instance;
         }
     }
-    private static nint? _PoolStateOffset;
+    private static nint _PoolStateOffset = -1;
 
     public ref ShatterGlassEntityPoolState_t PoolState
     {
         get
         {
-            _PoolStateOffset = _PoolStateOffset ?? Schema.GetOffset(0xC24E7798786B16F8);
-            return ref _Handle.AsRef<ShatterGlassEntityPoolState_t>(_PoolStateOffset!.Value);
+            if (_PoolStateOffset == -1) _PoolStateOffset = Schema.GetOffset(0xC24E7798786B16F8);
+            return ref _Handle.AsRef<ShatterGlassEntityPoolState_t>(_PoolStateOffset);
         }
     }
-    private static nint? _TouchedByPlayerOffset;
+    private static nint _TouchedByPlayerOffset = -1;
 
     public ref bool TouchedByPlayer
     {
         get
         {
-            _TouchedByPlayerOffset = _TouchedByPlayerOffset ?? Schema.GetOffset(0xC24E77983D91E55D);
-            return ref _Handle.AsRef<bool>(_TouchedByPlayerOffset!.Value);
+            if (_TouchedByPlayerOffset == -1) _TouchedByPlayerOffset = Schema.GetOffset(0xC24E77983D91E55D);
+            return ref _Handle.AsRef<bool>(_TouchedByPlayerOffset);
         }
     }
 

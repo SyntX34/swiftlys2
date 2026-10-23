@@ -25,7 +25,6 @@
 #include <api/shared/files.h>
 #include <api/shared/plat.h>
 #include <api/shared/string.h>
-#include <api/shared/texttable.h>
 
 #include <core/managed/host/host.h>
 #include <core/managed/host/strconv.h>
@@ -165,18 +164,8 @@ int CrashReporter::GetDotnetCrashTracerLevel()
 void CrashReporter::ReportPreventionIncident(std::string category, std::string reason)
 {
     g_pLogger->Warning("Crash Prevention", "A crash has been prevented by Swiftly Core and the details will be listed below:\n");
-
-    TextTable backtraceTable('-', '|', '+');
-
-    backtraceTable.add(" Category ");
-    backtraceTable.add(" Message ");
-    backtraceTable.endOfRow();
-
-    backtraceTable.add(fmt::format(" {} ", category));
-    backtraceTable.add(fmt::format(" {} ", reason));
-    backtraceTable.endOfRow();
-
-    PrintTextTable(LogType::WARNING, "Crash Prevention", backtraceTable);
+    g_pLogger->Warning("Crash Prevention", fmt::format("Category: {}\n", category));
+    g_pLogger->Warning("Crash Prevention", fmt::format("Message: {}\n", reason));
 
     std::string file_path = fmt::format("{}dumps/prevention/incident.{}.log", g_SwiftlyCore.GetCorePath(), get_uuid());
     if (Files::ExistsPath(file_path))

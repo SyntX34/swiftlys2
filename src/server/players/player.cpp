@@ -18,6 +18,8 @@
 
 #include "player.h"
 
+#include <mutex>
+
 #include <api/sdk/recipientfilter.h>
 #include <api/shared/string.h>
 
@@ -28,6 +30,7 @@
 #include <public/const.h>
 
 #include "usermessages.pb.h"
+#include "gameevents.pb.h"
 #include <api/sdk/serversideclient.h>
 #include <public/iserver.h>
 
@@ -39,6 +42,12 @@
 #define CBasePlayerPawn_m_pMovementServices 0xCA2EED04CF73E28A
 #define CPlayer_MovementServices_m_nButtons 0xD5BDF28998CCEF82
 #define CInButtonState_m_pButtonStates 0x6C8AF06A00121DF9
+
+static int32_t CachedSchemaOffset(uint64_t hash, int32_t& cache)
+{
+    if (cache == -1) cache = g_pSDKSchema->GetOffset(hash);
+    return cache;
+}
 
 uint64_t sessionId = 1000;
 
@@ -59,6 +68,7 @@ void CPlayer::Initialize(int playerid)
 
     m_uConnectedTimeStart = std::chrono::high_resolution_clock::now();
     m_uSessionId = sessionId++;
+    centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status", true);
 }
 
 void CPlayer::Shutdown()
@@ -66,11 +76,8 @@ void CPlayer::Shutdown()
     m_iPlayerId = -1;
     m_bAuthorized = false;
 
-    if (centerMessageEvent)
-    {
-        g_pGameEventManager->GetGameEventManager()->FreeEvent(centerMessageEvent);
-        centerMessageEvent = nullptr;
-    }
+    g_pGameEventManager->GetGameEventManager()->FreeEvent(centerMessageEvent);
+    centerMessageEvent = nullptr;
 }
 
 extern bool bypassPostEventAbstractHook;
@@ -274,11 +281,12 @@ void* CPlayer::GetPawn()
     if (!controller)
         return nullptr;
 
-    auto pawn = g_pSDKSchema->GetPropPtr(controller, CBasePlayerController_m_hPawn);
-    if (!pawn)
+    static int32_t s_offset = -1;
+    auto offset = CachedSchemaOffset(CBasePlayerController_m_hPawn, s_offset);
+    if (offset == -1)
         return nullptr;
 
-    CHandle<CEntityInstance>& pawnHandle = *(CHandle<CEntityInstance>*)pawn;
+    CHandle<CEntityInstance>& pawnHandle = *(CHandle<CEntityInstance>*)((uintptr_t)controller + offset);
     return pawnHandle.Get();
 }
 
@@ -288,11 +296,12 @@ void* CPlayer::GetPlayerPawn()
     if (!controller)
         return nullptr;
 
-    auto playerPawn = g_pSDKSchema->GetPropPtr(controller, CCSPlayerController_m_hPlayerPawn);
-    if (!playerPawn)
+    static int32_t s_offset = -1;
+    auto offset = CachedSchemaOffset(CCSPlayerController_m_hPlayerPawn, s_offset);
+    if (offset == -1)
         return nullptr;
 
-    CHandle<CEntityInstance>& playerPawnHandle = *(CHandle<CEntityInstance>*)playerPawn;
+    CHandle<CEntityInstance>& playerPawnHandle = *(CHandle<CEntityInstance>*)((uintptr_t)controller + offset);
     return playerPawnHandle.Get();
 }
 
@@ -344,104 +353,127 @@ void CPlayer::SetFirstSpawn(bool state)
 }
 
 extern void* g_pOnClientKeyStateChangedCallback;
-typedef IGameEventListener2* (*GetLegacyGameEventListener)(CPlayerSlot slot);
 
 void CPlayer::Think()
 {
-    static auto pListenerSig = g_pGameDataManager->GetSignatures()->Fetch("LegacyGameEventListener");
-    if (pListenerSig)
+    std::string menuText;
     {
-        auto listener = reinterpret_cast<GetLegacyGameEventListener>(pListenerSig)(m_iPlayerId);
-        if (listener)
-        {
-            if (!centerMessageEvent)
-                centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status");
+        std::lock_guard<std::mutex> lock(centerMenuMutex);
+        menuText = centerMenuText;
+    }
+    const bool showMenu = !menuText.empty();
+    const bool showMessage = !showMenu && centerMessageEndTime >= GetTime();
 
-            if (centerMessageEvent)
-            {
-                if (centerMenuText != "")
-                {
-                    centerMessageEvent->SetString("loc_token", centerMenuText.c_str());
-                    centerMessageEvent->SetInt("duration", 1);
-                    centerMessageEvent->SetInt("userid", m_iPlayerId);
-
-                    listener->FireGameEvent(centerMessageEvent);
-                }
-                else
-                {
-                    if (centerMessageEndTime >= GetTime())
-                    {
-                        centerMessageEvent->SetString("loc_token", centerMessageText.c_str());
-                        centerMessageEvent->SetInt("duration", 1);
-                        centerMessageEvent->SetInt("userid", m_iPlayerId);
-
-                        listener->FireGameEvent(centerMessageEvent);
-                    }
-                    else
-                    {
-                        centerMessageEndTime = 0;
-                    }
-                }
-            }
-        }
+    if (!showMenu && !showMessage)
+    {
+        centerMessageEndTime = 0;
+    }
+    else
+    {
+        if(!centerMessageEvent)
+            centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status", true);
+            
+        centerMessageEvent->SetString("loc_token", (showMenu ? menuText : centerMessageText).c_str());
+        centerMessageEvent->SetInt("duration", 1);
+        centerMessageEvent->SetInt("userid", m_iPlayerId);
+        SendGameEvent(centerMessageEvent);
     }
 
     auto pawn = GetPawn();
+    if (!pawn)
+        return;
 
-    if (pawn)
+    static int32_t s_movementServicesOffset = -1;
+    static int32_t s_buttonsOffset = -1;
+    static int32_t s_buttonStatesOffset = -1;
+
+    auto movementServicesOffset = CachedSchemaOffset(CBasePlayerPawn_m_pMovementServices, s_movementServicesOffset);
+    auto buttonsOffset = CachedSchemaOffset(CPlayer_MovementServices_m_nButtons, s_buttonsOffset);
+    auto buttonStatesOffset = CachedSchemaOffset(CInButtonState_m_pButtonStates, s_buttonStatesOffset);
+    if (movementServicesOffset == -1 || buttonsOffset == -1 || buttonStatesOffset == -1)
+        return;
+
+    auto movementServices = *(uintptr_t*)((uintptr_t)pawn + movementServicesOffset);
+    if (!movementServices)
+        return;
+
+    auto states = (uint64_t*)(movementServices + buttonsOffset + buttonStatesOffset);
+    const uint64_t newButtons = states[0];
+    if (newButtons == m_uPressedButtons)
+        return;
+
+    if (g_pOnClientKeyStateChangedCallback)
     {
-        auto& movementServices = *(void**)g_pSDKSchema->GetPropPtr(pawn, CBasePlayerPawn_m_pMovementServices);
-        if (movementServices)
+        auto callback = reinterpret_cast<void (*)(int, uint32_t, bool)>(g_pOnClientKeyStateChangedCallback);
+
+        for (int i = 0; i < 64; i++)
         {
-            void* buttons = g_pSDKSchema->GetPropPtr(movementServices, CPlayer_MovementServices_m_nButtons);
-            if (buttons)
+            uint64_t mask = (1ULL << i);
+            uint64_t oldState = m_uPressedButtons & mask;
+            uint64_t newState = newButtons & mask;
+
+            if (oldState == 0 && newState != 0)
             {
-                uint64_t* states = (uint64_t*)g_pSDKSchema->GetPropPtr(buttons, CInButtonState_m_pButtonStates);
-                uint64_t& newButtons = states[0];
-                if (newButtons != m_uPressedButtons)
-                {
-                    if (g_pOnClientKeyStateChangedCallback)
-                    {
-                        for (int i = 0; i < 64; i++)
-                        {
-                            uint64_t mask = (1ULL << i);
-                            uint64_t oldState = m_uPressedButtons & mask;
-                            uint64_t newState = newButtons & mask;
-
-                            if (oldState == 0 && newState != 0)
-                            {
-                                reinterpret_cast<void (*)(int, uint32_t, bool)>(g_pOnClientKeyStateChangedCallback)(m_iPlayerId, i, true);
-                            }
-                            else if (oldState != 0 && newState == 0)
-                            {
-                                reinterpret_cast<void (*)(int, uint32_t, bool)>(g_pOnClientKeyStateChangedCallback)(m_iPlayerId, i, false);
-                            }
-                        }
-                    }
-
-                    m_uPressedButtons = newButtons;
-                }
+                callback(m_iPlayerId, i, true);
+            }
+            else if (oldState != 0 && newState == 0)
+            {
+                callback(m_iPlayerId, i, false);
             }
         }
     }
+
+    m_uPressedButtons = newButtons;
 }
 
 void CPlayer::RenderMenuCenterText(const std::string& text)
 {
+    std::lock_guard<std::mutex> lock(centerMenuMutex);
     centerMenuText = text;
 }
 
 void CPlayer::ClearRenderMenuCenterText()
 {
+    std::lock_guard<std::mutex> lock(centerMenuMutex);
     centerMenuText = "";
 }
 
 bool CPlayer::HasMenuShown()
 {
+    std::lock_guard<std::mutex> lock(centerMenuMutex);
     return !centerMenuText.empty();
 }
 
 uint64_t CPlayer::GetSessionID()
 {
     return m_uSessionId;
+}
+
+bool CPlayer::IsListeningGameEvent(int eventID)
+{
+    std::lock_guard<std::mutex> lock(m_listeningGameEventsMutex);
+    return m_listeningGameEvents.IsBitSet(eventID);
+}
+
+void CPlayer::SetListeningGameEvents(CBitVector<8192>& eventIDs)
+{
+    std::lock_guard<std::mutex> lock(m_listeningGameEventsMutex);
+    m_listeningGameEvents.CopyFrom(eventIDs);
+}
+
+void CPlayer::SendGameEvent(IGameEvent* event)
+{
+    if(!event) return;
+
+    auto msg = g_pGameNetworkMessages->FindNetworkMessageById(GE_Source1LegacyGameEvent);
+    if(!msg) return;
+
+    auto data = msg->AllocateMessage()->ToPB<CMsgSource1LegacyGameEvent>();
+    CSingleRecipientFilter filter(m_iPlayerId);
+
+    bypassPostEventAbstractHook = true;
+    g_pGameEventManager->GetGameEventManager()->SerializeEvent(event, data);
+    g_pGameEventSystem->PostEventAbstract(-1, false, &filter, msg, data, 0);
+    delete data;
+    bypassPostEventAbstractHook = false;
 }

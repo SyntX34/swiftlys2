@@ -16,40 +16,40 @@ internal partial class C_OP_RenderClientPhysicsImpulseImpl : CParticleFunctionRe
 {
     public C_OP_RenderClientPhysicsImpulseImpl(nint handle) : base(handle) { }
 
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
     private CPerParticleFloatInputImpl? _RadiusInstance;
 
     public CPerParticleFloatInput Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x618F365ACFC08D);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x618F365ACFC08D);
             var instance = _RadiusInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RadiusOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RadiusOffset);
             return instance;
         }
     }
-    private static nint? _MagnitudeOffset;
+    private static nint _MagnitudeOffset = -1;
     private CPerParticleFloatInputImpl? _MagnitudeInstance;
 
     public CPerParticleFloatInput Magnitude
     {
         get
         {
-            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x618F36ED0A1D8B);
+            if (_MagnitudeOffset == -1) _MagnitudeOffset = Schema.GetOffset(0x618F36ED0A1D8B);
             var instance = _MagnitudeInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MagnitudeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MagnitudeOffset);
             return instance;
         }
     }
-    private static nint? _SimIdFilterOffset;
+    private static nint _SimIdFilterOffset = -1;
 
     public ref int SimIdFilter
     {
         get
         {
-            _SimIdFilterOffset = _SimIdFilterOffset ?? Schema.GetOffset(0x618F36C5FA023F);
-            return ref _Handle.AsRef<int>(_SimIdFilterOffset!.Value);
+            if (_SimIdFilterOffset == -1) _SimIdFilterOffset = Schema.GetOffset(0x618F36C5FA023F);
+            return ref _Handle.AsRef<int>(_SimIdFilterOffset);
         }
     }
 

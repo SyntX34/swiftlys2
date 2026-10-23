@@ -16,29 +16,29 @@ internal partial class CNmGraphDocFlowNodeImpl : CNmGraphDocNodeImpl, CNmGraphDo
 {
     public CNmGraphDocFlowNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputPinsOffset;
+    private static nint _InputPinsOffset = -1;
     private SchemaUntypedField? _InputPinsInstance;
 
     public SchemaUntypedField InputPins
     {
         get
         {
-            _InputPinsOffset = _InputPinsOffset ?? Schema.GetOffset(0xBF65A639041D8D93);
+            if (_InputPinsOffset == -1) _InputPinsOffset = Schema.GetOffset(0xBF65A639041D8D93);
             var instance = _InputPinsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _InputPinsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputPinsOffset);
             return instance;
         }
     }
-    private static nint? _OutputPinsOffset;
+    private static nint _OutputPinsOffset = -1;
     private SchemaUntypedField? _OutputPinsInstance;
 
     public SchemaUntypedField OutputPins
     {
         get
         {
-            _OutputPinsOffset = _OutputPinsOffset ?? Schema.GetOffset(0xBF65A639BBD86760);
+            if (_OutputPinsOffset == -1) _OutputPinsOffset = Schema.GetOffset(0xBF65A639BBD86760);
             var instance = _OutputPinsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OutputPinsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutputPinsOffset);
             return instance;
         }
     }

@@ -16,62 +16,62 @@ internal partial class CTestEffectImpl : CBaseEntityImpl, CTestEffect
 {
     public CTestEffectImpl(nint handle) : base(handle) { }
 
-    private static nint? _LoopOffset;
+    private static nint _LoopOffset = -1;
 
     public ref int Loop
     {
         get
         {
-            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0xF4103FBFFFB6D07A);
-            return ref _Handle.AsRef<int>(_LoopOffset!.Value);
+            if (_LoopOffset == -1) _LoopOffset = Schema.GetOffset(0xF4103FBFFFB6D07A);
+            return ref _Handle.AsRef<int>(_LoopOffset);
         }
     }
-    private static nint? _BeamOffset;
+    private static nint _BeamOffset = -1;
 
     public ref int Beam
     {
         get
         {
-            _BeamOffset = _BeamOffset ?? Schema.GetOffset(0xF4103FBF54034EE3);
-            return ref _Handle.AsRef<int>(_BeamOffset!.Value);
+            if (_BeamOffset == -1) _BeamOffset = Schema.GetOffset(0xF4103FBF54034EE3);
+            return ref _Handle.AsRef<int>(_BeamOffset);
         }
     }
-    private static nint? _Beam1Offset;
+    private static nint _Beam1Offset = -1;
     private SchemaFixedArray<CHandle<CBeam>>? _Beam1Instance;
 
     public ISchemaFixedArray<CHandle<CBeam>> Beam1
     {
         get
         {
-            _Beam1Offset = _Beam1Offset ?? Schema.GetOffset(0xF4103FBFC4017428);
+            if (_Beam1Offset == -1) _Beam1Offset = Schema.GetOffset(0xF4103FBFC4017428);
             var instance = _Beam1Instance ??= new SchemaFixedArray<CHandle<CBeam>>(0, 0xF4103FBFC4017428, 24, 4, 4);
-            instance.DangerousSetHandle(_Handle + _Beam1Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Beam1Offset);
             return instance;
         }
     }
-    private static nint? _BeamTimeOffset;
+    private static nint _BeamTimeOffset = -1;
     private SchemaClassFixedArray<GameTime_t>? _BeamTimeInstance;
 
     public ISchemaClassFixedArray<GameTime_t> BeamTime
     {
         get
         {
-            _BeamTimeOffset = _BeamTimeOffset ?? Schema.GetOffset(0xF4103FBF60293F01);
+            if (_BeamTimeOffset == -1) _BeamTimeOffset = Schema.GetOffset(0xF4103FBF60293F01);
             var instance = _BeamTimeInstance ??= new SchemaClassFixedArray<GameTime_t>(0, 0xF4103FBF60293F01, 24, 4, 4);
-            instance.DangerousSetHandle(_Handle + _BeamTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BeamTimeOffset);
             return instance;
         }
     }
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
     private GameTime_tImpl? _StartTimeInstance;
 
     public GameTime_t StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xF4103FBF67FE9DC4);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0xF4103FBF67FE9DC4);
             var instance = _StartTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
             return instance;
         }
     }

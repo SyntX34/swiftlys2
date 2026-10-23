@@ -16,29 +16,29 @@ internal partial class CNmSkeletonDocument__SecondarySkeleton_tImpl : SchemaClas
 {
     public CNmSkeletonDocument__SecondarySkeleton_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SkeletonOffset;
+    private static nint _SkeletonOffset = -1;
 
     public string Skeleton
     {
         get
         {
-            _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0xEEFE71E77F030E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SkeletonOffset!.Value));
+            if (_SkeletonOffset == -1) _SkeletonOffset = Schema.GetOffset(0xEEFE71E77F030E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SkeletonOffset));
         }
         set
         {
-            _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0xEEFE71E77F030E);
-            Schema.SetCUtlString(_Handle, _SkeletonOffset!.Value, value);
+            if (_SkeletonOffset == -1) _SkeletonOffset = Schema.GetOffset(0xEEFE71E77F030E);
+            Schema.SetCUtlString(_Handle, _SkeletonOffset, value);
         }
     }
-    private static nint? _AttachToBoneIDOffset;
+    private static nint _AttachToBoneIDOffset = -1;
 
     public ref CGlobalSymbol AttachToBoneID
     {
         get
         {
-            _AttachToBoneIDOffset = _AttachToBoneIDOffset ?? Schema.GetOffset(0xEEFE71B2F06B3A);
-            return ref _Handle.AsRef<CGlobalSymbol>(_AttachToBoneIDOffset!.Value);
+            if (_AttachToBoneIDOffset == -1) _AttachToBoneIDOffset = Schema.GetOffset(0xEEFE71B2F06B3A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AttachToBoneIDOffset);
         }
     }
 

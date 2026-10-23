@@ -16,94 +16,94 @@ internal partial class AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl : SchemaClass
 {
     public AI_BaseNPCAnimGraph_DebugSnapshotData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _Ag2_update_idOffset;
+    private static nint _Ag2_update_idOffset = -1;
 
     public ref int Ag2_update_id
     {
         get
         {
-            _Ag2_update_idOffset = _Ag2_update_idOffset ?? Schema.GetOffset(0xC191B83C8397CF91);
-            return ref _Handle.AsRef<int>(_Ag2_update_idOffset!.Value);
+            if (_Ag2_update_idOffset == -1) _Ag2_update_idOffset = Schema.GetOffset(0xC191B83C8397CF91);
+            return ref _Handle.AsRef<int>(_Ag2_update_idOffset);
         }
     }
-    private static nint? _E_action_desiredOffset;
+    private static nint _E_action_desiredOffset = -1;
 
     public ref CGlobalSymbol E_action_desired
     {
         get
         {
-            _E_action_desiredOffset = _E_action_desiredOffset ?? Schema.GetOffset(0xC191B83C18A816AA);
-            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_desiredOffset!.Value);
+            if (_E_action_desiredOffset == -1) _E_action_desiredOffset = Schema.GetOffset(0xC191B83C18A816AA);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_desiredOffset);
         }
     }
-    private static nint? _E_action_handshake_restartOffset;
+    private static nint _E_action_handshake_restartOffset = -1;
 
     public ref CGlobalSymbol E_action_handshake_restart
     {
         get
         {
-            _E_action_handshake_restartOffset = _E_action_handshake_restartOffset ?? Schema.GetOffset(0xC191B83C1708CA55);
-            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_handshake_restartOffset!.Value);
+            if (_E_action_handshake_restartOffset == -1) _E_action_handshake_restartOffset = Schema.GetOffset(0xC191B83C1708CA55);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_handshake_restartOffset);
         }
     }
-    private static nint? _E_action_handshake_body_authority_currentOffset;
+    private static nint _E_action_handshake_body_authority_currentOffset = -1;
 
     public ref CGlobalSymbol E_action_handshake_body_authority_current
     {
         get
         {
-            _E_action_handshake_body_authority_currentOffset = _E_action_handshake_body_authority_currentOffset ?? Schema.GetOffset(0xC191B83CECA167D2);
-            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_handshake_body_authority_currentOffset!.Value);
+            if (_E_action_handshake_body_authority_currentOffset == -1) _E_action_handshake_body_authority_currentOffset = Schema.GetOffset(0xC191B83CECA167D2);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_handshake_body_authority_currentOffset);
         }
     }
-    private static nint? _E_action_handshake_body_authority_desiredOffset;
+    private static nint _E_action_handshake_body_authority_desiredOffset = -1;
 
     public ref CGlobalSymbol E_action_handshake_body_authority_desired
     {
         get
         {
-            _E_action_handshake_body_authority_desiredOffset = _E_action_handshake_body_authority_desiredOffset ?? Schema.GetOffset(0xC191B83C26FDC22D);
-            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_handshake_body_authority_desiredOffset!.Value);
+            if (_E_action_handshake_body_authority_desiredOffset == -1) _E_action_handshake_body_authority_desiredOffset = Schema.GetOffset(0xC191B83C26FDC22D);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_action_handshake_body_authority_desiredOffset);
         }
     }
-    private static nint? _E_movement_type_desiredOffset;
+    private static nint _E_movement_type_desiredOffset = -1;
 
     public ref CGlobalSymbol E_movement_type_desired
     {
         get
         {
-            _E_movement_type_desiredOffset = _E_movement_type_desiredOffset ?? Schema.GetOffset(0xC191B83C3F404754);
-            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_type_desiredOffset!.Value);
+            if (_E_movement_type_desiredOffset == -1) _E_movement_type_desiredOffset = Schema.GetOffset(0xC191B83C3F404754);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_type_desiredOffset);
         }
     }
-    private static nint? _E_movement_handshake_restartOffset;
+    private static nint _E_movement_handshake_restartOffset = -1;
 
     public ref CGlobalSymbol E_movement_handshake_restart
     {
         get
         {
-            _E_movement_handshake_restartOffset = _E_movement_handshake_restartOffset ?? Schema.GetOffset(0xC191B83C628A4C1A);
-            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_handshake_restartOffset!.Value);
+            if (_E_movement_handshake_restartOffset == -1) _E_movement_handshake_restartOffset = Schema.GetOffset(0xC191B83C628A4C1A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_handshake_restartOffset);
         }
     }
-    private static nint? _E_movement_handshake_body_authority_currentOffset;
+    private static nint _E_movement_handshake_body_authority_currentOffset = -1;
 
     public ref CGlobalSymbol E_movement_handshake_body_authority_current
     {
         get
         {
-            _E_movement_handshake_body_authority_currentOffset = _E_movement_handshake_body_authority_currentOffset ?? Schema.GetOffset(0xC191B83C2FC6C293);
-            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_handshake_body_authority_currentOffset!.Value);
+            if (_E_movement_handshake_body_authority_currentOffset == -1) _E_movement_handshake_body_authority_currentOffset = Schema.GetOffset(0xC191B83C2FC6C293);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_handshake_body_authority_currentOffset);
         }
     }
-    private static nint? _E_movement_handshake_body_authority_desiredOffset;
+    private static nint _E_movement_handshake_body_authority_desiredOffset = -1;
 
     public ref CGlobalSymbol E_movement_handshake_body_authority_desired
     {
         get
         {
-            _E_movement_handshake_body_authority_desiredOffset = _E_movement_handshake_body_authority_desiredOffset ?? Schema.GetOffset(0xC191B83C981EDC70);
-            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_handshake_body_authority_desiredOffset!.Value);
+            if (_E_movement_handshake_body_authority_desiredOffset == -1) _E_movement_handshake_body_authority_desiredOffset = Schema.GetOffset(0xC191B83C981EDC70);
+            return ref _Handle.AsRef<CGlobalSymbol>(_E_movement_handshake_body_authority_desiredOffset);
         }
     }
 

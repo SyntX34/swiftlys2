@@ -16,59 +16,59 @@ internal partial class CAnimGraphDebugReplayImpl : SchemaClass, CAnimGraphDebugR
 {
     public CAnimGraphDebugReplayImpl(nint handle) : base(handle) { }
 
-    private static nint? _AnimGraphFileNameOffset;
+    private static nint _AnimGraphFileNameOffset = -1;
 
     public string AnimGraphFileName
     {
         get
         {
-            _AnimGraphFileNameOffset = _AnimGraphFileNameOffset ?? Schema.GetOffset(0x31D5349314D2CC69);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AnimGraphFileNameOffset!.Value));
+            if (_AnimGraphFileNameOffset == -1) _AnimGraphFileNameOffset = Schema.GetOffset(0x31D5349314D2CC69);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AnimGraphFileNameOffset));
         }
         set
         {
-            _AnimGraphFileNameOffset = _AnimGraphFileNameOffset ?? Schema.GetOffset(0x31D5349314D2CC69);
-            Schema.SetCUtlString(_Handle, _AnimGraphFileNameOffset!.Value, value);
+            if (_AnimGraphFileNameOffset == -1) _AnimGraphFileNameOffset = Schema.GetOffset(0x31D5349314D2CC69);
+            Schema.SetCUtlString(_Handle, _AnimGraphFileNameOffset, value);
         }
     }
-    private static nint? _FrameListOffset;
+    private static nint _FrameListOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> FrameList
     {
         get
         {
-            _FrameListOffset = _FrameListOffset ?? Schema.GetOffset(0x31D5349393EB99F2);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_FrameListOffset!.Value);
+            if (_FrameListOffset == -1) _FrameListOffset = Schema.GetOffset(0x31D5349393EB99F2);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_FrameListOffset);
         }
     }
-    private static nint? _StartIndexOffset;
+    private static nint _StartIndexOffset = -1;
 
     public ref int StartIndex
     {
         get
         {
-            _StartIndexOffset = _StartIndexOffset ?? Schema.GetOffset(0x31D534939F316D25);
-            return ref _Handle.AsRef<int>(_StartIndexOffset!.Value);
+            if (_StartIndexOffset == -1) _StartIndexOffset = Schema.GetOffset(0x31D534939F316D25);
+            return ref _Handle.AsRef<int>(_StartIndexOffset);
         }
     }
-    private static nint? _WriteIndexOffset;
+    private static nint _WriteIndexOffset = -1;
 
     public ref int WriteIndex
     {
         get
         {
-            _WriteIndexOffset = _WriteIndexOffset ?? Schema.GetOffset(0x31D53493161871B8);
-            return ref _Handle.AsRef<int>(_WriteIndexOffset!.Value);
+            if (_WriteIndexOffset == -1) _WriteIndexOffset = Schema.GetOffset(0x31D53493161871B8);
+            return ref _Handle.AsRef<int>(_WriteIndexOffset);
         }
     }
-    private static nint? _FrameCountOffset;
+    private static nint _FrameCountOffset = -1;
 
     public ref int FrameCount
     {
         get
         {
-            _FrameCountOffset = _FrameCountOffset ?? Schema.GetOffset(0x31D53493B0C97215);
-            return ref _Handle.AsRef<int>(_FrameCountOffset!.Value);
+            if (_FrameCountOffset == -1) _FrameCountOffset = Schema.GetOffset(0x31D53493B0C97215);
+            return ref _Handle.AsRef<int>(_FrameCountOffset);
         }
     }
 

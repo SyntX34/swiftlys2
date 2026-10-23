@@ -16,46 +16,46 @@ internal partial class C_INIT_RandomScalarImpl : CParticleFunctionInitializerImp
 {
     public C_INIT_RandomScalarImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinOffset;
+    private static nint _MinOffset = -1;
 
     public ref float Min
     {
         get
         {
-            _MinOffset = _MinOffset ?? Schema.GetOffset(0x76660B0D3B1A5649);
-            return ref _Handle.AsRef<float>(_MinOffset!.Value);
+            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0x76660B0D3B1A5649);
+            return ref _Handle.AsRef<float>(_MinOffset);
         }
     }
-    private static nint? _MaxOffset;
+    private static nint _MaxOffset = -1;
 
     public ref float Max
     {
         get
         {
-            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x76660B0D2D06B887);
-            return ref _Handle.AsRef<float>(_MaxOffset!.Value);
+            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0x76660B0D2D06B887);
+            return ref _Handle.AsRef<float>(_MaxOffset);
         }
     }
-    private static nint? _ExponentOffset;
+    private static nint _ExponentOffset = -1;
 
     public ref float Exponent
     {
         get
         {
-            _ExponentOffset = _ExponentOffset ?? Schema.GetOffset(0x76660B0D20A7BCBC);
-            return ref _Handle.AsRef<float>(_ExponentOffset!.Value);
+            if (_ExponentOffset == -1) _ExponentOffset = Schema.GetOffset(0x76660B0D20A7BCBC);
+            return ref _Handle.AsRef<float>(_ExponentOffset);
         }
     }
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x76660B0DE5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x76660B0DE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }

@@ -16,86 +16,86 @@ internal partial class C_INIT_DistanceToNeighborCullImpl : CParticleFunctionInit
 {
     public C_INIT_DistanceToNeighborCullImpl(nint handle) : base(handle) { }
 
-    private static nint? _DistanceOffset;
+    private static nint _DistanceOffset = -1;
     private CPerParticleFloatInputImpl? _DistanceInstance;
 
     public CPerParticleFloatInput Distance
     {
         get
         {
-            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x9ADFD8BA00DC4A68);
+            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0x9ADFD8BA00DC4A68);
             var instance = _DistanceInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DistanceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DistanceOffset);
             return instance;
         }
     }
-    private static nint? _IncludeRadiiOffset;
+    private static nint _IncludeRadiiOffset = -1;
 
     public ref bool IncludeRadii
     {
         get
         {
-            _IncludeRadiiOffset = _IncludeRadiiOffset ?? Schema.GetOffset(0x9ADFD8BAC86BFED0);
-            return ref _Handle.AsRef<bool>(_IncludeRadiiOffset!.Value);
+            if (_IncludeRadiiOffset == -1) _IncludeRadiiOffset = Schema.GetOffset(0x9ADFD8BAC86BFED0);
+            return ref _Handle.AsRef<bool>(_IncludeRadiiOffset);
         }
     }
-    private static nint? _LifespanOverlapOffset;
+    private static nint _LifespanOverlapOffset = -1;
     private CPerParticleFloatInputImpl? _LifespanOverlapInstance;
 
     public CPerParticleFloatInput LifespanOverlap
     {
         get
         {
-            _LifespanOverlapOffset = _LifespanOverlapOffset ?? Schema.GetOffset(0x9ADFD8BAB495428C);
+            if (_LifespanOverlapOffset == -1) _LifespanOverlapOffset = Schema.GetOffset(0x9ADFD8BAB495428C);
             var instance = _LifespanOverlapInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LifespanOverlapOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LifespanOverlapOffset);
             return instance;
         }
     }
-    private static nint? _FieldModifyOffset;
+    private static nint _FieldModifyOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldModifyInstance;
 
     public ParticleAttributeIndex_t FieldModify
     {
         get
         {
-            _FieldModifyOffset = _FieldModifyOffset ?? Schema.GetOffset(0x9ADFD8BA7EAE1A51);
+            if (_FieldModifyOffset == -1) _FieldModifyOffset = Schema.GetOffset(0x9ADFD8BA7EAE1A51);
             var instance = _FieldModifyInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldModifyOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldModifyOffset);
             return instance;
         }
     }
-    private static nint? _ModifyOffset;
+    private static nint _ModifyOffset = -1;
     private CPerParticleFloatInputImpl? _ModifyInstance;
 
     public CPerParticleFloatInput Modify
     {
         get
         {
-            _ModifyOffset = _ModifyOffset ?? Schema.GetOffset(0x9ADFD8BA5C62D8D5);
+            if (_ModifyOffset == -1) _ModifyOffset = Schema.GetOffset(0x9ADFD8BA5C62D8D5);
             var instance = _ModifyInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ModifyOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ModifyOffset);
             return instance;
         }
     }
-    private static nint? _SetMethodOffset;
+    private static nint _SetMethodOffset = -1;
 
     public ref ParticleSetMethod_t SetMethod
     {
         get
         {
-            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x9ADFD8BAFB53C31E);
-            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+            if (_SetMethodOffset == -1) _SetMethodOffset = Schema.GetOffset(0x9ADFD8BAFB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset);
         }
     }
-    private static nint? _UseNeighborOffset;
+    private static nint _UseNeighborOffset = -1;
 
     public ref bool UseNeighbor
     {
         get
         {
-            _UseNeighborOffset = _UseNeighborOffset ?? Schema.GetOffset(0x9ADFD8BAFBEB6DCE);
-            return ref _Handle.AsRef<bool>(_UseNeighborOffset!.Value);
+            if (_UseNeighborOffset == -1) _UseNeighborOffset = Schema.GetOffset(0x9ADFD8BAFBEB6DCE);
+            return ref _Handle.AsRef<bool>(_UseNeighborOffset);
         }
     }
 

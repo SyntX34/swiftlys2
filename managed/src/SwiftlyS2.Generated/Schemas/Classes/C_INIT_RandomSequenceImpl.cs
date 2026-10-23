@@ -16,54 +16,54 @@ internal partial class C_INIT_RandomSequenceImpl : CParticleFunctionInitializerI
 {
     public C_INIT_RandomSequenceImpl(nint handle) : base(handle) { }
 
-    private static nint? _SequenceMinOffset;
+    private static nint _SequenceMinOffset = -1;
 
     public ref int SequenceMin
     {
         get
         {
-            _SequenceMinOffset = _SequenceMinOffset ?? Schema.GetOffset(0x78382338D30682F0);
-            return ref _Handle.AsRef<int>(_SequenceMinOffset!.Value);
+            if (_SequenceMinOffset == -1) _SequenceMinOffset = Schema.GetOffset(0x78382338D30682F0);
+            return ref _Handle.AsRef<int>(_SequenceMinOffset);
         }
     }
-    private static nint? _SequenceMaxOffset;
+    private static nint _SequenceMaxOffset = -1;
 
     public ref int SequenceMax
     {
         get
         {
-            _SequenceMaxOffset = _SequenceMaxOffset ?? Schema.GetOffset(0x78382338C8F2EB7A);
-            return ref _Handle.AsRef<int>(_SequenceMaxOffset!.Value);
+            if (_SequenceMaxOffset == -1) _SequenceMaxOffset = Schema.GetOffset(0x78382338C8F2EB7A);
+            return ref _Handle.AsRef<int>(_SequenceMaxOffset);
         }
     }
-    private static nint? _ShuffleOffset;
+    private static nint _ShuffleOffset = -1;
 
     public ref bool Shuffle
     {
         get
         {
-            _ShuffleOffset = _ShuffleOffset ?? Schema.GetOffset(0x7838233828BD2B2E);
-            return ref _Handle.AsRef<bool>(_ShuffleOffset!.Value);
+            if (_ShuffleOffset == -1) _ShuffleOffset = Schema.GetOffset(0x7838233828BD2B2E);
+            return ref _Handle.AsRef<bool>(_ShuffleOffset);
         }
     }
-    private static nint? _LinearOffset;
+    private static nint _LinearOffset = -1;
 
     public ref bool Linear
     {
         get
         {
-            _LinearOffset = _LinearOffset ?? Schema.GetOffset(0x78382338B9313720);
-            return ref _Handle.AsRef<bool>(_LinearOffset!.Value);
+            if (_LinearOffset == -1) _LinearOffset = Schema.GetOffset(0x78382338B9313720);
+            return ref _Handle.AsRef<bool>(_LinearOffset);
         }
     }
-    private static nint? _WeightedListOffset;
+    private static nint _WeightedListOffset = -1;
 
     public ref CUtlVector<SequenceWeightedList_t> WeightedList
     {
         get
         {
-            _WeightedListOffset = _WeightedListOffset ?? Schema.GetOffset(0x783823385554D8B8);
-            return ref _Handle.AsRef<CUtlVector<SequenceWeightedList_t>>(_WeightedListOffset!.Value);
+            if (_WeightedListOffset == -1) _WeightedListOffset = Schema.GetOffset(0x783823385554D8B8);
+            return ref _Handle.AsRef<CUtlVector<SequenceWeightedList_t>>(_WeightedListOffset);
         }
     }
 

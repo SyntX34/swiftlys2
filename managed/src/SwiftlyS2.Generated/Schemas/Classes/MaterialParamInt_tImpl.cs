@@ -16,14 +16,14 @@ internal partial class MaterialParamInt_tImpl : MaterialParam_tImpl, MaterialPar
 {
     public MaterialParamInt_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public ref int Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xD2910839077D337E);
-            return ref _Handle.AsRef<int>(_ValueOffset!.Value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xD2910839077D337E);
+            return ref _Handle.AsRef<int>(_ValueOffset);
         }
     }
 

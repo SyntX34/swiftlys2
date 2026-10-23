@@ -16,39 +16,39 @@ internal partial class CMixOutputImpl : CMixPropertyBaseImpl, CMixOutput
 {
     public CMixOutputImpl(nint handle) : base(handle) { }
 
-    private static nint? _Volume1Offset;
+    private static nint _Volume1Offset = -1;
 
     public ref float Volume1
     {
         get
         {
-            _Volume1Offset = _Volume1Offset ?? Schema.GetOffset(0x3EBDDFF12B272668);
-            return ref _Handle.AsRef<float>(_Volume1Offset!.Value);
+            if (_Volume1Offset == -1) _Volume1Offset = Schema.GetOffset(0x3EBDDFF12B272668);
+            return ref _Handle.AsRef<float>(_Volume1Offset);
         }
     }
-    private static nint? _Volume2Offset;
+    private static nint _Volume2Offset = -1;
 
     public ref float Volume2
     {
         get
         {
-            _Volume2Offset = _Volume2Offset ?? Schema.GetOffset(0x3EBDDFF12E272B21);
-            return ref _Handle.AsRef<float>(_Volume2Offset!.Value);
+            if (_Volume2Offset == -1) _Volume2Offset = Schema.GetOffset(0x3EBDDFF12E272B21);
+            return ref _Handle.AsRef<float>(_Volume2Offset);
         }
     }
-    private static nint? _SendToOffset;
+    private static nint _SendToOffset = -1;
 
     public string SendTo
     {
         get
         {
-            _SendToOffset = _SendToOffset ?? Schema.GetOffset(0x3EBDDFF138EFB5AA);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SendToOffset!.Value));
+            if (_SendToOffset == -1) _SendToOffset = Schema.GetOffset(0x3EBDDFF138EFB5AA);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SendToOffset));
         }
         set
         {
-            _SendToOffset = _SendToOffset ?? Schema.GetOffset(0x3EBDDFF138EFB5AA);
-            Schema.SetCUtlString(_Handle, _SendToOffset!.Value, value);
+            if (_SendToOffset == -1) _SendToOffset = Schema.GetOffset(0x3EBDDFF138EFB5AA);
+            Schema.SetCUtlString(_Handle, _SendToOffset, value);
         }
     }
 

@@ -16,74 +16,74 @@ internal partial class C_OP_ForceBasedOnDistanceToPlaneImpl : CParticleFunctionF
 {
     public C_OP_ForceBasedOnDistanceToPlaneImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinDistOffset;
+    private static nint _MinDistOffset = -1;
 
     public ref float MinDist
     {
         get
         {
-            _MinDistOffset = _MinDistOffset ?? Schema.GetOffset(0x41A5EAC25219494D);
-            return ref _Handle.AsRef<float>(_MinDistOffset!.Value);
+            if (_MinDistOffset == -1) _MinDistOffset = Schema.GetOffset(0x41A5EAC25219494D);
+            return ref _Handle.AsRef<float>(_MinDistOffset);
         }
     }
-    private static nint? _ForceAtMinDistOffset;
+    private static nint _ForceAtMinDistOffset = -1;
 
     public ref Vector ForceAtMinDist
     {
         get
         {
-            _ForceAtMinDistOffset = _ForceAtMinDistOffset ?? Schema.GetOffset(0x41A5EAC23BD9C5EB);
-            return ref _Handle.AsRef<Vector>(_ForceAtMinDistOffset!.Value);
+            if (_ForceAtMinDistOffset == -1) _ForceAtMinDistOffset = Schema.GetOffset(0x41A5EAC23BD9C5EB);
+            return ref _Handle.AsRef<Vector>(_ForceAtMinDistOffset);
         }
     }
-    private static nint? _MaxDistOffset;
+    private static nint _MaxDistOffset = -1;
 
     public ref float MaxDist
     {
         get
         {
-            _MaxDistOffset = _MaxDistOffset ?? Schema.GetOffset(0x41A5EAC2EFFD23F7);
-            return ref _Handle.AsRef<float>(_MaxDistOffset!.Value);
+            if (_MaxDistOffset == -1) _MaxDistOffset = Schema.GetOffset(0x41A5EAC2EFFD23F7);
+            return ref _Handle.AsRef<float>(_MaxDistOffset);
         }
     }
-    private static nint? _ForceAtMaxDistOffset;
+    private static nint _ForceAtMaxDistOffset = -1;
 
     public ref Vector ForceAtMaxDist
     {
         get
         {
-            _ForceAtMaxDistOffset = _ForceAtMaxDistOffset ?? Schema.GetOffset(0x41A5EAC24119AAF9);
-            return ref _Handle.AsRef<Vector>(_ForceAtMaxDistOffset!.Value);
+            if (_ForceAtMaxDistOffset == -1) _ForceAtMaxDistOffset = Schema.GetOffset(0x41A5EAC24119AAF9);
+            return ref _Handle.AsRef<Vector>(_ForceAtMaxDistOffset);
         }
     }
-    private static nint? _PlaneNormalOffset;
+    private static nint _PlaneNormalOffset = -1;
 
     public ref Vector PlaneNormal
     {
         get
         {
-            _PlaneNormalOffset = _PlaneNormalOffset ?? Schema.GetOffset(0x41A5EAC221103682);
-            return ref _Handle.AsRef<Vector>(_PlaneNormalOffset!.Value);
+            if (_PlaneNormalOffset == -1) _PlaneNormalOffset = Schema.GetOffset(0x41A5EAC221103682);
+            return ref _Handle.AsRef<Vector>(_PlaneNormalOffset);
         }
     }
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x41A5EAC23F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x41A5EAC23F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _ExponentOffset;
+    private static nint _ExponentOffset = -1;
 
     public ref float Exponent
     {
         get
         {
-            _ExponentOffset = _ExponentOffset ?? Schema.GetOffset(0x41A5EAC220A7BCBC);
-            return ref _Handle.AsRef<float>(_ExponentOffset!.Value);
+            if (_ExponentOffset == -1) _ExponentOffset = Schema.GetOffset(0x41A5EAC220A7BCBC);
+            return ref _Handle.AsRef<float>(_ExponentOffset);
         }
     }
 

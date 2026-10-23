@@ -16,39 +16,39 @@ internal partial class C_OP_PinRopeSegmentParticleToParentImpl : CParticleFuncti
 {
     public C_OP_PinRopeSegmentParticleToParentImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParticleSelectionOffset;
+    private static nint _ParticleSelectionOffset = -1;
 
     public ref ParticleSelection_t ParticleSelection
     {
         get
         {
-            _ParticleSelectionOffset = _ParticleSelectionOffset ?? Schema.GetOffset(0x5F59F78EA2307EA7);
-            return ref _Handle.AsRef<ParticleSelection_t>(_ParticleSelectionOffset!.Value);
+            if (_ParticleSelectionOffset == -1) _ParticleSelectionOffset = Schema.GetOffset(0x5F59F78EA2307EA7);
+            return ref _Handle.AsRef<ParticleSelection_t>(_ParticleSelectionOffset);
         }
     }
-    private static nint? _ParticleNumberOffset;
+    private static nint _ParticleNumberOffset = -1;
     private CParticleCollectionFloatInputImpl? _ParticleNumberInstance;
 
     public CParticleCollectionFloatInput ParticleNumber
     {
         get
         {
-            _ParticleNumberOffset = _ParticleNumberOffset ?? Schema.GetOffset(0x5F59F78E12F26402);
+            if (_ParticleNumberOffset == -1) _ParticleNumberOffset = Schema.GetOffset(0x5F59F78E12F26402);
             var instance = _ParticleNumberInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParticleNumberOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParticleNumberOffset);
             return instance;
         }
     }
-    private static nint? _InterpolationOffset;
+    private static nint _InterpolationOffset = -1;
     private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
-            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x5F59F78ECF55B987);
+            if (_InterpolationOffset == -1) _InterpolationOffset = Schema.GetOffset(0x5F59F78ECF55B987);
             var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset);
             return instance;
         }
     }

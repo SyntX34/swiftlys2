@@ -16,41 +16,41 @@ internal partial class CNmGraphDocVariationDataNodeImpl : CNmGraphDocFlowNodeImp
 {
     public CNmGraphDocVariationDataNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _DefaultVariationDataOffset;
+    private static nint _DefaultVariationDataOffset = -1;
     private CNmGraphDocVariationDataNode__CDataImpl? _DefaultVariationDataInstance;
 
     public CNmGraphDocVariationDataNode__CData? DefaultVariationData
     {
         get
         {
-            _DefaultVariationDataOffset = _DefaultVariationDataOffset ?? Schema.GetOffset(0xC41C7EC7E001FD);
-            var ptr = _Handle.Read<nint>(_DefaultVariationDataOffset!.Value);
+            if (_DefaultVariationDataOffset == -1) _DefaultVariationDataOffset = Schema.GetOffset(0xC41C7EC7E001FD);
+            var ptr = _Handle.Read<nint>(_DefaultVariationDataOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _DefaultVariationDataInstance ??= new CNmGraphDocVariationDataNode__CDataImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _OverridesOffset;
+    private static nint _OverridesOffset = -1;
 
     public ref CUtlVector<CNmGraphDocVariationDataNode__OverrideValue_t> Overrides
     {
         get
         {
-            _OverridesOffset = _OverridesOffset ?? Schema.GetOffset(0xC41C7EEC1C75EA);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocVariationDataNode__OverrideValue_t>>(_OverridesOffset!.Value);
+            if (_OverridesOffset == -1) _OverridesOffset = Schema.GetOffset(0xC41C7EEC1C75EA);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocVariationDataNode__OverrideValue_t>>(_OverridesOffset);
         }
     }
-    private static nint? _DefaultResourceNameOffset;
+    private static nint _DefaultResourceNameOffset = -1;
     private SchemaUntypedField? _DefaultResourceNameInstance;
 
     public SchemaUntypedField DefaultResourceName
     {
         get
         {
-            _DefaultResourceNameOffset = _DefaultResourceNameOffset ?? Schema.GetOffset(0xC41C7E5D152705);
+            if (_DefaultResourceNameOffset == -1) _DefaultResourceNameOffset = Schema.GetOffset(0xC41C7E5D152705);
             var instance = _DefaultResourceNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DefaultResourceNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DefaultResourceNameOffset);
             return instance;
         }
     }

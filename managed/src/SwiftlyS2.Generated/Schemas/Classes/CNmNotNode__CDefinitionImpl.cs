@@ -16,14 +16,14 @@ internal partial class CNmNotNode__CDefinitionImpl : CNmBoolValueNode__CDefiniti
 {
     public CNmNotNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputValueNodeIdxOffset;
+    private static nint _InputValueNodeIdxOffset = -1;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x844BE2B095E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x844BE2B095E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class CLightRigBackgroundImpl : SchemaClass, CLightRigBackgroun
 {
     public CLightRigBackgroundImpl(nint handle) : base(handle) { }
 
-    private static nint? _EnabledOffset;
+    private static nint _EnabledOffset = -1;
 
     public ref bool Enabled
     {
         get
         {
-            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x443E479C6154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x443E479C6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset);
         }
     }
-    private static nint? _ColorOffset;
+    private static nint _ColorOffset = -1;
 
     public ref Color Color
     {
         get
         {
-            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x443E479CD7D017D8);
-            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x443E479CD7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset);
         }
     }
 

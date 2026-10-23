@@ -16,42 +16,42 @@ internal partial class CVMixDelayProcessorDescImpl : CVMixBaseProcessorDescImpl,
 {
     public CVMixDelayProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixDelayDesc_tImpl? _DescInstance;
 
     public VMixDelayDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0xDFF6E06227917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0xDFF6E06227917BC0);
             var instance = _DescInstance ??= new VMixDelayDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }
-    private static nint? _ParamCutoffFrequencyOffset;
+    private static nint _ParamCutoffFrequencyOffset = -1;
     private CVMixParameterFloatImpl? _ParamCutoffFrequencyInstance;
 
     public CVMixParameterFloat ParamCutoffFrequency
     {
         get
         {
-            _ParamCutoffFrequencyOffset = _ParamCutoffFrequencyOffset ?? Schema.GetOffset(0xDFF6E06212AFDCC7);
+            if (_ParamCutoffFrequencyOffset == -1) _ParamCutoffFrequencyOffset = Schema.GetOffset(0xDFF6E06212AFDCC7);
             var instance = _ParamCutoffFrequencyInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamCutoffFrequencyOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamCutoffFrequencyOffset);
             return instance;
         }
     }
-    private static nint? _ParamDelayOffset;
+    private static nint _ParamDelayOffset = -1;
     private CVMixParameterFloatImpl? _ParamDelayInstance;
 
     public CVMixParameterFloat ParamDelay
     {
         get
         {
-            _ParamDelayOffset = _ParamDelayOffset ?? Schema.GetOffset(0xDFF6E062CA358765);
+            if (_ParamDelayOffset == -1) _ParamDelayOffset = Schema.GetOffset(0xDFF6E062CA358765);
             var instance = _ParamDelayInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamDelayOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamDelayOffset);
             return instance;
         }
     }

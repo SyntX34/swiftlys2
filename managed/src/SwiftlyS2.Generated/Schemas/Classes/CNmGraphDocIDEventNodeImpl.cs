@@ -16,44 +16,44 @@ internal partial class CNmGraphDocIDEventNodeImpl : CNmGraphDocFlowNodeImpl, CNm
 {
     public CNmGraphDocIDEventNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _DefaultValueOffset;
+    private static nint _DefaultValueOffset = -1;
 
     public ref CGlobalSymbol DefaultValue
     {
         get
         {
-            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x8E80B558BBE0341F);
-            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset!.Value);
+            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0x8E80B558BBE0341F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset);
         }
     }
-    private static nint? _LimitSearchToSourceStateOffset;
+    private static nint _LimitSearchToSourceStateOffset = -1;
 
     public ref bool LimitSearchToSourceState
     {
         get
         {
-            _LimitSearchToSourceStateOffset = _LimitSearchToSourceStateOffset ?? Schema.GetOffset(0x8E80B55815D4BD01);
-            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset!.Value);
+            if (_LimitSearchToSourceStateOffset == -1) _LimitSearchToSourceStateOffset = Schema.GetOffset(0x8E80B55815D4BD01);
+            return ref _Handle.AsRef<bool>(_LimitSearchToSourceStateOffset);
         }
     }
-    private static nint? _PriorityRuleOffset;
+    private static nint _PriorityRuleOffset = -1;
 
     public ref NmEventPriorityRule_t PriorityRule
     {
         get
         {
-            _PriorityRuleOffset = _PriorityRuleOffset ?? Schema.GetOffset(0x8E80B55816C8898F);
-            return ref _Handle.AsRef<NmEventPriorityRule_t>(_PriorityRuleOffset!.Value);
+            if (_PriorityRuleOffset == -1) _PriorityRuleOffset = Schema.GetOffset(0x8E80B55816C8898F);
+            return ref _Handle.AsRef<NmEventPriorityRule_t>(_PriorityRuleOffset);
         }
     }
-    private static nint? _IgnoreInactiveBranchEventsOffset;
+    private static nint _IgnoreInactiveBranchEventsOffset = -1;
 
     public ref bool IgnoreInactiveBranchEvents
     {
         get
         {
-            _IgnoreInactiveBranchEventsOffset = _IgnoreInactiveBranchEventsOffset ?? Schema.GetOffset(0x8E80B55840B77877);
-            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset!.Value);
+            if (_IgnoreInactiveBranchEventsOffset == -1) _IgnoreInactiveBranchEventsOffset = Schema.GetOffset(0x8E80B55840B77877);
+            return ref _Handle.AsRef<bool>(_IgnoreInactiveBranchEventsOffset);
         }
     }
 

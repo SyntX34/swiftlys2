@@ -16,113 +16,113 @@ internal partial class CSelectorUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CSelec
 {
     public CSelectorUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChildrenOffset;
+    private static nint _ChildrenOffset = -1;
 
     public ref CUtlVector<CAnimUpdateNodeRef> Children
     {
         get
         {
-            _ChildrenOffset = _ChildrenOffset ?? Schema.GetOffset(0x23CD95F27415FA72);
-            return ref _Handle.AsRef<CUtlVector<CAnimUpdateNodeRef>>(_ChildrenOffset!.Value);
+            if (_ChildrenOffset == -1) _ChildrenOffset = Schema.GetOffset(0x23CD95F27415FA72);
+            return ref _Handle.AsRef<CUtlVector<CAnimUpdateNodeRef>>(_ChildrenOffset);
         }
     }
-    private static nint? _TagsOffset;
+    private static nint _TagsOffset = -1;
 
     public ref CUtlVector<byte> Tags
     {
         get
         {
-            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0x23CD95F2B46C8540);
-            return ref _Handle.AsRef<CUtlVector<byte>>(_TagsOffset!.Value);
+            if (_TagsOffset == -1) _TagsOffset = Schema.GetOffset(0x23CD95F2B46C8540);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_TagsOffset);
         }
     }
-    private static nint? _BlendCurveOffset;
+    private static nint _BlendCurveOffset = -1;
     private CBlendCurveImpl? _BlendCurveInstance;
 
     public CBlendCurve BlendCurve
     {
         get
         {
-            _BlendCurveOffset = _BlendCurveOffset ?? Schema.GetOffset(0x23CD95F291978183);
+            if (_BlendCurveOffset == -1) _BlendCurveOffset = Schema.GetOffset(0x23CD95F291978183);
             var instance = _BlendCurveInstance ??= new CBlendCurveImpl(0);
-            instance.DangerousSetHandle(_Handle + _BlendCurveOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BlendCurveOffset);
             return instance;
         }
     }
-    private static nint? _BlendTimeOffset;
+    private static nint _BlendTimeOffset = -1;
     private SchemaUntypedField? _BlendTimeInstance;
 
     public SchemaUntypedField BlendTime
     {
         get
         {
-            _BlendTimeOffset = _BlendTimeOffset ?? Schema.GetOffset(0x23CD95F2A6206E9F);
+            if (_BlendTimeOffset == -1) _BlendTimeOffset = Schema.GetOffset(0x23CD95F2A6206E9F);
             var instance = _BlendTimeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _BlendTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BlendTimeOffset);
             return instance;
         }
     }
-    private static nint? _ParameterOffset;
+    private static nint _ParameterOffset = -1;
     private CAnimParamHandleImpl? _ParameterInstance;
 
     public CAnimParamHandle Parameter
     {
         get
         {
-            _ParameterOffset = _ParameterOffset ?? Schema.GetOffset(0x23CD95F20C7008F6);
+            if (_ParameterOffset == -1) _ParameterOffset = Schema.GetOffset(0x23CD95F20C7008F6);
             var instance = _ParameterInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParameterOffset);
             return instance;
         }
     }
-    private static nint? _TagIndexOffset;
+    private static nint _TagIndexOffset = -1;
 
     public ref int TagIndex
     {
         get
         {
-            _TagIndexOffset = _TagIndexOffset ?? Schema.GetOffset(0x23CD95F2C2026AAD);
-            return ref _Handle.AsRef<int>(_TagIndexOffset!.Value);
+            if (_TagIndexOffset == -1) _TagIndexOffset = Schema.GetOffset(0x23CD95F2C2026AAD);
+            return ref _Handle.AsRef<int>(_TagIndexOffset);
         }
     }
-    private static nint? _TagBehaviorOffset;
+    private static nint _TagBehaviorOffset = -1;
 
     public ref SelectorTagBehavior_t TagBehavior
     {
         get
         {
-            _TagBehaviorOffset = _TagBehaviorOffset ?? Schema.GetOffset(0x23CD95F2698EF70A);
-            return ref _Handle.AsRef<SelectorTagBehavior_t>(_TagBehaviorOffset!.Value);
+            if (_TagBehaviorOffset == -1) _TagBehaviorOffset = Schema.GetOffset(0x23CD95F2698EF70A);
+            return ref _Handle.AsRef<SelectorTagBehavior_t>(_TagBehaviorOffset);
         }
     }
-    private static nint? _ResetOnChangeOffset;
+    private static nint _ResetOnChangeOffset = -1;
 
     public ref bool ResetOnChange
     {
         get
         {
-            _ResetOnChangeOffset = _ResetOnChangeOffset ?? Schema.GetOffset(0x23CD95F2E8AD58E9);
-            return ref _Handle.AsRef<bool>(_ResetOnChangeOffset!.Value);
+            if (_ResetOnChangeOffset == -1) _ResetOnChangeOffset = Schema.GetOffset(0x23CD95F2E8AD58E9);
+            return ref _Handle.AsRef<bool>(_ResetOnChangeOffset);
         }
     }
-    private static nint? _LockWhenWaningOffset;
+    private static nint _LockWhenWaningOffset = -1;
 
     public ref bool LockWhenWaning
     {
         get
         {
-            _LockWhenWaningOffset = _LockWhenWaningOffset ?? Schema.GetOffset(0x23CD95F2EED48004);
-            return ref _Handle.AsRef<bool>(_LockWhenWaningOffset!.Value);
+            if (_LockWhenWaningOffset == -1) _LockWhenWaningOffset = Schema.GetOffset(0x23CD95F2EED48004);
+            return ref _Handle.AsRef<bool>(_LockWhenWaningOffset);
         }
     }
-    private static nint? _SyncCyclesOnChangeOffset;
+    private static nint _SyncCyclesOnChangeOffset = -1;
 
     public ref bool SyncCyclesOnChange
     {
         get
         {
-            _SyncCyclesOnChangeOffset = _SyncCyclesOnChangeOffset ?? Schema.GetOffset(0x23CD95F25DD67E78);
-            return ref _Handle.AsRef<bool>(_SyncCyclesOnChangeOffset!.Value);
+            if (_SyncCyclesOnChangeOffset == -1) _SyncCyclesOnChangeOffset = Schema.GetOffset(0x23CD95F25DD67E78);
+            return ref _Handle.AsRef<bool>(_SyncCyclesOnChangeOffset);
         }
     }
 

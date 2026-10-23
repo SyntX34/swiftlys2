@@ -16,47 +16,47 @@ internal partial class CNmTransitionEventConditionNode__CDefinitionImpl : CNmBoo
 {
     public CNmTransitionEventConditionNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _RequireRuleIDOffset;
+    private static nint _RequireRuleIDOffset = -1;
 
     public ref CGlobalSymbol RequireRuleID
     {
         get
         {
-            _RequireRuleIDOffset = _RequireRuleIDOffset ?? Schema.GetOffset(0x874AC07F75BFD237);
-            return ref _Handle.AsRef<CGlobalSymbol>(_RequireRuleIDOffset!.Value);
+            if (_RequireRuleIDOffset == -1) _RequireRuleIDOffset = Schema.GetOffset(0x874AC07F75BFD237);
+            return ref _Handle.AsRef<CGlobalSymbol>(_RequireRuleIDOffset);
         }
     }
-    private static nint? _EventConditionRulesOffset;
+    private static nint _EventConditionRulesOffset = -1;
     private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
-            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x874AC07FA904315F);
+            if (_EventConditionRulesOffset == -1) _EventConditionRulesOffset = Schema.GetOffset(0x874AC07FA904315F);
             var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
-            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset);
             return instance;
         }
     }
-    private static nint? _SourceStateNodeIdxOffset;
+    private static nint _SourceStateNodeIdxOffset = -1;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x874AC07F63F0228C);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0x874AC07F63F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
         }
     }
-    private static nint? _RuleConditionOffset;
+    private static nint _RuleConditionOffset = -1;
 
     public ref NmTransitionRuleCondition_t RuleCondition
     {
         get
         {
-            _RuleConditionOffset = _RuleConditionOffset ?? Schema.GetOffset(0x874AC07FE5B98074);
-            return ref _Handle.AsRef<NmTransitionRuleCondition_t>(_RuleConditionOffset!.Value);
+            if (_RuleConditionOffset == -1) _RuleConditionOffset = Schema.GetOffset(0x874AC07FE5B98074);
+            return ref _Handle.AsRef<NmTransitionRuleCondition_t>(_RuleConditionOffset);
         }
     }
 

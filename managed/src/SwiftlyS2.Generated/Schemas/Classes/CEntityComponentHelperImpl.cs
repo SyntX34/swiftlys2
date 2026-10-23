@@ -16,50 +16,50 @@ internal partial class CEntityComponentHelperImpl : SchemaClass, CEntityComponen
 {
     public CEntityComponentHelperImpl(nint handle) : base(handle) { }
 
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref uint Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x714DB384DC74A14C);
-            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x714DB384DC74A14C);
+            return ref _Handle.AsRef<uint>(_FlagsOffset);
         }
     }
-    private static nint? _InfoOffset;
+    private static nint _InfoOffset = -1;
     private EntComponentInfo_tImpl? _InfoInstance;
 
     public EntComponentInfo_t? Info
     {
         get
         {
-            _InfoOffset = _InfoOffset ?? Schema.GetOffset(0x714DB3840F0BFD1B);
-            var ptr = _Handle.Read<nint>(_InfoOffset!.Value);
+            if (_InfoOffset == -1) _InfoOffset = Schema.GetOffset(0x714DB3840F0BFD1B);
+            var ptr = _Handle.Read<nint>(_InfoOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _InfoInstance ??= new EntComponentInfo_tImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _PriorityOffset;
+    private static nint _PriorityOffset = -1;
 
     public ref int Priority
     {
         get
         {
-            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0x714DB384E7EFB335);
-            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+            if (_PriorityOffset == -1) _PriorityOffset = Schema.GetOffset(0x714DB384E7EFB335);
+            return ref _Handle.AsRef<int>(_PriorityOffset);
         }
     }
-    private static nint? _NextOffset;
+    private static nint _NextOffset = -1;
     private CEntityComponentHelperImpl? _NextInstance;
 
     public CEntityComponentHelper? Next
     {
         get
         {
-            _NextOffset = _NextOffset ?? Schema.GetOffset(0x714DB38432B11E0E);
-            var ptr = _Handle.Read<nint>(_NextOffset!.Value);
+            if (_NextOffset == -1) _NextOffset = Schema.GetOffset(0x714DB38432B11E0E);
+            var ptr = _Handle.Read<nint>(_NextOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _NextInstance ??= new CEntityComponentHelperImpl(0);
             instance.DangerousSetHandle(ptr);

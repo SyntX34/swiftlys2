@@ -16,60 +16,60 @@ internal partial class C_OP_BoxConstraintImpl : CParticleFunctionConstraintImpl,
 {
     public C_OP_BoxConstraintImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinOffset;
+    private static nint _MinOffset = -1;
     private CParticleCollectionVecInputImpl? _MinInstance;
 
     public CParticleCollectionVecInput Min
     {
         get
         {
-            _MinOffset = _MinOffset ?? Schema.GetOffset(0x111EED71B0765F37);
+            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0x111EED71B0765F37);
             var instance = _MinInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MinOffset);
             return instance;
         }
     }
-    private static nint? _MaxOffset;
+    private static nint _MaxOffset = -1;
     private CParticleCollectionVecInputImpl? _MaxInstance;
 
     public CParticleCollectionVecInput Max
     {
         get
         {
-            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x111EED71BE89FCF9);
+            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0x111EED71BE89FCF9);
             var instance = _MaxInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MaxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MaxOffset);
             return instance;
         }
     }
-    private static nint? _CPOffset;
+    private static nint _CPOffset = -1;
 
     public ref int CP
     {
         get
         {
-            _CPOffset = _CPOffset ?? Schema.GetOffset(0x111EED71EB661472);
-            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+            if (_CPOffset == -1) _CPOffset = Schema.GetOffset(0x111EED71EB661472);
+            return ref _Handle.AsRef<int>(_CPOffset);
         }
     }
-    private static nint? _LocalSpaceOffset;
+    private static nint _LocalSpaceOffset = -1;
 
     public ref bool LocalSpace
     {
         get
         {
-            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0x111EED7162418E6E);
-            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+            if (_LocalSpaceOffset == -1) _LocalSpaceOffset = Schema.GetOffset(0x111EED7162418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset);
         }
     }
-    private static nint? _AccountForRadiusOffset;
+    private static nint _AccountForRadiusOffset = -1;
 
     public ref bool AccountForRadius
     {
         get
         {
-            _AccountForRadiusOffset = _AccountForRadiusOffset ?? Schema.GetOffset(0x111EED71E4DE9E21);
-            return ref _Handle.AsRef<bool>(_AccountForRadiusOffset!.Value);
+            if (_AccountForRadiusOffset == -1) _AccountForRadiusOffset = Schema.GetOffset(0x111EED71E4DE9E21);
+            return ref _Handle.AsRef<bool>(_AccountForRadiusOffset);
         }
     }
 

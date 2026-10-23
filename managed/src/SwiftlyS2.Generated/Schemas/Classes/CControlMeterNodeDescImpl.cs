@@ -16,14 +16,14 @@ internal partial class CControlMeterNodeDescImpl : CVControlNodeBaseDescImpl, CC
 {
     public CControlMeterNodeDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _IsSubgraphOffset;
+    private static nint _IsSubgraphOffset = -1;
 
     public ref bool IsSubgraph
     {
         get
         {
-            _IsSubgraphOffset = _IsSubgraphOffset ?? Schema.GetOffset(0xAED1C831D74FF007);
-            return ref _Handle.AsRef<bool>(_IsSubgraphOffset!.Value);
+            if (_IsSubgraphOffset == -1) _IsSubgraphOffset = Schema.GetOffset(0xAED1C831D74FF007);
+            return ref _Handle.AsRef<bool>(_IsSubgraphOffset);
         }
     }
 

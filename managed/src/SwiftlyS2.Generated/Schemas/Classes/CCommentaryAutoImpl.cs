@@ -16,34 +16,34 @@ internal partial class CCommentaryAutoImpl : CBaseEntityImpl, CCommentaryAuto
 {
     public CCommentaryAutoImpl(nint handle) : base(handle) { }
 
-    private static nint? _OnCommentaryNewGameOffset;
+    private static nint _OnCommentaryNewGameOffset = -1;
 
     public ref CEntityIOOutput OnCommentaryNewGame
     {
         get
         {
-            _OnCommentaryNewGameOffset = _OnCommentaryNewGameOffset ?? Schema.GetOffset(0x5BB39498C3245D97);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryNewGameOffset!.Value);
+            if (_OnCommentaryNewGameOffset == -1) _OnCommentaryNewGameOffset = Schema.GetOffset(0x5BB39498C3245D97);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryNewGameOffset);
         }
     }
-    private static nint? _OnCommentaryMidGameOffset;
+    private static nint _OnCommentaryMidGameOffset = -1;
 
     public ref CEntityIOOutput OnCommentaryMidGame
     {
         get
         {
-            _OnCommentaryMidGameOffset = _OnCommentaryMidGameOffset ?? Schema.GetOffset(0x5BB39498A1777FCB);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryMidGameOffset!.Value);
+            if (_OnCommentaryMidGameOffset == -1) _OnCommentaryMidGameOffset = Schema.GetOffset(0x5BB39498A1777FCB);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryMidGameOffset);
         }
     }
-    private static nint? _OnCommentaryMultiplayerSpawnOffset;
+    private static nint _OnCommentaryMultiplayerSpawnOffset = -1;
 
     public ref CEntityIOOutput OnCommentaryMultiplayerSpawn
     {
         get
         {
-            _OnCommentaryMultiplayerSpawnOffset = _OnCommentaryMultiplayerSpawnOffset ?? Schema.GetOffset(0x5BB3949819FDEEB2);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryMultiplayerSpawnOffset!.Value);
+            if (_OnCommentaryMultiplayerSpawnOffset == -1) _OnCommentaryMultiplayerSpawnOffset = Schema.GetOffset(0x5BB3949819FDEEB2);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryMultiplayerSpawnOffset);
         }
     }
 

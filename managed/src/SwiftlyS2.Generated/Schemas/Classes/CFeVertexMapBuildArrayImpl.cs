@@ -16,14 +16,14 @@ internal partial class CFeVertexMapBuildArrayImpl : SchemaClass, CFeVertexMapBui
 {
     public CFeVertexMapBuildArrayImpl(nint handle) : base(handle) { }
 
-    private static nint? _ArrayOffset;
+    private static nint _ArrayOffset = -1;
 
     public ref CUtlVector<PointerTo<FeVertexMapBuild_t>> Array
     {
         get
         {
-            _ArrayOffset = _ArrayOffset ?? Schema.GetOffset(0x7F8ABE7424AA62A6);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<FeVertexMapBuild_t>>>(_ArrayOffset!.Value);
+            if (_ArrayOffset == -1) _ArrayOffset = Schema.GetOffset(0x7F8ABE7424AA62A6);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<FeVertexMapBuild_t>>>(_ArrayOffset);
         }
     }
 

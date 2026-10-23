@@ -16,55 +16,55 @@ internal partial class CPulse_OutputConnectionImpl : SchemaClass, CPulse_OutputC
 {
     public CPulse_OutputConnectionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceOutputOffset;
+    private static nint _SourceOutputOffset = -1;
     private SchemaUntypedField? _SourceOutputInstance;
 
     public SchemaUntypedField SourceOutput
     {
         get
         {
-            _SourceOutputOffset = _SourceOutputOffset ?? Schema.GetOffset(0x6DEBCD452D46D7F5);
+            if (_SourceOutputOffset == -1) _SourceOutputOffset = Schema.GetOffset(0x6DEBCD452D46D7F5);
             var instance = _SourceOutputInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SourceOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SourceOutputOffset);
             return instance;
         }
     }
-    private static nint? _TargetEntityOffset;
+    private static nint _TargetEntityOffset = -1;
     private SchemaUntypedField? _TargetEntityInstance;
 
     public SchemaUntypedField TargetEntity
     {
         get
         {
-            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x6DEBCD45948B1533);
+            if (_TargetEntityOffset == -1) _TargetEntityOffset = Schema.GetOffset(0x6DEBCD45948B1533);
             var instance = _TargetEntityInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TargetEntityOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TargetEntityOffset);
             return instance;
         }
     }
-    private static nint? _TargetInputOffset;
+    private static nint _TargetInputOffset = -1;
     private SchemaUntypedField? _TargetInputInstance;
 
     public SchemaUntypedField TargetInput
     {
         get
         {
-            _TargetInputOffset = _TargetInputOffset ?? Schema.GetOffset(0x6DEBCD45F1A0003C);
+            if (_TargetInputOffset == -1) _TargetInputOffset = Schema.GetOffset(0x6DEBCD45F1A0003C);
             var instance = _TargetInputInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TargetInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TargetInputOffset);
             return instance;
         }
     }
-    private static nint? _ParamOffset;
+    private static nint _ParamOffset = -1;
     private SchemaUntypedField? _ParamInstance;
 
     public SchemaUntypedField Param
     {
         get
         {
-            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x6DEBCD45E85FEBB2);
+            if (_ParamOffset == -1) _ParamOffset = Schema.GetOffset(0x6DEBCD45E85FEBB2);
             var instance = _ParamInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamOffset);
             return instance;
         }
     }

@@ -16,14 +16,14 @@ internal partial class CSymbolAnimParameterImpl : CConcreteAnimParameterImpl, CS
 {
     public CSymbolAnimParameterImpl(nint handle) : base(handle) { }
 
-    private static nint? _DefaultValueOffset;
+    private static nint _DefaultValueOffset = -1;
 
     public ref CGlobalSymbol DefaultValue
     {
         get
         {
-            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0xA3486AA2BBE0341F);
-            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset!.Value);
+            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0xA3486AA2BBE0341F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset);
         }
     }
 

@@ -16,36 +16,36 @@ internal partial class CNmFootEventConditionNode__CDefinitionImpl : CNmBoolValue
 {
     public CNmFootEventConditionNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceStateNodeIdxOffset;
+    private static nint _SourceStateNodeIdxOffset = -1;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0xA837BCFE63F0228C);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0xA837BCFE63F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
         }
     }
-    private static nint? _PhaseConditionOffset;
+    private static nint _PhaseConditionOffset = -1;
 
     public ref NmFootPhaseCondition_t PhaseCondition
     {
         get
         {
-            _PhaseConditionOffset = _PhaseConditionOffset ?? Schema.GetOffset(0xA837BCFE79D4BD7D);
-            return ref _Handle.AsRef<NmFootPhaseCondition_t>(_PhaseConditionOffset!.Value);
+            if (_PhaseConditionOffset == -1) _PhaseConditionOffset = Schema.GetOffset(0xA837BCFE79D4BD7D);
+            return ref _Handle.AsRef<NmFootPhaseCondition_t>(_PhaseConditionOffset);
         }
     }
-    private static nint? _EventConditionRulesOffset;
+    private static nint _EventConditionRulesOffset = -1;
     private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
-            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0xA837BCFEA904315F);
+            if (_EventConditionRulesOffset == -1) _EventConditionRulesOffset = Schema.GetOffset(0xA837BCFEA904315F);
             var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
-            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset);
             return instance;
         }
     }

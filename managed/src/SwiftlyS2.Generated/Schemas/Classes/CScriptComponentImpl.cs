@@ -16,19 +16,19 @@ internal partial class CScriptComponentImpl : CEntityComponentImpl, CScriptCompo
 {
     public CScriptComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? _ScriptClassNameOffset;
+    private static nint _ScriptClassNameOffset = -1;
 
     public string ScriptClassName
     {
         get
         {
-            _ScriptClassNameOffset = _ScriptClassNameOffset ?? Schema.GetOffset(0xC922CE544F9B6681);
-            return Schema.GetString(_Handle.Read<nint>(_ScriptClassNameOffset!.Value));
+            if (_ScriptClassNameOffset == -1) _ScriptClassNameOffset = Schema.GetOffset(0xC922CE544F9B6681);
+            return Schema.GetString(_Handle.Read<nint>(_ScriptClassNameOffset));
         }
         set
         {
-            _ScriptClassNameOffset = _ScriptClassNameOffset ?? Schema.GetOffset(0xC922CE544F9B6681);
-            Schema.SetString(_Handle, _ScriptClassNameOffset!.Value, value);
+            if (_ScriptClassNameOffset == -1) _ScriptClassNameOffset = Schema.GetOffset(0xC922CE544F9B6681);
+            Schema.SetString(_Handle, _ScriptClassNameOffset, value);
         }
     }
 

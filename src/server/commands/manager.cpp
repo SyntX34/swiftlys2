@@ -18,6 +18,9 @@
 
 #include "manager.h"
 
+#include <memory>
+#include <memory/hooks/vfunction.h>
+
 #include <api/interfaces/interfaces.h>
 
 #include <api/shared/string.h>
@@ -27,48 +30,15 @@
 #include <public/icvar.h>
 
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args);
-IVFunctionHook* dispatchConCommandHook = nullptr;
 
 void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args);
-IVFunctionHook* clientCommandHook2 = nullptr;
+
+VFunctionHook dispatchConCommandHook(reinterpret_cast<void*>(DispatchConCommand), "tier0", "CCvar", "ICvar::DispatchConCommand");
+VFunctionHook clientCommandHook2(reinterpret_cast<void*>(ClientCommandHook2), "server", "CSource2GameClients", "IServerGameClients::ClientCommand");
 
 void CommandsCallback(const CCommandContext& context, const CCommand& args)
 {
     g_pServerCommands->HandleRegisteredCommand(context.GetPlayerSlot().Get(), args.GetCommandString());
-}
-
-void CServerCommands::Initialize()
-{
-    void* ccvarVTable;
-    g_pS2BinLib->FindVtable("tier0", "CCvar", &ccvarVTable);
-
-    dispatchConCommandHook = g_pHooksManager->CreateVFunctionHook();
-    dispatchConCommandHook->SetHookFunction(ccvarVTable, g_pGameDataManager->GetOffsets()->Fetch("ICvar::DispatchConCommand"), (void*)DispatchConCommand, true);
-    dispatchConCommandHook->Enable();
-
-    void* gameclientsvtable = nullptr;
-    g_pS2BinLib->FindVtable("server", "CSource2GameClients", &gameclientsvtable);
-
-    clientCommandHook2 = g_pHooksManager->CreateVFunctionHook();
-    clientCommandHook2->SetHookFunction(gameclientsvtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameClients::ClientCommand"), (void*)ClientCommandHook2, true);
-    clientCommandHook2->Enable();
-}
-
-void CServerCommands::Shutdown()
-{
-    if (dispatchConCommandHook)
-    {
-        dispatchConCommandHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(dispatchConCommandHook);
-        dispatchConCommandHook = nullptr;
-    }
-
-    if (clientCommandHook2)
-    {
-        clientCommandHook2->Disable();
-        g_pHooksManager->DestroyVFunctionHook(clientCommandHook2);
-        clientCommandHook2 = nullptr;
-    }
 }
 
 static const std::string* FindPrefix(const std::set<std::string>& prefixes, const std::string& text)
@@ -93,11 +63,13 @@ void CServerCommands::LoadPrefixes()
 
 bool CServerCommands::ResolveCommandName(std::string& commandName)
 {
-    if (m_commands.contains(commandName))
+    auto command = m_commands.find(commandName);
+    if (command != m_commands.end() && command->second)
         return true;
 
     std::string prefixedName = "sw_" + commandName;
-    if (!m_commands.contains(prefixedName))
+    command = m_commands.find(prefixedName);
+    if (command == m_commands.end() || !command->second)
         return false;
 
     commandName = std::move(prefixedName);
@@ -148,7 +120,7 @@ int CServerCommands::HandleCommand(int playerid, const std::string& text, bool d
     args.erase(args.begin());
 
     {
-        QueueLockGuard lock(m_mtxCommands);
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
         if (!ResolveCommandName(commandName))
         {
             return 0;
@@ -174,7 +146,7 @@ void CServerCommands::HandleRegisteredCommand(int playerid, const char* commandL
     args.erase(args.begin());
 
     {
-        QueueLockGuard lock(m_mtxCommands);
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
         if (!ResolveCommandName(commandName))
         {
             return;
@@ -204,28 +176,36 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
 {
     commandName = str_tolower(commandName);
 
-    QueueLockGuard lock(m_mtxCommands);
-    if (!registerRaw)
     {
-        if (m_commands.contains(commandName))
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        if (!registerRaw)
         {
-            return 0;
+            if (m_commands.contains(commandName)) return 0;
+            commandName.insert(0, "sw_");
         }
 
-        commandName.insert(0, "sw_");
+        // Reserve the name while engine registration invokes creation callbacks.
+        if (!m_commands.try_emplace(commandName, nullptr).second) return 0;
     }
 
-    if (m_commands.contains(commandName))
+    try
     {
-        return 0;
+        auto conCommand = std::make_unique<ConCommand>(commandName.c_str(), CommandsCallback, strdup(helpText.c_str()), FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND);
+        conCommand->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
+
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        const uint64_t commandId = m_lastCommandId + 1;
+        m_commandNames.emplace(commandId, commandName);
+        m_commands.find(commandName)->second = conCommand.release();
+        m_lastCommandId = commandId;
+        return commandId;
     }
-
-    auto* conCommand = new ConCommand(commandName.c_str(), CommandsCallback, strdup(helpText.c_str()), FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND);
-    conCommand->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
-
-    m_commands[commandName] = conCommand;
-    m_commandNames[++m_lastCommandId] = commandName;
-    return m_lastCommandId;
+    catch (...)
+    {
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        m_commands.erase(commandName);
+        throw;
+    }
 }
 
 void CServerCommands::SetCommandHandler(CommandHandler handler)
@@ -235,29 +215,33 @@ void CServerCommands::SetCommandHandler(CommandHandler handler)
 
 void CServerCommands::UnregisterCommand(uint64_t commandId)
 {
-    QueueLockGuard lock(m_mtxCommands);
-
-    auto nameIt = m_commandNames.find(commandId);
-    if (nameIt == m_commandNames.end())
+    ConCommand* command = nullptr;
+    std::string commandName;
     {
-        return;
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        auto nameIt = m_commandNames.find(commandId);
+        if (nameIt == m_commandNames.end()) return;
+
+        commandName = std::move(nameIt->second);
+        auto commandIt = m_commands.find(commandName);
+        if (commandIt != m_commands.end())
+        {
+            command = commandIt->second;
+            commandIt->second = nullptr;
+        }
+        m_commandNames.erase(nameIt);
     }
 
-    auto commandIt = m_commands.find(nameIt->second);
-    if (commandIt != m_commands.end())
-    {
-        delete commandIt->second;
-        m_commands.erase(commandIt);
-    }
-
-    m_commandNames.erase(nameIt);
+    delete command;
+    std::lock_guard<std::mutex> lock(m_mtxCommands);
+    m_commands.erase(commandName);
 }
 
 bool CServerCommands::IsCommandRegistered(std::string commandName)
 {
     commandName = str_tolower(commandName);
 
-    QueueLockGuard lock(m_mtxCommands);
+    std::lock_guard<std::mutex> lock(m_mtxCommands);
     return ResolveCommandName(commandName);
 }
 
@@ -265,7 +249,7 @@ uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string co
 {
     std::string helpText;
     {
-        QueueLockGuard lock(m_mtxCommands);
+        std::lock_guard<std::mutex> lock(m_mtxCommands);
 
         commandName = str_tolower(commandName);
         if (!ResolveCommandName(commandName))
@@ -273,7 +257,7 @@ uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string co
             return 0;
         }
 
-        helpText = m_commands[commandName]->GetHelpText();
+        helpText = m_commands.find(commandName)->second->GetHelpText();
     }
 
     return RegisterCommand(aliasCommand, registerRaw, helpText);
@@ -300,7 +284,7 @@ void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args)
     {
         return;
     }
-    return reinterpret_cast<decltype(&ClientCommandHook2)>(clientCommandHook2->GetOriginal())(thisPtr, slot, args);
+    return reinterpret_cast<decltype(&ClientCommandHook2)>(clientCommandHook2.GetOriginal())(thisPtr, slot, args);
 }
 
 static std::string GetChatText(const CCommand& args)
@@ -368,7 +352,7 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
         }
     }
 
-    if (shouldSend) reinterpret_cast<decltype(&DispatchConCommand)>(dispatchConCommandHook->GetOriginal())(thisPtr, cmd, ctx, args);
+    if (shouldSend) reinterpret_cast<decltype(&DispatchConCommand)>(dispatchConCommandHook.GetOriginal())(thisPtr, cmd, ctx, args);
 
     if (gameText != "") g_pServerCommands->HandleCommand(slot.Get(), gameText, false);
 }

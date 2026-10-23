@@ -16,14 +16,14 @@ internal partial class magnetted_objects_tImpl : SchemaClass, magnetted_objects_
 {
     public magnetted_objects_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EntityOffset;
+    private static nint _EntityOffset = -1;
 
     public ref CHandle<CBaseEntity> Entity
     {
         get
         {
-            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x494D696825B27FD0);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0x494D696825B27FD0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset);
         }
     }
 

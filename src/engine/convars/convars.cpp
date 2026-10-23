@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "convars.h"
+#include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
 #include <api/sdk/recipientfilter.h>
@@ -37,7 +38,8 @@
 
 #define CONVAR_FLAGS_TO_REMOVE (FCVAR_HIDDEN | FCVAR_DEVELOPMENTONLY | FCVAR_CLIENTDLL)
 
-IVFunctionHook* g_pProcessRespondCvarValueHook = nullptr;
+bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg);
+VFunctionHook g_ProcessRespondCvarValueHook(reinterpret_cast<void*>(OnConvarQuery), "engine2", "CServerSideClient", "CServerSideClient::ProcessRespondCvarValue");
 
 extern bool bypassPostEventAbstractHook;
 
@@ -49,13 +51,13 @@ void ChangedConvarCallback(ConVarRefAbstract* ref, CSplitScreenSlot nSlot, const
 bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg)
 {
     g_pConvarManager->OnClientQueryCvar(client->GetPlayerSlot().Get(), msg.name(), msg.value());
-    return reinterpret_cast<bool(*)(CServerSideClientBase*, const CNetMessagePB<CCLCMsg_RespondCvarValue>&)>(g_pProcessRespondCvarValueHook->GetOriginal())(client, msg);
+    return reinterpret_cast<bool(*)(CServerSideClientBase*, const CNetMessagePB<CCLCMsg_RespondCvarValue>&)>(g_ProcessRespondCvarValueHook.GetOriginal())(client, msg);
 }
 
 template <typename Listeners>
-static std::vector<typename Listeners::mapped_type> CopyListeners(QueueMutex& mutex, const Listeners& listeners)
+static std::vector<typename Listeners::mapped_type> CopyListeners(std::mutex& mutex, const Listeners& listeners)
 {
-    QueueLockGuard lock(mutex);
+    std::lock_guard<std::mutex> lock(mutex);
 
     std::vector<typename Listeners::mapped_type> copy;
     copy.reserve(listeners.size());
@@ -108,12 +110,10 @@ static std::string ConvertConvarValueToString(const ConvarValue& value)
 
 void CConvarManager::Initialize()
 {
-    void* serverSideClientVTable;
-    g_pS2BinLib->FindVtable("engine2", "CServerSideClient", &serverSideClientVTable);
-
-    g_pProcessRespondCvarValueHook = g_pHooksManager->CreateVFunctionHook();
-    g_pProcessRespondCvarValueHook->SetHookFunction(serverSideClientVTable, g_pGameDataManager->GetOffsets()->Fetch("CServerSideClient::ProcessRespondCvarValue"), reinterpret_cast<void*>(OnConvarQuery), true);
-    g_pProcessRespondCvarValueHook->Enable();
+    {
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
+        m_bShuttingDown = false;
+    }
 
     if (bool* unlockedCvars = std::get_if<bool>(&g_pConfiguration->GetValue("core.Unlocker.Convars")))
     {
@@ -155,24 +155,13 @@ void CConvarManager::Initialize()
 
 void CConvarManager::Shutdown()
 {
-    if (g_pProcessRespondCvarValueHook)
     {
-        g_pProcessRespondCvarValueHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pProcessRespondCvarValueHook);
-        g_pProcessRespondCvarValueHook = nullptr;
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
+        m_bShuttingDown = true;
     }
 
-    if (m_bChangeCallbackInstalled)
-    {
-        g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);
-        m_bChangeCallbackInstalled = false;
-    }
-
-    if (m_bCreationListenerInstalled)
-    {
-        g_pGameCvar->RemoveCreationListeners(this);
-        m_bCreationListenerInstalled = false;
-    }
+    UpdateChangeCallback();
+    UpdateCreationListener();
 }
 
 void CConvarManager::QueryClientConvar(int playerid, const std::string& cvar_name)
@@ -195,7 +184,7 @@ void CConvarManager::QueryClientConvar(int playerid, const std::string& cvar_nam
 
 int CConvarManager::AddQueryClientCvarCallback(std::function<void(int, std::string, std::string)> callback)
 {
-    QueueLockGuard lock(m_mtxQueryCallbacks);
+    std::lock_guard<std::mutex> lock(m_mtxQueryCallbacks);
 
     m_queryCallbacks[++m_lastQueryCallbackId] = std::move(callback);
     return m_lastQueryCallbackId;
@@ -203,7 +192,7 @@ int CConvarManager::AddQueryClientCvarCallback(std::function<void(int, std::stri
 
 void CConvarManager::RemoveQueryClientCvarCallback(int callback_id)
 {
-    QueueLockGuard lock(m_mtxQueryCallbacks);
+    std::lock_guard<std::mutex> lock(m_mtxQueryCallbacks);
     m_queryCallbacks.erase(callback_id);
 }
 
@@ -271,7 +260,7 @@ void CConvarManager::CreateConvar(const std::string& cvar_name, EConVarType type
 
     if (!created.convar) return;
 
-    QueueLockGuard lock(m_mtxConvars);
+    std::lock_guard<std::mutex> lock(m_mtxConvars);
     m_createdConvars[cvar_name] = created;
 }
 
@@ -279,7 +268,7 @@ void CConvarManager::DeleteConvar(const std::string& cvar_name)
 {
     CreatedConvar created;
     {
-        QueueLockGuard lock(m_mtxConvars);
+        std::lock_guard<std::mutex> lock(m_mtxConvars);
 
         auto it = m_createdConvars.find(cvar_name);
         if (it == m_createdConvars.end()) return;
@@ -293,22 +282,9 @@ void CConvarManager::DeleteConvar(const std::string& cvar_name)
     created.free(created.convar);
 }
 
-bool CConvarManager::ExistsConvar(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    return cvar.IsValidRef() && cvar.IsConVarDataValid();
-}
-
-EConVarType CConvarManager::GetConvarType(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    if (!cvar.IsConVarDataValid()) return EConVarType::EConVarType_Invalid;
-    return cvar.GetType();
-}
-
 ConVarRefAbstract& CConvarManager::GetConvarRef(const char* cvar_name)
 {
-    QueueLockGuard lock(m_mtxConvars);
+    std::lock_guard<std::mutex> lock(m_mtxConvars);
 
     auto it = m_convarRefs.find(std::string_view(cvar_name));
     if (it == m_convarRefs.end())
@@ -320,94 +296,6 @@ ConVarRefAbstract& CConvarManager::GetConvarRef(const char* cvar_name)
     return it->second;
 }
 
-void* CConvarManager::GetConvarDataAddress(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    CSplitScreenSlot server(0);
-    if (!cvar.IsValidRef()) return nullptr;
-    if (!cvar.IsConVarDataValid()) return nullptr;
-
-    return cvar.GetConVarData()->ValueOrDefault(server);
-}
-
-ConvarValue CConvarManager::GetConvarValue(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    CSplitScreenSlot server(0);
-    if (!cvar.IsConVarDataValid()) return 0;
-
-    switch (cvar.GetType())
-    {
-        case EConVarType_Int16: return cvar.GetAs<int16_t>(server);
-        case EConVarType_UInt16: return cvar.GetAs<uint16_t>(server);
-        case EConVarType_Int32: return cvar.GetAs<int32_t>(server);
-        case EConVarType_UInt32: return cvar.GetAs<uint32_t>(server);
-        /*
-
-        unsigned long long long long long long long long long long long long long long long long long long
-        fuck you linux fuck you gcc
-
-        * fuck sourcehook too, almost forget about you
-
-
-        */
-        case EConVarType_UInt64: return (uint64_t)cvar.GetAs<uint64>(server);
-        case EConVarType_Int64: return (int64_t)cvar.GetAs<int64>(server);
-        case EConVarType_Bool: return cvar.GetAs<bool>(server);
-        case EConVarType_Float32: return cvar.GetAs<float>(server);
-        case EConVarType_Float64: return cvar.GetAs<double>(server);
-        case EConVarType_String: return std::string(cvar.GetString(server).String());
-        case EConVarType_Color: return cvar.GetAs<Color>(server);
-        case EConVarType_Vector2: return cvar.GetAs<Vector2D>(server);
-        case EConVarType_Vector3: return cvar.GetAs<Vector>(server);
-        case EConVarType_Vector4: return cvar.GetAs<Vector4D>(server);
-        case EConVarType_Qangle: return cvar.GetAs<QAngle>(server);
-        default:
-            g_pLogger->Error("Convars", fmt::format("Unsupported ConVar type: {}", (int)cvar.GetType()));
-            return 0;
-    }
-}
-
-void CConvarManager::SetConvarValue(const std::string& cvar_name, const ConvarValue& value)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    CSplitScreenSlot server(0);
-    if (!cvar.IsConVarDataValid()) return;
-
-    auto v_str = ConvertConvarValueToString(value);
-    cvar.SetString(CUtlString(v_str.c_str()), server);
-}
-
-void CConvarManager::SetClientConvar(int playerid, const std::string& cvar_name, const std::string& value)
-{
-    const auto netmsg = g_pGameNetworkMessages->FindNetworkMessageById(6);
-    auto msg = netmsg->AllocateMessage()->ToPB<CNETMsg_SetConVar>();
-
-    CMsg_CVars_CVar* cvar = msg->mutable_convars()->add_cvars();
-    cvar->set_name(cvar_name);
-    cvar->set_value(value);
-
-    bypassPostEventAbstractHook = true;
-
-    CSingleRecipientFilter filter(playerid);
-    g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, msg, 0);
-
-    bypassPostEventAbstractHook = false;
-
-    /*
-    Finally it's been fixed, i've had this problem since a year ago, glad that it's fixed and i didn't need to use deamberd with it's "const const const" feature
-
-    thanks memoverride, glad to have you here m8
-
-    now i can finally delete it, even on windows!!!
-
-    and 100% (i'm not sure of this number) i'll not need to stay again 4 hours to debug it
-
-    fuck you windows
-    */
-    delete msg;
-}
-
 /*
 
 it feels so good to not make "#define private public" stuff
@@ -416,43 +304,11 @@ some people don't even want to look through all the fields and just go to the sh
 
 */
 
-void CConvarManager::AddFlags(const std::string& cvar_name, uint64_t flags)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    if (!cvar.IsConVarDataValid()) return;
-
-    cvar.AddFlags(flags);
-}
-
-void CConvarManager::RemoveFlags(const std::string& cvar_name, uint64_t flags)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    if (!cvar.IsConVarDataValid()) return;
-
-    cvar.RemoveFlags(flags);
-}
-
-void CConvarManager::ClearFlags(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    if (!cvar.IsConVarDataValid()) return;
-
-    cvar.RemoveFlags(cvar.GetFlags());
-}
-
-uint64_t CConvarManager::GetFlags(const std::string& cvar_name)
-{
-    ConVarRefAbstract cvar(cvar_name.c_str());
-    if (!cvar.IsConVarDataValid()) return 0;
-
-    return cvar.GetFlags();
-}
-
 uint64_t CConvarManager::AddGlobalChangeListener(std::function<void(const char*, int, const char*, const char*)> callback)
 {
     uint64_t id;
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         id = ++m_lastListenerId;
         m_changeListeners[id] = std::move(callback);
     }
@@ -464,7 +320,7 @@ uint64_t CConvarManager::AddGlobalChangeListener(std::function<void(const char*,
 void CConvarManager::RemoveGlobalChangeListener(uint64_t callback_id)
 {
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_changeListeners.erase(callback_id);
     }
 
@@ -475,7 +331,7 @@ uint64_t CConvarManager::AddConvarCreatedListener(std::function<void(const char*
 {
     uint64_t id;
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         id = ++m_lastListenerId;
         m_convarCreatedListeners[id] = std::move(callback);
     }
@@ -487,7 +343,7 @@ uint64_t CConvarManager::AddConvarCreatedListener(std::function<void(const char*
 void CConvarManager::RemoveConvarCreatedListener(uint64_t callback_id)
 {
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_convarCreatedListeners.erase(callback_id);
     }
 
@@ -498,7 +354,7 @@ uint64_t CConvarManager::AddConCommandCreatedListener(std::function<void(const c
 {
     uint64_t id;
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         id = ++m_lastListenerId;
         m_conCommandCreatedListeners[id] = std::move(callback);
     }
@@ -510,7 +366,7 @@ uint64_t CConvarManager::AddConCommandCreatedListener(std::function<void(const c
 void CConvarManager::RemoveConCommandCreatedListener(uint64_t callback_id)
 {
     {
-        QueueLockGuard lock(m_mtxListeners);
+        std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_conCommandCreatedListeners.erase(callback_id);
     }
 
@@ -519,36 +375,58 @@ void CConvarManager::RemoveConCommandCreatedListener(uint64_t callback_id)
 
 void CConvarManager::UpdateChangeCallback()
 {
-    bool install;
+    std::unique_lock<std::mutex> lock(m_mtxListeners);
+    if (m_bUpdatingChangeCallback) return;
+    if ((!m_bShuttingDown && !m_changeListeners.empty()) == m_bChangeCallbackInstalled) return;
+    m_bUpdatingChangeCallback = true;
+    try
     {
-        QueueLockGuard lock(m_mtxListeners);
-
-        install = !m_changeListeners.empty();
-        if (install == m_bChangeCallbackInstalled) return;
-
-        m_bChangeCallbackInstalled = install;
+        while ((!m_bShuttingDown && !m_changeListeners.empty()) != m_bChangeCallbackInstalled)
+        {
+            const bool install = !m_bShuttingDown && !m_changeListeners.empty();
+            lock.unlock();
+            if (install)
+                g_pGameCvar->InstallGlobalChangeCallback(ChangedConvarCallback);
+            else
+                g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);
+            lock.lock();
+            m_bChangeCallbackInstalled = install;
+        }
+        m_bUpdatingChangeCallback = false;
     }
-
-    if (install)
-        g_pGameCvar->InstallGlobalChangeCallback(ChangedConvarCallback);
-    else
-        g_pGameCvar->RemoveGlobalChangeCallback(ChangedConvarCallback);
+    catch (...)
+    {
+        if (!lock.owns_lock()) lock.lock();
+        m_bUpdatingChangeCallback = false;
+        throw;
+    }
 }
 
 void CConvarManager::UpdateCreationListener()
 {
-    bool install;
+    std::unique_lock<std::mutex> lock(m_mtxListeners);
+    if (m_bUpdatingCreationListener) return;
+    if ((!m_bShuttingDown && (!m_convarCreatedListeners.empty() || !m_conCommandCreatedListeners.empty())) == m_bCreationListenerInstalled) return;
+    m_bUpdatingCreationListener = true;
+    try
     {
-        QueueLockGuard lock(m_mtxListeners);
-
-        install = !m_convarCreatedListeners.empty() || !m_conCommandCreatedListeners.empty();
-        if (install == m_bCreationListenerInstalled) return;
-
-        m_bCreationListenerInstalled = install;
+        while ((!m_bShuttingDown && (!m_convarCreatedListeners.empty() || !m_conCommandCreatedListeners.empty())) != m_bCreationListenerInstalled)
+        {
+            const bool install = !m_bShuttingDown && (!m_convarCreatedListeners.empty() || !m_conCommandCreatedListeners.empty());
+            lock.unlock();
+            if (install)
+                g_pGameCvar->RegisterCreationListeners(this);
+            else
+                g_pGameCvar->RemoveCreationListeners(this);
+            lock.lock();
+            m_bCreationListenerInstalled = install;
+        }
+        m_bUpdatingCreationListener = false;
     }
-
-    if (install)
-        g_pGameCvar->RegisterCreationListeners(this);
-    else
-        g_pGameCvar->RemoveCreationListeners(this);
+    catch (...)
+    {
+        if (!lock.owns_lock()) lock.lock();
+        m_bUpdatingCreationListener = false;
+        throw;
+    }
 }

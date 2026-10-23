@@ -16,49 +16,49 @@ internal partial class CAnimGraphDoc_PairedSequenceNodeImpl : CAnimGraphDoc_Node
 {
     public CAnimGraphDoc_PairedSequenceNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _PairedRoleOffset;
+    private static nint _PairedRoleOffset = -1;
 
     public ref CGlobalSymbol PairedRole
     {
         get
         {
-            _PairedRoleOffset = _PairedRoleOffset ?? Schema.GetOffset(0x52598BC60E4E5107);
-            return ref _Handle.AsRef<CGlobalSymbol>(_PairedRoleOffset!.Value);
+            if (_PairedRoleOffset == -1) _PairedRoleOffset = Schema.GetOffset(0x52598BC60E4E5107);
+            return ref _Handle.AsRef<CGlobalSymbol>(_PairedRoleOffset);
         }
     }
-    private static nint? _PreviewSequenceNameOffset;
+    private static nint _PreviewSequenceNameOffset = -1;
 
     public string PreviewSequenceName
     {
         get
         {
-            _PreviewSequenceNameOffset = _PreviewSequenceNameOffset ?? Schema.GetOffset(0x52598BC6CBB2B10D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewSequenceNameOffset!.Value));
+            if (_PreviewSequenceNameOffset == -1) _PreviewSequenceNameOffset = Schema.GetOffset(0x52598BC6CBB2B10D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewSequenceNameOffset));
         }
         set
         {
-            _PreviewSequenceNameOffset = _PreviewSequenceNameOffset ?? Schema.GetOffset(0x52598BC6CBB2B10D);
-            Schema.SetCUtlString(_Handle, _PreviewSequenceNameOffset!.Value, value);
+            if (_PreviewSequenceNameOffset == -1) _PreviewSequenceNameOffset = Schema.GetOffset(0x52598BC6CBB2B10D);
+            Schema.SetCUtlString(_Handle, _PreviewSequenceNameOffset, value);
         }
     }
-    private static nint? _PlaybackSpeedOffset;
+    private static nint _PlaybackSpeedOffset = -1;
 
     public ref float PlaybackSpeed
     {
         get
         {
-            _PlaybackSpeedOffset = _PlaybackSpeedOffset ?? Schema.GetOffset(0x52598BC6FA2B402D);
-            return ref _Handle.AsRef<float>(_PlaybackSpeedOffset!.Value);
+            if (_PlaybackSpeedOffset == -1) _PlaybackSpeedOffset = Schema.GetOffset(0x52598BC6FA2B402D);
+            return ref _Handle.AsRef<float>(_PlaybackSpeedOffset);
         }
     }
-    private static nint? _LoopOffset;
+    private static nint _LoopOffset = -1;
 
     public ref bool Loop
     {
         get
         {
-            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0x52598BC6C668A4CB);
-            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+            if (_LoopOffset == -1) _LoopOffset = Schema.GetOffset(0x52598BC6C668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class CMixStereoDelayImpl : CMixPropertyBaseImpl, CMixStereoDel
 {
     public CMixStereoDelayImpl(nint handle) : base(handle) { }
 
-    private static nint? _DelayLeftOffset;
+    private static nint _DelayLeftOffset = -1;
 
     public ref float DelayLeft
     {
         get
         {
-            _DelayLeftOffset = _DelayLeftOffset ?? Schema.GetOffset(0xC5DDEB0775AB261B);
-            return ref _Handle.AsRef<float>(_DelayLeftOffset!.Value);
+            if (_DelayLeftOffset == -1) _DelayLeftOffset = Schema.GetOffset(0xC5DDEB0775AB261B);
+            return ref _Handle.AsRef<float>(_DelayLeftOffset);
         }
     }
-    private static nint? _DelayRightOffset;
+    private static nint _DelayRightOffset = -1;
 
     public ref float DelayRight
     {
         get
         {
-            _DelayRightOffset = _DelayRightOffset ?? Schema.GetOffset(0xC5DDEB07289A7864);
-            return ref _Handle.AsRef<float>(_DelayRightOffset!.Value);
+            if (_DelayRightOffset == -1) _DelayRightOffset = Schema.GetOffset(0xC5DDEB07289A7864);
+            return ref _Handle.AsRef<float>(_DelayRightOffset);
         }
     }
 

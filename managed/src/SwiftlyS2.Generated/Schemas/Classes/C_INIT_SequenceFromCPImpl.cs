@@ -16,44 +16,44 @@ internal partial class C_INIT_SequenceFromCPImpl : CParticleFunctionInitializerI
 {
     public C_INIT_SequenceFromCPImpl(nint handle) : base(handle) { }
 
-    private static nint? _KillUnusedOffset;
+    private static nint _KillUnusedOffset = -1;
 
     public ref bool KillUnused
     {
         get
         {
-            _KillUnusedOffset = _KillUnusedOffset ?? Schema.GetOffset(0xC62FB07C81506527);
-            return ref _Handle.AsRef<bool>(_KillUnusedOffset!.Value);
+            if (_KillUnusedOffset == -1) _KillUnusedOffset = Schema.GetOffset(0xC62FB07C81506527);
+            return ref _Handle.AsRef<bool>(_KillUnusedOffset);
         }
     }
-    private static nint? _RadiusScaleOffset;
+    private static nint _RadiusScaleOffset = -1;
 
     public ref bool RadiusScale
     {
         get
         {
-            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0xC62FB07CBBCB728B);
-            return ref _Handle.AsRef<bool>(_RadiusScaleOffset!.Value);
+            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0xC62FB07CBBCB728B);
+            return ref _Handle.AsRef<bool>(_RadiusScaleOffset);
         }
     }
-    private static nint? _CPOffset;
+    private static nint _CPOffset = -1;
 
     public ref int CP
     {
         get
         {
-            _CPOffset = _CPOffset ?? Schema.GetOffset(0xC62FB07CEB661472);
-            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+            if (_CPOffset == -1) _CPOffset = Schema.GetOffset(0xC62FB07CEB661472);
+            return ref _Handle.AsRef<int>(_CPOffset);
         }
     }
-    private static nint? _OffsetOffset;
+    private static nint _OffsetOffset = -1;
 
     public ref Vector Offset
     {
         get
         {
-            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xC62FB07CBD25CC2A);
-            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xC62FB07CBD25CC2A);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset);
         }
     }
 

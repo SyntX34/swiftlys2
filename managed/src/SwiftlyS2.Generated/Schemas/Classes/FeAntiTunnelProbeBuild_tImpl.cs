@@ -16,74 +16,74 @@ internal partial class FeAntiTunnelProbeBuild_tImpl : SchemaClass, FeAntiTunnelP
 {
     public FeAntiTunnelProbeBuild_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
 
     public ref float Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x71B6F8ABCFFC66CB);
-            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0x71B6F8ABCFFC66CB);
+            return ref _Handle.AsRef<float>(_WeightOffset);
         }
     }
-    private static nint? _ActivationDistanceOffset;
+    private static nint _ActivationDistanceOffset = -1;
 
     public ref float ActivationDistance
     {
         get
         {
-            _ActivationDistanceOffset = _ActivationDistanceOffset ?? Schema.GetOffset(0x71B6F8ABEAB1A998);
-            return ref _Handle.AsRef<float>(_ActivationDistanceOffset!.Value);
+            if (_ActivationDistanceOffset == -1) _ActivationDistanceOffset = Schema.GetOffset(0x71B6F8ABEAB1A998);
+            return ref _Handle.AsRef<float>(_ActivationDistanceOffset);
         }
     }
-    private static nint? _BiasOffset;
+    private static nint _BiasOffset = -1;
 
     public ref float Bias
     {
         get
         {
-            _BiasOffset = _BiasOffset ?? Schema.GetOffset(0x71B6F8AB30667CD6);
-            return ref _Handle.AsRef<float>(_BiasOffset!.Value);
+            if (_BiasOffset == -1) _BiasOffset = Schema.GetOffset(0x71B6F8AB30667CD6);
+            return ref _Handle.AsRef<float>(_BiasOffset);
         }
     }
-    private static nint? _CurvatureOffset;
+    private static nint _CurvatureOffset = -1;
 
     public ref float Curvature
     {
         get
         {
-            _CurvatureOffset = _CurvatureOffset ?? Schema.GetOffset(0x71B6F8ABF5F69668);
-            return ref _Handle.AsRef<float>(_CurvatureOffset!.Value);
+            if (_CurvatureOffset == -1) _CurvatureOffset = Schema.GetOffset(0x71B6F8ABF5F69668);
+            return ref _Handle.AsRef<float>(_CurvatureOffset);
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref uint Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x71B6F8ABB8D52E48);
-            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x71B6F8ABB8D52E48);
+            return ref _Handle.AsRef<uint>(_FlagsOffset);
         }
     }
-    private static nint? _ProbeNodeOffset;
+    private static nint _ProbeNodeOffset = -1;
 
     public ref ushort ProbeNode
     {
         get
         {
-            _ProbeNodeOffset = _ProbeNodeOffset ?? Schema.GetOffset(0x71B6F8AB5F3CB12D);
-            return ref _Handle.AsRef<ushort>(_ProbeNodeOffset!.Value);
+            if (_ProbeNodeOffset == -1) _ProbeNodeOffset = Schema.GetOffset(0x71B6F8AB5F3CB12D);
+            return ref _Handle.AsRef<ushort>(_ProbeNodeOffset);
         }
     }
-    private static nint? _TargetNodesOffset;
+    private static nint _TargetNodesOffset = -1;
 
     public ref CUtlVector<ushort> TargetNodes
     {
         get
         {
-            _TargetNodesOffset = _TargetNodesOffset ?? Schema.GetOffset(0x71B6F8AB4BCFFCA5);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_TargetNodesOffset!.Value);
+            if (_TargetNodesOffset == -1) _TargetNodesOffset = Schema.GetOffset(0x71B6F8AB4BCFFCA5);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_TargetNodesOffset);
         }
     }
 

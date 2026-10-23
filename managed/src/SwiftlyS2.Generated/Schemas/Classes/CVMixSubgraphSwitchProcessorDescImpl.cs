@@ -16,42 +16,42 @@ internal partial class CVMixSubgraphSwitchProcessorDescImpl : CVMixBaseProcessor
 {
     public CVMixSubgraphSwitchProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixSubgraphSwitchDesc_tImpl? _DescInstance;
 
     public VMixSubgraphSwitchDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0x2DD364BD27917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x2DD364BD27917BC0);
             var instance = _DescInstance ??= new VMixSubgraphSwitchDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }
-    private static nint? _ParamEffectNameOffset;
+    private static nint _ParamEffectNameOffset = -1;
     private CVMixParameterEffectNameImpl? _ParamEffectNameInstance;
 
     public CVMixParameterEffectName ParamEffectName
     {
         get
         {
-            _ParamEffectNameOffset = _ParamEffectNameOffset ?? Schema.GetOffset(0x2DD364BDCC86B95C);
+            if (_ParamEffectNameOffset == -1) _ParamEffectNameOffset = Schema.GetOffset(0x2DD364BDCC86B95C);
             var instance = _ParamEffectNameInstance ??= new CVMixParameterEffectNameImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamEffectNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamEffectNameOffset);
             return instance;
         }
     }
-    private static nint? _ParamSelectionIndexOffset;
+    private static nint _ParamSelectionIndexOffset = -1;
     private CVMixParameterFloatImpl? _ParamSelectionIndexInstance;
 
     public CVMixParameterFloat ParamSelectionIndex
     {
         get
         {
-            _ParamSelectionIndexOffset = _ParamSelectionIndexOffset ?? Schema.GetOffset(0x2DD364BD04066A40);
+            if (_ParamSelectionIndexOffset == -1) _ParamSelectionIndexOffset = Schema.GetOffset(0x2DD364BD04066A40);
             var instance = _ParamSelectionIndexInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamSelectionIndexOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamSelectionIndexOffset);
             return instance;
         }
     }

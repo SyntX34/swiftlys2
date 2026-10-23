@@ -16,39 +16,39 @@ internal partial class inv_image_item_tImpl : SchemaClass, inv_image_item_t
 {
     public inv_image_item_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _PositionOffset;
+    private static nint _PositionOffset = -1;
 
     public ref Vector Position
     {
         get
         {
-            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0xA62D7FA3934F4E0A);
-            return ref _Handle.AsRef<Vector>(_PositionOffset!.Value);
+            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0xA62D7FA3934F4E0A);
+            return ref _Handle.AsRef<Vector>(_PositionOffset);
         }
     }
-    private static nint? _AngleOffset;
+    private static nint _AngleOffset = -1;
 
     public ref QAngle Angle
     {
         get
         {
-            _AngleOffset = _AngleOffset ?? Schema.GetOffset(0xA62D7FA3AD544418);
-            return ref _Handle.AsRef<QAngle>(_AngleOffset!.Value);
+            if (_AngleOffset == -1) _AngleOffset = Schema.GetOffset(0xA62D7FA3AD544418);
+            return ref _Handle.AsRef<QAngle>(_AngleOffset);
         }
     }
-    private static nint? _Pose_sequenceOffset;
+    private static nint _Pose_sequenceOffset = -1;
 
     public string Pose_sequence
     {
         get
         {
-            _Pose_sequenceOffset = _Pose_sequenceOffset ?? Schema.GetOffset(0xA62D7FA3830B192C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_Pose_sequenceOffset!.Value));
+            if (_Pose_sequenceOffset == -1) _Pose_sequenceOffset = Schema.GetOffset(0xA62D7FA3830B192C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_Pose_sequenceOffset));
         }
         set
         {
-            _Pose_sequenceOffset = _Pose_sequenceOffset ?? Schema.GetOffset(0xA62D7FA3830B192C);
-            Schema.SetCUtlString(_Handle, _Pose_sequenceOffset!.Value, value);
+            if (_Pose_sequenceOffset == -1) _Pose_sequenceOffset = Schema.GetOffset(0xA62D7FA3830B192C);
+            Schema.SetCUtlString(_Handle, _Pose_sequenceOffset, value);
         }
     }
 

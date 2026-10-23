@@ -16,27 +16,27 @@ internal partial class FePrism_tImpl : SchemaClass, FePrism_t
 {
     public FePrism_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xE88E1DF2CD6694B9);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0xE88E1DF2CD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0xE88E1DF2CD6694B9, 6, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeOffset);
             return instance;
         }
     }
-    private static nint? _VolumeOffset;
+    private static nint _VolumeOffset = -1;
 
     public ref float Volume
     {
         get
         {
-            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0xE88E1DF2CD3B35E9);
-            return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
+            if (_VolumeOffset == -1) _VolumeOffset = Schema.GetOffset(0xE88E1DF2CD3B35E9);
+            return ref _Handle.AsRef<float>(_VolumeOffset);
         }
     }
 

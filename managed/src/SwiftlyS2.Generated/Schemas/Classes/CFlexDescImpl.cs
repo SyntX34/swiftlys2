@@ -16,19 +16,19 @@ internal partial class CFlexDescImpl : SchemaClass, CFlexDesc
 {
     public CFlexDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _FacsOffset;
+    private static nint _FacsOffset = -1;
 
     public string Facs
     {
         get
         {
-            _FacsOffset = _FacsOffset ?? Schema.GetOffset(0xF8B9C4900514A8FF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FacsOffset!.Value));
+            if (_FacsOffset == -1) _FacsOffset = Schema.GetOffset(0xF8B9C4900514A8FF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FacsOffset));
         }
         set
         {
-            _FacsOffset = _FacsOffset ?? Schema.GetOffset(0xF8B9C4900514A8FF);
-            Schema.SetCUtlString(_Handle, _FacsOffset!.Value, value);
+            if (_FacsOffset == -1) _FacsOffset = Schema.GetOffset(0xF8B9C4900514A8FF);
+            Schema.SetCUtlString(_Handle, _FacsOffset, value);
         }
     }
 

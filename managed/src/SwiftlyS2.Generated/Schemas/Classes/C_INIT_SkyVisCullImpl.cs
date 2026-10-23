@@ -16,37 +16,37 @@ internal partial class C_INIT_SkyVisCullImpl : CParticleFunctionInitializerImpl,
 {
     public C_INIT_SkyVisCullImpl(nint handle) : base(handle) { }
 
-    private static nint? _TestDirOffset;
+    private static nint _TestDirOffset = -1;
     private CParticleCollectionVecInputImpl? _TestDirInstance;
 
     public CParticleCollectionVecInput TestDir
     {
         get
         {
-            _TestDirOffset = _TestDirOffset ?? Schema.GetOffset(0x73742D57C17166B4);
+            if (_TestDirOffset == -1) _TestDirOffset = Schema.GetOffset(0x73742D57C17166B4);
             var instance = _TestDirInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _TestDirOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TestDirOffset);
             return instance;
         }
     }
-    private static nint? _TraceSetOffset;
+    private static nint _TraceSetOffset = -1;
 
     public ref ParticleTraceSet_t TraceSet
     {
         get
         {
-            _TraceSetOffset = _TraceSetOffset ?? Schema.GetOffset(0x73742D57BD26C5B2);
-            return ref _Handle.AsRef<ParticleTraceSet_t>(_TraceSetOffset!.Value);
+            if (_TraceSetOffset == -1) _TraceSetOffset = Schema.GetOffset(0x73742D57BD26C5B2);
+            return ref _Handle.AsRef<ParticleTraceSet_t>(_TraceSetOffset);
         }
     }
-    private static nint? _CullOnSkyOffset;
+    private static nint _CullOnSkyOffset = -1;
 
     public ref bool CullOnSky
     {
         get
         {
-            _CullOnSkyOffset = _CullOnSkyOffset ?? Schema.GetOffset(0x73742D57369D39FD);
-            return ref _Handle.AsRef<bool>(_CullOnSkyOffset!.Value);
+            if (_CullOnSkyOffset == -1) _CullOnSkyOffset = Schema.GetOffset(0x73742D57369D39FD);
+            return ref _Handle.AsRef<bool>(_CullOnSkyOffset);
         }
     }
 

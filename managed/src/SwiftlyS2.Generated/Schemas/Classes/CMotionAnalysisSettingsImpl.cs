@@ -16,71 +16,71 @@ internal partial class CMotionAnalysisSettingsImpl : SchemaClass, CMotionAnalysi
 {
     public CMotionAnalysisSettingsImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescriptionOffset;
+    private static nint _DescriptionOffset = -1;
 
     public string Description
     {
         get
         {
-            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0xC14D070F678744E9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset!.Value));
+            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0xC14D070F678744E9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset));
         }
         set
         {
-            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0xC14D070F678744E9);
-            Schema.SetCUtlString(_Handle, _DescriptionOffset!.Value, value);
+            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0xC14D070F678744E9);
+            Schema.SetCUtlString(_Handle, _DescriptionOffset, value);
         }
     }
-    private static nint? _LinearThresholdSlowOffset;
+    private static nint _LinearThresholdSlowOffset = -1;
 
     public ref float LinearThresholdSlow
     {
         get
         {
-            _LinearThresholdSlowOffset = _LinearThresholdSlowOffset ?? Schema.GetOffset(0xC14D070FC0566A80);
-            return ref _Handle.AsRef<float>(_LinearThresholdSlowOffset!.Value);
+            if (_LinearThresholdSlowOffset == -1) _LinearThresholdSlowOffset = Schema.GetOffset(0xC14D070FC0566A80);
+            return ref _Handle.AsRef<float>(_LinearThresholdSlowOffset);
         }
     }
-    private static nint? _LinearThresholdStoppedOffset;
+    private static nint _LinearThresholdStoppedOffset = -1;
 
     public ref float LinearThresholdStopped
     {
         get
         {
-            _LinearThresholdStoppedOffset = _LinearThresholdStoppedOffset ?? Schema.GetOffset(0xC14D070FEB2E8716);
-            return ref _Handle.AsRef<float>(_LinearThresholdStoppedOffset!.Value);
+            if (_LinearThresholdStoppedOffset == -1) _LinearThresholdStoppedOffset = Schema.GetOffset(0xC14D070FEB2E8716);
+            return ref _Handle.AsRef<float>(_LinearThresholdStoppedOffset);
         }
     }
-    private static nint? _AngularThresholdSlowOffset;
+    private static nint _AngularThresholdSlowOffset = -1;
 
     public ref float AngularThresholdSlow
     {
         get
         {
-            _AngularThresholdSlowOffset = _AngularThresholdSlowOffset ?? Schema.GetOffset(0xC14D070FF184D287);
-            return ref _Handle.AsRef<float>(_AngularThresholdSlowOffset!.Value);
+            if (_AngularThresholdSlowOffset == -1) _AngularThresholdSlowOffset = Schema.GetOffset(0xC14D070FF184D287);
+            return ref _Handle.AsRef<float>(_AngularThresholdSlowOffset);
         }
     }
-    private static nint? _AngularThresholdStoppedOffset;
+    private static nint _AngularThresholdStoppedOffset = -1;
 
     public ref float AngularThresholdStopped
     {
         get
         {
-            _AngularThresholdStoppedOffset = _AngularThresholdStoppedOffset ?? Schema.GetOffset(0xC14D070FF5DD6983);
-            return ref _Handle.AsRef<float>(_AngularThresholdStoppedOffset!.Value);
+            if (_AngularThresholdStoppedOffset == -1) _AngularThresholdStoppedOffset = Schema.GetOffset(0xC14D070FF5DD6983);
+            return ref _Handle.AsRef<float>(_AngularThresholdStoppedOffset);
         }
     }
-    private static nint? _FeetOffset;
+    private static nint _FeetOffset = -1;
     private SchemaUntypedField? _FeetInstance;
 
     public SchemaUntypedField Feet
     {
         get
         {
-            _FeetOffset = _FeetOffset ?? Schema.GetOffset(0xC14D070FF8E463D5);
+            if (_FeetOffset == -1) _FeetOffset = Schema.GetOffset(0xC14D070FF8E463D5);
             var instance = _FeetInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FeetOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FeetOffset);
             return instance;
         }
     }

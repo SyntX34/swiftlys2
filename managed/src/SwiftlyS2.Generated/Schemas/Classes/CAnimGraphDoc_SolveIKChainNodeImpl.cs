@@ -16,27 +16,27 @@ internal partial class CAnimGraphDoc_SolveIKChainNodeImpl : CAnimGraphDoc_NodeIm
 {
     public CAnimGraphDoc_SolveIKChainNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x5574A11A1F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x5574A11A1F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _IkChainsOffset;
+    private static nint _IkChainsOffset = -1;
 
     public ref CUtlVector<CSolveIKChainAnimNodeChainData> IkChains
     {
         get
         {
-            _IkChainsOffset = _IkChainsOffset ?? Schema.GetOffset(0x5574A11AB3093787);
-            return ref _Handle.AsRef<CUtlVector<CSolveIKChainAnimNodeChainData>>(_IkChainsOffset!.Value);
+            if (_IkChainsOffset == -1) _IkChainsOffset = Schema.GetOffset(0x5574A11AB3093787);
+            return ref _Handle.AsRef<CUtlVector<CSolveIKChainAnimNodeChainData>>(_IkChainsOffset);
         }
     }
 

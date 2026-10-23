@@ -16,29 +16,29 @@ internal partial class CPointGamestatsCounterImpl : CPointEntityImpl, CPointGame
 {
     public CPointGamestatsCounterImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrStatisticNameOffset;
+    private static nint _StrStatisticNameOffset = -1;
 
     public string StrStatisticName
     {
         get
         {
-            _StrStatisticNameOffset = _StrStatisticNameOffset ?? Schema.GetOffset(0xDB27C27354212AB1);
-            return Schema.GetString(_Handle.Read<nint>(_StrStatisticNameOffset!.Value));
+            if (_StrStatisticNameOffset == -1) _StrStatisticNameOffset = Schema.GetOffset(0xDB27C27354212AB1);
+            return Schema.GetString(_Handle.Read<nint>(_StrStatisticNameOffset));
         }
         set
         {
-            _StrStatisticNameOffset = _StrStatisticNameOffset ?? Schema.GetOffset(0xDB27C27354212AB1);
-            Schema.SetString(_Handle, _StrStatisticNameOffset!.Value, value);
+            if (_StrStatisticNameOffset == -1) _StrStatisticNameOffset = Schema.GetOffset(0xDB27C27354212AB1);
+            Schema.SetString(_Handle, _StrStatisticNameOffset, value);
         }
     }
-    private static nint? _DisabledOffset;
+    private static nint _DisabledOffset = -1;
 
     public ref bool Disabled
     {
         get
         {
-            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xDB27C2733A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0xDB27C2733A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset);
         }
     }
 

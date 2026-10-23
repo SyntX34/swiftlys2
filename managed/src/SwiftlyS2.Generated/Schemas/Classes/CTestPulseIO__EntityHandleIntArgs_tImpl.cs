@@ -16,24 +16,24 @@ internal partial class CTestPulseIO__EntityHandleIntArgs_tImpl : SchemaClass, CT
 {
     public CTestPulseIO__EntityHandleIntArgs_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _HandleAOffset;
+    private static nint _HandleAOffset = -1;
 
     public ref CHandle<CEntityInstance> HandleA
     {
         get
         {
-            _HandleAOffset = _HandleAOffset ?? Schema.GetOffset(0x662939E5C52D76D6);
-            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_HandleAOffset!.Value);
+            if (_HandleAOffset == -1) _HandleAOffset = Schema.GetOffset(0x662939E5C52D76D6);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_HandleAOffset);
         }
     }
-    private static nint? _ValueBOffset;
+    private static nint _ValueBOffset = -1;
 
     public ref int ValueB
     {
         get
         {
-            _ValueBOffset = _ValueBOffset ?? Schema.GetOffset(0x662939E50346FF18);
-            return ref _Handle.AsRef<int>(_ValueBOffset!.Value);
+            if (_ValueBOffset == -1) _ValueBOffset = Schema.GetOffset(0x662939E50346FF18);
+            return ref _Handle.AsRef<int>(_ValueBOffset);
         }
     }
 

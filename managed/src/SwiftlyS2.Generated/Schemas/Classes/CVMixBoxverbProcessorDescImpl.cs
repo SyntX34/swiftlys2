@@ -16,16 +16,16 @@ internal partial class CVMixBoxverbProcessorDescImpl : CVMixBaseProcessorDescImp
 {
     public CVMixBoxverbProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixBoxverbDesc_tImpl? _DescInstance;
 
     public VMixBoxverbDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0x33AD489327917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x33AD489327917BC0);
             var instance = _DescInstance ??= new VMixBoxverbDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }

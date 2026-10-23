@@ -16,14 +16,14 @@ internal partial class CNmVectorNegateNode__CDefinitionImpl : CNmVectorValueNode
 {
     public CNmVectorNegateNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputValueNodeIdxOffset;
+    private static nint _InputValueNodeIdxOffset = -1;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0xAC99508E95E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0xAC99508E95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
         }
     }
 

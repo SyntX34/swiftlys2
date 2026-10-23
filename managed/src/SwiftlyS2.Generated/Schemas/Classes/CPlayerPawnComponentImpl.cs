@@ -16,26 +16,26 @@ internal partial class CPlayerPawnComponentImpl : SchemaClass, CPlayerPawnCompon
 {
     public CPlayerPawnComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? ___m_pChainEntityOffset;
+    private static nint ___m_pChainEntityOffset = -1;
 
     public ref CNetworkVarChainer __m_pChainEntity
     {
         get
         {
-            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0x8B6AC9BCF63F0E7D);
-            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+            if (___m_pChainEntityOffset == -1) ___m_pChainEntityOffset = Schema.GetOffset(0x8B6AC9BCF63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset);
         }
     }
-    private static nint? _ComponentGraphControllerOffset;
+    private static nint _ComponentGraphControllerOffset = -1;
     private CAnimGraphControllerPtrImpl? _ComponentGraphControllerInstance;
 
     public CAnimGraphControllerPtr ComponentGraphController
     {
         get
         {
-            _ComponentGraphControllerOffset = _ComponentGraphControllerOffset ?? Schema.GetOffset(0x8B6AC9BCA605975A);
+            if (_ComponentGraphControllerOffset == -1) _ComponentGraphControllerOffset = Schema.GetOffset(0x8B6AC9BCA605975A);
             var instance = _ComponentGraphControllerInstance ??= new CAnimGraphControllerPtrImpl(0);
-            instance.DangerousSetHandle(_Handle + _ComponentGraphControllerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ComponentGraphControllerOffset);
             return instance;
         }
     }

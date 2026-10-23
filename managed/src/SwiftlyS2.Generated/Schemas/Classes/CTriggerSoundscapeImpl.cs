@@ -16,39 +16,39 @@ internal partial class CTriggerSoundscapeImpl : CBaseTriggerImpl, CTriggerSounds
 {
     public CTriggerSoundscapeImpl(nint handle) : base(handle) { }
 
-    private static nint? _SoundscapeOffset;
+    private static nint _SoundscapeOffset = -1;
 
     public ref CHandle<CEnvSoundscapeTriggerable> Soundscape
     {
         get
         {
-            _SoundscapeOffset = _SoundscapeOffset ?? Schema.GetOffset(0xA8ED7219EF1F0180);
-            return ref _Handle.AsRef<CHandle<CEnvSoundscapeTriggerable>>(_SoundscapeOffset!.Value);
+            if (_SoundscapeOffset == -1) _SoundscapeOffset = Schema.GetOffset(0xA8ED7219EF1F0180);
+            return ref _Handle.AsRef<CHandle<CEnvSoundscapeTriggerable>>(_SoundscapeOffset);
         }
     }
-    private static nint? _SoundscapeNameOffset;
+    private static nint _SoundscapeNameOffset = -1;
 
     public string SoundscapeName
     {
         get
         {
-            _SoundscapeNameOffset = _SoundscapeNameOffset ?? Schema.GetOffset(0xA8ED7219BDF7AA81);
-            return Schema.GetString(_Handle.Read<nint>(_SoundscapeNameOffset!.Value));
+            if (_SoundscapeNameOffset == -1) _SoundscapeNameOffset = Schema.GetOffset(0xA8ED7219BDF7AA81);
+            return Schema.GetString(_Handle.Read<nint>(_SoundscapeNameOffset));
         }
         set
         {
-            _SoundscapeNameOffset = _SoundscapeNameOffset ?? Schema.GetOffset(0xA8ED7219BDF7AA81);
-            Schema.SetString(_Handle, _SoundscapeNameOffset!.Value, value);
+            if (_SoundscapeNameOffset == -1) _SoundscapeNameOffset = Schema.GetOffset(0xA8ED7219BDF7AA81);
+            Schema.SetString(_Handle, _SoundscapeNameOffset, value);
         }
     }
-    private static nint? _SpectatorsOffset;
+    private static nint _SpectatorsOffset = -1;
 
     public ref CUtlVector<CHandle<CBasePlayerPawn>> Spectators
     {
         get
         {
-            _SpectatorsOffset = _SpectatorsOffset ?? Schema.GetOffset(0xA8ED7219149EB35B);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerPawn>>>(_SpectatorsOffset!.Value);
+            if (_SpectatorsOffset == -1) _SpectatorsOffset = Schema.GetOffset(0xA8ED7219149EB35B);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerPawn>>>(_SpectatorsOffset);
         }
     }
 

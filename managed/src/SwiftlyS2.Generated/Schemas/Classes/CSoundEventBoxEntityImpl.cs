@@ -16,27 +16,27 @@ internal partial class CSoundEventBoxEntityImpl : CSoundEventMultiPointEntityImp
 {
     public CSoundEventBoxEntityImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoxEntitiesOffset;
+    private static nint _BoxEntitiesOffset = -1;
     private SchemaStringFixedArray? _BoxEntitiesInstance;
 
     public ISchemaStringFixedArray BoxEntities
     {
         get
         {
-            _BoxEntitiesOffset = _BoxEntitiesOffset ?? Schema.GetOffset(0x4082DF6F27B5A8E5);
+            if (_BoxEntitiesOffset == -1) _BoxEntitiesOffset = Schema.GetOffset(0x4082DF6F27B5A8E5);
             var instance = _BoxEntitiesInstance ??= new SchemaStringFixedArray(0, 0x4082DF6F27B5A8E5, 16, 8, 8);
-            instance.DangerousSetHandle(_Handle + _BoxEntitiesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BoxEntitiesOffset);
             return instance;
         }
     }
-    private static nint? _BoxHelpersNetworkedOffset;
+    private static nint _BoxHelpersNetworkedOffset = -1;
 
     public ref CUtlVector<SoundeventBoxHelperNetworked_t> BoxHelpersNetworked
     {
         get
         {
-            _BoxHelpersNetworkedOffset = _BoxHelpersNetworkedOffset ?? Schema.GetOffset(0x4082DF6F0010FE06);
-            return ref _Handle.AsRef<CUtlVector<SoundeventBoxHelperNetworked_t>>(_BoxHelpersNetworkedOffset!.Value);
+            if (_BoxHelpersNetworkedOffset == -1) _BoxHelpersNetworkedOffset = Schema.GetOffset(0x4082DF6F0010FE06);
+            return ref _Handle.AsRef<CUtlVector<SoundeventBoxHelperNetworked_t>>(_BoxHelpersNetworkedOffset);
         }
     }
 

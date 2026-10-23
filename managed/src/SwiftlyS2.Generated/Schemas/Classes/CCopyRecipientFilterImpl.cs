@@ -16,34 +16,34 @@ internal partial class CCopyRecipientFilterImpl : SchemaClass, CCopyRecipientFil
 {
     public CCopyRecipientFilterImpl(nint handle) : base(handle) { }
 
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref int Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xB27F546C36B92FAC);
-            return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xB27F546C36B92FAC);
+            return ref _Handle.AsRef<int>(_FlagsOffset);
         }
     }
-    private static nint? _RecipientsOffset;
+    private static nint _RecipientsOffset = -1;
 
     public ref CUtlVector<uint> Recipients
     {
         get
         {
-            _RecipientsOffset = _RecipientsOffset ?? Schema.GetOffset(0xB27F546CDF6522D1);
-            return ref _Handle.AsRef<CUtlVector<uint>>(_RecipientsOffset!.Value);
+            if (_RecipientsOffset == -1) _RecipientsOffset = Schema.GetOffset(0xB27F546CDF6522D1);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_RecipientsOffset);
         }
     }
-    private static nint? _SlotPlayerExcludedDueToPredictionOffset;
+    private static nint _SlotPlayerExcludedDueToPredictionOffset = -1;
 
     public ref uint SlotPlayerExcludedDueToPrediction
     {
         get
         {
-            _SlotPlayerExcludedDueToPredictionOffset = _SlotPlayerExcludedDueToPredictionOffset ?? Schema.GetOffset(0xB27F546CA4F2B69C);
-            return ref _Handle.AsRef<uint>(_SlotPlayerExcludedDueToPredictionOffset!.Value);
+            if (_SlotPlayerExcludedDueToPredictionOffset == -1) _SlotPlayerExcludedDueToPredictionOffset = Schema.GetOffset(0xB27F546CA4F2B69C);
+            return ref _Handle.AsRef<uint>(_SlotPlayerExcludedDueToPredictionOffset);
         }
     }
 

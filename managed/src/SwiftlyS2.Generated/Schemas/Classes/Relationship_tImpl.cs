@@ -16,24 +16,24 @@ internal partial class Relationship_tImpl : SchemaClass, Relationship_t
 {
     public Relationship_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _DispositionOffset;
+    private static nint _DispositionOffset = -1;
 
     public ref Disposition_t Disposition
     {
         get
         {
-            _DispositionOffset = _DispositionOffset ?? Schema.GetOffset(0xD0FE62280D365234);
-            return ref _Handle.AsRef<Disposition_t>(_DispositionOffset!.Value);
+            if (_DispositionOffset == -1) _DispositionOffset = Schema.GetOffset(0xD0FE62280D365234);
+            return ref _Handle.AsRef<Disposition_t>(_DispositionOffset);
         }
     }
-    private static nint? _PriorityOffset;
+    private static nint _PriorityOffset = -1;
 
     public ref int Priority
     {
         get
         {
-            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0xD0FE622894E4E309);
-            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+            if (_PriorityOffset == -1) _PriorityOffset = Schema.GetOffset(0xD0FE622894E4E309);
+            return ref _Handle.AsRef<int>(_PriorityOffset);
         }
     }
 

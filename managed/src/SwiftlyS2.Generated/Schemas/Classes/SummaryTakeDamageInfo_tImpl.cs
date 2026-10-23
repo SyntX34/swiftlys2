@@ -16,44 +16,44 @@ internal partial class SummaryTakeDamageInfo_tImpl : SchemaClass, SummaryTakeDam
 {
     public SummaryTakeDamageInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SummarisedCountOffset;
+    private static nint _SummarisedCountOffset = -1;
 
     public ref int SummarisedCount
     {
         get
         {
-            _SummarisedCountOffset = _SummarisedCountOffset ?? Schema.GetOffset(0x8A8061E2B62D7D04);
-            return ref _Handle.AsRef<int>(_SummarisedCountOffset!.Value);
+            if (_SummarisedCountOffset == -1) _SummarisedCountOffset = Schema.GetOffset(0x8A8061E2B62D7D04);
+            return ref _Handle.AsRef<int>(_SummarisedCountOffset);
         }
     }
-    private static nint? _InfoOffset;
+    private static nint _InfoOffset = -1;
 
     public ref CTakeDamageInfo Info
     {
         get
         {
-            _InfoOffset = _InfoOffset ?? Schema.GetOffset(0x8A8061E20FB40705);
-            return ref _Handle.AsRef<CTakeDamageInfo>(_InfoOffset!.Value);
+            if (_InfoOffset == -1) _InfoOffset = Schema.GetOffset(0x8A8061E20FB40705);
+            return ref _Handle.AsRef<CTakeDamageInfo>(_InfoOffset);
         }
     }
-    private static nint? _ResultOffset;
+    private static nint _ResultOffset = -1;
 
     public ref CTakeDamageResult Result
     {
         get
         {
-            _ResultOffset = _ResultOffset ?? Schema.GetOffset(0x8A8061E20A377624);
-            return ref _Handle.AsRef<CTakeDamageResult>(_ResultOffset!.Value);
+            if (_ResultOffset == -1) _ResultOffset = Schema.GetOffset(0x8A8061E20A377624);
+            return ref _Handle.AsRef<CTakeDamageResult>(_ResultOffset);
         }
     }
-    private static nint? _TargetOffset;
+    private static nint _TargetOffset = -1;
 
     public ref CHandle<C_BaseEntity> Target
     {
         get
         {
-            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x8A8061E295A3933A);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_TargetOffset!.Value);
+            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0x8A8061E295A3933A);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_TargetOffset);
         }
     }
 

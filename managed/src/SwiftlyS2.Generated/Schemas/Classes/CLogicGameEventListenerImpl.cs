@@ -16,64 +16,64 @@ internal partial class CLogicGameEventListenerImpl : CLogicalEntityImpl, CLogicG
 {
     public CLogicGameEventListenerImpl(nint handle) : base(handle) { }
 
-    private static nint? _OnEventFiredOffset;
+    private static nint _OnEventFiredOffset = -1;
 
     public ref CEntityIOOutput OnEventFired
     {
         get
         {
-            _OnEventFiredOffset = _OnEventFiredOffset ?? Schema.GetOffset(0xB18EF22E84EA158);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnEventFiredOffset!.Value);
+            if (_OnEventFiredOffset == -1) _OnEventFiredOffset = Schema.GetOffset(0xB18EF22E84EA158);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEventFiredOffset);
         }
     }
-    private static nint? _GameEventNameOffset;
+    private static nint _GameEventNameOffset = -1;
 
     public string GameEventName
     {
         get
         {
-            _GameEventNameOffset = _GameEventNameOffset ?? Schema.GetOffset(0xB18EF22C6581BAE);
-            return Schema.GetString(_Handle.Read<nint>(_GameEventNameOffset!.Value));
+            if (_GameEventNameOffset == -1) _GameEventNameOffset = Schema.GetOffset(0xB18EF22C6581BAE);
+            return Schema.GetString(_Handle.Read<nint>(_GameEventNameOffset));
         }
         set
         {
-            _GameEventNameOffset = _GameEventNameOffset ?? Schema.GetOffset(0xB18EF22C6581BAE);
-            Schema.SetString(_Handle, _GameEventNameOffset!.Value, value);
+            if (_GameEventNameOffset == -1) _GameEventNameOffset = Schema.GetOffset(0xB18EF22C6581BAE);
+            Schema.SetString(_Handle, _GameEventNameOffset, value);
         }
     }
-    private static nint? _GameEventItemOffset;
+    private static nint _GameEventItemOffset = -1;
 
     public string GameEventItem
     {
         get
         {
-            _GameEventItemOffset = _GameEventItemOffset ?? Schema.GetOffset(0xB18EF22ACB669EE);
-            return Schema.GetString(_Handle.Read<nint>(_GameEventItemOffset!.Value));
+            if (_GameEventItemOffset == -1) _GameEventItemOffset = Schema.GetOffset(0xB18EF22ACB669EE);
+            return Schema.GetString(_Handle.Read<nint>(_GameEventItemOffset));
         }
         set
         {
-            _GameEventItemOffset = _GameEventItemOffset ?? Schema.GetOffset(0xB18EF22ACB669EE);
-            Schema.SetString(_Handle, _GameEventItemOffset!.Value, value);
+            if (_GameEventItemOffset == -1) _GameEventItemOffset = Schema.GetOffset(0xB18EF22ACB669EE);
+            Schema.SetString(_Handle, _GameEventItemOffset, value);
         }
     }
-    private static nint? _EnabledOffset;
+    private static nint _EnabledOffset = -1;
 
     public ref bool Enabled
     {
         get
         {
-            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xB18EF226154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0xB18EF226154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset);
         }
     }
-    private static nint? _StartDisabledOffset;
+    private static nint _StartDisabledOffset = -1;
 
     public ref bool StartDisabled
     {
         get
         {
-            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0xB18EF2261ED0C4F);
-            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+            if (_StartDisabledOffset == -1) _StartDisabledOffset = Schema.GetOffset(0xB18EF2261ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset);
         }
     }
 

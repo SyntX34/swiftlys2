@@ -16,24 +16,24 @@ internal partial class CMixControlCrossfadeImpl : CMixPropertyBaseImpl, CMixCont
 {
     public CMixControlCrossfadeImpl(nint handle) : base(handle) { }
 
-    private static nint? _FadeStartOffset;
+    private static nint _FadeStartOffset = -1;
 
     public ref float FadeStart
     {
         get
         {
-            _FadeStartOffset = _FadeStartOffset ?? Schema.GetOffset(0xD92360C9E1A81343);
-            return ref _Handle.AsRef<float>(_FadeStartOffset!.Value);
+            if (_FadeStartOffset == -1) _FadeStartOffset = Schema.GetOffset(0xD92360C9E1A81343);
+            return ref _Handle.AsRef<float>(_FadeStartOffset);
         }
     }
-    private static nint? _FadeEndOffset;
+    private static nint _FadeEndOffset = -1;
 
     public ref float FadeEnd
     {
         get
         {
-            _FadeEndOffset = _FadeEndOffset ?? Schema.GetOffset(0xD92360C9BE7F4636);
-            return ref _Handle.AsRef<float>(_FadeEndOffset!.Value);
+            if (_FadeEndOffset == -1) _FadeEndOffset = Schema.GetOffset(0xD92360C9BE7F4636);
+            return ref _Handle.AsRef<float>(_FadeEndOffset);
         }
     }
 

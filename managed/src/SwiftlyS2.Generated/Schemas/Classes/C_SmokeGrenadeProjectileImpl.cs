@@ -16,117 +16,117 @@ internal partial class C_SmokeGrenadeProjectileImpl : C_BaseCSGrenadeProjectileI
 {
     public C_SmokeGrenadeProjectileImpl(nint handle) : base(handle) { }
 
-    private static nint? _SmokeEffectTickBeginOffset;
+    private static nint _SmokeEffectTickBeginOffset = -1;
 
     public ref int SmokeEffectTickBegin
     {
         get
         {
-            _SmokeEffectTickBeginOffset = _SmokeEffectTickBeginOffset ?? Schema.GetOffset(0x4E65F325F5A25253);
-            return ref _Handle.AsRef<int>(_SmokeEffectTickBeginOffset!.Value);
+            if (_SmokeEffectTickBeginOffset == -1) _SmokeEffectTickBeginOffset = Schema.GetOffset(0x4E65F325F5A25253);
+            return ref _Handle.AsRef<int>(_SmokeEffectTickBeginOffset);
         }
     }
-    private static nint? _DidSmokeEffectOffset;
+    private static nint _DidSmokeEffectOffset = -1;
 
     public ref bool DidSmokeEffect
     {
         get
         {
-            _DidSmokeEffectOffset = _DidSmokeEffectOffset ?? Schema.GetOffset(0x4E65F32581A8B092);
-            return ref _Handle.AsRef<bool>(_DidSmokeEffectOffset!.Value);
+            if (_DidSmokeEffectOffset == -1) _DidSmokeEffectOffset = Schema.GetOffset(0x4E65F32581A8B092);
+            return ref _Handle.AsRef<bool>(_DidSmokeEffectOffset);
         }
     }
-    private static nint? _RandomSeedOffset;
+    private static nint _RandomSeedOffset = -1;
 
     public ref int RandomSeed
     {
         get
         {
-            _RandomSeedOffset = _RandomSeedOffset ?? Schema.GetOffset(0x4E65F3256388F067);
-            return ref _Handle.AsRef<int>(_RandomSeedOffset!.Value);
+            if (_RandomSeedOffset == -1) _RandomSeedOffset = Schema.GetOffset(0x4E65F3256388F067);
+            return ref _Handle.AsRef<int>(_RandomSeedOffset);
         }
     }
-    private static nint? _SmokeColorOffset;
+    private static nint _SmokeColorOffset = -1;
 
     public ref Vector SmokeColor
     {
         get
         {
-            _SmokeColorOffset = _SmokeColorOffset ?? Schema.GetOffset(0x4E65F3257808EA9D);
-            return ref _Handle.AsRef<Vector>(_SmokeColorOffset!.Value);
+            if (_SmokeColorOffset == -1) _SmokeColorOffset = Schema.GetOffset(0x4E65F3257808EA9D);
+            return ref _Handle.AsRef<Vector>(_SmokeColorOffset);
         }
     }
-    private static nint? _SmokeDetonationPosOffset;
+    private static nint _SmokeDetonationPosOffset = -1;
 
     public ref Vector SmokeDetonationPos
     {
         get
         {
-            _SmokeDetonationPosOffset = _SmokeDetonationPosOffset ?? Schema.GetOffset(0x4E65F325743595D7);
-            return ref _Handle.AsRef<Vector>(_SmokeDetonationPosOffset!.Value);
+            if (_SmokeDetonationPosOffset == -1) _SmokeDetonationPosOffset = Schema.GetOffset(0x4E65F325743595D7);
+            return ref _Handle.AsRef<Vector>(_SmokeDetonationPosOffset);
         }
     }
-    private static nint? _VoxelFrameDataOffset;
+    private static nint _VoxelFrameDataOffset = -1;
     private SchemaUntypedField? _VoxelFrameDataInstance;
 
     public SchemaUntypedField VoxelFrameData
     {
         get
         {
-            _VoxelFrameDataOffset = _VoxelFrameDataOffset ?? Schema.GetOffset(0x4E65F325E854C6C4);
+            if (_VoxelFrameDataOffset == -1) _VoxelFrameDataOffset = Schema.GetOffset(0x4E65F325E854C6C4);
             var instance = _VoxelFrameDataInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _VoxelFrameDataOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VoxelFrameDataOffset);
             return instance;
         }
     }
-    private static nint? _VoxelFrameDataSizeOffset;
+    private static nint _VoxelFrameDataSizeOffset = -1;
 
     public ref int VoxelFrameDataSize
     {
         get
         {
-            _VoxelFrameDataSizeOffset = _VoxelFrameDataSizeOffset ?? Schema.GetOffset(0x4E65F325369FBFD9);
-            return ref _Handle.AsRef<int>(_VoxelFrameDataSizeOffset!.Value);
+            if (_VoxelFrameDataSizeOffset == -1) _VoxelFrameDataSizeOffset = Schema.GetOffset(0x4E65F325369FBFD9);
+            return ref _Handle.AsRef<int>(_VoxelFrameDataSizeOffset);
         }
     }
-    private static nint? _VoxelUpdateOffset;
+    private static nint _VoxelUpdateOffset = -1;
 
     public ref int VoxelUpdate
     {
         get
         {
-            _VoxelUpdateOffset = _VoxelUpdateOffset ?? Schema.GetOffset(0x4E65F325EE30DA3A);
-            return ref _Handle.AsRef<int>(_VoxelUpdateOffset!.Value);
+            if (_VoxelUpdateOffset == -1) _VoxelUpdateOffset = Schema.GetOffset(0x4E65F325EE30DA3A);
+            return ref _Handle.AsRef<int>(_VoxelUpdateOffset);
         }
     }
-    private static nint? _SmokeLightProbeRegenOffset;
+    private static nint _SmokeLightProbeRegenOffset = -1;
 
     public ref byte SmokeLightProbeRegen
     {
         get
         {
-            _SmokeLightProbeRegenOffset = _SmokeLightProbeRegenOffset ?? Schema.GetOffset(0x4E65F325A0D17A81);
-            return ref _Handle.AsRef<byte>(_SmokeLightProbeRegenOffset!.Value);
+            if (_SmokeLightProbeRegenOffset == -1) _SmokeLightProbeRegenOffset = Schema.GetOffset(0x4E65F325A0D17A81);
+            return ref _Handle.AsRef<byte>(_SmokeLightProbeRegenOffset);
         }
     }
-    private static nint? _SmokeVolumeDataReceivedOffset;
+    private static nint _SmokeVolumeDataReceivedOffset = -1;
 
     public ref bool SmokeVolumeDataReceived
     {
         get
         {
-            _SmokeVolumeDataReceivedOffset = _SmokeVolumeDataReceivedOffset ?? Schema.GetOffset(0x4E65F3253D38D99B);
-            return ref _Handle.AsRef<bool>(_SmokeVolumeDataReceivedOffset!.Value);
+            if (_SmokeVolumeDataReceivedOffset == -1) _SmokeVolumeDataReceivedOffset = Schema.GetOffset(0x4E65F3253D38D99B);
+            return ref _Handle.AsRef<bool>(_SmokeVolumeDataReceivedOffset);
         }
     }
-    private static nint? _SmokeEffectSpawnedOffset;
+    private static nint _SmokeEffectSpawnedOffset = -1;
 
     public ref bool SmokeEffectSpawned
     {
         get
         {
-            _SmokeEffectSpawnedOffset = _SmokeEffectSpawnedOffset ?? Schema.GetOffset(0x4E65F325A015EA1F);
-            return ref _Handle.AsRef<bool>(_SmokeEffectSpawnedOffset!.Value);
+            if (_SmokeEffectSpawnedOffset == -1) _SmokeEffectSpawnedOffset = Schema.GetOffset(0x4E65F325A015EA1F);
+            return ref _Handle.AsRef<bool>(_SmokeEffectSpawnedOffset);
         }
     }
 

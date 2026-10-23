@@ -16,87 +16,87 @@ internal partial class CNetworkedSequenceOperationImpl : SchemaClass, CNetworked
 {
     public CNetworkedSequenceOperationImpl(nint handle) : base(handle) { }
 
-    private static nint? _SequenceOffset;
+    private static nint _SequenceOffset = -1;
     private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
-            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x3EA8ECC5E0A0598E);
+            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0x3EA8ECC5E0A0598E);
             var instance = _SequenceInstance ??= new HSequenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset);
             return instance;
         }
     }
-    private static nint? _PrevCycleOffset;
+    private static nint _PrevCycleOffset = -1;
 
     public ref float PrevCycle
     {
         get
         {
-            _PrevCycleOffset = _PrevCycleOffset ?? Schema.GetOffset(0x3EA8ECC5AA0F5CF4);
-            return ref _Handle.AsRef<float>(_PrevCycleOffset!.Value);
+            if (_PrevCycleOffset == -1) _PrevCycleOffset = Schema.GetOffset(0x3EA8ECC5AA0F5CF4);
+            return ref _Handle.AsRef<float>(_PrevCycleOffset);
         }
     }
-    private static nint? _CycleOffset;
+    private static nint _CycleOffset = -1;
 
     public ref float Cycle
     {
         get
         {
-            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x3EA8ECC50C77829F);
-            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+            if (_CycleOffset == -1) _CycleOffset = Schema.GetOffset(0x3EA8ECC50C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset);
         }
     }
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
 
     public ref CNetworkedQuantizedFloat Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x3EA8ECC57B81E7AB);
-            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_WeightOffset!.Value);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0x3EA8ECC57B81E7AB);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_WeightOffset);
         }
     }
-    private static nint? _SequenceChangeNetworkedOffset;
+    private static nint _SequenceChangeNetworkedOffset = -1;
 
     public ref bool SequenceChangeNetworked
     {
         get
         {
-            _SequenceChangeNetworkedOffset = _SequenceChangeNetworkedOffset ?? Schema.GetOffset(0x3EA8ECC510DEC927);
-            return ref _Handle.AsRef<bool>(_SequenceChangeNetworkedOffset!.Value);
+            if (_SequenceChangeNetworkedOffset == -1) _SequenceChangeNetworkedOffset = Schema.GetOffset(0x3EA8ECC510DEC927);
+            return ref _Handle.AsRef<bool>(_SequenceChangeNetworkedOffset);
         }
     }
-    private static nint? _DiscontinuityOffset;
+    private static nint _DiscontinuityOffset = -1;
 
     public ref bool Discontinuity
     {
         get
         {
-            _DiscontinuityOffset = _DiscontinuityOffset ?? Schema.GetOffset(0x3EA8ECC5C37DF9B1);
-            return ref _Handle.AsRef<bool>(_DiscontinuityOffset!.Value);
+            if (_DiscontinuityOffset == -1) _DiscontinuityOffset = Schema.GetOffset(0x3EA8ECC5C37DF9B1);
+            return ref _Handle.AsRef<bool>(_DiscontinuityOffset);
         }
     }
-    private static nint? _PrevCycleFromDiscontinuityOffset;
+    private static nint _PrevCycleFromDiscontinuityOffset = -1;
 
     public ref float PrevCycleFromDiscontinuity
     {
         get
         {
-            _PrevCycleFromDiscontinuityOffset = _PrevCycleFromDiscontinuityOffset ?? Schema.GetOffset(0x3EA8ECC581FD154E);
-            return ref _Handle.AsRef<float>(_PrevCycleFromDiscontinuityOffset!.Value);
+            if (_PrevCycleFromDiscontinuityOffset == -1) _PrevCycleFromDiscontinuityOffset = Schema.GetOffset(0x3EA8ECC581FD154E);
+            return ref _Handle.AsRef<float>(_PrevCycleFromDiscontinuityOffset);
         }
     }
-    private static nint? _PrevCycleForAnimEventDetectionOffset;
+    private static nint _PrevCycleForAnimEventDetectionOffset = -1;
 
     public ref float PrevCycleForAnimEventDetection
     {
         get
         {
-            _PrevCycleForAnimEventDetectionOffset = _PrevCycleForAnimEventDetectionOffset ?? Schema.GetOffset(0x3EA8ECC5B36E4559);
-            return ref _Handle.AsRef<float>(_PrevCycleForAnimEventDetectionOffset!.Value);
+            if (_PrevCycleForAnimEventDetectionOffset == -1) _PrevCycleForAnimEventDetectionOffset = Schema.GetOffset(0x3EA8ECC5B36E4559);
+            return ref _Handle.AsRef<float>(_PrevCycleForAnimEventDetectionOffset);
         }
     }
 

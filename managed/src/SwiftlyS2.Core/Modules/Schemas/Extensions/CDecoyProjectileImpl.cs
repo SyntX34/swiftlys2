@@ -2,7 +2,6 @@ using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;

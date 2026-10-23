@@ -16,19 +16,19 @@ internal partial class CCSMinimapVolumeImpl : CBaseTriggerImpl, CCSMinimapVolume
 {
     public CCSMinimapVolumeImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrMinimapNameOffset;
+    private static nint _StrMinimapNameOffset = -1;
 
     public string StrMinimapName
     {
         get
         {
-            _StrMinimapNameOffset = _StrMinimapNameOffset ?? Schema.GetOffset(0x282C61996A34881C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMinimapNameOffset!.Value));
+            if (_StrMinimapNameOffset == -1) _StrMinimapNameOffset = Schema.GetOffset(0x282C61996A34881C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrMinimapNameOffset));
         }
         set
         {
-            _StrMinimapNameOffset = _StrMinimapNameOffset ?? Schema.GetOffset(0x282C61996A34881C);
-            Schema.SetCUtlString(_Handle, _StrMinimapNameOffset!.Value, value);
+            if (_StrMinimapNameOffset == -1) _StrMinimapNameOffset = Schema.GetOffset(0x282C61996A34881C);
+            Schema.SetCUtlString(_Handle, _StrMinimapNameOffset, value);
         }
     }
 

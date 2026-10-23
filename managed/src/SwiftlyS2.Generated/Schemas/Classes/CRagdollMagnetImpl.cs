@@ -16,44 +16,44 @@ internal partial class CRagdollMagnetImpl : CPointEntityImpl, CRagdollMagnet
 {
     public CRagdollMagnetImpl(nint handle) : base(handle) { }
 
-    private static nint? _DisabledOffset;
+    private static nint _DisabledOffset = -1;
 
     public ref bool Disabled
     {
         get
         {
-            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x7C6BA43F3A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x7C6BA43F3A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x7C6BA43FA921CA53);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x7C6BA43FA921CA53);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _ForceOffset;
+    private static nint _ForceOffset = -1;
 
     public ref float Force
     {
         get
         {
-            _ForceOffset = _ForceOffset ?? Schema.GetOffset(0x7C6BA43FB9B6AFA4);
-            return ref _Handle.AsRef<float>(_ForceOffset!.Value);
+            if (_ForceOffset == -1) _ForceOffset = Schema.GetOffset(0x7C6BA43FB9B6AFA4);
+            return ref _Handle.AsRef<float>(_ForceOffset);
         }
     }
-    private static nint? _AxisOffset;
+    private static nint _AxisOffset = -1;
 
     public ref Vector Axis
     {
         get
         {
-            _AxisOffset = _AxisOffset ?? Schema.GetOffset(0x7C6BA43F2B06DE94);
-            return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+            if (_AxisOffset == -1) _AxisOffset = Schema.GetOffset(0x7C6BA43F2B06DE94);
+            return ref _Handle.AsRef<Vector>(_AxisOffset);
         }
     }
 

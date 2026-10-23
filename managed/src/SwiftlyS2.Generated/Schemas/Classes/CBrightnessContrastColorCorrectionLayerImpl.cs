@@ -16,24 +16,24 @@ internal partial class CBrightnessContrastColorCorrectionLayerImpl : CColorCorre
 {
     public CBrightnessContrastColorCorrectionLayerImpl(nint handle) : base(handle) { }
 
-    private static nint? _BrightnessOffset;
+    private static nint _BrightnessOffset = -1;
 
     public ref int Brightness
     {
         get
         {
-            _BrightnessOffset = _BrightnessOffset ?? Schema.GetOffset(0xF125833FA4C26AE6);
-            return ref _Handle.AsRef<int>(_BrightnessOffset!.Value);
+            if (_BrightnessOffset == -1) _BrightnessOffset = Schema.GetOffset(0xF125833FA4C26AE6);
+            return ref _Handle.AsRef<int>(_BrightnessOffset);
         }
     }
-    private static nint? _ContrastOffset;
+    private static nint _ContrastOffset = -1;
 
     public ref int Contrast
     {
         get
         {
-            _ContrastOffset = _ContrastOffset ?? Schema.GetOffset(0xF125833FA270DA5F);
-            return ref _Handle.AsRef<int>(_ContrastOffset!.Value);
+            if (_ContrastOffset == -1) _ContrastOffset = Schema.GetOffset(0xF125833FA270DA5F);
+            return ref _Handle.AsRef<int>(_ContrastOffset);
         }
     }
 

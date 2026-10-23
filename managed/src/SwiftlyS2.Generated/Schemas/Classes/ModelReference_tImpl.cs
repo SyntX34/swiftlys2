@@ -16,24 +16,24 @@ internal partial class ModelReference_tImpl : SchemaClass, ModelReference_t
 {
     public ModelReference_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ModelOffset;
+    private static nint _ModelOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> Model
     {
         get
         {
-            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0x72F202EC1CD79E7A);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+            if (_ModelOffset == -1) _ModelOffset = Schema.GetOffset(0x72F202EC1CD79E7A);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset);
         }
     }
-    private static nint? _RelativeProbabilityOfSpawnOffset;
+    private static nint _RelativeProbabilityOfSpawnOffset = -1;
 
     public ref float RelativeProbabilityOfSpawn
     {
         get
         {
-            _RelativeProbabilityOfSpawnOffset = _RelativeProbabilityOfSpawnOffset ?? Schema.GetOffset(0x72F202ECDBFCAD1E);
-            return ref _Handle.AsRef<float>(_RelativeProbabilityOfSpawnOffset!.Value);
+            if (_RelativeProbabilityOfSpawnOffset == -1) _RelativeProbabilityOfSpawnOffset = Schema.GetOffset(0x72F202ECDBFCAD1E);
+            return ref _Handle.AsRef<float>(_RelativeProbabilityOfSpawnOffset);
         }
     }
 

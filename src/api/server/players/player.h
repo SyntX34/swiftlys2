@@ -19,15 +19,17 @@
 #ifndef src_api_server_players_player_h
 #define src_api_server_players_player_h
 
+#include <atomic>
 #include <cstdint>
 #include <string>
 
 #include <api/engine/voicemanager/voicemanager.h>
-#include <api/utils/mutex.h>
+#include <mutex>
 
 #include <api/utils/bitvec.h>
 #include <public/bitvec.h>
 #include <public/const.h>
+#include <public/igameevents.h>
 
 #include "networkbasetypes.pb.h"
 
@@ -45,7 +47,28 @@ enum MessageType : uint8_t
 struct BlockedTransmitInfo
 {
     CBitVector<MAX_EDICTS> blockedTransmitBits;
-    QueueMutex mutex;
+    std::mutex mutex;
+    std::atomic<int> blockedCount{0};
+
+    void Block(int entityidx)
+    {
+        if (blockedTransmitBits.IsBitSet(entityidx)) return;
+        blockedTransmitBits.Set(entityidx);
+        blockedCount.fetch_add(1, std::memory_order_relaxed);
+    }
+
+    void Unblock(int entityidx)
+    {
+        if (!blockedTransmitBits.IsBitSet(entityidx)) return;
+        blockedTransmitBits.Clear(entityidx);
+        blockedCount.fetch_sub(1, std::memory_order_relaxed);
+    }
+
+    void UnblockAll()
+    {
+        blockedTransmitBits.ClearAll();
+        blockedCount.store(0, std::memory_order_relaxed);
+    }
 };
 
 class IPlayer
@@ -86,6 +109,9 @@ public:
     /** Engine Stuff **/
     virtual std::string GetIPAddress() = 0;
     virtual void Kick(const std::string& sReason, int uReason) = 0;
+    virtual void SetListeningGameEvents(CBitVector<8192>& eventIDs) = 0;
+    virtual bool IsListeningGameEvent(int eventID) = 0;
+    virtual void SendGameEvent(IGameEvent* event) = 0;
 
     /** Transmit Stuff **/
     virtual BlockedTransmitInfo& GetBlockedTransmittingBits() = 0;

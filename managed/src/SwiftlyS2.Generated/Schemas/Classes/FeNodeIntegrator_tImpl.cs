@@ -16,44 +16,44 @@ internal partial class FeNodeIntegrator_tImpl : SchemaClass, FeNodeIntegrator_t
 {
     public FeNodeIntegrator_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _PointDampingOffset;
+    private static nint _PointDampingOffset = -1;
 
     public ref float PointDamping
     {
         get
         {
-            _PointDampingOffset = _PointDampingOffset ?? Schema.GetOffset(0x64217E4215738003);
-            return ref _Handle.AsRef<float>(_PointDampingOffset!.Value);
+            if (_PointDampingOffset == -1) _PointDampingOffset = Schema.GetOffset(0x64217E4215738003);
+            return ref _Handle.AsRef<float>(_PointDampingOffset);
         }
     }
-    private static nint? _AnimationForceAttractionOffset;
+    private static nint _AnimationForceAttractionOffset = -1;
 
     public ref float AnimationForceAttraction
     {
         get
         {
-            _AnimationForceAttractionOffset = _AnimationForceAttractionOffset ?? Schema.GetOffset(0x64217E423D09A7B3);
-            return ref _Handle.AsRef<float>(_AnimationForceAttractionOffset!.Value);
+            if (_AnimationForceAttractionOffset == -1) _AnimationForceAttractionOffset = Schema.GetOffset(0x64217E423D09A7B3);
+            return ref _Handle.AsRef<float>(_AnimationForceAttractionOffset);
         }
     }
-    private static nint? _AnimationVertexAttractionOffset;
+    private static nint _AnimationVertexAttractionOffset = -1;
 
     public ref float AnimationVertexAttraction
     {
         get
         {
-            _AnimationVertexAttractionOffset = _AnimationVertexAttractionOffset ?? Schema.GetOffset(0x64217E424E9EA4DC);
-            return ref _Handle.AsRef<float>(_AnimationVertexAttractionOffset!.Value);
+            if (_AnimationVertexAttractionOffset == -1) _AnimationVertexAttractionOffset = Schema.GetOffset(0x64217E424E9EA4DC);
+            return ref _Handle.AsRef<float>(_AnimationVertexAttractionOffset);
         }
     }
-    private static nint? _GravityOffset;
+    private static nint _GravityOffset = -1;
 
     public ref float Gravity
     {
         get
         {
-            _GravityOffset = _GravityOffset ?? Schema.GetOffset(0x64217E4289B3B847);
-            return ref _Handle.AsRef<float>(_GravityOffset!.Value);
+            if (_GravityOffset == -1) _GravityOffset = Schema.GetOffset(0x64217E4289B3B847);
+            return ref _Handle.AsRef<float>(_GravityOffset);
         }
     }
 

@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "gameevents.h"
+#include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
 
@@ -26,6 +27,7 @@
 #include <api/memory/virtual/call.h>
 
 #include <public/iserver.h>
+#include <public/tier1/KeyValues.h>
 
 #include <fmt/format.h>
 
@@ -34,67 +36,38 @@ GameEventFireHandler g_fnPostEventFireHandler;
 
 IGameEventManager2* g_gameEventManager = nullptr;
 
-IVFunctionHook* g_PreworldUpdateHook = nullptr;
-void PreworldUpdateHook(void* _this, bool simulate);
-
-IVFunctionHook* g_pStartupServerEventHook = nullptr;
-void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
-
-IVFunctionHook* g_pFireEventHook = nullptr;
-bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast);
-
-void CEventManager::Initialize()
+static IGameEventManager2* ResolveGameEventManager()
 {
-    void* netserverservice = nullptr;
-    g_pS2BinLib->FindVtable("engine2", "CNetworkServerService", &netserverservice);
-
-    g_pStartupServerEventHook = g_pHooksManager->CreateVFunctionHook();
-    g_pStartupServerEventHook->SetHookFunction(netserverservice, g_pGameDataManager->GetOffsets()->Fetch("INetworkServerService::StartupServer"), reinterpret_cast<void*>(StartupServerEventHook), true);
-    g_pStartupServerEventHook->Enable();
-
     uintptr_t rawGameEventManager = (uintptr_t)(g_pGameDataManager->GetSignatures()->Fetch("CSource2Server::g_GameEventManager"));
+    if (!rawGameEventManager) return nullptr;
 
     rawGameEventManager += 3;
     rawGameEventManager += 4 + *(int*)(rawGameEventManager);
 
-    g_gameEventManager = *(IGameEventManager2**)(rawGameEventManager);
-
-    g_pFireEventHook = g_pHooksManager->CreateVFunctionHook();
-    g_pFireEventHook->SetHookFunction(g_gameEventManager, g_pGameDataManager->GetOffsets()->Fetch("IGameEventManager2::FireEvent"), reinterpret_cast<void*>(FireEventHook), false);
-    g_pFireEventHook->Enable();
-
-    void* servervtable = nullptr;
-    g_pS2BinLib->FindVtable("server", "CSource2Server", &servervtable);
-
-    g_PreworldUpdateHook = g_pHooksManager->CreateVFunctionHook();
-    g_PreworldUpdateHook->SetHookFunction(servervtable, g_pGameDataManager->GetOffsets()->Fetch("IServerGameDLL::PreWorldUpdate"), reinterpret_cast<void*>(PreworldUpdateHook), true);
-    g_PreworldUpdateHook->Enable();
-
-    QueueListener("player_spawn");
+    return *(IGameEventManager2**)(rawGameEventManager);
 }
 
-void CEventManager::Shutdown()
-{
-    if (g_pStartupServerEventHook)
-    {
-        g_pStartupServerEventHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pStartupServerEventHook);
-        g_pStartupServerEventHook = nullptr;
-    }
+void PreworldUpdateHook(void* _this, bool simulate);
+VFunctionHook g_PreworldUpdateHook(reinterpret_cast<void*>(PreworldUpdateHook), "server", "CSource2Server", "IServerGameDLL::PreWorldUpdate");
 
-    if (g_pFireEventHook)
-    {
-        g_pFireEventHook->Disable();
-        g_pHooksManager->DestroyVFunctionHook(g_pFireEventHook);
-        g_pFireEventHook = nullptr;
-    }
+void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b);
+VFunctionHook g_StartupServerEventHook(reinterpret_cast<void*>(StartupServerEventHook), "engine2", "CNetworkServerService", "INetworkServerService::StartupServer");
+
+bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast);
+VFunctionHook g_FireEventHook(reinterpret_cast<void*>(FireEventHook), []() -> void* { return ResolveGameEventManager(); }, "IGameEventManager2::FireEvent");
+
+void CEventManager::Initialize()
+{
+    g_gameEventManager = ResolveGameEventManager();
+
+    QueueListener("player_spawn");
 }
 
 extern void* g_pOnPreworldUpdateCallback;
 
 void PreworldUpdateHook(void* _this, bool simulate)
 {
-    reinterpret_cast<decltype(&PreworldUpdateHook)>(g_PreworldUpdateHook->GetOriginal())(_this, simulate);
+    reinterpret_cast<decltype(&PreworldUpdateHook)>(g_PreworldUpdateHook.GetOriginal())(_this, simulate);
 
     if (g_pOnPreworldUpdateCallback)
         reinterpret_cast<void(*)(bool)>(g_pOnPreworldUpdateCallback)(simulate);
@@ -102,7 +75,7 @@ void PreworldUpdateHook(void* _this, bool simulate)
 
 bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroadcast)
 {
-    auto originalFireEvent = reinterpret_cast<decltype(&FireEventHook)>(g_pFireEventHook->GetOriginal());
+    auto originalFireEvent = reinterpret_cast<decltype(&FireEventHook)>(g_FireEventHook.GetOriginal());
     if (!event) return originalFireEvent(_this, event, bDontBroadcast);
 
     static constexpr uint32_t k_uPlayerSpawnHash = hash_32_fnv1a_const("player_spawn");
@@ -153,27 +126,27 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
 
 void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
-    reinterpret_cast<decltype(&StartupServerEventHook)>(g_pStartupServerEventHook->GetOriginal())(_this, config, a, b);
+    reinterpret_cast<decltype(&StartupServerEventHook)>(g_StartupServerEventHook.GetOriginal())(_this, config, a, b);
     g_pGameEventManager->OnServerStartup();
 }
 
 void CEventManager::OnServerStartup()
 {
-    QueueLockGuard lock(m_mtxLock);
-    if (!g_gameEventManager || m_bListenersReady) return;
+    {
+        std::lock_guard<std::mutex> lock(m_mtxLock);
+        if (!g_gameEventManager || m_bListenersReady) return;
+        m_bListenersReady = true;
+        if (m_bDrainingListeners) return;
+        m_bDrainingListeners = true;
+    }
 
-    m_bListenersReady = true;
-
-    for (const auto& event_name : m_pendingListeners)
-        AddEngineListener(event_name);
-
-    m_pendingListeners.clear();
+    DrainEngineListeners();
 }
 
 void CEventManager::RegisterGameEventListener(std::string event_name)
 {
     {
-        QueueLockGuard lock(m_mtxRegisteredEvents);
+        std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
         m_registeredEvents.insert(hash_32_fnv1a_const(event_name.c_str()));
     }
 
@@ -182,13 +155,13 @@ void CEventManager::RegisterGameEventListener(std::string event_name)
 
 void CEventManager::UnregisterGameEventListener(std::string event_name)
 {
-    QueueLockGuard lock(m_mtxRegisteredEvents);
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
     m_registeredEvents.erase(hash_32_fnv1a_const(event_name.c_str()));
 }
 
 bool CEventManager::IsEventRegistered(uint32_t event_hash)
 {
-    QueueLockGuard lock(m_mtxRegisteredEvents);
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
     return m_registeredEvents.contains(event_hash);
 }
 
@@ -211,15 +184,71 @@ void CEventManager::FireGameEvent(IGameEvent* event) {}
 
 void CEventManager::QueueListener(const std::string& event_name)
 {
-    QueueLockGuard lock(m_mtxLock);
-    if (!m_bListenersReady)
+    bool registerImmediately = false;
     {
-        m_pendingListeners.insert(event_name);
-        return;
+        std::lock_guard<std::mutex> lock(m_mtxLock);
+        if (!m_bListenersReady || m_bDrainingListeners || !m_pendingListeners.empty())
+        {
+            m_pendingListeners.insert(event_name);
+            if (!m_bListenersReady || m_bDrainingListeners) return;
+        }
+        else
+        {
+            registerImmediately = true;
+        }
+        m_bDrainingListeners = true;
     }
 
-    AddEngineListener(event_name);
+    if (registerImmediately)
+    {
+        try
+        {
+            AddEngineListener(event_name);
+        }
+        catch (...)
+        {
+            std::lock_guard<std::mutex> lock(m_mtxLock);
+            m_bDrainingListeners = false;
+            m_pendingListeners.insert(event_name);
+            throw;
+        }
+    }
+
+    DrainEngineListeners();
 }
+
+void CEventManager::DrainEngineListeners()
+{
+    std::set<std::string> pending;
+    try
+    {
+        while (true)
+        {
+            {
+                std::lock_guard<std::mutex> lock(m_mtxLock);
+                if (m_pendingListeners.empty())
+                {
+                    m_bDrainingListeners = false;
+                    return;
+                }
+                pending.swap(m_pendingListeners);
+            }
+
+            for (const auto& event_name : pending)
+                AddEngineListener(event_name);
+            pending.clear();
+        }
+    }
+    catch (...)
+    {
+        std::lock_guard<std::mutex> lock(m_mtxLock);
+        m_pendingListeners.merge(pending);
+        m_bDrainingListeners = false;
+        throw;
+    }
+}
+
+bool bInitializedEvents = false;
 
 void CEventManager::AddEngineListener(const std::string& event_name)
 {
@@ -229,4 +258,45 @@ void CEventManager::AddEngineListener(const std::string& event_name)
         g_gameEventManager->AddListener(this, event_name.c_str(), true);
 
     g_pLogger->Debug("Game Events", fmt::format("Registered listener for event '{}'.\n", event_name));
+    if(!bInitializedEvents)
+    {
+        bInitializedEvents = true;
+        std::vector<std::string> fileNames = {"resource/mod.gameevents", "resource/core.gameevents", "resource/game.gameevents"};
+        for(const auto& file : fileNames)
+        {
+            KeyValues v("");
+            v.LoadFromFile(g_pGameFileSystem, file.c_str());
+            FOR_EACH_SUBKEY((&v), sub)
+                RegisterGameEventListenerID(sub->GetName(), g_gameEventManager->LookupEventId(sub->GetName()));
+        }
+    }
+}
+
+int CEventManager::GetGameEventListenerID(std::string event_name)
+{
+    auto& bucket = m_eventListenerIDs[std::hash<std::string>{}(event_name) % m_eventListenerIDs.size()];
+    for (auto* entry = bucket.load(std::memory_order_acquire); entry; entry = entry->next)
+        if (entry->name == event_name) return entry->id.load(std::memory_order_acquire);
+
+    return -1;
+}
+
+void CEventManager::RegisterGameEventListenerID(std::string event_name, int id)
+{
+    std::lock_guard<std::mutex> lock(m_mtxRegisteredEvents);
+    auto& bucket = m_eventListenerIDs[std::hash<std::string>{}(event_name) % m_eventListenerIDs.size()];
+    auto* head = bucket.load(std::memory_order_relaxed);
+    for (auto* entry = head; entry; entry = entry->next)
+    {
+        if (entry->name == event_name)
+        {
+            entry->id.store(id, std::memory_order_release);
+            return;
+        }
+    }
+
+    auto entry = std::make_unique<EventListenerID>(std::move(event_name), id, head);
+    auto* published = entry.get();
+    m_eventListenerIDEntries.push_back(std::move(entry));
+    bucket.store(published, std::memory_order_release);
 }

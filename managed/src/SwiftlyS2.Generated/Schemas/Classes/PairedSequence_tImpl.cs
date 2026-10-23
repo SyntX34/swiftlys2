@@ -16,36 +16,36 @@ internal partial class PairedSequence_tImpl : SchemaClass, PairedSequence_t
 {
     public PairedSequence_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _RoleOffset;
+    private static nint _RoleOffset = -1;
 
     public ref CGlobalSymbol Role
     {
         get
         {
-            _RoleOffset = _RoleOffset ?? Schema.GetOffset(0x6B47213ECF070A82);
-            return ref _Handle.AsRef<CGlobalSymbol>(_RoleOffset!.Value);
+            if (_RoleOffset == -1) _RoleOffset = Schema.GetOffset(0x6B47213ECF070A82);
+            return ref _Handle.AsRef<CGlobalSymbol>(_RoleOffset);
         }
     }
-    private static nint? _SequenceNameOffset;
+    private static nint _SequenceNameOffset = -1;
 
     public ref CGlobalSymbol SequenceName
     {
         get
         {
-            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x6B47213E7462AF30);
-            return ref _Handle.AsRef<CGlobalSymbol>(_SequenceNameOffset!.Value);
+            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x6B47213E7462AF30);
+            return ref _Handle.AsRef<CGlobalSymbol>(_SequenceNameOffset);
         }
     }
-    private static nint? _SequenceOffset;
+    private static nint _SequenceOffset = -1;
     private SchemaUntypedField? _SequenceInstance;
 
     public SchemaUntypedField Sequence
     {
         get
         {
-            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x6B47213EE0A0598E);
+            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0x6B47213EE0A0598E);
             var instance = _SequenceInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset);
             return instance;
         }
     }

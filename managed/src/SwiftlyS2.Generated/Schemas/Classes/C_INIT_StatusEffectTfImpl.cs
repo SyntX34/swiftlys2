@@ -16,204 +16,204 @@ internal partial class C_INIT_StatusEffectTfImpl : CParticleFunctionInitializerI
 {
     public C_INIT_StatusEffectTfImpl(nint handle) : base(handle) { }
 
-    private static nint? _SFXColorWarpAmountOffset;
+    private static nint _SFXColorWarpAmountOffset = -1;
 
     public ref float SFXColorWarpAmount
     {
         get
         {
-            _SFXColorWarpAmountOffset = _SFXColorWarpAmountOffset ?? Schema.GetOffset(0xAE97F2677AE5DF43);
-            return ref _Handle.AsRef<float>(_SFXColorWarpAmountOffset!.Value);
+            if (_SFXColorWarpAmountOffset == -1) _SFXColorWarpAmountOffset = Schema.GetOffset(0xAE97F2677AE5DF43);
+            return ref _Handle.AsRef<float>(_SFXColorWarpAmountOffset);
         }
     }
-    private static nint? _SFXNormalAmountOffset;
+    private static nint _SFXNormalAmountOffset = -1;
 
     public ref float SFXNormalAmount
     {
         get
         {
-            _SFXNormalAmountOffset = _SFXNormalAmountOffset ?? Schema.GetOffset(0xAE97F267ACB8EED5);
-            return ref _Handle.AsRef<float>(_SFXNormalAmountOffset!.Value);
+            if (_SFXNormalAmountOffset == -1) _SFXNormalAmountOffset = Schema.GetOffset(0xAE97F267ACB8EED5);
+            return ref _Handle.AsRef<float>(_SFXNormalAmountOffset);
         }
     }
-    private static nint? _SFXMetalnessAmountOffset;
+    private static nint _SFXMetalnessAmountOffset = -1;
 
     public ref float SFXMetalnessAmount
     {
         get
         {
-            _SFXMetalnessAmountOffset = _SFXMetalnessAmountOffset ?? Schema.GetOffset(0xAE97F26702A1BB5A);
-            return ref _Handle.AsRef<float>(_SFXMetalnessAmountOffset!.Value);
+            if (_SFXMetalnessAmountOffset == -1) _SFXMetalnessAmountOffset = Schema.GetOffset(0xAE97F26702A1BB5A);
+            return ref _Handle.AsRef<float>(_SFXMetalnessAmountOffset);
         }
     }
-    private static nint? _SFXRoughnessAmountOffset;
+    private static nint _SFXRoughnessAmountOffset = -1;
 
     public ref float SFXRoughnessAmount
     {
         get
         {
-            _SFXRoughnessAmountOffset = _SFXRoughnessAmountOffset ?? Schema.GetOffset(0xAE97F267C6E86EA4);
-            return ref _Handle.AsRef<float>(_SFXRoughnessAmountOffset!.Value);
+            if (_SFXRoughnessAmountOffset == -1) _SFXRoughnessAmountOffset = Schema.GetOffset(0xAE97F267C6E86EA4);
+            return ref _Handle.AsRef<float>(_SFXRoughnessAmountOffset);
         }
     }
-    private static nint? _SFXSelfIllumAmountOffset;
+    private static nint _SFXSelfIllumAmountOffset = -1;
 
     public ref float SFXSelfIllumAmount
     {
         get
         {
-            _SFXSelfIllumAmountOffset = _SFXSelfIllumAmountOffset ?? Schema.GetOffset(0xAE97F2677BD60AE5);
-            return ref _Handle.AsRef<float>(_SFXSelfIllumAmountOffset!.Value);
+            if (_SFXSelfIllumAmountOffset == -1) _SFXSelfIllumAmountOffset = Schema.GetOffset(0xAE97F2677BD60AE5);
+            return ref _Handle.AsRef<float>(_SFXSelfIllumAmountOffset);
         }
     }
-    private static nint? _SFXSScaleOffset;
+    private static nint _SFXSScaleOffset = -1;
 
     public ref float SFXSScale
     {
         get
         {
-            _SFXSScaleOffset = _SFXSScaleOffset ?? Schema.GetOffset(0xAE97F267CA52F1F3);
-            return ref _Handle.AsRef<float>(_SFXSScaleOffset!.Value);
+            if (_SFXSScaleOffset == -1) _SFXSScaleOffset = Schema.GetOffset(0xAE97F267CA52F1F3);
+            return ref _Handle.AsRef<float>(_SFXSScaleOffset);
         }
     }
-    private static nint? _SFXSScrollXOffset;
+    private static nint _SFXSScrollXOffset = -1;
 
     public ref float SFXSScrollX
     {
         get
         {
-            _SFXSScrollXOffset = _SFXSScrollXOffset ?? Schema.GetOffset(0xAE97F267F8557E0E);
-            return ref _Handle.AsRef<float>(_SFXSScrollXOffset!.Value);
+            if (_SFXSScrollXOffset == -1) _SFXSScrollXOffset = Schema.GetOffset(0xAE97F267F8557E0E);
+            return ref _Handle.AsRef<float>(_SFXSScrollXOffset);
         }
     }
-    private static nint? _SFXSScrollYOffset;
+    private static nint _SFXSScrollYOffset = -1;
 
     public ref float SFXSScrollY
     {
         get
         {
-            _SFXSScrollYOffset = _SFXSScrollYOffset ?? Schema.GetOffset(0xAE97F267F9557FA1);
-            return ref _Handle.AsRef<float>(_SFXSScrollYOffset!.Value);
+            if (_SFXSScrollYOffset == -1) _SFXSScrollYOffset = Schema.GetOffset(0xAE97F267F9557FA1);
+            return ref _Handle.AsRef<float>(_SFXSScrollYOffset);
         }
     }
-    private static nint? _SFXSScrollZOffset;
+    private static nint _SFXSScrollZOffset = -1;
 
     public ref float SFXSScrollZ
     {
         get
         {
-            _SFXSScrollZOffset = _SFXSScrollZOffset ?? Schema.GetOffset(0xAE97F267F6557AE8);
-            return ref _Handle.AsRef<float>(_SFXSScrollZOffset!.Value);
+            if (_SFXSScrollZOffset == -1) _SFXSScrollZOffset = Schema.GetOffset(0xAE97F267F6557AE8);
+            return ref _Handle.AsRef<float>(_SFXSScrollZOffset);
         }
     }
-    private static nint? _SFXSOffsetXOffset;
+    private static nint _SFXSOffsetXOffset = -1;
 
     public ref float SFXSOffsetX
     {
         get
         {
-            _SFXSOffsetXOffset = _SFXSOffsetXOffset ?? Schema.GetOffset(0xAE97F267FA92D3C0);
-            return ref _Handle.AsRef<float>(_SFXSOffsetXOffset!.Value);
+            if (_SFXSOffsetXOffset == -1) _SFXSOffsetXOffset = Schema.GetOffset(0xAE97F267FA92D3C0);
+            return ref _Handle.AsRef<float>(_SFXSOffsetXOffset);
         }
     }
-    private static nint? _SFXSOffsetYOffset;
+    private static nint _SFXSOffsetYOffset = -1;
 
     public ref float SFXSOffsetY
     {
         get
         {
-            _SFXSOffsetYOffset = _SFXSOffsetYOffset ?? Schema.GetOffset(0xAE97F267FB92D553);
-            return ref _Handle.AsRef<float>(_SFXSOffsetYOffset!.Value);
+            if (_SFXSOffsetYOffset == -1) _SFXSOffsetYOffset = Schema.GetOffset(0xAE97F267FB92D553);
+            return ref _Handle.AsRef<float>(_SFXSOffsetYOffset);
         }
     }
-    private static nint? _SFXSOffsetZOffset;
+    private static nint _SFXSOffsetZOffset = -1;
 
     public ref float SFXSOffsetZ
     {
         get
         {
-            _SFXSOffsetZOffset = _SFXSOffsetZOffset ?? Schema.GetOffset(0xAE97F267FC92D6E6);
-            return ref _Handle.AsRef<float>(_SFXSOffsetZOffset!.Value);
+            if (_SFXSOffsetZOffset == -1) _SFXSOffsetZOffset = Schema.GetOffset(0xAE97F267FC92D6E6);
+            return ref _Handle.AsRef<float>(_SFXSOffsetZOffset);
         }
     }
-    private static nint? _DetailComboOffset;
+    private static nint _DetailComboOffset = -1;
 
     public ref DetailCombo_t DetailCombo
     {
         get
         {
-            _DetailComboOffset = _DetailComboOffset ?? Schema.GetOffset(0xAE97F267928C6606);
-            return ref _Handle.AsRef<DetailCombo_t>(_DetailComboOffset!.Value);
+            if (_DetailComboOffset == -1) _DetailComboOffset = Schema.GetOffset(0xAE97F267928C6606);
+            return ref _Handle.AsRef<DetailCombo_t>(_DetailComboOffset);
         }
     }
-    private static nint? _SFXSDetailAmountOffset;
+    private static nint _SFXSDetailAmountOffset = -1;
 
     public ref float SFXSDetailAmount
     {
         get
         {
-            _SFXSDetailAmountOffset = _SFXSDetailAmountOffset ?? Schema.GetOffset(0xAE97F2675B8C7946);
-            return ref _Handle.AsRef<float>(_SFXSDetailAmountOffset!.Value);
+            if (_SFXSDetailAmountOffset == -1) _SFXSDetailAmountOffset = Schema.GetOffset(0xAE97F2675B8C7946);
+            return ref _Handle.AsRef<float>(_SFXSDetailAmountOffset);
         }
     }
-    private static nint? _SFXSDetailScaleOffset;
+    private static nint _SFXSDetailScaleOffset = -1;
 
     public ref float SFXSDetailScale
     {
         get
         {
-            _SFXSDetailScaleOffset = _SFXSDetailScaleOffset ?? Schema.GetOffset(0xAE97F267CC4A4840);
-            return ref _Handle.AsRef<float>(_SFXSDetailScaleOffset!.Value);
+            if (_SFXSDetailScaleOffset == -1) _SFXSDetailScaleOffset = Schema.GetOffset(0xAE97F267CC4A4840);
+            return ref _Handle.AsRef<float>(_SFXSDetailScaleOffset);
         }
     }
-    private static nint? _SFXSDetailScrollXOffset;
+    private static nint _SFXSDetailScrollXOffset = -1;
 
     public ref float SFXSDetailScrollX
     {
         get
         {
-            _SFXSDetailScrollXOffset = _SFXSDetailScrollXOffset ?? Schema.GetOffset(0xAE97F267F45EED31);
-            return ref _Handle.AsRef<float>(_SFXSDetailScrollXOffset!.Value);
+            if (_SFXSDetailScrollXOffset == -1) _SFXSDetailScrollXOffset = Schema.GetOffset(0xAE97F267F45EED31);
+            return ref _Handle.AsRef<float>(_SFXSDetailScrollXOffset);
         }
     }
-    private static nint? _SFXSDetailScrollYOffset;
+    private static nint _SFXSDetailScrollYOffset = -1;
 
     public ref float SFXSDetailScrollY
     {
         get
         {
-            _SFXSDetailScrollYOffset = _SFXSDetailScrollYOffset ?? Schema.GetOffset(0xAE97F267F35EEB9E);
-            return ref _Handle.AsRef<float>(_SFXSDetailScrollYOffset!.Value);
+            if (_SFXSDetailScrollYOffset == -1) _SFXSDetailScrollYOffset = Schema.GetOffset(0xAE97F267F35EEB9E);
+            return ref _Handle.AsRef<float>(_SFXSDetailScrollYOffset);
         }
     }
-    private static nint? _SFXSDetailScrollZOffset;
+    private static nint _SFXSDetailScrollZOffset = -1;
 
     public ref float SFXSDetailScrollZ
     {
         get
         {
-            _SFXSDetailScrollZOffset = _SFXSDetailScrollZOffset ?? Schema.GetOffset(0xAE97F267F25EEA0B);
-            return ref _Handle.AsRef<float>(_SFXSDetailScrollZOffset!.Value);
+            if (_SFXSDetailScrollZOffset == -1) _SFXSDetailScrollZOffset = Schema.GetOffset(0xAE97F267F25EEA0B);
+            return ref _Handle.AsRef<float>(_SFXSDetailScrollZOffset);
         }
     }
-    private static nint? _SFXSUseModelUVsOffset;
+    private static nint _SFXSUseModelUVsOffset = -1;
 
     public ref float SFXSUseModelUVs
     {
         get
         {
-            _SFXSUseModelUVsOffset = _SFXSUseModelUVsOffset ?? Schema.GetOffset(0xAE97F2678F106179);
-            return ref _Handle.AsRef<float>(_SFXSUseModelUVsOffset!.Value);
+            if (_SFXSUseModelUVsOffset == -1) _SFXSUseModelUVsOffset = Schema.GetOffset(0xAE97F2678F106179);
+            return ref _Handle.AsRef<float>(_SFXSUseModelUVsOffset);
         }
     }
-    private static nint? _SFXEnvMapAmountOffset;
+    private static nint _SFXEnvMapAmountOffset = -1;
 
     public ref float SFXEnvMapAmount
     {
         get
         {
-            _SFXEnvMapAmountOffset = _SFXEnvMapAmountOffset ?? Schema.GetOffset(0xAE97F267BEB362F5);
-            return ref _Handle.AsRef<float>(_SFXEnvMapAmountOffset!.Value);
+            if (_SFXEnvMapAmountOffset == -1) _SFXEnvMapAmountOffset = Schema.GetOffset(0xAE97F267BEB362F5);
+            return ref _Handle.AsRef<float>(_SFXEnvMapAmountOffset);
         }
     }
 

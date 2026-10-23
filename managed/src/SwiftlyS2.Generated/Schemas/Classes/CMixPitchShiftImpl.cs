@@ -16,54 +16,54 @@ internal partial class CMixPitchShiftImpl : CMixPropertyBaseImpl, CMixPitchShift
 {
     public CMixPitchShiftImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChannelsOffset;
+    private static nint _ChannelsOffset = -1;
 
     public ref int Channels
     {
         get
         {
-            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0xAE56A40A5A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
+            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0xAE56A40A5A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset);
         }
     }
-    private static nint? _PitchScaleOffset;
+    private static nint _PitchScaleOffset = -1;
 
     public ref float PitchScale
     {
         get
         {
-            _PitchScaleOffset = _PitchScaleOffset ?? Schema.GetOffset(0xAE56A40ABBEE57F3);
-            return ref _Handle.AsRef<float>(_PitchScaleOffset!.Value);
+            if (_PitchScaleOffset == -1) _PitchScaleOffset = Schema.GetOffset(0xAE56A40ABBEE57F3);
+            return ref _Handle.AsRef<float>(_PitchScaleOffset);
         }
     }
-    private static nint? _GrainMsOffset;
+    private static nint _GrainMsOffset = -1;
 
     public ref float GrainMs
     {
         get
         {
-            _GrainMsOffset = _GrainMsOffset ?? Schema.GetOffset(0xAE56A40A1D641186);
-            return ref _Handle.AsRef<float>(_GrainMsOffset!.Value);
+            if (_GrainMsOffset == -1) _GrainMsOffset = Schema.GetOffset(0xAE56A40A1D641186);
+            return ref _Handle.AsRef<float>(_GrainMsOffset);
         }
     }
-    private static nint? _ProcTypeOffset;
+    private static nint _ProcTypeOffset = -1;
 
     public ref int ProcType
     {
         get
         {
-            _ProcTypeOffset = _ProcTypeOffset ?? Schema.GetOffset(0xAE56A40AB256235D);
-            return ref _Handle.AsRef<int>(_ProcTypeOffset!.Value);
+            if (_ProcTypeOffset == -1) _ProcTypeOffset = Schema.GetOffset(0xAE56A40AB256235D);
+            return ref _Handle.AsRef<int>(_ProcTypeOffset);
         }
     }
-    private static nint? _QualityOffset;
+    private static nint _QualityOffset = -1;
 
     public ref int Quality
     {
         get
         {
-            _QualityOffset = _QualityOffset ?? Schema.GetOffset(0xAE56A40A60857B42);
-            return ref _Handle.AsRef<int>(_QualityOffset!.Value);
+            if (_QualityOffset == -1) _QualityOffset = Schema.GetOffset(0xAE56A40A60857B42);
+            return ref _Handle.AsRef<int>(_QualityOffset);
         }
     }
 

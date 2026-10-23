@@ -16,84 +16,84 @@ internal partial class C_OP_SetControlPointsToParticleImpl : CParticleFunctionOp
 {
     public C_OP_SetControlPointsToParticleImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChildGroupIDOffset;
+    private static nint _ChildGroupIDOffset = -1;
 
     public ref int ChildGroupID
     {
         get
         {
-            _ChildGroupIDOffset = _ChildGroupIDOffset ?? Schema.GetOffset(0x119EA308E3F3C965);
-            return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
+            if (_ChildGroupIDOffset == -1) _ChildGroupIDOffset = Schema.GetOffset(0x119EA308E3F3C965);
+            return ref _Handle.AsRef<int>(_ChildGroupIDOffset);
         }
     }
-    private static nint? _FirstControlPointOffset;
+    private static nint _FirstControlPointOffset = -1;
 
     public ref int FirstControlPoint
     {
         get
         {
-            _FirstControlPointOffset = _FirstControlPointOffset ?? Schema.GetOffset(0x119EA30872117650);
-            return ref _Handle.AsRef<int>(_FirstControlPointOffset!.Value);
+            if (_FirstControlPointOffset == -1) _FirstControlPointOffset = Schema.GetOffset(0x119EA30872117650);
+            return ref _Handle.AsRef<int>(_FirstControlPointOffset);
         }
     }
-    private static nint? _NumControlPointsOffset;
+    private static nint _NumControlPointsOffset = -1;
 
     public ref int NumControlPoints
     {
         get
         {
-            _NumControlPointsOffset = _NumControlPointsOffset ?? Schema.GetOffset(0x119EA308551EBC4F);
-            return ref _Handle.AsRef<int>(_NumControlPointsOffset!.Value);
+            if (_NumControlPointsOffset == -1) _NumControlPointsOffset = Schema.GetOffset(0x119EA308551EBC4F);
+            return ref _Handle.AsRef<int>(_NumControlPointsOffset);
         }
     }
-    private static nint? _FirstSourcePointOffset;
+    private static nint _FirstSourcePointOffset = -1;
 
     public ref int FirstSourcePoint
     {
         get
         {
-            _FirstSourcePointOffset = _FirstSourcePointOffset ?? Schema.GetOffset(0x119EA3089D7DC18E);
-            return ref _Handle.AsRef<int>(_FirstSourcePointOffset!.Value);
+            if (_FirstSourcePointOffset == -1) _FirstSourcePointOffset = Schema.GetOffset(0x119EA3089D7DC18E);
+            return ref _Handle.AsRef<int>(_FirstSourcePointOffset);
         }
     }
-    private static nint? _ReverseOffset;
+    private static nint _ReverseOffset = -1;
 
     public ref bool Reverse
     {
         get
         {
-            _ReverseOffset = _ReverseOffset ?? Schema.GetOffset(0x119EA308EA4E22E5);
-            return ref _Handle.AsRef<bool>(_ReverseOffset!.Value);
+            if (_ReverseOffset == -1) _ReverseOffset = Schema.GetOffset(0x119EA308EA4E22E5);
+            return ref _Handle.AsRef<bool>(_ReverseOffset);
         }
     }
-    private static nint? _SetOrientationOffset;
+    private static nint _SetOrientationOffset = -1;
 
     public ref bool SetOrientation
     {
         get
         {
-            _SetOrientationOffset = _SetOrientationOffset ?? Schema.GetOffset(0x119EA308E1390E37);
-            return ref _Handle.AsRef<bool>(_SetOrientationOffset!.Value);
+            if (_SetOrientationOffset == -1) _SetOrientationOffset = Schema.GetOffset(0x119EA308E1390E37);
+            return ref _Handle.AsRef<bool>(_SetOrientationOffset);
         }
     }
-    private static nint? _OrientationModeOffset;
+    private static nint _OrientationModeOffset = -1;
 
     public ref ParticleOrientationSetMode_t OrientationMode
     {
         get
         {
-            _OrientationModeOffset = _OrientationModeOffset ?? Schema.GetOffset(0x119EA308272947BA);
-            return ref _Handle.AsRef<ParticleOrientationSetMode_t>(_OrientationModeOffset!.Value);
+            if (_OrientationModeOffset == -1) _OrientationModeOffset = Schema.GetOffset(0x119EA308272947BA);
+            return ref _Handle.AsRef<ParticleOrientationSetMode_t>(_OrientationModeOffset);
         }
     }
-    private static nint? _SetParentOffset;
+    private static nint _SetParentOffset = -1;
 
     public ref ParticleParentSetMode_t SetParent
     {
         get
         {
-            _SetParentOffset = _SetParentOffset ?? Schema.GetOffset(0x119EA3082D8246B7);
-            return ref _Handle.AsRef<ParticleParentSetMode_t>(_SetParentOffset!.Value);
+            if (_SetParentOffset == -1) _SetParentOffset = Schema.GetOffset(0x119EA3082D8246B7);
+            return ref _Handle.AsRef<ParticleParentSetMode_t>(_SetParentOffset);
         }
     }
 

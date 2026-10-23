@@ -16,46 +16,46 @@ internal partial class CAudioSentenceImpl : SchemaClass, CAudioSentence
 {
     public CAudioSentenceImpl(nint handle) : base(handle) { }
 
-    private static nint? _ShouldVoiceDuckOffset;
+    private static nint _ShouldVoiceDuckOffset = -1;
 
     public ref bool ShouldVoiceDuck
     {
         get
         {
-            _ShouldVoiceDuckOffset = _ShouldVoiceDuckOffset ?? Schema.GetOffset(0x25F8D719C546CD15);
-            return ref _Handle.AsRef<bool>(_ShouldVoiceDuckOffset!.Value);
+            if (_ShouldVoiceDuckOffset == -1) _ShouldVoiceDuckOffset = Schema.GetOffset(0x25F8D719C546CD15);
+            return ref _Handle.AsRef<bool>(_ShouldVoiceDuckOffset);
         }
     }
-    private static nint? _RunTimePhonemesOffset;
+    private static nint _RunTimePhonemesOffset = -1;
 
     public ref CUtlVector<CAudioPhonemeTag> RunTimePhonemes
     {
         get
         {
-            _RunTimePhonemesOffset = _RunTimePhonemesOffset ?? Schema.GetOffset(0x25F8D719C0434838);
-            return ref _Handle.AsRef<CUtlVector<CAudioPhonemeTag>>(_RunTimePhonemesOffset!.Value);
+            if (_RunTimePhonemesOffset == -1) _RunTimePhonemesOffset = Schema.GetOffset(0x25F8D719C0434838);
+            return ref _Handle.AsRef<CUtlVector<CAudioPhonemeTag>>(_RunTimePhonemesOffset);
         }
     }
-    private static nint? _EmphasisSamplesOffset;
+    private static nint _EmphasisSamplesOffset = -1;
 
     public ref CUtlVector<CAudioEmphasisSample> EmphasisSamples
     {
         get
         {
-            _EmphasisSamplesOffset = _EmphasisSamplesOffset ?? Schema.GetOffset(0x25F8D7194EBE8F82);
-            return ref _Handle.AsRef<CUtlVector<CAudioEmphasisSample>>(_EmphasisSamplesOffset!.Value);
+            if (_EmphasisSamplesOffset == -1) _EmphasisSamplesOffset = Schema.GetOffset(0x25F8D7194EBE8F82);
+            return ref _Handle.AsRef<CUtlVector<CAudioEmphasisSample>>(_EmphasisSamplesOffset);
         }
     }
-    private static nint? _MorphDataOffset;
+    private static nint _MorphDataOffset = -1;
     private CAudioMorphDataImpl? _MorphDataInstance;
 
     public CAudioMorphData MorphData
     {
         get
         {
-            _MorphDataOffset = _MorphDataOffset ?? Schema.GetOffset(0x25F8D719A8207F65);
+            if (_MorphDataOffset == -1) _MorphDataOffset = Schema.GetOffset(0x25F8D719A8207F65);
             var instance = _MorphDataInstance ??= new CAudioMorphDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _MorphDataOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MorphDataOffset);
             return instance;
         }
     }

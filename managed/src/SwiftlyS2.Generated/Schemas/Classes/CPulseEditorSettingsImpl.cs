@@ -16,1194 +16,1194 @@ internal partial class CPulseEditorSettingsImpl : SchemaClass, CPulseEditorSetti
 {
     public CPulseEditorSettingsImpl(nint handle) : base(handle) { }
 
-    private static nint? _ColCanvasBackgroundOffset;
+    private static nint _ColCanvasBackgroundOffset = -1;
 
     public ref Color ColCanvasBackground
     {
         get
         {
-            _ColCanvasBackgroundOffset = _ColCanvasBackgroundOffset ?? Schema.GetOffset(0x9780840327EE6C85);
-            return ref _Handle.AsRef<Color>(_ColCanvasBackgroundOffset!.Value);
+            if (_ColCanvasBackgroundOffset == -1) _ColCanvasBackgroundOffset = Schema.GetOffset(0x9780840327EE6C85);
+            return ref _Handle.AsRef<Color>(_ColCanvasBackgroundOffset);
         }
     }
-    private static nint? _ColCanvasBackgroundWhenDebuggingOffset;
+    private static nint _ColCanvasBackgroundWhenDebuggingOffset = -1;
 
     public ref Color ColCanvasBackgroundWhenDebugging
     {
         get
         {
-            _ColCanvasBackgroundWhenDebuggingOffset = _ColCanvasBackgroundWhenDebuggingOffset ?? Schema.GetOffset(0x97808403696CB877);
-            return ref _Handle.AsRef<Color>(_ColCanvasBackgroundWhenDebuggingOffset!.Value);
+            if (_ColCanvasBackgroundWhenDebuggingOffset == -1) _ColCanvasBackgroundWhenDebuggingOffset = Schema.GetOffset(0x97808403696CB877);
+            return ref _Handle.AsRef<Color>(_ColCanvasBackgroundWhenDebuggingOffset);
         }
     }
-    private static nint? _ColCanvasBackgroundStaleCompileOffset;
+    private static nint _ColCanvasBackgroundStaleCompileOffset = -1;
 
     public ref Color ColCanvasBackgroundStaleCompile
     {
         get
         {
-            _ColCanvasBackgroundStaleCompileOffset = _ColCanvasBackgroundStaleCompileOffset ?? Schema.GetOffset(0x978084034A663CBF);
-            return ref _Handle.AsRef<Color>(_ColCanvasBackgroundStaleCompileOffset!.Value);
+            if (_ColCanvasBackgroundStaleCompileOffset == -1) _ColCanvasBackgroundStaleCompileOffset = Schema.GetOffset(0x978084034A663CBF);
+            return ref _Handle.AsRef<Color>(_ColCanvasBackgroundStaleCompileOffset);
         }
     }
-    private static nint? _ColCanvasBorderStaleCompileOffset;
+    private static nint _ColCanvasBorderStaleCompileOffset = -1;
 
     public ref Color ColCanvasBorderStaleCompile
     {
         get
         {
-            _ColCanvasBorderStaleCompileOffset = _ColCanvasBorderStaleCompileOffset ?? Schema.GetOffset(0x978084036AEFD27D);
-            return ref _Handle.AsRef<Color>(_ColCanvasBorderStaleCompileOffset!.Value);
+            if (_ColCanvasBorderStaleCompileOffset == -1) _ColCanvasBorderStaleCompileOffset = Schema.GetOffset(0x978084036AEFD27D);
+            return ref _Handle.AsRef<Color>(_ColCanvasBorderStaleCompileOffset);
         }
     }
-    private static nint? _ColCanvasBorderDebuggerDetachedOffset;
+    private static nint _ColCanvasBorderDebuggerDetachedOffset = -1;
 
     public ref Color ColCanvasBorderDebuggerDetached
     {
         get
         {
-            _ColCanvasBorderDebuggerDetachedOffset = _ColCanvasBorderDebuggerDetachedOffset ?? Schema.GetOffset(0x9780840345BF141E);
-            return ref _Handle.AsRef<Color>(_ColCanvasBorderDebuggerDetachedOffset!.Value);
+            if (_ColCanvasBorderDebuggerDetachedOffset == -1) _ColCanvasBorderDebuggerDetachedOffset = Schema.GetOffset(0x9780840345BF141E);
+            return ref _Handle.AsRef<Color>(_ColCanvasBorderDebuggerDetachedOffset);
         }
     }
-    private static nint? _GridSnapV2Offset;
+    private static nint _GridSnapV2Offset = -1;
 
     public ref float GridSnapV2
     {
         get
         {
-            _GridSnapV2Offset = _GridSnapV2Offset ?? Schema.GetOffset(0x978084034593C987);
-            return ref _Handle.AsRef<float>(_GridSnapV2Offset!.Value);
+            if (_GridSnapV2Offset == -1) _GridSnapV2Offset = Schema.GetOffset(0x978084034593C987);
+            return ref _Handle.AsRef<float>(_GridSnapV2Offset);
         }
     }
-    private static nint? _SnapAbsToGridOffset;
+    private static nint _SnapAbsToGridOffset = -1;
 
     public ref bool SnapAbsToGrid
     {
         get
         {
-            _SnapAbsToGridOffset = _SnapAbsToGridOffset ?? Schema.GetOffset(0x978084037D927AB6);
-            return ref _Handle.AsRef<bool>(_SnapAbsToGridOffset!.Value);
+            if (_SnapAbsToGridOffset == -1) _SnapAbsToGridOffset = Schema.GetOffset(0x978084037D927AB6);
+            return ref _Handle.AsRef<bool>(_SnapAbsToGridOffset);
         }
     }
-    private static nint? _SnapSizeToGridOffset;
+    private static nint _SnapSizeToGridOffset = -1;
 
     public ref bool SnapSizeToGrid
     {
         get
         {
-            _SnapSizeToGridOffset = _SnapSizeToGridOffset ?? Schema.GetOffset(0x97808403992563F9);
-            return ref _Handle.AsRef<bool>(_SnapSizeToGridOffset!.Value);
+            if (_SnapSizeToGridOffset == -1) _SnapSizeToGridOffset = Schema.GetOffset(0x97808403992563F9);
+            return ref _Handle.AsRef<bool>(_SnapSizeToGridOffset);
         }
     }
-    private static nint? _GridMinorPointsOffset;
+    private static nint _GridMinorPointsOffset = -1;
 
     public ref bool GridMinorPoints
     {
         get
         {
-            _GridMinorPointsOffset = _GridMinorPointsOffset ?? Schema.GetOffset(0x978084038A74288D);
-            return ref _Handle.AsRef<bool>(_GridMinorPointsOffset!.Value);
+            if (_GridMinorPointsOffset == -1) _GridMinorPointsOffset = Schema.GetOffset(0x978084038A74288D);
+            return ref _Handle.AsRef<bool>(_GridMinorPointsOffset);
         }
     }
-    private static nint? _GridMinorSpacingV2Offset;
+    private static nint _GridMinorSpacingV2Offset = -1;
 
     public ref float GridMinorSpacingV2
     {
         get
         {
-            _GridMinorSpacingV2Offset = _GridMinorSpacingV2Offset ?? Schema.GetOffset(0x9780840319A65589);
-            return ref _Handle.AsRef<float>(_GridMinorSpacingV2Offset!.Value);
+            if (_GridMinorSpacingV2Offset == -1) _GridMinorSpacingV2Offset = Schema.GetOffset(0x9780840319A65589);
+            return ref _Handle.AsRef<float>(_GridMinorSpacingV2Offset);
         }
     }
-    private static nint? _SuppressMinorGridFurtherThanOffset;
+    private static nint _SuppressMinorGridFurtherThanOffset = -1;
 
     public ref float SuppressMinorGridFurtherThan
     {
         get
         {
-            _SuppressMinorGridFurtherThanOffset = _SuppressMinorGridFurtherThanOffset ?? Schema.GetOffset(0x978084033FCF0C6E);
-            return ref _Handle.AsRef<float>(_SuppressMinorGridFurtherThanOffset!.Value);
+            if (_SuppressMinorGridFurtherThanOffset == -1) _SuppressMinorGridFurtherThanOffset = Schema.GetOffset(0x978084033FCF0C6E);
+            return ref _Handle.AsRef<float>(_SuppressMinorGridFurtherThanOffset);
         }
     }
-    private static nint? _ColGridMinorColorOffset;
+    private static nint _ColGridMinorColorOffset = -1;
 
     public ref Color ColGridMinorColor
     {
         get
         {
-            _ColGridMinorColorOffset = _ColGridMinorColorOffset ?? Schema.GetOffset(0x97808403BC085409);
-            return ref _Handle.AsRef<Color>(_ColGridMinorColorOffset!.Value);
+            if (_ColGridMinorColorOffset == -1) _ColGridMinorColorOffset = Schema.GetOffset(0x97808403BC085409);
+            return ref _Handle.AsRef<Color>(_ColGridMinorColorOffset);
         }
     }
-    private static nint? _GridMinorWidthOffset;
+    private static nint _GridMinorWidthOffset = -1;
 
     public ref float GridMinorWidth
     {
         get
         {
-            _GridMinorWidthOffset = _GridMinorWidthOffset ?? Schema.GetOffset(0x97808403CF867F10);
-            return ref _Handle.AsRef<float>(_GridMinorWidthOffset!.Value);
+            if (_GridMinorWidthOffset == -1) _GridMinorWidthOffset = Schema.GetOffset(0x97808403CF867F10);
+            return ref _Handle.AsRef<float>(_GridMinorWidthOffset);
         }
     }
-    private static nint? _GridMajorMultipleOffset;
+    private static nint _GridMajorMultipleOffset = -1;
 
     public ref int GridMajorMultiple
     {
         get
         {
-            _GridMajorMultipleOffset = _GridMajorMultipleOffset ?? Schema.GetOffset(0x978084032047FBD6);
-            return ref _Handle.AsRef<int>(_GridMajorMultipleOffset!.Value);
+            if (_GridMajorMultipleOffset == -1) _GridMajorMultipleOffset = Schema.GetOffset(0x978084032047FBD6);
+            return ref _Handle.AsRef<int>(_GridMajorMultipleOffset);
         }
     }
-    private static nint? _ColGridMajorColorOffset;
+    private static nint _ColGridMajorColorOffset = -1;
 
     public ref Color ColGridMajorColor
     {
         get
         {
-            _ColGridMajorColorOffset = _ColGridMajorColorOffset ?? Schema.GetOffset(0x978084034277353D);
-            return ref _Handle.AsRef<Color>(_ColGridMajorColorOffset!.Value);
+            if (_ColGridMajorColorOffset == -1) _ColGridMajorColorOffset = Schema.GetOffset(0x978084034277353D);
+            return ref _Handle.AsRef<Color>(_ColGridMajorColorOffset);
         }
     }
-    private static nint? _GridMajorWidthOffset;
+    private static nint _GridMajorWidthOffset = -1;
 
     public ref float GridMajorWidth
     {
         get
         {
-            _GridMajorWidthOffset = _GridMajorWidthOffset ?? Schema.GetOffset(0x97808403D4547DA4);
-            return ref _Handle.AsRef<float>(_GridMajorWidthOffset!.Value);
+            if (_GridMajorWidthOffset == -1) _GridMajorWidthOffset = Schema.GetOffset(0x97808403D4547DA4);
+            return ref _Handle.AsRef<float>(_GridMajorWidthOffset);
         }
     }
-    private static nint? _ColGridOriginColorOffset;
+    private static nint _ColGridOriginColorOffset = -1;
 
     public ref Color ColGridOriginColor
     {
         get
         {
-            _ColGridOriginColorOffset = _ColGridOriginColorOffset ?? Schema.GetOffset(0x978084039732B7E6);
-            return ref _Handle.AsRef<Color>(_ColGridOriginColorOffset!.Value);
+            if (_ColGridOriginColorOffset == -1) _ColGridOriginColorOffset = Schema.GetOffset(0x978084039732B7E6);
+            return ref _Handle.AsRef<Color>(_ColGridOriginColorOffset);
         }
     }
-    private static nint? _GridOriginWidthOffset;
+    private static nint _GridOriginWidthOffset = -1;
 
     public ref float GridOriginWidth
     {
         get
         {
-            _GridOriginWidthOffset = _GridOriginWidthOffset ?? Schema.GetOffset(0x978084032F9D5CB7);
-            return ref _Handle.AsRef<float>(_GridOriginWidthOffset!.Value);
+            if (_GridOriginWidthOffset == -1) _GridOriginWidthOffset = Schema.GetOffset(0x978084032F9D5CB7);
+            return ref _Handle.AsRef<float>(_GridOriginWidthOffset);
         }
     }
-    private static nint? _FlowTooltipBoxMarginOffset;
+    private static nint _FlowTooltipBoxMarginOffset = -1;
 
     public ref float FlowTooltipBoxMargin
     {
         get
         {
-            _FlowTooltipBoxMarginOffset = _FlowTooltipBoxMarginOffset ?? Schema.GetOffset(0x9780840311AC2C0B);
-            return ref _Handle.AsRef<float>(_FlowTooltipBoxMarginOffset!.Value);
+            if (_FlowTooltipBoxMarginOffset == -1) _FlowTooltipBoxMarginOffset = Schema.GetOffset(0x9780840311AC2C0B);
+            return ref _Handle.AsRef<float>(_FlowTooltipBoxMarginOffset);
         }
     }
-    private static nint? _FontSequencePointOffset;
+    private static nint _FontSequencePointOffset = -1;
 
     public string FontSequencePoint
     {
         get
         {
-            _FontSequencePointOffset = _FontSequencePointOffset ?? Schema.GetOffset(0x9780840390C18BB9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FontSequencePointOffset!.Value));
+            if (_FontSequencePointOffset == -1) _FontSequencePointOffset = Schema.GetOffset(0x9780840390C18BB9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FontSequencePointOffset));
         }
         set
         {
-            _FontSequencePointOffset = _FontSequencePointOffset ?? Schema.GetOffset(0x9780840390C18BB9);
-            Schema.SetCUtlString(_Handle, _FontSequencePointOffset!.Value, value);
+            if (_FontSequencePointOffset == -1) _FontSequencePointOffset = Schema.GetOffset(0x9780840390C18BB9);
+            Schema.SetCUtlString(_Handle, _FontSequencePointOffset, value);
         }
     }
-    private static nint? _SequencePointRadiusOffset;
+    private static nint _SequencePointRadiusOffset = -1;
 
     public ref float SequencePointRadius
     {
         get
         {
-            _SequencePointRadiusOffset = _SequencePointRadiusOffset ?? Schema.GetOffset(0x97808403FCCBCD5E);
-            return ref _Handle.AsRef<float>(_SequencePointRadiusOffset!.Value);
+            if (_SequencePointRadiusOffset == -1) _SequencePointRadiusOffset = Schema.GetOffset(0x97808403FCCBCD5E);
+            return ref _Handle.AsRef<float>(_SequencePointRadiusOffset);
         }
     }
-    private static nint? _SequencePointLinkWidthOffset;
+    private static nint _SequencePointLinkWidthOffset = -1;
 
     public ref float SequencePointLinkWidth
     {
         get
         {
-            _SequencePointLinkWidthOffset = _SequencePointLinkWidthOffset ?? Schema.GetOffset(0x97808403ADE78854);
-            return ref _Handle.AsRef<float>(_SequencePointLinkWidthOffset!.Value);
+            if (_SequencePointLinkWidthOffset == -1) _SequencePointLinkWidthOffset = Schema.GetOffset(0x97808403ADE78854);
+            return ref _Handle.AsRef<float>(_SequencePointLinkWidthOffset);
         }
     }
-    private static nint? _ColSequencePointFadeOverlayOffset;
+    private static nint _ColSequencePointFadeOverlayOffset = -1;
 
     public ref Color ColSequencePointFadeOverlay
     {
         get
         {
-            _ColSequencePointFadeOverlayOffset = _ColSequencePointFadeOverlayOffset ?? Schema.GetOffset(0x97808403654957FC);
-            return ref _Handle.AsRef<Color>(_ColSequencePointFadeOverlayOffset!.Value);
+            if (_ColSequencePointFadeOverlayOffset == -1) _ColSequencePointFadeOverlayOffset = Schema.GetOffset(0x97808403654957FC);
+            return ref _Handle.AsRef<Color>(_ColSequencePointFadeOverlayOffset);
         }
     }
-    private static nint? _ColSequencePointSpontaneousOffset;
+    private static nint _ColSequencePointSpontaneousOffset = -1;
 
     public ref Color ColSequencePointSpontaneous
     {
         get
         {
-            _ColSequencePointSpontaneousOffset = _ColSequencePointSpontaneousOffset ?? Schema.GetOffset(0x978084030C5B213B);
-            return ref _Handle.AsRef<Color>(_ColSequencePointSpontaneousOffset!.Value);
+            if (_ColSequencePointSpontaneousOffset == -1) _ColSequencePointSpontaneousOffset = Schema.GetOffset(0x978084030C5B213B);
+            return ref _Handle.AsRef<Color>(_ColSequencePointSpontaneousOffset);
         }
     }
-    private static nint? _ColSequencePointYieldOffset;
+    private static nint _ColSequencePointYieldOffset = -1;
 
     public ref Color ColSequencePointYield
     {
         get
         {
-            _ColSequencePointYieldOffset = _ColSequencePointYieldOffset ?? Schema.GetOffset(0x97808403ADCAD4FF);
-            return ref _Handle.AsRef<Color>(_ColSequencePointYieldOffset!.Value);
+            if (_ColSequencePointYieldOffset == -1) _ColSequencePointYieldOffset = Schema.GetOffset(0x97808403ADCAD4FF);
+            return ref _Handle.AsRef<Color>(_ColSequencePointYieldOffset);
         }
     }
-    private static nint? _ColSequencePointOffset;
+    private static nint _ColSequencePointOffset = -1;
 
     public ref Color ColSequencePoint
     {
         get
         {
-            _ColSequencePointOffset = _ColSequencePointOffset ?? Schema.GetOffset(0x97808403FD3F9912);
-            return ref _Handle.AsRef<Color>(_ColSequencePointOffset!.Value);
+            if (_ColSequencePointOffset == -1) _ColSequencePointOffset = Schema.GetOffset(0x97808403FD3F9912);
+            return ref _Handle.AsRef<Color>(_ColSequencePointOffset);
         }
     }
-    private static nint? _ColSequencePointLinkOffset;
+    private static nint _ColSequencePointLinkOffset = -1;
 
     public ref Color ColSequencePointLink
     {
         get
         {
-            _ColSequencePointLinkOffset = _ColSequencePointLinkOffset ?? Schema.GetOffset(0x97808403C15AF72A);
-            return ref _Handle.AsRef<Color>(_ColSequencePointLinkOffset!.Value);
+            if (_ColSequencePointLinkOffset == -1) _ColSequencePointLinkOffset = Schema.GetOffset(0x97808403C15AF72A);
+            return ref _Handle.AsRef<Color>(_ColSequencePointLinkOffset);
         }
     }
-    private static nint? _ColSequencePointLinkYieldOffset;
+    private static nint _ColSequencePointLinkYieldOffset = -1;
 
     public ref Color ColSequencePointLinkYield
     {
         get
         {
-            _ColSequencePointLinkYieldOffset = _ColSequencePointLinkYieldOffset ?? Schema.GetOffset(0x9780840394228217);
-            return ref _Handle.AsRef<Color>(_ColSequencePointLinkYieldOffset!.Value);
+            if (_ColSequencePointLinkYieldOffset == -1) _ColSequencePointLinkYieldOffset = Schema.GetOffset(0x9780840394228217);
+            return ref _Handle.AsRef<Color>(_ColSequencePointLinkYieldOffset);
         }
     }
-    private static nint? _ColSequencePointNameOffset;
+    private static nint _ColSequencePointNameOffset = -1;
 
     public ref Color ColSequencePointName
     {
         get
         {
-            _ColSequencePointNameOffset = _ColSequencePointNameOffset ?? Schema.GetOffset(0x97808403E3C92BF9);
-            return ref _Handle.AsRef<Color>(_ColSequencePointNameOffset!.Value);
+            if (_ColSequencePointNameOffset == -1) _ColSequencePointNameOffset = Schema.GetOffset(0x97808403E3C92BF9);
+            return ref _Handle.AsRef<Color>(_ColSequencePointNameOffset);
         }
     }
-    private static nint? _ColFlowTooltipBorderOffset;
+    private static nint _ColFlowTooltipBorderOffset = -1;
 
     public ref Color ColFlowTooltipBorder
     {
         get
         {
-            _ColFlowTooltipBorderOffset = _ColFlowTooltipBorderOffset ?? Schema.GetOffset(0x97808403DB496BF2);
-            return ref _Handle.AsRef<Color>(_ColFlowTooltipBorderOffset!.Value);
+            if (_ColFlowTooltipBorderOffset == -1) _ColFlowTooltipBorderOffset = Schema.GetOffset(0x97808403DB496BF2);
+            return ref _Handle.AsRef<Color>(_ColFlowTooltipBorderOffset);
         }
     }
-    private static nint? _ColFlowTooltipBackgroundOffset;
+    private static nint _ColFlowTooltipBackgroundOffset = -1;
 
     public ref Color ColFlowTooltipBackground
     {
         get
         {
-            _ColFlowTooltipBackgroundOffset = _ColFlowTooltipBackgroundOffset ?? Schema.GetOffset(0x978084039A2D88E8);
-            return ref _Handle.AsRef<Color>(_ColFlowTooltipBackgroundOffset!.Value);
+            if (_ColFlowTooltipBackgroundOffset == -1) _ColFlowTooltipBackgroundOffset = Schema.GetOffset(0x978084039A2D88E8);
+            return ref _Handle.AsRef<Color>(_ColFlowTooltipBackgroundOffset);
         }
     }
-    private static nint? _ColFlowTooltipForegroundOffset;
+    private static nint _ColFlowTooltipForegroundOffset = -1;
 
     public ref Color ColFlowTooltipForeground
     {
         get
         {
-            _ColFlowTooltipForegroundOffset = _ColFlowTooltipForegroundOffset ?? Schema.GetOffset(0x9780840314FACB5D);
-            return ref _Handle.AsRef<Color>(_ColFlowTooltipForegroundOffset!.Value);
+            if (_ColFlowTooltipForegroundOffset == -1) _ColFlowTooltipForegroundOffset = Schema.GetOffset(0x9780840314FACB5D);
+            return ref _Handle.AsRef<Color>(_ColFlowTooltipForegroundOffset);
         }
     }
-    private static nint? _PortDragOffCreateThresholdOffset;
+    private static nint _PortDragOffCreateThresholdOffset = -1;
 
     public ref float PortDragOffCreateThreshold
     {
         get
         {
-            _PortDragOffCreateThresholdOffset = _PortDragOffCreateThresholdOffset ?? Schema.GetOffset(0x978084034DC96E0A);
-            return ref _Handle.AsRef<float>(_PortDragOffCreateThresholdOffset!.Value);
+            if (_PortDragOffCreateThresholdOffset == -1) _PortDragOffCreateThresholdOffset = Schema.GetOffset(0x978084034DC96E0A);
+            return ref _Handle.AsRef<float>(_PortDragOffCreateThresholdOffset);
         }
     }
-    private static nint? _ColBoolOffset;
+    private static nint _ColBoolOffset = -1;
 
     public ref Color ColBool
     {
         get
         {
-            _ColBoolOffset = _ColBoolOffset ?? Schema.GetOffset(0x97808403051A5E51);
-            return ref _Handle.AsRef<Color>(_ColBoolOffset!.Value);
+            if (_ColBoolOffset == -1) _ColBoolOffset = Schema.GetOffset(0x97808403051A5E51);
+            return ref _Handle.AsRef<Color>(_ColBoolOffset);
         }
     }
-    private static nint? _ColNumberOffset;
+    private static nint _ColNumberOffset = -1;
 
     public ref Color ColNumber
     {
         get
         {
-            _ColNumberOffset = _ColNumberOffset ?? Schema.GetOffset(0x97808403FEFFD0DC);
-            return ref _Handle.AsRef<Color>(_ColNumberOffset!.Value);
+            if (_ColNumberOffset == -1) _ColNumberOffset = Schema.GetOffset(0x97808403FEFFD0DC);
+            return ref _Handle.AsRef<Color>(_ColNumberOffset);
         }
     }
-    private static nint? _ColStringOffset;
+    private static nint _ColStringOffset = -1;
 
     public ref Color ColString
     {
         get
         {
-            _ColStringOffset = _ColStringOffset ?? Schema.GetOffset(0x97808403E700CCCC);
-            return ref _Handle.AsRef<Color>(_ColStringOffset!.Value);
+            if (_ColStringOffset == -1) _ColStringOffset = Schema.GetOffset(0x97808403E700CCCC);
+            return ref _Handle.AsRef<Color>(_ColStringOffset);
         }
     }
-    private static nint? _ColOtherOffset;
+    private static nint _ColOtherOffset = -1;
 
     public ref Color ColOther
     {
         get
         {
-            _ColOtherOffset = _ColOtherOffset ?? Schema.GetOffset(0x9780840352201571);
-            return ref _Handle.AsRef<Color>(_ColOtherOffset!.Value);
+            if (_ColOtherOffset == -1) _ColOtherOffset = Schema.GetOffset(0x9780840352201571);
+            return ref _Handle.AsRef<Color>(_ColOtherOffset);
         }
     }
-    private static nint? _ColCursorFlowOffset;
+    private static nint _ColCursorFlowOffset = -1;
 
     public ref Color ColCursorFlow
     {
         get
         {
-            _ColCursorFlowOffset = _ColCursorFlowOffset ?? Schema.GetOffset(0x97808403C34AE717);
-            return ref _Handle.AsRef<Color>(_ColCursorFlowOffset!.Value);
+            if (_ColCursorFlowOffset == -1) _ColCursorFlowOffset = Schema.GetOffset(0x97808403C34AE717);
+            return ref _Handle.AsRef<Color>(_ColCursorFlowOffset);
         }
     }
-    private static nint? _FontFlowTooltipOffset;
+    private static nint _FontFlowTooltipOffset = -1;
 
     public string FontFlowTooltip
     {
         get
         {
-            _FontFlowTooltipOffset = _FontFlowTooltipOffset ?? Schema.GetOffset(0x9780840350C0B6D3);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FontFlowTooltipOffset!.Value));
+            if (_FontFlowTooltipOffset == -1) _FontFlowTooltipOffset = Schema.GetOffset(0x9780840350C0B6D3);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FontFlowTooltipOffset));
         }
         set
         {
-            _FontFlowTooltipOffset = _FontFlowTooltipOffset ?? Schema.GetOffset(0x9780840350C0B6D3);
-            Schema.SetCUtlString(_Handle, _FontFlowTooltipOffset!.Value, value);
+            if (_FontFlowTooltipOffset == -1) _FontFlowTooltipOffset = Schema.GetOffset(0x9780840350C0B6D3);
+            Schema.SetCUtlString(_Handle, _FontFlowTooltipOffset, value);
         }
     }
-    private static nint? _FontLiteralOffset;
+    private static nint _FontLiteralOffset = -1;
 
     public string FontLiteral
     {
         get
         {
-            _FontLiteralOffset = _FontLiteralOffset ?? Schema.GetOffset(0x97808403A6DC8F2F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FontLiteralOffset!.Value));
+            if (_FontLiteralOffset == -1) _FontLiteralOffset = Schema.GetOffset(0x97808403A6DC8F2F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FontLiteralOffset));
         }
         set
         {
-            _FontLiteralOffset = _FontLiteralOffset ?? Schema.GetOffset(0x97808403A6DC8F2F);
-            Schema.SetCUtlString(_Handle, _FontLiteralOffset!.Value, value);
+            if (_FontLiteralOffset == -1) _FontLiteralOffset = Schema.GetOffset(0x97808403A6DC8F2F);
+            Schema.SetCUtlString(_Handle, _FontLiteralOffset, value);
         }
     }
-    private static nint? _FontDomainNameOffset;
+    private static nint _FontDomainNameOffset = -1;
 
     public string FontDomainName
     {
         get
         {
-            _FontDomainNameOffset = _FontDomainNameOffset ?? Schema.GetOffset(0x978084035A6041F7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FontDomainNameOffset!.Value));
+            if (_FontDomainNameOffset == -1) _FontDomainNameOffset = Schema.GetOffset(0x978084035A6041F7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FontDomainNameOffset));
         }
         set
         {
-            _FontDomainNameOffset = _FontDomainNameOffset ?? Schema.GetOffset(0x978084035A6041F7);
-            Schema.SetCUtlString(_Handle, _FontDomainNameOffset!.Value, value);
+            if (_FontDomainNameOffset == -1) _FontDomainNameOffset = Schema.GetOffset(0x978084035A6041F7);
+            Schema.SetCUtlString(_Handle, _FontDomainNameOffset, value);
         }
     }
-    private static nint? _DomainNameOffsetPXOffset;
+    private static nint _DomainNameOffsetPXOffset = -1;
 
     public ref Vector2D DomainNameOffsetPX
     {
         get
         {
-            _DomainNameOffsetPXOffset = _DomainNameOffsetPXOffset ?? Schema.GetOffset(0x97808403B52267A1);
-            return ref _Handle.AsRef<Vector2D>(_DomainNameOffsetPXOffset!.Value);
+            if (_DomainNameOffsetPXOffset == -1) _DomainNameOffsetPXOffset = Schema.GetOffset(0x97808403B52267A1);
+            return ref _Handle.AsRef<Vector2D>(_DomainNameOffsetPXOffset);
         }
     }
-    private static nint? _ColDomainNameOffset;
+    private static nint _ColDomainNameOffset = -1;
 
     public ref Color ColDomainName
     {
         get
         {
-            _ColDomainNameOffset = _ColDomainNameOffset ?? Schema.GetOffset(0x9780840360EBBF4E);
-            return ref _Handle.AsRef<Color>(_ColDomainNameOffset!.Value);
+            if (_ColDomainNameOffset == -1) _ColDomainNameOffset = Schema.GetOffset(0x9780840360EBBF4E);
+            return ref _Handle.AsRef<Color>(_ColDomainNameOffset);
         }
     }
-    private static nint? _ColDomainNameWhenDebuggingOffset;
+    private static nint _ColDomainNameWhenDebuggingOffset = -1;
 
     public ref Color ColDomainNameWhenDebugging
     {
         get
         {
-            _ColDomainNameWhenDebuggingOffset = _ColDomainNameWhenDebuggingOffset ?? Schema.GetOffset(0x9780840319666936);
-            return ref _Handle.AsRef<Color>(_ColDomainNameWhenDebuggingOffset!.Value);
+            if (_ColDomainNameWhenDebuggingOffset == -1) _ColDomainNameWhenDebuggingOffset = Schema.GetOffset(0x9780840319666936);
+            return ref _Handle.AsRef<Color>(_ColDomainNameWhenDebuggingOffset);
         }
     }
-    private static nint? _FontParentAssetsOffset;
+    private static nint _FontParentAssetsOffset = -1;
 
     public string FontParentAssets
     {
         get
         {
-            _FontParentAssetsOffset = _FontParentAssetsOffset ?? Schema.GetOffset(0x978084037B6BD0C9);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FontParentAssetsOffset!.Value));
+            if (_FontParentAssetsOffset == -1) _FontParentAssetsOffset = Schema.GetOffset(0x978084037B6BD0C9);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FontParentAssetsOffset));
         }
         set
         {
-            _FontParentAssetsOffset = _FontParentAssetsOffset ?? Schema.GetOffset(0x978084037B6BD0C9);
-            Schema.SetCUtlString(_Handle, _FontParentAssetsOffset!.Value, value);
+            if (_FontParentAssetsOffset == -1) _FontParentAssetsOffset = Schema.GetOffset(0x978084037B6BD0C9);
+            Schema.SetCUtlString(_Handle, _FontParentAssetsOffset, value);
         }
     }
-    private static nint? _ColParentAssetsOffset;
+    private static nint _ColParentAssetsOffset = -1;
 
     public ref Color ColParentAssets
     {
         get
         {
-            _ColParentAssetsOffset = _ColParentAssetsOffset ?? Schema.GetOffset(0x97808403E3E2F454);
-            return ref _Handle.AsRef<Color>(_ColParentAssetsOffset!.Value);
+            if (_ColParentAssetsOffset == -1) _ColParentAssetsOffset = Schema.GetOffset(0x97808403E3E2F454);
+            return ref _Handle.AsRef<Color>(_ColParentAssetsOffset);
         }
     }
-    private static nint? _ColParentAssetsBrokenOffset;
+    private static nint _ColParentAssetsBrokenOffset = -1;
 
     public ref Color ColParentAssetsBroken
     {
         get
         {
-            _ColParentAssetsBrokenOffset = _ColParentAssetsBrokenOffset ?? Schema.GetOffset(0x978084037735FB21);
-            return ref _Handle.AsRef<Color>(_ColParentAssetsBrokenOffset!.Value);
+            if (_ColParentAssetsBrokenOffset == -1) _ColParentAssetsBrokenOffset = Schema.GetOffset(0x978084037735FB21);
+            return ref _Handle.AsRef<Color>(_ColParentAssetsBrokenOffset);
         }
     }
-    private static nint? _FontCompileStatusOffset;
+    private static nint _FontCompileStatusOffset = -1;
 
     public string FontCompileStatus
     {
         get
         {
-            _FontCompileStatusOffset = _FontCompileStatusOffset ?? Schema.GetOffset(0x97808403521B691F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FontCompileStatusOffset!.Value));
+            if (_FontCompileStatusOffset == -1) _FontCompileStatusOffset = Schema.GetOffset(0x97808403521B691F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FontCompileStatusOffset));
         }
         set
         {
-            _FontCompileStatusOffset = _FontCompileStatusOffset ?? Schema.GetOffset(0x97808403521B691F);
-            Schema.SetCUtlString(_Handle, _FontCompileStatusOffset!.Value, value);
+            if (_FontCompileStatusOffset == -1) _FontCompileStatusOffset = Schema.GetOffset(0x97808403521B691F);
+            Schema.SetCUtlString(_Handle, _FontCompileStatusOffset, value);
         }
     }
-    private static nint? _ColCompileStatusOffset;
+    private static nint _ColCompileStatusOffset = -1;
 
     public ref Color ColCompileStatus
     {
         get
         {
-            _ColCompileStatusOffset = _ColCompileStatusOffset ?? Schema.GetOffset(0x9780840359297D8C);
-            return ref _Handle.AsRef<Color>(_ColCompileStatusOffset!.Value);
+            if (_ColCompileStatusOffset == -1) _ColCompileStatusOffset = Schema.GetOffset(0x9780840359297D8C);
+            return ref _Handle.AsRef<Color>(_ColCompileStatusOffset);
         }
     }
-    private static nint? _LiteralLabelSpacingOffset;
+    private static nint _LiteralLabelSpacingOffset = -1;
 
     public ref float LiteralLabelSpacing
     {
         get
         {
-            _LiteralLabelSpacingOffset = _LiteralLabelSpacingOffset ?? Schema.GetOffset(0x9780840365C956F5);
-            return ref _Handle.AsRef<float>(_LiteralLabelSpacingOffset!.Value);
+            if (_LiteralLabelSpacingOffset == -1) _LiteralLabelSpacingOffset = Schema.GetOffset(0x9780840365C956F5);
+            return ref _Handle.AsRef<float>(_LiteralLabelSpacingOffset);
         }
     }
-    private static nint? _ColDebuggerBrokenBorderOffset;
+    private static nint _ColDebuggerBrokenBorderOffset = -1;
 
     public ref Color ColDebuggerBrokenBorder
     {
         get
         {
-            _ColDebuggerBrokenBorderOffset = _ColDebuggerBrokenBorderOffset ?? Schema.GetOffset(0x978084036C1D44BD);
-            return ref _Handle.AsRef<Color>(_ColDebuggerBrokenBorderOffset!.Value);
+            if (_ColDebuggerBrokenBorderOffset == -1) _ColDebuggerBrokenBorderOffset = Schema.GetOffset(0x978084036C1D44BD);
+            return ref _Handle.AsRef<Color>(_ColDebuggerBrokenBorderOffset);
         }
     }
-    private static nint? _DebuggerBrokenImgOffset;
+    private static nint _DebuggerBrokenImgOffset = -1;
 
     public string DebuggerBrokenImg
     {
         get
         {
-            _DebuggerBrokenImgOffset = _DebuggerBrokenImgOffset ?? Schema.GetOffset(0x97808403672F5B86);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBrokenImgOffset!.Value));
+            if (_DebuggerBrokenImgOffset == -1) _DebuggerBrokenImgOffset = Schema.GetOffset(0x97808403672F5B86);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBrokenImgOffset));
         }
         set
         {
-            _DebuggerBrokenImgOffset = _DebuggerBrokenImgOffset ?? Schema.GetOffset(0x97808403672F5B86);
-            Schema.SetCUtlString(_Handle, _DebuggerBrokenImgOffset!.Value, value);
+            if (_DebuggerBrokenImgOffset == -1) _DebuggerBrokenImgOffset = Schema.GetOffset(0x97808403672F5B86);
+            Schema.SetCUtlString(_Handle, _DebuggerBrokenImgOffset, value);
         }
     }
-    private static nint? _DebuggerBrokenOtherImgOffset;
+    private static nint _DebuggerBrokenOtherImgOffset = -1;
 
     public string DebuggerBrokenOtherImg
     {
         get
         {
-            _DebuggerBrokenOtherImgOffset = _DebuggerBrokenOtherImgOffset ?? Schema.GetOffset(0x97808403534CFADA);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBrokenOtherImgOffset!.Value));
+            if (_DebuggerBrokenOtherImgOffset == -1) _DebuggerBrokenOtherImgOffset = Schema.GetOffset(0x97808403534CFADA);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBrokenOtherImgOffset));
         }
         set
         {
-            _DebuggerBrokenOtherImgOffset = _DebuggerBrokenOtherImgOffset ?? Schema.GetOffset(0x97808403534CFADA);
-            Schema.SetCUtlString(_Handle, _DebuggerBrokenOtherImgOffset!.Value, value);
+            if (_DebuggerBrokenOtherImgOffset == -1) _DebuggerBrokenOtherImgOffset = Schema.GetOffset(0x97808403534CFADA);
+            Schema.SetCUtlString(_Handle, _DebuggerBrokenOtherImgOffset, value);
         }
     }
-    private static nint? _DebuggerBrokenStackImgOffset;
+    private static nint _DebuggerBrokenStackImgOffset = -1;
 
     public string DebuggerBrokenStackImg
     {
         get
         {
-            _DebuggerBrokenStackImgOffset = _DebuggerBrokenStackImgOffset ?? Schema.GetOffset(0x97808403FA5B37A0);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBrokenStackImgOffset!.Value));
+            if (_DebuggerBrokenStackImgOffset == -1) _DebuggerBrokenStackImgOffset = Schema.GetOffset(0x97808403FA5B37A0);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBrokenStackImgOffset));
         }
         set
         {
-            _DebuggerBrokenStackImgOffset = _DebuggerBrokenStackImgOffset ?? Schema.GetOffset(0x97808403FA5B37A0);
-            Schema.SetCUtlString(_Handle, _DebuggerBrokenStackImgOffset!.Value, value);
+            if (_DebuggerBrokenStackImgOffset == -1) _DebuggerBrokenStackImgOffset = Schema.GetOffset(0x97808403FA5B37A0);
+            Schema.SetCUtlString(_Handle, _DebuggerBrokenStackImgOffset, value);
         }
     }
-    private static nint? _DebuggerBrokenStackOtherImgOffset;
+    private static nint _DebuggerBrokenStackOtherImgOffset = -1;
 
     public string DebuggerBrokenStackOtherImg
     {
         get
         {
-            _DebuggerBrokenStackOtherImgOffset = _DebuggerBrokenStackOtherImgOffset ?? Schema.GetOffset(0x97808403B0FE92B0);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBrokenStackOtherImgOffset!.Value));
+            if (_DebuggerBrokenStackOtherImgOffset == -1) _DebuggerBrokenStackOtherImgOffset = Schema.GetOffset(0x97808403B0FE92B0);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBrokenStackOtherImgOffset));
         }
         set
         {
-            _DebuggerBrokenStackOtherImgOffset = _DebuggerBrokenStackOtherImgOffset ?? Schema.GetOffset(0x97808403B0FE92B0);
-            Schema.SetCUtlString(_Handle, _DebuggerBrokenStackOtherImgOffset!.Value, value);
+            if (_DebuggerBrokenStackOtherImgOffset == -1) _DebuggerBrokenStackOtherImgOffset = Schema.GetOffset(0x97808403B0FE92B0);
+            Schema.SetCUtlString(_Handle, _DebuggerBrokenStackOtherImgOffset, value);
         }
     }
-    private static nint? _DebuggerBrokenMarkerOffsetOffset;
+    private static nint _DebuggerBrokenMarkerOffsetOffset = -1;
 
     public ref float DebuggerBrokenMarkerOffset
     {
         get
         {
-            _DebuggerBrokenMarkerOffsetOffset = _DebuggerBrokenMarkerOffsetOffset ?? Schema.GetOffset(0x97808403867C6FE4);
-            return ref _Handle.AsRef<float>(_DebuggerBrokenMarkerOffsetOffset!.Value);
+            if (_DebuggerBrokenMarkerOffsetOffset == -1) _DebuggerBrokenMarkerOffsetOffset = Schema.GetOffset(0x97808403867C6FE4);
+            return ref _Handle.AsRef<float>(_DebuggerBrokenMarkerOffsetOffset);
         }
     }
-    private static nint? _DebuggerBrokenMarkerSizeOffset;
+    private static nint _DebuggerBrokenMarkerSizeOffset = -1;
 
     public ref float DebuggerBrokenMarkerSize
     {
         get
         {
-            _DebuggerBrokenMarkerSizeOffset = _DebuggerBrokenMarkerSizeOffset ?? Schema.GetOffset(0x9780840393AC0C76);
-            return ref _Handle.AsRef<float>(_DebuggerBrokenMarkerSizeOffset!.Value);
+            if (_DebuggerBrokenMarkerSizeOffset == -1) _DebuggerBrokenMarkerSizeOffset = Schema.GetOffset(0x9780840393AC0C76);
+            return ref _Handle.AsRef<float>(_DebuggerBrokenMarkerSizeOffset);
         }
     }
-    private static nint? _DebuggerBreakpointImgOffset;
+    private static nint _DebuggerBreakpointImgOffset = -1;
 
     public string DebuggerBreakpointImg
     {
         get
         {
-            _DebuggerBreakpointImgOffset = _DebuggerBreakpointImgOffset ?? Schema.GetOffset(0x97808403B91A3458);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBreakpointImgOffset!.Value));
+            if (_DebuggerBreakpointImgOffset == -1) _DebuggerBreakpointImgOffset = Schema.GetOffset(0x97808403B91A3458);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBreakpointImgOffset));
         }
         set
         {
-            _DebuggerBreakpointImgOffset = _DebuggerBreakpointImgOffset ?? Schema.GetOffset(0x97808403B91A3458);
-            Schema.SetCUtlString(_Handle, _DebuggerBreakpointImgOffset!.Value, value);
+            if (_DebuggerBreakpointImgOffset == -1) _DebuggerBreakpointImgOffset = Schema.GetOffset(0x97808403B91A3458);
+            Schema.SetCUtlString(_Handle, _DebuggerBreakpointImgOffset, value);
         }
     }
-    private static nint? _DebuggerBreakpointDisabledImgOffset;
+    private static nint _DebuggerBreakpointDisabledImgOffset = -1;
 
     public string DebuggerBreakpointDisabledImg
     {
         get
         {
-            _DebuggerBreakpointDisabledImgOffset = _DebuggerBreakpointDisabledImgOffset ?? Schema.GetOffset(0x97808403B21E4378);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBreakpointDisabledImgOffset!.Value));
+            if (_DebuggerBreakpointDisabledImgOffset == -1) _DebuggerBreakpointDisabledImgOffset = Schema.GetOffset(0x97808403B21E4378);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DebuggerBreakpointDisabledImgOffset));
         }
         set
         {
-            _DebuggerBreakpointDisabledImgOffset = _DebuggerBreakpointDisabledImgOffset ?? Schema.GetOffset(0x97808403B21E4378);
-            Schema.SetCUtlString(_Handle, _DebuggerBreakpointDisabledImgOffset!.Value, value);
+            if (_DebuggerBreakpointDisabledImgOffset == -1) _DebuggerBreakpointDisabledImgOffset = Schema.GetOffset(0x97808403B21E4378);
+            Schema.SetCUtlString(_Handle, _DebuggerBreakpointDisabledImgOffset, value);
         }
     }
-    private static nint? _YieldedCursorStackOffsetOffset;
+    private static nint _YieldedCursorStackOffsetOffset = -1;
 
     public ref float YieldedCursorStackOffset
     {
         get
         {
-            _YieldedCursorStackOffsetOffset = _YieldedCursorStackOffsetOffset ?? Schema.GetOffset(0x9780840373D74086);
-            return ref _Handle.AsRef<float>(_YieldedCursorStackOffsetOffset!.Value);
+            if (_YieldedCursorStackOffsetOffset == -1) _YieldedCursorStackOffsetOffset = Schema.GetOffset(0x9780840373D74086);
+            return ref _Handle.AsRef<float>(_YieldedCursorStackOffsetOffset);
         }
     }
-    private static nint? _GraphInstanceImgOffset;
+    private static nint _GraphInstanceImgOffset = -1;
 
     public string GraphInstanceImg
     {
         get
         {
-            _GraphInstanceImgOffset = _GraphInstanceImgOffset ?? Schema.GetOffset(0x978084034939407B);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_GraphInstanceImgOffset!.Value));
+            if (_GraphInstanceImgOffset == -1) _GraphInstanceImgOffset = Schema.GetOffset(0x978084034939407B);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_GraphInstanceImgOffset));
         }
         set
         {
-            _GraphInstanceImgOffset = _GraphInstanceImgOffset ?? Schema.GetOffset(0x978084034939407B);
-            Schema.SetCUtlString(_Handle, _GraphInstanceImgOffset!.Value, value);
+            if (_GraphInstanceImgOffset == -1) _GraphInstanceImgOffset = Schema.GetOffset(0x978084034939407B);
+            Schema.SetCUtlString(_Handle, _GraphInstanceImgOffset, value);
         }
     }
-    private static nint? _RecentExecTimeoutSecOffset;
+    private static nint _RecentExecTimeoutSecOffset = -1;
 
     public ref float RecentExecTimeoutSec
     {
         get
         {
-            _RecentExecTimeoutSecOffset = _RecentExecTimeoutSecOffset ?? Schema.GetOffset(0x97808403990EBB4D);
-            return ref _Handle.AsRef<float>(_RecentExecTimeoutSecOffset!.Value);
+            if (_RecentExecTimeoutSecOffset == -1) _RecentExecTimeoutSecOffset = Schema.GetOffset(0x97808403990EBB4D);
+            return ref _Handle.AsRef<float>(_RecentExecTimeoutSecOffset);
         }
     }
-    private static nint? _RecentExecStartOffsetOffset;
+    private static nint _RecentExecStartOffsetOffset = -1;
 
     public ref float RecentExecStartOffset
     {
         get
         {
-            _RecentExecStartOffsetOffset = _RecentExecStartOffsetOffset ?? Schema.GetOffset(0x9780840395DEE0D4);
-            return ref _Handle.AsRef<float>(_RecentExecStartOffsetOffset!.Value);
+            if (_RecentExecStartOffsetOffset == -1) _RecentExecStartOffsetOffset = Schema.GetOffset(0x9780840395DEE0D4);
+            return ref _Handle.AsRef<float>(_RecentExecStartOffsetOffset);
         }
     }
-    private static nint? _RecentExecEndOffsetOffset;
+    private static nint _RecentExecEndOffsetOffset = -1;
 
     public ref float RecentExecEndOffset
     {
         get
         {
-            _RecentExecEndOffsetOffset = _RecentExecEndOffsetOffset ?? Schema.GetOffset(0x97808403C7C7146D);
-            return ref _Handle.AsRef<float>(_RecentExecEndOffsetOffset!.Value);
+            if (_RecentExecEndOffsetOffset == -1) _RecentExecEndOffsetOffset = Schema.GetOffset(0x97808403C7C7146D);
+            return ref _Handle.AsRef<float>(_RecentExecEndOffsetOffset);
         }
     }
-    private static nint? _RecentExecLineWidthOffset;
+    private static nint _RecentExecLineWidthOffset = -1;
 
     public ref float RecentExecLineWidth
     {
         get
         {
-            _RecentExecLineWidthOffset = _RecentExecLineWidthOffset ?? Schema.GetOffset(0x97808403B1A36039);
-            return ref _Handle.AsRef<float>(_RecentExecLineWidthOffset!.Value);
+            if (_RecentExecLineWidthOffset == -1) _RecentExecLineWidthOffset = Schema.GetOffset(0x97808403B1A36039);
+            return ref _Handle.AsRef<float>(_RecentExecLineWidthOffset);
         }
     }
-    private static nint? _ColRecentExecStartColorOffset;
+    private static nint _ColRecentExecStartColorOffset = -1;
 
     public ref Color ColRecentExecStartColor
     {
         get
         {
-            _ColRecentExecStartColorOffset = _ColRecentExecStartColorOffset ?? Schema.GetOffset(0x9780840354B2BB70);
-            return ref _Handle.AsRef<Color>(_ColRecentExecStartColorOffset!.Value);
+            if (_ColRecentExecStartColorOffset == -1) _ColRecentExecStartColorOffset = Schema.GetOffset(0x9780840354B2BB70);
+            return ref _Handle.AsRef<Color>(_ColRecentExecStartColorOffset);
         }
     }
-    private static nint? _ColRecentExecEndColorOffset;
+    private static nint _ColRecentExecEndColorOffset = -1;
 
     public ref Color ColRecentExecEndColor
     {
         get
         {
-            _ColRecentExecEndColorOffset = _ColRecentExecEndColorOffset ?? Schema.GetOffset(0x9780840302F8026B);
-            return ref _Handle.AsRef<Color>(_ColRecentExecEndColorOffset!.Value);
+            if (_ColRecentExecEndColorOffset == -1) _ColRecentExecEndColorOffset = Schema.GetOffset(0x9780840302F8026B);
+            return ref _Handle.AsRef<Color>(_ColRecentExecEndColorOffset);
         }
     }
-    private static nint? _ColRecentExecRequirementFailStartColorOffset;
+    private static nint _ColRecentExecRequirementFailStartColorOffset = -1;
 
     public ref Color ColRecentExecRequirementFailStartColor
     {
         get
         {
-            _ColRecentExecRequirementFailStartColorOffset = _ColRecentExecRequirementFailStartColorOffset ?? Schema.GetOffset(0x97808403A5325F1D);
-            return ref _Handle.AsRef<Color>(_ColRecentExecRequirementFailStartColorOffset!.Value);
+            if (_ColRecentExecRequirementFailStartColorOffset == -1) _ColRecentExecRequirementFailStartColorOffset = Schema.GetOffset(0x97808403A5325F1D);
+            return ref _Handle.AsRef<Color>(_ColRecentExecRequirementFailStartColorOffset);
         }
     }
-    private static nint? _ColRecentExecRequirementFailEndColorOffset;
+    private static nint _ColRecentExecRequirementFailEndColorOffset = -1;
 
     public ref Color ColRecentExecRequirementFailEndColor
     {
         get
         {
-            _ColRecentExecRequirementFailEndColorOffset = _ColRecentExecRequirementFailEndColorOffset ?? Schema.GetOffset(0x9780840311FE5D6E);
-            return ref _Handle.AsRef<Color>(_ColRecentExecRequirementFailEndColorOffset!.Value);
+            if (_ColRecentExecRequirementFailEndColorOffset == -1) _ColRecentExecRequirementFailEndColorOffset = Schema.GetOffset(0x9780840311FE5D6E);
+            return ref _Handle.AsRef<Color>(_ColRecentExecRequirementFailEndColorOffset);
         }
     }
-    private static nint? _RecentExecConnectionIndicatorSizeOffset;
+    private static nint _RecentExecConnectionIndicatorSizeOffset = -1;
 
     public ref float RecentExecConnectionIndicatorSize
     {
         get
         {
-            _RecentExecConnectionIndicatorSizeOffset = _RecentExecConnectionIndicatorSizeOffset ?? Schema.GetOffset(0x9780840303F41143);
-            return ref _Handle.AsRef<float>(_RecentExecConnectionIndicatorSizeOffset!.Value);
+            if (_RecentExecConnectionIndicatorSizeOffset == -1) _RecentExecConnectionIndicatorSizeOffset = Schema.GetOffset(0x9780840303F41143);
+            return ref _Handle.AsRef<float>(_RecentExecConnectionIndicatorSizeOffset);
         }
     }
-    private static nint? _RecentExecConnectionIndicatorImgOffset;
+    private static nint _RecentExecConnectionIndicatorImgOffset = -1;
 
     public string RecentExecConnectionIndicatorImg
     {
         get
         {
-            _RecentExecConnectionIndicatorImgOffset = _RecentExecConnectionIndicatorImgOffset ?? Schema.GetOffset(0x97808403B3AB62FF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_RecentExecConnectionIndicatorImgOffset!.Value));
+            if (_RecentExecConnectionIndicatorImgOffset == -1) _RecentExecConnectionIndicatorImgOffset = Schema.GetOffset(0x97808403B3AB62FF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_RecentExecConnectionIndicatorImgOffset));
         }
         set
         {
-            _RecentExecConnectionIndicatorImgOffset = _RecentExecConnectionIndicatorImgOffset ?? Schema.GetOffset(0x97808403B3AB62FF);
-            Schema.SetCUtlString(_Handle, _RecentExecConnectionIndicatorImgOffset!.Value, value);
+            if (_RecentExecConnectionIndicatorImgOffset == -1) _RecentExecConnectionIndicatorImgOffset = Schema.GetOffset(0x97808403B3AB62FF);
+            Schema.SetCUtlString(_Handle, _RecentExecConnectionIndicatorImgOffset, value);
         }
     }
-    private static nint? _BreakOnExceptionsOffset;
+    private static nint _BreakOnExceptionsOffset = -1;
 
     public ref bool BreakOnExceptions
     {
         get
         {
-            _BreakOnExceptionsOffset = _BreakOnExceptionsOffset ?? Schema.GetOffset(0x97808403B7A7F473);
-            return ref _Handle.AsRef<bool>(_BreakOnExceptionsOffset!.Value);
+            if (_BreakOnExceptionsOffset == -1) _BreakOnExceptionsOffset = Schema.GetOffset(0x97808403B7A7F473);
+            return ref _Handle.AsRef<bool>(_BreakOnExceptionsOffset);
         }
     }
-    private static nint? _ShowExecutionHistoryOffset;
+    private static nint _ShowExecutionHistoryOffset = -1;
 
     public ref bool ShowExecutionHistory
     {
         get
         {
-            _ShowExecutionHistoryOffset = _ShowExecutionHistoryOffset ?? Schema.GetOffset(0x978084034A7034FA);
-            return ref _Handle.AsRef<bool>(_ShowExecutionHistoryOffset!.Value);
+            if (_ShowExecutionHistoryOffset == -1) _ShowExecutionHistoryOffset = Schema.GetOffset(0x978084034A7034FA);
+            return ref _Handle.AsRef<bool>(_ShowExecutionHistoryOffset);
         }
     }
-    private static nint? _BoxSelectRequiresFullyContainedOffset;
+    private static nint _BoxSelectRequiresFullyContainedOffset = -1;
 
     public ref bool BoxSelectRequiresFullyContained
     {
         get
         {
-            _BoxSelectRequiresFullyContainedOffset = _BoxSelectRequiresFullyContainedOffset ?? Schema.GetOffset(0x978084030F1A99E3);
-            return ref _Handle.AsRef<bool>(_BoxSelectRequiresFullyContainedOffset!.Value);
+            if (_BoxSelectRequiresFullyContainedOffset == -1) _BoxSelectRequiresFullyContainedOffset = Schema.GetOffset(0x978084030F1A99E3);
+            return ref _Handle.AsRef<bool>(_BoxSelectRequiresFullyContainedOffset);
         }
     }
-    private static nint? _ShowFullContextLoggingOffset;
+    private static nint _ShowFullContextLoggingOffset = -1;
 
     public ref bool ShowFullContextLogging
     {
         get
         {
-            _ShowFullContextLoggingOffset = _ShowFullContextLoggingOffset ?? Schema.GetOffset(0x978084031D189FF1);
-            return ref _Handle.AsRef<bool>(_ShowFullContextLoggingOffset!.Value);
+            if (_ShowFullContextLoggingOffset == -1) _ShowFullContextLoggingOffset = Schema.GetOffset(0x978084031D189FF1);
+            return ref _Handle.AsRef<bool>(_ShowFullContextLoggingOffset);
         }
     }
-    private static nint? _FollowCursorDuringDebugStepsOffset;
+    private static nint _FollowCursorDuringDebugStepsOffset = -1;
 
     public ref bool FollowCursorDuringDebugSteps
     {
         get
         {
-            _FollowCursorDuringDebugStepsOffset = _FollowCursorDuringDebugStepsOffset ?? Schema.GetOffset(0x9780840358B95CF9);
-            return ref _Handle.AsRef<bool>(_FollowCursorDuringDebugStepsOffset!.Value);
+            if (_FollowCursorDuringDebugStepsOffset == -1) _FollowCursorDuringDebugStepsOffset = Schema.GetOffset(0x9780840358B95CF9);
+            return ref _Handle.AsRef<bool>(_FollowCursorDuringDebugStepsOffset);
         }
     }
-    private static nint? _FlowMinWidthOffset;
+    private static nint _FlowMinWidthOffset = -1;
 
     public ref float FlowMinWidth
     {
         get
         {
-            _FlowMinWidthOffset = _FlowMinWidthOffset ?? Schema.GetOffset(0x97808403B1E3CC67);
-            return ref _Handle.AsRef<float>(_FlowMinWidthOffset!.Value);
+            if (_FlowMinWidthOffset == -1) _FlowMinWidthOffset = Schema.GetOffset(0x97808403B1E3CC67);
+            return ref _Handle.AsRef<float>(_FlowMinWidthOffset);
         }
     }
-    private static nint? _ColSelectedBorderOffset;
+    private static nint _ColSelectedBorderOffset = -1;
 
     public ref Color ColSelectedBorder
     {
         get
         {
-            _ColSelectedBorderOffset = _ColSelectedBorderOffset ?? Schema.GetOffset(0x978084037361FFFE);
-            return ref _Handle.AsRef<Color>(_ColSelectedBorderOffset!.Value);
+            if (_ColSelectedBorderOffset == -1) _ColSelectedBorderOffset = Schema.GetOffset(0x978084037361FFFE);
+            return ref _Handle.AsRef<Color>(_ColSelectedBorderOffset);
         }
     }
-    private static nint? _AppendButtonSizeOffset;
+    private static nint _AppendButtonSizeOffset = -1;
 
     public ref float AppendButtonSize
     {
         get
         {
-            _AppendButtonSizeOffset = _AppendButtonSizeOffset ?? Schema.GetOffset(0x97808403E2C0024E);
-            return ref _Handle.AsRef<float>(_AppendButtonSizeOffset!.Value);
+            if (_AppendButtonSizeOffset == -1) _AppendButtonSizeOffset = Schema.GetOffset(0x97808403E2C0024E);
+            return ref _Handle.AsRef<float>(_AppendButtonSizeOffset);
         }
     }
-    private static nint? _ColAppendHoverOffset;
+    private static nint _ColAppendHoverOffset = -1;
 
     public ref Color ColAppendHover
     {
         get
         {
-            _ColAppendHoverOffset = _ColAppendHoverOffset ?? Schema.GetOffset(0x97808403EA6BE33D);
-            return ref _Handle.AsRef<Color>(_ColAppendHoverOffset!.Value);
+            if (_ColAppendHoverOffset == -1) _ColAppendHoverOffset = Schema.GetOffset(0x97808403EA6BE33D);
+            return ref _Handle.AsRef<Color>(_ColAppendHoverOffset);
         }
     }
-    private static nint? _AppendImgOffset;
+    private static nint _AppendImgOffset = -1;
 
     public string AppendImg
     {
         get
         {
-            _AppendImgOffset = _AppendImgOffset ?? Schema.GetOffset(0x978084038B678238);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_AppendImgOffset!.Value));
+            if (_AppendImgOffset == -1) _AppendImgOffset = Schema.GetOffset(0x978084038B678238);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_AppendImgOffset));
         }
         set
         {
-            _AppendImgOffset = _AppendImgOffset ?? Schema.GetOffset(0x978084038B678238);
-            Schema.SetCUtlString(_Handle, _AppendImgOffset!.Value, value);
+            if (_AppendImgOffset == -1) _AppendImgOffset = Schema.GetOffset(0x978084038B678238);
+            Schema.SetCUtlString(_Handle, _AppendImgOffset, value);
         }
     }
-    private static nint? _MoveChildArrowOffsetOffset;
+    private static nint _MoveChildArrowOffsetOffset = -1;
 
     public ref float MoveChildArrowOffset
     {
         get
         {
-            _MoveChildArrowOffsetOffset = _MoveChildArrowOffsetOffset ?? Schema.GetOffset(0x978084034CC203CA);
-            return ref _Handle.AsRef<float>(_MoveChildArrowOffsetOffset!.Value);
+            if (_MoveChildArrowOffsetOffset == -1) _MoveChildArrowOffsetOffset = Schema.GetOffset(0x978084034CC203CA);
+            return ref _Handle.AsRef<float>(_MoveChildArrowOffsetOffset);
         }
     }
-    private static nint? _MoveChildArrowSizeOffset;
+    private static nint _MoveChildArrowSizeOffset = -1;
 
     public ref float MoveChildArrowSize
     {
         get
         {
-            _MoveChildArrowSizeOffset = _MoveChildArrowSizeOffset ?? Schema.GetOffset(0x97808403A4CA895C);
-            return ref _Handle.AsRef<float>(_MoveChildArrowSizeOffset!.Value);
+            if (_MoveChildArrowSizeOffset == -1) _MoveChildArrowSizeOffset = Schema.GetOffset(0x97808403A4CA895C);
+            return ref _Handle.AsRef<float>(_MoveChildArrowSizeOffset);
         }
     }
-    private static nint? _MoveChildArrowImgOffset;
+    private static nint _MoveChildArrowImgOffset = -1;
 
     public string MoveChildArrowImg
     {
         get
         {
-            _MoveChildArrowImgOffset = _MoveChildArrowImgOffset ?? Schema.GetOffset(0x978084033F16F8FE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_MoveChildArrowImgOffset!.Value));
+            if (_MoveChildArrowImgOffset == -1) _MoveChildArrowImgOffset = Schema.GetOffset(0x978084033F16F8FE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_MoveChildArrowImgOffset));
         }
         set
         {
-            _MoveChildArrowImgOffset = _MoveChildArrowImgOffset ?? Schema.GetOffset(0x978084033F16F8FE);
-            Schema.SetCUtlString(_Handle, _MoveChildArrowImgOffset!.Value, value);
+            if (_MoveChildArrowImgOffset == -1) _MoveChildArrowImgOffset = Schema.GetOffset(0x978084033F16F8FE);
+            Schema.SetCUtlString(_Handle, _MoveChildArrowImgOffset, value);
         }
     }
-    private static nint? _ColMoveChildArrowOffset;
+    private static nint _ColMoveChildArrowOffset = -1;
 
     public ref Color ColMoveChildArrow
     {
         get
         {
-            _ColMoveChildArrowOffset = _ColMoveChildArrowOffset ?? Schema.GetOffset(0x9780840313BD5F4B);
-            return ref _Handle.AsRef<Color>(_ColMoveChildArrowOffset!.Value);
+            if (_ColMoveChildArrowOffset == -1) _ColMoveChildArrowOffset = Schema.GetOffset(0x9780840313BD5F4B);
+            return ref _Handle.AsRef<Color>(_ColMoveChildArrowOffset);
         }
     }
-    private static nint? _ConnectionTangentStrengthOffset;
+    private static nint _ConnectionTangentStrengthOffset = -1;
 
     public ref float ConnectionTangentStrength
     {
         get
         {
-            _ConnectionTangentStrengthOffset = _ConnectionTangentStrengthOffset ?? Schema.GetOffset(0x978084038320B545);
-            return ref _Handle.AsRef<float>(_ConnectionTangentStrengthOffset!.Value);
+            if (_ConnectionTangentStrengthOffset == -1) _ConnectionTangentStrengthOffset = Schema.GetOffset(0x978084038320B545);
+            return ref _Handle.AsRef<float>(_ConnectionTangentStrengthOffset);
         }
     }
-    private static nint? _ConnectionCurveSpacingOffset;
+    private static nint _ConnectionCurveSpacingOffset = -1;
 
     public ref float ConnectionCurveSpacing
     {
         get
         {
-            _ConnectionCurveSpacingOffset = _ConnectionCurveSpacingOffset ?? Schema.GetOffset(0x978084036A0B531B);
-            return ref _Handle.AsRef<float>(_ConnectionCurveSpacingOffset!.Value);
+            if (_ConnectionCurveSpacingOffset == -1) _ConnectionCurveSpacingOffset = Schema.GetOffset(0x978084036A0B531B);
+            return ref _Handle.AsRef<float>(_ConnectionCurveSpacingOffset);
         }
     }
-    private static nint? _ConnectionDeltaLimitScaleOffset;
+    private static nint _ConnectionDeltaLimitScaleOffset = -1;
 
     public ref float ConnectionDeltaLimitScale
     {
         get
         {
-            _ConnectionDeltaLimitScaleOffset = _ConnectionDeltaLimitScaleOffset ?? Schema.GetOffset(0x978084035C008A10);
-            return ref _Handle.AsRef<float>(_ConnectionDeltaLimitScaleOffset!.Value);
+            if (_ConnectionDeltaLimitScaleOffset == -1) _ConnectionDeltaLimitScaleOffset = Schema.GetOffset(0x978084035C008A10);
+            return ref _Handle.AsRef<float>(_ConnectionDeltaLimitScaleOffset);
         }
     }
-    private static nint? _BrokenConnectionOffsetOffset;
+    private static nint _BrokenConnectionOffsetOffset = -1;
 
     public ref float BrokenConnectionOffset
     {
         get
         {
-            _BrokenConnectionOffsetOffset = _BrokenConnectionOffsetOffset ?? Schema.GetOffset(0x978084032AD86565);
-            return ref _Handle.AsRef<float>(_BrokenConnectionOffsetOffset!.Value);
+            if (_BrokenConnectionOffsetOffset == -1) _BrokenConnectionOffsetOffset = Schema.GetOffset(0x978084032AD86565);
+            return ref _Handle.AsRef<float>(_BrokenConnectionOffsetOffset);
         }
     }
-    private static nint? _ConnectionInflowOffsetOffset;
+    private static nint _ConnectionInflowOffsetOffset = -1;
 
     public ref float ConnectionInflowOffset
     {
         get
         {
-            _ConnectionInflowOffsetOffset = _ConnectionInflowOffsetOffset ?? Schema.GetOffset(0x978084030028CABF);
-            return ref _Handle.AsRef<float>(_ConnectionInflowOffsetOffset!.Value);
+            if (_ConnectionInflowOffsetOffset == -1) _ConnectionInflowOffsetOffset = Schema.GetOffset(0x978084030028CABF);
+            return ref _Handle.AsRef<float>(_ConnectionInflowOffsetOffset);
         }
     }
-    private static nint? _ConnectionInparamOffsetOffset;
+    private static nint _ConnectionInparamOffsetOffset = -1;
 
     public ref float ConnectionInparamOffset
     {
         get
         {
-            _ConnectionInparamOffsetOffset = _ConnectionInparamOffsetOffset ?? Schema.GetOffset(0x9780840365E78C62);
-            return ref _Handle.AsRef<float>(_ConnectionInparamOffsetOffset!.Value);
+            if (_ConnectionInparamOffsetOffset == -1) _ConnectionInparamOffsetOffset = Schema.GetOffset(0x9780840365E78C62);
+            return ref _Handle.AsRef<float>(_ConnectionInparamOffsetOffset);
         }
     }
-    private static nint? _ConnectionInparamOffsetArrayOffset;
+    private static nint _ConnectionInparamOffsetArrayOffset = -1;
 
     public ref float ConnectionInparamOffsetArray
     {
         get
         {
-            _ConnectionInparamOffsetArrayOffset = _ConnectionInparamOffsetArrayOffset ?? Schema.GetOffset(0x978084037E6B14E3);
-            return ref _Handle.AsRef<float>(_ConnectionInparamOffsetArrayOffset!.Value);
+            if (_ConnectionInparamOffsetArrayOffset == -1) _ConnectionInparamOffsetArrayOffset = Schema.GetOffset(0x978084037E6B14E3);
+            return ref _Handle.AsRef<float>(_ConnectionInparamOffsetArrayOffset);
         }
     }
-    private static nint? _ConnectionCapBrokenSizeOffset;
+    private static nint _ConnectionCapBrokenSizeOffset = -1;
 
     public ref float ConnectionCapBrokenSize
     {
         get
         {
-            _ConnectionCapBrokenSizeOffset = _ConnectionCapBrokenSizeOffset ?? Schema.GetOffset(0x978084037ECCBD91);
-            return ref _Handle.AsRef<float>(_ConnectionCapBrokenSizeOffset!.Value);
+            if (_ConnectionCapBrokenSizeOffset == -1) _ConnectionCapBrokenSizeOffset = Schema.GetOffset(0x978084037ECCBD91);
+            return ref _Handle.AsRef<float>(_ConnectionCapBrokenSizeOffset);
         }
     }
-    private static nint? _ConnectionCapBrokenImgOffset;
+    private static nint _ConnectionCapBrokenImgOffset = -1;
 
     public string ConnectionCapBrokenImg
     {
         get
         {
-            _ConnectionCapBrokenImgOffset = _ConnectionCapBrokenImgOffset ?? Schema.GetOffset(0x978084037B7D1A1D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ConnectionCapBrokenImgOffset!.Value));
+            if (_ConnectionCapBrokenImgOffset == -1) _ConnectionCapBrokenImgOffset = Schema.GetOffset(0x978084037B7D1A1D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ConnectionCapBrokenImgOffset));
         }
         set
         {
-            _ConnectionCapBrokenImgOffset = _ConnectionCapBrokenImgOffset ?? Schema.GetOffset(0x978084037B7D1A1D);
-            Schema.SetCUtlString(_Handle, _ConnectionCapBrokenImgOffset!.Value, value);
+            if (_ConnectionCapBrokenImgOffset == -1) _ConnectionCapBrokenImgOffset = Schema.GetOffset(0x978084037B7D1A1D);
+            Schema.SetCUtlString(_Handle, _ConnectionCapBrokenImgOffset, value);
         }
     }
-    private static nint? _ConnectionColorLerpPercentageStartOffset;
+    private static nint _ConnectionColorLerpPercentageStartOffset = -1;
 
     public ref float ConnectionColorLerpPercentageStart
     {
         get
         {
-            _ConnectionColorLerpPercentageStartOffset = _ConnectionColorLerpPercentageStartOffset ?? Schema.GetOffset(0x97808403F66271F1);
-            return ref _Handle.AsRef<float>(_ConnectionColorLerpPercentageStartOffset!.Value);
+            if (_ConnectionColorLerpPercentageStartOffset == -1) _ConnectionColorLerpPercentageStartOffset = Schema.GetOffset(0x97808403F66271F1);
+            return ref _Handle.AsRef<float>(_ConnectionColorLerpPercentageStartOffset);
         }
     }
-    private static nint? _BlockCommentDefaultSizeOffset;
+    private static nint _BlockCommentDefaultSizeOffset = -1;
 
     public ref Vector2D BlockCommentDefaultSize
     {
         get
         {
-            _BlockCommentDefaultSizeOffset = _BlockCommentDefaultSizeOffset ?? Schema.GetOffset(0x9780840307524E39);
-            return ref _Handle.AsRef<Vector2D>(_BlockCommentDefaultSizeOffset!.Value);
+            if (_BlockCommentDefaultSizeOffset == -1) _BlockCommentDefaultSizeOffset = Schema.GetOffset(0x9780840307524E39);
+            return ref _Handle.AsRef<Vector2D>(_BlockCommentDefaultSizeOffset);
         }
     }
-    private static nint? _BlockCommentMinSizeOffset;
+    private static nint _BlockCommentMinSizeOffset = -1;
 
     public ref Vector2D BlockCommentMinSize
     {
         get
         {
-            _BlockCommentMinSizeOffset = _BlockCommentMinSizeOffset ?? Schema.GetOffset(0x978084036ADF76A8);
-            return ref _Handle.AsRef<Vector2D>(_BlockCommentMinSizeOffset!.Value);
+            if (_BlockCommentMinSizeOffset == -1) _BlockCommentMinSizeOffset = Schema.GetOffset(0x978084036ADF76A8);
+            return ref _Handle.AsRef<Vector2D>(_BlockCommentMinSizeOffset);
         }
     }
-    private static nint? _ColBlockCommentDefaultOffset;
+    private static nint _ColBlockCommentDefaultOffset = -1;
 
     public ref Color ColBlockCommentDefault
     {
         get
         {
-            _ColBlockCommentDefaultOffset = _ColBlockCommentDefaultOffset ?? Schema.GetOffset(0x978084036A92F07C);
-            return ref _Handle.AsRef<Color>(_ColBlockCommentDefaultOffset!.Value);
+            if (_ColBlockCommentDefaultOffset == -1) _ColBlockCommentDefaultOffset = Schema.GetOffset(0x978084036A92F07C);
+            return ref _Handle.AsRef<Color>(_ColBlockCommentDefaultOffset);
         }
     }
-    private static nint? _ColBlockCommentTextLightOffset;
+    private static nint _ColBlockCommentTextLightOffset = -1;
 
     public ref Color ColBlockCommentTextLight
     {
         get
         {
-            _ColBlockCommentTextLightOffset = _ColBlockCommentTextLightOffset ?? Schema.GetOffset(0x97808403438E2D20);
-            return ref _Handle.AsRef<Color>(_ColBlockCommentTextLightOffset!.Value);
+            if (_ColBlockCommentTextLightOffset == -1) _ColBlockCommentTextLightOffset = Schema.GetOffset(0x97808403438E2D20);
+            return ref _Handle.AsRef<Color>(_ColBlockCommentTextLightOffset);
         }
     }
-    private static nint? _ColBlockCommentTextDarkOffset;
+    private static nint _ColBlockCommentTextDarkOffset = -1;
 
     public ref Color ColBlockCommentTextDark
     {
         get
         {
-            _ColBlockCommentTextDarkOffset = _ColBlockCommentTextDarkOffset ?? Schema.GetOffset(0x97808403DCE58B70);
-            return ref _Handle.AsRef<Color>(_ColBlockCommentTextDarkOffset!.Value);
+            if (_ColBlockCommentTextDarkOffset == -1) _ColBlockCommentTextDarkOffset = Schema.GetOffset(0x97808403DCE58B70);
+            return ref _Handle.AsRef<Color>(_ColBlockCommentTextDarkOffset);
         }
     }
-    private static nint? _BlockCommentRegionAlphaOffset;
+    private static nint _BlockCommentRegionAlphaOffset = -1;
 
     public ref float BlockCommentRegionAlpha
     {
         get
         {
-            _BlockCommentRegionAlphaOffset = _BlockCommentRegionAlphaOffset ?? Schema.GetOffset(0x978084038E9D5273);
-            return ref _Handle.AsRef<float>(_BlockCommentRegionAlphaOffset!.Value);
+            if (_BlockCommentRegionAlphaOffset == -1) _BlockCommentRegionAlphaOffset = Schema.GetOffset(0x978084038E9D5273);
+            return ref _Handle.AsRef<float>(_BlockCommentRegionAlphaOffset);
         }
     }
-    private static nint? _TimelineSeekBarHeightOffset;
+    private static nint _TimelineSeekBarHeightOffset = -1;
 
     public ref float TimelineSeekBarHeight
     {
         get
         {
-            _TimelineSeekBarHeightOffset = _TimelineSeekBarHeightOffset ?? Schema.GetOffset(0x97808403D02283DE);
-            return ref _Handle.AsRef<float>(_TimelineSeekBarHeightOffset!.Value);
+            if (_TimelineSeekBarHeightOffset == -1) _TimelineSeekBarHeightOffset = Schema.GetOffset(0x97808403D02283DE);
+            return ref _Handle.AsRef<float>(_TimelineSeekBarHeightOffset);
         }
     }
-    private static nint? _TimelinePauseIconSizeOffset;
+    private static nint _TimelinePauseIconSizeOffset = -1;
 
     public ref float TimelinePauseIconSize
     {
         get
         {
-            _TimelinePauseIconSizeOffset = _TimelinePauseIconSizeOffset ?? Schema.GetOffset(0x9780840366F6DBDA);
-            return ref _Handle.AsRef<float>(_TimelinePauseIconSizeOffset!.Value);
+            if (_TimelinePauseIconSizeOffset == -1) _TimelinePauseIconSizeOffset = Schema.GetOffset(0x9780840366F6DBDA);
+            return ref _Handle.AsRef<float>(_TimelinePauseIconSizeOffset);
         }
     }
-    private static nint? _TimelineCallModeIconSizeOffset;
+    private static nint _TimelineCallModeIconSizeOffset = -1;
 
     public ref float TimelineCallModeIconSize
     {
         get
         {
-            _TimelineCallModeIconSizeOffset = _TimelineCallModeIconSizeOffset ?? Schema.GetOffset(0x9780840384170FD7);
-            return ref _Handle.AsRef<float>(_TimelineCallModeIconSizeOffset!.Value);
+            if (_TimelineCallModeIconSizeOffset == -1) _TimelineCallModeIconSizeOffset = Schema.GetOffset(0x9780840384170FD7);
+            return ref _Handle.AsRef<float>(_TimelineCallModeIconSizeOffset);
         }
     }
-    private static nint? _FontTimelineTimeOffset;
+    private static nint _FontTimelineTimeOffset = -1;
 
     public string FontTimelineTime
     {
         get
         {
-            _FontTimelineTimeOffset = _FontTimelineTimeOffset ?? Schema.GetOffset(0x978084033A2982AA);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FontTimelineTimeOffset!.Value));
+            if (_FontTimelineTimeOffset == -1) _FontTimelineTimeOffset = Schema.GetOffset(0x978084033A2982AA);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FontTimelineTimeOffset));
         }
         set
         {
-            _FontTimelineTimeOffset = _FontTimelineTimeOffset ?? Schema.GetOffset(0x978084033A2982AA);
-            Schema.SetCUtlString(_Handle, _FontTimelineTimeOffset!.Value, value);
+            if (_FontTimelineTimeOffset == -1) _FontTimelineTimeOffset = Schema.GetOffset(0x978084033A2982AA);
+            Schema.SetCUtlString(_Handle, _FontTimelineTimeOffset, value);
         }
     }
-    private static nint? _ColTimelineLabelOffset;
+    private static nint _ColTimelineLabelOffset = -1;
 
     public ref Color ColTimelineLabel
     {
         get
         {
-            _ColTimelineLabelOffset = _ColTimelineLabelOffset ?? Schema.GetOffset(0x97808403048801E8);
-            return ref _Handle.AsRef<Color>(_ColTimelineLabelOffset!.Value);
+            if (_ColTimelineLabelOffset == -1) _ColTimelineLabelOffset = Schema.GetOffset(0x97808403048801E8);
+            return ref _Handle.AsRef<Color>(_ColTimelineLabelOffset);
         }
     }
-    private static nint? _TimelineIconFromPortOffset;
+    private static nint _TimelineIconFromPortOffset = -1;
 
     public ref Vector2D TimelineIconFromPort
     {
         get
         {
-            _TimelineIconFromPortOffset = _TimelineIconFromPortOffset ?? Schema.GetOffset(0x97808403C0B8F868);
-            return ref _Handle.AsRef<Vector2D>(_TimelineIconFromPortOffset!.Value);
+            if (_TimelineIconFromPortOffset == -1) _TimelineIconFromPortOffset = Schema.GetOffset(0x97808403C0B8F868);
+            return ref _Handle.AsRef<Vector2D>(_TimelineIconFromPortOffset);
         }
     }
-    private static nint? _TimelinePauseIconOffsetOffset;
+    private static nint _TimelinePauseIconOffsetOffset = -1;
 
     public ref Vector2D TimelinePauseIconOffset
     {
         get
         {
-            _TimelinePauseIconOffsetOffset = _TimelinePauseIconOffsetOffset ?? Schema.GetOffset(0x978084033E1AE4BE);
-            return ref _Handle.AsRef<Vector2D>(_TimelinePauseIconOffsetOffset!.Value);
+            if (_TimelinePauseIconOffsetOffset == -1) _TimelinePauseIconOffsetOffset = Schema.GetOffset(0x978084033E1AE4BE);
+            return ref _Handle.AsRef<Vector2D>(_TimelinePauseIconOffsetOffset);
         }
     }
-    private static nint? _TimelineCursorHeightOffset;
+    private static nint _TimelineCursorHeightOffset = -1;
 
     public ref float TimelineCursorHeight
     {
         get
         {
-            _TimelineCursorHeightOffset = _TimelineCursorHeightOffset ?? Schema.GetOffset(0x9780840325D79C0D);
-            return ref _Handle.AsRef<float>(_TimelineCursorHeightOffset!.Value);
+            if (_TimelineCursorHeightOffset == -1) _TimelineCursorHeightOffset = Schema.GetOffset(0x9780840325D79C0D);
+            return ref _Handle.AsRef<float>(_TimelineCursorHeightOffset);
         }
     }
-    private static nint? _TimelineCursorTextHeightOffset;
+    private static nint _TimelineCursorTextHeightOffset = -1;
 
     public ref float TimelineCursorTextHeight
     {
         get
         {
-            _TimelineCursorTextHeightOffset = _TimelineCursorTextHeightOffset ?? Schema.GetOffset(0x97808403EB767B52);
-            return ref _Handle.AsRef<float>(_TimelineCursorTextHeightOffset!.Value);
+            if (_TimelineCursorTextHeightOffset == -1) _TimelineCursorTextHeightOffset = Schema.GetOffset(0x97808403EB767B52);
+            return ref _Handle.AsRef<float>(_TimelineCursorTextHeightOffset);
         }
     }
 

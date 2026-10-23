@@ -16,134 +16,134 @@ internal partial class CTimerEntityImpl : CLogicalEntityImpl, CTimerEntity
 {
     public CTimerEntityImpl(nint handle) : base(handle) { }
 
-    private static nint? _OnTimerOffset;
+    private static nint _OnTimerOffset = -1;
 
     public ref CEntityIOOutput OnTimer
     {
         get
         {
-            _OnTimerOffset = _OnTimerOffset ?? Schema.GetOffset(0xE96486ECF7551DA1);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimerOffset!.Value);
+            if (_OnTimerOffset == -1) _OnTimerOffset = Schema.GetOffset(0xE96486ECF7551DA1);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimerOffset);
         }
     }
-    private static nint? _OnTimerHighOffset;
+    private static nint _OnTimerHighOffset = -1;
 
     public ref CEntityIOOutput OnTimerHigh
     {
         get
         {
-            _OnTimerHighOffset = _OnTimerHighOffset ?? Schema.GetOffset(0xE96486ECEAFE5EC1);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimerHighOffset!.Value);
+            if (_OnTimerHighOffset == -1) _OnTimerHighOffset = Schema.GetOffset(0xE96486ECEAFE5EC1);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimerHighOffset);
         }
     }
-    private static nint? _OnTimerLowOffset;
+    private static nint _OnTimerLowOffset = -1;
 
     public ref CEntityIOOutput OnTimerLow
     {
         get
         {
-            _OnTimerLowOffset = _OnTimerLowOffset ?? Schema.GetOffset(0xE96486EC60BA6A4D);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimerLowOffset!.Value);
+            if (_OnTimerLowOffset == -1) _OnTimerLowOffset = Schema.GetOffset(0xE96486EC60BA6A4D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimerLowOffset);
         }
     }
-    private static nint? _DisabledOffset;
+    private static nint _DisabledOffset = -1;
 
     public ref int Disabled
     {
         get
         {
-            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xE96486EC51B3CEAC);
-            return ref _Handle.AsRef<int>(_DisabledOffset!.Value);
+            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0xE96486EC51B3CEAC);
+            return ref _Handle.AsRef<int>(_DisabledOffset);
         }
     }
-    private static nint? _InitialDelayOffset;
+    private static nint _InitialDelayOffset = -1;
 
     public ref float InitialDelay
     {
         get
         {
-            _InitialDelayOffset = _InitialDelayOffset ?? Schema.GetOffset(0xE96486ECE025AE70);
-            return ref _Handle.AsRef<float>(_InitialDelayOffset!.Value);
+            if (_InitialDelayOffset == -1) _InitialDelayOffset = Schema.GetOffset(0xE96486ECE025AE70);
+            return ref _Handle.AsRef<float>(_InitialDelayOffset);
         }
     }
-    private static nint? _RefireTimeOffset;
+    private static nint _RefireTimeOffset = -1;
 
     public ref float RefireTime
     {
         get
         {
-            _RefireTimeOffset = _RefireTimeOffset ?? Schema.GetOffset(0xE96486ECEABAD29B);
-            return ref _Handle.AsRef<float>(_RefireTimeOffset!.Value);
+            if (_RefireTimeOffset == -1) _RefireTimeOffset = Schema.GetOffset(0xE96486ECEABAD29B);
+            return ref _Handle.AsRef<float>(_RefireTimeOffset);
         }
     }
-    private static nint? _UpDownStateOffset;
+    private static nint _UpDownStateOffset = -1;
 
     public ref bool UpDownState
     {
         get
         {
-            _UpDownStateOffset = _UpDownStateOffset ?? Schema.GetOffset(0xE96486EC42D72911);
-            return ref _Handle.AsRef<bool>(_UpDownStateOffset!.Value);
+            if (_UpDownStateOffset == -1) _UpDownStateOffset = Schema.GetOffset(0xE96486EC42D72911);
+            return ref _Handle.AsRef<bool>(_UpDownStateOffset);
         }
     }
-    private static nint? _UseRandomTimeOffset;
+    private static nint _UseRandomTimeOffset = -1;
 
     public ref int UseRandomTime
     {
         get
         {
-            _UseRandomTimeOffset = _UseRandomTimeOffset ?? Schema.GetOffset(0xE96486ECEBBE5799);
-            return ref _Handle.AsRef<int>(_UseRandomTimeOffset!.Value);
+            if (_UseRandomTimeOffset == -1) _UseRandomTimeOffset = Schema.GetOffset(0xE96486ECEBBE5799);
+            return ref _Handle.AsRef<int>(_UseRandomTimeOffset);
         }
     }
-    private static nint? _PauseAfterFiringOffset;
+    private static nint _PauseAfterFiringOffset = -1;
 
     public ref bool PauseAfterFiring
     {
         get
         {
-            _PauseAfterFiringOffset = _PauseAfterFiringOffset ?? Schema.GetOffset(0xE96486EC767C1C9E);
-            return ref _Handle.AsRef<bool>(_PauseAfterFiringOffset!.Value);
+            if (_PauseAfterFiringOffset == -1) _PauseAfterFiringOffset = Schema.GetOffset(0xE96486EC767C1C9E);
+            return ref _Handle.AsRef<bool>(_PauseAfterFiringOffset);
         }
     }
-    private static nint? _LowerRandomBoundOffset;
+    private static nint _LowerRandomBoundOffset = -1;
 
     public ref float LowerRandomBound
     {
         get
         {
-            _LowerRandomBoundOffset = _LowerRandomBoundOffset ?? Schema.GetOffset(0xE96486EC88350771);
-            return ref _Handle.AsRef<float>(_LowerRandomBoundOffset!.Value);
+            if (_LowerRandomBoundOffset == -1) _LowerRandomBoundOffset = Schema.GetOffset(0xE96486EC88350771);
+            return ref _Handle.AsRef<float>(_LowerRandomBoundOffset);
         }
     }
-    private static nint? _UpperRandomBoundOffset;
+    private static nint _UpperRandomBoundOffset = -1;
 
     public ref float UpperRandomBound
     {
         get
         {
-            _UpperRandomBoundOffset = _UpperRandomBoundOffset ?? Schema.GetOffset(0xE96486ECB238933E);
-            return ref _Handle.AsRef<float>(_UpperRandomBoundOffset!.Value);
+            if (_UpperRandomBoundOffset == -1) _UpperRandomBoundOffset = Schema.GetOffset(0xE96486ECB238933E);
+            return ref _Handle.AsRef<float>(_UpperRandomBoundOffset);
         }
     }
-    private static nint? _RemainingTimeOffset;
+    private static nint _RemainingTimeOffset = -1;
 
     public ref float RemainingTime
     {
         get
         {
-            _RemainingTimeOffset = _RemainingTimeOffset ?? Schema.GetOffset(0xE96486EC88B29520);
-            return ref _Handle.AsRef<float>(_RemainingTimeOffset!.Value);
+            if (_RemainingTimeOffset == -1) _RemainingTimeOffset = Schema.GetOffset(0xE96486EC88B29520);
+            return ref _Handle.AsRef<float>(_RemainingTimeOffset);
         }
     }
-    private static nint? _PausedOffset;
+    private static nint _PausedOffset = -1;
 
     public ref bool Paused
     {
         get
         {
-            _PausedOffset = _PausedOffset ?? Schema.GetOffset(0xE96486EC6E4C592B);
-            return ref _Handle.AsRef<bool>(_PausedOffset!.Value);
+            if (_PausedOffset == -1) _PausedOffset = Schema.GetOffset(0xE96486EC6E4C592B);
+            return ref _Handle.AsRef<bool>(_PausedOffset);
         }
     }
 

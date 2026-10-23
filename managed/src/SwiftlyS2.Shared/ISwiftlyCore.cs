@@ -6,12 +6,14 @@ using SwiftlyS2.Shared.Convars;
 using SwiftlyS2.Shared.Database;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Events;
+using SwiftlyS2.Shared.Extensions;
 using SwiftlyS2.Shared.FileSystem;
 using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Helpers;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Menus;
+using SwiftlyS2.Shared.Menu;
 using SwiftlyS2.Shared.NetMessages;
 using SwiftlyS2.Shared.Permissions;
 using SwiftlyS2.Shared.Players;
@@ -105,6 +107,11 @@ public interface ISwiftlyCore
     public IMemoryService Memory { get; }
 
     /// <summary>
+    /// Native extension and shared pointer service.
+    /// </summary>
+    public IExtensionService Extension { get; }
+
+    /// <summary>
     /// Logger factory.
     /// </summary>
     public ILoggerFactory LoggerFactory { get; }
@@ -157,7 +164,13 @@ public interface ISwiftlyCore
     /// <summary>
     /// Menu manager API.
     /// </summary>
+    [Obsolete("The classic menu system is deprecated and will be removed in future versions. Use Menu instead.")]
     public IMenuManagerAPI MenusAPI { get; }
+
+    /// <summary>
+    /// The component-based menu framework.
+    /// </summary>
+    public IMenuService Menu { get; }
 
     /// <summary>
     /// Command line.

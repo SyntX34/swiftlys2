@@ -16,24 +16,24 @@ internal partial class CAnimGraphDoc_FinishedConditionImpl : CAnimGraphDoc_Condi
 {
     public CAnimGraphDoc_FinishedConditionImpl(nint handle) : base(handle) { }
 
-    private static nint? _OptionOffset;
+    private static nint _OptionOffset = -1;
 
     public ref FinishedConditionOption Option
     {
         get
         {
-            _OptionOffset = _OptionOffset ?? Schema.GetOffset(0x6627D63985C51534);
-            return ref _Handle.AsRef<FinishedConditionOption>(_OptionOffset!.Value);
+            if (_OptionOffset == -1) _OptionOffset = Schema.GetOffset(0x6627D63985C51534);
+            return ref _Handle.AsRef<FinishedConditionOption>(_OptionOffset);
         }
     }
-    private static nint? _IsFinishedOffset;
+    private static nint _IsFinishedOffset = -1;
 
     public ref bool IsFinished
     {
         get
         {
-            _IsFinishedOffset = _IsFinishedOffset ?? Schema.GetOffset(0x6627D639F0384393);
-            return ref _Handle.AsRef<bool>(_IsFinishedOffset!.Value);
+            if (_IsFinishedOffset == -1) _IsFinishedOffset = Schema.GetOffset(0x6627D639F0384393);
+            return ref _Handle.AsRef<bool>(_IsFinishedOffset);
         }
     }
 

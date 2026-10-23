@@ -16,14 +16,14 @@ internal partial class CExampleSchemaVData_PolymorphicDerivedAImpl : CExampleSch
 {
     public CExampleSchemaVData_PolymorphicDerivedAImpl(nint handle) : base(handle) { }
 
-    private static nint? _DerivedAOffset;
+    private static nint _DerivedAOffset = -1;
 
     public ref int DerivedA
     {
         get
         {
-            _DerivedAOffset = _DerivedAOffset ?? Schema.GetOffset(0x275BE0CCB76A6609);
-            return ref _Handle.AsRef<int>(_DerivedAOffset!.Value);
+            if (_DerivedAOffset == -1) _DerivedAOffset = Schema.GetOffset(0x275BE0CCB76A6609);
+            return ref _Handle.AsRef<int>(_DerivedAOffset);
         }
     }
 

@@ -16,47 +16,47 @@ internal partial class FeCollisionPlane_tImpl : SchemaClass, FeCollisionPlane_t
 {
     public FeCollisionPlane_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _CtrlParentOffset;
+    private static nint _CtrlParentOffset = -1;
 
     public ref ushort CtrlParent
     {
         get
         {
-            _CtrlParentOffset = _CtrlParentOffset ?? Schema.GetOffset(0xF8EBA99555049230);
-            return ref _Handle.AsRef<ushort>(_CtrlParentOffset!.Value);
+            if (_CtrlParentOffset == -1) _CtrlParentOffset = Schema.GetOffset(0xF8EBA99555049230);
+            return ref _Handle.AsRef<ushort>(_CtrlParentOffset);
         }
     }
-    private static nint? _ChildNodeOffset;
+    private static nint _ChildNodeOffset = -1;
 
     public ref ushort ChildNode
     {
         get
         {
-            _ChildNodeOffset = _ChildNodeOffset ?? Schema.GetOffset(0xF8EBA99592A8E0E9);
-            return ref _Handle.AsRef<ushort>(_ChildNodeOffset!.Value);
+            if (_ChildNodeOffset == -1) _ChildNodeOffset = Schema.GetOffset(0xF8EBA99592A8E0E9);
+            return ref _Handle.AsRef<ushort>(_ChildNodeOffset);
         }
     }
-    private static nint? _PlaneOffset;
+    private static nint _PlaneOffset = -1;
     private RnPlane_tImpl? _PlaneInstance;
 
     public RnPlane_t Plane
     {
         get
         {
-            _PlaneOffset = _PlaneOffset ?? Schema.GetOffset(0xF8EBA995671CB5D5);
+            if (_PlaneOffset == -1) _PlaneOffset = Schema.GetOffset(0xF8EBA995671CB5D5);
             var instance = _PlaneInstance ??= new RnPlane_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PlaneOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PlaneOffset);
             return instance;
         }
     }
-    private static nint? _StrengthOffset;
+    private static nint _StrengthOffset = -1;
 
     public ref float Strength
     {
         get
         {
-            _StrengthOffset = _StrengthOffset ?? Schema.GetOffset(0xF8EBA995AFA3323A);
-            return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+            if (_StrengthOffset == -1) _StrengthOffset = Schema.GetOffset(0xF8EBA995AFA3323A);
+            return ref _Handle.AsRef<float>(_StrengthOffset);
         }
     }
 

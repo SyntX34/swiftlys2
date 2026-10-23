@@ -33,6 +33,7 @@ using SwiftlyS2.Core.Permissions;
 using SwiftlyS2.Shared.Permissions;
 using SwiftlyS2.Core.Menus;
 using SwiftlyS2.Shared.Menus;
+using SwiftlyS2.Shared.Menu;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.Translation;
 using SwiftlyS2.Core.Players;
@@ -49,12 +50,17 @@ using SwiftlyS2.Shared.StringTable;
 using SwiftlyS2.Core.Models;
 using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Shared.GameHooks;
+using SwiftlyS2.Core.Menu;
+using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.Extensions;
 
 namespace SwiftlyS2.Core.Services;
 
 internal class SwiftlyCore : ISwiftlyCore, IDisposable
 {
     private readonly ServiceProvider serviceProvider;
+    private readonly string gameDirectory;
+    private readonly string gameFilesDirectory;
 
     public EventSubscriber EventSubscriber { get; init; }
     public GameEventService GameEventService { get; init; }
@@ -72,6 +78,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     public TraceManager Trace { get; init; }
     public ContextedProfilerService ProfilerService { get; init; }
     public MemoryService MemoryService { get; init; }
+    public ExtensionService ExtensionService { get; init; }
     public SchedulerService SchedulerService { get; init; }
     public DatabaseService DatabaseService { get; init; }
     public TranslationService TranslationService { get; init; }
@@ -79,6 +86,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     public PermissionManager PermissionManager { get; init; }
     public RegistratorService RegistratorService { get; init; }
     public MenuManagerAPI MenuManagerAPI { get; init; }
+    public MenuService MenuService { get; init; }
     public CommandLineService CommandLineService { get; init; }
     public HelpersService Helpers { get; init; }
     public GameService GameService { get; init; }
@@ -94,6 +102,8 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         CoreContext id = new(contextId, contextBaseDirectory, pluginManifest);
         ContextBasePath = contextBaseDirectory;
         PluginDataDirectory = pluginDataDirectory;
+        gameDirectory = NativeEngineHelpers.GetGameDirectoryPath();
+        gameFilesDirectory = $"{gameDirectory}{(OperatingSystem.IsWindows() ? "\\" : "/")}{DetermineGameFolder()}";
 
         serviceProvider = new ServiceCollection()
             .AddSingleton(id)
@@ -107,6 +117,12 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton(coreProvider.GetRequiredService<TraceManager>())
             .AddSingleton(coreProvider.GetRequiredService<PermissionManager>())
             .AddSingleton(coreProvider.GetRequiredService<MenuManagerAPI>())
+            .AddSingleton(coreProvider.GetRequiredService<MenuRuntime>())
+            .AddSingleton(coreProvider.GetRequiredService<MenuActionRegistry>())
+            .AddSingleton(coreProvider.GetRequiredService<MenuRendererRegistry>())
+            .AddSingleton(coreProvider.GetRequiredService<MenuKeybindResolver>())
+            .AddSingleton(coreProvider.GetRequiredService<MenuRendererResolver>())
+            .AddSingleton(coreProvider.GetRequiredService<MenuInputMethodResolver>())
             .AddSingleton(coreProvider.GetRequiredService<DatabaseConnectionManager>())
 
             .AddSingleton<EventSubscriber>()
@@ -119,6 +135,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<EntitySystemService>()
             .AddSingleton<ConVarService>()
             .AddSingleton<MemoryService>()
+            .AddSingleton<ExtensionService>()
             .AddSingleton<GameDataService>()
             .AddSingleton<ContextedProfilerService>()
             .AddSingleton<GameFileSystem>()
@@ -128,6 +145,8 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<PlayerManagerService>()
             .AddSingleton(provider => provider.GetRequiredService<TranslationService>().GetLocalizer())
             .AddSingleton<RegistratorService>()
+            .AddSingleton<MenuService>()
+            .AddSingleton<IMenuService>(provider => provider.GetRequiredService<MenuService>())
             // .AddSingleton<MenuManager>()
             .AddSingleton<CommandLineService>()
             .AddSingleton<HelpersService>()
@@ -146,6 +165,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<IGameDataService>(provider => provider.GetRequiredService<GameDataService>())
             .AddSingleton<IPlayerManagerService>(provider => provider.GetRequiredService<PlayerManagerService>())
             .AddSingleton<IMemoryService>(provider => provider.GetRequiredService<MemoryService>())
+            .AddSingleton<IExtensionService>(provider => provider.GetRequiredService<ExtensionService>())
             .AddSingleton<IContextedProfilerService>(provider => provider.GetRequiredService<ContextedProfilerService>())
             .AddSingleton<ISchedulerService>(provider => provider.GetRequiredService<SchedulerService>())
             .AddSingleton<IEngineService>(provider => provider.GetRequiredService<EngineService>())
@@ -179,6 +199,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         PlayerManagerService = serviceProvider.GetRequiredService<PlayerManagerService>();
         ConVarService = serviceProvider.GetRequiredService<ConVarService>();
         MemoryService = serviceProvider.GetRequiredService<MemoryService>();
+        ExtensionService = serviceProvider.GetRequiredService<ExtensionService>();
         Engine = serviceProvider.GetRequiredService<EngineService>();
         Trace = serviceProvider.GetRequiredService<TraceManager>();
         ProfilerService = serviceProvider.GetRequiredService<ContextedProfilerService>();
@@ -190,6 +211,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         RegistratorService = serviceProvider.GetRequiredService<RegistratorService>();
         // MenuManager = serviceProvider.GetRequiredService<MenuManager>();
         MenuManagerAPI = serviceProvider.GetRequiredService<MenuManagerAPI>();
+        MenuService = serviceProvider.GetRequiredService<MenuService>();
         CommandLineService = serviceProvider.GetRequiredService<CommandLineService>();
         Helpers = serviceProvider.GetRequiredService<HelpersService>();
         GameService = serviceProvider.GetRequiredService<GameService>();
@@ -215,7 +237,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
         serviceProvider.Dispose();
     }
 
-    private string DetermineGameFolder()
+    private static string DetermineGameFolder()
     {
         var game = NativeEngineHelpers.GetCurrentGame();
         if (game == "cs2") return "csgo";
@@ -234,6 +256,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     IGameDataService ISwiftlyCore.GameData => GameDataService;
     IPlayerManagerService ISwiftlyCore.PlayerManager => PlayerManagerService;
     IMemoryService ISwiftlyCore.Memory => MemoryService;
+    IExtensionService ISwiftlyCore.Extension => ExtensionService;
     ILogger ISwiftlyCore.Logger => Logger;
     IContextedProfilerService ISwiftlyCore.Profiler => ProfilerService;
     IEngineService ISwiftlyCore.Engine => Engine;
@@ -245,6 +268,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     IPermissionManager ISwiftlyCore.Permission => PermissionManager;
     IRegistratorService ISwiftlyCore.Registrator => RegistratorService;
     IMenuManagerAPI ISwiftlyCore.MenusAPI => MenuManagerAPI;
+    IMenuService ISwiftlyCore.Menu => MenuService;
     ICommandLine ISwiftlyCore.CommandLine => CommandLineService;
     IHelpers ISwiftlyCore.Helpers => Helpers;
     IGameService ISwiftlyCore.Game => GameService;
@@ -254,8 +278,8 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
     IGameHooks ISwiftlyCore.GameHooks => GameHooksService;
     string ISwiftlyCore.PluginPath => ContextBasePath;
     string ISwiftlyCore.PluginDataDirectory => PluginDataDirectory;
-    string ISwiftlyCore.CSGODirectory => $"{NativeEngineHelpers.GetGameDirectoryPath()}{(OperatingSystem.IsWindows() ? "\\" : "/")}{DetermineGameFolder()}";
-    string ISwiftlyCore.GameFilesDirectory => $"{NativeEngineHelpers.GetGameDirectoryPath()}{(OperatingSystem.IsWindows() ? "\\" : "/")}{DetermineGameFolder()}";
-    string ISwiftlyCore.GameDirectory => NativeEngineHelpers.GetGameDirectoryPath();
+    string ISwiftlyCore.CSGODirectory => gameFilesDirectory;
+    string ISwiftlyCore.GameFilesDirectory => gameFilesDirectory;
+    string ISwiftlyCore.GameDirectory => gameDirectory;
     bool ISwiftlyCore.IsGameThread => NativeCore.IsMainThread();
 }

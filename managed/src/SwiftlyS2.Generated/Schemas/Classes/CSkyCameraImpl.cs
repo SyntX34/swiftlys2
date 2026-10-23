@@ -16,48 +16,48 @@ internal partial class CSkyCameraImpl : CBaseEntityImpl, CSkyCamera
 {
     public CSkyCameraImpl(nint handle) : base(handle) { }
 
-    private static nint? _SkyboxDataOffset;
+    private static nint _SkyboxDataOffset = -1;
     private sky3dparams_tImpl? _SkyboxDataInstance;
 
     public sky3dparams_t SkyboxData
     {
         get
         {
-            _SkyboxDataOffset = _SkyboxDataOffset ?? Schema.GetOffset(0xCD44EF44CDA0772B);
+            if (_SkyboxDataOffset == -1) _SkyboxDataOffset = Schema.GetOffset(0xCD44EF44CDA0772B);
             var instance = _SkyboxDataInstance ??= new sky3dparams_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SkyboxDataOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SkyboxDataOffset);
             return instance;
         }
     }
-    private static nint? _SkyboxSlotTokenOffset;
+    private static nint _SkyboxSlotTokenOffset = -1;
 
     public ref CUtlStringToken SkyboxSlotToken
     {
         get
         {
-            _SkyboxSlotTokenOffset = _SkyboxSlotTokenOffset ?? Schema.GetOffset(0xCD44EF44413FD3A4);
-            return ref _Handle.AsRef<CUtlStringToken>(_SkyboxSlotTokenOffset!.Value);
+            if (_SkyboxSlotTokenOffset == -1) _SkyboxSlotTokenOffset = Schema.GetOffset(0xCD44EF44413FD3A4);
+            return ref _Handle.AsRef<CUtlStringToken>(_SkyboxSlotTokenOffset);
         }
     }
-    private static nint? _UseAnglesOffset;
+    private static nint _UseAnglesOffset = -1;
 
     public ref bool UseAngles
     {
         get
         {
-            _UseAnglesOffset = _UseAnglesOffset ?? Schema.GetOffset(0xCD44EF44434C3DB4);
-            return ref _Handle.AsRef<bool>(_UseAnglesOffset!.Value);
+            if (_UseAnglesOffset == -1) _UseAnglesOffset = Schema.GetOffset(0xCD44EF44434C3DB4);
+            return ref _Handle.AsRef<bool>(_UseAnglesOffset);
         }
     }
-    private static nint? _NextOffset;
+    private static nint _NextOffset = -1;
     private CSkyCameraImpl? _NextInstance;
 
     public CSkyCamera? Next
     {
         get
         {
-            _NextOffset = _NextOffset ?? Schema.GetOffset(0xCD44EF4432B11E0E);
-            var ptr = _Handle.Read<nint>(_NextOffset!.Value);
+            if (_NextOffset == -1) _NextOffset = Schema.GetOffset(0xCD44EF4432B11E0E);
+            var ptr = _Handle.Read<nint>(_NextOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _NextInstance ??= new CSkyCameraImpl(0);
             instance.DangerousSetHandle(ptr);

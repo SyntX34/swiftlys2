@@ -16,24 +16,24 @@ internal partial class CTriggerDetectBulletFireImpl : CBaseTriggerImpl, CTrigger
 {
     public CTriggerDetectBulletFireImpl(nint handle) : base(handle) { }
 
-    private static nint? _PlayerFireOnlyOffset;
+    private static nint _PlayerFireOnlyOffset = -1;
 
     public ref bool PlayerFireOnly
     {
         get
         {
-            _PlayerFireOnlyOffset = _PlayerFireOnlyOffset ?? Schema.GetOffset(0x93930A3D56D51CFE);
-            return ref _Handle.AsRef<bool>(_PlayerFireOnlyOffset!.Value);
+            if (_PlayerFireOnlyOffset == -1) _PlayerFireOnlyOffset = Schema.GetOffset(0x93930A3D56D51CFE);
+            return ref _Handle.AsRef<bool>(_PlayerFireOnlyOffset);
         }
     }
-    private static nint? _OnDetectedBulletFireOffset;
+    private static nint _OnDetectedBulletFireOffset = -1;
 
     public ref CEntityIOOutput OnDetectedBulletFire
     {
         get
         {
-            _OnDetectedBulletFireOffset = _OnDetectedBulletFireOffset ?? Schema.GetOffset(0x93930A3D11D6C936);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnDetectedBulletFireOffset!.Value);
+            if (_OnDetectedBulletFireOffset == -1) _OnDetectedBulletFireOffset = Schema.GetOffset(0x93930A3D11D6C936);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDetectedBulletFireOffset);
         }
     }
 

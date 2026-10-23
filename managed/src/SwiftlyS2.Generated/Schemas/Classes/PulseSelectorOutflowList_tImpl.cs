@@ -16,14 +16,14 @@ internal partial class PulseSelectorOutflowList_tImpl : SchemaClass, PulseSelect
 {
     public PulseSelectorOutflowList_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _OutflowsOffset;
+    private static nint _OutflowsOffset = -1;
 
     public ref CUtlVector<OutflowWithRequirements_t> Outflows
     {
         get
         {
-            _OutflowsOffset = _OutflowsOffset ?? Schema.GetOffset(0x2A880DD28F0AFDF8);
-            return ref _Handle.AsRef<CUtlVector<OutflowWithRequirements_t>>(_OutflowsOffset!.Value);
+            if (_OutflowsOffset == -1) _OutflowsOffset = Schema.GetOffset(0x2A880DD28F0AFDF8);
+            return ref _Handle.AsRef<CUtlVector<OutflowWithRequirements_t>>(_OutflowsOffset);
         }
     }
 

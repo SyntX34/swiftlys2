@@ -16,37 +16,37 @@ internal partial class C_INIT_PlaneCullImpl : CParticleFunctionInitializerImpl, 
 {
     public C_INIT_PlaneCullImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControlPointOffset;
+    private static nint _ControlPointOffset = -1;
 
     public ref int ControlPoint
     {
         get
         {
-            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xCFA7A1100D0DDF8C);
-            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+            if (_ControlPointOffset == -1) _ControlPointOffset = Schema.GetOffset(0xCFA7A1100D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset);
         }
     }
-    private static nint? _DistanceOffset;
+    private static nint _DistanceOffset = -1;
     private CParticleCollectionFloatInputImpl? _DistanceInstance;
 
     public CParticleCollectionFloatInput Distance
     {
         get
         {
-            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0xCFA7A11000DC4A68);
+            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0xCFA7A11000DC4A68);
             var instance = _DistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DistanceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DistanceOffset);
             return instance;
         }
     }
-    private static nint? _CullInsideOffset;
+    private static nint _CullInsideOffset = -1;
 
     public ref bool CullInside
     {
         get
         {
-            _CullInsideOffset = _CullInsideOffset ?? Schema.GetOffset(0xCFA7A110293E00AD);
-            return ref _Handle.AsRef<bool>(_CullInsideOffset!.Value);
+            if (_CullInsideOffset == -1) _CullInsideOffset = Schema.GetOffset(0xCFA7A110293E00AD);
+            return ref _Handle.AsRef<bool>(_CullInsideOffset);
         }
     }
 

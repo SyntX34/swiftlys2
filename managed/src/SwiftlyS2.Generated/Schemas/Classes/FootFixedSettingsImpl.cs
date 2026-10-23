@@ -16,107 +16,107 @@ internal partial class FootFixedSettingsImpl : SchemaClass, FootFixedSettings
 {
     public FootFixedSettingsImpl(nint handle) : base(handle) { }
 
-    private static nint? _TraceSettingsOffset;
+    private static nint _TraceSettingsOffset = -1;
     private TraceSettings_tImpl? _TraceSettingsInstance;
 
     public TraceSettings_t TraceSettings
     {
         get
         {
-            _TraceSettingsOffset = _TraceSettingsOffset ?? Schema.GetOffset(0x3401F9D0115F2D3B);
+            if (_TraceSettingsOffset == -1) _TraceSettingsOffset = Schema.GetOffset(0x3401F9D0115F2D3B);
             var instance = _TraceSettingsInstance ??= new TraceSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TraceSettingsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TraceSettingsOffset);
             return instance;
         }
     }
-    private static nint? _FootBaseBindPosePositionMSOffset;
+    private static nint _FootBaseBindPosePositionMSOffset = -1;
 
     public ref Vector FootBaseBindPosePositionMS
     {
         get
         {
-            _FootBaseBindPosePositionMSOffset = _FootBaseBindPosePositionMSOffset ?? Schema.GetOffset(0x3401F9D0C391A025);
-            return ref _Handle.AsRef<Vector>(_FootBaseBindPosePositionMSOffset!.Value);
+            if (_FootBaseBindPosePositionMSOffset == -1) _FootBaseBindPosePositionMSOffset = Schema.GetOffset(0x3401F9D0C391A025);
+            return ref _Handle.AsRef<Vector>(_FootBaseBindPosePositionMSOffset);
         }
     }
-    private static nint? _FootBaseLengthOffset;
+    private static nint _FootBaseLengthOffset = -1;
 
     public ref float FootBaseLength
     {
         get
         {
-            _FootBaseLengthOffset = _FootBaseLengthOffset ?? Schema.GetOffset(0x3401F9D08593ED7E);
-            return ref _Handle.AsRef<float>(_FootBaseLengthOffset!.Value);
+            if (_FootBaseLengthOffset == -1) _FootBaseLengthOffset = Schema.GetOffset(0x3401F9D08593ED7E);
+            return ref _Handle.AsRef<float>(_FootBaseLengthOffset);
         }
     }
-    private static nint? _MaxRotationLeftOffset;
+    private static nint _MaxRotationLeftOffset = -1;
 
     public ref float MaxRotationLeft
     {
         get
         {
-            _MaxRotationLeftOffset = _MaxRotationLeftOffset ?? Schema.GetOffset(0x3401F9D0FA1CDF44);
-            return ref _Handle.AsRef<float>(_MaxRotationLeftOffset!.Value);
+            if (_MaxRotationLeftOffset == -1) _MaxRotationLeftOffset = Schema.GetOffset(0x3401F9D0FA1CDF44);
+            return ref _Handle.AsRef<float>(_MaxRotationLeftOffset);
         }
     }
-    private static nint? _MaxRotationRightOffset;
+    private static nint _MaxRotationRightOffset = -1;
 
     public ref float MaxRotationRight
     {
         get
         {
-            _MaxRotationRightOffset = _MaxRotationRightOffset ?? Schema.GetOffset(0x3401F9D08C95FA31);
-            return ref _Handle.AsRef<float>(_MaxRotationRightOffset!.Value);
+            if (_MaxRotationRightOffset == -1) _MaxRotationRightOffset = Schema.GetOffset(0x3401F9D08C95FA31);
+            return ref _Handle.AsRef<float>(_MaxRotationRightOffset);
         }
     }
-    private static nint? _FootstepLandedTagIndexOffset;
+    private static nint _FootstepLandedTagIndexOffset = -1;
 
     public ref int FootstepLandedTagIndex
     {
         get
         {
-            _FootstepLandedTagIndexOffset = _FootstepLandedTagIndexOffset ?? Schema.GetOffset(0x3401F9D04954321B);
-            return ref _Handle.AsRef<int>(_FootstepLandedTagIndexOffset!.Value);
+            if (_FootstepLandedTagIndexOffset == -1) _FootstepLandedTagIndexOffset = Schema.GetOffset(0x3401F9D04954321B);
+            return ref _Handle.AsRef<int>(_FootstepLandedTagIndexOffset);
         }
     }
-    private static nint? _EnableTracingOffset;
+    private static nint _EnableTracingOffset = -1;
 
     public ref bool EnableTracing
     {
         get
         {
-            _EnableTracingOffset = _EnableTracingOffset ?? Schema.GetOffset(0x3401F9D03C16FC54);
-            return ref _Handle.AsRef<bool>(_EnableTracingOffset!.Value);
+            if (_EnableTracingOffset == -1) _EnableTracingOffset = Schema.GetOffset(0x3401F9D03C16FC54);
+            return ref _Handle.AsRef<bool>(_EnableTracingOffset);
         }
     }
-    private static nint? _TraceAngleBlendOffset;
+    private static nint _TraceAngleBlendOffset = -1;
 
     public ref float TraceAngleBlend
     {
         get
         {
-            _TraceAngleBlendOffset = _TraceAngleBlendOffset ?? Schema.GetOffset(0x3401F9D0029B769E);
-            return ref _Handle.AsRef<float>(_TraceAngleBlendOffset!.Value);
+            if (_TraceAngleBlendOffset == -1) _TraceAngleBlendOffset = Schema.GetOffset(0x3401F9D0029B769E);
+            return ref _Handle.AsRef<float>(_TraceAngleBlendOffset);
         }
     }
-    private static nint? _DisableTagIndexOffset;
+    private static nint _DisableTagIndexOffset = -1;
 
     public ref int DisableTagIndex
     {
         get
         {
-            _DisableTagIndexOffset = _DisableTagIndexOffset ?? Schema.GetOffset(0x3401F9D0C56AE9EB);
-            return ref _Handle.AsRef<int>(_DisableTagIndexOffset!.Value);
+            if (_DisableTagIndexOffset == -1) _DisableTagIndexOffset = Schema.GetOffset(0x3401F9D0C56AE9EB);
+            return ref _Handle.AsRef<int>(_DisableTagIndexOffset);
         }
     }
-    private static nint? _FootIndexOffset;
+    private static nint _FootIndexOffset = -1;
 
     public ref int FootIndex
     {
         get
         {
-            _FootIndexOffset = _FootIndexOffset ?? Schema.GetOffset(0x3401F9D067D56BAB);
-            return ref _Handle.AsRef<int>(_FootIndexOffset!.Value);
+            if (_FootIndexOffset == -1) _FootIndexOffset = Schema.GetOffset(0x3401F9D067D56BAB);
+            return ref _Handle.AsRef<int>(_FootIndexOffset);
         }
     }
 

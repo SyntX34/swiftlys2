@@ -16,31 +16,31 @@ internal partial class CPulseCell_TestWaitWithAutoTracepointsImpl : CPulseCell_B
 {
     public CPulseCell_TestWaitWithAutoTracepointsImpl(nint handle) : base(handle) { }
 
-    private static nint? _TracePrefixOffset;
+    private static nint _TracePrefixOffset = -1;
 
     public string TracePrefix
     {
         get
         {
-            _TracePrefixOffset = _TracePrefixOffset ?? Schema.GetOffset(0x3624544CB2D78C02);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TracePrefixOffset!.Value));
+            if (_TracePrefixOffset == -1) _TracePrefixOffset = Schema.GetOffset(0x3624544CB2D78C02);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TracePrefixOffset));
         }
         set
         {
-            _TracePrefixOffset = _TracePrefixOffset ?? Schema.GetOffset(0x3624544CB2D78C02);
-            Schema.SetCUtlString(_Handle, _TracePrefixOffset!.Value, value);
+            if (_TracePrefixOffset == -1) _TracePrefixOffset = Schema.GetOffset(0x3624544CB2D78C02);
+            Schema.SetCUtlString(_Handle, _TracePrefixOffset, value);
         }
     }
-    private static nint? _WakeResumeOffset;
+    private static nint _WakeResumeOffset = -1;
     private CPulse_ResumePointImpl? _WakeResumeInstance;
 
     public CPulse_ResumePoint WakeResume
     {
         get
         {
-            _WakeResumeOffset = _WakeResumeOffset ?? Schema.GetOffset(0x3624544C31F86DC2);
+            if (_WakeResumeOffset == -1) _WakeResumeOffset = Schema.GetOffset(0x3624544C31F86DC2);
             var instance = _WakeResumeInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _WakeResumeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WakeResumeOffset);
             return instance;
         }
     }

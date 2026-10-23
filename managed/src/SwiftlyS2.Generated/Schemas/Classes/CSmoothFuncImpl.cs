@@ -16,54 +16,54 @@ internal partial class CSmoothFuncImpl : SchemaClass, CSmoothFunc
 {
     public CSmoothFuncImpl(nint handle) : base(handle) { }
 
-    private static nint? _SmoothAmplitudeOffset;
+    private static nint _SmoothAmplitudeOffset = -1;
 
     public ref float SmoothAmplitude
     {
         get
         {
-            _SmoothAmplitudeOffset = _SmoothAmplitudeOffset ?? Schema.GetOffset(0x4C3907DAAB831D3A);
-            return ref _Handle.AsRef<float>(_SmoothAmplitudeOffset!.Value);
+            if (_SmoothAmplitudeOffset == -1) _SmoothAmplitudeOffset = Schema.GetOffset(0x4C3907DAAB831D3A);
+            return ref _Handle.AsRef<float>(_SmoothAmplitudeOffset);
         }
     }
-    private static nint? _SmoothBiasOffset;
+    private static nint _SmoothBiasOffset = -1;
 
     public ref float SmoothBias
     {
         get
         {
-            _SmoothBiasOffset = _SmoothBiasOffset ?? Schema.GetOffset(0x4C3907DA8DF7120C);
-            return ref _Handle.AsRef<float>(_SmoothBiasOffset!.Value);
+            if (_SmoothBiasOffset == -1) _SmoothBiasOffset = Schema.GetOffset(0x4C3907DA8DF7120C);
+            return ref _Handle.AsRef<float>(_SmoothBiasOffset);
         }
     }
-    private static nint? _SmoothDurationOffset;
+    private static nint _SmoothDurationOffset = -1;
 
     public ref float SmoothDuration
     {
         get
         {
-            _SmoothDurationOffset = _SmoothDurationOffset ?? Schema.GetOffset(0x4C3907DA62F4C0D5);
-            return ref _Handle.AsRef<float>(_SmoothDurationOffset!.Value);
+            if (_SmoothDurationOffset == -1) _SmoothDurationOffset = Schema.GetOffset(0x4C3907DA62F4C0D5);
+            return ref _Handle.AsRef<float>(_SmoothDurationOffset);
         }
     }
-    private static nint? _SmoothRemainingTimeOffset;
+    private static nint _SmoothRemainingTimeOffset = -1;
 
     public ref float SmoothRemainingTime
     {
         get
         {
-            _SmoothRemainingTimeOffset = _SmoothRemainingTimeOffset ?? Schema.GetOffset(0x4C3907DAB4D54372);
-            return ref _Handle.AsRef<float>(_SmoothRemainingTimeOffset!.Value);
+            if (_SmoothRemainingTimeOffset == -1) _SmoothRemainingTimeOffset = Schema.GetOffset(0x4C3907DAB4D54372);
+            return ref _Handle.AsRef<float>(_SmoothRemainingTimeOffset);
         }
     }
-    private static nint? _SmoothDirOffset;
+    private static nint _SmoothDirOffset = -1;
 
     public ref int SmoothDir
     {
         get
         {
-            _SmoothDirOffset = _SmoothDirOffset ?? Schema.GetOffset(0x4C3907DAB90556AA);
-            return ref _Handle.AsRef<int>(_SmoothDirOffset!.Value);
+            if (_SmoothDirOffset == -1) _SmoothDirOffset = Schema.GetOffset(0x4C3907DAB90556AA);
+            return ref _Handle.AsRef<int>(_SmoothDirOffset);
         }
     }
 

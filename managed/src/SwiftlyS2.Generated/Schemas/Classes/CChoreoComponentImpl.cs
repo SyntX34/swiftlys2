@@ -16,69 +16,69 @@ internal partial class CChoreoComponentImpl : SchemaClass, CChoreoComponent
 {
     public CChoreoComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? ___m_pChainEntityOffset;
+    private static nint ___m_pChainEntityOffset = -1;
 
     public ref CNetworkVarChainer __m_pChainEntity
     {
         get
         {
-            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0x1CE3A87F63F0E7D);
-            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+            if (___m_pChainEntityOffset == -1) ___m_pChainEntityOffset = Schema.GetOffset(0x1CE3A87F63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset);
         }
     }
-    private static nint? _OwnerOffset;
+    private static nint _OwnerOffset = -1;
 
     public ref CHandle<CBaseModelEntity> Owner
     {
         get
         {
-            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0x1CE3A87F6D89572);
-            return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset!.Value);
+            if (_OwnerOffset == -1) _OwnerOffset = Schema.GetOffset(0x1CE3A87F6D89572);
+            return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset);
         }
     }
-    private static nint? _ExernalChoreoGraphCountOffset;
+    private static nint _ExernalChoreoGraphCountOffset = -1;
 
     public ref int ExernalChoreoGraphCount
     {
         get
         {
-            _ExernalChoreoGraphCountOffset = _ExernalChoreoGraphCountOffset ?? Schema.GetOffset(0x1CE3A87345F5FE3);
-            return ref _Handle.AsRef<int>(_ExernalChoreoGraphCountOffset!.Value);
+            if (_ExernalChoreoGraphCountOffset == -1) _ExernalChoreoGraphCountOffset = Schema.GetOffset(0x1CE3A87345F5FE3);
+            return ref _Handle.AsRef<int>(_ExernalChoreoGraphCountOffset);
         }
     }
-    private static nint? _ActiveExternalChoreoGraphSlotIDOffset;
+    private static nint _ActiveExternalChoreoGraphSlotIDOffset = -1;
 
     public ref CGlobalSymbol ActiveExternalChoreoGraphSlotID
     {
         get
         {
-            _ActiveExternalChoreoGraphSlotIDOffset = _ActiveExternalChoreoGraphSlotIDOffset ?? Schema.GetOffset(0x1CE3A879B40121E);
-            return ref _Handle.AsRef<CGlobalSymbol>(_ActiveExternalChoreoGraphSlotIDOffset!.Value);
+            if (_ActiveExternalChoreoGraphSlotIDOffset == -1) _ActiveExternalChoreoGraphSlotIDOffset = Schema.GetOffset(0x1CE3A879B40121E);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ActiveExternalChoreoGraphSlotIDOffset);
         }
     }
-    private static nint? _NextSceneEventIdOffset;
+    private static nint _NextSceneEventIdOffset = -1;
     private SceneEventId_tImpl? _NextSceneEventIdInstance;
 
     public SceneEventId_t NextSceneEventId
     {
         get
         {
-            _NextSceneEventIdOffset = _NextSceneEventIdOffset ?? Schema.GetOffset(0x1CE3A873756F461);
+            if (_NextSceneEventIdOffset == -1) _NextSceneEventIdOffset = Schema.GetOffset(0x1CE3A873756F461);
             var instance = _NextSceneEventIdInstance ??= new SceneEventId_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextSceneEventIdOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NextSceneEventIdOffset);
             return instance;
         }
     }
-    private static nint? _AllowResponsesEndTimeOffset;
+    private static nint _AllowResponsesEndTimeOffset = -1;
     private GameTime_tImpl? _AllowResponsesEndTimeInstance;
 
     public GameTime_t AllowResponsesEndTime
     {
         get
         {
-            _AllowResponsesEndTimeOffset = _AllowResponsesEndTimeOffset ?? Schema.GetOffset(0x1CE3A8758EB0248);
+            if (_AllowResponsesEndTimeOffset == -1) _AllowResponsesEndTimeOffset = Schema.GetOffset(0x1CE3A8758EB0248);
             var instance = _AllowResponsesEndTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AllowResponsesEndTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AllowResponsesEndTimeOffset);
             return instance;
         }
     }

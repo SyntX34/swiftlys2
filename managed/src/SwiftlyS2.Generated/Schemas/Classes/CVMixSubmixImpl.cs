@@ -16,72 +16,82 @@ internal partial class CVMixSubmixImpl : SchemaClass, CVMixSubmix
 {
     public CVMixSubmixImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x219038064D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x219038064D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x219038064D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x219038064D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _SendNamesOffset;
+    private static nint _SendNamesOffset = -1;
     private SchemaUtlStringFixedArray? _SendNamesInstance;
 
     public ISchemaUtlStringFixedArray SendNames
     {
         get
         {
-            _SendNamesOffset = _SendNamesOffset ?? Schema.GetOffset(0x2190380688C8C8ED);
+            if (_SendNamesOffset == -1) _SendNamesOffset = Schema.GetOffset(0x2190380688C8C8ED);
             var instance = _SendNamesInstance ??= new SchemaUtlStringFixedArray(0, 0x2190380688C8C8ED, 4, 8, 8);
-            instance.DangerousSetHandle(_Handle + _SendNamesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SendNamesOffset);
             return instance;
         }
     }
-    private static nint? _SoloNameHashOffset;
+    private static nint _SoloNameHashOffset = -1;
 
     public ref uint SoloNameHash
     {
         get
         {
-            _SoloNameHashOffset = _SoloNameHashOffset ?? Schema.GetOffset(0x21903806C160A089);
-            return ref _Handle.AsRef<uint>(_SoloNameHashOffset!.Value);
+            if (_SoloNameHashOffset == -1) _SoloNameHashOffset = Schema.GetOffset(0x21903806C160A089);
+            return ref _Handle.AsRef<uint>(_SoloNameHashOffset);
         }
     }
-    private static nint? _ChannelsOffset;
+    private static nint _ChannelsOffset = -1;
 
     public ref int Channels
     {
         get
         {
-            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0x219038065A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
+            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0x219038065A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset);
         }
     }
-    private static nint? _SendOperatorOffset;
+    private static nint _SendOperatorOffset = -1;
 
     public ref VMixSendOperator_t SendOperator
     {
         get
         {
-            _SendOperatorOffset = _SendOperatorOffset ?? Schema.GetOffset(0x21903806D94DFB03);
-            return ref _Handle.AsRef<VMixSendOperator_t>(_SendOperatorOffset!.Value);
+            if (_SendOperatorOffset == -1) _SendOperatorOffset = Schema.GetOffset(0x21903806D94DFB03);
+            return ref _Handle.AsRef<VMixSendOperator_t>(_SendOperatorOffset);
         }
     }
-    private static nint? _MixDownRuleOffset;
+    private static nint _MixDownRuleOffset = -1;
 
     public ref VMixMixDownRule_t MixDownRule
     {
         get
         {
-            _MixDownRuleOffset = _MixDownRuleOffset ?? Schema.GetOffset(0x2190380684D7067B);
-            return ref _Handle.AsRef<VMixMixDownRule_t>(_MixDownRuleOffset!.Value);
+            if (_MixDownRuleOffset == -1) _MixDownRuleOffset = Schema.GetOffset(0x2190380684D7067B);
+            return ref _Handle.AsRef<VMixMixDownRule_t>(_MixDownRuleOffset);
+        }
+    }
+    private static nint _UpMixRuleOffset = -1;
+
+    public ref VMixUpMixRule_t UpMixRule
+    {
+        get
+        {
+            if (_UpMixRuleOffset == -1) _UpMixRuleOffset = Schema.GetOffset(0x219038069572461C);
+            return ref _Handle.AsRef<VMixUpMixRule_t>(_UpMixRuleOffset);
         }
     }
 

@@ -16,54 +16,54 @@ internal partial class screenfade_tImpl : SchemaClass, screenfade_t
 {
     public screenfade_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SpeedOffset;
+    private static nint _SpeedOffset = -1;
 
     public ref float Speed
     {
         get
         {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x613989A40A6B8020);
-            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0x613989A40A6B8020);
+            return ref _Handle.AsRef<float>(_SpeedOffset);
         }
     }
-    private static nint? _EndOffset;
+    private static nint _EndOffset = -1;
 
     public ref float End
     {
         get
         {
-            _EndOffset = _EndOffset ?? Schema.GetOffset(0x613989A4CF93764A);
-            return ref _Handle.AsRef<float>(_EndOffset!.Value);
+            if (_EndOffset == -1) _EndOffset = Schema.GetOffset(0x613989A4CF93764A);
+            return ref _Handle.AsRef<float>(_EndOffset);
         }
     }
-    private static nint? _ResetOffset;
+    private static nint _ResetOffset = -1;
 
     public ref float Reset
     {
         get
         {
-            _ResetOffset = _ResetOffset ?? Schema.GetOffset(0x613989A40AC8A560);
-            return ref _Handle.AsRef<float>(_ResetOffset!.Value);
+            if (_ResetOffset == -1) _ResetOffset = Schema.GetOffset(0x613989A40AC8A560);
+            return ref _Handle.AsRef<float>(_ResetOffset);
         }
     }
-    private static nint? _ColorOffset;
+    private static nint _ColorOffset = -1;
 
     public ref Color Color
     {
         get
         {
-            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x613989A4D7D017D8);
-            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x613989A4D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset);
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref int Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x613989A44222EBCC);
-            return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x613989A44222EBCC);
+            return ref _Handle.AsRef<int>(_FlagsOffset);
         }
     }
 

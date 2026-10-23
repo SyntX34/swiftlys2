@@ -16,166 +16,166 @@ internal partial class CRemapValueItemImpl : SchemaClass, CRemapValueItem
 {
     public CRemapValueItemImpl(nint handle) : base(handle) { }
 
-    private static nint? _ValueTypeOffset;
+    private static nint _ValueTypeOffset = -1;
 
     public ref RemapValueType ValueType
     {
         get
         {
-            _ValueTypeOffset = _ValueTypeOffset ?? Schema.GetOffset(0xC0531C8B9230252A);
-            return ref _Handle.AsRef<RemapValueType>(_ValueTypeOffset!.Value);
+            if (_ValueTypeOffset == -1) _ValueTypeOffset = Schema.GetOffset(0xC0531C8B9230252A);
+            return ref _Handle.AsRef<RemapValueType>(_ValueTypeOffset);
         }
     }
-    private static nint? _FloatParamNameInOffset;
+    private static nint _FloatParamNameInOffset = -1;
 
     public string FloatParamNameIn
     {
         get
         {
-            _FloatParamNameInOffset = _FloatParamNameInOffset ?? Schema.GetOffset(0xC0531C8B0F50863A);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FloatParamNameInOffset!.Value));
+            if (_FloatParamNameInOffset == -1) _FloatParamNameInOffset = Schema.GetOffset(0xC0531C8B0F50863A);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FloatParamNameInOffset));
         }
         set
         {
-            _FloatParamNameInOffset = _FloatParamNameInOffset ?? Schema.GetOffset(0xC0531C8B0F50863A);
-            Schema.SetCUtlString(_Handle, _FloatParamNameInOffset!.Value, value);
+            if (_FloatParamNameInOffset == -1) _FloatParamNameInOffset = Schema.GetOffset(0xC0531C8B0F50863A);
+            Schema.SetCUtlString(_Handle, _FloatParamNameInOffset, value);
         }
     }
-    private static nint? _FloatParamNameOutOffset;
+    private static nint _FloatParamNameOutOffset = -1;
 
     public string FloatParamNameOut
     {
         get
         {
-            _FloatParamNameOutOffset = _FloatParamNameOutOffset ?? Schema.GetOffset(0xC0531C8BE53CECD3);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FloatParamNameOutOffset!.Value));
+            if (_FloatParamNameOutOffset == -1) _FloatParamNameOutOffset = Schema.GetOffset(0xC0531C8BE53CECD3);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FloatParamNameOutOffset));
         }
         set
         {
-            _FloatParamNameOutOffset = _FloatParamNameOutOffset ?? Schema.GetOffset(0xC0531C8BE53CECD3);
-            Schema.SetCUtlString(_Handle, _FloatParamNameOutOffset!.Value, value);
+            if (_FloatParamNameOutOffset == -1) _FloatParamNameOutOffset = Schema.GetOffset(0xC0531C8BE53CECD3);
+            Schema.SetCUtlString(_Handle, _FloatParamNameOutOffset, value);
         }
     }
-    private static nint? _VectorParamNameInOffset;
+    private static nint _VectorParamNameInOffset = -1;
 
     public string VectorParamNameIn
     {
         get
         {
-            _VectorParamNameInOffset = _VectorParamNameInOffset ?? Schema.GetOffset(0xC0531C8B193E11F7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_VectorParamNameInOffset!.Value));
+            if (_VectorParamNameInOffset == -1) _VectorParamNameInOffset = Schema.GetOffset(0xC0531C8B193E11F7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_VectorParamNameInOffset));
         }
         set
         {
-            _VectorParamNameInOffset = _VectorParamNameInOffset ?? Schema.GetOffset(0xC0531C8B193E11F7);
-            Schema.SetCUtlString(_Handle, _VectorParamNameInOffset!.Value, value);
+            if (_VectorParamNameInOffset == -1) _VectorParamNameInOffset = Schema.GetOffset(0xC0531C8B193E11F7);
+            Schema.SetCUtlString(_Handle, _VectorParamNameInOffset, value);
         }
     }
-    private static nint? _VectorParamNameOutOffset;
+    private static nint _VectorParamNameOutOffset = -1;
 
     public string VectorParamNameOut
     {
         get
         {
-            _VectorParamNameOutOffset = _VectorParamNameOutOffset ?? Schema.GetOffset(0xC0531C8BC76FCB7C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_VectorParamNameOutOffset!.Value));
+            if (_VectorParamNameOutOffset == -1) _VectorParamNameOutOffset = Schema.GetOffset(0xC0531C8BC76FCB7C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_VectorParamNameOutOffset));
         }
         set
         {
-            _VectorParamNameOutOffset = _VectorParamNameOutOffset ?? Schema.GetOffset(0xC0531C8BC76FCB7C);
-            Schema.SetCUtlString(_Handle, _VectorParamNameOutOffset!.Value, value);
+            if (_VectorParamNameOutOffset == -1) _VectorParamNameOutOffset = Schema.GetOffset(0xC0531C8BC76FCB7C);
+            Schema.SetCUtlString(_Handle, _VectorParamNameOutOffset, value);
         }
     }
-    private static nint? _FloatParamInOffset;
+    private static nint _FloatParamInOffset = -1;
     private AnimParamIDImpl? _FloatParamInInstance;
 
     public AnimParamID FloatParamIn
     {
         get
         {
-            _FloatParamInOffset = _FloatParamInOffset ?? Schema.GetOffset(0xC0531C8B84BA1B9D);
+            if (_FloatParamInOffset == -1) _FloatParamInOffset = Schema.GetOffset(0xC0531C8B84BA1B9D);
             var instance = _FloatParamInInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _FloatParamInOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FloatParamInOffset);
             return instance;
         }
     }
-    private static nint? _FloatParamOutOffset;
+    private static nint _FloatParamOutOffset = -1;
     private AnimParamIDImpl? _FloatParamOutInstance;
 
     public AnimParamID FloatParamOut
     {
         get
         {
-            _FloatParamOutOffset = _FloatParamOutOffset ?? Schema.GetOffset(0xC0531C8BA79A87A6);
+            if (_FloatParamOutOffset == -1) _FloatParamOutOffset = Schema.GetOffset(0xC0531C8BA79A87A6);
             var instance = _FloatParamOutInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _FloatParamOutOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FloatParamOutOffset);
             return instance;
         }
     }
-    private static nint? _VectorParamInOffset;
+    private static nint _VectorParamInOffset = -1;
     private AnimParamIDImpl? _VectorParamInInstance;
 
     public AnimParamID VectorParamIn
     {
         get
         {
-            _VectorParamInOffset = _VectorParamInOffset ?? Schema.GetOffset(0xC0531C8B1F329800);
+            if (_VectorParamInOffset == -1) _VectorParamInOffset = Schema.GetOffset(0xC0531C8B1F329800);
             var instance = _VectorParamInInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _VectorParamInOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VectorParamInOffset);
             return instance;
         }
     }
-    private static nint? _VectorParamOutOffset;
+    private static nint _VectorParamOutOffset = -1;
     private AnimParamIDImpl? _VectorParamOutInstance;
 
     public AnimParamID VectorParamOut
     {
         get
         {
-            _VectorParamOutOffset = _VectorParamOutOffset ?? Schema.GetOffset(0xC0531C8B724238C5);
+            if (_VectorParamOutOffset == -1) _VectorParamOutOffset = Schema.GetOffset(0xC0531C8B724238C5);
             var instance = _VectorParamOutInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _VectorParamOutOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VectorParamOutOffset);
             return instance;
         }
     }
-    private static nint? _MinInputValueOffset;
+    private static nint _MinInputValueOffset = -1;
 
     public ref float MinInputValue
     {
         get
         {
-            _MinInputValueOffset = _MinInputValueOffset ?? Schema.GetOffset(0xC0531C8BBDB4BC64);
-            return ref _Handle.AsRef<float>(_MinInputValueOffset!.Value);
+            if (_MinInputValueOffset == -1) _MinInputValueOffset = Schema.GetOffset(0xC0531C8BBDB4BC64);
+            return ref _Handle.AsRef<float>(_MinInputValueOffset);
         }
     }
-    private static nint? _MaxInputValueOffset;
+    private static nint _MaxInputValueOffset = -1;
 
     public ref float MaxInputValue
     {
         get
         {
-            _MaxInputValueOffset = _MaxInputValueOffset ?? Schema.GetOffset(0xC0531C8B3EF75C2A);
-            return ref _Handle.AsRef<float>(_MaxInputValueOffset!.Value);
+            if (_MaxInputValueOffset == -1) _MaxInputValueOffset = Schema.GetOffset(0xC0531C8B3EF75C2A);
+            return ref _Handle.AsRef<float>(_MaxInputValueOffset);
         }
     }
-    private static nint? _MinOutputValueOffset;
+    private static nint _MinOutputValueOffset = -1;
 
     public ref float MinOutputValue
     {
         get
         {
-            _MinOutputValueOffset = _MinOutputValueOffset ?? Schema.GetOffset(0xC0531C8BF63C7011);
-            return ref _Handle.AsRef<float>(_MinOutputValueOffset!.Value);
+            if (_MinOutputValueOffset == -1) _MinOutputValueOffset = Schema.GetOffset(0xC0531C8BF63C7011);
+            return ref _Handle.AsRef<float>(_MinOutputValueOffset);
         }
     }
-    private static nint? _MaxOutputValueOffset;
+    private static nint _MaxOutputValueOffset = -1;
 
     public ref float MaxOutputValue
     {
         get
         {
-            _MaxOutputValueOffset = _MaxOutputValueOffset ?? Schema.GetOffset(0xC0531C8BA91B71B3);
-            return ref _Handle.AsRef<float>(_MaxOutputValueOffset!.Value);
+            if (_MaxOutputValueOffset == -1) _MaxOutputValueOffset = Schema.GetOffset(0xC0531C8BA91B71B3);
+            return ref _Handle.AsRef<float>(_MaxOutputValueOffset);
         }
     }
 

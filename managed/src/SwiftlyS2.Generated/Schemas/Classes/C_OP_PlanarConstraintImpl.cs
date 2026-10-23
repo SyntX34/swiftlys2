@@ -16,90 +16,90 @@ internal partial class C_OP_PlanarConstraintImpl : CParticleFunctionConstraintIm
 {
     public C_OP_PlanarConstraintImpl(nint handle) : base(handle) { }
 
-    private static nint? _PointOnPlaneOffset;
+    private static nint _PointOnPlaneOffset = -1;
 
     public ref Vector PointOnPlane
     {
         get
         {
-            _PointOnPlaneOffset = _PointOnPlaneOffset ?? Schema.GetOffset(0x1440B2AE4A5806BE);
-            return ref _Handle.AsRef<Vector>(_PointOnPlaneOffset!.Value);
+            if (_PointOnPlaneOffset == -1) _PointOnPlaneOffset = Schema.GetOffset(0x1440B2AE4A5806BE);
+            return ref _Handle.AsRef<Vector>(_PointOnPlaneOffset);
         }
     }
-    private static nint? _PlaneNormalOffset;
+    private static nint _PlaneNormalOffset = -1;
 
     public ref Vector PlaneNormal
     {
         get
         {
-            _PlaneNormalOffset = _PlaneNormalOffset ?? Schema.GetOffset(0x1440B2AEEAA80062);
-            return ref _Handle.AsRef<Vector>(_PlaneNormalOffset!.Value);
+            if (_PlaneNormalOffset == -1) _PlaneNormalOffset = Schema.GetOffset(0x1440B2AEEAA80062);
+            return ref _Handle.AsRef<Vector>(_PlaneNormalOffset);
         }
     }
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x1440B2AE3F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x1440B2AE3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _GlobalOriginOffset;
+    private static nint _GlobalOriginOffset = -1;
 
     public ref bool GlobalOrigin
     {
         get
         {
-            _GlobalOriginOffset = _GlobalOriginOffset ?? Schema.GetOffset(0x1440B2AEDF871518);
-            return ref _Handle.AsRef<bool>(_GlobalOriginOffset!.Value);
+            if (_GlobalOriginOffset == -1) _GlobalOriginOffset = Schema.GetOffset(0x1440B2AEDF871518);
+            return ref _Handle.AsRef<bool>(_GlobalOriginOffset);
         }
     }
-    private static nint? _GlobalNormalOffset;
+    private static nint _GlobalNormalOffset = -1;
 
     public ref bool GlobalNormal
     {
         get
         {
-            _GlobalNormalOffset = _GlobalNormalOffset ?? Schema.GetOffset(0x1440B2AE266C15DD);
-            return ref _Handle.AsRef<bool>(_GlobalNormalOffset!.Value);
+            if (_GlobalNormalOffset == -1) _GlobalNormalOffset = Schema.GetOffset(0x1440B2AE266C15DD);
+            return ref _Handle.AsRef<bool>(_GlobalNormalOffset);
         }
     }
-    private static nint? _RadiusScaleOffset;
+    private static nint _RadiusScaleOffset = -1;
     private CPerParticleFloatInputImpl? _RadiusScaleInstance;
 
     public CPerParticleFloatInput RadiusScale
     {
         get
         {
-            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x1440B2AEA7A20159);
+            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0x1440B2AEA7A20159);
             var instance = _RadiusScaleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RadiusScaleOffset);
             return instance;
         }
     }
-    private static nint? _MaximumDistanceToCPOffset;
+    private static nint _MaximumDistanceToCPOffset = -1;
     private CParticleCollectionFloatInputImpl? _MaximumDistanceToCPInstance;
 
     public CParticleCollectionFloatInput MaximumDistanceToCP
     {
         get
         {
-            _MaximumDistanceToCPOffset = _MaximumDistanceToCPOffset ?? Schema.GetOffset(0x1440B2AE91B48FEA);
+            if (_MaximumDistanceToCPOffset == -1) _MaximumDistanceToCPOffset = Schema.GetOffset(0x1440B2AE91B48FEA);
             var instance = _MaximumDistanceToCPInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MaximumDistanceToCPOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MaximumDistanceToCPOffset);
             return instance;
         }
     }
-    private static nint? _UseOldCodeOffset;
+    private static nint _UseOldCodeOffset = -1;
 
     public ref bool UseOldCode
     {
         get
         {
-            _UseOldCodeOffset = _UseOldCodeOffset ?? Schema.GetOffset(0x1440B2AEB7886300);
-            return ref _Handle.AsRef<bool>(_UseOldCodeOffset!.Value);
+            if (_UseOldCodeOffset == -1) _UseOldCodeOffset = Schema.GetOffset(0x1440B2AEB7886300);
+            return ref _Handle.AsRef<bool>(_UseOldCodeOffset);
         }
     }
 

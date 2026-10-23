@@ -16,179 +16,179 @@ internal partial class GeneralOptionsEditableData_tImpl : SchemaClass, GeneralOp
 {
     public GeneralOptionsEditableData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _UndoLevelsOffset;
+    private static nint _UndoLevelsOffset = -1;
 
     public ref int UndoLevels
     {
         get
         {
-            _UndoLevelsOffset = _UndoLevelsOffset ?? Schema.GetOffset(0x3DCC33540138B4A9);
-            return ref _Handle.AsRef<int>(_UndoLevelsOffset!.Value);
+            if (_UndoLevelsOffset == -1) _UndoLevelsOffset = Schema.GetOffset(0x3DCC33540138B4A9);
+            return ref _Handle.AsRef<int>(_UndoLevelsOffset);
         }
     }
-    private static nint? _SaveChangesOnBuildMapOffset;
+    private static nint _SaveChangesOnBuildMapOffset = -1;
 
     public ref bool SaveChangesOnBuildMap
     {
         get
         {
-            _SaveChangesOnBuildMapOffset = _SaveChangesOnBuildMapOffset ?? Schema.GetOffset(0x3DCC33547B1CB36A);
-            return ref _Handle.AsRef<bool>(_SaveChangesOnBuildMapOffset!.Value);
+            if (_SaveChangesOnBuildMapOffset == -1) _SaveChangesOnBuildMapOffset = Schema.GetOffset(0x3DCC33547B1CB36A);
+            return ref _Handle.AsRef<bool>(_SaveChangesOnBuildMapOffset);
         }
     }
-    private static nint? _RenderFullyUnlitAsFullbrightOffset;
+    private static nint _RenderFullyUnlitAsFullbrightOffset = -1;
 
     public ref bool RenderFullyUnlitAsFullbright
     {
         get
         {
-            _RenderFullyUnlitAsFullbrightOffset = _RenderFullyUnlitAsFullbrightOffset ?? Schema.GetOffset(0x3DCC3354FF23142C);
-            return ref _Handle.AsRef<bool>(_RenderFullyUnlitAsFullbrightOffset!.Value);
+            if (_RenderFullyUnlitAsFullbrightOffset == -1) _RenderFullyUnlitAsFullbrightOffset = Schema.GetOffset(0x3DCC3354FF23142C);
+            return ref _Handle.AsRef<bool>(_RenderFullyUnlitAsFullbrightOffset);
         }
     }
-    private static nint? _ShowSelectionModeChangeNotificationIconsOffset;
+    private static nint _ShowSelectionModeChangeNotificationIconsOffset = -1;
 
     public ref bool ShowSelectionModeChangeNotificationIcons
     {
         get
         {
-            _ShowSelectionModeChangeNotificationIconsOffset = _ShowSelectionModeChangeNotificationIconsOffset ?? Schema.GetOffset(0x3DCC335414EBCF44);
-            return ref _Handle.AsRef<bool>(_ShowSelectionModeChangeNotificationIconsOffset!.Value);
+            if (_ShowSelectionModeChangeNotificationIconsOffset == -1) _ShowSelectionModeChangeNotificationIconsOffset = Schema.GetOffset(0x3DCC335414EBCF44);
+            return ref _Handle.AsRef<bool>(_ShowSelectionModeChangeNotificationIconsOffset);
         }
     }
-    private static nint? _ShowToolChangeNotificationIconsOffset;
+    private static nint _ShowToolChangeNotificationIconsOffset = -1;
 
     public ref bool ShowToolChangeNotificationIcons
     {
         get
         {
-            _ShowToolChangeNotificationIconsOffset = _ShowToolChangeNotificationIconsOffset ?? Schema.GetOffset(0x3DCC335476816E7D);
-            return ref _Handle.AsRef<bool>(_ShowToolChangeNotificationIconsOffset!.Value);
+            if (_ShowToolChangeNotificationIconsOffset == -1) _ShowToolChangeNotificationIconsOffset = Schema.GetOffset(0x3DCC335476816E7D);
+            return ref _Handle.AsRef<bool>(_ShowToolChangeNotificationIconsOffset);
         }
     }
-    private static nint? _PauseGameOnActivateOffset;
+    private static nint _PauseGameOnActivateOffset = -1;
 
     public ref bool PauseGameOnActivate
     {
         get
         {
-            _PauseGameOnActivateOffset = _PauseGameOnActivateOffset ?? Schema.GetOffset(0x3DCC3354AD297D9B);
-            return ref _Handle.AsRef<bool>(_PauseGameOnActivateOffset!.Value);
+            if (_PauseGameOnActivateOffset == -1) _PauseGameOnActivateOffset = Schema.GetOffset(0x3DCC3354AD297D9B);
+            return ref _Handle.AsRef<bool>(_PauseGameOnActivateOffset);
         }
     }
-    private static nint? _SolidEntityOffset;
+    private static nint _SolidEntityOffset = -1;
 
     public string SolidEntity
     {
         get
         {
-            _SolidEntityOffset = _SolidEntityOffset ?? Schema.GetOffset(0x3DCC3354272F588F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SolidEntityOffset!.Value));
+            if (_SolidEntityOffset == -1) _SolidEntityOffset = Schema.GetOffset(0x3DCC3354272F588F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SolidEntityOffset));
         }
         set
         {
-            _SolidEntityOffset = _SolidEntityOffset ?? Schema.GetOffset(0x3DCC3354272F588F);
-            Schema.SetCUtlString(_Handle, _SolidEntityOffset!.Value, value);
+            if (_SolidEntityOffset == -1) _SolidEntityOffset = Schema.GetOffset(0x3DCC3354272F588F);
+            Schema.SetCUtlString(_Handle, _SolidEntityOffset, value);
         }
     }
-    private static nint? _PointEntityOffset;
+    private static nint _PointEntityOffset = -1;
 
     public string PointEntity
     {
         get
         {
-            _PointEntityOffset = _PointEntityOffset ?? Schema.GetOffset(0x3DCC33541875D776);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PointEntityOffset!.Value));
+            if (_PointEntityOffset == -1) _PointEntityOffset = Schema.GetOffset(0x3DCC33541875D776);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PointEntityOffset));
         }
         set
         {
-            _PointEntityOffset = _PointEntityOffset ?? Schema.GetOffset(0x3DCC33541875D776);
-            Schema.SetCUtlString(_Handle, _PointEntityOffset!.Value, value);
+            if (_PointEntityOffset == -1) _PointEntityOffset = Schema.GetOffset(0x3DCC33541875D776);
+            Schema.SetCUtlString(_Handle, _PointEntityOffset, value);
         }
     }
-    private static nint? _PathEntityOffset;
+    private static nint _PathEntityOffset = -1;
 
     public string PathEntity
     {
         get
         {
-            _PathEntityOffset = _PathEntityOffset ?? Schema.GetOffset(0x3DCC3354E4FAFA85);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PathEntityOffset!.Value));
+            if (_PathEntityOffset == -1) _PathEntityOffset = Schema.GetOffset(0x3DCC3354E4FAFA85);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PathEntityOffset));
         }
         set
         {
-            _PathEntityOffset = _PathEntityOffset ?? Schema.GetOffset(0x3DCC3354E4FAFA85);
-            Schema.SetCUtlString(_Handle, _PathEntityOffset!.Value, value);
+            if (_PathEntityOffset == -1) _PathEntityOffset = Schema.GetOffset(0x3DCC3354E4FAFA85);
+            Schema.SetCUtlString(_Handle, _PathEntityOffset, value);
         }
     }
-    private static nint? _ReportMapCompileCrashesOffset;
+    private static nint _ReportMapCompileCrashesOffset = -1;
 
     public ref bool ReportMapCompileCrashes
     {
         get
         {
-            _ReportMapCompileCrashesOffset = _ReportMapCompileCrashesOffset ?? Schema.GetOffset(0x3DCC33541260F8FB);
-            return ref _Handle.AsRef<bool>(_ReportMapCompileCrashesOffset!.Value);
+            if (_ReportMapCompileCrashesOffset == -1) _ReportMapCompileCrashesOffset = Schema.GetOffset(0x3DCC33541260F8FB);
+            return ref _Handle.AsRef<bool>(_ReportMapCompileCrashesOffset);
         }
     }
-    private static nint? _ViewFocusStealingOffset;
+    private static nint _ViewFocusStealingOffset = -1;
 
     public ref bool ViewFocusStealing
     {
         get
         {
-            _ViewFocusStealingOffset = _ViewFocusStealingOffset ?? Schema.GetOffset(0x3DCC3354D362181D);
-            return ref _Handle.AsRef<bool>(_ViewFocusStealingOffset!.Value);
+            if (_ViewFocusStealingOffset == -1) _ViewFocusStealingOffset = Schema.GetOffset(0x3DCC3354D362181D);
+            return ref _Handle.AsRef<bool>(_ViewFocusStealingOffset);
         }
     }
-    private static nint? _MoveSelectedEnabledOffset;
+    private static nint _MoveSelectedEnabledOffset = -1;
 
     public ref bool MoveSelectedEnabled
     {
         get
         {
-            _MoveSelectedEnabledOffset = _MoveSelectedEnabledOffset ?? Schema.GetOffset(0x3DCC33547ADAE326);
-            return ref _Handle.AsRef<bool>(_MoveSelectedEnabledOffset!.Value);
+            if (_MoveSelectedEnabledOffset == -1) _MoveSelectedEnabledOffset = Schema.GetOffset(0x3DCC33547ADAE326);
+            return ref _Handle.AsRef<bool>(_MoveSelectedEnabledOffset);
         }
     }
-    private static nint? _PreviewMotionExtractionOffset;
+    private static nint _PreviewMotionExtractionOffset = -1;
 
     public ref bool PreviewMotionExtraction
     {
         get
         {
-            _PreviewMotionExtractionOffset = _PreviewMotionExtractionOffset ?? Schema.GetOffset(0x3DCC335499F92508);
-            return ref _Handle.AsRef<bool>(_PreviewMotionExtractionOffset!.Value);
+            if (_PreviewMotionExtractionOffset == -1) _PreviewMotionExtractionOffset = Schema.GetOffset(0x3DCC335499F92508);
+            return ref _Handle.AsRef<bool>(_PreviewMotionExtractionOffset);
         }
     }
-    private static nint? _ViewportFontSizeOffset;
+    private static nint _ViewportFontSizeOffset = -1;
 
     public ref int ViewportFontSize
     {
         get
         {
-            _ViewportFontSizeOffset = _ViewportFontSizeOffset ?? Schema.GetOffset(0x3DCC3354F8FFAFAF);
-            return ref _Handle.AsRef<int>(_ViewportFontSizeOffset!.Value);
+            if (_ViewportFontSizeOffset == -1) _ViewportFontSizeOffset = Schema.GetOffset(0x3DCC3354F8FFAFAF);
+            return ref _Handle.AsRef<int>(_ViewportFontSizeOffset);
         }
     }
-    private static nint? _VertexSnapRadiusOffset;
+    private static nint _VertexSnapRadiusOffset = -1;
 
     public ref float VertexSnapRadius
     {
         get
         {
-            _VertexSnapRadiusOffset = _VertexSnapRadiusOffset ?? Schema.GetOffset(0x3DCC33548DE94A2F);
-            return ref _Handle.AsRef<float>(_VertexSnapRadiusOffset!.Value);
+            if (_VertexSnapRadiusOffset == -1) _VertexSnapRadiusOffset = Schema.GetOffset(0x3DCC33548DE94A2F);
+            return ref _Handle.AsRef<float>(_VertexSnapRadiusOffset);
         }
     }
-    private static nint? _ForceStaticPropsForModelDragsOffset;
+    private static nint _ForceStaticPropsForModelDragsOffset = -1;
 
     public ref bool ForceStaticPropsForModelDrags
     {
         get
         {
-            _ForceStaticPropsForModelDragsOffset = _ForceStaticPropsForModelDragsOffset ?? Schema.GetOffset(0x3DCC3354D99E7B57);
-            return ref _Handle.AsRef<bool>(_ForceStaticPropsForModelDragsOffset!.Value);
+            if (_ForceStaticPropsForModelDragsOffset == -1) _ForceStaticPropsForModelDragsOffset = Schema.GetOffset(0x3DCC3354D99E7B57);
+            return ref _Handle.AsRef<bool>(_ForceStaticPropsForModelDragsOffset);
         }
     }
 

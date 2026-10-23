@@ -16,64 +16,64 @@ internal partial class CEnvLaserImpl : CBeamImpl, CEnvLaser
 {
     public CEnvLaserImpl(nint handle) : base(handle) { }
 
-    private static nint? _LaserTargetOffset;
+    private static nint _LaserTargetOffset = -1;
 
     public string LaserTarget
     {
         get
         {
-            _LaserTargetOffset = _LaserTargetOffset ?? Schema.GetOffset(0x83A2D3C8C257F4D);
-            return Schema.GetString(_Handle.Read<nint>(_LaserTargetOffset!.Value));
+            if (_LaserTargetOffset == -1) _LaserTargetOffset = Schema.GetOffset(0x83A2D3C8C257F4D);
+            return Schema.GetString(_Handle.Read<nint>(_LaserTargetOffset));
         }
         set
         {
-            _LaserTargetOffset = _LaserTargetOffset ?? Schema.GetOffset(0x83A2D3C8C257F4D);
-            Schema.SetString(_Handle, _LaserTargetOffset!.Value, value);
+            if (_LaserTargetOffset == -1) _LaserTargetOffset = Schema.GetOffset(0x83A2D3C8C257F4D);
+            Schema.SetString(_Handle, _LaserTargetOffset, value);
         }
     }
-    private static nint? _SpriteOffset;
+    private static nint _SpriteOffset = -1;
 
     public ref CHandle<CSprite> Sprite
     {
         get
         {
-            _SpriteOffset = _SpriteOffset ?? Schema.GetOffset(0x83A2D3CEFBFA166);
-            return ref _Handle.AsRef<CHandle<CSprite>>(_SpriteOffset!.Value);
+            if (_SpriteOffset == -1) _SpriteOffset = Schema.GetOffset(0x83A2D3CEFBFA166);
+            return ref _Handle.AsRef<CHandle<CSprite>>(_SpriteOffset);
         }
     }
-    private static nint? _SpriteNameOffset;
+    private static nint _SpriteNameOffset = -1;
 
     public string SpriteName
     {
         get
         {
-            _SpriteNameOffset = _SpriteNameOffset ?? Schema.GetOffset(0x83A2D3C096530FF);
-            return Schema.GetString(_Handle.Read<nint>(_SpriteNameOffset!.Value));
+            if (_SpriteNameOffset == -1) _SpriteNameOffset = Schema.GetOffset(0x83A2D3C096530FF);
+            return Schema.GetString(_Handle.Read<nint>(_SpriteNameOffset));
         }
         set
         {
-            _SpriteNameOffset = _SpriteNameOffset ?? Schema.GetOffset(0x83A2D3C096530FF);
-            Schema.SetString(_Handle, _SpriteNameOffset!.Value, value);
+            if (_SpriteNameOffset == -1) _SpriteNameOffset = Schema.GetOffset(0x83A2D3C096530FF);
+            Schema.SetString(_Handle, _SpriteNameOffset, value);
         }
     }
-    private static nint? _FirePositionOffset;
+    private static nint _FirePositionOffset = -1;
 
     public ref Vector FirePosition
     {
         get
         {
-            _FirePositionOffset = _FirePositionOffset ?? Schema.GetOffset(0x83A2D3C2A7C404E);
-            return ref _Handle.AsRef<Vector>(_FirePositionOffset!.Value);
+            if (_FirePositionOffset == -1) _FirePositionOffset = Schema.GetOffset(0x83A2D3C2A7C404E);
+            return ref _Handle.AsRef<Vector>(_FirePositionOffset);
         }
     }
-    private static nint? _StartFrameOffset;
+    private static nint _StartFrameOffset = -1;
 
     public ref float StartFrame
     {
         get
         {
-            _StartFrameOffset = _StartFrameOffset ?? Schema.GetOffset(0x83A2D3CB534B906);
-            return ref _Handle.AsRef<float>(_StartFrameOffset!.Value);
+            if (_StartFrameOffset == -1) _StartFrameOffset = Schema.GetOffset(0x83A2D3CB534B906);
+            return ref _Handle.AsRef<float>(_StartFrameOffset);
         }
     }
 

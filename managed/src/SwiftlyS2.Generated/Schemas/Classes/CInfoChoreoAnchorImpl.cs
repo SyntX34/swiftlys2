@@ -16,24 +16,24 @@ internal partial class CInfoChoreoAnchorImpl : CPointEntityImpl, CInfoChoreoAnch
 {
     public CInfoChoreoAnchorImpl(nint handle) : base(handle) { }
 
-    private static nint? _TargetEntriesOffset;
+    private static nint _TargetEntriesOffset = -1;
 
     public ref CUtlVector<CInfoChoreoAnchorPosition> TargetEntries
     {
         get
         {
-            _TargetEntriesOffset = _TargetEntriesOffset ?? Schema.GetOffset(0x603945D10AC6A8B8);
-            return ref _Handle.AsRef<CUtlVector<CInfoChoreoAnchorPosition>>(_TargetEntriesOffset!.Value);
+            if (_TargetEntriesOffset == -1) _TargetEntriesOffset = Schema.GetOffset(0x603945D10AC6A8B8);
+            return ref _Handle.AsRef<CUtlVector<CInfoChoreoAnchorPosition>>(_TargetEntriesOffset);
         }
     }
-    private static nint? _TargetWarpsOffset;
+    private static nint _TargetWarpsOffset = -1;
 
     public ref CUtlVector<CInfoChoreoAnchorPosition> TargetWarps
     {
         get
         {
-            _TargetWarpsOffset = _TargetWarpsOffset ?? Schema.GetOffset(0x603945D185A293FF);
-            return ref _Handle.AsRef<CUtlVector<CInfoChoreoAnchorPosition>>(_TargetWarpsOffset!.Value);
+            if (_TargetWarpsOffset == -1) _TargetWarpsOffset = Schema.GetOffset(0x603945D185A293FF);
+            return ref _Handle.AsRef<CUtlVector<CInfoChoreoAnchorPosition>>(_TargetWarpsOffset);
         }
     }
 

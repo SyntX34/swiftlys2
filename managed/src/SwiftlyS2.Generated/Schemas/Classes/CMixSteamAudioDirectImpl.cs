@@ -16,124 +16,124 @@ internal partial class CMixSteamAudioDirectImpl : CMixPropertyBaseImpl, CMixStea
 {
     public CMixSteamAudioDirectImpl(nint handle) : base(handle) { }
 
-    private static nint? _ApplyDistanceAttenuationOffset;
+    private static nint _ApplyDistanceAttenuationOffset = -1;
 
     public ref bool ApplyDistanceAttenuation
     {
         get
         {
-            _ApplyDistanceAttenuationOffset = _ApplyDistanceAttenuationOffset ?? Schema.GetOffset(0xA0CAA49703424CA4);
-            return ref _Handle.AsRef<bool>(_ApplyDistanceAttenuationOffset!.Value);
+            if (_ApplyDistanceAttenuationOffset == -1) _ApplyDistanceAttenuationOffset = Schema.GetOffset(0xA0CAA49703424CA4);
+            return ref _Handle.AsRef<bool>(_ApplyDistanceAttenuationOffset);
         }
     }
-    private static nint? _ApplyAirAbsorptionOffset;
+    private static nint _ApplyAirAbsorptionOffset = -1;
 
     public ref bool ApplyAirAbsorption
     {
         get
         {
-            _ApplyAirAbsorptionOffset = _ApplyAirAbsorptionOffset ?? Schema.GetOffset(0xA0CAA4974115A520);
-            return ref _Handle.AsRef<bool>(_ApplyAirAbsorptionOffset!.Value);
+            if (_ApplyAirAbsorptionOffset == -1) _ApplyAirAbsorptionOffset = Schema.GetOffset(0xA0CAA4974115A520);
+            return ref _Handle.AsRef<bool>(_ApplyAirAbsorptionOffset);
         }
     }
-    private static nint? _ApplyDirectivityOffset;
+    private static nint _ApplyDirectivityOffset = -1;
 
     public ref bool ApplyDirectivity
     {
         get
         {
-            _ApplyDirectivityOffset = _ApplyDirectivityOffset ?? Schema.GetOffset(0xA0CAA497A4D49563);
-            return ref _Handle.AsRef<bool>(_ApplyDirectivityOffset!.Value);
+            if (_ApplyDirectivityOffset == -1) _ApplyDirectivityOffset = Schema.GetOffset(0xA0CAA497A4D49563);
+            return ref _Handle.AsRef<bool>(_ApplyDirectivityOffset);
         }
     }
-    private static nint? _ApplyOcclusionOffset;
+    private static nint _ApplyOcclusionOffset = -1;
 
     public ref bool ApplyOcclusion
     {
         get
         {
-            _ApplyOcclusionOffset = _ApplyOcclusionOffset ?? Schema.GetOffset(0xA0CAA49742E2B03C);
-            return ref _Handle.AsRef<bool>(_ApplyOcclusionOffset!.Value);
+            if (_ApplyOcclusionOffset == -1) _ApplyOcclusionOffset = Schema.GetOffset(0xA0CAA49742E2B03C);
+            return ref _Handle.AsRef<bool>(_ApplyOcclusionOffset);
         }
     }
-    private static nint? _ApplyTransmissionOffset;
+    private static nint _ApplyTransmissionOffset = -1;
 
     public ref bool ApplyTransmission
     {
         get
         {
-            _ApplyTransmissionOffset = _ApplyTransmissionOffset ?? Schema.GetOffset(0xA0CAA4976178FCC7);
-            return ref _Handle.AsRef<bool>(_ApplyTransmissionOffset!.Value);
+            if (_ApplyTransmissionOffset == -1) _ApplyTransmissionOffset = Schema.GetOffset(0xA0CAA4976178FCC7);
+            return ref _Handle.AsRef<bool>(_ApplyTransmissionOffset);
         }
     }
-    private static nint? _DipoleWeightOffset;
+    private static nint _DipoleWeightOffset = -1;
 
     public ref float DipoleWeight
     {
         get
         {
-            _DipoleWeightOffset = _DipoleWeightOffset ?? Schema.GetOffset(0xA0CAA49727FFC152);
-            return ref _Handle.AsRef<float>(_DipoleWeightOffset!.Value);
+            if (_DipoleWeightOffset == -1) _DipoleWeightOffset = Schema.GetOffset(0xA0CAA49727FFC152);
+            return ref _Handle.AsRef<float>(_DipoleWeightOffset);
         }
     }
-    private static nint? _DipolePowerOffset;
+    private static nint _DipolePowerOffset = -1;
 
     public ref float DipolePower
     {
         get
         {
-            _DipolePowerOffset = _DipolePowerOffset ?? Schema.GetOffset(0xA0CAA497674443DB);
-            return ref _Handle.AsRef<float>(_DipolePowerOffset!.Value);
+            if (_DipolePowerOffset == -1) _DipolePowerOffset = Schema.GetOffset(0xA0CAA497674443DB);
+            return ref _Handle.AsRef<float>(_DipolePowerOffset);
         }
     }
-    private static nint? _OcclusionOffset;
+    private static nint _OcclusionOffset = -1;
 
     public ref float Occlusion
     {
         get
         {
-            _OcclusionOffset = _OcclusionOffset ?? Schema.GetOffset(0xA0CAA49795CE8530);
-            return ref _Handle.AsRef<float>(_OcclusionOffset!.Value);
+            if (_OcclusionOffset == -1) _OcclusionOffset = Schema.GetOffset(0xA0CAA49795CE8530);
+            return ref _Handle.AsRef<float>(_OcclusionOffset);
         }
     }
-    private static nint? _TransmissionLowOffset;
+    private static nint _TransmissionLowOffset = -1;
 
     public ref float TransmissionLow
     {
         get
         {
-            _TransmissionLowOffset = _TransmissionLowOffset ?? Schema.GetOffset(0xA0CAA497EBFB7543);
-            return ref _Handle.AsRef<float>(_TransmissionLowOffset!.Value);
+            if (_TransmissionLowOffset == -1) _TransmissionLowOffset = Schema.GetOffset(0xA0CAA497EBFB7543);
+            return ref _Handle.AsRef<float>(_TransmissionLowOffset);
         }
     }
-    private static nint? _TransmissionMidOffset;
+    private static nint _TransmissionMidOffset = -1;
 
     public ref float TransmissionMid
     {
         get
         {
-            _TransmissionMidOffset = _TransmissionMidOffset ?? Schema.GetOffset(0xA0CAA4977EBE6917);
-            return ref _Handle.AsRef<float>(_TransmissionMidOffset!.Value);
+            if (_TransmissionMidOffset == -1) _TransmissionMidOffset = Schema.GetOffset(0xA0CAA4977EBE6917);
+            return ref _Handle.AsRef<float>(_TransmissionMidOffset);
         }
     }
-    private static nint? _TransmissionHighOffset;
+    private static nint _TransmissionHighOffset = -1;
 
     public ref float TransmissionHigh
     {
         get
         {
-            _TransmissionHighOffset = _TransmissionHighOffset ?? Schema.GetOffset(0xA0CAA497F9D8D35F);
-            return ref _Handle.AsRef<float>(_TransmissionHighOffset!.Value);
+            if (_TransmissionHighOffset == -1) _TransmissionHighOffset = Schema.GetOffset(0xA0CAA497F9D8D35F);
+            return ref _Handle.AsRef<float>(_TransmissionHighOffset);
         }
     }
-    private static nint? _TransmissionOffset;
+    private static nint _TransmissionOffset = -1;
 
     public ref CUtlVector<float> Transmission
     {
         get
         {
-            _TransmissionOffset = _TransmissionOffset ?? Schema.GetOffset(0xA0CAA4972C245045);
-            return ref _Handle.AsRef<CUtlVector<float>>(_TransmissionOffset!.Value);
+            if (_TransmissionOffset == -1) _TransmissionOffset = Schema.GetOffset(0xA0CAA4972C245045);
+            return ref _Handle.AsRef<CUtlVector<float>>(_TransmissionOffset);
         }
     }
 

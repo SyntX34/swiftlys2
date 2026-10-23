@@ -16,64 +16,64 @@ internal partial class VMixFilterDesc_tImpl : SchemaClass, VMixFilterDesc_t
 {
     public VMixFilterDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _FldbGainOffset;
+    private static nint _FldbGainOffset = -1;
 
     public ref float FldbGain
     {
         get
         {
-            _FldbGainOffset = _FldbGainOffset ?? Schema.GetOffset(0x39A87B6931BF2DF2);
-            return ref _Handle.AsRef<float>(_FldbGainOffset!.Value);
+            if (_FldbGainOffset == -1) _FldbGainOffset = Schema.GetOffset(0x39A87B6931BF2DF2);
+            return ref _Handle.AsRef<float>(_FldbGainOffset);
         }
     }
-    private static nint? _CutoffFreqOffset;
+    private static nint _CutoffFreqOffset = -1;
 
     public ref float CutoffFreq
     {
         get
         {
-            _CutoffFreqOffset = _CutoffFreqOffset ?? Schema.GetOffset(0x39A87B691E8CBE8C);
-            return ref _Handle.AsRef<float>(_CutoffFreqOffset!.Value);
+            if (_CutoffFreqOffset == -1) _CutoffFreqOffset = Schema.GetOffset(0x39A87B691E8CBE8C);
+            return ref _Handle.AsRef<float>(_CutoffFreqOffset);
         }
     }
-    private static nint? _QOffset;
+    private static nint _QOffset = -1;
 
     public ref float Q
     {
         get
         {
-            _QOffset = _QOffset ?? Schema.GetOffset(0x39A87B6996122E3A);
-            return ref _Handle.AsRef<float>(_QOffset!.Value);
+            if (_QOffset == -1) _QOffset = Schema.GetOffset(0x39A87B6996122E3A);
+            return ref _Handle.AsRef<float>(_QOffset);
         }
     }
-    private static nint? _FilterTypeOffset;
+    private static nint _FilterTypeOffset = -1;
 
     public ref VMixFilterType_t FilterType
     {
         get
         {
-            _FilterTypeOffset = _FilterTypeOffset ?? Schema.GetOffset(0x39A87B6971861EDB);
-            return ref _Handle.AsRef<VMixFilterType_t>(_FilterTypeOffset!.Value);
+            if (_FilterTypeOffset == -1) _FilterTypeOffset = Schema.GetOffset(0x39A87B6971861EDB);
+            return ref _Handle.AsRef<VMixFilterType_t>(_FilterTypeOffset);
         }
     }
-    private static nint? _FilterSlopeOffset;
+    private static nint _FilterSlopeOffset = -1;
 
     public ref VMixFilterSlope_t FilterSlope
     {
         get
         {
-            _FilterSlopeOffset = _FilterSlopeOffset ?? Schema.GetOffset(0x39A87B696387D992);
-            return ref _Handle.AsRef<VMixFilterSlope_t>(_FilterSlopeOffset!.Value);
+            if (_FilterSlopeOffset == -1) _FilterSlopeOffset = Schema.GetOffset(0x39A87B696387D992);
+            return ref _Handle.AsRef<VMixFilterSlope_t>(_FilterSlopeOffset);
         }
     }
-    private static nint? _EnabledOffset;
+    private static nint _EnabledOffset = -1;
 
     public ref bool Enabled
     {
         get
         {
-            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x39A87B696154EB7E);
-            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+            if (_EnabledOffset == -1) _EnabledOffset = Schema.GetOffset(0x39A87B696154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset);
         }
     }
 

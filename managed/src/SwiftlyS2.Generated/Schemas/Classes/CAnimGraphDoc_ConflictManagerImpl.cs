@@ -16,14 +16,14 @@ internal partial class CAnimGraphDoc_ConflictManagerImpl : SchemaClass, CAnimGra
 {
     public CAnimGraphDoc_ConflictManagerImpl(nint handle) : base(handle) { }
 
-    private static nint? _ConflictsOffset;
+    private static nint _ConflictsOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> Conflicts
     {
         get
         {
-            _ConflictsOffset = _ConflictsOffset ?? Schema.GetOffset(0xE8DA1997CBA22314);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ConflictsOffset!.Value);
+            if (_ConflictsOffset == -1) _ConflictsOffset = Schema.GetOffset(0xE8DA1997CBA22314);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ConflictsOffset);
         }
     }
 

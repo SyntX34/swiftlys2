@@ -16,100 +16,100 @@ internal partial class PhysObjectHeader_tImpl : SchemaClass, PhysObjectHeader_t
 {
     public PhysObjectHeader_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref PhysInterfaceId_t Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xBB54A9005127F14D);
-            return ref _Handle.AsRef<PhysInterfaceId_t>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0xBB54A9005127F14D);
+            return ref _Handle.AsRef<PhysInterfaceId_t>(_TypeOffset);
         }
     }
-    private static nint? _EntityOffset;
+    private static nint _EntityOffset = -1;
 
     public ref CHandle<C_BaseEntity> Entity
     {
         get
         {
-            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xBB54A90025B27FD0);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset!.Value);
+            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0xBB54A90025B27FD0);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_EntityOffset);
         }
     }
-    private static nint? _FieldNameOffset;
+    private static nint _FieldNameOffset = -1;
 
     public string FieldName
     {
         get
         {
-            _FieldNameOffset = _FieldNameOffset ?? Schema.GetOffset(0xBB54A9007D0E6744);
-            return Schema.GetString(_Handle.Read<nint>(_FieldNameOffset!.Value));
+            if (_FieldNameOffset == -1) _FieldNameOffset = Schema.GetOffset(0xBB54A9007D0E6744);
+            return Schema.GetString(_Handle.Read<nint>(_FieldNameOffset));
         }
         set
         {
-            _FieldNameOffset = _FieldNameOffset ?? Schema.GetOffset(0xBB54A9007D0E6744);
-            Schema.SetString(_Handle, _FieldNameOffset!.Value, value);
+            if (_FieldNameOffset == -1) _FieldNameOffset = Schema.GetOffset(0xBB54A9007D0E6744);
+            Schema.SetString(_Handle, _FieldNameOffset, value);
         }
     }
-    private static nint? _SaveObjectOffset;
+    private static nint _SaveObjectOffset = -1;
 
     public ref bool SaveObject
     {
         get
         {
-            _SaveObjectOffset = _SaveObjectOffset ?? Schema.GetOffset(0xBB54A9008FCC8DFF);
-            return ref _Handle.AsRef<bool>(_SaveObjectOffset!.Value);
+            if (_SaveObjectOffset == -1) _SaveObjectOffset = Schema.GetOffset(0xBB54A9008FCC8DFF);
+            return ref _Handle.AsRef<bool>(_SaveObjectOffset);
         }
     }
-    private static nint? _ModelNameOffset;
+    private static nint _ModelNameOffset = -1;
 
     public string ModelName
     {
         get
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xBB54A9004A8A4B01);
-            return Schema.GetString(_Handle.Read<nint>(_ModelNameOffset!.Value));
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xBB54A9004A8A4B01);
+            return Schema.GetString(_Handle.Read<nint>(_ModelNameOffset));
         }
         set
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xBB54A9004A8A4B01);
-            Schema.SetString(_Handle, _ModelNameOffset!.Value, value);
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xBB54A9004A8A4B01);
+            Schema.SetString(_Handle, _ModelNameOffset, value);
         }
     }
-    private static nint? _BboxOffset;
+    private static nint _BboxOffset = -1;
     private AABB_tImpl? _BboxInstance;
 
     public AABB_t Bbox
     {
         get
         {
-            _BboxOffset = _BboxOffset ?? Schema.GetOffset(0xBB54A90094AAAED2);
+            if (_BboxOffset == -1) _BboxOffset = Schema.GetOffset(0xBB54A90094AAAED2);
             var instance = _BboxInstance ??= new AABB_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BboxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BboxOffset);
             return instance;
         }
     }
-    private static nint? _SphereOffset;
+    private static nint _SphereOffset = -1;
     private physics_save_sphere_tImpl? _SphereInstance;
 
     public physics_save_sphere_t Sphere
     {
         get
         {
-            _SphereOffset = _SphereOffset ?? Schema.GetOffset(0xBB54A900AFD98518);
+            if (_SphereOffset == -1) _SphereOffset = Schema.GetOffset(0xBB54A900AFD98518);
             var instance = _SphereInstance ??= new physics_save_sphere_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SphereOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SphereOffset);
             return instance;
         }
     }
-    private static nint? _CollideOffset;
+    private static nint _CollideOffset = -1;
 
     public ref int Collide
     {
         get
         {
-            _CollideOffset = _CollideOffset ?? Schema.GetOffset(0xBB54A900239916A2);
-            return ref _Handle.AsRef<int>(_CollideOffset!.Value);
+            if (_CollideOffset == -1) _CollideOffset = Schema.GetOffset(0xBB54A900239916A2);
+            return ref _Handle.AsRef<int>(_CollideOffset);
         }
     }
 

@@ -16,44 +16,44 @@ internal partial class FeCtrlSoftOffset_tImpl : SchemaClass, FeCtrlSoftOffset_t
 {
     public FeCtrlSoftOffset_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _CtrlParentOffset;
+    private static nint _CtrlParentOffset = -1;
 
     public ref ushort CtrlParent
     {
         get
         {
-            _CtrlParentOffset = _CtrlParentOffset ?? Schema.GetOffset(0xCA94FF2955049230);
-            return ref _Handle.AsRef<ushort>(_CtrlParentOffset!.Value);
+            if (_CtrlParentOffset == -1) _CtrlParentOffset = Schema.GetOffset(0xCA94FF2955049230);
+            return ref _Handle.AsRef<ushort>(_CtrlParentOffset);
         }
     }
-    private static nint? _CtrlChildOffset;
+    private static nint _CtrlChildOffset = -1;
 
     public ref ushort CtrlChild
     {
         get
         {
-            _CtrlChildOffset = _CtrlChildOffset ?? Schema.GetOffset(0xCA94FF295BE48066);
-            return ref _Handle.AsRef<ushort>(_CtrlChildOffset!.Value);
+            if (_CtrlChildOffset == -1) _CtrlChildOffset = Schema.GetOffset(0xCA94FF295BE48066);
+            return ref _Handle.AsRef<ushort>(_CtrlChildOffset);
         }
     }
-    private static nint? _OffsetOffset;
+    private static nint _OffsetOffset = -1;
 
     public ref Vector Offset
     {
         get
         {
-            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xCA94FF29B2913856);
-            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xCA94FF29B2913856);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset);
         }
     }
-    private static nint? _AlphaOffset;
+    private static nint _AlphaOffset = -1;
 
     public ref float Alpha
     {
         get
         {
-            _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0xCA94FF29684C8871);
-            return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
+            if (_AlphaOffset == -1) _AlphaOffset = Schema.GetOffset(0xCA94FF29684C8871);
+            return ref _Handle.AsRef<float>(_AlphaOffset);
         }
     }
 

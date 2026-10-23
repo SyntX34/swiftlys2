@@ -16,44 +16,44 @@ internal partial class CGameGibManagerImpl : CBaseEntityImpl, CGameGibManager
 {
     public CGameGibManagerImpl(nint handle) : base(handle) { }
 
-    private static nint? _AllowNewGibsOffset;
+    private static nint _AllowNewGibsOffset = -1;
 
     public ref bool AllowNewGibs
     {
         get
         {
-            _AllowNewGibsOffset = _AllowNewGibsOffset ?? Schema.GetOffset(0x1068CB09FD80F507);
-            return ref _Handle.AsRef<bool>(_AllowNewGibsOffset!.Value);
+            if (_AllowNewGibsOffset == -1) _AllowNewGibsOffset = Schema.GetOffset(0x1068CB09FD80F507);
+            return ref _Handle.AsRef<bool>(_AllowNewGibsOffset);
         }
     }
-    private static nint? _CurrentMaxPiecesOffset;
+    private static nint _CurrentMaxPiecesOffset = -1;
 
     public ref int CurrentMaxPieces
     {
         get
         {
-            _CurrentMaxPiecesOffset = _CurrentMaxPiecesOffset ?? Schema.GetOffset(0x1068CB0999B0D602);
-            return ref _Handle.AsRef<int>(_CurrentMaxPiecesOffset!.Value);
+            if (_CurrentMaxPiecesOffset == -1) _CurrentMaxPiecesOffset = Schema.GetOffset(0x1068CB0999B0D602);
+            return ref _Handle.AsRef<int>(_CurrentMaxPiecesOffset);
         }
     }
-    private static nint? _MaxPiecesOffset;
+    private static nint _MaxPiecesOffset = -1;
 
     public ref int MaxPieces
     {
         get
         {
-            _MaxPiecesOffset = _MaxPiecesOffset ?? Schema.GetOffset(0x1068CB092DDFB63D);
-            return ref _Handle.AsRef<int>(_MaxPiecesOffset!.Value);
+            if (_MaxPiecesOffset == -1) _MaxPiecesOffset = Schema.GetOffset(0x1068CB092DDFB63D);
+            return ref _Handle.AsRef<int>(_MaxPiecesOffset);
         }
     }
-    private static nint? _LastFrameOffset;
+    private static nint _LastFrameOffset = -1;
 
     public ref int LastFrame
     {
         get
         {
-            _LastFrameOffset = _LastFrameOffset ?? Schema.GetOffset(0x1068CB09F0B58C21);
-            return ref _Handle.AsRef<int>(_LastFrameOffset!.Value);
+            if (_LastFrameOffset == -1) _LastFrameOffset = Schema.GetOffset(0x1068CB09F0B58C21);
+            return ref _Handle.AsRef<int>(_LastFrameOffset);
         }
     }
 

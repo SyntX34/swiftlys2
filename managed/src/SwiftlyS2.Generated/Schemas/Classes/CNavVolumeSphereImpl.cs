@@ -16,24 +16,24 @@ internal partial class CNavVolumeSphereImpl : CNavVolumeImpl, CNavVolumeSphere
 {
     public CNavVolumeSphereImpl(nint handle) : base(handle) { }
 
-    private static nint? _CenterOffset;
+    private static nint _CenterOffset = -1;
 
     public ref Vector Center
     {
         get
         {
-            _CenterOffset = _CenterOffset ?? Schema.GetOffset(0x8FB5B6B8C82A5908);
-            return ref _Handle.AsRef<Vector>(_CenterOffset!.Value);
+            if (_CenterOffset == -1) _CenterOffset = Schema.GetOffset(0x8FB5B6B8C82A5908);
+            return ref _Handle.AsRef<Vector>(_CenterOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x8FB5B6B85ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x8FB5B6B85ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
 

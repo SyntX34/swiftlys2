@@ -16,24 +16,24 @@ internal partial class CNmFloatChannelSet_tImpl : SchemaClass, CNmFloatChannelSe
 {
     public CNmFloatChannelSet_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
 
     public ref CGlobalSymbol ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0xE2B9F90D95066900);
-            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xE2B9F90D95066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset);
         }
     }
-    private static nint? _ChannelIDsOffset;
+    private static nint _ChannelIDsOffset = -1;
 
     public ref CUtlLeanVector<CGlobalSymbol, int> ChannelIDs
     {
         get
         {
-            _ChannelIDsOffset = _ChannelIDsOffset ?? Schema.GetOffset(0xE2B9F90DBC07ADCE);
-            return ref _Handle.AsRef<CUtlLeanVector<CGlobalSymbol, int>>(_ChannelIDsOffset!.Value);
+            if (_ChannelIDsOffset == -1) _ChannelIDsOffset = Schema.GetOffset(0xE2B9F90DBC07ADCE);
+            return ref _Handle.AsRef<CUtlLeanVector<CGlobalSymbol, int>>(_ChannelIDsOffset);
         }
     }
 

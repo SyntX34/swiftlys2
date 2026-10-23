@@ -16,114 +16,114 @@ internal partial class AggregateSceneObject_tImpl : SchemaClass, AggregateSceneO
 {
     public AggregateSceneObject_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _AllFlagsOffset;
+    private static nint _AllFlagsOffset = -1;
 
     public ref ObjectTypeFlags_t AllFlags
     {
         get
         {
-            _AllFlagsOffset = _AllFlagsOffset ?? Schema.GetOffset(0xEF81F2D4DD9F35F7);
-            return ref _Handle.AsRef<ObjectTypeFlags_t>(_AllFlagsOffset!.Value);
+            if (_AllFlagsOffset == -1) _AllFlagsOffset = Schema.GetOffset(0xEF81F2D4DD9F35F7);
+            return ref _Handle.AsRef<ObjectTypeFlags_t>(_AllFlagsOffset);
         }
     }
-    private static nint? _AnyFlagsOffset;
+    private static nint _AnyFlagsOffset = -1;
 
     public ref ObjectTypeFlags_t AnyFlags
     {
         get
         {
-            _AnyFlagsOffset = _AnyFlagsOffset ?? Schema.GetOffset(0xEF81F2D456CC84B4);
-            return ref _Handle.AsRef<ObjectTypeFlags_t>(_AnyFlagsOffset!.Value);
+            if (_AnyFlagsOffset == -1) _AnyFlagsOffset = Schema.GetOffset(0xEF81F2D456CC84B4);
+            return ref _Handle.AsRef<ObjectTypeFlags_t>(_AnyFlagsOffset);
         }
     }
-    private static nint? _LayerOffset;
+    private static nint _LayerOffset = -1;
 
     public ref short Layer
     {
         get
         {
-            _LayerOffset = _LayerOffset ?? Schema.GetOffset(0xEF81F2D4477C7B2A);
-            return ref _Handle.AsRef<short>(_LayerOffset!.Value);
+            if (_LayerOffset == -1) _LayerOffset = Schema.GetOffset(0xEF81F2D4477C7B2A);
+            return ref _Handle.AsRef<short>(_LayerOffset);
         }
     }
-    private static nint? _InstanceStreamOffset;
+    private static nint _InstanceStreamOffset = -1;
 
     public ref short InstanceStream
     {
         get
         {
-            _InstanceStreamOffset = _InstanceStreamOffset ?? Schema.GetOffset(0xEF81F2D4B5A8384A);
-            return ref _Handle.AsRef<short>(_InstanceStreamOffset!.Value);
+            if (_InstanceStreamOffset == -1) _InstanceStreamOffset = Schema.GetOffset(0xEF81F2D4B5A8384A);
+            return ref _Handle.AsRef<short>(_InstanceStreamOffset);
         }
     }
-    private static nint? _VertexAlbedoStreamOffset;
+    private static nint _VertexAlbedoStreamOffset = -1;
 
     public ref short VertexAlbedoStream
     {
         get
         {
-            _VertexAlbedoStreamOffset = _VertexAlbedoStreamOffset ?? Schema.GetOffset(0xEF81F2D42540B1EA);
-            return ref _Handle.AsRef<short>(_VertexAlbedoStreamOffset!.Value);
+            if (_VertexAlbedoStreamOffset == -1) _VertexAlbedoStreamOffset = Schema.GetOffset(0xEF81F2D42540B1EA);
+            return ref _Handle.AsRef<short>(_VertexAlbedoStreamOffset);
         }
     }
-    private static nint? _VertexEmissiveStreamOffset;
+    private static nint _VertexEmissiveStreamOffset = -1;
 
     public ref short VertexEmissiveStream
     {
         get
         {
-            _VertexEmissiveStreamOffset = _VertexEmissiveStreamOffset ?? Schema.GetOffset(0xEF81F2D403495594);
-            return ref _Handle.AsRef<short>(_VertexEmissiveStreamOffset!.Value);
+            if (_VertexEmissiveStreamOffset == -1) _VertexEmissiveStreamOffset = Schema.GetOffset(0xEF81F2D403495594);
+            return ref _Handle.AsRef<short>(_VertexEmissiveStreamOffset);
         }
     }
-    private static nint? _AggregateMeshesOffset;
+    private static nint _AggregateMeshesOffset = -1;
 
     public ref CUtlVector<AggregateMeshInfo_t> AggregateMeshes
     {
         get
         {
-            _AggregateMeshesOffset = _AggregateMeshesOffset ?? Schema.GetOffset(0xEF81F2D402570BA1);
-            return ref _Handle.AsRef<CUtlVector<AggregateMeshInfo_t>>(_AggregateMeshesOffset!.Value);
+            if (_AggregateMeshesOffset == -1) _AggregateMeshesOffset = Schema.GetOffset(0xEF81F2D402570BA1);
+            return ref _Handle.AsRef<CUtlVector<AggregateMeshInfo_t>>(_AggregateMeshesOffset);
         }
     }
-    private static nint? _LodSetupsOffset;
+    private static nint _LodSetupsOffset = -1;
 
     public ref CUtlVector<AggregateLODSetup_t> LodSetups
     {
         get
         {
-            _LodSetupsOffset = _LodSetupsOffset ?? Schema.GetOffset(0xEF81F2D4B0CE61E2);
-            return ref _Handle.AsRef<CUtlVector<AggregateLODSetup_t>>(_LodSetupsOffset!.Value);
+            if (_LodSetupsOffset == -1) _LodSetupsOffset = Schema.GetOffset(0xEF81F2D4B0CE61E2);
+            return ref _Handle.AsRef<CUtlVector<AggregateLODSetup_t>>(_LodSetupsOffset);
         }
     }
-    private static nint? _VisClusterMembershipOffset;
+    private static nint _VisClusterMembershipOffset = -1;
 
     public ref CUtlVector<ushort> VisClusterMembership
     {
         get
         {
-            _VisClusterMembershipOffset = _VisClusterMembershipOffset ?? Schema.GetOffset(0xEF81F2D4F2C828CD);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_VisClusterMembershipOffset!.Value);
+            if (_VisClusterMembershipOffset == -1) _VisClusterMembershipOffset = Schema.GetOffset(0xEF81F2D4F2C828CD);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_VisClusterMembershipOffset);
         }
     }
-    private static nint? _FragmentTransformsOffset;
+    private static nint _FragmentTransformsOffset = -1;
 
     public ref CUtlVector<matrix3x4_t> FragmentTransforms
     {
         get
         {
-            _FragmentTransformsOffset = _FragmentTransformsOffset ?? Schema.GetOffset(0xEF81F2D4192EBA20);
-            return ref _Handle.AsRef<CUtlVector<matrix3x4_t>>(_FragmentTransformsOffset!.Value);
+            if (_FragmentTransformsOffset == -1) _FragmentTransformsOffset = Schema.GetOffset(0xEF81F2D4192EBA20);
+            return ref _Handle.AsRef<CUtlVector<matrix3x4_t>>(_FragmentTransformsOffset);
         }
     }
-    private static nint? _RenderableModelOffset;
+    private static nint _RenderableModelOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> RenderableModel
     {
         get
         {
-            _RenderableModelOffset = _RenderableModelOffset ?? Schema.GetOffset(0xEF81F2D42AEEFA82);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RenderableModelOffset!.Value);
+            if (_RenderableModelOffset == -1) _RenderableModelOffset = Schema.GetOffset(0xEF81F2D42AEEFA82);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RenderableModelOffset);
         }
     }
 

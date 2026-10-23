@@ -16,119 +16,119 @@ internal partial class CLeanMatrixUpdateNodeImpl : CLeafUpdateNodeImpl, CLeanMat
 {
     public CLeanMatrixUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _FrameCornersOffset;
+    private static nint _FrameCornersOffset = -1;
     private SchemaUntypedField? _FrameCornersInstance;
 
     public SchemaUntypedField FrameCorners
     {
         get
         {
-            _FrameCornersOffset = _FrameCornersOffset ?? Schema.GetOffset(0xDB33C9A617463774);
+            if (_FrameCornersOffset == -1) _FrameCornersOffset = Schema.GetOffset(0xDB33C9A617463774);
             var instance = _FrameCornersInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _FrameCornersOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FrameCornersOffset);
             return instance;
         }
     }
-    private static nint? _PosesOffset;
+    private static nint _PosesOffset = -1;
     private SchemaClassFixedArray<CPoseHandle>? _PosesInstance;
 
     public ISchemaClassFixedArray<CPoseHandle> Poses
     {
         get
         {
-            _PosesOffset = _PosesOffset ?? Schema.GetOffset(0xDB33C9A6B851C9F5);
+            if (_PosesOffset == -1) _PosesOffset = Schema.GetOffset(0xDB33C9A6B851C9F5);
             var instance = _PosesInstance ??= new SchemaClassFixedArray<CPoseHandle>(0, 0xDB33C9A6B851C9F5, 9, 4, 2);
-            instance.DangerousSetHandle(_Handle + _PosesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PosesOffset);
             return instance;
         }
     }
-    private static nint? _DampingOffset;
+    private static nint _DampingOffset = -1;
     private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
-            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xDB33C9A615440FB5);
+            if (_DampingOffset == -1) _DampingOffset = Schema.GetOffset(0xDB33C9A615440FB5);
             var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
-            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DampingOffset);
             return instance;
         }
     }
-    private static nint? _BlendSourceOffset;
+    private static nint _BlendSourceOffset = -1;
 
     public ref AnimVectorSource BlendSource
     {
         get
         {
-            _BlendSourceOffset = _BlendSourceOffset ?? Schema.GetOffset(0xDB33C9A6EB9142CD);
-            return ref _Handle.AsRef<AnimVectorSource>(_BlendSourceOffset!.Value);
+            if (_BlendSourceOffset == -1) _BlendSourceOffset = Schema.GetOffset(0xDB33C9A6EB9142CD);
+            return ref _Handle.AsRef<AnimVectorSource>(_BlendSourceOffset);
         }
     }
-    private static nint? _ParamIndexOffset;
+    private static nint _ParamIndexOffset = -1;
     private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
-            _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xDB33C9A661990A86);
+            if (_ParamIndexOffset == -1) _ParamIndexOffset = Schema.GetOffset(0xDB33C9A661990A86);
             var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset);
             return instance;
         }
     }
-    private static nint? _VerticalAxisOffset;
+    private static nint _VerticalAxisOffset = -1;
 
     public ref Vector VerticalAxis
     {
         get
         {
-            _VerticalAxisOffset = _VerticalAxisOffset ?? Schema.GetOffset(0xDB33C9A6F82ED1C6);
-            return ref _Handle.AsRef<Vector>(_VerticalAxisOffset!.Value);
+            if (_VerticalAxisOffset == -1) _VerticalAxisOffset = Schema.GetOffset(0xDB33C9A6F82ED1C6);
+            return ref _Handle.AsRef<Vector>(_VerticalAxisOffset);
         }
     }
-    private static nint? _HorizontalAxisOffset;
+    private static nint _HorizontalAxisOffset = -1;
 
     public ref Vector HorizontalAxis
     {
         get
         {
-            _HorizontalAxisOffset = _HorizontalAxisOffset ?? Schema.GetOffset(0xDB33C9A6FE8AD688);
-            return ref _Handle.AsRef<Vector>(_HorizontalAxisOffset!.Value);
+            if (_HorizontalAxisOffset == -1) _HorizontalAxisOffset = Schema.GetOffset(0xDB33C9A6FE8AD688);
+            return ref _Handle.AsRef<Vector>(_HorizontalAxisOffset);
         }
     }
-    private static nint? _SequenceOffset;
+    private static nint _SequenceOffset = -1;
     private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
-            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xDB33C9A6E0A0598E);
+            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0xDB33C9A6E0A0598E);
             var instance = _SequenceInstance ??= new HSequenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset);
             return instance;
         }
     }
-    private static nint? _MaxValueOffset;
+    private static nint _MaxValueOffset = -1;
 
     public ref float MaxValue
     {
         get
         {
-            _MaxValueOffset = _MaxValueOffset ?? Schema.GetOffset(0xDB33C9A6D0A5C87C);
-            return ref _Handle.AsRef<float>(_MaxValueOffset!.Value);
+            if (_MaxValueOffset == -1) _MaxValueOffset = Schema.GetOffset(0xDB33C9A6D0A5C87C);
+            return ref _Handle.AsRef<float>(_MaxValueOffset);
         }
     }
-    private static nint? _SequenceMaxFrameOffset;
+    private static nint _SequenceMaxFrameOffset = -1;
 
     public ref int SequenceMaxFrame
     {
         get
         {
-            _SequenceMaxFrameOffset = _SequenceMaxFrameOffset ?? Schema.GetOffset(0xDB33C9A65FD0AE0B);
-            return ref _Handle.AsRef<int>(_SequenceMaxFrameOffset!.Value);
+            if (_SequenceMaxFrameOffset == -1) _SequenceMaxFrameOffset = Schema.GetOffset(0xDB33C9A65FD0AE0B);
+            return ref _Handle.AsRef<int>(_SequenceMaxFrameOffset);
         }
     }
 

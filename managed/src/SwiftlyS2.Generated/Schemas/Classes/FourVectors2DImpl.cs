@@ -16,24 +16,24 @@ internal partial class FourVectors2DImpl : SchemaClass, FourVectors2D
 {
     public FourVectors2DImpl(nint handle) : base(handle) { }
 
-    private static nint? _XOffset;
+    private static nint _XOffset = -1;
 
     public ref fltx4 X
     {
         get
         {
-            _XOffset = _XOffset ?? Schema.GetOffset(0x7A817FA5FD0C5087);
-            return ref _Handle.AsRef<fltx4>(_XOffset!.Value);
+            if (_XOffset == -1) _XOffset = Schema.GetOffset(0x7A817FA5FD0C5087);
+            return ref _Handle.AsRef<fltx4>(_XOffset);
         }
     }
-    private static nint? _YOffset;
+    private static nint _YOffset = -1;
 
     public ref fltx4 Y
     {
         get
         {
-            _YOffset = _YOffset ?? Schema.GetOffset(0x7A817FA5FC0C4EF4);
-            return ref _Handle.AsRef<fltx4>(_YOffset!.Value);
+            if (_YOffset == -1) _YOffset = Schema.GetOffset(0x7A817FA5FC0C4EF4);
+            return ref _Handle.AsRef<fltx4>(_YOffset);
         }
     }
 

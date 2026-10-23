@@ -16,111 +16,111 @@ internal partial class CBaseCombatCharacterImpl : CBaseAnimGraphImpl, CBaseComba
 {
     public CBaseCombatCharacterImpl(nint handle) : base(handle) { }
 
-    private static nint? _ForceServerRagdollOffset;
+    private static nint _ForceServerRagdollOffset = -1;
 
     public ref bool ForceServerRagdoll
     {
         get
         {
-            _ForceServerRagdollOffset = _ForceServerRagdollOffset ?? Schema.GetOffset(0xB47DE3DEC0D0B742);
-            return ref _Handle.AsRef<bool>(_ForceServerRagdollOffset!.Value);
+            if (_ForceServerRagdollOffset == -1) _ForceServerRagdollOffset = Schema.GetOffset(0xB47DE3DEC0D0B742);
+            return ref _Handle.AsRef<bool>(_ForceServerRagdollOffset);
         }
     }
-    private static nint? _MyWearablesOffset;
+    private static nint _MyWearablesOffset = -1;
 
     public ref CUtlVector<CHandle<CEconWearable>> MyWearables
     {
         get
         {
-            _MyWearablesOffset = _MyWearablesOffset ?? Schema.GetOffset(0xB47DE3DE000B8B43);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CEconWearable>>>(_MyWearablesOffset!.Value);
+            if (_MyWearablesOffset == -1) _MyWearablesOffset = Schema.GetOffset(0xB47DE3DE000B8B43);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CEconWearable>>>(_MyWearablesOffset);
         }
     }
-    private static nint? _ImpactEnergyScaleOffset;
+    private static nint _ImpactEnergyScaleOffset = -1;
 
     public ref float ImpactEnergyScale
     {
         get
         {
-            _ImpactEnergyScaleOffset = _ImpactEnergyScaleOffset ?? Schema.GetOffset(0xB47DE3DEC66BAC1B);
-            return ref _Handle.AsRef<float>(_ImpactEnergyScaleOffset!.Value);
+            if (_ImpactEnergyScaleOffset == -1) _ImpactEnergyScaleOffset = Schema.GetOffset(0xB47DE3DEC66BAC1B);
+            return ref _Handle.AsRef<float>(_ImpactEnergyScaleOffset);
         }
     }
-    private static nint? _ApplyStressDamageOffset;
+    private static nint _ApplyStressDamageOffset = -1;
 
     public ref bool ApplyStressDamage
     {
         get
         {
-            _ApplyStressDamageOffset = _ApplyStressDamageOffset ?? Schema.GetOffset(0xB47DE3DEC16FF452);
-            return ref _Handle.AsRef<bool>(_ApplyStressDamageOffset!.Value);
+            if (_ApplyStressDamageOffset == -1) _ApplyStressDamageOffset = Schema.GetOffset(0xB47DE3DEC16FF452);
+            return ref _Handle.AsRef<bool>(_ApplyStressDamageOffset);
         }
     }
-    private static nint? _DeathEventsDispatchedOffset;
+    private static nint _DeathEventsDispatchedOffset = -1;
 
     public ref bool DeathEventsDispatched
     {
         get
         {
-            _DeathEventsDispatchedOffset = _DeathEventsDispatchedOffset ?? Schema.GetOffset(0xB47DE3DE8F5C8C9F);
-            return ref _Handle.AsRef<bool>(_DeathEventsDispatchedOffset!.Value);
+            if (_DeathEventsDispatchedOffset == -1) _DeathEventsDispatchedOffset = Schema.GetOffset(0xB47DE3DE8F5C8C9F);
+            return ref _Handle.AsRef<bool>(_DeathEventsDispatchedOffset);
         }
     }
-    private static nint? _RelationshipsOffset;
+    private static nint _RelationshipsOffset = -1;
 
     public ref CUtlVector<RelationshipOverride_t> Relationships
     {
         get
         {
-            _RelationshipsOffset = _RelationshipsOffset ?? Schema.GetOffset(0xB47DE3DEF4339A38);
-            return ref _Handle.AsRef<CUtlVector<RelationshipOverride_t>>(_RelationshipsOffset!.Value);
+            if (_RelationshipsOffset == -1) _RelationshipsOffset = Schema.GetOffset(0xB47DE3DEF4339A38);
+            return ref _Handle.AsRef<CUtlVector<RelationshipOverride_t>>(_RelationshipsOffset);
         }
     }
-    private static nint? _StrRelationshipsOffset;
+    private static nint _StrRelationshipsOffset = -1;
 
     public string StrRelationships
     {
         get
         {
-            _StrRelationshipsOffset = _StrRelationshipsOffset ?? Schema.GetOffset(0xB47DE3DEF96E2AD7);
-            return Schema.GetString(_Handle.Read<nint>(_StrRelationshipsOffset!.Value));
+            if (_StrRelationshipsOffset == -1) _StrRelationshipsOffset = Schema.GetOffset(0xB47DE3DEF96E2AD7);
+            return Schema.GetString(_Handle.Read<nint>(_StrRelationshipsOffset));
         }
         set
         {
-            _StrRelationshipsOffset = _StrRelationshipsOffset ?? Schema.GetOffset(0xB47DE3DEF96E2AD7);
-            Schema.SetString(_Handle, _StrRelationshipsOffset!.Value, value);
+            if (_StrRelationshipsOffset == -1) _StrRelationshipsOffset = Schema.GetOffset(0xB47DE3DEF96E2AD7);
+            Schema.SetString(_Handle, _StrRelationshipsOffset, value);
         }
     }
-    private static nint? _HullOffset;
+    private static nint _HullOffset = -1;
 
     public ref Hull_t Hull
     {
         get
         {
-            _HullOffset = _HullOffset ?? Schema.GetOffset(0xB47DE3DE20B7E577);
-            return ref _Handle.AsRef<Hull_t>(_HullOffset!.Value);
+            if (_HullOffset == -1) _HullOffset = Schema.GetOffset(0xB47DE3DE20B7E577);
+            return ref _Handle.AsRef<Hull_t>(_HullOffset);
         }
     }
-    private static nint? _NavHullIdxOffset;
+    private static nint _NavHullIdxOffset = -1;
 
     public ref uint NavHullIdx
     {
         get
         {
-            _NavHullIdxOffset = _NavHullIdxOffset ?? Schema.GetOffset(0xB47DE3DE90C08DF0);
-            return ref _Handle.AsRef<uint>(_NavHullIdxOffset!.Value);
+            if (_NavHullIdxOffset == -1) _NavHullIdxOffset = Schema.GetOffset(0xB47DE3DE90C08DF0);
+            return ref _Handle.AsRef<uint>(_NavHullIdxOffset);
         }
     }
-    private static nint? _MovementStatsOffset;
+    private static nint _MovementStatsOffset = -1;
     private CMovementStatsPropertyImpl? _MovementStatsInstance;
 
     public CMovementStatsProperty MovementStats
     {
         get
         {
-            _MovementStatsOffset = _MovementStatsOffset ?? Schema.GetOffset(0xB47DE3DE4CF2CCDB);
+            if (_MovementStatsOffset == -1) _MovementStatsOffset = Schema.GetOffset(0xB47DE3DE4CF2CCDB);
             var instance = _MovementStatsInstance ??= new CMovementStatsPropertyImpl(0);
-            instance.DangerousSetHandle(_Handle + _MovementStatsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MovementStatsOffset);
             return instance;
         }
     }

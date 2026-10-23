@@ -16,59 +16,59 @@ internal partial class GAME_HEADERImpl : SchemaClass, GAME_HEADER
 {
     public GAME_HEADERImpl(nint handle) : base(handle) { }
 
-    private static nint? _CommentOffset;
+    private static nint _CommentOffset = -1;
 
     public string Comment
     {
         get
         {
-            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0xA43EA28D88A0B4DF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset!.Value));
+            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0xA43EA28D88A0B4DF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CommentOffset));
         }
         set
         {
-            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0xA43EA28D88A0B4DF);
-            Schema.SetCUtlString(_Handle, _CommentOffset!.Value, value);
+            if (_CommentOffset == -1) _CommentOffset = Schema.GetOffset(0xA43EA28D88A0B4DF);
+            Schema.SetCUtlString(_Handle, _CommentOffset, value);
         }
     }
-    private static nint? _SpawnGroupCountOffset;
+    private static nint _SpawnGroupCountOffset = -1;
 
     public ref int SpawnGroupCount
     {
         get
         {
-            _SpawnGroupCountOffset = _SpawnGroupCountOffset ?? Schema.GetOffset(0xA43EA28D0187B706);
-            return ref _Handle.AsRef<int>(_SpawnGroupCountOffset!.Value);
+            if (_SpawnGroupCountOffset == -1) _SpawnGroupCountOffset = Schema.GetOffset(0xA43EA28D0187B706);
+            return ref _Handle.AsRef<int>(_SpawnGroupCountOffset);
         }
     }
-    private static nint? _LandmarkOffset;
+    private static nint _LandmarkOffset = -1;
 
     public string Landmark
     {
         get
         {
-            _LandmarkOffset = _LandmarkOffset ?? Schema.GetOffset(0xA43EA28D6B06E99E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_LandmarkOffset!.Value));
+            if (_LandmarkOffset == -1) _LandmarkOffset = Schema.GetOffset(0xA43EA28D6B06E99E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_LandmarkOffset));
         }
         set
         {
-            _LandmarkOffset = _LandmarkOffset ?? Schema.GetOffset(0xA43EA28D6B06E99E);
-            Schema.SetCUtlString(_Handle, _LandmarkOffset!.Value, value);
+            if (_LandmarkOffset == -1) _LandmarkOffset = Schema.GetOffset(0xA43EA28D6B06E99E);
+            Schema.SetCUtlString(_Handle, _LandmarkOffset, value);
         }
     }
-    private static nint? _RequiredAddonsOffset;
+    private static nint _RequiredAddonsOffset = -1;
 
     public string RequiredAddons
     {
         get
         {
-            _RequiredAddonsOffset = _RequiredAddonsOffset ?? Schema.GetOffset(0xA43EA28D4178A27C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_RequiredAddonsOffset!.Value));
+            if (_RequiredAddonsOffset == -1) _RequiredAddonsOffset = Schema.GetOffset(0xA43EA28D4178A27C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_RequiredAddonsOffset));
         }
         set
         {
-            _RequiredAddonsOffset = _RequiredAddonsOffset ?? Schema.GetOffset(0xA43EA28D4178A27C);
-            Schema.SetCUtlString(_Handle, _RequiredAddonsOffset!.Value, value);
+            if (_RequiredAddonsOffset == -1) _RequiredAddonsOffset = Schema.GetOffset(0xA43EA28D4178A27C);
+            Schema.SetCUtlString(_Handle, _RequiredAddonsOffset, value);
         }
     }
 

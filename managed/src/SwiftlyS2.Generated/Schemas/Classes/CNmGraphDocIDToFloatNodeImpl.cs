@@ -16,24 +16,24 @@ internal partial class CNmGraphDocIDToFloatNodeImpl : CNmGraphDocFlowNodeImpl, C
 {
     public CNmGraphDocIDToFloatNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _DefaultValueOffset;
+    private static nint _DefaultValueOffset = -1;
 
     public ref float DefaultValue
     {
         get
         {
-            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0xFEE5FBC5BBE0341F);
-            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+            if (_DefaultValueOffset == -1) _DefaultValueOffset = Schema.GetOffset(0xFEE5FBC5BBE0341F);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset);
         }
     }
-    private static nint? _MappingsOffset;
+    private static nint _MappingsOffset = -1;
 
     public ref CUtlVector<CNmGraphDocIDToFloatNode__Mapping_t> Mappings
     {
         get
         {
-            _MappingsOffset = _MappingsOffset ?? Schema.GetOffset(0xFEE5FBC5896152E2);
-            return ref _Handle.AsRef<CUtlVector<CNmGraphDocIDToFloatNode__Mapping_t>>(_MappingsOffset!.Value);
+            if (_MappingsOffset == -1) _MappingsOffset = Schema.GetOffset(0xFEE5FBC5896152E2);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDocIDToFloatNode__Mapping_t>>(_MappingsOffset);
         }
     }
 

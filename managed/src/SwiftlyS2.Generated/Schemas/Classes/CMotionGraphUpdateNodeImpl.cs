@@ -16,16 +16,16 @@ internal partial class CMotionGraphUpdateNodeImpl : CLeafUpdateNodeImpl, CMotion
 {
     public CMotionGraphUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _MotionGraphOffset;
+    private static nint _MotionGraphOffset = -1;
     private SchemaUntypedField? _MotionGraphInstance;
 
     public SchemaUntypedField MotionGraph
     {
         get
         {
-            _MotionGraphOffset = _MotionGraphOffset ?? Schema.GetOffset(0x69396A054F70C737);
+            if (_MotionGraphOffset == -1) _MotionGraphOffset = Schema.GetOffset(0x69396A054F70C737);
             var instance = _MotionGraphInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MotionGraphOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MotionGraphOffset);
             return instance;
         }
     }

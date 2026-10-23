@@ -16,37 +16,37 @@ internal partial class C_OP_RenderFlattenGrassImpl : CParticleFunctionRendererIm
 {
     public C_OP_RenderFlattenGrassImpl(nint handle) : base(handle) { }
 
-    private static nint? _FlattenStrengthOffset;
+    private static nint _FlattenStrengthOffset = -1;
 
     public ref float FlattenStrength
     {
         get
         {
-            _FlattenStrengthOffset = _FlattenStrengthOffset ?? Schema.GetOffset(0x81877FD959D69362);
-            return ref _Handle.AsRef<float>(_FlattenStrengthOffset!.Value);
+            if (_FlattenStrengthOffset == -1) _FlattenStrengthOffset = Schema.GetOffset(0x81877FD959D69362);
+            return ref _Handle.AsRef<float>(_FlattenStrengthOffset);
         }
     }
-    private static nint? _StrengthFieldOverrideOffset;
+    private static nint _StrengthFieldOverrideOffset = -1;
     private ParticleAttributeIndex_tImpl? _StrengthFieldOverrideInstance;
 
     public ParticleAttributeIndex_t StrengthFieldOverride
     {
         get
         {
-            _StrengthFieldOverrideOffset = _StrengthFieldOverrideOffset ?? Schema.GetOffset(0x81877FD91996F4F8);
+            if (_StrengthFieldOverrideOffset == -1) _StrengthFieldOverrideOffset = Schema.GetOffset(0x81877FD91996F4F8);
             var instance = _StrengthFieldOverrideInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StrengthFieldOverrideOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StrengthFieldOverrideOffset);
             return instance;
         }
     }
-    private static nint? _RadiusScaleOffset;
+    private static nint _RadiusScaleOffset = -1;
 
     public ref float RadiusScale
     {
         get
         {
-            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x81877FD9A7A20159);
-            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0x81877FD9A7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset);
         }
     }
 

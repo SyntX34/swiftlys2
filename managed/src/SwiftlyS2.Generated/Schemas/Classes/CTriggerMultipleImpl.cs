@@ -16,14 +16,14 @@ internal partial class CTriggerMultipleImpl : CBaseTriggerImpl, CTriggerMultiple
 {
     public CTriggerMultipleImpl(nint handle) : base(handle) { }
 
-    private static nint? _OnTriggerOffset;
+    private static nint _OnTriggerOffset = -1;
 
     public ref CEntityIOOutput OnTrigger
     {
         get
         {
-            _OnTriggerOffset = _OnTriggerOffset ?? Schema.GetOffset(0x327F607E81E0BFEC);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerOffset!.Value);
+            if (_OnTriggerOffset == -1) _OnTriggerOffset = Schema.GetOffset(0x327F607E81E0BFEC);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerOffset);
         }
     }
 

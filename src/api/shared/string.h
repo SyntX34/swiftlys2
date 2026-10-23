@@ -23,8 +23,6 @@
 #include <vector>
 #include <set>
 
-#include "texttable.h"
-
 #include <api/interfaces/interfaces.h>
 
 constexpr uint32_t val_32_const = 0x811c9dc5;
@@ -62,7 +60,5 @@ std::vector<std::string> TokenizeCommand(std::string cmd);
 std::string RemoveHtmlTags(std::string input);
 std::string replace_case_insensitive(std::string str, const std::string from, const std::string to);
 std::string& trim(std::string& s, const char* t = " \t\n\r\f\v");
-
-void PrintTextTable(LogType type, std::string category, TextTable table);
 
 #endif

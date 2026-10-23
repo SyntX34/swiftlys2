@@ -16,62 +16,62 @@ internal partial class CAnimGraphDoc_NodeImpl : SchemaClass, CAnimGraphDoc_Node
 {
     public CAnimGraphDoc_NodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x7692535663D22D49);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x7692535663D22D49);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x7692535663D22D49);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x7692535663D22D49);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _PositionOffset;
+    private static nint _PositionOffset = -1;
 
     public ref Vector2D Position
     {
         get
         {
-            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x76925356E092EE6A);
-            return ref _Handle.AsRef<Vector2D>(_PositionOffset!.Value);
+            if (_PositionOffset == -1) _PositionOffset = Schema.GetOffset(0x76925356E092EE6A);
+            return ref _Handle.AsRef<Vector2D>(_PositionOffset);
         }
     }
-    private static nint? _NodeIDOffset;
+    private static nint _NodeIDOffset = -1;
     private AnimNodeIDImpl? _NodeIDInstance;
 
     public AnimNodeID NodeID
     {
         get
         {
-            _NodeIDOffset = _NodeIDOffset ?? Schema.GetOffset(0x769253560FD6755C);
+            if (_NodeIDOffset == -1) _NodeIDOffset = Schema.GetOffset(0x769253560FD6755C);
             var instance = _NodeIDInstance ??= new AnimNodeIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _NodeIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeIDOffset);
             return instance;
         }
     }
-    private static nint? _DebugThisNodeOffset;
+    private static nint _DebugThisNodeOffset = -1;
 
     public ref bool DebugThisNode
     {
         get
         {
-            _DebugThisNodeOffset = _DebugThisNodeOffset ?? Schema.GetOffset(0x769253565F169688);
-            return ref _Handle.AsRef<bool>(_DebugThisNodeOffset!.Value);
+            if (_DebugThisNodeOffset == -1) _DebugThisNodeOffset = Schema.GetOffset(0x769253565F169688);
+            return ref _Handle.AsRef<bool>(_DebugThisNodeOffset);
         }
     }
-    private static nint? _NetworkModeOffset;
+    private static nint _NetworkModeOffset = -1;
 
     public ref AnimNodeNetworkMode NetworkMode
     {
         get
         {
-            _NetworkModeOffset = _NetworkModeOffset ?? Schema.GetOffset(0x76925356E3307112);
-            return ref _Handle.AsRef<AnimNodeNetworkMode>(_NetworkModeOffset!.Value);
+            if (_NetworkModeOffset == -1) _NetworkModeOffset = Schema.GetOffset(0x76925356E3307112);
+            return ref _Handle.AsRef<AnimNodeNetworkMode>(_NetworkModeOffset);
         }
     }
 

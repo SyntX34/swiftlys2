@@ -16,56 +16,56 @@ internal partial class CMixControlCurveImpl : CMixPropertyBaseImpl, CMixControlC
 {
     public CMixControlCurveImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputMinOffset;
+    private static nint _InputMinOffset = -1;
 
     public ref float InputMin
     {
         get
         {
-            _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0xD3914A50E88A0D0F);
-            return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+            if (_InputMinOffset == -1) _InputMinOffset = Schema.GetOffset(0xD3914A50E88A0D0F);
+            return ref _Handle.AsRef<float>(_InputMinOffset);
         }
     }
-    private static nint? _InputMaxOffset;
+    private static nint _InputMaxOffset = -1;
 
     public ref float InputMax
     {
         get
         {
-            _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0xD3914A50D6766901);
-            return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+            if (_InputMaxOffset == -1) _InputMaxOffset = Schema.GetOffset(0xD3914A50D6766901);
+            return ref _Handle.AsRef<float>(_InputMaxOffset);
         }
     }
-    private static nint? _OutputMinOffset;
+    private static nint _OutputMinOffset = -1;
 
     public ref float OutputMin
     {
         get
         {
-            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0xD3914A505F8D7716);
-            return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+            if (_OutputMinOffset == -1) _OutputMinOffset = Schema.GetOffset(0xD3914A505F8D7716);
+            return ref _Handle.AsRef<float>(_OutputMinOffset);
         }
     }
-    private static nint? _OutputMaxOffset;
+    private static nint _OutputMaxOffset = -1;
 
     public ref float OutputMax
     {
         get
         {
-            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0xD3914A5051A0E8C4);
-            return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+            if (_OutputMaxOffset == -1) _OutputMaxOffset = Schema.GetOffset(0xD3914A5051A0E8C4);
+            return ref _Handle.AsRef<float>(_OutputMaxOffset);
         }
     }
-    private static nint? _CurveOffset;
+    private static nint _CurveOffset = -1;
     private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
-            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xD3914A50BFFA0B34);
+            if (_CurveOffset == -1) _CurveOffset = Schema.GetOffset(0xD3914A50BFFA0B34);
             var instance = _CurveInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CurveOffset);
             return instance;
         }
     }

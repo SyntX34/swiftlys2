@@ -16,14 +16,14 @@ internal partial class EventServerPostSimulate_tImpl : EventSimulate_tImpl, Even
 {
     public EventServerPostSimulate_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _LastTickBeforeClientUpdateOffset;
+    private static nint _LastTickBeforeClientUpdateOffset = -1;
 
     public ref bool LastTickBeforeClientUpdate
     {
         get
         {
-            _LastTickBeforeClientUpdateOffset = _LastTickBeforeClientUpdateOffset ?? Schema.GetOffset(0x302874F71F345D8D);
-            return ref _Handle.AsRef<bool>(_LastTickBeforeClientUpdateOffset!.Value);
+            if (_LastTickBeforeClientUpdateOffset == -1) _LastTickBeforeClientUpdateOffset = Schema.GetOffset(0x302874F71F345D8D);
+            return ref _Handle.AsRef<bool>(_LastTickBeforeClientUpdateOffset);
         }
     }
 

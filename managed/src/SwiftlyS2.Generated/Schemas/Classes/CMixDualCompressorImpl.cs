@@ -16,26 +16,26 @@ internal partial class CMixDualCompressorImpl : CMixPropertyBaseImpl, CMixDualCo
 {
     public CMixDualCompressorImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChannelsOffset;
+    private static nint _ChannelsOffset = -1;
 
     public ref int Channels
     {
         get
         {
-            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0x5887B9675A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
+            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0x5887B9675A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset);
         }
     }
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixDualCompressorDesc_tImpl? _DescInstance;
 
     public VMixDualCompressorDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0x5887B96727917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x5887B96727917BC0);
             var instance = _DescInstance ??= new VMixDualCompressorDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }

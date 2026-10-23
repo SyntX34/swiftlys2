@@ -16,84 +16,84 @@ internal partial class CRenderMeshImpl : SchemaClass, CRenderMesh
 {
     public CRenderMeshImpl(nint handle) : base(handle) { }
 
-    private static nint? _SceneObjectsOffset;
+    private static nint _SceneObjectsOffset = -1;
     private SchemaUntypedField? _SceneObjectsInstance;
 
     public SchemaUntypedField SceneObjects
     {
         get
         {
-            _SceneObjectsOffset = _SceneObjectsOffset ?? Schema.GetOffset(0x8593C3BF332235A1);
+            if (_SceneObjectsOffset == -1) _SceneObjectsOffset = Schema.GetOffset(0x8593C3BF332235A1);
             var instance = _SceneObjectsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SceneObjectsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SceneObjectsOffset);
             return instance;
         }
     }
-    private static nint? _ConstraintsOffset;
+    private static nint _ConstraintsOffset = -1;
 
     public ref CUtlLeanVector<PointerTo<CBaseConstraint>, int> Constraints
     {
         get
         {
-            _ConstraintsOffset = _ConstraintsOffset ?? Schema.GetOffset(0x8593C3BF251CBAAB);
-            return ref _Handle.AsRef<CUtlLeanVector<PointerTo<CBaseConstraint>, int>>(_ConstraintsOffset!.Value);
+            if (_ConstraintsOffset == -1) _ConstraintsOffset = Schema.GetOffset(0x8593C3BF251CBAAB);
+            return ref _Handle.AsRef<CUtlLeanVector<PointerTo<CBaseConstraint>, int>>(_ConstraintsOffset);
         }
     }
-    private static nint? _SkeletonOffset;
+    private static nint _SkeletonOffset = -1;
     private CRenderSkeletonImpl? _SkeletonInstance;
 
     public CRenderSkeleton Skeleton
     {
         get
         {
-            _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0x8593C3BFE77F030E);
+            if (_SkeletonOffset == -1) _SkeletonOffset = Schema.GetOffset(0x8593C3BFE77F030E);
             var instance = _SkeletonInstance ??= new CRenderSkeletonImpl(0);
-            instance.DangerousSetHandle(_Handle + _SkeletonOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SkeletonOffset);
             return instance;
         }
     }
-    private static nint? _UseUV2ForChartingOffset;
+    private static nint _UseUV2ForChartingOffset = -1;
 
     public ref bool UseUV2ForCharting
     {
         get
         {
-            _UseUV2ForChartingOffset = _UseUV2ForChartingOffset ?? Schema.GetOffset(0x8593C3BFFE2DF46A);
-            return ref _Handle.AsRef<bool>(_UseUV2ForChartingOffset!.Value);
+            if (_UseUV2ForChartingOffset == -1) _UseUV2ForChartingOffset = Schema.GetOffset(0x8593C3BFFE2DF46A);
+            return ref _Handle.AsRef<bool>(_UseUV2ForChartingOffset);
         }
     }
-    private static nint? _EmbeddedMapMeshOffset;
+    private static nint _EmbeddedMapMeshOffset = -1;
 
     public ref bool EmbeddedMapMesh
     {
         get
         {
-            _EmbeddedMapMeshOffset = _EmbeddedMapMeshOffset ?? Schema.GetOffset(0x8593C3BF6E866052);
-            return ref _Handle.AsRef<bool>(_EmbeddedMapMeshOffset!.Value);
+            if (_EmbeddedMapMeshOffset == -1) _EmbeddedMapMeshOffset = Schema.GetOffset(0x8593C3BF6E866052);
+            return ref _Handle.AsRef<bool>(_EmbeddedMapMeshOffset);
         }
     }
-    private static nint? _MeshDeformParamsOffset;
+    private static nint _MeshDeformParamsOffset = -1;
     private DynamicMeshDeformParams_tImpl? _MeshDeformParamsInstance;
 
     public DynamicMeshDeformParams_t MeshDeformParams
     {
         get
         {
-            _MeshDeformParamsOffset = _MeshDeformParamsOffset ?? Schema.GetOffset(0x8593C3BF061DBB9B);
+            if (_MeshDeformParamsOffset == -1) _MeshDeformParamsOffset = Schema.GetOffset(0x8593C3BF061DBB9B);
             var instance = _MeshDeformParamsInstance ??= new DynamicMeshDeformParams_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _MeshDeformParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MeshDeformParamsOffset);
             return instance;
         }
     }
-    private static nint? _GroomDataOffset;
+    private static nint _GroomDataOffset = -1;
     private CRenderGroomImpl? _GroomDataInstance;
 
     public CRenderGroom? GroomData
     {
         get
         {
-            _GroomDataOffset = _GroomDataOffset ?? Schema.GetOffset(0x8593C3BFCFCDEA93);
-            var ptr = _Handle.Read<nint>(_GroomDataOffset!.Value);
+            if (_GroomDataOffset == -1) _GroomDataOffset = Schema.GetOffset(0x8593C3BFCFCDEA93);
+            var ptr = _Handle.Read<nint>(_GroomDataOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _GroomDataInstance ??= new CRenderGroomImpl(0);
             instance.DangerousSetHandle(ptr);

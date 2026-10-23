@@ -16,84 +16,84 @@ internal partial class PostProcessingFogScatteringParameters_tImpl : SchemaClass
 {
     public PostProcessingFogScatteringParameters_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xAE3B2EF52E1F6E07);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0xAE3B2EF52E1F6E07);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
 
     public ref float Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xAE3B2EF555E6EFAD);
-            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xAE3B2EF555E6EFAD);
+            return ref _Handle.AsRef<float>(_ScaleOffset);
         }
     }
-    private static nint? _CubemapScaleOffset;
+    private static nint _CubemapScaleOffset = -1;
 
     public ref float CubemapScale
     {
         get
         {
-            _CubemapScaleOffset = _CubemapScaleOffset ?? Schema.GetOffset(0xAE3B2EF593A389D0);
-            return ref _Handle.AsRef<float>(_CubemapScaleOffset!.Value);
+            if (_CubemapScaleOffset == -1) _CubemapScaleOffset = Schema.GetOffset(0xAE3B2EF593A389D0);
+            return ref _Handle.AsRef<float>(_CubemapScaleOffset);
         }
     }
-    private static nint? _VolumetricScaleOffset;
+    private static nint _VolumetricScaleOffset = -1;
 
     public ref float VolumetricScale
     {
         get
         {
-            _VolumetricScaleOffset = _VolumetricScaleOffset ?? Schema.GetOffset(0xAE3B2EF515A15A21);
-            return ref _Handle.AsRef<float>(_VolumetricScaleOffset!.Value);
+            if (_VolumetricScaleOffset == -1) _VolumetricScaleOffset = Schema.GetOffset(0xAE3B2EF515A15A21);
+            return ref _Handle.AsRef<float>(_VolumetricScaleOffset);
         }
     }
-    private static nint? _GradientScaleOffset;
+    private static nint _GradientScaleOffset = -1;
 
     public ref float GradientScale
     {
         get
         {
-            _GradientScaleOffset = _GradientScaleOffset ?? Schema.GetOffset(0xAE3B2EF58473F465);
-            return ref _Handle.AsRef<float>(_GradientScaleOffset!.Value);
+            if (_GradientScaleOffset == -1) _GradientScaleOffset = Schema.GetOffset(0xAE3B2EF58473F465);
+            return ref _Handle.AsRef<float>(_GradientScaleOffset);
         }
     }
-    private static nint? _WaterScaleOffset;
+    private static nint _WaterScaleOffset = -1;
 
     public ref float WaterScale
     {
         get
         {
-            _WaterScaleOffset = _WaterScaleOffset ?? Schema.GetOffset(0xAE3B2EF5A973E52E);
-            return ref _Handle.AsRef<float>(_WaterScaleOffset!.Value);
+            if (_WaterScaleOffset == -1) _WaterScaleOffset = Schema.GetOffset(0xAE3B2EF5A973E52E);
+            return ref _Handle.AsRef<float>(_WaterScaleOffset);
         }
     }
-    private static nint? _WaterDensityOffset;
+    private static nint _WaterDensityOffset = -1;
 
     public ref float WaterDensity
     {
         get
         {
-            _WaterDensityOffset = _WaterDensityOffset ?? Schema.GetOffset(0xAE3B2EF52C55B87C);
-            return ref _Handle.AsRef<float>(_WaterDensityOffset!.Value);
+            if (_WaterDensityOffset == -1) _WaterDensityOffset = Schema.GetOffset(0xAE3B2EF52C55B87C);
+            return ref _Handle.AsRef<float>(_WaterDensityOffset);
         }
     }
-    private static nint? _WaterDepthBlurRadiusOffset;
+    private static nint _WaterDepthBlurRadiusOffset = -1;
 
     public ref float WaterDepthBlurRadius
     {
         get
         {
-            _WaterDepthBlurRadiusOffset = _WaterDepthBlurRadiusOffset ?? Schema.GetOffset(0xAE3B2EF52C22ADB2);
-            return ref _Handle.AsRef<float>(_WaterDepthBlurRadiusOffset!.Value);
+            if (_WaterDepthBlurRadiusOffset == -1) _WaterDepthBlurRadiusOffset = Schema.GetOffset(0xAE3B2EF52C22ADB2);
+            return ref _Handle.AsRef<float>(_WaterDepthBlurRadiusOffset);
         }
     }
 

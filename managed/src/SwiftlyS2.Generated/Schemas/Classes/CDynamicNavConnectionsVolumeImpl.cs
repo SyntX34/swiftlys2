@@ -16,79 +16,79 @@ internal partial class CDynamicNavConnectionsVolumeImpl : CTriggerMultipleImpl, 
 {
     public CDynamicNavConnectionsVolumeImpl(nint handle) : base(handle) { }
 
-    private static nint? _ConnectionTargetOffset;
+    private static nint _ConnectionTargetOffset = -1;
 
     public string ConnectionTarget
     {
         get
         {
-            _ConnectionTargetOffset = _ConnectionTargetOffset ?? Schema.GetOffset(0xA03D49DB1120FFE4);
-            return Schema.GetString(_Handle.Read<nint>(_ConnectionTargetOffset!.Value));
+            if (_ConnectionTargetOffset == -1) _ConnectionTargetOffset = Schema.GetOffset(0xA03D49DB1120FFE4);
+            return Schema.GetString(_Handle.Read<nint>(_ConnectionTargetOffset));
         }
         set
         {
-            _ConnectionTargetOffset = _ConnectionTargetOffset ?? Schema.GetOffset(0xA03D49DB1120FFE4);
-            Schema.SetString(_Handle, _ConnectionTargetOffset!.Value, value);
+            if (_ConnectionTargetOffset == -1) _ConnectionTargetOffset = Schema.GetOffset(0xA03D49DB1120FFE4);
+            Schema.SetString(_Handle, _ConnectionTargetOffset, value);
         }
     }
-    private static nint? _ConnectionsOffset;
+    private static nint _ConnectionsOffset = -1;
 
     public ref CUtlVector<DynamicVolumeDef_t> Connections
     {
         get
         {
-            _ConnectionsOffset = _ConnectionsOffset ?? Schema.GetOffset(0xA03D49DB11986B7E);
-            return ref _Handle.AsRef<CUtlVector<DynamicVolumeDef_t>>(_ConnectionsOffset!.Value);
+            if (_ConnectionsOffset == -1) _ConnectionsOffset = Schema.GetOffset(0xA03D49DB11986B7E);
+            return ref _Handle.AsRef<CUtlVector<DynamicVolumeDef_t>>(_ConnectionsOffset);
         }
     }
-    private static nint? _TransitionTypeOffset;
+    private static nint _TransitionTypeOffset = -1;
 
     public ref CGlobalSymbol TransitionType
     {
         get
         {
-            _TransitionTypeOffset = _TransitionTypeOffset ?? Schema.GetOffset(0xA03D49DB68D65FB9);
-            return ref _Handle.AsRef<CGlobalSymbol>(_TransitionTypeOffset!.Value);
+            if (_TransitionTypeOffset == -1) _TransitionTypeOffset = Schema.GetOffset(0xA03D49DB68D65FB9);
+            return ref _Handle.AsRef<CGlobalSymbol>(_TransitionTypeOffset);
         }
     }
-    private static nint? _ConnectionsEnabledOffset;
+    private static nint _ConnectionsEnabledOffset = -1;
 
     public ref bool ConnectionsEnabled
     {
         get
         {
-            _ConnectionsEnabledOffset = _ConnectionsEnabledOffset ?? Schema.GetOffset(0xA03D49DB4C10BC9B);
-            return ref _Handle.AsRef<bool>(_ConnectionsEnabledOffset!.Value);
+            if (_ConnectionsEnabledOffset == -1) _ConnectionsEnabledOffset = Schema.GetOffset(0xA03D49DB4C10BC9B);
+            return ref _Handle.AsRef<bool>(_ConnectionsEnabledOffset);
         }
     }
-    private static nint? _TargetAreaSearchRadiusOffset;
+    private static nint _TargetAreaSearchRadiusOffset = -1;
 
     public ref float TargetAreaSearchRadius
     {
         get
         {
-            _TargetAreaSearchRadiusOffset = _TargetAreaSearchRadiusOffset ?? Schema.GetOffset(0xA03D49DBACD0EEE5);
-            return ref _Handle.AsRef<float>(_TargetAreaSearchRadiusOffset!.Value);
+            if (_TargetAreaSearchRadiusOffset == -1) _TargetAreaSearchRadiusOffset = Schema.GetOffset(0xA03D49DBACD0EEE5);
+            return ref _Handle.AsRef<float>(_TargetAreaSearchRadiusOffset);
         }
     }
-    private static nint? _UpdateDistanceOffset;
+    private static nint _UpdateDistanceOffset = -1;
 
     public ref float UpdateDistance
     {
         get
         {
-            _UpdateDistanceOffset = _UpdateDistanceOffset ?? Schema.GetOffset(0xA03D49DB46AB2045);
-            return ref _Handle.AsRef<float>(_UpdateDistanceOffset!.Value);
+            if (_UpdateDistanceOffset == -1) _UpdateDistanceOffset = Schema.GetOffset(0xA03D49DB46AB2045);
+            return ref _Handle.AsRef<float>(_UpdateDistanceOffset);
         }
     }
-    private static nint? _MaxConnectionDistanceOffset;
+    private static nint _MaxConnectionDistanceOffset = -1;
 
     public ref float MaxConnectionDistance
     {
         get
         {
-            _MaxConnectionDistanceOffset = _MaxConnectionDistanceOffset ?? Schema.GetOffset(0xA03D49DB7590E3B8);
-            return ref _Handle.AsRef<float>(_MaxConnectionDistanceOffset!.Value);
+            if (_MaxConnectionDistanceOffset == -1) _MaxConnectionDistanceOffset = Schema.GetOffset(0xA03D49DB7590E3B8);
+            return ref _Handle.AsRef<float>(_MaxConnectionDistanceOffset);
         }
     }
 

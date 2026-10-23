@@ -16,94 +16,94 @@ internal partial class CResourceAssetTypeInfoImpl : CSimpleAssetTypeInfoImpl, CR
 {
     public CResourceAssetTypeInfoImpl(nint handle) : base(handle) { }
 
-    private static nint? _CompilerIdentifierOffset;
+    private static nint _CompilerIdentifierOffset = -1;
 
     public string CompilerIdentifier
     {
         get
         {
-            _CompilerIdentifierOffset = _CompilerIdentifierOffset ?? Schema.GetOffset(0x52E684CE62A92E77);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CompilerIdentifierOffset!.Value));
+            if (_CompilerIdentifierOffset == -1) _CompilerIdentifierOffset = Schema.GetOffset(0x52E684CE62A92E77);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CompilerIdentifierOffset));
         }
         set
         {
-            _CompilerIdentifierOffset = _CompilerIdentifierOffset ?? Schema.GetOffset(0x52E684CE62A92E77);
-            Schema.SetCUtlString(_Handle, _CompilerIdentifierOffset!.Value, value);
+            if (_CompilerIdentifierOffset == -1) _CompilerIdentifierOffset = Schema.GetOffset(0x52E684CE62A92E77);
+            Schema.SetCUtlString(_Handle, _CompilerIdentifierOffset, value);
         }
     }
-    private static nint? _CompileDependsOnResourceTypesOffset;
+    private static nint _CompileDependsOnResourceTypesOffset = -1;
 
     public ref CUtlVector<CUtlString> CompileDependsOnResourceTypes
     {
         get
         {
-            _CompileDependsOnResourceTypesOffset = _CompileDependsOnResourceTypesOffset ?? Schema.GetOffset(0x52E684CEE92763E9);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_CompileDependsOnResourceTypesOffset!.Value);
+            if (_CompileDependsOnResourceTypesOffset == -1) _CompileDependsOnResourceTypesOffset = Schema.GetOffset(0x52E684CEE92763E9);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_CompileDependsOnResourceTypesOffset);
         }
     }
-    private static nint? _BlocksOffset;
+    private static nint _BlocksOffset = -1;
 
     public ref CUtlVector<ResourceBlockTypeInfo_t> Blocks
     {
         get
         {
-            _BlocksOffset = _BlocksOffset ?? Schema.GetOffset(0x52E684CE84AE5A43);
-            return ref _Handle.AsRef<CUtlVector<ResourceBlockTypeInfo_t>>(_BlocksOffset!.Value);
+            if (_BlocksOffset == -1) _BlocksOffset = Schema.GetOffset(0x52E684CE84AE5A43);
+            return ref _Handle.AsRef<CUtlVector<ResourceBlockTypeInfo_t>>(_BlocksOffset);
         }
     }
-    private static nint? _RequiredSpecialDependencyOffset;
+    private static nint _RequiredSpecialDependencyOffset = -1;
 
     public string RequiredSpecialDependency
     {
         get
         {
-            _RequiredSpecialDependencyOffset = _RequiredSpecialDependencyOffset ?? Schema.GetOffset(0x52E684CE626234AE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_RequiredSpecialDependencyOffset!.Value));
+            if (_RequiredSpecialDependencyOffset == -1) _RequiredSpecialDependencyOffset = Schema.GetOffset(0x52E684CE626234AE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_RequiredSpecialDependencyOffset));
         }
         set
         {
-            _RequiredSpecialDependencyOffset = _RequiredSpecialDependencyOffset ?? Schema.GetOffset(0x52E684CE626234AE);
-            Schema.SetCUtlString(_Handle, _RequiredSpecialDependencyOffset!.Value, value);
+            if (_RequiredSpecialDependencyOffset == -1) _RequiredSpecialDependencyOffset = Schema.GetOffset(0x52E684CE626234AE);
+            Schema.SetCUtlString(_Handle, _RequiredSpecialDependencyOffset, value);
         }
     }
-    private static nint? _PreventDirectCompileOffset;
+    private static nint _PreventDirectCompileOffset = -1;
 
     public ref bool PreventDirectCompile
     {
         get
         {
-            _PreventDirectCompileOffset = _PreventDirectCompileOffset ?? Schema.GetOffset(0x52E684CE546CB159);
-            return ref _Handle.AsRef<bool>(_PreventDirectCompileOffset!.Value);
+            if (_PreventDirectCompileOffset == -1) _PreventDirectCompileOffset = Schema.GetOffset(0x52E684CE546CB159);
+            return ref _Handle.AsRef<bool>(_PreventDirectCompileOffset);
         }
     }
-    private static nint? _CannotBeAMultiParentChildCompileOffset;
+    private static nint _CannotBeAMultiParentChildCompileOffset = -1;
 
     public ref bool CannotBeAMultiParentChildCompile
     {
         get
         {
-            _CannotBeAMultiParentChildCompileOffset = _CannotBeAMultiParentChildCompileOffset ?? Schema.GetOffset(0x52E684CE9FFE30B0);
-            return ref _Handle.AsRef<bool>(_CannotBeAMultiParentChildCompileOffset!.Value);
+            if (_CannotBeAMultiParentChildCompileOffset == -1) _CannotBeAMultiParentChildCompileOffset = Schema.GetOffset(0x52E684CE9FFE30B0);
+            return ref _Handle.AsRef<bool>(_CannotBeAMultiParentChildCompileOffset);
         }
     }
-    private static nint? _PrefersIconForThumbnailOffset;
+    private static nint _PrefersIconForThumbnailOffset = -1;
 
     public ref bool PrefersIconForThumbnail
     {
         get
         {
-            _PrefersIconForThumbnailOffset = _PrefersIconForThumbnailOffset ?? Schema.GetOffset(0x52E684CE36ACCD44);
-            return ref _Handle.AsRef<bool>(_PrefersIconForThumbnailOffset!.Value);
+            if (_PrefersIconForThumbnailOffset == -1) _PrefersIconForThumbnailOffset = Schema.GetOffset(0x52E684CE36ACCD44);
+            return ref _Handle.AsRef<bool>(_PrefersIconForThumbnailOffset);
         }
     }
-    private static nint? _AllowedToCompileInTestModeOffset;
+    private static nint _AllowedToCompileInTestModeOffset = -1;
 
     public ref bool AllowedToCompileInTestMode
     {
         get
         {
-            _AllowedToCompileInTestModeOffset = _AllowedToCompileInTestModeOffset ?? Schema.GetOffset(0x52E684CE8C4711C3);
-            return ref _Handle.AsRef<bool>(_AllowedToCompileInTestModeOffset!.Value);
+            if (_AllowedToCompileInTestModeOffset == -1) _AllowedToCompileInTestModeOffset = Schema.GetOffset(0x52E684CE8C4711C3);
+            return ref _Handle.AsRef<bool>(_AllowedToCompileInTestModeOffset);
         }
     }
 

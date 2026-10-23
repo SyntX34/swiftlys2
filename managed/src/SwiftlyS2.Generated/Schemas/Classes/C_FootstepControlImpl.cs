@@ -16,34 +16,34 @@ internal partial class C_FootstepControlImpl : C_BaseTriggerImpl, C_FootstepCont
 {
     public C_FootstepControlImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceOffset;
+    private static nint _SourceOffset = -1;
 
     public string Source
     {
         get
         {
-            _SourceOffset = _SourceOffset ?? Schema.GetOffset(0x3E3103D6D0835C78);
-            return Schema.GetString(_Handle.Read<nint>(_SourceOffset!.Value));
+            if (_SourceOffset == -1) _SourceOffset = Schema.GetOffset(0x3E3103D6D0835C78);
+            return Schema.GetString(_Handle.Read<nint>(_SourceOffset));
         }
         set
         {
-            _SourceOffset = _SourceOffset ?? Schema.GetOffset(0x3E3103D6D0835C78);
-            Schema.SetString(_Handle, _SourceOffset!.Value, value);
+            if (_SourceOffset == -1) _SourceOffset = Schema.GetOffset(0x3E3103D6D0835C78);
+            Schema.SetString(_Handle, _SourceOffset, value);
         }
     }
-    private static nint? _DestinationOffset;
+    private static nint _DestinationOffset = -1;
 
     public string Destination
     {
         get
         {
-            _DestinationOffset = _DestinationOffset ?? Schema.GetOffset(0x3E3103D66E5C12DF);
-            return Schema.GetString(_Handle.Read<nint>(_DestinationOffset!.Value));
+            if (_DestinationOffset == -1) _DestinationOffset = Schema.GetOffset(0x3E3103D66E5C12DF);
+            return Schema.GetString(_Handle.Read<nint>(_DestinationOffset));
         }
         set
         {
-            _DestinationOffset = _DestinationOffset ?? Schema.GetOffset(0x3E3103D66E5C12DF);
-            Schema.SetString(_Handle, _DestinationOffset!.Value, value);
+            if (_DestinationOffset == -1) _DestinationOffset = Schema.GetOffset(0x3E3103D66E5C12DF);
+            Schema.SetString(_Handle, _DestinationOffset, value);
         }
     }
 

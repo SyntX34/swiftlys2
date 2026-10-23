@@ -16,24 +16,24 @@ internal partial class CCSPlayer_HostageServicesImpl : CPlayerPawnComponentImpl,
 {
     public CCSPlayer_HostageServicesImpl(nint handle) : base(handle) { }
 
-    private static nint? _CarriedHostageOffset;
+    private static nint _CarriedHostageOffset = -1;
 
     public ref CHandle<CBaseEntity> CarriedHostage
     {
         get
         {
-            _CarriedHostageOffset = _CarriedHostageOffset ?? Schema.GetOffset(0x1742920F695FDF3C);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CarriedHostageOffset!.Value);
+            if (_CarriedHostageOffset == -1) _CarriedHostageOffset = Schema.GetOffset(0x1742920F695FDF3C);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CarriedHostageOffset);
         }
     }
-    private static nint? _CarriedHostagePropOffset;
+    private static nint _CarriedHostagePropOffset = -1;
 
     public ref CHandle<CBaseEntity> CarriedHostageProp
     {
         get
         {
-            _CarriedHostagePropOffset = _CarriedHostagePropOffset ?? Schema.GetOffset(0x1742920F7270EB65);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CarriedHostagePropOffset!.Value);
+            if (_CarriedHostagePropOffset == -1) _CarriedHostagePropOffset = Schema.GetOffset(0x1742920F7270EB65);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CarriedHostagePropOffset);
         }
     }
 

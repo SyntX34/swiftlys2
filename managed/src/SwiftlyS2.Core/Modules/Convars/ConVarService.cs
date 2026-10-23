@@ -30,11 +30,39 @@ internal enum EConVarType : int
     EConVarType_MAX
 };
 
+internal static class ConVarTypes
+{
+    public static bool TryGet<T>( out EConVarType type )
+    {
+        var t = typeof(T);
+        type =
+            t == typeof(bool) ? EConVarType.EConVarType_Bool :
+            t == typeof(short) ? EConVarType.EConVarType_Int16 :
+            t == typeof(ushort) ? EConVarType.EConVarType_UInt16 :
+            t == typeof(int) ? EConVarType.EConVarType_Int32 :
+            t == typeof(uint) ? EConVarType.EConVarType_UInt32 :
+            t == typeof(long) ? EConVarType.EConVarType_Int64 :
+            t == typeof(ulong) ? EConVarType.EConVarType_UInt64 :
+            t == typeof(float) ? EConVarType.EConVarType_Float32 :
+            t == typeof(double) ? EConVarType.EConVarType_Float64 :
+            t == typeof(string) ? EConVarType.EConVarType_String :
+            t == typeof(Color) ? EConVarType.EConVarType_Color :
+            t == typeof(Vector2D) ? EConVarType.EConVarType_Vector2 :
+            t == typeof(Vector) ? EConVarType.EConVarType_Vector3 :
+            t == typeof(Vector4D) ? EConVarType.EConVarType_Vector4 :
+            t == typeof(QAngle) ? EConVarType.EConVarType_Qangle :
+            t == typeof(VectorWS) ? EConVarType.EConVarType_VectorWS :
+            EConVarType.EConVarType_Invalid;
+        return type != EConVarType.EConVarType_Invalid;
+    }
+}
+
 internal class ConVarService : IConVarService
 {
     private static readonly Dictionary<(int ClientId, string Name), Queue<Action<string>>> _pendingQueries = [];
     private static readonly Lock _pendingQueriesLock = new();
     private INetMessageService _netMessageService;
+    private CNETMsg_SetConVar? _setConVarMessage;
 
     public ConVarService( INetMessageService netMessageService )
     {
@@ -69,7 +97,7 @@ internal class ConVarService : IConVarService
             NativeConvars.CreateConvar(name, (int)type, (ulong)flags, helpMessage, (nint)Unsafe.AsPointer(ref defaultValue), 0, 0);
         }
 
-        return new ConVar<T>(name, this);
+        return new ConVar<T>(name, this, type);
     }
 
     public unsafe IConVar<T> Create<T>( string name, string helpMessage, T defaultValue, T? minValue, T? maxValue, ConvarFlags flags = ConvarFlags.NONE ) where T : unmanaged
@@ -86,7 +114,7 @@ internal class ConVarService : IConVarService
 
         NativeConvars.CreateConvar(name, (int)type, (ulong)flags, helpMessage, (nint)(&defaultValue), minValue.HasValue ? (nint)(&min) : 0, maxValue.HasValue ? (nint)(&max) : 0);
 
-        return new ConVar<T>(name, this);
+        return new ConVar<T>(name, this, type);
     }
 
     public IConVar<T> CreateOrFind<T>( string name, string helpMessage, T defaultValue, ConvarFlags flags = ConvarFlags.NONE )
@@ -99,27 +127,42 @@ internal class ConVarService : IConVarService
         return NativeConvars.ExistsConvar(name) ? new ConVar<T>(name, this) : Create(name, helpMessage, defaultValue, minValue, maxValue, flags);
     }
 
-    public void ReplicateToClient( int clientId, string name, string value )
+    private void Replicate( string name, string value, int? clientId )
     {
-        _netMessageService.Send<CNETMsg_SetConVar>(msg =>
+        if (NativeBinding.IsMainThread)
         {
-            var cvar = msg.Convars.Cvars.Add();
-            cvar.Name = name;
-            cvar.Value = value;
-            msg.Recipients.AddRecipient(clientId);
-        });
+            ReplicateNow(name, value, clientId);
+            return;
+        }
+
+        _ = SchedulerManager.QueueOrNow(() => ReplicateNow(name, value, clientId));
     }
 
-    public void ReplicateToAll( string name, string value )
+    private void ReplicateNow( string name, string value, int? clientId )
     {
-        _netMessageService.Send<CNETMsg_SetConVar>(msg =>
+        var msg = _setConVarMessage ??= _netMessageService.Create<CNETMsg_SetConVar>();
+
+        msg.Convars.Cvars.Clear();
+        var cvar = msg.Convars.Cvars.Add();
+        cvar.Name = name;
+        cvar.Value = value;
+
+        msg.Recipients.RemoveAllPlayers();
+        if (clientId is { } id)
         {
-            var cvar = msg.Convars.Cvars.Add();
-            cvar.Name = name;
-            cvar.Value = value;
+            msg.Recipients.AddRecipient(id);
+        }
+        else
+        {
             msg.Recipients.AddAllPlayers();
-        });
+        }
+
+        msg.Send();
     }
+
+    public void ReplicateToClient( int clientId, string name, string value ) => Replicate(name, value, clientId);
+
+    public void ReplicateToAll( string name, string value ) => Replicate(name, value, null);
 
     private static unsafe void CreateStringConVar( string name, string helpMessage, string value, ConvarFlags flags )
     {
@@ -130,26 +173,8 @@ internal class ConVarService : IConVarService
         }
     }
 
-    private static EConVarType GetConVarType<T>()
-    {
-        if (typeof(T) == typeof(bool)) return EConVarType.EConVarType_Bool;
-        if (typeof(T) == typeof(short)) return EConVarType.EConVarType_Int16;
-        if (typeof(T) == typeof(ushort)) return EConVarType.EConVarType_UInt16;
-        if (typeof(T) == typeof(int)) return EConVarType.EConVarType_Int32;
-        if (typeof(T) == typeof(uint)) return EConVarType.EConVarType_UInt32;
-        if (typeof(T) == typeof(long)) return EConVarType.EConVarType_Int64;
-        if (typeof(T) == typeof(ulong)) return EConVarType.EConVarType_UInt64;
-        if (typeof(T) == typeof(float)) return EConVarType.EConVarType_Float32;
-        if (typeof(T) == typeof(double)) return EConVarType.EConVarType_Float64;
-        if (typeof(T) == typeof(string)) return EConVarType.EConVarType_String;
-        if (typeof(T) == typeof(Color)) return EConVarType.EConVarType_Color;
-        if (typeof(T) == typeof(Vector2D)) return EConVarType.EConVarType_Vector2;
-        if (typeof(T) == typeof(Vector)) return EConVarType.EConVarType_Vector3;
-        if (typeof(T) == typeof(Vector4D)) return EConVarType.EConVarType_Vector4;
-        if (typeof(T) == typeof(QAngle)) return EConVarType.EConVarType_Qangle;
-
-        throw new Exception($"Unsupported type {typeof(T)}.");
-    }
+    private static EConVarType GetConVarType<T>() =>
+        ConVarTypes.TryGet<T>(out var type) ? type : throw new Exception($"Unsupported type {typeof(T)}.");
 
     public void QueryClient( int clientId, string name, Action<string> callback )
     {

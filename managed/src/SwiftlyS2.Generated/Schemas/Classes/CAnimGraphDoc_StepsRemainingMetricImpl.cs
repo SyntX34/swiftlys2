@@ -16,24 +16,24 @@ internal partial class CAnimGraphDoc_StepsRemainingMetricImpl : CAnimGraphDoc_Mo
 {
     public CAnimGraphDoc_StepsRemainingMetricImpl(nint handle) : base(handle) { }
 
-    private static nint? _FeetOffset;
+    private static nint _FeetOffset = -1;
 
     public ref CUtlVector<CUtlString> Feet
     {
         get
         {
-            _FeetOffset = _FeetOffset ?? Schema.GetOffset(0x65F60337910AFF5);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_FeetOffset!.Value);
+            if (_FeetOffset == -1) _FeetOffset = Schema.GetOffset(0x65F60337910AFF5);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_FeetOffset);
         }
     }
-    private static nint? _MinStepsRemainingOffset;
+    private static nint _MinStepsRemainingOffset = -1;
 
     public ref float MinStepsRemaining
     {
         get
         {
-            _MinStepsRemainingOffset = _MinStepsRemainingOffset ?? Schema.GetOffset(0x65F6033382CE1FC);
-            return ref _Handle.AsRef<float>(_MinStepsRemainingOffset!.Value);
+            if (_MinStepsRemainingOffset == -1) _MinStepsRemainingOffset = Schema.GetOffset(0x65F6033382CE1FC);
+            return ref _Handle.AsRef<float>(_MinStepsRemainingOffset);
         }
     }
 

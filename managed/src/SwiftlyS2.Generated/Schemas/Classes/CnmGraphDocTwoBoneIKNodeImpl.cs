@@ -16,34 +16,34 @@ internal partial class CnmGraphDocTwoBoneIKNodeImpl : CNmGraphDocVariationDataNo
 {
     public CnmGraphDocTwoBoneIKNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _IsTargetInWorldSpaceOffset;
+    private static nint _IsTargetInWorldSpaceOffset = -1;
 
     public ref bool IsTargetInWorldSpace
     {
         get
         {
-            _IsTargetInWorldSpaceOffset = _IsTargetInWorldSpaceOffset ?? Schema.GetOffset(0xAA1C391B5F56E0C5);
-            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
+            if (_IsTargetInWorldSpaceOffset == -1) _IsTargetInWorldSpaceOffset = Schema.GetOffset(0xAA1C391B5F56E0C5);
+            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset);
         }
     }
-    private static nint? _BlendModeOffset;
+    private static nint _BlendModeOffset = -1;
 
     public ref NmIKBlendMode_t BlendMode
     {
         get
         {
-            _BlendModeOffset = _BlendModeOffset ?? Schema.GetOffset(0xAA1C391B8D5006AB);
-            return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset!.Value);
+            if (_BlendModeOffset == -1) _BlendModeOffset = Schema.GetOffset(0xAA1C391B8D5006AB);
+            return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset);
         }
     }
-    private static nint? _ChainRotationWeightOffset;
+    private static nint _ChainRotationWeightOffset = -1;
 
     public ref float ChainRotationWeight
     {
         get
         {
-            _ChainRotationWeightOffset = _ChainRotationWeightOffset ?? Schema.GetOffset(0xAA1C391B2BCFB44A);
-            return ref _Handle.AsRef<float>(_ChainRotationWeightOffset!.Value);
+            if (_ChainRotationWeightOffset == -1) _ChainRotationWeightOffset = Schema.GetOffset(0xAA1C391B2BCFB44A);
+            return ref _Handle.AsRef<float>(_ChainRotationWeightOffset);
         }
     }
 

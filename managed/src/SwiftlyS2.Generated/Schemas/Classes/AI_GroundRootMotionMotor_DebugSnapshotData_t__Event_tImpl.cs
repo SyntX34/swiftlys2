@@ -16,29 +16,29 @@ internal partial class AI_GroundRootMotionMotor_DebugSnapshotData_t__Event_tImpl
 {
     public AI_GroundRootMotionMotor_DebugSnapshotData_t__Event_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescriptionOffset;
+    private static nint _DescriptionOffset = -1;
 
     public string Description
     {
         get
         {
-            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x6C81D7B0346F3B69);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset!.Value));
+            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0x6C81D7B0346F3B69);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DescriptionOffset));
         }
         set
         {
-            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x6C81D7B0346F3B69);
-            Schema.SetCUtlString(_Handle, _DescriptionOffset!.Value, value);
+            if (_DescriptionOffset == -1) _DescriptionOffset = Schema.GetOffset(0x6C81D7B0346F3B69);
+            Schema.SetCUtlString(_Handle, _DescriptionOffset, value);
         }
     }
-    private static nint? _LocationOffset;
+    private static nint _LocationOffset = -1;
 
     public ref Vector Location
     {
         get
         {
-            _LocationOffset = _LocationOffset ?? Schema.GetOffset(0x6C81D7B00BF5A9A6);
-            return ref _Handle.AsRef<Vector>(_LocationOffset!.Value);
+            if (_LocationOffset == -1) _LocationOffset = Schema.GetOffset(0x6C81D7B00BF5A9A6);
+            return ref _Handle.AsRef<Vector>(_LocationOffset);
         }
     }
 

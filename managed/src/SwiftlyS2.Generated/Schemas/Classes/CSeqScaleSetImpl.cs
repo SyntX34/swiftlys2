@@ -16,54 +16,54 @@ internal partial class CSeqScaleSetImpl : SchemaClass, CSeqScaleSet
 {
     public CSeqScaleSetImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public ref CBufferString Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x34C951AB63D22D49);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x34C951AB63D22D49);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset);
         }
     }
-    private static nint? _RootOffsetOffset;
+    private static nint _RootOffsetOffset = -1;
 
     public ref bool RootOffset
     {
         get
         {
-            _RootOffsetOffset = _RootOffsetOffset ?? Schema.GetOffset(0x34C951ABEE69828A);
-            return ref _Handle.AsRef<bool>(_RootOffsetOffset!.Value);
+            if (_RootOffsetOffset == -1) _RootOffsetOffset = Schema.GetOffset(0x34C951ABEE69828A);
+            return ref _Handle.AsRef<bool>(_RootOffsetOffset);
         }
     }
-    private static nint? _RootOffset1Offset;
+    private static nint _RootOffset1Offset = -1;
 
     public ref Vector RootOffset1
     {
         get
         {
-            _RootOffset1Offset = _RootOffset1Offset ?? Schema.GetOffset(0x34C951ABA62E010E);
-            return ref _Handle.AsRef<Vector>(_RootOffset1Offset!.Value);
+            if (_RootOffset1Offset == -1) _RootOffset1Offset = Schema.GetOffset(0x34C951ABA62E010E);
+            return ref _Handle.AsRef<Vector>(_RootOffset1Offset);
         }
     }
-    private static nint? _LocalBoneArrayOffset;
+    private static nint _LocalBoneArrayOffset = -1;
 
     public ref CUtlVector<short> LocalBoneArray
     {
         get
         {
-            _LocalBoneArrayOffset = _LocalBoneArrayOffset ?? Schema.GetOffset(0x34C951AB0B8EFD6B);
-            return ref _Handle.AsRef<CUtlVector<short>>(_LocalBoneArrayOffset!.Value);
+            if (_LocalBoneArrayOffset == -1) _LocalBoneArrayOffset = Schema.GetOffset(0x34C951AB0B8EFD6B);
+            return ref _Handle.AsRef<CUtlVector<short>>(_LocalBoneArrayOffset);
         }
     }
-    private static nint? _BoneScaleArrayOffset;
+    private static nint _BoneScaleArrayOffset = -1;
 
     public ref CUtlVector<float> BoneScaleArray
     {
         get
         {
-            _BoneScaleArrayOffset = _BoneScaleArrayOffset ?? Schema.GetOffset(0x34C951ABC4BD868A);
-            return ref _Handle.AsRef<CUtlVector<float>>(_BoneScaleArrayOffset!.Value);
+            if (_BoneScaleArrayOffset == -1) _BoneScaleArrayOffset = Schema.GetOffset(0x34C951ABC4BD868A);
+            return ref _Handle.AsRef<CUtlVector<float>>(_BoneScaleArrayOffset);
         }
     }
 

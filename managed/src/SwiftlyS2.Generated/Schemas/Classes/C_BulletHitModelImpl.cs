@@ -16,64 +16,64 @@ internal partial class C_BulletHitModelImpl : CBaseAnimGraphImpl, C_BulletHitMod
 {
     public C_BulletHitModelImpl(nint handle) : base(handle) { }
 
-    private static nint? _MatLocalOffset;
+    private static nint _MatLocalOffset = -1;
 
     public ref matrix3x4_t MatLocal
     {
         get
         {
-            _MatLocalOffset = _MatLocalOffset ?? Schema.GetOffset(0xDAA54AFDA23F2FA0);
-            return ref _Handle.AsRef<matrix3x4_t>(_MatLocalOffset!.Value);
+            if (_MatLocalOffset == -1) _MatLocalOffset = Schema.GetOffset(0xDAA54AFDA23F2FA0);
+            return ref _Handle.AsRef<matrix3x4_t>(_MatLocalOffset);
         }
     }
-    private static nint? _BoneIndexOffset;
+    private static nint _BoneIndexOffset = -1;
 
     public ref int BoneIndex
     {
         get
         {
-            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xDAA54AFD2A3ADD7E);
-            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+            if (_BoneIndexOffset == -1) _BoneIndexOffset = Schema.GetOffset(0xDAA54AFD2A3ADD7E);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset);
         }
     }
-    private static nint? _PlayerParentOffset;
+    private static nint _PlayerParentOffset = -1;
 
     public ref CHandle<C_BaseEntity> PlayerParent
     {
         get
         {
-            _PlayerParentOffset = _PlayerParentOffset ?? Schema.GetOffset(0xDAA54AFDD4C41CD6);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_PlayerParentOffset!.Value);
+            if (_PlayerParentOffset == -1) _PlayerParentOffset = Schema.GetOffset(0xDAA54AFDD4C41CD6);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_PlayerParentOffset);
         }
     }
-    private static nint? _IsHitOffset;
+    private static nint _IsHitOffset = -1;
 
     public ref bool IsHit
     {
         get
         {
-            _IsHitOffset = _IsHitOffset ?? Schema.GetOffset(0xDAA54AFD1F0402FA);
-            return ref _Handle.AsRef<bool>(_IsHitOffset!.Value);
+            if (_IsHitOffset == -1) _IsHitOffset = Schema.GetOffset(0xDAA54AFD1F0402FA);
+            return ref _Handle.AsRef<bool>(_IsHitOffset);
         }
     }
-    private static nint? _TimeCreatedOffset;
+    private static nint _TimeCreatedOffset = -1;
 
     public ref float TimeCreated
     {
         get
         {
-            _TimeCreatedOffset = _TimeCreatedOffset ?? Schema.GetOffset(0xDAA54AFD2B85079A);
-            return ref _Handle.AsRef<float>(_TimeCreatedOffset!.Value);
+            if (_TimeCreatedOffset == -1) _TimeCreatedOffset = Schema.GetOffset(0xDAA54AFD2B85079A);
+            return ref _Handle.AsRef<float>(_TimeCreatedOffset);
         }
     }
-    private static nint? _StartPosOffset;
+    private static nint _StartPosOffset = -1;
 
     public ref Vector StartPos
     {
         get
         {
-            _StartPosOffset = _StartPosOffset ?? Schema.GetOffset(0xDAA54AFD26654BFF);
-            return ref _Handle.AsRef<Vector>(_StartPosOffset!.Value);
+            if (_StartPosOffset == -1) _StartPosOffset = Schema.GetOffset(0xDAA54AFD26654BFF);
+            return ref _Handle.AsRef<Vector>(_StartPosOffset);
         }
     }
 

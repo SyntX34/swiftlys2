@@ -16,16 +16,16 @@ internal partial class CAttributeContainerImpl : CAttributeManagerImpl, CAttribu
 {
     public CAttributeContainerImpl(nint handle) : base(handle) { }
 
-    private static nint? _ItemOffset;
+    private static nint _ItemOffset = -1;
     private CEconItemViewImpl? _ItemInstance;
 
     public CEconItemView Item
     {
         get
         {
-            _ItemOffset = _ItemOffset ?? Schema.GetOffset(0x554833CDDCE71866);
+            if (_ItemOffset == -1) _ItemOffset = Schema.GetOffset(0x554833CDDCE71866);
             var instance = _ItemInstance ??= new CEconItemViewImpl(0);
-            instance.DangerousSetHandle(_Handle + _ItemOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ItemOffset);
             return instance;
         }
     }

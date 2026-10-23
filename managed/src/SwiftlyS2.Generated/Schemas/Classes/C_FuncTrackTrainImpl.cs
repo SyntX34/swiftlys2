@@ -16,34 +16,34 @@ internal partial class C_FuncTrackTrainImpl : C_BaseModelEntityImpl, C_FuncTrack
 {
     public C_FuncTrackTrainImpl(nint handle) : base(handle) { }
 
-    private static nint? _LongAxisOffset;
+    private static nint _LongAxisOffset = -1;
 
     public ref int LongAxis
     {
         get
         {
-            _LongAxisOffset = _LongAxisOffset ?? Schema.GetOffset(0x5640726DE6D8F0A);
-            return ref _Handle.AsRef<int>(_LongAxisOffset!.Value);
+            if (_LongAxisOffset == -1) _LongAxisOffset = Schema.GetOffset(0x5640726DE6D8F0A);
+            return ref _Handle.AsRef<int>(_LongAxisOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x56407265ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x56407265ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _LineLengthOffset;
+    private static nint _LineLengthOffset = -1;
 
     public ref float LineLength
     {
         get
         {
-            _LineLengthOffset = _LineLengthOffset ?? Schema.GetOffset(0x564072608A049AD);
-            return ref _Handle.AsRef<float>(_LineLengthOffset!.Value);
+            if (_LineLengthOffset == -1) _LineLengthOffset = Schema.GetOffset(0x564072608A049AD);
+            return ref _Handle.AsRef<float>(_LineLengthOffset);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CExampleSchemaVData_PolymorphicBaseImpl : SchemaClass, CE
 {
     public CExampleSchemaVData_PolymorphicBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _BaseOffset;
+    private static nint _BaseOffset = -1;
 
     public ref int Base
     {
         get
         {
-            _BaseOffset = _BaseOffset ?? Schema.GetOffset(0x2CEB124160282B7C);
-            return ref _Handle.AsRef<int>(_BaseOffset!.Value);
+            if (_BaseOffset == -1) _BaseOffset = Schema.GetOffset(0x2CEB124160282B7C);
+            return ref _Handle.AsRef<int>(_BaseOffset);
         }
     }
 

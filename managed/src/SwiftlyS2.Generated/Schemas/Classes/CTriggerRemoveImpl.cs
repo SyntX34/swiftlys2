@@ -16,14 +16,14 @@ internal partial class CTriggerRemoveImpl : CBaseTriggerImpl, CTriggerRemove
 {
     public CTriggerRemoveImpl(nint handle) : base(handle) { }
 
-    private static nint? _OnRemoveOffset;
+    private static nint _OnRemoveOffset = -1;
 
     public ref CEntityIOOutput OnRemove
     {
         get
         {
-            _OnRemoveOffset = _OnRemoveOffset ?? Schema.GetOffset(0x97A9D4D67DC268F8);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnRemoveOffset!.Value);
+            if (_OnRemoveOffset == -1) _OnRemoveOffset = Schema.GetOffset(0x97A9D4D67DC268F8);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRemoveOffset);
         }
     }
 

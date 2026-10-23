@@ -16,36 +16,36 @@ internal partial class CBtNodeConditionInactiveImpl : CBtNodeConditionImpl, CBtN
 {
     public CBtNodeConditionInactiveImpl(nint handle) : base(handle) { }
 
-    private static nint? _RoundStartThresholdSecondsOffset;
+    private static nint _RoundStartThresholdSecondsOffset = -1;
 
     public ref float RoundStartThresholdSeconds
     {
         get
         {
-            _RoundStartThresholdSecondsOffset = _RoundStartThresholdSecondsOffset ?? Schema.GetOffset(0x1AB44FB08A52CC47);
-            return ref _Handle.AsRef<float>(_RoundStartThresholdSecondsOffset!.Value);
+            if (_RoundStartThresholdSecondsOffset == -1) _RoundStartThresholdSecondsOffset = Schema.GetOffset(0x1AB44FB08A52CC47);
+            return ref _Handle.AsRef<float>(_RoundStartThresholdSecondsOffset);
         }
     }
-    private static nint? _SensorInactivityThresholdSecondsOffset;
+    private static nint _SensorInactivityThresholdSecondsOffset = -1;
 
     public ref float SensorInactivityThresholdSeconds
     {
         get
         {
-            _SensorInactivityThresholdSecondsOffset = _SensorInactivityThresholdSecondsOffset ?? Schema.GetOffset(0x1AB44FB07E66A29F);
-            return ref _Handle.AsRef<float>(_SensorInactivityThresholdSecondsOffset!.Value);
+            if (_SensorInactivityThresholdSecondsOffset == -1) _SensorInactivityThresholdSecondsOffset = Schema.GetOffset(0x1AB44FB07E66A29F);
+            return ref _Handle.AsRef<float>(_SensorInactivityThresholdSecondsOffset);
         }
     }
-    private static nint? _SensorInactivityTimerOffset;
+    private static nint _SensorInactivityTimerOffset = -1;
     private CountdownTimerImpl? _SensorInactivityTimerInstance;
 
     public CountdownTimer SensorInactivityTimer
     {
         get
         {
-            _SensorInactivityTimerOffset = _SensorInactivityTimerOffset ?? Schema.GetOffset(0x1AB44FB0D921DF72);
+            if (_SensorInactivityTimerOffset == -1) _SensorInactivityTimerOffset = Schema.GetOffset(0x1AB44FB0D921DF72);
             var instance = _SensorInactivityTimerInstance ??= new CountdownTimerImpl(0);
-            instance.DangerousSetHandle(_Handle + _SensorInactivityTimerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SensorInactivityTimerOffset);
             return instance;
         }
     }

@@ -16,34 +16,34 @@ internal partial class C_INIT_RandomTrailLengthImpl : CParticleFunctionInitializ
 {
     public C_INIT_RandomTrailLengthImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinLengthOffset;
+    private static nint _MinLengthOffset = -1;
 
     public ref float MinLength
     {
         get
         {
-            _MinLengthOffset = _MinLengthOffset ?? Schema.GetOffset(0x6418031B95FB8E51);
-            return ref _Handle.AsRef<float>(_MinLengthOffset!.Value);
+            if (_MinLengthOffset == -1) _MinLengthOffset = Schema.GetOffset(0x6418031B95FB8E51);
+            return ref _Handle.AsRef<float>(_MinLengthOffset);
         }
     }
-    private static nint? _MaxLengthOffset;
+    private static nint _MaxLengthOffset = -1;
 
     public ref float MaxLength
     {
         get
         {
-            _MaxLengthOffset = _MaxLengthOffset ?? Schema.GetOffset(0x6418031B87A8B4C7);
-            return ref _Handle.AsRef<float>(_MaxLengthOffset!.Value);
+            if (_MaxLengthOffset == -1) _MaxLengthOffset = Schema.GetOffset(0x6418031B87A8B4C7);
+            return ref _Handle.AsRef<float>(_MaxLengthOffset);
         }
     }
-    private static nint? _LengthRandExponentOffset;
+    private static nint _LengthRandExponentOffset = -1;
 
     public ref float LengthRandExponent
     {
         get
         {
-            _LengthRandExponentOffset = _LengthRandExponentOffset ?? Schema.GetOffset(0x6418031B41B064A7);
-            return ref _Handle.AsRef<float>(_LengthRandExponentOffset!.Value);
+            if (_LengthRandExponentOffset == -1) _LengthRandExponentOffset = Schema.GetOffset(0x6418031B41B064A7);
+            return ref _Handle.AsRef<float>(_LengthRandExponentOffset);
         }
     }
 

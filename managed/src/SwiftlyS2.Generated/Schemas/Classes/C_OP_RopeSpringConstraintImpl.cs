@@ -16,65 +16,65 @@ internal partial class C_OP_RopeSpringConstraintImpl : CParticleFunctionConstrai
 {
     public C_OP_RopeSpringConstraintImpl(nint handle) : base(handle) { }
 
-    private static nint? _RestLengthOffset;
+    private static nint _RestLengthOffset = -1;
     private CParticleCollectionFloatInputImpl? _RestLengthInstance;
 
     public CParticleCollectionFloatInput RestLength
     {
         get
         {
-            _RestLengthOffset = _RestLengthOffset ?? Schema.GetOffset(0x2CF6156393AC4079);
+            if (_RestLengthOffset == -1) _RestLengthOffset = Schema.GetOffset(0x2CF6156393AC4079);
             var instance = _RestLengthInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RestLengthOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RestLengthOffset);
             return instance;
         }
     }
-    private static nint? _MinDistanceOffset;
+    private static nint _MinDistanceOffset = -1;
     private CParticleCollectionFloatInputImpl? _MinDistanceInstance;
 
     public CParticleCollectionFloatInput MinDistance
     {
         get
         {
-            _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0x2CF6156392BCAD06);
+            if (_MinDistanceOffset == -1) _MinDistanceOffset = Schema.GetOffset(0x2CF6156392BCAD06);
             var instance = _MinDistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MinDistanceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MinDistanceOffset);
             return instance;
         }
     }
-    private static nint? _MaxDistanceOffset;
+    private static nint _MaxDistanceOffset = -1;
     private CParticleCollectionFloatInputImpl? _MaxDistanceInstance;
 
     public CParticleCollectionFloatInput MaxDistance
     {
         get
         {
-            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x2CF6156398893360);
+            if (_MaxDistanceOffset == -1) _MaxDistanceOffset = Schema.GetOffset(0x2CF6156398893360);
             var instance = _MaxDistanceInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MaxDistanceOffset);
             return instance;
         }
     }
-    private static nint? _AdjustmentScaleOffset;
+    private static nint _AdjustmentScaleOffset = -1;
 
     public ref float AdjustmentScale
     {
         get
         {
-            _AdjustmentScaleOffset = _AdjustmentScaleOffset ?? Schema.GetOffset(0x2CF61563A29D34AE);
-            return ref _Handle.AsRef<float>(_AdjustmentScaleOffset!.Value);
+            if (_AdjustmentScaleOffset == -1) _AdjustmentScaleOffset = Schema.GetOffset(0x2CF61563A29D34AE);
+            return ref _Handle.AsRef<float>(_AdjustmentScaleOffset);
         }
     }
-    private static nint? _InitialRestingLengthOffset;
+    private static nint _InitialRestingLengthOffset = -1;
     private CParticleCollectionFloatInputImpl? _InitialRestingLengthInstance;
 
     public CParticleCollectionFloatInput InitialRestingLength
     {
         get
         {
-            _InitialRestingLengthOffset = _InitialRestingLengthOffset ?? Schema.GetOffset(0x2CF61563FE9273C1);
+            if (_InitialRestingLengthOffset == -1) _InitialRestingLengthOffset = Schema.GetOffset(0x2CF61563FE9273C1);
             var instance = _InitialRestingLengthInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InitialRestingLengthOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InitialRestingLengthOffset);
             return instance;
         }
     }

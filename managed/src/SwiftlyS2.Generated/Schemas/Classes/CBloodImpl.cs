@@ -16,44 +16,44 @@ internal partial class CBloodImpl : CPointEntityImpl, CBlood
 {
     public CBloodImpl(nint handle) : base(handle) { }
 
-    private static nint? _SprayAnglesOffset;
+    private static nint _SprayAnglesOffset = -1;
 
     public ref QAngle SprayAngles
     {
         get
         {
-            _SprayAnglesOffset = _SprayAnglesOffset ?? Schema.GetOffset(0x68CF460A2BDF444E);
-            return ref _Handle.AsRef<QAngle>(_SprayAnglesOffset!.Value);
+            if (_SprayAnglesOffset == -1) _SprayAnglesOffset = Schema.GetOffset(0x68CF460A2BDF444E);
+            return ref _Handle.AsRef<QAngle>(_SprayAnglesOffset);
         }
     }
-    private static nint? _SprayDirOffset;
+    private static nint _SprayDirOffset = -1;
 
     public ref Vector SprayDir
     {
         get
         {
-            _SprayDirOffset = _SprayDirOffset ?? Schema.GetOffset(0x68CF460A0A8A2531);
-            return ref _Handle.AsRef<Vector>(_SprayDirOffset!.Value);
+            if (_SprayDirOffset == -1) _SprayDirOffset = Schema.GetOffset(0x68CF460A0A8A2531);
+            return ref _Handle.AsRef<Vector>(_SprayDirOffset);
         }
     }
-    private static nint? _AmountOffset;
+    private static nint _AmountOffset = -1;
 
     public ref float Amount
     {
         get
         {
-            _AmountOffset = _AmountOffset ?? Schema.GetOffset(0x68CF460A187D1B1B);
-            return ref _Handle.AsRef<float>(_AmountOffset!.Value);
+            if (_AmountOffset == -1) _AmountOffset = Schema.GetOffset(0x68CF460A187D1B1B);
+            return ref _Handle.AsRef<float>(_AmountOffset);
         }
     }
-    private static nint? _ColorOffset;
+    private static nint _ColorOffset = -1;
 
     public ref BloodType Color
     {
         get
         {
-            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x68CF460AD7D017D8);
-            return ref _Handle.AsRef<BloodType>(_ColorOffset!.Value);
+            if (_ColorOffset == -1) _ColorOffset = Schema.GetOffset(0x68CF460AD7D017D8);
+            return ref _Handle.AsRef<BloodType>(_ColorOffset);
         }
     }
 

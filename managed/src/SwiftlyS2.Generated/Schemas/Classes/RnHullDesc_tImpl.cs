@@ -16,16 +16,16 @@ internal partial class RnHullDesc_tImpl : RnShapeDesc_tImpl, RnHullDesc_t
 {
     public RnHullDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _HullOffset;
+    private static nint _HullOffset = -1;
     private RnHull_tImpl? _HullInstance;
 
     public RnHull_t Hull
     {
         get
         {
-            _HullOffset = _HullOffset ?? Schema.GetOffset(0xBB74EDD8AC535D36);
+            if (_HullOffset == -1) _HullOffset = Schema.GetOffset(0xBB74EDD8AC535D36);
             var instance = _HullInstance ??= new RnHull_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _HullOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HullOffset);
             return instance;
         }
     }

@@ -16,54 +16,54 @@ internal partial class FollowTargetOpFixedSettings_tImpl : SchemaClass, FollowTa
 {
     public FollowTargetOpFixedSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoneIndexOffset;
+    private static nint _BoneIndexOffset = -1;
 
     public ref int BoneIndex
     {
         get
         {
-            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xF6423DF66AFA4155);
-            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+            if (_BoneIndexOffset == -1) _BoneIndexOffset = Schema.GetOffset(0xF6423DF66AFA4155);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset);
         }
     }
-    private static nint? _BoneTargetOffset;
+    private static nint _BoneTargetOffset = -1;
 
     public ref bool BoneTarget
     {
         get
         {
-            _BoneTargetOffset = _BoneTargetOffset ?? Schema.GetOffset(0xF6423DF60E626FD2);
-            return ref _Handle.AsRef<bool>(_BoneTargetOffset!.Value);
+            if (_BoneTargetOffset == -1) _BoneTargetOffset = Schema.GetOffset(0xF6423DF60E626FD2);
+            return ref _Handle.AsRef<bool>(_BoneTargetOffset);
         }
     }
-    private static nint? _BoneTargetIndexOffset;
+    private static nint _BoneTargetIndexOffset = -1;
 
     public ref int BoneTargetIndex
     {
         get
         {
-            _BoneTargetIndexOffset = _BoneTargetIndexOffset ?? Schema.GetOffset(0xF6423DF62218DF46);
-            return ref _Handle.AsRef<int>(_BoneTargetIndexOffset!.Value);
+            if (_BoneTargetIndexOffset == -1) _BoneTargetIndexOffset = Schema.GetOffset(0xF6423DF62218DF46);
+            return ref _Handle.AsRef<int>(_BoneTargetIndexOffset);
         }
     }
-    private static nint? _WorldCoodinateTargetOffset;
+    private static nint _WorldCoodinateTargetOffset = -1;
 
     public ref bool WorldCoodinateTarget
     {
         get
         {
-            _WorldCoodinateTargetOffset = _WorldCoodinateTargetOffset ?? Schema.GetOffset(0xF6423DF60B5B2B16);
-            return ref _Handle.AsRef<bool>(_WorldCoodinateTargetOffset!.Value);
+            if (_WorldCoodinateTargetOffset == -1) _WorldCoodinateTargetOffset = Schema.GetOffset(0xF6423DF60B5B2B16);
+            return ref _Handle.AsRef<bool>(_WorldCoodinateTargetOffset);
         }
     }
-    private static nint? _MatchTargetOrientationOffset;
+    private static nint _MatchTargetOrientationOffset = -1;
 
     public ref bool MatchTargetOrientation
     {
         get
         {
-            _MatchTargetOrientationOffset = _MatchTargetOrientationOffset ?? Schema.GetOffset(0xF6423DF642E0C3DB);
-            return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset!.Value);
+            if (_MatchTargetOrientationOffset == -1) _MatchTargetOrientationOffset = Schema.GetOffset(0xF6423DF642E0C3DB);
+            return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset);
         }
     }
 

@@ -16,44 +16,44 @@ internal partial class View2DOptionsEditableData_tImpl : SchemaClass, View2DOpti
 {
     public View2DOptionsEditableData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NudgeOffset;
+    private static nint _NudgeOffset = -1;
 
     public ref bool Nudge
     {
         get
         {
-            _NudgeOffset = _NudgeOffset ?? Schema.GetOffset(0x8F6FE90F9F1088B8);
-            return ref _Handle.AsRef<bool>(_NudgeOffset!.Value);
+            if (_NudgeOffset == -1) _NudgeOffset = Schema.GetOffset(0x8F6FE90F9F1088B8);
+            return ref _Handle.AsRef<bool>(_NudgeOffset);
         }
     }
-    private static nint? _UsegroupcolorsOffset;
+    private static nint _UsegroupcolorsOffset = -1;
 
     public ref bool Usegroupcolors
     {
         get
         {
-            _UsegroupcolorsOffset = _UsegroupcolorsOffset ?? Schema.GetOffset(0x8F6FE90F225A42FF);
-            return ref _Handle.AsRef<bool>(_UsegroupcolorsOffset!.Value);
+            if (_UsegroupcolorsOffset == -1) _UsegroupcolorsOffset = Schema.GetOffset(0x8F6FE90F225A42FF);
+            return ref _Handle.AsRef<bool>(_UsegroupcolorsOffset);
         }
     }
-    private static nint? _GridIntensityOffset;
+    private static nint _GridIntensityOffset = -1;
 
     public ref int GridIntensity
     {
         get
         {
-            _GridIntensityOffset = _GridIntensityOffset ?? Schema.GetOffset(0x8F6FE90F42AE0495);
-            return ref _Handle.AsRef<int>(_GridIntensityOffset!.Value);
+            if (_GridIntensityOffset == -1) _GridIntensityOffset = Schema.GetOffset(0x8F6FE90F42AE0495);
+            return ref _Handle.AsRef<int>(_GridIntensityOffset);
         }
     }
-    private static nint? _ShowEntityNamesOffset;
+    private static nint _ShowEntityNamesOffset = -1;
 
     public ref bool ShowEntityNames
     {
         get
         {
-            _ShowEntityNamesOffset = _ShowEntityNamesOffset ?? Schema.GetOffset(0x8F6FE90F142BF375);
-            return ref _Handle.AsRef<bool>(_ShowEntityNamesOffset!.Value);
+            if (_ShowEntityNamesOffset == -1) _ShowEntityNamesOffset = Schema.GetOffset(0x8F6FE90F142BF375);
+            return ref _Handle.AsRef<bool>(_ShowEntityNamesOffset);
         }
     }
 

@@ -16,56 +16,56 @@ internal partial class CNmTimeControlledClipNode__CDefinitionImpl : CNmPoseNode_
 {
     public CNmTimeControlledClipNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _PlayInReverseValueNodeIdxOffset;
+    private static nint _PlayInReverseValueNodeIdxOffset = -1;
 
     public ref short PlayInReverseValueNodeIdx
     {
         get
         {
-            _PlayInReverseValueNodeIdxOffset = _PlayInReverseValueNodeIdxOffset ?? Schema.GetOffset(0xE851372A1BE16D82);
-            return ref _Handle.AsRef<short>(_PlayInReverseValueNodeIdxOffset!.Value);
+            if (_PlayInReverseValueNodeIdxOffset == -1) _PlayInReverseValueNodeIdxOffset = Schema.GetOffset(0xE851372A1BE16D82);
+            return ref _Handle.AsRef<short>(_PlayInReverseValueNodeIdxOffset);
         }
     }
-    private static nint? _SampleRootMotionOffset;
+    private static nint _SampleRootMotionOffset = -1;
 
     public ref bool SampleRootMotion
     {
         get
         {
-            _SampleRootMotionOffset = _SampleRootMotionOffset ?? Schema.GetOffset(0xE851372A9443A5E9);
-            return ref _Handle.AsRef<bool>(_SampleRootMotionOffset!.Value);
+            if (_SampleRootMotionOffset == -1) _SampleRootMotionOffset = Schema.GetOffset(0xE851372A9443A5E9);
+            return ref _Handle.AsRef<bool>(_SampleRootMotionOffset);
         }
     }
-    private static nint? _DataSlotIdxOffset;
+    private static nint _DataSlotIdxOffset = -1;
 
     public ref short DataSlotIdx
     {
         get
         {
-            _DataSlotIdxOffset = _DataSlotIdxOffset ?? Schema.GetOffset(0xE851372AB1C15B68);
-            return ref _Handle.AsRef<short>(_DataSlotIdxOffset!.Value);
+            if (_DataSlotIdxOffset == -1) _DataSlotIdxOffset = Schema.GetOffset(0xE851372AB1C15B68);
+            return ref _Handle.AsRef<short>(_DataSlotIdxOffset);
         }
     }
-    private static nint? _TimeValueNodeIdxOffset;
+    private static nint _TimeValueNodeIdxOffset = -1;
 
     public ref short TimeValueNodeIdx
     {
         get
         {
-            _TimeValueNodeIdxOffset = _TimeValueNodeIdxOffset ?? Schema.GetOffset(0xE851372A097166A4);
-            return ref _Handle.AsRef<short>(_TimeValueNodeIdxOffset!.Value);
+            if (_TimeValueNodeIdxOffset == -1) _TimeValueNodeIdxOffset = Schema.GetOffset(0xE851372A097166A4);
+            return ref _Handle.AsRef<short>(_TimeValueNodeIdxOffset);
         }
     }
-    private static nint? _GraphEventsOffset;
+    private static nint _GraphEventsOffset = -1;
     private SchemaUntypedField? _GraphEventsInstance;
 
     public SchemaUntypedField GraphEvents
     {
         get
         {
-            _GraphEventsOffset = _GraphEventsOffset ?? Schema.GetOffset(0xE851372A14A73162);
+            if (_GraphEventsOffset == -1) _GraphEventsOffset = Schema.GetOffset(0xE851372A14A73162);
             var instance = _GraphEventsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _GraphEventsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GraphEventsOffset);
             return instance;
         }
     }

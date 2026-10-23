@@ -16,14 +16,14 @@ internal partial class AggregateVertexAlbedoStreamOnDiskData_tImpl : SchemaClass
 {
     public AggregateVertexAlbedoStreamOnDiskData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _BufferDataOffset;
+    private static nint _BufferDataOffset = -1;
 
     public ref CUtlBinaryBlock BufferData
     {
         get
         {
-            _BufferDataOffset = _BufferDataOffset ?? Schema.GetOffset(0x2C9A1CB4ED884C43);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_BufferDataOffset!.Value);
+            if (_BufferDataOffset == -1) _BufferDataOffset = Schema.GetOffset(0x2C9A1CB4ED884C43);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_BufferDataOffset);
         }
     }
 

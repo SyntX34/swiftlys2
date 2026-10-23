@@ -16,44 +16,44 @@ internal partial class CNmTargetOffsetNode__CDefinitionImpl : CNmTargetValueNode
 {
     public CNmTargetOffsetNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputValueNodeIdxOffset;
+    private static nint _InputValueNodeIdxOffset = -1;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x33F484EF95E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x33F484EF95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
         }
     }
-    private static nint? _IsBoneSpaceOffsetOffset;
+    private static nint _IsBoneSpaceOffsetOffset = -1;
 
     public ref bool IsBoneSpaceOffset
     {
         get
         {
-            _IsBoneSpaceOffsetOffset = _IsBoneSpaceOffsetOffset ?? Schema.GetOffset(0x33F484EF7B33F588);
-            return ref _Handle.AsRef<bool>(_IsBoneSpaceOffsetOffset!.Value);
+            if (_IsBoneSpaceOffsetOffset == -1) _IsBoneSpaceOffsetOffset = Schema.GetOffset(0x33F484EF7B33F588);
+            return ref _Handle.AsRef<bool>(_IsBoneSpaceOffsetOffset);
         }
     }
-    private static nint? _RotationOffsetOffset;
+    private static nint _RotationOffsetOffset = -1;
 
     public ref Quaternion RotationOffset
     {
         get
         {
-            _RotationOffsetOffset = _RotationOffsetOffset ?? Schema.GetOffset(0x33F484EFD70314A4);
-            return ref _Handle.AsRef<Quaternion>(_RotationOffsetOffset!.Value);
+            if (_RotationOffsetOffset == -1) _RotationOffsetOffset = Schema.GetOffset(0x33F484EFD70314A4);
+            return ref _Handle.AsRef<Quaternion>(_RotationOffsetOffset);
         }
     }
-    private static nint? _TranslationOffsetOffset;
+    private static nint _TranslationOffsetOffset = -1;
 
     public ref Vector TranslationOffset
     {
         get
         {
-            _TranslationOffsetOffset = _TranslationOffsetOffset ?? Schema.GetOffset(0x33F484EF1ABA9777);
-            return ref _Handle.AsRef<Vector>(_TranslationOffsetOffset!.Value);
+            if (_TranslationOffsetOffset == -1) _TranslationOffsetOffset = Schema.GetOffset(0x33F484EF1ABA9777);
+            return ref _Handle.AsRef<Vector>(_TranslationOffsetOffset);
         }
     }
 

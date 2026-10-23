@@ -16,75 +16,75 @@ internal partial class CLogicCompareImpl : CLogicalEntityImpl, CLogicCompare
 {
     public CLogicCompareImpl(nint handle) : base(handle) { }
 
-    private static nint? _InValueOffset;
+    private static nint _InValueOffset = -1;
 
     public ref float InValue
     {
         get
         {
-            _InValueOffset = _InValueOffset ?? Schema.GetOffset(0xCEFDBF2F414AD5ED);
-            return ref _Handle.AsRef<float>(_InValueOffset!.Value);
+            if (_InValueOffset == -1) _InValueOffset = Schema.GetOffset(0xCEFDBF2F414AD5ED);
+            return ref _Handle.AsRef<float>(_InValueOffset);
         }
     }
-    private static nint? _CompareValueOffset;
+    private static nint _CompareValueOffset = -1;
 
     public ref float CompareValue
     {
         get
         {
-            _CompareValueOffset = _CompareValueOffset ?? Schema.GetOffset(0xCEFDBF2F42C0882F);
-            return ref _Handle.AsRef<float>(_CompareValueOffset!.Value);
+            if (_CompareValueOffset == -1) _CompareValueOffset = Schema.GetOffset(0xCEFDBF2F42C0882F);
+            return ref _Handle.AsRef<float>(_CompareValueOffset);
         }
     }
-    private static nint? _OnLessThanOffset;
+    private static nint _OnLessThanOffset = -1;
     private SchemaUntypedField? _OnLessThanInstance;
 
     public SchemaUntypedField OnLessThan
     {
         get
         {
-            _OnLessThanOffset = _OnLessThanOffset ?? Schema.GetOffset(0xCEFDBF2FB6AC02FE);
+            if (_OnLessThanOffset == -1) _OnLessThanOffset = Schema.GetOffset(0xCEFDBF2FB6AC02FE);
             var instance = _OnLessThanInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnLessThanOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnLessThanOffset);
             return instance;
         }
     }
-    private static nint? _OnEqualToOffset;
+    private static nint _OnEqualToOffset = -1;
     private SchemaUntypedField? _OnEqualToInstance;
 
     public SchemaUntypedField OnEqualTo
     {
         get
         {
-            _OnEqualToOffset = _OnEqualToOffset ?? Schema.GetOffset(0xCEFDBF2F87EEC581);
+            if (_OnEqualToOffset == -1) _OnEqualToOffset = Schema.GetOffset(0xCEFDBF2F87EEC581);
             var instance = _OnEqualToInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnEqualToOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnEqualToOffset);
             return instance;
         }
     }
-    private static nint? _OnNotEqualToOffset;
+    private static nint _OnNotEqualToOffset = -1;
     private SchemaUntypedField? _OnNotEqualToInstance;
 
     public SchemaUntypedField OnNotEqualTo
     {
         get
         {
-            _OnNotEqualToOffset = _OnNotEqualToOffset ?? Schema.GetOffset(0xCEFDBF2FDA1680D6);
+            if (_OnNotEqualToOffset == -1) _OnNotEqualToOffset = Schema.GetOffset(0xCEFDBF2FDA1680D6);
             var instance = _OnNotEqualToInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnNotEqualToOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnNotEqualToOffset);
             return instance;
         }
     }
-    private static nint? _OnGreaterThanOffset;
+    private static nint _OnGreaterThanOffset = -1;
     private SchemaUntypedField? _OnGreaterThanInstance;
 
     public SchemaUntypedField OnGreaterThan
     {
         get
         {
-            _OnGreaterThanOffset = _OnGreaterThanOffset ?? Schema.GetOffset(0xCEFDBF2F50BD472D);
+            if (_OnGreaterThanOffset == -1) _OnGreaterThanOffset = Schema.GetOffset(0xCEFDBF2F50BD472D);
             var instance = _OnGreaterThanInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _OnGreaterThanOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnGreaterThanOffset);
             return instance;
         }
     }

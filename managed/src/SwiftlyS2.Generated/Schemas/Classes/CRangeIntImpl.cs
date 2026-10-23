@@ -16,16 +16,16 @@ internal partial class CRangeIntImpl : SchemaClass, CRangeInt
 {
     public CRangeIntImpl(nint handle) : base(handle) { }
 
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
     private SchemaFixedArray<int>? _ValueInstance;
 
     public ISchemaFixedArray<int> Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xF42199F07F437844);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xF42199F07F437844);
             var instance = _ValueInstance ??= new SchemaFixedArray<int>(0, 0xF42199F07F437844, 2, 4, 4);
-            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ValueOffset);
             return instance;
         }
     }

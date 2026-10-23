@@ -16,14 +16,14 @@ internal partial class CNmConstBoolNode__CDefinitionImpl : CNmBoolValueNode__CDe
 {
     public CNmConstBoolNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public ref bool Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xDEAA315605AAB4AA);
-            return ref _Handle.AsRef<bool>(_ValueOffset!.Value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xDEAA315605AAB4AA);
+            return ref _Handle.AsRef<bool>(_ValueOffset);
         }
     }
 

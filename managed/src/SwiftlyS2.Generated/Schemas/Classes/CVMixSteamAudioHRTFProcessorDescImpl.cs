@@ -16,120 +16,120 @@ internal partial class CVMixSteamAudioHRTFProcessorDescImpl : CVMixBaseProcessor
 {
     public CVMixSteamAudioHRTFProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParamPositionXOffset;
+    private static nint _ParamPositionXOffset = -1;
     private CVMixParameterFloatImpl? _ParamPositionXInstance;
 
     public CVMixParameterFloat ParamPositionX
     {
         get
         {
-            _ParamPositionXOffset = _ParamPositionXOffset ?? Schema.GetOffset(0xE27FB3952A55B0F);
+            if (_ParamPositionXOffset == -1) _ParamPositionXOffset = Schema.GetOffset(0xE27FB3952A55B0F);
             var instance = _ParamPositionXInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamPositionXOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamPositionXOffset);
             return instance;
         }
     }
-    private static nint? _ParamPositionYOffset;
+    private static nint _ParamPositionYOffset = -1;
     private CVMixParameterFloatImpl? _ParamPositionYInstance;
 
     public CVMixParameterFloat ParamPositionY
     {
         get
         {
-            _ParamPositionYOffset = _ParamPositionYOffset ?? Schema.GetOffset(0xE27FB3951A5597C);
+            if (_ParamPositionYOffset == -1) _ParamPositionYOffset = Schema.GetOffset(0xE27FB3951A5597C);
             var instance = _ParamPositionYInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamPositionYOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamPositionYOffset);
             return instance;
         }
     }
-    private static nint? _ParamPositionZOffset;
+    private static nint _ParamPositionZOffset = -1;
     private CVMixParameterFloatImpl? _ParamPositionZInstance;
 
     public CVMixParameterFloat ParamPositionZ
     {
         get
         {
-            _ParamPositionZOffset = _ParamPositionZOffset ?? Schema.GetOffset(0xE27FB3954A55E35);
+            if (_ParamPositionZOffset == -1) _ParamPositionZOffset = Schema.GetOffset(0xE27FB3954A55E35);
             var instance = _ParamPositionZInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamPositionZOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamPositionZOffset);
             return instance;
         }
     }
-    private static nint? _ParamInterpolationOffset;
+    private static nint _ParamInterpolationOffset = -1;
     private CVMixParameterFloatImpl? _ParamInterpolationInstance;
 
     public CVMixParameterFloat ParamInterpolation
     {
         get
         {
-            _ParamInterpolationOffset = _ParamInterpolationOffset ?? Schema.GetOffset(0xE27FB39A03DCC00);
+            if (_ParamInterpolationOffset == -1) _ParamInterpolationOffset = Schema.GetOffset(0xE27FB39A03DCC00);
             var instance = _ParamInterpolationInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamInterpolationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamInterpolationOffset);
             return instance;
         }
     }
-    private static nint? _ParamDirectMixLevelOffset;
+    private static nint _ParamDirectMixLevelOffset = -1;
     private CVMixParameterFloatImpl? _ParamDirectMixLevelInstance;
 
     public CVMixParameterFloat ParamDirectMixLevel
     {
         get
         {
-            _ParamDirectMixLevelOffset = _ParamDirectMixLevelOffset ?? Schema.GetOffset(0xE27FB39CDA3FDF3);
+            if (_ParamDirectMixLevelOffset == -1) _ParamDirectMixLevelOffset = Schema.GetOffset(0xE27FB39CDA3FDF3);
             var instance = _ParamDirectMixLevelInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamDirectMixLevelOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamDirectMixLevelOffset);
             return instance;
         }
     }
-    private static nint? _ParamPerspectiveCorrectionOffset;
+    private static nint _ParamPerspectiveCorrectionOffset = -1;
     private CVMixParameterFloatImpl? _ParamPerspectiveCorrectionInstance;
 
     public CVMixParameterFloat ParamPerspectiveCorrection
     {
         get
         {
-            _ParamPerspectiveCorrectionOffset = _ParamPerspectiveCorrectionOffset ?? Schema.GetOffset(0xE27FB3917A33980);
+            if (_ParamPerspectiveCorrectionOffset == -1) _ParamPerspectiveCorrectionOffset = Schema.GetOffset(0xE27FB3917A33980);
             var instance = _ParamPerspectiveCorrectionInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamPerspectiveCorrectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamPerspectiveCorrectionOffset);
             return instance;
         }
     }
-    private static nint? _ParamRelativePositionOffset;
+    private static nint _ParamRelativePositionOffset = -1;
     private CVMixParameterFloatImpl? _ParamRelativePositionInstance;
 
     public CVMixParameterFloat ParamRelativePosition
     {
         get
         {
-            _ParamRelativePositionOffset = _ParamRelativePositionOffset ?? Schema.GetOffset(0xE27FB39F5D78F3D);
+            if (_ParamRelativePositionOffset == -1) _ParamRelativePositionOffset = Schema.GetOffset(0xE27FB39F5D78F3D);
             var instance = _ParamRelativePositionInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamRelativePositionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamRelativePositionOffset);
             return instance;
         }
     }
-    private static nint? _ParamDelayLeftOffset;
+    private static nint _ParamDelayLeftOffset = -1;
     private CVMixParameterFloatImpl? _ParamDelayLeftInstance;
 
     public CVMixParameterFloat ParamDelayLeft
     {
         get
         {
-            _ParamDelayLeftOffset = _ParamDelayLeftOffset ?? Schema.GetOffset(0xE27FB393068EDF0);
+            if (_ParamDelayLeftOffset == -1) _ParamDelayLeftOffset = Schema.GetOffset(0xE27FB393068EDF0);
             var instance = _ParamDelayLeftInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamDelayLeftOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamDelayLeftOffset);
             return instance;
         }
     }
-    private static nint? _ParamDelayRightOffset;
+    private static nint _ParamDelayRightOffset = -1;
     private CVMixParameterFloatImpl? _ParamDelayRightInstance;
 
     public CVMixParameterFloat ParamDelayRight
     {
         get
         {
-            _ParamDelayRightOffset = _ParamDelayRightOffset ?? Schema.GetOffset(0xE27FB39621F8A65);
+            if (_ParamDelayRightOffset == -1) _ParamDelayRightOffset = Schema.GetOffset(0xE27FB39621F8A65);
             var instance = _ParamDelayRightInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamDelayRightOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamDelayRightOffset);
             return instance;
         }
     }

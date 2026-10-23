@@ -16,182 +16,182 @@ internal partial class CSndBeatPatternImpl : SchemaClass, CSndBeatPattern
 {
     public CSndBeatPatternImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x6C0E36654D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x6C0E36654D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x6C0E36654D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x6C0E36654D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _SyncPriorityOffset;
+    private static nint _SyncPriorityOffset = -1;
 
     public ref float SyncPriority
     {
         get
         {
-            _SyncPriorityOffset = _SyncPriorityOffset ?? Schema.GetOffset(0x6C0E3665A7C7E480);
-            return ref _Handle.AsRef<float>(_SyncPriorityOffset!.Value);
+            if (_SyncPriorityOffset == -1) _SyncPriorityOffset = Schema.GetOffset(0x6C0E3665A7C7E480);
+            return ref _Handle.AsRef<float>(_SyncPriorityOffset);
         }
     }
-    private static nint? _SyncStartTypeOffset;
+    private static nint _SyncStartTypeOffset = -1;
 
     public ref SndBeatSyncStartType_t SyncStartType
     {
         get
         {
-            _SyncStartTypeOffset = _SyncStartTypeOffset ?? Schema.GetOffset(0x6C0E36653ACF6D52);
-            return ref _Handle.AsRef<SndBeatSyncStartType_t>(_SyncStartTypeOffset!.Value);
+            if (_SyncStartTypeOffset == -1) _SyncStartTypeOffset = Schema.GetOffset(0x6C0E36653ACF6D52);
+            return ref _Handle.AsRef<SndBeatSyncStartType_t>(_SyncStartTypeOffset);
         }
     }
-    private static nint? _SyncTypeOffset;
+    private static nint _SyncTypeOffset = -1;
 
     public ref SndBeatSyncType_t SyncType
     {
         get
         {
-            _SyncTypeOffset = _SyncTypeOffset ?? Schema.GetOffset(0x6C0E366570235FDA);
-            return ref _Handle.AsRef<SndBeatSyncType_t>(_SyncTypeOffset!.Value);
+            if (_SyncTypeOffset == -1) _SyncTypeOffset = Schema.GetOffset(0x6C0E366570235FDA);
+            return ref _Handle.AsRef<SndBeatSyncType_t>(_SyncTypeOffset);
         }
     }
-    private static nint? _TimeSignatureOffset;
+    private static nint _TimeSignatureOffset = -1;
     private SndBeatTimeSignature_tImpl? _TimeSignatureInstance;
 
     public SndBeatTimeSignature_t TimeSignature
     {
         get
         {
-            _TimeSignatureOffset = _TimeSignatureOffset ?? Schema.GetOffset(0x6C0E36655C8CE99E);
+            if (_TimeSignatureOffset == -1) _TimeSignatureOffset = Schema.GetOffset(0x6C0E36655C8CE99E);
             var instance = _TimeSignatureInstance ??= new SndBeatTimeSignature_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TimeSignatureOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TimeSignatureOffset);
             return instance;
         }
     }
-    private static nint? _LengthOffset;
+    private static nint _LengthOffset = -1;
 
     public ref float Length
     {
         get
         {
-            _LengthOffset = _LengthOffset ?? Schema.GetOffset(0x6C0E3665FF9776DF);
-            return ref _Handle.AsRef<float>(_LengthOffset!.Value);
+            if (_LengthOffset == -1) _LengthOffset = Schema.GetOffset(0x6C0E3665FF9776DF);
+            return ref _Handle.AsRef<float>(_LengthOffset);
         }
     }
-    private static nint? _LoopingOffset;
+    private static nint _LoopingOffset = -1;
 
     public ref bool Looping
     {
         get
         {
-            _LoopingOffset = _LoopingOffset ?? Schema.GetOffset(0x6C0E366525449B0D);
-            return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
+            if (_LoopingOffset == -1) _LoopingOffset = Schema.GetOffset(0x6C0E366525449B0D);
+            return ref _Handle.AsRef<bool>(_LoopingOffset);
         }
     }
-    private static nint? _PlayEventTypeOffset;
+    private static nint _PlayEventTypeOffset = -1;
 
     public ref SndBeatEventType_t PlayEventType
     {
         get
         {
-            _PlayEventTypeOffset = _PlayEventTypeOffset ?? Schema.GetOffset(0x6C0E36657B511719);
-            return ref _Handle.AsRef<SndBeatEventType_t>(_PlayEventTypeOffset!.Value);
+            if (_PlayEventTypeOffset == -1) _PlayEventTypeOffset = Schema.GetOffset(0x6C0E36657B511719);
+            return ref _Handle.AsRef<SndBeatEventType_t>(_PlayEventTypeOffset);
         }
     }
-    private static nint? _PlayBeatMultOffset;
+    private static nint _PlayBeatMultOffset = -1;
 
     public ref float PlayBeatMult
     {
         get
         {
-            _PlayBeatMultOffset = _PlayBeatMultOffset ?? Schema.GetOffset(0x6C0E3665A5AAC147);
-            return ref _Handle.AsRef<float>(_PlayBeatMultOffset!.Value);
+            if (_PlayBeatMultOffset == -1) _PlayBeatMultOffset = Schema.GetOffset(0x6C0E3665A5AAC147);
+            return ref _Handle.AsRef<float>(_PlayBeatMultOffset);
         }
     }
-    private static nint? _PlayKeyTypeOffset;
+    private static nint _PlayKeyTypeOffset = -1;
 
     public ref SndBeatKeyType_t PlayKeyType
     {
         get
         {
-            _PlayKeyTypeOffset = _PlayKeyTypeOffset ?? Schema.GetOffset(0x6C0E3665E605833A);
-            return ref _Handle.AsRef<SndBeatKeyType_t>(_PlayKeyTypeOffset!.Value);
+            if (_PlayKeyTypeOffset == -1) _PlayKeyTypeOffset = Schema.GetOffset(0x6C0E3665E605833A);
+            return ref _Handle.AsRef<SndBeatKeyType_t>(_PlayKeyTypeOffset);
         }
     }
-    private static nint? _PatternKeysOffset;
+    private static nint _PatternKeysOffset = -1;
 
     public ref CUtlVector<SndBeatEventKeys_t> PatternKeys
     {
         get
         {
-            _PatternKeysOffset = _PatternKeysOffset ?? Schema.GetOffset(0x6C0E3665C7A0A3C9);
-            return ref _Handle.AsRef<CUtlVector<SndBeatEventKeys_t>>(_PatternKeysOffset!.Value);
+            if (_PatternKeysOffset == -1) _PatternKeysOffset = Schema.GetOffset(0x6C0E3665C7A0A3C9);
+            return ref _Handle.AsRef<CUtlVector<SndBeatEventKeys_t>>(_PatternKeysOffset);
         }
     }
-    private static nint? _PatternFloatsOffset;
+    private static nint _PatternFloatsOffset = -1;
 
     public ref CUtlVector<SndBeatEventKeyedFloats_t> PatternFloats
     {
         get
         {
-            _PatternFloatsOffset = _PatternFloatsOffset ?? Schema.GetOffset(0x6C0E366557E13A26);
-            return ref _Handle.AsRef<CUtlVector<SndBeatEventKeyedFloats_t>>(_PatternFloatsOffset!.Value);
+            if (_PatternFloatsOffset == -1) _PatternFloatsOffset = Schema.GetOffset(0x6C0E366557E13A26);
+            return ref _Handle.AsRef<CUtlVector<SndBeatEventKeyedFloats_t>>(_PatternFloatsOffset);
         }
     }
-    private static nint? _PatternSndEvtsOffset;
+    private static nint _PatternSndEvtsOffset = -1;
 
     public ref CUtlVector<SndBeatEventKeyedSndEvts_t> PatternSndEvts
     {
         get
         {
-            _PatternSndEvtsOffset = _PatternSndEvtsOffset ?? Schema.GetOffset(0x6C0E36656BD0868E);
-            return ref _Handle.AsRef<CUtlVector<SndBeatEventKeyedSndEvts_t>>(_PatternSndEvtsOffset!.Value);
+            if (_PatternSndEvtsOffset == -1) _PatternSndEvtsOffset = Schema.GetOffset(0x6C0E36656BD0868E);
+            return ref _Handle.AsRef<CUtlVector<SndBeatEventKeyedSndEvts_t>>(_PatternSndEvtsOffset);
         }
     }
-    private static nint? _PatternMidiOffset;
+    private static nint _PatternMidiOffset = -1;
 
     public ref CUtlVector<SndBeatEventKeyedMidiNotes_t> PatternMidi
     {
         get
         {
-            _PatternMidiOffset = _PatternMidiOffset ?? Schema.GetOffset(0x6C0E36652A5C59B8);
-            return ref _Handle.AsRef<CUtlVector<SndBeatEventKeyedMidiNotes_t>>(_PatternMidiOffset!.Value);
+            if (_PatternMidiOffset == -1) _PatternMidiOffset = Schema.GetOffset(0x6C0E36652A5C59B8);
+            return ref _Handle.AsRef<CUtlVector<SndBeatEventKeyedMidiNotes_t>>(_PatternMidiOffset);
         }
     }
-    private static nint? _SyncEventTypeOffset;
+    private static nint _SyncEventTypeOffset = -1;
 
     public ref SndBeatEventType_t SyncEventType
     {
         get
         {
-            _SyncEventTypeOffset = _SyncEventTypeOffset ?? Schema.GetOffset(0x6C0E3665872BE346);
-            return ref _Handle.AsRef<SndBeatEventType_t>(_SyncEventTypeOffset!.Value);
+            if (_SyncEventTypeOffset == -1) _SyncEventTypeOffset = Schema.GetOffset(0x6C0E3665872BE346);
+            return ref _Handle.AsRef<SndBeatEventType_t>(_SyncEventTypeOffset);
         }
     }
-    private static nint? _SyncBeatMultOffset;
+    private static nint _SyncBeatMultOffset = -1;
 
     public ref float SyncBeatMult
     {
         get
         {
-            _SyncBeatMultOffset = _SyncBeatMultOffset ?? Schema.GetOffset(0x6C0E3665A650F4DA);
-            return ref _Handle.AsRef<float>(_SyncBeatMultOffset!.Value);
+            if (_SyncBeatMultOffset == -1) _SyncBeatMultOffset = Schema.GetOffset(0x6C0E3665A650F4DA);
+            return ref _Handle.AsRef<float>(_SyncBeatMultOffset);
         }
     }
-    private static nint? _SyncPatternKeysOffset;
+    private static nint _SyncPatternKeysOffset = -1;
 
     public ref CUtlVector<SndBeatEventKeys_t> SyncPatternKeys
     {
         get
         {
-            _SyncPatternKeysOffset = _SyncPatternKeysOffset ?? Schema.GetOffset(0x6C0E366586B4A804);
-            return ref _Handle.AsRef<CUtlVector<SndBeatEventKeys_t>>(_SyncPatternKeysOffset!.Value);
+            if (_SyncPatternKeysOffset == -1) _SyncPatternKeysOffset = Schema.GetOffset(0x6C0E366586B4A804);
+            return ref _Handle.AsRef<CUtlVector<SndBeatEventKeys_t>>(_SyncPatternKeysOffset);
         }
     }
 

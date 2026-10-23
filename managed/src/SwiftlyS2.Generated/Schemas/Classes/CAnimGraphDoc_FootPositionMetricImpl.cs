@@ -16,24 +16,24 @@ internal partial class CAnimGraphDoc_FootPositionMetricImpl : CAnimGraphDoc_Moti
 {
     public CAnimGraphDoc_FootPositionMetricImpl(nint handle) : base(handle) { }
 
-    private static nint? _FeetOffset;
+    private static nint _FeetOffset = -1;
 
     public ref CUtlVector<CUtlString> Feet
     {
         get
         {
-            _FeetOffset = _FeetOffset ?? Schema.GetOffset(0xB937D9417910AFF5);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_FeetOffset!.Value);
+            if (_FeetOffset == -1) _FeetOffset = Schema.GetOffset(0xB937D9417910AFF5);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_FeetOffset);
         }
     }
-    private static nint? _IgnoreSlopeOffset;
+    private static nint _IgnoreSlopeOffset = -1;
 
     public ref bool IgnoreSlope
     {
         get
         {
-            _IgnoreSlopeOffset = _IgnoreSlopeOffset ?? Schema.GetOffset(0xB937D941541E43F2);
-            return ref _Handle.AsRef<bool>(_IgnoreSlopeOffset!.Value);
+            if (_IgnoreSlopeOffset == -1) _IgnoreSlopeOffset = Schema.GetOffset(0xB937D941541E43F2);
+            return ref _Handle.AsRef<bool>(_IgnoreSlopeOffset);
         }
     }
 

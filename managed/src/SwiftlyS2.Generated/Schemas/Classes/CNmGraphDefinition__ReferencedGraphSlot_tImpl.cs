@@ -16,24 +16,24 @@ internal partial class CNmGraphDefinition__ReferencedGraphSlot_tImpl : SchemaCla
 {
     public CNmGraphDefinition__ReferencedGraphSlot_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeIdxOffset;
+    private static nint _NodeIdxOffset = -1;
 
     public ref short NodeIdx
     {
         get
         {
-            _NodeIdxOffset = _NodeIdxOffset ?? Schema.GetOffset(0x33C2E12E124AB5CC);
-            return ref _Handle.AsRef<short>(_NodeIdxOffset!.Value);
+            if (_NodeIdxOffset == -1) _NodeIdxOffset = Schema.GetOffset(0x33C2E12E124AB5CC);
+            return ref _Handle.AsRef<short>(_NodeIdxOffset);
         }
     }
-    private static nint? _DataSlotIdxOffset;
+    private static nint _DataSlotIdxOffset = -1;
 
     public ref short DataSlotIdx
     {
         get
         {
-            _DataSlotIdxOffset = _DataSlotIdxOffset ?? Schema.GetOffset(0x33C2E12E7115A3B4);
-            return ref _Handle.AsRef<short>(_DataSlotIdxOffset!.Value);
+            if (_DataSlotIdxOffset == -1) _DataSlotIdxOffset = Schema.GetOffset(0x33C2E12E7115A3B4);
+            return ref _Handle.AsRef<short>(_DataSlotIdxOffset);
         }
     }
 

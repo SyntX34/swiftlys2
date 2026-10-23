@@ -16,39 +16,39 @@ internal partial class CPulseCell_LerpCameraSettings__CursorState_tImpl : CPulse
 {
     public CPulseCell_LerpCameraSettings__CursorState_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _CameraOffset;
+    private static nint _CameraOffset = -1;
 
     public ref CHandle<CPointCamera> Camera
     {
         get
         {
-            _CameraOffset = _CameraOffset ?? Schema.GetOffset(0x84AB53FD538EFB98);
-            return ref _Handle.AsRef<CHandle<CPointCamera>>(_CameraOffset!.Value);
+            if (_CameraOffset == -1) _CameraOffset = Schema.GetOffset(0x84AB53FD538EFB98);
+            return ref _Handle.AsRef<CHandle<CPointCamera>>(_CameraOffset);
         }
     }
-    private static nint? _OverlaidStartOffset;
+    private static nint _OverlaidStartOffset = -1;
     private PointCameraSettings_tImpl? _OverlaidStartInstance;
 
     public PointCameraSettings_t OverlaidStart
     {
         get
         {
-            _OverlaidStartOffset = _OverlaidStartOffset ?? Schema.GetOffset(0x84AB53FD54E9A76F);
+            if (_OverlaidStartOffset == -1) _OverlaidStartOffset = Schema.GetOffset(0x84AB53FD54E9A76F);
             var instance = _OverlaidStartInstance ??= new PointCameraSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OverlaidStartOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OverlaidStartOffset);
             return instance;
         }
     }
-    private static nint? _OverlaidEndOffset;
+    private static nint _OverlaidEndOffset = -1;
     private PointCameraSettings_tImpl? _OverlaidEndInstance;
 
     public PointCameraSettings_t OverlaidEnd
     {
         get
         {
-            _OverlaidEndOffset = _OverlaidEndOffset ?? Schema.GetOffset(0x84AB53FD3CDFDEFA);
+            if (_OverlaidEndOffset == -1) _OverlaidEndOffset = Schema.GetOffset(0x84AB53FD3CDFDEFA);
             var instance = _OverlaidEndInstance ??= new PointCameraSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OverlaidEndOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OverlaidEndOffset);
             return instance;
         }
     }

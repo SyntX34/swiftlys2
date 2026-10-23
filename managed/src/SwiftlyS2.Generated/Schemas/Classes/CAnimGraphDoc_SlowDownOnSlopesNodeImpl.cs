@@ -16,27 +16,27 @@ internal partial class CAnimGraphDoc_SlowDownOnSlopesNodeImpl : CAnimGraphDoc_No
 {
     public CAnimGraphDoc_SlowDownOnSlopesNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0xCA5B62CE1F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0xCA5B62CE1F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _SlowDownStrengthOffset;
+    private static nint _SlowDownStrengthOffset = -1;
 
     public ref float SlowDownStrength
     {
         get
         {
-            _SlowDownStrengthOffset = _SlowDownStrengthOffset ?? Schema.GetOffset(0xCA5B62CE8D85E247);
-            return ref _Handle.AsRef<float>(_SlowDownStrengthOffset!.Value);
+            if (_SlowDownStrengthOffset == -1) _SlowDownStrengthOffset = Schema.GetOffset(0xCA5B62CE8D85E247);
+            return ref _Handle.AsRef<float>(_SlowDownStrengthOffset);
         }
     }
 

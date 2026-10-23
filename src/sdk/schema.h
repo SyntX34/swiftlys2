@@ -53,11 +53,11 @@ public:
 
 struct SchemaField
 {
-    bool m_bChainer;
-    bool m_bIsStruct;
     int32_t m_nChainerOffset;
     int32_t m_nStateChangedOffset;
     uint32_t m_uOffset;
+    bool m_bIsStruct;
+    bool m_bHasVtable;
 };
 
 struct FNV1aHasher64 {
@@ -67,6 +67,7 @@ struct FNV1aHasher64 {
 };
 
 extern std::unordered_map<uint64_t, SchemaField, FNV1aHasher64> offsets;
+extern std::unordered_map<void*, int32_t> networkVarStateChangedOffsets;
 
 class NetworkVar {
 public:

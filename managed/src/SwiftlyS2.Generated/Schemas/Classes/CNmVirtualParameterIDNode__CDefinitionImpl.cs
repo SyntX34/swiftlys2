@@ -16,14 +16,14 @@ internal partial class CNmVirtualParameterIDNode__CDefinitionImpl : CNmIDValueNo
 {
     public CNmVirtualParameterIDNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChildNodeIdxOffset;
+    private static nint _ChildNodeIdxOffset = -1;
 
     public ref short ChildNodeIdx
     {
         get
         {
-            _ChildNodeIdxOffset = _ChildNodeIdxOffset ?? Schema.GetOffset(0xE010C6705C29A73C);
-            return ref _Handle.AsRef<short>(_ChildNodeIdxOffset!.Value);
+            if (_ChildNodeIdxOffset == -1) _ChildNodeIdxOffset = Schema.GetOffset(0xE010C6705C29A73C);
+            return ref _Handle.AsRef<short>(_ChildNodeIdxOffset);
         }
     }
 

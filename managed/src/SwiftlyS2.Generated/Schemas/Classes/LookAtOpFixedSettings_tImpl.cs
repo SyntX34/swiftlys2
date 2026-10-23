@@ -16,120 +16,120 @@ internal partial class LookAtOpFixedSettings_tImpl : SchemaClass, LookAtOpFixedS
 {
     public LookAtOpFixedSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _AttachmentOffset;
+    private static nint _AttachmentOffset = -1;
     private CAnimAttachmentImpl? _AttachmentInstance;
 
     public CAnimAttachment Attachment
     {
         get
         {
-            _AttachmentOffset = _AttachmentOffset ?? Schema.GetOffset(0xF114BD602C5CA308);
+            if (_AttachmentOffset == -1) _AttachmentOffset = Schema.GetOffset(0xF114BD602C5CA308);
             var instance = _AttachmentInstance ??= new CAnimAttachmentImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttachmentOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AttachmentOffset);
             return instance;
         }
     }
-    private static nint? _DampingOffset;
+    private static nint _DampingOffset = -1;
     private CAnimInputDampingImpl? _DampingInstance;
 
     public CAnimInputDamping Damping
     {
         get
         {
-            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xF114BD6015440FB5);
+            if (_DampingOffset == -1) _DampingOffset = Schema.GetOffset(0xF114BD6015440FB5);
             var instance = _DampingInstance ??= new CAnimInputDampingImpl(0);
-            instance.DangerousSetHandle(_Handle + _DampingOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DampingOffset);
             return instance;
         }
     }
-    private static nint? _BonesOffset;
+    private static nint _BonesOffset = -1;
 
     public ref CUtlVector<LookAtBone_t> Bones
     {
         get
         {
-            _BonesOffset = _BonesOffset ?? Schema.GetOffset(0xF114BD600FDA60D4);
-            return ref _Handle.AsRef<CUtlVector<LookAtBone_t>>(_BonesOffset!.Value);
+            if (_BonesOffset == -1) _BonesOffset = Schema.GetOffset(0xF114BD600FDA60D4);
+            return ref _Handle.AsRef<CUtlVector<LookAtBone_t>>(_BonesOffset);
         }
     }
-    private static nint? _YawLimitOffset;
+    private static nint _YawLimitOffset = -1;
 
     public ref float YawLimit
     {
         get
         {
-            _YawLimitOffset = _YawLimitOffset ?? Schema.GetOffset(0xF114BD60C8DE6E19);
-            return ref _Handle.AsRef<float>(_YawLimitOffset!.Value);
+            if (_YawLimitOffset == -1) _YawLimitOffset = Schema.GetOffset(0xF114BD60C8DE6E19);
+            return ref _Handle.AsRef<float>(_YawLimitOffset);
         }
     }
-    private static nint? _PitchLimitOffset;
+    private static nint _PitchLimitOffset = -1;
 
     public ref float PitchLimit
     {
         get
         {
-            _PitchLimitOffset = _PitchLimitOffset ?? Schema.GetOffset(0xF114BD60A68363C6);
-            return ref _Handle.AsRef<float>(_PitchLimitOffset!.Value);
+            if (_PitchLimitOffset == -1) _PitchLimitOffset = Schema.GetOffset(0xF114BD60A68363C6);
+            return ref _Handle.AsRef<float>(_PitchLimitOffset);
         }
     }
-    private static nint? _HysteresisInnerAngleOffset;
+    private static nint _HysteresisInnerAngleOffset = -1;
 
     public ref float HysteresisInnerAngle
     {
         get
         {
-            _HysteresisInnerAngleOffset = _HysteresisInnerAngleOffset ?? Schema.GetOffset(0xF114BD6097B2D677);
-            return ref _Handle.AsRef<float>(_HysteresisInnerAngleOffset!.Value);
+            if (_HysteresisInnerAngleOffset == -1) _HysteresisInnerAngleOffset = Schema.GetOffset(0xF114BD6097B2D677);
+            return ref _Handle.AsRef<float>(_HysteresisInnerAngleOffset);
         }
     }
-    private static nint? _HysteresisOuterAngleOffset;
+    private static nint _HysteresisOuterAngleOffset = -1;
 
     public ref float HysteresisOuterAngle
     {
         get
         {
-            _HysteresisOuterAngleOffset = _HysteresisOuterAngleOffset ?? Schema.GetOffset(0xF114BD60F67403AE);
-            return ref _Handle.AsRef<float>(_HysteresisOuterAngleOffset!.Value);
+            if (_HysteresisOuterAngleOffset == -1) _HysteresisOuterAngleOffset = Schema.GetOffset(0xF114BD60F67403AE);
+            return ref _Handle.AsRef<float>(_HysteresisOuterAngleOffset);
         }
     }
-    private static nint? _RotateYawForwardOffset;
+    private static nint _RotateYawForwardOffset = -1;
 
     public ref bool RotateYawForward
     {
         get
         {
-            _RotateYawForwardOffset = _RotateYawForwardOffset ?? Schema.GetOffset(0xF114BD6058C8E372);
-            return ref _Handle.AsRef<bool>(_RotateYawForwardOffset!.Value);
+            if (_RotateYawForwardOffset == -1) _RotateYawForwardOffset = Schema.GetOffset(0xF114BD6058C8E372);
+            return ref _Handle.AsRef<bool>(_RotateYawForwardOffset);
         }
     }
-    private static nint? _MaintainUpDirectionOffset;
+    private static nint _MaintainUpDirectionOffset = -1;
 
     public ref bool MaintainUpDirection
     {
         get
         {
-            _MaintainUpDirectionOffset = _MaintainUpDirectionOffset ?? Schema.GetOffset(0xF114BD601F5BE57E);
-            return ref _Handle.AsRef<bool>(_MaintainUpDirectionOffset!.Value);
+            if (_MaintainUpDirectionOffset == -1) _MaintainUpDirectionOffset = Schema.GetOffset(0xF114BD601F5BE57E);
+            return ref _Handle.AsRef<bool>(_MaintainUpDirectionOffset);
         }
     }
-    private static nint? _TargetIsPositionOffset;
+    private static nint _TargetIsPositionOffset = -1;
 
     public ref bool TargetIsPosition
     {
         get
         {
-            _TargetIsPositionOffset = _TargetIsPositionOffset ?? Schema.GetOffset(0xF114BD6014C34163);
-            return ref _Handle.AsRef<bool>(_TargetIsPositionOffset!.Value);
+            if (_TargetIsPositionOffset == -1) _TargetIsPositionOffset = Schema.GetOffset(0xF114BD6014C34163);
+            return ref _Handle.AsRef<bool>(_TargetIsPositionOffset);
         }
     }
-    private static nint? _UseHysteresisOffset;
+    private static nint _UseHysteresisOffset = -1;
 
     public ref bool UseHysteresis
     {
         get
         {
-            _UseHysteresisOffset = _UseHysteresisOffset ?? Schema.GetOffset(0xF114BD60A1B392FB);
-            return ref _Handle.AsRef<bool>(_UseHysteresisOffset!.Value);
+            if (_UseHysteresisOffset == -1) _UseHysteresisOffset = Schema.GetOffset(0xF114BD60A1B392FB);
+            return ref _Handle.AsRef<bool>(_UseHysteresisOffset);
         }
     }
 

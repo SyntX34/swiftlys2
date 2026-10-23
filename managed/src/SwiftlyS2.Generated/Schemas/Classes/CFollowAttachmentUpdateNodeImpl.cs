@@ -16,16 +16,16 @@ internal partial class CFollowAttachmentUpdateNodeImpl : CUnaryUpdateNodeImpl, C
 {
     public CFollowAttachmentUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _OpFixedDataOffset;
+    private static nint _OpFixedDataOffset = -1;
     private FollowAttachmentSettings_tImpl? _OpFixedDataInstance;
 
     public FollowAttachmentSettings_t OpFixedData
     {
         get
         {
-            _OpFixedDataOffset = _OpFixedDataOffset ?? Schema.GetOffset(0x8E705AE36960AF8C);
+            if (_OpFixedDataOffset == -1) _OpFixedDataOffset = Schema.GetOffset(0x8E705AE36960AF8C);
             var instance = _OpFixedDataInstance ??= new FollowAttachmentSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OpFixedDataOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OpFixedDataOffset);
             return instance;
         }
     }

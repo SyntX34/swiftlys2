@@ -16,14 +16,14 @@ internal partial class CPathAnimMotorUpdaterBaseImpl : CAnimMotorUpdaterBaseImpl
 {
     public CPathAnimMotorUpdaterBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _LockToPathOffset;
+    private static nint _LockToPathOffset = -1;
 
     public ref bool LockToPath
     {
         get
         {
-            _LockToPathOffset = _LockToPathOffset ?? Schema.GetOffset(0x165EE5771F2F0960);
-            return ref _Handle.AsRef<bool>(_LockToPathOffset!.Value);
+            if (_LockToPathOffset == -1) _LockToPathOffset = Schema.GetOffset(0x165EE5771F2F0960);
+            return ref _Handle.AsRef<bool>(_LockToPathOffset);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class CNmVirtualParameterBoneMaskNode__CDefinitionImpl : CNmBon
 {
     public CNmVirtualParameterBoneMaskNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChildNodeIdxOffset;
+    private static nint _ChildNodeIdxOffset = -1;
 
     public ref short ChildNodeIdx
     {
         get
         {
-            _ChildNodeIdxOffset = _ChildNodeIdxOffset ?? Schema.GetOffset(0x4C267E9D5C29A73C);
-            return ref _Handle.AsRef<short>(_ChildNodeIdxOffset!.Value);
+            if (_ChildNodeIdxOffset == -1) _ChildNodeIdxOffset = Schema.GetOffset(0x4C267E9D5C29A73C);
+            return ref _Handle.AsRef<short>(_ChildNodeIdxOffset);
         }
     }
 

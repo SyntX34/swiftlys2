@@ -16,24 +16,24 @@ internal partial class CodeGenAABB_tImpl : SchemaClass, CodeGenAABB_t
 {
     public CodeGenAABB_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinBoundsOffset;
+    private static nint _MinBoundsOffset = -1;
 
     public ref Vector MinBounds
     {
         get
         {
-            _MinBoundsOffset = _MinBoundsOffset ?? Schema.GetOffset(0xB0F2ACCB114799FE);
-            return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
+            if (_MinBoundsOffset == -1) _MinBoundsOffset = Schema.GetOffset(0xB0F2ACCB114799FE);
+            return ref _Handle.AsRef<Vector>(_MinBoundsOffset);
         }
     }
-    private static nint? _MaxBoundsOffset;
+    private static nint _MaxBoundsOffset = -1;
 
     public ref Vector MaxBounds
     {
         get
         {
-            _MaxBoundsOffset = _MaxBoundsOffset ?? Schema.GetOffset(0xB0F2ACCBC0B4CE60);
-            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
+            if (_MaxBoundsOffset == -1) _MaxBoundsOffset = Schema.GetOffset(0xB0F2ACCBC0B4CE60);
+            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset);
         }
     }
 

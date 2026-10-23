@@ -16,44 +16,44 @@ internal partial class RnNode_tImpl : SchemaClass, RnNode_t
 {
     public RnNode_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinOffset;
+    private static nint _MinOffset = -1;
 
     public ref Vector Min
     {
         get
         {
-            _MinOffset = _MinOffset ?? Schema.GetOffset(0x7C7D54E2F4B0AA63);
-            return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
+            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0x7C7D54E2F4B0AA63);
+            return ref _Handle.AsRef<Vector>(_MinOffset);
         }
     }
-    private static nint? _ChildrenOffset;
+    private static nint _ChildrenOffset = -1;
 
     public ref uint Children
     {
         get
         {
-            _ChildrenOffset = _ChildrenOffset ?? Schema.GetOffset(0x7C7D54E2D0F4635E);
-            return ref _Handle.AsRef<uint>(_ChildrenOffset!.Value);
+            if (_ChildrenOffset == -1) _ChildrenOffset = Schema.GetOffset(0x7C7D54E2D0F4635E);
+            return ref _Handle.AsRef<uint>(_ChildrenOffset);
         }
     }
-    private static nint? _MaxOffset;
+    private static nint _MaxOffset = -1;
 
     public ref Vector Max
     {
         get
         {
-            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x7C7D54E2EAC4225D);
-            return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
+            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0x7C7D54E2EAC4225D);
+            return ref _Handle.AsRef<Vector>(_MaxOffset);
         }
     }
-    private static nint? _TriangleOffsetOffset;
+    private static nint _TriangleOffsetOffset = -1;
 
     public ref uint TriangleOffset
     {
         get
         {
-            _TriangleOffsetOffset = _TriangleOffsetOffset ?? Schema.GetOffset(0x7C7D54E2AFE22CE6);
-            return ref _Handle.AsRef<uint>(_TriangleOffsetOffset!.Value);
+            if (_TriangleOffsetOffset == -1) _TriangleOffsetOffset = Schema.GetOffset(0x7C7D54E2AFE22CE6);
+            return ref _Handle.AsRef<uint>(_TriangleOffsetOffset);
         }
     }
 

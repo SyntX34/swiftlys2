@@ -16,144 +16,144 @@ internal partial class MoodAnimationLayer_tImpl : SchemaClass, MoodAnimationLaye
 {
     public MoodAnimationLayer_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3663914263D22D49);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x3663914263D22D49);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3663914263D22D49);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x3663914263D22D49);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _ActiveListeningOffset;
+    private static nint _ActiveListeningOffset = -1;
 
     public ref bool ActiveListening
     {
         get
         {
-            _ActiveListeningOffset = _ActiveListeningOffset ?? Schema.GetOffset(0x36639142122973A0);
-            return ref _Handle.AsRef<bool>(_ActiveListeningOffset!.Value);
+            if (_ActiveListeningOffset == -1) _ActiveListeningOffset = Schema.GetOffset(0x36639142122973A0);
+            return ref _Handle.AsRef<bool>(_ActiveListeningOffset);
         }
     }
-    private static nint? _ActiveTalkingOffset;
+    private static nint _ActiveTalkingOffset = -1;
 
     public ref bool ActiveTalking
     {
         get
         {
-            _ActiveTalkingOffset = _ActiveTalkingOffset ?? Schema.GetOffset(0x366391423033E5C3);
-            return ref _Handle.AsRef<bool>(_ActiveTalkingOffset!.Value);
+            if (_ActiveTalkingOffset == -1) _ActiveTalkingOffset = Schema.GetOffset(0x366391423033E5C3);
+            return ref _Handle.AsRef<bool>(_ActiveTalkingOffset);
         }
     }
-    private static nint? _LayerAnimationsOffset;
+    private static nint _LayerAnimationsOffset = -1;
 
     public ref CUtlVector<MoodAnimation_t> LayerAnimations
     {
         get
         {
-            _LayerAnimationsOffset = _LayerAnimationsOffset ?? Schema.GetOffset(0x3663914250279465);
-            return ref _Handle.AsRef<CUtlVector<MoodAnimation_t>>(_LayerAnimationsOffset!.Value);
+            if (_LayerAnimationsOffset == -1) _LayerAnimationsOffset = Schema.GetOffset(0x3663914250279465);
+            return ref _Handle.AsRef<CUtlVector<MoodAnimation_t>>(_LayerAnimationsOffset);
         }
     }
-    private static nint? _IntensityOffset;
+    private static nint _IntensityOffset = -1;
     private CRangeFloatImpl? _IntensityInstance;
 
     public CRangeFloat Intensity
     {
         get
         {
-            _IntensityOffset = _IntensityOffset ?? Schema.GetOffset(0x3663914267B5578C);
+            if (_IntensityOffset == -1) _IntensityOffset = Schema.GetOffset(0x3663914267B5578C);
             var instance = _IntensityInstance ??= new CRangeFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _IntensityOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IntensityOffset);
             return instance;
         }
     }
-    private static nint? _DurationScaleOffset;
+    private static nint _DurationScaleOffset = -1;
     private CRangeFloatImpl? _DurationScaleInstance;
 
     public CRangeFloat DurationScale
     {
         get
         {
-            _DurationScaleOffset = _DurationScaleOffset ?? Schema.GetOffset(0x36639142776D4203);
+            if (_DurationScaleOffset == -1) _DurationScaleOffset = Schema.GetOffset(0x36639142776D4203);
             var instance = _DurationScaleInstance ??= new CRangeFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _DurationScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DurationScaleOffset);
             return instance;
         }
     }
-    private static nint? _ScaleWithIntsOffset;
+    private static nint _ScaleWithIntsOffset = -1;
 
     public ref bool ScaleWithInts
     {
         get
         {
-            _ScaleWithIntsOffset = _ScaleWithIntsOffset ?? Schema.GetOffset(0x366391427C46A077);
-            return ref _Handle.AsRef<bool>(_ScaleWithIntsOffset!.Value);
+            if (_ScaleWithIntsOffset == -1) _ScaleWithIntsOffset = Schema.GetOffset(0x366391427C46A077);
+            return ref _Handle.AsRef<bool>(_ScaleWithIntsOffset);
         }
     }
-    private static nint? _NextStartOffset;
+    private static nint _NextStartOffset = -1;
     private CRangeFloatImpl? _NextStartInstance;
 
     public CRangeFloat NextStart
     {
         get
         {
-            _NextStartOffset = _NextStartOffset ?? Schema.GetOffset(0x3663914202956BDE);
+            if (_NextStartOffset == -1) _NextStartOffset = Schema.GetOffset(0x3663914202956BDE);
             var instance = _NextStartInstance ??= new CRangeFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextStartOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NextStartOffset);
             return instance;
         }
     }
-    private static nint? _StartOffsetOffset;
+    private static nint _StartOffsetOffset = -1;
     private CRangeFloatImpl? _StartOffsetInstance;
 
     public CRangeFloat StartOffset
     {
         get
         {
-            _StartOffsetOffset = _StartOffsetOffset ?? Schema.GetOffset(0x3663914269A449AA);
+            if (_StartOffsetOffset == -1) _StartOffsetOffset = Schema.GetOffset(0x3663914269A449AA);
             var instance = _StartOffsetInstance ??= new CRangeFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartOffsetOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartOffsetOffset);
             return instance;
         }
     }
-    private static nint? _EndOffsetOffset;
+    private static nint _EndOffsetOffset = -1;
     private CRangeFloatImpl? _EndOffsetInstance;
 
     public CRangeFloat EndOffset
     {
         get
         {
-            _EndOffsetOffset = _EndOffsetOffset ?? Schema.GetOffset(0x36639142C863E027);
+            if (_EndOffsetOffset == -1) _EndOffsetOffset = Schema.GetOffset(0x36639142C863E027);
             var instance = _EndOffsetInstance ??= new CRangeFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _EndOffsetOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EndOffsetOffset);
             return instance;
         }
     }
-    private static nint? _FadeInOffset;
+    private static nint _FadeInOffset = -1;
 
     public ref float FadeIn
     {
         get
         {
-            _FadeInOffset = _FadeInOffset ?? Schema.GetOffset(0x36639142FCA835D2);
-            return ref _Handle.AsRef<float>(_FadeInOffset!.Value);
+            if (_FadeInOffset == -1) _FadeInOffset = Schema.GetOffset(0x36639142FCA835D2);
+            return ref _Handle.AsRef<float>(_FadeInOffset);
         }
     }
-    private static nint? _FadeOutOffset;
+    private static nint _FadeOutOffset = -1;
 
     public ref float FadeOut
     {
         get
         {
-            _FadeOutOffset = _FadeOutOffset ?? Schema.GetOffset(0x36639142FEBCE80B);
-            return ref _Handle.AsRef<float>(_FadeOutOffset!.Value);
+            if (_FadeOutOffset == -1) _FadeOutOffset = Schema.GetOffset(0x36639142FEBCE80B);
+            return ref _Handle.AsRef<float>(_FadeOutOffset);
         }
     }
 

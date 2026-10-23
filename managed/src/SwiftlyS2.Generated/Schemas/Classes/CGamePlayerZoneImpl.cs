@@ -16,49 +16,49 @@ internal partial class CGamePlayerZoneImpl : CRuleBrushEntityImpl, CGamePlayerZo
 {
     public CGamePlayerZoneImpl(nint handle) : base(handle) { }
 
-    private static nint? _OnPlayerInZoneOffset;
+    private static nint _OnPlayerInZoneOffset = -1;
 
     public ref CEntityIOOutput OnPlayerInZone
     {
         get
         {
-            _OnPlayerInZoneOffset = _OnPlayerInZoneOffset ?? Schema.GetOffset(0x35811C97FBD22730);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerInZoneOffset!.Value);
+            if (_OnPlayerInZoneOffset == -1) _OnPlayerInZoneOffset = Schema.GetOffset(0x35811C97FBD22730);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerInZoneOffset);
         }
     }
-    private static nint? _OnPlayerOutZoneOffset;
+    private static nint _OnPlayerOutZoneOffset = -1;
 
     public ref CEntityIOOutput OnPlayerOutZone
     {
         get
         {
-            _OnPlayerOutZoneOffset = _OnPlayerOutZoneOffset ?? Schema.GetOffset(0x35811C97E3DE880D);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerOutZoneOffset!.Value);
+            if (_OnPlayerOutZoneOffset == -1) _OnPlayerOutZoneOffset = Schema.GetOffset(0x35811C97E3DE880D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerOutZoneOffset);
         }
     }
-    private static nint? _PlayersInCountOffset;
+    private static nint _PlayersInCountOffset = -1;
     private SchemaUntypedField? _PlayersInCountInstance;
 
     public SchemaUntypedField PlayersInCount
     {
         get
         {
-            _PlayersInCountOffset = _PlayersInCountOffset ?? Schema.GetOffset(0x35811C9706A59501);
+            if (_PlayersInCountOffset == -1) _PlayersInCountOffset = Schema.GetOffset(0x35811C9706A59501);
             var instance = _PlayersInCountInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PlayersInCountOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PlayersInCountOffset);
             return instance;
         }
     }
-    private static nint? _PlayersOutCountOffset;
+    private static nint _PlayersOutCountOffset = -1;
     private SchemaUntypedField? _PlayersOutCountInstance;
 
     public SchemaUntypedField PlayersOutCount
     {
         get
         {
-            _PlayersOutCountOffset = _PlayersOutCountOffset ?? Schema.GetOffset(0x35811C976894D862);
+            if (_PlayersOutCountOffset == -1) _PlayersOutCountOffset = Schema.GetOffset(0x35811C976894D862);
             var instance = _PlayersOutCountInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PlayersOutCountOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PlayersOutCountOffset);
             return instance;
         }
     }

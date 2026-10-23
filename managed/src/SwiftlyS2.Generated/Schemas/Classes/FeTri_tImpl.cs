@@ -16,57 +16,57 @@ internal partial class FeTri_tImpl : SchemaClass, FeTri_t
 {
     public FeTri_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x75C07D86CD6694B9);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x75C07D86CD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x75C07D86CD6694B9, 3, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeOffset);
             return instance;
         }
     }
-    private static nint? _W1Offset;
+    private static nint _W1Offset = -1;
 
     public ref float W1
     {
         get
         {
-            _W1Offset = _W1Offset ?? Schema.GetOffset(0x75C07D8610473805);
-            return ref _Handle.AsRef<float>(_W1Offset!.Value);
+            if (_W1Offset == -1) _W1Offset = Schema.GetOffset(0x75C07D8610473805);
+            return ref _Handle.AsRef<float>(_W1Offset);
         }
     }
-    private static nint? _W2Offset;
+    private static nint _W2Offset = -1;
 
     public ref float W2
     {
         get
         {
-            _W2Offset = _W2Offset ?? Schema.GetOffset(0x75C07D860D47334C);
-            return ref _Handle.AsRef<float>(_W2Offset!.Value);
+            if (_W2Offset == -1) _W2Offset = Schema.GetOffset(0x75C07D860D47334C);
+            return ref _Handle.AsRef<float>(_W2Offset);
         }
     }
-    private static nint? _V1xOffset;
+    private static nint _V1xOffset = -1;
 
     public ref float V1x
     {
         get
         {
-            _V1xOffset = _V1xOffset ?? Schema.GetOffset(0x75C07D8680EC4B30);
-            return ref _Handle.AsRef<float>(_V1xOffset!.Value);
+            if (_V1xOffset == -1) _V1xOffset = Schema.GetOffset(0x75C07D8680EC4B30);
+            return ref _Handle.AsRef<float>(_V1xOffset);
         }
     }
-    private static nint? _V2Offset;
+    private static nint _V2Offset = -1;
 
     public ref Vector2D V2
     {
         get
         {
-            _V2Offset = _V2Offset ?? Schema.GetOffset(0x75C07D86974A4B21);
-            return ref _Handle.AsRef<Vector2D>(_V2Offset!.Value);
+            if (_V2Offset == -1) _V2Offset = Schema.GetOffset(0x75C07D86974A4B21);
+            return ref _Handle.AsRef<Vector2D>(_V2Offset);
         }
     }
 

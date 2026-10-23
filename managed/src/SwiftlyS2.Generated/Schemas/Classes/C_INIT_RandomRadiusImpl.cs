@@ -16,34 +16,34 @@ internal partial class C_INIT_RandomRadiusImpl : CParticleFunctionInitializerImp
 {
     public C_INIT_RandomRadiusImpl(nint handle) : base(handle) { }
 
-    private static nint? _RadiusMinOffset;
+    private static nint _RadiusMinOffset = -1;
 
     public ref float RadiusMin
     {
         get
         {
-            _RadiusMinOffset = _RadiusMinOffset ?? Schema.GetOffset(0xE9419C037AEB467F);
-            return ref _Handle.AsRef<float>(_RadiusMinOffset!.Value);
+            if (_RadiusMinOffset == -1) _RadiusMinOffset = Schema.GetOffset(0xE9419C037AEB467F);
+            return ref _Handle.AsRef<float>(_RadiusMinOffset);
         }
     }
-    private static nint? _RadiusMaxOffset;
+    private static nint _RadiusMaxOffset = -1;
 
     public ref float RadiusMax
     {
         get
         {
-            _RadiusMaxOffset = _RadiusMaxOffset ?? Schema.GetOffset(0xE9419C0388D641D1);
-            return ref _Handle.AsRef<float>(_RadiusMaxOffset!.Value);
+            if (_RadiusMaxOffset == -1) _RadiusMaxOffset = Schema.GetOffset(0xE9419C0388D641D1);
+            return ref _Handle.AsRef<float>(_RadiusMaxOffset);
         }
     }
-    private static nint? _RadiusRandExponentOffset;
+    private static nint _RadiusRandExponentOffset = -1;
 
     public ref float RadiusRandExponent
     {
         get
         {
-            _RadiusRandExponentOffset = _RadiusRandExponentOffset ?? Schema.GetOffset(0xE9419C03D4637A31);
-            return ref _Handle.AsRef<float>(_RadiusRandExponentOffset!.Value);
+            if (_RadiusRandExponentOffset == -1) _RadiusRandExponentOffset = Schema.GetOffset(0xE9419C03D4637A31);
+            return ref _Handle.AsRef<float>(_RadiusRandExponentOffset);
         }
     }
 

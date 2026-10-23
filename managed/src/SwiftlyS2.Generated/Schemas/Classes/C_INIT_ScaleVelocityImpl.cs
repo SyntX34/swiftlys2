@@ -16,16 +16,16 @@ internal partial class C_INIT_ScaleVelocityImpl : CParticleFunctionInitializerIm
 {
     public C_INIT_ScaleVelocityImpl(nint handle) : base(handle) { }
 
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
     private CParticleCollectionVecInputImpl? _ScaleInstance;
 
     public CParticleCollectionVecInput Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xF226CCC35F596B51);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xF226CCC35F596B51);
             var instance = _ScaleInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset);
             return instance;
         }
     }

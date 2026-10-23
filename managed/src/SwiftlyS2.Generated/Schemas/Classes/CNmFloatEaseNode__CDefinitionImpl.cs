@@ -16,54 +16,54 @@ internal partial class CNmFloatEaseNode__CDefinitionImpl : CNmFloatValueNode__CD
 {
     public CNmFloatEaseNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _EaseTimeOffset;
+    private static nint _EaseTimeOffset = -1;
 
     public ref float EaseTime
     {
         get
         {
-            _EaseTimeOffset = _EaseTimeOffset ?? Schema.GetOffset(0x9D7103D0A54FCC);
-            return ref _Handle.AsRef<float>(_EaseTimeOffset!.Value);
+            if (_EaseTimeOffset == -1) _EaseTimeOffset = Schema.GetOffset(0x9D7103D0A54FCC);
+            return ref _Handle.AsRef<float>(_EaseTimeOffset);
         }
     }
-    private static nint? _StartValueOffset;
+    private static nint _StartValueOffset = -1;
 
     public ref float StartValue
     {
         get
         {
-            _StartValueOffset = _StartValueOffset ?? Schema.GetOffset(0x9D710351C82C2A);
-            return ref _Handle.AsRef<float>(_StartValueOffset!.Value);
+            if (_StartValueOffset == -1) _StartValueOffset = Schema.GetOffset(0x9D710351C82C2A);
+            return ref _Handle.AsRef<float>(_StartValueOffset);
         }
     }
-    private static nint? _InputValueNodeIdxOffset;
+    private static nint _InputValueNodeIdxOffset = -1;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x9D710395E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x9D710395E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
         }
     }
-    private static nint? _EasingOpOffset;
+    private static nint _EasingOpOffset = -1;
 
     public ref NmEasingOperation_t EasingOp
     {
         get
         {
-            _EasingOpOffset = _EasingOpOffset ?? Schema.GetOffset(0x9D7103CF457EAF);
-            return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset!.Value);
+            if (_EasingOpOffset == -1) _EasingOpOffset = Schema.GetOffset(0x9D7103CF457EAF);
+            return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset);
         }
     }
-    private static nint? _UseStartValueOffset;
+    private static nint _UseStartValueOffset = -1;
 
     public ref bool UseStartValue
     {
         get
         {
-            _UseStartValueOffset = _UseStartValueOffset ?? Schema.GetOffset(0x9D710306DE6089);
-            return ref _Handle.AsRef<bool>(_UseStartValueOffset!.Value);
+            if (_UseStartValueOffset == -1) _UseStartValueOffset = Schema.GetOffset(0x9D710306DE6089);
+            return ref _Handle.AsRef<bool>(_UseStartValueOffset);
         }
     }
 

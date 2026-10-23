@@ -16,28 +16,48 @@ internal partial class CVoiceContainerBaseImpl : SchemaClass, CVoiceContainerBas
 {
     public CVoiceContainerBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _SoundOffset;
+    private static nint _RegisteredVMixOffset = -1;
+
+    public ref bool RegisteredVMix
+    {
+        get
+        {
+            if (_RegisteredVMixOffset == -1) _RegisteredVMixOffset = Schema.GetOffset(0x9D65DC36B4239C51);
+            return ref _Handle.AsRef<bool>(_RegisteredVMixOffset);
+        }
+    }
+    private static nint _ResourceNameOffset = -1;
+
+    public ref CUtlStringToken ResourceName
+    {
+        get
+        {
+            if (_ResourceNameOffset == -1) _ResourceNameOffset = Schema.GetOffset(0x9D65DC360EA6374A);
+            return ref _Handle.AsRef<CUtlStringToken>(_ResourceNameOffset);
+        }
+    }
+    private static nint _SoundOffset = -1;
     private CVSoundImpl? _SoundInstance;
 
     public CVSound Sound
     {
         get
         {
-            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x9D65DC3663C1A950);
+            if (_SoundOffset == -1) _SoundOffset = Schema.GetOffset(0x9D65DC3663C1A950);
             var instance = _SoundInstance ??= new CVSoundImpl(0);
-            instance.DangerousSetHandle(_Handle + _SoundOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SoundOffset);
             return instance;
         }
     }
-    private static nint? _EnvelopeAnalyzerOffset;
+    private static nint _EnvelopeAnalyzerOffset = -1;
     private CVoiceContainerAnalysisBaseImpl? _EnvelopeAnalyzerInstance;
 
     public CVoiceContainerAnalysisBase? EnvelopeAnalyzer
     {
         get
         {
-            _EnvelopeAnalyzerOffset = _EnvelopeAnalyzerOffset ?? Schema.GetOffset(0x9D65DC362102947D);
-            var ptr = _Handle.Read<nint>(_EnvelopeAnalyzerOffset!.Value);
+            if (_EnvelopeAnalyzerOffset == -1) _EnvelopeAnalyzerOffset = Schema.GetOffset(0x9D65DC362102947D);
+            var ptr = _Handle.Read<nint>(_EnvelopeAnalyzerOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _EnvelopeAnalyzerInstance ??= new CVoiceContainerAnalysisBaseImpl(0);
             instance.DangerousSetHandle(ptr);

@@ -16,24 +16,24 @@ internal partial class CBreakableStageHelperImpl : SchemaClass, CBreakableStageH
 {
     public CBreakableStageHelperImpl(nint handle) : base(handle) { }
 
-    private static nint? _CurrentStageOffset;
+    private static nint _CurrentStageOffset = -1;
 
     public ref int CurrentStage
     {
         get
         {
-            _CurrentStageOffset = _CurrentStageOffset ?? Schema.GetOffset(0xF3B3D901E6644458);
-            return ref _Handle.AsRef<int>(_CurrentStageOffset!.Value);
+            if (_CurrentStageOffset == -1) _CurrentStageOffset = Schema.GetOffset(0xF3B3D901E6644458);
+            return ref _Handle.AsRef<int>(_CurrentStageOffset);
         }
     }
-    private static nint? _StageCountOffset;
+    private static nint _StageCountOffset = -1;
 
     public ref int StageCount
     {
         get
         {
-            _StageCountOffset = _StageCountOffset ?? Schema.GetOffset(0xF3B3D901117B2130);
-            return ref _Handle.AsRef<int>(_StageCountOffset!.Value);
+            if (_StageCountOffset == -1) _StageCountOffset = Schema.GetOffset(0xF3B3D901117B2130);
+            return ref _Handle.AsRef<int>(_StageCountOffset);
         }
     }
 

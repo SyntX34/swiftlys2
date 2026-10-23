@@ -16,19 +16,19 @@ internal partial class CNmGraphDocReferencedGraphNode__CDataImpl : CNmGraphDocVa
 {
     public CNmGraphDocReferencedGraphNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _VariationOffset;
+    private static nint _VariationOffset = -1;
 
     public string Variation
     {
         get
         {
-            _VariationOffset = _VariationOffset ?? Schema.GetOffset(0x5BE87FC7ECE4085E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_VariationOffset!.Value));
+            if (_VariationOffset == -1) _VariationOffset = Schema.GetOffset(0x5BE87FC7ECE4085E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_VariationOffset));
         }
         set
         {
-            _VariationOffset = _VariationOffset ?? Schema.GetOffset(0x5BE87FC7ECE4085E);
-            Schema.SetCUtlString(_Handle, _VariationOffset!.Value, value);
+            if (_VariationOffset == -1) _VariationOffset = Schema.GetOffset(0x5BE87FC7ECE4085E);
+            Schema.SetCUtlString(_Handle, _VariationOffset, value);
         }
     }
 

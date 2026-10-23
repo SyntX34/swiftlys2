@@ -16,29 +16,29 @@ internal partial class CVMixEffectChainProcessorDescImpl : CVMixBaseProcessorDes
 {
     public CVMixEffectChainProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixEffectChainDesc_tImpl? _DescInstance;
 
     public VMixEffectChainDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0x9154B78127917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x9154B78127917BC0);
             var instance = _DescInstance ??= new VMixEffectChainDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }
-    private static nint? _ParamEffectNameOffset;
+    private static nint _ParamEffectNameOffset = -1;
     private CVMixParameterEffectNameImpl? _ParamEffectNameInstance;
 
     public CVMixParameterEffectName ParamEffectName
     {
         get
         {
-            _ParamEffectNameOffset = _ParamEffectNameOffset ?? Schema.GetOffset(0x9154B781CC86B95C);
+            if (_ParamEffectNameOffset == -1) _ParamEffectNameOffset = Schema.GetOffset(0x9154B781CC86B95C);
             var instance = _ParamEffectNameInstance ??= new CVMixParameterEffectNameImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamEffectNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamEffectNameOffset);
             return instance;
         }
     }

@@ -16,64 +16,64 @@ internal partial class VMixUtilityDesc_tImpl : SchemaClass, VMixUtilityDesc_t
 {
     public VMixUtilityDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _OpOffset;
+    private static nint _OpOffset = -1;
 
     public ref VMixChannelOperation_t Op
     {
         get
         {
-            _OpOffset = _OpOffset ?? Schema.GetOffset(0x9B3640C11384687E);
-            return ref _Handle.AsRef<VMixChannelOperation_t>(_OpOffset!.Value);
+            if (_OpOffset == -1) _OpOffset = Schema.GetOffset(0x9B3640C11384687E);
+            return ref _Handle.AsRef<VMixChannelOperation_t>(_OpOffset);
         }
     }
-    private static nint? _InputPanOffset;
+    private static nint _InputPanOffset = -1;
 
     public ref float InputPan
     {
         get
         {
-            _InputPanOffset = _InputPanOffset ?? Schema.GetOffset(0x9B3640C17E813E04);
-            return ref _Handle.AsRef<float>(_InputPanOffset!.Value);
+            if (_InputPanOffset == -1) _InputPanOffset = Schema.GetOffset(0x9B3640C17E813E04);
+            return ref _Handle.AsRef<float>(_InputPanOffset);
         }
     }
-    private static nint? _OutputBalanceOffset;
+    private static nint _OutputBalanceOffset = -1;
 
     public ref float OutputBalance
     {
         get
         {
-            _OutputBalanceOffset = _OutputBalanceOffset ?? Schema.GetOffset(0x9B3640C1730ED266);
-            return ref _Handle.AsRef<float>(_OutputBalanceOffset!.Value);
+            if (_OutputBalanceOffset == -1) _OutputBalanceOffset = Schema.GetOffset(0x9B3640C1730ED266);
+            return ref _Handle.AsRef<float>(_OutputBalanceOffset);
         }
     }
-    private static nint? _FldbOutputGainOffset;
+    private static nint _FldbOutputGainOffset = -1;
 
     public ref float FldbOutputGain
     {
         get
         {
-            _FldbOutputGainOffset = _FldbOutputGainOffset ?? Schema.GetOffset(0x9B3640C167F97C23);
-            return ref _Handle.AsRef<float>(_FldbOutputGainOffset!.Value);
+            if (_FldbOutputGainOffset == -1) _FldbOutputGainOffset = Schema.GetOffset(0x9B3640C167F97C23);
+            return ref _Handle.AsRef<float>(_FldbOutputGainOffset);
         }
     }
-    private static nint? _BassMonoOffset;
+    private static nint _BassMonoOffset = -1;
 
     public ref bool BassMono
     {
         get
         {
-            _BassMonoOffset = _BassMonoOffset ?? Schema.GetOffset(0x9B3640C1C65EDB7D);
-            return ref _Handle.AsRef<bool>(_BassMonoOffset!.Value);
+            if (_BassMonoOffset == -1) _BassMonoOffset = Schema.GetOffset(0x9B3640C1C65EDB7D);
+            return ref _Handle.AsRef<bool>(_BassMonoOffset);
         }
     }
-    private static nint? _BassFreqOffset;
+    private static nint _BassFreqOffset = -1;
 
     public ref float BassFreq
     {
         get
         {
-            _BassFreqOffset = _BassFreqOffset ?? Schema.GetOffset(0x9B3640C13E71CC5A);
-            return ref _Handle.AsRef<float>(_BassFreqOffset!.Value);
+            if (_BassFreqOffset == -1) _BassFreqOffset = Schema.GetOffset(0x9B3640C13E71CC5A);
+            return ref _Handle.AsRef<float>(_BassFreqOffset);
         }
     }
 

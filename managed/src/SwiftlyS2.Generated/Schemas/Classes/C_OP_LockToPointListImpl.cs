@@ -16,57 +16,57 @@ internal partial class C_OP_LockToPointListImpl : CParticleFunctionOperatorImpl,
 {
     public C_OP_LockToPointListImpl(nint handle) : base(handle) { }
 
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xC9237E67E5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xC9237E67E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _PointListOffset;
+    private static nint _PointListOffset = -1;
 
     public ref CUtlVector<PointDefinition_t> PointList
     {
         get
         {
-            _PointListOffset = _PointListOffset ?? Schema.GetOffset(0xC9237E67976AB4FD);
-            return ref _Handle.AsRef<CUtlVector<PointDefinition_t>>(_PointListOffset!.Value);
+            if (_PointListOffset == -1) _PointListOffset = Schema.GetOffset(0xC9237E67976AB4FD);
+            return ref _Handle.AsRef<CUtlVector<PointDefinition_t>>(_PointListOffset);
         }
     }
-    private static nint? _PlaceAlongPathOffset;
+    private static nint _PlaceAlongPathOffset = -1;
 
     public ref bool PlaceAlongPath
     {
         get
         {
-            _PlaceAlongPathOffset = _PlaceAlongPathOffset ?? Schema.GetOffset(0xC9237E6781CF2E1A);
-            return ref _Handle.AsRef<bool>(_PlaceAlongPathOffset!.Value);
+            if (_PlaceAlongPathOffset == -1) _PlaceAlongPathOffset = Schema.GetOffset(0xC9237E6781CF2E1A);
+            return ref _Handle.AsRef<bool>(_PlaceAlongPathOffset);
         }
     }
-    private static nint? _ClosedLoopOffset;
+    private static nint _ClosedLoopOffset = -1;
 
     public ref bool ClosedLoop
     {
         get
         {
-            _ClosedLoopOffset = _ClosedLoopOffset ?? Schema.GetOffset(0xC9237E677C20D1AB);
-            return ref _Handle.AsRef<bool>(_ClosedLoopOffset!.Value);
+            if (_ClosedLoopOffset == -1) _ClosedLoopOffset = Schema.GetOffset(0xC9237E677C20D1AB);
+            return ref _Handle.AsRef<bool>(_ClosedLoopOffset);
         }
     }
-    private static nint? _NumPointsAlongPathOffset;
+    private static nint _NumPointsAlongPathOffset = -1;
 
     public ref int NumPointsAlongPath
     {
         get
         {
-            _NumPointsAlongPathOffset = _NumPointsAlongPathOffset ?? Schema.GetOffset(0xC9237E67ACB5FC8A);
-            return ref _Handle.AsRef<int>(_NumPointsAlongPathOffset!.Value);
+            if (_NumPointsAlongPathOffset == -1) _NumPointsAlongPathOffset = Schema.GetOffset(0xC9237E67ACB5FC8A);
+            return ref _Handle.AsRef<int>(_NumPointsAlongPathOffset);
         }
     }
 

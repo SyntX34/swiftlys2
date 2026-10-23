@@ -16,44 +16,44 @@ internal partial class CLogicBranchImpl : CLogicalEntityImpl, CLogicBranch
 {
     public CLogicBranchImpl(nint handle) : base(handle) { }
 
-    private static nint? _InValueOffset;
+    private static nint _InValueOffset = -1;
 
     public ref bool InValue
     {
         get
         {
-            _InValueOffset = _InValueOffset ?? Schema.GetOffset(0x5B700E1052400A1F);
-            return ref _Handle.AsRef<bool>(_InValueOffset!.Value);
+            if (_InValueOffset == -1) _InValueOffset = Schema.GetOffset(0x5B700E1052400A1F);
+            return ref _Handle.AsRef<bool>(_InValueOffset);
         }
     }
-    private static nint? _ListenersOffset;
+    private static nint _ListenersOffset = -1;
 
     public ref CUtlVector<CHandle<CBaseEntity>> Listeners
     {
         get
         {
-            _ListenersOffset = _ListenersOffset ?? Schema.GetOffset(0x5B700E10E4AECE86);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ListenersOffset!.Value);
+            if (_ListenersOffset == -1) _ListenersOffset = Schema.GetOffset(0x5B700E10E4AECE86);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ListenersOffset);
         }
     }
-    private static nint? _OnTrueOffset;
+    private static nint _OnTrueOffset = -1;
 
     public ref CEntityIOOutput OnTrue
     {
         get
         {
-            _OnTrueOffset = _OnTrueOffset ?? Schema.GetOffset(0x5B700E106EAE5D88);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTrueOffset!.Value);
+            if (_OnTrueOffset == -1) _OnTrueOffset = Schema.GetOffset(0x5B700E106EAE5D88);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTrueOffset);
         }
     }
-    private static nint? _OnFalseOffset;
+    private static nint _OnFalseOffset = -1;
 
     public ref CEntityIOOutput OnFalse
     {
         get
         {
-            _OnFalseOffset = _OnFalseOffset ?? Schema.GetOffset(0x5B700E104973AF03);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnFalseOffset!.Value);
+            if (_OnFalseOffset == -1) _OnFalseOffset = Schema.GetOffset(0x5B700E104973AF03);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFalseOffset);
         }
     }
 

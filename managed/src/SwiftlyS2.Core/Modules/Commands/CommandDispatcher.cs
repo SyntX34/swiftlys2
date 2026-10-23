@@ -90,8 +90,18 @@ internal static unsafe class CommandDispatcher
     internal static void RemoveAlias( string normalizedAlias ) =>
         _ = aliasToCommand.TryRemove(normalizedAlias, out _);
 
-    internal static IEnumerable<CommandCallback> GetCommands() =>
-        commands.Values.SelectMany(callbacks => callbacks);
+    internal static int Count => commands.Count;
+
+    internal static IEnumerable<CommandCallback> GetCommands()
+    {
+        foreach (var pair in commands)
+        {
+            foreach (var callback in pair.Value)
+            {
+                yield return callback;
+            }
+        }
+    }
 
     internal static string NormalizeName( string commandName, bool registerRaw ) =>
         registerRaw ? commandName.ToLowerInvariant() : "sw_" + commandName.ToLowerInvariant();

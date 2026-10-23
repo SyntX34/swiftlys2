@@ -16,39 +16,39 @@ internal partial class C_BaseButtonImpl : C_BaseToggleImpl, C_BaseButton
 {
     public C_BaseButtonImpl(nint handle) : base(handle) { }
 
-    private static nint? _GlowEntityOffset;
+    private static nint _GlowEntityOffset = -1;
 
     public ref CHandle<C_BaseModelEntity> GlowEntity
     {
         get
         {
-            _GlowEntityOffset = _GlowEntityOffset ?? Schema.GetOffset(0xCD6BF32235C883E7);
-            return ref _Handle.AsRef<CHandle<C_BaseModelEntity>>(_GlowEntityOffset!.Value);
+            if (_GlowEntityOffset == -1) _GlowEntityOffset = Schema.GetOffset(0xCD6BF32235C883E7);
+            return ref _Handle.AsRef<CHandle<C_BaseModelEntity>>(_GlowEntityOffset);
         }
     }
-    private static nint? _UsableOffset;
+    private static nint _UsableOffset = -1;
 
     public ref bool Usable
     {
         get
         {
-            _UsableOffset = _UsableOffset ?? Schema.GetOffset(0xCD6BF32244B8E369);
-            return ref _Handle.AsRef<bool>(_UsableOffset!.Value);
+            if (_UsableOffset == -1) _UsableOffset = Schema.GetOffset(0xCD6BF32244B8E369);
+            return ref _Handle.AsRef<bool>(_UsableOffset);
         }
     }
-    private static nint? _DisplayTextOffset;
+    private static nint _DisplayTextOffset = -1;
 
     public string DisplayText
     {
         get
         {
-            _DisplayTextOffset = _DisplayTextOffset ?? Schema.GetOffset(0xCD6BF322DE5320C5);
-            return Schema.GetString(_Handle.Read<nint>(_DisplayTextOffset!.Value));
+            if (_DisplayTextOffset == -1) _DisplayTextOffset = Schema.GetOffset(0xCD6BF322DE5320C5);
+            return Schema.GetString(_Handle.Read<nint>(_DisplayTextOffset));
         }
         set
         {
-            _DisplayTextOffset = _DisplayTextOffset ?? Schema.GetOffset(0xCD6BF322DE5320C5);
-            Schema.SetString(_Handle, _DisplayTextOffset!.Value, value);
+            if (_DisplayTextOffset == -1) _DisplayTextOffset = Schema.GetOffset(0xCD6BF322DE5320C5);
+            Schema.SetString(_Handle, _DisplayTextOffset, value);
         }
     }
 

@@ -16,80 +16,80 @@ internal partial class CMotionGraphImpl : SchemaClass, CMotionGraph
 {
     public CMotionGraphImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParamSpansOffset;
+    private static nint _ParamSpansOffset = -1;
     private CParamSpanUpdaterImpl? _ParamSpansInstance;
 
     public CParamSpanUpdater ParamSpans
     {
         get
         {
-            _ParamSpansOffset = _ParamSpansOffset ?? Schema.GetOffset(0xA24822FCDAC91553);
+            if (_ParamSpansOffset == -1) _ParamSpansOffset = Schema.GetOffset(0xA24822FCDAC91553);
             var instance = _ParamSpansInstance ??= new CParamSpanUpdaterImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamSpansOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamSpansOffset);
             return instance;
         }
     }
-    private static nint? _TagsOffset;
+    private static nint _TagsOffset = -1;
 
     public ref CUtlVector<TagSpan_t> Tags
     {
         get
         {
-            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0xA24822FCB46C8540);
-            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+            if (_TagsOffset == -1) _TagsOffset = Schema.GetOffset(0xA24822FCB46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset);
         }
     }
-    private static nint? _RootNodeOffset;
+    private static nint _RootNodeOffset = -1;
     private SchemaUntypedField? _RootNodeInstance;
 
     public SchemaUntypedField RootNode
     {
         get
         {
-            _RootNodeOffset = _RootNodeOffset ?? Schema.GetOffset(0xA24822FC8BB07023);
+            if (_RootNodeOffset == -1) _RootNodeOffset = Schema.GetOffset(0xA24822FC8BB07023);
             var instance = _RootNodeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RootNodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RootNodeOffset);
             return instance;
         }
     }
-    private static nint? _ParameterCountOffset;
+    private static nint _ParameterCountOffset = -1;
 
     public ref int ParameterCount
     {
         get
         {
-            _ParameterCountOffset = _ParameterCountOffset ?? Schema.GetOffset(0xA24822FC3B0EE24B);
-            return ref _Handle.AsRef<int>(_ParameterCountOffset!.Value);
+            if (_ParameterCountOffset == -1) _ParameterCountOffset = Schema.GetOffset(0xA24822FC3B0EE24B);
+            return ref _Handle.AsRef<int>(_ParameterCountOffset);
         }
     }
-    private static nint? _ConfigStartIndexOffset;
+    private static nint _ConfigStartIndexOffset = -1;
 
     public ref int ConfigStartIndex
     {
         get
         {
-            _ConfigStartIndexOffset = _ConfigStartIndexOffset ?? Schema.GetOffset(0xA24822FCEB4B0D77);
-            return ref _Handle.AsRef<int>(_ConfigStartIndexOffset!.Value);
+            if (_ConfigStartIndexOffset == -1) _ConfigStartIndexOffset = Schema.GetOffset(0xA24822FCEB4B0D77);
+            return ref _Handle.AsRef<int>(_ConfigStartIndexOffset);
         }
     }
-    private static nint? _ConfigCountOffset;
+    private static nint _ConfigCountOffset = -1;
 
     public ref int ConfigCount
     {
         get
         {
-            _ConfigCountOffset = _ConfigCountOffset ?? Schema.GetOffset(0xA24822FC16549AD2);
-            return ref _Handle.AsRef<int>(_ConfigCountOffset!.Value);
+            if (_ConfigCountOffset == -1) _ConfigCountOffset = Schema.GetOffset(0xA24822FC16549AD2);
+            return ref _Handle.AsRef<int>(_ConfigCountOffset);
         }
     }
-    private static nint? _LoopOffset;
+    private static nint _LoopOffset = -1;
 
     public ref bool Loop
     {
         get
         {
-            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0xA24822FCC668A4CB);
-            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+            if (_LoopOffset == -1) _LoopOffset = Schema.GetOffset(0xA24822FCC668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset);
         }
     }
 

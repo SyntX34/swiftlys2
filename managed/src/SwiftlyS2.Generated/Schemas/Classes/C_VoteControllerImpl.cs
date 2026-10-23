@@ -16,77 +16,77 @@ internal partial class C_VoteControllerImpl : C_BaseEntityImpl, C_VoteController
 {
     public C_VoteControllerImpl(nint handle) : base(handle) { }
 
-    private static nint? _ActiveIssueIndexOffset;
+    private static nint _ActiveIssueIndexOffset = -1;
 
     public ref int ActiveIssueIndex
     {
         get
         {
-            _ActiveIssueIndexOffset = _ActiveIssueIndexOffset ?? Schema.GetOffset(0x8F3361A3D557A463);
-            return ref _Handle.AsRef<int>(_ActiveIssueIndexOffset!.Value);
+            if (_ActiveIssueIndexOffset == -1) _ActiveIssueIndexOffset = Schema.GetOffset(0x8F3361A3D557A463);
+            return ref _Handle.AsRef<int>(_ActiveIssueIndexOffset);
         }
     }
-    private static nint? _OnlyTeamToVoteOffset;
+    private static nint _OnlyTeamToVoteOffset = -1;
 
     public ref int OnlyTeamToVote
     {
         get
         {
-            _OnlyTeamToVoteOffset = _OnlyTeamToVoteOffset ?? Schema.GetOffset(0x8F3361A3C957B8C6);
-            return ref _Handle.AsRef<int>(_OnlyTeamToVoteOffset!.Value);
+            if (_OnlyTeamToVoteOffset == -1) _OnlyTeamToVoteOffset = Schema.GetOffset(0x8F3361A3C957B8C6);
+            return ref _Handle.AsRef<int>(_OnlyTeamToVoteOffset);
         }
     }
-    private static nint? _VoteOptionCountOffset;
+    private static nint _VoteOptionCountOffset = -1;
     private SchemaFixedArray<int>? _VoteOptionCountInstance;
 
     public ISchemaFixedArray<int> VoteOptionCount
     {
         get
         {
-            _VoteOptionCountOffset = _VoteOptionCountOffset ?? Schema.GetOffset(0x8F3361A314DBD0DF);
+            if (_VoteOptionCountOffset == -1) _VoteOptionCountOffset = Schema.GetOffset(0x8F3361A314DBD0DF);
             var instance = _VoteOptionCountInstance ??= new SchemaFixedArray<int>(0, 0x8F3361A314DBD0DF, 5, 4, 4);
-            instance.DangerousSetHandle(_Handle + _VoteOptionCountOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VoteOptionCountOffset);
             return instance;
         }
     }
-    private static nint? _PotentialVotesOffset;
+    private static nint _PotentialVotesOffset = -1;
 
     public ref int PotentialVotes
     {
         get
         {
-            _PotentialVotesOffset = _PotentialVotesOffset ?? Schema.GetOffset(0x8F3361A30198673E);
-            return ref _Handle.AsRef<int>(_PotentialVotesOffset!.Value);
+            if (_PotentialVotesOffset == -1) _PotentialVotesOffset = Schema.GetOffset(0x8F3361A30198673E);
+            return ref _Handle.AsRef<int>(_PotentialVotesOffset);
         }
     }
-    private static nint? _VotesDirtyOffset;
+    private static nint _VotesDirtyOffset = -1;
 
     public ref bool VotesDirty
     {
         get
         {
-            _VotesDirtyOffset = _VotesDirtyOffset ?? Schema.GetOffset(0x8F3361A38498534A);
-            return ref _Handle.AsRef<bool>(_VotesDirtyOffset!.Value);
+            if (_VotesDirtyOffset == -1) _VotesDirtyOffset = Schema.GetOffset(0x8F3361A38498534A);
+            return ref _Handle.AsRef<bool>(_VotesDirtyOffset);
         }
     }
-    private static nint? _TypeDirtyOffset;
+    private static nint _TypeDirtyOffset = -1;
 
     public ref bool TypeDirty
     {
         get
         {
-            _TypeDirtyOffset = _TypeDirtyOffset ?? Schema.GetOffset(0x8F3361A30E9F6E53);
-            return ref _Handle.AsRef<bool>(_TypeDirtyOffset!.Value);
+            if (_TypeDirtyOffset == -1) _TypeDirtyOffset = Schema.GetOffset(0x8F3361A30E9F6E53);
+            return ref _Handle.AsRef<bool>(_TypeDirtyOffset);
         }
     }
-    private static nint? _IsYesNoVoteOffset;
+    private static nint _IsYesNoVoteOffset = -1;
 
     public ref bool IsYesNoVote
     {
         get
         {
-            _IsYesNoVoteOffset = _IsYesNoVoteOffset ?? Schema.GetOffset(0x8F3361A39A553B97);
-            return ref _Handle.AsRef<bool>(_IsYesNoVoteOffset!.Value);
+            if (_IsYesNoVoteOffset == -1) _IsYesNoVoteOffset = Schema.GetOffset(0x8F3361A39A553B97);
+            return ref _Handle.AsRef<bool>(_IsYesNoVoteOffset);
         }
     }
 

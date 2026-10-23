@@ -16,39 +16,39 @@ internal partial class CNmGraphEventConditionNode__CDefinitionImpl : CNmBoolValu
 {
     public CNmGraphEventConditionNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceStateNodeIdxOffset;
+    private static nint _SourceStateNodeIdxOffset = -1;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x8806734863F0228C);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0x8806734863F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
         }
     }
-    private static nint? _EventConditionRulesOffset;
+    private static nint _EventConditionRulesOffset = -1;
     private CNmBitFlagsImpl? _EventConditionRulesInstance;
 
     public CNmBitFlags EventConditionRules
     {
         get
         {
-            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x88067348A904315F);
+            if (_EventConditionRulesOffset == -1) _EventConditionRulesOffset = Schema.GetOffset(0x88067348A904315F);
             var instance = _EventConditionRulesInstance ??= new CNmBitFlagsImpl(0);
-            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EventConditionRulesOffset);
             return instance;
         }
     }
-    private static nint? _ConditionsOffset;
+    private static nint _ConditionsOffset = -1;
     private SchemaUntypedField? _ConditionsInstance;
 
     public SchemaUntypedField Conditions
     {
         get
         {
-            _ConditionsOffset = _ConditionsOffset ?? Schema.GetOffset(0x88067348EDDF6757);
+            if (_ConditionsOffset == -1) _ConditionsOffset = Schema.GetOffset(0x88067348EDDF6757);
             var instance = _ConditionsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ConditionsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ConditionsOffset);
             return instance;
         }
     }

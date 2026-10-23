@@ -16,46 +16,46 @@ internal partial class FeNodeStrayBox_tImpl : SchemaClass, FeNodeStrayBox_t
 {
     public FeNodeStrayBox_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinOffset;
+    private static nint _MinOffset = -1;
 
     public ref Vector Min
     {
         get
         {
-            _MinOffset = _MinOffset ?? Schema.GetOffset(0x6809134DFBEAA903);
-            return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
+            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0x6809134DFBEAA903);
+            return ref _Handle.AsRef<Vector>(_MinOffset);
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref uint Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x6809134DB8D52E48);
-            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x6809134DB8D52E48);
+            return ref _Handle.AsRef<uint>(_FlagsOffset);
         }
     }
-    private static nint? _MaxOffset;
+    private static nint _MaxOffset = -1;
 
     public ref Vector Max
     {
         get
         {
-            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x6809134DF1FE20FD);
-            return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
+            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0x6809134DF1FE20FD);
+            return ref _Handle.AsRef<Vector>(_MaxOffset);
         }
     }
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x6809134DCD6694B9);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x6809134DCD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x6809134DCD6694B9, 2, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeOffset);
             return instance;
         }
     }

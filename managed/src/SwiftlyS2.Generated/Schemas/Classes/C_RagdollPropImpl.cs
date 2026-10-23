@@ -16,106 +16,106 @@ internal partial class C_RagdollPropImpl : CBaseAnimGraphImpl, C_RagdollProp
 {
     public C_RagdollPropImpl(nint handle) : base(handle) { }
 
-    private static nint? _RagEnabledOffset;
+    private static nint _RagEnabledOffset = -1;
     private SchemaUntypedField? _RagEnabledInstance;
 
     public SchemaUntypedField RagEnabled
     {
         get
         {
-            _RagEnabledOffset = _RagEnabledOffset ?? Schema.GetOffset(0xBD7FBD7BCD1FB84A);
+            if (_RagEnabledOffset == -1) _RagEnabledOffset = Schema.GetOffset(0xBD7FBD7BCD1FB84A);
             var instance = _RagEnabledInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RagEnabledOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RagEnabledOffset);
             return instance;
         }
     }
-    private static nint? _RagPosOffset;
+    private static nint _RagPosOffset = -1;
     private SchemaUntypedField? _RagPosInstance;
 
     public SchemaUntypedField RagPos
     {
         get
         {
-            _RagPosOffset = _RagPosOffset ?? Schema.GetOffset(0xBD7FBD7B97C85315);
+            if (_RagPosOffset == -1) _RagPosOffset = Schema.GetOffset(0xBD7FBD7B97C85315);
             var instance = _RagPosInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RagPosOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RagPosOffset);
             return instance;
         }
     }
-    private static nint? _RagAnglesOffset;
+    private static nint _RagAnglesOffset = -1;
     private SchemaUntypedField? _RagAnglesInstance;
 
     public SchemaUntypedField RagAngles
     {
         get
         {
-            _RagAnglesOffset = _RagAnglesOffset ?? Schema.GetOffset(0xBD7FBD7BFD4E530D);
+            if (_RagAnglesOffset == -1) _RagAnglesOffset = Schema.GetOffset(0xBD7FBD7BFD4E530D);
             var instance = _RagAnglesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _RagAnglesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RagAnglesOffset);
             return instance;
         }
     }
-    private static nint? _BlendWeightOffset;
+    private static nint _BlendWeightOffset = -1;
 
     public ref float BlendWeight
     {
         get
         {
-            _BlendWeightOffset = _BlendWeightOffset ?? Schema.GetOffset(0xBD7FBD7BE5D6B9CE);
-            return ref _Handle.AsRef<float>(_BlendWeightOffset!.Value);
+            if (_BlendWeightOffset == -1) _BlendWeightOffset = Schema.GetOffset(0xBD7FBD7BE5D6B9CE);
+            return ref _Handle.AsRef<float>(_BlendWeightOffset);
         }
     }
-    private static nint? _RagdollSourceOffset;
+    private static nint _RagdollSourceOffset = -1;
 
     public ref CHandle<C_BaseEntity> RagdollSource
     {
         get
         {
-            _RagdollSourceOffset = _RagdollSourceOffset ?? Schema.GetOffset(0xBD7FBD7B35E0724F);
-            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_RagdollSourceOffset!.Value);
+            if (_RagdollSourceOffset == -1) _RagdollSourceOffset = Schema.GetOffset(0xBD7FBD7B35E0724F);
+            return ref _Handle.AsRef<CHandle<C_BaseEntity>>(_RagdollSourceOffset);
         }
     }
-    private static nint? _EyeAttachmentOffset;
+    private static nint _EyeAttachmentOffset = -1;
     private AttachmentHandle_tImpl? _EyeAttachmentInstance;
 
     public AttachmentHandle_t EyeAttachment
     {
         get
         {
-            _EyeAttachmentOffset = _EyeAttachmentOffset ?? Schema.GetOffset(0xBD7FBD7BCDE31574);
+            if (_EyeAttachmentOffset == -1) _EyeAttachmentOffset = Schema.GetOffset(0xBD7FBD7BCDE31574);
             var instance = _EyeAttachmentInstance ??= new AttachmentHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _EyeAttachmentOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _EyeAttachmentOffset);
             return instance;
         }
     }
-    private static nint? _BlendWeightCurrentOffset;
+    private static nint _BlendWeightCurrentOffset = -1;
 
     public ref float BlendWeightCurrent
     {
         get
         {
-            _BlendWeightCurrentOffset = _BlendWeightCurrentOffset ?? Schema.GetOffset(0xBD7FBD7B1A8C88A7);
-            return ref _Handle.AsRef<float>(_BlendWeightCurrentOffset!.Value);
+            if (_BlendWeightCurrentOffset == -1) _BlendWeightCurrentOffset = Schema.GetOffset(0xBD7FBD7B1A8C88A7);
+            return ref _Handle.AsRef<float>(_BlendWeightCurrentOffset);
         }
     }
-    private static nint? _ParentPhysicsBoneIndicesOffset;
+    private static nint _ParentPhysicsBoneIndicesOffset = -1;
 
     public ref CUtlVector<int> ParentPhysicsBoneIndices
     {
         get
         {
-            _ParentPhysicsBoneIndicesOffset = _ParentPhysicsBoneIndicesOffset ?? Schema.GetOffset(0xBD7FBD7B6470E2D9);
-            return ref _Handle.AsRef<CUtlVector<int>>(_ParentPhysicsBoneIndicesOffset!.Value);
+            if (_ParentPhysicsBoneIndicesOffset == -1) _ParentPhysicsBoneIndicesOffset = Schema.GetOffset(0xBD7FBD7B6470E2D9);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ParentPhysicsBoneIndicesOffset);
         }
     }
-    private static nint? _WorldSpaceBoneComputationOrderOffset;
+    private static nint _WorldSpaceBoneComputationOrderOffset = -1;
 
     public ref CUtlVector<int> WorldSpaceBoneComputationOrder
     {
         get
         {
-            _WorldSpaceBoneComputationOrderOffset = _WorldSpaceBoneComputationOrderOffset ?? Schema.GetOffset(0xBD7FBD7BAD07BEA8);
-            return ref _Handle.AsRef<CUtlVector<int>>(_WorldSpaceBoneComputationOrderOffset!.Value);
+            if (_WorldSpaceBoneComputationOrderOffset == -1) _WorldSpaceBoneComputationOrderOffset = Schema.GetOffset(0xBD7FBD7BAD07BEA8);
+            return ref _Handle.AsRef<CUtlVector<int>>(_WorldSpaceBoneComputationOrderOffset);
         }
     }
 

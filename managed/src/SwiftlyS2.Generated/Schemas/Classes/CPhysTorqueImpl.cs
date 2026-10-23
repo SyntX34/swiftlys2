@@ -16,14 +16,14 @@ internal partial class CPhysTorqueImpl : CPhysForceImpl, CPhysTorque
 {
     public CPhysTorqueImpl(nint handle) : base(handle) { }
 
-    private static nint? _AxisOffset;
+    private static nint _AxisOffset = -1;
 
     public ref Vector Axis
     {
         get
         {
-            _AxisOffset = _AxisOffset ?? Schema.GetOffset(0x6EADFD042B06DE94);
-            return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+            if (_AxisOffset == -1) _AxisOffset = Schema.GetOffset(0x6EADFD042B06DE94);
+            return ref _Handle.AsRef<Vector>(_AxisOffset);
         }
     }
 

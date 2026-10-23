@@ -16,39 +16,39 @@ internal partial class CChoreo_GraphControllerImpl : CAnimGraphControllerBaseImp
 {
     public CChoreo_GraphControllerImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChoreoStateOffset;
+    private static nint _ChoreoStateOffset = -1;
 
     public ref CAnimGraph2ParamOptionalRefCGlobalSymbol ChoreoState
     {
         get
         {
-            _ChoreoStateOffset = _ChoreoStateOffset ?? Schema.GetOffset(0x49D3EABB02972E63);
-            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefCGlobalSymbol>(_ChoreoStateOffset!.Value);
+            if (_ChoreoStateOffset == -1) _ChoreoStateOffset = Schema.GetOffset(0x49D3EABB02972E63);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefCGlobalSymbol>(_ChoreoStateOffset);
         }
     }
-    private static nint? _TChoreoTargetWarpOffset;
+    private static nint _TChoreoTargetWarpOffset = -1;
     private SchemaUntypedField? _TChoreoTargetWarpInstance;
 
     public SchemaUntypedField TChoreoTargetWarp
     {
         get
         {
-            _TChoreoTargetWarpOffset = _TChoreoTargetWarpOffset ?? Schema.GetOffset(0x49D3EABB02B3B9AE);
+            if (_TChoreoTargetWarpOffset == -1) _TChoreoTargetWarpOffset = Schema.GetOffset(0x49D3EABB02B3B9AE);
             var instance = _TChoreoTargetWarpInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TChoreoTargetWarpOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TChoreoTargetWarpOffset);
             return instance;
         }
     }
-    private static nint? _TChoreoExitWarpOffset;
+    private static nint _TChoreoExitWarpOffset = -1;
     private SchemaUntypedField? _TChoreoExitWarpInstance;
 
     public SchemaUntypedField TChoreoExitWarp
     {
         get
         {
-            _TChoreoExitWarpOffset = _TChoreoExitWarpOffset ?? Schema.GetOffset(0x49D3EABBA4952AE7);
+            if (_TChoreoExitWarpOffset == -1) _TChoreoExitWarpOffset = Schema.GetOffset(0x49D3EABBA4952AE7);
             var instance = _TChoreoExitWarpInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TChoreoExitWarpOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TChoreoExitWarpOffset);
             return instance;
         }
     }

@@ -16,16 +16,16 @@ internal partial class CAnimGraphControllerBaseImpl : SchemaClass, CAnimGraphCon
 {
     public CAnimGraphControllerBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _ExternalGraphOffset;
+    private static nint _ExternalGraphOffset = -1;
     private ExternalAnimGraphHandle_tImpl? _ExternalGraphInstance;
 
     public ExternalAnimGraphHandle_t ExternalGraph
     {
         get
         {
-            _ExternalGraphOffset = _ExternalGraphOffset ?? Schema.GetOffset(0x1AA25B609FE82D60);
+            if (_ExternalGraphOffset == -1) _ExternalGraphOffset = Schema.GetOffset(0x1AA25B609FE82D60);
             var instance = _ExternalGraphInstance ??= new ExternalAnimGraphHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _ExternalGraphOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ExternalGraphOffset);
             return instance;
         }
     }

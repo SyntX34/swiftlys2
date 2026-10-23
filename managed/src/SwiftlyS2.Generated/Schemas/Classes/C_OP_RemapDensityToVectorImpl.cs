@@ -16,87 +16,87 @@ internal partial class C_OP_RemapDensityToVectorImpl : CParticleFunctionOperator
 {
     public C_OP_RemapDensityToVectorImpl(nint handle) : base(handle) { }
 
-    private static nint? _RadiusScaleOffset;
+    private static nint _RadiusScaleOffset = -1;
 
     public ref float RadiusScale
     {
         get
         {
-            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x81794CB4A7A20159);
-            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+            if (_RadiusScaleOffset == -1) _RadiusScaleOffset = Schema.GetOffset(0x81794CB4A7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset);
         }
     }
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x81794CB4E5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x81794CB4E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _DensityMinOffset;
+    private static nint _DensityMinOffset = -1;
 
     public ref float DensityMin
     {
         get
         {
-            _DensityMinOffset = _DensityMinOffset ?? Schema.GetOffset(0x81794CB4B4D8467B);
-            return ref _Handle.AsRef<float>(_DensityMinOffset!.Value);
+            if (_DensityMinOffset == -1) _DensityMinOffset = Schema.GetOffset(0x81794CB4B4D8467B);
+            return ref _Handle.AsRef<float>(_DensityMinOffset);
         }
     }
-    private static nint? _DensityMaxOffset;
+    private static nint _DensityMaxOffset = -1;
 
     public ref float DensityMax
     {
         get
         {
-            _DensityMaxOffset = _DensityMaxOffset ?? Schema.GetOffset(0x81794CB4AAC31C05);
-            return ref _Handle.AsRef<float>(_DensityMaxOffset!.Value);
+            if (_DensityMaxOffset == -1) _DensityMaxOffset = Schema.GetOffset(0x81794CB4AAC31C05);
+            return ref _Handle.AsRef<float>(_DensityMaxOffset);
         }
     }
-    private static nint? _OutputMinOffset;
+    private static nint _OutputMinOffset = -1;
 
     public ref Vector OutputMin
     {
         get
         {
-            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x81794CB42EFED678);
-            return ref _Handle.AsRef<Vector>(_OutputMinOffset!.Value);
+            if (_OutputMinOffset == -1) _OutputMinOffset = Schema.GetOffset(0x81794CB42EFED678);
+            return ref _Handle.AsRef<Vector>(_OutputMinOffset);
         }
     }
-    private static nint? _OutputMaxOffset;
+    private static nint _OutputMaxOffset = -1;
 
     public ref Vector OutputMax
     {
         get
         {
-            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x81794CB4451280D2);
-            return ref _Handle.AsRef<Vector>(_OutputMaxOffset!.Value);
+            if (_OutputMaxOffset == -1) _OutputMaxOffset = Schema.GetOffset(0x81794CB4451280D2);
+            return ref _Handle.AsRef<Vector>(_OutputMaxOffset);
         }
     }
-    private static nint? _UseParentDensityOffset;
+    private static nint _UseParentDensityOffset = -1;
 
     public ref bool UseParentDensity
     {
         get
         {
-            _UseParentDensityOffset = _UseParentDensityOffset ?? Schema.GetOffset(0x81794CB40FE31F64);
-            return ref _Handle.AsRef<bool>(_UseParentDensityOffset!.Value);
+            if (_UseParentDensityOffset == -1) _UseParentDensityOffset = Schema.GetOffset(0x81794CB40FE31F64);
+            return ref _Handle.AsRef<bool>(_UseParentDensityOffset);
         }
     }
-    private static nint? _VoxelGridResolutionOffset;
+    private static nint _VoxelGridResolutionOffset = -1;
 
     public ref int VoxelGridResolution
     {
         get
         {
-            _VoxelGridResolutionOffset = _VoxelGridResolutionOffset ?? Schema.GetOffset(0x81794CB45AA7D7ED);
-            return ref _Handle.AsRef<int>(_VoxelGridResolutionOffset!.Value);
+            if (_VoxelGridResolutionOffset == -1) _VoxelGridResolutionOffset = Schema.GetOffset(0x81794CB45AA7D7ED);
+            return ref _Handle.AsRef<int>(_VoxelGridResolutionOffset);
         }
     }
 

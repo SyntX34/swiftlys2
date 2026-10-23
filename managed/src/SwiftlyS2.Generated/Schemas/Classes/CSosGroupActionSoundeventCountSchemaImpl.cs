@@ -16,29 +16,29 @@ internal partial class CSosGroupActionSoundeventCountSchemaImpl : CSosGroupActio
 {
     public CSosGroupActionSoundeventCountSchemaImpl(nint handle) : base(handle) { }
 
-    private static nint? _ExcludeStoppedSoundsOffset;
+    private static nint _ExcludeStoppedSoundsOffset = -1;
 
     public ref bool ExcludeStoppedSounds
     {
         get
         {
-            _ExcludeStoppedSoundsOffset = _ExcludeStoppedSoundsOffset ?? Schema.GetOffset(0x6A0D82691BDF6FB6);
-            return ref _Handle.AsRef<bool>(_ExcludeStoppedSoundsOffset!.Value);
+            if (_ExcludeStoppedSoundsOffset == -1) _ExcludeStoppedSoundsOffset = Schema.GetOffset(0x6A0D82691BDF6FB6);
+            return ref _Handle.AsRef<bool>(_ExcludeStoppedSoundsOffset);
         }
     }
-    private static nint? _StrCountKeyNameOffset;
+    private static nint _StrCountKeyNameOffset = -1;
 
     public string StrCountKeyName
     {
         get
         {
-            _StrCountKeyNameOffset = _StrCountKeyNameOffset ?? Schema.GetOffset(0x6A0D8269463A7AA5);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCountKeyNameOffset!.Value));
+            if (_StrCountKeyNameOffset == -1) _StrCountKeyNameOffset = Schema.GetOffset(0x6A0D8269463A7AA5);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrCountKeyNameOffset));
         }
         set
         {
-            _StrCountKeyNameOffset = _StrCountKeyNameOffset ?? Schema.GetOffset(0x6A0D8269463A7AA5);
-            Schema.SetCUtlString(_Handle, _StrCountKeyNameOffset!.Value, value);
+            if (_StrCountKeyNameOffset == -1) _StrCountKeyNameOffset = Schema.GetOffset(0x6A0D8269463A7AA5);
+            Schema.SetCUtlString(_Handle, _StrCountKeyNameOffset, value);
         }
     }
 

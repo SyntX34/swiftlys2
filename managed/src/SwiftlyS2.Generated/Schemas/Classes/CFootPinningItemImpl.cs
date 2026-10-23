@@ -16,110 +16,110 @@ internal partial class CFootPinningItemImpl : SchemaClass, CFootPinningItem
 {
     public CFootPinningItemImpl(nint handle) : base(handle) { }
 
-    private static nint? _FootNameOffset;
+    private static nint _FootNameOffset = -1;
 
     public string FootName
     {
         get
         {
-            _FootNameOffset = _FootNameOffset ?? Schema.GetOffset(0xD2617F9C228316B2);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FootNameOffset!.Value));
+            if (_FootNameOffset == -1) _FootNameOffset = Schema.GetOffset(0xD2617F9C228316B2);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FootNameOffset));
         }
         set
         {
-            _FootNameOffset = _FootNameOffset ?? Schema.GetOffset(0xD2617F9C228316B2);
-            Schema.SetCUtlString(_Handle, _FootNameOffset!.Value, value);
+            if (_FootNameOffset == -1) _FootNameOffset = Schema.GetOffset(0xD2617F9C228316B2);
+            Schema.SetCUtlString(_Handle, _FootNameOffset, value);
         }
     }
-    private static nint? _TargetBoneNameOffset;
+    private static nint _TargetBoneNameOffset = -1;
 
     public string TargetBoneName
     {
         get
         {
-            _TargetBoneNameOffset = _TargetBoneNameOffset ?? Schema.GetOffset(0xD2617F9CAF85A2D5);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBoneNameOffset!.Value));
+            if (_TargetBoneNameOffset == -1) _TargetBoneNameOffset = Schema.GetOffset(0xD2617F9CAF85A2D5);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TargetBoneNameOffset));
         }
         set
         {
-            _TargetBoneNameOffset = _TargetBoneNameOffset ?? Schema.GetOffset(0xD2617F9CAF85A2D5);
-            Schema.SetCUtlString(_Handle, _TargetBoneNameOffset!.Value, value);
+            if (_TargetBoneNameOffset == -1) _TargetBoneNameOffset = Schema.GetOffset(0xD2617F9CAF85A2D5);
+            Schema.SetCUtlString(_Handle, _TargetBoneNameOffset, value);
         }
     }
-    private static nint? _IkChainNameOffset;
+    private static nint _IkChainNameOffset = -1;
 
     public string IkChainName
     {
         get
         {
-            _IkChainNameOffset = _IkChainNameOffset ?? Schema.GetOffset(0xD2617F9C50E152ED);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainNameOffset!.Value));
+            if (_IkChainNameOffset == -1) _IkChainNameOffset = Schema.GetOffset(0xD2617F9C50E152ED);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainNameOffset));
         }
         set
         {
-            _IkChainNameOffset = _IkChainNameOffset ?? Schema.GetOffset(0xD2617F9C50E152ED);
-            Schema.SetCUtlString(_Handle, _IkChainNameOffset!.Value, value);
+            if (_IkChainNameOffset == -1) _IkChainNameOffset = Schema.GetOffset(0xD2617F9C50E152ED);
+            Schema.SetCUtlString(_Handle, _IkChainNameOffset, value);
         }
     }
-    private static nint? _TagOffset;
+    private static nint _TagOffset = -1;
     private AnimTagIDImpl? _TagInstance;
 
     public AnimTagID Tag
     {
         get
         {
-            _TagOffset = _TagOffset ?? Schema.GetOffset(0xD2617F9C8419ADB3);
+            if (_TagOffset == -1) _TagOffset = Schema.GetOffset(0xD2617F9C8419ADB3);
             var instance = _TagInstance ??= new AnimTagIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _TagOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TagOffset);
             return instance;
         }
     }
-    private static nint? _ParamNameOffset;
+    private static nint _ParamNameOffset = -1;
 
     public string ParamName
     {
         get
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xD2617F9CE87A9639);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset!.Value));
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0xD2617F9CE87A9639);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset));
         }
         set
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xD2617F9CE87A9639);
-            Schema.SetCUtlString(_Handle, _ParamNameOffset!.Value, value);
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0xD2617F9CE87A9639);
+            Schema.SetCUtlString(_Handle, _ParamNameOffset, value);
         }
     }
-    private static nint? _ParamOffset;
+    private static nint _ParamOffset = -1;
     private AnimParamIDImpl? _ParamInstance;
 
     public AnimParamID Param
     {
         get
         {
-            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0xD2617F9CBCD4D752);
+            if (_ParamOffset == -1) _ParamOffset = Schema.GetOffset(0xD2617F9CBCD4D752);
             var instance = _ParamInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamOffset);
             return instance;
         }
     }
-    private static nint? _MaxRotationLeftOffset;
+    private static nint _MaxRotationLeftOffset = -1;
 
     public ref float MaxRotationLeft
     {
         get
         {
-            _MaxRotationLeftOffset = _MaxRotationLeftOffset ?? Schema.GetOffset(0xD2617F9CFA1CDF44);
-            return ref _Handle.AsRef<float>(_MaxRotationLeftOffset!.Value);
+            if (_MaxRotationLeftOffset == -1) _MaxRotationLeftOffset = Schema.GetOffset(0xD2617F9CFA1CDF44);
+            return ref _Handle.AsRef<float>(_MaxRotationLeftOffset);
         }
     }
-    private static nint? _MaxRotationRightOffset;
+    private static nint _MaxRotationRightOffset = -1;
 
     public ref float MaxRotationRight
     {
         get
         {
-            _MaxRotationRightOffset = _MaxRotationRightOffset ?? Schema.GetOffset(0xD2617F9C8C95FA31);
-            return ref _Handle.AsRef<float>(_MaxRotationRightOffset!.Value);
+            if (_MaxRotationRightOffset == -1) _MaxRotationRightOffset = Schema.GetOffset(0xD2617F9C8C95FA31);
+            return ref _Handle.AsRef<float>(_MaxRotationRightOffset);
         }
     }
 

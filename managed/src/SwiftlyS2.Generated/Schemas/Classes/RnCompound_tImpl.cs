@@ -16,143 +16,143 @@ internal partial class RnCompound_tImpl : SchemaClass, RnCompound_t
 {
     public RnCompound_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _TreeOffset;
+    private static nint _TreeOffset = -1;
     private RnCompoundTree_tImpl? _TreeInstance;
 
     public RnCompoundTree_t Tree
     {
         get
         {
-            _TreeOffset = _TreeOffset ?? Schema.GetOffset(0xAFF8C613AB3A1955);
+            if (_TreeOffset == -1) _TreeOffset = Schema.GetOffset(0xAFF8C613AB3A1955);
             var instance = _TreeInstance ??= new RnCompoundTree_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TreeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TreeOffset);
             return instance;
         }
     }
-    private static nint? _HullBaseIndexOffset;
+    private static nint _HullBaseIndexOffset = -1;
 
     public ref int HullBaseIndex
     {
         get
         {
-            _HullBaseIndexOffset = _HullBaseIndexOffset ?? Schema.GetOffset(0xAFF8C61328B4E0FD);
-            return ref _Handle.AsRef<int>(_HullBaseIndexOffset!.Value);
+            if (_HullBaseIndexOffset == -1) _HullBaseIndexOffset = Schema.GetOffset(0xAFF8C61328B4E0FD);
+            return ref _Handle.AsRef<int>(_HullBaseIndexOffset);
         }
     }
-    private static nint? _MeshBaseIndexOffset;
+    private static nint _MeshBaseIndexOffset = -1;
 
     public ref int MeshBaseIndex
     {
         get
         {
-            _MeshBaseIndexOffset = _MeshBaseIndexOffset ?? Schema.GetOffset(0xAFF8C61364293A13);
-            return ref _Handle.AsRef<int>(_MeshBaseIndexOffset!.Value);
+            if (_MeshBaseIndexOffset == -1) _MeshBaseIndexOffset = Schema.GetOffset(0xAFF8C61364293A13);
+            return ref _Handle.AsRef<int>(_MeshBaseIndexOffset);
         }
     }
-    private static nint? _ShapeCountOffset;
+    private static nint _ShapeCountOffset = -1;
 
     public ref int ShapeCount
     {
         get
         {
-            _ShapeCountOffset = _ShapeCountOffset ?? Schema.GetOffset(0xAFF8C6136BF2B149);
-            return ref _Handle.AsRef<int>(_ShapeCountOffset!.Value);
+            if (_ShapeCountOffset == -1) _ShapeCountOffset = Schema.GetOffset(0xAFF8C6136BF2B149);
+            return ref _Handle.AsRef<int>(_ShapeCountOffset);
         }
     }
-    private static nint? _MeshesOffset;
+    private static nint _MeshesOffset = -1;
     private SchemaUntypedField? _MeshesInstance;
 
     public SchemaUntypedField Meshes
     {
         get
         {
-            _MeshesOffset = _MeshesOffset ?? Schema.GetOffset(0xAFF8C613D394E2B8);
+            if (_MeshesOffset == -1) _MeshesOffset = Schema.GetOffset(0xAFF8C613D394E2B8);
             var instance = _MeshesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MeshesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MeshesOffset);
             return instance;
         }
     }
-    private static nint? _HullsOffset;
+    private static nint _HullsOffset = -1;
 
     public ref CUtlLeanVector<RnHull_t, int> Hulls
     {
         get
         {
-            _HullsOffset = _HullsOffset ?? Schema.GetOffset(0xAFF8C6138C3BD39F);
-            return ref _Handle.AsRef<CUtlLeanVector<RnHull_t, int>>(_HullsOffset!.Value);
+            if (_HullsOffset == -1) _HullsOffset = Schema.GetOffset(0xAFF8C6138C3BD39F);
+            return ref _Handle.AsRef<CUtlLeanVector<RnHull_t, int>>(_HullsOffset);
         }
     }
-    private static nint? _CapsulesOffset;
+    private static nint _CapsulesOffset = -1;
 
     public ref CUtlLeanVector<RnCapsule_t, int> Capsules
     {
         get
         {
-            _CapsulesOffset = _CapsulesOffset ?? Schema.GetOffset(0xAFF8C613FC27BB2D);
-            return ref _Handle.AsRef<CUtlLeanVector<RnCapsule_t, int>>(_CapsulesOffset!.Value);
+            if (_CapsulesOffset == -1) _CapsulesOffset = Schema.GetOffset(0xAFF8C613FC27BB2D);
+            return ref _Handle.AsRef<CUtlLeanVector<RnCapsule_t, int>>(_CapsulesOffset);
         }
     }
-    private static nint? _SpheresOffset;
+    private static nint _SpheresOffset = -1;
 
     public ref CUtlLeanVector<RnSphere_t, int> Spheres
     {
         get
         {
-            _SpheresOffset = _SpheresOffset ?? Schema.GetOffset(0xAFF8C613E56F78F1);
-            return ref _Handle.AsRef<CUtlLeanVector<RnSphere_t, int>>(_SpheresOffset!.Value);
+            if (_SpheresOffset == -1) _SpheresOffset = Schema.GetOffset(0xAFF8C613E56F78F1);
+            return ref _Handle.AsRef<CUtlLeanVector<RnSphere_t, int>>(_SpheresOffset);
         }
     }
-    private static nint? _CompoundMaterialIndicesOffset;
+    private static nint _CompoundMaterialIndicesOffset = -1;
 
     public ref CUtlLeanVector<byte, int> CompoundMaterialIndices
     {
         get
         {
-            _CompoundMaterialIndicesOffset = _CompoundMaterialIndicesOffset ?? Schema.GetOffset(0xAFF8C61356D76BA2);
-            return ref _Handle.AsRef<CUtlLeanVector<byte, int>>(_CompoundMaterialIndicesOffset!.Value);
+            if (_CompoundMaterialIndicesOffset == -1) _CompoundMaterialIndicesOffset = Schema.GetOffset(0xAFF8C61356D76BA2);
+            return ref _Handle.AsRef<CUtlLeanVector<byte, int>>(_CompoundMaterialIndicesOffset);
         }
     }
-    private static nint? _BoundsOffset;
+    private static nint _BoundsOffset = -1;
     private AABB_tImpl? _BoundsInstance;
 
     public AABB_t Bounds
     {
         get
         {
-            _BoundsOffset = _BoundsOffset ?? Schema.GetOffset(0xAFF8C613ABF76288);
+            if (_BoundsOffset == -1) _BoundsOffset = Schema.GetOffset(0xAFF8C613ABF76288);
             var instance = _BoundsInstance ??= new AABB_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BoundsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BoundsOffset);
             return instance;
         }
     }
-    private static nint? _OrthographicAreasOffset;
+    private static nint _OrthographicAreasOffset = -1;
 
     public ref Vector OrthographicAreas
     {
         get
         {
-            _OrthographicAreasOffset = _OrthographicAreasOffset ?? Schema.GetOffset(0xAFF8C613B74855D3);
-            return ref _Handle.AsRef<Vector>(_OrthographicAreasOffset!.Value);
+            if (_OrthographicAreasOffset == -1) _OrthographicAreasOffset = Schema.GetOffset(0xAFF8C613B74855D3);
+            return ref _Handle.AsRef<Vector>(_OrthographicAreasOffset);
         }
     }
-    private static nint? _SurfaceAreaOffset;
+    private static nint _SurfaceAreaOffset = -1;
 
     public ref float SurfaceArea
     {
         get
         {
-            _SurfaceAreaOffset = _SurfaceAreaOffset ?? Schema.GetOffset(0xAFF8C613E4AE7C2F);
-            return ref _Handle.AsRef<float>(_SurfaceAreaOffset!.Value);
+            if (_SurfaceAreaOffset == -1) _SurfaceAreaOffset = Schema.GetOffset(0xAFF8C613E4AE7C2F);
+            return ref _Handle.AsRef<float>(_SurfaceAreaOffset);
         }
     }
-    private static nint? _VolumeOffset;
+    private static nint _VolumeOffset = -1;
 
     public ref float Volume
     {
         get
         {
-            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0xAFF8C6137647E0C9);
-            return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
+            if (_VolumeOffset == -1) _VolumeOffset = Schema.GetOffset(0xAFF8C6137647E0C9);
+            return ref _Handle.AsRef<float>(_VolumeOffset);
         }
     }
 

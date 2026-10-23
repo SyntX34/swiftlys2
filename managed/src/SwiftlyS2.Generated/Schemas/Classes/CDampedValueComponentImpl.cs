@@ -16,29 +16,29 @@ internal partial class CDampedValueComponentImpl : CAnimGraphDoc_ComponentImpl, 
 {
     public CDampedValueComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFC288A994D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFC288A994D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFC288A994D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFC288A994D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _ItemsOffset;
+    private static nint _ItemsOffset = -1;
 
     public ref CUtlVector<CDampedValueItem> Items
     {
         get
         {
-            _ItemsOffset = _ItemsOffset ?? Schema.GetOffset(0xFC288A997A87EDAF);
-            return ref _Handle.AsRef<CUtlVector<CDampedValueItem>>(_ItemsOffset!.Value);
+            if (_ItemsOffset == -1) _ItemsOffset = Schema.GetOffset(0xFC288A997A87EDAF);
+            return ref _Handle.AsRef<CUtlVector<CDampedValueItem>>(_ItemsOffset);
         }
     }
 

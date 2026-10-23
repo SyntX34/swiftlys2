@@ -16,154 +16,154 @@ internal partial class CModelStateImpl : SchemaClass, CModelState
 {
     public CModelStateImpl(nint handle) : base(handle) { }
 
-    private static nint? _ModelOffset;
+    private static nint _ModelOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeCModel> Model
     {
         get
         {
-            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0xC0A51C0E100C814);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+            if (_ModelOffset == -1) _ModelOffset = Schema.GetOffset(0xC0A51C0E100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset);
         }
     }
-    private static nint? _ModelNameOffset;
+    private static nint _ModelNameOffset = -1;
 
     public string ModelName
     {
         get
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xC0A51C0D7A1D881);
-            return Schema.GetString(_Handle.Read<nint>(_ModelNameOffset!.Value));
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xC0A51C0D7A1D881);
+            return Schema.GetString(_Handle.Read<nint>(_ModelNameOffset));
         }
         set
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xC0A51C0D7A1D881);
-            Schema.SetString(_Handle, _ModelNameOffset!.Value, value);
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xC0A51C0D7A1D881);
+            Schema.SetString(_Handle, _ModelNameOffset, value);
         }
     }
-    private static nint? _VPhysicsAggregateOffset;
+    private static nint _VPhysicsAggregateOffset = -1;
     private IPhysAggregateInstanceImpl? _VPhysicsAggregateInstance;
 
     public IPhysAggregateInstance? VPhysicsAggregate
     {
         get
         {
-            _VPhysicsAggregateOffset = _VPhysicsAggregateOffset ?? Schema.GetOffset(0xC0A51C089AC0B13);
-            var ptr = _Handle.Read<nint>(_VPhysicsAggregateOffset!.Value);
+            if (_VPhysicsAggregateOffset == -1) _VPhysicsAggregateOffset = Schema.GetOffset(0xC0A51C089AC0B13);
+            var ptr = _Handle.Read<nint>(_VPhysicsAggregateOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _VPhysicsAggregateInstance ??= new IPhysAggregateInstanceImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _RootBoneOffset_xOffset;
+    private static nint _RootBoneOffset_xOffset = -1;
 
     public ref float RootBoneOffset_x
     {
         get
         {
-            _RootBoneOffset_xOffset = _RootBoneOffset_xOffset ?? Schema.GetOffset(0xC0A51C069BA7A51);
-            return ref _Handle.AsRef<float>(_RootBoneOffset_xOffset!.Value);
+            if (_RootBoneOffset_xOffset == -1) _RootBoneOffset_xOffset = Schema.GetOffset(0xC0A51C069BA7A51);
+            return ref _Handle.AsRef<float>(_RootBoneOffset_xOffset);
         }
     }
-    private static nint? _RootBoneOffset_yOffset;
+    private static nint _RootBoneOffset_yOffset = -1;
 
     public ref float RootBoneOffset_y
     {
         get
         {
-            _RootBoneOffset_yOffset = _RootBoneOffset_yOffset ?? Schema.GetOffset(0xC0A51C068BA78BE);
-            return ref _Handle.AsRef<float>(_RootBoneOffset_yOffset!.Value);
+            if (_RootBoneOffset_yOffset == -1) _RootBoneOffset_yOffset = Schema.GetOffset(0xC0A51C068BA78BE);
+            return ref _Handle.AsRef<float>(_RootBoneOffset_yOffset);
         }
     }
-    private static nint? _RootBoneOffset_zOffset;
+    private static nint _RootBoneOffset_zOffset = -1;
 
     public ref float RootBoneOffset_z
     {
         get
         {
-            _RootBoneOffset_zOffset = _RootBoneOffset_zOffset ?? Schema.GetOffset(0xC0A51C067BA772B);
-            return ref _Handle.AsRef<float>(_RootBoneOffset_zOffset!.Value);
+            if (_RootBoneOffset_zOffset == -1) _RootBoneOffset_zOffset = Schema.GetOffset(0xC0A51C067BA772B);
+            return ref _Handle.AsRef<float>(_RootBoneOffset_zOffset);
         }
     }
-    private static nint? _RootBoneOffsetResetSerialNumberOffset;
+    private static nint _RootBoneOffsetResetSerialNumberOffset = -1;
 
     public ref byte RootBoneOffsetResetSerialNumber
     {
         get
         {
-            _RootBoneOffsetResetSerialNumberOffset = _RootBoneOffsetResetSerialNumberOffset ?? Schema.GetOffset(0xC0A51C09EC37A1A);
-            return ref _Handle.AsRef<byte>(_RootBoneOffsetResetSerialNumberOffset!.Value);
+            if (_RootBoneOffsetResetSerialNumberOffset == -1) _RootBoneOffsetResetSerialNumberOffset = Schema.GetOffset(0xC0A51C09EC37A1A);
+            return ref _Handle.AsRef<byte>(_RootBoneOffsetResetSerialNumberOffset);
         }
     }
-    private static nint? _ClientClothCreationSuppressedOffset;
+    private static nint _ClientClothCreationSuppressedOffset = -1;
 
     public ref bool ClientClothCreationSuppressed
     {
         get
         {
-            _ClientClothCreationSuppressedOffset = _ClientClothCreationSuppressedOffset ?? Schema.GetOffset(0xC0A51C0953717E1);
-            return ref _Handle.AsRef<bool>(_ClientClothCreationSuppressedOffset!.Value);
+            if (_ClientClothCreationSuppressedOffset == -1) _ClientClothCreationSuppressedOffset = Schema.GetOffset(0xC0A51C0953717E1);
+            return ref _Handle.AsRef<bool>(_ClientClothCreationSuppressedOffset);
         }
     }
-    private static nint? _AnimStateNoInterpSerialNumberOffset;
+    private static nint _AnimStateNoInterpSerialNumberOffset = -1;
 
     public ref byte AnimStateNoInterpSerialNumber
     {
         get
         {
-            _AnimStateNoInterpSerialNumberOffset = _AnimStateNoInterpSerialNumberOffset ?? Schema.GetOffset(0xC0A51C0F0F6D719);
-            return ref _Handle.AsRef<byte>(_AnimStateNoInterpSerialNumberOffset!.Value);
+            if (_AnimStateNoInterpSerialNumberOffset == -1) _AnimStateNoInterpSerialNumberOffset = Schema.GetOffset(0xC0A51C0F0F6D719);
+            return ref _Handle.AsRef<byte>(_AnimStateNoInterpSerialNumberOffset);
         }
     }
-    private static nint? _MeshGroupMaskOffset;
+    private static nint _MeshGroupMaskOffset = -1;
 
     public ref ulong MeshGroupMask
     {
         get
         {
-            _MeshGroupMaskOffset = _MeshGroupMaskOffset ?? Schema.GetOffset(0xC0A51C009C93F2B);
-            return ref _Handle.AsRef<ulong>(_MeshGroupMaskOffset!.Value);
+            if (_MeshGroupMaskOffset == -1) _MeshGroupMaskOffset = Schema.GetOffset(0xC0A51C009C93F2B);
+            return ref _Handle.AsRef<ulong>(_MeshGroupMaskOffset);
         }
     }
-    private static nint? _BodyGroupChoicesOffset;
+    private static nint _BodyGroupChoicesOffset = -1;
 
     public ref CUtlVector<int> BodyGroupChoices
     {
         get
         {
-            _BodyGroupChoicesOffset = _BodyGroupChoicesOffset ?? Schema.GetOffset(0xC0A51C02395D0B0);
-            return ref _Handle.AsRef<CUtlVector<int>>(_BodyGroupChoicesOffset!.Value);
+            if (_BodyGroupChoicesOffset == -1) _BodyGroupChoicesOffset = Schema.GetOffset(0xC0A51C02395D0B0);
+            return ref _Handle.AsRef<CUtlVector<int>>(_BodyGroupChoicesOffset);
         }
     }
-    private static nint? _IdealMotionTypeOffset;
+    private static nint _IdealMotionTypeOffset = -1;
 
     public ref byte IdealMotionType
     {
         get
         {
-            _IdealMotionTypeOffset = _IdealMotionTypeOffset ?? Schema.GetOffset(0xC0A51C00A904E94);
-            return ref _Handle.AsRef<byte>(_IdealMotionTypeOffset!.Value);
+            if (_IdealMotionTypeOffset == -1) _IdealMotionTypeOffset = Schema.GetOffset(0xC0A51C00A904E94);
+            return ref _Handle.AsRef<byte>(_IdealMotionTypeOffset);
         }
     }
-    private static nint? _ForceLODOffset;
+    private static nint _ForceLODOffset = -1;
 
     public ref byte ForceLOD
     {
         get
         {
-            _ForceLODOffset = _ForceLODOffset ?? Schema.GetOffset(0xC0A51C091D53D5F);
-            return ref _Handle.AsRef<byte>(_ForceLODOffset!.Value);
+            if (_ForceLODOffset == -1) _ForceLODOffset = Schema.GetOffset(0xC0A51C091D53D5F);
+            return ref _Handle.AsRef<byte>(_ForceLODOffset);
         }
     }
-    private static nint? _ClothUpdateFlagsOffset;
+    private static nint _ClothUpdateFlagsOffset = -1;
 
     public ref byte ClothUpdateFlags
     {
         get
         {
-            _ClothUpdateFlagsOffset = _ClothUpdateFlagsOffset ?? Schema.GetOffset(0xC0A51C0C74A2B81);
-            return ref _Handle.AsRef<byte>(_ClothUpdateFlagsOffset!.Value);
+            if (_ClothUpdateFlagsOffset == -1) _ClothUpdateFlagsOffset = Schema.GetOffset(0xC0A51C0C74A2B81);
+            return ref _Handle.AsRef<byte>(_ClothUpdateFlagsOffset);
         }
     }
 

@@ -16,34 +16,34 @@ internal partial class C_OP_SetControlPointFieldToWaterImpl : CParticleFunctionP
 {
     public C_OP_SetControlPointFieldToWaterImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceCPOffset;
+    private static nint _SourceCPOffset = -1;
 
     public ref int SourceCP
     {
         get
         {
-            _SourceCPOffset = _SourceCPOffset ?? Schema.GetOffset(0x77BA8CA24C01E3B7);
-            return ref _Handle.AsRef<int>(_SourceCPOffset!.Value);
+            if (_SourceCPOffset == -1) _SourceCPOffset = Schema.GetOffset(0x77BA8CA24C01E3B7);
+            return ref _Handle.AsRef<int>(_SourceCPOffset);
         }
     }
-    private static nint? _DestCPOffset;
+    private static nint _DestCPOffset = -1;
 
     public ref int DestCP
     {
         get
         {
-            _DestCPOffset = _DestCPOffset ?? Schema.GetOffset(0x77BA8CA2E27355DA);
-            return ref _Handle.AsRef<int>(_DestCPOffset!.Value);
+            if (_DestCPOffset == -1) _DestCPOffset = Schema.GetOffset(0x77BA8CA2E27355DA);
+            return ref _Handle.AsRef<int>(_DestCPOffset);
         }
     }
-    private static nint? _CPFieldOffset;
+    private static nint _CPFieldOffset = -1;
 
     public ref int CPField
     {
         get
         {
-            _CPFieldOffset = _CPFieldOffset ?? Schema.GetOffset(0x77BA8CA250B79876);
-            return ref _Handle.AsRef<int>(_CPFieldOffset!.Value);
+            if (_CPFieldOffset == -1) _CPFieldOffset = Schema.GetOffset(0x77BA8CA250B79876);
+            return ref _Handle.AsRef<int>(_CPFieldOffset);
         }
     }
 

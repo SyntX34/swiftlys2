@@ -16,132 +16,132 @@ internal partial class CEnvShakeImpl : CPointEntityImpl, CEnvShake
 {
     public CEnvShakeImpl(nint handle) : base(handle) { }
 
-    private static nint? _LimitToEntityOffset;
+    private static nint _LimitToEntityOffset = -1;
 
     public string LimitToEntity
     {
         get
         {
-            _LimitToEntityOffset = _LimitToEntityOffset ?? Schema.GetOffset(0x10FEA945E1C029E2);
-            return Schema.GetString(_Handle.Read<nint>(_LimitToEntityOffset!.Value));
+            if (_LimitToEntityOffset == -1) _LimitToEntityOffset = Schema.GetOffset(0x10FEA945E1C029E2);
+            return Schema.GetString(_Handle.Read<nint>(_LimitToEntityOffset));
         }
         set
         {
-            _LimitToEntityOffset = _LimitToEntityOffset ?? Schema.GetOffset(0x10FEA945E1C029E2);
-            Schema.SetString(_Handle, _LimitToEntityOffset!.Value, value);
+            if (_LimitToEntityOffset == -1) _LimitToEntityOffset = Schema.GetOffset(0x10FEA945E1C029E2);
+            Schema.SetString(_Handle, _LimitToEntityOffset, value);
         }
     }
-    private static nint? _AmplitudeOffset;
+    private static nint _AmplitudeOffset = -1;
 
     public ref float Amplitude
     {
         get
         {
-            _AmplitudeOffset = _AmplitudeOffset ?? Schema.GetOffset(0x10FEA945A38BF822);
-            return ref _Handle.AsRef<float>(_AmplitudeOffset!.Value);
+            if (_AmplitudeOffset == -1) _AmplitudeOffset = Schema.GetOffset(0x10FEA945A38BF822);
+            return ref _Handle.AsRef<float>(_AmplitudeOffset);
         }
     }
-    private static nint? _FrequencyOffset;
+    private static nint _FrequencyOffset = -1;
 
     public ref float Frequency
     {
         get
         {
-            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0x10FEA945BCCAA981);
-            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+            if (_FrequencyOffset == -1) _FrequencyOffset = Schema.GetOffset(0x10FEA945BCCAA981);
+            return ref _Handle.AsRef<float>(_FrequencyOffset);
         }
     }
-    private static nint? _DurationOffset;
+    private static nint _DurationOffset = -1;
 
     public ref float Duration
     {
         get
         {
-            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x10FEA9459879A98D);
-            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x10FEA9459879A98D);
+            return ref _Handle.AsRef<float>(_DurationOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x10FEA9457C5B0533);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x10FEA9457C5B0533);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _StopTimeOffset;
+    private static nint _StopTimeOffset = -1;
     private GameTime_tImpl? _StopTimeInstance;
 
     public GameTime_t StopTime
     {
         get
         {
-            _StopTimeOffset = _StopTimeOffset ?? Schema.GetOffset(0x10FEA9456BFFEDC4);
+            if (_StopTimeOffset == -1) _StopTimeOffset = Schema.GetOffset(0x10FEA9456BFFEDC4);
             var instance = _StopTimeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StopTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StopTimeOffset);
             return instance;
         }
     }
-    private static nint? _NextShakeOffset;
+    private static nint _NextShakeOffset = -1;
     private GameTime_tImpl? _NextShakeInstance;
 
     public GameTime_t NextShake
     {
         get
         {
-            _NextShakeOffset = _NextShakeOffset ?? Schema.GetOffset(0x10FEA94563E0833E);
+            if (_NextShakeOffset == -1) _NextShakeOffset = Schema.GetOffset(0x10FEA94563E0833E);
             var instance = _NextShakeInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NextShakeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NextShakeOffset);
             return instance;
         }
     }
-    private static nint? _CurrentAmpOffset;
+    private static nint _CurrentAmpOffset = -1;
 
     public ref float CurrentAmp
     {
         get
         {
-            _CurrentAmpOffset = _CurrentAmpOffset ?? Schema.GetOffset(0x10FEA94504EE10FC);
-            return ref _Handle.AsRef<float>(_CurrentAmpOffset!.Value);
+            if (_CurrentAmpOffset == -1) _CurrentAmpOffset = Schema.GetOffset(0x10FEA94504EE10FC);
+            return ref _Handle.AsRef<float>(_CurrentAmpOffset);
         }
     }
-    private static nint? _MaxForceOffset;
+    private static nint _MaxForceOffset = -1;
 
     public ref Vector MaxForce
     {
         get
         {
-            _MaxForceOffset = _MaxForceOffset ?? Schema.GetOffset(0x10FEA945FA9D37B8);
-            return ref _Handle.AsRef<Vector>(_MaxForceOffset!.Value);
+            if (_MaxForceOffset == -1) _MaxForceOffset = Schema.GetOffset(0x10FEA945FA9D37B8);
+            return ref _Handle.AsRef<Vector>(_MaxForceOffset);
         }
     }
-    private static nint? _ShakeControllerOffset;
+    private static nint _ShakeControllerOffset = -1;
     private IPhysicsMotionControllerImpl? _ShakeControllerInstance;
 
     public IPhysicsMotionController? ShakeController
     {
         get
         {
-            _ShakeControllerOffset = _ShakeControllerOffset ?? Schema.GetOffset(0x10FEA9457B0190A7);
-            var ptr = _Handle.Read<nint>(_ShakeControllerOffset!.Value);
+            if (_ShakeControllerOffset == -1) _ShakeControllerOffset = Schema.GetOffset(0x10FEA9457B0190A7);
+            var ptr = _Handle.Read<nint>(_ShakeControllerOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _ShakeControllerInstance ??= new IPhysicsMotionControllerImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _ShakeCallbackOffset;
+    private static nint _ShakeCallbackOffset = -1;
     private CPhysicsShakeImpl? _ShakeCallbackInstance;
 
     public CPhysicsShake ShakeCallback
     {
         get
         {
-            _ShakeCallbackOffset = _ShakeCallbackOffset ?? Schema.GetOffset(0x10FEA945C4E1E076);
+            if (_ShakeCallbackOffset == -1) _ShakeCallbackOffset = Schema.GetOffset(0x10FEA945C4E1E076);
             var instance = _ShakeCallbackInstance ??= new CPhysicsShakeImpl(0);
-            instance.DangerousSetHandle(_Handle + _ShakeCallbackOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ShakeCallbackOffset);
             return instance;
         }
     }

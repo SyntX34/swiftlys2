@@ -16,47 +16,47 @@ internal partial class CPhysPulleyImpl : CPhysConstraintImpl, CPhysPulley
 {
     public CPhysPulleyImpl(nint handle) : base(handle) { }
 
-    private static nint? _Position2Offset;
+    private static nint _Position2Offset = -1;
 
     public ref Vector Position2
     {
         get
         {
-            _Position2Offset = _Position2Offset ?? Schema.GetOffset(0xDCB3A22333568F48);
-            return ref _Handle.AsRef<Vector>(_Position2Offset!.Value);
+            if (_Position2Offset == -1) _Position2Offset = Schema.GetOffset(0xDCB3A22333568F48);
+            return ref _Handle.AsRef<Vector>(_Position2Offset);
         }
     }
-    private static nint? _OffsetOffset;
+    private static nint _OffsetOffset = -1;
     private SchemaFixedArray<Vector>? _OffsetInstance;
 
     public ISchemaFixedArray<Vector> Offset
     {
         get
         {
-            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xDCB3A223F836806A);
+            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0xDCB3A223F836806A);
             var instance = _OffsetInstance ??= new SchemaFixedArray<Vector>(0, 0xDCB3A223F836806A, 2, 12, 4);
-            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset);
             return instance;
         }
     }
-    private static nint? _AddLengthOffset;
+    private static nint _AddLengthOffset = -1;
 
     public ref float AddLength
     {
         get
         {
-            _AddLengthOffset = _AddLengthOffset ?? Schema.GetOffset(0xDCB3A223A30AA6D8);
-            return ref _Handle.AsRef<float>(_AddLengthOffset!.Value);
+            if (_AddLengthOffset == -1) _AddLengthOffset = Schema.GetOffset(0xDCB3A223A30AA6D8);
+            return ref _Handle.AsRef<float>(_AddLengthOffset);
         }
     }
-    private static nint? _GearRatioOffset;
+    private static nint _GearRatioOffset = -1;
 
     public ref float GearRatio
     {
         get
         {
-            _GearRatioOffset = _GearRatioOffset ?? Schema.GetOffset(0xDCB3A223DF6EB135);
-            return ref _Handle.AsRef<float>(_GearRatioOffset!.Value);
+            if (_GearRatioOffset == -1) _GearRatioOffset = Schema.GetOffset(0xDCB3A223DF6EB135);
+            return ref _Handle.AsRef<float>(_GearRatioOffset);
         }
     }
 

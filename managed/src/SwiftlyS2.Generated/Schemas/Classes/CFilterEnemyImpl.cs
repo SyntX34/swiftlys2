@@ -16,64 +16,64 @@ internal partial class CFilterEnemyImpl : CBaseFilterImpl, CFilterEnemy
 {
     public CFilterEnemyImpl(nint handle) : base(handle) { }
 
-    private static nint? _EnemyNameOffset;
+    private static nint _EnemyNameOffset = -1;
 
     public string EnemyName
     {
         get
         {
-            _EnemyNameOffset = _EnemyNameOffset ?? Schema.GetOffset(0x23F92540C9E922A8);
-            return Schema.GetString(_Handle.Read<nint>(_EnemyNameOffset!.Value));
+            if (_EnemyNameOffset == -1) _EnemyNameOffset = Schema.GetOffset(0x23F92540C9E922A8);
+            return Schema.GetString(_Handle.Read<nint>(_EnemyNameOffset));
         }
         set
         {
-            _EnemyNameOffset = _EnemyNameOffset ?? Schema.GetOffset(0x23F92540C9E922A8);
-            Schema.SetString(_Handle, _EnemyNameOffset!.Value, value);
+            if (_EnemyNameOffset == -1) _EnemyNameOffset = Schema.GetOffset(0x23F92540C9E922A8);
+            Schema.SetString(_Handle, _EnemyNameOffset, value);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x23F925405ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x23F925405ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _OuterRadiusOffset;
+    private static nint _OuterRadiusOffset = -1;
 
     public ref float OuterRadius
     {
         get
         {
-            _OuterRadiusOffset = _OuterRadiusOffset ?? Schema.GetOffset(0x23F925407B66A818);
-            return ref _Handle.AsRef<float>(_OuterRadiusOffset!.Value);
+            if (_OuterRadiusOffset == -1) _OuterRadiusOffset = Schema.GetOffset(0x23F925407B66A818);
+            return ref _Handle.AsRef<float>(_OuterRadiusOffset);
         }
     }
-    private static nint? _MaxSquadmatesPerEnemyOffset;
+    private static nint _MaxSquadmatesPerEnemyOffset = -1;
 
     public ref int MaxSquadmatesPerEnemy
     {
         get
         {
-            _MaxSquadmatesPerEnemyOffset = _MaxSquadmatesPerEnemyOffset ?? Schema.GetOffset(0x23F925407AA226A0);
-            return ref _Handle.AsRef<int>(_MaxSquadmatesPerEnemyOffset!.Value);
+            if (_MaxSquadmatesPerEnemyOffset == -1) _MaxSquadmatesPerEnemyOffset = Schema.GetOffset(0x23F925407AA226A0);
+            return ref _Handle.AsRef<int>(_MaxSquadmatesPerEnemyOffset);
         }
     }
-    private static nint? _PlayerNameOffset;
+    private static nint _PlayerNameOffset = -1;
 
     public string PlayerName
     {
         get
         {
-            _PlayerNameOffset = _PlayerNameOffset ?? Schema.GetOffset(0x23F92540DE61DD3B);
-            return Schema.GetString(_Handle.Read<nint>(_PlayerNameOffset!.Value));
+            if (_PlayerNameOffset == -1) _PlayerNameOffset = Schema.GetOffset(0x23F92540DE61DD3B);
+            return Schema.GetString(_Handle.Read<nint>(_PlayerNameOffset));
         }
         set
         {
-            _PlayerNameOffset = _PlayerNameOffset ?? Schema.GetOffset(0x23F92540DE61DD3B);
-            Schema.SetString(_Handle, _PlayerNameOffset!.Value, value);
+            if (_PlayerNameOffset == -1) _PlayerNameOffset = Schema.GetOffset(0x23F92540DE61DD3B);
+            Schema.SetString(_Handle, _PlayerNameOffset, value);
         }
     }
 

@@ -16,84 +16,84 @@ internal partial class CSeqAutoLayerFlagImpl : SchemaClass, CSeqAutoLayerFlag
 {
     public CSeqAutoLayerFlagImpl(nint handle) : base(handle) { }
 
-    private static nint? _PostOffset;
+    private static nint _PostOffset = -1;
 
     public ref bool Post
     {
         get
         {
-            _PostOffset = _PostOffset ?? Schema.GetOffset(0x9E41A1515698A5A7);
-            return ref _Handle.AsRef<bool>(_PostOffset!.Value);
+            if (_PostOffset == -1) _PostOffset = Schema.GetOffset(0x9E41A1515698A5A7);
+            return ref _Handle.AsRef<bool>(_PostOffset);
         }
     }
-    private static nint? _SplineOffset;
+    private static nint _SplineOffset = -1;
 
     public ref bool Spline
     {
         get
         {
-            _SplineOffset = _SplineOffset ?? Schema.GetOffset(0x9E41A1512F9204DC);
-            return ref _Handle.AsRef<bool>(_SplineOffset!.Value);
+            if (_SplineOffset == -1) _SplineOffset = Schema.GetOffset(0x9E41A1512F9204DC);
+            return ref _Handle.AsRef<bool>(_SplineOffset);
         }
     }
-    private static nint? _XFadeOffset;
+    private static nint _XFadeOffset = -1;
 
     public ref bool XFade
     {
         get
         {
-            _XFadeOffset = _XFadeOffset ?? Schema.GetOffset(0x9E41A1511DEAA5A9);
-            return ref _Handle.AsRef<bool>(_XFadeOffset!.Value);
+            if (_XFadeOffset == -1) _XFadeOffset = Schema.GetOffset(0x9E41A1511DEAA5A9);
+            return ref _Handle.AsRef<bool>(_XFadeOffset);
         }
     }
-    private static nint? _NoBlendOffset;
+    private static nint _NoBlendOffset = -1;
 
     public ref bool NoBlend
     {
         get
         {
-            _NoBlendOffset = _NoBlendOffset ?? Schema.GetOffset(0x9E41A15180E307E1);
-            return ref _Handle.AsRef<bool>(_NoBlendOffset!.Value);
+            if (_NoBlendOffset == -1) _NoBlendOffset = Schema.GetOffset(0x9E41A15180E307E1);
+            return ref _Handle.AsRef<bool>(_NoBlendOffset);
         }
     }
-    private static nint? _LocalOffset;
+    private static nint _LocalOffset = -1;
 
     public ref bool Local
     {
         get
         {
-            _LocalOffset = _LocalOffset ?? Schema.GetOffset(0x9E41A15130D5CDE8);
-            return ref _Handle.AsRef<bool>(_LocalOffset!.Value);
+            if (_LocalOffset == -1) _LocalOffset = Schema.GetOffset(0x9E41A15130D5CDE8);
+            return ref _Handle.AsRef<bool>(_LocalOffset);
         }
     }
-    private static nint? _PoseOffset;
+    private static nint _PoseOffset = -1;
 
     public ref bool Pose
     {
         get
         {
-            _PoseOffset = _PoseOffset ?? Schema.GetOffset(0x9E41A15145988AE4);
-            return ref _Handle.AsRef<bool>(_PoseOffset!.Value);
+            if (_PoseOffset == -1) _PoseOffset = Schema.GetOffset(0x9E41A15145988AE4);
+            return ref _Handle.AsRef<bool>(_PoseOffset);
         }
     }
-    private static nint? _FetchFrameOffset;
+    private static nint _FetchFrameOffset = -1;
 
     public ref bool FetchFrame
     {
         get
         {
-            _FetchFrameOffset = _FetchFrameOffset ?? Schema.GetOffset(0x9E41A15118941788);
-            return ref _Handle.AsRef<bool>(_FetchFrameOffset!.Value);
+            if (_FetchFrameOffset == -1) _FetchFrameOffset = Schema.GetOffset(0x9E41A15118941788);
+            return ref _Handle.AsRef<bool>(_FetchFrameOffset);
         }
     }
-    private static nint? _SubtractOffset;
+    private static nint _SubtractOffset = -1;
 
     public ref bool Subtract
     {
         get
         {
-            _SubtractOffset = _SubtractOffset ?? Schema.GetOffset(0x9E41A1514F203AC1);
-            return ref _Handle.AsRef<bool>(_SubtractOffset!.Value);
+            if (_SubtractOffset == -1) _SubtractOffset = Schema.GetOffset(0x9E41A1514F203AC1);
+            return ref _Handle.AsRef<bool>(_SubtractOffset);
         }
     }
 

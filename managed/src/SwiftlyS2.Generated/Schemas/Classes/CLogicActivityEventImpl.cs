@@ -16,49 +16,49 @@ internal partial class CLogicActivityEventImpl : CLogicalEntityImpl, CLogicActiv
 {
     public CLogicActivityEventImpl(nint handle) : base(handle) { }
 
-    private static nint? _EventTypeOffset;
+    private static nint _EventTypeOffset = -1;
 
     public ref int EventType
     {
         get
         {
-            _EventTypeOffset = _EventTypeOffset ?? Schema.GetOffset(0xB778F4F7E1F9AA93);
-            return ref _Handle.AsRef<int>(_EventTypeOffset!.Value);
+            if (_EventTypeOffset == -1) _EventTypeOffset = Schema.GetOffset(0xB778F4F7E1F9AA93);
+            return ref _Handle.AsRef<int>(_EventTypeOffset);
         }
     }
-    private static nint? _DurationOffset;
+    private static nint _DurationOffset = -1;
 
     public ref float Duration
     {
         get
         {
-            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xB778F4F7BC5E3BAB);
-            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0xB778F4F7BC5E3BAB);
+            return ref _Handle.AsRef<float>(_DurationOffset);
         }
     }
-    private static nint? _SourceEntityNameOffset;
+    private static nint _SourceEntityNameOffset = -1;
 
     public string SourceEntityName
     {
         get
         {
-            _SourceEntityNameOffset = _SourceEntityNameOffset ?? Schema.GetOffset(0xB778F4F76C1387C0);
-            return Schema.GetString(_Handle.Read<nint>(_SourceEntityNameOffset!.Value));
+            if (_SourceEntityNameOffset == -1) _SourceEntityNameOffset = Schema.GetOffset(0xB778F4F76C1387C0);
+            return Schema.GetString(_Handle.Read<nint>(_SourceEntityNameOffset));
         }
         set
         {
-            _SourceEntityNameOffset = _SourceEntityNameOffset ?? Schema.GetOffset(0xB778F4F76C1387C0);
-            Schema.SetString(_Handle, _SourceEntityNameOffset!.Value, value);
+            if (_SourceEntityNameOffset == -1) _SourceEntityNameOffset = Schema.GetOffset(0xB778F4F76C1387C0);
+            Schema.SetString(_Handle, _SourceEntityNameOffset, value);
         }
     }
-    private static nint? _SourceOffset;
+    private static nint _SourceOffset = -1;
 
     public ref CHandle<CEntityInstance> Source
     {
         get
         {
-            _SourceOffset = _SourceOffset ?? Schema.GetOffset(0xB778F4F733D3CD82);
-            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_SourceOffset!.Value);
+            if (_SourceOffset == -1) _SourceOffset = Schema.GetOffset(0xB778F4F733D3CD82);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_SourceOffset);
         }
     }
 

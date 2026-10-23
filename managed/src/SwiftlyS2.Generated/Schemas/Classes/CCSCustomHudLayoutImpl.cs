@@ -16,82 +16,82 @@ internal partial class CCSCustomHudLayoutImpl : CBaseEntityImpl, CCSCustomHudLay
 {
     public CCSCustomHudLayoutImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrLayoutOffset;
+    private static nint _StrLayoutOffset = -1;
 
     public string StrLayout
     {
         get
         {
-            _StrLayoutOffset = _StrLayoutOffset ?? Schema.GetOffset(0x8D6B5DA6F7FB9036);
-            return Schema.GetString(_Handle.Read<nint>(_StrLayoutOffset!.Value));
+            if (_StrLayoutOffset == -1) _StrLayoutOffset = Schema.GetOffset(0x8D6B5DA6F7FB9036);
+            return Schema.GetString(_Handle.Read<nint>(_StrLayoutOffset));
         }
         set
         {
-            _StrLayoutOffset = _StrLayoutOffset ?? Schema.GetOffset(0x8D6B5DA6F7FB9036);
-            Schema.SetString(_Handle, _StrLayoutOffset!.Value, value);
+            if (_StrLayoutOffset == -1) _StrLayoutOffset = Schema.GetOffset(0x8D6B5DA6F7FB9036);
+            Schema.SetString(_Handle, _StrLayoutOffset, value);
         }
     }
-    private static nint? _ObservableOffset;
+    private static nint _ObservableOffset = -1;
 
     public ref bool Observable
     {
         get
         {
-            _ObservableOffset = _ObservableOffset ?? Schema.GetOffset(0x8D6B5DA6B19746C8);
-            return ref _Handle.AsRef<bool>(_ObservableOffset!.Value);
+            if (_ObservableOffset == -1) _ObservableOffset = Schema.GetOffset(0x8D6B5DA6B19746C8);
+            return ref _Handle.AsRef<bool>(_ObservableOffset);
         }
     }
-    private static nint? _PlayerLayoutStatesOffset;
+    private static nint _PlayerLayoutStatesOffset = -1;
 
     public ref CUtlVector<CCSCustomHudLayoutState> PlayerLayoutStates
     {
         get
         {
-            _PlayerLayoutStatesOffset = _PlayerLayoutStatesOffset ?? Schema.GetOffset(0x8D6B5DA6A9304E98);
-            return ref _Handle.AsRef<CUtlVector<CCSCustomHudLayoutState>>(_PlayerLayoutStatesOffset!.Value);
+            if (_PlayerLayoutStatesOffset == -1) _PlayerLayoutStatesOffset = Schema.GetOffset(0x8D6B5DA6A9304E98);
+            return ref _Handle.AsRef<CUtlVector<CCSCustomHudLayoutState>>(_PlayerLayoutStatesOffset);
         }
     }
-    private static nint? _GlobalLayoutStateOffset;
+    private static nint _GlobalLayoutStateOffset = -1;
     private CCSCustomHudLayoutStateImpl? _GlobalLayoutStateInstance;
 
     public CCSCustomHudLayoutState GlobalLayoutState
     {
         get
         {
-            _GlobalLayoutStateOffset = _GlobalLayoutStateOffset ?? Schema.GetOffset(0x8D6B5DA66973065D);
+            if (_GlobalLayoutStateOffset == -1) _GlobalLayoutStateOffset = Schema.GetOffset(0x8D6B5DA66973065D);
             var instance = _GlobalLayoutStateInstance ??= new CCSCustomHudLayoutStateImpl(0);
-            instance.DangerousSetHandle(_Handle + _GlobalLayoutStateOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GlobalLayoutStateOffset);
             return instance;
         }
     }
-    private static nint? _PanelIdsOffset;
+    private static nint _PanelIdsOffset = -1;
 
     public ref CUtlVector<CUtlString> PanelIds
     {
         get
         {
-            _PanelIdsOffset = _PanelIdsOffset ?? Schema.GetOffset(0x8D6B5DA6E1F230A9);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_PanelIdsOffset!.Value);
+            if (_PanelIdsOffset == -1) _PanelIdsOffset = Schema.GetOffset(0x8D6B5DA6E1F230A9);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_PanelIdsOffset);
         }
     }
-    private static nint? _ClassNamesOffset;
+    private static nint _ClassNamesOffset = -1;
 
     public ref CUtlVector<CUtlString> ClassNames
     {
         get
         {
-            _ClassNamesOffset = _ClassNamesOffset ?? Schema.GetOffset(0x8D6B5DA6E822781D);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ClassNamesOffset!.Value);
+            if (_ClassNamesOffset == -1) _ClassNamesOffset = Schema.GetOffset(0x8D6B5DA6E822781D);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ClassNamesOffset);
         }
     }
-    private static nint? _DialogVariableNamesOffset;
+    private static nint _DialogVariableNamesOffset = -1;
 
     public ref CUtlVector<CUtlString> DialogVariableNames
     {
         get
         {
-            _DialogVariableNamesOffset = _DialogVariableNamesOffset ?? Schema.GetOffset(0x8D6B5DA6671A338B);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DialogVariableNamesOffset!.Value);
+            if (_DialogVariableNamesOffset == -1) _DialogVariableNamesOffset = Schema.GetOffset(0x8D6B5DA6671A338B);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DialogVariableNamesOffset);
         }
     }
 

@@ -16,54 +16,54 @@ internal partial class CMixEnvelopeTriggerImpl : CMixPropertyBaseImpl, CMixEnvel
 {
     public CMixEnvelopeTriggerImpl(nint handle) : base(handle) { }
 
-    private static nint? _BaseValueOffset;
+    private static nint _BaseValueOffset = -1;
 
     public ref float BaseValue
     {
         get
         {
-            _BaseValueOffset = _BaseValueOffset ?? Schema.GetOffset(0xB6C7429CB5B71A9B);
-            return ref _Handle.AsRef<float>(_BaseValueOffset!.Value);
+            if (_BaseValueOffset == -1) _BaseValueOffset = Schema.GetOffset(0xB6C7429CB5B71A9B);
+            return ref _Handle.AsRef<float>(_BaseValueOffset);
         }
     }
-    private static nint? _DestinationValueOffset;
+    private static nint _DestinationValueOffset = -1;
 
     public ref float DestinationValue
     {
         get
         {
-            _DestinationValueOffset = _DestinationValueOffset ?? Schema.GetOffset(0xB6C7429C05945C0A);
-            return ref _Handle.AsRef<float>(_DestinationValueOffset!.Value);
+            if (_DestinationValueOffset == -1) _DestinationValueOffset = Schema.GetOffset(0xB6C7429C05945C0A);
+            return ref _Handle.AsRef<float>(_DestinationValueOffset);
         }
     }
-    private static nint? _AttackTimeOffset;
+    private static nint _AttackTimeOffset = -1;
 
     public ref float AttackTime
     {
         get
         {
-            _AttackTimeOffset = _AttackTimeOffset ?? Schema.GetOffset(0xB6C7429CC5A41DD6);
-            return ref _Handle.AsRef<float>(_AttackTimeOffset!.Value);
+            if (_AttackTimeOffset == -1) _AttackTimeOffset = Schema.GetOffset(0xB6C7429CC5A41DD6);
+            return ref _Handle.AsRef<float>(_AttackTimeOffset);
         }
     }
-    private static nint? _HoldTimeOffset;
+    private static nint _HoldTimeOffset = -1;
 
     public ref float HoldTime
     {
         get
         {
-            _HoldTimeOffset = _HoldTimeOffset ?? Schema.GetOffset(0xB6C7429C0A26F66F);
-            return ref _Handle.AsRef<float>(_HoldTimeOffset!.Value);
+            if (_HoldTimeOffset == -1) _HoldTimeOffset = Schema.GetOffset(0xB6C7429C0A26F66F);
+            return ref _Handle.AsRef<float>(_HoldTimeOffset);
         }
     }
-    private static nint? _ReleaseTimeOffset;
+    private static nint _ReleaseTimeOffset = -1;
 
     public ref float ReleaseTime
     {
         get
         {
-            _ReleaseTimeOffset = _ReleaseTimeOffset ?? Schema.GetOffset(0xB6C7429C86296445);
-            return ref _Handle.AsRef<float>(_ReleaseTimeOffset!.Value);
+            if (_ReleaseTimeOffset == -1) _ReleaseTimeOffset = Schema.GetOffset(0xB6C7429C86296445);
+            return ref _Handle.AsRef<float>(_ReleaseTimeOffset);
         }
     }
 

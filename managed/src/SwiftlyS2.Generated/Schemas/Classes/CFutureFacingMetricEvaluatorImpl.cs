@@ -16,24 +16,24 @@ internal partial class CFutureFacingMetricEvaluatorImpl : CMotionMetricEvaluator
 {
     public CFutureFacingMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-    private static nint? _DistanceOffset;
+    private static nint _DistanceOffset = -1;
 
     public ref float Distance
     {
         get
         {
-            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x6A3CD0D400DC4A68);
-            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0x6A3CD0D400DC4A68);
+            return ref _Handle.AsRef<float>(_DistanceOffset);
         }
     }
-    private static nint? _TimeOffset;
+    private static nint _TimeOffset = -1;
 
     public ref float Time
     {
         get
         {
-            _TimeOffset = _TimeOffset ?? Schema.GetOffset(0x6A3CD0D4C957229E);
-            return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+            if (_TimeOffset == -1) _TimeOffset = Schema.GetOffset(0x6A3CD0D4C957229E);
+            return ref _Handle.AsRef<float>(_TimeOffset);
         }
     }
 

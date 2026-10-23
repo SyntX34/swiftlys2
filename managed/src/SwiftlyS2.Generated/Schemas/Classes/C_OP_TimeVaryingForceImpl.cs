@@ -16,44 +16,44 @@ internal partial class C_OP_TimeVaryingForceImpl : CParticleFunctionForceImpl, C
 {
     public C_OP_TimeVaryingForceImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartLerpTimeOffset;
+    private static nint _StartLerpTimeOffset = -1;
 
     public ref float StartLerpTime
     {
         get
         {
-            _StartLerpTimeOffset = _StartLerpTimeOffset ?? Schema.GetOffset(0xAC89FC47C1D0DC21);
-            return ref _Handle.AsRef<float>(_StartLerpTimeOffset!.Value);
+            if (_StartLerpTimeOffset == -1) _StartLerpTimeOffset = Schema.GetOffset(0xAC89FC47C1D0DC21);
+            return ref _Handle.AsRef<float>(_StartLerpTimeOffset);
         }
     }
-    private static nint? _StartingForceOffset;
+    private static nint _StartingForceOffset = -1;
 
     public ref Vector StartingForce
     {
         get
         {
-            _StartingForceOffset = _StartingForceOffset ?? Schema.GetOffset(0xAC89FC478FA47818);
-            return ref _Handle.AsRef<Vector>(_StartingForceOffset!.Value);
+            if (_StartingForceOffset == -1) _StartingForceOffset = Schema.GetOffset(0xAC89FC478FA47818);
+            return ref _Handle.AsRef<Vector>(_StartingForceOffset);
         }
     }
-    private static nint? _EndLerpTimeOffset;
+    private static nint _EndLerpTimeOffset = -1;
 
     public ref float EndLerpTime
     {
         get
         {
-            _EndLerpTimeOffset = _EndLerpTimeOffset ?? Schema.GetOffset(0xAC89FC47AA182894);
-            return ref _Handle.AsRef<float>(_EndLerpTimeOffset!.Value);
+            if (_EndLerpTimeOffset == -1) _EndLerpTimeOffset = Schema.GetOffset(0xAC89FC47AA182894);
+            return ref _Handle.AsRef<float>(_EndLerpTimeOffset);
         }
     }
-    private static nint? _EndingForceOffset;
+    private static nint _EndingForceOffset = -1;
 
     public ref Vector EndingForce
     {
         get
         {
-            _EndingForceOffset = _EndingForceOffset ?? Schema.GetOffset(0xAC89FC47CEB5307D);
-            return ref _Handle.AsRef<Vector>(_EndingForceOffset!.Value);
+            if (_EndingForceOffset == -1) _EndingForceOffset = Schema.GetOffset(0xAC89FC47CEB5307D);
+            return ref _Handle.AsRef<Vector>(_EndingForceOffset);
         }
     }
 

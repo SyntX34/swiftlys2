@@ -16,26 +16,26 @@ internal partial class FollowAttachmentDataImpl : SchemaClass, FollowAttachmentD
 {
     public FollowAttachmentDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _BoneIndexOffset;
+    private static nint _BoneIndexOffset = -1;
 
     public ref int BoneIndex
     {
         get
         {
-            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0x7E37AD4D6AFA4155);
-            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+            if (_BoneIndexOffset == -1) _BoneIndexOffset = Schema.GetOffset(0x7E37AD4D6AFA4155);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset);
         }
     }
-    private static nint? _AttachmentHandleOffset;
+    private static nint _AttachmentHandleOffset = -1;
     private AttachmentHandle_tImpl? _AttachmentHandleInstance;
 
     public AttachmentHandle_t AttachmentHandle
     {
         get
         {
-            _AttachmentHandleOffset = _AttachmentHandleOffset ?? Schema.GetOffset(0x7E37AD4DA203035E);
+            if (_AttachmentHandleOffset == -1) _AttachmentHandleOffset = Schema.GetOffset(0x7E37AD4DA203035E);
             var instance = _AttachmentHandleInstance ??= new AttachmentHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttachmentHandleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AttachmentHandleOffset);
             return instance;
         }
     }

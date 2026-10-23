@@ -16,16 +16,16 @@ internal partial class CStanceScaleUpdateNodeImpl : CUnaryUpdateNodeImpl, CStanc
 {
     public CStanceScaleUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParamOffset;
+    private static nint _ParamOffset = -1;
     private CAnimParamHandleImpl? _ParamInstance;
 
     public CAnimParamHandle Param
     {
         get
         {
-            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0xA2CC6975679286A4);
+            if (_ParamOffset == -1) _ParamOffset = Schema.GetOffset(0xA2CC6975679286A4);
             var instance = _ParamInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamOffset);
             return instance;
         }
     }

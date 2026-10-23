@@ -16,46 +16,56 @@ internal partial class CMixTrackImpl : CMixPropertyBaseImpl, CMixTrack
 {
     public CMixTrackImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChannelsOffset;
+    private static nint _ChannelsOffset = -1;
 
     public ref int Channels
     {
         get
         {
-            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0x27C36335A815AD1);
-            return ref _Handle.AsRef<int>(_ChannelsOffset!.Value);
+            if (_ChannelsOffset == -1) _ChannelsOffset = Schema.GetOffset(0x27C36335A815AD1);
+            return ref _Handle.AsRef<int>(_ChannelsOffset);
         }
     }
-    private static nint? _MixDownOffset;
+    private static nint _MixDownOffset = -1;
 
     public ref VMixMixDownRule_t MixDown
     {
         get
         {
-            _MixDownOffset = _MixDownOffset ?? Schema.GetOffset(0x27C36336EB49BFD);
-            return ref _Handle.AsRef<VMixMixDownRule_t>(_MixDownOffset!.Value);
+            if (_MixDownOffset == -1) _MixDownOffset = Schema.GetOffset(0x27C36336EB49BFD);
+            return ref _Handle.AsRef<VMixMixDownRule_t>(_MixDownOffset);
         }
     }
-    private static nint? _SendOperatorOffset;
+    private static nint _UpMixRuleOffset = -1;
+
+    public ref VMixUpMixRule_t UpMixRule
+    {
+        get
+        {
+            if (_UpMixRuleOffset == -1) _UpMixRuleOffset = Schema.GetOffset(0x27C36339572461C);
+            return ref _Handle.AsRef<VMixUpMixRule_t>(_UpMixRuleOffset);
+        }
+    }
+    private static nint _SendOperatorOffset = -1;
 
     public ref VMixSendOperator_t SendOperator
     {
         get
         {
-            _SendOperatorOffset = _SendOperatorOffset ?? Schema.GetOffset(0x27C3633D94DFB03);
-            return ref _Handle.AsRef<VMixSendOperator_t>(_SendOperatorOffset!.Value);
+            if (_SendOperatorOffset == -1) _SendOperatorOffset = Schema.GetOffset(0x27C3633D94DFB03);
+            return ref _Handle.AsRef<VMixSendOperator_t>(_SendOperatorOffset);
         }
     }
-    private static nint? _SendNamesOffset;
+    private static nint _SendNamesOffset = -1;
     private SchemaUtlStringFixedArray? _SendNamesInstance;
 
     public ISchemaUtlStringFixedArray SendNames
     {
         get
         {
-            _SendNamesOffset = _SendNamesOffset ?? Schema.GetOffset(0x27C363388C8C8ED);
+            if (_SendNamesOffset == -1) _SendNamesOffset = Schema.GetOffset(0x27C363388C8C8ED);
             var instance = _SendNamesInstance ??= new SchemaUtlStringFixedArray(0, 0x27C363388C8C8ED, 4, 8, 8);
-            instance.DangerousSetHandle(_Handle + _SendNamesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SendNamesOffset);
             return instance;
         }
     }

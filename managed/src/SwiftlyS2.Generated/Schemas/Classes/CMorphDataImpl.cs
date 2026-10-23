@@ -16,29 +16,29 @@ internal partial class CMorphDataImpl : SchemaClass, CMorphData
 {
     public CMorphDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x603F8C4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x603F8C4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x603F8C4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x603F8C4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _MorphRectDatasOffset;
+    private static nint _MorphRectDatasOffset = -1;
 
     public ref CUtlVector<CMorphRectData> MorphRectDatas
     {
         get
         {
-            _MorphRectDatasOffset = _MorphRectDatasOffset ?? Schema.GetOffset(0x603F8CB92C9674);
-            return ref _Handle.AsRef<CUtlVector<CMorphRectData>>(_MorphRectDatasOffset!.Value);
+            if (_MorphRectDatasOffset == -1) _MorphRectDatasOffset = Schema.GetOffset(0x603F8CB92C9674);
+            return ref _Handle.AsRef<CUtlVector<CMorphRectData>>(_MorphRectDatasOffset);
         }
     }
 

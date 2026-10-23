@@ -16,27 +16,27 @@ internal partial class MotionBlendItemImpl : SchemaClass, MotionBlendItem
 {
     public MotionBlendItemImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChildOffset;
+    private static nint _ChildOffset = -1;
     private SchemaUntypedField? _ChildInstance;
 
     public SchemaUntypedField Child
     {
         get
         {
-            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0x6AF18B8D4A0B773F);
+            if (_ChildOffset == -1) _ChildOffset = Schema.GetOffset(0x6AF18B8D4A0B773F);
             var instance = _ChildInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ChildOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ChildOffset);
             return instance;
         }
     }
-    private static nint? _KeyValueOffset;
+    private static nint _KeyValueOffset = -1;
 
     public ref float KeyValue
     {
         get
         {
-            _KeyValueOffset = _KeyValueOffset ?? Schema.GetOffset(0x6AF18B8D039CE1D7);
-            return ref _Handle.AsRef<float>(_KeyValueOffset!.Value);
+            if (_KeyValueOffset == -1) _KeyValueOffset = Schema.GetOffset(0x6AF18B8D039CE1D7);
+            return ref _Handle.AsRef<float>(_KeyValueOffset);
         }
     }
 

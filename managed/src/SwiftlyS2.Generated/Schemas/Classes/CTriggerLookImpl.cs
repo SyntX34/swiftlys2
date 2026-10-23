@@ -16,157 +16,157 @@ internal partial class CTriggerLookImpl : CTriggerOnceImpl, CTriggerLook
 {
     public CTriggerLookImpl(nint handle) : base(handle) { }
 
-    private static nint? _LookTargetOffset;
+    private static nint _LookTargetOffset = -1;
 
     public ref CHandle<CBaseEntity> LookTarget
     {
         get
         {
-            _LookTargetOffset = _LookTargetOffset ?? Schema.GetOffset(0x400CA6913361F745);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LookTargetOffset!.Value);
+            if (_LookTargetOffset == -1) _LookTargetOffset = Schema.GetOffset(0x400CA6913361F745);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LookTargetOffset);
         }
     }
-    private static nint? _FieldOfViewOffset;
+    private static nint _FieldOfViewOffset = -1;
 
     public ref float FieldOfView
     {
         get
         {
-            _FieldOfViewOffset = _FieldOfViewOffset ?? Schema.GetOffset(0x400CA69157C8F26D);
-            return ref _Handle.AsRef<float>(_FieldOfViewOffset!.Value);
+            if (_FieldOfViewOffset == -1) _FieldOfViewOffset = Schema.GetOffset(0x400CA69157C8F26D);
+            return ref _Handle.AsRef<float>(_FieldOfViewOffset);
         }
     }
-    private static nint? _LookTimeOffset;
+    private static nint _LookTimeOffset = -1;
 
     public ref float LookTime
     {
         get
         {
-            _LookTimeOffset = _LookTimeOffset ?? Schema.GetOffset(0x400CA69104D9B055);
-            return ref _Handle.AsRef<float>(_LookTimeOffset!.Value);
+            if (_LookTimeOffset == -1) _LookTimeOffset = Schema.GetOffset(0x400CA69104D9B055);
+            return ref _Handle.AsRef<float>(_LookTimeOffset);
         }
     }
-    private static nint? _LookTimeTotalOffset;
+    private static nint _LookTimeTotalOffset = -1;
 
     public ref float LookTimeTotal
     {
         get
         {
-            _LookTimeTotalOffset = _LookTimeTotalOffset ?? Schema.GetOffset(0x400CA6910EF1464D);
-            return ref _Handle.AsRef<float>(_LookTimeTotalOffset!.Value);
+            if (_LookTimeTotalOffset == -1) _LookTimeTotalOffset = Schema.GetOffset(0x400CA6910EF1464D);
+            return ref _Handle.AsRef<float>(_LookTimeTotalOffset);
         }
     }
-    private static nint? _LookTimeLastOffset;
+    private static nint _LookTimeLastOffset = -1;
     private GameTime_tImpl? _LookTimeLastInstance;
 
     public GameTime_t LookTimeLast
     {
         get
         {
-            _LookTimeLastOffset = _LookTimeLastOffset ?? Schema.GetOffset(0x400CA691C3304509);
+            if (_LookTimeLastOffset == -1) _LookTimeLastOffset = Schema.GetOffset(0x400CA691C3304509);
             var instance = _LookTimeLastInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _LookTimeLastOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LookTimeLastOffset);
             return instance;
         }
     }
-    private static nint? _TimeoutDurationOffset;
+    private static nint _TimeoutDurationOffset = -1;
 
     public ref float TimeoutDuration
     {
         get
         {
-            _TimeoutDurationOffset = _TimeoutDurationOffset ?? Schema.GetOffset(0x400CA6919AF6CDFE);
-            return ref _Handle.AsRef<float>(_TimeoutDurationOffset!.Value);
+            if (_TimeoutDurationOffset == -1) _TimeoutDurationOffset = Schema.GetOffset(0x400CA6919AF6CDFE);
+            return ref _Handle.AsRef<float>(_TimeoutDurationOffset);
         }
     }
-    private static nint? _TimeoutFiredOffset;
+    private static nint _TimeoutFiredOffset = -1;
 
     public ref bool TimeoutFired
     {
         get
         {
-            _TimeoutFiredOffset = _TimeoutFiredOffset ?? Schema.GetOffset(0x400CA69169DF01E8);
-            return ref _Handle.AsRef<bool>(_TimeoutFiredOffset!.Value);
+            if (_TimeoutFiredOffset == -1) _TimeoutFiredOffset = Schema.GetOffset(0x400CA69169DF01E8);
+            return ref _Handle.AsRef<bool>(_TimeoutFiredOffset);
         }
     }
-    private static nint? _IsLookingOffset;
+    private static nint _IsLookingOffset = -1;
 
     public ref bool IsLooking
     {
         get
         {
-            _IsLookingOffset = _IsLookingOffset ?? Schema.GetOffset(0x400CA691983E8E2A);
-            return ref _Handle.AsRef<bool>(_IsLookingOffset!.Value);
+            if (_IsLookingOffset == -1) _IsLookingOffset = Schema.GetOffset(0x400CA691983E8E2A);
+            return ref _Handle.AsRef<bool>(_IsLookingOffset);
         }
     }
-    private static nint? _B2DFOVOffset;
+    private static nint _B2DFOVOffset = -1;
 
     public ref bool B2DFOV
     {
         get
         {
-            _B2DFOVOffset = _B2DFOVOffset ?? Schema.GetOffset(0x400CA6919C4430D2);
-            return ref _Handle.AsRef<bool>(_B2DFOVOffset!.Value);
+            if (_B2DFOVOffset == -1) _B2DFOVOffset = Schema.GetOffset(0x400CA6919C4430D2);
+            return ref _Handle.AsRef<bool>(_B2DFOVOffset);
         }
     }
-    private static nint? _UseVelocityOffset;
+    private static nint _UseVelocityOffset = -1;
 
     public ref bool UseVelocity
     {
         get
         {
-            _UseVelocityOffset = _UseVelocityOffset ?? Schema.GetOffset(0x400CA6915E806BAF);
-            return ref _Handle.AsRef<bool>(_UseVelocityOffset!.Value);
+            if (_UseVelocityOffset == -1) _UseVelocityOffset = Schema.GetOffset(0x400CA6915E806BAF);
+            return ref _Handle.AsRef<bool>(_UseVelocityOffset);
         }
     }
-    private static nint? _TestOcclusionOffset;
+    private static nint _TestOcclusionOffset = -1;
 
     public ref bool TestOcclusion
     {
         get
         {
-            _TestOcclusionOffset = _TestOcclusionOffset ?? Schema.GetOffset(0x400CA6912AB3E7C2);
-            return ref _Handle.AsRef<bool>(_TestOcclusionOffset!.Value);
+            if (_TestOcclusionOffset == -1) _TestOcclusionOffset = Schema.GetOffset(0x400CA6912AB3E7C2);
+            return ref _Handle.AsRef<bool>(_TestOcclusionOffset);
         }
     }
-    private static nint? _TestAllVisibleOcclusionOffset;
+    private static nint _TestAllVisibleOcclusionOffset = -1;
 
     public ref bool TestAllVisibleOcclusion
     {
         get
         {
-            _TestAllVisibleOcclusionOffset = _TestAllVisibleOcclusionOffset ?? Schema.GetOffset(0x400CA691FBAABAEB);
-            return ref _Handle.AsRef<bool>(_TestAllVisibleOcclusionOffset!.Value);
+            if (_TestAllVisibleOcclusionOffset == -1) _TestAllVisibleOcclusionOffset = Schema.GetOffset(0x400CA691FBAABAEB);
+            return ref _Handle.AsRef<bool>(_TestAllVisibleOcclusionOffset);
         }
     }
-    private static nint? _OnTimeoutOffset;
+    private static nint _OnTimeoutOffset = -1;
 
     public ref CEntityIOOutput OnTimeout
     {
         get
         {
-            _OnTimeoutOffset = _OnTimeoutOffset ?? Schema.GetOffset(0x400CA691C5301603);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimeoutOffset!.Value);
+            if (_OnTimeoutOffset == -1) _OnTimeoutOffset = Schema.GetOffset(0x400CA691C5301603);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimeoutOffset);
         }
     }
-    private static nint? _OnStartLookOffset;
+    private static nint _OnStartLookOffset = -1;
 
     public ref CEntityIOOutput OnStartLook
     {
         get
         {
-            _OnStartLookOffset = _OnStartLookOffset ?? Schema.GetOffset(0x400CA6914E36D787);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartLookOffset!.Value);
+            if (_OnStartLookOffset == -1) _OnStartLookOffset = Schema.GetOffset(0x400CA6914E36D787);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartLookOffset);
         }
     }
-    private static nint? _OnEndLookOffset;
+    private static nint _OnEndLookOffset = -1;
 
     public ref CEntityIOOutput OnEndLook
     {
         get
         {
-            _OnEndLookOffset = _OnEndLookOffset ?? Schema.GetOffset(0x400CA6914D4626E6);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndLookOffset!.Value);
+            if (_OnEndLookOffset == -1) _OnEndLookOffset = Schema.GetOffset(0x400CA6914D4626E6);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndLookOffset);
         }
     }
 

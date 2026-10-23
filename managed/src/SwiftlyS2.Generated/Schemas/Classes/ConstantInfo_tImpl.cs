@@ -16,39 +16,39 @@ internal partial class ConstantInfo_tImpl : SchemaClass, ConstantInfo_t
 {
     public ConstantInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF4BEF78E4D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xF4BEF78E4D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF4BEF78E4D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xF4BEF78E4D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _NameTokenOffset;
+    private static nint _NameTokenOffset = -1;
 
     public ref CUtlStringToken NameToken
     {
         get
         {
-            _NameTokenOffset = _NameTokenOffset ?? Schema.GetOffset(0xF4BEF78E9293FEF3);
-            return ref _Handle.AsRef<CUtlStringToken>(_NameTokenOffset!.Value);
+            if (_NameTokenOffset == -1) _NameTokenOffset = Schema.GetOffset(0xF4BEF78E9293FEF3);
+            return ref _Handle.AsRef<CUtlStringToken>(_NameTokenOffset);
         }
     }
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public ref float Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xF4BEF78E8DFCB984);
-            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0xF4BEF78E8DFCB984);
+            return ref _Handle.AsRef<float>(_ValueOffset);
         }
     }
 

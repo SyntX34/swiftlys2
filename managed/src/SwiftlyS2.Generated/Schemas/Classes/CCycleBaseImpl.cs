@@ -16,14 +16,14 @@ internal partial class CCycleBaseImpl : SchemaClass, CCycleBase
 {
     public CCycleBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _CycleOffset;
+    private static nint _CycleOffset = -1;
 
     public ref float Cycle
     {
         get
         {
-            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x8FBE16990C77829F);
-            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+            if (_CycleOffset == -1) _CycleOffset = Schema.GetOffset(0x8FBE16990C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset);
         }
     }
 

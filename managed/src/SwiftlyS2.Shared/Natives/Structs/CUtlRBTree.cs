@@ -76,10 +76,14 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
     public void SetParent( TKey i, TKey p ) => Parent(i) = p;
     public void SetLeftChild( TKey i, TKey l ) => LeftChild(i) = l;
     public void SetRightChild( TKey i, TKey r ) => RightChild(i) = r;
-    public bool IsRed( TKey i ) => Links(i).Tag == TKey.CreateChecked((int)NodeColor_t.RED);
-    public bool IsBlack( TKey i ) => Links(i).Tag == TKey.CreateChecked((int)NodeColor_t.BLACK);
-    public NodeColor_t Color( TKey i ) => (NodeColor_t)int.CreateChecked(Links(i).Tag);
-    public void SetColor( TKey i, NodeColor_t c ) => Links(i).Tag = TKey.CreateChecked((int)c);
+    public bool IsRed( TKey i ) => i != InvalidIndex() && Links(i).Tag == TKey.CreateChecked((int)NodeColor_t.RED);
+    public bool IsBlack( TKey i ) => i == InvalidIndex() || Links(i).Tag == TKey.CreateChecked((int)NodeColor_t.BLACK);
+    public NodeColor_t Color( TKey i ) => i == InvalidIndex() ? NodeColor_t.BLACK : (NodeColor_t)int.CreateChecked(Links(i).Tag);
+    public void SetColor( TKey i, NodeColor_t c )
+    {
+        if (i != InvalidIndex())
+            Links(i).Tag = TKey.CreateChecked((int)c);
+    }
 
     public TKey NewNode()
     {

@@ -16,59 +16,59 @@ internal partial class CMotionGraphGroupImpl : SchemaClass, CMotionGraphGroup
 {
     public CMotionGraphGroupImpl(nint handle) : base(handle) { }
 
-    private static nint? _SearchDBOffset;
+    private static nint _SearchDBOffset = -1;
     private CMotionSearchDBImpl? _SearchDBInstance;
 
     public CMotionSearchDB SearchDB
     {
         get
         {
-            _SearchDBOffset = _SearchDBOffset ?? Schema.GetOffset(0x34D64AAF5662226F);
+            if (_SearchDBOffset == -1) _SearchDBOffset = Schema.GetOffset(0x34D64AAF5662226F);
             var instance = _SearchDBInstance ??= new CMotionSearchDBImpl(0);
-            instance.DangerousSetHandle(_Handle + _SearchDBOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SearchDBOffset);
             return instance;
         }
     }
-    private static nint? _MotionGraphsOffset;
+    private static nint _MotionGraphsOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> MotionGraphs
     {
         get
         {
-            _MotionGraphsOffset = _MotionGraphsOffset ?? Schema.GetOffset(0x34D64AAFE9CB46D2);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotionGraphsOffset!.Value);
+            if (_MotionGraphsOffset == -1) _MotionGraphsOffset = Schema.GetOffset(0x34D64AAFE9CB46D2);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotionGraphsOffset);
         }
     }
-    private static nint? _MotionGraphConfigsOffset;
+    private static nint _MotionGraphConfigsOffset = -1;
 
     public ref CUtlVector<CMotionGraphConfig> MotionGraphConfigs
     {
         get
         {
-            _MotionGraphConfigsOffset = _MotionGraphConfigsOffset ?? Schema.GetOffset(0x34D64AAF8D9A544C);
-            return ref _Handle.AsRef<CUtlVector<CMotionGraphConfig>>(_MotionGraphConfigsOffset!.Value);
+            if (_MotionGraphConfigsOffset == -1) _MotionGraphConfigsOffset = Schema.GetOffset(0x34D64AAF8D9A544C);
+            return ref _Handle.AsRef<CUtlVector<CMotionGraphConfig>>(_MotionGraphConfigsOffset);
         }
     }
-    private static nint? _SampleToConfigOffset;
+    private static nint _SampleToConfigOffset = -1;
 
     public ref CUtlVector<int> SampleToConfig
     {
         get
         {
-            _SampleToConfigOffset = _SampleToConfigOffset ?? Schema.GetOffset(0x34D64AAF85EC9B7C);
-            return ref _Handle.AsRef<CUtlVector<int>>(_SampleToConfigOffset!.Value);
+            if (_SampleToConfigOffset == -1) _SampleToConfigOffset = Schema.GetOffset(0x34D64AAF85EC9B7C);
+            return ref _Handle.AsRef<CUtlVector<int>>(_SampleToConfigOffset);
         }
     }
-    private static nint? _IsActiveScriptOffset;
+    private static nint _IsActiveScriptOffset = -1;
     private AnimScriptHandleImpl? _IsActiveScriptInstance;
 
     public AnimScriptHandle IsActiveScript
     {
         get
         {
-            _IsActiveScriptOffset = _IsActiveScriptOffset ?? Schema.GetOffset(0x34D64AAFF2DBEC2A);
+            if (_IsActiveScriptOffset == -1) _IsActiveScriptOffset = Schema.GetOffset(0x34D64AAFF2DBEC2A);
             var instance = _IsActiveScriptInstance ??= new AnimScriptHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _IsActiveScriptOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IsActiveScriptOffset);
             return instance;
         }
     }

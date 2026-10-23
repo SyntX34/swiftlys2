@@ -16,42 +16,42 @@ internal partial class C_OP_ColorAdjustHSLImpl : CParticleFunctionOperatorImpl, 
 {
     public C_OP_ColorAdjustHSLImpl(nint handle) : base(handle) { }
 
-    private static nint? _HueAdjustOffset;
+    private static nint _HueAdjustOffset = -1;
     private CPerParticleFloatInputImpl? _HueAdjustInstance;
 
     public CPerParticleFloatInput HueAdjust
     {
         get
         {
-            _HueAdjustOffset = _HueAdjustOffset ?? Schema.GetOffset(0x34348E726B20DB80);
+            if (_HueAdjustOffset == -1) _HueAdjustOffset = Schema.GetOffset(0x34348E726B20DB80);
             var instance = _HueAdjustInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _HueAdjustOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HueAdjustOffset);
             return instance;
         }
     }
-    private static nint? _SaturationAdjustOffset;
+    private static nint _SaturationAdjustOffset = -1;
     private CPerParticleFloatInputImpl? _SaturationAdjustInstance;
 
     public CPerParticleFloatInput SaturationAdjust
     {
         get
         {
-            _SaturationAdjustOffset = _SaturationAdjustOffset ?? Schema.GetOffset(0x34348E72D0C582F4);
+            if (_SaturationAdjustOffset == -1) _SaturationAdjustOffset = Schema.GetOffset(0x34348E72D0C582F4);
             var instance = _SaturationAdjustInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SaturationAdjustOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SaturationAdjustOffset);
             return instance;
         }
     }
-    private static nint? _LightnessAdjustOffset;
+    private static nint _LightnessAdjustOffset = -1;
     private CPerParticleFloatInputImpl? _LightnessAdjustInstance;
 
     public CPerParticleFloatInput LightnessAdjust
     {
         get
         {
-            _LightnessAdjustOffset = _LightnessAdjustOffset ?? Schema.GetOffset(0x34348E72DC0100D5);
+            if (_LightnessAdjustOffset == -1) _LightnessAdjustOffset = Schema.GetOffset(0x34348E72DC0100D5);
             var instance = _LightnessAdjustInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LightnessAdjustOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LightnessAdjustOffset);
             return instance;
         }
     }

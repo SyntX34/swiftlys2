@@ -16,166 +16,166 @@ internal partial class CPulseGraphDefImpl : SchemaClass, CPulseGraphDef
 {
     public CPulseGraphDefImpl(nint handle) : base(handle) { }
 
-    private static nint? _DomainIdentifierOffset;
+    private static nint _DomainIdentifierOffset = -1;
     private SchemaUntypedField? _DomainIdentifierInstance;
 
     public SchemaUntypedField DomainIdentifier
     {
         get
         {
-            _DomainIdentifierOffset = _DomainIdentifierOffset ?? Schema.GetOffset(0x2A792CD89A57EDFA);
+            if (_DomainIdentifierOffset == -1) _DomainIdentifierOffset = Schema.GetOffset(0x2A792CD89A57EDFA);
             var instance = _DomainIdentifierInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DomainIdentifierOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DomainIdentifierOffset);
             return instance;
         }
     }
-    private static nint? _DomainSubTypeOffset;
+    private static nint _DomainSubTypeOffset = -1;
     private SchemaUntypedField? _DomainSubTypeInstance;
 
     public SchemaUntypedField DomainSubType
     {
         get
         {
-            _DomainSubTypeOffset = _DomainSubTypeOffset ?? Schema.GetOffset(0x2A792CD83A580FB9);
+            if (_DomainSubTypeOffset == -1) _DomainSubTypeOffset = Schema.GetOffset(0x2A792CD83A580FB9);
             var instance = _DomainSubTypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DomainSubTypeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DomainSubTypeOffset);
             return instance;
         }
     }
-    private static nint? _ParentMapNameOffset;
+    private static nint _ParentMapNameOffset = -1;
     private SchemaUntypedField? _ParentMapNameInstance;
 
     public SchemaUntypedField ParentMapName
     {
         get
         {
-            _ParentMapNameOffset = _ParentMapNameOffset ?? Schema.GetOffset(0x2A792CD8A9A81AA2);
+            if (_ParentMapNameOffset == -1) _ParentMapNameOffset = Schema.GetOffset(0x2A792CD8A9A81AA2);
             var instance = _ParentMapNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ParentMapNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParentMapNameOffset);
             return instance;
         }
     }
-    private static nint? _ParentXmlNameOffset;
+    private static nint _ParentXmlNameOffset = -1;
     private SchemaUntypedField? _ParentXmlNameInstance;
 
     public SchemaUntypedField ParentXmlName
     {
         get
         {
-            _ParentXmlNameOffset = _ParentXmlNameOffset ?? Schema.GetOffset(0x2A792CD80689878D);
+            if (_ParentXmlNameOffset == -1) _ParentXmlNameOffset = Schema.GetOffset(0x2A792CD80689878D);
             var instance = _ParentXmlNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ParentXmlNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParentXmlNameOffset);
             return instance;
         }
     }
-    private static nint? _ChunksOffset;
+    private static nint _ChunksOffset = -1;
 
     public ref CUtlVector<PointerTo<CPulse_Chunk>> Chunks
     {
         get
         {
-            _ChunksOffset = _ChunksOffset ?? Schema.GetOffset(0x2A792CD8CCAED623);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_Chunk>>>(_ChunksOffset!.Value);
+            if (_ChunksOffset == -1) _ChunksOffset = Schema.GetOffset(0x2A792CD8CCAED623);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_Chunk>>>(_ChunksOffset);
         }
     }
-    private static nint? _CellsOffset;
+    private static nint _CellsOffset = -1;
 
     public ref CUtlVector<PointerTo<CPulseCell_Base>> Cells
     {
         get
         {
-            _CellsOffset = _CellsOffset ?? Schema.GetOffset(0x2A792CD8739C8132);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulseCell_Base>>>(_CellsOffset!.Value);
+            if (_CellsOffset == -1) _CellsOffset = Schema.GetOffset(0x2A792CD8739C8132);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulseCell_Base>>>(_CellsOffset);
         }
     }
-    private static nint? _VarsOffset;
+    private static nint _VarsOffset = -1;
 
     public ref CUtlVector<CPulse_Variable> Vars
     {
         get
         {
-            _VarsOffset = _VarsOffset ?? Schema.GetOffset(0x2A792CD8845ACC37);
-            return ref _Handle.AsRef<CUtlVector<CPulse_Variable>>(_VarsOffset!.Value);
+            if (_VarsOffset == -1) _VarsOffset = Schema.GetOffset(0x2A792CD8845ACC37);
+            return ref _Handle.AsRef<CUtlVector<CPulse_Variable>>(_VarsOffset);
         }
     }
-    private static nint? _TempVarBanksOffset;
+    private static nint _TempVarBanksOffset = -1;
 
     public ref CUtlVector<PointerTo<CPulse_TempVarBankDefinition>> TempVarBanks
     {
         get
         {
-            _TempVarBanksOffset = _TempVarBanksOffset ?? Schema.GetOffset(0x2A792CD8D2759DC3);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_TempVarBankDefinition>>>(_TempVarBanksOffset!.Value);
+            if (_TempVarBanksOffset == -1) _TempVarBanksOffset = Schema.GetOffset(0x2A792CD8D2759DC3);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_TempVarBankDefinition>>>(_TempVarBanksOffset);
         }
     }
-    private static nint? _PublicOutputsOffset;
+    private static nint _PublicOutputsOffset = -1;
 
     public ref CUtlVector<CPulse_PublicOutput> PublicOutputs
     {
         get
         {
-            _PublicOutputsOffset = _PublicOutputsOffset ?? Schema.GetOffset(0x2A792CD8F0A9E7DA);
-            return ref _Handle.AsRef<CUtlVector<CPulse_PublicOutput>>(_PublicOutputsOffset!.Value);
+            if (_PublicOutputsOffset == -1) _PublicOutputsOffset = Schema.GetOffset(0x2A792CD8F0A9E7DA);
+            return ref _Handle.AsRef<CUtlVector<CPulse_PublicOutput>>(_PublicOutputsOffset);
         }
     }
-    private static nint? _InvokeBindingsOffset;
+    private static nint _InvokeBindingsOffset = -1;
 
     public ref CUtlVector<PointerTo<CPulse_InvokeBinding>> InvokeBindings
     {
         get
         {
-            _InvokeBindingsOffset = _InvokeBindingsOffset ?? Schema.GetOffset(0x2A792CD8828E222B);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_InvokeBinding>>>(_InvokeBindingsOffset!.Value);
+            if (_InvokeBindingsOffset == -1) _InvokeBindingsOffset = Schema.GetOffset(0x2A792CD8828E222B);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_InvokeBinding>>>(_InvokeBindingsOffset);
         }
     }
-    private static nint? _CallInfosOffset;
+    private static nint _CallInfosOffset = -1;
 
     public ref CUtlVector<PointerTo<CPulse_CallInfo>> CallInfos
     {
         get
         {
-            _CallInfosOffset = _CallInfosOffset ?? Schema.GetOffset(0x2A792CD8EBB65CE6);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_CallInfo>>>(_CallInfosOffset!.Value);
+            if (_CallInfosOffset == -1) _CallInfosOffset = Schema.GetOffset(0x2A792CD8EBB65CE6);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_CallInfo>>>(_CallInfosOffset);
         }
     }
-    private static nint? _ConstantsOffset;
+    private static nint _ConstantsOffset = -1;
 
     public ref CUtlVector<CPulse_Constant> Constants
     {
         get
         {
-            _ConstantsOffset = _ConstantsOffset ?? Schema.GetOffset(0x2A792CD83ACB72E2);
-            return ref _Handle.AsRef<CUtlVector<CPulse_Constant>>(_ConstantsOffset!.Value);
+            if (_ConstantsOffset == -1) _ConstantsOffset = Schema.GetOffset(0x2A792CD83ACB72E2);
+            return ref _Handle.AsRef<CUtlVector<CPulse_Constant>>(_ConstantsOffset);
         }
     }
-    private static nint? _DomainValuesOffset;
+    private static nint _DomainValuesOffset = -1;
 
     public ref CUtlVector<CPulse_DomainValue> DomainValues
     {
         get
         {
-            _DomainValuesOffset = _DomainValuesOffset ?? Schema.GetOffset(0x2A792CD8AA783E57);
-            return ref _Handle.AsRef<CUtlVector<CPulse_DomainValue>>(_DomainValuesOffset!.Value);
+            if (_DomainValuesOffset == -1) _DomainValuesOffset = Schema.GetOffset(0x2A792CD8AA783E57);
+            return ref _Handle.AsRef<CUtlVector<CPulse_DomainValue>>(_DomainValuesOffset);
         }
     }
-    private static nint? _BlackboardReferencesOffset;
+    private static nint _BlackboardReferencesOffset = -1;
 
     public ref CUtlVector<CPulse_BlackboardReference> BlackboardReferences
     {
         get
         {
-            _BlackboardReferencesOffset = _BlackboardReferencesOffset ?? Schema.GetOffset(0x2A792CD8AC9DF456);
-            return ref _Handle.AsRef<CUtlVector<CPulse_BlackboardReference>>(_BlackboardReferencesOffset!.Value);
+            if (_BlackboardReferencesOffset == -1) _BlackboardReferencesOffset = Schema.GetOffset(0x2A792CD8AC9DF456);
+            return ref _Handle.AsRef<CUtlVector<CPulse_BlackboardReference>>(_BlackboardReferencesOffset);
         }
     }
-    private static nint? _OutputConnectionsOffset;
+    private static nint _OutputConnectionsOffset = -1;
 
     public ref CUtlVector<PointerTo<CPulse_OutputConnection>> OutputConnections
     {
         get
         {
-            _OutputConnectionsOffset = _OutputConnectionsOffset ?? Schema.GetOffset(0x2A792CD843CD6C85);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_OutputConnection>>>(_OutputConnectionsOffset!.Value);
+            if (_OutputConnectionsOffset == -1) _OutputConnectionsOffset = Schema.GetOffset(0x2A792CD843CD6C85);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CPulse_OutputConnection>>>(_OutputConnectionsOffset);
         }
     }
 

@@ -16,102 +16,102 @@ internal partial class C_OP_WaterImpulseRendererImpl : CParticleFunctionRenderer
 {
     public C_OP_WaterImpulseRendererImpl(nint handle) : base(handle) { }
 
-    private static nint? _PosOffset;
+    private static nint _PosOffset = -1;
     private CPerParticleVecInputImpl? _PosInstance;
 
     public CPerParticleVecInput Pos
     {
         get
         {
-            _PosOffset = _PosOffset ?? Schema.GetOffset(0x7CC87C0C3B18EB69);
+            if (_PosOffset == -1) _PosOffset = Schema.GetOffset(0x7CC87C0C3B18EB69);
             var instance = _PosInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _PosOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PosOffset);
             return instance;
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
     private CPerParticleFloatInputImpl? _RadiusInstance;
 
     public CPerParticleFloatInput Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x7CC87C0C5ACFC08D);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x7CC87C0C5ACFC08D);
             var instance = _RadiusInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RadiusOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RadiusOffset);
             return instance;
         }
     }
-    private static nint? _MagnitudeOffset;
+    private static nint _MagnitudeOffset = -1;
     private CPerParticleFloatInputImpl? _MagnitudeInstance;
 
     public CPerParticleFloatInput Magnitude
     {
         get
         {
-            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x7CC87C0CED0A1D8B);
+            if (_MagnitudeOffset == -1) _MagnitudeOffset = Schema.GetOffset(0x7CC87C0CED0A1D8B);
             var instance = _MagnitudeInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MagnitudeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MagnitudeOffset);
             return instance;
         }
     }
-    private static nint? _ShapeOffset;
+    private static nint _ShapeOffset = -1;
     private CPerParticleFloatInputImpl? _ShapeInstance;
 
     public CPerParticleFloatInput Shape
     {
         get
         {
-            _ShapeOffset = _ShapeOffset ?? Schema.GetOffset(0x7CC87C0C5DCE07D8);
+            if (_ShapeOffset == -1) _ShapeOffset = Schema.GetOffset(0x7CC87C0C5DCE07D8);
             var instance = _ShapeInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ShapeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ShapeOffset);
             return instance;
         }
     }
-    private static nint? _WindSpeedOffset;
+    private static nint _WindSpeedOffset = -1;
     private CPerParticleFloatInputImpl? _WindSpeedInstance;
 
     public CPerParticleFloatInput WindSpeed
     {
         get
         {
-            _WindSpeedOffset = _WindSpeedOffset ?? Schema.GetOffset(0x7CC87C0CADDA5C24);
+            if (_WindSpeedOffset == -1) _WindSpeedOffset = Schema.GetOffset(0x7CC87C0CADDA5C24);
             var instance = _WindSpeedInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _WindSpeedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WindSpeedOffset);
             return instance;
         }
     }
-    private static nint? _WobbleOffset;
+    private static nint _WobbleOffset = -1;
     private CPerParticleFloatInputImpl? _WobbleInstance;
 
     public CPerParticleFloatInput Wobble
     {
         get
         {
-            _WobbleOffset = _WobbleOffset ?? Schema.GetOffset(0x7CC87C0CF8575B0A);
+            if (_WobbleOffset == -1) _WobbleOffset = Schema.GetOffset(0x7CC87C0CF8575B0A);
             var instance = _WobbleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _WobbleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WobbleOffset);
             return instance;
         }
     }
-    private static nint? _IsRadialWindOffset;
+    private static nint _IsRadialWindOffset = -1;
 
     public ref bool IsRadialWind
     {
         get
         {
-            _IsRadialWindOffset = _IsRadialWindOffset ?? Schema.GetOffset(0x7CC87C0C64147034);
-            return ref _Handle.AsRef<bool>(_IsRadialWindOffset!.Value);
+            if (_IsRadialWindOffset == -1) _IsRadialWindOffset = Schema.GetOffset(0x7CC87C0C64147034);
+            return ref _Handle.AsRef<bool>(_IsRadialWindOffset);
         }
     }
-    private static nint? _EventTypeOffset;
+    private static nint _EventTypeOffset = -1;
 
     public ref EventTypeSelection_t EventType
     {
         get
         {
-            _EventTypeOffset = _EventTypeOffset ?? Schema.GetOffset(0x7CC87C0CE1F9AA93);
-            return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+            if (_EventTypeOffset == -1) _EventTypeOffset = Schema.GetOffset(0x7CC87C0CE1F9AA93);
+            return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset);
         }
     }
 

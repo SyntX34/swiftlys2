@@ -16,93 +16,93 @@ internal partial class CompositeMaterialEditorPoint_tImpl : SchemaClass, Composi
 {
     public CompositeMaterialEditorPoint_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ModelNameOffset;
+    private static nint _ModelNameOffset = -1;
     private SchemaUntypedField? _ModelNameInstance;
 
     public SchemaUntypedField ModelName
     {
         get
         {
-            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xE9A3EC5DD7A1D881);
+            if (_ModelNameOffset == -1) _ModelNameOffset = Schema.GetOffset(0xE9A3EC5DD7A1D881);
             var instance = _ModelNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ModelNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ModelNameOffset);
             return instance;
         }
     }
-    private static nint? _SequenceIndexOffset;
+    private static nint _SequenceIndexOffset = -1;
 
     public ref int SequenceIndex
     {
         get
         {
-            _SequenceIndexOffset = _SequenceIndexOffset ?? Schema.GetOffset(0xE9A3EC5DF87A9C78);
-            return ref _Handle.AsRef<int>(_SequenceIndexOffset!.Value);
+            if (_SequenceIndexOffset == -1) _SequenceIndexOffset = Schema.GetOffset(0xE9A3EC5DF87A9C78);
+            return ref _Handle.AsRef<int>(_SequenceIndexOffset);
         }
     }
-    private static nint? _CycleOffset;
+    private static nint _CycleOffset = -1;
 
     public ref float Cycle
     {
         get
         {
-            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0xE9A3EC5D0C77829F);
-            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+            if (_CycleOffset == -1) _CycleOffset = Schema.GetOffset(0xE9A3EC5D0C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset);
         }
     }
-    private static nint? _KVModelStateChoicesOffset;
+    private static nint _KVModelStateChoicesOffset = -1;
     private SchemaUntypedField? _KVModelStateChoicesInstance;
 
     public SchemaUntypedField KVModelStateChoices
     {
         get
         {
-            _KVModelStateChoicesOffset = _KVModelStateChoicesOffset ?? Schema.GetOffset(0xE9A3EC5DBE6D8ED6);
+            if (_KVModelStateChoicesOffset == -1) _KVModelStateChoicesOffset = Schema.GetOffset(0xE9A3EC5DBE6D8ED6);
             var instance = _KVModelStateChoicesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _KVModelStateChoicesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _KVModelStateChoicesOffset);
             return instance;
         }
     }
-    private static nint? _EnableChildModelOffset;
+    private static nint _EnableChildModelOffset = -1;
 
     public ref bool EnableChildModel
     {
         get
         {
-            _EnableChildModelOffset = _EnableChildModelOffset ?? Schema.GetOffset(0xE9A3EC5D14C4CFD9);
-            return ref _Handle.AsRef<bool>(_EnableChildModelOffset!.Value);
+            if (_EnableChildModelOffset == -1) _EnableChildModelOffset = Schema.GetOffset(0xE9A3EC5D14C4CFD9);
+            return ref _Handle.AsRef<bool>(_EnableChildModelOffset);
         }
     }
-    private static nint? _ChildModelNameOffset;
+    private static nint _ChildModelNameOffset = -1;
     private SchemaUntypedField? _ChildModelNameInstance;
 
     public SchemaUntypedField ChildModelName
     {
         get
         {
-            _ChildModelNameOffset = _ChildModelNameOffset ?? Schema.GetOffset(0xE9A3EC5D268E1C19);
+            if (_ChildModelNameOffset == -1) _ChildModelNameOffset = Schema.GetOffset(0xE9A3EC5D268E1C19);
             var instance = _ChildModelNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ChildModelNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ChildModelNameOffset);
             return instance;
         }
     }
-    private static nint? _CompositeMaterialAssemblyProceduresOffset;
+    private static nint _CompositeMaterialAssemblyProceduresOffset = -1;
 
     public ref CUtlVector<CompositeMaterialAssemblyProcedure_t> CompositeMaterialAssemblyProcedures
     {
         get
         {
-            _CompositeMaterialAssemblyProceduresOffset = _CompositeMaterialAssemblyProceduresOffset ?? Schema.GetOffset(0xE9A3EC5D00101B5F);
-            return ref _Handle.AsRef<CUtlVector<CompositeMaterialAssemblyProcedure_t>>(_CompositeMaterialAssemblyProceduresOffset!.Value);
+            if (_CompositeMaterialAssemblyProceduresOffset == -1) _CompositeMaterialAssemblyProceduresOffset = Schema.GetOffset(0xE9A3EC5D00101B5F);
+            return ref _Handle.AsRef<CUtlVector<CompositeMaterialAssemblyProcedure_t>>(_CompositeMaterialAssemblyProceduresOffset);
         }
     }
-    private static nint? _CompositeMaterialsOffset;
+    private static nint _CompositeMaterialsOffset = -1;
 
     public ref CUtlVector<CompositeMaterial_t> CompositeMaterials
     {
         get
         {
-            _CompositeMaterialsOffset = _CompositeMaterialsOffset ?? Schema.GetOffset(0xE9A3EC5D9B099A8A);
-            return ref _Handle.AsRef<CUtlVector<CompositeMaterial_t>>(_CompositeMaterialsOffset!.Value);
+            if (_CompositeMaterialsOffset == -1) _CompositeMaterialsOffset = Schema.GetOffset(0xE9A3EC5D9B099A8A);
+            return ref _Handle.AsRef<CUtlVector<CompositeMaterial_t>>(_CompositeMaterialsOffset);
         }
     }
 

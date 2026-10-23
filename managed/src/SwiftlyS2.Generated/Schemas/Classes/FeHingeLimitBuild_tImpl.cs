@@ -16,47 +16,47 @@ internal partial class FeHingeLimitBuild_tImpl : SchemaClass, FeHingeLimitBuild_
 {
     public FeHingeLimitBuild_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x50E120ADCD6694B9);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x50E120ADCD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x50E120ADCD6694B9, 6, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeOffset);
             return instance;
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref uint Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x50E120ADB8D52E48);
-            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x50E120ADB8D52E48);
+            return ref _Handle.AsRef<uint>(_FlagsOffset);
         }
     }
-    private static nint? _LimitCWOffset;
+    private static nint _LimitCWOffset = -1;
 
     public ref float LimitCW
     {
         get
         {
-            _LimitCWOffset = _LimitCWOffset ?? Schema.GetOffset(0x50E120ADC3D20C44);
-            return ref _Handle.AsRef<float>(_LimitCWOffset!.Value);
+            if (_LimitCWOffset == -1) _LimitCWOffset = Schema.GetOffset(0x50E120ADC3D20C44);
+            return ref _Handle.AsRef<float>(_LimitCWOffset);
         }
     }
-    private static nint? _LimitCCWOffset;
+    private static nint _LimitCCWOffset = -1;
 
     public ref float LimitCCW
     {
         get
         {
-            _LimitCCWOffset = _LimitCCWOffset ?? Schema.GetOffset(0x50E120ADA6C794ED);
-            return ref _Handle.AsRef<float>(_LimitCCWOffset!.Value);
+            if (_LimitCCWOffset == -1) _LimitCCWOffset = Schema.GetOffset(0x50E120ADA6C794ED);
+            return ref _Handle.AsRef<float>(_LimitCCWOffset);
         }
     }
 

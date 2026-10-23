@@ -16,24 +16,24 @@ internal partial class CAnimGraphDoc_FutureFacingMetricImpl : CAnimGraphDoc_Moti
 {
     public CAnimGraphDoc_FutureFacingMetricImpl(nint handle) : base(handle) { }
 
-    private static nint? _DistanceOffset;
+    private static nint _DistanceOffset = -1;
 
     public ref float Distance
     {
         get
         {
-            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x7E1E800700DC4A68);
-            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+            if (_DistanceOffset == -1) _DistanceOffset = Schema.GetOffset(0x7E1E800700DC4A68);
+            return ref _Handle.AsRef<float>(_DistanceOffset);
         }
     }
-    private static nint? _TimeOffset;
+    private static nint _TimeOffset = -1;
 
     public ref float Time
     {
         get
         {
-            _TimeOffset = _TimeOffset ?? Schema.GetOffset(0x7E1E8007C957229E);
-            return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+            if (_TimeOffset == -1) _TimeOffset = Schema.GetOffset(0x7E1E8007C957229E);
+            return ref _Handle.AsRef<float>(_TimeOffset);
         }
     }
 

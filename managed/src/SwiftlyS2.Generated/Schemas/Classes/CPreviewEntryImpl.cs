@@ -16,44 +16,44 @@ internal partial class CPreviewEntryImpl : SchemaClass, CPreviewEntry
 {
     public CPreviewEntryImpl(nint handle) : base(handle) { }
 
-    private static nint? _SoundNameOffset;
+    private static nint _SoundNameOffset = -1;
 
     public string SoundName
     {
         get
         {
-            _SoundNameOffset = _SoundNameOffset ?? Schema.GetOffset(0x55F6D97653204B8F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SoundNameOffset!.Value));
+            if (_SoundNameOffset == -1) _SoundNameOffset = Schema.GetOffset(0x55F6D97653204B8F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SoundNameOffset));
         }
         set
         {
-            _SoundNameOffset = _SoundNameOffset ?? Schema.GetOffset(0x55F6D97653204B8F);
-            Schema.SetCUtlString(_Handle, _SoundNameOffset!.Value, value);
+            if (_SoundNameOffset == -1) _SoundNameOffset = Schema.GetOffset(0x55F6D97653204B8F);
+            Schema.SetCUtlString(_Handle, _SoundNameOffset, value);
         }
     }
-    private static nint? _TrackNameOffset;
+    private static nint _TrackNameOffset = -1;
 
     public string TrackName
     {
         get
         {
-            _TrackNameOffset = _TrackNameOffset ?? Schema.GetOffset(0x55F6D9766B424377);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TrackNameOffset!.Value));
+            if (_TrackNameOffset == -1) _TrackNameOffset = Schema.GetOffset(0x55F6D9766B424377);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TrackNameOffset));
         }
         set
         {
-            _TrackNameOffset = _TrackNameOffset ?? Schema.GetOffset(0x55F6D9766B424377);
-            Schema.SetCUtlString(_Handle, _TrackNameOffset!.Value, value);
+            if (_TrackNameOffset == -1) _TrackNameOffset = Schema.GetOffset(0x55F6D9766B424377);
+            Schema.SetCUtlString(_Handle, _TrackNameOffset, value);
         }
     }
-    private static nint? _IsSoundEventOffset;
+    private static nint _IsSoundEventOffset = -1;
 
     public ref bool IsSoundEvent
     {
         get
         {
-            _IsSoundEventOffset = _IsSoundEventOffset ?? Schema.GetOffset(0x55F6D976490F281C);
-            return ref _Handle.AsRef<bool>(_IsSoundEventOffset!.Value);
+            if (_IsSoundEventOffset == -1) _IsSoundEventOffset = Schema.GetOffset(0x55F6D976490F281C);
+            return ref _Handle.AsRef<bool>(_IsSoundEventOffset);
         }
     }
 

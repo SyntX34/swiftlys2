@@ -16,87 +16,87 @@ internal partial class CMarkupSearchHelperImpl : SchemaClass, CMarkupSearchHelpe
 {
     public CMarkupSearchHelperImpl(nint handle) : base(handle) { }
 
-    private static nint? _NavHullOffset;
+    private static nint _NavHullOffset = -1;
     private NavHull_tImpl? _NavHullInstance;
 
     public NavHull_t NavHull
     {
         get
         {
-            _NavHullOffset = _NavHullOffset ?? Schema.GetOffset(0x5F5CEF8ACDC085E1);
+            if (_NavHullOffset == -1) _NavHullOffset = Schema.GetOffset(0x5F5CEF8ACDC085E1);
             var instance = _NavHullInstance ??= new NavHull_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NavHullOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NavHullOffset);
             return instance;
         }
     }
-    private static nint? _TagStringOffset;
+    private static nint _TagStringOffset = -1;
 
     public string TagString
     {
         get
         {
-            _TagStringOffset = _TagStringOffset ?? Schema.GetOffset(0x5F5CEF8AB8F7ACB6);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TagStringOffset!.Value));
+            if (_TagStringOffset == -1) _TagStringOffset = Schema.GetOffset(0x5F5CEF8AB8F7ACB6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TagStringOffset));
         }
         set
         {
-            _TagStringOffset = _TagStringOffset ?? Schema.GetOffset(0x5F5CEF8AB8F7ACB6);
-            Schema.SetCUtlString(_Handle, _TagStringOffset!.Value, value);
+            if (_TagStringOffset == -1) _TagStringOffset = Schema.GetOffset(0x5F5CEF8AB8F7ACB6);
+            Schema.SetCUtlString(_Handle, _TagStringOffset, value);
         }
     }
-    private static nint? _NameStringOffset;
+    private static nint _NameStringOffset = -1;
 
     public string NameString
     {
         get
         {
-            _NameStringOffset = _NameStringOffset ?? Schema.GetOffset(0x5F5CEF8A4CC86537);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameStringOffset!.Value));
+            if (_NameStringOffset == -1) _NameStringOffset = Schema.GetOffset(0x5F5CEF8A4CC86537);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameStringOffset));
         }
         set
         {
-            _NameStringOffset = _NameStringOffset ?? Schema.GetOffset(0x5F5CEF8A4CC86537);
-            Schema.SetCUtlString(_Handle, _NameStringOffset!.Value, value);
+            if (_NameStringOffset == -1) _NameStringOffset = Schema.GetOffset(0x5F5CEF8A4CC86537);
+            Schema.SetCUtlString(_Handle, _NameStringOffset, value);
         }
     }
-    private static nint? _RefPosOffset;
+    private static nint _RefPosOffset = -1;
 
     public ref Vector RefPos
     {
         get
         {
-            _RefPosOffset = _RefPosOffset ?? Schema.GetOffset(0x5F5CEF8A664EC524);
-            return ref _Handle.AsRef<Vector>(_RefPosOffset!.Value);
+            if (_RefPosOffset == -1) _RefPosOffset = Schema.GetOffset(0x5F5CEF8A664EC524);
+            return ref _Handle.AsRef<Vector>(_RefPosOffset);
         }
     }
-    private static nint? _RefPosSetOffset;
+    private static nint _RefPosSetOffset = -1;
 
     public ref bool RefPosSet
     {
         get
         {
-            _RefPosSetOffset = _RefPosSetOffset ?? Schema.GetOffset(0x5F5CEF8ABD2C2518);
-            return ref _Handle.AsRef<bool>(_RefPosSetOffset!.Value);
+            if (_RefPosSetOffset == -1) _RefPosSetOffset = Schema.GetOffset(0x5F5CEF8ABD2C2518);
+            return ref _Handle.AsRef<bool>(_RefPosSetOffset);
         }
     }
-    private static nint? _UseStepHeightOffset;
+    private static nint _UseStepHeightOffset = -1;
 
     public ref bool UseStepHeight
     {
         get
         {
-            _UseStepHeightOffset = _UseStepHeightOffset ?? Schema.GetOffset(0x5F5CEF8AAA398A8D);
-            return ref _Handle.AsRef<bool>(_UseStepHeightOffset!.Value);
+            if (_UseStepHeightOffset == -1) _UseStepHeightOffset = Schema.GetOffset(0x5F5CEF8AAA398A8D);
+            return ref _Handle.AsRef<bool>(_UseStepHeightOffset);
         }
     }
-    private static nint? _ActiveOffset;
+    private static nint _ActiveOffset = -1;
 
     public ref bool Active
     {
         get
         {
-            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0x5F5CEF8A8334208F);
-            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+            if (_ActiveOffset == -1) _ActiveOffset = Schema.GetOffset(0x5F5CEF8A8334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset);
         }
     }
 

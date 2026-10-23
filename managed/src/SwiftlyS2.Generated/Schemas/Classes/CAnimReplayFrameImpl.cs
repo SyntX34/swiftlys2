@@ -16,54 +16,54 @@ internal partial class CAnimReplayFrameImpl : SchemaClass, CAnimReplayFrame
 {
     public CAnimReplayFrameImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputDataBlocksOffset;
+    private static nint _InputDataBlocksOffset = -1;
 
     public ref CUtlVector<CUtlBinaryBlock> InputDataBlocks
     {
         get
         {
-            _InputDataBlocksOffset = _InputDataBlocksOffset ?? Schema.GetOffset(0xBED2F401F7E8195D);
-            return ref _Handle.AsRef<CUtlVector<CUtlBinaryBlock>>(_InputDataBlocksOffset!.Value);
+            if (_InputDataBlocksOffset == -1) _InputDataBlocksOffset = Schema.GetOffset(0xBED2F401F7E8195D);
+            return ref _Handle.AsRef<CUtlVector<CUtlBinaryBlock>>(_InputDataBlocksOffset);
         }
     }
-    private static nint? _InstanceDataOffset;
+    private static nint _InstanceDataOffset = -1;
 
     public ref CUtlBinaryBlock InstanceData
     {
         get
         {
-            _InstanceDataOffset = _InstanceDataOffset ?? Schema.GetOffset(0xBED2F401AE26D9C2);
-            return ref _Handle.AsRef<CUtlBinaryBlock>(_InstanceDataOffset!.Value);
+            if (_InstanceDataOffset == -1) _InstanceDataOffset = Schema.GetOffset(0xBED2F401AE26D9C2);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_InstanceDataOffset);
         }
     }
-    private static nint? _StartingLocalToWorldTransformOffset;
+    private static nint _StartingLocalToWorldTransformOffset = -1;
 
     public ref CTransform StartingLocalToWorldTransform
     {
         get
         {
-            _StartingLocalToWorldTransformOffset = _StartingLocalToWorldTransformOffset ?? Schema.GetOffset(0xBED2F40140311BA5);
-            return ref _Handle.AsRef<CTransform>(_StartingLocalToWorldTransformOffset!.Value);
+            if (_StartingLocalToWorldTransformOffset == -1) _StartingLocalToWorldTransformOffset = Schema.GetOffset(0xBED2F40140311BA5);
+            return ref _Handle.AsRef<CTransform>(_StartingLocalToWorldTransformOffset);
         }
     }
-    private static nint? _LocalToWorldTransformOffset;
+    private static nint _LocalToWorldTransformOffset = -1;
 
     public ref CTransform LocalToWorldTransform
     {
         get
         {
-            _LocalToWorldTransformOffset = _LocalToWorldTransformOffset ?? Schema.GetOffset(0xBED2F401AE75F5B9);
-            return ref _Handle.AsRef<CTransform>(_LocalToWorldTransformOffset!.Value);
+            if (_LocalToWorldTransformOffset == -1) _LocalToWorldTransformOffset = Schema.GetOffset(0xBED2F401AE75F5B9);
+            return ref _Handle.AsRef<CTransform>(_LocalToWorldTransformOffset);
         }
     }
-    private static nint? _TimeStampOffset;
+    private static nint _TimeStampOffset = -1;
 
     public ref float TimeStamp
     {
         get
         {
-            _TimeStampOffset = _TimeStampOffset ?? Schema.GetOffset(0xBED2F4014335BEE3);
-            return ref _Handle.AsRef<float>(_TimeStampOffset!.Value);
+            if (_TimeStampOffset == -1) _TimeStampOffset = Schema.GetOffset(0xBED2F4014335BEE3);
+            return ref _Handle.AsRef<float>(_TimeStampOffset);
         }
     }
 

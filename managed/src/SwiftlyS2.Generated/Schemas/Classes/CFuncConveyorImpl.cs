@@ -16,122 +16,122 @@ internal partial class CFuncConveyorImpl : CBaseModelEntityImpl, CFuncConveyor
 {
     public CFuncConveyorImpl(nint handle) : base(handle) { }
 
-    private static nint? _ConveyorModelsOffset;
+    private static nint _ConveyorModelsOffset = -1;
 
     public string ConveyorModels
     {
         get
         {
-            _ConveyorModelsOffset = _ConveyorModelsOffset ?? Schema.GetOffset(0x6E29EBA973AE4DBB);
-            return Schema.GetString(_Handle.Read<nint>(_ConveyorModelsOffset!.Value));
+            if (_ConveyorModelsOffset == -1) _ConveyorModelsOffset = Schema.GetOffset(0x6E29EBA973AE4DBB);
+            return Schema.GetString(_Handle.Read<nint>(_ConveyorModelsOffset));
         }
         set
         {
-            _ConveyorModelsOffset = _ConveyorModelsOffset ?? Schema.GetOffset(0x6E29EBA973AE4DBB);
-            Schema.SetString(_Handle, _ConveyorModelsOffset!.Value, value);
+            if (_ConveyorModelsOffset == -1) _ConveyorModelsOffset = Schema.GetOffset(0x6E29EBA973AE4DBB);
+            Schema.SetString(_Handle, _ConveyorModelsOffset, value);
         }
     }
-    private static nint? _TransitionDurationSecondsOffset;
+    private static nint _TransitionDurationSecondsOffset = -1;
 
     public ref float TransitionDurationSeconds
     {
         get
         {
-            _TransitionDurationSecondsOffset = _TransitionDurationSecondsOffset ?? Schema.GetOffset(0x6E29EBA9D5E92B1D);
-            return ref _Handle.AsRef<float>(_TransitionDurationSecondsOffset!.Value);
+            if (_TransitionDurationSecondsOffset == -1) _TransitionDurationSecondsOffset = Schema.GetOffset(0x6E29EBA9D5E92B1D);
+            return ref _Handle.AsRef<float>(_TransitionDurationSecondsOffset);
         }
     }
-    private static nint? _SpeedOffset;
+    private static nint _SpeedOffset = -1;
 
     public ref float Speed
     {
         get
         {
-            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x6E29EBA9C631B7EA);
-            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+            if (_SpeedOffset == -1) _SpeedOffset = Schema.GetOffset(0x6E29EBA9C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset);
         }
     }
-    private static nint? _MoveEntitySpaceOffset;
+    private static nint _MoveEntitySpaceOffset = -1;
 
     public ref QAngle MoveEntitySpace
     {
         get
         {
-            _MoveEntitySpaceOffset = _MoveEntitySpaceOffset ?? Schema.GetOffset(0x6E29EBA9325319F9);
-            return ref _Handle.AsRef<QAngle>(_MoveEntitySpaceOffset!.Value);
+            if (_MoveEntitySpaceOffset == -1) _MoveEntitySpaceOffset = Schema.GetOffset(0x6E29EBA9325319F9);
+            return ref _Handle.AsRef<QAngle>(_MoveEntitySpaceOffset);
         }
     }
-    private static nint? _MoveDirEntitySpaceOffset;
+    private static nint _MoveDirEntitySpaceOffset = -1;
 
     public ref Vector MoveDirEntitySpace
     {
         get
         {
-            _MoveDirEntitySpaceOffset = _MoveDirEntitySpaceOffset ?? Schema.GetOffset(0x6E29EBA98181512A);
-            return ref _Handle.AsRef<Vector>(_MoveDirEntitySpaceOffset!.Value);
+            if (_MoveDirEntitySpaceOffset == -1) _MoveDirEntitySpaceOffset = Schema.GetOffset(0x6E29EBA98181512A);
+            return ref _Handle.AsRef<Vector>(_MoveDirEntitySpaceOffset);
         }
     }
-    private static nint? _TargetSpeedOffset;
+    private static nint _TargetSpeedOffset = -1;
 
     public ref float TargetSpeed
     {
         get
         {
-            _TargetSpeedOffset = _TargetSpeedOffset ?? Schema.GetOffset(0x6E29EBA99C627845);
-            return ref _Handle.AsRef<float>(_TargetSpeedOffset!.Value);
+            if (_TargetSpeedOffset == -1) _TargetSpeedOffset = Schema.GetOffset(0x6E29EBA99C627845);
+            return ref _Handle.AsRef<float>(_TargetSpeedOffset);
         }
     }
-    private static nint? _TransitionStartTickOffset;
+    private static nint _TransitionStartTickOffset = -1;
     private GameTick_tImpl? _TransitionStartTickInstance;
 
     public GameTick_t TransitionStartTick
     {
         get
         {
-            _TransitionStartTickOffset = _TransitionStartTickOffset ?? Schema.GetOffset(0x6E29EBA9FB464AF3);
+            if (_TransitionStartTickOffset == -1) _TransitionStartTickOffset = Schema.GetOffset(0x6E29EBA9FB464AF3);
             var instance = _TransitionStartTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TransitionStartTickOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TransitionStartTickOffset);
             return instance;
         }
     }
-    private static nint? _TransitionDurationTicksOffset;
+    private static nint _TransitionDurationTicksOffset = -1;
 
     public ref int TransitionDurationTicks
     {
         get
         {
-            _TransitionDurationTicksOffset = _TransitionDurationTicksOffset ?? Schema.GetOffset(0x6E29EBA9B99437D4);
-            return ref _Handle.AsRef<int>(_TransitionDurationTicksOffset!.Value);
+            if (_TransitionDurationTicksOffset == -1) _TransitionDurationTicksOffset = Schema.GetOffset(0x6E29EBA9B99437D4);
+            return ref _Handle.AsRef<int>(_TransitionDurationTicksOffset);
         }
     }
-    private static nint? _TransitionStartSpeedOffset;
+    private static nint _TransitionStartSpeedOffset = -1;
 
     public ref float TransitionStartSpeed
     {
         get
         {
-            _TransitionStartSpeedOffset = _TransitionStartSpeedOffset ?? Schema.GetOffset(0x6E29EBA97456F6D7);
-            return ref _Handle.AsRef<float>(_TransitionStartSpeedOffset!.Value);
+            if (_TransitionStartSpeedOffset == -1) _TransitionStartSpeedOffset = Schema.GetOffset(0x6E29EBA97456F6D7);
+            return ref _Handle.AsRef<float>(_TransitionStartSpeedOffset);
         }
     }
-    private static nint? _FrictionScaleOffset;
+    private static nint _FrictionScaleOffset = -1;
 
     public ref float FrictionScale
     {
         get
         {
-            _FrictionScaleOffset = _FrictionScaleOffset ?? Schema.GetOffset(0x6E29EBA9CB7D1875);
-            return ref _Handle.AsRef<float>(_FrictionScaleOffset!.Value);
+            if (_FrictionScaleOffset == -1) _FrictionScaleOffset = Schema.GetOffset(0x6E29EBA9CB7D1875);
+            return ref _Handle.AsRef<float>(_FrictionScaleOffset);
         }
     }
-    private static nint? _ConveyorModels1Offset;
+    private static nint _ConveyorModels1Offset = -1;
 
     public ref CUtlVector<CHandle<CBaseEntity>> ConveyorModels1
     {
         get
         {
-            _ConveyorModels1Offset = _ConveyorModels1Offset ?? Schema.GetOffset(0x6E29EBA9BAB755A8);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ConveyorModels1Offset!.Value);
+            if (_ConveyorModels1Offset == -1) _ConveyorModels1Offset = Schema.GetOffset(0x6E29EBA9BAB755A8);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ConveyorModels1Offset);
         }
     }
 

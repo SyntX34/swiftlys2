@@ -16,97 +16,97 @@ internal partial class SkeletonAnimCapture_t__Frame_tImpl : SchemaClass, Skeleto
 {
     public SkeletonAnimCapture_t__Frame_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _TimeOffset;
+    private static nint _TimeOffset = -1;
 
     public ref float Time
     {
         get
         {
-            _TimeOffset = _TimeOffset ?? Schema.GetOffset(0x413CC2EEC957229E);
-            return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+            if (_TimeOffset == -1) _TimeOffset = Schema.GetOffset(0x413CC2EEC957229E);
+            return ref _Handle.AsRef<float>(_TimeOffset);
         }
     }
-    private static nint? _StampOffset;
+    private static nint _StampOffset = -1;
     private SkeletonAnimCapture_t__FrameStamp_tImpl? _StampInstance;
 
     public SkeletonAnimCapture_t__FrameStamp_t Stamp
     {
         get
         {
-            _StampOffset = _StampOffset ?? Schema.GetOffset(0x413CC2EE11943004);
+            if (_StampOffset == -1) _StampOffset = Schema.GetOffset(0x413CC2EE11943004);
             var instance = _StampInstance ??= new SkeletonAnimCapture_t__FrameStamp_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StampOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StampOffset);
             return instance;
         }
     }
-    private static nint? _TransformOffset;
+    private static nint _TransformOffset = -1;
 
     public ref CTransform Transform
     {
         get
         {
-            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0x413CC2EE6EC5209B);
-            return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+            if (_TransformOffset == -1) _TransformOffset = Schema.GetOffset(0x413CC2EE6EC5209B);
+            return ref _Handle.AsRef<CTransform>(_TransformOffset);
         }
     }
-    private static nint? _TeleportOffset;
+    private static nint _TeleportOffset = -1;
 
     public ref bool Teleport
     {
         get
         {
-            _TeleportOffset = _TeleportOffset ?? Schema.GetOffset(0x413CC2EEE663C11E);
-            return ref _Handle.AsRef<bool>(_TeleportOffset!.Value);
+            if (_TeleportOffset == -1) _TeleportOffset = Schema.GetOffset(0x413CC2EEE663C11E);
+            return ref _Handle.AsRef<bool>(_TeleportOffset);
         }
     }
-    private static nint? _CompositeBonesOffset;
+    private static nint _CompositeBonesOffset = -1;
 
     public ref CUtlVector<CTransform> CompositeBones
     {
         get
         {
-            _CompositeBonesOffset = _CompositeBonesOffset ?? Schema.GetOffset(0x413CC2EE5F49062B);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_CompositeBonesOffset!.Value);
+            if (_CompositeBonesOffset == -1) _CompositeBonesOffset = Schema.GetOffset(0x413CC2EE5F49062B);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_CompositeBonesOffset);
         }
     }
-    private static nint? _SimStateBonesOffset;
+    private static nint _SimStateBonesOffset = -1;
 
     public ref CUtlVector<CTransform> SimStateBones
     {
         get
         {
-            _SimStateBonesOffset = _SimStateBonesOffset ?? Schema.GetOffset(0x413CC2EE5DAE9398);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_SimStateBonesOffset!.Value);
+            if (_SimStateBonesOffset == -1) _SimStateBonesOffset = Schema.GetOffset(0x413CC2EE5DAE9398);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_SimStateBonesOffset);
         }
     }
-    private static nint? _FeModelAnimsOffset;
+    private static nint _FeModelAnimsOffset = -1;
 
     public ref CUtlVector<CTransform> FeModelAnims
     {
         get
         {
-            _FeModelAnimsOffset = _FeModelAnimsOffset ?? Schema.GetOffset(0x413CC2EE62EC797D);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_FeModelAnimsOffset!.Value);
+            if (_FeModelAnimsOffset == -1) _FeModelAnimsOffset = Schema.GetOffset(0x413CC2EE62EC797D);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_FeModelAnimsOffset);
         }
     }
-    private static nint? _FeModelPosOffset;
+    private static nint _FeModelPosOffset = -1;
 
     public ref CUtlVector<Vector> FeModelPos
     {
         get
         {
-            _FeModelPosOffset = _FeModelPosOffset ?? Schema.GetOffset(0x413CC2EECA74E7F5);
-            return ref _Handle.AsRef<CUtlVector<Vector>>(_FeModelPosOffset!.Value);
+            if (_FeModelPosOffset == -1) _FeModelPosOffset = Schema.GetOffset(0x413CC2EECA74E7F5);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_FeModelPosOffset);
         }
     }
-    private static nint? _FlexControllerWeightsOffset;
+    private static nint _FlexControllerWeightsOffset = -1;
 
     public ref CUtlVector<float> FlexControllerWeights
     {
         get
         {
-            _FlexControllerWeightsOffset = _FlexControllerWeightsOffset ?? Schema.GetOffset(0x413CC2EECA3D8033);
-            return ref _Handle.AsRef<CUtlVector<float>>(_FlexControllerWeightsOffset!.Value);
+            if (_FlexControllerWeightsOffset == -1) _FlexControllerWeightsOffset = Schema.GetOffset(0x413CC2EECA3D8033);
+            return ref _Handle.AsRef<CUtlVector<float>>(_FlexControllerWeightsOffset);
         }
     }
 

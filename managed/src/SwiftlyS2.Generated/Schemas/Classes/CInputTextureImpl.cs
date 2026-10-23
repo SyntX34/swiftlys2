@@ -16,139 +16,139 @@ internal partial class CInputTextureImpl : SchemaClass, CInputTexture
 {
     public CInputTextureImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x958E51194D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x958E51194D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x958E51194D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x958E51194D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _FileNameOffset;
+    private static nint _FileNameOffset = -1;
 
     public string FileName
     {
         get
         {
-            _FileNameOffset = _FileNameOffset ?? Schema.GetOffset(0x958E5119C8D68508);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FileNameOffset!.Value));
+            if (_FileNameOffset == -1) _FileNameOffset = Schema.GetOffset(0x958E5119C8D68508);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FileNameOffset));
         }
         set
         {
-            _FileNameOffset = _FileNameOffset ?? Schema.GetOffset(0x958E5119C8D68508);
-            Schema.SetCUtlString(_Handle, _FileNameOffset!.Value, value);
+            if (_FileNameOffset == -1) _FileNameOffset = Schema.GetOffset(0x958E5119C8D68508);
+            Schema.SetCUtlString(_Handle, _FileNameOffset, value);
         }
     }
-    private static nint? _ColorSpaceOffset;
+    private static nint _ColorSpaceOffset = -1;
 
     public string ColorSpace
     {
         get
         {
-            _ColorSpaceOffset = _ColorSpaceOffset ?? Schema.GetOffset(0x958E51194311D09E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ColorSpaceOffset!.Value));
+            if (_ColorSpaceOffset == -1) _ColorSpaceOffset = Schema.GetOffset(0x958E51194311D09E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ColorSpaceOffset));
         }
         set
         {
-            _ColorSpaceOffset = _ColorSpaceOffset ?? Schema.GetOffset(0x958E51194311D09E);
-            Schema.SetCUtlString(_Handle, _ColorSpaceOffset!.Value, value);
+            if (_ColorSpaceOffset == -1) _ColorSpaceOffset = Schema.GetOffset(0x958E51194311D09E);
+            Schema.SetCUtlString(_Handle, _ColorSpaceOffset, value);
         }
     }
-    private static nint? _FileExtOffset;
+    private static nint _FileExtOffset = -1;
 
     public string FileExt
     {
         get
         {
-            _FileExtOffset = _FileExtOffset ?? Schema.GetOffset(0x958E51196AB837DE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_FileExtOffset!.Value));
+            if (_FileExtOffset == -1) _FileExtOffset = Schema.GetOffset(0x958E51196AB837DE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_FileExtOffset));
         }
         set
         {
-            _FileExtOffset = _FileExtOffset ?? Schema.GetOffset(0x958E51196AB837DE);
-            Schema.SetCUtlString(_Handle, _FileExtOffset!.Value, value);
+            if (_FileExtOffset == -1) _FileExtOffset = Schema.GetOffset(0x958E51196AB837DE);
+            Schema.SetCUtlString(_Handle, _FileExtOffset, value);
         }
     }
-    private static nint? _MinBitsPerChannelOffset;
+    private static nint _MinBitsPerChannelOffset = -1;
 
     public ref int MinBitsPerChannel
     {
         get
         {
-            _MinBitsPerChannelOffset = _MinBitsPerChannelOffset ?? Schema.GetOffset(0x958E5119083A5839);
-            return ref _Handle.AsRef<int>(_MinBitsPerChannelOffset!.Value);
+            if (_MinBitsPerChannelOffset == -1) _MinBitsPerChannelOffset = Schema.GetOffset(0x958E5119083A5839);
+            return ref _Handle.AsRef<int>(_MinBitsPerChannelOffset);
         }
     }
-    private static nint? _TypeStringOffset;
+    private static nint _TypeStringOffset = -1;
 
     public string TypeString
     {
         get
         {
-            _TypeStringOffset = _TypeStringOffset ?? Schema.GetOffset(0x958E51197B7FC800);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_TypeStringOffset!.Value));
+            if (_TypeStringOffset == -1) _TypeStringOffset = Schema.GetOffset(0x958E51197B7FC800);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_TypeStringOffset));
         }
         set
         {
-            _TypeStringOffset = _TypeStringOffset ?? Schema.GetOffset(0x958E51197B7FC800);
-            Schema.SetCUtlString(_Handle, _TypeStringOffset!.Value, value);
+            if (_TypeStringOffset == -1) _TypeStringOffset = Schema.GetOffset(0x958E51197B7FC800);
+            Schema.SetCUtlString(_Handle, _TypeStringOffset, value);
         }
     }
-    private static nint? _PassThroughToCompiledVtexOffset;
+    private static nint _PassThroughToCompiledVtexOffset = -1;
 
     public ref bool PassThroughToCompiledVtex
     {
         get
         {
-            _PassThroughToCompiledVtexOffset = _PassThroughToCompiledVtexOffset ?? Schema.GetOffset(0x958E511930AEA62C);
-            return ref _Handle.AsRef<bool>(_PassThroughToCompiledVtexOffset!.Value);
+            if (_PassThroughToCompiledVtexOffset == -1) _PassThroughToCompiledVtexOffset = Schema.GetOffset(0x958E511930AEA62C);
+            return ref _Handle.AsRef<bool>(_PassThroughToCompiledVtexOffset);
         }
     }
-    private static nint? _N3DSliceCountOffset;
+    private static nint _N3DSliceCountOffset = -1;
 
     public ref int N3DSliceCount
     {
         get
         {
-            _N3DSliceCountOffset = _N3DSliceCountOffset ?? Schema.GetOffset(0x958E511939876D1B);
-            return ref _Handle.AsRef<int>(_N3DSliceCountOffset!.Value);
+            if (_N3DSliceCountOffset == -1) _N3DSliceCountOffset = Schema.GetOffset(0x958E511939876D1B);
+            return ref _Handle.AsRef<int>(_N3DSliceCountOffset);
         }
     }
-    private static nint? _N3DSliceWidthOffset;
+    private static nint _N3DSliceWidthOffset = -1;
 
     public ref int N3DSliceWidth
     {
         get
         {
-            _N3DSliceWidthOffset = _N3DSliceWidthOffset ?? Schema.GetOffset(0x958E51196D4E3380);
-            return ref _Handle.AsRef<int>(_N3DSliceWidthOffset!.Value);
+            if (_N3DSliceWidthOffset == -1) _N3DSliceWidthOffset = Schema.GetOffset(0x958E51196D4E3380);
+            return ref _Handle.AsRef<int>(_N3DSliceWidthOffset);
         }
     }
-    private static nint? _N3DSliceHeightOffset;
+    private static nint _N3DSliceHeightOffset = -1;
 
     public ref int N3DSliceHeight
     {
         get
         {
-            _N3DSliceHeightOffset = _N3DSliceHeightOffset ?? Schema.GetOffset(0x958E511971331B37);
-            return ref _Handle.AsRef<int>(_N3DSliceHeightOffset!.Value);
+            if (_N3DSliceHeightOffset == -1) _N3DSliceHeightOffset = Schema.GetOffset(0x958E511971331B37);
+            return ref _Handle.AsRef<int>(_N3DSliceHeightOffset);
         }
     }
-    private static nint? _ImageProcessorArrayOffset;
+    private static nint _ImageProcessorArrayOffset = -1;
 
     public ref CUtlVector<CImageProcessor> ImageProcessorArray
     {
         get
         {
-            _ImageProcessorArrayOffset = _ImageProcessorArrayOffset ?? Schema.GetOffset(0x958E5119CAB705C7);
-            return ref _Handle.AsRef<CUtlVector<CImageProcessor>>(_ImageProcessorArrayOffset!.Value);
+            if (_ImageProcessorArrayOffset == -1) _ImageProcessorArrayOffset = Schema.GetOffset(0x958E5119CAB705C7);
+            return ref _Handle.AsRef<CUtlVector<CImageProcessor>>(_ImageProcessorArrayOffset);
         }
     }
 

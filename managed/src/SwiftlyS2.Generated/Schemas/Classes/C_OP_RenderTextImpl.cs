@@ -16,29 +16,29 @@ internal partial class C_OP_RenderTextImpl : CParticleFunctionRendererImpl, C_OP
 {
     public C_OP_RenderTextImpl(nint handle) : base(handle) { }
 
-    private static nint? _OutlineColorOffset;
+    private static nint _OutlineColorOffset = -1;
 
     public ref Color OutlineColor
     {
         get
         {
-            _OutlineColorOffset = _OutlineColorOffset ?? Schema.GetOffset(0x376BB2E675B94BB0);
-            return ref _Handle.AsRef<Color>(_OutlineColorOffset!.Value);
+            if (_OutlineColorOffset == -1) _OutlineColorOffset = Schema.GetOffset(0x376BB2E675B94BB0);
+            return ref _Handle.AsRef<Color>(_OutlineColorOffset);
         }
     }
-    private static nint? _DefaultTextOffset;
+    private static nint _DefaultTextOffset = -1;
 
     public string DefaultText
     {
         get
         {
-            _DefaultTextOffset = _DefaultTextOffset ?? Schema.GetOffset(0x376BB2E67556AF5D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DefaultTextOffset!.Value));
+            if (_DefaultTextOffset == -1) _DefaultTextOffset = Schema.GetOffset(0x376BB2E67556AF5D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DefaultTextOffset));
         }
         set
         {
-            _DefaultTextOffset = _DefaultTextOffset ?? Schema.GetOffset(0x376BB2E67556AF5D);
-            Schema.SetCUtlString(_Handle, _DefaultTextOffset!.Value, value);
+            if (_DefaultTextOffset == -1) _DefaultTextOffset = Schema.GetOffset(0x376BB2E67556AF5D);
+            Schema.SetCUtlString(_Handle, _DefaultTextOffset, value);
         }
     }
 

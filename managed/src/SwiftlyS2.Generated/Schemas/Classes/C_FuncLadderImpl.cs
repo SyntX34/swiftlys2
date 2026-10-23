@@ -16,94 +16,94 @@ internal partial class C_FuncLadderImpl : C_BaseModelEntityImpl, C_FuncLadder
 {
     public C_FuncLadderImpl(nint handle) : base(handle) { }
 
-    private static nint? _LadderDirOffset;
+    private static nint _LadderDirOffset = -1;
 
     public ref Vector LadderDir
     {
         get
         {
-            _LadderDirOffset = _LadderDirOffset ?? Schema.GetOffset(0x7C3D9669BEE3D218);
-            return ref _Handle.AsRef<Vector>(_LadderDirOffset!.Value);
+            if (_LadderDirOffset == -1) _LadderDirOffset = Schema.GetOffset(0x7C3D9669BEE3D218);
+            return ref _Handle.AsRef<Vector>(_LadderDirOffset);
         }
     }
-    private static nint? _DismountsOffset;
+    private static nint _DismountsOffset = -1;
 
     public ref CUtlVector<CHandle<C_InfoLadderDismount>> Dismounts
     {
         get
         {
-            _DismountsOffset = _DismountsOffset ?? Schema.GetOffset(0x7C3D9669E1BF2F19);
-            return ref _Handle.AsRef<CUtlVector<CHandle<C_InfoLadderDismount>>>(_DismountsOffset!.Value);
+            if (_DismountsOffset == -1) _DismountsOffset = Schema.GetOffset(0x7C3D9669E1BF2F19);
+            return ref _Handle.AsRef<CUtlVector<CHandle<C_InfoLadderDismount>>>(_DismountsOffset);
         }
     }
-    private static nint? _LocalTopOffset;
+    private static nint _LocalTopOffset = -1;
 
     public ref Vector LocalTop
     {
         get
         {
-            _LocalTopOffset = _LocalTopOffset ?? Schema.GetOffset(0x7C3D9669A709E4E3);
-            return ref _Handle.AsRef<Vector>(_LocalTopOffset!.Value);
+            if (_LocalTopOffset == -1) _LocalTopOffset = Schema.GetOffset(0x7C3D9669A709E4E3);
+            return ref _Handle.AsRef<Vector>(_LocalTopOffset);
         }
     }
-    private static nint? _PlayerMountPositionTopOffset;
+    private static nint _PlayerMountPositionTopOffset = -1;
 
     public ref Vector PlayerMountPositionTop
     {
         get
         {
-            _PlayerMountPositionTopOffset = _PlayerMountPositionTopOffset ?? Schema.GetOffset(0x7C3D96693DC07685);
-            return ref _Handle.AsRef<Vector>(_PlayerMountPositionTopOffset!.Value);
+            if (_PlayerMountPositionTopOffset == -1) _PlayerMountPositionTopOffset = Schema.GetOffset(0x7C3D96693DC07685);
+            return ref _Handle.AsRef<Vector>(_PlayerMountPositionTopOffset);
         }
     }
-    private static nint? _PlayerMountPositionBottomOffset;
+    private static nint _PlayerMountPositionBottomOffset = -1;
 
     public ref Vector PlayerMountPositionBottom
     {
         get
         {
-            _PlayerMountPositionBottomOffset = _PlayerMountPositionBottomOffset ?? Schema.GetOffset(0x7C3D96697AC961B1);
-            return ref _Handle.AsRef<Vector>(_PlayerMountPositionBottomOffset!.Value);
+            if (_PlayerMountPositionBottomOffset == -1) _PlayerMountPositionBottomOffset = Schema.GetOffset(0x7C3D96697AC961B1);
+            return ref _Handle.AsRef<Vector>(_PlayerMountPositionBottomOffset);
         }
     }
-    private static nint? _AutoRideSpeedOffset;
+    private static nint _AutoRideSpeedOffset = -1;
 
     public ref float AutoRideSpeed
     {
         get
         {
-            _AutoRideSpeedOffset = _AutoRideSpeedOffset ?? Schema.GetOffset(0x7C3D9669B5C8CE19);
-            return ref _Handle.AsRef<float>(_AutoRideSpeedOffset!.Value);
+            if (_AutoRideSpeedOffset == -1) _AutoRideSpeedOffset = Schema.GetOffset(0x7C3D9669B5C8CE19);
+            return ref _Handle.AsRef<float>(_AutoRideSpeedOffset);
         }
     }
-    private static nint? _DisabledOffset;
+    private static nint _DisabledOffset = -1;
 
     public ref bool Disabled
     {
         get
         {
-            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x7C3D96693A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x7C3D96693A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset);
         }
     }
-    private static nint? _FakeLadderOffset;
+    private static nint _FakeLadderOffset = -1;
 
     public ref bool FakeLadder
     {
         get
         {
-            _FakeLadderOffset = _FakeLadderOffset ?? Schema.GetOffset(0x7C3D966987708598);
-            return ref _Handle.AsRef<bool>(_FakeLadderOffset!.Value);
+            if (_FakeLadderOffset == -1) _FakeLadderOffset = Schema.GetOffset(0x7C3D966987708598);
+            return ref _Handle.AsRef<bool>(_FakeLadderOffset);
         }
     }
-    private static nint? _HasSlackOffset;
+    private static nint _HasSlackOffset = -1;
 
     public ref bool HasSlack
     {
         get
         {
-            _HasSlackOffset = _HasSlackOffset ?? Schema.GetOffset(0x7C3D96691745DB1D);
-            return ref _Handle.AsRef<bool>(_HasSlackOffset!.Value);
+            if (_HasSlackOffset == -1) _HasSlackOffset = Schema.GetOffset(0x7C3D96691745DB1D);
+            return ref _Handle.AsRef<bool>(_HasSlackOffset);
         }
     }
 

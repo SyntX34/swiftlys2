@@ -16,47 +16,47 @@ internal partial class C_OP_PlaneCullImpl : CParticleFunctionOperatorImpl, C_OP_
 {
     public C_OP_PlaneCullImpl(nint handle) : base(handle) { }
 
-    private static nint? _PlaneControlPointOffset;
+    private static nint _PlaneControlPointOffset = -1;
 
     public ref int PlaneControlPoint
     {
         get
         {
-            _PlaneControlPointOffset = _PlaneControlPointOffset ?? Schema.GetOffset(0x352AAF45E621E9BC);
-            return ref _Handle.AsRef<int>(_PlaneControlPointOffset!.Value);
+            if (_PlaneControlPointOffset == -1) _PlaneControlPointOffset = Schema.GetOffset(0x352AAF45E621E9BC);
+            return ref _Handle.AsRef<int>(_PlaneControlPointOffset);
         }
     }
-    private static nint? _PlaneDirectionOffset;
+    private static nint _PlaneDirectionOffset = -1;
     private CParticleCollectionVecInputImpl? _PlaneDirectionInstance;
 
     public CParticleCollectionVecInput PlaneDirection
     {
         get
         {
-            _PlaneDirectionOffset = _PlaneDirectionOffset ?? Schema.GetOffset(0x352AAF45B00A585A);
+            if (_PlaneDirectionOffset == -1) _PlaneDirectionOffset = Schema.GetOffset(0x352AAF45B00A585A);
             var instance = _PlaneDirectionInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _PlaneDirectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PlaneDirectionOffset);
             return instance;
         }
     }
-    private static nint? _LocalSpaceOffset;
+    private static nint _LocalSpaceOffset = -1;
 
     public ref bool LocalSpace
     {
         get
         {
-            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0x352AAF4562418E6E);
-            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+            if (_LocalSpaceOffset == -1) _LocalSpaceOffset = Schema.GetOffset(0x352AAF4562418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset);
         }
     }
-    private static nint? _PlaneOffsetOffset;
+    private static nint _PlaneOffsetOffset = -1;
 
     public ref float PlaneOffset
     {
         get
         {
-            _PlaneOffsetOffset = _PlaneOffsetOffset ?? Schema.GetOffset(0x352AAF45D394676C);
-            return ref _Handle.AsRef<float>(_PlaneOffsetOffset!.Value);
+            if (_PlaneOffsetOffset == -1) _PlaneOffsetOffset = Schema.GetOffset(0x352AAF45D394676C);
+            return ref _Handle.AsRef<float>(_PlaneOffsetOffset);
         }
     }
 

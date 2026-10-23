@@ -16,60 +16,60 @@ internal partial class CFollowPathInstanceDataImpl : SchemaClass, CFollowPathIns
 {
     public CFollowPathInstanceDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _XLastPredictedTransformsDeltasOffset;
+    private static nint _XLastPredictedTransformsDeltasOffset = -1;
     private SchemaUntypedField? _XLastPredictedTransformsDeltasInstance;
 
     public SchemaUntypedField XLastPredictedTransformsDeltas
     {
         get
         {
-            _XLastPredictedTransformsDeltasOffset = _XLastPredictedTransformsDeltasOffset ?? Schema.GetOffset(0x558B9B8B483A040B);
+            if (_XLastPredictedTransformsDeltasOffset == -1) _XLastPredictedTransformsDeltasOffset = Schema.GetOffset(0x558B9B8B483A040B);
             var instance = _XLastPredictedTransformsDeltasInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _XLastPredictedTransformsDeltasOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _XLastPredictedTransformsDeltasOffset);
             return instance;
         }
     }
-    private static nint? _DampedTurnValueOffset;
+    private static nint _DampedTurnValueOffset = -1;
 
     public ref float DampedTurnValue
     {
         get
         {
-            _DampedTurnValueOffset = _DampedTurnValueOffset ?? Schema.GetOffset(0x558B9B8B36AC933E);
-            return ref _Handle.AsRef<float>(_DampedTurnValueOffset!.Value);
+            if (_DampedTurnValueOffset == -1) _DampedTurnValueOffset = Schema.GetOffset(0x558B9B8B36AC933E);
+            return ref _Handle.AsRef<float>(_DampedTurnValueOffset);
         }
     }
-    private static nint? _TurnAmountOffset;
+    private static nint _TurnAmountOffset = -1;
 
     public ref float TurnAmount
     {
         get
         {
-            _TurnAmountOffset = _TurnAmountOffset ?? Schema.GetOffset(0x558B9B8B9B677100);
-            return ref _Handle.AsRef<float>(_TurnAmountOffset!.Value);
+            if (_TurnAmountOffset == -1) _TurnAmountOffset = Schema.GetOffset(0x558B9B8B9B677100);
+            return ref _Handle.AsRef<float>(_TurnAmountOffset);
         }
     }
-    private static nint? _PredictionScaleOffset;
+    private static nint _PredictionScaleOffset = -1;
     private SchemaUntypedField? _PredictionScaleInstance;
 
     public SchemaUntypedField PredictionScale
     {
         get
         {
-            _PredictionScaleOffset = _PredictionScaleOffset ?? Schema.GetOffset(0x558B9B8BE91D4B2C);
+            if (_PredictionScaleOffset == -1) _PredictionScaleOffset = Schema.GetOffset(0x558B9B8BE91D4B2C);
             var instance = _PredictionScaleInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PredictionScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PredictionScaleOffset);
             return instance;
         }
     }
-    private static nint? _LastPathTimeOffset;
+    private static nint _LastPathTimeOffset = -1;
 
     public ref float LastPathTime
     {
         get
         {
-            _LastPathTimeOffset = _LastPathTimeOffset ?? Schema.GetOffset(0x558B9B8BCA380281);
-            return ref _Handle.AsRef<float>(_LastPathTimeOffset!.Value);
+            if (_LastPathTimeOffset == -1) _LastPathTimeOffset = Schema.GetOffset(0x558B9B8BCA380281);
+            return ref _Handle.AsRef<float>(_LastPathTimeOffset);
         }
     }
 

@@ -16,64 +16,64 @@ internal partial class DecalGroupOption_tImpl : SchemaClass, DecalGroupOption_t
 {
     public DecalGroupOption_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _MaterialOffset;
+    private static nint _MaterialOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material
     {
         get
         {
-            _MaterialOffset = _MaterialOffset ?? Schema.GetOffset(0x9F3DB78B888CE42E);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+            if (_MaterialOffset == -1) _MaterialOffset = Schema.GetOffset(0x9F3DB78B888CE42E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset);
         }
     }
-    private static nint? _SequenceNameOffset;
+    private static nint _SequenceNameOffset = -1;
 
     public ref CGlobalSymbol SequenceName
     {
         get
         {
-            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x9F3DB78B7462AF30);
-            return ref _Handle.AsRef<CGlobalSymbol>(_SequenceNameOffset!.Value);
+            if (_SequenceNameOffset == -1) _SequenceNameOffset = Schema.GetOffset(0x9F3DB78B7462AF30);
+            return ref _Handle.AsRef<CGlobalSymbol>(_SequenceNameOffset);
         }
     }
-    private static nint? _ProbabilityOffset;
+    private static nint _ProbabilityOffset = -1;
 
     public ref float Probability
     {
         get
         {
-            _ProbabilityOffset = _ProbabilityOffset ?? Schema.GetOffset(0x9F3DB78B9ABB533A);
-            return ref _Handle.AsRef<float>(_ProbabilityOffset!.Value);
+            if (_ProbabilityOffset == -1) _ProbabilityOffset = Schema.GetOffset(0x9F3DB78B9ABB533A);
+            return ref _Handle.AsRef<float>(_ProbabilityOffset);
         }
     }
-    private static nint? _EnableAngleBetweenNormalAndGravityRangeOffset;
+    private static nint _EnableAngleBetweenNormalAndGravityRangeOffset = -1;
 
     public ref bool EnableAngleBetweenNormalAndGravityRange
     {
         get
         {
-            _EnableAngleBetweenNormalAndGravityRangeOffset = _EnableAngleBetweenNormalAndGravityRangeOffset ?? Schema.GetOffset(0x9F3DB78B5C382DAE);
-            return ref _Handle.AsRef<bool>(_EnableAngleBetweenNormalAndGravityRangeOffset!.Value);
+            if (_EnableAngleBetweenNormalAndGravityRangeOffset == -1) _EnableAngleBetweenNormalAndGravityRangeOffset = Schema.GetOffset(0x9F3DB78B5C382DAE);
+            return ref _Handle.AsRef<bool>(_EnableAngleBetweenNormalAndGravityRangeOffset);
         }
     }
-    private static nint? _MinAngleBetweenNormalAndGravityOffset;
+    private static nint _MinAngleBetweenNormalAndGravityOffset = -1;
 
     public ref float MinAngleBetweenNormalAndGravity
     {
         get
         {
-            _MinAngleBetweenNormalAndGravityOffset = _MinAngleBetweenNormalAndGravityOffset ?? Schema.GetOffset(0x9F3DB78B8EB6C526);
-            return ref _Handle.AsRef<float>(_MinAngleBetweenNormalAndGravityOffset!.Value);
+            if (_MinAngleBetweenNormalAndGravityOffset == -1) _MinAngleBetweenNormalAndGravityOffset = Schema.GetOffset(0x9F3DB78B8EB6C526);
+            return ref _Handle.AsRef<float>(_MinAngleBetweenNormalAndGravityOffset);
         }
     }
-    private static nint? _MaxAngleBetweenNormalAndGravityOffset;
+    private static nint _MaxAngleBetweenNormalAndGravityOffset = -1;
 
     public ref float MaxAngleBetweenNormalAndGravity
     {
         get
         {
-            _MaxAngleBetweenNormalAndGravityOffset = _MaxAngleBetweenNormalAndGravityOffset ?? Schema.GetOffset(0x9F3DB78B44368314);
-            return ref _Handle.AsRef<float>(_MaxAngleBetweenNormalAndGravityOffset!.Value);
+            if (_MaxAngleBetweenNormalAndGravityOffset == -1) _MaxAngleBetweenNormalAndGravityOffset = Schema.GetOffset(0x9F3DB78B44368314);
+            return ref _Handle.AsRef<float>(_MaxAngleBetweenNormalAndGravityOffset);
         }
     }
 

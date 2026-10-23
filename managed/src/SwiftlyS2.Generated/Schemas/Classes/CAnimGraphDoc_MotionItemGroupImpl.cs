@@ -16,41 +16,41 @@ internal partial class CAnimGraphDoc_MotionItemGroupImpl : SchemaClass, CAnimGra
 {
     public CAnimGraphDoc_MotionItemGroupImpl(nint handle) : base(handle) { }
 
-    private static nint? _MotionsOffset;
+    private static nint _MotionsOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> Motions
     {
         get
         {
-            _MotionsOffset = _MotionsOffset ?? Schema.GetOffset(0x4F96AA46C12C855C);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotionsOffset!.Value);
+            if (_MotionsOffset == -1) _MotionsOffset = Schema.GetOffset(0x4F96AA46C12C855C);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotionsOffset);
         }
     }
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x4F96AA464D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x4F96AA464D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x4F96AA464D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x4F96AA464D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _ConditionsOffset;
+    private static nint _ConditionsOffset = -1;
     private CAnimGraphDoc_ConditionContainerImpl? _ConditionsInstance;
 
     public CAnimGraphDoc_ConditionContainer Conditions
     {
         get
         {
-            _ConditionsOffset = _ConditionsOffset ?? Schema.GetOffset(0x4F96AA46EDDF6757);
+            if (_ConditionsOffset == -1) _ConditionsOffset = Schema.GetOffset(0x4F96AA46EDDF6757);
             var instance = _ConditionsInstance ??= new CAnimGraphDoc_ConditionContainerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ConditionsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ConditionsOffset);
             return instance;
         }
     }

@@ -16,52 +16,52 @@ internal partial class CPulse_OutflowConnectionImpl : SchemaClass, CPulse_Outflo
 {
     public CPulse_OutflowConnectionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceOutflowNameOffset;
+    private static nint _SourceOutflowNameOffset = -1;
     private SchemaUntypedField? _SourceOutflowNameInstance;
 
     public SchemaUntypedField SourceOutflowName
     {
         get
         {
-            _SourceOutflowNameOffset = _SourceOutflowNameOffset ?? Schema.GetOffset(0x58023C685EA2FFCF);
+            if (_SourceOutflowNameOffset == -1) _SourceOutflowNameOffset = Schema.GetOffset(0x58023C685EA2FFCF);
             var instance = _SourceOutflowNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SourceOutflowNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SourceOutflowNameOffset);
             return instance;
         }
     }
-    private static nint? _DestChunkOffset;
+    private static nint _DestChunkOffset = -1;
     private PulseRuntimeChunkIndex_tImpl? _DestChunkInstance;
 
     public PulseRuntimeChunkIndex_t DestChunk
     {
         get
         {
-            _DestChunkOffset = _DestChunkOffset ?? Schema.GetOffset(0x58023C68D6AC502E);
+            if (_DestChunkOffset == -1) _DestChunkOffset = Schema.GetOffset(0x58023C68D6AC502E);
             var instance = _DestChunkInstance ??= new PulseRuntimeChunkIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DestChunkOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DestChunkOffset);
             return instance;
         }
     }
-    private static nint? _InstructionOffset;
+    private static nint _InstructionOffset = -1;
 
     public ref int Instruction
     {
         get
         {
-            _InstructionOffset = _InstructionOffset ?? Schema.GetOffset(0x58023C6890E63133);
-            return ref _Handle.AsRef<int>(_InstructionOffset!.Value);
+            if (_InstructionOffset == -1) _InstructionOffset = Schema.GetOffset(0x58023C6890E63133);
+            return ref _Handle.AsRef<int>(_InstructionOffset);
         }
     }
-    private static nint? _OutflowRegisterMapOffset;
+    private static nint _OutflowRegisterMapOffset = -1;
     private PulseRegisterMap_tImpl? _OutflowRegisterMapInstance;
 
     public PulseRegisterMap_t OutflowRegisterMap
     {
         get
         {
-            _OutflowRegisterMapOffset = _OutflowRegisterMapOffset ?? Schema.GetOffset(0x58023C68F89A90F8);
+            if (_OutflowRegisterMapOffset == -1) _OutflowRegisterMapOffset = Schema.GetOffset(0x58023C68F89A90F8);
             var instance = _OutflowRegisterMapInstance ??= new PulseRegisterMap_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutflowRegisterMapOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutflowRegisterMapOffset);
             return instance;
         }
     }

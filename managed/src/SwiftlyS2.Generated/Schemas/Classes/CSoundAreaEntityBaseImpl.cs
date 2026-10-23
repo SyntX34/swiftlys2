@@ -16,39 +16,39 @@ internal partial class CSoundAreaEntityBaseImpl : CBaseEntityImpl, CSoundAreaEnt
 {
     public CSoundAreaEntityBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _DisabledOffset;
+    private static nint _DisabledOffset = -1;
 
     public ref bool Disabled
     {
         get
         {
-            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x15C90E163A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x15C90E163A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset);
         }
     }
-    private static nint? _SoundAreaTypeOffset;
+    private static nint _SoundAreaTypeOffset = -1;
 
     public string SoundAreaType
     {
         get
         {
-            _SoundAreaTypeOffset = _SoundAreaTypeOffset ?? Schema.GetOffset(0x15C90E16227612E5);
-            return Schema.GetString(_Handle.Read<nint>(_SoundAreaTypeOffset!.Value));
+            if (_SoundAreaTypeOffset == -1) _SoundAreaTypeOffset = Schema.GetOffset(0x15C90E16227612E5);
+            return Schema.GetString(_Handle.Read<nint>(_SoundAreaTypeOffset));
         }
         set
         {
-            _SoundAreaTypeOffset = _SoundAreaTypeOffset ?? Schema.GetOffset(0x15C90E16227612E5);
-            Schema.SetString(_Handle, _SoundAreaTypeOffset!.Value, value);
+            if (_SoundAreaTypeOffset == -1) _SoundAreaTypeOffset = Schema.GetOffset(0x15C90E16227612E5);
+            Schema.SetString(_Handle, _SoundAreaTypeOffset, value);
         }
     }
-    private static nint? _PosOffset;
+    private static nint _PosOffset = -1;
 
     public ref Vector Pos
     {
         get
         {
-            _PosOffset = _PosOffset ?? Schema.GetOffset(0x15C90E16DE9CFC5D);
-            return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+            if (_PosOffset == -1) _PosOffset = Schema.GetOffset(0x15C90E16DE9CFC5D);
+            return ref _Handle.AsRef<Vector>(_PosOffset);
         }
     }
 

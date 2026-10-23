@@ -16,64 +16,64 @@ internal partial class CPhysBallSocketImpl : CPhysConstraintImpl, CPhysBallSocke
 {
     public CPhysBallSocketImpl(nint handle) : base(handle) { }
 
-    private static nint? _JointFrictionOffset;
+    private static nint _JointFrictionOffset = -1;
 
     public ref float JointFriction
     {
         get
         {
-            _JointFrictionOffset = _JointFrictionOffset ?? Schema.GetOffset(0xDE2408965CA9FD47);
-            return ref _Handle.AsRef<float>(_JointFrictionOffset!.Value);
+            if (_JointFrictionOffset == -1) _JointFrictionOffset = Schema.GetOffset(0xDE2408965CA9FD47);
+            return ref _Handle.AsRef<float>(_JointFrictionOffset);
         }
     }
-    private static nint? _EnableSwingLimitOffset;
+    private static nint _EnableSwingLimitOffset = -1;
 
     public ref bool EnableSwingLimit
     {
         get
         {
-            _EnableSwingLimitOffset = _EnableSwingLimitOffset ?? Schema.GetOffset(0xDE240896DADAC14B);
-            return ref _Handle.AsRef<bool>(_EnableSwingLimitOffset!.Value);
+            if (_EnableSwingLimitOffset == -1) _EnableSwingLimitOffset = Schema.GetOffset(0xDE240896DADAC14B);
+            return ref _Handle.AsRef<bool>(_EnableSwingLimitOffset);
         }
     }
-    private static nint? _SwingLimitOffset;
+    private static nint _SwingLimitOffset = -1;
 
     public ref float SwingLimit
     {
         get
         {
-            _SwingLimitOffset = _SwingLimitOffset ?? Schema.GetOffset(0xDE240896279A44C2);
-            return ref _Handle.AsRef<float>(_SwingLimitOffset!.Value);
+            if (_SwingLimitOffset == -1) _SwingLimitOffset = Schema.GetOffset(0xDE240896279A44C2);
+            return ref _Handle.AsRef<float>(_SwingLimitOffset);
         }
     }
-    private static nint? _EnableTwistLimitOffset;
+    private static nint _EnableTwistLimitOffset = -1;
 
     public ref bool EnableTwistLimit
     {
         get
         {
-            _EnableTwistLimitOffset = _EnableTwistLimitOffset ?? Schema.GetOffset(0xDE2408967DBEA570);
-            return ref _Handle.AsRef<bool>(_EnableTwistLimitOffset!.Value);
+            if (_EnableTwistLimitOffset == -1) _EnableTwistLimitOffset = Schema.GetOffset(0xDE2408967DBEA570);
+            return ref _Handle.AsRef<bool>(_EnableTwistLimitOffset);
         }
     }
-    private static nint? _MinTwistAngleOffset;
+    private static nint _MinTwistAngleOffset = -1;
 
     public ref float MinTwistAngle
     {
         get
         {
-            _MinTwistAngleOffset = _MinTwistAngleOffset ?? Schema.GetOffset(0xDE240896B6E6BB7F);
-            return ref _Handle.AsRef<float>(_MinTwistAngleOffset!.Value);
+            if (_MinTwistAngleOffset == -1) _MinTwistAngleOffset = Schema.GetOffset(0xDE240896B6E6BB7F);
+            return ref _Handle.AsRef<float>(_MinTwistAngleOffset);
         }
     }
-    private static nint? _MaxTwistAngleOffset;
+    private static nint _MaxTwistAngleOffset = -1;
 
     public ref float MaxTwistAngle
     {
         get
         {
-            _MaxTwistAngleOffset = _MaxTwistAngleOffset ?? Schema.GetOffset(0xDE24089690C63AD5);
-            return ref _Handle.AsRef<float>(_MaxTwistAngleOffset!.Value);
+            if (_MaxTwistAngleOffset == -1) _MaxTwistAngleOffset = Schema.GetOffset(0xDE24089690C63AD5);
+            return ref _Handle.AsRef<float>(_MaxTwistAngleOffset);
         }
     }
 

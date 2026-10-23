@@ -16,59 +16,59 @@ internal partial class C_BaseModelEntity__Emphasized_PhonemeImpl : SchemaClass, 
 {
     public C_BaseModelEntity__Emphasized_PhonemeImpl(nint handle) : base(handle) { }
 
-    private static nint? _ClassNameOffset;
+    private static nint _ClassNameOffset = -1;
 
     public string ClassName
     {
         get
         {
-            _ClassNameOffset = _ClassNameOffset ?? Schema.GetOffset(0x18A72D3D01F01439);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ClassNameOffset!.Value));
+            if (_ClassNameOffset == -1) _ClassNameOffset = Schema.GetOffset(0x18A72D3D01F01439);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ClassNameOffset));
         }
         set
         {
-            _ClassNameOffset = _ClassNameOffset ?? Schema.GetOffset(0x18A72D3D01F01439);
-            Schema.SetCUtlString(_Handle, _ClassNameOffset!.Value, value);
+            if (_ClassNameOffset == -1) _ClassNameOffset = Schema.GetOffset(0x18A72D3D01F01439);
+            Schema.SetCUtlString(_Handle, _ClassNameOffset, value);
         }
     }
-    private static nint? _AmountOffset;
+    private static nint _AmountOffset = -1;
 
     public ref float Amount
     {
         get
         {
-            _AmountOffset = _AmountOffset ?? Schema.GetOffset(0x18A72D3D187D1B1B);
-            return ref _Handle.AsRef<float>(_AmountOffset!.Value);
+            if (_AmountOffset == -1) _AmountOffset = Schema.GetOffset(0x18A72D3D187D1B1B);
+            return ref _Handle.AsRef<float>(_AmountOffset);
         }
     }
-    private static nint? _RequiredOffset;
+    private static nint _RequiredOffset = -1;
 
     public ref bool Required
     {
         get
         {
-            _RequiredOffset = _RequiredOffset ?? Schema.GetOffset(0x18A72D3D4F039780);
-            return ref _Handle.AsRef<bool>(_RequiredOffset!.Value);
+            if (_RequiredOffset == -1) _RequiredOffset = Schema.GetOffset(0x18A72D3D4F039780);
+            return ref _Handle.AsRef<bool>(_RequiredOffset);
         }
     }
-    private static nint? _BasecheckedOffset;
+    private static nint _BasecheckedOffset = -1;
 
     public ref bool Basechecked
     {
         get
         {
-            _BasecheckedOffset = _BasecheckedOffset ?? Schema.GetOffset(0x18A72D3D507FC301);
-            return ref _Handle.AsRef<bool>(_BasecheckedOffset!.Value);
+            if (_BasecheckedOffset == -1) _BasecheckedOffset = Schema.GetOffset(0x18A72D3D507FC301);
+            return ref _Handle.AsRef<bool>(_BasecheckedOffset);
         }
     }
-    private static nint? _ValidOffset;
+    private static nint _ValidOffset = -1;
 
     public ref bool Valid
     {
         get
         {
-            _ValidOffset = _ValidOffset ?? Schema.GetOffset(0x18A72D3D06C73851);
-            return ref _Handle.AsRef<bool>(_ValidOffset!.Value);
+            if (_ValidOffset == -1) _ValidOffset = Schema.GetOffset(0x18A72D3D06C73851);
+            return ref _Handle.AsRef<bool>(_ValidOffset);
         }
     }
 

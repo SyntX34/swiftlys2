@@ -16,62 +16,62 @@ internal partial class NmGraphDocPin_tImpl : SchemaClass, NmGraphDocPin_t
 {
     public NmGraphDocPin_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
     private SchemaUntypedField? _IDInstance;
 
     public SchemaUntypedField ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0xA05A46B695066900);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xA05A46B695066900);
             var instance = _IDInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _IDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IDOffset);
             return instance;
         }
     }
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA05A46B64D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xA05A46B64D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA05A46B64D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xA05A46B64D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref NmGraphValueType_t Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xA05A46B60F04B4ED);
-            return ref _Handle.AsRef<NmGraphValueType_t>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0xA05A46B60F04B4ED);
+            return ref _Handle.AsRef<NmGraphValueType_t>(_TypeOffset);
         }
     }
-    private static nint? _IsDynamicPinOffset;
+    private static nint _IsDynamicPinOffset = -1;
 
     public ref bool IsDynamicPin
     {
         get
         {
-            _IsDynamicPinOffset = _IsDynamicPinOffset ?? Schema.GetOffset(0xA05A46B61C247775);
-            return ref _Handle.AsRef<bool>(_IsDynamicPinOffset!.Value);
+            if (_IsDynamicPinOffset == -1) _IsDynamicPinOffset = Schema.GetOffset(0xA05A46B61C247775);
+            return ref _Handle.AsRef<bool>(_IsDynamicPinOffset);
         }
     }
-    private static nint? _AllowMultipleOutConnectionsOffset;
+    private static nint _AllowMultipleOutConnectionsOffset = -1;
 
     public ref bool AllowMultipleOutConnections
     {
         get
         {
-            _AllowMultipleOutConnectionsOffset = _AllowMultipleOutConnectionsOffset ?? Schema.GetOffset(0xA05A46B6CF01AE0F);
-            return ref _Handle.AsRef<bool>(_AllowMultipleOutConnectionsOffset!.Value);
+            if (_AllowMultipleOutConnectionsOffset == -1) _AllowMultipleOutConnectionsOffset = Schema.GetOffset(0xA05A46B6CF01AE0F);
+            return ref _Handle.AsRef<bool>(_AllowMultipleOutConnectionsOffset);
         }
     }
 

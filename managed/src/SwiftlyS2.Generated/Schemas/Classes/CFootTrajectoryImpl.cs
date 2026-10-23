@@ -16,34 +16,34 @@ internal partial class CFootTrajectoryImpl : SchemaClass, CFootTrajectory
 {
     public CFootTrajectoryImpl(nint handle) : base(handle) { }
 
-    private static nint? _OffsetOffset;
+    private static nint _OffsetOffset = -1;
 
     public ref Vector Offset
     {
         get
         {
-            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x193297AFFE159136);
-            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x193297AFFE159136);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset);
         }
     }
-    private static nint? _RotationOffsetOffset;
+    private static nint _RotationOffsetOffset = -1;
 
     public ref float RotationOffset
     {
         get
         {
-            _RotationOffsetOffset = _RotationOffsetOffset ?? Schema.GetOffset(0x193297AFF811C66E);
-            return ref _Handle.AsRef<float>(_RotationOffsetOffset!.Value);
+            if (_RotationOffsetOffset == -1) _RotationOffsetOffset = Schema.GetOffset(0x193297AFF811C66E);
+            return ref _Handle.AsRef<float>(_RotationOffsetOffset);
         }
     }
-    private static nint? _ProgressionOffset;
+    private static nint _ProgressionOffset = -1;
 
     public ref float Progression
     {
         get
         {
-            _ProgressionOffset = _ProgressionOffset ?? Schema.GetOffset(0x193297AF4C9E1656);
-            return ref _Handle.AsRef<float>(_ProgressionOffset!.Value);
+            if (_ProgressionOffset == -1) _ProgressionOffset = Schema.GetOffset(0x193297AF4C9E1656);
+            return ref _Handle.AsRef<float>(_ProgressionOffset);
         }
     }
 

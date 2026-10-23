@@ -16,44 +16,44 @@ internal partial class CMaterialDrawDescriptor__RigidMeshPart_tImpl : SchemaClas
 {
     public CMaterialDrawDescriptor__RigidMeshPart_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _RigidBLASIndexOffset;
+    private static nint _RigidBLASIndexOffset = -1;
 
     public ref ushort RigidBLASIndex
     {
         get
         {
-            _RigidBLASIndexOffset = _RigidBLASIndexOffset ?? Schema.GetOffset(0xD375EED8EE87873E);
-            return ref _Handle.AsRef<ushort>(_RigidBLASIndexOffset!.Value);
+            if (_RigidBLASIndexOffset == -1) _RigidBLASIndexOffset = Schema.GetOffset(0xD375EED8EE87873E);
+            return ref _Handle.AsRef<ushort>(_RigidBLASIndexOffset);
         }
     }
-    private static nint? _BoneIndexOffset;
+    private static nint _BoneIndexOffset = -1;
 
     public ref short BoneIndex
     {
         get
         {
-            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xD375EED89F407B79);
-            return ref _Handle.AsRef<short>(_BoneIndexOffset!.Value);
+            if (_BoneIndexOffset == -1) _BoneIndexOffset = Schema.GetOffset(0xD375EED89F407B79);
+            return ref _Handle.AsRef<short>(_BoneIndexOffset);
         }
     }
-    private static nint? _StartIndexOffsetOffset;
+    private static nint _StartIndexOffsetOffset = -1;
 
     public ref uint StartIndexOffset
     {
         get
         {
-            _StartIndexOffsetOffset = _StartIndexOffsetOffset ?? Schema.GetOffset(0xD375EED891EF1626);
-            return ref _Handle.AsRef<uint>(_StartIndexOffsetOffset!.Value);
+            if (_StartIndexOffsetOffset == -1) _StartIndexOffsetOffset = Schema.GetOffset(0xD375EED891EF1626);
+            return ref _Handle.AsRef<uint>(_StartIndexOffsetOffset);
         }
     }
-    private static nint? _PrimitiveCountOffset;
+    private static nint _PrimitiveCountOffset = -1;
 
     public ref uint PrimitiveCount
     {
         get
         {
-            _PrimitiveCountOffset = _PrimitiveCountOffset ?? Schema.GetOffset(0xD375EED8B627A621);
-            return ref _Handle.AsRef<uint>(_PrimitiveCountOffset!.Value);
+            if (_PrimitiveCountOffset == -1) _PrimitiveCountOffset = Schema.GetOffset(0xD375EED8B627A621);
+            return ref _Handle.AsRef<uint>(_PrimitiveCountOffset);
         }
     }
 

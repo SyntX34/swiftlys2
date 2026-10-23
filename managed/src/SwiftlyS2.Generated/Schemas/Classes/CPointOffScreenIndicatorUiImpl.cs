@@ -16,45 +16,45 @@ internal partial class CPointOffScreenIndicatorUiImpl : C_PointClientUIWorldPane
 {
     public CPointOffScreenIndicatorUiImpl(nint handle) : base(handle) { }
 
-    private static nint? _BeenEnabledOffset;
+    private static nint _BeenEnabledOffset = -1;
 
     public ref bool BeenEnabled
     {
         get
         {
-            _BeenEnabledOffset = _BeenEnabledOffset ?? Schema.GetOffset(0x25A993307631D6F8);
-            return ref _Handle.AsRef<bool>(_BeenEnabledOffset!.Value);
+            if (_BeenEnabledOffset == -1) _BeenEnabledOffset = Schema.GetOffset(0x25A993307631D6F8);
+            return ref _Handle.AsRef<bool>(_BeenEnabledOffset);
         }
     }
-    private static nint? _HideOffset;
+    private static nint _HideOffset = -1;
 
     public ref bool Hide
     {
         get
         {
-            _HideOffset = _HideOffset ?? Schema.GetOffset(0x25A993302D926E0D);
-            return ref _Handle.AsRef<bool>(_HideOffset!.Value);
+            if (_HideOffset == -1) _HideOffset = Schema.GetOffset(0x25A993302D926E0D);
+            return ref _Handle.AsRef<bool>(_HideOffset);
         }
     }
-    private static nint? _SeenTargetTimeOffset;
+    private static nint _SeenTargetTimeOffset = -1;
 
     public ref float SeenTargetTime
     {
         get
         {
-            _SeenTargetTimeOffset = _SeenTargetTimeOffset ?? Schema.GetOffset(0x25A99330DCFFF61C);
-            return ref _Handle.AsRef<float>(_SeenTargetTimeOffset!.Value);
+            if (_SeenTargetTimeOffset == -1) _SeenTargetTimeOffset = Schema.GetOffset(0x25A99330DCFFF61C);
+            return ref _Handle.AsRef<float>(_SeenTargetTimeOffset);
         }
     }
-    private static nint? _TargetPanelOffset;
+    private static nint _TargetPanelOffset = -1;
     private C_PointClientUIWorldPanelImpl? _TargetPanelInstance;
 
     public C_PointClientUIWorldPanel? TargetPanel
     {
         get
         {
-            _TargetPanelOffset = _TargetPanelOffset ?? Schema.GetOffset(0x25A99330678AAF10);
-            var ptr = _Handle.Read<nint>(_TargetPanelOffset!.Value);
+            if (_TargetPanelOffset == -1) _TargetPanelOffset = Schema.GetOffset(0x25A99330678AAF10);
+            var ptr = _Handle.Read<nint>(_TargetPanelOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _TargetPanelInstance ??= new C_PointClientUIWorldPanelImpl(0);
             instance.DangerousSetHandle(ptr);

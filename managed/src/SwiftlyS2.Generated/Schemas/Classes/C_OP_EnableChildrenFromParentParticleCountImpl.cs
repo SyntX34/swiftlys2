@@ -16,67 +16,67 @@ internal partial class C_OP_EnableChildrenFromParentParticleCountImpl : CParticl
 {
     public C_OP_EnableChildrenFromParentParticleCountImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChildGroupIDOffset;
+    private static nint _ChildGroupIDOffset = -1;
 
     public ref int ChildGroupID
     {
         get
         {
-            _ChildGroupIDOffset = _ChildGroupIDOffset ?? Schema.GetOffset(0xDF13D5F2E3F3C965);
-            return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
+            if (_ChildGroupIDOffset == -1) _ChildGroupIDOffset = Schema.GetOffset(0xDF13D5F2E3F3C965);
+            return ref _Handle.AsRef<int>(_ChildGroupIDOffset);
         }
     }
-    private static nint? _FirstChildOffset;
+    private static nint _FirstChildOffset = -1;
 
     public ref int FirstChild
     {
         get
         {
-            _FirstChildOffset = _FirstChildOffset ?? Schema.GetOffset(0xDF13D5F22DF4A8BD);
-            return ref _Handle.AsRef<int>(_FirstChildOffset!.Value);
+            if (_FirstChildOffset == -1) _FirstChildOffset = Schema.GetOffset(0xDF13D5F22DF4A8BD);
+            return ref _Handle.AsRef<int>(_FirstChildOffset);
         }
     }
-    private static nint? _NumChildrenToEnableOffset;
+    private static nint _NumChildrenToEnableOffset = -1;
     private CParticleCollectionFloatInputImpl? _NumChildrenToEnableInstance;
 
     public CParticleCollectionFloatInput NumChildrenToEnable
     {
         get
         {
-            _NumChildrenToEnableOffset = _NumChildrenToEnableOffset ?? Schema.GetOffset(0xDF13D5F28039247A);
+            if (_NumChildrenToEnableOffset == -1) _NumChildrenToEnableOffset = Schema.GetOffset(0xDF13D5F28039247A);
             var instance = _NumChildrenToEnableInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _NumChildrenToEnableOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NumChildrenToEnableOffset);
             return instance;
         }
     }
-    private static nint? _DisableChildrenOffset;
+    private static nint _DisableChildrenOffset = -1;
 
     public ref bool DisableChildren
     {
         get
         {
-            _DisableChildrenOffset = _DisableChildrenOffset ?? Schema.GetOffset(0xDF13D5F2F13DBFCC);
-            return ref _Handle.AsRef<bool>(_DisableChildrenOffset!.Value);
+            if (_DisableChildrenOffset == -1) _DisableChildrenOffset = Schema.GetOffset(0xDF13D5F2F13DBFCC);
+            return ref _Handle.AsRef<bool>(_DisableChildrenOffset);
         }
     }
-    private static nint? _PlayEndcapOnStopOffset;
+    private static nint _PlayEndcapOnStopOffset = -1;
 
     public ref bool PlayEndcapOnStop
     {
         get
         {
-            _PlayEndcapOnStopOffset = _PlayEndcapOnStopOffset ?? Schema.GetOffset(0xDF13D5F2CEC82FA1);
-            return ref _Handle.AsRef<bool>(_PlayEndcapOnStopOffset!.Value);
+            if (_PlayEndcapOnStopOffset == -1) _PlayEndcapOnStopOffset = Schema.GetOffset(0xDF13D5F2CEC82FA1);
+            return ref _Handle.AsRef<bool>(_PlayEndcapOnStopOffset);
         }
     }
-    private static nint? _DestroyImmediatelyOffset;
+    private static nint _DestroyImmediatelyOffset = -1;
 
     public ref bool DestroyImmediately
     {
         get
         {
-            _DestroyImmediatelyOffset = _DestroyImmediatelyOffset ?? Schema.GetOffset(0xDF13D5F275F43101);
-            return ref _Handle.AsRef<bool>(_DestroyImmediatelyOffset!.Value);
+            if (_DestroyImmediatelyOffset == -1) _DestroyImmediatelyOffset = Schema.GetOffset(0xDF13D5F275F43101);
+            return ref _Handle.AsRef<bool>(_DestroyImmediatelyOffset);
         }
     }
 

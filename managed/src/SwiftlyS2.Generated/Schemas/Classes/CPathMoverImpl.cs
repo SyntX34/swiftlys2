@@ -16,74 +16,74 @@ internal partial class CPathMoverImpl : CPathWithDynamicNodesImpl, CPathMover
 {
     public CPathMoverImpl(nint handle) : base(handle) { }
 
-    private static nint? _MoversOffset;
+    private static nint _MoversOffset = -1;
 
     public ref CUtlVector<CHandle<CFuncMover>> Movers
     {
         get
         {
-            _MoversOffset = _MoversOffset ?? Schema.GetOffset(0x459CE4C65C9C4C93);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CFuncMover>>>(_MoversOffset!.Value);
+            if (_MoversOffset == -1) _MoversOffset = Schema.GetOffset(0x459CE4C65C9C4C93);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CFuncMover>>>(_MoversOffset);
         }
     }
-    private static nint? _SpawnersOffset;
+    private static nint _SpawnersOffset = -1;
 
     public ref CUtlVector<CHandle<CPathMoverEntitySpawner>> Spawners
     {
         get
         {
-            _SpawnersOffset = _SpawnersOffset ?? Schema.GetOffset(0x459CE4C66B28B874);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CPathMoverEntitySpawner>>>(_SpawnersOffset!.Value);
+            if (_SpawnersOffset == -1) _SpawnersOffset = Schema.GetOffset(0x459CE4C66B28B874);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CPathMoverEntitySpawner>>>(_SpawnersOffset);
         }
     }
-    private static nint? _MoverSpawnerNameOffset;
+    private static nint _MoverSpawnerNameOffset = -1;
 
     public string MoverSpawnerName
     {
         get
         {
-            _MoverSpawnerNameOffset = _MoverSpawnerNameOffset ?? Schema.GetOffset(0x459CE4C65C6B2861);
-            return Schema.GetString(_Handle.Read<nint>(_MoverSpawnerNameOffset!.Value));
+            if (_MoverSpawnerNameOffset == -1) _MoverSpawnerNameOffset = Schema.GetOffset(0x459CE4C65C6B2861);
+            return Schema.GetString(_Handle.Read<nint>(_MoverSpawnerNameOffset));
         }
         set
         {
-            _MoverSpawnerNameOffset = _MoverSpawnerNameOffset ?? Schema.GetOffset(0x459CE4C65C6B2861);
-            Schema.SetString(_Handle, _MoverSpawnerNameOffset!.Value, value);
+            if (_MoverSpawnerNameOffset == -1) _MoverSpawnerNameOffset = Schema.GetOffset(0x459CE4C65C6B2861);
+            Schema.SetString(_Handle, _MoverSpawnerNameOffset, value);
         }
     }
-    private static nint? _MoverRouterOffset;
+    private static nint _MoverRouterOffset = -1;
 
     public ref CHandle<CFuncMoverRouter> MoverRouter
     {
         get
         {
-            _MoverRouterOffset = _MoverRouterOffset ?? Schema.GetOffset(0x459CE4C6BC5064D1);
-            return ref _Handle.AsRef<CHandle<CFuncMoverRouter>>(_MoverRouterOffset!.Value);
+            if (_MoverRouterOffset == -1) _MoverRouterOffset = Schema.GetOffset(0x459CE4C6BC5064D1);
+            return ref _Handle.AsRef<CHandle<CFuncMoverRouter>>(_MoverRouterOffset);
         }
     }
-    private static nint? _MoverRouterNameOffset;
+    private static nint _MoverRouterNameOffset = -1;
 
     public string MoverRouterName
     {
         get
         {
-            _MoverRouterNameOffset = _MoverRouterNameOffset ?? Schema.GetOffset(0x459CE4C68D3E59D0);
-            return Schema.GetString(_Handle.Read<nint>(_MoverRouterNameOffset!.Value));
+            if (_MoverRouterNameOffset == -1) _MoverRouterNameOffset = Schema.GetOffset(0x459CE4C68D3E59D0);
+            return Schema.GetString(_Handle.Read<nint>(_MoverRouterNameOffset));
         }
         set
         {
-            _MoverRouterNameOffset = _MoverRouterNameOffset ?? Schema.GetOffset(0x459CE4C68D3E59D0);
-            Schema.SetString(_Handle, _MoverRouterNameOffset!.Value, value);
+            if (_MoverRouterNameOffset == -1) _MoverRouterNameOffset = Schema.GetOffset(0x459CE4C68D3E59D0);
+            Schema.SetString(_Handle, _MoverRouterNameOffset, value);
         }
     }
-    private static nint? _SampleSpacingOffset;
+    private static nint _SampleSpacingOffset = -1;
 
     public ref float SampleSpacing
     {
         get
         {
-            _SampleSpacingOffset = _SampleSpacingOffset ?? Schema.GetOffset(0x459CE4C6F46CEE26);
-            return ref _Handle.AsRef<float>(_SampleSpacingOffset!.Value);
+            if (_SampleSpacingOffset == -1) _SampleSpacingOffset = Schema.GetOffset(0x459CE4C6F46CEE26);
+            return ref _Handle.AsRef<float>(_SampleSpacingOffset);
         }
     }
 

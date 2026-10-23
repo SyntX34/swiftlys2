@@ -16,14 +16,14 @@ internal partial class CDynamicPropGraphControllerImpl : CAnimGraphControllerBas
 {
     public CDynamicPropGraphControllerImpl(nint handle) : base(handle) { }
 
-    private static nint? _ActionStateOffset;
+    private static nint _ActionStateOffset = -1;
 
     public ref CAnimGraph2ParamOptionalRefCGlobalSymbol ActionState
     {
         get
         {
-            _ActionStateOffset = _ActionStateOffset ?? Schema.GetOffset(0xFC377D0227AA6025);
-            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefCGlobalSymbol>(_ActionStateOffset!.Value);
+            if (_ActionStateOffset == -1) _ActionStateOffset = Schema.GetOffset(0xFC377D0227AA6025);
+            return ref _Handle.AsRef<CAnimGraph2ParamOptionalRefCGlobalSymbol>(_ActionStateOffset);
         }
     }
 

@@ -16,44 +16,44 @@ internal partial class CMarkupVolumeWithRefImpl : CMarkupVolumeTaggedImpl, CMark
 {
     public CMarkupVolumeWithRefImpl(nint handle) : base(handle) { }
 
-    private static nint? _UseRefOffset;
+    private static nint _UseRefOffset = -1;
 
     public ref bool UseRef
     {
         get
         {
-            _UseRefOffset = _UseRefOffset ?? Schema.GetOffset(0x12AA97857F572B29);
-            return ref _Handle.AsRef<bool>(_UseRefOffset!.Value);
+            if (_UseRefOffset == -1) _UseRefOffset = Schema.GetOffset(0x12AA97857F572B29);
+            return ref _Handle.AsRef<bool>(_UseRefOffset);
         }
     }
-    private static nint? _RefPosEntitySpaceOffset;
+    private static nint _RefPosEntitySpaceOffset = -1;
 
     public ref Vector RefPosEntitySpace
     {
         get
         {
-            _RefPosEntitySpaceOffset = _RefPosEntitySpaceOffset ?? Schema.GetOffset(0x12AA978532BBDFAB);
-            return ref _Handle.AsRef<Vector>(_RefPosEntitySpaceOffset!.Value);
+            if (_RefPosEntitySpaceOffset == -1) _RefPosEntitySpaceOffset = Schema.GetOffset(0x12AA978532BBDFAB);
+            return ref _Handle.AsRef<Vector>(_RefPosEntitySpaceOffset);
         }
     }
-    private static nint? _RefPosWorldSpaceOffset;
+    private static nint _RefPosWorldSpaceOffset = -1;
 
     public ref Vector RefPosWorldSpace
     {
         get
         {
-            _RefPosWorldSpaceOffset = _RefPosWorldSpaceOffset ?? Schema.GetOffset(0x12AA97856139C236);
-            return ref _Handle.AsRef<Vector>(_RefPosWorldSpaceOffset!.Value);
+            if (_RefPosWorldSpaceOffset == -1) _RefPosWorldSpaceOffset = Schema.GetOffset(0x12AA97856139C236);
+            return ref _Handle.AsRef<Vector>(_RefPosWorldSpaceOffset);
         }
     }
-    private static nint? _RefDotOffset;
+    private static nint _RefDotOffset = -1;
 
     public ref float RefDot
     {
         get
         {
-            _RefDotOffset = _RefDotOffset ?? Schema.GetOffset(0x12AA9785584DB957);
-            return ref _Handle.AsRef<float>(_RefDotOffset!.Value);
+            if (_RefDotOffset == -1) _RefDotOffset = Schema.GetOffset(0x12AA9785584DB957);
+            return ref _Handle.AsRef<float>(_RefDotOffset);
         }
     }
 

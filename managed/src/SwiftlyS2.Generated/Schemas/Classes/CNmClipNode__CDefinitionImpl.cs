@@ -16,87 +16,87 @@ internal partial class CNmClipNode__CDefinitionImpl : CNmClipReferenceNode__CDef
 {
     public CNmClipNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _PlayInReverseValueNodeIdxOffset;
+    private static nint _PlayInReverseValueNodeIdxOffset = -1;
 
     public ref short PlayInReverseValueNodeIdx
     {
         get
         {
-            _PlayInReverseValueNodeIdxOffset = _PlayInReverseValueNodeIdxOffset ?? Schema.GetOffset(0x9BA44A131BE16D82);
-            return ref _Handle.AsRef<short>(_PlayInReverseValueNodeIdxOffset!.Value);
+            if (_PlayInReverseValueNodeIdxOffset == -1) _PlayInReverseValueNodeIdxOffset = Schema.GetOffset(0x9BA44A131BE16D82);
+            return ref _Handle.AsRef<short>(_PlayInReverseValueNodeIdxOffset);
         }
     }
-    private static nint? _SampleRootMotionOffset;
+    private static nint _SampleRootMotionOffset = -1;
 
     public ref bool SampleRootMotion
     {
         get
         {
-            _SampleRootMotionOffset = _SampleRootMotionOffset ?? Schema.GetOffset(0x9BA44A139443A5E9);
-            return ref _Handle.AsRef<bool>(_SampleRootMotionOffset!.Value);
+            if (_SampleRootMotionOffset == -1) _SampleRootMotionOffset = Schema.GetOffset(0x9BA44A139443A5E9);
+            return ref _Handle.AsRef<bool>(_SampleRootMotionOffset);
         }
     }
-    private static nint? _AllowLoopingOffset;
+    private static nint _AllowLoopingOffset = -1;
 
     public ref bool AllowLooping
     {
         get
         {
-            _AllowLoopingOffset = _AllowLoopingOffset ?? Schema.GetOffset(0x9BA44A13FEB26D98);
-            return ref _Handle.AsRef<bool>(_AllowLoopingOffset!.Value);
+            if (_AllowLoopingOffset == -1) _AllowLoopingOffset = Schema.GetOffset(0x9BA44A13FEB26D98);
+            return ref _Handle.AsRef<bool>(_AllowLoopingOffset);
         }
     }
-    private static nint? _DataSlotIdxOffset;
+    private static nint _DataSlotIdxOffset = -1;
 
     public ref short DataSlotIdx
     {
         get
         {
-            _DataSlotIdxOffset = _DataSlotIdxOffset ?? Schema.GetOffset(0x9BA44A13B1C15B68);
-            return ref _Handle.AsRef<short>(_DataSlotIdxOffset!.Value);
+            if (_DataSlotIdxOffset == -1) _DataSlotIdxOffset = Schema.GetOffset(0x9BA44A13B1C15B68);
+            return ref _Handle.AsRef<short>(_DataSlotIdxOffset);
         }
     }
-    private static nint? _ResetTimeValueNodeIdxOffset;
+    private static nint _ResetTimeValueNodeIdxOffset = -1;
 
     public ref short ResetTimeValueNodeIdx
     {
         get
         {
-            _ResetTimeValueNodeIdxOffset = _ResetTimeValueNodeIdxOffset ?? Schema.GetOffset(0x9BA44A13698930E1);
-            return ref _Handle.AsRef<short>(_ResetTimeValueNodeIdxOffset!.Value);
+            if (_ResetTimeValueNodeIdxOffset == -1) _ResetTimeValueNodeIdxOffset = Schema.GetOffset(0x9BA44A13698930E1);
+            return ref _Handle.AsRef<short>(_ResetTimeValueNodeIdxOffset);
         }
     }
-    private static nint? _GraphEventsOffset;
+    private static nint _GraphEventsOffset = -1;
     private SchemaUntypedField? _GraphEventsInstance;
 
     public SchemaUntypedField GraphEvents
     {
         get
         {
-            _GraphEventsOffset = _GraphEventsOffset ?? Schema.GetOffset(0x9BA44A1314A73162);
+            if (_GraphEventsOffset == -1) _GraphEventsOffset = Schema.GetOffset(0x9BA44A1314A73162);
             var instance = _GraphEventsInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _GraphEventsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GraphEventsOffset);
             return instance;
         }
     }
-    private static nint? _SpeedMultiplierOffset;
+    private static nint _SpeedMultiplierOffset = -1;
 
     public ref float SpeedMultiplier
     {
         get
         {
-            _SpeedMultiplierOffset = _SpeedMultiplierOffset ?? Schema.GetOffset(0x9BA44A135D5B304D);
-            return ref _Handle.AsRef<float>(_SpeedMultiplierOffset!.Value);
+            if (_SpeedMultiplierOffset == -1) _SpeedMultiplierOffset = Schema.GetOffset(0x9BA44A135D5B304D);
+            return ref _Handle.AsRef<float>(_SpeedMultiplierOffset);
         }
     }
-    private static nint? _StartSyncEventOffsetOffset;
+    private static nint _StartSyncEventOffsetOffset = -1;
 
     public ref int StartSyncEventOffset
     {
         get
         {
-            _StartSyncEventOffsetOffset = _StartSyncEventOffsetOffset ?? Schema.GetOffset(0x9BA44A138A6F2A97);
-            return ref _Handle.AsRef<int>(_StartSyncEventOffsetOffset!.Value);
+            if (_StartSyncEventOffsetOffset == -1) _StartSyncEventOffsetOffset = Schema.GetOffset(0x9BA44A138A6F2A97);
+            return ref _Handle.AsRef<int>(_StartSyncEventOffsetOffset);
         }
     }
 

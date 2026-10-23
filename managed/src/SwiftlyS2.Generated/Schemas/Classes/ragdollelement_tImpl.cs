@@ -16,44 +16,44 @@ internal partial class ragdollelement_tImpl : SchemaClass, ragdollelement_t
 {
     public ragdollelement_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _OriginParentSpaceOffset;
+    private static nint _OriginParentSpaceOffset = -1;
 
     public ref Vector OriginParentSpace
     {
         get
         {
-            _OriginParentSpaceOffset = _OriginParentSpaceOffset ?? Schema.GetOffset(0x6DFDA0AB476AA8AB);
-            return ref _Handle.AsRef<Vector>(_OriginParentSpaceOffset!.Value);
+            if (_OriginParentSpaceOffset == -1) _OriginParentSpaceOffset = Schema.GetOffset(0x6DFDA0AB476AA8AB);
+            return ref _Handle.AsRef<Vector>(_OriginParentSpaceOffset);
         }
     }
-    private static nint? _ParentIndexOffset;
+    private static nint _ParentIndexOffset = -1;
 
     public ref int ParentIndex
     {
         get
         {
-            _ParentIndexOffset = _ParentIndexOffset ?? Schema.GetOffset(0x6DFDA0ABFE49C863);
-            return ref _Handle.AsRef<int>(_ParentIndexOffset!.Value);
+            if (_ParentIndexOffset == -1) _ParentIndexOffset = Schema.GetOffset(0x6DFDA0ABFE49C863);
+            return ref _Handle.AsRef<int>(_ParentIndexOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x6DFDA0AB5ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x6DFDA0AB5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _HeightOffset;
+    private static nint _HeightOffset = -1;
 
     public ref int Height
     {
         get
         {
-            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0x6DFDA0ABCAB61C56);
-            return ref _Handle.AsRef<int>(_HeightOffset!.Value);
+            if (_HeightOffset == -1) _HeightOffset = Schema.GetOffset(0x6DFDA0ABCAB61C56);
+            return ref _Handle.AsRef<int>(_HeightOffset);
         }
     }
 

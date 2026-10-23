@@ -16,24 +16,24 @@ internal partial class CFlexRuleImpl : SchemaClass, CFlexRule
 {
     public CFlexRuleImpl(nint handle) : base(handle) { }
 
-    private static nint? _FlexOffset;
+    private static nint _FlexOffset = -1;
 
     public ref int Flex
     {
         get
         {
-            _FlexOffset = _FlexOffset ?? Schema.GetOffset(0xA92320A3D3DC2E86);
-            return ref _Handle.AsRef<int>(_FlexOffset!.Value);
+            if (_FlexOffset == -1) _FlexOffset = Schema.GetOffset(0xA92320A3D3DC2E86);
+            return ref _Handle.AsRef<int>(_FlexOffset);
         }
     }
-    private static nint? _FlexOpsOffset;
+    private static nint _FlexOpsOffset = -1;
 
     public ref CUtlVector<CFlexOp> FlexOps
     {
         get
         {
-            _FlexOpsOffset = _FlexOpsOffset ?? Schema.GetOffset(0xA92320A3F3F4D8D2);
-            return ref _Handle.AsRef<CUtlVector<CFlexOp>>(_FlexOpsOffset!.Value);
+            if (_FlexOpsOffset == -1) _FlexOpsOffset = Schema.GetOffset(0xA92320A3F3F4D8D2);
+            return ref _Handle.AsRef<CUtlVector<CFlexOp>>(_FlexOpsOffset);
         }
     }
 

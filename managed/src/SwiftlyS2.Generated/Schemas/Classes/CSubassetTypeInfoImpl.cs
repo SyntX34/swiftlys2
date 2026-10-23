@@ -16,34 +16,34 @@ internal partial class CSubassetTypeInfoImpl : SchemaClass, CSubassetTypeInfo
 {
     public CSubassetTypeInfoImpl(nint handle) : base(handle) { }
 
-    private static nint? _FollowReferencesOffset;
+    private static nint _FollowReferencesOffset = -1;
 
     public ref bool FollowReferences
     {
         get
         {
-            _FollowReferencesOffset = _FollowReferencesOffset ?? Schema.GetOffset(0x3F92DA146F6EB35A);
-            return ref _Handle.AsRef<bool>(_FollowReferencesOffset!.Value);
+            if (_FollowReferencesOffset == -1) _FollowReferencesOffset = Schema.GetOffset(0x3F92DA146F6EB35A);
+            return ref _Handle.AsRef<bool>(_FollowReferencesOffset);
         }
     }
-    private static nint? _AllowDefinitionsOffset;
+    private static nint _AllowDefinitionsOffset = -1;
 
     public ref bool AllowDefinitions
     {
         get
         {
-            _AllowDefinitionsOffset = _AllowDefinitionsOffset ?? Schema.GetOffset(0x3F92DA14C74D6030);
-            return ref _Handle.AsRef<bool>(_AllowDefinitionsOffset!.Value);
+            if (_AllowDefinitionsOffset == -1) _AllowDefinitionsOffset = Schema.GetOffset(0x3F92DA14C74D6030);
+            return ref _Handle.AsRef<bool>(_AllowDefinitionsOffset);
         }
     }
-    private static nint? _AllowReferencesOffset;
+    private static nint _AllowReferencesOffset = -1;
 
     public ref bool AllowReferences
     {
         get
         {
-            _AllowReferencesOffset = _AllowReferencesOffset ?? Schema.GetOffset(0x3F92DA149BE87EDC);
-            return ref _Handle.AsRef<bool>(_AllowReferencesOffset!.Value);
+            if (_AllowReferencesOffset == -1) _AllowReferencesOffset = Schema.GetOffset(0x3F92DA149BE87EDC);
+            return ref _Handle.AsRef<bool>(_AllowReferencesOffset);
         }
     }
 

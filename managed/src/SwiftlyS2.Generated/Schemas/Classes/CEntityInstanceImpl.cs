@@ -16,45 +16,45 @@ internal partial class CEntityInstanceImpl : SchemaClass, CEntityInstance
 {
     public CEntityInstanceImpl(nint handle) : base(handle) { }
 
-    private static nint? _PrivateVScriptsOffset;
+    private static nint _PrivateVScriptsOffset = -1;
 
     public string PrivateVScripts
     {
         get
         {
-            _PrivateVScriptsOffset = _PrivateVScriptsOffset ?? Schema.GetOffset(0xB6DD442EB087F3B2);
-            return Schema.GetString(_Handle.Read<nint>(_PrivateVScriptsOffset!.Value));
+            if (_PrivateVScriptsOffset == -1) _PrivateVScriptsOffset = Schema.GetOffset(0xB6DD442EB087F3B2);
+            return Schema.GetString(_Handle.Read<nint>(_PrivateVScriptsOffset));
         }
         set
         {
-            _PrivateVScriptsOffset = _PrivateVScriptsOffset ?? Schema.GetOffset(0xB6DD442EB087F3B2);
-            Schema.SetString(_Handle, _PrivateVScriptsOffset!.Value, value);
+            if (_PrivateVScriptsOffset == -1) _PrivateVScriptsOffset = Schema.GetOffset(0xB6DD442EB087F3B2);
+            Schema.SetString(_Handle, _PrivateVScriptsOffset, value);
         }
     }
-    private static nint? _EntityOffset;
+    private static nint _EntityOffset = -1;
     private CEntityIdentityImpl? _EntityInstance;
 
     public CEntityIdentity? Entity
     {
         get
         {
-            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xB6DD442EA8A45978);
-            var ptr = _Handle.Read<nint>(_EntityOffset!.Value);
+            if (_EntityOffset == -1) _EntityOffset = Schema.GetOffset(0xB6DD442EA8A45978);
+            var ptr = _Handle.Read<nint>(_EntityOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _EntityInstance ??= new CEntityIdentityImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _CScriptComponentOffset;
+    private static nint _CScriptComponentOffset = -1;
     private CScriptComponentImpl? _CScriptComponentInstance;
 
     public CScriptComponent? CScriptComponent
     {
         get
         {
-            _CScriptComponentOffset = _CScriptComponentOffset ?? Schema.GetOffset(0xB6DD442E3F4202B4);
-            var ptr = _Handle.Read<nint>(_CScriptComponentOffset!.Value);
+            if (_CScriptComponentOffset == -1) _CScriptComponentOffset = Schema.GetOffset(0xB6DD442E3F4202B4);
+            var ptr = _Handle.Read<nint>(_CScriptComponentOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _CScriptComponentInstance ??= new CScriptComponentImpl(0);
             instance.DangerousSetHandle(ptr);

@@ -16,14 +16,14 @@ internal partial class CNmBlendSpace1DImpl : SchemaClass, CNmBlendSpace1D
 {
     public CNmBlendSpace1DImpl(nint handle) : base(handle) { }
 
-    private static nint? _PointsOffset;
+    private static nint _PointsOffset = -1;
 
     public ref CUtlVector<CNmBlendSpace1D__Point_t> Points
     {
         get
         {
-            _PointsOffset = _PointsOffset ?? Schema.GetOffset(0xF9411CE118915D66);
-            return ref _Handle.AsRef<CUtlVector<CNmBlendSpace1D__Point_t>>(_PointsOffset!.Value);
+            if (_PointsOffset == -1) _PointsOffset = Schema.GetOffset(0xF9411CE118915D66);
+            return ref _Handle.AsRef<CUtlVector<CNmBlendSpace1D__Point_t>>(_PointsOffset);
         }
     }
 

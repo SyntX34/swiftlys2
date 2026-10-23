@@ -16,26 +16,26 @@ internal partial class C_OP_ChooseRandomChildrenInGroupImpl : CParticleFunctionP
 {
     public C_OP_ChooseRandomChildrenInGroupImpl(nint handle) : base(handle) { }
 
-    private static nint? _ChildGroupIDOffset;
+    private static nint _ChildGroupIDOffset = -1;
 
     public ref int ChildGroupID
     {
         get
         {
-            _ChildGroupIDOffset = _ChildGroupIDOffset ?? Schema.GetOffset(0xF79CD816E3F3C965);
-            return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
+            if (_ChildGroupIDOffset == -1) _ChildGroupIDOffset = Schema.GetOffset(0xF79CD816E3F3C965);
+            return ref _Handle.AsRef<int>(_ChildGroupIDOffset);
         }
     }
-    private static nint? _NumberOfChildrenOffset;
+    private static nint _NumberOfChildrenOffset = -1;
     private CParticleCollectionFloatInputImpl? _NumberOfChildrenInstance;
 
     public CParticleCollectionFloatInput NumberOfChildren
     {
         get
         {
-            _NumberOfChildrenOffset = _NumberOfChildrenOffset ?? Schema.GetOffset(0xF79CD8160275D868);
+            if (_NumberOfChildrenOffset == -1) _NumberOfChildrenOffset = Schema.GetOffset(0xF79CD8160275D868);
             var instance = _NumberOfChildrenInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _NumberOfChildrenOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NumberOfChildrenOffset);
             return instance;
         }
     }

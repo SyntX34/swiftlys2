@@ -16,49 +16,49 @@ internal partial class C_SoundAreaEntityBaseImpl : C_BaseEntityImpl, C_SoundArea
 {
     public C_SoundAreaEntityBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _DisabledOffset;
+    private static nint _DisabledOffset = -1;
 
     public ref bool Disabled
     {
         get
         {
-            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xA9821CE13A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0xA9821CE13A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset);
         }
     }
-    private static nint? _WasEnabledOffset;
+    private static nint _WasEnabledOffset = -1;
 
     public ref bool WasEnabled
     {
         get
         {
-            _WasEnabledOffset = _WasEnabledOffset ?? Schema.GetOffset(0xA9821CE17399C3FF);
-            return ref _Handle.AsRef<bool>(_WasEnabledOffset!.Value);
+            if (_WasEnabledOffset == -1) _WasEnabledOffset = Schema.GetOffset(0xA9821CE17399C3FF);
+            return ref _Handle.AsRef<bool>(_WasEnabledOffset);
         }
     }
-    private static nint? _SoundAreaTypeOffset;
+    private static nint _SoundAreaTypeOffset = -1;
 
     public string SoundAreaType
     {
         get
         {
-            _SoundAreaTypeOffset = _SoundAreaTypeOffset ?? Schema.GetOffset(0xA9821CE1227612E5);
-            return Schema.GetString(_Handle.Read<nint>(_SoundAreaTypeOffset!.Value));
+            if (_SoundAreaTypeOffset == -1) _SoundAreaTypeOffset = Schema.GetOffset(0xA9821CE1227612E5);
+            return Schema.GetString(_Handle.Read<nint>(_SoundAreaTypeOffset));
         }
         set
         {
-            _SoundAreaTypeOffset = _SoundAreaTypeOffset ?? Schema.GetOffset(0xA9821CE1227612E5);
-            Schema.SetString(_Handle, _SoundAreaTypeOffset!.Value, value);
+            if (_SoundAreaTypeOffset == -1) _SoundAreaTypeOffset = Schema.GetOffset(0xA9821CE1227612E5);
+            Schema.SetString(_Handle, _SoundAreaTypeOffset, value);
         }
     }
-    private static nint? _PosOffset;
+    private static nint _PosOffset = -1;
 
     public ref Vector Pos
     {
         get
         {
-            _PosOffset = _PosOffset ?? Schema.GetOffset(0xA9821CE1DE9CFC5D);
-            return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+            if (_PosOffset == -1) _PosOffset = Schema.GetOffset(0xA9821CE1DE9CFC5D);
+            return ref _Handle.AsRef<Vector>(_PosOffset);
         }
     }
 

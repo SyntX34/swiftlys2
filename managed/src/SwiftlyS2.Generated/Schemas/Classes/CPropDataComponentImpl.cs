@@ -16,114 +16,114 @@ internal partial class CPropDataComponentImpl : CEntityComponentImpl, CPropDataC
 {
     public CPropDataComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? _DmgModBulletOffset;
+    private static nint _DmgModBulletOffset = -1;
 
     public ref float DmgModBullet
     {
         get
         {
-            _DmgModBulletOffset = _DmgModBulletOffset ?? Schema.GetOffset(0x1CFE413EBB77495F);
-            return ref _Handle.AsRef<float>(_DmgModBulletOffset!.Value);
+            if (_DmgModBulletOffset == -1) _DmgModBulletOffset = Schema.GetOffset(0x1CFE413EBB77495F);
+            return ref _Handle.AsRef<float>(_DmgModBulletOffset);
         }
     }
-    private static nint? _DmgModClubOffset;
+    private static nint _DmgModClubOffset = -1;
 
     public ref float DmgModClub
     {
         get
         {
-            _DmgModClubOffset = _DmgModClubOffset ?? Schema.GetOffset(0x1CFE413E1C404FB7);
-            return ref _Handle.AsRef<float>(_DmgModClubOffset!.Value);
+            if (_DmgModClubOffset == -1) _DmgModClubOffset = Schema.GetOffset(0x1CFE413E1C404FB7);
+            return ref _Handle.AsRef<float>(_DmgModClubOffset);
         }
     }
-    private static nint? _DmgModExplosiveOffset;
+    private static nint _DmgModExplosiveOffset = -1;
 
     public ref float DmgModExplosive
     {
         get
         {
-            _DmgModExplosiveOffset = _DmgModExplosiveOffset ?? Schema.GetOffset(0x1CFE413E0E90F97E);
-            return ref _Handle.AsRef<float>(_DmgModExplosiveOffset!.Value);
+            if (_DmgModExplosiveOffset == -1) _DmgModExplosiveOffset = Schema.GetOffset(0x1CFE413E0E90F97E);
+            return ref _Handle.AsRef<float>(_DmgModExplosiveOffset);
         }
     }
-    private static nint? _DmgModFireOffset;
+    private static nint _DmgModFireOffset = -1;
 
     public ref float DmgModFire
     {
         get
         {
-            _DmgModFireOffset = _DmgModFireOffset ?? Schema.GetOffset(0x1CFE413E7E842D23);
-            return ref _Handle.AsRef<float>(_DmgModFireOffset!.Value);
+            if (_DmgModFireOffset == -1) _DmgModFireOffset = Schema.GetOffset(0x1CFE413E7E842D23);
+            return ref _Handle.AsRef<float>(_DmgModFireOffset);
         }
     }
-    private static nint? _PhysicsDamageTableNameOffset;
+    private static nint _PhysicsDamageTableNameOffset = -1;
 
     public string PhysicsDamageTableName
     {
         get
         {
-            _PhysicsDamageTableNameOffset = _PhysicsDamageTableNameOffset ?? Schema.GetOffset(0x1CFE413E7A45F0E2);
-            return Schema.GetString(_Handle.Read<nint>(_PhysicsDamageTableNameOffset!.Value));
+            if (_PhysicsDamageTableNameOffset == -1) _PhysicsDamageTableNameOffset = Schema.GetOffset(0x1CFE413E7A45F0E2);
+            return Schema.GetString(_Handle.Read<nint>(_PhysicsDamageTableNameOffset));
         }
         set
         {
-            _PhysicsDamageTableNameOffset = _PhysicsDamageTableNameOffset ?? Schema.GetOffset(0x1CFE413E7A45F0E2);
-            Schema.SetString(_Handle, _PhysicsDamageTableNameOffset!.Value, value);
+            if (_PhysicsDamageTableNameOffset == -1) _PhysicsDamageTableNameOffset = Schema.GetOffset(0x1CFE413E7A45F0E2);
+            Schema.SetString(_Handle, _PhysicsDamageTableNameOffset, value);
         }
     }
-    private static nint? _BasePropDataOffset;
+    private static nint _BasePropDataOffset = -1;
 
     public string BasePropData
     {
         get
         {
-            _BasePropDataOffset = _BasePropDataOffset ?? Schema.GetOffset(0x1CFE413EBF60E2A1);
-            return Schema.GetString(_Handle.Read<nint>(_BasePropDataOffset!.Value));
+            if (_BasePropDataOffset == -1) _BasePropDataOffset = Schema.GetOffset(0x1CFE413EBF60E2A1);
+            return Schema.GetString(_Handle.Read<nint>(_BasePropDataOffset));
         }
         set
         {
-            _BasePropDataOffset = _BasePropDataOffset ?? Schema.GetOffset(0x1CFE413EBF60E2A1);
-            Schema.SetString(_Handle, _BasePropDataOffset!.Value, value);
+            if (_BasePropDataOffset == -1) _BasePropDataOffset = Schema.GetOffset(0x1CFE413EBF60E2A1);
+            Schema.SetString(_Handle, _BasePropDataOffset, value);
         }
     }
-    private static nint? _InteractionsOffset;
+    private static nint _InteractionsOffset = -1;
 
     public ref int Interactions
     {
         get
         {
-            _InteractionsOffset = _InteractionsOffset ?? Schema.GetOffset(0x1CFE413EE8050E44);
-            return ref _Handle.AsRef<int>(_InteractionsOffset!.Value);
+            if (_InteractionsOffset == -1) _InteractionsOffset = Schema.GetOffset(0x1CFE413EE8050E44);
+            return ref _Handle.AsRef<int>(_InteractionsOffset);
         }
     }
-    private static nint? _SpawnMotionDisabledOffset;
+    private static nint _SpawnMotionDisabledOffset = -1;
 
     public ref bool SpawnMotionDisabled
     {
         get
         {
-            _SpawnMotionDisabledOffset = _SpawnMotionDisabledOffset ?? Schema.GetOffset(0x1CFE413E87EB2E82);
-            return ref _Handle.AsRef<bool>(_SpawnMotionDisabledOffset!.Value);
+            if (_SpawnMotionDisabledOffset == -1) _SpawnMotionDisabledOffset = Schema.GetOffset(0x1CFE413E87EB2E82);
+            return ref _Handle.AsRef<bool>(_SpawnMotionDisabledOffset);
         }
     }
-    private static nint? _DisableTakePhysicsDamageSpawnFlagOffset;
+    private static nint _DisableTakePhysicsDamageSpawnFlagOffset = -1;
 
     public ref int DisableTakePhysicsDamageSpawnFlag
     {
         get
         {
-            _DisableTakePhysicsDamageSpawnFlagOffset = _DisableTakePhysicsDamageSpawnFlagOffset ?? Schema.GetOffset(0x1CFE413E5D3DCAE1);
-            return ref _Handle.AsRef<int>(_DisableTakePhysicsDamageSpawnFlagOffset!.Value);
+            if (_DisableTakePhysicsDamageSpawnFlagOffset == -1) _DisableTakePhysicsDamageSpawnFlagOffset = Schema.GetOffset(0x1CFE413E5D3DCAE1);
+            return ref _Handle.AsRef<int>(_DisableTakePhysicsDamageSpawnFlagOffset);
         }
     }
-    private static nint? _MotionDisabledSpawnFlagOffset;
+    private static nint _MotionDisabledSpawnFlagOffset = -1;
 
     public ref int MotionDisabledSpawnFlag
     {
         get
         {
-            _MotionDisabledSpawnFlagOffset = _MotionDisabledSpawnFlagOffset ?? Schema.GetOffset(0x1CFE413ECBDEA450);
-            return ref _Handle.AsRef<int>(_MotionDisabledSpawnFlagOffset!.Value);
+            if (_MotionDisabledSpawnFlagOffset == -1) _MotionDisabledSpawnFlagOffset = Schema.GetOffset(0x1CFE413ECBDEA450);
+            return ref _Handle.AsRef<int>(_MotionDisabledSpawnFlagOffset);
         }
     }
 

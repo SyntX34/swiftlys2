@@ -16,64 +16,64 @@ internal partial class CAnimKeyDataImpl : SchemaClass, CAnimKeyData
 {
     public CAnimKeyDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public ref CBufferString Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x790610E24D8F5786);
-            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x790610E24D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset);
         }
     }
-    private static nint? _BoneArrayOffset;
+    private static nint _BoneArrayOffset = -1;
 
     public ref CUtlVector<CAnimBone> BoneArray
     {
         get
         {
-            _BoneArrayOffset = _BoneArrayOffset ?? Schema.GetOffset(0x790610E280273F0C);
-            return ref _Handle.AsRef<CUtlVector<CAnimBone>>(_BoneArrayOffset!.Value);
+            if (_BoneArrayOffset == -1) _BoneArrayOffset = Schema.GetOffset(0x790610E280273F0C);
+            return ref _Handle.AsRef<CUtlVector<CAnimBone>>(_BoneArrayOffset);
         }
     }
-    private static nint? _UserArrayOffset;
+    private static nint _UserArrayOffset = -1;
 
     public ref CUtlVector<CAnimUser> UserArray
     {
         get
         {
-            _UserArrayOffset = _UserArrayOffset ?? Schema.GetOffset(0x790610E2FBDB0C13);
-            return ref _Handle.AsRef<CUtlVector<CAnimUser>>(_UserArrayOffset!.Value);
+            if (_UserArrayOffset == -1) _UserArrayOffset = Schema.GetOffset(0x790610E2FBDB0C13);
+            return ref _Handle.AsRef<CUtlVector<CAnimUser>>(_UserArrayOffset);
         }
     }
-    private static nint? _MorphArrayOffset;
+    private static nint _MorphArrayOffset = -1;
 
     public ref CUtlVector<CBufferString> MorphArray
     {
         get
         {
-            _MorphArrayOffset = _MorphArrayOffset ?? Schema.GetOffset(0x790610E28C6827E6);
-            return ref _Handle.AsRef<CUtlVector<CBufferString>>(_MorphArrayOffset!.Value);
+            if (_MorphArrayOffset == -1) _MorphArrayOffset = Schema.GetOffset(0x790610E28C6827E6);
+            return ref _Handle.AsRef<CUtlVector<CBufferString>>(_MorphArrayOffset);
         }
     }
-    private static nint? _ChannelElementsOffset;
+    private static nint _ChannelElementsOffset = -1;
 
     public ref int ChannelElements
     {
         get
         {
-            _ChannelElementsOffset = _ChannelElementsOffset ?? Schema.GetOffset(0x790610E20D1DA989);
-            return ref _Handle.AsRef<int>(_ChannelElementsOffset!.Value);
+            if (_ChannelElementsOffset == -1) _ChannelElementsOffset = Schema.GetOffset(0x790610E20D1DA989);
+            return ref _Handle.AsRef<int>(_ChannelElementsOffset);
         }
     }
-    private static nint? _DataChannelArrayOffset;
+    private static nint _DataChannelArrayOffset = -1;
 
     public ref CUtlVector<CAnimDataChannelDesc> DataChannelArray
     {
         get
         {
-            _DataChannelArrayOffset = _DataChannelArrayOffset ?? Schema.GetOffset(0x790610E2D1641EB9);
-            return ref _Handle.AsRef<CUtlVector<CAnimDataChannelDesc>>(_DataChannelArrayOffset!.Value);
+            if (_DataChannelArrayOffset == -1) _DataChannelArrayOffset = Schema.GetOffset(0x790610E2D1641EB9);
+            return ref _Handle.AsRef<CUtlVector<CAnimDataChannelDesc>>(_DataChannelArrayOffset);
         }
     }
 

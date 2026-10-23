@@ -205,10 +205,13 @@ internal class PermissionManager : IPermissionManager
                 return false;
             }
 
-            if (permissions.Any(p => IsEqual(p, permission)))
+            foreach (var p in permissions)
             {
-                _queryCache = _queryCache.Add(key, true);
-                return true;
+                if (IsEqual(p, permission))
+                {
+                    _queryCache = _queryCache.Add(key, true);
+                    return true;
+                }
             }
 
             foreach (var perm in permissions)

@@ -16,14 +16,14 @@ internal partial class C_INIT_RadiusFromCPObjectImpl : CParticleFunctionInitiali
 {
     public C_INIT_RadiusFromCPObjectImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControlPointOffset;
+    private static nint _ControlPointOffset = -1;
 
     public ref int ControlPoint
     {
         get
         {
-            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xC79B0CC80D0DDF8C);
-            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+            if (_ControlPointOffset == -1) _ControlPointOffset = Schema.GetOffset(0xC79B0CC80D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset);
         }
     }
 

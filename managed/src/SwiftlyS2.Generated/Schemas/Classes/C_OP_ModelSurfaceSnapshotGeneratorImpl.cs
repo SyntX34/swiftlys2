@@ -16,119 +16,119 @@ internal partial class C_OP_ModelSurfaceSnapshotGeneratorImpl : CParticleFunctio
 {
     public C_OP_ModelSurfaceSnapshotGeneratorImpl(nint handle) : base(handle) { }
 
-    private static nint? _CPSnapshotOffset;
+    private static nint _CPSnapshotOffset = -1;
 
     public ref int CPSnapshot
     {
         get
         {
-            _CPSnapshotOffset = _CPSnapshotOffset ?? Schema.GetOffset(0xCFB908DE86FAC63E);
-            return ref _Handle.AsRef<int>(_CPSnapshotOffset!.Value);
+            if (_CPSnapshotOffset == -1) _CPSnapshotOffset = Schema.GetOffset(0xCFB908DE86FAC63E);
+            return ref _Handle.AsRef<int>(_CPSnapshotOffset);
         }
     }
-    private static nint? _ModelInputOffset;
+    private static nint _ModelInputOffset = -1;
     private CParticleModelInputImpl? _ModelInputInstance;
 
     public CParticleModelInput ModelInput
     {
         get
         {
-            _ModelInputOffset = _ModelInputOffset ?? Schema.GetOffset(0xCFB908DEEB74120E);
+            if (_ModelInputOffset == -1) _ModelInputOffset = Schema.GetOffset(0xCFB908DEEB74120E);
             var instance = _ModelInputInstance ??= new CParticleModelInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ModelInputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ModelInputOffset);
             return instance;
         }
     }
-    private static nint? _RecalcRateOffset;
+    private static nint _RecalcRateOffset = -1;
     private CParticleCollectionFloatInputImpl? _RecalcRateInstance;
 
     public CParticleCollectionFloatInput RecalcRate
     {
         get
         {
-            _RecalcRateOffset = _RecalcRateOffset ?? Schema.GetOffset(0xCFB908DE4DBA63D9);
+            if (_RecalcRateOffset == -1) _RecalcRateOffset = Schema.GetOffset(0xCFB908DE4DBA63D9);
             var instance = _RecalcRateInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _RecalcRateOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RecalcRateOffset);
             return instance;
         }
     }
-    private static nint? _USpacingOffset;
+    private static nint _USpacingOffset = -1;
     private CParticleCollectionFloatInputImpl? _USpacingInstance;
 
     public CParticleCollectionFloatInput USpacing
     {
         get
         {
-            _USpacingOffset = _USpacingOffset ?? Schema.GetOffset(0xCFB908DECF6DFAF3);
+            if (_USpacingOffset == -1) _USpacingOffset = Schema.GetOffset(0xCFB908DECF6DFAF3);
             var instance = _USpacingInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _USpacingOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _USpacingOffset);
             return instance;
         }
     }
-    private static nint? _VSpacingOffset;
+    private static nint _VSpacingOffset = -1;
     private CParticleCollectionFloatInputImpl? _VSpacingInstance;
 
     public CParticleCollectionFloatInput VSpacing
     {
         get
         {
-            _VSpacingOffset = _VSpacingOffset ?? Schema.GetOffset(0xCFB908DE60D31FE0);
+            if (_VSpacingOffset == -1) _VSpacingOffset = Schema.GetOffset(0xCFB908DE60D31FE0);
             var instance = _VSpacingInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _VSpacingOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _VSpacingOffset);
             return instance;
         }
     }
-    private static nint? _SurfaceOffsetOffset;
+    private static nint _SurfaceOffsetOffset = -1;
     private CParticleCollectionFloatInputImpl? _SurfaceOffsetInstance;
 
     public CParticleCollectionFloatInput SurfaceOffset
     {
         get
         {
-            _SurfaceOffsetOffset = _SurfaceOffsetOffset ?? Schema.GetOffset(0xCFB908DE6276F65D);
+            if (_SurfaceOffsetOffset == -1) _SurfaceOffsetOffset = Schema.GetOffset(0xCFB908DE6276F65D);
             var instance = _SurfaceOffsetInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SurfaceOffsetOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SurfaceOffsetOffset);
             return instance;
         }
     }
-    private static nint? _SetNormalOffset;
+    private static nint _SetNormalOffset = -1;
 
     public ref bool SetNormal
     {
         get
         {
-            _SetNormalOffset = _SetNormalOffset ?? Schema.GetOffset(0xCFB908DE542722AC);
-            return ref _Handle.AsRef<bool>(_SetNormalOffset!.Value);
+            if (_SetNormalOffset == -1) _SetNormalOffset = Schema.GetOffset(0xCFB908DE542722AC);
+            return ref _Handle.AsRef<bool>(_SetNormalOffset);
         }
     }
-    private static nint? _SetUpOffset;
+    private static nint _SetUpOffset = -1;
 
     public ref bool SetUp
     {
         get
         {
-            _SetUpOffset = _SetUpOffset ?? Schema.GetOffset(0xCFB908DEF75E4AF6);
-            return ref _Handle.AsRef<bool>(_SetUpOffset!.Value);
+            if (_SetUpOffset == -1) _SetUpOffset = Schema.GetOffset(0xCFB908DEF75E4AF6);
+            return ref _Handle.AsRef<bool>(_SetUpOffset);
         }
     }
-    private static nint? _SetGravityOffset;
+    private static nint _SetGravityOffset = -1;
 
     public ref bool SetGravity
     {
         get
         {
-            _SetGravityOffset = _SetGravityOffset ?? Schema.GetOffset(0xCFB908DECAEFF07B);
-            return ref _Handle.AsRef<bool>(_SetGravityOffset!.Value);
+            if (_SetGravityOffset == -1) _SetGravityOffset = Schema.GetOffset(0xCFB908DECAEFF07B);
+            return ref _Handle.AsRef<bool>(_SetGravityOffset);
         }
     }
-    private static nint? _SetUVOffset;
+    private static nint _SetUVOffset = -1;
 
     public ref bool SetUV
     {
         get
         {
-            _SetUVOffset = _SetUVOffset ?? Schema.GetOffset(0xCFB908DED95E1BBC);
-            return ref _Handle.AsRef<bool>(_SetUVOffset!.Value);
+            if (_SetUVOffset == -1) _SetUVOffset = Schema.GetOffset(0xCFB908DED95E1BBC);
+            return ref _Handle.AsRef<bool>(_SetUVOffset);
         }
     }
 

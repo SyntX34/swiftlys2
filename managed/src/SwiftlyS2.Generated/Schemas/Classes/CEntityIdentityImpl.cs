@@ -16,155 +16,155 @@ internal partial class CEntityIdentityImpl : SchemaClass, CEntityIdentity
 {
     public CEntityIdentityImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameStringTableIndexOffset;
+    private static nint _NameStringTableIndexOffset = -1;
 
     public ref int NameStringTableIndex
     {
         get
         {
-            _NameStringTableIndexOffset = _NameStringTableIndexOffset ?? Schema.GetOffset(0xAE42345F85F9915F);
-            return ref _Handle.AsRef<int>(_NameStringTableIndexOffset!.Value);
+            if (_NameStringTableIndexOffset == -1) _NameStringTableIndexOffset = Schema.GetOffset(0xAE42345F85F9915F);
+            return ref _Handle.AsRef<int>(_NameStringTableIndexOffset);
         }
     }
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xAE42345F4D8F5786);
-            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xAE42345F4D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xAE42345F4D8F5786);
-            Schema.SetString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xAE42345F4D8F5786);
+            Schema.SetString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _DesignerNameOffset;
+    private static nint _DesignerNameOffset = -1;
 
     public string DesignerName
     {
         get
         {
-            _DesignerNameOffset = _DesignerNameOffset ?? Schema.GetOffset(0xAE42345FBFC1F33F);
-            return Schema.GetString(_Handle.Read<nint>(_DesignerNameOffset!.Value));
+            if (_DesignerNameOffset == -1) _DesignerNameOffset = Schema.GetOffset(0xAE42345FBFC1F33F);
+            return Schema.GetString(_Handle.Read<nint>(_DesignerNameOffset));
         }
         set
         {
-            _DesignerNameOffset = _DesignerNameOffset ?? Schema.GetOffset(0xAE42345FBFC1F33F);
-            Schema.SetString(_Handle, _DesignerNameOffset!.Value, value);
+            if (_DesignerNameOffset == -1) _DesignerNameOffset = Schema.GetOffset(0xAE42345FBFC1F33F);
+            Schema.SetString(_Handle, _DesignerNameOffset, value);
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref uint Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xAE42345FDC74A14C);
-            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xAE42345FDC74A14C);
+            return ref _Handle.AsRef<uint>(_FlagsOffset);
         }
     }
-    private static nint? _WorldGroupIdOffset;
+    private static nint _WorldGroupIdOffset = -1;
 
     public ref uint WorldGroupId
     {
         get
         {
-            _WorldGroupIdOffset = _WorldGroupIdOffset ?? Schema.GetOffset(0xAE42345F0BECFAC7);
-            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+            if (_WorldGroupIdOffset == -1) _WorldGroupIdOffset = Schema.GetOffset(0xAE42345F0BECFAC7);
+            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset);
         }
     }
-    private static nint? _DataObjectTypesOffset;
+    private static nint _DataObjectTypesOffset = -1;
 
     public ref uint DataObjectTypes
     {
         get
         {
-            _DataObjectTypesOffset = _DataObjectTypesOffset ?? Schema.GetOffset(0xAE42345F6C7E475F);
-            return ref _Handle.AsRef<uint>(_DataObjectTypesOffset!.Value);
+            if (_DataObjectTypesOffset == -1) _DataObjectTypesOffset = Schema.GetOffset(0xAE42345F6C7E475F);
+            return ref _Handle.AsRef<uint>(_DataObjectTypesOffset);
         }
     }
-    private static nint? _PathIndexOffset;
+    private static nint _PathIndexOffset = -1;
 
     public ref ChangeAccessorFieldPathIndex_t PathIndex
     {
         get
         {
-            _PathIndexOffset = _PathIndexOffset ?? Schema.GetOffset(0xAE42345F2DA3F47A);
-            return ref _Handle.AsRef<ChangeAccessorFieldPathIndex_t>(_PathIndexOffset!.Value);
+            if (_PathIndexOffset == -1) _PathIndexOffset = Schema.GetOffset(0xAE42345F2DA3F47A);
+            return ref _Handle.AsRef<ChangeAccessorFieldPathIndex_t>(_PathIndexOffset);
         }
     }
-    private static nint? _AttributesOffset;
+    private static nint _AttributesOffset = -1;
     private CEntityAttributeTableImpl? _AttributesInstance;
 
     public CEntityAttributeTable? Attributes
     {
         get
         {
-            _AttributesOffset = _AttributesOffset ?? Schema.GetOffset(0xAE42345F1DCF7962);
-            var ptr = _Handle.Read<nint>(_AttributesOffset!.Value);
+            if (_AttributesOffset == -1) _AttributesOffset = Schema.GetOffset(0xAE42345F1DCF7962);
+            var ptr = _Handle.Read<nint>(_AttributesOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _AttributesInstance ??= new CEntityAttributeTableImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _PrevOffset;
+    private static nint _PrevOffset = -1;
     private CEntityIdentityImpl? _PrevInstance;
 
     public CEntityIdentity? Prev
     {
         get
         {
-            _PrevOffset = _PrevOffset ?? Schema.GetOffset(0xAE42345FD49AD9AA);
-            var ptr = _Handle.Read<nint>(_PrevOffset!.Value);
+            if (_PrevOffset == -1) _PrevOffset = Schema.GetOffset(0xAE42345FD49AD9AA);
+            var ptr = _Handle.Read<nint>(_PrevOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _PrevInstance ??= new CEntityIdentityImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _NextOffset;
+    private static nint _NextOffset = -1;
     private CEntityIdentityImpl? _NextInstance;
 
     public CEntityIdentity? Next
     {
         get
         {
-            _NextOffset = _NextOffset ?? Schema.GetOffset(0xAE42345F32B11E0E);
-            var ptr = _Handle.Read<nint>(_NextOffset!.Value);
+            if (_NextOffset == -1) _NextOffset = Schema.GetOffset(0xAE42345F32B11E0E);
+            var ptr = _Handle.Read<nint>(_NextOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _NextInstance ??= new CEntityIdentityImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _PrevByClassOffset;
+    private static nint _PrevByClassOffset = -1;
     private CEntityIdentityImpl? _PrevByClassInstance;
 
     public CEntityIdentity? PrevByClass
     {
         get
         {
-            _PrevByClassOffset = _PrevByClassOffset ?? Schema.GetOffset(0xAE42345F1F46E9A5);
-            var ptr = _Handle.Read<nint>(_PrevByClassOffset!.Value);
+            if (_PrevByClassOffset == -1) _PrevByClassOffset = Schema.GetOffset(0xAE42345F1F46E9A5);
+            var ptr = _Handle.Read<nint>(_PrevByClassOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _PrevByClassInstance ??= new CEntityIdentityImpl(0);
             instance.DangerousSetHandle(ptr);
             return instance;
         }
     }
-    private static nint? _NextByClassOffset;
+    private static nint _NextByClassOffset = -1;
     private CEntityIdentityImpl? _NextByClassInstance;
 
     public CEntityIdentity? NextByClass
     {
         get
         {
-            _NextByClassOffset = _NextByClassOffset ?? Schema.GetOffset(0xAE42345F908D6209);
-            var ptr = _Handle.Read<nint>(_NextByClassOffset!.Value);
+            if (_NextByClassOffset == -1) _NextByClassOffset = Schema.GetOffset(0xAE42345F908D6209);
+            var ptr = _Handle.Read<nint>(_NextByClassOffset);
             if (!ptr.IsValidPtr()) return null;
             var instance = _NextByClassInstance ??= new CEntityIdentityImpl(0);
             instance.DangerousSetHandle(ptr);

@@ -16,44 +16,44 @@ internal partial class CMixFreeverbImpl : CMixPropertyBaseImpl, CMixFreeverb
 {
     public CMixFreeverbImpl(nint handle) : base(handle) { }
 
-    private static nint? _RoomSizeOffset;
+    private static nint _RoomSizeOffset = -1;
 
     public ref float RoomSize
     {
         get
         {
-            _RoomSizeOffset = _RoomSizeOffset ?? Schema.GetOffset(0x73F5EF9BDEA95199);
-            return ref _Handle.AsRef<float>(_RoomSizeOffset!.Value);
+            if (_RoomSizeOffset == -1) _RoomSizeOffset = Schema.GetOffset(0x73F5EF9BDEA95199);
+            return ref _Handle.AsRef<float>(_RoomSizeOffset);
         }
     }
-    private static nint? _DampOffset;
+    private static nint _DampOffset = -1;
 
     public ref float Damp
     {
         get
         {
-            _DampOffset = _DampOffset ?? Schema.GetOffset(0x73F5EF9B51CA5395);
-            return ref _Handle.AsRef<float>(_DampOffset!.Value);
+            if (_DampOffset == -1) _DampOffset = Schema.GetOffset(0x73F5EF9B51CA5395);
+            return ref _Handle.AsRef<float>(_DampOffset);
         }
     }
-    private static nint? _WidthOffset;
+    private static nint _WidthOffset = -1;
 
     public ref float Width
     {
         get
         {
-            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0x73F5EF9BB91935E1);
-            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+            if (_WidthOffset == -1) _WidthOffset = Schema.GetOffset(0x73F5EF9BB91935E1);
+            return ref _Handle.AsRef<float>(_WidthOffset);
         }
     }
-    private static nint? _LateReflectionsOffset;
+    private static nint _LateReflectionsOffset = -1;
 
     public ref float LateReflections
     {
         get
         {
-            _LateReflectionsOffset = _LateReflectionsOffset ?? Schema.GetOffset(0x73F5EF9B30A49ADF);
-            return ref _Handle.AsRef<float>(_LateReflectionsOffset!.Value);
+            if (_LateReflectionsOffset == -1) _LateReflectionsOffset = Schema.GetOffset(0x73F5EF9B30A49ADF);
+            return ref _Handle.AsRef<float>(_LateReflectionsOffset);
         }
     }
 

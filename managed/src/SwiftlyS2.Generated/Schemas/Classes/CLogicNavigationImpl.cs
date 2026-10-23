@@ -16,24 +16,24 @@ internal partial class CLogicNavigationImpl : CLogicalEntityImpl, CLogicNavigati
 {
     public CLogicNavigationImpl(nint handle) : base(handle) { }
 
-    private static nint? _IsOnOffset;
+    private static nint _IsOnOffset = -1;
 
     public ref bool IsOn
     {
         get
         {
-            _IsOnOffset = _IsOnOffset ?? Schema.GetOffset(0x8E444D6254B260A0);
-            return ref _Handle.AsRef<bool>(_IsOnOffset!.Value);
+            if (_IsOnOffset == -1) _IsOnOffset = Schema.GetOffset(0x8E444D6254B260A0);
+            return ref _Handle.AsRef<bool>(_IsOnOffset);
         }
     }
-    private static nint? _NavPropertyOffset;
+    private static nint _NavPropertyOffset = -1;
 
     public ref navproperties_t NavProperty
     {
         get
         {
-            _NavPropertyOffset = _NavPropertyOffset ?? Schema.GetOffset(0x8E444D62C9E0B3E7);
-            return ref _Handle.AsRef<navproperties_t>(_NavPropertyOffset!.Value);
+            if (_NavPropertyOffset == -1) _NavPropertyOffset = Schema.GetOffset(0x8E444D62C9E0B3E7);
+            return ref _Handle.AsRef<navproperties_t>(_NavPropertyOffset);
         }
     }
 

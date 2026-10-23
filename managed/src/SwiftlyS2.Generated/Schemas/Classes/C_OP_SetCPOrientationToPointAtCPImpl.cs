@@ -16,67 +16,67 @@ internal partial class C_OP_SetCPOrientationToPointAtCPImpl : CParticleFunctionP
 {
     public C_OP_SetCPOrientationToPointAtCPImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputCPOffset;
+    private static nint _InputCPOffset = -1;
 
     public ref int InputCP
     {
         get
         {
-            _InputCPOffset = _InputCPOffset ?? Schema.GetOffset(0xEB886769F39A3C14);
-            return ref _Handle.AsRef<int>(_InputCPOffset!.Value);
+            if (_InputCPOffset == -1) _InputCPOffset = Schema.GetOffset(0xEB886769F39A3C14);
+            return ref _Handle.AsRef<int>(_InputCPOffset);
         }
     }
-    private static nint? _OutputCPOffset;
+    private static nint _OutputCPOffset = -1;
 
     public ref int OutputCP
     {
         get
         {
-            _OutputCPOffset = _OutputCPOffset ?? Schema.GetOffset(0xEB88676950DF5703);
-            return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
+            if (_OutputCPOffset == -1) _OutputCPOffset = Schema.GetOffset(0xEB88676950DF5703);
+            return ref _Handle.AsRef<int>(_OutputCPOffset);
         }
     }
-    private static nint? _InterpolationOffset;
+    private static nint _InterpolationOffset = -1;
     private CParticleCollectionFloatInputImpl? _InterpolationInstance;
 
     public CParticleCollectionFloatInput Interpolation
     {
         get
         {
-            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0xEB886769CF55B987);
+            if (_InterpolationOffset == -1) _InterpolationOffset = Schema.GetOffset(0xEB886769CF55B987);
             var instance = _InterpolationInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset);
             return instance;
         }
     }
-    private static nint? _B2DOrientationOffset;
+    private static nint _B2DOrientationOffset = -1;
 
     public ref bool B2DOrientation
     {
         get
         {
-            _B2DOrientationOffset = _B2DOrientationOffset ?? Schema.GetOffset(0xEB886769D5B7C017);
-            return ref _Handle.AsRef<bool>(_B2DOrientationOffset!.Value);
+            if (_B2DOrientationOffset == -1) _B2DOrientationOffset = Schema.GetOffset(0xEB886769D5B7C017);
+            return ref _Handle.AsRef<bool>(_B2DOrientationOffset);
         }
     }
-    private static nint? _AvoidSingularityOffset;
+    private static nint _AvoidSingularityOffset = -1;
 
     public ref bool AvoidSingularity
     {
         get
         {
-            _AvoidSingularityOffset = _AvoidSingularityOffset ?? Schema.GetOffset(0xEB8867694B0F0B45);
-            return ref _Handle.AsRef<bool>(_AvoidSingularityOffset!.Value);
+            if (_AvoidSingularityOffset == -1) _AvoidSingularityOffset = Schema.GetOffset(0xEB8867694B0F0B45);
+            return ref _Handle.AsRef<bool>(_AvoidSingularityOffset);
         }
     }
-    private static nint? _PointAwayOffset;
+    private static nint _PointAwayOffset = -1;
 
     public ref bool PointAway
     {
         get
         {
-            _PointAwayOffset = _PointAwayOffset ?? Schema.GetOffset(0xEB88676987355BAF);
-            return ref _Handle.AsRef<bool>(_PointAwayOffset!.Value);
+            if (_PointAwayOffset == -1) _PointAwayOffset = Schema.GetOffset(0xEB88676987355BAF);
+            return ref _Handle.AsRef<bool>(_PointAwayOffset);
         }
     }
 

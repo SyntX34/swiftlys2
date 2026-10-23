@@ -16,131 +16,131 @@ internal partial class C_OP_ExternalWindForceImpl : CParticleFunctionForceImpl, 
 {
     public C_OP_ExternalWindForceImpl(nint handle) : base(handle) { }
 
-    private static nint? _SamplePositionOffset;
+    private static nint _SamplePositionOffset = -1;
     private CPerParticleVecInputImpl? _SamplePositionInstance;
 
     public CPerParticleVecInput SamplePosition
     {
         get
         {
-            _SamplePositionOffset = _SamplePositionOffset ?? Schema.GetOffset(0xFE6646FBC3F6C534);
+            if (_SamplePositionOffset == -1) _SamplePositionOffset = Schema.GetOffset(0xFE6646FBC3F6C534);
             var instance = _SamplePositionInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _SamplePositionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SamplePositionOffset);
             return instance;
         }
     }
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
     private CPerParticleVecInputImpl? _ScaleInstance;
 
     public CPerParticleVecInput Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xFE6646FB5F596B51);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0xFE6646FB5F596B51);
             var instance = _ScaleInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset);
             return instance;
         }
     }
-    private static nint? _SampleWindOffset;
+    private static nint _SampleWindOffset = -1;
 
     public ref bool SampleWind
     {
         get
         {
-            _SampleWindOffset = _SampleWindOffset ?? Schema.GetOffset(0xFE6646FB3C2A72D1);
-            return ref _Handle.AsRef<bool>(_SampleWindOffset!.Value);
+            if (_SampleWindOffset == -1) _SampleWindOffset = Schema.GetOffset(0xFE6646FB3C2A72D1);
+            return ref _Handle.AsRef<bool>(_SampleWindOffset);
         }
     }
-    private static nint? _SampleWaterOffset;
+    private static nint _SampleWaterOffset = -1;
 
     public ref bool SampleWater
     {
         get
         {
-            _SampleWaterOffset = _SampleWaterOffset ?? Schema.GetOffset(0xFE6646FB97B80806);
-            return ref _Handle.AsRef<bool>(_SampleWaterOffset!.Value);
+            if (_SampleWaterOffset == -1) _SampleWaterOffset = Schema.GetOffset(0xFE6646FB97B80806);
+            return ref _Handle.AsRef<bool>(_SampleWaterOffset);
         }
     }
-    private static nint? _DampenNearWaterPlaneOffset;
+    private static nint _DampenNearWaterPlaneOffset = -1;
 
     public ref bool DampenNearWaterPlane
     {
         get
         {
-            _DampenNearWaterPlaneOffset = _DampenNearWaterPlaneOffset ?? Schema.GetOffset(0xFE6646FB974DA031);
-            return ref _Handle.AsRef<bool>(_DampenNearWaterPlaneOffset!.Value);
+            if (_DampenNearWaterPlaneOffset == -1) _DampenNearWaterPlaneOffset = Schema.GetOffset(0xFE6646FB974DA031);
+            return ref _Handle.AsRef<bool>(_DampenNearWaterPlaneOffset);
         }
     }
-    private static nint? _SampleGravityOffset;
+    private static nint _SampleGravityOffset = -1;
 
     public ref bool SampleGravity
     {
         get
         {
-            _SampleGravityOffset = _SampleGravityOffset ?? Schema.GetOffset(0xFE6646FB805373EF);
-            return ref _Handle.AsRef<bool>(_SampleGravityOffset!.Value);
+            if (_SampleGravityOffset == -1) _SampleGravityOffset = Schema.GetOffset(0xFE6646FB805373EF);
+            return ref _Handle.AsRef<bool>(_SampleGravityOffset);
         }
     }
-    private static nint? _GravityForceOffset;
+    private static nint _GravityForceOffset = -1;
     private CPerParticleVecInputImpl? _GravityForceInstance;
 
     public CPerParticleVecInput GravityForce
     {
         get
         {
-            _GravityForceOffset = _GravityForceOffset ?? Schema.GetOffset(0xFE6646FB2E2EF2C4);
+            if (_GravityForceOffset == -1) _GravityForceOffset = Schema.GetOffset(0xFE6646FB2E2EF2C4);
             var instance = _GravityForceInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _GravityForceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _GravityForceOffset);
             return instance;
         }
     }
-    private static nint? _UseBasicMovementGravityOffset;
+    private static nint _UseBasicMovementGravityOffset = -1;
 
     public ref bool UseBasicMovementGravity
     {
         get
         {
-            _UseBasicMovementGravityOffset = _UseBasicMovementGravityOffset ?? Schema.GetOffset(0xFE6646FBC84E3D7B);
-            return ref _Handle.AsRef<bool>(_UseBasicMovementGravityOffset!.Value);
+            if (_UseBasicMovementGravityOffset == -1) _UseBasicMovementGravityOffset = Schema.GetOffset(0xFE6646FBC84E3D7B);
+            return ref _Handle.AsRef<bool>(_UseBasicMovementGravityOffset);
         }
     }
-    private static nint? _LocalGravityScaleOffset;
+    private static nint _LocalGravityScaleOffset = -1;
     private CPerParticleFloatInputImpl? _LocalGravityScaleInstance;
 
     public CPerParticleFloatInput LocalGravityScale
     {
         get
         {
-            _LocalGravityScaleOffset = _LocalGravityScaleOffset ?? Schema.GetOffset(0xFE6646FBD7EB148E);
+            if (_LocalGravityScaleOffset == -1) _LocalGravityScaleOffset = Schema.GetOffset(0xFE6646FBD7EB148E);
             var instance = _LocalGravityScaleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LocalGravityScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LocalGravityScaleOffset);
             return instance;
         }
     }
-    private static nint? _LocalBuoyancyScaleOffset;
+    private static nint _LocalBuoyancyScaleOffset = -1;
     private CPerParticleFloatInputImpl? _LocalBuoyancyScaleInstance;
 
     public CPerParticleFloatInput LocalBuoyancyScale
     {
         get
         {
-            _LocalBuoyancyScaleOffset = _LocalBuoyancyScaleOffset ?? Schema.GetOffset(0xFE6646FBC6A6171E);
+            if (_LocalBuoyancyScaleOffset == -1) _LocalBuoyancyScaleOffset = Schema.GetOffset(0xFE6646FBC6A6171E);
             var instance = _LocalBuoyancyScaleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LocalBuoyancyScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LocalBuoyancyScaleOffset);
             return instance;
         }
     }
-    private static nint? _BuoyancyForceOffset;
+    private static nint _BuoyancyForceOffset = -1;
     private CPerParticleVecInputImpl? _BuoyancyForceInstance;
 
     public CPerParticleVecInput BuoyancyForce
     {
         get
         {
-            _BuoyancyForceOffset = _BuoyancyForceOffset ?? Schema.GetOffset(0xFE6646FBCA7F361E);
+            if (_BuoyancyForceOffset == -1) _BuoyancyForceOffset = Schema.GetOffset(0xFE6646FBCA7F361E);
             var instance = _BuoyancyForceInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _BuoyancyForceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BuoyancyForceOffset);
             return instance;
         }
     }

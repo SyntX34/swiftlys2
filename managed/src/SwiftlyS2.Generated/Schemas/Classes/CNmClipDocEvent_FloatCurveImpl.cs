@@ -16,31 +16,31 @@ internal partial class CNmClipDocEvent_FloatCurveImpl : CNmClipDocEventImpl, CNm
 {
     public CNmClipDocEvent_FloatCurveImpl(nint handle) : base(handle) { }
 
-    private static nint? _IDOffset;
+    private static nint _IDOffset = -1;
 
     public string ID
     {
         get
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0xCA64E85595066900);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IDOffset!.Value));
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xCA64E85595066900);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IDOffset));
         }
         set
         {
-            _IDOffset = _IDOffset ?? Schema.GetOffset(0xCA64E85595066900);
-            Schema.SetCUtlString(_Handle, _IDOffset!.Value, value);
+            if (_IDOffset == -1) _IDOffset = Schema.GetOffset(0xCA64E85595066900);
+            Schema.SetCUtlString(_Handle, _IDOffset, value);
         }
     }
-    private static nint? _CurveOffset;
+    private static nint _CurveOffset = -1;
     private SchemaUntypedField? _CurveInstance;
 
     public SchemaUntypedField Curve
     {
         get
         {
-            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xCA64E855BFFA0B34);
+            if (_CurveOffset == -1) _CurveOffset = Schema.GetOffset(0xCA64E855BFFA0B34);
             var instance = _CurveInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CurveOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CurveOffset);
             return instance;
         }
     }

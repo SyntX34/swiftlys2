@@ -16,44 +16,44 @@ internal partial class CnmGraphDocFootIKNode__CDataImpl : CNmGraphDocVariationDa
 {
     public CnmGraphDocFootIKNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _LeftEffectorBoneNameOffset;
+    private static nint _LeftEffectorBoneNameOffset = -1;
 
     public string LeftEffectorBoneName
     {
         get
         {
-            _LeftEffectorBoneNameOffset = _LeftEffectorBoneNameOffset ?? Schema.GetOffset(0xAC57B3927F71AD95);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_LeftEffectorBoneNameOffset!.Value));
+            if (_LeftEffectorBoneNameOffset == -1) _LeftEffectorBoneNameOffset = Schema.GetOffset(0xAC57B3927F71AD95);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_LeftEffectorBoneNameOffset));
         }
         set
         {
-            _LeftEffectorBoneNameOffset = _LeftEffectorBoneNameOffset ?? Schema.GetOffset(0xAC57B3927F71AD95);
-            Schema.SetCUtlString(_Handle, _LeftEffectorBoneNameOffset!.Value, value);
+            if (_LeftEffectorBoneNameOffset == -1) _LeftEffectorBoneNameOffset = Schema.GetOffset(0xAC57B3927F71AD95);
+            Schema.SetCUtlString(_Handle, _LeftEffectorBoneNameOffset, value);
         }
     }
-    private static nint? _RightEffectorBoneNameOffset;
+    private static nint _RightEffectorBoneNameOffset = -1;
 
     public string RightEffectorBoneName
     {
         get
         {
-            _RightEffectorBoneNameOffset = _RightEffectorBoneNameOffset ?? Schema.GetOffset(0xAC57B392D004B340);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_RightEffectorBoneNameOffset!.Value));
+            if (_RightEffectorBoneNameOffset == -1) _RightEffectorBoneNameOffset = Schema.GetOffset(0xAC57B392D004B340);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_RightEffectorBoneNameOffset));
         }
         set
         {
-            _RightEffectorBoneNameOffset = _RightEffectorBoneNameOffset ?? Schema.GetOffset(0xAC57B392D004B340);
-            Schema.SetCUtlString(_Handle, _RightEffectorBoneNameOffset!.Value, value);
+            if (_RightEffectorBoneNameOffset == -1) _RightEffectorBoneNameOffset = Schema.GetOffset(0xAC57B392D004B340);
+            Schema.SetCUtlString(_Handle, _RightEffectorBoneNameOffset, value);
         }
     }
-    private static nint? _BlendTimeSecondsOffset;
+    private static nint _BlendTimeSecondsOffset = -1;
 
     public ref float BlendTimeSeconds
     {
         get
         {
-            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0xAC57B3926D3A08FC);
-            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+            if (_BlendTimeSecondsOffset == -1) _BlendTimeSecondsOffset = Schema.GetOffset(0xAC57B3926D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset);
         }
     }
 

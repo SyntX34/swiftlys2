@@ -16,44 +16,44 @@ internal partial class CAnimGraphDoc_SpeedScaleNodeImpl : CAnimGraphDoc_NodeImpl
 {
     public CAnimGraphDoc_SpeedScaleNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x3CD199511F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x3CD199511F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _ParamNameOffset;
+    private static nint _ParamNameOffset = -1;
 
     public string ParamName
     {
         get
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0x3CD19951E87A9639);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset!.Value));
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0x3CD19951E87A9639);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset));
         }
         set
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0x3CD19951E87A9639);
-            Schema.SetCUtlString(_Handle, _ParamNameOffset!.Value, value);
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0x3CD19951E87A9639);
+            Schema.SetCUtlString(_Handle, _ParamNameOffset, value);
         }
     }
-    private static nint? _ParamOffset;
+    private static nint _ParamOffset = -1;
     private AnimParamIDImpl? _ParamInstance;
 
     public AnimParamID Param
     {
         get
         {
-            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x3CD19951BCD4D752);
+            if (_ParamOffset == -1) _ParamOffset = Schema.GetOffset(0x3CD19951BCD4D752);
             var instance = _ParamInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamOffset);
             return instance;
         }
     }

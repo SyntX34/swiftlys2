@@ -39,42 +39,23 @@ internal static class GameFunctions
     public static unsafe delegate* unmanaged< nint, int, nint*, nint*, uint, void > pCCSCustomHudLayoutSetHasClassForPlayer;
     public static unsafe delegate* unmanaged< nint, nint*, nint*, uint, void > pCCSCustomHudLayoutSetHasClass;
     public static unsafe delegate* unmanaged< nint, int, byte, void > pCCSCustomHudLayoutSetInputCaptureEnabled;
-    private static Lazy<int> CreateOffset( string name ) => new(() => NativeOffsets.Fetch(name));
-    private static readonly Lazy<int> _teleportOffset = CreateOffset("CBaseEntity::Teleport");
-    private static readonly Lazy<int> _commitSuicideOffset = CreateOffset("CBasePlayerPawn::CommitSuicide");
-    private static readonly Lazy<int> _getSkeletonInstanceOffset = CreateOffset("CGameSceneNode::GetSkeletonInstance");
-    private static readonly Lazy<int> _findPickerEntityOffset = CreateOffset("CGameRules::FindPickerEntity");
-    private static readonly Lazy<int> _removeWeaponsOffset = CreateOffset("CCSPlayer_ItemServices::RemoveWeapons");
-    private static readonly Lazy<int> _giveNamedItemOffset = CreateOffset("CCSPlayer_ItemServices::GiveNamedItem");
-    private static readonly Lazy<int> _dropActiveItemOffset = CreateOffset("CCSPlayer_ItemServices::DropActiveItem");
-    private static readonly Lazy<int> _dropWeaponOffset = CreateOffset("CCSPlayer_WeaponServices::DropWeapon");
-    private static readonly Lazy<int> _selectWeaponOffset = CreateOffset("CCSPlayer_WeaponServices::SelectWeapon");
-    private static readonly Lazy<int> _addResourceOffset = CreateOffset("CEntityResourceManifest::AddResource");
-    private static readonly Lazy<int> _collisionRulesChangedOffset = CreateOffset("CBaseEntity::CollisionRulesChanged");
-    private static readonly Lazy<int> _respawnOffset = CreateOffset("CCSPlayerController::Respawn");
-    private static readonly Lazy<int> _getViewVectorsOffset = CreateOffset("CGameRules::GetViewVectors");
-    private static readonly Lazy<int> _goToIntermissionOffset = CreateOffset("CGameRules::GoToIntermission");
-    private static readonly Lazy<int> _changeTeamOffset = CreateOffset("CCSPlayerController::ChangeTeam");
-    private static readonly Lazy<int> _takeGuidOffset = CreateOffset("CSoundSystem::TakeGuid");
-    private static readonly Lazy<int> _traceShapeOffset = CreateOffset("CNavPhysicsInterface::TraceShape");
-
-    public static int TeleportOffset => _teleportOffset.Value;
-    public static int CommitSuicideOffset => _commitSuicideOffset.Value;
-    public static int GetSkeletonInstanceOffset => _getSkeletonInstanceOffset.Value;
-    public static int FindPickerEntityOffset => _findPickerEntityOffset.Value;
-    public static int RemoveWeaponsOffset => _removeWeaponsOffset.Value;
-    public static int GiveNamedItemOffset => _giveNamedItemOffset.Value;
-    public static int DropActiveItemOffset => _dropActiveItemOffset.Value;
-    public static int DropWeaponOffset => _dropWeaponOffset.Value;
-    public static int SelectWeaponOffset => _selectWeaponOffset.Value;
-    public static int AddResourceOffset => _addResourceOffset.Value;
-    public static int CollisionRulesChangedOffset => _collisionRulesChangedOffset.Value;
-    public static int RespawnOffset => _respawnOffset.Value;
-    public static int GetViewVectorsOffset => _getViewVectorsOffset.Value;
-    public static int GoToIntermissionOffset => _goToIntermissionOffset.Value;
-    public static int ChangeTeamOffset => _changeTeamOffset.Value;
-    public static int TakeGuidOffset => _takeGuidOffset.Value;
-    public static int TraceShapeOffset => _traceShapeOffset.Value;
+    public static int TeleportOffset { get; private set; }
+    public static int CommitSuicideOffset { get; private set; }
+    public static int GetSkeletonInstanceOffset { get; private set; }
+    public static int FindPickerEntityOffset { get; private set; }
+    public static int RemoveWeaponsOffset { get; private set; }
+    public static int GiveNamedItemOffset { get; private set; }
+    public static int DropActiveItemOffset { get; private set; }
+    public static int DropWeaponOffset { get; private set; }
+    public static int SelectWeaponOffset { get; private set; }
+    public static int AddResourceOffset { get; private set; }
+    public static int CollisionRulesChangedOffset { get; private set; }
+    public static int RespawnOffset { get; private set; }
+    public static int GetViewVectorsOffset { get; private set; }
+    public static int GoToIntermissionOffset { get; private set; }
+    public static int ChangeTeamOffset { get; private set; }
+    public static int TakeGuidOffset { get; private set; }
+    public static int TraceShapeOffset { get; private set; }
 
     private static void CheckPtr( nint ptr, string name )
     {
@@ -93,6 +74,24 @@ internal static class GameFunctions
     {
         unsafe
         {
+            TeleportOffset = NativeOffsets.Fetch("CBaseEntity::Teleport");
+            CommitSuicideOffset = NativeOffsets.Fetch("CBasePlayerPawn::CommitSuicide");
+            GetSkeletonInstanceOffset = NativeOffsets.Fetch("CGameSceneNode::GetSkeletonInstance");
+            FindPickerEntityOffset = NativeOffsets.Fetch("CGameRules::FindPickerEntity");
+            RemoveWeaponsOffset = NativeOffsets.Fetch("CCSPlayer_ItemServices::RemoveWeapons");
+            GiveNamedItemOffset = NativeOffsets.Fetch("CCSPlayer_ItemServices::GiveNamedItem");
+            DropActiveItemOffset = NativeOffsets.Fetch("CCSPlayer_ItemServices::DropActiveItem");
+            DropWeaponOffset = NativeOffsets.Fetch("CCSPlayer_WeaponServices::DropWeapon");
+            SelectWeaponOffset = NativeOffsets.Fetch("CCSPlayer_WeaponServices::SelectWeapon");
+            AddResourceOffset = NativeOffsets.Fetch("CEntityResourceManifest::AddResource");
+            CollisionRulesChangedOffset = NativeOffsets.Fetch("CBaseEntity::CollisionRulesChanged");
+            RespawnOffset = NativeOffsets.Fetch("CCSPlayerController::Respawn");
+            GetViewVectorsOffset = NativeOffsets.Fetch("CGameRules::GetViewVectors");
+            GoToIntermissionOffset = NativeOffsets.Fetch("CGameRules::GoToIntermission");
+            ChangeTeamOffset = NativeOffsets.Fetch("CCSPlayerController::ChangeTeam");
+            TakeGuidOffset = NativeOffsets.Fetch("CSoundSystem::TakeGuid");
+            TraceShapeOffset = NativeOffsets.Fetch("CNavPhysicsInterface::TraceShape");
+
             pCTakeDamageInfo_Constructor = (delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void >)NativeSignatures.Fetch("CTakeDamageInfo::Constructor");
             pTakeDamage = (delegate* unmanaged< nint, CTakeDamageInfo*, CTakeDamageResult*, void >)NativeSignatures.Fetch("CBaseEntity::TakeDamage");
             pTraceShape = (delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void >)NativeSignatures.Fetch("TraceShape");

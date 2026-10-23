@@ -16,67 +16,67 @@ internal partial class FeHingeLimit_tImpl : SchemaClass, FeHingeLimit_t
 {
     public FeHingeLimit_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
     private SchemaFixedArray<ushort>? _NodeInstance;
 
     public ISchemaFixedArray<ushort> Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x3E7F1FF5CD6694B9);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0x3E7F1FF5CD6694B9);
             var instance = _NodeInstance ??= new SchemaFixedArray<ushort>(0, 0x3E7F1FF5CD6694B9, 6, 2, 2);
-            instance.DangerousSetHandle(_Handle + _NodeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeOffset);
             return instance;
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref uint Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x3E7F1FF5B8D52E48);
-            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0x3E7F1FF5B8D52E48);
+            return ref _Handle.AsRef<uint>(_FlagsOffset);
         }
     }
-    private static nint? _Weight4Offset;
+    private static nint _Weight4Offset = -1;
 
     public ref float Weight4
     {
         get
         {
-            _Weight4Offset = _Weight4Offset ?? Schema.GetOffset(0x3E7F1FF56956236D);
-            return ref _Handle.AsRef<float>(_Weight4Offset!.Value);
+            if (_Weight4Offset == -1) _Weight4Offset = Schema.GetOffset(0x3E7F1FF56956236D);
+            return ref _Handle.AsRef<float>(_Weight4Offset);
         }
     }
-    private static nint? _Weight5Offset;
+    private static nint _Weight5Offset = -1;
 
     public ref float Weight5
     {
         get
         {
-            _Weight5Offset = _Weight5Offset ?? Schema.GetOffset(0x3E7F1FF5685621DA);
-            return ref _Handle.AsRef<float>(_Weight5Offset!.Value);
+            if (_Weight5Offset == -1) _Weight5Offset = Schema.GetOffset(0x3E7F1FF5685621DA);
+            return ref _Handle.AsRef<float>(_Weight5Offset);
         }
     }
-    private static nint? _AngleCenterOffset;
+    private static nint _AngleCenterOffset = -1;
 
     public ref float AngleCenter
     {
         get
         {
-            _AngleCenterOffset = _AngleCenterOffset ?? Schema.GetOffset(0x3E7F1FF57BF2D76B);
-            return ref _Handle.AsRef<float>(_AngleCenterOffset!.Value);
+            if (_AngleCenterOffset == -1) _AngleCenterOffset = Schema.GetOffset(0x3E7F1FF57BF2D76B);
+            return ref _Handle.AsRef<float>(_AngleCenterOffset);
         }
     }
-    private static nint? _AngleExtentsOffset;
+    private static nint _AngleExtentsOffset = -1;
 
     public ref float AngleExtents
     {
         get
         {
-            _AngleExtentsOffset = _AngleExtentsOffset ?? Schema.GetOffset(0x3E7F1FF59D58EF0B);
-            return ref _Handle.AsRef<float>(_AngleExtentsOffset!.Value);
+            if (_AngleExtentsOffset == -1) _AngleExtentsOffset = Schema.GetOffset(0x3E7F1FF59D58EF0B);
+            return ref _Handle.AsRef<float>(_AngleExtentsOffset);
         }
     }
 

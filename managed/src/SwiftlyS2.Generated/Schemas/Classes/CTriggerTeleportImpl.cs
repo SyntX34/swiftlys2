@@ -16,49 +16,49 @@ internal partial class CTriggerTeleportImpl : CBaseTriggerImpl, CTriggerTeleport
 {
     public CTriggerTeleportImpl(nint handle) : base(handle) { }
 
-    private static nint? _LandmarkOffset;
+    private static nint _LandmarkOffset = -1;
 
     public string Landmark
     {
         get
         {
-            _LandmarkOffset = _LandmarkOffset ?? Schema.GetOffset(0xA6381755DF022EC4);
-            return Schema.GetString(_Handle.Read<nint>(_LandmarkOffset!.Value));
+            if (_LandmarkOffset == -1) _LandmarkOffset = Schema.GetOffset(0xA6381755DF022EC4);
+            return Schema.GetString(_Handle.Read<nint>(_LandmarkOffset));
         }
         set
         {
-            _LandmarkOffset = _LandmarkOffset ?? Schema.GetOffset(0xA6381755DF022EC4);
-            Schema.SetString(_Handle, _LandmarkOffset!.Value, value);
+            if (_LandmarkOffset == -1) _LandmarkOffset = Schema.GetOffset(0xA6381755DF022EC4);
+            Schema.SetString(_Handle, _LandmarkOffset, value);
         }
     }
-    private static nint? _UseLandmarkAnglesOffset;
+    private static nint _UseLandmarkAnglesOffset = -1;
 
     public ref bool UseLandmarkAngles
     {
         get
         {
-            _UseLandmarkAnglesOffset = _UseLandmarkAnglesOffset ?? Schema.GetOffset(0xA638175528C3B2F4);
-            return ref _Handle.AsRef<bool>(_UseLandmarkAnglesOffset!.Value);
+            if (_UseLandmarkAnglesOffset == -1) _UseLandmarkAnglesOffset = Schema.GetOffset(0xA638175528C3B2F4);
+            return ref _Handle.AsRef<bool>(_UseLandmarkAnglesOffset);
         }
     }
-    private static nint? _MirrorPlayerOffset;
+    private static nint _MirrorPlayerOffset = -1;
 
     public ref bool MirrorPlayer
     {
         get
         {
-            _MirrorPlayerOffset = _MirrorPlayerOffset ?? Schema.GetOffset(0xA638175563293A1B);
-            return ref _Handle.AsRef<bool>(_MirrorPlayerOffset!.Value);
+            if (_MirrorPlayerOffset == -1) _MirrorPlayerOffset = Schema.GetOffset(0xA638175563293A1B);
+            return ref _Handle.AsRef<bool>(_MirrorPlayerOffset);
         }
     }
-    private static nint? _CheckDestIfClearForPlayerOffset;
+    private static nint _CheckDestIfClearForPlayerOffset = -1;
 
     public ref bool CheckDestIfClearForPlayer
     {
         get
         {
-            _CheckDestIfClearForPlayerOffset = _CheckDestIfClearForPlayerOffset ?? Schema.GetOffset(0xA638175514792115);
-            return ref _Handle.AsRef<bool>(_CheckDestIfClearForPlayerOffset!.Value);
+            if (_CheckDestIfClearForPlayerOffset == -1) _CheckDestIfClearForPlayerOffset = Schema.GetOffset(0xA638175514792115);
+            return ref _Handle.AsRef<bool>(_CheckDestIfClearForPlayerOffset);
         }
     }
 

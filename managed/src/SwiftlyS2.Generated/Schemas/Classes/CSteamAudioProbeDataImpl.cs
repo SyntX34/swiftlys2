@@ -16,16 +16,16 @@ internal partial class CSteamAudioProbeDataImpl : SchemaClass, CSteamAudioProbeD
 {
     public CSteamAudioProbeDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _ProbeBatchOffset;
+    private static nint _ProbeBatchOffset = -1;
     private SchemaUntypedField? _ProbeBatchInstance;
 
     public SchemaUntypedField ProbeBatch
     {
         get
         {
-            _ProbeBatchOffset = _ProbeBatchOffset ?? Schema.GetOffset(0xFF7D377618576D1D);
+            if (_ProbeBatchOffset == -1) _ProbeBatchOffset = Schema.GetOffset(0xFF7D377618576D1D);
             var instance = _ProbeBatchInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ProbeBatchOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ProbeBatchOffset);
             return instance;
         }
     }

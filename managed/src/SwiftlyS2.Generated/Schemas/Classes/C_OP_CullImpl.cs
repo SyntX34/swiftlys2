@@ -16,44 +16,44 @@ internal partial class C_OP_CullImpl : CParticleFunctionOperatorImpl, C_OP_Cull
 {
     public C_OP_CullImpl(nint handle) : base(handle) { }
 
-    private static nint? _CullPercOffset;
+    private static nint _CullPercOffset = -1;
 
     public ref float CullPerc
     {
         get
         {
-            _CullPercOffset = _CullPercOffset ?? Schema.GetOffset(0xD1E3C83568069ED3);
-            return ref _Handle.AsRef<float>(_CullPercOffset!.Value);
+            if (_CullPercOffset == -1) _CullPercOffset = Schema.GetOffset(0xD1E3C83568069ED3);
+            return ref _Handle.AsRef<float>(_CullPercOffset);
         }
     }
-    private static nint? _CullStartOffset;
+    private static nint _CullStartOffset = -1;
 
     public ref float CullStart
     {
         get
         {
-            _CullStartOffset = _CullStartOffset ?? Schema.GetOffset(0xD1E3C835AB265851);
-            return ref _Handle.AsRef<float>(_CullStartOffset!.Value);
+            if (_CullStartOffset == -1) _CullStartOffset = Schema.GetOffset(0xD1E3C835AB265851);
+            return ref _Handle.AsRef<float>(_CullStartOffset);
         }
     }
-    private static nint? _CullEndOffset;
+    private static nint _CullEndOffset = -1;
 
     public ref float CullEnd
     {
         get
         {
-            _CullEndOffset = _CullEndOffset ?? Schema.GetOffset(0xD1E3C835B8217F50);
-            return ref _Handle.AsRef<float>(_CullEndOffset!.Value);
+            if (_CullEndOffset == -1) _CullEndOffset = Schema.GetOffset(0xD1E3C835B8217F50);
+            return ref _Handle.AsRef<float>(_CullEndOffset);
         }
     }
-    private static nint? _CullExpOffset;
+    private static nint _CullExpOffset = -1;
 
     public ref float CullExp
     {
         get
         {
-            _CullExpOffset = _CullExpOffset ?? Schema.GetOffset(0xD1E3C835BFF46C4A);
-            return ref _Handle.AsRef<float>(_CullExpOffset!.Value);
+            if (_CullExpOffset == -1) _CullExpOffset = Schema.GetOffset(0xD1E3C835BFF46C4A);
+            return ref _Handle.AsRef<float>(_CullExpOffset);
         }
     }
 

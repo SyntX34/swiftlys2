@@ -16,14 +16,14 @@ internal partial class RnFace_tImpl : SchemaClass, RnFace_t
 {
     public RnFace_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EdgeOffset;
+    private static nint _EdgeOffset = -1;
 
     public ref byte Edge
     {
         get
         {
-            _EdgeOffset = _EdgeOffset ?? Schema.GetOffset(0xE71D75B3E2949FC8);
-            return ref _Handle.AsRef<byte>(_EdgeOffset!.Value);
+            if (_EdgeOffset == -1) _EdgeOffset = Schema.GetOffset(0xE71D75B3E2949FC8);
+            return ref _Handle.AsRef<byte>(_EdgeOffset);
         }
     }
 

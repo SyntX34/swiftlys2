@@ -16,163 +16,163 @@ internal partial class C_INIT_CreateOnModelAtHeightImpl : CParticleFunctionIniti
 {
     public C_INIT_CreateOnModelAtHeightImpl(nint handle) : base(handle) { }
 
-    private static nint? _UseBonesOffset;
+    private static nint _UseBonesOffset = -1;
 
     public ref bool UseBones
     {
         get
         {
-            _UseBonesOffset = _UseBonesOffset ?? Schema.GetOffset(0xBB8B79F610D1938B);
-            return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
+            if (_UseBonesOffset == -1) _UseBonesOffset = Schema.GetOffset(0xBB8B79F610D1938B);
+            return ref _Handle.AsRef<bool>(_UseBonesOffset);
         }
     }
-    private static nint? _ForceZOffset;
+    private static nint _ForceZOffset = -1;
 
     public ref bool ForceZ
     {
         get
         {
-            _ForceZOffset = _ForceZOffset ?? Schema.GetOffset(0xBB8B79F6A3DF359A);
-            return ref _Handle.AsRef<bool>(_ForceZOffset!.Value);
+            if (_ForceZOffset == -1) _ForceZOffset = Schema.GetOffset(0xBB8B79F6A3DF359A);
+            return ref _Handle.AsRef<bool>(_ForceZOffset);
         }
     }
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xBB8B79F63F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0xBB8B79F63F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _HeightCPOffset;
+    private static nint _HeightCPOffset = -1;
 
     public ref int HeightCP
     {
         get
         {
-            _HeightCPOffset = _HeightCPOffset ?? Schema.GetOffset(0xBB8B79F6943E048D);
-            return ref _Handle.AsRef<int>(_HeightCPOffset!.Value);
+            if (_HeightCPOffset == -1) _HeightCPOffset = Schema.GetOffset(0xBB8B79F6943E048D);
+            return ref _Handle.AsRef<int>(_HeightCPOffset);
         }
     }
-    private static nint? _UseWaterHeightOffset;
+    private static nint _UseWaterHeightOffset = -1;
 
     public ref bool UseWaterHeight
     {
         get
         {
-            _UseWaterHeightOffset = _UseWaterHeightOffset ?? Schema.GetOffset(0xBB8B79F616CA1A0C);
-            return ref _Handle.AsRef<bool>(_UseWaterHeightOffset!.Value);
+            if (_UseWaterHeightOffset == -1) _UseWaterHeightOffset = Schema.GetOffset(0xBB8B79F616CA1A0C);
+            return ref _Handle.AsRef<bool>(_UseWaterHeightOffset);
         }
     }
-    private static nint? _DesiredHeightOffset;
+    private static nint _DesiredHeightOffset = -1;
     private CParticleCollectionFloatInputImpl? _DesiredHeightInstance;
 
     public CParticleCollectionFloatInput DesiredHeight
     {
         get
         {
-            _DesiredHeightOffset = _DesiredHeightOffset ?? Schema.GetOffset(0xBB8B79F6D72286F4);
+            if (_DesiredHeightOffset == -1) _DesiredHeightOffset = Schema.GetOffset(0xBB8B79F6D72286F4);
             var instance = _DesiredHeightInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DesiredHeightOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DesiredHeightOffset);
             return instance;
         }
     }
-    private static nint? _HitBoxScaleOffset;
+    private static nint _HitBoxScaleOffset = -1;
     private CParticleCollectionVecInputImpl? _HitBoxScaleInstance;
 
     public CParticleCollectionVecInput HitBoxScale
     {
         get
         {
-            _HitBoxScaleOffset = _HitBoxScaleOffset ?? Schema.GetOffset(0xBB8B79F658EE3FB7);
+            if (_HitBoxScaleOffset == -1) _HitBoxScaleOffset = Schema.GetOffset(0xBB8B79F658EE3FB7);
             var instance = _HitBoxScaleInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _HitBoxScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HitBoxScaleOffset);
             return instance;
         }
     }
-    private static nint? _DirectionBiasOffset;
+    private static nint _DirectionBiasOffset = -1;
     private CParticleCollectionVecInputImpl? _DirectionBiasInstance;
 
     public CParticleCollectionVecInput DirectionBias
     {
         get
         {
-            _DirectionBiasOffset = _DirectionBiasOffset ?? Schema.GetOffset(0xBB8B79F65A1697CF);
+            if (_DirectionBiasOffset == -1) _DirectionBiasOffset = Schema.GetOffset(0xBB8B79F65A1697CF);
             var instance = _DirectionBiasInstance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _DirectionBiasOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DirectionBiasOffset);
             return instance;
         }
     }
-    private static nint? _BiasTypeOffset;
+    private static nint _BiasTypeOffset = -1;
 
     public ref ParticleHitboxBiasType_t BiasType
     {
         get
         {
-            _BiasTypeOffset = _BiasTypeOffset ?? Schema.GetOffset(0xBB8B79F65FAB0448);
-            return ref _Handle.AsRef<ParticleHitboxBiasType_t>(_BiasTypeOffset!.Value);
+            if (_BiasTypeOffset == -1) _BiasTypeOffset = Schema.GetOffset(0xBB8B79F65FAB0448);
+            return ref _Handle.AsRef<ParticleHitboxBiasType_t>(_BiasTypeOffset);
         }
     }
-    private static nint? _LocalCoordsOffset;
+    private static nint _LocalCoordsOffset = -1;
 
     public ref bool LocalCoords
     {
         get
         {
-            _LocalCoordsOffset = _LocalCoordsOffset ?? Schema.GetOffset(0xBB8B79F630E716DE);
-            return ref _Handle.AsRef<bool>(_LocalCoordsOffset!.Value);
+            if (_LocalCoordsOffset == -1) _LocalCoordsOffset = Schema.GetOffset(0xBB8B79F630E716DE);
+            return ref _Handle.AsRef<bool>(_LocalCoordsOffset);
         }
     }
-    private static nint? _PreferMovingBoxesOffset;
+    private static nint _PreferMovingBoxesOffset = -1;
 
     public ref bool PreferMovingBoxes
     {
         get
         {
-            _PreferMovingBoxesOffset = _PreferMovingBoxesOffset ?? Schema.GetOffset(0xBB8B79F68F1573EE);
-            return ref _Handle.AsRef<bool>(_PreferMovingBoxesOffset!.Value);
+            if (_PreferMovingBoxesOffset == -1) _PreferMovingBoxesOffset = Schema.GetOffset(0xBB8B79F68F1573EE);
+            return ref _Handle.AsRef<bool>(_PreferMovingBoxesOffset);
         }
     }
-    private static nint? _HitboxSetNameOffset;
+    private static nint _HitboxSetNameOffset = -1;
 
     public string HitboxSetName
     {
         get
         {
-            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0xBB8B79F66A21BB0E);
-            return Schema.GetString(_Handle + _HitboxSetNameOffset!.Value);
+            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0xBB8B79F66A21BB0E);
+            return Schema.GetString(_Handle + _HitboxSetNameOffset);
         }
         set
         {
-            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0xBB8B79F66A21BB0E);
-            Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
+            if (_HitboxSetNameOffset == -1) _HitboxSetNameOffset = Schema.GetOffset(0xBB8B79F66A21BB0E);
+            Schema.SetFixedString(_Handle, _HitboxSetNameOffset, value, 128);
         }
     }
-    private static nint? _HitboxVelocityScaleOffset;
+    private static nint _HitboxVelocityScaleOffset = -1;
     private CParticleCollectionFloatInputImpl? _HitboxVelocityScaleInstance;
 
     public CParticleCollectionFloatInput HitboxVelocityScale
     {
         get
         {
-            _HitboxVelocityScaleOffset = _HitboxVelocityScaleOffset ?? Schema.GetOffset(0xBB8B79F65BE2EDCC);
+            if (_HitboxVelocityScaleOffset == -1) _HitboxVelocityScaleOffset = Schema.GetOffset(0xBB8B79F65BE2EDCC);
             var instance = _HitboxVelocityScaleInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _HitboxVelocityScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HitboxVelocityScaleOffset);
             return instance;
         }
     }
-    private static nint? _MaxBoneVelocityOffset;
+    private static nint _MaxBoneVelocityOffset = -1;
     private CParticleCollectionFloatInputImpl? _MaxBoneVelocityInstance;
 
     public CParticleCollectionFloatInput MaxBoneVelocity
     {
         get
         {
-            _MaxBoneVelocityOffset = _MaxBoneVelocityOffset ?? Schema.GetOffset(0xBB8B79F660C6A35A);
+            if (_MaxBoneVelocityOffset == -1) _MaxBoneVelocityOffset = Schema.GetOffset(0xBB8B79F660C6A35A);
             var instance = _MaxBoneVelocityInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MaxBoneVelocityOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MaxBoneVelocityOffset);
             return instance;
         }
     }

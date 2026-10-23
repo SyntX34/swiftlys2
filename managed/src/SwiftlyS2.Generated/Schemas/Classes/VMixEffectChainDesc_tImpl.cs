@@ -16,19 +16,19 @@ internal partial class VMixEffectChainDesc_tImpl : SchemaClass, VMixEffectChainD
 {
     public VMixEffectChainDesc_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _EffectNameOffset;
+    private static nint _EffectNameOffset = -1;
 
     public string EffectName
     {
         get
         {
-            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x993FEE34DF4F5CF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectNameOffset!.Value));
+            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0x993FEE34DF4F5CF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectNameOffset));
         }
         set
         {
-            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x993FEE34DF4F5CF);
-            Schema.SetCUtlString(_Handle, _EffectNameOffset!.Value, value);
+            if (_EffectNameOffset == -1) _EffectNameOffset = Schema.GetOffset(0x993FEE34DF4F5CF);
+            Schema.SetCUtlString(_Handle, _EffectNameOffset, value);
         }
     }
 

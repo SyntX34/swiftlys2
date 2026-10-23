@@ -16,34 +16,34 @@ internal partial class CAnimScriptComponentImpl : CAnimGraphDoc_ComponentImpl, C
 {
     public CAnimScriptComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8C9545BB63D22D49);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x8C9545BB63D22D49);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8C9545BB63D22D49);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x8C9545BB63D22D49);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _ScriptFilenameOffset;
+    private static nint _ScriptFilenameOffset = -1;
 
     public string ScriptFilename
     {
         get
         {
-            _ScriptFilenameOffset = _ScriptFilenameOffset ?? Schema.GetOffset(0x8C9545BB5AE0F3A7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ScriptFilenameOffset!.Value));
+            if (_ScriptFilenameOffset == -1) _ScriptFilenameOffset = Schema.GetOffset(0x8C9545BB5AE0F3A7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ScriptFilenameOffset));
         }
         set
         {
-            _ScriptFilenameOffset = _ScriptFilenameOffset ?? Schema.GetOffset(0x8C9545BB5AE0F3A7);
-            Schema.SetCUtlString(_Handle, _ScriptFilenameOffset!.Value, value);
+            if (_ScriptFilenameOffset == -1) _ScriptFilenameOffset = Schema.GetOffset(0x8C9545BB5AE0F3A7);
+            Schema.SetCUtlString(_Handle, _ScriptFilenameOffset, value);
         }
     }
 

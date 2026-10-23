@@ -16,36 +16,36 @@ internal partial class CPulseCell_FireCursorsImpl : CPulseCell_BaseYieldingInflo
 {
     public CPulseCell_FireCursorsImpl(nint handle) : base(handle) { }
 
-    private static nint? _OutflowsOffset;
+    private static nint _OutflowsOffset = -1;
 
     public ref CUtlVector<CPulse_OutflowConnection> Outflows
     {
         get
         {
-            _OutflowsOffset = _OutflowsOffset ?? Schema.GetOffset(0x9BFA034F8F0AFDF8);
-            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_OutflowsOffset!.Value);
+            if (_OutflowsOffset == -1) _OutflowsOffset = Schema.GetOffset(0x9BFA034F8F0AFDF8);
+            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_OutflowsOffset);
         }
     }
-    private static nint? _WaitForChildOutflowsOffset;
+    private static nint _WaitForChildOutflowsOffset = -1;
 
     public ref bool WaitForChildOutflows
     {
         get
         {
-            _WaitForChildOutflowsOffset = _WaitForChildOutflowsOffset ?? Schema.GetOffset(0x9BFA034F3F8E29C6);
-            return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset!.Value);
+            if (_WaitForChildOutflowsOffset == -1) _WaitForChildOutflowsOffset = Schema.GetOffset(0x9BFA034F3F8E29C6);
+            return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset);
         }
     }
-    private static nint? _OnFinishedOffset;
+    private static nint _OnFinishedOffset = -1;
     private CPulse_ResumePointImpl? _OnFinishedInstance;
 
     public CPulse_ResumePoint OnFinished
     {
         get
         {
-            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0x9BFA034F8D903E5E);
+            if (_OnFinishedOffset == -1) _OnFinishedOffset = Schema.GetOffset(0x9BFA034F8D903E5E);
             var instance = _OnFinishedInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _OnFinishedOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OnFinishedOffset);
             return instance;
         }
     }

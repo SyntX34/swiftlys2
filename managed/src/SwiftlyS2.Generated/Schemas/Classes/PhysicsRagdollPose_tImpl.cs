@@ -16,34 +16,34 @@ internal partial class PhysicsRagdollPose_tImpl : SchemaClass, PhysicsRagdollPos
 {
     public PhysicsRagdollPose_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _RelativeTransformsOffset;
+    private static nint _RelativeTransformsOffset = -1;
 
     public ref CUtlVector<CTransform> RelativeTransforms
     {
         get
         {
-            _RelativeTransformsOffset = _RelativeTransformsOffset ?? Schema.GetOffset(0x54A98BF925B7C80);
-            return ref _Handle.AsRef<CUtlVector<CTransform>>(_RelativeTransformsOffset!.Value);
+            if (_RelativeTransformsOffset == -1) _RelativeTransformsOffset = Schema.GetOffset(0x54A98BF925B7C80);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_RelativeTransformsOffset);
         }
     }
-    private static nint? _OwnerOffset;
+    private static nint _OwnerOffset = -1;
 
     public ref CHandle<CBaseEntity> Owner
     {
         get
         {
-            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0x54A98BFF6D89572);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OwnerOffset!.Value);
+            if (_OwnerOffset == -1) _OwnerOffset = Schema.GetOffset(0x54A98BFF6D89572);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OwnerOffset);
         }
     }
-    private static nint? _SetFromDebugHistoryOffset;
+    private static nint _SetFromDebugHistoryOffset = -1;
 
     public ref bool SetFromDebugHistory
     {
         get
         {
-            _SetFromDebugHistoryOffset = _SetFromDebugHistoryOffset ?? Schema.GetOffset(0x54A98BF136013F6);
-            return ref _Handle.AsRef<bool>(_SetFromDebugHistoryOffset!.Value);
+            if (_SetFromDebugHistoryOffset == -1) _SetFromDebugHistoryOffset = Schema.GetOffset(0x54A98BF136013F6);
+            return ref _Handle.AsRef<bool>(_SetFromDebugHistoryOffset);
         }
     }
 

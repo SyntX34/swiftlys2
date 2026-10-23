@@ -16,26 +16,26 @@ internal partial class CPulseCell_WaitForCursorsWithTagBaseImpl : CPulseCell_Bas
 {
     public CPulseCell_WaitForCursorsWithTagBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _CursorsAllowedToWaitOffset;
+    private static nint _CursorsAllowedToWaitOffset = -1;
 
     public ref int CursorsAllowedToWait
     {
         get
         {
-            _CursorsAllowedToWaitOffset = _CursorsAllowedToWaitOffset ?? Schema.GetOffset(0xA8108DB0236617EC);
-            return ref _Handle.AsRef<int>(_CursorsAllowedToWaitOffset!.Value);
+            if (_CursorsAllowedToWaitOffset == -1) _CursorsAllowedToWaitOffset = Schema.GetOffset(0xA8108DB0236617EC);
+            return ref _Handle.AsRef<int>(_CursorsAllowedToWaitOffset);
         }
     }
-    private static nint? _WaitCompleteOffset;
+    private static nint _WaitCompleteOffset = -1;
     private CPulse_ResumePointImpl? _WaitCompleteInstance;
 
     public CPulse_ResumePoint WaitComplete
     {
         get
         {
-            _WaitCompleteOffset = _WaitCompleteOffset ?? Schema.GetOffset(0xA8108DB02C41AD97);
+            if (_WaitCompleteOffset == -1) _WaitCompleteOffset = Schema.GetOffset(0xA8108DB02C41AD97);
             var instance = _WaitCompleteInstance ??= new CPulse_ResumePointImpl(0);
-            instance.DangerousSetHandle(_Handle + _WaitCompleteOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WaitCompleteOffset);
             return instance;
         }
     }

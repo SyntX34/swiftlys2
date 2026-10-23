@@ -16,16 +16,16 @@ internal partial class CVMixGraphInputImpl : CVMixInputBaseImpl, CVMixGraphInput
 {
     public CVMixGraphInputImpl(nint handle) : base(handle) { }
 
-    private static nint? _OffsetOffset;
+    private static nint _OffsetOffset = -1;
     private CVMixDataOffsetImpl? _OffsetInstance;
 
     public CVMixDataOffset Offset
     {
         get
         {
-            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x33B159EE27734C8E);
+            if (_OffsetOffset == -1) _OffsetOffset = Schema.GetOffset(0x33B159EE27734C8E);
             var instance = _OffsetInstance ??= new CVMixDataOffsetImpl(0);
-            instance.DangerousSetHandle(_Handle + _OffsetOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OffsetOffset);
             return instance;
         }
     }

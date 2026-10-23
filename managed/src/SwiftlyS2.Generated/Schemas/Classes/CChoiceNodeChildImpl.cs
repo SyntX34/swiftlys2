@@ -16,52 +16,52 @@ internal partial class CChoiceNodeChildImpl : SchemaClass, CChoiceNodeChild
 {
     public CChoiceNodeChildImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0xFE9D7DB91F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0xFE9D7DB91F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFE9D7DB94D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFE9D7DB94D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFE9D7DB94D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xFE9D7DB94D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _WeightOffset;
+    private static nint _WeightOffset = -1;
 
     public ref float Weight
     {
         get
         {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xFE9D7DB907D0CD59);
-            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+            if (_WeightOffset == -1) _WeightOffset = Schema.GetOffset(0xFE9D7DB907D0CD59);
+            return ref _Handle.AsRef<float>(_WeightOffset);
         }
     }
-    private static nint? _BlendTimeOffset;
+    private static nint _BlendTimeOffset = -1;
 
     public ref float BlendTime
     {
         get
         {
-            _BlendTimeOffset = _BlendTimeOffset ?? Schema.GetOffset(0xFE9D7DB973D026B1);
-            return ref _Handle.AsRef<float>(_BlendTimeOffset!.Value);
+            if (_BlendTimeOffset == -1) _BlendTimeOffset = Schema.GetOffset(0xFE9D7DB973D026B1);
+            return ref _Handle.AsRef<float>(_BlendTimeOffset);
         }
     }
 

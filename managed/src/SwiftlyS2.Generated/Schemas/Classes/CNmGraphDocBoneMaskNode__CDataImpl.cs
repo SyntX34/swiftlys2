@@ -16,14 +16,14 @@ internal partial class CNmGraphDocBoneMaskNode__CDataImpl : CNmGraphDocVariation
 {
     public CNmGraphDocBoneMaskNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _OverrideMaskIDOffset;
+    private static nint _OverrideMaskIDOffset = -1;
 
     public ref CGlobalSymbol OverrideMaskID
     {
         get
         {
-            _OverrideMaskIDOffset = _OverrideMaskIDOffset ?? Schema.GetOffset(0xC59F38A476E16D74);
-            return ref _Handle.AsRef<CGlobalSymbol>(_OverrideMaskIDOffset!.Value);
+            if (_OverrideMaskIDOffset == -1) _OverrideMaskIDOffset = Schema.GetOffset(0xC59F38A476E16D74);
+            return ref _Handle.AsRef<CGlobalSymbol>(_OverrideMaskIDOffset);
         }
     }
 

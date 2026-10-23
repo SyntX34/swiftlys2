@@ -16,73 +16,73 @@ internal partial class CAimMatrixUpdateNodeImpl : CUnaryUpdateNodeImpl, CAimMatr
 {
     public CAimMatrixUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _OpFixedSettingsOffset;
+    private static nint _OpFixedSettingsOffset = -1;
     private AimMatrixOpFixedSettings_tImpl? _OpFixedSettingsInstance;
 
     public AimMatrixOpFixedSettings_t OpFixedSettings
     {
         get
         {
-            _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0xB3687A53E533AB09);
+            if (_OpFixedSettingsOffset == -1) _OpFixedSettingsOffset = Schema.GetOffset(0xB3687A53E533AB09);
             var instance = _OpFixedSettingsInstance ??= new AimMatrixOpFixedSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OpFixedSettingsOffset);
             return instance;
         }
     }
-    private static nint? _TargetOffset;
+    private static nint _TargetOffset = -1;
 
     public ref AnimVectorSource Target
     {
         get
         {
-            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xB3687A53FA08A9E8);
-            return ref _Handle.AsRef<AnimVectorSource>(_TargetOffset!.Value);
+            if (_TargetOffset == -1) _TargetOffset = Schema.GetOffset(0xB3687A53FA08A9E8);
+            return ref _Handle.AsRef<AnimVectorSource>(_TargetOffset);
         }
     }
-    private static nint? _ParamIndexOffset;
+    private static nint _ParamIndexOffset = -1;
     private CAnimParamHandleImpl? _ParamIndexInstance;
 
     public CAnimParamHandle ParamIndex
     {
         get
         {
-            _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xB3687A5361990A86);
+            if (_ParamIndexOffset == -1) _ParamIndexOffset = Schema.GetOffset(0xB3687A5361990A86);
             var instance = _ParamIndexInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamIndexOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamIndexOffset);
             return instance;
         }
     }
-    private static nint? _SequenceOffset;
+    private static nint _SequenceOffset = -1;
     private HSequenceImpl? _SequenceInstance;
 
     public HSequence Sequence
     {
         get
         {
-            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xB3687A53E0A0598E);
+            if (_SequenceOffset == -1) _SequenceOffset = Schema.GetOffset(0xB3687A53E0A0598E);
             var instance = _SequenceInstance ??= new HSequenceImpl(0);
-            instance.DangerousSetHandle(_Handle + _SequenceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SequenceOffset);
             return instance;
         }
     }
-    private static nint? _ResetChildOffset;
+    private static nint _ResetChildOffset = -1;
 
     public ref bool ResetChild
     {
         get
         {
-            _ResetChildOffset = _ResetChildOffset ?? Schema.GetOffset(0xB3687A5365CC88B6);
-            return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
+            if (_ResetChildOffset == -1) _ResetChildOffset = Schema.GetOffset(0xB3687A5365CC88B6);
+            return ref _Handle.AsRef<bool>(_ResetChildOffset);
         }
     }
-    private static nint? _LockWhenWaningOffset;
+    private static nint _LockWhenWaningOffset = -1;
 
     public ref bool LockWhenWaning
     {
         get
         {
-            _LockWhenWaningOffset = _LockWhenWaningOffset ?? Schema.GetOffset(0xB3687A53EED48004);
-            return ref _Handle.AsRef<bool>(_LockWhenWaningOffset!.Value);
+            if (_LockWhenWaningOffset == -1) _LockWhenWaningOffset = Schema.GetOffset(0xB3687A53EED48004);
+            return ref _Handle.AsRef<bool>(_LockWhenWaningOffset);
         }
     }
 

@@ -16,73 +16,73 @@ internal partial class C_INIT_CreateWithinBoxImpl : CParticleFunctionInitializer
 {
     public C_INIT_CreateWithinBoxImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinOffset;
+    private static nint _MinOffset = -1;
     private CPerParticleVecInputImpl? _MinInstance;
 
     public CPerParticleVecInput Min
     {
         get
         {
-            _MinOffset = _MinOffset ?? Schema.GetOffset(0x331A2B22B0765F37);
+            if (_MinOffset == -1) _MinOffset = Schema.GetOffset(0x331A2B22B0765F37);
             var instance = _MinInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MinOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MinOffset);
             return instance;
         }
     }
-    private static nint? _MaxOffset;
+    private static nint _MaxOffset = -1;
     private CPerParticleVecInputImpl? _MaxInstance;
 
     public CPerParticleVecInput Max
     {
         get
         {
-            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x331A2B22BE89FCF9);
+            if (_MaxOffset == -1) _MaxOffset = Schema.GetOffset(0x331A2B22BE89FCF9);
             var instance = _MaxInstance ??= new CPerParticleVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _MaxOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MaxOffset);
             return instance;
         }
     }
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x331A2B223F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x331A2B223F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _LocalSpaceOffset;
+    private static nint _LocalSpaceOffset = -1;
 
     public ref bool LocalSpace
     {
         get
         {
-            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0x331A2B2262418E6E);
-            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+            if (_LocalSpaceOffset == -1) _LocalSpaceOffset = Schema.GetOffset(0x331A2B2262418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset);
         }
     }
-    private static nint? _RandomnessParametersOffset;
+    private static nint _RandomnessParametersOffset = -1;
     private CRandomNumberGeneratorParametersImpl? _RandomnessParametersInstance;
 
     public CRandomNumberGeneratorParameters RandomnessParameters
     {
         get
         {
-            _RandomnessParametersOffset = _RandomnessParametersOffset ?? Schema.GetOffset(0x331A2B227EDF50AD);
+            if (_RandomnessParametersOffset == -1) _RandomnessParametersOffset = Schema.GetOffset(0x331A2B227EDF50AD);
             var instance = _RandomnessParametersInstance ??= new CRandomNumberGeneratorParametersImpl(0);
-            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _RandomnessParametersOffset);
             return instance;
         }
     }
-    private static nint? _UseNewCodeOffset;
+    private static nint _UseNewCodeOffset = -1;
 
     public ref bool UseNewCode
     {
         get
         {
-            _UseNewCodeOffset = _UseNewCodeOffset ?? Schema.GetOffset(0x331A2B227C6D1CDF);
-            return ref _Handle.AsRef<bool>(_UseNewCodeOffset!.Value);
+            if (_UseNewCodeOffset == -1) _UseNewCodeOffset = Schema.GetOffset(0x331A2B227C6D1CDF);
+            return ref _Handle.AsRef<bool>(_UseNewCodeOffset);
         }
     }
 

@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include "consoleoutput.h"
+#include <memory/hooks/function.h>
 
 #include <core/entrypoint.h>
 
@@ -27,39 +28,93 @@
 #include <api/shared/jsonc.h>
 #include <api/shared/files.h>
 
-#include <atomic>
-#include <mutex>
-#include <thread>
 #include <utility>
-#include <vector>
 
 using json = nlohmann::json;
 
-std::map<uint64_t, std::function<void(const std::string&)>> g_ConsoleListeners;
-std::mutex g_ConsoleListenersMutex;
+extern CConsoleOutput g_ConsoleOutput;
 
-constexpr uint32_t CONSOLE_FILTER_ENABLED = 1;
-constexpr uint32_t CONSOLE_LISTENER_INCREMENT = 2;
-std::atomic<uint32_t> g_ConsoleWorkState{ 0 };
+int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args);
+FunctionHook g_CLoggingSystem_LogDirect_Hook(reinterpret_cast<void*>(CLoggingSystem_LogDirectHook), "CLoggingSystem::LogDirect");
 
-std::vector<std::string> g_QueuedConsoleMessages;
-std::vector<std::string> g_DispatchedConsoleMessages;
-std::mutex g_QueuedConsoleMessagesMutex;
-std::mutex g_DispatchConsoleMessagesMutex;
-std::atomic<bool> g_HasQueuedConsoleMessages{ false };
-std::thread g_ConsoleDispatchThread;
-std::atomic<bool> g_ConsoleDispatchRunning{ false };
+int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args)
+{
+    const auto original = reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook.GetOriginal());
 
-std::map<uint64_t, pcre2_code*> g_Filters;
-std::map<uint64_t, pcre2_match_data*> g_FiltersMatchData;
+    if (str && g_ConsoleOutput.ProcessLogMessage(str, args))
+        return 0;
 
-uint64_t g_filterIds = 1;
+    return original(loggingSystem, channel, severity, leafCode, str, args);
+}
 
-std::map<uint64_t, std::string> g_FilterNames;
-std::map<uint64_t, uint64_t> g_FilteredMessages;
-std::atomic<bool> skipNextNewlineOnlyLog{ false };
+struct ConsoleFilter
+{
+    std::string name;
+    pcre2_code* code = nullptr;
+    pcre2_match_data* matchData = nullptr;
+    uint64_t hits = 0;
 
-IFunctionHook* g_CLoggingSystem_LogDirect_Hook = nullptr;
+    ConsoleFilter(std::string filterName, pcre2_code* filterCode, pcre2_match_data* filterMatchData)
+        : name(std::move(filterName)), code(filterCode), matchData(filterMatchData)
+    {
+    }
+
+    ConsoleFilter(const ConsoleFilter&) = delete;
+    ConsoleFilter& operator=(const ConsoleFilter&) = delete;
+
+    ~ConsoleFilter()
+    {
+        pcre2_match_data_free(matchData);
+        pcre2_code_free(code);
+    }
+
+    bool Matches(PCRE2_SPTR text, PCRE2_SIZE length) const
+    {
+        return pcre2_match(code, text, length, 0, 0, matchData, nullptr) > 0;
+    }
+
+    bool SuppressesFollowingNewline() const
+    {
+        return name == "Framerate_Values" || name == "Framerate_Total";
+    }
+};
+
+CConsoleOutput::CConsoleOutput() = default;
+CConsoleOutput::~CConsoleOutput() = default;
+
+struct ConsoleDispatchScope
+{
+    CConsoleOutput* output;
+    const ConsoleDispatchScope* previous;
+    static inline thread_local const ConsoleDispatchScope* active = nullptr;
+
+    explicit ConsoleDispatchScope(CConsoleOutput* instance) : output(instance), previous(active) { active = this; }
+    ~ConsoleDispatchScope() { active = previous; }
+
+    static bool Contains(const CConsoleOutput* instance)
+    {
+        for (auto scope = active; scope; scope = scope->previous)
+            if (scope->output == instance) return true;
+        return false;
+    }
+};
+
+bool CConsoleOutput::ProcessLogMessage(const char* str, va_list* args)
+{
+    if (m_SkipNextNewlineOnlyLog.load(std::memory_order_relaxed) && strcmp(str, "\n") == 0) {
+        m_SkipNextNewlineOnlyLog.store(false, std::memory_order_relaxed);
+        return true;
+    }
+
+    const uint32_t workState = m_WorkState.load(std::memory_order_relaxed);
+    const bool filterEnabled = (workState & FILTER_ENABLED) != 0;
+    const bool hasListeners = workState >= LISTENER_INCREMENT;
+
+    if (!filterEnabled && !hasListeners) [[likely]]
+        return false;
+
+    return FilterOrQueueMessage(str, args, filterEnabled, hasListeners);
+}
 
 #if defined(_MSC_VER)
 #define SWIFTLY_CONSOLE_NOINLINE __declspec(noinline)
@@ -67,12 +122,7 @@ IFunctionHook* g_CLoggingSystem_LogDirect_Hook = nullptr;
 #define SWIFTLY_CONSOLE_NOINLINE __attribute__((noinline))
 #endif
 
-static SWIFTLY_CONSOLE_NOINLINE bool FilterOrQueueConsoleMessage(
-    const char* str,
-    va_list* args,
-    bool filterEnabled,
-    bool hasListeners
-)
+SWIFTLY_CONSOLE_NOINLINE bool CConsoleOutput::FilterOrQueueMessage(const char* str, va_list* args, bool filterEnabled, bool hasListeners)
 {
     char buf[MAX_LOGGING_MESSAGE_LENGTH];
     const char* message = str;
@@ -84,185 +134,129 @@ static SWIFTLY_CONSOLE_NOINLINE bool FilterOrQueueConsoleMessage(
         message = buf;
     }
 
-    if (filterEnabled && g_pConsoleOutput->NeedsFiltering(const_cast<char*>(message))) return true;
+    if (filterEnabled && NeedsFiltering(const_cast<char*>(message))) return true;
 
     bool wakeDispatcher = false;
     if (hasListeners)
     {
-        std::lock_guard<std::mutex> lock(g_QueuedConsoleMessagesMutex);
+        std::lock_guard<std::mutex> lock(m_QueueMutex);
 
         // A listener may have been removed after the fast-path load.
-        if (g_ConsoleWorkState.load(std::memory_order_relaxed) >= CONSOLE_LISTENER_INCREMENT)
+        if (m_WorkState.load(std::memory_order_relaxed) >= LISTENER_INCREMENT)
         {
-            wakeDispatcher = g_QueuedConsoleMessages.empty();
-            g_QueuedConsoleMessages.emplace_back(message);
+            wakeDispatcher = m_QueuedMessages.empty();
+            m_QueuedMessages.emplace_back(message);
             if (wakeDispatcher)
-                g_HasQueuedConsoleMessages.store(true, std::memory_order_release);
+                m_HasQueuedMessages.store(true, std::memory_order_release);
         }
     }
 
     // One wake-up is enough for a complete batch. Avoid notifying the worker for
     // every message while producers are already filling a non-empty queue.
     if (wakeDispatcher)
-        g_HasQueuedConsoleMessages.notify_one();
+        m_HasQueuedMessages.notify_one();
 
     return false;
 }
 
-static void ConsoleDispatchWorker()
-{
-    while (g_ConsoleDispatchRunning.load(std::memory_order_acquire))
-    {
-        g_HasQueuedConsoleMessages.wait(false, std::memory_order_acquire);
-
-        if (!g_ConsoleDispatchRunning.load(std::memory_order_acquire))
-            break;
-
-        g_pConsoleOutput->DispatchQueuedListeners();
-    }
-}
-
 #undef SWIFTLY_CONSOLE_NOINLINE
 
-int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity, LeafCodeInfo_t* leafCode, char const* str, va_list* args)
+void CConsoleOutput::DispatchWorker()
 {
-    const auto original = reinterpret_cast<decltype(&CLoggingSystem_LogDirectHook)>(g_CLoggingSystem_LogDirect_Hook->GetOriginal());
+    while (m_DispatchRunning.load(std::memory_order_acquire))
+    {
+        m_HasQueuedMessages.wait(false, std::memory_order_acquire);
 
-    if (!str)
-        return original(loggingSystem, channel, severity, leafCode, str, args);
+        if (!m_DispatchRunning.load(std::memory_order_acquire))
+            break;
 
-    if (skipNextNewlineOnlyLog.load(std::memory_order_relaxed) && strcmp(str, "\n") == 0) {
-        skipNextNewlineOnlyLog.store(false, std::memory_order_relaxed);
-        return 0;
+        DispatchQueuedListeners();
     }
-
-    const uint32_t workState = g_ConsoleWorkState.load(std::memory_order_relaxed);
-    const bool filterEnabled = (workState & CONSOLE_FILTER_ENABLED) != 0;
-    const bool hasListeners = workState >= CONSOLE_LISTENER_INCREMENT;
-
-    // The overwhelmingly common no-consumer path must not format, allocate, copy, or lock.
-    if (!filterEnabled && !hasListeners) [[likely]]
-        return original(loggingSystem, channel, severity, leafCode, str, args);
-
-    if (FilterOrQueueConsoleMessage(str, args, filterEnabled, hasListeners)) return 0;
-
-    return original(loggingSystem, channel, severity, leafCode, str, args);
 }
 
 void CConsoleOutput::Initialize()
 {
-    void* LogDirectAddr = g_pGameDataManager->GetSignatures()->Fetch("CLoggingSystem::LogDirect");
-    if (!LogDirectAddr) return;
-
-    g_CLoggingSystem_LogDirect_Hook = g_pHooksManager->CreateFunctionHook();
-    g_CLoggingSystem_LogDirect_Hook->SetHookFunction(LogDirectAddr, (void*)CLoggingSystem_LogDirectHook);
-    g_CLoggingSystem_LogDirect_Hook->Enable();
-
     ReloadFilterConfiguration();
 
-    g_ConsoleDispatchRunning.store(true, std::memory_order_release);
-    g_ConsoleDispatchThread = std::thread(ConsoleDispatchWorker);
+    m_DispatchRunning.store(true, std::memory_order_release);
+    m_DispatchThread = std::thread(&CConsoleOutput::DispatchWorker, this);
 }
 
 void CConsoleOutput::Shutdown()
 {
-    if (g_CLoggingSystem_LogDirect_Hook) {
-        g_CLoggingSystem_LogDirect_Hook->Disable();
-        g_pHooksManager->DestroyFunctionHook(g_CLoggingSystem_LogDirect_Hook);
-        g_CLoggingSystem_LogDirect_Hook = nullptr;
-    }
+    m_DispatchRunning.store(false, std::memory_order_release);
+    m_HasQueuedMessages.store(true, std::memory_order_release);
+    m_HasQueuedMessages.notify_one();
+    if (m_DispatchThread.joinable())
+        m_DispatchThread.join();
 
-    g_ConsoleDispatchRunning.store(false, std::memory_order_release);
-    g_HasQueuedConsoleMessages.store(true, std::memory_order_release);
-    g_HasQueuedConsoleMessages.notify_one();
-    if (g_ConsoleDispatchThread.joinable())
-        g_ConsoleDispatchThread.join();
-
-    {
-        std::scoped_lock lock(g_DispatchConsoleMessagesMutex, g_QueuedConsoleMessagesMutex);
-        g_QueuedConsoleMessages.clear();
-        g_DispatchedConsoleMessages.clear();
-        g_HasQueuedConsoleMessages.store(false, std::memory_order_release);
-    }
+    std::scoped_lock lock(m_DispatchMutex, m_QueueMutex);
+    m_QueuedMessages.clear();
+    m_DispatchedMessages.clear();
+    m_HasQueuedMessages.store(false, std::memory_order_release);
 }
 
 void CConsoleOutput::ReloadFilterConfiguration()
 {
-    for (auto it = g_Filters.begin(); it != g_Filters.end(); ++it)
-        pcre2_code_free(it->second);
+    json filters = parseJsonc(Files::Read(g_SwiftlyCore.GetCorePath() + "/configs/confilter.jsonc"));
 
-    for (auto it = g_FiltersMatchData.begin(); it != g_FiltersMatchData.end(); ++it)
-        pcre2_match_data_free(it->second);
-
-    g_Filters.clear();
-    g_FiltersMatchData.clear();
-    g_FilteredMessages.clear();
-    g_FilterNames.clear();
-
-    json filters = json::object();
-    filters = parseJsonc(Files::Read(g_SwiftlyCore.GetCorePath() + "/configs/confilter.jsonc"));
+    std::map<uint64_t, std::unique_ptr<ConsoleFilter>> compiled;
+    uint64_t nextId = m_NextFilterId;
 
     for (auto& [key, value] : filters.items()) {
-        pcre2_code* re;
         PCRE2_SIZE erroffset;
         int errorcode;
 
-        re = pcre2_compile((PCRE2_SPTR8)(value.get<std::string>().c_str()), PCRE2_ZERO_TERMINATED, 0, &errorcode, &erroffset, nullptr);
-        if (!re) {
+        pcre2_code* code = pcre2_compile((PCRE2_SPTR8)(value.get<std::string>().c_str()), PCRE2_ZERO_TERMINATED, 0, &errorcode, &erroffset, nullptr);
+        if (!code) {
             g_pLogger->Error("Console Filter", fmt::format("The regex for \"{}\" is not valid.\n", key));
             g_pLogger->Error("Console Filter", fmt::format("Failed to compile at offset {}.\n", erroffset));
             continue;
         }
 
-        pcre2_match_data* match_data = pcre2_match_data_create_from_pattern(re, nullptr);
-        if (!match_data) {
+        pcre2_jit_compile(code, PCRE2_JIT_COMPLETE);
+
+        pcre2_match_data* matchData = pcre2_match_data_create_from_pattern(code, nullptr);
+        if (!matchData) {
             g_pLogger->Error("Console Filter", fmt::format("Failed to create match data for \"{}\".\n", key));
-            pcre2_code_free(re);
+            pcre2_code_free(code);
             continue;
         }
 
-        g_Filters.insert({ g_filterIds, re });
-        g_FiltersMatchData.insert({ g_filterIds, match_data });
-        g_FilterNames.insert({ g_filterIds, key });
-        g_FilteredMessages.insert({ g_filterIds, 0 });
-        g_filterIds++;
+        compiled.emplace(nextId++, std::make_unique<ConsoleFilter>(key, code, matchData));
     }
+
+    std::lock_guard<std::mutex> lock(m_FiltersMutex);
+    m_Filters = std::move(compiled);
+    m_NextFilterId = nextId;
 }
 
 void CConsoleOutput::ToggleFilter()
 {
-    g_ConsoleWorkState.fetch_xor(CONSOLE_FILTER_ENABLED, std::memory_order_relaxed);
+    m_WorkState.fetch_xor(FILTER_ENABLED, std::memory_order_relaxed);
 }
 
 bool CConsoleOutput::IsEnabled()
 {
-    return (g_ConsoleWorkState.load(std::memory_order_relaxed) & CONSOLE_FILTER_ENABLED) != 0;
+    return (m_WorkState.load(std::memory_order_relaxed) & FILTER_ENABLED) != 0;
 }
 
 bool CConsoleOutput::NeedsFiltering(char* text)
 {
     if (!IsEnabled()) return false;
 
-    PCRE2_SPTR str = (PCRE2_SPTR)text;
-    PCRE2_SIZE len = (PCRE2_SIZE)strlen(text);
+    const PCRE2_SPTR str = (PCRE2_SPTR)text;
+    const PCRE2_SIZE len = (PCRE2_SIZE)strlen(text);
 
-    for (auto it = g_Filters.begin(); it != g_Filters.end(); ++it)
+    std::lock_guard<std::mutex> lock(m_FiltersMutex);
+
+    for (auto& [id, filter] : m_Filters)
     {
-        pcre2_code* re = it->second;
-        pcre2_match_data* match_data = g_FiltersMatchData[it->first];
+        if (!filter->Matches(str, len)) continue;
 
-        if (pcre2_match(re, str, len, 0, 0, match_data, nullptr) > 0)
-        {
-            uint64_t key = it->first;
-            g_FilteredMessages[key]++;
-
-            skipNextNewlineOnlyLog.store(
-                g_FilterNames[key] == "Framerate_Values" || g_FilterNames[key] == "Framerate_Total",
-                std::memory_order_relaxed
-            );
-
-            return true;
-        }
+        filter->hits++;
+        m_SkipNextNewlineOnlyLog.store(filter->SuppressesFollowingNewline(), std::memory_order_relaxed);
+        return true;
     }
 
     return false;
@@ -270,21 +264,22 @@ bool CConsoleOutput::NeedsFiltering(char* text)
 
 std::string CConsoleOutput::GetCounterText()
 {
+    std::lock_guard<std::mutex> lock(m_FiltersMutex);
+
     std::string out;
-    for (const auto& [msg, count] : g_FilteredMessages)
-        out += "- " + g_FilterNames[msg] + " -> " + std::to_string(count) + "\n";
+    for (const auto& [id, filter] : m_Filters)
+        out += "- " + filter->name + " -> " + std::to_string(filter->hits) + "\n";
 
     return out;
 }
 
 uint64_t CConsoleOutput::AddConsoleListener(std::function<void(const std::string&)> callback)
 {
-    static uint64_t current_id = 0;
-    std::lock_guard<std::mutex> lock(g_ConsoleListenersMutex);
+    std::lock_guard<std::mutex> lock(m_ListenersMutex);
 
-    const uint64_t id = current_id++;
-    g_ConsoleListeners.emplace(id, std::move(callback));
-    g_ConsoleWorkState.fetch_add(CONSOLE_LISTENER_INCREMENT, std::memory_order_relaxed);
+    const uint64_t id = m_NextListenerId++;
+    m_Listeners.emplace(id, std::move(callback));
+    m_WorkState.fetch_add(LISTENER_INCREMENT, std::memory_order_relaxed);
     return id;
 }
 
@@ -292,52 +287,60 @@ void CConsoleOutput::RemoveConsoleListener(uint64_t id)
 {
     bool removedLastListener = false;
     {
-        std::lock_guard<std::mutex> lock(g_ConsoleListenersMutex);
-        if (g_ConsoleListeners.erase(id) == 0) return;
+        std::lock_guard<std::mutex> lock(m_ListenersMutex);
+        if (m_Listeners.erase(id) == 0) return;
 
-        const uint32_t previousState = g_ConsoleWorkState.fetch_sub(CONSOLE_LISTENER_INCREMENT, std::memory_order_relaxed);
-        removedLastListener = previousState < CONSOLE_LISTENER_INCREMENT * 2;
+        const uint32_t previousState = m_WorkState.fetch_sub(LISTENER_INCREMENT, std::memory_order_relaxed);
+        removedLastListener = previousState < LISTENER_INCREMENT * 2;
     }
 
     if (removedLastListener)
     {
-        std::lock_guard<std::mutex> lock(g_QueuedConsoleMessagesMutex);
-        g_QueuedConsoleMessages.clear();
-        g_HasQueuedConsoleMessages.store(false, std::memory_order_release);
+        std::lock_guard<std::mutex> lock(m_QueueMutex);
+        if (m_WorkState.load(std::memory_order_relaxed) < LISTENER_INCREMENT)
+            m_QueuedMessages.clear();
     }
 }
 
 void CConsoleOutput::DispatchQueuedListeners()
 {
     // The idle dispatcher path is a single atomic load with no mutex acquisition.
-    if (!g_HasQueuedConsoleMessages.load(std::memory_order_acquire)) return;
+    if (!m_HasQueuedMessages.load(std::memory_order_acquire)) return;
+    if (ConsoleDispatchScope::Contains(this)) return;
 
     // The worker is the normal consumer. An explicit command-output flush may race it;
     // wait for the active batch so the capture window cannot close too early.
-    std::unique_lock<std::mutex> dispatchLock(g_DispatchConsoleMessagesMutex);
+    std::lock_guard<std::mutex> dispatchLock(m_DispatchMutex);
+    ConsoleDispatchScope scope(this);
 
-    // Avoid taking the queue mutex when no console messages were produced.
-    if (!g_HasQueuedConsoleMessages.exchange(false, std::memory_order_acq_rel)) return;
+    if (!m_HasQueuedMessages.load(std::memory_order_acquire)) return;
 
     {
-        std::lock_guard<std::mutex> lock(g_QueuedConsoleMessagesMutex);
-        g_QueuedConsoleMessages.swap(g_DispatchedConsoleMessages);
+        std::lock_guard<std::mutex> lock(m_QueueMutex);
+        m_QueuedMessages.swap(m_DispatchedMessages);
+        if (m_DispatchedMessages.empty())
+        {
+            m_HasQueuedMessages.store(false, std::memory_order_release);
+            return;
+        }
     }
-
-    if (g_DispatchedConsoleMessages.empty()) return;
 
     std::vector<std::function<void(const std::string&)>> listeners;
     {
-        std::lock_guard<std::mutex> lock(g_ConsoleListenersMutex);
-        listeners.reserve(g_ConsoleListeners.size());
-        for (const auto& [id, callback] : g_ConsoleListeners)
+        std::lock_guard<std::mutex> lock(m_ListenersMutex);
+        listeners.reserve(m_Listeners.size());
+        for (const auto& [id, callback] : m_Listeners)
             listeners.emplace_back(callback);
     }
 
-    for (const auto& message : g_DispatchedConsoleMessages)
+    for (const auto& message : m_DispatchedMessages)
         for (const auto& callback : listeners)
             callback(message);
 
     // Keep the allocation for the next buffer swap while releasing message payloads now.
-    g_DispatchedConsoleMessages.clear();
+    m_DispatchedMessages.clear();
+
+    // Keep the flag set through callbacks so another thread's flush waits for this batch.
+    std::lock_guard<std::mutex> lock(m_QueueMutex);
+    m_HasQueuedMessages.store(!m_QueuedMessages.empty(), std::memory_order_release);
 }

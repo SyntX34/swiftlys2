@@ -16,86 +16,86 @@ internal partial class C_OP_SetControlPointFieldFromVectorExpressionImpl : CPart
 {
     public C_OP_SetControlPointFieldFromVectorExpressionImpl(nint handle) : base(handle) { }
 
-    private static nint? _ExpressionOffset;
+    private static nint _ExpressionOffset = -1;
 
     public ref VectorFloatExpressionType_t Expression
     {
         get
         {
-            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x1A9FFD07160B2427);
-            return ref _Handle.AsRef<VectorFloatExpressionType_t>(_ExpressionOffset!.Value);
+            if (_ExpressionOffset == -1) _ExpressionOffset = Schema.GetOffset(0x1A9FFD07160B2427);
+            return ref _Handle.AsRef<VectorFloatExpressionType_t>(_ExpressionOffset);
         }
     }
-    private static nint? _Input1Offset;
+    private static nint _Input1Offset = -1;
     private CParticleCollectionVecInputImpl? _Input1Instance;
 
     public CParticleCollectionVecInput Input1
     {
         get
         {
-            _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x1A9FFD07A155BDDE);
+            if (_Input1Offset == -1) _Input1Offset = Schema.GetOffset(0x1A9FFD07A155BDDE);
             var instance = _Input1Instance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Input1Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Input1Offset);
             return instance;
         }
     }
-    private static nint? _Input2Offset;
+    private static nint _Input2Offset = -1;
     private CParticleCollectionVecInputImpl? _Input2Instance;
 
     public CParticleCollectionVecInput Input2
     {
         get
         {
-            _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x1A9FFD07A055BC4B);
+            if (_Input2Offset == -1) _Input2Offset = Schema.GetOffset(0x1A9FFD07A055BC4B);
             var instance = _Input2Instance ??= new CParticleCollectionVecInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _Input2Offset!.Value);
+            instance.DangerousSetHandle(_Handle + _Input2Offset);
             return instance;
         }
     }
-    private static nint? _LerpOffset;
+    private static nint _LerpOffset = -1;
     private CPerParticleFloatInputImpl? _LerpInstance;
 
     public CPerParticleFloatInput Lerp
     {
         get
         {
-            _LerpOffset = _LerpOffset ?? Schema.GetOffset(0x1A9FFD07622FAB06);
+            if (_LerpOffset == -1) _LerpOffset = Schema.GetOffset(0x1A9FFD07622FAB06);
             var instance = _LerpInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _LerpOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _LerpOffset);
             return instance;
         }
     }
-    private static nint? _OutputRemapOffset;
+    private static nint _OutputRemapOffset = -1;
     private CParticleRemapFloatInputImpl? _OutputRemapInstance;
 
     public CParticleRemapFloatInput OutputRemap
     {
         get
         {
-            _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x1A9FFD071239396F);
+            if (_OutputRemapOffset == -1) _OutputRemapOffset = Schema.GetOffset(0x1A9FFD071239396F);
             var instance = _OutputRemapInstance ??= new CParticleRemapFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputRemapOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutputRemapOffset);
             return instance;
         }
     }
-    private static nint? _OutputCPOffset;
+    private static nint _OutputCPOffset = -1;
 
     public ref int OutputCP
     {
         get
         {
-            _OutputCPOffset = _OutputCPOffset ?? Schema.GetOffset(0x1A9FFD0750DF5703);
-            return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
+            if (_OutputCPOffset == -1) _OutputCPOffset = Schema.GetOffset(0x1A9FFD0750DF5703);
+            return ref _Handle.AsRef<int>(_OutputCPOffset);
         }
     }
-    private static nint? _OutVectorFieldOffset;
+    private static nint _OutVectorFieldOffset = -1;
 
     public ref int OutVectorField
     {
         get
         {
-            _OutVectorFieldOffset = _OutVectorFieldOffset ?? Schema.GetOffset(0x1A9FFD07F9041E74);
-            return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
+            if (_OutVectorFieldOffset == -1) _OutVectorFieldOffset = Schema.GetOffset(0x1A9FFD07F9041E74);
+            return ref _Handle.AsRef<int>(_OutVectorFieldOffset);
         }
     }
 

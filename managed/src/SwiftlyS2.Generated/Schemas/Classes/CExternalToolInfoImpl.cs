@@ -16,109 +16,109 @@ internal partial class CExternalToolInfoImpl : CBaseToolInfoImpl, CExternalToolI
 {
     public CExternalToolInfoImpl(nint handle) : base(handle) { }
 
-    private static nint? _ExecutableOffset;
+    private static nint _ExecutableOffset = -1;
 
     public string Executable
     {
         get
         {
-            _ExecutableOffset = _ExecutableOffset ?? Schema.GetOffset(0xBDCFBFEFA4BC4A8D);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ExecutableOffset!.Value));
+            if (_ExecutableOffset == -1) _ExecutableOffset = Schema.GetOffset(0xBDCFBFEFA4BC4A8D);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ExecutableOffset));
         }
         set
         {
-            _ExecutableOffset = _ExecutableOffset ?? Schema.GetOffset(0xBDCFBFEFA4BC4A8D);
-            Schema.SetCUtlString(_Handle, _ExecutableOffset!.Value, value);
+            if (_ExecutableOffset == -1) _ExecutableOffset = Schema.GetOffset(0xBDCFBFEFA4BC4A8D);
+            Schema.SetCUtlString(_Handle, _ExecutableOffset, value);
         }
     }
-    private static nint? _ArgsOffset;
+    private static nint _ArgsOffset = -1;
 
     public string Args
     {
         get
         {
-            _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0xBDCFBFEFDAB98BBC);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ArgsOffset!.Value));
+            if (_ArgsOffset == -1) _ArgsOffset = Schema.GetOffset(0xBDCFBFEFDAB98BBC);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ArgsOffset));
         }
         set
         {
-            _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0xBDCFBFEFDAB98BBC);
-            Schema.SetCUtlString(_Handle, _ArgsOffset!.Value, value);
+            if (_ArgsOffset == -1) _ArgsOffset = Schema.GetOffset(0xBDCFBFEFDAB98BBC);
+            Schema.SetCUtlString(_Handle, _ArgsOffset, value);
         }
     }
-    private static nint? _ArgsWithLineColumnOffset;
+    private static nint _ArgsWithLineColumnOffset = -1;
 
     public string ArgsWithLineColumn
     {
         get
         {
-            _ArgsWithLineColumnOffset = _ArgsWithLineColumnOffset ?? Schema.GetOffset(0xBDCFBFEF369526BC);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ArgsWithLineColumnOffset!.Value));
+            if (_ArgsWithLineColumnOffset == -1) _ArgsWithLineColumnOffset = Schema.GetOffset(0xBDCFBFEF369526BC);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ArgsWithLineColumnOffset));
         }
         set
         {
-            _ArgsWithLineColumnOffset = _ArgsWithLineColumnOffset ?? Schema.GetOffset(0xBDCFBFEF369526BC);
-            Schema.SetCUtlString(_Handle, _ArgsWithLineColumnOffset!.Value, value);
+            if (_ArgsWithLineColumnOffset == -1) _ArgsWithLineColumnOffset = Schema.GetOffset(0xBDCFBFEF369526BC);
+            Schema.SetCUtlString(_Handle, _ArgsWithLineColumnOffset, value);
         }
     }
-    private static nint? _WorkingDirOffset;
+    private static nint _WorkingDirOffset = -1;
 
     public string WorkingDir
     {
         get
         {
-            _WorkingDirOffset = _WorkingDirOffset ?? Schema.GetOffset(0xBDCFBFEF716F9D3F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_WorkingDirOffset!.Value));
+            if (_WorkingDirOffset == -1) _WorkingDirOffset = Schema.GetOffset(0xBDCFBFEF716F9D3F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_WorkingDirOffset));
         }
         set
         {
-            _WorkingDirOffset = _WorkingDirOffset ?? Schema.GetOffset(0xBDCFBFEF716F9D3F);
-            Schema.SetCUtlString(_Handle, _WorkingDirOffset!.Value, value);
+            if (_WorkingDirOffset == -1) _WorkingDirOffset = Schema.GetOffset(0xBDCFBFEF716F9D3F);
+            Schema.SetCUtlString(_Handle, _WorkingDirOffset, value);
         }
     }
-    private static nint? _MatchSystemExecutableOffset;
+    private static nint _MatchSystemExecutableOffset = -1;
 
     public string MatchSystemExecutable
     {
         get
         {
-            _MatchSystemExecutableOffset = _MatchSystemExecutableOffset ?? Schema.GetOffset(0xBDCFBFEFC73EA4D7);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_MatchSystemExecutableOffset!.Value));
+            if (_MatchSystemExecutableOffset == -1) _MatchSystemExecutableOffset = Schema.GetOffset(0xBDCFBFEFC73EA4D7);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_MatchSystemExecutableOffset));
         }
         set
         {
-            _MatchSystemExecutableOffset = _MatchSystemExecutableOffset ?? Schema.GetOffset(0xBDCFBFEFC73EA4D7);
-            Schema.SetCUtlString(_Handle, _MatchSystemExecutableOffset!.Value, value);
+            if (_MatchSystemExecutableOffset == -1) _MatchSystemExecutableOffset = Schema.GetOffset(0xBDCFBFEFC73EA4D7);
+            Schema.SetCUtlString(_Handle, _MatchSystemExecutableOffset, value);
         }
     }
-    private static nint? _SupportedExtsOffset;
+    private static nint _SupportedExtsOffset = -1;
 
     public ref CUtlVector<CUtlString> SupportedExts
     {
         get
         {
-            _SupportedExtsOffset = _SupportedExtsOffset ?? Schema.GetOffset(0xBDCFBFEF87126589);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_SupportedExtsOffset!.Value);
+            if (_SupportedExtsOffset == -1) _SupportedExtsOffset = Schema.GetOffset(0xBDCFBFEF87126589);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_SupportedExtsOffset);
         }
     }
-    private static nint? _PriorityExtsOffset;
+    private static nint _PriorityExtsOffset = -1;
 
     public ref CUtlVector<CUtlString> PriorityExts
     {
         get
         {
-            _PriorityExtsOffset = _PriorityExtsOffset ?? Schema.GetOffset(0xBDCFBFEFB3FFA269);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_PriorityExtsOffset!.Value);
+            if (_PriorityExtsOffset == -1) _PriorityExtsOffset = Schema.GetOffset(0xBDCFBFEFB3FFA269);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_PriorityExtsOffset);
         }
     }
-    private static nint? _DebugCommandlineOffset;
+    private static nint _DebugCommandlineOffset = -1;
 
     public ref bool DebugCommandline
     {
         get
         {
-            _DebugCommandlineOffset = _DebugCommandlineOffset ?? Schema.GetOffset(0xBDCFBFEF21AE642B);
-            return ref _Handle.AsRef<bool>(_DebugCommandlineOffset!.Value);
+            if (_DebugCommandlineOffset == -1) _DebugCommandlineOffset = Schema.GetOffset(0xBDCFBFEF21AE642B);
+            return ref _Handle.AsRef<bool>(_DebugCommandlineOffset);
         }
     }
 

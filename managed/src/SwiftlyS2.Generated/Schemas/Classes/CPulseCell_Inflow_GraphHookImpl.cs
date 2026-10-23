@@ -16,16 +16,16 @@ internal partial class CPulseCell_Inflow_GraphHookImpl : CPulseCell_Inflow_BaseE
 {
     public CPulseCell_Inflow_GraphHookImpl(nint handle) : base(handle) { }
 
-    private static nint? _HookNameOffset;
+    private static nint _HookNameOffset = -1;
     private SchemaUntypedField? _HookNameInstance;
 
     public SchemaUntypedField HookName
     {
         get
         {
-            _HookNameOffset = _HookNameOffset ?? Schema.GetOffset(0xEA4B2E6FA19F4D11);
+            if (_HookNameOffset == -1) _HookNameOffset = Schema.GetOffset(0xEA4B2E6FA19F4D11);
             var instance = _HookNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _HookNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HookNameOffset);
             return instance;
         }
     }

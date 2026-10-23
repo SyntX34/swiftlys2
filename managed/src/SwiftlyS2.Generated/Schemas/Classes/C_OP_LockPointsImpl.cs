@@ -16,64 +16,64 @@ internal partial class C_OP_LockPointsImpl : CParticleFunctionOperatorImpl, C_OP
 {
     public C_OP_LockPointsImpl(nint handle) : base(handle) { }
 
-    private static nint? _MinColOffset;
+    private static nint _MinColOffset = -1;
 
     public ref int MinCol
     {
         get
         {
-            _MinColOffset = _MinColOffset ?? Schema.GetOffset(0x68C45815E41E1FFB);
-            return ref _Handle.AsRef<int>(_MinColOffset!.Value);
+            if (_MinColOffset == -1) _MinColOffset = Schema.GetOffset(0x68C45815E41E1FFB);
+            return ref _Handle.AsRef<int>(_MinColOffset);
         }
     }
-    private static nint? _MaxColOffset;
+    private static nint _MaxColOffset = -1;
 
     public ref int MaxCol
     {
         get
         {
-            _MaxColOffset = _MaxColOffset ?? Schema.GetOffset(0x68C45815EC9939A1);
-            return ref _Handle.AsRef<int>(_MaxColOffset!.Value);
+            if (_MaxColOffset == -1) _MaxColOffset = Schema.GetOffset(0x68C45815EC9939A1);
+            return ref _Handle.AsRef<int>(_MaxColOffset);
         }
     }
-    private static nint? _MinRowOffset;
+    private static nint _MinRowOffset = -1;
 
     public ref int MinRow
     {
         get
         {
-            _MinRowOffset = _MinRowOffset ?? Schema.GetOffset(0x68C45815199E3CF1);
-            return ref _Handle.AsRef<int>(_MinRowOffset!.Value);
+            if (_MinRowOffset == -1) _MinRowOffset = Schema.GetOffset(0x68C45815199E3CF1);
+            return ref _Handle.AsRef<int>(_MinRowOffset);
         }
     }
-    private static nint? _MaxRowOffset;
+    private static nint _MaxRowOffset = -1;
 
     public ref int MaxRow
     {
         get
         {
-            _MaxRowOffset = _MaxRowOffset ?? Schema.GetOffset(0x68C458157E297EEB);
-            return ref _Handle.AsRef<int>(_MaxRowOffset!.Value);
+            if (_MaxRowOffset == -1) _MaxRowOffset = Schema.GetOffset(0x68C458157E297EEB);
+            return ref _Handle.AsRef<int>(_MaxRowOffset);
         }
     }
-    private static nint? _ControlPointOffset;
+    private static nint _ControlPointOffset = -1;
 
     public ref int ControlPoint
     {
         get
         {
-            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0x68C458150D0DDF8C);
-            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+            if (_ControlPointOffset == -1) _ControlPointOffset = Schema.GetOffset(0x68C458150D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset);
         }
     }
-    private static nint? _BlendValueOffset;
+    private static nint _BlendValueOffset = -1;
 
     public ref float BlendValue
     {
         get
         {
-            _BlendValueOffset = _BlendValueOffset ?? Schema.GetOffset(0x68C45815E14CD067);
-            return ref _Handle.AsRef<float>(_BlendValueOffset!.Value);
+            if (_BlendValueOffset == -1) _BlendValueOffset = Schema.GetOffset(0x68C45815E14CD067);
+            return ref _Handle.AsRef<float>(_BlendValueOffset);
         }
     }
 

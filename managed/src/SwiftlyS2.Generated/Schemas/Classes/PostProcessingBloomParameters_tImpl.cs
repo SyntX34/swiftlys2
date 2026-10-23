@@ -16,169 +16,169 @@ internal partial class PostProcessingBloomParameters_tImpl : SchemaClass, PostPr
 {
     public PostProcessingBloomParameters_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _BlendModeOffset;
+    private static nint _BlendModeOffset = -1;
 
     public ref BloomBlendMode_t BlendMode
     {
         get
         {
-            _BlendModeOffset = _BlendModeOffset ?? Schema.GetOffset(0x30F41F3C8D5006AB);
-            return ref _Handle.AsRef<BloomBlendMode_t>(_BlendModeOffset!.Value);
+            if (_BlendModeOffset == -1) _BlendModeOffset = Schema.GetOffset(0x30F41F3C8D5006AB);
+            return ref _Handle.AsRef<BloomBlendMode_t>(_BlendModeOffset);
         }
     }
-    private static nint? _BloomStrengthOffset;
+    private static nint _BloomStrengthOffset = -1;
 
     public ref float BloomStrength
     {
         get
         {
-            _BloomStrengthOffset = _BloomStrengthOffset ?? Schema.GetOffset(0x30F41F3C398A137F);
-            return ref _Handle.AsRef<float>(_BloomStrengthOffset!.Value);
+            if (_BloomStrengthOffset == -1) _BloomStrengthOffset = Schema.GetOffset(0x30F41F3C398A137F);
+            return ref _Handle.AsRef<float>(_BloomStrengthOffset);
         }
     }
-    private static nint? _ScreenBloomStrengthOffset;
+    private static nint _ScreenBloomStrengthOffset = -1;
 
     public ref float ScreenBloomStrength
     {
         get
         {
-            _ScreenBloomStrengthOffset = _ScreenBloomStrengthOffset ?? Schema.GetOffset(0x30F41F3CE8A0AA33);
-            return ref _Handle.AsRef<float>(_ScreenBloomStrengthOffset!.Value);
+            if (_ScreenBloomStrengthOffset == -1) _ScreenBloomStrengthOffset = Schema.GetOffset(0x30F41F3CE8A0AA33);
+            return ref _Handle.AsRef<float>(_ScreenBloomStrengthOffset);
         }
     }
-    private static nint? _BlurBloomStrengthOffset;
+    private static nint _BlurBloomStrengthOffset = -1;
 
     public ref float BlurBloomStrength
     {
         get
         {
-            _BlurBloomStrengthOffset = _BlurBloomStrengthOffset ?? Schema.GetOffset(0x30F41F3CF8D07238);
-            return ref _Handle.AsRef<float>(_BlurBloomStrengthOffset!.Value);
+            if (_BlurBloomStrengthOffset == -1) _BlurBloomStrengthOffset = Schema.GetOffset(0x30F41F3CF8D07238);
+            return ref _Handle.AsRef<float>(_BlurBloomStrengthOffset);
         }
     }
-    private static nint? _BloomThresholdOffset;
+    private static nint _BloomThresholdOffset = -1;
 
     public ref float BloomThreshold
     {
         get
         {
-            _BloomThresholdOffset = _BloomThresholdOffset ?? Schema.GetOffset(0x30F41F3C06FD7D91);
-            return ref _Handle.AsRef<float>(_BloomThresholdOffset!.Value);
+            if (_BloomThresholdOffset == -1) _BloomThresholdOffset = Schema.GetOffset(0x30F41F3C06FD7D91);
+            return ref _Handle.AsRef<float>(_BloomThresholdOffset);
         }
     }
-    private static nint? _BloomThresholdWidthOffset;
+    private static nint _BloomThresholdWidthOffset = -1;
 
     public ref float BloomThresholdWidth
     {
         get
         {
-            _BloomThresholdWidthOffset = _BloomThresholdWidthOffset ?? Schema.GetOffset(0x30F41F3CF71B95FB);
-            return ref _Handle.AsRef<float>(_BloomThresholdWidthOffset!.Value);
+            if (_BloomThresholdWidthOffset == -1) _BloomThresholdWidthOffset = Schema.GetOffset(0x30F41F3CF71B95FB);
+            return ref _Handle.AsRef<float>(_BloomThresholdWidthOffset);
         }
     }
-    private static nint? _SkyboxBloomStrengthOffset;
+    private static nint _SkyboxBloomStrengthOffset = -1;
 
     public ref float SkyboxBloomStrength
     {
         get
         {
-            _SkyboxBloomStrengthOffset = _SkyboxBloomStrengthOffset ?? Schema.GetOffset(0x30F41F3C99229415);
-            return ref _Handle.AsRef<float>(_SkyboxBloomStrengthOffset!.Value);
+            if (_SkyboxBloomStrengthOffset == -1) _SkyboxBloomStrengthOffset = Schema.GetOffset(0x30F41F3C99229415);
+            return ref _Handle.AsRef<float>(_SkyboxBloomStrengthOffset);
         }
     }
-    private static nint? _BloomStartValueOffset;
+    private static nint _BloomStartValueOffset = -1;
 
     public ref float BloomStartValue
     {
         get
         {
-            _BloomStartValueOffset = _BloomStartValueOffset ?? Schema.GetOffset(0x30F41F3C214727D7);
-            return ref _Handle.AsRef<float>(_BloomStartValueOffset!.Value);
+            if (_BloomStartValueOffset == -1) _BloomStartValueOffset = Schema.GetOffset(0x30F41F3C214727D7);
+            return ref _Handle.AsRef<float>(_BloomStartValueOffset);
         }
     }
-    private static nint? _ComputeBloomStrengthOffset;
+    private static nint _ComputeBloomStrengthOffset = -1;
 
     public ref float ComputeBloomStrength
     {
         get
         {
-            _ComputeBloomStrengthOffset = _ComputeBloomStrengthOffset ?? Schema.GetOffset(0x30F41F3C347885E6);
-            return ref _Handle.AsRef<float>(_ComputeBloomStrengthOffset!.Value);
+            if (_ComputeBloomStrengthOffset == -1) _ComputeBloomStrengthOffset = Schema.GetOffset(0x30F41F3C347885E6);
+            return ref _Handle.AsRef<float>(_ComputeBloomStrengthOffset);
         }
     }
-    private static nint? _ComputeBloomThresholdOffset;
+    private static nint _ComputeBloomThresholdOffset = -1;
 
     public ref float ComputeBloomThreshold
     {
         get
         {
-            _ComputeBloomThresholdOffset = _ComputeBloomThresholdOffset ?? Schema.GetOffset(0x30F41F3C37939E0E);
-            return ref _Handle.AsRef<float>(_ComputeBloomThresholdOffset!.Value);
+            if (_ComputeBloomThresholdOffset == -1) _ComputeBloomThresholdOffset = Schema.GetOffset(0x30F41F3C37939E0E);
+            return ref _Handle.AsRef<float>(_ComputeBloomThresholdOffset);
         }
     }
-    private static nint? _ComputeBloomRadiusOffset;
+    private static nint _ComputeBloomRadiusOffset = -1;
 
     public ref float ComputeBloomRadius
     {
         get
         {
-            _ComputeBloomRadiusOffset = _ComputeBloomRadiusOffset ?? Schema.GetOffset(0x30F41F3C6AD33551);
-            return ref _Handle.AsRef<float>(_ComputeBloomRadiusOffset!.Value);
+            if (_ComputeBloomRadiusOffset == -1) _ComputeBloomRadiusOffset = Schema.GetOffset(0x30F41F3C6AD33551);
+            return ref _Handle.AsRef<float>(_ComputeBloomRadiusOffset);
         }
     }
-    private static nint? _ComputeBloomEffectsScaleOffset;
+    private static nint _ComputeBloomEffectsScaleOffset = -1;
 
     public ref float ComputeBloomEffectsScale
     {
         get
         {
-            _ComputeBloomEffectsScaleOffset = _ComputeBloomEffectsScaleOffset ?? Schema.GetOffset(0x30F41F3C7863A30F);
-            return ref _Handle.AsRef<float>(_ComputeBloomEffectsScaleOffset!.Value);
+            if (_ComputeBloomEffectsScaleOffset == -1) _ComputeBloomEffectsScaleOffset = Schema.GetOffset(0x30F41F3C7863A30F);
+            return ref _Handle.AsRef<float>(_ComputeBloomEffectsScaleOffset);
         }
     }
-    private static nint? _ComputeBloomLensDirtStrengthOffset;
+    private static nint _ComputeBloomLensDirtStrengthOffset = -1;
 
     public ref float ComputeBloomLensDirtStrength
     {
         get
         {
-            _ComputeBloomLensDirtStrengthOffset = _ComputeBloomLensDirtStrengthOffset ?? Schema.GetOffset(0x30F41F3C7236C0F3);
-            return ref _Handle.AsRef<float>(_ComputeBloomLensDirtStrengthOffset!.Value);
+            if (_ComputeBloomLensDirtStrengthOffset == -1) _ComputeBloomLensDirtStrengthOffset = Schema.GetOffset(0x30F41F3C7236C0F3);
+            return ref _Handle.AsRef<float>(_ComputeBloomLensDirtStrengthOffset);
         }
     }
-    private static nint? _ComputeBloomLensDirtBlackLevelOffset;
+    private static nint _ComputeBloomLensDirtBlackLevelOffset = -1;
 
     public ref float ComputeBloomLensDirtBlackLevel
     {
         get
         {
-            _ComputeBloomLensDirtBlackLevelOffset = _ComputeBloomLensDirtBlackLevelOffset ?? Schema.GetOffset(0x30F41F3CB4FB5025);
-            return ref _Handle.AsRef<float>(_ComputeBloomLensDirtBlackLevelOffset!.Value);
+            if (_ComputeBloomLensDirtBlackLevelOffset == -1) _ComputeBloomLensDirtBlackLevelOffset = Schema.GetOffset(0x30F41F3CB4FB5025);
+            return ref _Handle.AsRef<float>(_ComputeBloomLensDirtBlackLevelOffset);
         }
     }
-    private static nint? _BlurWeightOffset;
+    private static nint _BlurWeightOffset = -1;
     private SchemaFixedArray<float>? _BlurWeightInstance;
 
     public ISchemaFixedArray<float> BlurWeight
     {
         get
         {
-            _BlurWeightOffset = _BlurWeightOffset ?? Schema.GetOffset(0x30F41F3CAF5FB432);
+            if (_BlurWeightOffset == -1) _BlurWeightOffset = Schema.GetOffset(0x30F41F3CAF5FB432);
             var instance = _BlurWeightInstance ??= new SchemaFixedArray<float>(0, 0x30F41F3CAF5FB432, 5, 4, 4);
-            instance.DangerousSetHandle(_Handle + _BlurWeightOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BlurWeightOffset);
             return instance;
         }
     }
-    private static nint? _BlurTintOffset;
+    private static nint _BlurTintOffset = -1;
     private SchemaFixedArray<Vector>? _BlurTintInstance;
 
     public ISchemaFixedArray<Vector> BlurTint
     {
         get
         {
-            _BlurTintOffset = _BlurTintOffset ?? Schema.GetOffset(0x30F41F3CC8FE1D49);
+            if (_BlurTintOffset == -1) _BlurTintOffset = Schema.GetOffset(0x30F41F3CC8FE1D49);
             var instance = _BlurTintInstance ??= new SchemaFixedArray<Vector>(0, 0x30F41F3CC8FE1D49, 5, 12, 4);
-            instance.DangerousSetHandle(_Handle + _BlurTintOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BlurTintOffset);
             return instance;
         }
     }

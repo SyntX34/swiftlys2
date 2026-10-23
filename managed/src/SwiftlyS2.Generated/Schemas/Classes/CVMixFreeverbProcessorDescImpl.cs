@@ -16,16 +16,16 @@ internal partial class CVMixFreeverbProcessorDescImpl : CVMixBaseProcessorDescIm
 {
     public CVMixFreeverbProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixFreeverbDesc_tImpl? _DescInstance;
 
     public VMixFreeverbDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0x78DEDC8A27917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x78DEDC8A27917BC0);
             var instance = _DescInstance ??= new VMixFreeverbDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }

@@ -16,53 +16,53 @@ internal partial class CPulseBreakpointLocationImpl : SchemaClass, CPulseBreakpo
 {
     public CPulseBreakpointLocationImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeIDOffset;
+    private static nint _NodeIDOffset = -1;
     private PulseDocNodeID_tImpl? _NodeIDInstance;
 
     public PulseDocNodeID_t NodeID
     {
         get
         {
-            _NodeIDOffset = _NodeIDOffset ?? Schema.GetOffset(0x985BB7CF66BE98D8);
+            if (_NodeIDOffset == -1) _NodeIDOffset = Schema.GetOffset(0x985BB7CF66BE98D8);
             var instance = _NodeIDInstance ??= new PulseDocNodeID_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _NodeIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeIDOffset);
             return instance;
         }
     }
-    private static nint? _SequencePointOffset;
+    private static nint _SequencePointOffset = -1;
     private SchemaUntypedField? _SequencePointInstance;
 
     public SchemaUntypedField SequencePoint
     {
         get
         {
-            _SequencePointOffset = _SequencePointOffset ?? Schema.GetOffset(0x985BB7CF9996CEDE);
+            if (_SequencePointOffset == -1) _SequencePointOffset = Schema.GetOffset(0x985BB7CF9996CEDE);
             var instance = _SequencePointInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _SequencePointOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SequencePointOffset);
             return instance;
         }
     }
-    private static nint? _PortNameOffset;
+    private static nint _PortNameOffset = -1;
     private SchemaUntypedField? _PortNameInstance;
 
     public SchemaUntypedField PortName
     {
         get
         {
-            _PortNameOffset = _PortNameOffset ?? Schema.GetOffset(0x985BB7CF07237B65);
+            if (_PortNameOffset == -1) _PortNameOffset = Schema.GetOffset(0x985BB7CF07237B65);
             var instance = _PortNameInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _PortNameOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PortNameOffset);
             return instance;
         }
     }
-    private static nint? _DeferBreakOffset;
+    private static nint _DeferBreakOffset = -1;
 
     public ref bool DeferBreak
     {
         get
         {
-            _DeferBreakOffset = _DeferBreakOffset ?? Schema.GetOffset(0x985BB7CF048AE24E);
-            return ref _Handle.AsRef<bool>(_DeferBreakOffset!.Value);
+            if (_DeferBreakOffset == -1) _DeferBreakOffset = Schema.GetOffset(0x985BB7CF048AE24E);
+            return ref _Handle.AsRef<bool>(_DeferBreakOffset);
         }
     }
 

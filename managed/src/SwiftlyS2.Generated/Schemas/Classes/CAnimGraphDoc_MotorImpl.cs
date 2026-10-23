@@ -16,29 +16,29 @@ internal partial class CAnimGraphDoc_MotorImpl : SchemaClass, CAnimGraphDoc_Moto
 {
     public CAnimGraphDoc_MotorImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x549255734D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x549255734D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x549255734D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x549255734D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _DefaultOffset;
+    private static nint _DefaultOffset = -1;
 
     public ref bool Default
     {
         get
         {
-            _DefaultOffset = _DefaultOffset ?? Schema.GetOffset(0x5492557385F067BE);
-            return ref _Handle.AsRef<bool>(_DefaultOffset!.Value);
+            if (_DefaultOffset == -1) _DefaultOffset = Schema.GetOffset(0x5492557385F067BE);
+            return ref _Handle.AsRef<bool>(_DefaultOffset);
         }
     }
 

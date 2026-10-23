@@ -1,0 +1,247 @@
+using SwiftlyS2.Core.Menu.Config;
+using SwiftlyS2.Core.Translations;
+using SwiftlyS2.Shared.Menu;
+
+namespace SwiftlyS2.Core.Menu;
+
+internal sealed class MenuFrameComposer( MenuRendererRegistry renderers, MenuLayoutOptions layout )
+{
+    public MenuFrame Compose( MenuSession session )
+    {
+        var menu = session.Instance;
+        var rendererId = menu.Renderer.Id;
+
+        var translate = GlobalLocalization.For(session.Player);
+        var header = RenderRegion(menu, session, MenuRegion.Header, rendererId, translate);
+        var footer = RenderRegion(menu, session, MenuRegion.Footer, rendererId, translate);
+
+        var body = menu.GetVisible(MenuRegion.Body, session);
+        var focusables = new List<IMenuComponent>(body.Count);
+
+        foreach (var component in body)
+        {
+            if (component.IsFocusable)
+            {
+                focusables.Add(component);
+            }
+        }
+
+        var focused = focusables.Count == 0 ? null : focusables[Math.Clamp(session.FocusedIndex, 0, focusables.Count - 1)];
+
+        var page = ResolvePage(body, focused, menu.ItemsPerPage, layout.MaxVisibleLines, session.PageOffset);
+        session.PageOffset = page.Offset;
+
+        var bodyNodes = new List<MenuNode>(page.Count);
+        var selectables = new List<IMenuComponent>();
+        var numbered = menu.InputMethod == MenuInputMethod.Chat;
+
+        for (var index = page.Offset; index < page.Offset + page.Count; index++)
+        {
+            var component = body[index];
+            var isFocused = ReferenceEquals(component, focused);
+            var node = RenderComponent(menu, session, component, isFocused, rendererId, translate);
+
+            if (!component.IsFocusable)
+            {
+                bodyNodes.Add(node);
+                continue;
+            }
+
+            selectables.Add(component);
+            bodyNodes.Add(MenuLineNode.Of(new MenuSelectionNode(isFocused, numbered ? selectables.Count : 0), node));
+        }
+
+        session.PageSelectables = selectables;
+
+        if (focused?.GetHint(session, translate) is { Length: > 0 } hint)
+        {
+            footer.Add(new MenuTextNode(hint, MenuTextStyle.Default.WithSize(MenuTextSize.Small)));
+        }
+
+        var hints = BuildKeybindHints(menu, translate);
+
+        if (hints is not null)
+        {
+            footer.Add(hints);
+        }
+
+        return new MenuFrame {
+            Header = header,
+            Body = bodyNodes,
+            Footer = footer,
+            PageOffset = page.Offset,
+            TotalItems = focusables.Count
+        };
+    }
+
+    private List<MenuNode> RenderRegion( MenuInstance menu, MenuSession session, MenuRegion region, string rendererId, Func<string, string> translate )
+    {
+        var components = menu.GetVisible(region, session);
+        var nodes = new List<MenuNode>(components.Count);
+
+        foreach (var component in components)
+        {
+            nodes.Add(RenderComponent(menu, session, component, false, rendererId, translate));
+        }
+
+        return nodes;
+    }
+
+    private MenuNode RenderComponent(
+        MenuInstance menu,
+        MenuSession session,
+        IMenuComponent component,
+        bool isFocused,
+        string rendererId,
+        Func<string, string> translate )
+    {
+        var context = new ComponentRenderContext(
+            menu,
+            session,
+            component,
+            isFocused,
+            component.IsEnabled(session),
+            rendererId,
+            translate);
+
+        var specialised = renderers.ResolveComponentRenderer(rendererId, component.GetType());
+
+        if (specialised is not null && specialised.TryRender(component, context, out var node) && node is not null)
+        {
+            return node;
+        }
+
+        return component.Render(context);
+    }
+
+    private static (int Offset, int Count) ResolvePage(
+        List<IMenuComponent> body,
+        IMenuComponent? focused,
+        int itemsPerPage,
+        int maxVisibleLines,
+        int currentOffset )
+    {
+        if (body.Count == 0)
+        {
+            return (0, 0);
+        }
+
+        var offset = Math.Clamp(currentOffset, 0, body.Count - 1);
+        var position = focused is null ? -1 : body.IndexOf(focused);
+
+        if (position >= 0 && position < offset)
+        {
+            offset = position;
+        }
+
+        var count = Measure(body, offset, itemsPerPage, maxVisibleLines);
+
+        while (position >= offset + count)
+        {
+            offset++;
+            count = Measure(body, offset, itemsPerPage, maxVisibleLines);
+        }
+
+        while (offset > 0 && offset + count >= body.Count)
+        {
+            var earlier = Measure(body, offset - 1, itemsPerPage, maxVisibleLines);
+
+            if (earlier <= count)
+            {
+                break;
+            }
+
+            offset--;
+            count = earlier;
+        }
+
+        return (offset, count);
+    }
+
+    private static int Measure( List<IMenuComponent> body, int offset, int itemsPerPage, int maxVisibleLines )
+    {
+        var count = 0;
+        var lines = 0;
+
+        for (var index = offset; index < body.Count && count < itemsPerPage; index++)
+        {
+            var cost = Math.Max(1, body[index].LineCount);
+
+            if (count > 0 && lines + cost > maxVisibleLines)
+            {
+                break;
+            }
+
+            lines += cost;
+            count++;
+        }
+
+        return Math.Max(1, count);
+    }
+
+    private static readonly MenuTextStyle FooterLabelStyle = MenuTextStyle.Default.WithSize(MenuTextSize.Small).WithColor("#FF0000");
+    private static readonly MenuTextStyle FooterValueStyle = MenuTextStyle.Default.WithSize(MenuTextSize.Small).WithColor("#FFFFFF");
+
+    private static MenuNode? BuildKeybindHints( MenuInstance menu, Func<string, string> translate )
+    {
+        if (menu.InputMethod == MenuInputMethod.Chat)
+        {
+            return menu.ChatHints.GetOrAdd(translate, static t => MenuLineNode.Of(
+                new MenuTextNode($"{t("menu.footer.use")}: ", FooterLabelStyle),
+                new MenuTextNode($"!<{t("menu.footer.chat_number")}>", FooterValueStyle),
+                new MenuTextNode(" | ", FooterValueStyle),
+                new MenuTextNode($"{t("menu.footer.exit")}: ", FooterLabelStyle),
+                new MenuTextNode("!0", FooterValueStyle)));
+        }
+
+        if (menu.Keymap is not MenuKeymap keymap)
+        {
+            return BuildButtonHints(menu.Keymap);
+        }
+
+        var actions = keymap.Actions;
+        var keys = actions.Count <= 32 ? stackalloc MenuKey[actions.Count] : new MenuKey[actions.Count];
+        keymap.ResolveAll(keys);
+
+        if (menu.ButtonHints is { } cached && ReferenceEquals(cached.Actions, actions) && keys.SequenceEqual(cached.Keys))
+        {
+            return cached.Node;
+        }
+
+        var node = BuildButtonHints(keymap);
+        menu.ButtonHints = new MenuHintCache(actions, keys.ToArray(), node);
+        return node;
+    }
+
+    private static MenuNode? BuildButtonHints( IMenuKeymap menuKeymap )
+    {
+        var parts = new List<MenuNode>();
+
+        foreach (var descriptor in menuKeymap.Actions)
+        {
+            if (!descriptor.ShowInFooter)
+            {
+                continue;
+            }
+
+            var key = menuKeymap.GetKey(descriptor.Id);
+
+            if (key == MenuKey.None)
+            {
+                continue;
+            }
+
+            if (parts.Count > 0)
+            {
+                parts.Add(new MenuTextNode(" | ", FooterValueStyle));
+            }
+
+            parts.Add(new MenuTextNode($"{descriptor.Label ?? descriptor.Id.Name}: ", FooterLabelStyle));
+            parts.Add(new MenuTextNode(MenuKeys.Describe(key), FooterValueStyle));
+        }
+
+        return parts.Count == 0 ? null : new MenuLineNode(parts);
+    }
+}
+
+internal sealed record MenuHintCache( IReadOnlyList<MenuActionDescriptor> Actions, MenuKey[] Keys, MenuNode? Node );

@@ -16,14 +16,14 @@ internal partial class CAnimGraphDoc_NodeListImpl : SchemaClass, CAnimGraphDoc_N
 {
     public CAnimGraphDoc_NodeListImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodesOffset;
+    private static nint _NodesOffset = -1;
 
     public ref CUtlVector<PointerTo<CAnimGraphDoc_Node>> Nodes
     {
         get
         {
-            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0xB6E8BD02780F027A);
-            return ref _Handle.AsRef<CUtlVector<PointerTo<CAnimGraphDoc_Node>>>(_NodesOffset!.Value);
+            if (_NodesOffset == -1) _NodesOffset = Schema.GetOffset(0xB6E8BD02780F027A);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CAnimGraphDoc_Node>>>(_NodesOffset);
         }
     }
 

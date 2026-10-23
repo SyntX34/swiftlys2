@@ -16,27 +16,27 @@ internal partial class CTriggerBuoyancyImpl : CBaseTriggerImpl, CTriggerBuoyancy
 {
     public CTriggerBuoyancyImpl(nint handle) : base(handle) { }
 
-    private static nint? _BuoyancyHelperOffset;
+    private static nint _BuoyancyHelperOffset = -1;
     private CBuoyancyHelperImpl? _BuoyancyHelperInstance;
 
     public CBuoyancyHelper BuoyancyHelper
     {
         get
         {
-            _BuoyancyHelperOffset = _BuoyancyHelperOffset ?? Schema.GetOffset(0xE9698D106BAFFEA7);
+            if (_BuoyancyHelperOffset == -1) _BuoyancyHelperOffset = Schema.GetOffset(0xE9698D106BAFFEA7);
             var instance = _BuoyancyHelperInstance ??= new CBuoyancyHelperImpl(0);
-            instance.DangerousSetHandle(_Handle + _BuoyancyHelperOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BuoyancyHelperOffset);
             return instance;
         }
     }
-    private static nint? _FluidDensityOffset;
+    private static nint _FluidDensityOffset = -1;
 
     public ref float FluidDensity
     {
         get
         {
-            _FluidDensityOffset = _FluidDensityOffset ?? Schema.GetOffset(0xE9698D10DABBC5A3);
-            return ref _Handle.AsRef<float>(_FluidDensityOffset!.Value);
+            if (_FluidDensityOffset == -1) _FluidDensityOffset = Schema.GetOffset(0xE9698D10DABBC5A3);
+            return ref _Handle.AsRef<float>(_FluidDensityOffset);
         }
     }
 

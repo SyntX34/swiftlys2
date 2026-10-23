@@ -16,24 +16,24 @@ internal partial class ragdollhierarchyjoint_tImpl : SchemaClass, ragdollhierarc
 {
     public ragdollhierarchyjoint_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParentIndexOffset;
+    private static nint _ParentIndexOffset = -1;
 
     public ref int ParentIndex
     {
         get
         {
-            _ParentIndexOffset = _ParentIndexOffset ?? Schema.GetOffset(0x3D7AD556FE49C863);
-            return ref _Handle.AsRef<int>(_ParentIndexOffset!.Value);
+            if (_ParentIndexOffset == -1) _ParentIndexOffset = Schema.GetOffset(0x3D7AD556FE49C863);
+            return ref _Handle.AsRef<int>(_ParentIndexOffset);
         }
     }
-    private static nint? _ChildIndexOffset;
+    private static nint _ChildIndexOffset = -1;
 
     public ref int ChildIndex
     {
         get
         {
-            _ChildIndexOffset = _ChildIndexOffset ?? Schema.GetOffset(0x3D7AD556226EC483);
-            return ref _Handle.AsRef<int>(_ChildIndexOffset!.Value);
+            if (_ChildIndexOffset == -1) _ChildIndexOffset = Schema.GetOffset(0x3D7AD556226EC483);
+            return ref _Handle.AsRef<int>(_ChildIndexOffset);
         }
     }
 

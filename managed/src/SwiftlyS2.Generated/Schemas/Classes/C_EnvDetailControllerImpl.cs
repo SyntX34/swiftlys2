@@ -16,24 +16,24 @@ internal partial class C_EnvDetailControllerImpl : C_BaseEntityImpl, C_EnvDetail
 {
     public C_EnvDetailControllerImpl(nint handle) : base(handle) { }
 
-    private static nint? _FadeStartDistOffset;
+    private static nint _FadeStartDistOffset = -1;
 
     public ref float FadeStartDist
     {
         get
         {
-            _FadeStartDistOffset = _FadeStartDistOffset ?? Schema.GetOffset(0xE20E08A7FBFACAF3);
-            return ref _Handle.AsRef<float>(_FadeStartDistOffset!.Value);
+            if (_FadeStartDistOffset == -1) _FadeStartDistOffset = Schema.GetOffset(0xE20E08A7FBFACAF3);
+            return ref _Handle.AsRef<float>(_FadeStartDistOffset);
         }
     }
-    private static nint? _FadeEndDistOffset;
+    private static nint _FadeEndDistOffset = -1;
 
     public ref float FadeEndDist
     {
         get
         {
-            _FadeEndDistOffset = _FadeEndDistOffset ?? Schema.GetOffset(0xE20E08A76DD6252A);
-            return ref _Handle.AsRef<float>(_FadeEndDistOffset!.Value);
+            if (_FadeEndDistOffset == -1) _FadeEndDistOffset = Schema.GetOffset(0xE20E08A76DD6252A);
+            return ref _Handle.AsRef<float>(_FadeEndDistOffset);
         }
     }
 

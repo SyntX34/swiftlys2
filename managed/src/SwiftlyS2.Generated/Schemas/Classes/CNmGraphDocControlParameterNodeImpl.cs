@@ -16,16 +16,16 @@ internal partial class CNmGraphDocControlParameterNodeImpl : CNmGraphDocParamete
 {
     public CNmGraphDocControlParameterNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _DictionaryParameterBindingOffset;
+    private static nint _DictionaryParameterBindingOffset = -1;
     private SchemaUntypedField? _DictionaryParameterBindingInstance;
 
     public SchemaUntypedField DictionaryParameterBinding
     {
         get
         {
-            _DictionaryParameterBindingOffset = _DictionaryParameterBindingOffset ?? Schema.GetOffset(0x50C60E55C301A001);
+            if (_DictionaryParameterBindingOffset == -1) _DictionaryParameterBindingOffset = Schema.GetOffset(0x50C60E55C301A001);
             var instance = _DictionaryParameterBindingInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _DictionaryParameterBindingOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DictionaryParameterBindingOffset);
             return instance;
         }
     }

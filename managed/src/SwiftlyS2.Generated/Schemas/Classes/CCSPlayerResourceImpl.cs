@@ -16,122 +16,122 @@ internal partial class CCSPlayerResourceImpl : CBaseEntityImpl, CCSPlayerResourc
 {
     public CCSPlayerResourceImpl(nint handle) : base(handle) { }
 
-    private static nint? _HostageAliveOffset;
+    private static nint _HostageAliveOffset = -1;
     private SchemaFixedArray<bool>? _HostageAliveInstance;
 
     public ISchemaFixedArray<bool> HostageAlive
     {
         get
         {
-            _HostageAliveOffset = _HostageAliveOffset ?? Schema.GetOffset(0xBEE9B9154C5B2E7F);
+            if (_HostageAliveOffset == -1) _HostageAliveOffset = Schema.GetOffset(0xBEE9B9154C5B2E7F);
             var instance = _HostageAliveInstance ??= new SchemaFixedArray<bool>(0, 0xBEE9B9154C5B2E7F, 12, 1, 1);
-            instance.DangerousSetHandle(_Handle + _HostageAliveOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HostageAliveOffset);
             return instance;
         }
     }
-    private static nint? _IsHostageFollowingSomeoneOffset;
+    private static nint _IsHostageFollowingSomeoneOffset = -1;
     private SchemaFixedArray<bool>? _IsHostageFollowingSomeoneInstance;
 
     public ISchemaFixedArray<bool> IsHostageFollowingSomeone
     {
         get
         {
-            _IsHostageFollowingSomeoneOffset = _IsHostageFollowingSomeoneOffset ?? Schema.GetOffset(0xBEE9B9153F8AA9BB);
+            if (_IsHostageFollowingSomeoneOffset == -1) _IsHostageFollowingSomeoneOffset = Schema.GetOffset(0xBEE9B9153F8AA9BB);
             var instance = _IsHostageFollowingSomeoneInstance ??= new SchemaFixedArray<bool>(0, 0xBEE9B9153F8AA9BB, 12, 1, 1);
-            instance.DangerousSetHandle(_Handle + _IsHostageFollowingSomeoneOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _IsHostageFollowingSomeoneOffset);
             return instance;
         }
     }
-    private static nint? _HostageEntityIDsOffset;
+    private static nint _HostageEntityIDsOffset = -1;
     private SchemaFixedArray<uint>? _HostageEntityIDsInstance;
 
     public ISchemaFixedArray<uint> HostageEntityIDs
     {
         get
         {
-            _HostageEntityIDsOffset = _HostageEntityIDsOffset ?? Schema.GetOffset(0xBEE9B9150EEFA350);
+            if (_HostageEntityIDsOffset == -1) _HostageEntityIDsOffset = Schema.GetOffset(0xBEE9B9150EEFA350);
             var instance = _HostageEntityIDsInstance ??= new SchemaFixedArray<uint>(0, 0xBEE9B9150EEFA350, 12, 4, 4);
-            instance.DangerousSetHandle(_Handle + _HostageEntityIDsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HostageEntityIDsOffset);
             return instance;
         }
     }
-    private static nint? _BombsiteCenterAOffset;
+    private static nint _BombsiteCenterAOffset = -1;
 
     public ref Vector BombsiteCenterA
     {
         get
         {
-            _BombsiteCenterAOffset = _BombsiteCenterAOffset ?? Schema.GetOffset(0xBEE9B915A11A73BA);
-            return ref _Handle.AsRef<Vector>(_BombsiteCenterAOffset!.Value);
+            if (_BombsiteCenterAOffset == -1) _BombsiteCenterAOffset = Schema.GetOffset(0xBEE9B915A11A73BA);
+            return ref _Handle.AsRef<Vector>(_BombsiteCenterAOffset);
         }
     }
-    private static nint? _BombsiteCenterBOffset;
+    private static nint _BombsiteCenterBOffset = -1;
 
     public ref Vector BombsiteCenterB
     {
         get
         {
-            _BombsiteCenterBOffset = _BombsiteCenterBOffset ?? Schema.GetOffset(0xBEE9B915A01A7227);
-            return ref _Handle.AsRef<Vector>(_BombsiteCenterBOffset!.Value);
+            if (_BombsiteCenterBOffset == -1) _BombsiteCenterBOffset = Schema.GetOffset(0xBEE9B915A01A7227);
+            return ref _Handle.AsRef<Vector>(_BombsiteCenterBOffset);
         }
     }
-    private static nint? _HostageRescueXOffset;
+    private static nint _HostageRescueXOffset = -1;
     private SchemaFixedArray<int>? _HostageRescueXInstance;
 
     public ISchemaFixedArray<int> HostageRescueX
     {
         get
         {
-            _HostageRescueXOffset = _HostageRescueXOffset ?? Schema.GetOffset(0xBEE9B91584FE2109);
+            if (_HostageRescueXOffset == -1) _HostageRescueXOffset = Schema.GetOffset(0xBEE9B91584FE2109);
             var instance = _HostageRescueXInstance ??= new SchemaFixedArray<int>(0, 0xBEE9B91584FE2109, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _HostageRescueXOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HostageRescueXOffset);
             return instance;
         }
     }
-    private static nint? _HostageRescueYOffset;
+    private static nint _HostageRescueYOffset = -1;
     private SchemaFixedArray<int>? _HostageRescueYInstance;
 
     public ISchemaFixedArray<int> HostageRescueY
     {
         get
         {
-            _HostageRescueYOffset = _HostageRescueYOffset ?? Schema.GetOffset(0xBEE9B91583FE1F76);
+            if (_HostageRescueYOffset == -1) _HostageRescueYOffset = Schema.GetOffset(0xBEE9B91583FE1F76);
             var instance = _HostageRescueYInstance ??= new SchemaFixedArray<int>(0, 0xBEE9B91583FE1F76, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _HostageRescueYOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HostageRescueYOffset);
             return instance;
         }
     }
-    private static nint? _HostageRescueZOffset;
+    private static nint _HostageRescueZOffset = -1;
     private SchemaFixedArray<int>? _HostageRescueZInstance;
 
     public ISchemaFixedArray<int> HostageRescueZ
     {
         get
         {
-            _HostageRescueZOffset = _HostageRescueZOffset ?? Schema.GetOffset(0xBEE9B91582FE1DE3);
+            if (_HostageRescueZOffset == -1) _HostageRescueZOffset = Schema.GetOffset(0xBEE9B91582FE1DE3);
             var instance = _HostageRescueZInstance ??= new SchemaFixedArray<int>(0, 0xBEE9B91582FE1DE3, 4, 4, 4);
-            instance.DangerousSetHandle(_Handle + _HostageRescueZOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _HostageRescueZOffset);
             return instance;
         }
     }
-    private static nint? _EndMatchNextMapAllVotedOffset;
+    private static nint _EndMatchNextMapAllVotedOffset = -1;
 
     public ref bool EndMatchNextMapAllVoted
     {
         get
         {
-            _EndMatchNextMapAllVotedOffset = _EndMatchNextMapAllVotedOffset ?? Schema.GetOffset(0xBEE9B915E1946791);
-            return ref _Handle.AsRef<bool>(_EndMatchNextMapAllVotedOffset!.Value);
+            if (_EndMatchNextMapAllVotedOffset == -1) _EndMatchNextMapAllVotedOffset = Schema.GetOffset(0xBEE9B915E1946791);
+            return ref _Handle.AsRef<bool>(_EndMatchNextMapAllVotedOffset);
         }
     }
-    private static nint? _FoundGoalPositionsOffset;
+    private static nint _FoundGoalPositionsOffset = -1;
 
     public ref bool FoundGoalPositions
     {
         get
         {
-            _FoundGoalPositionsOffset = _FoundGoalPositionsOffset ?? Schema.GetOffset(0xBEE9B915A90F0670);
-            return ref _Handle.AsRef<bool>(_FoundGoalPositionsOffset!.Value);
+            if (_FoundGoalPositionsOffset == -1) _FoundGoalPositionsOffset = Schema.GetOffset(0xBEE9B915A90F0670);
+            return ref _Handle.AsRef<bool>(_FoundGoalPositionsOffset);
         }
     }
 

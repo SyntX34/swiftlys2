@@ -16,42 +16,42 @@ internal partial class CVMixEnvelopeProcessorDescImpl : CVMixBaseProcessorDescIm
 {
     public CVMixEnvelopeProcessorDescImpl(nint handle) : base(handle) { }
 
-    private static nint? _DescOffset;
+    private static nint _DescOffset = -1;
     private VMixEnvelopeDesc_tImpl? _DescInstance;
 
     public VMixEnvelopeDesc_t Desc
     {
         get
         {
-            _DescOffset = _DescOffset ?? Schema.GetOffset(0x10287F727917BC0);
+            if (_DescOffset == -1) _DescOffset = Schema.GetOffset(0x10287F727917BC0);
             var instance = _DescInstance ??= new VMixEnvelopeDesc_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DescOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DescOffset);
             return instance;
         }
     }
-    private static nint? _OutParamLevelOffset;
+    private static nint _OutParamLevelOffset = -1;
     private CVMixParameterFloatImpl? _OutParamLevelInstance;
 
     public CVMixParameterFloat OutParamLevel
     {
         get
         {
-            _OutParamLevelOffset = _OutParamLevelOffset ?? Schema.GetOffset(0x10287F74EE63A32);
+            if (_OutParamLevelOffset == -1) _OutParamLevelOffset = Schema.GetOffset(0x10287F74EE63A32);
             var instance = _OutParamLevelInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutParamLevelOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutParamLevelOffset);
             return instance;
         }
     }
-    private static nint? _OutParamdBLevelOffset;
+    private static nint _OutParamdBLevelOffset = -1;
     private CVMixParameterFloatImpl? _OutParamdBLevelInstance;
 
     public CVMixParameterFloat OutParamdBLevel
     {
         get
         {
-            _OutParamdBLevelOffset = _OutParamdBLevelOffset ?? Schema.GetOffset(0x10287F7B5E8DB6C);
+            if (_OutParamdBLevelOffset == -1) _OutParamdBLevelOffset = Schema.GetOffset(0x10287F7B5E8DB6C);
             var instance = _OutParamdBLevelInstance ??= new CVMixParameterFloatImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutParamdBLevelOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutParamdBLevelOffset);
             return instance;
         }
     }

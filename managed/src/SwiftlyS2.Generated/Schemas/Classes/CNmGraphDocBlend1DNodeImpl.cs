@@ -16,27 +16,27 @@ internal partial class CNmGraphDocBlend1DNodeImpl : CNmGraphDocFlowNodeImpl, CNm
 {
     public CNmGraphDocBlend1DNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _BlendSpaceOffset;
+    private static nint _BlendSpaceOffset = -1;
     private CNmBlendSpace1DImpl? _BlendSpaceInstance;
 
     public CNmBlendSpace1D BlendSpace
     {
         get
         {
-            _BlendSpaceOffset = _BlendSpaceOffset ?? Schema.GetOffset(0x8FC237E19DCBC41E);
+            if (_BlendSpaceOffset == -1) _BlendSpaceOffset = Schema.GetOffset(0x8FC237E19DCBC41E);
             var instance = _BlendSpaceInstance ??= new CNmBlendSpace1DImpl(0);
-            instance.DangerousSetHandle(_Handle + _BlendSpaceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BlendSpaceOffset);
             return instance;
         }
     }
-    private static nint? _AllowLoopingOffset;
+    private static nint _AllowLoopingOffset = -1;
 
     public ref bool AllowLooping
     {
         get
         {
-            _AllowLoopingOffset = _AllowLoopingOffset ?? Schema.GetOffset(0x8FC237E1FEB26D98);
-            return ref _Handle.AsRef<bool>(_AllowLoopingOffset!.Value);
+            if (_AllowLoopingOffset == -1) _AllowLoopingOffset = Schema.GetOffset(0x8FC237E1FEB26D98);
+            return ref _Handle.AsRef<bool>(_AllowLoopingOffset);
         }
     }
 

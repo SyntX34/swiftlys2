@@ -22,6 +22,7 @@
 #include <api/server/players/player.h>
 
 #include <public/igameevents.h>
+#include <mutex>
 
 #include <chrono>
 
@@ -60,6 +61,9 @@ public:
 
     virtual std::string GetIPAddress() override;
     virtual void Kick(const std::string& sReason, int uReason) override;
+    virtual void SetListeningGameEvents(CBitVector<8192>& eventIDs) override;
+    virtual bool IsListeningGameEvent(int eventID) override;
+    virtual void SendGameEvent(IGameEvent* event) override;
 
     virtual BlockedTransmitInfo& GetBlockedTransmittingBits() override;
 
@@ -98,8 +102,12 @@ private:
     std::string centerMessageText = "";
     IGameEvent* centerMessageEvent = nullptr;
 
+    std::mutex centerMenuMutex;
     std::string centerMenuText = "";
     uint64_t m_uSessionId = 0;
+
+    std::mutex m_listeningGameEventsMutex;
+    CBitVector<8192> m_listeningGameEvents = {};
 };
 
 #endif

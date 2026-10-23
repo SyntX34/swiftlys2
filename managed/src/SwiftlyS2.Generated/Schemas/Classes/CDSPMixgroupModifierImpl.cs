@@ -16,69 +16,69 @@ internal partial class CDSPMixgroupModifierImpl : SchemaClass, CDSPMixgroupModif
 {
     public CDSPMixgroupModifierImpl(nint handle) : base(handle) { }
 
-    private static nint? _MixgroupOffset;
+    private static nint _MixgroupOffset = -1;
 
     public string Mixgroup
     {
         get
         {
-            _MixgroupOffset = _MixgroupOffset ?? Schema.GetOffset(0xDF83C91D89577218);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_MixgroupOffset!.Value));
+            if (_MixgroupOffset == -1) _MixgroupOffset = Schema.GetOffset(0xDF83C91D89577218);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_MixgroupOffset));
         }
         set
         {
-            _MixgroupOffset = _MixgroupOffset ?? Schema.GetOffset(0xDF83C91D89577218);
-            Schema.SetCUtlString(_Handle, _MixgroupOffset!.Value, value);
+            if (_MixgroupOffset == -1) _MixgroupOffset = Schema.GetOffset(0xDF83C91D89577218);
+            Schema.SetCUtlString(_Handle, _MixgroupOffset, value);
         }
     }
-    private static nint? _ModifierOffset;
+    private static nint _ModifierOffset = -1;
 
     public ref float Modifier
     {
         get
         {
-            _ModifierOffset = _ModifierOffset ?? Schema.GetOffset(0xDF83C91D55620FB6);
-            return ref _Handle.AsRef<float>(_ModifierOffset!.Value);
+            if (_ModifierOffset == -1) _ModifierOffset = Schema.GetOffset(0xDF83C91D55620FB6);
+            return ref _Handle.AsRef<float>(_ModifierOffset);
         }
     }
-    private static nint? _ModifierMinOffset;
+    private static nint _ModifierMinOffset = -1;
 
     public ref float ModifierMin
     {
         get
         {
-            _ModifierMinOffset = _ModifierMinOffset ?? Schema.GetOffset(0xDF83C91D62C9A002);
-            return ref _Handle.AsRef<float>(_ModifierMinOffset!.Value);
+            if (_ModifierMinOffset == -1) _ModifierMinOffset = Schema.GetOffset(0xDF83C91D62C9A002);
+            return ref _Handle.AsRef<float>(_ModifierMinOffset);
         }
     }
-    private static nint? _SourceModifierOffset;
+    private static nint _SourceModifierOffset = -1;
 
     public ref float SourceModifier
     {
         get
         {
-            _SourceModifierOffset = _SourceModifierOffset ?? Schema.GetOffset(0xDF83C91D64BF2A67);
-            return ref _Handle.AsRef<float>(_SourceModifierOffset!.Value);
+            if (_SourceModifierOffset == -1) _SourceModifierOffset = Schema.GetOffset(0xDF83C91D64BF2A67);
+            return ref _Handle.AsRef<float>(_SourceModifierOffset);
         }
     }
-    private static nint? _SourceModifierMinOffset;
+    private static nint _SourceModifierMinOffset = -1;
 
     public ref float SourceModifierMin
     {
         get
         {
-            _SourceModifierMinOffset = _SourceModifierMinOffset ?? Schema.GetOffset(0xDF83C91D59151DE1);
-            return ref _Handle.AsRef<float>(_SourceModifierMinOffset!.Value);
+            if (_SourceModifierMinOffset == -1) _SourceModifierMinOffset = Schema.GetOffset(0xDF83C91D59151DE1);
+            return ref _Handle.AsRef<float>(_SourceModifierMinOffset);
         }
     }
-    private static nint? _ListenerReverbModifierWhenSourceReverbIsActiveOffset;
+    private static nint _ListenerReverbModifierWhenSourceReverbIsActiveOffset = -1;
 
     public ref float ListenerReverbModifierWhenSourceReverbIsActive
     {
         get
         {
-            _ListenerReverbModifierWhenSourceReverbIsActiveOffset = _ListenerReverbModifierWhenSourceReverbIsActiveOffset ?? Schema.GetOffset(0xDF83C91DC98A5029);
-            return ref _Handle.AsRef<float>(_ListenerReverbModifierWhenSourceReverbIsActiveOffset!.Value);
+            if (_ListenerReverbModifierWhenSourceReverbIsActiveOffset == -1) _ListenerReverbModifierWhenSourceReverbIsActiveOffset = Schema.GetOffset(0xDF83C91DC98A5029);
+            return ref _Handle.AsRef<float>(_ListenerReverbModifierWhenSourceReverbIsActiveOffset);
         }
     }
 

@@ -16,39 +16,39 @@ internal partial class RnSoftbodyCapsule_tImpl : SchemaClass, RnSoftbodyCapsule_
 {
     public RnSoftbodyCapsule_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _CenterOffset;
+    private static nint _CenterOffset = -1;
     private SchemaFixedArray<Vector>? _CenterInstance;
 
     public ISchemaFixedArray<Vector> Center
     {
         get
         {
-            _CenterOffset = _CenterOffset ?? Schema.GetOffset(0x896978BC82A5908);
+            if (_CenterOffset == -1) _CenterOffset = Schema.GetOffset(0x896978BC82A5908);
             var instance = _CenterInstance ??= new SchemaFixedArray<Vector>(0, 0x896978BC82A5908, 2, 12, 4);
-            instance.DangerousSetHandle(_Handle + _CenterOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CenterOffset);
             return instance;
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x896978B5ACFC08D);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x896978B5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _ParticleOffset;
+    private static nint _ParticleOffset = -1;
     private SchemaFixedArray<ushort>? _ParticleInstance;
 
     public ISchemaFixedArray<ushort> Particle
     {
         get
         {
-            _ParticleOffset = _ParticleOffset ?? Schema.GetOffset(0x896978B863A8E83);
+            if (_ParticleOffset == -1) _ParticleOffset = Schema.GetOffset(0x896978B863A8E83);
             var instance = _ParticleInstance ??= new SchemaFixedArray<ushort>(0, 0x896978B863A8E83, 2, 2, 2);
-            instance.DangerousSetHandle(_Handle + _ParticleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParticleOffset);
             return instance;
         }
     }

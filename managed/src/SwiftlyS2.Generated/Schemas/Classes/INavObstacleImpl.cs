@@ -16,14 +16,14 @@ internal partial class INavObstacleImpl : SchemaClass, INavObstacle
 {
     public INavObstacleImpl(nint handle) : base(handle) { }
 
-    private static nint? _IdOffset;
+    private static nint _IdOffset = -1;
 
     public ref ulong Id
     {
         get
         {
-            _IdOffset = _IdOffset ?? Schema.GetOffset(0xD6337050037544C4);
-            return ref _Handle.AsRef<ulong>(_IdOffset!.Value);
+            if (_IdOffset == -1) _IdOffset = Schema.GetOffset(0xD6337050037544C4);
+            return ref _Handle.AsRef<ulong>(_IdOffset);
         }
     }
 

@@ -16,36 +16,36 @@ internal partial class CCompositeMaterialEditorDocImpl : SchemaClass, CComposite
 {
     public CCompositeMaterialEditorDocImpl(nint handle) : base(handle) { }
 
-    private static nint? _VersionOffset;
+    private static nint _VersionOffset = -1;
 
     public ref int Version
     {
         get
         {
-            _VersionOffset = _VersionOffset ?? Schema.GetOffset(0xEF8ED7DDB0AB8B1B);
-            return ref _Handle.AsRef<int>(_VersionOffset!.Value);
+            if (_VersionOffset == -1) _VersionOffset = Schema.GetOffset(0xEF8ED7DDB0AB8B1B);
+            return ref _Handle.AsRef<int>(_VersionOffset);
         }
     }
-    private static nint? _PointsOffset;
+    private static nint _PointsOffset = -1;
 
     public ref CUtlVector<CompositeMaterialEditorPoint_t> Points
     {
         get
         {
-            _PointsOffset = _PointsOffset ?? Schema.GetOffset(0xEF8ED7DD2B362046);
-            return ref _Handle.AsRef<CUtlVector<CompositeMaterialEditorPoint_t>>(_PointsOffset!.Value);
+            if (_PointsOffset == -1) _PointsOffset = Schema.GetOffset(0xEF8ED7DD2B362046);
+            return ref _Handle.AsRef<CUtlVector<CompositeMaterialEditorPoint_t>>(_PointsOffset);
         }
     }
-    private static nint? _KVthumbnailOffset;
+    private static nint _KVthumbnailOffset = -1;
     private SchemaUntypedField? _KVthumbnailInstance;
 
     public SchemaUntypedField KVthumbnail
     {
         get
         {
-            _KVthumbnailOffset = _KVthumbnailOffset ?? Schema.GetOffset(0xEF8ED7DDAE646E40);
+            if (_KVthumbnailOffset == -1) _KVthumbnailOffset = Schema.GetOffset(0xEF8ED7DDAE646E40);
             var instance = _KVthumbnailInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _KVthumbnailOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _KVthumbnailOffset);
             return instance;
         }
     }

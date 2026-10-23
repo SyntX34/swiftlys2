@@ -16,29 +16,29 @@ internal partial class C_INIT_InitFloatCollectionImpl : CParticleFunctionInitial
 {
     public C_INIT_InitFloatCollectionImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputValueOffset;
+    private static nint _InputValueOffset = -1;
     private CParticleCollectionFloatInputImpl? _InputValueInstance;
 
     public CParticleCollectionFloatInput InputValue
     {
         get
         {
-            _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0x70773EFA34445438);
+            if (_InputValueOffset == -1) _InputValueOffset = Schema.GetOffset(0x70773EFA34445438);
             var instance = _InputValueInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputValueOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputValueOffset);
             return instance;
         }
     }
-    private static nint? _OutputFieldOffset;
+    private static nint _OutputFieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
-            _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x70773EFA324F6F74);
+            if (_OutputFieldOffset == -1) _OutputFieldOffset = Schema.GetOffset(0x70773EFA324F6F74);
             var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset);
             return instance;
         }
     }

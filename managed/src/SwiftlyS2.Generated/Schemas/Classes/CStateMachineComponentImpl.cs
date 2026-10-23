@@ -16,19 +16,19 @@ internal partial class CStateMachineComponentImpl : CAnimGraphDoc_ComponentImpl,
 {
     public CStateMachineComponentImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x2302755363D22D49);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x2302755363D22D49);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x2302755363D22D49);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x2302755363D22D49);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
 

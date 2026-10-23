@@ -16,27 +16,27 @@ internal partial class CAnimGraphDoc_JiggleBoneNodeImpl : CAnimGraphDoc_NodeImpl
 {
     public CAnimGraphDoc_JiggleBoneNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0xB3C43C641F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0xB3C43C641F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _ItemsOffset;
+    private static nint _ItemsOffset = -1;
 
     public ref CUtlVector<CJiggleBoneItem> Items
     {
         get
         {
-            _ItemsOffset = _ItemsOffset ?? Schema.GetOffset(0xB3C43C647A87EDAF);
-            return ref _Handle.AsRef<CUtlVector<CJiggleBoneItem>>(_ItemsOffset!.Value);
+            if (_ItemsOffset == -1) _ItemsOffset = Schema.GetOffset(0xB3C43C647A87EDAF);
+            return ref _Handle.AsRef<CUtlVector<CJiggleBoneItem>>(_ItemsOffset);
         }
     }
 

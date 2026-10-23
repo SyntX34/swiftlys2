@@ -16,14 +16,14 @@ internal partial class SceneEventId_tImpl : SchemaClass, SceneEventId_t
 {
     public SceneEventId_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
 
     public ref uint Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x73B0927FDCB0894A);
-            return ref _Handle.AsRef<uint>(_ValueOffset!.Value);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x73B0927FDCB0894A);
+            return ref _Handle.AsRef<uint>(_ValueOffset);
         }
     }
 

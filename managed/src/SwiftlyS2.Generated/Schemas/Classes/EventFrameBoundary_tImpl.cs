@@ -16,14 +16,14 @@ internal partial class EventFrameBoundary_tImpl : SchemaClass, EventFrameBoundar
 {
     public EventFrameBoundary_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _FrameTimeOffset;
+    private static nint _FrameTimeOffset = -1;
 
     public ref float FrameTime
     {
         get
         {
-            _FrameTimeOffset = _FrameTimeOffset ?? Schema.GetOffset(0xDFF6C21659DF875);
-            return ref _Handle.AsRef<float>(_FrameTimeOffset!.Value);
+            if (_FrameTimeOffset == -1) _FrameTimeOffset = Schema.GetOffset(0xDFF6C21659DF875);
+            return ref _Handle.AsRef<float>(_FrameTimeOffset);
         }
     }
 

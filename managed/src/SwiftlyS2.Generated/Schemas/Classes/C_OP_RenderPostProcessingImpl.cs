@@ -16,37 +16,37 @@ internal partial class C_OP_RenderPostProcessingImpl : CParticleFunctionRenderer
 {
     public C_OP_RenderPostProcessingImpl(nint handle) : base(handle) { }
 
-    private static nint? _PostProcessStrengthOffset;
+    private static nint _PostProcessStrengthOffset = -1;
     private CPerParticleFloatInputImpl? _PostProcessStrengthInstance;
 
     public CPerParticleFloatInput PostProcessStrength
     {
         get
         {
-            _PostProcessStrengthOffset = _PostProcessStrengthOffset ?? Schema.GetOffset(0xD64D179C653C1A17);
+            if (_PostProcessStrengthOffset == -1) _PostProcessStrengthOffset = Schema.GetOffset(0xD64D179C653C1A17);
             var instance = _PostProcessStrengthInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _PostProcessStrengthOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PostProcessStrengthOffset);
             return instance;
         }
     }
-    private static nint? _PostTextureOffset;
+    private static nint _PostTextureOffset = -1;
 
     public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostTexture
     {
         get
         {
-            _PostTextureOffset = _PostTextureOffset ?? Schema.GetOffset(0xD64D179C943F8D28);
-            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCPostProcessingResource>>(_PostTextureOffset!.Value);
+            if (_PostTextureOffset == -1) _PostTextureOffset = Schema.GetOffset(0xD64D179C943F8D28);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCPostProcessingResource>>(_PostTextureOffset);
         }
     }
-    private static nint? _PriorityOffset;
+    private static nint _PriorityOffset = -1;
 
     public ref ParticlePostProcessPriorityGroup_t Priority
     {
         get
         {
-            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0xD64D179CE7EFB335);
-            return ref _Handle.AsRef<ParticlePostProcessPriorityGroup_t>(_PriorityOffset!.Value);
+            if (_PriorityOffset == -1) _PriorityOffset = Schema.GetOffset(0xD64D179CE7EFB335);
+            return ref _Handle.AsRef<ParticlePostProcessPriorityGroup_t>(_PriorityOffset);
         }
     }
 

@@ -16,51 +16,51 @@ internal partial class CFeNamedJiggleBoneImpl : SchemaClass, CFeNamedJiggleBone
 {
     public CFeNamedJiggleBoneImpl(nint handle) : base(handle) { }
 
-    private static nint? _StrParentBoneOffset;
+    private static nint _StrParentBoneOffset = -1;
 
     public string StrParentBone
     {
         get
         {
-            _StrParentBoneOffset = _StrParentBoneOffset ?? Schema.GetOffset(0x51055B3A22DD827E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_StrParentBoneOffset!.Value));
+            if (_StrParentBoneOffset == -1) _StrParentBoneOffset = Schema.GetOffset(0x51055B3A22DD827E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_StrParentBoneOffset));
         }
         set
         {
-            _StrParentBoneOffset = _StrParentBoneOffset ?? Schema.GetOffset(0x51055B3A22DD827E);
-            Schema.SetCUtlString(_Handle, _StrParentBoneOffset!.Value, value);
+            if (_StrParentBoneOffset == -1) _StrParentBoneOffset = Schema.GetOffset(0x51055B3A22DD827E);
+            Schema.SetCUtlString(_Handle, _StrParentBoneOffset, value);
         }
     }
-    private static nint? _TransformOffset;
+    private static nint _TransformOffset = -1;
 
     public ref CTransform Transform
     {
         get
         {
-            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0x51055B3A3A9A393B);
-            return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+            if (_TransformOffset == -1) _TransformOffset = Schema.GetOffset(0x51055B3A3A9A393B);
+            return ref _Handle.AsRef<CTransform>(_TransformOffset);
         }
     }
-    private static nint? _JiggleParentOffset;
+    private static nint _JiggleParentOffset = -1;
 
     public ref uint JiggleParent
     {
         get
         {
-            _JiggleParentOffset = _JiggleParentOffset ?? Schema.GetOffset(0x51055B3A8AABF3B9);
-            return ref _Handle.AsRef<uint>(_JiggleParentOffset!.Value);
+            if (_JiggleParentOffset == -1) _JiggleParentOffset = Schema.GetOffset(0x51055B3A8AABF3B9);
+            return ref _Handle.AsRef<uint>(_JiggleParentOffset);
         }
     }
-    private static nint? _JiggleBoneOffset;
+    private static nint _JiggleBoneOffset = -1;
     private CFeJiggleBoneImpl? _JiggleBoneInstance;
 
     public CFeJiggleBone JiggleBone
     {
         get
         {
-            _JiggleBoneOffset = _JiggleBoneOffset ?? Schema.GetOffset(0x51055B3A6038C557);
+            if (_JiggleBoneOffset == -1) _JiggleBoneOffset = Schema.GetOffset(0x51055B3A6038C557);
             var instance = _JiggleBoneInstance ??= new CFeJiggleBoneImpl(0);
-            instance.DangerousSetHandle(_Handle + _JiggleBoneOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _JiggleBoneOffset);
             return instance;
         }
     }

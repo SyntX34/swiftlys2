@@ -16,100 +16,100 @@ internal partial class CFootAdjustmentUpdateNodeImpl : CUnaryUpdateNodeImpl, CFo
 {
     public CFootAdjustmentUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _ClipsOffset;
+    private static nint _ClipsOffset = -1;
 
     public ref CUtlVector<HSequence> Clips
     {
         get
         {
-            _ClipsOffset = _ClipsOffset ?? Schema.GetOffset(0x667ADE248CB21A38);
-            return ref _Handle.AsRef<CUtlVector<HSequence>>(_ClipsOffset!.Value);
+            if (_ClipsOffset == -1) _ClipsOffset = Schema.GetOffset(0x667ADE248CB21A38);
+            return ref _Handle.AsRef<CUtlVector<HSequence>>(_ClipsOffset);
         }
     }
-    private static nint? _BasePoseCacheHandleOffset;
+    private static nint _BasePoseCacheHandleOffset = -1;
     private CPoseHandleImpl? _BasePoseCacheHandleInstance;
 
     public CPoseHandle BasePoseCacheHandle
     {
         get
         {
-            _BasePoseCacheHandleOffset = _BasePoseCacheHandleOffset ?? Schema.GetOffset(0x667ADE240690C505);
+            if (_BasePoseCacheHandleOffset == -1) _BasePoseCacheHandleOffset = Schema.GetOffset(0x667ADE240690C505);
             var instance = _BasePoseCacheHandleInstance ??= new CPoseHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _BasePoseCacheHandleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BasePoseCacheHandleOffset);
             return instance;
         }
     }
-    private static nint? _FacingTargetOffset;
+    private static nint _FacingTargetOffset = -1;
     private CAnimParamHandleImpl? _FacingTargetInstance;
 
     public CAnimParamHandle FacingTarget
     {
         get
         {
-            _FacingTargetOffset = _FacingTargetOffset ?? Schema.GetOffset(0x667ADE24ED73C452);
+            if (_FacingTargetOffset == -1) _FacingTargetOffset = Schema.GetOffset(0x667ADE24ED73C452);
             var instance = _FacingTargetInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _FacingTargetOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FacingTargetOffset);
             return instance;
         }
     }
-    private static nint? _TurnTimeMinOffset;
+    private static nint _TurnTimeMinOffset = -1;
 
     public ref float TurnTimeMin
     {
         get
         {
-            _TurnTimeMinOffset = _TurnTimeMinOffset ?? Schema.GetOffset(0x667ADE247BF2813F);
-            return ref _Handle.AsRef<float>(_TurnTimeMinOffset!.Value);
+            if (_TurnTimeMinOffset == -1) _TurnTimeMinOffset = Schema.GetOffset(0x667ADE247BF2813F);
+            return ref _Handle.AsRef<float>(_TurnTimeMinOffset);
         }
     }
-    private static nint? _TurnTimeMaxOffset;
+    private static nint _TurnTimeMaxOffset = -1;
 
     public ref float TurnTimeMax
     {
         get
         {
-            _TurnTimeMaxOffset = _TurnTimeMaxOffset ?? Schema.GetOffset(0x667ADE2489DF0F91);
-            return ref _Handle.AsRef<float>(_TurnTimeMaxOffset!.Value);
+            if (_TurnTimeMaxOffset == -1) _TurnTimeMaxOffset = Schema.GetOffset(0x667ADE2489DF0F91);
+            return ref _Handle.AsRef<float>(_TurnTimeMaxOffset);
         }
     }
-    private static nint? _StepHeightMaxOffset;
+    private static nint _StepHeightMaxOffset = -1;
 
     public ref float StepHeightMax
     {
         get
         {
-            _StepHeightMaxOffset = _StepHeightMaxOffset ?? Schema.GetOffset(0x667ADE24C48F8DDC);
-            return ref _Handle.AsRef<float>(_StepHeightMaxOffset!.Value);
+            if (_StepHeightMaxOffset == -1) _StepHeightMaxOffset = Schema.GetOffset(0x667ADE24C48F8DDC);
+            return ref _Handle.AsRef<float>(_StepHeightMaxOffset);
         }
     }
-    private static nint? _StepHeightMaxAngleOffset;
+    private static nint _StepHeightMaxAngleOffset = -1;
 
     public ref float StepHeightMaxAngle
     {
         get
         {
-            _StepHeightMaxAngleOffset = _StepHeightMaxAngleOffset ?? Schema.GetOffset(0x667ADE24E36AE247);
-            return ref _Handle.AsRef<float>(_StepHeightMaxAngleOffset!.Value);
+            if (_StepHeightMaxAngleOffset == -1) _StepHeightMaxAngleOffset = Schema.GetOffset(0x667ADE24E36AE247);
+            return ref _Handle.AsRef<float>(_StepHeightMaxAngleOffset);
         }
     }
-    private static nint? _ResetChildOffset;
+    private static nint _ResetChildOffset = -1;
 
     public ref bool ResetChild
     {
         get
         {
-            _ResetChildOffset = _ResetChildOffset ?? Schema.GetOffset(0x667ADE2465CC88B6);
-            return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
+            if (_ResetChildOffset == -1) _ResetChildOffset = Schema.GetOffset(0x667ADE2465CC88B6);
+            return ref _Handle.AsRef<bool>(_ResetChildOffset);
         }
     }
-    private static nint? _AnimationDrivenOffset;
+    private static nint _AnimationDrivenOffset = -1;
 
     public ref bool AnimationDriven
     {
         get
         {
-            _AnimationDrivenOffset = _AnimationDrivenOffset ?? Schema.GetOffset(0x667ADE24B5FFC0F3);
-            return ref _Handle.AsRef<bool>(_AnimationDrivenOffset!.Value);
+            if (_AnimationDrivenOffset == -1) _AnimationDrivenOffset = Schema.GetOffset(0x667ADE24B5FFC0F3);
+            return ref _Handle.AsRef<bool>(_AnimationDrivenOffset);
         }
     }
 

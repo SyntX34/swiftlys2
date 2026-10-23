@@ -16,29 +16,29 @@ internal partial class CSolveIKTargetHandle_tImpl : SchemaClass, CSolveIKTargetH
 {
     public CSolveIKTargetHandle_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _PositionHandleOffset;
+    private static nint _PositionHandleOffset = -1;
     private CAnimParamHandleImpl? _PositionHandleInstance;
 
     public CAnimParamHandle PositionHandle
     {
         get
         {
-            _PositionHandleOffset = _PositionHandleOffset ?? Schema.GetOffset(0xC2940485B066E3D4);
+            if (_PositionHandleOffset == -1) _PositionHandleOffset = Schema.GetOffset(0xC2940485B066E3D4);
             var instance = _PositionHandleInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _PositionHandleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PositionHandleOffset);
             return instance;
         }
     }
-    private static nint? _OrientationHandleOffset;
+    private static nint _OrientationHandleOffset = -1;
     private CAnimParamHandleImpl? _OrientationHandleInstance;
 
     public CAnimParamHandle OrientationHandle
     {
         get
         {
-            _OrientationHandleOffset = _OrientationHandleOffset ?? Schema.GetOffset(0xC294048597E9518F);
+            if (_OrientationHandleOffset == -1) _OrientationHandleOffset = Schema.GetOffset(0xC294048597E9518F);
             var instance = _OrientationHandleInstance ??= new CAnimParamHandleImpl(0);
-            instance.DangerousSetHandle(_Handle + _OrientationHandleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OrientationHandleOffset);
             return instance;
         }
     }

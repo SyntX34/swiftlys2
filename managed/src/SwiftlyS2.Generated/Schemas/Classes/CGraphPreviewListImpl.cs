@@ -16,27 +16,42 @@ internal partial class CGraphPreviewListImpl : SchemaClass, CGraphPreviewList
 {
     public CGraphPreviewListImpl(nint handle) : base(handle) { }
 
-    private static nint? _VolumeOffset;
+    private static nint _VolumeOffset = -1;
 
     public ref float Volume
     {
         get
         {
-            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0x7A40C4727647E0C9);
-            return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
+            if (_VolumeOffset == -1) _VolumeOffset = Schema.GetOffset(0x7A40C4727647E0C9);
+            return ref _Handle.AsRef<float>(_VolumeOffset);
         }
     }
-    private static nint? _PreviewListOffset;
+    private static nint _PreviewListOffset = -1;
     private CPreviewListImpl? _PreviewListInstance;
 
     public CPreviewList PreviewList
     {
         get
         {
-            _PreviewListOffset = _PreviewListOffset ?? Schema.GetOffset(0x7A40C4727035D7DF);
+            if (_PreviewListOffset == -1) _PreviewListOffset = Schema.GetOffset(0x7A40C4727035D7DF);
             var instance = _PreviewListInstance ??= new CPreviewListImpl(0);
-            instance.DangerousSetHandle(_Handle + _PreviewListOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PreviewListOffset);
             return instance;
+        }
+    }
+    private static nint _PreviewGraphNameOffset = -1;
+
+    public string PreviewGraphName
+    {
+        get
+        {
+            if (_PreviewGraphNameOffset == -1) _PreviewGraphNameOffset = Schema.GetOffset(0x7A40C4721B481FA6);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PreviewGraphNameOffset));
+        }
+        set
+        {
+            if (_PreviewGraphNameOffset == -1) _PreviewGraphNameOffset = Schema.GetOffset(0x7A40C4721B481FA6);
+            Schema.SetCUtlString(_Handle, _PreviewGraphNameOffset, value);
         }
     }
 

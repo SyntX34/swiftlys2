@@ -16,84 +16,84 @@ internal partial class CManifestInfoImpl : SchemaClass, CManifestInfo
 {
     public CManifestInfoImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE7F68F87CAE8A266);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE7F68F87CAE8A266);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE7F68F87CAE8A266);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0xE7F68F87CAE8A266);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _GroupOffset;
+    private static nint _GroupOffset = -1;
 
     public string Group
     {
         get
         {
-            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0xE7F68F87FA0AD40C);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupOffset!.Value));
+            if (_GroupOffset == -1) _GroupOffset = Schema.GetOffset(0xE7F68F87FA0AD40C);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_GroupOffset));
         }
         set
         {
-            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0xE7F68F87FA0AD40C);
-            Schema.SetCUtlString(_Handle, _GroupOffset!.Value, value);
+            if (_GroupOffset == -1) _GroupOffset = Schema.GetOffset(0xE7F68F87FA0AD40C);
+            Schema.SetCUtlString(_Handle, _GroupOffset, value);
         }
     }
-    private static nint? _ModOffset;
+    private static nint _ModOffset = -1;
 
     public string Mod
     {
         get
         {
-            _ModOffset = _ModOffset ?? Schema.GetOffset(0xE7F68F876B34CC03);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ModOffset!.Value));
+            if (_ModOffset == -1) _ModOffset = Schema.GetOffset(0xE7F68F876B34CC03);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ModOffset));
         }
         set
         {
-            _ModOffset = _ModOffset ?? Schema.GetOffset(0xE7F68F876B34CC03);
-            Schema.SetCUtlString(_Handle, _ModOffset!.Value, value);
+            if (_ModOffset == -1) _ModOffset = Schema.GetOffset(0xE7F68F876B34CC03);
+            Schema.SetCUtlString(_Handle, _ModOffset, value);
         }
     }
-    private static nint? _SourceFileOffset;
+    private static nint _SourceFileOffset = -1;
 
     public string SourceFile
     {
         get
         {
-            _SourceFileOffset = _SourceFileOffset ?? Schema.GetOffset(0xE7F68F879F08DB0E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SourceFileOffset!.Value));
+            if (_SourceFileOffset == -1) _SourceFileOffset = Schema.GetOffset(0xE7F68F879F08DB0E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SourceFileOffset));
         }
         set
         {
-            _SourceFileOffset = _SourceFileOffset ?? Schema.GetOffset(0xE7F68F879F08DB0E);
-            Schema.SetCUtlString(_Handle, _SourceFileOffset!.Value, value);
+            if (_SourceFileOffset == -1) _SourceFileOffset = Schema.GetOffset(0xE7F68F879F08DB0E);
+            Schema.SetCUtlString(_Handle, _SourceFileOffset, value);
         }
     }
-    private static nint? _SourceLineOffset;
+    private static nint _SourceLineOffset = -1;
 
     public ref int SourceLine
     {
         get
         {
-            _SourceLineOffset = _SourceLineOffset ?? Schema.GetOffset(0xE7F68F87CA21D4AE);
-            return ref _Handle.AsRef<int>(_SourceLineOffset!.Value);
+            if (_SourceLineOffset == -1) _SourceLineOffset = Schema.GetOffset(0xE7F68F87CA21D4AE);
+            return ref _Handle.AsRef<int>(_SourceLineOffset);
         }
     }
-    private static nint? _ResourcesOffset;
+    private static nint _ResourcesOffset = -1;
 
     public ref CUtlVector<CUtlString> Resources
     {
         get
         {
-            _ResourcesOffset = _ResourcesOffset ?? Schema.GetOffset(0xE7F68F87FDED4D72);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ResourcesOffset!.Value);
+            if (_ResourcesOffset == -1) _ResourcesOffset = Schema.GetOffset(0xE7F68F87FDED4D72);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ResourcesOffset);
         }
     }
 

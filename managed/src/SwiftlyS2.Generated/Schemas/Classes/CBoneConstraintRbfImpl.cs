@@ -16,24 +16,24 @@ internal partial class CBoneConstraintRbfImpl : CBoneConstraintBaseImpl, CBoneCo
 {
     public CBoneConstraintRbfImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputBonesOffset;
+    private static nint _InputBonesOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> InputBones
     {
         get
         {
-            _InputBonesOffset = _InputBonesOffset ?? Schema.GetOffset(0x45CB33BF83336B6E);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_InputBonesOffset!.Value);
+            if (_InputBonesOffset == -1) _InputBonesOffset = Schema.GetOffset(0x45CB33BF83336B6E);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_InputBonesOffset);
         }
     }
-    private static nint? _OutputBonesOffset;
+    private static nint _OutputBonesOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> OutputBones
     {
         get
         {
-            _OutputBonesOffset = _OutputBonesOffset ?? Schema.GetOffset(0x45CB33BF84D3A41B);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_OutputBonesOffset!.Value);
+            if (_OutputBonesOffset == -1) _OutputBonesOffset = Schema.GetOffset(0x45CB33BF84D3A41B);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_OutputBonesOffset);
         }
     }
 

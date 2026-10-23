@@ -16,34 +16,34 @@ internal partial class C_OP_ParentVorticesImpl : CParticleFunctionForceImpl, C_O
 {
     public C_OP_ParentVorticesImpl(nint handle) : base(handle) { }
 
-    private static nint? _ForceScaleOffset;
+    private static nint _ForceScaleOffset = -1;
 
     public ref float ForceScale
     {
         get
         {
-            _ForceScaleOffset = _ForceScaleOffset ?? Schema.GetOffset(0xBB2B6F884817F390);
-            return ref _Handle.AsRef<float>(_ForceScaleOffset!.Value);
+            if (_ForceScaleOffset == -1) _ForceScaleOffset = Schema.GetOffset(0xBB2B6F884817F390);
+            return ref _Handle.AsRef<float>(_ForceScaleOffset);
         }
     }
-    private static nint? _TwistAxisOffset;
+    private static nint _TwistAxisOffset = -1;
 
     public ref Vector TwistAxis
     {
         get
         {
-            _TwistAxisOffset = _TwistAxisOffset ?? Schema.GetOffset(0xBB2B6F8808970741);
-            return ref _Handle.AsRef<Vector>(_TwistAxisOffset!.Value);
+            if (_TwistAxisOffset == -1) _TwistAxisOffset = Schema.GetOffset(0xBB2B6F8808970741);
+            return ref _Handle.AsRef<Vector>(_TwistAxisOffset);
         }
     }
-    private static nint? _FlipBasedOnYawOffset;
+    private static nint _FlipBasedOnYawOffset = -1;
 
     public ref bool FlipBasedOnYaw
     {
         get
         {
-            _FlipBasedOnYawOffset = _FlipBasedOnYawOffset ?? Schema.GetOffset(0xBB2B6F88BCFD5843);
-            return ref _Handle.AsRef<bool>(_FlipBasedOnYawOffset!.Value);
+            if (_FlipBasedOnYawOffset == -1) _FlipBasedOnYawOffset = Schema.GetOffset(0xBB2B6F88BCFD5843);
+            return ref _Handle.AsRef<bool>(_FlipBasedOnYawOffset);
         }
     }
 

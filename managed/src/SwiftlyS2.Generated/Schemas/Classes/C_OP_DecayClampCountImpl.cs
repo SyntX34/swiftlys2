@@ -16,16 +16,16 @@ internal partial class C_OP_DecayClampCountImpl : CParticleFunctionOperatorImpl,
 {
     public C_OP_DecayClampCountImpl(nint handle) : base(handle) { }
 
-    private static nint? _CountOffset;
+    private static nint _CountOffset = -1;
     private CParticleCollectionFloatInputImpl? _CountInstance;
 
     public CParticleCollectionFloatInput Count
     {
         get
         {
-            _CountOffset = _CountOffset ?? Schema.GetOffset(0xBBD38E0B7D31AC08);
+            if (_CountOffset == -1) _CountOffset = Schema.GetOffset(0xBBD38E0B7D31AC08);
             var instance = _CountInstance ??= new CParticleCollectionFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _CountOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CountOffset);
             return instance;
         }
     }

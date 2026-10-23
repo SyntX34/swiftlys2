@@ -21,6 +21,8 @@ using SwiftlyS2.Shared.Sounds;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.Menus;
+using SwiftlyS2.Shared.Menu;
+using SwiftlyS2.Shared.Menu.Components;
 using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared.Trace;
@@ -1019,10 +1021,7 @@ public class TestPlugin : BasePlugin
     [Command("kurotest", registerRaw: true)]
     public void Command_kurotest( ICommandContext context )
     {
-        foreach (var client in Core.PlayerManager.GetAllPlayers())
-        {
-            Console.WriteLine($"{client.Name}");
-        }
+        Console.WriteLine($"{Core.GameEvent.IsListeningToEvent(context.Sender!.PlayerID, "round_start")} {Core.GameEvent.IsListeningToEvent(context.Sender!.PlayerID, "achievement_earned_local")}");
     }
 
     private Callback<GCMessageAvailable_t>? _authTicketResponse;
@@ -1437,6 +1436,176 @@ public class TestPlugin : BasePlugin
         // Core.MenusAPI.OpenMenuForPlayer(player, menu);
     }
 
+    [Command("nm")]
+    public void NewMenuTestCommand( ICommandContext context )
+    {
+        var player = context.Sender!;
+
+        var confirmMenu = Core.Menu.CreateMenu("testplugin.nm.confirm")
+            .WithTitle("Confirm")
+            .Add(new ButtonComponent("Yes", ctx => { ctx.Player.SendChat("Confirmed."); ctx.Session.Close(); return ValueTask.CompletedTask; }))
+            .Add(new ButtonComponent("No", ctx => { ctx.Session.Close(); return ValueTask.CompletedTask; }))
+            .Build();
+
+        var menu = Core.Menu.CreateMenu("testplugin.nm")
+            .WithTitle("New Menu System")
+            .WithAutoClose(TimeSpan.FromSeconds(30))
+            .WithAction("Shop", MenuKey.Ctrl, ctx => { ctx.Player.SendChat("Ctrl pressed - shop opened via an extra action!"); return ValueTask.CompletedTask; }, "Shop")
+            .Add(new TextComponent("Just a label"))
+            .Add(new DividerComponent())
+            .Add(new ChatColoredTextComponent("Chat-colored, best-fit on this renderer", Helper.ChatColors.Green))
+            .Add(new ButtonComponent("Click me", ctx => { ctx.Player.SendChat("Clicked!"); return ValueTask.CompletedTask; }))
+            .Add(new ClickCounterComponent("Custom component"))
+            .Add(new ToggleComponent("Enabled", true))
+            .Add(new SliderComponent("Volume", 0f, 100f, 50f))
+            .Add(new SelectorComponent<string>("Mode", ["Easy", "Normal", "Hard"]))
+            .Add(new ChoiceComponent("Team", ["CT", "T", "Spectator"]))
+            .Add(new InputComponent("Nickname", "player"))
+            .Add(new ProgressBarComponent("Loading", _ => 0.65f))
+            .Add(new SubmenuComponent("Confirm submenu", confirmMenu))
+            .AddFooter(new TextComponent("Press E to select"))
+            .Build();
+
+        menu.Open(player);
+    }
+
+    [Command("nmall")]
+    public void NewMenuOpenForAllTestCommand( ICommandContext context )
+    {
+        var menu = Core.Menu.CreateMenu("testplugin.nmall")
+            .WithTitle("Broadcast Menu")
+            .Add(new TextComponent("Opened for everyone connected."))
+            .Add(new ButtonComponent("Close", ctx => { ctx.Session.Close(); return ValueTask.CompletedTask; }))
+            .Build();
+
+        var sessions = menu.OpenForAll();
+        context.Reply($"Opened '{menu.Id}' for {sessions.Count} player(s).");
+    }
+
+    [Command("playerlist")]
+    public void PlayerListMenuTestCommand( ICommandContext context )
+        => _ = BuildPlayerListMenu().Open(context.Sender!);
+
+    private IMenu BuildPlayerListMenu()
+    {
+        var list = new PlayerListComponent() {
+            SearchMode = TargetSearchMode.IncludeSelf,
+            Sorter = found => found.OrderBy(p => p.Controller?.PlayerName),
+            ItemHint = p => $"SteamID: {p.SteamID}",
+            OnPlayerSelected = ctx => ctx.Player.SendChat($"Selected {ctx.Target.Controller?.PlayerName}"),
+        };
+
+        return Core.Menu.CreateMenu("testplugin.playerlist")
+            .WithTitle("Players")
+            .Add(list)
+            .Build();
+    }
+
+    [Command("collection")]
+    public void CollectionMenuTestCommand( ICommandContext context )
+        => _ = BuildCollectionMenu().Open(context.Sender!);
+
+    private IMenu BuildCollectionMenu()
+    {
+        var calls = 0;
+
+        var collection = new PagedCollectionComponent<IPlayer>(async () => {
+            await Task.Delay(1500);
+
+            return ++calls % 3 == 0
+                ? throw new InvalidOperationException("simulated failure")
+                : Core.PlayerManager.GetAllPlayers().Where(p => p.IsValid && !p.IsFakeClient).ToList();
+        }) {
+            Formatter = p => p.Controller?.PlayerName ?? "unknown",
+            ItemHint = p => $"SteamID: {p.SteamID}",
+            OnItemSelected = ctx => ctx.Player.SendChat($"Selected {ctx.Item.Controller?.PlayerName}"),
+            ShowFailureMessage = true,
+        };
+
+        return Core.Menu.CreateMenu("testplugin.collection")
+            .WithTitle("Paged Collection")
+            .Add(new ButtonComponent("Reload", _ => { collection.Reload(); return ValueTask.CompletedTask; }))
+            .Add(collection)
+            .Build();
+    }
+
+    [Command("selection")]
+    public void SelectionMenuTestCommand( ICommandContext context )
+    {
+        var menu = Core.Menu.CreateMenu("testplugin.selection")
+            .WithTitle("Selection Components")
+            .Add(new SubmenuComponent("Player selection", _ => BuildPlayerSelectionMenu()))
+            .Add(new SubmenuComponent("Collection selection", _ => BuildCollectionSelectionMenu()))
+            .Add(new SubmenuComponent("Player list", _ => BuildPlayerListMenu()))
+            .Add(new SubmenuComponent("Paged collection", _ => BuildCollectionMenu()))
+            .Build();
+
+        _ = menu.Open(context.Sender!);
+    }
+
+    private IMenu BuildPlayerSelectionMenu()
+    {
+        var selection = new PlayerSelectionComponent() {
+            DefaultSelected = ( session, p ) => p.PlayerID == session.Player.PlayerID,
+            List = { ItemHint = p => $"SteamID: {p.SteamID}" },
+            OnSelectionChanged = ctx => ctx.Player.SendChat(
+                $"{(ctx.IsSelected ? "Ticked" : "Unticked")} {ctx.Item.Controller?.PlayerName}({ctx.Selected.Count} selected)"),
+        };
+
+        return Core.Menu.CreateMenu("testplugin.playerselection")
+            .WithTitle("Player Selection")
+            .Add(new ButtonComponent("Report selected", ctx => {
+                var names = selection.GetSelected(ctx.Session).Select(p => p.Controller?.PlayerName ?? "?");
+                ctx.Player.SendChat($"Selected: {string.Join(", ", names)}");
+                return ValueTask.CompletedTask;
+            }))
+            .Add(new ButtonComponent("Clear", ctx => { selection.Clear(ctx.Session); return ValueTask.CompletedTask; }))
+            .Add(selection)
+            .Build();
+    }
+
+    private IMenu BuildCollectionSelectionMenu()
+    {
+        var selection = new CollectionSelectionComponent<string>(async () => {
+            await Task.Delay(1000);
+            return (IReadOnlyList<string>)["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliet"];
+        }) {
+            MaxSelected = 3,
+            DefaultSelected = ( _, item ) => item is "Alpha" or "Bravo",
+            List = { ItemHint = item => $"Max 3 can be ticked ({item})" },
+            OnSelectionChanged = ctx => ctx.Player.SendChat(
+                $"{(ctx.IsSelected ? "Ticked" : "Unticked")} {ctx.Item} ({ctx.Selected.Count}/3)"),
+        };
+
+        return Core.Menu.CreateMenu("testplugin.collectionselection")
+            .WithTitle("Collection Selection")
+            .Add(new ButtonComponent("Reload", _ => { selection.Reload(); return ValueTask.CompletedTask; }))
+            .Add(new ButtonComponent("Report selected", ctx => {
+                ctx.Player.SendChat($"Selected: {string.Join(", ", selection.GetSelected(ctx.Session))}");
+                return ValueTask.CompletedTask;
+            }))
+            .Add(selection)
+            .Build();
+    }
+
+    [Command("cm")]
+    public void ChatMenuTestCommand( ICommandContext context )
+    {
+        var player = context.Sender!;
+
+        var menu = Core.Menu.CreateMenu("testplugin.cm")
+            .WithRenderer(MenuRendererIds.Chat)
+            .WithTitle("Chat Menu")
+            .Add(new ChatColoredTextComponent("This line is chat-colored.", Helper.ChatColors.Green))
+            .Add(new ChatColoredTextComponent("So is this one.", Helper.ChatColors.LightBlue))
+            .Add(new TextComponent("Plain component - no color on this renderer."))
+            .Add(new ButtonComponent("Say hi", ctx => { ctx.Player.SendChat($"{Helper.ChatColors.Yellow}Hi!".Colored()); return ValueTask.CompletedTask; }))
+            .Add(new ToggleComponent("Enabled", true))
+            .Build();
+
+        menu.Open(player);
+    }
+
     [Command("menutest")]
     public void MenuTestCommand( ICommandContext context )
     {
@@ -1629,12 +1798,7 @@ public class TestPlugin : BasePlugin
     [Command("tb2m")]
     public void TeleportBotToMeCommand( ICommandContext context )
     {
-        var player = context.Sender!;
-        Core.PlayerManager.GetAllPlayers()
-            .Where(p => p.IsValid && p.IsFakeClient)
-            .ToList()
-            .FirstOrDefault()
-            ?.Teleport(player.PlayerPawn!.AbsOrigin!.Value, player.PlayerPawn!.EyeAngles, Vector.Zero);
+        context.Sender!.Pawn.WeaponServices.RemoveWeaponBySlot(gear_slot_t.GEAR_SLOT_KNIFE);
     }
 
     [Command("los")]

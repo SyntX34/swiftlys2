@@ -16,44 +16,44 @@ internal partial class CMixSteamAudioHybridReverbImpl : CMixPropertyBaseImpl, CM
 {
     public CMixSteamAudioHybridReverbImpl(nint handle) : base(handle) { }
 
-    private static nint? _ReverbTimeLowOffset;
+    private static nint _ReverbTimeLowOffset = -1;
 
     public ref float ReverbTimeLow
     {
         get
         {
-            _ReverbTimeLowOffset = _ReverbTimeLowOffset ?? Schema.GetOffset(0x241B62D060D6A1F4);
-            return ref _Handle.AsRef<float>(_ReverbTimeLowOffset!.Value);
+            if (_ReverbTimeLowOffset == -1) _ReverbTimeLowOffset = Schema.GetOffset(0x241B62D060D6A1F4);
+            return ref _Handle.AsRef<float>(_ReverbTimeLowOffset);
         }
     }
-    private static nint? _ReverbTimeMidOffset;
+    private static nint _ReverbTimeMidOffset = -1;
 
     public ref float ReverbTimeMid
     {
         get
         {
-            _ReverbTimeMidOffset = _ReverbTimeMidOffset ?? Schema.GetOffset(0x241B62D0CA9F83DC);
-            return ref _Handle.AsRef<float>(_ReverbTimeMidOffset!.Value);
+            if (_ReverbTimeMidOffset == -1) _ReverbTimeMidOffset = Schema.GetOffset(0x241B62D0CA9F83DC);
+            return ref _Handle.AsRef<float>(_ReverbTimeMidOffset);
         }
     }
-    private static nint? _ReverbTimeHighOffset;
+    private static nint _ReverbTimeHighOffset = -1;
 
     public ref float ReverbTimeHigh
     {
         get
         {
-            _ReverbTimeHighOffset = _ReverbTimeHighOffset ?? Schema.GetOffset(0x241B62D00BE39BEE);
-            return ref _Handle.AsRef<float>(_ReverbTimeHighOffset!.Value);
+            if (_ReverbTimeHighOffset == -1) _ReverbTimeHighOffset = Schema.GetOffset(0x241B62D00BE39BEE);
+            return ref _Handle.AsRef<float>(_ReverbTimeHighOffset);
         }
     }
-    private static nint? _ReverbTimeOffset;
+    private static nint _ReverbTimeOffset = -1;
 
     public ref CUtlVector<float> ReverbTime
     {
         get
         {
-            _ReverbTimeOffset = _ReverbTimeOffset ?? Schema.GetOffset(0x241B62D08BD62124);
-            return ref _Handle.AsRef<CUtlVector<float>>(_ReverbTimeOffset!.Value);
+            if (_ReverbTimeOffset == -1) _ReverbTimeOffset = Schema.GetOffset(0x241B62D08BD62124);
+            return ref _Handle.AsRef<CUtlVector<float>>(_ReverbTimeOffset);
         }
     }
 

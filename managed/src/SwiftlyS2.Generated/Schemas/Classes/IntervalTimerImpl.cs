@@ -16,27 +16,27 @@ internal partial class IntervalTimerImpl : SchemaClass, IntervalTimer
 {
     public IntervalTimerImpl(nint handle) : base(handle) { }
 
-    private static nint? _TimestampOffset;
+    private static nint _TimestampOffset = -1;
     private GameTime_tImpl? _TimestampInstance;
 
     public GameTime_t Timestamp
     {
         get
         {
-            _TimestampOffset = _TimestampOffset ?? Schema.GetOffset(0x8FD39659B6C56F43);
+            if (_TimestampOffset == -1) _TimestampOffset = Schema.GetOffset(0x8FD39659B6C56F43);
             var instance = _TimestampInstance ??= new GameTime_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _TimestampOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TimestampOffset);
             return instance;
         }
     }
-    private static nint? _WorldGroupIdOffset;
+    private static nint _WorldGroupIdOffset = -1;
 
     public ref uint WorldGroupId
     {
         get
         {
-            _WorldGroupIdOffset = _WorldGroupIdOffset ?? Schema.GetOffset(0x8FD396597414B193);
-            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+            if (_WorldGroupIdOffset == -1) _WorldGroupIdOffset = Schema.GetOffset(0x8FD396597414B193);
+            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset);
         }
     }
 

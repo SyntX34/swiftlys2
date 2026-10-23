@@ -16,24 +16,24 @@ internal partial class CDetailPropTypeImpl : SchemaClass, CDetailPropType
 {
     public CDetailPropTypeImpl(nint handle) : base(handle) { }
 
-    private static nint? _DensityOffset;
+    private static nint _DensityOffset = -1;
 
     public ref float Density
     {
         get
         {
-            _DensityOffset = _DensityOffset ?? Schema.GetOffset(0xFDA9002EA7E7CAA1);
-            return ref _Handle.AsRef<float>(_DensityOffset!.Value);
+            if (_DensityOffset == -1) _DensityOffset = Schema.GetOffset(0xFDA9002EA7E7CAA1);
+            return ref _Handle.AsRef<float>(_DensityOffset);
         }
     }
-    private static nint? _ModelsOffset;
+    private static nint _ModelsOffset = -1;
 
     public ref CUtlVector<CDetailPropModel> Models
     {
         get
         {
-            _ModelsOffset = _ModelsOffset ?? Schema.GetOffset(0xFDA9002E83128B0B);
-            return ref _Handle.AsRef<CUtlVector<CDetailPropModel>>(_ModelsOffset!.Value);
+            if (_ModelsOffset == -1) _ModelsOffset = Schema.GetOffset(0xFDA9002E83128B0B);
+            return ref _Handle.AsRef<CUtlVector<CDetailPropModel>>(_ModelsOffset);
         }
     }
 

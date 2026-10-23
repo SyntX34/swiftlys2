@@ -16,74 +16,74 @@ internal partial class CNmTwoBoneIKNode__CDefinitionImpl : CNmPassthroughNode__C
 {
     public CNmTwoBoneIKNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _EffectorBoneIDOffset;
+    private static nint _EffectorBoneIDOffset = -1;
 
     public ref CGlobalSymbol EffectorBoneID
     {
         get
         {
-            _EffectorBoneIDOffset = _EffectorBoneIDOffset ?? Schema.GetOffset(0x4D36C61F7F221CB6);
-            return ref _Handle.AsRef<CGlobalSymbol>(_EffectorBoneIDOffset!.Value);
+            if (_EffectorBoneIDOffset == -1) _EffectorBoneIDOffset = Schema.GetOffset(0x4D36C61F7F221CB6);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EffectorBoneIDOffset);
         }
     }
-    private static nint? _EffectorTargetNodeIdxOffset;
+    private static nint _EffectorTargetNodeIdxOffset = -1;
 
     public ref short EffectorTargetNodeIdx
     {
         get
         {
-            _EffectorTargetNodeIdxOffset = _EffectorTargetNodeIdxOffset ?? Schema.GetOffset(0x4D36C61FD6B9B943);
-            return ref _Handle.AsRef<short>(_EffectorTargetNodeIdxOffset!.Value);
+            if (_EffectorTargetNodeIdxOffset == -1) _EffectorTargetNodeIdxOffset = Schema.GetOffset(0x4D36C61FD6B9B943);
+            return ref _Handle.AsRef<short>(_EffectorTargetNodeIdxOffset);
         }
     }
-    private static nint? _EnabledNodeIdxOffset;
+    private static nint _EnabledNodeIdxOffset = -1;
 
     public ref short EnabledNodeIdx
     {
         get
         {
-            _EnabledNodeIdxOffset = _EnabledNodeIdxOffset ?? Schema.GetOffset(0x4D36C61FF7CDF5E9);
-            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+            if (_EnabledNodeIdxOffset == -1) _EnabledNodeIdxOffset = Schema.GetOffset(0x4D36C61FF7CDF5E9);
+            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset);
         }
     }
-    private static nint? _BlendTimeSecondsOffset;
+    private static nint _BlendTimeSecondsOffset = -1;
 
     public ref float BlendTimeSeconds
     {
         get
         {
-            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0x4D36C61F6D3A08FC);
-            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+            if (_BlendTimeSecondsOffset == -1) _BlendTimeSecondsOffset = Schema.GetOffset(0x4D36C61F6D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset);
         }
     }
-    private static nint? _BlendModeOffset;
+    private static nint _BlendModeOffset = -1;
 
     public ref NmIKBlendMode_t BlendMode
     {
         get
         {
-            _BlendModeOffset = _BlendModeOffset ?? Schema.GetOffset(0x4D36C61F8D5006AB);
-            return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset!.Value);
+            if (_BlendModeOffset == -1) _BlendModeOffset = Schema.GetOffset(0x4D36C61F8D5006AB);
+            return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset);
         }
     }
-    private static nint? _IsTargetInWorldSpaceOffset;
+    private static nint _IsTargetInWorldSpaceOffset = -1;
 
     public ref bool IsTargetInWorldSpace
     {
         get
         {
-            _IsTargetInWorldSpaceOffset = _IsTargetInWorldSpaceOffset ?? Schema.GetOffset(0x4D36C61F5F56E0C5);
-            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
+            if (_IsTargetInWorldSpaceOffset == -1) _IsTargetInWorldSpaceOffset = Schema.GetOffset(0x4D36C61F5F56E0C5);
+            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset);
         }
     }
-    private static nint? _ChainRotationWeightOffset;
+    private static nint _ChainRotationWeightOffset = -1;
 
     public ref float ChainRotationWeight
     {
         get
         {
-            _ChainRotationWeightOffset = _ChainRotationWeightOffset ?? Schema.GetOffset(0x4D36C61F2BCFB44A);
-            return ref _Handle.AsRef<float>(_ChainRotationWeightOffset!.Value);
+            if (_ChainRotationWeightOffset == -1) _ChainRotationWeightOffset = Schema.GetOffset(0x4D36C61F2BCFB44A);
+            return ref _Handle.AsRef<float>(_ChainRotationWeightOffset);
         }
     }
 

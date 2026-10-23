@@ -16,60 +16,60 @@ internal partial class FollowAttachmentSettings_tImpl : SchemaClass, FollowAttac
 {
     public FollowAttachmentSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _AttachmentOffset;
+    private static nint _AttachmentOffset = -1;
     private CAnimAttachmentImpl? _AttachmentInstance;
 
     public CAnimAttachment Attachment
     {
         get
         {
-            _AttachmentOffset = _AttachmentOffset ?? Schema.GetOffset(0x94FFC64B2C5CA308);
+            if (_AttachmentOffset == -1) _AttachmentOffset = Schema.GetOffset(0x94FFC64B2C5CA308);
             var instance = _AttachmentInstance ??= new CAnimAttachmentImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttachmentOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AttachmentOffset);
             return instance;
         }
     }
-    private static nint? _BoneIndexOffset;
+    private static nint _BoneIndexOffset = -1;
 
     public ref int BoneIndex
     {
         get
         {
-            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0x94FFC64B6AFA4155);
-            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+            if (_BoneIndexOffset == -1) _BoneIndexOffset = Schema.GetOffset(0x94FFC64B6AFA4155);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset);
         }
     }
-    private static nint? _AttachmentHandleOffset;
+    private static nint _AttachmentHandleOffset = -1;
     private AttachmentHandle_tImpl? _AttachmentHandleInstance;
 
     public AttachmentHandle_t AttachmentHandle
     {
         get
         {
-            _AttachmentHandleOffset = _AttachmentHandleOffset ?? Schema.GetOffset(0x94FFC64BA203035E);
+            if (_AttachmentHandleOffset == -1) _AttachmentHandleOffset = Schema.GetOffset(0x94FFC64BA203035E);
             var instance = _AttachmentHandleInstance ??= new AttachmentHandle_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _AttachmentHandleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _AttachmentHandleOffset);
             return instance;
         }
     }
-    private static nint? _MatchTranslationOffset;
+    private static nint _MatchTranslationOffset = -1;
 
     public ref bool MatchTranslation
     {
         get
         {
-            _MatchTranslationOffset = _MatchTranslationOffset ?? Schema.GetOffset(0x94FFC64B96FCC779);
-            return ref _Handle.AsRef<bool>(_MatchTranslationOffset!.Value);
+            if (_MatchTranslationOffset == -1) _MatchTranslationOffset = Schema.GetOffset(0x94FFC64B96FCC779);
+            return ref _Handle.AsRef<bool>(_MatchTranslationOffset);
         }
     }
-    private static nint? _MatchRotationOffset;
+    private static nint _MatchRotationOffset = -1;
 
     public ref bool MatchRotation
     {
         get
         {
-            _MatchRotationOffset = _MatchRotationOffset ?? Schema.GetOffset(0x94FFC64BA4FB561C);
-            return ref _Handle.AsRef<bool>(_MatchRotationOffset!.Value);
+            if (_MatchRotationOffset == -1) _MatchRotationOffset = Schema.GetOffset(0x94FFC64BA4FB561C);
+            return ref _Handle.AsRef<bool>(_MatchRotationOffset);
         }
     }
 

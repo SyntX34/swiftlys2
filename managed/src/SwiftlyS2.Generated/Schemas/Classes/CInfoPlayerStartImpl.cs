@@ -16,34 +16,34 @@ internal partial class CInfoPlayerStartImpl : CPointEntityImpl, CInfoPlayerStart
 {
     public CInfoPlayerStartImpl(nint handle) : base(handle) { }
 
-    private static nint? _DisabledOffset;
+    private static nint _DisabledOffset = -1;
 
     public ref bool Disabled
     {
         get
         {
-            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xE0799D713A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0xE0799D713A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset);
         }
     }
-    private static nint? _IsMasterOffset;
+    private static nint _IsMasterOffset = -1;
 
     public ref bool IsMaster
     {
         get
         {
-            _IsMasterOffset = _IsMasterOffset ?? Schema.GetOffset(0xE0799D71DE5719A3);
-            return ref _Handle.AsRef<bool>(_IsMasterOffset!.Value);
+            if (_IsMasterOffset == -1) _IsMasterOffset = Schema.GetOffset(0xE0799D71DE5719A3);
+            return ref _Handle.AsRef<bool>(_IsMasterOffset);
         }
     }
-    private static nint? _PawnSubclassOffset;
+    private static nint _PawnSubclassOffset = -1;
 
     public ref CGlobalSymbol PawnSubclass
     {
         get
         {
-            _PawnSubclassOffset = _PawnSubclassOffset ?? Schema.GetOffset(0xE0799D7190AFB5EF);
-            return ref _Handle.AsRef<CGlobalSymbol>(_PawnSubclassOffset!.Value);
+            if (_PawnSubclassOffset == -1) _PawnSubclassOffset = Schema.GetOffset(0xE0799D7190AFB5EF);
+            return ref _Handle.AsRef<CGlobalSymbol>(_PawnSubclassOffset);
         }
     }
 

@@ -16,14 +16,14 @@ internal partial class C_PhysicsPropImpl : C_BreakablePropImpl, C_PhysicsProp
 {
     public C_PhysicsPropImpl(nint handle) : base(handle) { }
 
-    private static nint? _AwakeOffset;
+    private static nint _AwakeOffset = -1;
 
     public ref bool Awake
     {
         get
         {
-            _AwakeOffset = _AwakeOffset ?? Schema.GetOffset(0xAD839A2D9A5C15BC);
-            return ref _Handle.AsRef<bool>(_AwakeOffset!.Value);
+            if (_AwakeOffset == -1) _AwakeOffset = Schema.GetOffset(0xAD839A2D9A5C15BC);
+            return ref _Handle.AsRef<bool>(_AwakeOffset);
         }
     }
 

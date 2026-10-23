@@ -16,14 +16,14 @@ internal partial class CNavFlagsImpl : SchemaClass, CNavFlags
 {
     public CNavFlagsImpl(nint handle) : base(handle) { }
 
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref ulong Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xB01A6A7236B92FAC);
-            return ref _Handle.AsRef<ulong>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xB01A6A7236B92FAC);
+            return ref _Handle.AsRef<ulong>(_FlagsOffset);
         }
     }
 

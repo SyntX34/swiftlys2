@@ -16,49 +16,49 @@ internal partial class CInfoFanImpl : CPointEntityImpl, CInfoFan
 {
     public CInfoFanImpl(nint handle) : base(handle) { }
 
-    private static nint? _FanForceMaxRadiusOffset;
+    private static nint _FanForceMaxRadiusOffset = -1;
 
     public ref float FanForceMaxRadius
     {
         get
         {
-            _FanForceMaxRadiusOffset = _FanForceMaxRadiusOffset ?? Schema.GetOffset(0x1372EEA33EA45A67);
-            return ref _Handle.AsRef<float>(_FanForceMaxRadiusOffset!.Value);
+            if (_FanForceMaxRadiusOffset == -1) _FanForceMaxRadiusOffset = Schema.GetOffset(0x1372EEA33EA45A67);
+            return ref _Handle.AsRef<float>(_FanForceMaxRadiusOffset);
         }
     }
-    private static nint? _FanForceMinRadiusOffset;
+    private static nint _FanForceMinRadiusOffset = -1;
 
     public ref float FanForceMinRadius
     {
         get
         {
-            _FanForceMinRadiusOffset = _FanForceMinRadiusOffset ?? Schema.GetOffset(0x1372EEA352CA71C5);
-            return ref _Handle.AsRef<float>(_FanForceMinRadiusOffset!.Value);
+            if (_FanForceMinRadiusOffset == -1) _FanForceMinRadiusOffset = Schema.GetOffset(0x1372EEA352CA71C5);
+            return ref _Handle.AsRef<float>(_FanForceMinRadiusOffset);
         }
     }
-    private static nint? _CurveDistRangeOffset;
+    private static nint _CurveDistRangeOffset = -1;
 
     public ref float CurveDistRange
     {
         get
         {
-            _CurveDistRangeOffset = _CurveDistRangeOffset ?? Schema.GetOffset(0x1372EEA3EE91456F);
-            return ref _Handle.AsRef<float>(_CurveDistRangeOffset!.Value);
+            if (_CurveDistRangeOffset == -1) _CurveDistRangeOffset = Schema.GetOffset(0x1372EEA3EE91456F);
+            return ref _Handle.AsRef<float>(_CurveDistRangeOffset);
         }
     }
-    private static nint? _FanForceCurveStringOffset;
+    private static nint _FanForceCurveStringOffset = -1;
 
     public string FanForceCurveString
     {
         get
         {
-            _FanForceCurveStringOffset = _FanForceCurveStringOffset ?? Schema.GetOffset(0x1372EEA3CC493A61);
-            return Schema.GetString(_Handle.Read<nint>(_FanForceCurveStringOffset!.Value));
+            if (_FanForceCurveStringOffset == -1) _FanForceCurveStringOffset = Schema.GetOffset(0x1372EEA3CC493A61);
+            return Schema.GetString(_Handle.Read<nint>(_FanForceCurveStringOffset));
         }
         set
         {
-            _FanForceCurveStringOffset = _FanForceCurveStringOffset ?? Schema.GetOffset(0x1372EEA3CC493A61);
-            Schema.SetString(_Handle, _FanForceCurveStringOffset!.Value, value);
+            if (_FanForceCurveStringOffset == -1) _FanForceCurveStringOffset = Schema.GetOffset(0x1372EEA3CC493A61);
+            Schema.SetString(_Handle, _FanForceCurveStringOffset, value);
         }
     }
 

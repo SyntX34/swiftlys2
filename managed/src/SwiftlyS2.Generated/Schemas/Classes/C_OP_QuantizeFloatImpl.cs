@@ -16,29 +16,29 @@ internal partial class C_OP_QuantizeFloatImpl : CParticleFunctionOperatorImpl, C
 {
     public C_OP_QuantizeFloatImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputValueOffset;
+    private static nint _InputValueOffset = -1;
     private CPerParticleFloatInputImpl? _InputValueInstance;
 
     public CPerParticleFloatInput InputValue
     {
         get
         {
-            _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0xCD85375434445438);
+            if (_InputValueOffset == -1) _InputValueOffset = Schema.GetOffset(0xCD85375434445438);
             var instance = _InputValueInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputValueOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputValueOffset);
             return instance;
         }
     }
-    private static nint? _OutputFieldOffset;
+    private static nint _OutputFieldOffset = -1;
     private ParticleAttributeIndex_tImpl? _OutputFieldInstance;
 
     public ParticleAttributeIndex_t OutputField
     {
         get
         {
-            _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0xCD853754324F6F74);
+            if (_OutputFieldOffset == -1) _OutputFieldOffset = Schema.GetOffset(0xCD853754324F6F74);
             var instance = _OutputFieldInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _OutputFieldOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _OutputFieldOffset);
             return instance;
         }
     }

@@ -16,24 +16,24 @@ internal partial class NavGravity_tImpl : SchemaClass, NavGravity_t
 {
     public NavGravity_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _GravityOffset;
+    private static nint _GravityOffset = -1;
 
     public ref Vector Gravity
     {
         get
         {
-            _GravityOffset = _GravityOffset ?? Schema.GetOffset(0xAF45EC63A5AE4779);
-            return ref _Handle.AsRef<Vector>(_GravityOffset!.Value);
+            if (_GravityOffset == -1) _GravityOffset = Schema.GetOffset(0xAF45EC63A5AE4779);
+            return ref _Handle.AsRef<Vector>(_GravityOffset);
         }
     }
-    private static nint? _DefaultOffset;
+    private static nint _DefaultOffset = -1;
 
     public ref bool Default
     {
         get
         {
-            _DefaultOffset = _DefaultOffset ?? Schema.GetOffset(0xAF45EC6385F067BE);
-            return ref _Handle.AsRef<bool>(_DefaultOffset!.Value);
+            if (_DefaultOffset == -1) _DefaultOffset = Schema.GetOffset(0xAF45EC6385F067BE);
+            return ref _Handle.AsRef<bool>(_DefaultOffset);
         }
     }
 

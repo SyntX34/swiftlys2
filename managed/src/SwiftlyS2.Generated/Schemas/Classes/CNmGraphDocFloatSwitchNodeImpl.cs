@@ -16,24 +16,24 @@ internal partial class CNmGraphDocFloatSwitchNodeImpl : CNmGraphDocFlowNodeImpl,
 {
     public CNmGraphDocFloatSwitchNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _FalseValueOffset;
+    private static nint _FalseValueOffset = -1;
 
     public ref float FalseValue
     {
         get
         {
-            _FalseValueOffset = _FalseValueOffset ?? Schema.GetOffset(0xAA6AADFD5C87DE2F);
-            return ref _Handle.AsRef<float>(_FalseValueOffset!.Value);
+            if (_FalseValueOffset == -1) _FalseValueOffset = Schema.GetOffset(0xAA6AADFD5C87DE2F);
+            return ref _Handle.AsRef<float>(_FalseValueOffset);
         }
     }
-    private static nint? _TrueValueOffset;
+    private static nint _TrueValueOffset = -1;
 
     public ref float TrueValue
     {
         get
         {
-            _TrueValueOffset = _TrueValueOffset ?? Schema.GetOffset(0xAA6AADFD28CBA8A0);
-            return ref _Handle.AsRef<float>(_TrueValueOffset!.Value);
+            if (_TrueValueOffset == -1) _TrueValueOffset = Schema.GetOffset(0xAA6AADFD28CBA8A0);
+            return ref _Handle.AsRef<float>(_TrueValueOffset);
         }
     }
 

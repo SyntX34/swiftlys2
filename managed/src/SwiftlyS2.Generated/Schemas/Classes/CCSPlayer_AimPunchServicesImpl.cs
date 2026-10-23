@@ -16,70 +16,70 @@ internal partial class CCSPlayer_AimPunchServicesImpl : CPlayerPawnComponentImpl
 {
     public CCSPlayer_AimPunchServicesImpl(nint handle) : base(handle) { }
 
-    private static nint? _PredictableBaseTickOffset;
+    private static nint _PredictableBaseTickOffset = -1;
     private GameTick_tImpl? _PredictableBaseTickInstance;
 
     public GameTick_t PredictableBaseTick
     {
         get
         {
-            _PredictableBaseTickOffset = _PredictableBaseTickOffset ?? Schema.GetOffset(0xDFFC786DC958216A);
+            if (_PredictableBaseTickOffset == -1) _PredictableBaseTickOffset = Schema.GetOffset(0xDFFC786DC958216A);
             var instance = _PredictableBaseTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _PredictableBaseTickOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _PredictableBaseTickOffset);
             return instance;
         }
     }
-    private static nint? _PredictableBaseTickInterpAmountOffset;
+    private static nint _PredictableBaseTickInterpAmountOffset = -1;
 
     public ref float PredictableBaseTickInterpAmount
     {
         get
         {
-            _PredictableBaseTickInterpAmountOffset = _PredictableBaseTickInterpAmountOffset ?? Schema.GetOffset(0xDFFC786D8B6226DC);
-            return ref _Handle.AsRef<float>(_PredictableBaseTickInterpAmountOffset!.Value);
+            if (_PredictableBaseTickInterpAmountOffset == -1) _PredictableBaseTickInterpAmountOffset = Schema.GetOffset(0xDFFC786D8B6226DC);
+            return ref _Handle.AsRef<float>(_PredictableBaseTickInterpAmountOffset);
         }
     }
-    private static nint? _PredictableBaseAngleOffset;
+    private static nint _PredictableBaseAngleOffset = -1;
 
     public ref QAngle PredictableBaseAngle
     {
         get
         {
-            _PredictableBaseAngleOffset = _PredictableBaseAngleOffset ?? Schema.GetOffset(0xDFFC786D480B1352);
-            return ref _Handle.AsRef<QAngle>(_PredictableBaseAngleOffset!.Value);
+            if (_PredictableBaseAngleOffset == -1) _PredictableBaseAngleOffset = Schema.GetOffset(0xDFFC786D480B1352);
+            return ref _Handle.AsRef<QAngle>(_PredictableBaseAngleOffset);
         }
     }
-    private static nint? _PredictableBaseAngleVelOffset;
+    private static nint _PredictableBaseAngleVelOffset = -1;
 
     public ref QAngle PredictableBaseAngleVel
     {
         get
         {
-            _PredictableBaseAngleVelOffset = _PredictableBaseAngleVelOffset ?? Schema.GetOffset(0xDFFC786D10CC32A5);
-            return ref _Handle.AsRef<QAngle>(_PredictableBaseAngleVelOffset!.Value);
+            if (_PredictableBaseAngleVelOffset == -1) _PredictableBaseAngleVelOffset = Schema.GetOffset(0xDFFC786D10CC32A5);
+            return ref _Handle.AsRef<QAngle>(_PredictableBaseAngleVelOffset);
         }
     }
-    private static nint? _UnpredictableBaseTickOffset;
+    private static nint _UnpredictableBaseTickOffset = -1;
     private GameTick_tImpl? _UnpredictableBaseTickInstance;
 
     public GameTick_t UnpredictableBaseTick
     {
         get
         {
-            _UnpredictableBaseTickOffset = _UnpredictableBaseTickOffset ?? Schema.GetOffset(0xDFFC786DD8B95A17);
+            if (_UnpredictableBaseTickOffset == -1) _UnpredictableBaseTickOffset = Schema.GetOffset(0xDFFC786DD8B95A17);
             var instance = _UnpredictableBaseTickInstance ??= new GameTick_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _UnpredictableBaseTickOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _UnpredictableBaseTickOffset);
             return instance;
         }
     }
-    private static nint? _UnpredictableBaseAngleOffset;
+    private static nint _UnpredictableBaseAngleOffset = -1;
 
     public ref QAngle UnpredictableBaseAngle
     {
         get
         {
-            _UnpredictableBaseAngleOffset = _UnpredictableBaseAngleOffset ?? Schema.GetOffset(0xDFFC786DD6BE4DE1);
-            return ref _Handle.AsRef<QAngle>(_UnpredictableBaseAngleOffset!.Value);
+            if (_UnpredictableBaseAngleOffset == -1) _UnpredictableBaseAngleOffset = Schema.GetOffset(0xDFFC786DD6BE4DE1);
+            return ref _Handle.AsRef<QAngle>(_UnpredictableBaseAngleOffset);
         }
     }
 

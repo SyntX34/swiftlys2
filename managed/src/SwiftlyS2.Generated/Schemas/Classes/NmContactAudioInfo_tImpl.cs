@@ -16,34 +16,34 @@ internal partial class NmContactAudioInfo_tImpl : SchemaClass, NmContactAudioInf
 {
     public NmContactAudioInfo_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _AudioActionIDOffset;
+    private static nint _AudioActionIDOffset = -1;
 
     public ref CGlobalSymbol AudioActionID
     {
         get
         {
-            _AudioActionIDOffset = _AudioActionIDOffset ?? Schema.GetOffset(0xBB0BC481A70F0456);
-            return ref _Handle.AsRef<CGlobalSymbol>(_AudioActionIDOffset!.Value);
+            if (_AudioActionIDOffset == -1) _AudioActionIDOffset = Schema.GetOffset(0xBB0BC481A70F0456);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AudioActionIDOffset);
         }
     }
-    private static nint? _AudioTypeIDOffset;
+    private static nint _AudioTypeIDOffset = -1;
 
     public ref CGlobalSymbol AudioTypeID
     {
         get
         {
-            _AudioTypeIDOffset = _AudioTypeIDOffset ?? Schema.GetOffset(0xBB0BC481E0E8F6A4);
-            return ref _Handle.AsRef<CGlobalSymbol>(_AudioTypeIDOffset!.Value);
+            if (_AudioTypeIDOffset == -1) _AudioTypeIDOffset = Schema.GetOffset(0xBB0BC481E0E8F6A4);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AudioTypeIDOffset);
         }
     }
-    private static nint? _SoundeventOverrideIDOffset;
+    private static nint _SoundeventOverrideIDOffset = -1;
 
     public ref CGlobalSymbol SoundeventOverrideID
     {
         get
         {
-            _SoundeventOverrideIDOffset = _SoundeventOverrideIDOffset ?? Schema.GetOffset(0xBB0BC481A8F8F339);
-            return ref _Handle.AsRef<CGlobalSymbol>(_SoundeventOverrideIDOffset!.Value);
+            if (_SoundeventOverrideIDOffset == -1) _SoundeventOverrideIDOffset = Schema.GetOffset(0xBB0BC481A8F8F339);
+            return ref _Handle.AsRef<CGlobalSymbol>(_SoundeventOverrideIDOffset);
         }
     }
 

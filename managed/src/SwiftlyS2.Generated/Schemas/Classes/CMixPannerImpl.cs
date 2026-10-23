@@ -16,24 +16,24 @@ internal partial class CMixPannerImpl : CMixPropertyBaseImpl, CMixPanner
 {
     public CMixPannerImpl(nint handle) : base(handle) { }
 
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref VMixPannerType_t Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x4332BF2C0F04B4ED);
-            return ref _Handle.AsRef<VMixPannerType_t>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x4332BF2C0F04B4ED);
+            return ref _Handle.AsRef<VMixPannerType_t>(_TypeOffset);
         }
     }
-    private static nint? _StrengthOffset;
+    private static nint _StrengthOffset = -1;
 
     public ref float Strength
     {
         get
         {
-            _StrengthOffset = _StrengthOffset ?? Schema.GetOffset(0x4332BF2C8F67AF1A);
-            return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+            if (_StrengthOffset == -1) _StrengthOffset = Schema.GetOffset(0x4332BF2C8F67AF1A);
+            return ref _Handle.AsRef<float>(_StrengthOffset);
         }
     }
 

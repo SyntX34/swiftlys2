@@ -16,52 +16,52 @@ internal partial class CFloatAnimValueImpl : SchemaClass, CFloatAnimValue
 {
     public CFloatAnimValueImpl(nint handle) : base(handle) { }
 
-    private static nint? _ConstValueOffset;
+    private static nint _ConstValueOffset = -1;
 
     public ref float ConstValue
     {
         get
         {
-            _ConstValueOffset = _ConstValueOffset ?? Schema.GetOffset(0xEBD7567A15B55ED3);
-            return ref _Handle.AsRef<float>(_ConstValueOffset!.Value);
+            if (_ConstValueOffset == -1) _ConstValueOffset = Schema.GetOffset(0xEBD7567A15B55ED3);
+            return ref _Handle.AsRef<float>(_ConstValueOffset);
         }
     }
-    private static nint? _ParamNameOffset;
+    private static nint _ParamNameOffset = -1;
 
     public string ParamName
     {
         get
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xEBD7567AE87A9639);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset!.Value));
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0xEBD7567AE87A9639);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ParamNameOffset));
         }
         set
         {
-            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xEBD7567AE87A9639);
-            Schema.SetCUtlString(_Handle, _ParamNameOffset!.Value, value);
+            if (_ParamNameOffset == -1) _ParamNameOffset = Schema.GetOffset(0xEBD7567AE87A9639);
+            Schema.SetCUtlString(_Handle, _ParamNameOffset, value);
         }
     }
-    private static nint? _ParamIDOffset;
+    private static nint _ParamIDOffset = -1;
     private AnimParamIDImpl? _ParamIDInstance;
 
     public AnimParamID ParamID
     {
         get
         {
-            _ParamIDOffset = _ParamIDOffset ?? Schema.GetOffset(0xEBD7567AD605831F);
+            if (_ParamIDOffset == -1) _ParamIDOffset = Schema.GetOffset(0xEBD7567AD605831F);
             var instance = _ParamIDInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParamIDOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParamIDOffset);
             return instance;
         }
     }
-    private static nint? _SourceOffset;
+    private static nint _SourceOffset = -1;
 
     public ref EAnimValueSource Source
     {
         get
         {
-            _SourceOffset = _SourceOffset ?? Schema.GetOffset(0xEBD7567A11F0FA65);
-            return ref _Handle.AsRef<EAnimValueSource>(_SourceOffset!.Value);
+            if (_SourceOffset == -1) _SourceOffset = Schema.GetOffset(0xEBD7567A11F0FA65);
+            return ref _Handle.AsRef<EAnimValueSource>(_SourceOffset);
         }
     }
 

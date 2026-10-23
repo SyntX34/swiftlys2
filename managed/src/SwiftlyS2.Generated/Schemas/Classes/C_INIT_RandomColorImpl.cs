@@ -16,107 +16,107 @@ internal partial class C_INIT_RandomColorImpl : CParticleFunctionInitializerImpl
 {
     public C_INIT_RandomColorImpl(nint handle) : base(handle) { }
 
-    private static nint? _ColorMinOffset;
+    private static nint _ColorMinOffset = -1;
 
     public ref Color ColorMin
     {
         get
         {
-            _ColorMinOffset = _ColorMinOffset ?? Schema.GetOffset(0x90523A48552A5834);
-            return ref _Handle.AsRef<Color>(_ColorMinOffset!.Value);
+            if (_ColorMinOffset == -1) _ColorMinOffset = Schema.GetOffset(0x90523A48552A5834);
+            return ref _Handle.AsRef<Color>(_ColorMinOffset);
         }
     }
-    private static nint? _ColorMaxOffset;
+    private static nint _ColorMaxOffset = -1;
 
     public ref Color ColorMax
     {
         get
         {
-            _ColorMaxOffset = _ColorMaxOffset ?? Schema.GetOffset(0x90523A48433DC396);
-            return ref _Handle.AsRef<Color>(_ColorMaxOffset!.Value);
+            if (_ColorMaxOffset == -1) _ColorMaxOffset = Schema.GetOffset(0x90523A48433DC396);
+            return ref _Handle.AsRef<Color>(_ColorMaxOffset);
         }
     }
-    private static nint? _TintMinOffset;
+    private static nint _TintMinOffset = -1;
 
     public ref Color TintMin
     {
         get
         {
-            _TintMinOffset = _TintMinOffset ?? Schema.GetOffset(0x90523A4850B36A60);
-            return ref _Handle.AsRef<Color>(_TintMinOffset!.Value);
+            if (_TintMinOffset == -1) _TintMinOffset = Schema.GetOffset(0x90523A4850B36A60);
+            return ref _Handle.AsRef<Color>(_TintMinOffset);
         }
     }
-    private static nint? _TintMaxOffset;
+    private static nint _TintMaxOffset = -1;
 
     public ref Color TintMax
     {
         get
         {
-            _TintMaxOffset = _TintMaxOffset ?? Schema.GetOffset(0x90523A4866A0054A);
-            return ref _Handle.AsRef<Color>(_TintMaxOffset!.Value);
+            if (_TintMaxOffset == -1) _TintMaxOffset = Schema.GetOffset(0x90523A4866A0054A);
+            return ref _Handle.AsRef<Color>(_TintMaxOffset);
         }
     }
-    private static nint? _TintPercOffset;
+    private static nint _TintPercOffset = -1;
 
     public ref float TintPerc
     {
         get
         {
-            _TintPercOffset = _TintPercOffset ?? Schema.GetOffset(0x90523A48E32BE3C6);
-            return ref _Handle.AsRef<float>(_TintPercOffset!.Value);
+            if (_TintPercOffset == -1) _TintPercOffset = Schema.GetOffset(0x90523A48E32BE3C6);
+            return ref _Handle.AsRef<float>(_TintPercOffset);
         }
     }
-    private static nint? _UpdateThresholdOffset;
+    private static nint _UpdateThresholdOffset = -1;
 
     public ref float UpdateThreshold
     {
         get
         {
-            _UpdateThresholdOffset = _UpdateThresholdOffset ?? Schema.GetOffset(0x90523A48A2303609);
-            return ref _Handle.AsRef<float>(_UpdateThresholdOffset!.Value);
+            if (_UpdateThresholdOffset == -1) _UpdateThresholdOffset = Schema.GetOffset(0x90523A48A2303609);
+            return ref _Handle.AsRef<float>(_UpdateThresholdOffset);
         }
     }
-    private static nint? _TintCPOffset;
+    private static nint _TintCPOffset = -1;
 
     public ref int TintCP
     {
         get
         {
-            _TintCPOffset = _TintCPOffset ?? Schema.GetOffset(0x90523A4854940ABB);
-            return ref _Handle.AsRef<int>(_TintCPOffset!.Value);
+            if (_TintCPOffset == -1) _TintCPOffset = Schema.GetOffset(0x90523A4854940ABB);
+            return ref _Handle.AsRef<int>(_TintCPOffset);
         }
     }
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x90523A48E5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x90523A48E5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _TintBlendModeOffset;
+    private static nint _TintBlendModeOffset = -1;
 
     public ref ParticleColorBlendMode_t TintBlendMode
     {
         get
         {
-            _TintBlendModeOffset = _TintBlendModeOffset ?? Schema.GetOffset(0x90523A48B80E5314);
-            return ref _Handle.AsRef<ParticleColorBlendMode_t>(_TintBlendModeOffset!.Value);
+            if (_TintBlendModeOffset == -1) _TintBlendModeOffset = Schema.GetOffset(0x90523A48B80E5314);
+            return ref _Handle.AsRef<ParticleColorBlendMode_t>(_TintBlendModeOffset);
         }
     }
-    private static nint? _LightAmplificationOffset;
+    private static nint _LightAmplificationOffset = -1;
 
     public ref float LightAmplification
     {
         get
         {
-            _LightAmplificationOffset = _LightAmplificationOffset ?? Schema.GetOffset(0x90523A48C8D7C0AD);
-            return ref _Handle.AsRef<float>(_LightAmplificationOffset!.Value);
+            if (_LightAmplificationOffset == -1) _LightAmplificationOffset = Schema.GetOffset(0x90523A48C8D7C0AD);
+            return ref _Handle.AsRef<float>(_LightAmplificationOffset);
         }
     }
 

@@ -16,34 +16,34 @@ internal partial class PlayerInputMotorInstanceData_tImpl : SchemaClass, PlayerI
 {
     public PlayerInputMotorInstanceData_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputVectorWSOffset;
+    private static nint _InputVectorWSOffset = -1;
 
     public ref Vector InputVectorWS
     {
         get
         {
-            _InputVectorWSOffset = _InputVectorWSOffset ?? Schema.GetOffset(0x6A8D4939041B4416);
-            return ref _Handle.AsRef<Vector>(_InputVectorWSOffset!.Value);
+            if (_InputVectorWSOffset == -1) _InputVectorWSOffset = Schema.GetOffset(0x6A8D4939041B4416);
+            return ref _Handle.AsRef<Vector>(_InputVectorWSOffset);
         }
     }
-    private static nint? _VelocityWSOffset;
+    private static nint _VelocityWSOffset = -1;
 
     public ref Vector VelocityWS
     {
         get
         {
-            _VelocityWSOffset = _VelocityWSOffset ?? Schema.GetOffset(0x6A8D49395D3351C8);
-            return ref _Handle.AsRef<Vector>(_VelocityWSOffset!.Value);
+            if (_VelocityWSOffset == -1) _VelocityWSOffset = Schema.GetOffset(0x6A8D49395D3351C8);
+            return ref _Handle.AsRef<Vector>(_VelocityWSOffset);
         }
     }
-    private static nint? _AccelerationWSOffset;
+    private static nint _AccelerationWSOffset = -1;
 
     public ref Vector AccelerationWS
     {
         get
         {
-            _AccelerationWSOffset = _AccelerationWSOffset ?? Schema.GetOffset(0x6A8D4939AA6DC133);
-            return ref _Handle.AsRef<Vector>(_AccelerationWSOffset!.Value);
+            if (_AccelerationWSOffset == -1) _AccelerationWSOffset = Schema.GetOffset(0x6A8D4939AA6DC133);
+            return ref _Handle.AsRef<Vector>(_AccelerationWSOffset);
         }
     }
 

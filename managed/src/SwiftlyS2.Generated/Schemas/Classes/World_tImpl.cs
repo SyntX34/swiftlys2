@@ -16,50 +16,50 @@ internal partial class World_tImpl : SchemaClass, World_t
 {
     public World_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _BuilderParamsOffset;
+    private static nint _BuilderParamsOffset = -1;
     private WorldBuilderParams_tImpl? _BuilderParamsInstance;
 
     public WorldBuilderParams_t BuilderParams
     {
         get
         {
-            _BuilderParamsOffset = _BuilderParamsOffset ?? Schema.GetOffset(0x4CBF8350CE4EEF26);
+            if (_BuilderParamsOffset == -1) _BuilderParamsOffset = Schema.GetOffset(0x4CBF8350CE4EEF26);
             var instance = _BuilderParamsInstance ??= new WorldBuilderParams_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _BuilderParamsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BuilderParamsOffset);
             return instance;
         }
     }
-    private static nint? _WorldNodesOffset;
+    private static nint _WorldNodesOffset = -1;
 
     public ref CUtlVector<NodeData_t> WorldNodes
     {
         get
         {
-            _WorldNodesOffset = _WorldNodesOffset ?? Schema.GetOffset(0x4CBF835064F33530);
-            return ref _Handle.AsRef<CUtlVector<NodeData_t>>(_WorldNodesOffset!.Value);
+            if (_WorldNodesOffset == -1) _WorldNodesOffset = Schema.GetOffset(0x4CBF835064F33530);
+            return ref _Handle.AsRef<CUtlVector<NodeData_t>>(_WorldNodesOffset);
         }
     }
-    private static nint? _WorldLightingInfoOffset;
+    private static nint _WorldLightingInfoOffset = -1;
     private BakedLightingInfo_tImpl? _WorldLightingInfoInstance;
 
     public BakedLightingInfo_t WorldLightingInfo
     {
         get
         {
-            _WorldLightingInfoOffset = _WorldLightingInfoOffset ?? Schema.GetOffset(0x4CBF83508B843A17);
+            if (_WorldLightingInfoOffset == -1) _WorldLightingInfoOffset = Schema.GetOffset(0x4CBF83508B843A17);
             var instance = _WorldLightingInfoInstance ??= new BakedLightingInfo_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _WorldLightingInfoOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _WorldLightingInfoOffset);
             return instance;
         }
     }
-    private static nint? _EntityLumpsOffset;
+    private static nint _EntityLumpsOffset = -1;
 
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> EntityLumps
     {
         get
         {
-            _EntityLumpsOffset = _EntityLumpsOffset ?? Schema.GetOffset(0x4CBF8350E4A85021);
-            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>>>(_EntityLumpsOffset!.Value);
+            if (_EntityLumpsOffset == -1) _EntityLumpsOffset = Schema.GetOffset(0x4CBF8350E4A85021);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>>>(_EntityLumpsOffset);
         }
     }
 

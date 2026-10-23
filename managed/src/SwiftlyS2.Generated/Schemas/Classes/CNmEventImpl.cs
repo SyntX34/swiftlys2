@@ -16,40 +16,40 @@ internal partial class CNmEventImpl : SchemaClass, CNmEvent
 {
     public CNmEventImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
     private NmPercent_tImpl? _StartTimeInstance;
 
     public NmPercent_t StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xF987100967FE9DC4);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0xF987100967FE9DC4);
             var instance = _StartTimeInstance ??= new NmPercent_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _StartTimeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _StartTimeOffset);
             return instance;
         }
     }
-    private static nint? _DurationOffset;
+    private static nint _DurationOffset = -1;
     private NmPercent_tImpl? _DurationInstance;
 
     public NmPercent_t Duration
     {
         get
         {
-            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xF9871009BC5E3BAB);
+            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0xF9871009BC5E3BAB);
             var instance = _DurationInstance ??= new NmPercent_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _DurationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _DurationOffset);
             return instance;
         }
     }
-    private static nint? _SyncIDOffset;
+    private static nint _SyncIDOffset = -1;
 
     public ref CGlobalSymbol SyncID
     {
         get
         {
-            _SyncIDOffset = _SyncIDOffset ?? Schema.GetOffset(0xF987100915636837);
-            return ref _Handle.AsRef<CGlobalSymbol>(_SyncIDOffset!.Value);
+            if (_SyncIDOffset == -1) _SyncIDOffset = Schema.GetOffset(0xF987100915636837);
+            return ref _Handle.AsRef<CGlobalSymbol>(_SyncIDOffset);
         }
     }
 

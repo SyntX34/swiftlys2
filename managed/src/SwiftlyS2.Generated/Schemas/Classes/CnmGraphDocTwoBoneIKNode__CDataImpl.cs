@@ -16,29 +16,29 @@ internal partial class CnmGraphDocTwoBoneIKNode__CDataImpl : CNmGraphDocVariatio
 {
     public CnmGraphDocTwoBoneIKNode__CDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _EffectorBoneNameOffset;
+    private static nint _EffectorBoneNameOffset = -1;
 
     public string EffectorBoneName
     {
         get
         {
-            _EffectorBoneNameOffset = _EffectorBoneNameOffset ?? Schema.GetOffset(0xBC56ECC0507D3A80);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectorBoneNameOffset!.Value));
+            if (_EffectorBoneNameOffset == -1) _EffectorBoneNameOffset = Schema.GetOffset(0xBC56ECC0507D3A80);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectorBoneNameOffset));
         }
         set
         {
-            _EffectorBoneNameOffset = _EffectorBoneNameOffset ?? Schema.GetOffset(0xBC56ECC0507D3A80);
-            Schema.SetCUtlString(_Handle, _EffectorBoneNameOffset!.Value, value);
+            if (_EffectorBoneNameOffset == -1) _EffectorBoneNameOffset = Schema.GetOffset(0xBC56ECC0507D3A80);
+            Schema.SetCUtlString(_Handle, _EffectorBoneNameOffset, value);
         }
     }
-    private static nint? _BlendTimeSecondsOffset;
+    private static nint _BlendTimeSecondsOffset = -1;
 
     public ref float BlendTimeSeconds
     {
         get
         {
-            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0xBC56ECC06D3A08FC);
-            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+            if (_BlendTimeSecondsOffset == -1) _BlendTimeSecondsOffset = Schema.GetOffset(0xBC56ECC06D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset);
         }
     }
 

@@ -16,24 +16,24 @@ internal partial class CNmGraphDefinition__ExternalPoseSlot_tImpl : SchemaClass,
 {
     public CNmGraphDefinition__ExternalPoseSlot_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeIdxOffset;
+    private static nint _NodeIdxOffset = -1;
 
     public ref short NodeIdx
     {
         get
         {
-            _NodeIdxOffset = _NodeIdxOffset ?? Schema.GetOffset(0xBF645B81124AB5CC);
-            return ref _Handle.AsRef<short>(_NodeIdxOffset!.Value);
+            if (_NodeIdxOffset == -1) _NodeIdxOffset = Schema.GetOffset(0xBF645B81124AB5CC);
+            return ref _Handle.AsRef<short>(_NodeIdxOffset);
         }
     }
-    private static nint? _SlotIDOffset;
+    private static nint _SlotIDOffset = -1;
 
     public ref CGlobalSymbol SlotID
     {
         get
         {
-            _SlotIDOffset = _SlotIDOffset ?? Schema.GetOffset(0xBF645B81EA2BB724);
-            return ref _Handle.AsRef<CGlobalSymbol>(_SlotIDOffset!.Value);
+            if (_SlotIDOffset == -1) _SlotIDOffset = Schema.GetOffset(0xBF645B81EA2BB724);
+            return ref _Handle.AsRef<CGlobalSymbol>(_SlotIDOffset);
         }
     }
 

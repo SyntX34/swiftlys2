@@ -16,82 +16,82 @@ internal partial class CSteamAudioBakedDimensionsDataImpl : SchemaClass, CSteamA
 {
     public CSteamAudioBakedDimensionsDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _SettingsOffset;
+    private static nint _SettingsOffset = -1;
     private SteamAudioCustomDataDimensionsSettings_tImpl? _SettingsInstance;
 
     public SteamAudioCustomDataDimensionsSettings_t Settings
     {
         get
         {
-            _SettingsOffset = _SettingsOffset ?? Schema.GetOffset(0xB8BDCBF6B3DE33A8);
+            if (_SettingsOffset == -1) _SettingsOffset = Schema.GetOffset(0xB8BDCBF6B3DE33A8);
             var instance = _SettingsInstance ??= new SteamAudioCustomDataDimensionsSettings_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _SettingsOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _SettingsOffset);
             return instance;
         }
     }
-    private static nint? _ProbesOffset;
+    private static nint _ProbesOffset = -1;
     private CSteamAudioProbeDataImpl? _ProbesInstance;
 
     public CSteamAudioProbeData Probes
     {
         get
         {
-            _ProbesOffset = _ProbesOffset ?? Schema.GetOffset(0xB8BDCBF649D37E06);
+            if (_ProbesOffset == -1) _ProbesOffset = Schema.GetOffset(0xB8BDCBF649D37E06);
             var instance = _ProbesInstance ??= new CSteamAudioProbeDataImpl(0);
-            instance.DangerousSetHandle(_Handle + _ProbesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ProbesOffset);
             return instance;
         }
     }
-    private static nint? _InOutOffset;
+    private static nint _InOutOffset = -1;
 
     public ref CUtlVector<float> InOut
     {
         get
         {
-            _InOutOffset = _InOutOffset ?? Schema.GetOffset(0xB8BDCBF6F387EE22);
-            return ref _Handle.AsRef<CUtlVector<float>>(_InOutOffset!.Value);
+            if (_InOutOffset == -1) _InOutOffset = Schema.GetOffset(0xB8BDCBF6F387EE22);
+            return ref _Handle.AsRef<CUtlVector<float>>(_InOutOffset);
         }
     }
-    private static nint? _SizeOffset;
+    private static nint _SizeOffset = -1;
 
     public ref CUtlVector<float> Size
     {
         get
         {
-            _SizeOffset = _SizeOffset ?? Schema.GetOffset(0xB8BDCBF6DABBAEBC);
-            return ref _Handle.AsRef<CUtlVector<float>>(_SizeOffset!.Value);
+            if (_SizeOffset == -1) _SizeOffset = Schema.GetOffset(0xB8BDCBF6DABBAEBC);
+            return ref _Handle.AsRef<CUtlVector<float>>(_SizeOffset);
         }
     }
-    private static nint? _OutsideFieldOffset;
+    private static nint _OutsideFieldOffset = -1;
 
     public ref CUtlVector<CSteamAudioAmbisonicsField> OutsideField
     {
         get
         {
-            _OutsideFieldOffset = _OutsideFieldOffset ?? Schema.GetOffset(0xB8BDCBF64CC1CB58);
-            return ref _Handle.AsRef<CUtlVector<CSteamAudioAmbisonicsField>>(_OutsideFieldOffset!.Value);
+            if (_OutsideFieldOffset == -1) _OutsideFieldOffset = Schema.GetOffset(0xB8BDCBF64CC1CB58);
+            return ref _Handle.AsRef<CUtlVector<CSteamAudioAmbisonicsField>>(_OutsideFieldOffset);
         }
     }
-    private static nint? _InsideSmallSizeFieldOffset;
+    private static nint _InsideSmallSizeFieldOffset = -1;
 
     public ref CUtlVector<CSteamAudioAmbisonicsField> InsideSmallSizeField
     {
         get
         {
-            _InsideSmallSizeFieldOffset = _InsideSmallSizeFieldOffset ?? Schema.GetOffset(0xB8BDCBF6BA49C7DF);
-            return ref _Handle.AsRef<CUtlVector<CSteamAudioAmbisonicsField>>(_InsideSmallSizeFieldOffset!.Value);
+            if (_InsideSmallSizeFieldOffset == -1) _InsideSmallSizeFieldOffset = Schema.GetOffset(0xB8BDCBF6BA49C7DF);
+            return ref _Handle.AsRef<CUtlVector<CSteamAudioAmbisonicsField>>(_InsideSmallSizeFieldOffset);
         }
     }
-    private static nint? _MovablesOffset;
+    private static nint _MovablesOffset = -1;
     private SchemaUntypedField? _MovablesInstance;
 
     public SchemaUntypedField Movables
     {
         get
         {
-            _MovablesOffset = _MovablesOffset ?? Schema.GetOffset(0xB8BDCBF6D92B2A8E);
+            if (_MovablesOffset == -1) _MovablesOffset = Schema.GetOffset(0xB8BDCBF6D92B2A8E);
             var instance = _MovablesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _MovablesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _MovablesOffset);
             return instance;
         }
     }

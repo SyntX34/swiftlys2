@@ -21,9 +21,7 @@
 
 #include <api/network/netmessages/netmessages.h>
 
-#include <api/utils/mutex.h>
-
-#include <unordered_set>
+#include <atomic>
 
  // ofc you need to stay here
 #include <public/engine/igameeventsystem.h>
@@ -31,8 +29,6 @@
 class CNetMessages : public INetMessages
 {
 public:
-    virtual void Initialize() override;
-    virtual void Shutdown() override;
 
     virtual void RegisterMessageHook(NetMessageHookType type, int messageid) override;
     virtual void UnregisterMessageHook(NetMessageHookType type, int messageid) override;
@@ -42,8 +38,8 @@ public:
     virtual void SetClientMessageSendHandler(std::function<int(int, int, void*)> handler) override;
     virtual void SetServerMessageInternalSendHandler(std::function<int(int, int, void*)> handler) override;
 private:
-    QueueMutex m_mtxRegisteredMessages;
-    std::unordered_set<int> m_registeredMessages[NetMessageHook_Count];
+    static constexpr int MESSAGE_COUNT = 16385;
+    std::atomic<uint64_t> m_registeredMessages[NetMessageHook_Count][(MESSAGE_COUNT + 63) / 64]{};
 };
 
 #endif

@@ -16,26 +16,26 @@ internal partial class C_OP_CPVelocityForceImpl : CParticleFunctionForceImpl, C_
 {
     public C_OP_CPVelocityForceImpl(nint handle) : base(handle) { }
 
-    private static nint? _ControlPointNumberOffset;
+    private static nint _ControlPointNumberOffset = -1;
 
     public ref int ControlPointNumber
     {
         get
         {
-            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x4C04FC843F31A6BD);
-            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+            if (_ControlPointNumberOffset == -1) _ControlPointNumberOffset = Schema.GetOffset(0x4C04FC843F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset);
         }
     }
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
     private CPerParticleFloatInputImpl? _ScaleInstance;
 
     public CPerParticleFloatInput Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x4C04FC84B731A42F);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x4C04FC84B731A42F);
             var instance = _ScaleInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _ScaleOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ScaleOffset);
             return instance;
         }
     }

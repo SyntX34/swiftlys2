@@ -16,29 +16,29 @@ internal partial class CPulse_ConstantImpl : SchemaClass, CPulse_Constant
 {
     public CPulse_ConstantImpl(nint handle) : base(handle) { }
 
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
     private SchemaUntypedField? _TypeInstance;
 
     public SchemaUntypedField Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x28B1B9F08ED6D5CD);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x28B1B9F08ED6D5CD);
             var instance = _TypeInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _TypeOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _TypeOffset);
             return instance;
         }
     }
-    private static nint? _ValueOffset;
+    private static nint _ValueOffset = -1;
     private SchemaUntypedField? _ValueInstance;
 
     public SchemaUntypedField Value
     {
         get
         {
-            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x28B1B9F0DCB0894A);
+            if (_ValueOffset == -1) _ValueOffset = Schema.GetOffset(0x28B1B9F0DCB0894A);
             var instance = _ValueInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _ValueOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ValueOffset);
             return instance;
         }
     }

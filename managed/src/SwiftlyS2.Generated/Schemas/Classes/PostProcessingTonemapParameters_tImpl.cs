@@ -16,154 +16,154 @@ internal partial class PostProcessingTonemapParameters_tImpl : SchemaClass, Post
 {
     public PostProcessingTonemapParameters_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _ExposureBiasOffset;
+    private static nint _ExposureBiasOffset = -1;
 
     public ref float ExposureBias
     {
         get
         {
-            _ExposureBiasOffset = _ExposureBiasOffset ?? Schema.GetOffset(0x62C7E951BBF57613);
-            return ref _Handle.AsRef<float>(_ExposureBiasOffset!.Value);
+            if (_ExposureBiasOffset == -1) _ExposureBiasOffset = Schema.GetOffset(0x62C7E951BBF57613);
+            return ref _Handle.AsRef<float>(_ExposureBiasOffset);
         }
     }
-    private static nint? _ShoulderStrengthOffset;
+    private static nint _ShoulderStrengthOffset = -1;
 
     public ref float ShoulderStrength
     {
         get
         {
-            _ShoulderStrengthOffset = _ShoulderStrengthOffset ?? Schema.GetOffset(0x62C7E951F177A3EE);
-            return ref _Handle.AsRef<float>(_ShoulderStrengthOffset!.Value);
+            if (_ShoulderStrengthOffset == -1) _ShoulderStrengthOffset = Schema.GetOffset(0x62C7E951F177A3EE);
+            return ref _Handle.AsRef<float>(_ShoulderStrengthOffset);
         }
     }
-    private static nint? _LinearStrengthOffset;
+    private static nint _LinearStrengthOffset = -1;
 
     public ref float LinearStrength
     {
         get
         {
-            _LinearStrengthOffset = _LinearStrengthOffset ?? Schema.GetOffset(0x62C7E95172E93F83);
-            return ref _Handle.AsRef<float>(_LinearStrengthOffset!.Value);
+            if (_LinearStrengthOffset == -1) _LinearStrengthOffset = Schema.GetOffset(0x62C7E95172E93F83);
+            return ref _Handle.AsRef<float>(_LinearStrengthOffset);
         }
     }
-    private static nint? _LinearAngleOffset;
+    private static nint _LinearAngleOffset = -1;
 
     public ref float LinearAngle
     {
         get
         {
-            _LinearAngleOffset = _LinearAngleOffset ?? Schema.GetOffset(0x62C7E951C16B14B1);
-            return ref _Handle.AsRef<float>(_LinearAngleOffset!.Value);
+            if (_LinearAngleOffset == -1) _LinearAngleOffset = Schema.GetOffset(0x62C7E951C16B14B1);
+            return ref _Handle.AsRef<float>(_LinearAngleOffset);
         }
     }
-    private static nint? _ToeStrengthOffset;
+    private static nint _ToeStrengthOffset = -1;
 
     public ref float ToeStrength
     {
         get
         {
-            _ToeStrengthOffset = _ToeStrengthOffset ?? Schema.GetOffset(0x62C7E95168B1B908);
-            return ref _Handle.AsRef<float>(_ToeStrengthOffset!.Value);
+            if (_ToeStrengthOffset == -1) _ToeStrengthOffset = Schema.GetOffset(0x62C7E95168B1B908);
+            return ref _Handle.AsRef<float>(_ToeStrengthOffset);
         }
     }
-    private static nint? _ToeNumOffset;
+    private static nint _ToeNumOffset = -1;
 
     public ref float ToeNum
     {
         get
         {
-            _ToeNumOffset = _ToeNumOffset ?? Schema.GetOffset(0x62C7E951DCB0097B);
-            return ref _Handle.AsRef<float>(_ToeNumOffset!.Value);
+            if (_ToeNumOffset == -1) _ToeNumOffset = Schema.GetOffset(0x62C7E951DCB0097B);
+            return ref _Handle.AsRef<float>(_ToeNumOffset);
         }
     }
-    private static nint? _ToeDenomOffset;
+    private static nint _ToeDenomOffset = -1;
 
     public ref float ToeDenom
     {
         get
         {
-            _ToeDenomOffset = _ToeDenomOffset ?? Schema.GetOffset(0x62C7E951FFD477EC);
-            return ref _Handle.AsRef<float>(_ToeDenomOffset!.Value);
+            if (_ToeDenomOffset == -1) _ToeDenomOffset = Schema.GetOffset(0x62C7E951FFD477EC);
+            return ref _Handle.AsRef<float>(_ToeDenomOffset);
         }
     }
-    private static nint? _WhitePointOffset;
+    private static nint _WhitePointOffset = -1;
 
     public ref float WhitePoint
     {
         get
         {
-            _WhitePointOffset = _WhitePointOffset ?? Schema.GetOffset(0x62C7E9518901AA8E);
-            return ref _Handle.AsRef<float>(_WhitePointOffset!.Value);
+            if (_WhitePointOffset == -1) _WhitePointOffset = Schema.GetOffset(0x62C7E9518901AA8E);
+            return ref _Handle.AsRef<float>(_WhitePointOffset);
         }
     }
-    private static nint? _LuminanceSourceOffset;
+    private static nint _LuminanceSourceOffset = -1;
 
     public ref float LuminanceSource
     {
         get
         {
-            _LuminanceSourceOffset = _LuminanceSourceOffset ?? Schema.GetOffset(0x62C7E9517B15A366);
-            return ref _Handle.AsRef<float>(_LuminanceSourceOffset!.Value);
+            if (_LuminanceSourceOffset == -1) _LuminanceSourceOffset = Schema.GetOffset(0x62C7E9517B15A366);
+            return ref _Handle.AsRef<float>(_LuminanceSourceOffset);
         }
     }
-    private static nint? _ExposureBiasShadowsOffset;
+    private static nint _ExposureBiasShadowsOffset = -1;
 
     public ref float ExposureBiasShadows
     {
         get
         {
-            _ExposureBiasShadowsOffset = _ExposureBiasShadowsOffset ?? Schema.GetOffset(0x62C7E951958A1C90);
-            return ref _Handle.AsRef<float>(_ExposureBiasShadowsOffset!.Value);
+            if (_ExposureBiasShadowsOffset == -1) _ExposureBiasShadowsOffset = Schema.GetOffset(0x62C7E951958A1C90);
+            return ref _Handle.AsRef<float>(_ExposureBiasShadowsOffset);
         }
     }
-    private static nint? _ExposureBiasHighlightsOffset;
+    private static nint _ExposureBiasHighlightsOffset = -1;
 
     public ref float ExposureBiasHighlights
     {
         get
         {
-            _ExposureBiasHighlightsOffset = _ExposureBiasHighlightsOffset ?? Schema.GetOffset(0x62C7E95105E519FE);
-            return ref _Handle.AsRef<float>(_ExposureBiasHighlightsOffset!.Value);
+            if (_ExposureBiasHighlightsOffset == -1) _ExposureBiasHighlightsOffset = Schema.GetOffset(0x62C7E95105E519FE);
+            return ref _Handle.AsRef<float>(_ExposureBiasHighlightsOffset);
         }
     }
-    private static nint? _MinShadowLumOffset;
+    private static nint _MinShadowLumOffset = -1;
 
     public ref float MinShadowLum
     {
         get
         {
-            _MinShadowLumOffset = _MinShadowLumOffset ?? Schema.GetOffset(0x62C7E9511E2BE58D);
-            return ref _Handle.AsRef<float>(_MinShadowLumOffset!.Value);
+            if (_MinShadowLumOffset == -1) _MinShadowLumOffset = Schema.GetOffset(0x62C7E9511E2BE58D);
+            return ref _Handle.AsRef<float>(_MinShadowLumOffset);
         }
     }
-    private static nint? _MaxShadowLumOffset;
+    private static nint _MaxShadowLumOffset = -1;
 
     public ref float MaxShadowLum
     {
         get
         {
-            _MaxShadowLumOffset = _MaxShadowLumOffset ?? Schema.GetOffset(0x62C7E951269F61AB);
-            return ref _Handle.AsRef<float>(_MaxShadowLumOffset!.Value);
+            if (_MaxShadowLumOffset == -1) _MaxShadowLumOffset = Schema.GetOffset(0x62C7E951269F61AB);
+            return ref _Handle.AsRef<float>(_MaxShadowLumOffset);
         }
     }
-    private static nint? _MinHighlightLumOffset;
+    private static nint _MinHighlightLumOffset = -1;
 
     public ref float MinHighlightLum
     {
         get
         {
-            _MinHighlightLumOffset = _MinHighlightLumOffset ?? Schema.GetOffset(0x62C7E951A9EADF4F);
-            return ref _Handle.AsRef<float>(_MinHighlightLumOffset!.Value);
+            if (_MinHighlightLumOffset == -1) _MinHighlightLumOffset = Schema.GetOffset(0x62C7E951A9EADF4F);
+            return ref _Handle.AsRef<float>(_MinHighlightLumOffset);
         }
     }
-    private static nint? _MaxHighlightLumOffset;
+    private static nint _MaxHighlightLumOffset = -1;
 
     public ref float MaxHighlightLum
     {
         get
         {
-            _MaxHighlightLumOffset = _MaxHighlightLumOffset ?? Schema.GetOffset(0x62C7E9516352B9A5);
-            return ref _Handle.AsRef<float>(_MaxHighlightLumOffset!.Value);
+            if (_MaxHighlightLumOffset == -1) _MaxHighlightLumOffset = Schema.GetOffset(0x62C7E9516352B9A5);
+            return ref _Handle.AsRef<float>(_MaxHighlightLumOffset);
         }
     }
 

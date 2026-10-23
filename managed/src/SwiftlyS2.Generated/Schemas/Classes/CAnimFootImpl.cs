@@ -16,59 +16,59 @@ internal partial class CAnimFootImpl : SchemaClass, CAnimFoot
 {
     public CAnimFootImpl(nint handle) : base(handle) { }
 
-    private static nint? _NameOffset;
+    private static nint _NameOffset = -1;
 
     public string Name
     {
         get
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x583A05E34D8F5786);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x583A05E34D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset));
         }
         set
         {
-            _NameOffset = _NameOffset ?? Schema.GetOffset(0x583A05E34D8F5786);
-            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+            if (_NameOffset == -1) _NameOffset = Schema.GetOffset(0x583A05E34D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset, value);
         }
     }
-    private static nint? _BallOffsetOffset;
+    private static nint _BallOffsetOffset = -1;
 
     public ref Vector BallOffset
     {
         get
         {
-            _BallOffsetOffset = _BallOffsetOffset ?? Schema.GetOffset(0x583A05E3E3376F1B);
-            return ref _Handle.AsRef<Vector>(_BallOffsetOffset!.Value);
+            if (_BallOffsetOffset == -1) _BallOffsetOffset = Schema.GetOffset(0x583A05E3E3376F1B);
+            return ref _Handle.AsRef<Vector>(_BallOffsetOffset);
         }
     }
-    private static nint? _HeelOffsetOffset;
+    private static nint _HeelOffsetOffset = -1;
 
     public ref Vector HeelOffset
     {
         get
         {
-            _HeelOffsetOffset = _HeelOffsetOffset ?? Schema.GetOffset(0x583A05E3306AE608);
-            return ref _Handle.AsRef<Vector>(_HeelOffsetOffset!.Value);
+            if (_HeelOffsetOffset == -1) _HeelOffsetOffset = Schema.GetOffset(0x583A05E3306AE608);
+            return ref _Handle.AsRef<Vector>(_HeelOffsetOffset);
         }
     }
-    private static nint? _AnkleBoneIndexOffset;
+    private static nint _AnkleBoneIndexOffset = -1;
 
     public ref int AnkleBoneIndex
     {
         get
         {
-            _AnkleBoneIndexOffset = _AnkleBoneIndexOffset ?? Schema.GetOffset(0x583A05E31E89F146);
-            return ref _Handle.AsRef<int>(_AnkleBoneIndexOffset!.Value);
+            if (_AnkleBoneIndexOffset == -1) _AnkleBoneIndexOffset = Schema.GetOffset(0x583A05E31E89F146);
+            return ref _Handle.AsRef<int>(_AnkleBoneIndexOffset);
         }
     }
-    private static nint? _ToeBoneIndexOffset;
+    private static nint _ToeBoneIndexOffset = -1;
 
     public ref int ToeBoneIndex
     {
         get
         {
-            _ToeBoneIndexOffset = _ToeBoneIndexOffset ?? Schema.GetOffset(0x583A05E3EEF7CC57);
-            return ref _Handle.AsRef<int>(_ToeBoneIndexOffset!.Value);
+            if (_ToeBoneIndexOffset == -1) _ToeBoneIndexOffset = Schema.GetOffset(0x583A05E3EEF7CC57);
+            return ref _Handle.AsRef<int>(_ToeBoneIndexOffset);
         }
     }
 

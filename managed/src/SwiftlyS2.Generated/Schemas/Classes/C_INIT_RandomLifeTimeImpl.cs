@@ -16,34 +16,34 @@ internal partial class C_INIT_RandomLifeTimeImpl : CParticleFunctionInitializerI
 {
     public C_INIT_RandomLifeTimeImpl(nint handle) : base(handle) { }
 
-    private static nint? _LifetimeMinOffset;
+    private static nint _LifetimeMinOffset = -1;
 
     public ref float LifetimeMin
     {
         get
         {
-            _LifetimeMinOffset = _LifetimeMinOffset ?? Schema.GetOffset(0xC413CA5E5D0684A6);
-            return ref _Handle.AsRef<float>(_LifetimeMinOffset!.Value);
+            if (_LifetimeMinOffset == -1) _LifetimeMinOffset = Schema.GetOffset(0xC413CA5E5D0684A6);
+            return ref _Handle.AsRef<float>(_LifetimeMinOffset);
         }
     }
-    private static nint? _LifetimeMaxOffset;
+    private static nint _LifetimeMaxOffset = -1;
 
     public ref float LifetimeMax
     {
         get
         {
-            _LifetimeMaxOffset = _LifetimeMaxOffset ?? Schema.GetOffset(0xC413CA5E6F1BBBB4);
-            return ref _Handle.AsRef<float>(_LifetimeMaxOffset!.Value);
+            if (_LifetimeMaxOffset == -1) _LifetimeMaxOffset = Schema.GetOffset(0xC413CA5E6F1BBBB4);
+            return ref _Handle.AsRef<float>(_LifetimeMaxOffset);
         }
     }
-    private static nint? _LifetimeRandExponentOffset;
+    private static nint _LifetimeRandExponentOffset = -1;
 
     public ref float LifetimeRandExponent
     {
         get
         {
-            _LifetimeRandExponentOffset = _LifetimeRandExponentOffset ?? Schema.GetOffset(0xC413CA5E9B83919A);
-            return ref _Handle.AsRef<float>(_LifetimeRandExponentOffset!.Value);
+            if (_LifetimeRandExponentOffset == -1) _LifetimeRandExponentOffset = Schema.GetOffset(0xC413CA5E9B83919A);
+            return ref _Handle.AsRef<float>(_LifetimeRandExponentOffset);
         }
     }
 

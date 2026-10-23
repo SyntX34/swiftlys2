@@ -16,24 +16,24 @@ internal partial class CVMixToolEditorDataImpl : SchemaClass, CVMixToolEditorDat
 {
     public CVMixToolEditorDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _SelectedGraphOffset;
+    private static nint _SelectedGraphOffset = -1;
 
     public ref int SelectedGraph
     {
         get
         {
-            _SelectedGraphOffset = _SelectedGraphOffset ?? Schema.GetOffset(0x39ED1DC54697C664);
-            return ref _Handle.AsRef<int>(_SelectedGraphOffset!.Value);
+            if (_SelectedGraphOffset == -1) _SelectedGraphOffset = Schema.GetOffset(0x39ED1DC54697C664);
+            return ref _Handle.AsRef<int>(_SelectedGraphOffset);
         }
     }
-    private static nint? _SelectedEffectPresetOffset;
+    private static nint _SelectedEffectPresetOffset = -1;
 
     public ref int SelectedEffectPreset
     {
         get
         {
-            _SelectedEffectPresetOffset = _SelectedEffectPresetOffset ?? Schema.GetOffset(0x39ED1DC55BFB1792);
-            return ref _Handle.AsRef<int>(_SelectedEffectPresetOffset!.Value);
+            if (_SelectedEffectPresetOffset == -1) _SelectedEffectPresetOffset = Schema.GetOffset(0x39ED1DC55BFB1792);
+            return ref _Handle.AsRef<int>(_SelectedEffectPresetOffset);
         }
     }
 

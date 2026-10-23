@@ -16,19 +16,19 @@ internal partial class CFilterAttributeIntImpl : CBaseFilterImpl, CFilterAttribu
 {
     public CFilterAttributeIntImpl(nint handle) : base(handle) { }
 
-    private static nint? _AttributeNameOffset;
+    private static nint _AttributeNameOffset = -1;
 
     public string AttributeName
     {
         get
         {
-            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x7CC26955E63BC84D);
-            return Schema.GetString(_Handle.Read<nint>(_AttributeNameOffset!.Value));
+            if (_AttributeNameOffset == -1) _AttributeNameOffset = Schema.GetOffset(0x7CC26955E63BC84D);
+            return Schema.GetString(_Handle.Read<nint>(_AttributeNameOffset));
         }
         set
         {
-            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x7CC26955E63BC84D);
-            Schema.SetString(_Handle, _AttributeNameOffset!.Value, value);
+            if (_AttributeNameOffset == -1) _AttributeNameOffset = Schema.GetOffset(0x7CC26955E63BC84D);
+            Schema.SetString(_Handle, _AttributeNameOffset, value);
         }
     }
 

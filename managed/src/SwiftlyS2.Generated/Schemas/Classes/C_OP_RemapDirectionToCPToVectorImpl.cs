@@ -16,79 +16,79 @@ internal partial class C_OP_RemapDirectionToCPToVectorImpl : CParticleFunctionOp
 {
     public C_OP_RemapDirectionToCPToVectorImpl(nint handle) : base(handle) { }
 
-    private static nint? _CPOffset;
+    private static nint _CPOffset = -1;
 
     public ref int CP
     {
         get
         {
-            _CPOffset = _CPOffset ?? Schema.GetOffset(0x80443C5BEB661472);
-            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+            if (_CPOffset == -1) _CPOffset = Schema.GetOffset(0x80443C5BEB661472);
+            return ref _Handle.AsRef<int>(_CPOffset);
         }
     }
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x80443C5BE5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x80443C5BE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _ScaleOffset;
+    private static nint _ScaleOffset = -1;
 
     public ref float Scale
     {
         get
         {
-            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x80443C5BB731A42F);
-            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+            if (_ScaleOffset == -1) _ScaleOffset = Schema.GetOffset(0x80443C5BB731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset);
         }
     }
-    private static nint? _OffsetRotOffset;
+    private static nint _OffsetRotOffset = -1;
 
     public ref float OffsetRot
     {
         get
         {
-            _OffsetRotOffset = _OffsetRotOffset ?? Schema.GetOffset(0x80443C5BB414F849);
-            return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+            if (_OffsetRotOffset == -1) _OffsetRotOffset = Schema.GetOffset(0x80443C5BB414F849);
+            return ref _Handle.AsRef<float>(_OffsetRotOffset);
         }
     }
-    private static nint? _OffsetAxisOffset;
+    private static nint _OffsetAxisOffset = -1;
 
     public ref Vector OffsetAxis
     {
         get
         {
-            _OffsetAxisOffset = _OffsetAxisOffset ?? Schema.GetOffset(0x80443C5BFAB4918F);
-            return ref _Handle.AsRef<Vector>(_OffsetAxisOffset!.Value);
+            if (_OffsetAxisOffset == -1) _OffsetAxisOffset = Schema.GetOffset(0x80443C5BFAB4918F);
+            return ref _Handle.AsRef<Vector>(_OffsetAxisOffset);
         }
     }
-    private static nint? _NormalizeOffset;
+    private static nint _NormalizeOffset = -1;
 
     public ref bool Normalize
     {
         get
         {
-            _NormalizeOffset = _NormalizeOffset ?? Schema.GetOffset(0x80443C5B48BC424C);
-            return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+            if (_NormalizeOffset == -1) _NormalizeOffset = Schema.GetOffset(0x80443C5B48BC424C);
+            return ref _Handle.AsRef<bool>(_NormalizeOffset);
         }
     }
-    private static nint? _FieldStrengthOffset;
+    private static nint _FieldStrengthOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldStrengthInstance;
 
     public ParticleAttributeIndex_t FieldStrength
     {
         get
         {
-            _FieldStrengthOffset = _FieldStrengthOffset ?? Schema.GetOffset(0x80443C5BDBA3663E);
+            if (_FieldStrengthOffset == -1) _FieldStrengthOffset = Schema.GetOffset(0x80443C5BDBA3663E);
             var instance = _FieldStrengthInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldStrengthOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldStrengthOffset);
             return instance;
         }
     }

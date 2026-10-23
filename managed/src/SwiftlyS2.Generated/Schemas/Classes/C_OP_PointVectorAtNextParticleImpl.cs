@@ -16,40 +16,40 @@ internal partial class C_OP_PointVectorAtNextParticleImpl : CParticleFunctionOpe
 {
     public C_OP_PointVectorAtNextParticleImpl(nint handle) : base(handle) { }
 
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xC209094CE5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0xC209094CE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _InterpolationOffset;
+    private static nint _InterpolationOffset = -1;
     private CPerParticleFloatInputImpl? _InterpolationInstance;
 
     public CPerParticleFloatInput Interpolation
     {
         get
         {
-            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0xC209094CCF55B987);
+            if (_InterpolationOffset == -1) _InterpolationOffset = Schema.GetOffset(0xC209094CCF55B987);
             var instance = _InterpolationInstance ??= new CPerParticleFloatInputImpl(0);
-            instance.DangerousSetHandle(_Handle + _InterpolationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InterpolationOffset);
             return instance;
         }
     }
-    private static nint? _PreviousOffset;
+    private static nint _PreviousOffset = -1;
 
     public ref bool Previous
     {
         get
         {
-            _PreviousOffset = _PreviousOffset ?? Schema.GetOffset(0xC209094C14318488);
-            return ref _Handle.AsRef<bool>(_PreviousOffset!.Value);
+            if (_PreviousOffset == -1) _PreviousOffset = Schema.GetOffset(0xC209094C14318488);
+            return ref _Handle.AsRef<bool>(_PreviousOffset);
         }
     }
 

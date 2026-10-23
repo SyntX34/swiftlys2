@@ -44,6 +44,19 @@ public:
         return m_uData[qword];
     }
 
+    uint32_t GetDWord(int dword)
+    {
+        if (dword < 0 || dword >= NUM_QWORDS * 2) return 0;
+        return static_cast<uint32_t>(m_uData[dword >> 1] >> ((dword & 1) * 32));
+    }
+
+    void SetDWord(int dword, uint32_t value)
+    {
+        if (dword < 0 || dword >= NUM_QWORDS * 2) return;
+        int shift = (dword & 1) * 32;
+        m_uData[dword >> 1] = (m_uData[dword >> 1] & ~(0xFFFFFFFFULL << shift)) | (static_cast<uint64_t>(value) << shift);
+    }
+
     void Clear(int bit)
     {
         if (bit < 0 || bit >= N) return;
@@ -53,6 +66,12 @@ public:
     void ClearAll()
     {
         std::fill(std::begin(m_uData), std::end(m_uData), 0ULL);
+    }
+
+    void CopyFrom(CBitVector<N>& src)
+    {
+        for (int i = 0; i < NUM_QWORDS; i++)
+            m_uData[i] = src.GetQWord(i);
     }
 
     void Filter(CBitVector<N>& filter)
@@ -70,7 +89,7 @@ private:
         NUM_QWORDS = (N + 63) >> 6
     };
 
-    uint64_t m_uData[NUM_QWORDS];
+    uint64_t m_uData[NUM_QWORDS] = {};
 };
 
 #endif

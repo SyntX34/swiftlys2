@@ -16,54 +16,54 @@ internal partial class CFuncTimescaleImpl : CBaseEntityImpl, CFuncTimescale
 {
     public CFuncTimescaleImpl(nint handle) : base(handle) { }
 
-    private static nint? _DesiredTimescaleOffset;
+    private static nint _DesiredTimescaleOffset = -1;
 
     public ref float DesiredTimescale
     {
         get
         {
-            _DesiredTimescaleOffset = _DesiredTimescaleOffset ?? Schema.GetOffset(0x93388D41E4EE9A68);
-            return ref _Handle.AsRef<float>(_DesiredTimescaleOffset!.Value);
+            if (_DesiredTimescaleOffset == -1) _DesiredTimescaleOffset = Schema.GetOffset(0x93388D41E4EE9A68);
+            return ref _Handle.AsRef<float>(_DesiredTimescaleOffset);
         }
     }
-    private static nint? _AccelerationOffset;
+    private static nint _AccelerationOffset = -1;
 
     public ref float Acceleration
     {
         get
         {
-            _AccelerationOffset = _AccelerationOffset ?? Schema.GetOffset(0x93388D41071E739B);
-            return ref _Handle.AsRef<float>(_AccelerationOffset!.Value);
+            if (_AccelerationOffset == -1) _AccelerationOffset = Schema.GetOffset(0x93388D41071E739B);
+            return ref _Handle.AsRef<float>(_AccelerationOffset);
         }
     }
-    private static nint? _MinBlendRateOffset;
+    private static nint _MinBlendRateOffset = -1;
 
     public ref float MinBlendRate
     {
         get
         {
-            _MinBlendRateOffset = _MinBlendRateOffset ?? Schema.GetOffset(0x93388D41E90D5E26);
-            return ref _Handle.AsRef<float>(_MinBlendRateOffset!.Value);
+            if (_MinBlendRateOffset == -1) _MinBlendRateOffset = Schema.GetOffset(0x93388D41E90D5E26);
+            return ref _Handle.AsRef<float>(_MinBlendRateOffset);
         }
     }
-    private static nint? _BlendDeltaMultiplierOffset;
+    private static nint _BlendDeltaMultiplierOffset = -1;
 
     public ref float BlendDeltaMultiplier
     {
         get
         {
-            _BlendDeltaMultiplierOffset = _BlendDeltaMultiplierOffset ?? Schema.GetOffset(0x93388D413D2158F7);
-            return ref _Handle.AsRef<float>(_BlendDeltaMultiplierOffset!.Value);
+            if (_BlendDeltaMultiplierOffset == -1) _BlendDeltaMultiplierOffset = Schema.GetOffset(0x93388D413D2158F7);
+            return ref _Handle.AsRef<float>(_BlendDeltaMultiplierOffset);
         }
     }
-    private static nint? _IsStartedOffset;
+    private static nint _IsStartedOffset = -1;
 
     public ref bool IsStarted
     {
         get
         {
-            _IsStartedOffset = _IsStartedOffset ?? Schema.GetOffset(0x93388D41C4A4378E);
-            return ref _Handle.AsRef<bool>(_IsStartedOffset!.Value);
+            if (_IsStartedOffset == -1) _IsStartedOffset = Schema.GetOffset(0x93388D41C4A4378E);
+            return ref _Handle.AsRef<bool>(_IsStartedOffset);
         }
     }
 

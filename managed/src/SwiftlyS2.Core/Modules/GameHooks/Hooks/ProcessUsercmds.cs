@@ -29,7 +29,7 @@ internal static partial class GameHooksPublisher
                 _controllerPool.Return(dummy);
                 if (player == null) return next()(controller, userCmds, numCmds, paused, margin);
 
-                var cmdsList = new List<IUserCmd>(numCmds);
+                var cmdsList = _usercmdsListPool.Rent();
 
                 for (var i = 0; i < numCmds; i++)
                 {
@@ -71,6 +71,8 @@ internal static partial class GameHooksPublisher
                         userCmdImpl.Address = 0;
                         _userCmdPool.Return(userCmdImpl);
                     }
+                    cmdsList.Clear();
+                    _usercmdsListPool.Return(cmdsList);
                     return 0;
                 }
 
@@ -85,6 +87,8 @@ internal static partial class GameHooksPublisher
                     userCmdImpl.Address = 0;
                     _userCmdPool.Return(userCmdImpl);
                 }
+                cmdsList.Clear();
+                _usercmdsListPool.Return(cmdsList);
                 return result;
             };
         });

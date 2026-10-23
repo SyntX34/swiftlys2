@@ -16,64 +16,64 @@ internal partial class VPhysics2ShapeDef_tImpl : SchemaClass, VPhysics2ShapeDef_
 {
     public VPhysics2ShapeDef_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SpheresOffset;
+    private static nint _SpheresOffset = -1;
 
     public ref CUtlLeanVector<RnSphereDesc_t, int> Spheres
     {
         get
         {
-            _SpheresOffset = _SpheresOffset ?? Schema.GetOffset(0xB5A68CEBBFDA8091);
-            return ref _Handle.AsRef<CUtlLeanVector<RnSphereDesc_t, int>>(_SpheresOffset!.Value);
+            if (_SpheresOffset == -1) _SpheresOffset = Schema.GetOffset(0xB5A68CEBBFDA8091);
+            return ref _Handle.AsRef<CUtlLeanVector<RnSphereDesc_t, int>>(_SpheresOffset);
         }
     }
-    private static nint? _CapsulesOffset;
+    private static nint _CapsulesOffset = -1;
 
     public ref CUtlLeanVector<RnCapsuleDesc_t, int> Capsules
     {
         get
         {
-            _CapsulesOffset = _CapsulesOffset ?? Schema.GetOffset(0xB5A68CEBF8737C4D);
-            return ref _Handle.AsRef<CUtlLeanVector<RnCapsuleDesc_t, int>>(_CapsulesOffset!.Value);
+            if (_CapsulesOffset == -1) _CapsulesOffset = Schema.GetOffset(0xB5A68CEBF8737C4D);
+            return ref _Handle.AsRef<CUtlLeanVector<RnCapsuleDesc_t, int>>(_CapsulesOffset);
         }
     }
-    private static nint? _HullsOffset;
+    private static nint _HullsOffset = -1;
 
     public ref CUtlLeanVector<RnHullDesc_t, int> Hulls
     {
         get
         {
-            _HullsOffset = _HullsOffset ?? Schema.GetOffset(0xB5A68CEB31F7453F);
-            return ref _Handle.AsRef<CUtlLeanVector<RnHullDesc_t, int>>(_HullsOffset!.Value);
+            if (_HullsOffset == -1) _HullsOffset = Schema.GetOffset(0xB5A68CEB31F7453F);
+            return ref _Handle.AsRef<CUtlLeanVector<RnHullDesc_t, int>>(_HullsOffset);
         }
     }
-    private static nint? _MeshesOffset;
+    private static nint _MeshesOffset = -1;
 
     public ref CUtlLeanVector<RnMeshDesc_t, int> Meshes
     {
         get
         {
-            _MeshesOffset = _MeshesOffset ?? Schema.GetOffset(0xB5A68CEBC0F01FD8);
-            return ref _Handle.AsRef<CUtlLeanVector<RnMeshDesc_t, int>>(_MeshesOffset!.Value);
+            if (_MeshesOffset == -1) _MeshesOffset = Schema.GetOffset(0xB5A68CEBC0F01FD8);
+            return ref _Handle.AsRef<CUtlLeanVector<RnMeshDesc_t, int>>(_MeshesOffset);
         }
     }
-    private static nint? _CompoundsOffset;
+    private static nint _CompoundsOffset = -1;
 
     public ref CUtlLeanVector<RnCompoundDesc_t, int> Compounds
     {
         get
         {
-            _CompoundsOffset = _CompoundsOffset ?? Schema.GetOffset(0xB5A68CEBB561D89D);
-            return ref _Handle.AsRef<CUtlLeanVector<RnCompoundDesc_t, int>>(_CompoundsOffset!.Value);
+            if (_CompoundsOffset == -1) _CompoundsOffset = Schema.GetOffset(0xB5A68CEBB561D89D);
+            return ref _Handle.AsRef<CUtlLeanVector<RnCompoundDesc_t, int>>(_CompoundsOffset);
         }
     }
-    private static nint? _CollisionAttributeIndicesOffset;
+    private static nint _CollisionAttributeIndicesOffset = -1;
 
     public ref CUtlVector<ushort> CollisionAttributeIndices
     {
         get
         {
-            _CollisionAttributeIndicesOffset = _CollisionAttributeIndicesOffset ?? Schema.GetOffset(0xB5A68CEB86453EB2);
-            return ref _Handle.AsRef<CUtlVector<ushort>>(_CollisionAttributeIndicesOffset!.Value);
+            if (_CollisionAttributeIndicesOffset == -1) _CollisionAttributeIndicesOffset = Schema.GetOffset(0xB5A68CEB86453EB2);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_CollisionAttributeIndicesOffset);
         }
     }
 

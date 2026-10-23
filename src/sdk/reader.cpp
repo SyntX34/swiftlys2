@@ -48,7 +48,7 @@ bool IsStandardLayoutClass(SchemaClassInfoData_t* classData) {
 
 std::string chainEntityIndex = "__m_pChainEntity";
 
-void FindChainer(bool& has_chainer, int& chainer_offset, CSchemaClassInfo* classInfo)
+void FindChainer(int& chainer_offset, CSchemaClassInfo* classInfo)
 {
     for (int i = 0; i < classInfo->m_nBaseClassCount; i++)
     {
@@ -59,24 +59,23 @@ void FindChainer(bool& has_chainer, int& chainer_offset, CSchemaClassInfo* class
             {
                 if (baseClass->m_pFields[j].m_pszName == chainEntityIndex)
                 {
-                    has_chainer = true;
                     chainer_offset = baseClass->m_pFields[j].m_nSingleInheritanceOffset;
                     break;
                 }
             }
         }
-        if (has_chainer) break;
+        if (chainer_offset != -1) break;
     }
 
-    if (!has_chainer)
+    if (chainer_offset == -1)
     {
         for (int i = 0; i < classInfo->m_nBaseClassCount; i++)
         {
             auto baseClass = classInfo->m_pBaseClasses[i].m_pClass;
             if (baseClass)
             {
-                FindChainer(has_chainer, chainer_offset, baseClass);
-                if (has_chainer) break;
+                FindChainer(chainer_offset, baseClass);
+                if (chainer_offset != -1) break;
             }
         }
     }
@@ -89,26 +88,26 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass)
     if (!classInfo) return;
 
     uint64_t class_hash = (uint64_t)(hash_32_fnv1a_const(classInfo->m_pszName)) << 32;
-    bool isStruct = IsStandardLayoutClass(classInfo);
     auto field_size = classInfo->m_nFieldCount;
     auto fields = classInfo->m_pFields;
+    bool isStruct = IsStandardLayoutClass(classInfo);
+    void* classVtable = nullptr;
+    bool hasVtable = g_pS2BinLib->FindVtable("server", classInfo->m_pszName, &classVtable) == 0;
 
-    bool has_chainer = false;
-    int chainer_offset = 0;
+    int chainer_offset = -1;
 
     for (int i = 0; i < field_size; i++)
     {
         if (fields[i].m_pszName == chainEntityIndex)
         {
-            has_chainer = true;
             chainer_offset = fields[i].m_nSingleInheritanceOffset;
             break;
         }
     }
 
-    if (!has_chainer)
+    if (chainer_offset == -1)
     {
-        FindChainer(has_chainer, chainer_offset, classInfo);
+        FindChainer(chainer_offset, classInfo);
     }
 
     for (int i = 0; i < field_size; i++)
@@ -126,9 +125,10 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass)
             result = g_pS2BinLib->FindNetworkvarVtableStatechanged((uint64_t)vtable, &index);
             if (result == 0) {
                 stateChangedIndex = (int)index;
+                networkVarStateChangedOffsets.emplace(vtable, stateChangedIndex);
             }
         }
 
-        offsets.insert({ fieldHash, { has_chainer, isStruct, chainer_offset, stateChangedIndex, (uint32_t)field.m_nSingleInheritanceOffset } });
+        offsets.insert({ fieldHash, { chainer_offset, stateChangedIndex, (uint32_t)field.m_nSingleInheritanceOffset, isStruct, hasVtable } });
     }
 }

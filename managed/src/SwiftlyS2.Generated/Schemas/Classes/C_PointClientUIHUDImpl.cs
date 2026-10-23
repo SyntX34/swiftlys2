@@ -16,136 +16,136 @@ internal partial class C_PointClientUIHUDImpl : C_BaseClientUIEntityImpl, C_Poin
 {
     public C_PointClientUIHUDImpl(nint handle) : base(handle) { }
 
-    private static nint? _CheckCSSClassesOffset;
+    private static nint _CheckCSSClassesOffset = -1;
 
     public ref bool CheckCSSClasses
     {
         get
         {
-            _CheckCSSClassesOffset = _CheckCSSClassesOffset ?? Schema.GetOffset(0x72F5CBFFFCBA3F8A);
-            return ref _Handle.AsRef<bool>(_CheckCSSClassesOffset!.Value);
+            if (_CheckCSSClassesOffset == -1) _CheckCSSClassesOffset = Schema.GetOffset(0x72F5CBFFFCBA3F8A);
+            return ref _Handle.AsRef<bool>(_CheckCSSClassesOffset);
         }
     }
-    private static nint? _IgnoreInputOffset;
+    private static nint _IgnoreInputOffset = -1;
 
     public ref bool IgnoreInput
     {
         get
         {
-            _IgnoreInputOffset = _IgnoreInputOffset ?? Schema.GetOffset(0x72F5CBFF946EC6E1);
-            return ref _Handle.AsRef<bool>(_IgnoreInputOffset!.Value);
+            if (_IgnoreInputOffset == -1) _IgnoreInputOffset = Schema.GetOffset(0x72F5CBFF946EC6E1);
+            return ref _Handle.AsRef<bool>(_IgnoreInputOffset);
         }
     }
-    private static nint? _WidthOffset;
+    private static nint _WidthOffset = -1;
 
     public ref float Width
     {
         get
         {
-            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0x72F5CBFFB91935E1);
-            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+            if (_WidthOffset == -1) _WidthOffset = Schema.GetOffset(0x72F5CBFFB91935E1);
+            return ref _Handle.AsRef<float>(_WidthOffset);
         }
     }
-    private static nint? _HeightOffset;
+    private static nint _HeightOffset = -1;
 
     public ref float Height
     {
         get
         {
-            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0x72F5CBFFEADD7FB0);
-            return ref _Handle.AsRef<float>(_HeightOffset!.Value);
+            if (_HeightOffset == -1) _HeightOffset = Schema.GetOffset(0x72F5CBFFEADD7FB0);
+            return ref _Handle.AsRef<float>(_HeightOffset);
         }
     }
-    private static nint? _DPIOffset;
+    private static nint _DPIOffset = -1;
 
     public ref float DPI
     {
         get
         {
-            _DPIOffset = _DPIOffset ?? Schema.GetOffset(0x72F5CBFFEB0B7A2E);
-            return ref _Handle.AsRef<float>(_DPIOffset!.Value);
+            if (_DPIOffset == -1) _DPIOffset = Schema.GetOffset(0x72F5CBFFEB0B7A2E);
+            return ref _Handle.AsRef<float>(_DPIOffset);
         }
     }
-    private static nint? _InteractDistanceOffset;
+    private static nint _InteractDistanceOffset = -1;
 
     public ref float InteractDistance
     {
         get
         {
-            _InteractDistanceOffset = _InteractDistanceOffset ?? Schema.GetOffset(0x72F5CBFF47FBB4C2);
-            return ref _Handle.AsRef<float>(_InteractDistanceOffset!.Value);
+            if (_InteractDistanceOffset == -1) _InteractDistanceOffset = Schema.GetOffset(0x72F5CBFF47FBB4C2);
+            return ref _Handle.AsRef<float>(_InteractDistanceOffset);
         }
     }
-    private static nint? _DepthOffsetOffset;
+    private static nint _DepthOffsetOffset = -1;
 
     public ref float DepthOffset
     {
         get
         {
-            _DepthOffsetOffset = _DepthOffsetOffset ?? Schema.GetOffset(0x72F5CBFF67D1DB9B);
-            return ref _Handle.AsRef<float>(_DepthOffsetOffset!.Value);
+            if (_DepthOffsetOffset == -1) _DepthOffsetOffset = Schema.GetOffset(0x72F5CBFF67D1DB9B);
+            return ref _Handle.AsRef<float>(_DepthOffsetOffset);
         }
     }
-    private static nint? _OwnerContextOffset;
+    private static nint _OwnerContextOffset = -1;
 
     public ref uint OwnerContext
     {
         get
         {
-            _OwnerContextOffset = _OwnerContextOffset ?? Schema.GetOffset(0x72F5CBFFB5F5A8BC);
-            return ref _Handle.AsRef<uint>(_OwnerContextOffset!.Value);
+            if (_OwnerContextOffset == -1) _OwnerContextOffset = Schema.GetOffset(0x72F5CBFFB5F5A8BC);
+            return ref _Handle.AsRef<uint>(_OwnerContextOffset);
         }
     }
-    private static nint? _HorizontalAlignOffset;
+    private static nint _HorizontalAlignOffset = -1;
 
     public ref uint HorizontalAlign
     {
         get
         {
-            _HorizontalAlignOffset = _HorizontalAlignOffset ?? Schema.GetOffset(0x72F5CBFFF2F27A57);
-            return ref _Handle.AsRef<uint>(_HorizontalAlignOffset!.Value);
+            if (_HorizontalAlignOffset == -1) _HorizontalAlignOffset = Schema.GetOffset(0x72F5CBFFF2F27A57);
+            return ref _Handle.AsRef<uint>(_HorizontalAlignOffset);
         }
     }
-    private static nint? _VerticalAlignOffset;
+    private static nint _VerticalAlignOffset = -1;
 
     public ref uint VerticalAlign
     {
         get
         {
-            _VerticalAlignOffset = _VerticalAlignOffset ?? Schema.GetOffset(0x72F5CBFFC263FE8D);
-            return ref _Handle.AsRef<uint>(_VerticalAlignOffset!.Value);
+            if (_VerticalAlignOffset == -1) _VerticalAlignOffset = Schema.GetOffset(0x72F5CBFFC263FE8D);
+            return ref _Handle.AsRef<uint>(_VerticalAlignOffset);
         }
     }
-    private static nint? _OrientationOffset;
+    private static nint _OrientationOffset = -1;
 
     public ref uint Orientation
     {
         get
         {
-            _OrientationOffset = _OrientationOffset ?? Schema.GetOffset(0x72F5CBFFB9A99B4C);
-            return ref _Handle.AsRef<uint>(_OrientationOffset!.Value);
+            if (_OrientationOffset == -1) _OrientationOffset = Schema.GetOffset(0x72F5CBFFB9A99B4C);
+            return ref _Handle.AsRef<uint>(_OrientationOffset);
         }
     }
-    private static nint? _AllowInteractionFromAllSceneWorldsOffset;
+    private static nint _AllowInteractionFromAllSceneWorldsOffset = -1;
 
     public ref bool AllowInteractionFromAllSceneWorlds
     {
         get
         {
-            _AllowInteractionFromAllSceneWorldsOffset = _AllowInteractionFromAllSceneWorldsOffset ?? Schema.GetOffset(0x72F5CBFFB50077AE);
-            return ref _Handle.AsRef<bool>(_AllowInteractionFromAllSceneWorldsOffset!.Value);
+            if (_AllowInteractionFromAllSceneWorldsOffset == -1) _AllowInteractionFromAllSceneWorldsOffset = Schema.GetOffset(0x72F5CBFFB50077AE);
+            return ref _Handle.AsRef<bool>(_AllowInteractionFromAllSceneWorldsOffset);
         }
     }
-    private static nint? _CSSClassesOffset;
+    private static nint _CSSClassesOffset = -1;
     private SchemaUntypedField? _CSSClassesInstance;
 
     public SchemaUntypedField CSSClasses
     {
         get
         {
-            _CSSClassesOffset = _CSSClassesOffset ?? Schema.GetOffset(0x72F5CBFFCB74D1DC);
+            if (_CSSClassesOffset == -1) _CSSClassesOffset = Schema.GetOffset(0x72F5CBFFCB74D1DC);
             var instance = _CSSClassesInstance ??= new SchemaUntypedField(0);
-            instance.DangerousSetHandle(_Handle + _CSSClassesOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _CSSClassesOffset);
             return instance;
         }
     }

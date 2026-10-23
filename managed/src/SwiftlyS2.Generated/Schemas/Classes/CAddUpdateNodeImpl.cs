@@ -16,54 +16,54 @@ internal partial class CAddUpdateNodeImpl : CBinaryUpdateNodeImpl, CAddUpdateNod
 {
     public CAddUpdateNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _FootMotionTimingOffset;
+    private static nint _FootMotionTimingOffset = -1;
 
     public ref BinaryNodeChildOption FootMotionTiming
     {
         get
         {
-            _FootMotionTimingOffset = _FootMotionTimingOffset ?? Schema.GetOffset(0x607346F4BB17F13D);
-            return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset!.Value);
+            if (_FootMotionTimingOffset == -1) _FootMotionTimingOffset = Schema.GetOffset(0x607346F4BB17F13D);
+            return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset);
         }
     }
-    private static nint? _ApplyToFootMotionOffset;
+    private static nint _ApplyToFootMotionOffset = -1;
 
     public ref bool ApplyToFootMotion
     {
         get
         {
-            _ApplyToFootMotionOffset = _ApplyToFootMotionOffset ?? Schema.GetOffset(0x607346F43D831E94);
-            return ref _Handle.AsRef<bool>(_ApplyToFootMotionOffset!.Value);
+            if (_ApplyToFootMotionOffset == -1) _ApplyToFootMotionOffset = Schema.GetOffset(0x607346F43D831E94);
+            return ref _Handle.AsRef<bool>(_ApplyToFootMotionOffset);
         }
     }
-    private static nint? _ApplyChannelsSeparatelyOffset;
+    private static nint _ApplyChannelsSeparatelyOffset = -1;
 
     public ref bool ApplyChannelsSeparately
     {
         get
         {
-            _ApplyChannelsSeparatelyOffset = _ApplyChannelsSeparatelyOffset ?? Schema.GetOffset(0x607346F4FF2DBB45);
-            return ref _Handle.AsRef<bool>(_ApplyChannelsSeparatelyOffset!.Value);
+            if (_ApplyChannelsSeparatelyOffset == -1) _ApplyChannelsSeparatelyOffset = Schema.GetOffset(0x607346F4FF2DBB45);
+            return ref _Handle.AsRef<bool>(_ApplyChannelsSeparatelyOffset);
         }
     }
-    private static nint? _UseModelSpaceOffset;
+    private static nint _UseModelSpaceOffset = -1;
 
     public ref bool UseModelSpace
     {
         get
         {
-            _UseModelSpaceOffset = _UseModelSpaceOffset ?? Schema.GetOffset(0x607346F448863521);
-            return ref _Handle.AsRef<bool>(_UseModelSpaceOffset!.Value);
+            if (_UseModelSpaceOffset == -1) _UseModelSpaceOffset = Schema.GetOffset(0x607346F448863521);
+            return ref _Handle.AsRef<bool>(_UseModelSpaceOffset);
         }
     }
-    private static nint? _ApplyScaleOffset;
+    private static nint _ApplyScaleOffset = -1;
 
     public ref bool ApplyScale
     {
         get
         {
-            _ApplyScaleOffset = _ApplyScaleOffset ?? Schema.GetOffset(0x607346F469D11233);
-            return ref _Handle.AsRef<bool>(_ApplyScaleOffset!.Value);
+            if (_ApplyScaleOffset == -1) _ApplyScaleOffset = Schema.GetOffset(0x607346F469D11233);
+            return ref _Handle.AsRef<bool>(_ApplyScaleOffset);
         }
     }
 

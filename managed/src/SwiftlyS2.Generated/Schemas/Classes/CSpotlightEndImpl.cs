@@ -16,44 +16,44 @@ internal partial class CSpotlightEndImpl : CBaseModelEntityImpl, CSpotlightEnd
 {
     public CSpotlightEndImpl(nint handle) : base(handle) { }
 
-    private static nint? _LightScaleOffset;
+    private static nint _LightScaleOffset = -1;
 
     public ref float LightScale
     {
         get
         {
-            _LightScaleOffset = _LightScaleOffset ?? Schema.GetOffset(0x49085AA3E5A1295D);
-            return ref _Handle.AsRef<float>(_LightScaleOffset!.Value);
+            if (_LightScaleOffset == -1) _LightScaleOffset = Schema.GetOffset(0x49085AA3E5A1295D);
+            return ref _Handle.AsRef<float>(_LightScaleOffset);
         }
     }
-    private static nint? _RadiusOffset;
+    private static nint _RadiusOffset = -1;
 
     public ref float Radius
     {
         get
         {
-            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x49085AA37C5B0533);
-            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+            if (_RadiusOffset == -1) _RadiusOffset = Schema.GetOffset(0x49085AA37C5B0533);
+            return ref _Handle.AsRef<float>(_RadiusOffset);
         }
     }
-    private static nint? _SpotlightDirOffset;
+    private static nint _SpotlightDirOffset = -1;
 
     public ref Vector SpotlightDir
     {
         get
         {
-            _SpotlightDirOffset = _SpotlightDirOffset ?? Schema.GetOffset(0x49085AA3EE68984A);
-            return ref _Handle.AsRef<Vector>(_SpotlightDirOffset!.Value);
+            if (_SpotlightDirOffset == -1) _SpotlightDirOffset = Schema.GetOffset(0x49085AA3EE68984A);
+            return ref _Handle.AsRef<Vector>(_SpotlightDirOffset);
         }
     }
-    private static nint? _SpotlightOrgOffset;
+    private static nint _SpotlightOrgOffset = -1;
 
     public ref Vector SpotlightOrg
     {
         get
         {
-            _SpotlightOrgOffset = _SpotlightOrgOffset ?? Schema.GetOffset(0x49085AA34C84B367);
-            return ref _Handle.AsRef<Vector>(_SpotlightOrgOffset!.Value);
+            if (_SpotlightOrgOffset == -1) _SpotlightOrgOffset = Schema.GetOffset(0x49085AA34C84B367);
+            return ref _Handle.AsRef<Vector>(_SpotlightOrgOffset);
         }
     }
 

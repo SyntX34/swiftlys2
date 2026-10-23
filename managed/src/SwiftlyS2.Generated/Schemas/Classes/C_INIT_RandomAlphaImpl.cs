@@ -16,47 +16,47 @@ internal partial class C_INIT_RandomAlphaImpl : CParticleFunctionInitializerImpl
 {
     public C_INIT_RandomAlphaImpl(nint handle) : base(handle) { }
 
-    private static nint? _FieldOutputOffset;
+    private static nint _FieldOutputOffset = -1;
     private ParticleAttributeIndex_tImpl? _FieldOutputInstance;
 
     public ParticleAttributeIndex_t FieldOutput
     {
         get
         {
-            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x3D7FD5BE5729606);
+            if (_FieldOutputOffset == -1) _FieldOutputOffset = Schema.GetOffset(0x3D7FD5BE5729606);
             var instance = _FieldOutputInstance ??= new ParticleAttributeIndex_tImpl(0);
-            instance.DangerousSetHandle(_Handle + _FieldOutputOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FieldOutputOffset);
             return instance;
         }
     }
-    private static nint? _AlphaMinOffset;
+    private static nint _AlphaMinOffset = -1;
 
     public ref int AlphaMin
     {
         get
         {
-            _AlphaMinOffset = _AlphaMinOffset ?? Schema.GetOffset(0x3D7FD5BD7670531);
-            return ref _Handle.AsRef<int>(_AlphaMinOffset!.Value);
+            if (_AlphaMinOffset == -1) _AlphaMinOffset = Schema.GetOffset(0x3D7FD5BD7670531);
+            return ref _Handle.AsRef<int>(_AlphaMinOffset);
         }
     }
-    private static nint? _AlphaMaxOffset;
+    private static nint _AlphaMaxOffset = -1;
 
     public ref int AlphaMax
     {
         get
         {
-            _AlphaMaxOffset = _AlphaMaxOffset ?? Schema.GetOffset(0x3D7FD5BE97AA93F);
-            return ref _Handle.AsRef<int>(_AlphaMaxOffset!.Value);
+            if (_AlphaMaxOffset == -1) _AlphaMaxOffset = Schema.GetOffset(0x3D7FD5BE97AA93F);
+            return ref _Handle.AsRef<int>(_AlphaMaxOffset);
         }
     }
-    private static nint? _AlphaRandExponentOffset;
+    private static nint _AlphaRandExponentOffset = -1;
 
     public ref float AlphaRandExponent
     {
         get
         {
-            _AlphaRandExponentOffset = _AlphaRandExponentOffset ?? Schema.GetOffset(0x3D7FD5BA2C243B5);
-            return ref _Handle.AsRef<float>(_AlphaRandExponentOffset!.Value);
+            if (_AlphaRandExponentOffset == -1) _AlphaRandExponentOffset = Schema.GetOffset(0x3D7FD5BA2C243B5);
+            return ref _Handle.AsRef<float>(_AlphaRandExponentOffset);
         }
     }
 

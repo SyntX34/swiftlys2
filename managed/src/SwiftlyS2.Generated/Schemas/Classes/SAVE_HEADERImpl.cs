@@ -16,79 +16,79 @@ internal partial class SAVE_HEADERImpl : SchemaClass, SAVE_HEADER
 {
     public SAVE_HEADERImpl(nint handle) : base(handle) { }
 
-    private static nint? _SaveIdOffset;
+    private static nint _SaveIdOffset = -1;
 
     public ref int SaveId
     {
         get
         {
-            _SaveIdOffset = _SaveIdOffset ?? Schema.GetOffset(0xB5CD27F0F8DF1435);
-            return ref _Handle.AsRef<int>(_SaveIdOffset!.Value);
+            if (_SaveIdOffset == -1) _SaveIdOffset = Schema.GetOffset(0xB5CD27F0F8DF1435);
+            return ref _Handle.AsRef<int>(_SaveIdOffset);
         }
     }
-    private static nint? _VersionOffset;
+    private static nint _VersionOffset = -1;
 
     public ref int Version
     {
         get
         {
-            _VersionOffset = _VersionOffset ?? Schema.GetOffset(0xB5CD27F004D046B7);
-            return ref _Handle.AsRef<int>(_VersionOffset!.Value);
+            if (_VersionOffset == -1) _VersionOffset = Schema.GetOffset(0xB5CD27F004D046B7);
+            return ref _Handle.AsRef<int>(_VersionOffset);
         }
     }
-    private static nint? _ConnectionCountOffset;
+    private static nint _ConnectionCountOffset = -1;
 
     public ref int ConnectionCount
     {
         get
         {
-            _ConnectionCountOffset = _ConnectionCountOffset ?? Schema.GetOffset(0xB5CD27F0B19B756C);
-            return ref _Handle.AsRef<int>(_ConnectionCountOffset!.Value);
+            if (_ConnectionCountOffset == -1) _ConnectionCountOffset = Schema.GetOffset(0xB5CD27F0B19B756C);
+            return ref _Handle.AsRef<int>(_ConnectionCountOffset);
         }
     }
-    private static nint? _MapVersionOffset;
+    private static nint _MapVersionOffset = -1;
 
     public ref int MapVersion
     {
         get
         {
-            _MapVersionOffset = _MapVersionOffset ?? Schema.GetOffset(0xB5CD27F0150AD79F);
-            return ref _Handle.AsRef<int>(_MapVersionOffset!.Value);
+            if (_MapVersionOffset == -1) _MapVersionOffset = Schema.GetOffset(0xB5CD27F0150AD79F);
+            return ref _Handle.AsRef<int>(_MapVersionOffset);
         }
     }
-    private static nint? _SpawnGroupNameOffset;
+    private static nint _SpawnGroupNameOffset = -1;
 
     public string SpawnGroupName
     {
         get
         {
-            _SpawnGroupNameOffset = _SpawnGroupNameOffset ?? Schema.GetOffset(0xB5CD27F0B2281EA3);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_SpawnGroupNameOffset!.Value));
+            if (_SpawnGroupNameOffset == -1) _SpawnGroupNameOffset = Schema.GetOffset(0xB5CD27F0B2281EA3);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_SpawnGroupNameOffset));
         }
         set
         {
-            _SpawnGroupNameOffset = _SpawnGroupNameOffset ?? Schema.GetOffset(0xB5CD27F0B2281EA3);
-            Schema.SetCUtlString(_Handle, _SpawnGroupNameOffset!.Value, value);
+            if (_SpawnGroupNameOffset == -1) _SpawnGroupNameOffset = Schema.GetOffset(0xB5CD27F0B2281EA3);
+            Schema.SetCUtlString(_Handle, _SpawnGroupNameOffset, value);
         }
     }
-    private static nint? _WorldOffsetOffset;
+    private static nint _WorldOffsetOffset = -1;
 
     public ref matrix3x4_t WorldOffset
     {
         get
         {
-            _WorldOffsetOffset = _WorldOffsetOffset ?? Schema.GetOffset(0xB5CD27F083450700);
-            return ref _Handle.AsRef<matrix3x4_t>(_WorldOffsetOffset!.Value);
+            if (_WorldOffsetOffset == -1) _WorldOffsetOffset = Schema.GetOffset(0xB5CD27F083450700);
+            return ref _Handle.AsRef<matrix3x4_t>(_WorldOffsetOffset);
         }
     }
-    private static nint? _SaveTimeOffset;
+    private static nint _SaveTimeOffset = -1;
 
     public ref float SaveTime
     {
         get
         {
-            _SaveTimeOffset = _SaveTimeOffset ?? Schema.GetOffset(0xB5CD27F00FC8CABB);
-            return ref _Handle.AsRef<float>(_SaveTimeOffset!.Value);
+            if (_SaveTimeOffset == -1) _SaveTimeOffset = Schema.GetOffset(0xB5CD27F00FC8CABB);
+            return ref _Handle.AsRef<float>(_SaveTimeOffset);
         }
     }
 

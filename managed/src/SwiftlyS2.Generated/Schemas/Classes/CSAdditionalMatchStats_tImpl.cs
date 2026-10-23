@@ -16,124 +16,124 @@ internal partial class CSAdditionalMatchStats_tImpl : CSAdditionalPerRoundStats_
 {
     public CSAdditionalMatchStats_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NumRoundsSurvivedStreakOffset;
+    private static nint _NumRoundsSurvivedStreakOffset = -1;
 
     public ref int NumRoundsSurvivedStreak
     {
         get
         {
-            _NumRoundsSurvivedStreakOffset = _NumRoundsSurvivedStreakOffset ?? Schema.GetOffset(0x22CBC11586C59622);
-            return ref _Handle.AsRef<int>(_NumRoundsSurvivedStreakOffset!.Value);
+            if (_NumRoundsSurvivedStreakOffset == -1) _NumRoundsSurvivedStreakOffset = Schema.GetOffset(0x22CBC11586C59622);
+            return ref _Handle.AsRef<int>(_NumRoundsSurvivedStreakOffset);
         }
     }
-    private static nint? _MaxNumRoundsSurvivedStreakOffset;
+    private static nint _MaxNumRoundsSurvivedStreakOffset = -1;
 
     public ref int MaxNumRoundsSurvivedStreak
     {
         get
         {
-            _MaxNumRoundsSurvivedStreakOffset = _MaxNumRoundsSurvivedStreakOffset ?? Schema.GetOffset(0x22CBC1153C4DCEFE);
-            return ref _Handle.AsRef<int>(_MaxNumRoundsSurvivedStreakOffset!.Value);
+            if (_MaxNumRoundsSurvivedStreakOffset == -1) _MaxNumRoundsSurvivedStreakOffset = Schema.GetOffset(0x22CBC1153C4DCEFE);
+            return ref _Handle.AsRef<int>(_MaxNumRoundsSurvivedStreakOffset);
         }
     }
-    private static nint? _NumRoundsSurvivedTotalOffset;
+    private static nint _NumRoundsSurvivedTotalOffset = -1;
 
     public ref int NumRoundsSurvivedTotal
     {
         get
         {
-            _NumRoundsSurvivedTotalOffset = _NumRoundsSurvivedTotalOffset ?? Schema.GetOffset(0x22CBC1154AB60BAA);
-            return ref _Handle.AsRef<int>(_NumRoundsSurvivedTotalOffset!.Value);
+            if (_NumRoundsSurvivedTotalOffset == -1) _NumRoundsSurvivedTotalOffset = Schema.GetOffset(0x22CBC1154AB60BAA);
+            return ref _Handle.AsRef<int>(_NumRoundsSurvivedTotalOffset);
         }
     }
-    private static nint? _RoundsWonWithoutPurchaseOffset;
+    private static nint _RoundsWonWithoutPurchaseOffset = -1;
 
     public ref int RoundsWonWithoutPurchase
     {
         get
         {
-            _RoundsWonWithoutPurchaseOffset = _RoundsWonWithoutPurchaseOffset ?? Schema.GetOffset(0x22CBC115AC7FF6C6);
-            return ref _Handle.AsRef<int>(_RoundsWonWithoutPurchaseOffset!.Value);
+            if (_RoundsWonWithoutPurchaseOffset == -1) _RoundsWonWithoutPurchaseOffset = Schema.GetOffset(0x22CBC115AC7FF6C6);
+            return ref _Handle.AsRef<int>(_RoundsWonWithoutPurchaseOffset);
         }
     }
-    private static nint? _RoundsWonWithoutPurchaseTotalOffset;
+    private static nint _RoundsWonWithoutPurchaseTotalOffset = -1;
 
     public ref int RoundsWonWithoutPurchaseTotal
     {
         get
         {
-            _RoundsWonWithoutPurchaseTotalOffset = _RoundsWonWithoutPurchaseTotalOffset ?? Schema.GetOffset(0x22CBC1153AC9D3C8);
-            return ref _Handle.AsRef<int>(_RoundsWonWithoutPurchaseTotalOffset!.Value);
+            if (_RoundsWonWithoutPurchaseTotalOffset == -1) _RoundsWonWithoutPurchaseTotalOffset = Schema.GetOffset(0x22CBC1153AC9D3C8);
+            return ref _Handle.AsRef<int>(_RoundsWonWithoutPurchaseTotalOffset);
         }
     }
-    private static nint? _NumFirstKillsOffset;
+    private static nint _NumFirstKillsOffset = -1;
 
     public ref int NumFirstKills
     {
         get
         {
-            _NumFirstKillsOffset = _NumFirstKillsOffset ?? Schema.GetOffset(0x22CBC115500366CC);
-            return ref _Handle.AsRef<int>(_NumFirstKillsOffset!.Value);
+            if (_NumFirstKillsOffset == -1) _NumFirstKillsOffset = Schema.GetOffset(0x22CBC115500366CC);
+            return ref _Handle.AsRef<int>(_NumFirstKillsOffset);
         }
     }
-    private static nint? _NumClutchKillsOffset;
+    private static nint _NumClutchKillsOffset = -1;
 
     public ref int NumClutchKills
     {
         get
         {
-            _NumClutchKillsOffset = _NumClutchKillsOffset ?? Schema.GetOffset(0x22CBC115875D8493);
-            return ref _Handle.AsRef<int>(_NumClutchKillsOffset!.Value);
+            if (_NumClutchKillsOffset == -1) _NumClutchKillsOffset = Schema.GetOffset(0x22CBC115875D8493);
+            return ref _Handle.AsRef<int>(_NumClutchKillsOffset);
         }
     }
-    private static nint? _NumPistolKillsOffset;
+    private static nint _NumPistolKillsOffset = -1;
 
     public ref int NumPistolKills
     {
         get
         {
-            _NumPistolKillsOffset = _NumPistolKillsOffset ?? Schema.GetOffset(0x22CBC115079C10BD);
-            return ref _Handle.AsRef<int>(_NumPistolKillsOffset!.Value);
+            if (_NumPistolKillsOffset == -1) _NumPistolKillsOffset = Schema.GetOffset(0x22CBC115079C10BD);
+            return ref _Handle.AsRef<int>(_NumPistolKillsOffset);
         }
     }
-    private static nint? _NumSniperKillsOffset;
+    private static nint _NumSniperKillsOffset = -1;
 
     public ref int NumSniperKills
     {
         get
         {
-            _NumSniperKillsOffset = _NumSniperKillsOffset ?? Schema.GetOffset(0x22CBC115FAE64E21);
-            return ref _Handle.AsRef<int>(_NumSniperKillsOffset!.Value);
+            if (_NumSniperKillsOffset == -1) _NumSniperKillsOffset = Schema.GetOffset(0x22CBC115FAE64E21);
+            return ref _Handle.AsRef<int>(_NumSniperKillsOffset);
         }
     }
-    private static nint? _NumSuicidesOffset;
+    private static nint _NumSuicidesOffset = -1;
 
     public ref int NumSuicides
     {
         get
         {
-            _NumSuicidesOffset = _NumSuicidesOffset ?? Schema.GetOffset(0x22CBC11545F754B9);
-            return ref _Handle.AsRef<int>(_NumSuicidesOffset!.Value);
+            if (_NumSuicidesOffset == -1) _NumSuicidesOffset = Schema.GetOffset(0x22CBC11545F754B9);
+            return ref _Handle.AsRef<int>(_NumSuicidesOffset);
         }
     }
-    private static nint? _NumTeamKillsOffset;
+    private static nint _NumTeamKillsOffset = -1;
 
     public ref int NumTeamKills
     {
         get
         {
-            _NumTeamKillsOffset = _NumTeamKillsOffset ?? Schema.GetOffset(0x22CBC115033A4DAE);
-            return ref _Handle.AsRef<int>(_NumTeamKillsOffset!.Value);
+            if (_NumTeamKillsOffset == -1) _NumTeamKillsOffset = Schema.GetOffset(0x22CBC115033A4DAE);
+            return ref _Handle.AsRef<int>(_NumTeamKillsOffset);
         }
     }
-    private static nint? _TeamDamageOffset;
+    private static nint _TeamDamageOffset = -1;
 
     public ref float TeamDamage
     {
         get
         {
-            _TeamDamageOffset = _TeamDamageOffset ?? Schema.GetOffset(0x22CBC11530150C1B);
-            return ref _Handle.AsRef<float>(_TeamDamageOffset!.Value);
+            if (_TeamDamageOffset == -1) _TeamDamageOffset = Schema.GetOffset(0x22CBC11530150C1B);
+            return ref _Handle.AsRef<float>(_TeamDamageOffset);
         }
     }
 

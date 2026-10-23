@@ -16,44 +16,44 @@ internal partial class SteamAudioPathSettings_tImpl : SchemaClass, SteamAudioPat
 {
     public SteamAudioPathSettings_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NumVisSamplesOffset;
+    private static nint _NumVisSamplesOffset = -1;
 
     public ref int NumVisSamples
     {
         get
         {
-            _NumVisSamplesOffset = _NumVisSamplesOffset ?? Schema.GetOffset(0x5A34F40E431E0D0A);
-            return ref _Handle.AsRef<int>(_NumVisSamplesOffset!.Value);
+            if (_NumVisSamplesOffset == -1) _NumVisSamplesOffset = Schema.GetOffset(0x5A34F40E431E0D0A);
+            return ref _Handle.AsRef<int>(_NumVisSamplesOffset);
         }
     }
-    private static nint? _ProbeVisRadiusOffset;
+    private static nint _ProbeVisRadiusOffset = -1;
 
     public ref float ProbeVisRadius
     {
         get
         {
-            _ProbeVisRadiusOffset = _ProbeVisRadiusOffset ?? Schema.GetOffset(0x5A34F40E63BAD7F9);
-            return ref _Handle.AsRef<float>(_ProbeVisRadiusOffset!.Value);
+            if (_ProbeVisRadiusOffset == -1) _ProbeVisRadiusOffset = Schema.GetOffset(0x5A34F40E63BAD7F9);
+            return ref _Handle.AsRef<float>(_ProbeVisRadiusOffset);
         }
     }
-    private static nint? _ProbeVisThresholdOffset;
+    private static nint _ProbeVisThresholdOffset = -1;
 
     public ref float ProbeVisThreshold
     {
         get
         {
-            _ProbeVisThresholdOffset = _ProbeVisThresholdOffset ?? Schema.GetOffset(0x5A34F40E523FBBD6);
-            return ref _Handle.AsRef<float>(_ProbeVisThresholdOffset!.Value);
+            if (_ProbeVisThresholdOffset == -1) _ProbeVisThresholdOffset = Schema.GetOffset(0x5A34F40E523FBBD6);
+            return ref _Handle.AsRef<float>(_ProbeVisThresholdOffset);
         }
     }
-    private static nint? _ProbePathRangeOffset;
+    private static nint _ProbePathRangeOffset = -1;
 
     public ref float ProbePathRange
     {
         get
         {
-            _ProbePathRangeOffset = _ProbePathRangeOffset ?? Schema.GetOffset(0x5A34F40E0B806101);
-            return ref _Handle.AsRef<float>(_ProbePathRangeOffset!.Value);
+            if (_ProbePathRangeOffset == -1) _ProbePathRangeOffset = Schema.GetOffset(0x5A34F40E0B806101);
+            return ref _Handle.AsRef<float>(_ProbePathRangeOffset);
         }
     }
 

@@ -16,70 +16,70 @@ internal partial class CAnimGraphDoc_SubGraphImpl : SchemaClass, CAnimGraphDoc_S
 {
     public CAnimGraphDoc_SubGraphImpl(nint handle) : base(handle) { }
 
-    private static nint? _NodeManagerOffset;
+    private static nint _NodeManagerOffset = -1;
     private CAnimGraphDoc_NodeManagerImpl? _NodeManagerInstance;
 
     public CAnimGraphDoc_NodeManager NodeManager
     {
         get
         {
-            _NodeManagerOffset = _NodeManagerOffset ?? Schema.GetOffset(0x7438E68CADC397E4);
+            if (_NodeManagerOffset == -1) _NodeManagerOffset = Schema.GetOffset(0x7438E68CADC397E4);
             var instance = _NodeManagerInstance ??= new CAnimGraphDoc_NodeManagerImpl(0);
-            instance.DangerousSetHandle(_Handle + _NodeManagerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _NodeManagerOffset);
             return instance;
         }
     }
-    private static nint? _ComponentManagerOffset;
+    private static nint _ComponentManagerOffset = -1;
     private CAnimGraphDoc_ComponentManagerImpl? _ComponentManagerInstance;
 
     public CAnimGraphDoc_ComponentManager ComponentManager
     {
         get
         {
-            _ComponentManagerOffset = _ComponentManagerOffset ?? Schema.GetOffset(0x7438E68C31BD899F);
+            if (_ComponentManagerOffset == -1) _ComponentManagerOffset = Schema.GetOffset(0x7438E68C31BD899F);
             var instance = _ComponentManagerInstance ??= new CAnimGraphDoc_ComponentManagerImpl(0);
-            instance.DangerousSetHandle(_Handle + _ComponentManagerOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ComponentManagerOffset);
             return instance;
         }
     }
-    private static nint? _LocalParametersOffset;
+    private static nint _LocalParametersOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> LocalParameters
     {
         get
         {
-            _LocalParametersOffset = _LocalParametersOffset ?? Schema.GetOffset(0x7438E68CE46095CC);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_LocalParametersOffset!.Value);
+            if (_LocalParametersOffset == -1) _LocalParametersOffset = Schema.GetOffset(0x7438E68CE46095CC);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_LocalParametersOffset);
         }
     }
-    private static nint? _LocalTagsOffset;
+    private static nint _LocalTagsOffset = -1;
 
     public ref CUtlVector<SchemaUntypedField> LocalTags
     {
         get
         {
-            _LocalTagsOffset = _LocalTagsOffset ?? Schema.GetOffset(0x7438E68CEB72C051);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_LocalTagsOffset!.Value);
+            if (_LocalTagsOffset == -1) _LocalTagsOffset = Schema.GetOffset(0x7438E68CEB72C051);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_LocalTagsOffset);
         }
     }
-    private static nint? _ReferencedParamGroupsOffset;
+    private static nint _ReferencedParamGroupsOffset = -1;
 
     public ref CUtlVector<CUtlString> ReferencedParamGroups
     {
         get
         {
-            _ReferencedParamGroupsOffset = _ReferencedParamGroupsOffset ?? Schema.GetOffset(0x7438E68CACF8F7C3);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ReferencedParamGroupsOffset!.Value);
+            if (_ReferencedParamGroupsOffset == -1) _ReferencedParamGroupsOffset = Schema.GetOffset(0x7438E68CACF8F7C3);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ReferencedParamGroupsOffset);
         }
     }
-    private static nint? _ReferencedTagGroupsOffset;
+    private static nint _ReferencedTagGroupsOffset = -1;
 
     public ref CUtlVector<CUtlString> ReferencedTagGroups
     {
         get
         {
-            _ReferencedTagGroupsOffset = _ReferencedTagGroupsOffset ?? Schema.GetOffset(0x7438E68C1B810DF2);
-            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ReferencedTagGroupsOffset!.Value);
+            if (_ReferencedTagGroupsOffset == -1) _ReferencedTagGroupsOffset = Schema.GetOffset(0x7438E68C1B810DF2);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ReferencedTagGroupsOffset);
         }
     }
 

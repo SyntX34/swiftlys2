@@ -16,24 +16,24 @@ internal partial class CVoiceContainerDecayingSineWaveImpl : CVoiceContainerGene
 {
     public CVoiceContainerDecayingSineWaveImpl(nint handle) : base(handle) { }
 
-    private static nint? _FrequencyOffset;
+    private static nint _FrequencyOffset = -1;
 
     public ref float Frequency
     {
         get
         {
-            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0x3383CD01D2C16DD7);
-            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+            if (_FrequencyOffset == -1) _FrequencyOffset = Schema.GetOffset(0x3383CD01D2C16DD7);
+            return ref _Handle.AsRef<float>(_FrequencyOffset);
         }
     }
-    private static nint? _DecayTimeOffset;
+    private static nint _DecayTimeOffset = -1;
 
     public ref float DecayTime
     {
         get
         {
-            _DecayTimeOffset = _DecayTimeOffset ?? Schema.GetOffset(0x3383CD01E94A0656);
-            return ref _Handle.AsRef<float>(_DecayTimeOffset!.Value);
+            if (_DecayTimeOffset == -1) _DecayTimeOffset = Schema.GetOffset(0x3383CD01E94A0656);
+            return ref _Handle.AsRef<float>(_DecayTimeOffset);
         }
     }
 

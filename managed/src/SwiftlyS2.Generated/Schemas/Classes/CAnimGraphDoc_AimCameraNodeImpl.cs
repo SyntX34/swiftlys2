@@ -16,208 +16,208 @@ internal partial class CAnimGraphDoc_AimCameraNodeImpl : CAnimGraphDoc_NodeImpl,
 {
     public CAnimGraphDoc_AimCameraNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x28B0234C1F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x28B0234C1F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _IkChainOffset;
+    private static nint _IkChainOffset = -1;
 
     public string IkChain
     {
         get
         {
-            _IkChainOffset = _IkChainOffset ?? Schema.GetOffset(0x28B0234CAF2F43AE);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainOffset!.Value));
+            if (_IkChainOffset == -1) _IkChainOffset = Schema.GetOffset(0x28B0234CAF2F43AE);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_IkChainOffset));
         }
         set
         {
-            _IkChainOffset = _IkChainOffset ?? Schema.GetOffset(0x28B0234CAF2F43AE);
-            Schema.SetCUtlString(_Handle, _IkChainOffset!.Value, value);
+            if (_IkChainOffset == -1) _IkChainOffset = Schema.GetOffset(0x28B0234CAF2F43AE);
+            Schema.SetCUtlString(_Handle, _IkChainOffset, value);
         }
     }
-    private static nint? _CameraJointNameOffset;
+    private static nint _CameraJointNameOffset = -1;
 
     public string CameraJointName
     {
         get
         {
-            _CameraJointNameOffset = _CameraJointNameOffset ?? Schema.GetOffset(0x28B0234CA605D871);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_CameraJointNameOffset!.Value));
+            if (_CameraJointNameOffset == -1) _CameraJointNameOffset = Schema.GetOffset(0x28B0234CA605D871);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_CameraJointNameOffset));
         }
         set
         {
-            _CameraJointNameOffset = _CameraJointNameOffset ?? Schema.GetOffset(0x28B0234CA605D871);
-            Schema.SetCUtlString(_Handle, _CameraJointNameOffset!.Value, value);
+            if (_CameraJointNameOffset == -1) _CameraJointNameOffset = Schema.GetOffset(0x28B0234CA605D871);
+            Schema.SetCUtlString(_Handle, _CameraJointNameOffset, value);
         }
     }
-    private static nint? _PelvisJointNameOffset;
+    private static nint _PelvisJointNameOffset = -1;
 
     public string PelvisJointName
     {
         get
         {
-            _PelvisJointNameOffset = _PelvisJointNameOffset ?? Schema.GetOffset(0x28B0234C3210B6BF);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_PelvisJointNameOffset!.Value));
+            if (_PelvisJointNameOffset == -1) _PelvisJointNameOffset = Schema.GetOffset(0x28B0234C3210B6BF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_PelvisJointNameOffset));
         }
         set
         {
-            _PelvisJointNameOffset = _PelvisJointNameOffset ?? Schema.GetOffset(0x28B0234C3210B6BF);
-            Schema.SetCUtlString(_Handle, _PelvisJointNameOffset!.Value, value);
+            if (_PelvisJointNameOffset == -1) _PelvisJointNameOffset = Schema.GetOffset(0x28B0234C3210B6BF);
+            Schema.SetCUtlString(_Handle, _PelvisJointNameOffset, value);
         }
     }
-    private static nint? _ClavicleLeftJointNameOffset;
+    private static nint _ClavicleLeftJointNameOffset = -1;
 
     public string ClavicleLeftJointName
     {
         get
         {
-            _ClavicleLeftJointNameOffset = _ClavicleLeftJointNameOffset ?? Schema.GetOffset(0x28B0234C8408D6F2);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ClavicleLeftJointNameOffset!.Value));
+            if (_ClavicleLeftJointNameOffset == -1) _ClavicleLeftJointNameOffset = Schema.GetOffset(0x28B0234C8408D6F2);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ClavicleLeftJointNameOffset));
         }
         set
         {
-            _ClavicleLeftJointNameOffset = _ClavicleLeftJointNameOffset ?? Schema.GetOffset(0x28B0234C8408D6F2);
-            Schema.SetCUtlString(_Handle, _ClavicleLeftJointNameOffset!.Value, value);
+            if (_ClavicleLeftJointNameOffset == -1) _ClavicleLeftJointNameOffset = Schema.GetOffset(0x28B0234C8408D6F2);
+            Schema.SetCUtlString(_Handle, _ClavicleLeftJointNameOffset, value);
         }
     }
-    private static nint? _ClavicleRightJointNameOffset;
+    private static nint _ClavicleRightJointNameOffset = -1;
 
     public string ClavicleRightJointName
     {
         get
         {
-            _ClavicleRightJointNameOffset = _ClavicleRightJointNameOffset ?? Schema.GetOffset(0x28B0234C96CCE51F);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_ClavicleRightJointNameOffset!.Value));
+            if (_ClavicleRightJointNameOffset == -1) _ClavicleRightJointNameOffset = Schema.GetOffset(0x28B0234C96CCE51F);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_ClavicleRightJointNameOffset));
         }
         set
         {
-            _ClavicleRightJointNameOffset = _ClavicleRightJointNameOffset ?? Schema.GetOffset(0x28B0234C96CCE51F);
-            Schema.SetCUtlString(_Handle, _ClavicleRightJointNameOffset!.Value, value);
+            if (_ClavicleRightJointNameOffset == -1) _ClavicleRightJointNameOffset = Schema.GetOffset(0x28B0234C96CCE51F);
+            Schema.SetCUtlString(_Handle, _ClavicleRightJointNameOffset, value);
         }
     }
-    private static nint? _ParameterNamePositionOffset;
+    private static nint _ParameterNamePositionOffset = -1;
     private AnimParamIDImpl? _ParameterNamePositionInstance;
 
     public AnimParamID ParameterNamePosition
     {
         get
         {
-            _ParameterNamePositionOffset = _ParameterNamePositionOffset ?? Schema.GetOffset(0x28B0234C0A24A760);
+            if (_ParameterNamePositionOffset == -1) _ParameterNamePositionOffset = Schema.GetOffset(0x28B0234C0A24A760);
             var instance = _ParameterNamePositionInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterNamePositionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParameterNamePositionOffset);
             return instance;
         }
     }
-    private static nint? _ParameterNameOrientationOffset;
+    private static nint _ParameterNameOrientationOffset = -1;
     private AnimParamIDImpl? _ParameterNameOrientationInstance;
 
     public AnimParamID ParameterNameOrientation
     {
         get
         {
-            _ParameterNameOrientationOffset = _ParameterNameOrientationOffset ?? Schema.GetOffset(0x28B0234C7F4C52A7);
+            if (_ParameterNameOrientationOffset == -1) _ParameterNameOrientationOffset = Schema.GetOffset(0x28B0234C7F4C52A7);
             var instance = _ParameterNameOrientationInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterNameOrientationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParameterNameOrientationOffset);
             return instance;
         }
     }
-    private static nint? _ParameterNamePelvisOffsetOffset;
+    private static nint _ParameterNamePelvisOffsetOffset = -1;
     private AnimParamIDImpl? _ParameterNamePelvisOffsetInstance;
 
     public AnimParamID ParameterNamePelvisOffset
     {
         get
         {
-            _ParameterNamePelvisOffsetOffset = _ParameterNamePelvisOffsetOffset ?? Schema.GetOffset(0x28B0234CF94442B9);
+            if (_ParameterNamePelvisOffsetOffset == -1) _ParameterNamePelvisOffsetOffset = Schema.GetOffset(0x28B0234CF94442B9);
             var instance = _ParameterNamePelvisOffsetInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterNamePelvisOffsetOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParameterNamePelvisOffsetOffset);
             return instance;
         }
     }
-    private static nint? _ParameterCameraOnlyOffset;
+    private static nint _ParameterCameraOnlyOffset = -1;
     private AnimParamIDImpl? _ParameterCameraOnlyInstance;
 
     public AnimParamID ParameterCameraOnly
     {
         get
         {
-            _ParameterCameraOnlyOffset = _ParameterCameraOnlyOffset ?? Schema.GetOffset(0x28B0234CAA1573A1);
+            if (_ParameterCameraOnlyOffset == -1) _ParameterCameraOnlyOffset = Schema.GetOffset(0x28B0234CAA1573A1);
             var instance = _ParameterCameraOnlyInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterCameraOnlyOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParameterCameraOnlyOffset);
             return instance;
         }
     }
-    private static nint? _ParameterCameraClearanceDistanceOffset;
+    private static nint _ParameterCameraClearanceDistanceOffset = -1;
     private AnimParamIDImpl? _ParameterCameraClearanceDistanceInstance;
 
     public AnimParamID ParameterCameraClearanceDistance
     {
         get
         {
-            _ParameterCameraClearanceDistanceOffset = _ParameterCameraClearanceDistanceOffset ?? Schema.GetOffset(0x28B0234C3FBF9934);
+            if (_ParameterCameraClearanceDistanceOffset == -1) _ParameterCameraClearanceDistanceOffset = Schema.GetOffset(0x28B0234C3FBF9934);
             var instance = _ParameterCameraClearanceDistanceInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterCameraClearanceDistanceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParameterCameraClearanceDistanceOffset);
             return instance;
         }
     }
-    private static nint? _ParameterWeaponDepenetrationDistanceOffset;
+    private static nint _ParameterWeaponDepenetrationDistanceOffset = -1;
     private AnimParamIDImpl? _ParameterWeaponDepenetrationDistanceInstance;
 
     public AnimParamID ParameterWeaponDepenetrationDistance
     {
         get
         {
-            _ParameterWeaponDepenetrationDistanceOffset = _ParameterWeaponDepenetrationDistanceOffset ?? Schema.GetOffset(0x28B0234C359F8243);
+            if (_ParameterWeaponDepenetrationDistanceOffset == -1) _ParameterWeaponDepenetrationDistanceOffset = Schema.GetOffset(0x28B0234C359F8243);
             var instance = _ParameterWeaponDepenetrationDistanceInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterWeaponDepenetrationDistanceOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParameterWeaponDepenetrationDistanceOffset);
             return instance;
         }
     }
-    private static nint? _ParameterWeaponDepenetrationDeltaOffset;
+    private static nint _ParameterWeaponDepenetrationDeltaOffset = -1;
     private AnimParamIDImpl? _ParameterWeaponDepenetrationDeltaInstance;
 
     public AnimParamID ParameterWeaponDepenetrationDelta
     {
         get
         {
-            _ParameterWeaponDepenetrationDeltaOffset = _ParameterWeaponDepenetrationDeltaOffset ?? Schema.GetOffset(0x28B0234C7E7205CE);
+            if (_ParameterWeaponDepenetrationDeltaOffset == -1) _ParameterWeaponDepenetrationDeltaOffset = Schema.GetOffset(0x28B0234C7E7205CE);
             var instance = _ParameterWeaponDepenetrationDeltaInstance ??= new AnimParamIDImpl(0);
-            instance.DangerousSetHandle(_Handle + _ParameterWeaponDepenetrationDeltaOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _ParameterWeaponDepenetrationDeltaOffset);
             return instance;
         }
     }
-    private static nint? _DepenetrationJointNameOffset;
+    private static nint _DepenetrationJointNameOffset = -1;
 
     public string DepenetrationJointName
     {
         get
         {
-            _DepenetrationJointNameOffset = _DepenetrationJointNameOffset ?? Schema.GetOffset(0x28B0234C9458BD9E);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_DepenetrationJointNameOffset!.Value));
+            if (_DepenetrationJointNameOffset == -1) _DepenetrationJointNameOffset = Schema.GetOffset(0x28B0234C9458BD9E);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_DepenetrationJointNameOffset));
         }
         set
         {
-            _DepenetrationJointNameOffset = _DepenetrationJointNameOffset ?? Schema.GetOffset(0x28B0234C9458BD9E);
-            Schema.SetCUtlString(_Handle, _DepenetrationJointNameOffset!.Value, value);
+            if (_DepenetrationJointNameOffset == -1) _DepenetrationJointNameOffset = Schema.GetOffset(0x28B0234C9458BD9E);
+            Schema.SetCUtlString(_Handle, _DepenetrationJointNameOffset, value);
         }
     }
-    private static nint? _PropJointsOffset;
+    private static nint _PropJointsOffset = -1;
 
     public ref CUtlVector<CAnimGraphDoc_AimCameraNode_PropJoint> PropJoints
     {
         get
         {
-            _PropJointsOffset = _PropJointsOffset ?? Schema.GetOffset(0x28B0234C24880565);
-            return ref _Handle.AsRef<CUtlVector<CAnimGraphDoc_AimCameraNode_PropJoint>>(_PropJointsOffset!.Value);
+            if (_PropJointsOffset == -1) _PropJointsOffset = Schema.GetOffset(0x28B0234C24880565);
+            return ref _Handle.AsRef<CUtlVector<CAnimGraphDoc_AimCameraNode_PropJoint>>(_PropJointsOffset);
         }
     }
 

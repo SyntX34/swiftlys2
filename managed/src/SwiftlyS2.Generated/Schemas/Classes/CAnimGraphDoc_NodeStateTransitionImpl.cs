@@ -16,62 +16,62 @@ internal partial class CAnimGraphDoc_NodeStateTransitionImpl : CAnimGraphDoc_Sta
 {
     public CAnimGraphDoc_NodeStateTransitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _BlendDurationOffset;
+    private static nint _BlendDurationOffset = -1;
     private CFloatAnimValueImpl? _BlendDurationInstance;
 
     public CFloatAnimValue BlendDuration
     {
         get
         {
-            _BlendDurationOffset = _BlendDurationOffset ?? Schema.GetOffset(0xEC298304BC9B1228);
+            if (_BlendDurationOffset == -1) _BlendDurationOffset = Schema.GetOffset(0xEC298304BC9B1228);
             var instance = _BlendDurationInstance ??= new CFloatAnimValueImpl(0);
-            instance.DangerousSetHandle(_Handle + _BlendDurationOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BlendDurationOffset);
             return instance;
         }
     }
-    private static nint? _ResetOffset;
+    private static nint _ResetOffset = -1;
 
     public ref bool Reset
     {
         get
         {
-            _ResetOffset = _ResetOffset ?? Schema.GetOffset(0xEC298304F99F9AA0);
-            return ref _Handle.AsRef<bool>(_ResetOffset!.Value);
+            if (_ResetOffset == -1) _ResetOffset = Schema.GetOffset(0xEC298304F99F9AA0);
+            return ref _Handle.AsRef<bool>(_ResetOffset);
         }
     }
-    private static nint? _ResetCycleOptionOffset;
+    private static nint _ResetCycleOptionOffset = -1;
 
     public ref ResetCycleOption ResetCycleOption
     {
         get
         {
-            _ResetCycleOptionOffset = _ResetCycleOptionOffset ?? Schema.GetOffset(0xEC298304A597A1E3);
-            return ref _Handle.AsRef<ResetCycleOption>(_ResetCycleOptionOffset!.Value);
+            if (_ResetCycleOptionOffset == -1) _ResetCycleOptionOffset = Schema.GetOffset(0xEC298304A597A1E3);
+            return ref _Handle.AsRef<ResetCycleOption>(_ResetCycleOptionOffset);
         }
     }
-    private static nint? _FixedCycleValueOffset;
+    private static nint _FixedCycleValueOffset = -1;
     private CFloatAnimValueImpl? _FixedCycleValueInstance;
 
     public CFloatAnimValue FixedCycleValue
     {
         get
         {
-            _FixedCycleValueOffset = _FixedCycleValueOffset ?? Schema.GetOffset(0xEC29830484BF5B40);
+            if (_FixedCycleValueOffset == -1) _FixedCycleValueOffset = Schema.GetOffset(0xEC29830484BF5B40);
             var instance = _FixedCycleValueInstance ??= new CFloatAnimValueImpl(0);
-            instance.DangerousSetHandle(_Handle + _FixedCycleValueOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _FixedCycleValueOffset);
             return instance;
         }
     }
-    private static nint? _BlendCurveOffset;
+    private static nint _BlendCurveOffset = -1;
     private CBlendCurveImpl? _BlendCurveInstance;
 
     public CBlendCurve BlendCurve
     {
         get
         {
-            _BlendCurveOffset = _BlendCurveOffset ?? Schema.GetOffset(0xEC29830491978183);
+            if (_BlendCurveOffset == -1) _BlendCurveOffset = Schema.GetOffset(0xEC29830491978183);
             var instance = _BlendCurveInstance ??= new CBlendCurveImpl(0);
-            instance.DangerousSetHandle(_Handle + _BlendCurveOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _BlendCurveOffset);
             return instance;
         }
     }

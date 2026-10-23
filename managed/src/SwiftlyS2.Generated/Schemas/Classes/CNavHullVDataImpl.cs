@@ -16,154 +16,154 @@ internal partial class CNavHullVDataImpl : SchemaClass, CNavHullVData
 {
     public CNavHullVDataImpl(nint handle) : base(handle) { }
 
-    private static nint? _AgentEnabledOffset;
+    private static nint _AgentEnabledOffset = -1;
 
     public ref bool AgentEnabled
     {
         get
         {
-            _AgentEnabledOffset = _AgentEnabledOffset ?? Schema.GetOffset(0x74449E2E9D43CFF3);
-            return ref _Handle.AsRef<bool>(_AgentEnabledOffset!.Value);
+            if (_AgentEnabledOffset == -1) _AgentEnabledOffset = Schema.GetOffset(0x74449E2E9D43CFF3);
+            return ref _Handle.AsRef<bool>(_AgentEnabledOffset);
         }
     }
-    private static nint? _AgentRadiusOffset;
+    private static nint _AgentRadiusOffset = -1;
 
     public ref float AgentRadius
     {
         get
         {
-            _AgentRadiusOffset = _AgentRadiusOffset ?? Schema.GetOffset(0x74449E2ED9F4ED84);
-            return ref _Handle.AsRef<float>(_AgentRadiusOffset!.Value);
+            if (_AgentRadiusOffset == -1) _AgentRadiusOffset = Schema.GetOffset(0x74449E2ED9F4ED84);
+            return ref _Handle.AsRef<float>(_AgentRadiusOffset);
         }
     }
-    private static nint? _AgentHeightOffset;
+    private static nint _AgentHeightOffset = -1;
 
     public ref float AgentHeight
     {
         get
         {
-            _AgentHeightOffset = _AgentHeightOffset ?? Schema.GetOffset(0x74449E2E5A46CC6D);
-            return ref _Handle.AsRef<float>(_AgentHeightOffset!.Value);
+            if (_AgentHeightOffset == -1) _AgentHeightOffset = Schema.GetOffset(0x74449E2E5A46CC6D);
+            return ref _Handle.AsRef<float>(_AgentHeightOffset);
         }
     }
-    private static nint? _AgentShortHeightEnabledOffset;
+    private static nint _AgentShortHeightEnabledOffset = -1;
 
     public ref bool AgentShortHeightEnabled
     {
         get
         {
-            _AgentShortHeightEnabledOffset = _AgentShortHeightEnabledOffset ?? Schema.GetOffset(0x74449E2EB869D4B0);
-            return ref _Handle.AsRef<bool>(_AgentShortHeightEnabledOffset!.Value);
+            if (_AgentShortHeightEnabledOffset == -1) _AgentShortHeightEnabledOffset = Schema.GetOffset(0x74449E2EB869D4B0);
+            return ref _Handle.AsRef<bool>(_AgentShortHeightEnabledOffset);
         }
     }
-    private static nint? _AgentShortHeightOffset;
+    private static nint _AgentShortHeightOffset = -1;
 
     public ref float AgentShortHeight
     {
         get
         {
-            _AgentShortHeightOffset = _AgentShortHeightOffset ?? Schema.GetOffset(0x74449E2E82909A4B);
-            return ref _Handle.AsRef<float>(_AgentShortHeightOffset!.Value);
+            if (_AgentShortHeightOffset == -1) _AgentShortHeightOffset = Schema.GetOffset(0x74449E2E82909A4B);
+            return ref _Handle.AsRef<float>(_AgentShortHeightOffset);
         }
     }
-    private static nint? _AgentCrawlEnabledOffset;
+    private static nint _AgentCrawlEnabledOffset = -1;
 
     public ref bool AgentCrawlEnabled
     {
         get
         {
-            _AgentCrawlEnabledOffset = _AgentCrawlEnabledOffset ?? Schema.GetOffset(0x74449E2E042611D2);
-            return ref _Handle.AsRef<bool>(_AgentCrawlEnabledOffset!.Value);
+            if (_AgentCrawlEnabledOffset == -1) _AgentCrawlEnabledOffset = Schema.GetOffset(0x74449E2E042611D2);
+            return ref _Handle.AsRef<bool>(_AgentCrawlEnabledOffset);
         }
     }
-    private static nint? _AgentCrawlHeightOffset;
+    private static nint _AgentCrawlHeightOffset = -1;
 
     public ref float AgentCrawlHeight
     {
         get
         {
-            _AgentCrawlHeightOffset = _AgentCrawlHeightOffset ?? Schema.GetOffset(0x74449E2E8068594E);
-            return ref _Handle.AsRef<float>(_AgentCrawlHeightOffset!.Value);
+            if (_AgentCrawlHeightOffset == -1) _AgentCrawlHeightOffset = Schema.GetOffset(0x74449E2E8068594E);
+            return ref _Handle.AsRef<float>(_AgentCrawlHeightOffset);
         }
     }
-    private static nint? _AgentMaxClimbOffset;
+    private static nint _AgentMaxClimbOffset = -1;
 
     public ref float AgentMaxClimb
     {
         get
         {
-            _AgentMaxClimbOffset = _AgentMaxClimbOffset ?? Schema.GetOffset(0x74449E2EDF3EC175);
-            return ref _Handle.AsRef<float>(_AgentMaxClimbOffset!.Value);
+            if (_AgentMaxClimbOffset == -1) _AgentMaxClimbOffset = Schema.GetOffset(0x74449E2EDF3EC175);
+            return ref _Handle.AsRef<float>(_AgentMaxClimbOffset);
         }
     }
-    private static nint? _AgentMaxSlopeOffset;
+    private static nint _AgentMaxSlopeOffset = -1;
 
     public ref int AgentMaxSlope
     {
         get
         {
-            _AgentMaxSlopeOffset = _AgentMaxSlopeOffset ?? Schema.GetOffset(0x74449E2EFAC02727);
-            return ref _Handle.AsRef<int>(_AgentMaxSlopeOffset!.Value);
+            if (_AgentMaxSlopeOffset == -1) _AgentMaxSlopeOffset = Schema.GetOffset(0x74449E2EFAC02727);
+            return ref _Handle.AsRef<int>(_AgentMaxSlopeOffset);
         }
     }
-    private static nint? _AgentMaxJumpDownDistOffset;
+    private static nint _AgentMaxJumpDownDistOffset = -1;
 
     public ref float AgentMaxJumpDownDist
     {
         get
         {
-            _AgentMaxJumpDownDistOffset = _AgentMaxJumpDownDistOffset ?? Schema.GetOffset(0x74449E2E1B440540);
-            return ref _Handle.AsRef<float>(_AgentMaxJumpDownDistOffset!.Value);
+            if (_AgentMaxJumpDownDistOffset == -1) _AgentMaxJumpDownDistOffset = Schema.GetOffset(0x74449E2E1B440540);
+            return ref _Handle.AsRef<float>(_AgentMaxJumpDownDistOffset);
         }
     }
-    private static nint? _AgentMaxJumpHorizDistBaseOffset;
+    private static nint _AgentMaxJumpHorizDistBaseOffset = -1;
 
     public ref float AgentMaxJumpHorizDistBase
     {
         get
         {
-            _AgentMaxJumpHorizDistBaseOffset = _AgentMaxJumpHorizDistBaseOffset ?? Schema.GetOffset(0x74449E2ED8C1AC5F);
-            return ref _Handle.AsRef<float>(_AgentMaxJumpHorizDistBaseOffset!.Value);
+            if (_AgentMaxJumpHorizDistBaseOffset == -1) _AgentMaxJumpHorizDistBaseOffset = Schema.GetOffset(0x74449E2ED8C1AC5F);
+            return ref _Handle.AsRef<float>(_AgentMaxJumpHorizDistBaseOffset);
         }
     }
-    private static nint? _AgentMaxJumpUpDistOffset;
+    private static nint _AgentMaxJumpUpDistOffset = -1;
 
     public ref float AgentMaxJumpUpDist
     {
         get
         {
-            _AgentMaxJumpUpDistOffset = _AgentMaxJumpUpDistOffset ?? Schema.GetOffset(0x74449E2E0CA237AD);
-            return ref _Handle.AsRef<float>(_AgentMaxJumpUpDistOffset!.Value);
+            if (_AgentMaxJumpUpDistOffset == -1) _AgentMaxJumpUpDistOffset = Schema.GetOffset(0x74449E2E0CA237AD);
+            return ref _Handle.AsRef<float>(_AgentMaxJumpUpDistOffset);
         }
     }
-    private static nint? _AgentBorderErosionOffset;
+    private static nint _AgentBorderErosionOffset = -1;
 
     public ref int AgentBorderErosion
     {
         get
         {
-            _AgentBorderErosionOffset = _AgentBorderErosionOffset ?? Schema.GetOffset(0x74449E2EC445012D);
-            return ref _Handle.AsRef<int>(_AgentBorderErosionOffset!.Value);
+            if (_AgentBorderErosionOffset == -1) _AgentBorderErosionOffset = Schema.GetOffset(0x74449E2EC445012D);
+            return ref _Handle.AsRef<int>(_AgentBorderErosionOffset);
         }
     }
-    private static nint? _FlowMapGenerationEnabledOffset;
+    private static nint _FlowMapGenerationEnabledOffset = -1;
 
     public ref bool FlowMapGenerationEnabled
     {
         get
         {
-            _FlowMapGenerationEnabledOffset = _FlowMapGenerationEnabledOffset ?? Schema.GetOffset(0x74449E2E8E7494D0);
-            return ref _Handle.AsRef<bool>(_FlowMapGenerationEnabledOffset!.Value);
+            if (_FlowMapGenerationEnabledOffset == -1) _FlowMapGenerationEnabledOffset = Schema.GetOffset(0x74449E2E8E7494D0);
+            return ref _Handle.AsRef<bool>(_FlowMapGenerationEnabledOffset);
         }
     }
-    private static nint? _FlowMapNodeMaxRadiusOffset;
+    private static nint _FlowMapNodeMaxRadiusOffset = -1;
 
     public ref float FlowMapNodeMaxRadius
     {
         get
         {
-            _FlowMapNodeMaxRadiusOffset = _FlowMapNodeMaxRadiusOffset ?? Schema.GetOffset(0x74449E2E19B2323B);
-            return ref _Handle.AsRef<float>(_FlowMapNodeMaxRadiusOffset!.Value);
+            if (_FlowMapNodeMaxRadiusOffset == -1) _FlowMapNodeMaxRadiusOffset = Schema.GetOffset(0x74449E2E19B2323B);
+            return ref _Handle.AsRef<float>(_FlowMapNodeMaxRadiusOffset);
         }
     }
 

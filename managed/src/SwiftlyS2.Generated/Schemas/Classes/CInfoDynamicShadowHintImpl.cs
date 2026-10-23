@@ -16,54 +16,54 @@ internal partial class CInfoDynamicShadowHintImpl : CPointEntityImpl, CInfoDynam
 {
     public CInfoDynamicShadowHintImpl(nint handle) : base(handle) { }
 
-    private static nint? _DisabledOffset;
+    private static nint _DisabledOffset = -1;
 
     public ref bool Disabled
     {
         get
         {
-            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x46DDE8EE3A7C5965);
-            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+            if (_DisabledOffset == -1) _DisabledOffset = Schema.GetOffset(0x46DDE8EE3A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset);
         }
     }
-    private static nint? _RangeOffset;
+    private static nint _RangeOffset = -1;
 
     public ref float Range
     {
         get
         {
-            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0x46DDE8EE3FC92844);
-            return ref _Handle.AsRef<float>(_RangeOffset!.Value);
+            if (_RangeOffset == -1) _RangeOffset = Schema.GetOffset(0x46DDE8EE3FC92844);
+            return ref _Handle.AsRef<float>(_RangeOffset);
         }
     }
-    private static nint? _ImportanceOffset;
+    private static nint _ImportanceOffset = -1;
 
     public ref int Importance
     {
         get
         {
-            _ImportanceOffset = _ImportanceOffset ?? Schema.GetOffset(0x46DDE8EE85D7F083);
-            return ref _Handle.AsRef<int>(_ImportanceOffset!.Value);
+            if (_ImportanceOffset == -1) _ImportanceOffset = Schema.GetOffset(0x46DDE8EE85D7F083);
+            return ref _Handle.AsRef<int>(_ImportanceOffset);
         }
     }
-    private static nint? _LightChoiceOffset;
+    private static nint _LightChoiceOffset = -1;
 
     public ref int LightChoice
     {
         get
         {
-            _LightChoiceOffset = _LightChoiceOffset ?? Schema.GetOffset(0x46DDE8EED82DFBD8);
-            return ref _Handle.AsRef<int>(_LightChoiceOffset!.Value);
+            if (_LightChoiceOffset == -1) _LightChoiceOffset = Schema.GetOffset(0x46DDE8EED82DFBD8);
+            return ref _Handle.AsRef<int>(_LightChoiceOffset);
         }
     }
-    private static nint? _LightOffset;
+    private static nint _LightOffset = -1;
 
     public ref CHandle<CBaseEntity> Light
     {
         get
         {
-            _LightOffset = _LightOffset ?? Schema.GetOffset(0x46DDE8EEF68359B1);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LightOffset!.Value);
+            if (_LightOffset == -1) _LightOffset = Schema.GetOffset(0x46DDE8EEF68359B1);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LightOffset);
         }
     }
 

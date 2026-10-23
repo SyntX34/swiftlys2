@@ -16,14 +16,14 @@ internal partial class CDampedValueComponentUpdaterImpl : CAnimComponentUpdaterI
 {
     public CDampedValueComponentUpdaterImpl(nint handle) : base(handle) { }
 
-    private static nint? _ItemsOffset;
+    private static nint _ItemsOffset = -1;
 
     public ref CUtlVector<CDampedValueUpdateItem> Items
     {
         get
         {
-            _ItemsOffset = _ItemsOffset ?? Schema.GetOffset(0x9FFDDC9E7A87EDAF);
-            return ref _Handle.AsRef<CUtlVector<CDampedValueUpdateItem>>(_ItemsOffset!.Value);
+            if (_ItemsOffset == -1) _ItemsOffset = Schema.GetOffset(0x9FFDDC9E7A87EDAF);
+            return ref _Handle.AsRef<CUtlVector<CDampedValueUpdateItem>>(_ItemsOffset);
         }
     }
 

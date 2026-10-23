@@ -16,44 +16,44 @@ internal partial class CVMixDescriptionImpl : CVMixBaseGraphDescriptionImpl, CVM
 {
     public CVMixDescriptionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SubmixListOffset;
+    private static nint _SubmixListOffset = -1;
 
     public ref CUtlLeanVector<CSubmix, int> SubmixList
     {
         get
         {
-            _SubmixListOffset = _SubmixListOffset ?? Schema.GetOffset(0xCA17AD94B500E19D);
-            return ref _Handle.AsRef<CUtlLeanVector<CSubmix, int>>(_SubmixListOffset!.Value);
+            if (_SubmixListOffset == -1) _SubmixListOffset = Schema.GetOffset(0xCA17AD94B500E19D);
+            return ref _Handle.AsRef<CUtlLeanVector<CSubmix, int>>(_SubmixListOffset);
         }
     }
-    private static nint? _SourcesOffset;
+    private static nint _SourcesOffset = -1;
 
     public ref CUtlLeanVector<SchemaUntypedField, int> Sources
     {
         get
         {
-            _SourcesOffset = _SourcesOffset ?? Schema.GetOffset(0xCA17AD9449C9E551);
-            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_SourcesOffset!.Value);
+            if (_SourcesOffset == -1) _SourcesOffset = Schema.GetOffset(0xCA17AD9449C9E551);
+            return ref _Handle.AsRef<CUtlLeanVector<SchemaUntypedField, int>>(_SourcesOffset);
         }
     }
-    private static nint? _ImpulseResponseValuesOffset;
+    private static nint _ImpulseResponseValuesOffset = -1;
 
     public ref CUtlLeanVector<ulong, int> ImpulseResponseValues
     {
         get
         {
-            _ImpulseResponseValuesOffset = _ImpulseResponseValuesOffset ?? Schema.GetOffset(0xCA17AD94C2088359);
-            return ref _Handle.AsRef<CUtlLeanVector<ulong, int>>(_ImpulseResponseValuesOffset!.Value);
+            if (_ImpulseResponseValuesOffset == -1) _ImpulseResponseValuesOffset = Schema.GetOffset(0xCA17AD94C2088359);
+            return ref _Handle.AsRef<CUtlLeanVector<ulong, int>>(_ImpulseResponseValuesOffset);
         }
     }
-    private static nint? _NameHashCodeOffset;
+    private static nint _NameHashCodeOffset = -1;
 
     public ref uint NameHashCode
     {
         get
         {
-            _NameHashCodeOffset = _NameHashCodeOffset ?? Schema.GetOffset(0xCA17AD9448744CA3);
-            return ref _Handle.AsRef<uint>(_NameHashCodeOffset!.Value);
+            if (_NameHashCodeOffset == -1) _NameHashCodeOffset = Schema.GetOffset(0xCA17AD9448744CA3);
+            return ref _Handle.AsRef<uint>(_NameHashCodeOffset);
         }
     }
 

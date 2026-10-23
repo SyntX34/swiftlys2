@@ -16,67 +16,67 @@ internal partial class CAnimGraphDoc_WayPointHelperNodeImpl : CAnimGraphDoc_Node
 {
     public CAnimGraphDoc_WayPointHelperNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InputConnectionOffset;
+    private static nint _InputConnectionOffset = -1;
     private CAnimGraphDoc_NodeConnectionImpl? _InputConnectionInstance;
 
     public CAnimGraphDoc_NodeConnection InputConnection
     {
         get
         {
-            _InputConnectionOffset = _InputConnectionOffset ?? Schema.GetOffset(0x68FC746D1F7849CB);
+            if (_InputConnectionOffset == -1) _InputConnectionOffset = Schema.GetOffset(0x68FC746D1F7849CB);
             var instance = _InputConnectionInstance ??= new CAnimGraphDoc_NodeConnectionImpl(0);
-            instance.DangerousSetHandle(_Handle + _InputConnectionOffset!.Value);
+            instance.DangerousSetHandle(_Handle + _InputConnectionOffset);
             return instance;
         }
     }
-    private static nint? _StartCycleOffset;
+    private static nint _StartCycleOffset = -1;
 
     public ref float StartCycle
     {
         get
         {
-            _StartCycleOffset = _StartCycleOffset ?? Schema.GetOffset(0x68FC746DABB46051);
-            return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
+            if (_StartCycleOffset == -1) _StartCycleOffset = Schema.GetOffset(0x68FC746DABB46051);
+            return ref _Handle.AsRef<float>(_StartCycleOffset);
         }
     }
-    private static nint? _EndCycleOffset;
+    private static nint _EndCycleOffset = -1;
 
     public ref float EndCycle
     {
         get
         {
-            _EndCycleOffset = _EndCycleOffset ?? Schema.GetOffset(0x68FC746D176E8F62);
-            return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
+            if (_EndCycleOffset == -1) _EndCycleOffset = Schema.GetOffset(0x68FC746D176E8F62);
+            return ref _Handle.AsRef<float>(_EndCycleOffset);
         }
     }
-    private static nint? _OnlyGoalsOffset;
+    private static nint _OnlyGoalsOffset = -1;
 
     public ref bool OnlyGoals
     {
         get
         {
-            _OnlyGoalsOffset = _OnlyGoalsOffset ?? Schema.GetOffset(0x68FC746D3526BA11);
-            return ref _Handle.AsRef<bool>(_OnlyGoalsOffset!.Value);
+            if (_OnlyGoalsOffset == -1) _OnlyGoalsOffset = Schema.GetOffset(0x68FC746D3526BA11);
+            return ref _Handle.AsRef<bool>(_OnlyGoalsOffset);
         }
     }
-    private static nint? _PreventOvershootOffset;
+    private static nint _PreventOvershootOffset = -1;
 
     public ref bool PreventOvershoot
     {
         get
         {
-            _PreventOvershootOffset = _PreventOvershootOffset ?? Schema.GetOffset(0x68FC746DB161EADA);
-            return ref _Handle.AsRef<bool>(_PreventOvershootOffset!.Value);
+            if (_PreventOvershootOffset == -1) _PreventOvershootOffset = Schema.GetOffset(0x68FC746DB161EADA);
+            return ref _Handle.AsRef<bool>(_PreventOvershootOffset);
         }
     }
-    private static nint? _PreventUndershootOffset;
+    private static nint _PreventUndershootOffset = -1;
 
     public ref bool PreventUndershoot
     {
         get
         {
-            _PreventUndershootOffset = _PreventUndershootOffset ?? Schema.GetOffset(0x68FC746DC22276F8);
-            return ref _Handle.AsRef<bool>(_PreventUndershootOffset!.Value);
+            if (_PreventUndershootOffset == -1) _PreventUndershootOffset = Schema.GetOffset(0x68FC746DC22276F8);
+            return ref _Handle.AsRef<bool>(_PreventUndershootOffset);
         }
     }
 

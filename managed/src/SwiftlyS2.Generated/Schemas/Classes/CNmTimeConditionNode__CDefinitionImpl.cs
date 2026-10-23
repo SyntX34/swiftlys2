@@ -16,54 +16,54 @@ internal partial class CNmTimeConditionNode__CDefinitionImpl : CNmBoolValueNode_
 {
     public CNmTimeConditionNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-    private static nint? _SourceStateNodeIdxOffset;
+    private static nint _SourceStateNodeIdxOffset = -1;
 
     public ref short SourceStateNodeIdx
     {
         get
         {
-            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x421E2145D1DB8128);
-            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+            if (_SourceStateNodeIdxOffset == -1) _SourceStateNodeIdxOffset = Schema.GetOffset(0x421E2145D1DB8128);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset);
         }
     }
-    private static nint? _InputValueNodeIdxOffset;
+    private static nint _InputValueNodeIdxOffset = -1;
 
     public ref short InputValueNodeIdx
     {
         get
         {
-            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x421E214595E89F27);
-            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+            if (_InputValueNodeIdxOffset == -1) _InputValueNodeIdxOffset = Schema.GetOffset(0x421E214595E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset);
         }
     }
-    private static nint? _ComparandOffset;
+    private static nint _ComparandOffset = -1;
 
     public ref float Comparand
     {
         get
         {
-            _ComparandOffset = _ComparandOffset ?? Schema.GetOffset(0x421E21450CF10B48);
-            return ref _Handle.AsRef<float>(_ComparandOffset!.Value);
+            if (_ComparandOffset == -1) _ComparandOffset = Schema.GetOffset(0x421E21450CF10B48);
+            return ref _Handle.AsRef<float>(_ComparandOffset);
         }
     }
-    private static nint? _TypeOffset;
+    private static nint _TypeOffset = -1;
 
     public ref CNmTimeConditionNode__ComparisonType_t Type
     {
         get
         {
-            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x421E21450F04B4ED);
-            return ref _Handle.AsRef<CNmTimeConditionNode__ComparisonType_t>(_TypeOffset!.Value);
+            if (_TypeOffset == -1) _TypeOffset = Schema.GetOffset(0x421E21450F04B4ED);
+            return ref _Handle.AsRef<CNmTimeConditionNode__ComparisonType_t>(_TypeOffset);
         }
     }
-    private static nint? _OperatorOffset;
+    private static nint _OperatorOffset = -1;
 
     public ref CNmTimeConditionNode__Operator_t Operator
     {
         get
         {
-            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0x421E21458ABE049D);
-            return ref _Handle.AsRef<CNmTimeConditionNode__Operator_t>(_OperatorOffset!.Value);
+            if (_OperatorOffset == -1) _OperatorOffset = Schema.GetOffset(0x421E21458ABE049D);
+            return ref _Handle.AsRef<CNmTimeConditionNode__Operator_t>(_OperatorOffset);
         }
     }
 

@@ -16,54 +16,54 @@ internal partial class FeSphereRigid_tImpl : SchemaClass, FeSphereRigid_t
 {
     public FeSphereRigid_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _SphereOffset;
+    private static nint _SphereOffset = -1;
 
     public ref fltx4 Sphere
     {
         get
         {
-            _SphereOffset = _SphereOffset ?? Schema.GetOffset(0xA76DA0A39E2AC48C);
-            return ref _Handle.AsRef<fltx4>(_SphereOffset!.Value);
+            if (_SphereOffset == -1) _SphereOffset = Schema.GetOffset(0xA76DA0A39E2AC48C);
+            return ref _Handle.AsRef<fltx4>(_SphereOffset);
         }
     }
-    private static nint? _NodeOffset;
+    private static nint _NodeOffset = -1;
 
     public ref ushort Node
     {
         get
         {
-            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xA76DA0A3CD6694B9);
-            return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
+            if (_NodeOffset == -1) _NodeOffset = Schema.GetOffset(0xA76DA0A3CD6694B9);
+            return ref _Handle.AsRef<ushort>(_NodeOffset);
         }
     }
-    private static nint? _CollisionMaskOffset;
+    private static nint _CollisionMaskOffset = -1;
 
     public ref ushort CollisionMask
     {
         get
         {
-            _CollisionMaskOffset = _CollisionMaskOffset ?? Schema.GetOffset(0xA76DA0A30ED3454F);
-            return ref _Handle.AsRef<ushort>(_CollisionMaskOffset!.Value);
+            if (_CollisionMaskOffset == -1) _CollisionMaskOffset = Schema.GetOffset(0xA76DA0A30ED3454F);
+            return ref _Handle.AsRef<ushort>(_CollisionMaskOffset);
         }
     }
-    private static nint? _VertexMapIndexOffset;
+    private static nint _VertexMapIndexOffset = -1;
 
     public ref ushort VertexMapIndex
     {
         get
         {
-            _VertexMapIndexOffset = _VertexMapIndexOffset ?? Schema.GetOffset(0xA76DA0A37B332E39);
-            return ref _Handle.AsRef<ushort>(_VertexMapIndexOffset!.Value);
+            if (_VertexMapIndexOffset == -1) _VertexMapIndexOffset = Schema.GetOffset(0xA76DA0A37B332E39);
+            return ref _Handle.AsRef<ushort>(_VertexMapIndexOffset);
         }
     }
-    private static nint? _FlagsOffset;
+    private static nint _FlagsOffset = -1;
 
     public ref ushort Flags
     {
         get
         {
-            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xA76DA0A3B8D52E48);
-            return ref _Handle.AsRef<ushort>(_FlagsOffset!.Value);
+            if (_FlagsOffset == -1) _FlagsOffset = Schema.GetOffset(0xA76DA0A3B8D52E48);
+            return ref _Handle.AsRef<ushort>(_FlagsOffset);
         }
     }
 

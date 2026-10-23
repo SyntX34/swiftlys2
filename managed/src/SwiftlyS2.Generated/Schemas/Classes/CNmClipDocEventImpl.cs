@@ -16,24 +16,24 @@ internal partial class CNmClipDocEventImpl : SchemaClass, CNmClipDocEvent
 {
     public CNmClipDocEventImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartTimeOffset;
+    private static nint _StartTimeOffset = -1;
 
     public ref float StartTime
     {
         get
         {
-            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x114E858767FE9DC4);
-            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+            if (_StartTimeOffset == -1) _StartTimeOffset = Schema.GetOffset(0x114E858767FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset);
         }
     }
-    private static nint? _DurationOffset;
+    private static nint _DurationOffset = -1;
 
     public ref float Duration
     {
         get
         {
-            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x114E8587BC5E3BAB);
-            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+            if (_DurationOffset == -1) _DurationOffset = Schema.GetOffset(0x114E8587BC5E3BAB);
+            return ref _Handle.AsRef<float>(_DurationOffset);
         }
     }
 
