@@ -44,6 +44,5 @@ std::string GetTerminalStringColor(const std::string& plugin_name);
 std::vector<std::string> TokenizeCommand(std::string_view cmd);
 std::string RemoveHtmlTags(const std::string& input);
 std::string replace_case_insensitive(std::string str, std::string_view from, std::string_view to);
-std::string& trim(std::string& s, std::string_view t = " \t\n\r\f\v");
 
 #endif

@@ -280,13 +280,6 @@ static void WriteMessageValue(int kind, google::protobuf::Message* message, cons
     }
 }
 
-static bool IsMessageKind(int kind)
-{
-    PROFILE_FUNCTION();
-
-    return kind == ProtobufValueKind_Vector2D || kind == ProtobufValueKind_Vector || kind == ProtobufValueKind_Color || kind == ProtobufValueKind_QAngle;
-}
-
 bool Bridge_NetMessages_HasField(void* pmsg, const char* fieldName)
 {
     PROFILE_FUNCTION();

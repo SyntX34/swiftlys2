@@ -21,12 +21,9 @@
 
 #include <api/interfaces/interfaces.h>
 
+#include <api/shared/hash.h>
 #include <api/shared/hookresult.h>
 #include <api/shared/profiler.h>
-#include <api/shared/string.h>
-
-#include <memory/gamedata/manager.h>
-#include <api/memory/virtual/call.h>
 
 #include <public/iserver.h>
 #include <public/tier1/KeyValues.h>

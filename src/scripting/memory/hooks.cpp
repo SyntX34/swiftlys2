@@ -18,7 +18,6 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
-#include <cstdio>
 #include <scripting/scripting.h>
 
 void* Bridge_Hooks_AllocateHook()

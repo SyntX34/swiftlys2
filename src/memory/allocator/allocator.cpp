@@ -19,7 +19,6 @@
 #include "allocator.h"
 #include <api/shared/profiler.h>
 #include <cstring>
-#include <algorithm>
 
 #include "tier0/memdbgon.h"
 

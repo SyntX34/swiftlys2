@@ -20,7 +20,6 @@
 #define src_memory_hooks_manager_h
 
 #include <api/memory/hooks/manager.h>
-#include <vector>
 
 #include "function.h"
 #include "mfunction.h"

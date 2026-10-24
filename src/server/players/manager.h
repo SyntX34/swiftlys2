@@ -23,8 +23,6 @@
 
 #include "player.h"
 
-#include "networkbasetypes.pb.h"
-
 #include <steam/steam_api_common.h>
 #include <steam/isteamuser.h>
 #include <steam/steamclientpublic.h>

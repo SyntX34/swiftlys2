@@ -23,7 +23,6 @@
 #include <scripting/scripting.h>
 
 #include <optional>
-#include <variant>
 
 typedef void (*QueryClientCvarCallback)(int, const char*, const char*);
 typedef void (*GlobalChangeListenerCallback)(const char*, int, const char*, const char*);

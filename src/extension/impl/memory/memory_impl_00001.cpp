@@ -21,7 +21,6 @@
 #include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
 #include <core/entrypoint.h>
-#include <memory/gamedata/manager.h>
 #include <limits>
 
 namespace

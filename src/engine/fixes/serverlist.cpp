@@ -21,8 +21,6 @@
 #include <memory/hooks/vfunction.h>
 #include <core/entrypoint.h>
 
-#include <cstdint>
-
 #include <public/tier0/platform.h>
 #include <public/steam/isteamclient.h>
 #include <public/steam/isteamgameserver.h>

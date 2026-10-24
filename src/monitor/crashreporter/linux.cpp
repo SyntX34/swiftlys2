@@ -23,7 +23,6 @@
 #ifdef PAGE_SIZE
 #undef PAGE_SIZE
 #endif
-#include <core/managed/host/strconv.h>
 #include <core/entrypoint.h>
 
 #include <api/interfaces/interfaces.h>

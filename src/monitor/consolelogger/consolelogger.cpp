@@ -20,7 +20,6 @@
 
 #include <api/engine/consoleoutput/consoleoutput.h>
 #include <api/interfaces/interfaces.h>
-#include <api/interfaces/interfaces.h>
 #include <api/server/configuration/configuration.h>
 #include <api/shared/files.h>
 #include <api/shared/plat.h>

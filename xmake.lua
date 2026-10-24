@@ -38,14 +38,6 @@ local protobufs = {
     "gcsdk_gcmessages"
 }
 
-function GetDistDirName()
-    if is_plat("windows") then
-        return "win64"
-    else
-        return "linuxsteamrt64"
-    end
-end
-
 target("swiftlys2")
     set_kind("shared")
     add_options("profiler")
@@ -83,10 +75,7 @@ target("swiftlys2")
         sdk_path.."/public/tier0",
         sdk_path.."/public/tier1",
         sdk_path.."/public/entity2",
-        sdk_path.."/public/game/server",
         sdk_path.."/game/shared",
-        sdk_path.."/game/server",
-        sdk_path.."/common",
 
         breakpad_path,
     })
@@ -187,15 +176,6 @@ target("swiftlys2")
             "COMPILER_MSVC",
             "COMPILER_MSVC64",
             "WIN32",
-            "WINDOWS",
-            "CRT_SECURE_NO_WARNINGS",
-            "CRT_SECURE_NO_DEPRECATE",
-            "CRT_NONSTDC_NO_DEPRECATE",
-            "_MBCS",
-            "META_IS_SOURCE2",
-            "COMPILER_MSVC",
-            "COMPILER_MSVC64",
-            "WIN32",
             "_WIN32",
             "WINDOWS",
             "_WINDOWS",
@@ -206,13 +186,8 @@ target("swiftlys2")
             "CRT_NONSTDC_NO_DEPRECATE",
             "_CRT_NONSTDC_NO_DEPRECATE",
             "_MBCS",
-            "META_IS_SOURCE2",
-            "X64BITS",
             "PLATFORM_64BITS",
             "NDEBUG",
-            "JSON_HAS_CPP_14",
-            "JSON_HAS_CPP_11",
-            "LUA_USE_WINDOWS",
             "_LIBCPP_STD_VER",
         })
 
@@ -234,9 +209,7 @@ target("swiftlys2")
             "GNUC",
             "COMPILER_GCC",
             "PLATFORM_64BITS",
-            "META_IS_SOURCE2",
             "_GLIBCXX_USE_CXX11_ABI=0",
-            "LUA_USE_LINUX",
 
             -- Breakpad config defines
             "BPLOG_MINIMUM_SEVERITY=SEVERITY_CRITICAL",
@@ -298,14 +271,9 @@ target("swiftlys2")
         }, { cxxflags = "-g0" })
     end
 
-
-
     add_defines({
         "GITHUB_SHA=\""..GITHUB_SHA.."\"",
         "SWIFTLY_VERSION=\""..SWIFTLY_VERSION.."\"",
-        "ASMJIT_STATIC",
-        "HAVE_STRUCT_TIMESPEC",
-        "BUILDING_CORE",
         "HAVE_CONFIG_H",
         "SW_HOST"
     })
@@ -337,7 +305,6 @@ target("swiftlys2")
             "odbccp32",
             "dbghelp",
             "ntdll",
-            "kernel32",
         })
     else
         add_links({
@@ -455,30 +422,21 @@ target("swiftlys2")
 
     --[[ -------------------------------- Misc Section -------------------------------- ]]
 
-    set_languages("cxx23")
     set_optimize("fastest")
     set_symbols("debug")
     set_strip("none")
 
     if is_plat("windows") then
-        add_ldflags("/INCREMENTAL:NO", { force = true })
         add_shflags("/INCREMENTAL:NO", { force = true })
     end
 
     after_build(function(target)
-        function GetDistDirName()
-            if is_plat("windows") then
-                return "win64"
-            else
-                return "linuxsteamrt64"
-            end
-        end
+        local dist = is_plat("windows") and "win64" or "linuxsteamrt64"
+        local ext = is_plat("windows") and "dll" or "so"
+        local package = "build/package/addons/swiftlys2"
 
-        if os.exists("build/package") then
-            os.rmdir("build/package")
-        end
-        
-        os.cp("plugin_files/", 'build/package/addons/swiftlys2')
-        os.mkdir('build/package/addons/swiftlys2/bin/'..GetDistDirName())
-        os.cp(target:targetfile(), 'build/package/addons/swiftlys2/bin/'..GetDistDirName().."/swiftlys2."..(is_plat("windows") and "dll" or "so"))
+        os.tryrm("build/package")
+        os.cp("plugin_files/", package)
+        os.mkdir(package.."/bin/"..dist)
+        os.cp(target:targetfile(), package.."/bin/"..dist.."/swiftlys2."..ext)
     end)

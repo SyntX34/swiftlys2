@@ -20,7 +20,6 @@
 #include <scripting/scripting.h>
 
 #include <api/shared/profiler.h>
-#include <api/shared/string.h>
 
 typedef void (*ConsoleListenerCallback)(const char*);
 

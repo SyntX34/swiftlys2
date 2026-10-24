@@ -19,7 +19,6 @@
 #include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
 #include <api/shared/string.h>
-#include <api/shared/plat.h>
 #include <api/shared/profiler.h>
 #include <mutex>
 
@@ -27,7 +26,6 @@
 #include <scripting/scripting.h>
 
 #include <public/filesystem.h>
-#include <public/steam/isteamgameserver.h>
 #include <public/tier0/platform.h>
 #include <public/iserver.h>
 #include <igamesystemfactory.h>

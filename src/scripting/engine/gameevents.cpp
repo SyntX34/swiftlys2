@@ -19,7 +19,6 @@
 #include <api/interfaces/interfaces.h>
 
 #include <api/shared/profiler.h>
-#include <api/shared/string.h>
 
 #include <game/shared/ehandle.h>
 

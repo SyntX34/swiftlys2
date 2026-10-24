@@ -21,10 +21,8 @@
 
 #include <cstdint>
 
-#include <public/entity2/entitykeyvalues.h>
 #include <public/entity2/entitysystem.h>
 #include <public/iserver.h>
-#include <public/gametrace.h>
 
 #include "listener.h"
 

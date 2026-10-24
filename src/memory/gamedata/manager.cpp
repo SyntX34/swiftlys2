@@ -22,7 +22,6 @@
 #include <api/shared/files.h>
 #include <api/shared/jsonc.h>
 #include <api/shared/profiler.h>
-#include <api/shared/string.h>
 
 #include <core/entrypoint.h>
 

@@ -20,7 +20,6 @@
 #include <memory/hooks/vfunction.h>
 #include "console/colors.h"
 #include <api/interfaces/interfaces.h>
-#include <api/interfaces/interfaces.h>
 #include <api/memory/hooks/manager.h>
 #include <api/scripting/scripting.h>
 #include <api/shared/env.h>
@@ -31,15 +30,12 @@
 #include "managed/host/dynlib.h"
 #include "managed/host/strconv.h"
 
-#include <engine/entities/entitysystem.h>
-#include <engine/entities/listener.h>
 #include <engine/fixes/entrypoint.h>
 #include <engine/gamesystem/gamesystem.h>
 
 #include <public/tier0/icommandline.h>
 #include <public/tier1/utlstringtoken.h>
 
-#include <api/shared/files.h>
 #include <api/shared/plat.h>
 #include <api/shared/profiler.h>
 #include <api/shared/string.h>
@@ -52,11 +48,8 @@
 
 #include <public/engine/igameeventsystem.h>
 
-#include <public/steam/steam_gameserver.h>
-
 #include <public/tier1/convar.h>
 #include <thread>
-#include <cstdlib>
 
 #include <monitor/consolelogger/consolelogger.h>
 #include <scripting/engine/events.h>

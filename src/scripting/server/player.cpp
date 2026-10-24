@@ -20,7 +20,6 @@
 #include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
-#include <api/memory/virtual/call.h>
 #include <api/sdk/serversideclient.h>
 
 void Bridge_Player_SendMessage(int playerid, int kind, const char* message, int duration)

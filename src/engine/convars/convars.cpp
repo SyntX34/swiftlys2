@@ -25,10 +25,7 @@
 #include <api/shared/profiler.h>
 
 #include <optional>
-#include <type_traits>
 #include <vector>
-
-#include <memory/gamedata/manager.h>
 
 #include <public/networksystem/inetworkmessages.h>
 #include <public/engine/igameeventsystem.h>
@@ -98,30 +95,6 @@ static void FreeConVar(void* convar)
     PROFILE_FUNCTION();
 
     delete (CConVar<T>*)convar;
-}
-
-static std::string ConvertConvarValueToString(const ConvarValue& value)
-{
-    PROFILE_FUNCTION();
-
-    return std::visit([](const auto& v) -> std::string {
-        using T = std::decay_t<decltype(v)>;
-
-        if constexpr (std::is_same_v<T, std::string>)
-            return v;
-        else if constexpr (std::is_same_v<T, bool>)
-            return v ? "1" : "0";
-        else if constexpr (std::is_same_v<T, Color>)
-            return std::format("{},{},{},{}", v.r(), v.g(), v.b(), v.a());
-        else if constexpr (std::is_same_v<T, Vector2D>)
-            return std::format("{},{}", v.x, v.y);
-        else if constexpr (std::is_same_v<T, Vector> || std::is_same_v<T, QAngle>)
-            return std::format("{},{},{}", v.x, v.y, v.z);
-        else if constexpr (std::is_same_v<T, Vector4D>)
-            return std::format("{},{},{},{}", v.x, v.y, v.z, v.w);
-        else
-            return std::format("{}", v);
-        }, value);
 }
 
 void CConvarManager::Initialize()

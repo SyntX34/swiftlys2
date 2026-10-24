@@ -44,12 +44,6 @@ public:
         return m_uData[qword];
     }
 
-    uint32_t GetDWord(int dword)
-    {
-        if (dword < 0 || dword >= NUM_QWORDS * 2) return 0;
-        return static_cast<uint32_t>(m_uData[dword >> 1] >> ((dword & 1) * 32));
-    }
-
     void SetDWord(int dword, uint32_t value)
     {
         if (dword < 0 || dword >= NUM_QWORDS * 2) return;

@@ -17,10 +17,8 @@
  ************************************************************************************************/
 
 #include "listener.h"
-#include "entitysystem.h"
 
 #include <api/interfaces/interfaces.h>
-#include <api/shared/plat.h>
 #include <api/shared/profiler.h>
 #include <scripting/engine/events.h>
 

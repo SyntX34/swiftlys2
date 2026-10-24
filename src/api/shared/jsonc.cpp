@@ -17,9 +17,7 @@
  ************************************************************************************************/
 
 #include "jsonc.h"
-#include "files.h"
 #include <api/shared/profiler.h>
-#include <sstream>
 
 std::string stripJsonComments(const std::string& jsonc)
 {
@@ -108,12 +106,4 @@ nlohmann::json parseJsonc(const std::string& jsonc)
     catch (nlohmann::json::exception& e) {
         return nlohmann::json();
     }
-}
-
-void WriteJSON(std::string path, nlohmann::json& j)
-{
-    PROFILE_FUNCTION();
-
-    std::string content = j.dump(4);
-    Files::Write(path, content, false);
 }

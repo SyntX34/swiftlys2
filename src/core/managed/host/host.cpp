@@ -16,20 +16,6 @@ load_assembly_and_get_function_pointer_fn _load_assembly_and_get_function_pointe
 hostfxr_set_runtime_property_value_fn _set_runtime_prop_value = nullptr;
 hostfxr_handle fxrcxt;
 
-void* GetDotnetPointer(int kind);
-
-typedef int(CORECLR_DELEGATE_CALLTYPE* load_file_fn)(void* context, const char* filePath, int len);
-typedef void(CORECLR_DELEGATE_CALLTYPE* remove_file_fn)(void* context);
-typedef void(CORECLR_DELEGATE_CALLTYPE* interpret_as_string_fn)(void* object, int type, const char* out, int len);
-typedef void*(CORECLR_DELEGATE_CALLTYPE* allocate_pointer_fn)(int size, int count);
-typedef uint64_t(CORECLR_DELEGATE_CALLTYPE* get_plugin_memory_fn)(void* context);
-typedef void(CORECLR_DELEGATE_CALLTYPE* execute_function_fn)(void* ctx, void* pctx);
-typedef void(CORECLR_DELEGATE_CALLTYPE* state_fn)(int state);
-
-load_file_fn loadFile = nullptr;
-interpret_as_string_fn interpretAsString = nullptr;
-remove_file_fn removeFile = nullptr;
-
 void* hostfxr_lib = nullptr;
 
 #ifdef _WIN32
@@ -45,11 +31,6 @@ std::string widenedOriginPath;
 #endif
 
 std::string original_path;
-
-allocate_pointer_fn allocatePointer = nullptr;
-get_plugin_memory_fn getMemory = nullptr;
-execute_function_fn execFunction = nullptr;
-state_fn set_state = nullptr;
 
 bool InitializeHostFXR(std::string origin_path)
 {
@@ -202,15 +183,4 @@ bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, std::s
     }
 
     return true;
-}
-
-void CloseHostFXR()
-{
-    PROFILE_FUNCTION();
-
-    if (fxrcxt && _close)
-    {
-        _close(fxrcxt);
-    }
-    unload_library(hostfxr_lib);
 }

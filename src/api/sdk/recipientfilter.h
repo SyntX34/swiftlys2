@@ -41,33 +41,10 @@ public:
                 AddRecipient(i);
     }
 
-    void RemoveAllPlayers(void)
-    {
-        m_Recipients.ClearAll();
-    }
-
     void AddRecipient(CPlayerSlot slot)
     {
         if (slot.Get() >= 0 && slot.Get() < ABSOLUTE_PLAYER_LIMIT)
             m_Recipients.Set(slot.Get());
-    }
-
-    void RemoveRecipient(CPlayerSlot slot)
-    {
-        if (slot.Get() >= 0 && slot.Get() < ABSOLUTE_PLAYER_LIMIT)
-            m_Recipients.Clear(slot.Get());
-    }
-
-    int GetRecipientCount()
-    {
-        const uint64_t bits = *reinterpret_cast<const uint64_t*>(GetRecipients().Base());
-
-        int count = 0;
-        for (int i = 0; i < 64; i++)
-            if ((bits & (1ULL << i)))
-                ++count;
-
-        return count;
     }
 
 protected:

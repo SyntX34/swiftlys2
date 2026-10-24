@@ -29,7 +29,6 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/sdk/serversideclient.h>
-#include <memory/gamedata/manager.h>
 
 #include <api/shared/hookresult.h>
 #include <api/shared/plat.h>

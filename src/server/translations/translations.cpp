@@ -20,15 +20,7 @@
 
 #include <api/interfaces/interfaces.h>
 
-#include <api/shared/files.h>
-#include <api/shared/jsonc.h>
-#include <api/shared/plat.h>
 #include <api/shared/profiler.h>
-#include <api/shared/string.h>
-
-#include <nlohmann/json.hpp>
-
-using json = nlohmann::json;
 
 static std::map<std::string, std::string> l_mLanguages = {
     { "arabic", "ar" },

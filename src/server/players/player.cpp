@@ -26,7 +26,6 @@
 #include <public/networksystem/inetworkmessages.h>
 
 #include <game/shared/ehandle.h>
-#include <public/const.h>
 
 #include "usermessages.pb.h"
 #include "gameevents.pb.h"
@@ -34,7 +33,6 @@
 #include <public/iserver.h>
 #include <scripting/engine/events.h>
 
-#include <memory>
 #include <vector>
 
 constexpr uint64_t CBaseEntity_m_iTeamNum = SchemaFieldHash("CBaseEntity", "m_iTeamNum");

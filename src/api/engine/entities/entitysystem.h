@@ -19,11 +19,7 @@
 #ifndef src_api_engine_entities_entitysystem_h
 #define src_api_engine_entities_entitysystem_h
 
-#include <variant>
-
 #include <public/entity2/entitysystem.h>
-
-using InputType = std::variant<int32_t, uint32_t, int64_t, uint64_t, float, double, bool, const char*>;
 
 class IEntitySystem
 {

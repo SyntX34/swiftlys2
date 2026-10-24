@@ -253,16 +253,4 @@ void Profiler::Save(const std::string& path)
     Files::Write(path, report, false);
 }
 
-void Profiler::Reset()
-{
-    auto& registry = GetRegistry();
-    std::lock_guard threadsLock(registry.mutex);
-    for (const auto& thread : registry.threads)
-    {
-        std::lock_guard lock(thread->mutex);
-        thread->stats.clear();
-        thread->edges.clear();
-    }
-}
-
 #endif

@@ -19,7 +19,6 @@
 #include "string.h"
 #include "plat.h"
 
-#include <api/interfaces/interfaces.h>
 #include <api/shared/profiler.h>
 
 #include <algorithm>
@@ -403,15 +402,6 @@ std::vector<std::string> TokenizeCommand(std::string_view cmd)
         tokens.push_back(std::move(tmp_token));
 
     return tokens;
-}
-
-std::string& trim(std::string& s, std::string_view t)
-{
-    PROFILE_FUNCTION();
-
-    s.erase(s.find_last_not_of(t) + 1);
-    s.erase(0, s.find_first_not_of(t));
-    return s;
 }
 
 std::string RemoveHtmlTags(const std::string& input)

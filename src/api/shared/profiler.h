@@ -52,7 +52,6 @@ private:
 namespace Profiler
 {
     void Save(const std::string& path);
-    void Reset();
 }
 
 #define PROFILER_CONCAT_INNER(a, b) a##b
@@ -68,7 +67,6 @@ namespace Profiler
 namespace Profiler
 {
     inline void Save(const std::string&) {}
-    inline void Reset() {}
 }
 
 #define PROFILE_SCOPE(name) ((void)0)

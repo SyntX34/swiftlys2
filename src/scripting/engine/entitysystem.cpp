@@ -20,9 +20,6 @@
 #include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
-#include <entityhandle.h>
-#include "ehandle.h"
-
 void* Bridge_EntitySystem_GetEntitySystem()
 {
     PROFILE_FUNCTION();

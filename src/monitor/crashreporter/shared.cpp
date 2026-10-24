@@ -27,15 +27,9 @@
 #include <api/shared/profiler.h>
 #include <api/shared/string.h>
 
-#include <core/managed/host/host.h>
-#include <core/managed/host/strconv.h>
-
 #include <core/entrypoint.h>
 
 #include <format>
-
-
-#include <nlohmann/json.hpp>
 
 bool setEnvVar(const std::string& key, const std::string& value);
 std::string g_dumpPath;

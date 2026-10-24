@@ -23,8 +23,6 @@
 #include "vfunction.h"
 #include "mfunction.h"
 
-#define PTR_SIZE sizeof(void*)
-
 class IHooksManager
 {
 public:

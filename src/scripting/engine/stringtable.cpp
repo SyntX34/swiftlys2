@@ -20,7 +20,6 @@
 #include <api/shared/profiler.h>
 #include <networkstringtabledefs.h>
 #include <scripting/scripting.h>
-#include <sstream>
 
 INetworkStringTable* Bridge_StringTable_ContainerFindTable(const char* tableName)
 {

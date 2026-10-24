@@ -1,7 +1,6 @@
 #include "plat.h"
 #include <api/shared/profiler.h>
 #include <cstring>
-#include <string>
 
 #include <safetyhook/safetyhook.hpp>
 
