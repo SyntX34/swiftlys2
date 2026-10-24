@@ -34,7 +34,6 @@ std::set<std::string> explodeToSet(std::string_view str, std::string_view delimi
 std::string implode(const std::vector<std::string>& elements, const std::string& delimiter);
 std::string ProcessColor(std::string str, int team);
 std::string ClearColors(std::string str);
-uint64_t GetTime();
 std::string str_tolower(std::string_view s);
 std::string str_toupper(std::string_view s);
 std::string get_uuid();

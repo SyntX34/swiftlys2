@@ -18,8 +18,6 @@
 
 #include "player.h"
 
-#include <mutex>
-
 #include <api/sdk/recipientfilter.h>
 #include <api/shared/string.h>
 
@@ -35,6 +33,9 @@
 #include <public/iserver.h>
 #include <scripting/engine/events.h>
 
+#include <memory>
+#include <vector>
+
 constexpr uint64_t CBaseEntity_m_iTeamNum = SchemaFieldHash("CBaseEntity", "m_iTeamNum");
 
 constexpr uint64_t CBasePlayerController_m_iszPlayerName = SchemaFieldHash("CBasePlayerController", "m_iszPlayerName");
@@ -49,32 +50,86 @@ constexpr uint64_t CBasePlayerPawn_m_pMovementServices = SchemaFieldHash("CBaseP
 constexpr uint64_t CPlayer_MovementServices_m_nButtons = SchemaFieldHash("CPlayer_MovementServices", "m_nButtons");
 constexpr uint64_t CInButtonState_m_pButtonStates = SchemaFieldHash("CInButtonState", "m_pButtonStates");
 
-static int32_t CachedSchemaOffset(uint64_t hash, int32_t& cache)
-{
-    if (cache == -1) cache = g_pSDKSchema->GetOffset(hash);
-    return cache;
-}
+extern bool bypassPostEventAbstractHook;
 
-uint64_t sessionId = 1000;
+static uint64_t s_nextSessionId = 1000;
+
+static void* GetHandleEntity(void* owner, uint64_t hash)
+{
+    auto handle = static_cast<CHandle<CEntityInstance>*>(g_pSDKSchema->GetPropPtr(owner, hash));
+    return handle ? handle->Get() : nullptr;
+}
 
 CServerSideClient* GetServerSideClient(int playerid)
 {
-    static auto offset = g_pGameDataManager->GetOffsets()->Fetch("CNetworkGameServer::m_Clients");
+    static const auto offset = g_pGameDataManager->GetOffsets()->Fetch("CNetworkGameServer::m_Clients");
 
     auto gameserver = g_pGameNetworkServerService->GetIGameServer();
 
-    auto clients = ((CUtlVector<CServerSideClient*>*)((uintptr_t)gameserver + offset));
+    auto clients = reinterpret_cast<CUtlVector<CServerSideClient*>*>(reinterpret_cast<uintptr_t>(gameserver) + offset);
     return clients->Element(playerid);
+}
+
+void PostTextMsg(IRecipientFilter* filter, MessageType type, const std::string& message, std::optional<int> team)
+{
+    auto msg = RemoveHtmlTags(message);
+    if (type == MessageType::Console)
+    {
+        msg = ClearColors(std::move(msg));
+        msg += '\n';
+    }
+
+    std::vector<std::string> parts;
+    if (type == MessageType::Chat || type == MessageType::ChatEOT)
+    {
+        if (!msg.empty())
+        {
+            if (!team)
+                return;
+
+            const bool startsWithColor = msg.front() == '[';
+            msg = ProcessColor(message, *team);
+            if (startsWithColor)
+                msg.insert(0, " ");
+        }
+
+        parts = explode(msg, "[newline]");
+    }
+    else
+    {
+        parts.push_back(std::move(msg));
+    }
+
+    auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("TextMsg");
+    if (!netmsg)
+        return;
+
+    for (const auto& part : parts)
+    {
+        CNetMessagePB<CUserMessageTextMsg>* pmsg = netmsg->AllocateMessage()->ToPB<CUserMessageTextMsg>();
+        pmsg->set_dest(static_cast<int>(type));
+        pmsg->add_param(part);
+
+        bypassPostEventAbstractHook = true;
+        g_pGameEventSystem->PostEventAbstract(-1, false, filter, netmsg, pmsg, 0);
+        bypassPostEventAbstractHook = false;
+        delete pmsg;
+    }
+}
+
+void CPlayer::EnsureCenterMessageEvent()
+{
+    if (!m_pCenterMessageEvent)
+        m_pCenterMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status", true);
 }
 
 void CPlayer::Initialize(int playerid)
 {
     m_iPlayerId = playerid;
-    m_bAuthorized = false;
 
-    m_uConnectedTimeStart = std::chrono::high_resolution_clock::now();
-    m_uSessionId = sessionId++;
-    centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status", true);
+    m_uConnectedTimeStart = std::chrono::steady_clock::now();
+    m_uSessionId = s_nextSessionId++;
+    EnsureCenterMessageEvent();
 }
 
 void CPlayer::Shutdown()
@@ -82,89 +137,28 @@ void CPlayer::Shutdown()
     m_iPlayerId = -1;
     m_bAuthorized = false;
 
-    g_pGameEventManager->GetGameEventManager()->FreeEvent(centerMessageEvent);
-    centerMessageEvent = nullptr;
+    g_pGameEventManager->GetGameEventManager()->FreeEvent(m_pCenterMessageEvent);
+    m_pCenterMessageEvent = nullptr;
 }
 
-extern bool bypassPostEventAbstractHook;
-
-void CPlayer::SendMsg(MessageType type, const std::string& message, int duration = 5000)
+void CPlayer::SendMsg(MessageType type, const std::string& message, int duration)
 {
     if (type == MessageType::CenterHTML)
     {
-        if (message == "")
-            centerMessageEndTime = 0;
+        if (message.empty())
+        {
+            m_centerMessageEndTime = {};
+        }
         else
         {
-            centerMessageEndTime = GetTime() + duration;
-            centerMessageText = message;
+            m_centerMessageEndTime = std::chrono::steady_clock::now() + std::chrono::milliseconds(duration);
+            m_sCenterMessageText = message;
         }
+        return;
     }
-    else
-    {
-        auto msg = RemoveHtmlTags(message);
-        if (type == MessageType::Console)
-        {
-            msg = ClearColors(msg);
-            msg += "\n";
-        }
 
-        if (type == MessageType::Chat || type == MessageType::ChatEOT)
-        {
-            if (msg.size() > 0)
-            {
-                msg += "\x01";
-
-                bool startsWithColor = (msg.at(0) == '[');
-
-                auto team = GetTeam();
-                if (!team)
-                    return;
-
-                msg = ProcessColor(message, *team);
-
-                if (startsWithColor)
-                    msg = " " + msg;
-            }
-
-            auto splitMessage = explode(msg, "[newline]");
-
-            auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("TextMsg");
-
-            for (auto& part : splitMessage)
-            {
-                auto pmsg = netmsg->AllocateMessage()->ToPB<CUserMessageTextMsg>();
-
-                pmsg->set_dest((int)type);
-                pmsg->add_param(part);
-
-                bypassPostEventAbstractHook = true;
-
-                CSingleRecipientFilter filter(m_iPlayerId);
-                g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, pmsg, 0);
-
-                bypassPostEventAbstractHook = false;
-
-                delete pmsg;
-            }
-        }
-        else {
-            auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("TextMsg");
-            auto pmsg = netmsg->AllocateMessage()->ToPB<CUserMessageTextMsg>();
-
-            pmsg->set_dest((int)type);
-            pmsg->add_param(msg);
-
-            bypassPostEventAbstractHook = true;
-
-            CSingleRecipientFilter filter(m_iPlayerId);
-            g_pGameEventSystem->PostEventAbstract(-1, false, &filter, netmsg, pmsg, 0);
-
-            bypassPostEventAbstractHook = false;
-
-            delete pmsg;
-        }
-    }
+    CSingleRecipientFilter filter(m_iPlayerId);
+    PostTextMsg(&filter, type, message, GetTeam());
 }
 
 bool CPlayer::IsAuthorized()
@@ -184,7 +178,7 @@ bool CPlayer::IsFakeClient()
 
 uint32_t CPlayer::GetConnectedTime()
 {
-    return std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - m_uConnectedTimeStart).count();
+    return static_cast<uint32_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - m_uConnectedTimeStart).count());
 }
 
 int CPlayer::GetSlot()
@@ -203,10 +197,7 @@ uint64_t CPlayer::GetUnauthorizedSteamID()
         return 0;
 
     auto steamid = g_pGameEngine->GetClientSteamID(m_iPlayerId);
-    if (!steamid)
-        return m_uUnauthorizedSteamID;
-
-    return steamid->ConvertToUint64();
+    return steamid ? steamid->ConvertToUint64() : m_uUnauthorizedSteamID;
 }
 
 uint64_t CPlayer::GetSteamID()
@@ -214,21 +205,14 @@ uint64_t CPlayer::GetSteamID()
     if (IsFakeClient())
         return 0;
 
-    auto s = std::get_if<std::string>(&g_pConfiguration->GetValue("core.SteamAuth.Mode"));
     if (m_bAuthorized)
     {
         auto steamid = g_pGameEngine->GetClientSteamID(m_iPlayerId);
-        if (!steamid)
-            return 0;
+        return steamid ? steamid->ConvertToUint64() : 0;
+    }
 
-        return steamid->ConvertToUint64();
-    }
-    else if (*s == "flexible")
-    {
-        return GetUnauthorizedSteamID();
-    }
-    else
-        return 0;
+    const auto* mode = std::get_if<std::string>(&g_pConfiguration->GetValue("core.SteamAuth.Mode"));
+    return mode && *mode == "flexible" ? GetUnauthorizedSteamID() : 0;
 }
 
 void CPlayer::ChangeAuthorizationState(bool bAuthorized)
@@ -252,12 +236,7 @@ void CPlayer::ChangeAuthorizationState(bool bAuthorized)
 
 std::string& CPlayer::GetLanguage()
 {
-    if (m_bLanguageRetrieved) {
-        return m_sLanguage;
-    }
-    else {
-        return std::get<std::string>(g_pConfiguration->GetValue("core.Language"));
-    }
+    return m_bLanguageRetrieved ? m_sLanguage : std::get<std::string>(g_pConfiguration->GetValue("core.Language"));
 }
 
 void CPlayer::SetLanguage(const std::string& language)
@@ -272,8 +251,7 @@ void* CPlayer::GetController()
     if (!entitySystem)
         return nullptr;
 
-    CEntityInstance* controller = entitySystem->GetEntityInstance(CEntityIndex(m_iPlayerId + 1));
-    return controller;
+    return entitySystem->GetEntityInstance(CEntityIndex(m_iPlayerId + 1));
 }
 
 std::optional<int> CPlayer::GetTeam()
@@ -282,7 +260,11 @@ std::optional<int> CPlayer::GetTeam()
     if (!controller)
         return std::nullopt;
 
-    return *static_cast<int*>(g_pSDKSchema->GetPropPtr(controller, CBaseEntity_m_iTeamNum));
+    auto team = static_cast<int*>(g_pSDKSchema->GetPropPtr(controller, CBaseEntity_m_iTeamNum));
+    if (!team)
+        return std::nullopt;
+
+    return *team;
 }
 
 int32_t CPlayer::GetKills()
@@ -291,15 +273,16 @@ int32_t CPlayer::GetKills()
     if (!controller)
         return 0;
 
-    auto services = *reinterpret_cast<void**>(g_pSDKSchema->GetPropPtr(controller, CCSPlayerController_m_pActionTrackingServices));
-    if (!services)
+    auto servicesPtr = static_cast<void**>(g_pSDKSchema->GetPropPtr(controller, CCSPlayerController_m_pActionTrackingServices));
+    if (!servicesPtr || !*servicesPtr)
         return 0;
 
-    auto matchStats = g_pSDKSchema->GetPropPtr(services, CCSPlayer_ActionTrackingServices_m_matchStats);
+    auto matchStats = g_pSDKSchema->GetPropPtr(*servicesPtr, CCSPlayer_ActionTrackingServices_m_matchStats);
     if (!matchStats)
         return 0;
 
-    return *static_cast<int32_t*>(g_pSDKSchema->GetPropPtr(matchStats, CSPerRoundStats_t_m_iKills));
+    auto kills = static_cast<int32_t*>(g_pSDKSchema->GetPropPtr(matchStats, CSPerRoundStats_t_m_iKills));
+    return kills ? *kills : 0;
 }
 
 const char* CPlayer::GetName()
@@ -308,37 +291,18 @@ const char* CPlayer::GetName()
     if (!controller)
         return "";
 
-    return static_cast<const char*>(g_pSDKSchema->GetPropPtr(controller, CBasePlayerController_m_iszPlayerName));
+    auto name = static_cast<const char*>(g_pSDKSchema->GetPropPtr(controller, CBasePlayerController_m_iszPlayerName));
+    return name ? name : "";
 }
 
 void* CPlayer::GetPawn()
 {
-    auto controller = GetController();
-    if (!controller)
-        return nullptr;
-
-    static int32_t s_offset = -1;
-    auto offset = CachedSchemaOffset(CBasePlayerController_m_hPawn, s_offset);
-    if (offset == -1)
-        return nullptr;
-
-    CHandle<CEntityInstance>& pawnHandle = *(CHandle<CEntityInstance>*)((uintptr_t)controller + offset);
-    return pawnHandle.Get();
+    return GetHandleEntity(GetController(), CBasePlayerController_m_hPawn);
 }
 
 void* CPlayer::GetPlayerPawn()
 {
-    auto controller = GetController();
-    if (!controller)
-        return nullptr;
-
-    static int32_t s_offset = -1;
-    auto offset = CachedSchemaOffset(CCSPlayerController_m_hPlayerPawn, s_offset);
-    if (offset == -1)
-        return nullptr;
-
-    CHandle<CEntityInstance>& playerPawnHandle = *(CHandle<CEntityInstance>*)((uintptr_t)controller + offset);
-    return playerPawnHandle.Get();
+    return GetHandleEntity(GetController(), CCSPlayerController_m_hPlayerPawn);
 }
 
 ListenOverride& CPlayer::GetListenOverride(int targetid)
@@ -358,7 +322,7 @@ CPlayerBitVec& CPlayer::GetSelfMutes()
 
 std::string CPlayer::GetIPAddress()
 {
-    if (m_iPlayerId < 0 || m_iPlayerId > 63)
+    if (m_iPlayerId < 0 || m_iPlayerId >= MAX_PLAYERS)
         return "";
 
     auto pNetChan = g_pGameEngine->GetPlayerNetInfo(m_iPlayerId);
@@ -388,51 +352,49 @@ void CPlayer::SetFirstSpawn(bool state)
     m_bFirstSpawn = state;
 }
 
-void CPlayer::Think()
+void CPlayer::UpdateCenterMessage()
 {
     std::string menuText;
     {
-        std::lock_guard<std::mutex> lock(centerMenuMutex);
-        menuText = centerMenuText;
+        std::lock_guard lock(m_centerMenuMutex);
+        menuText = m_sCenterMenuText;
     }
-    const bool showMenu = !menuText.empty();
-    const bool showMessage = !showMenu && centerMessageEndTime >= GetTime();
 
+    const bool showMenu = !menuText.empty();
+    const bool showMessage = !showMenu && m_centerMessageEndTime >= std::chrono::steady_clock::now();
     if (!showMenu && !showMessage)
     {
-        centerMessageEndTime = 0;
-    }
-    else
-    {
-        if(!centerMessageEvent)
-            centerMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status", true);
-            
-        centerMessageEvent->SetString("loc_token", (showMenu ? menuText : centerMessageText).c_str());
-        centerMessageEvent->SetInt("duration", 1);
-        centerMessageEvent->SetInt("userid", m_iPlayerId);
-        SendGameEvent(centerMessageEvent);
+        m_centerMessageEndTime = {};
+        return;
     }
 
+    EnsureCenterMessageEvent();
+
+    m_pCenterMessageEvent->SetString("loc_token", (showMenu ? menuText : m_sCenterMessageText).c_str());
+    m_pCenterMessageEvent->SetInt("duration", 1);
+    m_pCenterMessageEvent->SetInt("userid", m_iPlayerId);
+    SendGameEvent(m_pCenterMessageEvent);
+}
+
+void CPlayer::UpdateButtons()
+{
     auto pawn = GetPawn();
     if (!pawn)
         return;
 
-    static int32_t s_movementServicesOffset = -1;
-    static int32_t s_buttonsOffset = -1;
-    static int32_t s_buttonStatesOffset = -1;
-
-    auto movementServicesOffset = CachedSchemaOffset(CBasePlayerPawn_m_pMovementServices, s_movementServicesOffset);
-    auto buttonsOffset = CachedSchemaOffset(CPlayer_MovementServices_m_nButtons, s_buttonsOffset);
-    auto buttonStatesOffset = CachedSchemaOffset(CInButtonState_m_pButtonStates, s_buttonStatesOffset);
-    if (movementServicesOffset == -1 || buttonsOffset == -1 || buttonStatesOffset == -1)
-        return;
-
-    auto movementServices = *(uintptr_t*)((uintptr_t)pawn + movementServicesOffset);
+    auto movementServices = static_cast<void**>(g_pSDKSchema->GetPropPtr(pawn, CBasePlayerPawn_m_pMovementServices));
     if (!movementServices)
         return;
 
-    auto states = (uint64_t*)(movementServices + buttonsOffset + buttonStatesOffset);
-    const uint64_t newButtons = states[0];
+    auto buttons = g_pSDKSchema->GetPropPtr(*movementServices, CPlayer_MovementServices_m_nButtons);
+    if(!buttons) 
+        return;
+        
+    auto states = static_cast<uint64_t*>(g_pSDKSchema->GetPropPtr(buttons, CInButtonState_m_pButtonStates));
+    if (!states)
+        return;
+
+    const uint64_t newButtons = *states;
     if (newButtons == m_uPressedButtons)
         return;
 
@@ -440,40 +402,39 @@ void CPlayer::Think()
     {
         for (int i = 0; i < 64; i++)
         {
-            uint64_t mask = (1ULL << i);
-            uint64_t oldState = m_uPressedButtons & mask;
-            uint64_t newState = newButtons & mask;
+            bool wasPressed = (m_uPressedButtons >> i) & 1;
+            bool isPressed = (newButtons >> i) & 1;
 
-            if (oldState == 0 && newState != 0)
-            {
-                g_pOnClientKeyStateChangedCallback(m_iPlayerId, i, true);
-            }
-            else if (oldState != 0 && newState == 0)
-            {
-                g_pOnClientKeyStateChangedCallback(m_iPlayerId, i, false);
-            }
+            if (wasPressed != isPressed)
+                g_pOnClientKeyStateChangedCallback(m_iPlayerId, i, isPressed);
         }
     }
 
     m_uPressedButtons = newButtons;
 }
 
+void CPlayer::Think()
+{
+    UpdateCenterMessage();
+    UpdateButtons();
+}
+
 void CPlayer::RenderMenuCenterText(const std::string& text)
 {
-    std::lock_guard<std::mutex> lock(centerMenuMutex);
-    centerMenuText = text;
+    std::lock_guard lock(m_centerMenuMutex);
+    m_sCenterMenuText = text;
 }
 
 void CPlayer::ClearRenderMenuCenterText()
 {
-    std::lock_guard<std::mutex> lock(centerMenuMutex);
-    centerMenuText = "";
+    std::lock_guard lock(m_centerMenuMutex);
+    m_sCenterMenuText.clear();
 }
 
 bool CPlayer::HasMenuShown()
 {
-    std::lock_guard<std::mutex> lock(centerMenuMutex);
-    return !centerMenuText.empty();
+    std::lock_guard lock(m_centerMenuMutex);
+    return !m_sCenterMenuText.empty();
 }
 
 uint64_t CPlayer::GetSessionID()
@@ -483,13 +444,13 @@ uint64_t CPlayer::GetSessionID()
 
 bool CPlayer::IsListeningGameEvent(int eventID)
 {
-    std::lock_guard<std::mutex> lock(m_listeningGameEventsMutex);
+    std::lock_guard lock(m_listeningGameEventsMutex);
     return m_listeningGameEvents.IsBitSet(eventID);
 }
 
 void CPlayer::SetListeningGameEvents(CBitVector<8192>& eventIDs)
 {
-    std::lock_guard<std::mutex> lock(m_listeningGameEventsMutex);
+    std::lock_guard lock(m_listeningGameEventsMutex);
     m_listeningGameEvents.CopyFrom(eventIDs);
 }
 

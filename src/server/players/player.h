@@ -22,9 +22,14 @@
 #include <api/server/players/player.h>
 
 #include <public/igameevents.h>
-#include <mutex>
+#include <public/irecipientfilter.h>
 
 #include <chrono>
+#include <mutex>
+#include <optional>
+#include <string>
+
+void PostTextMsg(IRecipientFilter* filter, MessageType type, const std::string& message, std::optional<int> team);
 
 class CPlayer : public IPlayer
 {
@@ -81,8 +86,12 @@ public:
     virtual uint64_t GetSessionID() override;
 
 private:
-    int m_iPlayerId;
-    bool m_bAuthorized;
+    void UpdateCenterMessage();
+    void UpdateButtons();
+    void EnsureCenterMessageEvent();
+
+    int m_iPlayerId = -1;
+    bool m_bAuthorized = false;
     bool m_bFirstSpawn = true;
     bool m_bIsFakeClient = false;
 
@@ -94,19 +103,19 @@ private:
 
     uint64_t m_uPressedButtons = 0;
 
-    std::chrono::high_resolution_clock::time_point m_uConnectedTimeStart;
+    std::chrono::steady_clock::time_point m_uConnectedTimeStart;
 
     uint64_t m_uUnauthorizedSteamID = 0;
 
     std::string m_sLanguage = "en";
     bool m_bLanguageRetrieved = false;
 
-    uint64_t centerMessageEndTime = 0;
-    std::string centerMessageText = "";
-    IGameEvent* centerMessageEvent = nullptr;
+    std::chrono::steady_clock::time_point m_centerMessageEndTime;
+    std::string m_sCenterMessageText;
+    IGameEvent* m_pCenterMessageEvent = nullptr;
 
-    std::mutex centerMenuMutex;
-    std::string centerMenuText = "";
+    std::mutex m_centerMenuMutex;
+    std::string m_sCenterMenuText;
     uint64_t m_uSessionId = 0;
 
     std::mutex m_listeningGameEventsMutex;

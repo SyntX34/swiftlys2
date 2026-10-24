@@ -23,7 +23,6 @@
 
 #include <algorithm>
 #include <cctype>
-#include <chrono>
 #include <format>
 #include <iterator>
 #include <limits>
@@ -241,11 +240,6 @@ std::string implode(const std::vector<std::string>& elements, const std::string&
 {
     auto joined = elements | std::views::join_with(delimiter);
     return std::string(joined.begin(), joined.end());
-}
-
-uint64_t GetTime()
-{
-    return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
 std::string str_tolower(std::string_view s)
