@@ -293,7 +293,6 @@ void CPlayerManager::SendMsg(MessageType type, const std::string& message, int d
 
                 bypassPostEventAbstractHook = false;
 
-                // see in src/engine/convars/convars.cpp at the end of the file why i "love" this now
                 delete pmsg;
             }
         }
@@ -311,7 +310,6 @@ void CPlayerManager::SendMsg(MessageType type, const std::string& message, int d
 
             bypassPostEventAbstractHook = false;
 
-            // see in src/engine/convars/convars.cpp at the end of the file why i "love" this now
             delete pmsg;
         }
     }

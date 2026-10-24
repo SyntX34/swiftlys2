@@ -22,7 +22,14 @@
 #include <string>
 #include <cstdint>
 
+#include <api/shared/hash.h>
+
 #include <public/datamap.h>
+
+inline constexpr uint64_t SchemaFieldHash(const char* sClassName, const char* sMemberName) noexcept
+{
+    return (uint64_t(hash_32_fnv1a_const(sClassName)) << 32) | hash_32_fnv1a_const(sMemberName);
+}
 
 class ISDKSchema
 {

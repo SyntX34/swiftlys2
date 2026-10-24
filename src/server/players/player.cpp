@@ -35,19 +35,19 @@
 #include <public/iserver.h>
 #include <scripting/engine/events.h>
 
-#define CBaseEntity_m_iTeamNum 0x9DC483B8A5BFEFB3
+constexpr uint64_t CBaseEntity_m_iTeamNum = SchemaFieldHash("CBaseEntity", "m_iTeamNum");
 
-#define CBasePlayerController_m_iszPlayerName 4141622183986322747ULL
-#define CCSPlayerController_m_pActionTrackingServices 2948968945599070532ULL
-#define CCSPlayer_ActionTrackingServices_m_matchStats 10871517706464109133ULL
-#define CSPerRoundStats_t_m_iKills 11631537702922711013ULL
+constexpr uint64_t CBasePlayerController_m_iszPlayerName = SchemaFieldHash("CBasePlayerController", "m_iszPlayerName");
+constexpr uint64_t CCSPlayerController_m_pActionTrackingServices = SchemaFieldHash("CCSPlayerController", "m_pActionTrackingServices");
+constexpr uint64_t CCSPlayer_ActionTrackingServices_m_matchStats = SchemaFieldHash("CCSPlayerController_ActionTrackingServices", "m_matchStats");
+constexpr uint64_t CSPerRoundStats_t_m_iKills = SchemaFieldHash("CSPerRoundStats_t", "m_iKills");
 
-#define CBasePlayerController_m_hPawn 0x3979FF6E7C628C1D
-#define CCSPlayerController_m_hPlayerPawn 0x28ECD7A1D6C93E7C
+constexpr uint64_t CBasePlayerController_m_hPawn = SchemaFieldHash("CBasePlayerController", "m_hPawn");
+constexpr uint64_t CCSPlayerController_m_hPlayerPawn = SchemaFieldHash("CCSPlayerController", "m_hPlayerPawn");
 
-#define CBasePlayerPawn_m_pMovementServices 0xCA2EED04CF73E28A
-#define CPlayer_MovementServices_m_nButtons 0xD5BDF28998CCEF82
-#define CInButtonState_m_pButtonStates 0x6C8AF06A00121DF9
+constexpr uint64_t CBasePlayerPawn_m_pMovementServices = SchemaFieldHash("CBasePlayerPawn", "m_pMovementServices");
+constexpr uint64_t CPlayer_MovementServices_m_nButtons = SchemaFieldHash("CPlayer_MovementServices", "m_nButtons");
+constexpr uint64_t CInButtonState_m_pButtonStates = SchemaFieldHash("CInButtonState", "m_pButtonStates");
 
 static int32_t CachedSchemaOffset(uint64_t hash, int32_t& cache)
 {
@@ -145,7 +145,6 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
 
                 bypassPostEventAbstractHook = false;
 
-                // see in src/engine/convars/convars.cpp at the end of the file why i "love" this now
                 delete pmsg;
             }
         }
@@ -163,7 +162,6 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
 
             bypassPostEventAbstractHook = false;
 
-            // see in src/engine/convars/convars.cpp at the end of the file why i "love" this now
             delete pmsg;
         }
     }

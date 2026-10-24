@@ -178,7 +178,6 @@ void CConvarManager::QueryClientConvar(int playerid, const std::string& cvar_nam
 
     bypassPostEventAbstractHook = false;
 
-    // see at the end of the file the comment for this one too
     delete msg;
 }
 

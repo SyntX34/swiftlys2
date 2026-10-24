@@ -19,7 +19,6 @@
 #include "schema_impl_00001.h"
 
 #include <api/interfaces/interfaces.h>
-#include <api/shared/hash.h>
 
 namespace
 {
@@ -52,7 +51,7 @@ sw_status set_state_changed(
     if (!self || !object || !class_name || !field_name)
         return SW_E_INVALID_ARG;
 
-    uint64_t field_hash = (static_cast<uint64_t>(hash_32_fnv1a_const(class_name)) << 32) | hash_32_fnv1a_const(field_name);
+    uint64_t field_hash = SchemaFieldHash(class_name, field_name);
     if (g_pSDKSchema->GetOffset(field_hash) == -1)
         return SW_E_INVALID_ARG;
 
