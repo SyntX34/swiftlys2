@@ -109,7 +109,6 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     g_pGameCvar = (ICvar*)GetInterface(CVAR_INTERFACE_VERSION);
     g_pGameSchemaSystem = (CSchemaSystem*)GetInterface(SCHEMASYSTEM_INTERFACE_VERSION);
     g_pGameNetworkStringTableContainer = (INetworkStringTableContainer*)GetInterface(SOURCE2ENGINETOSERVERSTRINGTABLE_INTERFACE_VERSION);
-    g_pGameClientsService = (ISource2GameClients*)GetInterface(INTERFACEVERSION_SERVERGAMECLIENTS);
     g_pGameResources = GetInterface(GAMERESOURCESERVICESERVER_INTERFACE_VERSION);
 
 #ifdef _WIN32

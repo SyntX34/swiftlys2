@@ -37,6 +37,11 @@
 
 #define CBaseEntity_m_iTeamNum 0x9DC483B8A5BFEFB3
 
+#define CBasePlayerController_m_iszPlayerName 4141622183986322747ULL
+#define CCSPlayerController_m_pActionTrackingServices 2948968945599070532ULL
+#define CCSPlayer_ActionTrackingServices_m_matchStats 10871517706464109133ULL
+#define CSPerRoundStats_t_m_iKills 11631537702922711013ULL
+
 #define CBasePlayerController_m_hPawn 0x3979FF6E7C628C1D
 #define CCSPlayerController_m_hPlayerPawn 0x28ECD7A1D6C93E7C
 
@@ -280,6 +285,32 @@ std::optional<int> CPlayer::GetTeam()
         return std::nullopt;
 
     return *static_cast<int*>(g_pSDKSchema->GetPropPtr(controller, CBaseEntity_m_iTeamNum));
+}
+
+int32_t CPlayer::GetKills()
+{
+    void* controller = GetController();
+    if (!controller)
+        return 0;
+
+    auto services = *reinterpret_cast<void**>(g_pSDKSchema->GetPropPtr(controller, CCSPlayerController_m_pActionTrackingServices));
+    if (!services)
+        return 0;
+
+    auto matchStats = g_pSDKSchema->GetPropPtr(services, CCSPlayer_ActionTrackingServices_m_matchStats);
+    if (!matchStats)
+        return 0;
+
+    return *static_cast<int32_t*>(g_pSDKSchema->GetPropPtr(matchStats, CSPerRoundStats_t_m_iKills));
+}
+
+const char* CPlayer::GetName()
+{
+    void* controller = GetController();
+    if (!controller)
+        return "";
+
+    return static_cast<const char*>(g_pSDKSchema->GetPropPtr(controller, CBasePlayerController_m_iszPlayerName));
 }
 
 void* CPlayer::GetPawn()

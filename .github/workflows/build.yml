@@ -438,7 +438,7 @@ jobs:
           release/swiftlys2-windows-v${{ needs.versioning.outputs.semVer }}-pdb.zip
         prerelease: ${{ needs.versioning.outputs.preReleaseLabel != '' }}
         tag_name: ${{ env.TAG_NAME }}
-        name: Release v${{ needs.versioning.outputs.semVer }}
+        name: v${{ needs.versioning.outputs.semVer }}
         body: ${{ needs.versioning.outputs.semVer  }}
 
     - name: Trigger API docs build

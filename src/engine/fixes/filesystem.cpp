@@ -22,12 +22,12 @@
 #include <api/interfaces/interfaces.h>
 #include <core/entrypoint.h>
 
-#include <fmt/format.h>
+#include <format>
 
 void FileSystemFix::Start()
 {
-    std::string gamefolder_path = fmt::format("{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder);
-    std::string swiftly_path = fmt::format("{}{}{}", gamefolder_path, WIN_LINUX("\\", "/"), g_SwiftlyCore.GetCorePath());
+    std::string gamefolder_path = std::format("{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder);
+    std::string swiftly_path = std::format("{}{}{}", gamefolder_path, WIN_LINUX("\\", "/"), g_SwiftlyCore.GetCorePath());
 
     g_pGameFileSystem->RemoveSearchPath(swiftly_path.c_str(), "GAME");
     g_pGameFileSystem->RemoveSearchPaths("DEFAULT_WRITE_PATH");

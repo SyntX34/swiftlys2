@@ -98,7 +98,6 @@ extern INetworkServerService* g_pGameNetworkServerService;
 extern ICvar* g_pGameCvar;
 extern CSchemaSystem* g_pGameSchemaSystem;
 extern INetworkStringTableContainer* g_pGameNetworkStringTableContainer;
-extern ISource2GameClients* g_pGameClientsService;
 extern void* g_pGameResources;
 
 #endif

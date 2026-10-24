@@ -102,6 +102,8 @@ public:
     virtual void* GetPawn() = 0;
     virtual void* GetPlayerPawn() = 0;
     virtual std::optional<int> GetTeam() = 0;
+    virtual int32_t GetKills() = 0;
+    virtual const char* GetName() = 0;
 
     /** Voice Manager **/
     virtual ListenOverride& GetListenOverride(int targetid) = 0;

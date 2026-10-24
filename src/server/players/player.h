@@ -55,6 +55,8 @@ public:
     virtual void* GetPawn() override;
     virtual void* GetPlayerPawn() override;
     virtual std::optional<int> GetTeam() override;
+    virtual int32_t GetKills() override;
+    virtual const char* GetName() override;
 
     virtual ListenOverride& GetListenOverride(int targetid) override;
     virtual VoiceFlagValue& GetVoiceFlags() override;

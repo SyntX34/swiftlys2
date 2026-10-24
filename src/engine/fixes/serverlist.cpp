@@ -20,9 +20,13 @@
 #include <memory/hooks/vfunction.h>
 #include <core/entrypoint.h>
 
+#include <cstdint>
+
 #include <public/tier0/platform.h>
 #include <public/steam/isteamclient.h>
 #include <public/steam/isteamgameserver.h>
+
+static constexpr double UPDATE_INTERVAL_SECONDS = 5.0;
 
 void GameFrame(void* _this, bool simulate, bool first, bool last);
 VFunctionHook g_GameFrameHook(reinterpret_cast<void*>(GameFrame), "server", "CSource2Server", "IServerGameDLL::GameFrame");
@@ -31,27 +35,25 @@ void GameFrame(void* _this, bool simulate, bool first, bool last)
 {
     reinterpret_cast<decltype(&GameFrame)>(g_GameFrameHook.GetOriginal())(_this, simulate, first, last);
 
-    static double l_NextUpdate = 0.0;
+    static double nextUpdate = 0.0;
 
-    if (double curtime = Plat_FloatTime(); curtime >= l_NextUpdate)
+    double curtime = Plat_FloatTime();
+    if (curtime < nextUpdate) return;
+    nextUpdate = curtime + UPDATE_INTERVAL_SECONDS;
+
+    auto steamGameServer = SteamGameServer();
+    if (!steamGameServer) return;
+
+    for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
     {
-        l_NextUpdate = curtime + 5.0;
+        auto steamid = g_pGameEngine->GetClientSteamID(i);
+        if (!steamid) continue;
 
-        auto steamGameServer = SteamGameServer();
-        if (!steamGameServer) return;
+        auto player = g_pPlayerManager->GetPlayer(i);
+        if (!player) continue;
 
-        for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
-        {
-            auto steamid = g_pGameEngine->GetClientSteamID(i);
-            if (!steamid) continue;
+        if (!player->GetController()) continue;
 
-            auto player = g_pPlayerManager->GetPlayer(i);
-            if (!player) continue;
-
-            auto controller = player->GetController();
-            if (!controller) continue;
-
-            steamGameServer->BUpdateUserData(*steamid, (const char*)(g_pSDKSchema->GetPropPtr(controller, 4141622183986322747)), g_pGameClientsService->GetPlayerScore(i)); // CBasePlayerController::PlayerName
-        }
+        steamGameServer->BUpdateUserData(*steamid, player->GetName(), player->GetKills());
     }
-}
+}
