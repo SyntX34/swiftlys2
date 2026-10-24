@@ -31,10 +31,8 @@
 #include <api/sdk/serversideclient.h>
 #include <memory/gamedata/manager.h>
 
+#include <api/shared/hookresult.h>
 #include <api/shared/plat.h>
-
-constexpr int kHookResultStop = 1;
-constexpr int kHookResultStopOriginal = 3;
 
 constexpr uintptr_t kProtoToNetMessageOffset = 48;
 
@@ -97,7 +95,7 @@ bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBuf
     auto playerid = client->GetPlayerSlot().Get();
 
     auto res = g_fnServerMessageInternalSendHandler(playerid, msgid, pData);
-    if (res == kHookResultStop || res == kHookResultStopOriginal) return true;
+    if (res == HookResult_Stop || res == HookResult_CancelOriginal) return true;
 
     return originalSendNetMessage(client, pData, bufType);
 }
@@ -129,8 +127,8 @@ bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
     if (g_pNetMessages->IsMessageRegistered(NetMessageHook_Client, msgid))
     {
         auto res = g_fnClientMessageSendHandler(playerid, msgid, cMsg);
-        if (res == kHookResultStop) return true;
-        if (res == kHookResultStopOriginal) stopOriginal = true;
+        if (res == HookResult_Stop) return true;
+        if (res == HookResult_CancelOriginal) stopOriginal = true;
     }
 
     if (msgid == svc_UserMessage)
@@ -139,8 +137,8 @@ bool FilterMessage(void* client, CNetMessage* cMsg, INetChannel* netchan)
         if (userMessage)
         {
             auto innerResult = DispatchClientUserMessage(playerid, *userMessage);
-            if (innerResult == kHookResultStop) return true;
-            if (innerResult == kHookResultStopOriginal) stopOriginal = true;
+            if (innerResult == HookResult_Stop) return true;
+            if (innerResult == HookResult_CancelOriginal) stopOriginal = true;
         }
     }
 
@@ -157,11 +155,11 @@ void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLocalOnly,
     if (!g_pNetMessages->IsMessageRegistered(NetMessageHook_Server, msgid))
         return originalPostEventAbstract(_this, nSlot, bLocalOnly, nClientCount, clients, pEvent, pData, nSize, bufType);
 
-    auto playermask = const_cast<uint64_t*>(clients);
+    auto playermask = reinterpret_cast<uint64_t*>(const_cast<uint64*>(clients));
     auto msg = const_cast<CNetMessage*>(pData);
 
     auto res = g_fnServerMessageSendHandler(playermask, msgid, msg);
-    if (res == kHookResultStop || res == kHookResultStopOriginal) return;
+    if (res == HookResult_Stop || res == HookResult_CancelOriginal) return;
 
     originalPostEventAbstract(_this, nSlot, bLocalOnly, nClientCount, clients, pEvent, pData, nSize, bufType);
 }

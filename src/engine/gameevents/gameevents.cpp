@@ -21,6 +21,7 @@
 
 #include <api/interfaces/interfaces.h>
 
+#include <api/shared/hookresult.h>
 #include <api/shared/string.h>
 
 #include <memory/gamedata/manager.h>
@@ -92,7 +93,7 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
     if (isRegistered && g_fnEventFireHandler)
     {
         auto res = g_fnEventFireHandler(event, shouldBroadcast, event_hash);
-        if (res == 1 || res == 3) {
+        if (res == HookResult_Stop || res == HookResult_CancelOriginal) {
             g_gameEventManager->FreeEvent(event);
             return false;
         }
@@ -115,7 +116,7 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
     if (isRegistered && g_fnPostEventFireHandler)
     {
         auto res = g_fnPostEventFireHandler(dupEvent, shouldBroadcast, event_hash);
-        if (res == 1 || res == 3) result = false;
+        if (res == HookResult_Stop || res == HookResult_CancelOriginal) result = false;
     }
 
     if (dupEvent)
