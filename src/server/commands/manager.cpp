@@ -26,11 +26,13 @@
 #include <api/shared/string.h>
 
 #include <algorithm>
-#include <cstdio>
+#include <cstring>
+#include <mutex>
+#include <string_view>
+#include <vector>
 #include <public/icvar.h>
 
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args);
-
 void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args);
 
 VFunctionHook dispatchConCommandHook(reinterpret_cast<void*>(DispatchConCommand), "tier0", "CCvar", "ICvar::DispatchConCommand");
@@ -82,12 +84,7 @@ bool CServerCommands::ResolveCommandName(std::string& commandName)
 // @returns 0 - is not command
 int CServerCommands::HandleCommand(int playerid, const std::string& text, bool dryrun)
 {
-    if (text.empty())
-    {
-        return -1;
-    }
-
-    if (g_pPlayerManager->GetPlayer(playerid) == nullptr)
+    if (text.empty() || !g_pPlayerManager->GetPlayer(playerid))
     {
         return -1;
     }
@@ -113,14 +110,12 @@ int CServerCommands::HandleCommand(int playerid, const std::string& text, bool d
         return 0;
     }
 
-    std::string originalCommandName = str_tolower(args[0].substr(
-        (((selectedPrefix->size()) < (args[0].size())) ? (selectedPrefix->size()) : (args[0].size()))
-    ));
+    std::string originalCommandName = str_tolower(args[0].substr((std::min)(selectedPrefix->size(), args[0].size())));
     std::string commandName = originalCommandName;
     args.erase(args.begin());
 
     {
-        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        std::lock_guard lock(m_mtxCommands);
         if (!ResolveCommandName(commandName))
         {
             return 0;
@@ -146,7 +141,7 @@ void CServerCommands::HandleRegisteredCommand(int playerid, const char* commandL
     args.erase(args.begin());
 
     {
-        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        std::lock_guard lock(m_mtxCommands);
         if (!ResolveCommandName(commandName))
         {
             return;
@@ -177,7 +172,7 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
     commandName = str_tolower(commandName);
 
     {
-        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        std::lock_guard lock(m_mtxCommands);
         if (!registerRaw)
         {
             if (m_commands.contains(commandName)) return 0;
@@ -193,7 +188,7 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
         auto conCommand = std::make_unique<ConCommand>(commandName.c_str(), CommandsCallback, strdup(helpText.c_str()), FCVAR_CLIENT_CAN_EXECUTE | FCVAR_LINKED_CONCOMMAND);
         conCommand->RemoveFlags(FCVAR_SERVER_CAN_EXECUTE);
 
-        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        std::lock_guard lock(m_mtxCommands);
         const uint64_t commandId = m_lastCommandId + 1;
         m_commandNames.emplace(commandId, commandName);
         m_commands.find(commandName)->second = conCommand.release();
@@ -202,7 +197,7 @@ uint64_t CServerCommands::RegisterCommand(std::string commandName, bool register
     }
     catch (...)
     {
-        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        std::lock_guard lock(m_mtxCommands);
         m_commands.erase(commandName);
         throw;
     }
@@ -218,7 +213,7 @@ void CServerCommands::UnregisterCommand(uint64_t commandId)
     ConCommand* command = nullptr;
     std::string commandName;
     {
-        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        std::lock_guard lock(m_mtxCommands);
         auto nameIt = m_commandNames.find(commandId);
         if (nameIt == m_commandNames.end()) return;
 
@@ -233,7 +228,7 @@ void CServerCommands::UnregisterCommand(uint64_t commandId)
     }
 
     delete command;
-    std::lock_guard<std::mutex> lock(m_mtxCommands);
+    std::lock_guard lock(m_mtxCommands);
     m_commands.erase(commandName);
 }
 
@@ -241,7 +236,7 @@ bool CServerCommands::IsCommandRegistered(std::string commandName)
 {
     commandName = str_tolower(commandName);
 
-    std::lock_guard<std::mutex> lock(m_mtxCommands);
+    std::lock_guard lock(m_mtxCommands);
     return ResolveCommandName(commandName);
 }
 
@@ -249,7 +244,7 @@ uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string co
 {
     std::string helpText;
     {
-        std::lock_guard<std::mutex> lock(m_mtxCommands);
+        std::lock_guard lock(m_mtxCommands);
 
         commandName = str_tolower(commandName);
         if (!ResolveCommandName(commandName))
@@ -289,36 +284,34 @@ void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args)
 
 static std::string GetChatText(const CCommand& args)
 {
-    std::string rawCmd = args.GetCommandString();
+    std::string_view text = args.GetCommandString();
 
     size_t textStart;
-    if (!rawCmd.empty() && rawCmd[0] == '"')
+    if (text.starts_with('"'))
     {
-        size_t closeQuote = rawCmd.find('"', 1);
-        textStart = (closeQuote != std::string::npos) ? closeQuote + 1 : rawCmd.size();
+        size_t closeQuote = text.find('"', 1);
+        textStart = closeQuote != std::string_view::npos ? closeQuote + 1 : text.size();
     }
     else
     {
         textStart = strlen(args.Arg(0));
     }
 
-    while (textStart < rawCmd.size() && rawCmd[textStart] == ' ')
-        textStart++;
+    text.remove_prefix((std::min)(textStart, text.size()));
+    text.remove_prefix((std::min)(text.find_first_not_of(' '), text.size()));
+    if (text.starts_with('"'))
+        text.remove_prefix(1);
+    if (text.ends_with('"'))
+        text.remove_suffix(1);
 
-    std::string text = rawCmd.substr(textStart);
-    if (!text.empty() && text.front() == '"')
-        text.erase(0, 1);
-    if (!text.empty() && text.back() == '"')
-        text.pop_back();
-
-    return text;
+    return std::string(text);
 }
 
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args)
 {
     CPlayerSlot slot = ctx.GetPlayerSlot();
 
-    std::string gameText = "";
+    std::string gameText;
     bool shouldSend = true;
 
     if (slot.Get() != -1)
@@ -354,5 +347,5 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
 
     if (shouldSend) reinterpret_cast<decltype(&DispatchConCommand)>(dispatchConCommandHook.GetOriginal())(thisPtr, cmd, ctx, args);
 
-    if (gameText != "") g_pServerCommands->HandleCommand(slot.Get(), gameText, false);
+    if (!gameText.empty()) g_pServerCommands->HandleCommand(slot.Get(), gameText, false);
 }

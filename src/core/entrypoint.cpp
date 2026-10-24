@@ -87,12 +87,12 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     SetupConsoleColors();
 
     m_sCorePath = CommandLine()->ParmValue(CUtlStringToken("-sw_path"), WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2"));
-    if (!ends_with(m_sCorePath, WIN_LINUX("\\", "/")))
+    if (!m_sCorePath.ends_with(WIN_LINUX("\\", "/")))
     {
         m_sCorePath += WIN_LINUX("\\", "/");
     }
     m_sLogPath = CommandLine()->ParmValue(CUtlStringToken("-sw_logpath"), WIN_LINUX("addons\\swiftlys2\\logs", "addons/swiftlys2/logs"));
-    if (!ends_with(m_sLogPath, WIN_LINUX("\\", "/")))
+    if (!m_sLogPath.ends_with(WIN_LINUX("\\", "/")))
     {
         m_sLogPath += WIN_LINUX("\\", "/");
     }

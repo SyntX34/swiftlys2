@@ -37,7 +37,7 @@ void* FindSignature(const std::string& library, const std::string& pattern)
 void ForEachGameDataEntry(const std::string& game, const std::string& suffix, const std::function<void(const std::string&, const nlohmann::json&)>& callback)
 {
     for (const auto& file : Files::FetchFileNames(g_SwiftlyCore.GetCorePath() + "gamedata/" + game)) {
-        if (!ends_with(file, suffix)) continue;
+        if (!file.ends_with(suffix)) continue;
 
         try {
             auto entries = parseJsonc(Files::Read(file));

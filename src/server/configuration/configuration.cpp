@@ -133,7 +133,7 @@ void Configuration::InitializeExamples()
 {
     for (const auto& file : Files::FetchFileNames(g_SwiftlyCore.GetCorePath() + "configs"))
     {
-        if (!ends_with(file, ".example.jsonc"))
+        if (!file.ends_with(".example.jsonc"))
             continue;
 
         const std::string config_name = replace(file, ".example", "");

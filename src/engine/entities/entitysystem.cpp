@@ -33,8 +33,6 @@
 
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
-bool g_bDone = false;
-
 CGameEntitySystem* GameEntitySystem()
 {
     return g_pGameEntitySystem;
@@ -46,20 +44,19 @@ VFunctionHook g_StartupServerHook(reinterpret_cast<void*>(StartupServerHook), "e
 
 void CEntSystem::Shutdown()
 {
-    g_pGameEntitySystem->RemoveListenerEntity(&g_entityListener);
+    if (g_pGameEntitySystem)
+        g_pGameEntitySystem->RemoveListenerEntity(&g_entityListener);
 }
 
 void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
     reinterpret_cast<decltype(&StartupServerHook)>(g_StartupServerHook.GetOriginal())(_this, config, a, b);
 
-    if (!g_bDone)
+    if (!g_pGameEntitySystem)
     {
-        CGameEntitySystem* entSystem = *reinterpret_cast<CGameEntitySystem**>((uintptr_t)(g_pGameResources)+g_pGameDataManager->GetOffsets()->Fetch("GameEntitySystem"));
-        g_pGameEntitySystem = entSystem;
+        auto offset = g_pGameDataManager->GetOffsets()->Fetch("GameEntitySystem");
+        g_pGameEntitySystem = *reinterpret_cast<CGameEntitySystem**>(reinterpret_cast<uintptr_t>(g_pGameResources) + offset);
         g_pGameEntitySystem->AddListenerEntity(&g_entityListener);
-
-        g_bDone = true;
     }
 
     if (g_pOnStartupServerCallback)
@@ -68,12 +65,14 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
 
 void CEntSystem::AddEntityListener(IEntityListener* listener)
 {
-    g_pGameEntitySystem->AddListenerEntity(listener);
+    if (g_pGameEntitySystem)
+        g_pGameEntitySystem->AddListenerEntity(listener);
 }
 
 void CEntSystem::RemoveEntityListener(IEntityListener* listener)
 {
-    g_pGameEntitySystem->RemoveListenerEntity(listener);
+    if (g_pGameEntitySystem)
+        g_pGameEntitySystem->RemoveListenerEntity(listener);
 }
 
 CEntitySystem* CEntSystem::GetEntitySystem()

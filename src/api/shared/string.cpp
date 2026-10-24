@@ -21,18 +21,18 @@
 
 #include <api/interfaces/interfaces.h>
 
+#include <algorithm>
+#include <cctype>
+#include <chrono>
+#include <format>
+#include <iterator>
+#include <limits>
 #include <map>
 #include <random>
-#include <chrono>
-
-#include <regex>
 #include <ranges>
+#include <regex>
 
-#include <fmt/format.h>
-
-const char* wws = " \t\n\r\f\v";
-
-std::map<std::string, std::string> terminalColors = {
+const std::map<std::string_view, std::string_view> terminalColors = {
     {"[default]", WIN_LINUX("\033[38;2;255;255;255m", "\e[39m")},
     {"[/]", WIN_LINUX("\033[38;2;255;255;255m", "\e[39m")},
     {"[white]", WIN_LINUX("\033[38;2;255;255;255m", "\e[39m")},
@@ -80,7 +80,7 @@ std::map<std::string, std::string> terminalColors = {
     {"[bgorange]", WIN_LINUX("\x1B[43m", "\e[43m")},
 };
 
-std::vector<std::string> terminalPrefixColors = {
+constexpr std::string_view terminalPrefixColors[] = {
     "[default]",
     "[/]",
     "[white]",
@@ -103,7 +103,7 @@ std::vector<std::string> terminalPrefixColors = {
     "[orange]",
 };
 
-std::map<std::string, std::string> colors = {
+const std::map<std::string_view, std::string_view> colors = {
     {"[default]", "\x01"},
     {"[/]", "\x01"},
     {"[white]", "\x01"},
@@ -131,47 +131,40 @@ std::map<std::string, std::string> colors = {
 
 std::string ProcessColor(std::string str, int team)
 {
-    str = replace_case_insensitive(str, "[teamcolor]", team == 3 ? "[lightblue]" : (team == 2 ? "[yellow]" : "[lightpurple]"));
-    for (auto it = colors.begin(); it != colors.end(); ++it)
-    {
-        str = replace_case_insensitive(str, it->first, it->second);
-    }
+    const std::string_view teamColor = team == 3 ? "[lightblue]" : (team == 2 ? "[yellow]" : "[lightpurple]");
+    str = replace_case_insensitive(str, "[teamcolor]", teamColor);
+    for (const auto& [name, code] : colors)
+        str = replace_case_insensitive(str, name, code);
     return str;
 }
 
 std::string ClearColors(std::string str)
 {
     str = replace_case_insensitive(str, "[teamcolor]", "");
-    for (auto it = terminalColors.begin(); it != terminalColors.end(); ++it)
-    {
-        str = replace_case_insensitive(str, it->first, "");
-    }
+    for (const auto name : std::views::keys(colors))
+        str = replace_case_insensitive(str, name, "");
     return str;
 }
 
 std::string TerminalProcessColor(std::string str)
 {
-    for (auto it = terminalColors.begin(); it != terminalColors.end(); ++it)
-    {
-        str = replace_case_insensitive(str, it->first, it->second);
-    }
+    for (const auto& [name, code] : terminalColors)
+        str = replace_case_insensitive(str, name, code);
     return str;
 }
 
 std::string ClearTerminalColors(std::string str)
 {
-    for (auto it = terminalColors.begin(); it != terminalColors.end(); ++it)
-    {
-        str = replace_case_insensitive(str, it->first, "");
-    }
+    for (const auto name : std::views::keys(terminalColors))
+        str = replace_case_insensitive(str, name, "");
     return str;
 }
 
-std::string StripAnsiEscapes(std::string str)
+std::string StripAnsiEscapes(std::string_view str)
 {
     std::string out;
     out.reserve(str.size());
-    for (std::size_t i = 0; i < str.size(); ++i)
+    for (size_t i = 0; i < str.size(); ++i)
     {
         if (str[i] == '\x1b' && i + 1 < str.size() && str[i + 1] == '[')
         {
@@ -187,100 +180,67 @@ std::string StripAnsiEscapes(std::string str)
     return out;
 }
 
-std::string GetTerminalStringColor(std::string plugin_name)
+std::string GetTerminalStringColor(const std::string& plugin_name)
 {
-    auto hash = hash_64_fnv1a_const(plugin_name.c_str());
-    uint64_t steps = (hash % terminalPrefixColors.size());
-    return terminalPrefixColors[steps];
+    const auto hash = hash_64_fnv1a_const(plugin_name.c_str());
+    return std::string(terminalPrefixColors[hash % std::size(terminalPrefixColors)]);
 }
 
-std::string replace(std::string str, const std::string from, const std::string to)
+std::string replace(std::string str, std::string_view from, std::string_view to)
 {
     if (from.empty())
         return str;
-    int start_pos = 0;
-    while ((start_pos = str.find(from, start_pos)) != std::string::npos)
-    {
-        str.replace(start_pos, from.length(), to);
-        start_pos += to.length();
-    }
+
+    for (size_t pos = 0; (pos = str.find(from, pos)) != std::string::npos; pos += to.size())
+        str.replace(pos, from.size(), to);
     return str;
 }
 
-std::string replace_case_insensitive(std::string str, const std::string from, const std::string to)
+std::string replace_case_insensitive(std::string str, std::string_view from, std::string_view to)
 {
     if (from.empty())
         return str;
 
-    std::string from_lower = str_tolower(from);
+    const std::string from_lower = str_tolower(from);
     std::string str_lower = str_tolower(str);
-    size_t start_pos = 0;
 
-    while ((start_pos = str_lower.find(from_lower, start_pos)) != std::string::npos)
+    for (size_t pos = 0; (pos = str_lower.find(from_lower, pos)) != std::string::npos; pos += to.size())
     {
-        str.replace(start_pos, from.length(), to);
-        str_lower.replace(start_pos, from.length(), to);
-        start_pos += to.length();
+        str.replace(pos, from.size(), to);
+        str_lower.replace(pos, from.size(), to);
     }
     return str;
 }
 
-std::vector<std::string> explode(std::string s, std::string delimiter)
+std::vector<std::string> explode(std::string_view str, std::string_view delimiter)
 {
-    if (s.size() == 0) return {};
-    int pos_start = 0, pos_end, delim_len = delimiter.length();
-    std::string token;
-    std::vector<std::string> res;
+    if (str.empty()) return {};
+    if (delimiter.empty()) return {std::string(str)};
 
-    while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos)
+    std::vector<std::string> res;
+    size_t pos_start = 0;
+    size_t pos_end;
+
+    while ((pos_end = str.find(delimiter, pos_start)) != std::string_view::npos)
     {
-        token = s.substr(pos_start, pos_end - pos_start);
-        pos_start = pos_end + delim_len;
-        res.push_back(token);
+        res.emplace_back(str.substr(pos_start, pos_end - pos_start));
+        pos_start = pos_end + delimiter.size();
     }
 
-    res.push_back(s.substr(pos_start));
+    res.emplace_back(str.substr(pos_start));
     return res;
 }
 
-std::set<std::string> explodeToSet(std::string str, std::string delimiter)
+std::set<std::string> explodeToSet(std::string_view str, std::string_view delimiter)
 {
-    if (str.size() == 0) return {};
-    int pos_start = 0, pos_end, delim_len = delimiter.length();
-    std::string token;
-    std::set<std::string> res;
-
-    while ((pos_end = str.find(delimiter, pos_start)) != std::string::npos)
-    {
-        token = str.substr(pos_start, pos_end - pos_start);
-        pos_start = pos_end + delim_len;
-        res.insert(token);
-    }
-
-    res.insert(str.substr(pos_start));
-    return res;
+    const auto tokens = explode(str, delimiter);
+    return std::set<std::string>(tokens.begin(), tokens.end());
 }
 
 std::string implode(const std::vector<std::string>& elements, const std::string& delimiter)
 {
-    if (elements.size() == 0) return "";
-
     auto joined = elements | std::views::join_with(delimiter);
     return std::string(joined.begin(), joined.end());
-}
-
-bool ends_with(std::string value, std::string ending)
-{
-    if (value.size() < ending.size())
-        return false;
-    return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
-}
-
-bool starts_with(std::string value, std::string starting)
-{
-    if (value.size() < starting.size())
-        return false;
-    return std::equal(starting.begin(), starting.end(), value.begin());
 }
 
 uint64_t GetTime()
@@ -288,30 +248,29 @@ uint64_t GetTime()
     return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
-std::string str_tolower(std::string s)
+std::string str_tolower(std::string_view s)
 {
-    std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c)
-        { return std::tolower(c); });
-    return s;
+    std::string out(s);
+    std::ranges::transform(out, out.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    return out;
 }
 
-std::string str_toupper(std::string s)
+std::string str_toupper(std::string_view s)
 {
-    std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c)
-        { return std::toupper(c); });
-    return s;
+    std::string out(s);
+    std::ranges::transform(out, out.begin(), [](unsigned char c) { return static_cast<char>(std::toupper(c)); });
+    return out;
 }
 
 int32_t genrand()
 {
-    static std::random_device rd;
-    static std::mt19937 rng(rd());
-    return std::uniform_int_distribution<int>(0, INT_MAX)(rng);
+    static thread_local std::mt19937 rng{std::random_device{}()};
+    return std::uniform_int_distribution<int32_t>(0, INT_MAX)(rng);
 }
 
 std::string get_uuid()
 {
-    return fmt::format(
+    return std::format(
         "{:04x}{:04x}-{:04x}-{:04x}-{:04x}-{:04x}{:04x}{:04x}",
         (genrand() & 0xFFFF), (genrand() & 0xFFFF),
         (genrand() & 0xFFFF),
@@ -320,7 +279,7 @@ std::string get_uuid()
         (genrand() & 0xFFFF), (genrand() & 0xFFFF), (genrand() & 0xFFFF));
 }
 
-std::vector<std::string> TokenizeCommand(std::string cmd)
+std::vector<std::string> TokenizeCommand(std::string_view cmd)
 {
     std::vector<std::string> tokens;
     std::string tmp_token;
@@ -329,14 +288,13 @@ std::vector<std::string> TokenizeCommand(std::string cmd)
     bool double_quote = false;
     bool token_had_quotes = false;
 
-    const auto* bytes = reinterpret_cast<const unsigned char*>(cmd.data());
-    const size_t length = cmd.size();
+    const auto byteAt = [&](size_t index) { return static_cast<unsigned char>(cmd[index]); };
 
-    for (size_t index = 0; index < length; ++index)
+    for (size_t index = 0; index < cmd.size(); ++index)
     {
-        const unsigned char c = bytes[index];
+        const unsigned char c = byteAt(index);
         // VALVE USE ZWSP FOR QUOTES IN CHAT AND NO ONE KNOWS FUCKING WHY
-        const bool is_replaced_double_quote = c == 0xE2 && index + 2 < length && bytes[index + 1] == 0x80 && bytes[index + 2] == 0x8B;
+        const bool is_replaced_double_quote = c == 0xE2 && index + 2 < cmd.size() && byteAt(index + 1) == 0x80 && byteAt(index + 2) == 0x8B;
 
         if ((c == '"' || is_replaced_double_quote) && !single_quote) {
             double_quote = !double_quote;
@@ -355,41 +313,31 @@ std::vector<std::string> TokenizeCommand(std::string cmd)
 
         if (std::isspace(c) && !single_quote && !double_quote) {
             if (!tmp_token.empty() || token_had_quotes) {
-                tokens.push_back(tmp_token);
+                tokens.push_back(std::move(tmp_token));
                 tmp_token.clear();
                 token_had_quotes = false;
             }
         }
         else {
-            tmp_token += c;
+            tmp_token += static_cast<char>(c);
         }
     }
 
     if (!tmp_token.empty() || token_had_quotes)
-        tokens.push_back(tmp_token);
+        tokens.push_back(std::move(tmp_token));
 
     return tokens;
 }
 
-std::string& rtrim(std::string& s, const char* t)
+std::string& trim(std::string& s, std::string_view t)
 {
     s.erase(s.find_last_not_of(t) + 1);
-    return s;
-}
-
-std::string& ltrim(std::string& s, const char* t)
-{
     s.erase(0, s.find_first_not_of(t));
     return s;
 }
 
-std::string& trim(std::string& s, const char* t)
+std::string RemoveHtmlTags(const std::string& input)
 {
-    return ltrim(rtrim(s, t), t);
-}
-
-std::string RemoveHtmlTags(std::string input) {
-    std::regex pattern("<(/?)(div|font)[^>]*>");
-
+    static const std::regex pattern("<(/?)(div|font)[^>]*>");
     return std::regex_replace(input, pattern, "");
 }

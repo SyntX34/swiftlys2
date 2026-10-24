@@ -23,7 +23,7 @@
 #include <api/shared/plat.h>
 #include <scripting/engine/events.h>
 
-#define CCSGameRulesProxy_m_pGameRules 0x242D3ADB925C1F40
+#include <mutex>
 
 CEntityListener g_entityListener;
 
@@ -49,12 +49,13 @@ void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
 {
     auto entindex = pEntity->m_pEntity->m_EHandle.GetEntryIndex();
 
-    for (int i = 0; i < 64; i++) {
+    for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)
+    {
         auto player = g_pPlayerManager->GetPlayer(i);
         if (!player) continue;
 
         auto& transmittingBits = player->GetBlockedTransmittingBits();
-        std::lock_guard<std::mutex> lock(transmittingBits.mutex);
+        std::lock_guard lock(transmittingBits.mutex);
 
         transmittingBits.Unblock(entindex);
     }
