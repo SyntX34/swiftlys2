@@ -26,7 +26,7 @@
 
 #include <core/entrypoint.h>
 
-#include <fmt/format.h>
+#include <format>
 
 #include <nlohmann/json.hpp>
 
@@ -135,7 +135,7 @@ struct CoreConfig
             if (node[i].is_string())
                 items.push_back(node[i].get<std::string>());
             else
-                g_pLogger->Error("Configuration", fmt::format("The field \"{}[{}]\" is not a string in core.jsonc.", key, i));
+                g_pLogger->Error("Configuration", std::format("The field \"{}[{}]\" is not a string in core.jsonc.", key, i));
         }
 
         values["core." + key] = implode(items, delimiter);
@@ -178,7 +178,7 @@ bool Configuration::Load()
         cfg.AddList("PatchesToPerform", {}, " ");
 
         if (game == "cs2") cfg.Add("CS2ServerGuidelines", "https://blog.counter-strike.net/index.php/server_guidelines/");
-        cfg.Add(fmt::format("Follow{}ServerGuidelines", str_toupper(game)), true);
+        cfg.Add(std::format("Follow{}ServerGuidelines", str_toupper(game)), true);
 
         cfg.Add("Language", "en");
         cfg.Add("UsePlayerLanguage", true);
@@ -232,7 +232,7 @@ bool Configuration::Load()
         m_mConfiguration = std::move(cfg.values);
     }
     catch (json::parse_error& e) {
-        g_pLogger->Error("Configuration", fmt::format("Failed to parse the core configuration ('{}').\nError: {}.\n", path, e.what()));
+        g_pLogger->Error("Configuration", std::format("Failed to parse the core configuration ('{}').\nError: {}.\n", path, e.what()));
     }
 
     m_bLoaded = true;

@@ -48,7 +48,7 @@
 #include <public/icvar.h>
 #include <public/tier1/KeyValues.h>
 
-#include <fmt/format.h>
+#include <format>
 
 #include <public/engine/igameeventsystem.h>
 
@@ -138,7 +138,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
     {
         if (g_pGameEngine)
         {
-            g_pLogger->Error("Entrypoint", fmt::format("Unknown game detected. App ID: {}", g_pGameEngine->GetAppID()));
+            g_pLogger->Error("Entrypoint", std::format("Unknown game detected. App ID: {}", g_pGameEngine->GetAppID()));
         }
         else
         {
@@ -176,11 +176,11 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
             if (g_pGameDataManager->GetPatches()->Exists(patch))
             {
                 g_pGameDataManager->GetPatches()->Apply(patch);
-                g_pLogger->Info("Patching", fmt::format("Applied patch: {}\n", patch));
+                g_pLogger->Info("Patching", std::format("Applied patch: {}\n", patch));
             }
             else
             {
-                g_pLogger->Warning("Patching", fmt::format("Couldn't find patch: {}\n", patch));
+                g_pLogger->Warning("Patching", std::format("Couldn't find patch: {}\n", patch));
             }
         }
 
@@ -225,7 +225,7 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
     if (!InitializeHostFXR(std::string(Plat_GetGameDirectory()) + "/" + g_sGameFolder + "/" + m_sCorePath))
     {
-        g_pCrashReporter->ReportPreventionIncident("Managed", fmt::format("Couldn't initialize the .NET runtime. Make sure you installed `swiftlys2-{}-{}-with-runtimes.zip`.", WIN_LINUX("windows", "linux"), GetVersion()));
+        g_pCrashReporter->ReportPreventionIncident("Managed", std::format("Couldn't initialize the .NET runtime. Make sure you installed `swiftlys2-{}-{}-with-runtimes.zip`.", WIN_LINUX("windows", "linux"), GetVersion()));
         return true;
     }
 

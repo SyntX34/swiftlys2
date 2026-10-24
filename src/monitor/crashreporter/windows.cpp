@@ -27,7 +27,7 @@
 #include <core/managed/host/strconv.h>
 #include <core/entrypoint.h>
 
-#include <fmt/format.h>
+#include <format>
 
 #include <common/path_helper.h>
 #include <common/scoped_ptr.h>
@@ -129,21 +129,21 @@ static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump
     if (tracerLevel > 0)
     {
         std::string tracerPath = dmpFolder + "\\managedtrace.txt";
-        g_pLogger->Warning("Crash Reporter", fmt::format("Dumping managed trace to: {}\n", tracerPath));
+        g_pLogger->Warning("Crash Reporter", std::format("Dumping managed trace to: {}\n", tracerPath));
         TracerDump(g_SwiftlyCore.GetCorePath(), tracerPath.c_str());
     }
 
     std::string mdmpId = StringTight(minidump_id);
 
-    std::string mdmpPath = fmt::format("{}\\{}.dmp", dmpFolder, mdmpId);
+    std::string mdmpPath = std::format("{}\\{}.dmp", dmpFolder, mdmpId);
 
     if (!succeeded) {
-        g_pLogger->Error("Crash Reporter", fmt::format("Failed to write minidump to '{}'\n", mdmpPath));
+        g_pLogger->Error("Crash Reporter", std::format("Failed to write minidump to '{}'\n", mdmpPath));
         return succeeded;
     }
 
     g_dumpWritten = true;
-    g_pLogger->Info("Crash Reporter", fmt::format("Minidump written to '{}'\n", mdmpPath));
+    g_pLogger->Info("Crash Reporter", std::format("Minidump written to '{}'\n", mdmpPath));
 
     google_breakpad::SimpleSymbolSupplier symbolSupplier("");
     google_breakpad::BasicSourceLineResolver resolver;
@@ -155,14 +155,14 @@ static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump
 
     google_breakpad::Minidump mdmp(mdmpPath);
     if (!mdmp.Read()) {
-        g_pLogger->Error("Crash Reporter", fmt::format("Failed to read minidump from '{}'\n", mdmpPath));
+        g_pLogger->Error("Crash Reporter", std::format("Failed to read minidump from '{}'\n", mdmpPath));
         return succeeded;
     }
     else {
         google_breakpad::ProcessState processState;
         if (minidump_processor.Process(&mdmp, &processState) != google_breakpad::PROCESS_OK)
         {
-            g_pLogger->Error("Crash Reporter", fmt::format("MinidumpProcessor::Process failed\n", mdmpPath));
+            g_pLogger->Error("Crash Reporter", "MinidumpProcessor::Process failed\n");
         }
         else
         {
@@ -189,14 +189,14 @@ void ParseAndWriteCrashInfo(const std::string& mdmpAbsPath, const std::string& c
     google_breakpad::Minidump mdmp(mdmpAbsPath);
     if (!mdmp.Read())
     {
-        g_pLogger->Error("Crash Reporter", fmt::format("Failed to read minidump from '{}'\n", mdmpAbsPath));
+        g_pLogger->Error("Crash Reporter", std::format("Failed to read minidump from '{}'\n", mdmpAbsPath));
         return;
     }
 
     google_breakpad::ProcessState processState;
     if (minidump_processor.Process(&mdmp, &processState) != google_breakpad::PROCESS_OK)
     {
-        g_pLogger->Error("Crash Reporter", fmt::format("MinidumpProcessor::Process failed for '{}'\n", mdmpAbsPath));
+        g_pLogger->Error("Crash Reporter", std::format("MinidumpProcessor::Process failed for '{}'\n", mdmpAbsPath));
         return;
     }
 

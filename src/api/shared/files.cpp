@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <filesystem>
-#include <fmt/format.h>
+#include <format>
 
 extern std::string g_sGameFolder;
 
@@ -35,7 +35,7 @@ std::string GetRelativePath(std::string path)
 {
     PROFILE_FUNCTION();
 
-    std::string str = fmt::format("{}{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder, WIN_LINUX("\\", "/"));
+    std::string str = std::format("{}{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder, WIN_LINUX("\\", "/"));
     return replace(path, str, "");
 }
 
@@ -43,7 +43,7 @@ std::string Files::GeneratePath(std::string path)
 {
     PROFILE_FUNCTION();
 
-    return fmt::format("{}{}{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder, WIN_LINUX("\\", "/"), path);
+    return std::format("{}{}{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder, WIN_LINUX("\\", "/"), path);
 }
 
 std::string Files::Read(std::string path)

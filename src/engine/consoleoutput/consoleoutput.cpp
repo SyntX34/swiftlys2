@@ -23,7 +23,7 @@
 
 #include <api/interfaces/interfaces.h>
 #include <pcre2.h>
-#include <fmt/format.h>
+#include <format>
 
 #include <api/shared/jsonc.h>
 #include <api/shared/files.h>
@@ -243,8 +243,8 @@ void CConsoleOutput::ReloadFilterConfiguration()
 
         pcre2_code* code = pcre2_compile((PCRE2_SPTR8)(value.get<std::string>().c_str()), PCRE2_ZERO_TERMINATED, 0, &errorcode, &erroffset, nullptr);
         if (!code) {
-            g_pLogger->Error("Console Filter", fmt::format("The regex for \"{}\" is not valid.\n", key));
-            g_pLogger->Error("Console Filter", fmt::format("Failed to compile at offset {}.\n", erroffset));
+            g_pLogger->Error("Console Filter", std::format("The regex for \"{}\" is not valid.\n", key));
+            g_pLogger->Error("Console Filter", std::format("Failed to compile at offset {}.\n", erroffset));
             continue;
         }
 
@@ -252,7 +252,7 @@ void CConsoleOutput::ReloadFilterConfiguration()
 
         pcre2_match_data* matchData = pcre2_match_data_create_from_pattern(code, nullptr);
         if (!matchData) {
-            g_pLogger->Error("Console Filter", fmt::format("Failed to create match data for \"{}\".\n", key));
+            g_pLogger->Error("Console Filter", std::format("Failed to create match data for \"{}\".\n", key));
             pcre2_code_free(code);
             continue;
         }

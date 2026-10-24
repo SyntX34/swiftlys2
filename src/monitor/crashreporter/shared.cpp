@@ -32,7 +32,7 @@
 
 #include <core/entrypoint.h>
 
-#include <fmt/format.h>
+#include <format>
 
 
 #include <nlohmann/json.hpp>
@@ -111,7 +111,7 @@ void CrashReporter::Init()
         if (dmpRelPath.empty())
             continue;
 
-        g_pLogger->Info("Crash Reporter", fmt::format("Recovering crashinfo.json for: {}\n", dir));
+        g_pLogger->Info("Crash Reporter", std::format("Recovering crashinfo.json for: {}\n", dir));
         ParseAndWriteCrashInfo(Files::GeneratePath(dmpRelPath), dir + "/crashinfo.json");
     }
 
@@ -149,7 +149,7 @@ void CrashReporter::EnableDotnetCrashTracer(int level)
 {
     PROFILE_FUNCTION();
 
-    g_pLogger->Warning("Crash Reporter", fmt::format("Dotnet crash tracer level set to: {}\n", level));
+    g_pLogger->Warning("Crash Reporter", std::format("Dotnet crash tracer level set to: {}\n", level));
 
     m_tracerLevel = level;
     if (level <= 0)
@@ -175,17 +175,17 @@ void CrashReporter::ReportPreventionIncident(std::string category, std::string r
     PROFILE_FUNCTION();
 
     g_pLogger->Warning("Crash Prevention", "A crash has been prevented by Swiftly Core and the details will be listed below:\n");
-    g_pLogger->Warning("Crash Prevention", fmt::format("Category: {}\n", category));
-    g_pLogger->Warning("Crash Prevention", fmt::format("Message: {}\n", reason));
+    g_pLogger->Warning("Crash Prevention", std::format("Category: {}\n", category));
+    g_pLogger->Warning("Crash Prevention", std::format("Message: {}\n", reason));
 
-    std::string file_path = fmt::format("{}dumps/prevention/incident.{}.log", g_SwiftlyCore.GetCorePath(), get_uuid());
+    std::string file_path = std::format("{}dumps/prevention/incident.{}.log", g_SwiftlyCore.GetCorePath(), get_uuid());
     if (Files::ExistsPath(file_path))
     {
         Files::Delete(file_path);
     }
 
-    Files::Append(file_path, fmt::format("================================\nCategory: {}\nDetails: {}", category, reason), false);
-    g_pLogger->Warning("Crash Prevention", fmt::format("A log file has been created at: {}\n", file_path));
+    Files::Append(file_path, std::format("================================\nCategory: {}\nDetails: {}", category, reason), false);
+    g_pLogger->Warning("Crash Prevention", std::format("A log file has been created at: {}\n", file_path));
 }
 
 #ifndef _WIN32

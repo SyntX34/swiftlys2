@@ -31,7 +31,7 @@
 #include <public/iserver.h>
 #include <public/tier1/KeyValues.h>
 
-#include <fmt/format.h>
+#include <format>
 #include <scripting/engine/events.h>
 
 GameEventFireHandler g_fnEventFireHandler;
@@ -300,7 +300,7 @@ void CEventManager::AddEngineListener(const std::string& event_name)
     if (!g_gameEventManager->FindListener(this, event_name.c_str()))
         g_gameEventManager->AddListener(this, event_name.c_str(), true);
 
-    g_pLogger->Debug("Game Events", fmt::format("Registered listener for event '{}'.\n", event_name));
+    g_pLogger->Debug("Game Events", std::format("Registered listener for event '{}'.\n", event_name));
     if(!bInitializedEvents)
     {
         bInitializedEvents = true;

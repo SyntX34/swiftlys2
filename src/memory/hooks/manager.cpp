@@ -26,7 +26,7 @@
 #include <api/shared/string.h>
 
 #include <algorithm>
-#include <fmt/format.h>
+#include <format>
 
 static std::vector<IManagedHook*>* g_pManagedHooks = nullptr;
 
@@ -105,7 +105,7 @@ void HooksManager::Initialize()
     for (auto* hook : *g_pManagedHooks)
     {
         if (!hook->Install())
-            g_pLogger->Warning("Hooks", fmt::format("Couldn't install the hook '{}'.\n", hook->GetName()));
+            g_pLogger->Warning("Hooks", std::format("Couldn't install the hook '{}'.\n", hook->GetName()));
     }
 }
 

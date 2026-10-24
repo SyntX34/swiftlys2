@@ -28,7 +28,7 @@
 #include <api/shared/string.h>
 #include <core/entrypoint.h>
 
-#include <fmt/format.h>
+#include <format>
 
 #include <algorithm>
 #include <chrono>
@@ -139,7 +139,7 @@ void ConsoleLogger::Initialize()
 
     m_listenerId = g_pConsoleOutput->AddConsoleListener([this](const std::string& message) {
         std::lock_guard<std::mutex> lock(m_mutex);
-        m_queue.push(fmt::format("[{}] {}", GetTimestampString(), message));
+        m_queue.push(std::format("[{}] {}", GetTimestampString(), message));
         });
 }
 

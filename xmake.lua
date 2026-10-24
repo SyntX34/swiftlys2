@@ -75,8 +75,6 @@ target("swiftlys2")
         "src/core/managed/libs/dotnet",
         "src/monitor/crashreporter",
 
-        "vendor/fmt/include",
-
         sdk_path,
         sdk_path.."/thirdparty/protobuf-3.21.8/src",
         sdk_path.."/public",
@@ -365,8 +363,6 @@ target("swiftlys2")
     add_files({
         "vendor/safetyhook/safetyhook.cpp",
         "vendor/safetyhook/Zydis.c",
-        "vendor/fmt/src/format.cc",
-        "vendor/fmt/src/os.cc",
         breakpad_path.."/common/convert_UTF.cc",
         breakpad_path.."/common/md5.cc",
         breakpad_path.."/common/string_conversion.cc",

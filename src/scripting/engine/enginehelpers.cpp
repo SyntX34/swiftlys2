@@ -33,7 +33,7 @@
 #include <igamesystemfactory.h>
 #include <networksystem/inetworksystem.h>
 
-#include <fmt/format.h>
+#include <format>
 
 #include <api/sdk/recipientfilter.h>
 
@@ -54,8 +54,8 @@ bool Bridge_EngineHelpers_IsMapValid(const char* map_name)
 
     return (
         g_pGameEngine->IsMapValid(map_name) ||
-        Files::ExistsPath(fmt::format("{}steamapps/workshop/content/730/{}/{}.vpk", s_sWorkingDir.Get(), map_name, map_name)) ||
-        Files::ExistsPath(fmt::format("{}steamapps/workshop/content/730/{}/{}_dir.vpk", s_sWorkingDir.Get(), map_name, map_name))
+        Files::ExistsPath(std::format("{}steamapps/workshop/content/730/{}/{}.vpk", s_sWorkingDir.Get(), map_name, map_name)) ||
+        Files::ExistsPath(std::format("{}steamapps/workshop/content/730/{}/{}_dir.vpk", s_sWorkingDir.Get(), map_name, map_name))
         );
 }
 
@@ -172,7 +172,7 @@ char* Bridge_EngineHelpers_GetIP(int* size)
     PROFILE_FUNCTION();
 
     auto& addr = g_pGameNetworkSystem->GetPublicAdr();
-    std::string s = fmt::format("{}.{}.{}.{}", addr.ip[0], addr.ip[1], addr.ip[2], addr.ip[3]);
+    std::string s = std::format("{}.{}.{}.{}", addr.ip[0], addr.ip[1], addr.ip[2], addr.ip[3]);
 
     return Bridge_CopyString(s, size);
 }

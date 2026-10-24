@@ -33,7 +33,7 @@
 #include <public/networksystem/inetworkmessages.h>
 #include <public/engine/igameeventsystem.h>
 
-#include <fmt/format.h>
+#include <format>
 
 #include "networkbasetypes.pb.h"
 
@@ -112,15 +112,15 @@ static std::string ConvertConvarValueToString(const ConvarValue& value)
         else if constexpr (std::is_same_v<T, bool>)
             return v ? "1" : "0";
         else if constexpr (std::is_same_v<T, Color>)
-            return fmt::format("{},{},{},{}", v.r(), v.g(), v.b(), v.a());
+            return std::format("{},{},{},{}", v.r(), v.g(), v.b(), v.a());
         else if constexpr (std::is_same_v<T, Vector2D>)
-            return fmt::format("{},{}", v.x, v.y);
+            return std::format("{},{}", v.x, v.y);
         else if constexpr (std::is_same_v<T, Vector> || std::is_same_v<T, QAngle>)
-            return fmt::format("{},{},{}", v.x, v.y, v.z);
+            return std::format("{},{},{}", v.x, v.y, v.z);
         else if constexpr (std::is_same_v<T, Vector4D>)
-            return fmt::format("{},{},{},{}", v.x, v.y, v.z, v.w);
+            return std::format("{},{},{},{}", v.x, v.y, v.z, v.w);
         else
-            return fmt::format("{}", v);
+            return std::format("{}", v);
         }, value);
 }
 
@@ -147,7 +147,7 @@ void CConvarManager::Initialize()
                 unlockedConvars++;
             }
 
-            g_pLogger->Info("Unlocker", fmt::format("Unlocked {} convars.\n", unlockedConvars));
+            g_pLogger->Info("Unlocker", std::format("Unlocked {} convars.\n", unlockedConvars));
         }
     }
 
@@ -166,7 +166,7 @@ void CConvarManager::Initialize()
                 unlockedCommands++;
             }
 
-            g_pLogger->Info("Unlocker", fmt::format("Unlocked {} concommands.\n", unlockedCommands));
+            g_pLogger->Info("Unlocker", std::format("Unlocked {} concommands.\n", unlockedCommands));
         }
     }
 }

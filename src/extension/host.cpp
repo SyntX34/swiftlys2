@@ -21,7 +21,7 @@
 #include <algorithm>
 #include <filesystem>
 
-#include <fmt/format.h>
+#include <format>
 
 #include <api/shared/plat.h>
 #include <api/shared/profiler.h>
@@ -168,7 +168,7 @@ bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::str
     const auto module_path = std::filesystem::canonical(path, error);
     if (error || !std::filesystem::is_regular_file(module_path, error))
     {
-        g_pLogger->Error("Extension", fmt::format("Extension path does not exist: {}\n", path));
+        g_pLogger->Error("Extension", std::format("Extension path does not exist: {}\n", path));
         return false;
     }
 
@@ -178,21 +178,21 @@ bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::str
     });
     if (it != extensions_.end())
     {
-        g_pLogger->Warning("Extension", fmt::format("Extension is already loaded: {}\n", id));
+        g_pLogger->Warning("Extension", std::format("Extension is already loaded: {}\n", id));
         return false;
     }
 
     void* lib = load_library(module_path.c_str());
     if (!lib)
     {
-        g_pLogger->Error("Extension", fmt::format("Failed to load extension: {}\n", path));
+        g_pLogger->Error("Extension", std::format("Failed to load extension: {}\n", path));
         return false;
     }
 
     sw_extension_init_fn init_fn = (sw_extension_init_fn)get_export(lib, "sw_extension_init");
     if (!init_fn)
     {
-        g_pLogger->Error("Extension", fmt::format("Extension missing entry function sw_extension_init: {}\n", path));
+        g_pLogger->Error("Extension", std::format("Extension missing entry function sw_extension_init: {}\n", path));
         unload_library(lib);
         return false;
     }
@@ -206,13 +206,13 @@ bool CExtensionHost::LoadExtensionFromPath(const std::string& id, const std::str
     ext->FinishInitialization();
     if (status != SW_OK)
     {
-        g_pLogger->Error("Extension", fmt::format("Extension initialization failed with status {}: {}\n", status, path));
+        g_pLogger->Error("Extension", std::format("Extension initialization failed with status {}: {}\n", status, path));
         return false;
     }
 
     if (!ext->IsInitialized())
     {
-        g_pLogger->Warning("Extension", fmt::format("Extension is not properly initialized: {}\n", path));
+        g_pLogger->Warning("Extension", std::format("Extension is not properly initialized: {}\n", path));
     }
 
     extensions_.push_back(std::move(ext));
@@ -229,7 +229,7 @@ bool CExtensionHost::UnloadExtension(const std::string& id)
     const auto it = std::find_if(extensions_.begin(), extensions_.end(), [&](const auto& ext) { return ext->GetId() == id; });
     if (it == extensions_.end())
     {
-        g_pLogger->Warning("Extension", fmt::format("Extension is not loaded: {}\n", id));
+        g_pLogger->Warning("Extension", std::format("Extension is not loaded: {}\n", id));
         return false;
     }
 
