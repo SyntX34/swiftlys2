@@ -20,12 +20,15 @@
 
 #include <api/shared/plat.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <core/entrypoint.h>
 
 #include <format>
 
 void FileSystemFix::Start()
 {
+    PROFILE_FUNCTION();
+
     std::string gamefolder_path = std::format("{}{}{}", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"), g_sGameFolder);
     std::string swiftly_path = std::format("{}{}{}", gamefolder_path, WIN_LINUX("\\", "/"), g_SwiftlyCore.GetCorePath());
 

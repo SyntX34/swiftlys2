@@ -20,6 +20,7 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
+#include <api/shared/profiler.h>
 
 #include "crashreporter.h"
 
@@ -51,6 +52,8 @@ LONG CALLBACK BreakpadVectoredHandler(_In_ PEXCEPTION_POINTERS ExceptionInfo);
 
 void InitCrashReporterWindows()
 {
+    PROFILE_FUNCTION();
+
     std::wstring wideString = StringWide(g_dumpPath);
 
     MINIDUMP_TYPE mdmpType = static_cast<MINIDUMP_TYPE>(MiniDumpWithUnloadedModules | MiniDumpWithFullMemoryInfo);
@@ -64,6 +67,8 @@ void InitCrashReporterWindows()
 
 void ShutdownCrashReporterWindows()
 {
+    PROFILE_FUNCTION();
+
     if (vectoredHandler)
     {
         RemoveVectoredExceptionHandler(vectoredHandler);
@@ -73,6 +78,8 @@ void ShutdownCrashReporterWindows()
 
 LONG CALLBACK BreakpadVectoredHandler(_In_ PEXCEPTION_POINTERS ExceptionInfo)
 {
+    PROFILE_FUNCTION();
+
     switch (ExceptionInfo->ExceptionRecord->ExceptionCode)
     {
     case EXCEPTION_ACCESS_VIOLATION:
@@ -113,6 +120,8 @@ LONG CALLBACK BreakpadVectoredHandler(_In_ PEXCEPTION_POINTERS ExceptionInfo)
 
 static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump_id, void* context, EXCEPTION_POINTERS* exinfo, MDRawAssertionInfo* assertion, bool succeeded)
 {
+    PROFILE_FUNCTION();
+
     std::string dmpFolder = StringTight(dumpPath);
     ConsoleLogger_FlushForCrash();
 
@@ -167,6 +176,8 @@ static bool windowsDumpCallback(const wchar_t* dumpPath, const wchar_t* minidump
 
 void ParseAndWriteCrashInfo(const std::string& mdmpAbsPath, const std::string& crashInfoRelPath)
 {
+    PROFILE_FUNCTION();
+
     google_breakpad::SimpleSymbolSupplier symbolSupplier("");
     google_breakpad::BasicSourceLineResolver resolver;
     google_breakpad::MinidumpProcessor minidump_processor(&symbolSupplier, &resolver);

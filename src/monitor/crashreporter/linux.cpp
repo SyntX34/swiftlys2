@@ -28,6 +28,7 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
+#include <api/shared/profiler.h>
 #include <fmt/format.h>
 
 #include <common/path_helper.h>
@@ -53,12 +54,16 @@ const int kNumHandledSignals = std::size(kExceptionSignals);
 
 static void CrashSignalHandler(int sig, siginfo_t* info, void* uctx)
 {
+    PROFILE_FUNCTION();
+
     if (exceptionHandler) exceptionHandler->HandleSignal(sig, info, uctx);
     _exit(1);
 }
 
 void InitCrashReporterLinux()
 {
+    PROFILE_FUNCTION();
+
     google_breakpad::MinidumpDescriptor descriptor(g_dumpPath);
 
     exceptionHandler = new google_breakpad::ExceptionHandler(descriptor, NULL, linuxDumpCallback, NULL, true, -1);
@@ -77,6 +82,8 @@ void InitCrashReporterLinux()
 
 void CrashReporterOnTickLinux()
 {
+    PROFILE_FUNCTION();
+
     bool signalChanged = false;
     struct sigaction oact;
 
@@ -110,6 +117,8 @@ void CrashReporterOnTickLinux()
 
 bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* context, bool succeeded)
 {
+    PROFILE_FUNCTION();
+
     auto tracerLevel = g_pCrashReporter->GetDotnetCrashTracerLevel();
     if (tracerLevel > 0)
     {
@@ -164,6 +173,8 @@ bool linuxDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, vo
 
 void ParseAndWriteCrashInfo(const std::string& mdmpAbsPath, const std::string& crashInfoRelPath)
 {
+    PROFILE_FUNCTION();
+
     google_breakpad::SimpleSymbolSupplier symbolSupplier("");
     google_breakpad::BasicSourceLineResolver resolver;
     google_breakpad::MinidumpProcessor minidump_processor(&symbolSupplier, &resolver);

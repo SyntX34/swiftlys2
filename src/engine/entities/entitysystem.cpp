@@ -29,12 +29,15 @@
 #include "listener.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/engine/events.h>
 
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
 CGameEntitySystem* GameEntitySystem()
 {
+    PROFILE_FUNCTION();
+
     return g_pGameEntitySystem;
 }
 
@@ -44,6 +47,8 @@ VFunctionHook g_StartupServerHook(reinterpret_cast<void*>(StartupServerHook), "e
 
 void CEntSystem::Shutdown()
 {
+    PROFILE_FUNCTION();
+
     if (g_pGameEntitySystem)
         g_pGameEntitySystem->RemoveListenerEntity(&g_entityListener);
 }
@@ -51,6 +56,8 @@ void CEntSystem::Shutdown()
 void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)
 {
     reinterpret_cast<decltype(&StartupServerHook)>(g_StartupServerHook.GetOriginal())(_this, config, a, b);
+
+    PROFILE_FUNCTION();
 
     if (!g_pGameEntitySystem)
     {
@@ -65,17 +72,23 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
 
 void CEntSystem::AddEntityListener(IEntityListener* listener)
 {
+    PROFILE_FUNCTION();
+
     if (g_pGameEntitySystem)
         g_pGameEntitySystem->AddListenerEntity(listener);
 }
 
 void CEntSystem::RemoveEntityListener(IEntityListener* listener)
 {
+    PROFILE_FUNCTION();
+
     if (g_pGameEntitySystem)
         g_pGameEntitySystem->RemoveListenerEntity(listener);
 }
 
 CEntitySystem* CEntSystem::GetEntitySystem()
 {
+    PROFILE_FUNCTION();
+
     return g_pGameEntitySystem;
 }

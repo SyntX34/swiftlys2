@@ -24,6 +24,7 @@
 #include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 
 #include <core/managed/host/host.h>
@@ -44,6 +45,8 @@ google_breakpad::ExceptionHandler* exceptionHandler = nullptr;
 
 void CrashReporter::Init()
 {
+    PROFILE_FUNCTION();
+
     if (!Files::ExistsPath(g_SwiftlyCore.GetCorePath() + "dumps"))
     {
         if (!Files::CreateDir(g_SwiftlyCore.GetCorePath() + "dumps"))
@@ -130,6 +133,8 @@ void CrashReporter::Init()
 
 void CrashReporter::Shutdown()
 {
+    PROFILE_FUNCTION();
+
 #ifdef _WIN32
     ShutdownCrashReporterWindows();
 #endif
@@ -142,6 +147,8 @@ void CrashReporter::Shutdown()
 
 void CrashReporter::EnableDotnetCrashTracer(int level)
 {
+    PROFILE_FUNCTION();
+
     g_pLogger->Warning("Crash Reporter", fmt::format("Dotnet crash tracer level set to: {}\n", level));
 
     m_tracerLevel = level;
@@ -158,11 +165,15 @@ void CrashReporter::EnableDotnetCrashTracer(int level)
 
 int CrashReporter::GetDotnetCrashTracerLevel()
 {
+    PROFILE_FUNCTION();
+
     return m_tracerLevel;
 }
 
 void CrashReporter::ReportPreventionIncident(std::string category, std::string reason)
 {
+    PROFILE_FUNCTION();
+
     g_pLogger->Warning("Crash Prevention", "A crash has been prevented by Swiftly Core and the details will be listed below:\n");
     g_pLogger->Warning("Crash Prevention", fmt::format("Category: {}\n", category));
     g_pLogger->Warning("Crash Prevention", fmt::format("Message: {}\n", reason));
@@ -183,6 +194,8 @@ void CrashReporterOnTickLinux();
 
 void CrashReporter::OnTick()
 {
+    PROFILE_FUNCTION();
+
 #ifndef _WIN32
     CrashReporterOnTickLinux();
 #endif

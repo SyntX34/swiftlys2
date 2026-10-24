@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 #include <core/entrypoint.h>
 
@@ -24,11 +25,15 @@
 
 void* Bridge_MemoryHelpers_FetchInterfaceByName(const char* iface_name)
 {
+    PROFILE_FUNCTION();
+
     return g_SwiftlyCore.GetInterface(iface_name);
 }
 
 void* Bridge_MemoryHelpers_GetVirtualTableAddress(const char* binary, const char* vtable_name)
 {
+    PROFILE_FUNCTION();
+
     void* result = nullptr;
 
     g_pS2BinLib->FindVtable(binary, vtable_name, &result);
@@ -37,6 +42,8 @@ void* Bridge_MemoryHelpers_GetVirtualTableAddress(const char* binary, const char
 
 void* Bridge_MemoryHelpers_GetVirtualTableAddressNested2(const char* binary, const char* class1, const char* class2)
 {
+    PROFILE_FUNCTION();
+
     void* result = nullptr;
 
     g_pS2BinLib->FindVtableNested2(binary, class1, class2, &result);
@@ -44,6 +51,8 @@ void* Bridge_MemoryHelpers_GetVirtualTableAddressNested2(const char* binary, con
 }
 
 std::string BytesToIdaSignature(const unsigned char* data, int size) {
+    PROFILE_FUNCTION();
+
     static const char* hex = "0123456789ABCDEF";
     std::string result;
     result.reserve(size * 3);
@@ -67,11 +76,15 @@ std::string BytesToIdaSignature(const unsigned char* data, int size) {
 
 void* Bridge_MemoryHelpers_GetAddressBySignature(const char* binary, const char* signature, int len, bool rawBytes)
 {
+    PROFILE_FUNCTION();
+
     return FindSignature(binary, rawBytes ? BytesToIdaSignature(reinterpret_cast<const unsigned char*>(signature), len) : signature);
 }
 
 char* Bridge_MemoryHelpers_GetObjectPtrVtableName(int* size, void* objptr)
 {
+    PROFILE_FUNCTION();
+
     char buffer[1024] = { 0 };
     int ret = g_pS2BinLib->GetObjectPtrVtableName(objptr, buffer, sizeof(buffer));
     if (ret != 0)
@@ -84,11 +97,15 @@ char* Bridge_MemoryHelpers_GetObjectPtrVtableName(int* size, void* objptr)
 
 bool Bridge_MemoryHelpers_ObjectPtrHasVtable(void* objptr)
 {
+    PROFILE_FUNCTION();
+
     return g_pS2BinLib->ObjectPtrHasVtable(objptr) == 1;
 }
 
 bool Bridge_MemoryHelpers_ObjectPtrHasBaseClass(void* objptr, const char* base_class_name)
 {
+    PROFILE_FUNCTION();
+
     return g_pS2BinLib->ObjectPtrHasBaseClass(objptr, base_class_name) == 1;
 }
 

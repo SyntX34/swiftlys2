@@ -117,10 +117,6 @@
         "windows": 41,
         "linux": 41
     },
-    "IServerGameDLL::GameServerSteamAPIDeactivated": {
-        "windows": 42,
-        "linux": 42
-    },
     "IGameEventSystem::PostEventAbstract": {
         "windows": 16,
         "linux": 15

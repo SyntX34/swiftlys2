@@ -17,25 +17,34 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
 void Bridge_VoiceManager_SetClientListenOverride(int playerid, int targetid, int override)
 {
+    PROFILE_FUNCTION();
+
     g_pVoiceManager->SetClientListenOverride(playerid, targetid, (ListenOverride)override);
 }
 
 int Bridge_VoiceManager_GetClientListenOverride(int playerid, int targetid)
 {
+    PROFILE_FUNCTION();
+
     return static_cast<int>(g_pVoiceManager->GetClientListenOverride(playerid, targetid));
 }
 
 void Bridge_VoiceManager_SetClientVoiceFlags(int playerid, int flags)
 {
+    PROFILE_FUNCTION();
+
     g_pVoiceManager->SetClientVoiceFlags(playerid, (VoiceFlagValue)flags);
 }
 
 int Bridge_VoiceManager_GetClientVoiceFlags(int playerid)
 {
+    PROFILE_FUNCTION();
+
     return static_cast<int>(g_pVoiceManager->GetClientVoiceFlags(playerid));
 }
 

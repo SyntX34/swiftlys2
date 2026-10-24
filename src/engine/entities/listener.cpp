@@ -21,6 +21,7 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 #include <scripting/engine/events.h>
 
 #include <mutex>
@@ -29,24 +30,32 @@ CEntityListener g_entityListener;
 
 void CEntityListener::OnEntitySpawned(CEntityInstance* pEntity)
 {
+    PROFILE_FUNCTION();
+
     if (g_pOnEntitySpawnedCallback)
         g_pOnEntitySpawnedCallback(pEntity);
 }
 
 void CEntityListener::OnEntityParentChanged(CEntityInstance* pEntity, CEntityInstance* pNewParent)
 {
+    PROFILE_FUNCTION();
+
     if (g_pOnEntityParentChangedCallback)
         g_pOnEntityParentChangedCallback(pEntity, pNewParent);
 }
 
 void CEntityListener::OnEntityCreated(CEntityInstance* pEntity)
 {
+    PROFILE_FUNCTION();
+
     if (g_pOnEntityCreatedCallback)
         g_pOnEntityCreatedCallback(pEntity);
 }
 
 void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
 {
+    PROFILE_FUNCTION();
+
     auto entindex = pEntity->m_pEntity->m_EHandle.GetEntryIndex();
 
     for (int i = 0; i < g_pPlayerManager->GetPlayerCap(); i++)

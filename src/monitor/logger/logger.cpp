@@ -19,6 +19,7 @@
 #include "logger.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 
 #include <core/entrypoint.h>
@@ -46,6 +47,8 @@ static constexpr std::string_view LogTypeName(LogType type)
 
 static LogType GetMinLogLevelFromEnv()
 {
+    PROFILE_FUNCTION();
+
     const char* env = std::getenv("SWIFTLY_LOG_LEVEL");
     if (!env) return LogType::INFO;
 
@@ -61,12 +64,16 @@ static LogType GetMinLogLevelFromEnv()
 
 bool Logger::ShouldLog(LogType type)
 {
+    PROFILE_FUNCTION();
+
     static const LogType minLevel = GetMinLogLevelFromEnv();
     return type != LogType::NONE && type >= minLevel;
 }
 
 void Logger::Log(LogType type, const std::string& message)
 {
+    PROFILE_FUNCTION();
+
     if (!ShouldLog(type)) return;
 
     auto name = std::string(LogTypeName(type));
@@ -76,6 +83,8 @@ void Logger::Log(LogType type, const std::string& message)
 
 void Logger::Log(LogType type, const std::string& category, const std::string& message)
 {
+    PROFILE_FUNCTION();
+
     if (!ShouldLog(type)) return;
 
     Log(type, std::format("[{}{}[/]] {}", GetTerminalStringColor(category), category, message));

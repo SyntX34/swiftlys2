@@ -18,9 +18,12 @@
 
 #include <scripting/scripting.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 char* Bridge_FileSystem_GetSearchPath(int* size, char* pathId, int32_t searchPathType, int32_t searchPathsToGet)
 {
+    PROFILE_FUNCTION();
+
     CBufferStringGrowable<MAX_PATH> searchPath;
     g_pGameFileSystem->GetSearchPath(pathId, (GetSearchPathTypes_t)searchPathType, searchPath, searchPathsToGet);
 
@@ -30,31 +33,43 @@ char* Bridge_FileSystem_GetSearchPath(int* size, char* pathId, int32_t searchPat
 
 bool Bridge_FileSystem_FileExists(char* fileName, char* pathId)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameFileSystem->FileExists(fileName, pathId);
 }
 
 void Bridge_FileSystem_AddSearchPath(char* path, char* pathId, int32_t searchPathAdd, int32_t searchPathPriority)
 {
+    PROFILE_FUNCTION();
+
     g_pGameFileSystem->AddSearchPath(path, pathId, (SearchPathAdd_t)searchPathAdd, (SearchPathPriority_t)searchPathPriority, 0);
 }
 
 bool Bridge_FileSystem_RemoveSearchPath(char* path, char* pathId)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameFileSystem->RemoveSearchPath(path, pathId);
 }
 
 bool Bridge_FileSystem_IsDirectory(char* path, char* pathId)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameFileSystem->IsDirectory(path, pathId);
 }
 
 void Bridge_FileSystem_PrintSearchPaths()
 {
+    PROFILE_FUNCTION();
+
     g_pGameFileSystem->PrintSearchPaths();
 }
 
 char* Bridge_FileSystem_ReadFile(int* size, char* fileName, char* pathId)
 {
+    PROFILE_FUNCTION();
+
     CUtlBuffer buf;
 
     int fileSize = g_pGameFileSystem->Size(fileName, pathId);
@@ -78,6 +93,8 @@ char* Bridge_FileSystem_ReadFile(int* size, char* fileName, char* pathId)
 
 bool Bridge_FileSystem_WriteFile(char* fileName, char* pathId, char* inputBuffer)
 {
+    PROFILE_FUNCTION();
+
     CUtlBuffer buf;
     buf.Put(inputBuffer, strlen(inputBuffer) + 1);
 
@@ -86,26 +103,36 @@ bool Bridge_FileSystem_WriteFile(char* fileName, char* pathId, char* inputBuffer
 
 uint32_t Bridge_FileSystem_GetFileSize(char* fileName, char* pathId)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameFileSystem->Size(fileName, pathId);
 }
 
 bool Bridge_FileSystem_PrecacheFile(char* fileName, char* pathId)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameFileSystem->Precache(fileName, pathId);
 }
 
 bool Bridge_FileSystem_IsFileWritable(char* fileName, char* pathId)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameFileSystem->IsFileWritable(fileName, pathId);
 }
 
 bool Bridge_FileSystem_SetFileWritable(char* fileName, char* pathId, bool writable)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameFileSystem->SetFileWritable(fileName, writable, pathId);
 }
 
 void Bridge_FileSystem_FindFileAbsoluteList(void* outVector, const char* wildcard, const char* pathId)
 {
+    PROFILE_FUNCTION();
+
     g_pGameFileSystem->FindFileAbsoluteList(*reinterpret_cast<CUtlVector<CUtlString>*>(outVector), wildcard, pathId);
 }
 

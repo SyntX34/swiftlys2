@@ -20,6 +20,7 @@
 #include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <api/utils/bitvec.h>
 
 #include <core/entrypoint.h>
@@ -44,12 +45,16 @@ VFunctionHook g_OnGameFramePlayerHook(reinterpret_cast<void*>(OnGameFramePlayerH
 
 void CPlayerManager::Initialize()
 {
+    PROFILE_FUNCTION();
+
     for (auto& player : m_players)
         player.reset();
 }
 
 void CPlayerManager::Shutdown()
 {
+    PROFILE_FUNCTION();
+
     for (auto& player : m_players)
         player.reset();
 }
@@ -57,6 +62,8 @@ void CPlayerManager::Shutdown()
 void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid)
 {
     reinterpret_cast<decltype(&OnClientPutInServerHook)>(g_ClientPutInServerHook.GetOriginal())(_this, slot, pszName, type, xuid);
+
+    PROFILE_FUNCTION();
 
     if (type == 0)
     {
@@ -77,6 +84,8 @@ void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName,
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities)
 {
     reinterpret_cast<decltype(&CheckTransmitHook)>(g_CheckTransmitHook.GetOriginal())(_this, ppInfoList, infoCount, unionTransmitEdicts, unk, pNetworkables, pEntityIndicies, nEntities);
+
+    PROFILE_FUNCTION();
 
     for (int i = 0; i < infoCount; i++)
     {
@@ -101,6 +110,8 @@ void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last)
 {
     reinterpret_cast<decltype(&OnGameFramePlayerHook)>(g_OnGameFramePlayerHook.GetOriginal())(_this, simulate, first, last);
 
+    PROFILE_FUNCTION();
+
     if (g_pOnGameTickCallback)
         g_pOnGameTickCallback(simulate, first, last);
 
@@ -115,6 +126,8 @@ void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last)
 
 bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, bool unk1, CBufferString* pRejectReason)
 {
+    PROFILE_FUNCTION();
+
     auto playerid = slot.Get();
     auto player = g_pPlayerManager->RegisterPlayer(playerid);
     if (!player)
@@ -134,11 +147,15 @@ bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint6
         }
     }
 
+    PROFILE_PAUSE();
+
     return reinterpret_cast<decltype(&ClientConnectHook)>(g_ClientConnectHook.GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, unk1, pRejectReason);
 }
 
 void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, const char* pszAddress, bool bFakePlayer)
 {
+    PROFILE_FUNCTION();
+
     auto playerid = slot.Get();
 
     if (bFakePlayer)
@@ -168,6 +185,8 @@ void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char*
 {
     reinterpret_cast<decltype(&ClientDisconnectHook)>(g_ClientDisconnectHook.GetOriginal())(_this, slot, reason, pszName, xuid, pszNetworkID);
 
+    PROFILE_FUNCTION();
+
     auto playerid = slot.Get();
 
     if (g_pOnClientDisconnectCallback)
@@ -178,6 +197,8 @@ void ClientDisconnectHook(void* _this, CPlayerSlot slot, int reason, const char*
 
 IPlayer* CPlayerManager::RegisterPlayer(int playerid)
 {
+    PROFILE_FUNCTION();
+
     if (playerid < 0 || playerid >= g_SwiftlyCore.GetMaxGameClients())
         return nullptr;
 
@@ -193,6 +214,8 @@ IPlayer* CPlayerManager::RegisterPlayer(int playerid)
 
 void CPlayerManager::UnregisterPlayer(int playerid)
 {
+    PROFILE_FUNCTION();
+
     if (playerid < 0 || playerid >= g_SwiftlyCore.GetMaxGameClients())
         return;
 
@@ -206,6 +229,8 @@ void CPlayerManager::UnregisterPlayer(int playerid)
 
 IPlayer* CPlayerManager::GetPlayer(int playerid)
 {
+    PROFILE_FUNCTION();
+
     if (playerid < 0 || playerid >= MAX_PLAYERS || !m_players[playerid])
         return nullptr;
 
@@ -214,6 +239,8 @@ IPlayer* CPlayerManager::GetPlayer(int playerid)
 
 int CPlayerManager::GetPlayerCount()
 {
+    PROFILE_FUNCTION();
+
     int count = 0;
 
     for (int i = 0; i < GetPlayerCap(); i++)
@@ -225,11 +252,15 @@ int CPlayerManager::GetPlayerCount()
 
 int CPlayerManager::GetPlayerCap()
 {
+    PROFILE_FUNCTION();
+
     return g_SwiftlyCore.GetMaxGameClients();
 }
 
 void CPlayerManager::SendMsg(MessageType type, const std::string& message, int duration)
 {
+    PROFILE_FUNCTION();
+
     if (type == MessageType::CenterHTML)
     {
         for (int i = 0; i < GetPlayerCap(); i++)
@@ -246,11 +277,15 @@ void CPlayerManager::SendMsg(MessageType type, const std::string& message, int d
 
 void CPlayerManager::SteamAPIServerActivated()
 {
+    PROFILE_FUNCTION();
+
     m_CallbackValidateAuthTicketResponse.Register(this, &CPlayerManager::OnValidateAuthTicket);
 }
 
 void CPlayerManager::OnValidateAuthTicket(ValidateAuthTicketResponse_t* response)
 {
+    PROFILE_FUNCTION();
+
     uint64_t steamid = response->m_SteamID.ConvertToUint64();
 
     for (int i = 0; i < GetPlayerCap(); i++)

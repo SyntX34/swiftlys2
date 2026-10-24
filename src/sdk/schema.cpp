@@ -24,6 +24,7 @@
 #include <vector>
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 #include <public/entity2/entityclass.h>
 
@@ -39,6 +40,8 @@ struct CNetworkVarChainer
 
 std::optional<SchemaField> CSDKSchema::FindField(uint64_t uHash) const
 {
+    PROFILE_FUNCTION();
+
     auto it = m_fields.find(uHash);
     if (it == m_fields.end()) return std::nullopt;
     return it->second;
@@ -46,6 +49,8 @@ std::optional<SchemaField> CSDKSchema::FindField(uint64_t uHash) const
 
 std::optional<int32_t> CSDKSchema::FindStateChangedIndex(void* pVtable) const
 {
+    PROFILE_FUNCTION();
+
     auto it = m_networkVarStateChangedOffsets.find(pVtable);
     if (it == m_networkVarStateChangedOffsets.end()) return std::nullopt;
     return it->second;
@@ -53,6 +58,8 @@ std::optional<int32_t> CSDKSchema::FindStateChangedIndex(void* pVtable) const
 
 void CSDKSchema::Load()
 {
+    PROFILE_FUNCTION();
+
     g_pLogger->Info("SDK", "Loading SDK classes and network var vtables...\n");
 
     m_fields.clear();
@@ -94,6 +101,8 @@ void CSDKSchema::Load()
 
 void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
 {
+    PROFILE_FUNCTION();
+
     if (pEntity == nullptr) return;
 
     auto fieldInfo = FindField(uHash);
@@ -131,22 +140,30 @@ void CSDKSchema::SetStateChanged(void* pEntity, uint64_t uHash)
 
 int32_t CSDKSchema::GetOffset(const char* sClassName, const char* sMemberName)
 {
+    PROFILE_FUNCTION();
+
     return GetOffset(SchemaFieldHash(sClassName, sMemberName));
 }
 
 int32_t CSDKSchema::GetOffset(uint64_t uHash)
 {
+    PROFILE_FUNCTION();
+
     auto field = FindField(uHash);
     return field.has_value() ? static_cast<int32_t>(field->m_uOffset) : -1;
 }
 
 void* CSDKSchema::GetPropPtr(void* pEntity, const char* sClassName, const char* sMemberName)
 {
+    PROFILE_FUNCTION();
+
     return GetPropPtr(pEntity, SchemaFieldHash(sClassName, sMemberName));
 }
 
 void* CSDKSchema::GetPropPtr(void* pEntity, uint64_t uHash)
 {
+    PROFILE_FUNCTION();
+
     if (pEntity == nullptr) return nullptr;
 
     auto field = FindField(uHash);
@@ -157,12 +174,16 @@ void* CSDKSchema::GetPropPtr(void* pEntity, uint64_t uHash)
 
 void* CSDKSchema::GetVData(void* pEntity)
 {
+    PROFILE_FUNCTION();
+
     void* subclassPtr = GetPropPtr(pEntity, CBaseEntity_m_nSubclassID);
     return *reinterpret_cast<void**>(reinterpret_cast<uintptr_t>(subclassPtr) + 4);
 }
 
 void* CSDKSchema::GetDatamapFunction(const char* className, const char* functionName)
 {
+    PROFILE_FUNCTION();
+
     auto entitySystem = g_pEntSystem->GetEntitySystem();
     if (entitySystem == nullptr) return nullptr;
 

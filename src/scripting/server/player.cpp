@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
 #include <api/memory/virtual/call.h>
@@ -24,6 +25,8 @@
 
 void Bridge_Player_SendMessage(int playerid, int kind, const char* message, int duration)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return;
@@ -33,6 +36,8 @@ void Bridge_Player_SendMessage(int playerid, int kind, const char* message, int 
 
 bool Bridge_Player_IsFakeClient(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return true;
@@ -42,6 +47,8 @@ bool Bridge_Player_IsFakeClient(int playerid)
 
 bool Bridge_Player_IsAuthorized(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return false;
@@ -51,6 +58,8 @@ bool Bridge_Player_IsAuthorized(int playerid)
 
 uint32_t Bridge_Player_GetConnectedTime(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return 0;
@@ -60,6 +69,8 @@ uint32_t Bridge_Player_GetConnectedTime(int playerid)
 
 uint64_t Bridge_Player_GetUnauthorizedSteamID(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return 0;
@@ -69,6 +80,8 @@ uint64_t Bridge_Player_GetUnauthorizedSteamID(int playerid)
 
 uint64_t Bridge_Player_GetSteamID(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return 0;
@@ -78,6 +91,8 @@ uint64_t Bridge_Player_GetSteamID(int playerid)
 
 char* Bridge_Player_GetIPAddress(int* size, int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return Bridge_CopyString("", size);
@@ -89,6 +104,8 @@ char* Bridge_Player_GetIPAddress(int* size, int playerid)
 
 void Bridge_Player_Kick(int playerid, const char* reason, int gamereason)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return;
@@ -98,6 +115,8 @@ void Bridge_Player_Kick(int playerid, const char* reason, int gamereason)
 
 void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool shouldBlockTransmit)
 {
+    PROFILE_FUNCTION();
+
     if (entityidx < 0 || entityidx >= MAX_EDICTS) return;
     if (playerid + 1 == entityidx) return;
 
@@ -113,6 +132,8 @@ void Bridge_Player_ShouldBlockTransmitEntity(int playerid, int entityidx, bool s
 
 bool Bridge_Player_IsTransmitEntityBlocked(int playerid, int entityidx)
 {
+    PROFILE_FUNCTION();
+
     if (entityidx < 0 || entityidx >= MAX_EDICTS) return false;
     if (playerid + 1 == entityidx) return false;
 
@@ -126,6 +147,8 @@ bool Bridge_Player_IsTransmitEntityBlocked(int playerid, int entityidx)
 
 void Bridge_Player_ClearTransmitEntityBlocked(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return;
@@ -137,6 +160,8 @@ void Bridge_Player_ClearTransmitEntityBlocked(int playerid)
 
 char* Bridge_Player_GetLanguage(int* size, int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return Bridge_CopyString("", size);
@@ -147,6 +172,8 @@ char* Bridge_Player_GetLanguage(int* size, int playerid)
 
 void Bridge_Player_SetCenterMenuRender(int playerid, const char* text)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return;
@@ -156,6 +183,8 @@ void Bridge_Player_SetCenterMenuRender(int playerid, const char* text)
 
 void Bridge_Player_ClearCenterMenuRender(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return;
@@ -165,6 +194,8 @@ void Bridge_Player_ClearCenterMenuRender(int playerid)
 
 bool Bridge_Player_HasMenuShown(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return false;
@@ -174,6 +205,8 @@ bool Bridge_Player_HasMenuShown(int playerid)
 
 void Bridge_Player_ExecuteCommand(int playerid, const char* command)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return;
@@ -196,6 +229,8 @@ void Bridge_Player_ExecuteCommand(int playerid, const char* command)
 
 uint8_t Bridge_Player_IsFirstSpawn(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return 0;
@@ -205,11 +240,15 @@ uint8_t Bridge_Player_IsFirstSpawn(int playerid)
 
 int Bridge_Player_GetUserID(int playerid)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameEngine->GetPlayerUserId(CPlayerSlot(playerid)).Get();
 }
 
 uint64_t Bridge_Player_GetSessionID(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return 0;
@@ -219,6 +258,8 @@ uint64_t Bridge_Player_GetSessionID(int playerid)
 
 char* Bridge_Player_GetClientConvarValue(int* size, int playerid, const char* convarName)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return Bridge_CopyString("", size);
@@ -231,6 +272,8 @@ CServerSideClient* GetServerSideClient(int playerid);
 
 void* Bridge_Player_GetServerSideClient(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player)
         return nullptr;

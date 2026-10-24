@@ -41,6 +41,7 @@
 
 #include <api/shared/files.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 #include <mutex>
 
@@ -67,18 +68,18 @@ CreateIFaceFn g_pServerFactory = nullptr;
 CreateIFaceFn g_pEngineFactory = nullptr;
 
 void GameServerSteamAPIActivatedHook(void* _this);
-void GameServerSteamAPIDeactivatedHook(void* _this);
 
 bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry);
 
 VFunctionHook g_GameServerSteamAPIActivated(reinterpret_cast<void*>(GameServerSteamAPIActivatedHook), "server", "CSource2Server", "IServerGameDLL::GameServerSteamAPIActivated");
-VFunctionHook g_GameServerSteamAPIDeactivated(reinterpret_cast<void*>(GameServerSteamAPIDeactivatedHook), "server", "CSource2Server", "IServerGameDLL::GameServerSteamAPIDeactivated");
 VFunctionHook g_LoopInitHook(reinterpret_cast<void*>(LoopInitHook), "engine2", "CLoopModeLevelLoad", "ILoopMode::LoopInit");
 
 extern ICvar* g_pCVar;
 
 bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFaceFn engineFactory)
 {
+    PROFILE_FUNCTION();
+
     g_pServerFactory = serverFactory;
     g_pEngineFactory = engineFactory;
     g_mainThreadId = std::this_thread::get_id();
@@ -249,6 +250,8 @@ bool SwiftlyCore::Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFa
 
 bool SwiftlyCore::Unload()
 {
+    PROFILE_FUNCTION();
+
     g_pExtensionHost->UnloadExtensions();
     g_pHooksManager->Shutdown();
     g_pPlayerManager->Shutdown();
@@ -259,24 +262,21 @@ bool SwiftlyCore::Unload()
     g_pConsoleOutput->Shutdown();
     g_pCrashReporter->Shutdown();
 
+    Profiler::Save(m_sLogPath + "profiler.txt");
+
     return true;
 }
 
 void GameServerSteamAPIActivatedHook(void* _this)
 {
-    if (!g_pGameEngine->IsDedicatedServer())
-    {
-        return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_GameServerSteamAPIActivated.GetOriginal())(_this);
-    }
+    PROFILE_FUNCTION();
 
-    g_pPlayerManager->SteamAPIServerActivated();
+    if (g_pGameEngine->IsDedicatedServer())
+        g_pPlayerManager->SteamAPIServerActivated();
+
+    PROFILE_PAUSE();
 
     return reinterpret_cast<decltype(&GameServerSteamAPIActivatedHook)>(g_GameServerSteamAPIActivated.GetOriginal())(_this);
-}
-
-void GameServerSteamAPIDeactivatedHook(void* _this)
-{
-    return reinterpret_cast<decltype(&GameServerSteamAPIDeactivatedHook)>(g_GameServerSteamAPIDeactivated.GetOriginal())(_this);
 }
 
 std::string workshop_map = "";
@@ -285,12 +285,18 @@ std::string current_map = "";
 
 bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
 {
+    PROFILE_FUNCTION();
+
     if (current_map != "")
     {
         g_SwiftlyCore.OnMapUnload();
     }
 
+    PROFILE_PAUSE();
+
     bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_LoopInitHook.GetOriginal())(_this, pKeyValues, pRegistry);
+
+    PROFILE_RESUME();
 
     {
         std::lock_guard<std::mutex> lock(g_qmMapLoadQueue);
@@ -304,6 +310,8 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
 
 void SwiftlyCore::OnMapLoad(std::string map_name)
 {
+    PROFILE_FUNCTION();
+
     current_map = map_name;
 
     if (g_pOnMapLoadCallback)
@@ -314,6 +322,8 @@ void SwiftlyCore::OnMapLoad(std::string map_name)
 
 void SwiftlyCore::OnMapUnload()
 {
+    PROFILE_FUNCTION();
+
     if (g_pOnMapUnloadCallback)
     {
         g_pOnMapUnloadCallback(current_map.c_str());
@@ -324,6 +334,8 @@ void SwiftlyCore::OnMapUnload()
 
 void* SwiftlyCore::GetInterface(const std::string& interface_name)
 {
+    PROFILE_FUNCTION();
+
     int returnCode = 0;
 
     void* iface = g_pServerFactory(interface_name.c_str(), &returnCode);
@@ -335,11 +347,15 @@ void* SwiftlyCore::GetInterface(const std::string& interface_name)
 
 void SwiftlyCore::SendConsoleMessage(const std::string& message)
 {
+    PROFILE_FUNCTION();
+
     Msg("%s", message.c_str());
 }
 
 std::string SwiftlyCore::GetCurrentGame()
 {
+    PROFILE_FUNCTION();
+
     if (g_sGameFolder == "")
     {
         return "unknown";
@@ -351,17 +367,27 @@ std::string SwiftlyCore::GetCurrentGame()
 
 int SwiftlyCore::GetMaxGameClients()
 {
-    if (g_sGameFolder == "csgo") return 64;
-    else return 0;
+    PROFILE_FUNCTION();
+    
+    if(m_iMaxClients == -1)
+    {
+        if (g_sGameFolder == "csgo")
+            m_iMaxClients = 64;
+    }
+    return m_iMaxClients;
 }
 
 std::string& SwiftlyCore::GetCorePath()
 {
+    PROFILE_FUNCTION();
+
     return m_sCorePath;
 }
 
 std::string SwiftlyCore::GetVersion()
 {
+    PROFILE_FUNCTION();
+
 #ifndef SWIFTLY_VERSION
     return "Local";
 #else

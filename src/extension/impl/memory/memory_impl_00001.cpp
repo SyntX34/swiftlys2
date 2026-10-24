@@ -19,6 +19,7 @@
 #include "memory_impl_00001.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <core/entrypoint.h>
 #include <memory/gamedata/manager.h>
 #include <limits>
@@ -32,6 +33,8 @@ sw_status alloc(
     void** pointer_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !pointer_out)
         return SW_E_INVALID_ARG;
 
@@ -46,6 +49,8 @@ sw_status free(
     void* pointer
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self)
         return SW_E_INVALID_ARG;
 
@@ -60,6 +65,8 @@ sw_status resize(
     void** pointer_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !pointer_out)
         return SW_E_INVALID_ARG;
 
@@ -75,6 +82,8 @@ sw_status hook_address(
     void** original_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !address || !hook_callback || !handle_out || !original_out)
         return SW_E_INVALID_ARG;
 
@@ -105,6 +114,8 @@ sw_status unhook_address(
     const sw_hook_handle handle
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !handle)
         return SW_E_INVALID_ARG;
 
@@ -124,6 +135,8 @@ sw_status hook_vtable(
     void** original_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !vtable || offset > static_cast<uint32_t>((std::numeric_limits<int>::max)()) || !hook_callback || !handle_out || !original_out)
         return SW_E_INVALID_ARG;
 
@@ -154,6 +167,8 @@ sw_status unhook_vtable(
     const sw_hook_handle handle
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !handle)
         return SW_E_INVALID_ARG;
 
@@ -170,6 +185,8 @@ sw_status gamedata_resolve_signature(
     void** address_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !name || !address_out)
         return SW_E_INVALID_ARG;
 
@@ -190,6 +207,8 @@ sw_status gamedata_get_offset(
     uint32_t* offset_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !name || !offset_out)
         return SW_E_INVALID_ARG;
 
@@ -209,6 +228,8 @@ sw_status resolve_signature(
     void** address_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !library || !pattern || !address_out)
         return SW_E_INVALID_ARG;
 
@@ -228,6 +249,8 @@ sw_status find_vtable(
     void** address_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !library || !vtable || !address_out)
         return SW_E_INVALID_ARG;
 
@@ -247,6 +270,8 @@ sw_status get_valve_interface(
     sw_ptr_out interface_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !interface_name || !interface_out)
         return SW_E_INVALID_ARG;
 

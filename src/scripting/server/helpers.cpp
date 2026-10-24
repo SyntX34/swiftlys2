@@ -18,9 +18,12 @@
 
 #include <scripting/scripting.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 char* Bridge_ServerHelpers_GetServerLanguage(int* size)
 {
+    PROFILE_FUNCTION();
+
     std::string s = std::get<std::string>(g_pConfiguration->GetValue("core.Language"));
 
     return Bridge_CopyString(s, size);
@@ -28,16 +31,22 @@ char* Bridge_ServerHelpers_GetServerLanguage(int* size)
 
 bool Bridge_ServerHelpers_UsePlayerLanguage()
 {
+    PROFILE_FUNCTION();
+
     return std::get<bool>(g_pConfiguration->GetValue("core.UsePlayerLanguage"));
 }
 
 bool Bridge_ServerHelpers_IsFollowingServerGuidelines()
 {
+    PROFILE_FUNCTION();
+
     return std::get<bool>(g_pConfiguration->GetValue("core.FollowCS2ServerGuidelines"));
 }
 
 bool Bridge_ServerHelpers_UseAutoHotReload()
 {
+    PROFILE_FUNCTION();
+
     return std::get<bool>(g_pConfiguration->GetValue("core.AutoHotReload"));
 }
 

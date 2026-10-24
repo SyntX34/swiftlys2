@@ -21,11 +21,14 @@
 #include <public/tier1/utlstringtoken.h>
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 #include <string>
 
 bool Scripting_CommandLine_HasParameter(const char* param)
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return false;
 
@@ -35,6 +38,8 @@ bool Scripting_CommandLine_HasParameter(const char* param)
 
 int Scripting_CommandLine_GetParameterCount()
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return 0;
 
@@ -43,6 +48,8 @@ int Scripting_CommandLine_GetParameterCount()
 
 char* Scripting_CommandLine_GetParameterValueString(int* size, const char* param, const char* defaultValue)
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine)
     {
@@ -56,6 +63,8 @@ char* Scripting_CommandLine_GetParameterValueString(int* size, const char* param
 
 int Scripting_CommandLine_GetParameterValueInt(const char* param, int defaultValue)
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return defaultValue;
 
@@ -65,6 +74,8 @@ int Scripting_CommandLine_GetParameterValueInt(const char* param, int defaultVal
 
 float Scripting_CommandLine_GetParameterValueFloat(const char* param, float defaultValue)
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return defaultValue;
 
@@ -74,6 +85,8 @@ float Scripting_CommandLine_GetParameterValueFloat(const char* param, float defa
 
 char* Scripting_CommandLine_GetCommandLine(int* size)
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine)
     {
@@ -86,6 +99,8 @@ char* Scripting_CommandLine_GetCommandLine(int* size)
 
 bool Scripting_CommandLine_HasParameters()
 {
+    PROFILE_FUNCTION();
+
     ICommandLine* cmdLine = CommandLine();
     if (!cmdLine) return false;
 

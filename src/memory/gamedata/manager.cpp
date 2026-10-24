@@ -21,6 +21,7 @@
 #include <api/interfaces/interfaces.h>
 #include <api/shared/files.h>
 #include <api/shared/jsonc.h>
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 
 #include <core/entrypoint.h>
@@ -29,6 +30,8 @@
 
 void* FindSignature(const std::string& library, const std::string& pattern)
 {
+    PROFILE_FUNCTION();
+
     void* result = nullptr;
     g_pS2BinLib->PatternScan(library.c_str(), pattern.c_str(), &result);
     return result;
@@ -36,6 +39,8 @@ void* FindSignature(const std::string& library, const std::string& pattern)
 
 void ForEachGameDataEntry(const std::string& game, const std::string& suffix, const std::function<void(const std::string&, const nlohmann::json&)>& callback)
 {
+    PROFILE_FUNCTION();
+
     for (const auto& file : Files::FetchFileNames(g_SwiftlyCore.GetCorePath() + "gamedata/" + game)) {
         if (!file.ends_with(suffix)) continue;
 

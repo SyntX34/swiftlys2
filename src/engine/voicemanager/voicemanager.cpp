@@ -20,6 +20,7 @@
 #include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/engine/events.h>
 
 #include <cstdio>
@@ -35,6 +36,8 @@ VFunctionHook g_ClientVoiceHook(reinterpret_cast<void*>(ClientVoiceHook), "serve
 
 bool ResolveListen(IPlayer* receiver, IPlayer* sender, int senderSlot, bool bListen)
 {
+    PROFILE_FUNCTION();
+
     const VoiceFlagValue senderFlags = sender->GetVoiceFlags();
     const VoiceFlagValue receiverFlags = receiver->GetVoiceFlags();
     const ListenOverride listenOverride = receiver->GetListenOverride(senderSlot);
@@ -58,16 +61,22 @@ bool ResolveListen(IPlayer* receiver, IPlayer* sender, int senderSlot, bool bLis
 
 bool SetClientListeningHook(void* _this, CPlayerSlot iReceiver, CPlayerSlot iSender, bool bListen)
 {
+    PROFILE_FUNCTION();
+
     IPlayer* receiver = g_pPlayerManager->GetPlayer(iReceiver.Get());
     IPlayer* sender = g_pPlayerManager->GetPlayer(iSender.Get());
     if (receiver && sender)
         bListen = ResolveListen(receiver, sender, iSender.Get(), bListen);
+
+    PROFILE_PAUSE();
 
     return reinterpret_cast<decltype(&SetClientListeningHook)>(g_SetClientListeningHook.GetOriginal())(_this, iReceiver, iSender, bListen);
 }
 
 void ClientCommandHook(void* _this, CPlayerSlot slot, const CCommand& args)
 {
+    PROFILE_FUNCTION();
+
     IPlayer* receiver = g_pPlayerManager->GetPlayer(slot.Get());
     if (receiver && args.ArgC() > 1 && std::strcmp(args.Arg(0), "vban") == 0)
     {
@@ -76,6 +85,8 @@ void ClientCommandHook(void* _this, CPlayerSlot slot, const CCommand& args)
         receiver->GetSelfMutes().SetDWord(0, mask);
     }
 
+    PROFILE_PAUSE();
+
     reinterpret_cast<decltype(&ClientCommandHook)>(g_ClientCommandHook.GetOriginal())(_this, slot, args);
 }
 
@@ -83,12 +94,16 @@ void ClientVoiceHook(void* _this, CPlayerSlot slot)
 {
     reinterpret_cast<decltype(&ClientVoiceHook)>(g_ClientVoiceHook.GetOriginal())(_this, slot);
 
+    PROFILE_FUNCTION();
+
     if (g_pOnClientVoiceCallback != nullptr)
         g_pOnClientVoiceCallback(slot.Get());
 }
 
 void CVoiceManager::SetClientListenOverride(int playerid, int targetid, ListenOverride value)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return;
     player->GetListenOverride(targetid) = value;
@@ -96,6 +111,8 @@ void CVoiceManager::SetClientListenOverride(int playerid, int targetid, ListenOv
 
 ListenOverride CVoiceManager::GetClientListenOverride(int playerid, int targetid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return Listen_Default;
     return player->GetListenOverride(targetid);
@@ -103,6 +120,8 @@ ListenOverride CVoiceManager::GetClientListenOverride(int playerid, int targetid
 
 void CVoiceManager::SetClientVoiceFlags(int playerid, VoiceFlagValue flags)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return;
 
@@ -111,6 +130,8 @@ void CVoiceManager::SetClientVoiceFlags(int playerid, VoiceFlagValue flags)
 
 VoiceFlagValue CVoiceManager::GetClientVoiceFlags(int playerid)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return Speak_Normal;
     return player->GetVoiceFlags();

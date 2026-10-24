@@ -19,6 +19,7 @@
 #include "player.h"
 
 #include <api/sdk/recipientfilter.h>
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 
 #include <public/engine/igameeventsystem.h>
@@ -56,12 +57,16 @@ static uint64_t s_nextSessionId = 1000;
 
 static void* GetHandleEntity(void* owner, uint64_t hash)
 {
+    PROFILE_FUNCTION();
+
     auto handle = static_cast<CHandle<CEntityInstance>*>(g_pSDKSchema->GetPropPtr(owner, hash));
     return handle ? handle->Get() : nullptr;
 }
 
 CServerSideClient* GetServerSideClient(int playerid)
 {
+    PROFILE_FUNCTION();
+
     static const auto offset = g_pGameDataManager->GetOffsets()->Fetch("CNetworkGameServer::m_Clients");
 
     auto gameserver = g_pGameNetworkServerService->GetIGameServer();
@@ -72,6 +77,8 @@ CServerSideClient* GetServerSideClient(int playerid)
 
 void PostTextMsg(IRecipientFilter* filter, MessageType type, const std::string& message, std::optional<int> team)
 {
+    PROFILE_FUNCTION();
+
     auto msg = RemoveHtmlTags(message);
     if (type == MessageType::Console)
     {
@@ -119,12 +126,16 @@ void PostTextMsg(IRecipientFilter* filter, MessageType type, const std::string& 
 
 void CPlayer::EnsureCenterMessageEvent()
 {
+    PROFILE_FUNCTION();
+
     if (!m_pCenterMessageEvent)
         m_pCenterMessageEvent = g_pGameEventManager->GetGameEventManager()->CreateEvent("show_survival_respawn_status", true);
 }
 
 void CPlayer::Initialize(int playerid)
 {
+    PROFILE_FUNCTION();
+
     m_iPlayerId = playerid;
 
     m_uConnectedTimeStart = std::chrono::steady_clock::now();
@@ -134,6 +145,8 @@ void CPlayer::Initialize(int playerid)
 
 void CPlayer::Shutdown()
 {
+    PROFILE_FUNCTION();
+
     m_iPlayerId = -1;
     m_bAuthorized = false;
 
@@ -143,6 +156,8 @@ void CPlayer::Shutdown()
 
 void CPlayer::SendMsg(MessageType type, const std::string& message, int duration)
 {
+    PROFILE_FUNCTION();
+
     if (type == MessageType::CenterHTML)
     {
         if (message.empty())
@@ -163,36 +178,50 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
 
 bool CPlayer::IsAuthorized()
 {
+    PROFILE_FUNCTION();
+
     return m_bAuthorized;
 }
 
 void CPlayer::SetFakeClient(bool state)
 {
+    PROFILE_FUNCTION();
+
     m_bIsFakeClient = state;
 }
 
 bool CPlayer::IsFakeClient()
 {
+    PROFILE_FUNCTION();
+
     return m_bIsFakeClient;
 }
 
 uint32_t CPlayer::GetConnectedTime()
 {
+    PROFILE_FUNCTION();
+
     return static_cast<uint32_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - m_uConnectedTimeStart).count());
 }
 
 int CPlayer::GetSlot()
 {
+    PROFILE_FUNCTION();
+
     return m_iPlayerId;
 }
 
 void CPlayer::SetUnauthorizedSteamID(uint64_t steamID)
 {
+    PROFILE_FUNCTION();
+
     m_uUnauthorizedSteamID = steamID;
 }
 
 uint64_t CPlayer::GetUnauthorizedSteamID()
 {
+    PROFILE_FUNCTION();
+
     if (IsFakeClient())
         return 0;
 
@@ -202,6 +231,8 @@ uint64_t CPlayer::GetUnauthorizedSteamID()
 
 uint64_t CPlayer::GetSteamID()
 {
+    PROFILE_FUNCTION();
+
     if (IsFakeClient())
         return 0;
 
@@ -217,6 +248,8 @@ uint64_t CPlayer::GetSteamID()
 
 void CPlayer::ChangeAuthorizationState(bool bAuthorized)
 {
+    PROFILE_FUNCTION();
+
     if (m_bAuthorized == bAuthorized)
         return;
 
@@ -236,17 +269,23 @@ void CPlayer::ChangeAuthorizationState(bool bAuthorized)
 
 std::string& CPlayer::GetLanguage()
 {
+    PROFILE_FUNCTION();
+
     return m_bLanguageRetrieved ? m_sLanguage : std::get<std::string>(g_pConfiguration->GetValue("core.Language"));
 }
 
 void CPlayer::SetLanguage(const std::string& language)
 {
+    PROFILE_FUNCTION();
+
     m_sLanguage = language;
     m_bLanguageRetrieved = true;
 }
 
 void* CPlayer::GetController()
 {
+    PROFILE_FUNCTION();
+
     auto entitySystem = g_pEntSystem->GetEntitySystem();
     if (!entitySystem)
         return nullptr;
@@ -256,6 +295,8 @@ void* CPlayer::GetController()
 
 std::optional<int> CPlayer::GetTeam()
 {
+    PROFILE_FUNCTION();
+
     void* controller = GetController();
     if (!controller)
         return std::nullopt;
@@ -269,6 +310,8 @@ std::optional<int> CPlayer::GetTeam()
 
 int32_t CPlayer::GetKills()
 {
+    PROFILE_FUNCTION();
+
     void* controller = GetController();
     if (!controller)
         return 0;
@@ -287,6 +330,8 @@ int32_t CPlayer::GetKills()
 
 const char* CPlayer::GetName()
 {
+    PROFILE_FUNCTION();
+
     void* controller = GetController();
     if (!controller)
         return "";
@@ -297,31 +342,43 @@ const char* CPlayer::GetName()
 
 void* CPlayer::GetPawn()
 {
+    PROFILE_FUNCTION();
+
     return GetHandleEntity(GetController(), CBasePlayerController_m_hPawn);
 }
 
 void* CPlayer::GetPlayerPawn()
 {
+    PROFILE_FUNCTION();
+
     return GetHandleEntity(GetController(), CCSPlayerController_m_hPlayerPawn);
 }
 
 ListenOverride& CPlayer::GetListenOverride(int targetid)
 {
+    PROFILE_FUNCTION();
+
     return m_uListenMap[targetid];
 }
 
 VoiceFlagValue& CPlayer::GetVoiceFlags()
 {
+    PROFILE_FUNCTION();
+
     return m_uVoiceFlags;
 }
 
 CPlayerBitVec& CPlayer::GetSelfMutes()
 {
+    PROFILE_FUNCTION();
+
     return m_bvSelfMutes;
 }
 
 std::string CPlayer::GetIPAddress()
 {
+    PROFILE_FUNCTION();
+
     if (m_iPlayerId < 0 || m_iPlayerId >= MAX_PLAYERS)
         return "";
 
@@ -334,26 +391,36 @@ std::string CPlayer::GetIPAddress()
 
 void CPlayer::Kick(const std::string& sReason, int uReason)
 {
+    PROFILE_FUNCTION();
+
     g_pGameEngine->KickClient(m_iPlayerId, sReason.c_str(), uReason);
 }
 
 BlockedTransmitInfo& CPlayer::GetBlockedTransmittingBits()
 {
+    PROFILE_FUNCTION();
+
     return m_bvBlockedTransmittingEntities;
 }
 
 bool CPlayer::IsFirstSpawn()
 {
+    PROFILE_FUNCTION();
+
     return m_bFirstSpawn;
 }
 
 void CPlayer::SetFirstSpawn(bool state)
 {
+    PROFILE_FUNCTION();
+
     m_bFirstSpawn = state;
 }
 
 void CPlayer::UpdateCenterMessage()
 {
+    PROFILE_FUNCTION();
+
     std::string menuText;
     {
         std::lock_guard lock(m_centerMenuMutex);
@@ -378,6 +445,8 @@ void CPlayer::UpdateCenterMessage()
 
 void CPlayer::UpdateButtons()
 {
+    PROFILE_FUNCTION();
+
     auto pawn = GetPawn();
     if (!pawn)
         return;
@@ -415,47 +484,63 @@ void CPlayer::UpdateButtons()
 
 void CPlayer::Think()
 {
+    PROFILE_FUNCTION();
+
     UpdateCenterMessage();
     UpdateButtons();
 }
 
 void CPlayer::RenderMenuCenterText(const std::string& text)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard lock(m_centerMenuMutex);
     m_sCenterMenuText = text;
 }
 
 void CPlayer::ClearRenderMenuCenterText()
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard lock(m_centerMenuMutex);
     m_sCenterMenuText.clear();
 }
 
 bool CPlayer::HasMenuShown()
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard lock(m_centerMenuMutex);
     return !m_sCenterMenuText.empty();
 }
 
 uint64_t CPlayer::GetSessionID()
 {
+    PROFILE_FUNCTION();
+
     return m_uSessionId;
 }
 
 bool CPlayer::IsListeningGameEvent(int eventID)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard lock(m_listeningGameEventsMutex);
     return m_listeningGameEvents.IsBitSet(eventID);
 }
 
 void CPlayer::SetListeningGameEvents(CBitVector<8192>& eventIDs)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard lock(m_listeningGameEventsMutex);
     m_listeningGameEvents.CopyFrom(eventIDs);
 }
 
 void CPlayer::SendGameEvent(IGameEvent* event)
 {
+    PROFILE_FUNCTION();
+
     if(!event) return;
 
     auto msg = g_pGameNetworkMessages->FindNetworkMessageById(GE_Source1LegacyGameEvent);

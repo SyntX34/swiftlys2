@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
 #include <entityhandle.h>
@@ -24,11 +25,15 @@
 
 void* Bridge_EntitySystem_GetEntitySystem()
 {
+    PROFILE_FUNCTION();
+
     return g_pEntSystem->GetEntitySystem();
 }
 
 bool Bridge_EntitySystem_IsValid()
 {
+    PROFILE_FUNCTION();
+
     return Bridge_EntitySystem_GetEntitySystem() != nullptr;
 }
 

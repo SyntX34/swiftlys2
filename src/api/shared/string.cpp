@@ -20,6 +20,7 @@
 #include "plat.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 #include <algorithm>
 #include <cctype>
@@ -128,39 +129,86 @@ const std::map<std::string_view, std::string_view> colors = {
     {"[orange]", "\x10"},
 };
 
+static constexpr char AsciiLower(char c)
+{
+    return (c >= 'A' && c <= 'Z') ? static_cast<char>(c + ('a' - 'A')) : c;
+}
+
+static std::string ReplaceColorTokens(std::string str, const std::map<std::string_view, std::string_view>& table, bool clear)
+{
+    size_t open = str.find('[');
+    if (open == std::string::npos)
+        return str;
+
+    std::string out;
+    out.reserve(str.size());
+
+    char token[32];
+    size_t last = 0;
+
+    while (open != std::string::npos)
+    {
+        const size_t close = str.find(']', open + 1);
+        if (close == std::string::npos)
+            break;
+
+        const size_t len = close - open + 1;
+        if (len <= sizeof(token))
+        {
+            for (size_t i = 0; i < len; ++i)
+                token[i] = AsciiLower(str[open + i]);
+
+            if (const auto it = table.find(std::string_view(token, len)); it != table.end())
+            {
+                out.append(str, last, open - last);
+                if (!clear)
+                    out.append(it->second);
+                last = close + 1;
+                open = str.find('[', last);
+                continue;
+            }
+        }
+
+        open = str.find('[', open + 1);
+    }
+
+    out.append(str, last, std::string::npos);
+    return out;
+}
+
 std::string ProcessColor(std::string str, int team)
 {
+    PROFILE_FUNCTION();
+
     const std::string_view teamColor = team == 3 ? "[lightblue]" : (team == 2 ? "[yellow]" : "[lightpurple]");
-    str = replace_case_insensitive(str, "[teamcolor]", teamColor);
-    for (const auto& [name, code] : colors)
-        str = replace_case_insensitive(str, name, code);
-    return str;
+    return ReplaceColorTokens(replace_case_insensitive(std::move(str), "[teamcolor]", teamColor), colors, false);
 }
 
 std::string ClearColors(std::string str)
 {
-    str = replace_case_insensitive(str, "[teamcolor]", "");
-    for (const auto name : std::views::keys(colors))
-        str = replace_case_insensitive(str, name, "");
-    return str;
+    PROFILE_FUNCTION();
+
+    return ReplaceColorTokens(replace_case_insensitive(std::move(str), "[teamcolor]", ""), colors, true);
 }
 
 std::string TerminalProcessColor(std::string str)
 {
-    for (const auto& [name, code] : terminalColors)
-        str = replace_case_insensitive(str, name, code);
-    return str;
+    PROFILE_FUNCTION();
+
+    return ReplaceColorTokens(std::move(str), terminalColors, false);
 }
 
 std::string ClearTerminalColors(std::string str)
 {
-    for (const auto name : std::views::keys(terminalColors))
-        str = replace_case_insensitive(str, name, "");
-    return str;
+    PROFILE_FUNCTION();
+
+    return ReplaceColorTokens(std::move(str), terminalColors, true);
 }
 
 std::string StripAnsiEscapes(std::string_view str)
 {
+    PROFILE_FUNCTION();
+
     std::string out;
     out.reserve(str.size());
     for (size_t i = 0; i < str.size(); ++i)
@@ -181,12 +229,16 @@ std::string StripAnsiEscapes(std::string_view str)
 
 std::string GetTerminalStringColor(const std::string& plugin_name)
 {
+    PROFILE_FUNCTION();
+
     const auto hash = hash_64_fnv1a_const(plugin_name.c_str());
     return std::string(terminalPrefixColors[hash % std::size(terminalPrefixColors)]);
 }
 
 std::string replace(std::string str, std::string_view from, std::string_view to)
 {
+    PROFILE_FUNCTION();
+
     if (from.empty())
         return str;
 
@@ -197,22 +249,37 @@ std::string replace(std::string str, std::string_view from, std::string_view to)
 
 std::string replace_case_insensitive(std::string str, std::string_view from, std::string_view to)
 {
+    PROFILE_FUNCTION();
+
     if (from.empty())
         return str;
 
-    const std::string from_lower = str_tolower(from);
-    std::string str_lower = str_tolower(str);
+    const auto equalsIgnoreCase = [](char a, char b) { return AsciiLower(a) == AsciiLower(b); };
 
-    for (size_t pos = 0; (pos = str_lower.find(from_lower, pos)) != std::string::npos; pos += to.size())
+    auto match = std::search(str.begin(), str.end(), from.begin(), from.end(), equalsIgnoreCase);
+    if (match == str.end())
+        return str;
+
+    std::string out;
+    out.reserve(str.size());
+
+    auto cursor = str.begin();
+    while (match != str.end())
     {
-        str.replace(pos, from.size(), to);
-        str_lower.replace(pos, from.size(), to);
+        out.append(cursor, match);
+        out.append(to);
+        cursor = match + from.size();
+        match = std::search(cursor, str.end(), from.begin(), from.end(), equalsIgnoreCase);
     }
-    return str;
+
+    out.append(cursor, str.end());
+    return out;
 }
 
 std::vector<std::string> explode(std::string_view str, std::string_view delimiter)
 {
+    PROFILE_FUNCTION();
+
     if (str.empty()) return {};
     if (delimiter.empty()) return {std::string(str)};
 
@@ -232,25 +299,34 @@ std::vector<std::string> explode(std::string_view str, std::string_view delimite
 
 std::set<std::string> explodeToSet(std::string_view str, std::string_view delimiter)
 {
+    PROFILE_FUNCTION();
+
     const auto tokens = explode(str, delimiter);
     return std::set<std::string>(tokens.begin(), tokens.end());
 }
 
 std::string implode(const std::vector<std::string>& elements, const std::string& delimiter)
 {
+    PROFILE_FUNCTION();
+
     auto joined = elements | std::views::join_with(delimiter);
     return std::string(joined.begin(), joined.end());
 }
 
 std::string str_tolower(std::string_view s)
 {
+    PROFILE_FUNCTION();
+
     std::string out(s);
-    std::ranges::transform(out, out.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+    for (char& c : out)
+        c = AsciiLower(c);
     return out;
 }
 
 std::string str_toupper(std::string_view s)
 {
+    PROFILE_FUNCTION();
+
     std::string out(s);
     std::ranges::transform(out, out.begin(), [](unsigned char c) { return static_cast<char>(std::toupper(c)); });
     return out;
@@ -258,12 +334,16 @@ std::string str_toupper(std::string_view s)
 
 int32_t genrand()
 {
+    PROFILE_FUNCTION();
+
     static thread_local std::mt19937 rng{std::random_device{}()};
     return std::uniform_int_distribution<int32_t>(0, INT_MAX)(rng);
 }
 
 std::string get_uuid()
 {
+    PROFILE_FUNCTION();
+
     return std::format(
         "{:04x}{:04x}-{:04x}-{:04x}-{:04x}-{:04x}{:04x}{:04x}",
         (genrand() & 0xFFFF), (genrand() & 0xFFFF),
@@ -275,6 +355,8 @@ std::string get_uuid()
 
 std::vector<std::string> TokenizeCommand(std::string_view cmd)
 {
+    PROFILE_FUNCTION();
+
     std::vector<std::string> tokens;
     std::string tmp_token;
 
@@ -325,6 +407,8 @@ std::vector<std::string> TokenizeCommand(std::string_view cmd)
 
 std::string& trim(std::string& s, std::string_view t)
 {
+    PROFILE_FUNCTION();
+
     s.erase(s.find_last_not_of(t) + 1);
     s.erase(0, s.find_first_not_of(t));
     return s;
@@ -332,6 +416,8 @@ std::string& trim(std::string& s, std::string_view t)
 
 std::string RemoveHtmlTags(const std::string& input)
 {
+    PROFILE_FUNCTION();
+
     static const std::regex pattern("<(/?)(div|font)[^>]*>");
     return std::regex_replace(input, pattern, "");
 }

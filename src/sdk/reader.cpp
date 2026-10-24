@@ -19,6 +19,7 @@
 #include "schema.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 #include <format>
 #include <span>
@@ -29,6 +30,8 @@ constexpr std::string_view kChainEntityField = "__m_pChainEntity";
 
 static bool IsStandardLayoutClass(const SchemaClassInfoData_t* classData)
 {
+    PROFILE_FUNCTION();
+
     int classesWithFields = 0;
     for (auto pClass = classData; pClass != nullptr; pClass = pClass->m_pBaseClasses ? pClass->m_pBaseClasses->m_pClass : nullptr)
     {
@@ -51,6 +54,8 @@ static bool IsStandardLayoutClass(const SchemaClassInfoData_t* classData)
 
 static int FindChainerOffset(const CSchemaClassInfo* classInfo)
 {
+    PROFILE_FUNCTION();
+
     for (const auto& field : std::span(classInfo->m_pFields, classInfo->m_nFieldCount))
         if (kChainEntityField == field.m_pszName)
             return field.m_nSingleInheritanceOffset;
@@ -70,6 +75,8 @@ static int FindChainerOffset(const CSchemaClassInfo* classInfo)
 
 void CSDKSchema::ReadClasses(CSchemaType_DeclaredClass* declClass)
 {
+    PROFILE_FUNCTION();
+
     auto classInfo = declClass->m_pClassInfo;
     if (!classInfo) return;
 

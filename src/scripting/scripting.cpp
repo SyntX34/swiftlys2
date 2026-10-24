@@ -18,20 +18,27 @@
 
 #include "scripting.h"
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 NativeFunction g_NativeFunctions[MAX_NATIVE_FUNCTIONS];
 int g_NativeFunctionCount = 0;
 
 NativeFunction* CScriptingAPI::GetNativeFunctions() {
+    PROFILE_FUNCTION();
+
     return g_NativeFunctions;
 }
 
 int CScriptingAPI::GetNativeFunctionsCount() {
+    PROFILE_FUNCTION();
+
     return g_NativeFunctionCount;
 }
 
 char* Bridge_CopyString(const std::string& value, int* size)
 {
+    PROFILE_FUNCTION();
+
     int outSize = static_cast<int>(value.size());
     *size = outSize;
 
@@ -43,5 +50,7 @@ char* Bridge_CopyString(const std::string& value, int* size)
 
 char* Bridge_CopyString(const char* value, int* size)
 {
+    PROFILE_FUNCTION();
+
     return Bridge_CopyString(std::string(value ? value : ""), size);
 }

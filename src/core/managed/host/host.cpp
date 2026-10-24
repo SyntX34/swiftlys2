@@ -2,6 +2,8 @@
 #include "dynlib.h"
 #include "strconv.h"
 
+#include <api/shared/profiler.h>
+
 #include <iostream>
 #include <string.h>
 
@@ -51,6 +53,8 @@ state_fn set_state = nullptr;
 
 bool InitializeHostFXR(std::string origin_path)
 {
+    PROFILE_FUNCTION();
+
 #ifdef _WIN32
     for (size_t i = 0; i < origin_path.size(); ++i)
     {
@@ -169,6 +173,8 @@ bool InitializeHostFXR(std::string origin_path)
 
 bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, std::string log_path)
 {
+    PROFILE_FUNCTION();
+
     typedef void(CORECLR_DELEGATE_CALLTYPE * custom_loader_fn)(void*, int, const char*, const char*);
     static custom_loader_fn custom_loader = nullptr;
 
@@ -200,6 +206,8 @@ bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, std::s
 
 void CloseHostFXR()
 {
+    PROFILE_FUNCTION();
+
     if (fxrcxt && _close)
     {
         _close(fxrcxt);

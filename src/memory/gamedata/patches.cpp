@@ -21,11 +21,14 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 
 #include <format>
 
 static std::vector<uint8_t> ParsePatchBytes(const std::string& patch)
 {
+    PROFILE_FUNCTION();
+
     auto nibble = [](char c) -> int {
         if (c >= '0' && c <= '9') return c - '0';
         if (c >= 'a' && c <= 'f') return c - 'a' + 10;
@@ -54,6 +57,8 @@ static std::vector<uint8_t> ParsePatchBytes(const std::string& patch)
 
 void GameDataPatches::Load(const std::string& game)
 {
+    PROFILE_FUNCTION();
+
     ForEachGameDataEntry(game, "patches.jsonc", [this](const std::string& key, const nlohmann::json& value) {
         auto signature = ReadGameDataField<std::string>(value, "patch", key, "signature");
         auto win = ReadGameDataField<std::string>(value, "patch", key, "windows");
@@ -79,6 +84,8 @@ void GameDataPatches::Load(const std::string& game)
 
 void GameDataPatches::Apply(const std::string& name)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard lock(m_mtxLock);
 
     auto it = m_mPatches.find(name);
@@ -102,6 +109,8 @@ void GameDataPatches::Apply(const std::string& name)
 
 void GameDataPatches::Revert(const std::string& name)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard lock(m_mtxLock);
 
     auto it = m_mPatches.find(name);

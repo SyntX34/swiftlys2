@@ -18,12 +18,15 @@
 
 #include <scripting/scripting.h>
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <thread>
 
 extern std::thread::id g_mainThreadId;
 
 uint8_t Bridge_Core_PluginManualLoadState()
 {
+    PROFILE_FUNCTION();
+
     if (bool* b = std::get_if<bool>(&g_pConfiguration->GetValue("core.ManualLoadPlugins")))
     {
         return *b ? 1 : 0;
@@ -33,6 +36,8 @@ uint8_t Bridge_Core_PluginManualLoadState()
 
 char* Bridge_Core_PluginLoadOrder(int* size)
 {
+    PROFILE_FUNCTION();
+
     if (std::string* vec = std::get_if<std::string>(&g_pConfiguration->GetValue("core.PluginLoadOrder")))
     {
         return Bridge_CopyString(*vec, size);
@@ -43,6 +48,8 @@ char* Bridge_Core_PluginLoadOrder(int* size)
 
 int32_t Bridge_Core_GetProfilerLevelByDefault()
 {
+    PROFILE_FUNCTION();
+
     if (int* i = std::get_if<int>(&g_pConfiguration->GetValue("core.ProfilerLevel")))
     {
         return (int32_t)*i;
@@ -52,6 +59,8 @@ int32_t Bridge_Core_GetProfilerLevelByDefault()
 
 uint8_t Bridge_Core_IsMainThread()
 {
+    PROFILE_FUNCTION();
+
     return std::this_thread::get_id() == g_mainThreadId ? 1 : 0;
 }
 

@@ -19,12 +19,15 @@
 #include <api/interfaces/interfaces.h>
 #include <scripting/scripting.h>
 
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 
 typedef void (*ConsoleListenerCallback)(const char*);
 
 uint64_t Bridge_ConsoleOutput_AddConsoleListener(ConsoleListenerCallback callback)
 {
+    PROFILE_FUNCTION();
+
     return g_pConsoleOutput->AddConsoleListener([callback](const std::string& text) {
         callback(text.c_str());
         });
@@ -32,36 +35,50 @@ uint64_t Bridge_ConsoleOutput_AddConsoleListener(ConsoleListenerCallback callbac
 
 void Bridge_ConsoleOutput_RemoveConsoleListener(uint64_t listenerId)
 {
+    PROFILE_FUNCTION();
+
     g_pConsoleOutput->RemoveConsoleListener(listenerId);
 }
 
 void Bridge_ConsoleOutput_DispatchQueuedListeners()
 {
+    PROFILE_FUNCTION();
+
     g_pConsoleOutput->DispatchQueuedListeners();
 }
 
 bool Bridge_ConsoleOutput_IsEnabled()
 {
+    PROFILE_FUNCTION();
+
     return g_pConsoleOutput->IsEnabled();
 }
 
 void Bridge_ConsoleOutput_ToggleFilter()
 {
+    PROFILE_FUNCTION();
+
     g_pConsoleOutput->ToggleFilter();
 }
 
 void Bridge_ConsoleOutput_ReloadFilterConfiguration()
 {
+    PROFILE_FUNCTION();
+
     g_pConsoleOutput->ReloadFilterConfiguration();
 }
 
 bool Bridge_ConsoleOutput_NeedsFiltering(const char* text)
 {
+    PROFILE_FUNCTION();
+
     return g_pConsoleOutput->NeedsFiltering((char*)text);
 }
 
 char* Bridge_ConsoleOutput_GetCounterText(int* size)
 {
+    PROFILE_FUNCTION();
+
     std::string counterText = g_pConsoleOutput->GetCounterText();
 
     return Bridge_CopyString(counterText, size);

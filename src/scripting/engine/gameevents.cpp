@@ -18,6 +18,7 @@
 
 #include <api/interfaces/interfaces.h>
 
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 
 #include <fmt/format.h>
@@ -43,6 +44,8 @@ enum GameEventValueKind
 
 static void WriteDefaultValue(int kind, void* out)
 {
+    PROFILE_FUNCTION();
+
     switch (kind)
     {
         case GameEventValueKind_Bool: *(bool*)out = false; break;
@@ -61,6 +64,8 @@ static void WriteDefaultValue(int kind, void* out)
 
 bool Bridge_GameEvents_GetValue(void* pevent, const char* key, int kind, void* out)
 {
+    PROFILE_FUNCTION();
+
     WriteDefaultValue(kind, out);
     if (!pevent) return false;
 
@@ -86,6 +91,8 @@ bool Bridge_GameEvents_GetValue(void* pevent, const char* key, int kind, void* o
 
 bool Bridge_GameEvents_SetValue(void* pevent, const char* key, int kind, const void* value)
 {
+    PROFILE_FUNCTION();
+
     if (!pevent) return false;
 
     IGameEvent* event = (IGameEvent*)pevent;
@@ -107,6 +114,8 @@ bool Bridge_GameEvents_SetValue(void* pevent, const char* key, int kind, const v
 
 char* Bridge_GameEvents_GetString(int* size, void* event, const char* key)
 {
+    PROFILE_FUNCTION();
+
     if (!event)
     {
         return Bridge_CopyString("", size);
@@ -118,30 +127,40 @@ char* Bridge_GameEvents_GetString(int* size, void* event, const char* key)
 
 void Bridge_GameEvents_SetString(void* event, const char* key, const char* value)
 {
+    PROFILE_FUNCTION();
+
     if (!event) return;
     ((IGameEvent*)event)->SetString(key, value);
 }
 
 bool Bridge_GameEvents_HasKey(void* event, const char* key)
 {
+    PROFILE_FUNCTION();
+
     if (!event) return false;
     return ((IGameEvent*)event)->HasKey(key);
 }
 
 bool Bridge_GameEvents_IsReliable(void* event)
 {
+    PROFILE_FUNCTION();
+
     if (!event) return false;
     return ((IGameEvent*)event)->IsReliable();
 }
 
 bool Bridge_GameEvents_IsLocal(void* event)
 {
+    PROFILE_FUNCTION();
+
     if (!event) return false;
     return ((IGameEvent*)event)->IsLocal();
 }
 
 void Bridge_GameEvents_RegisterListener(const char* eventName)
 {
+    PROFILE_FUNCTION();
+
     g_pGameEventManager->RegisterGameEventListener(eventName);
 }
 
@@ -149,11 +168,15 @@ typedef int (*GameEventCallbackType)(uint32_t hash, void* event, bool* dont_broa
 
 void Bridge_GameEvents_UnregisterListener(const char* eventName)
 {
+    PROFILE_FUNCTION();
+
     g_pGameEventManager->UnregisterGameEventListener(eventName);
 }
 
 void Bridge_GameEvents_SetListenerPreHandler(void* callback_ptr)
 {
+    PROFILE_FUNCTION();
+
     g_pGameEventManager->SetGameEventFireHandler([callback_ptr](IGameEvent* event, bool& dont_broadcast, uint32_t hash) -> int
         {
             return reinterpret_cast<GameEventCallbackType>(callback_ptr)(hash, event, &dont_broadcast);
@@ -162,6 +185,8 @@ void Bridge_GameEvents_SetListenerPreHandler(void* callback_ptr)
 
 void Bridge_GameEvents_SetListenerPostHandler(void* callback_ptr)
 {
+    PROFILE_FUNCTION();
+
     g_pGameEventManager->SetPostGameEventFireHandler([callback_ptr](IGameEvent* event, bool& dont_broadcast, uint32_t hash) -> int
         {
             return reinterpret_cast<GameEventCallbackType>(callback_ptr)(hash, event, &dont_broadcast);
@@ -170,16 +195,22 @@ void Bridge_GameEvents_SetListenerPostHandler(void* callback_ptr)
 
 void* Bridge_GameEvents_CreateEvent(const char* eventName)
 {
+    PROFILE_FUNCTION();
+
     return g_pGameEventManager->GetGameEventManager()->CreateEvent(eventName);
 }
 
 void Bridge_GameEvents_FreeEvent(void* event)
 {
+    PROFILE_FUNCTION();
+
     g_pGameEventManager->GetGameEventManager()->FreeEvent((IGameEvent*)event);
 }
 
 void Bridge_GameEvents_FireEvent(void* event, bool dontBroadcast)
 {
+    PROFILE_FUNCTION();
+
     if (!event) return;
 
     g_pGameEventManager->GetGameEventManager()->FireEvent((IGameEvent*)event, dontBroadcast);
@@ -187,6 +218,8 @@ void Bridge_GameEvents_FireEvent(void* event, bool dontBroadcast)
 
 void Bridge_GameEvents_FireEventToClient(void* event, int playerid)
 {
+    PROFILE_FUNCTION();
+
     if (!event) return;
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return;
@@ -196,6 +229,8 @@ void Bridge_GameEvents_FireEventToClient(void* event, int playerid)
 
 bool Bridge_GameEvents_IsPlayerListeningToEventName(int playerid, const char* eventName)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return false;
 
@@ -204,6 +239,8 @@ bool Bridge_GameEvents_IsPlayerListeningToEventName(int playerid, const char* ev
 
 bool Bridge_GameEvents_IsPlayerListeningToEvent(int playerid, void* event)
 {
+    PROFILE_FUNCTION();
+
     auto player = g_pPlayerManager->GetPlayer(playerid);
     if (!player) return false;
 

@@ -19,6 +19,7 @@
 #include <memory/hooks/function.h>
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 
 #include <format>
@@ -31,6 +32,8 @@ extern FunctionHook g_PreloadDLLHook;
 
 void __fastcall PreloadDLLHook(HMODULE hModule)
 {
+    PROFILE_FUNCTION();
+
     if (!g_PreloadDLLHook.GetOriginal())
     {
         return;
@@ -50,6 +53,8 @@ void __fastcall PreloadDLLHook(HMODULE hModule)
             }
         }
     }
+
+    PROFILE_PAUSE();
 
     return reinterpret_cast<decltype(&PreloadDLLHook)>(g_PreloadDLLHook.GetOriginal())(hModule);
 }

@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <memory/hooks/vfunction.h>
 #include <core/entrypoint.h>
 
@@ -34,6 +35,8 @@ VFunctionHook g_GameFrameHook(reinterpret_cast<void*>(GameFrame), "server", "CSo
 void GameFrame(void* _this, bool simulate, bool first, bool last)
 {
     reinterpret_cast<decltype(&GameFrame)>(g_GameFrameHook.GetOriginal())(_this, simulate, first, last);
+
+    PROFILE_FUNCTION();
 
     static double nextUpdate = 0.0;
 

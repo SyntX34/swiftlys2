@@ -19,6 +19,7 @@
 #include "schema_impl_00001.h"
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 
 namespace
 {
@@ -30,6 +31,8 @@ sw_status get_schema_offset(
     uint32_t* offset_out
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !class_name || !field_name || !offset_out)
         return SW_E_INVALID_ARG;
 
@@ -48,6 +51,8 @@ sw_status set_state_changed(
     const char* field_name
 )
 {
+    PROFILE_FUNCTION();
+
     if (!self || !object || !class_name || !field_name)
         return SW_E_INVALID_ARG;
 

@@ -23,6 +23,7 @@
 #include <api/shared/files.h>
 #include <api/shared/jsonc.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 #include <api/shared/string.h>
 
 #include <nlohmann/json.hpp>
@@ -64,6 +65,8 @@ static std::map<std::string, std::string> l_mLanguages = {
 
 void CTranslations::Initialize()
 {
+    PROFILE_FUNCTION();
+
     g_pConvarManager->AddQueryClientCvarCallback([](int playerid, std::string cvar_name, std::string cvar_value) {
         if (cvar_name != "cl_language") return;
 

@@ -20,6 +20,7 @@
 #include <memory/hooks/vfunction.h>
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/engine/events.h>
 
 CBaseGameSystemFactory** CBaseGameSystemFactory::sm_pFirst = nullptr;
@@ -31,12 +32,16 @@ void BuildGameSessionManifestHook(void* _this, EventBuildGameSessionManifest_t* 
 {
     reinterpret_cast<decltype(&BuildGameSessionManifestHook)>(g_BuildGameSessionManifestHook.GetOriginal())(_this, msg);
 
+    PROFILE_FUNCTION();
+
     IEntityResourceManifest* pResourceManifest = msg->m_pResourceManifest;
     if (g_pOnPrecacheResourceCallback) g_pOnPrecacheResourceCallback(pResourceManifest);
 }
 
 bool InitGameSystem()
 {
+    PROFILE_FUNCTION();
+
     void* ptr = g_pGameDataManager->GetSignatures()->Fetch("IGameSystem::InitAllSystems->pFirst");
     if (!ptr) {
         g_pLogger->Error("Game System", "Couldn't find signature for 'IGameSystem::InitAllSystems->pFirst'!\n");

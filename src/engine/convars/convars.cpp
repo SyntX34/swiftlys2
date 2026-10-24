@@ -22,6 +22,7 @@
 #include <api/interfaces/interfaces.h>
 #include <api/sdk/recipientfilter.h>
 #include <api/sdk/serversideclient.h>
+#include <api/shared/profiler.h>
 
 #include <optional>
 #include <type_traits>
@@ -45,18 +46,27 @@ extern bool bypassPostEventAbstractHook;
 
 void ChangedConvarCallback(ConVarRefAbstract* ref, CSplitScreenSlot nSlot, const char* pNewValue, const char* pOldValue, void* __unk01)
 {
+    PROFILE_FUNCTION();
+
     g_pConvarManager->OnConvarChanged(ref, nSlot, pNewValue, pOldValue);
 }
 
 bool OnConvarQuery(CServerSideClientBase* client, const CNetMessagePB<CCLCMsg_RespondCvarValue>& msg)
 {
+    PROFILE_FUNCTION();
+
     g_pConvarManager->OnClientQueryCvar(client->GetPlayerSlot().Get(), msg.name(), msg.value());
+
+    PROFILE_PAUSE();
+
     return reinterpret_cast<bool(*)(CServerSideClientBase*, const CNetMessagePB<CCLCMsg_RespondCvarValue>&)>(g_ProcessRespondCvarValueHook.GetOriginal())(client, msg);
 }
 
 template <typename Listeners>
 static std::vector<typename Listeners::mapped_type> CopyListeners(std::mutex& mutex, const Listeners& listeners)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard<std::mutex> lock(mutex);
 
     std::vector<typename Listeners::mapped_type> copy;
@@ -70,6 +80,8 @@ static std::vector<typename Listeners::mapped_type> CopyListeners(std::mutex& mu
 template <typename T, typename V = T>
 static void* NewConVar(const std::string& cvar_name, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue, const std::optional<ConvarValue>& maxValue)
 {
+    PROFILE_FUNCTION();
+
     auto defaultOrZero = (T)std::get<V>(defaultValue);
 
     bool hasMin = minValue.has_value();
@@ -83,11 +95,15 @@ static void* NewConVar(const std::string& cvar_name, uint64_t flags, const char*
 template <typename T>
 static void FreeConVar(void* convar)
 {
+    PROFILE_FUNCTION();
+
     delete (CConVar<T>*)convar;
 }
 
 static std::string ConvertConvarValueToString(const ConvarValue& value)
 {
+    PROFILE_FUNCTION();
+
     return std::visit([](const auto& v) -> std::string {
         using T = std::decay_t<decltype(v)>;
 
@@ -110,6 +126,8 @@ static std::string ConvertConvarValueToString(const ConvarValue& value)
 
 void CConvarManager::Initialize()
 {
+    PROFILE_FUNCTION();
+
     {
         std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_bShuttingDown = false;
@@ -155,6 +173,8 @@ void CConvarManager::Initialize()
 
 void CConvarManager::Shutdown()
 {
+    PROFILE_FUNCTION();
+
     {
         std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_bShuttingDown = true;
@@ -166,6 +186,8 @@ void CConvarManager::Shutdown()
 
 void CConvarManager::QueryClientConvar(int playerid, const std::string& cvar_name)
 {
+    PROFILE_FUNCTION();
+
     auto netmsg = g_pGameNetworkMessages->FindNetworkMessagePartial("GetCvarValue");
     auto msg = netmsg->AllocateMessage()->ToPB<CSVCMsg_GetCvarValue>();
 
@@ -183,6 +205,8 @@ void CConvarManager::QueryClientConvar(int playerid, const std::string& cvar_nam
 
 int CConvarManager::AddQueryClientCvarCallback(std::function<void(int, std::string, std::string)> callback)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard<std::mutex> lock(m_mtxQueryCallbacks);
 
     m_queryCallbacks[++m_lastQueryCallbackId] = std::move(callback);
@@ -191,36 +215,48 @@ int CConvarManager::AddQueryClientCvarCallback(std::function<void(int, std::stri
 
 void CConvarManager::RemoveQueryClientCvarCallback(int callback_id)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard<std::mutex> lock(m_mtxQueryCallbacks);
     m_queryCallbacks.erase(callback_id);
 }
 
 void CConvarManager::OnClientQueryCvar(int playerid, const std::string& cvar_name, const std::string& cvar_value)
 {
+    PROFILE_FUNCTION();
+
     for (const auto& callback : CopyListeners(m_mtxQueryCallbacks, m_queryCallbacks))
         callback(playerid, cvar_name, cvar_value);
 }
 
 void CConvarManager::OnConvarChanged(ConVarRefAbstract* ref, CSplitScreenSlot slot, const char* new_value, const char* old_value)
 {
+    PROFILE_FUNCTION();
+
     for (const auto& listener : CopyListeners(m_mtxListeners, m_changeListeners))
         listener(ref->GetName(), slot.Get(), new_value, old_value);
 }
 
 void CConvarManager::OnConVarCreated(ConVarRefAbstract* pNewCvar)
 {
+    PROFILE_FUNCTION();
+
     for (const auto& listener : CopyListeners(m_mtxListeners, m_convarCreatedListeners))
         listener(pNewCvar->GetName());
 }
 
 void CConvarManager::OnConCommandCreated(ConCommand* pNewCommand)
 {
+    PROFILE_FUNCTION();
+
     for (const auto& listener : CopyListeners(m_mtxListeners, m_conCommandCreatedListeners))
         listener(pNewCommand->GetName());
 }
 
 void CConvarManager::CreateConvar(const std::string& cvar_name, EConVarType type, uint64_t flags, const char* help_message, const ConvarValue& defaultValue, const std::optional<ConvarValue>& minValue, const std::optional<ConvarValue>& maxValue)
 {
+    PROFILE_FUNCTION();
+
     ConVarRefAbstract cvar(cvar_name.c_str());
     if (cvar.IsValidRef()) return;
 
@@ -265,6 +301,8 @@ void CConvarManager::CreateConvar(const std::string& cvar_name, EConVarType type
 
 void CConvarManager::DeleteConvar(const std::string& cvar_name)
 {
+    PROFILE_FUNCTION();
+
     CreatedConvar created;
     {
         std::lock_guard<std::mutex> lock(m_mtxConvars);
@@ -283,6 +321,8 @@ void CConvarManager::DeleteConvar(const std::string& cvar_name)
 
 ConVarRefAbstract& CConvarManager::GetConvarRef(const char* cvar_name)
 {
+    PROFILE_FUNCTION();
+
     std::lock_guard<std::mutex> lock(m_mtxConvars);
 
     auto it = m_convarRefs.find(std::string_view(cvar_name));
@@ -305,6 +345,8 @@ some people don't even want to look through all the fields and just go to the sh
 
 uint64_t CConvarManager::AddGlobalChangeListener(std::function<void(const char*, int, const char*, const char*)> callback)
 {
+    PROFILE_FUNCTION();
+
     uint64_t id;
     {
         std::lock_guard<std::mutex> lock(m_mtxListeners);
@@ -318,6 +360,8 @@ uint64_t CConvarManager::AddGlobalChangeListener(std::function<void(const char*,
 
 void CConvarManager::RemoveGlobalChangeListener(uint64_t callback_id)
 {
+    PROFILE_FUNCTION();
+
     {
         std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_changeListeners.erase(callback_id);
@@ -328,6 +372,8 @@ void CConvarManager::RemoveGlobalChangeListener(uint64_t callback_id)
 
 uint64_t CConvarManager::AddConvarCreatedListener(std::function<void(const char*)> callback)
 {
+    PROFILE_FUNCTION();
+
     uint64_t id;
     {
         std::lock_guard<std::mutex> lock(m_mtxListeners);
@@ -341,6 +387,8 @@ uint64_t CConvarManager::AddConvarCreatedListener(std::function<void(const char*
 
 void CConvarManager::RemoveConvarCreatedListener(uint64_t callback_id)
 {
+    PROFILE_FUNCTION();
+
     {
         std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_convarCreatedListeners.erase(callback_id);
@@ -351,6 +399,8 @@ void CConvarManager::RemoveConvarCreatedListener(uint64_t callback_id)
 
 uint64_t CConvarManager::AddConCommandCreatedListener(std::function<void(const char*)> callback)
 {
+    PROFILE_FUNCTION();
+
     uint64_t id;
     {
         std::lock_guard<std::mutex> lock(m_mtxListeners);
@@ -364,6 +414,8 @@ uint64_t CConvarManager::AddConCommandCreatedListener(std::function<void(const c
 
 void CConvarManager::RemoveConCommandCreatedListener(uint64_t callback_id)
 {
+    PROFILE_FUNCTION();
+
     {
         std::lock_guard<std::mutex> lock(m_mtxListeners);
         m_conCommandCreatedListeners.erase(callback_id);
@@ -374,6 +426,8 @@ void CConvarManager::RemoveConCommandCreatedListener(uint64_t callback_id)
 
 void CConvarManager::UpdateChangeCallback()
 {
+    PROFILE_FUNCTION();
+
     std::unique_lock<std::mutex> lock(m_mtxListeners);
     if (m_bUpdatingChangeCallback) return;
     if ((!m_bShuttingDown && !m_changeListeners.empty()) == m_bChangeCallbackInstalled) return;
@@ -403,6 +457,8 @@ void CConvarManager::UpdateChangeCallback()
 
 void CConvarManager::UpdateCreationListener()
 {
+    PROFILE_FUNCTION();
+
     std::unique_lock<std::mutex> lock(m_mtxListeners);
     if (m_bUpdatingCreationListener) return;
     if ((!m_bShuttingDown && (!m_convarCreatedListeners.empty() || !m_conCommandCreatedListeners.empty())) == m_bCreationListenerInstalled) return;

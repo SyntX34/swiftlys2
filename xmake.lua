@@ -7,6 +7,13 @@ set_languages("cxx23")
 
 add_rules("mode.debug", "mode.release")
 
+option("profiler")
+    set_default(false)
+    set_showmenu(true)
+    set_description("Enable the PROFILE_* scope profiler")
+    add_defines("PROFILER")
+option_end()
+
 local GITHUB_SHA = os.getenv("GITHUB_SHA") or "Local"
 local SWIFTLY_VERSION = os.getenv("SWIFTLY_VERSION") or "Local"
 
@@ -41,6 +48,7 @@ end
 
 target("swiftlys2")
     set_kind("shared")
+    add_options("profiler")
     add_packages("pcre2")
 
     add_files({
@@ -455,6 +463,11 @@ target("swiftlys2")
     set_optimize("fastest")
     set_symbols("debug")
     set_strip("none")
+
+    if is_plat("windows") then
+        add_ldflags("/INCREMENTAL:NO", { force = true })
+        add_shflags("/INCREMENTAL:NO", { force = true })
+    end
 
     after_build(function(target)
         function GetDistDirName()

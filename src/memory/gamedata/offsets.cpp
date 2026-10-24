@@ -21,11 +21,14 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 
 #include <format>
 
 void GameDataOffsets::Load(const std::string& game)
 {
+    PROFILE_FUNCTION();
+
     ForEachGameDataEntry(game, "offsets.jsonc", [this](const std::string& key, const nlohmann::json& value) {
         if (m_mOffsets.contains(key)) {
             g_pLogger->Warning("GameData", std::format("Offset '{}' is already defined. Skipping...\n", key));
@@ -44,6 +47,8 @@ void GameDataOffsets::Load(const std::string& game)
 
 int GameDataOffsets::Fetch(const std::string& name)
 {
+    PROFILE_FUNCTION();
+
     auto it = m_mOffsets.find(name);
     return it != m_mOffsets.end() ? it->second : 0;
 }

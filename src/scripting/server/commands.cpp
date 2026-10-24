@@ -17,6 +17,7 @@
  ************************************************************************************************/
 
 #include <api/interfaces/interfaces.h>
+#include <api/shared/profiler.h>
 #include <scripting/scripting.h>
 
 #include <api/shared/string.h>
@@ -27,11 +28,15 @@ typedef int (*ClientChatCallback)(int, const char*, uint8_t);
 
 uint64_t Bridge_Commands_RegisterCommand(const char* commandName, bool registerRaw, const char* helpText)
 {
+    PROFILE_FUNCTION();
+
     return g_pServerCommands->RegisterCommand(commandName, registerRaw, helpText);
 }
 
 void Bridge_Commands_SetCommandHandler(CommandCallback callback)
 {
+    PROFILE_FUNCTION();
+
     g_pServerCommands->SetCommandHandler(
         [callback](const std::string& commandName, int playerid, const std::vector<std::string>& args, const std::string& originalCommandName, const std::string& selectedPrefix, bool isSilentCommand) -> void
         {
@@ -43,26 +48,36 @@ void Bridge_Commands_SetCommandHandler(CommandCallback callback)
 
 void Bridge_Commands_UnregisterCommand(uint64_t callbackID)
 {
+    PROFILE_FUNCTION();
+
     g_pServerCommands->UnregisterCommand(callbackID);
 }
 
 uint8_t Bridge_Commands_IsCommandRegistered(const char* commandName)
 {
+    PROFILE_FUNCTION();
+
     return g_pServerCommands->IsCommandRegistered(commandName) ? 1 : 0;
 }
 
 uint64_t Bridge_Commands_RegisterAlias(const char* alias, const char* command, bool registerRaw)
 {
+    PROFILE_FUNCTION();
+
     return g_pServerCommands->RegisterAlias(alias, command, registerRaw);
 }
 
 void Bridge_Commands_UnregisterAlias(uint64_t callbackID)
 {
+    PROFILE_FUNCTION();
+
     g_pServerCommands->UnregisterAlias(callbackID);
 }
 
 void Bridge_Commands_SetClientCommandHandler(ClientCommandCallback callback)
 {
+    PROFILE_FUNCTION();
+
     if (!callback)
     {
         g_pServerCommands->SetClientCommandHandler(nullptr);
@@ -76,6 +91,8 @@ void Bridge_Commands_SetClientCommandHandler(ClientCommandCallback callback)
 
 void Bridge_Commands_SetClientChatHandler(ClientChatCallback callback)
 {
+    PROFILE_FUNCTION();
+
     if (!callback)
     {
         g_pServerCommands->SetClientChatHandler(nullptr);

@@ -19,10 +19,14 @@
 #include "entrypoint.h"
 #include "filesystem.h"
 
+#include <api/shared/profiler.h>
+
 FileSystemFix g_FileSystemFix;
 
 void StartFixes()
 {
+    PROFILE_FUNCTION();
+
     g_FileSystemFix.Start();
 }
 

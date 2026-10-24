@@ -21,11 +21,14 @@
 
 #include <api/interfaces/interfaces.h>
 #include <api/shared/plat.h>
+#include <api/shared/profiler.h>
 
 #include <format>
 
 void GameDataSignatures::Load(const std::string& game)
 {
+    PROFILE_FUNCTION();
+
     ForEachGameDataEntry(game, "signatures.jsonc", [this](const std::string& key, const nlohmann::json& value) {
         auto lib = ReadGameDataField<std::string>(value, "signature", key, "lib");
         auto win = ReadGameDataField<std::string>(value, "signature", key, "windows");
@@ -51,6 +54,8 @@ void GameDataSignatures::Load(const std::string& game)
 
 void* GameDataSignatures::Fetch(const std::string& name)
 {
+    PROFILE_FUNCTION();
+
     auto it = m_mSignatures.find(name);
     return it != m_mSignatures.end() ? it->second : nullptr;
 }

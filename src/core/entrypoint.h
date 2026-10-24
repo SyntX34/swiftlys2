@@ -36,6 +36,7 @@ private:
     BridgeKind_t m_iKind;
     std::string m_sCorePath;
     std::string m_sLogPath;
+    int m_iMaxClients = -1;
 
 public:
     bool Load(BridgeKind_t kind, CreateIFaceFn serverFactory, CreateIFaceFn engineFactory);

@@ -21,6 +21,7 @@
 #include <api/shared/files.h>
 #include <api/shared/string.h>
 #include <api/shared/jsonc.h>
+#include <api/shared/profiler.h>
 #include <api/interfaces/interfaces.h>
 
 #include <core/entrypoint.h>
@@ -33,6 +34,8 @@ using json = nlohmann::json;
 
 static ValueType FromJson(const json& j)
 {
+    PROFILE_FUNCTION();
+
     if (j.is_number_integer()) return j.get<int>();
     if (j.is_number_float()) return j.get<double>();
     if (j.is_boolean()) return j.get<bool>();
@@ -59,6 +62,8 @@ static ValueType FromJson(const json& j)
 
 static json ToJson(const ValueType& value)
 {
+    PROFILE_FUNCTION();
+
     return std::visit([](const auto& v) -> json {
         using T = std::decay_t<decltype(v)>;
         if constexpr (std::is_same_v<T, std::vector<ValueStruct>>) return json::array();
@@ -69,6 +74,8 @@ static json ToJson(const ValueType& value)
 
 static bool SameKind(const json& value, const json& defaultValue)
 {
+    PROFILE_FUNCTION();
+
     if (defaultValue.is_number_integer()) return value.is_number_integer();
     if (defaultValue.is_number_float()) return value.is_number_float();
     return value.type() == defaultValue.type();
@@ -82,6 +89,8 @@ struct CoreConfig
 
     json& Resolve(const std::string& key)
     {
+        PROFILE_FUNCTION();
+
         json* node = &doc;
         for (const auto& part : explode(key, "."))
         {
@@ -94,6 +103,8 @@ struct CoreConfig
 
     void Add(const std::string& key, ValueType defaultValue)
     {
+        PROFILE_FUNCTION();
+
         const json defaultJson = ToJson(defaultValue);
         json& node = Resolve(key);
 
@@ -108,6 +119,8 @@ struct CoreConfig
 
     void AddList(const std::string& key, const std::vector<std::string>& defaultValue, const std::string& delimiter)
     {
+        PROFILE_FUNCTION();
+
         json& node = Resolve(key);
 
         if (!node.is_array())
@@ -131,6 +144,8 @@ struct CoreConfig
 
 void Configuration::InitializeExamples()
 {
+    PROFILE_FUNCTION();
+
     for (const auto& file : Files::FetchFileNames(g_SwiftlyCore.GetCorePath() + "configs"))
     {
         if (!file.ends_with(".example.jsonc"))
@@ -144,6 +159,8 @@ void Configuration::InitializeExamples()
 
 bool Configuration::Load()
 {
+    PROFILE_FUNCTION();
+
     if (m_bLoaded)
         return true;
 
@@ -224,6 +241,8 @@ bool Configuration::Load()
 
 ValueType& Configuration::GetValue(const std::string& key)
 {
+    PROFILE_FUNCTION();
+
     static ValueType s_missing;
 
     std::shared_lock lock(m_mutex);
@@ -233,12 +252,16 @@ ValueType& Configuration::GetValue(const std::string& key)
 
 void Configuration::SetValue(const std::string& key, ValueType value)
 {
+    PROFILE_FUNCTION();
+
     std::unique_lock lock(m_mutex);
     m_mConfiguration.insert_or_assign(key, std::move(value));
 }
 
 bool Configuration::HasKey(const std::string& key)
 {
+    PROFILE_FUNCTION();
+
     std::shared_lock lock(m_mutex);
     return m_mConfiguration.contains(key);
 }
